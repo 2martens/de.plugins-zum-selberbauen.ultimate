@@ -46,15 +46,15 @@ class Dispatcher extends SingletonFactory {
         $viewConfigurations = CacheHandler::getInstance()->get($cache, 'configs');
         
         //$config['templateName'] = template name of the overall generated template
-        //$config['content'] = array ('content name' => '*ComponentPage')
+        //$config['content'] = array ('content id' => '*ComponentPage')
         $config = $viewConfigurations[$this->requestURI];
         $callData = array(
         	'templateName' => $config['templateName'],
             'content' => array()
         );
-        foreach ($config['content'] as $name => $component) {
-            $result = new $component($name); //returns output
-            $callData['content'][$name] = $result;
+        foreach ($config['content'] as $id => $component) {
+            $result = new $component($id); //returns output
+            $callData['content'][$id] = $result;
         }
         
         $controllerObj = 'ultimate\page\GenericCMSPage';

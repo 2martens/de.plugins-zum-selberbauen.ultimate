@@ -54,8 +54,8 @@ class GenericCMSPage extends AbstractPage {
      * @see wcf\page\AbstractPage::assignVariables()
      */
     public function assignVariables() {
-        foreach ($this->content as $name => $output) {
-            UltimateCMS::getTPL()->assign($name, $output);
+        foreach ($this->content as $id => $output) {
+            UltimateCMS::getTPL()->assign($id, $output);
         }
     }
 }

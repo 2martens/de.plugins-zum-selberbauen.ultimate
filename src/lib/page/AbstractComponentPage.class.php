@@ -22,10 +22,10 @@ abstract class AbstractComponentPage extends AbstractPage {
     public $useTemplate = false;
     
     /**
-     * Contains the name of the attached content.
-     * @var string
+     * Contains the id of the attached content.
+     * @var int
      */
-    protected $contentName = '';
+    protected $contentID = 0;
     
     /**
      * Contains the content which will be displayed.
@@ -49,8 +49,8 @@ abstract class AbstractComponentPage extends AbstractPage {
      * Creates a new AbstractComponentPage object.
      * @param string $contentName
      */
-    public function __construct($contentName) {
-        $this->contentName = StringUtil::trim($contentName);
+    public function __construct($contentID) {
+        $this->contentID = StringUtil::trim($contentID);
         parent::__construct();
         //returns the output
         return $this->output();
@@ -63,7 +63,7 @@ abstract class AbstractComponentPage extends AbstractPage {
         parent::readData();
         
         $conditions = new PreparedStatementConditionBuilder();
-        $conditions->add('contentTitle = ?', array($this->contentName));
+        $conditions->add('contentID = ?', array($this->contentID));
         $sql = 'SELECT contentID, contentTitle, contentText
         		FROM ultimate'.ULTIMATE_N.'_'.$this->databaseTable.'
         		'.$conditions.'
