@@ -18,32 +18,14 @@ define('ULTIMATE_VERSION', '1.0.0 Alpha 1 (Indigo)');
  */
 class UltimateCMS extends AbstractApplication {
     
-    /**
-     * Contains a dispatcher object.
-     * @var Dispatcher
-     */
-    protected static $dispatcher = null;
     
     /**
      * Calls all init functions of the Ultimate CMS class.
      */
     public function __construct() {
         
-        $this->initDispatcher();
+        
     }
     
-    /**
-     * Inits the dispatcher.
-     */
-    protected function initDispatcher() {
-        self::$dispatcher = new Dispatcher();
-    }
     
-    /**
-     * Returns the dispatcher object.
-     * @return Dispatcher
-     */
-    public static function getDispatcher() {
-        return self::$dispatcher;
-    }
 }
