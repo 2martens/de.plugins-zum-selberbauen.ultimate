@@ -1,5 +1,7 @@
 <?php
 namespace ultimate\page;
+use ultimate\data\content\Content;
+
 use ultimate\system\UltimateCMS;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\page\AbstractPage;
@@ -62,19 +64,11 @@ abstract class AbstractComponentPage extends AbstractPage {
     public function readData() {
         parent::readData();
         
-        $conditions = new PreparedStatementConditionBuilder();
-        $conditions->add('contentID = ?', array($this->contentID));
-        $sql = 'SELECT contentID, contentTitle, contentText
-        		FROM ultimate'.ULTIMATE_N.'_'.$this->databaseTable.'
-        		'.$conditions.'
-        		LIMIT 1';
-        $statement = UltimateCMS::getDB()->prepareStatement($sql);
-        $statement->execute($conditions->getParameters());
-        $row = $statement->fetchArray();
+        $content = new Content($this->contentID);
         $this->displayContent = array(
-            'contentID' => intval($row['contentID']),
-            'contentTitle' => StringUtil::trim($row['contentTitle']),
-            'contentText' => StringUtil::trim($row['contentText'])
+            'contentID' => intval($content->contentID),
+            'contentTitle' => StringUtil::trim($content->contentTitle),
+            'contentText' => StringUtil::trim($content->contentText)
         );
     }
     
