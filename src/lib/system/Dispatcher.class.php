@@ -5,6 +5,7 @@ use wcf\util\FileUtil;
 use wcf\util\StringUtil;
 use wcf\system\cache\CacheHandler;
 use wcf\system\SingletonFactory;
+use ultimate\system\UltimateCore;
 
 /**
  * Handles the incoming links.
@@ -38,6 +39,11 @@ class Dispatcher extends SingletonFactory {
         $linkList = array();
         $linkList = CacheHandler::getInstance()->get($cache, 'links');
         
+        if (false) {
+            echo $this->getRequestURI().'<br /><pre>'.print_r($linkList, true).'</pre>';
+            exit;
+        }
+        
         if (!in_array($this->requestURI, $linkList)) {
             throw new IllegalLinkException();
         }
@@ -53,16 +59,17 @@ class Dispatcher extends SingletonFactory {
             'content' => array()
         );
         foreach ($config['content'] as $id => $component) {
-            $result = new $component($id); //returns output
+            if ($debug) echo $component.'<br /><pre>'.print_r(UltimateCore::getTPL()->templatePaths, true).'</pre>';
+            require_once(ULTIMATE_DIR.'lib/page/'.$component.'.class.php');
+            $component = 'ultimate\page\\'.$component;
+            $obj = new $component($id);
+            $result = $obj->getOutput(); //returns output
             $callData['content'][$id] = $result;
         }
         
-        if ($debug) {
-            echo $this->getRequestURI();
-            exit;
-        }
+        
         $controllerObj = 'ultimate\page\GenericCMSPage';
-        new $controllerObj();
+        new $controllerObj($callData);
     }
     
     /**
