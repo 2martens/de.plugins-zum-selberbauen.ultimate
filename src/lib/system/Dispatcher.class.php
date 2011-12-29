@@ -28,7 +28,7 @@ class Dispatcher extends SingletonFactory {
      * Handles a http request.
      */
     public function handle() {
-        if (isset($_GET['request'])) $this->requestURI = FileUtil::removeLeadingSlash(StringUtil::trim($_GET['request']));
+        if (isset($_GET['request'])) $this->requestURI = FileUtil::removeTrailingSlash(FileUtil::removeLeadingSlash(StringUtil::trim($_GET['request'])));
         
         //loading links from cache
         $cache = 'ultimate-links-'.PACKAGE_ID;
