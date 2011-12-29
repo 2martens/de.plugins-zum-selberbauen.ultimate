@@ -1,10 +1,9 @@
 <?php
 namespace ultimate\page;
 use ultimate\data\content\Content;
-
-use ultimate\system\UltimateCMS;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\page\AbstractPage;
+use wcf\system\WCF;
 
 /**
  * Every ComponentPage should extend this class.
@@ -68,6 +67,7 @@ abstract class AbstractComponentPage extends AbstractPage {
         $this->displayContent = array(
             'contentID' => intval($content->contentID),
             'contentTitle' => StringUtil::trim($content->contentTitle),
+            'contentDescription' => StringUtil::trim($content->contentDescription),
             'contentText' => StringUtil::trim($content->contentText)
         );
     }
@@ -77,9 +77,10 @@ abstract class AbstractComponentPage extends AbstractPage {
      */
     public function assignVariables() {
         parent::assignVariables();
-        UltimateCMS::getTPL()->assign(array(
+        WCF::getTPL()->assign(array(
             'contentID' => $this->displayContent['contentID'],
             'contentTitle' => $this->displayContent['contentTitle'],
+            'contentDescription' => $this->displayContent['contentDescription'],
             'contentText' => $this->displayContent['contentText']
         ));
     }
@@ -89,6 +90,6 @@ abstract class AbstractComponentPage extends AbstractPage {
      */
     public function show() {
         parent::show();
-        $this->output = UltimateCMS::getTPL()->fetch($this->templateName);
+        $this->output = WCF::getTPL()->fetch($this->templateName);
     }
 }

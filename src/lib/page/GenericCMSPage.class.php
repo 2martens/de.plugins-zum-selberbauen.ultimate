@@ -1,7 +1,7 @@
 <?php
 namespace ultimate\page;
-use ultimate\system\UltimateCMS;
 use wcf\page\AbstractPage;
+use wcf\system\WCF;
 
 /**
  * Shows a page with the specified template.
@@ -55,7 +55,7 @@ class GenericCMSPage extends AbstractPage {
      */
     public function assignVariables() {
         foreach ($this->content as $id => $output) {
-            UltimateCMS::getTPL()->assign($id, $output);
+            WCF::getTPL()->assign($id, $output);
         }
     }
 }
