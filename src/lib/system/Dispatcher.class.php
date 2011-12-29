@@ -40,8 +40,13 @@ class Dispatcher extends SingletonFactory {
         $domainPaths = CacheHandler::getInstance()->get($cache, 'paths');
         $domainPath = $domainPaths[PACKAGE_ID];
         //cut domain path away from request uri
-        $this->requestURI = substr($this->requestURI, strlen($domainPath));
-        
+        while(true) {
+            if (strpos($this->requestURI, $domainPath)) {
+                $this->requestURI = substr($this->requestURI, strlen($domainPath));
+            } else {
+                break;
+            }
+        }
         //loading links from cache
         $cache = 'ultimate-links-'.PACKAGE_ID;
         $file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
