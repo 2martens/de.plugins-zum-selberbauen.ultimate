@@ -4,6 +4,7 @@ use ultimate\data\content\Content;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\page\AbstractPage;
 use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * Every ComponentPage should extend this class.
