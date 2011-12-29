@@ -8,7 +8,7 @@ use wcf\data\DatabaseObjectEditor;
  * @author Jim Martens
  * @copyright 2011 Jim Martens
  * @license http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
- * @package de.plugins-zum-selberbauen.cms
+ * @package de.plugins-zum-selberbauen.ultimate
  * @subpackage data.link
  * @category Ultimate CMS
  */
