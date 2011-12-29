@@ -55,7 +55,7 @@ abstract class AbstractComponentPage extends AbstractPage {
         $this->contentID = StringUtil::trim($contentID);
         parent::__construct();
         //returns the output
-        return $this->output();
+        return $this->output;
     }
     
     /**
