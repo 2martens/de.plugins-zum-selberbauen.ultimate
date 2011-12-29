@@ -1,6 +1,6 @@
 <?php
-// 1 vars
-// wcf
+// 14 vars
+// ultimate
 if (!defined('ULTIMATE_DIR')) define('ULTIMATE_DIR', dirname(__FILE__).'/');
 if (!defined('RELATIVE_ULTIMATE_DIR')) define('RELATIVE_ULTIMATE_DIR', '');
 if (!defined('ULTIMATE_N')) define('ULTIMATE_N', '1_1');

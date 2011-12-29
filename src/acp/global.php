@@ -13,10 +13,4 @@ define('RELATIVE_ULTIMATE_DIR', '../');
 require_once(dirname(dirname(__FILE__)).'/config.inc.php');
 
 //include wcf
-require_once(RELATIVE_WCF_DIR.'global.php');
-if (!count($packageDirs)) $packageDirs[] = ULTIMATE_DIR;
-$packageDirs[] = WCF_DIR;
-
-//starting ultimate acp
-require_once(WCF_DIR.'lib/system/WCFACP.class.php');
-new wcf\system\WCFACP();
+require_once(RELATIVE_WCF_DIR.'acp/global.php');
