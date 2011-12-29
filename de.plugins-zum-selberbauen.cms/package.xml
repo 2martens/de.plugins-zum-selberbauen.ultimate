@@ -28,5 +28,9 @@
         <instruction type="template">templates.tar</instruction>
         <instruction type="acptemplate">acptemplate.tar</instruction>
         <instruction type="sql">install.sql</instruction>
+        
+        <!-- xmls -->
+        <instruction type="option">option.xml</instruction>
+        <instruction type="userGroupOption">userGroupOption.xml</instruction>
     </instructions>
 </package>
