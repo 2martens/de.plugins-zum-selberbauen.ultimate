@@ -15,7 +15,6 @@ use wcf\system\database\util\PreparedStatementConditionBuilder;
  * @category Ultimate CMS
  */
 class ContentAction extends AbstractDatabaseObjectAction {
-    
     /**
      * @see wcf\data\AbstractDatabaseObjectAction::$className
      */

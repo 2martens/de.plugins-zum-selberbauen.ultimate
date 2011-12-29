@@ -13,7 +13,6 @@ use wcf\data\DatabaseObjectList;
  * @category Ultimate CMS
  */
 class ContentList extends DatabaseObjectList {
-    
     /**
      * @see wcf\data\DatabaseObjectList::$className
      */
