@@ -27,7 +27,7 @@ class Dispatcher extends SingletonFactory {
     /**
      * Handles a http request.
      */
-    public function handle() {
+    public function handle($debug = false) {
         if (isset($_GET['request'])) $this->requestURI = FileUtil::removeTrailingSlash(FileUtil::removeLeadingSlash(StringUtil::trim($_GET['request'])));
         
         //loading links from cache
@@ -57,6 +57,10 @@ class Dispatcher extends SingletonFactory {
             $callData['content'][$id] = $result;
         }
         
+        if ($debug) {
+            echo $this->getRequestURI();
+            exit;
+        }
         $controllerObj = 'ultimate\page\GenericCMSPage';
         new $controllerObj();
     }
