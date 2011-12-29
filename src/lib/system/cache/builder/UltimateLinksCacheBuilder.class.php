@@ -62,5 +62,6 @@ class UltimateLinksCacheBuilder implements ICacheBuilder {
             );
         }
         $data['configs'] = $configs;
+        return $data;
     }
 }
