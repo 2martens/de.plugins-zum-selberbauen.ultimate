@@ -29,5 +29,5 @@ ALTER TABLE ultimate1_1_link ADD FOREIGN KEY (configID) REFERENCES ultimate1_1_c
 
 /**** default entries ****/
 INSERT INTO ultimate1_1_content (contentTitle, contentDescription, contentText) VALUES ('Test', 'Ein kleiner Test', 'Das ist ein schöner Testtext, um zu prüfen, ob alles klappt.');
-INSERT INTO ultimate1_1_config (templateName, requiredContents) VALUES ('test', '');
+INSERT INTO ultimate1_1_config (templateName, requiredContents) VALUES ('test', 'a:1:{i:1;s:17:"SiteComponentPage";}');
 INSERT INTO ultimate1_1_link (configID, linkSlug) VALUES (1, 'test');
