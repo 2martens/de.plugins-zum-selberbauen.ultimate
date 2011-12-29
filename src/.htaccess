@@ -1,7 +1,0 @@
-DirectoryIndex index.php?request=index
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteBase /
-
-RewriteRule !(index.php|css|jpe?g|png|gif|zip|rar)$ /index.php?request=%{REQUEST_URI}&%{QUERY_STRING} [NC,L]
-</IfModule>
