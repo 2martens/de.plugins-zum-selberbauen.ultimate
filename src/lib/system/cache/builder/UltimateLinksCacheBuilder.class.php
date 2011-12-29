@@ -15,7 +15,6 @@ use wcf\system\cache\builder\ICacheBuilder;
  * @category Ultimate CMS
  */
 class UltimateLinksCacheBuilder implements ICacheBuilder {
-    
     /**
      * Contains the database table name of the link table.
      * @var string
@@ -52,6 +51,7 @@ class UltimateLinksCacheBuilder implements ICacheBuilder {
         
         //read configs
         $configList = new ConfigList();
+        $configList->readObjects();
         $objects = $configList->getObjects();
         $configs = array();
         foreach ($objects as $config) {

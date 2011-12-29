@@ -28,8 +28,19 @@ class Dispatcher extends SingletonFactory {
     /**
      * Handles a http request.
      */
-    public function handle($debug = false) {
-        if (isset($_GET['request'])) $this->requestURI = FileUtil::removeTrailingSlash(FileUtil::removeLeadingSlash(StringUtil::trim($_GET['request'])));
+    public function handle() {
+        if (isset($_GET['request'])) $this->requestURI = FileUtil::removeTrailingSlash(StringUtil::trim($_GET['request']));
+        
+        //loading domain path from cache
+        $cache = 'domain-paths';
+        $file = WCF_DIR.'cache/cache.'.$cache.'.php';
+        $className = 'ultimate\system\cache\builder\ApplicationDomainPathCacheBuilder';
+        CacheHandler::getInstance()->addResource($cache, $file, $className);
+        
+        $domainPaths = CacheHandler::getInstance()->get($cache, 'paths');
+        $domainPath = $domainPaths[PACKAGE_ID];
+        //cut domain path away from request uri
+        $this->requestURI = substr($this->requestURI, strlen($domainPath));
         
         //loading links from cache
         $cache = 'ultimate-links-'.PACKAGE_ID;
@@ -39,9 +50,9 @@ class Dispatcher extends SingletonFactory {
         $linkList = array();
         $linkList = CacheHandler::getInstance()->get($cache, 'links');
         
-        if (false) {
+        if (DEBUG) {
             echo $this->getRequestURI().'<br /><pre>'.print_r($linkList, true).'</pre>';
-            exit;
+            //exit;
         }
         
         if (!in_array($this->requestURI, $linkList)) {
@@ -59,7 +70,7 @@ class Dispatcher extends SingletonFactory {
             'content' => array()
         );
         foreach ($config['content'] as $id => $component) {
-            if ($debug) echo $component.'<br /><pre>'.print_r(UltimateCore::getTPL()->templatePaths, true).'</pre>';
+            if (DEBUG) echo $component.'<br /><pre>'.print_r(UltimateCore::getTPL()->templatePaths, true).'</pre>';
             require_once(ULTIMATE_DIR.'lib/page/'.$component.'.class.php');
             $component = 'ultimate\page\\'.$component;
             $obj = new $component($id);
