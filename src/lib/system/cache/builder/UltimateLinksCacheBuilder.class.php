@@ -1,7 +1,7 @@
 <?php
 namespace ultimate\system\cache\builder;
+use ultimate\data\config\ConfigList;
 use ultimate\data\link\LinkList;
-
 use wcf\system\cache\builder\ICacheBuilder;
 
 /**
@@ -42,12 +42,25 @@ class UltimateLinksCacheBuilder implements ICacheBuilder {
         $linkList = new LinkList();
         $objects = $linkList->getObjects();
         $links = array();
+        $configIDs = array();
         foreach ($objects as $link) {
             $links[$link->linkID] = $link->linkSlug;
+            $configIDs[$link->linkSlug] = $link->configID;
         }
         $data['links'] = $links;
         
-        //reading data of the config table
-        $sql = 'SELECT configID, linkSlug';
+        //read configs
+        $configList = new ConfigList();
+        $objects = $configList->getObjects();
+        $configs = array();
+        foreach ($objects as $config) {
+            if (!in_array($config->configID, $configIDs)) continue;
+            $linkSlugs = array_flip($configIDs);
+            $configs[$linkSlugs[$config->configID]] = array(
+                'templateName' => $config->templateName,
+                'content' => unserialize($config->requiredContents)
+            );
+        }
+        $data['configs'] = $configs;
     }
 }
