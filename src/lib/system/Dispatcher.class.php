@@ -50,7 +50,7 @@ class Dispatcher extends SingletonFactory {
         $linkList = array();
         $linkList = CacheHandler::getInstance()->get($cache, 'links');
         
-        if (DEBUG) {
+        if (false) { //does nothing
             echo $this->getRequestURI().'<br /><pre>'.print_r($linkList, true).'</pre>';
             //exit;
         }
@@ -70,7 +70,9 @@ class Dispatcher extends SingletonFactory {
             'content' => array()
         );
         foreach ($config['content'] as $id => $component) {
-            if (DEBUG) echo $component.'<br /><pre>'.print_r(UltimateCore::getTPL()->templatePaths, true).'</pre>';
+            //if statement does nothing
+            if (false) echo $component.'<br /><pre>'.print_r(UltimateCore::getTPL()->templatePaths, true).'</pre>';
+            
             require_once(ULTIMATE_DIR.'lib/page/'.$component.'.class.php');
             $component = 'ultimate\page\\'.$component;
             $obj = new $component($id);
