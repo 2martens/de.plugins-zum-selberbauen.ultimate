@@ -7,7 +7,7 @@
 {include file='header' sandbox=false}
 
 <div id="main">
-    {@$1}
+    {@$id1}
 </div>
 
 {include file='footer' sandbox=false}

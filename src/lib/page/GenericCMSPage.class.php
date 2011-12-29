@@ -59,7 +59,7 @@ class GenericCMSPage extends AbstractPage {
      */
     public function assignVariables() {
         foreach ($this->content as $id => $output) {
-            UltimateCore::getTPL()->assign($id, $output);
+            UltimateCore::getTPL()->assign('id'.$id, $output);
         }
     }
 }
