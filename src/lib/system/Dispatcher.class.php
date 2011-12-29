@@ -1,10 +1,13 @@
 <?php
 namespace ultimate\system;
+use wcf\util\HeaderUtil;
+
 use wcf\system\exception\IllegalLinkException;
 use wcf\util\FileUtil;
 use wcf\util\StringUtil;
 use wcf\system\cache\CacheHandler;
 use wcf\system\SingletonFactory;
+use wcf\system\request\RequestHandler;
 use ultimate\system\UltimateCore;
 
 /**
@@ -40,12 +43,11 @@ class Dispatcher extends SingletonFactory {
         $domainPaths = CacheHandler::getInstance()->get($cache, 'paths');
         $domainPath = $domainPaths[PACKAGE_ID];
         //cut domain path away from request uri
-        while(true) {
-            if (strpos($this->requestURI, $domainPath)) {
-                $this->requestURI = substr($this->requestURI, strlen($domainPath));
-            } else {
-                break;
-            }
+        
+        $this->requestURI = str_replace($domainPath, '', $this->requestURI);
+        if ($pos = strpos($this->requestURI, 'index.php') !== false) {
+            HeaderUtil::redirect($this->requestURI.'/');
+            exit;
         }
         //loading links from cache
         $cache = 'ultimate-links-'.PACKAGE_ID;
