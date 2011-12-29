@@ -1,8 +1,8 @@
 <?php
 namespace ultimate\system;
+use wcf\system\WCF;
+use wcf\system\menu\page\PageMenu;
 use wcf\system\package\PackageDependencyHandler;
-
-use ultimate\system\Dispatcher;
 use wcf\system\application\AbstractApplication;
 
 //defines global version
