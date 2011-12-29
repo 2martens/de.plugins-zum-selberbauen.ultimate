@@ -40,6 +40,7 @@ class UltimateLinksCacheBuilder implements ICacheBuilder {
         
         //read links
         $linkList = new LinkList();
+        $linkList->readObjects();
         $objects = $linkList->getObjects();
         $links = array();
         $configIDs = array();
