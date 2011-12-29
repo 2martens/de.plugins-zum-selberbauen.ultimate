@@ -35,28 +35,4 @@ class LinkAction extends AbstractDatabaseObjectAction {
 	 */
 	protected $permissionsUpdate = array('admin.content.ultimate.canEditLink');
 	
-	/**
-	 * @see wcf\data\AbstractDatabaseObjectAction::validateDelete()
-	 * @throws ValidateActionException
-	 */
-	public function validateDelete() {
-	    parent::validateDelete();
-	    
-	    $linkIDs = array();
-	    foreach ($this->objects as $link) $linkIDs[] = $link->linkID;
-	    
-	    $conditions = new PreparedStatementConditionBuilder();
-	    $conditions->add('linkID IN (?)', array($linkIDs));
-	    
-	    $sql = 'SELECT COUNT(linkID) AS count
-	    		FROM ultimate'.ULTIMATE_N.'_config
-	    		'.$conditions.'
-	    		LIMIT 1';
-	    $statement = UltimateCMS::getDB()->prepareStatement($sql);
-	    $statement->execute($conditions->getParameters());
-	    $row = $statement->fetchArray();
-	    if (intval($row['count']) > 0) {
-	        throw new ValidateActionException('Some of the links are still connected with configurations.');
-	    }
-	}
 }
