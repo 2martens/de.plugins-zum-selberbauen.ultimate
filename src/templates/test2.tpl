@@ -8,6 +8,7 @@
 
 {@$id1}
 
+{@$id2}
 {include file='footer' sandbox=false}
 
 </body>
