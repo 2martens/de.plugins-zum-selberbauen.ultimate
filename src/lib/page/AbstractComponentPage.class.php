@@ -1,9 +1,9 @@
 <?php
 namespace ultimate\page;
+use ultimate\system\UltimateCore;
 use ultimate\data\content\Content;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\page\AbstractPage;
-use wcf\system\WCF;
 use wcf\util\StringUtil;
 
 /**
@@ -78,7 +78,7 @@ abstract class AbstractComponentPage extends AbstractPage {
      */
     public function assignVariables() {
         parent::assignVariables();
-        WCF::getTPL()->assign(array(
+        UltimateCore::getTPL()->assign(array(
             'contentID' => $this->displayContent['contentID'],
             'contentTitle' => $this->displayContent['contentTitle'],
             'contentDescription' => $this->displayContent['contentDescription'],
@@ -91,6 +91,6 @@ abstract class AbstractComponentPage extends AbstractPage {
      */
     public function show() {
         parent::show();
-        $this->output = WCF::getTPL()->fetch($this->templateName);
+        $this->output = UltimateCore::getTPL()->fetch($this->templateName);
     }
 }
