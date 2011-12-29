@@ -5,7 +5,7 @@
 </head>
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
 {include file='header' sandbox=false}
-<div class="mainHeadline>
+<div class="mainHeadline">
     <div class="headlineContainer">
         <h2>Main page</h2>
         <p>The main page</p>
