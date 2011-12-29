@@ -26,7 +26,7 @@ class GenericCMSPage extends AbstractPage {
      * @see wcf\page\AbstractPage::$neededPermissions
      */
     public $neededPermissions = array(
-        'user.content.ultimate.canUseFrontend'
+        'user.ultimate.canUseFrontend'
     );
     
     /**
