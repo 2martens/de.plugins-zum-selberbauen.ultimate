@@ -7,7 +7,7 @@ use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 
 /**
- * Execute content-related functions.
+ * Executes content-related functions.
  *
  * @author Jim Martens
  * @copyright 2011 Jim Martens

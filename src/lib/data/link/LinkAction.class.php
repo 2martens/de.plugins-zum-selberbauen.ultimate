@@ -5,7 +5,7 @@ use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 
 /**
- * Execute link-related actions.
+ * Executes link-related actions.
  *
  * @author Jim Martens
  * @copyright 2011 Jim Martens
