@@ -1,6 +1,6 @@
 <?php
 namespace ultimate\data\content;
-use wcf\data\DatabaseObject;
+use ultimate\data\AbstractUltimateDatabaseObject;
 
 /**
  * Represents a content entry.
@@ -12,7 +12,7 @@ use wcf\data\DatabaseObject;
  * @subpackage data.content
  * @category Ultimate CMS
  */
-class Content extends DatabaseObject {
+class Content extends AbstractUltimateDatabaseObject {
     /**
      * @see wcf\data\DatabaseObject::$databaseTableName
      */
@@ -27,5 +27,6 @@ class Content extends DatabaseObject {
      * @see wcf\data\DatabaseObject::$databaseTableIndexName
      */
     protected static $databaseTableIndexName = 'contentID';
+    
     
 }
