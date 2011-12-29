@@ -47,6 +47,10 @@ class GenericCMSPage extends AbstractPage {
     public function __construct(array $callData) {
         $this->templateName = $callData['templateName'];
         $this->content = $callData['content'];
+        if (DEBUG) {
+            $this->neededModules = array();
+            $this->neededPermissions = array();
+        }
         parent::__construct();
     }
     
