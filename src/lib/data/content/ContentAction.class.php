@@ -1,5 +1,7 @@
 <?php
 namespace ultimate\data\content;
+use ultimate\data\config\ConfigList;
+
 use wcf\system\exception\ValidateActionException;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
@@ -42,21 +44,15 @@ class ContentAction extends AbstractDatabaseObjectAction {
 	public function validateDelete() {
 	    parent::validateDelete();
 	    
-	    $contentIDs = array();
-	    foreach ($this->objects as $content) $contentIDs[] = $content->contentID;
-	    
-	    $conditions = new PreparedStatementConditionBuilder();
-	    $conditions->add('contentID IN (?)', array($contentIDs));
-	    
-	    $sql = 'SELECT COUNT(contentID) AS count
-	    		FROM ultimate'.ULTIMATE_N.'_content_to_links
-	    		'.$conditions.'
-	    		LIMIT 1';
-	    $statement = UltimateCMS::getDB()->prepareStatement($sql);
-	    $statement->execute($conditions->getParameters());
-	    $row = $statement->fetchArray();
-	    if (intval($row['count']) > 0) {
-	        throw new ValidateActionException('Some of the contents are still used.');
+	    $configList = new ConfigList();
+	    $objects = $configList->getObjects();
+	    foreach ($objects as $config) {
+	        $requiredContents = unserialize($config->requiredContents);
+	        foreach ($this->objectIDs as $objectID) {
+	            if (!in_array($objectID, $requiredContents)) continue;
+	            
+	            throw new ValidateActionException('The content with the ID '.(string) $objectID.' is still needed by some configs.');
+	        }
 	    }
 	}
 }
