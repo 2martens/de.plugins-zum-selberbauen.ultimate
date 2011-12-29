@@ -43,7 +43,7 @@ class UltimateCore extends AbstractApplication {
      * @see wcf\system\WCF::initTPL()
      */
     protected function initTPL() {
-        self::getTPL()->addTemplatePath($this->packageID, ULTIMATE_DIR.'templates/');
-        self::getTPL()->assign('__ultimate', $this);
+        WCF::getTPL()->addTemplatePath(PACKAGE_ID, ULTIMATE_DIR.'templates/');
+        WCF::getTPL()->assign('__ultimate', $this);
     }
 }
