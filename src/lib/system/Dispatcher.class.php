@@ -33,7 +33,7 @@ class Dispatcher extends SingletonFactory {
         //loading links from cache
         $cache = 'ultimate-links-'.PACKAGE_ID;
         $file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
-        $className = 'ultimate\system\cache\CacheBuilderUltimateLinks';
+        $className = 'ultimate\system\cache\builder\UltimateLinks';
         CacheHandler::getInstance()->addResource($cache, $file, $className);
         $linkList = array();
         $linkList = CacheHandler::getInstance()->get($cache, 'links');
