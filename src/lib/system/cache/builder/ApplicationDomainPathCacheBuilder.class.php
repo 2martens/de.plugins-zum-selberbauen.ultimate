@@ -1,5 +1,6 @@
 <?php
 namespace ultimate\system\cache\builder;
+use ultimate\system\UltimateCore;
 use wcf\system\cache\builder\ICacheBuilder;
 use wcf\util\StringUtil;
 
