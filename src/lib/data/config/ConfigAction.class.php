@@ -22,17 +22,17 @@ class ConfigAction extends AbstractDatabaseObjectAction {
 	/**
 	 * @see	wcf\data\AbstractDatabaseObjectAction::$permissionsCreate
 	 */
-	protected $permissionsCreate = array('admin.content.ultimate.canAddConfigs');
+	protected $permissionsCreate = array('admin.content.ultimate.canAddConfig');
 	
 	/**
 	 * @see	wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
 	 */
-	protected $permissionsDelete = array('admin.content.ultimate.canDeleteConfigs');
+	protected $permissionsDelete = array('admin.content.ultimate.canDeleteConfig');
 	
 	/**
 	 * @see	wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
 	 */
-	protected $permissionsUpdate = array('admin.content.ultimate.canEditConfigs');
+	protected $permissionsUpdate = array('admin.content.ultimate.canEditConfig');
 	
 	/**
 	 * @see wcf\data\AbstractDatabaseObjectAction::validateDelete()
