@@ -48,8 +48,9 @@ class ContentAction extends AbstractDatabaseObjectAction {
 	    $objects = $configList->getObjects();
 	    foreach ($objects as $config) {
 	        $requiredContents = unserialize($config->requiredContents);
+	        $flippedArray = array_flip($requiredContents);
 	        foreach ($this->objectIDs as $objectID) {
-	            if (!in_array($objectID, $requiredContents)) continue;
+	            if (!in_array($objectID, $flippedArray)) continue;
 	            
 	            throw new ValidateActionException('The content with the ID '.(string) $objectID.' is still needed by some configs.');
 	        }
