@@ -2,6 +2,8 @@
 namespace ultimate\system;
 use wcf\system\WCF;
 use wcf\system\menu\page\PageMenu;
+use wcf\system\breadcrumb\Breadcrumb;
+use wcf\system\request\LinkHandler;
 use wcf\system\package\PackageDependencyHandler;
 use wcf\system\application\AbstractApplication;
 
