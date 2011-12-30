@@ -43,6 +43,7 @@
         <instruction type="option">option.xml</instruction>
         <instruction type="userGroupOption">userGroupOption.xml</instruction>
         <instruction type="pageMenu">pagemenu.xml</instruction>
+        <instruction type="language">language/*.xml</instruction>
         
         <!-- others -->
         <instruction type="sql">install.sql</instruction>

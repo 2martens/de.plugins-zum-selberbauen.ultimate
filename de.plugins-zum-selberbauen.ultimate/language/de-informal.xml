@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language languagecode="de-informal" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd">
+    <category name="wcf.acp.option">
+        <item name="wcf.acp.option.module_ultimateFrontend"><![CDATA[]]></item>
+        <item name="wcf.acp.option.module_ultimateFrontend.description"><![CDATA[]]></item>
+    </category>
+</language>
