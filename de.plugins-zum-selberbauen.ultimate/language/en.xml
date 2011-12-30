@@ -1,7 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language languagecode="en" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd">
     <category name="wcf.acp.option">
+        <!-- modules -->
         <item name="wcf.acp.option.module_ultimateFrontend"><![CDATA[]]></item>
         <item name="wcf.acp.option.module_ultimateFrontend.description"><![CDATA[]]></item>
+        <!-- /modules -->
+    </category>
+    
+    <category name="wcf.acp.group">
+        <!-- categories -->
+        <!-- user -->
+        <item name="wcf.acp.group.option.category.user.ultimate"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.category.user.ultimate.description"><![CDATA[]]></item>
+        <!-- /user -->
+        
+        <!-- admin -->
+        <item name="wcf.acp.group.option.category.admin.content.ultimate"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.category.admin.content.ultimate.description"><![CDATA[]]></item>
+        <!-- /admin -->
+        <!-- /categories -->
+        
+        <!-- options -->
+        <!-- user -->
+        <item name="wcf.acp.group.option.user.ultimate.canUseFrontend"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.canUseFrontend.description"><![CDATA[]]></item>
+        <!-- /user -->
+        
+        <!-- admin -->
+        <!-- content -->
+        <item name="wcf.acp.group.option.admin.content.ultimate.canAddContent"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canAddContent.description"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canEditContent"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canEditContent.description"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent.description"><![CDATA[]]></item>
+        <!-- /content -->
+        
+        <!-- link -->
+        <item name="wcf.acp.group.option.admin.content.ultimate.canAddLink"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canAddLink.description"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canEditLink"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canEditLink.description"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteLink"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteLink.description"><![CDATA[]]></item>
+        <!-- /link -->
+        
+        <!-- config -->
+        <item name="wcf.acp.group.option.admin.content.ultimate.canAddConfig"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canAddConfig.description"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canEditConfig"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canEditConfig.description"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteConfig"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteConfig.description"><![CDATA[]]></item>
+        <!-- /config -->
+        <!-- /admin -->
     </category>
 </language>
