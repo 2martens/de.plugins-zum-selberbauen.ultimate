@@ -19,7 +19,7 @@ class GenericCMSPage extends AbstractPage {
      * @see wcf\page\AbstractPage::$neededModules
      */
     public $neededModules = array(
-        'module_ultimateFrontend'
+        'MODULE_ULTIMATEFRONTEND'
     );
     
     /**
