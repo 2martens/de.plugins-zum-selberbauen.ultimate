@@ -6,18 +6,18 @@ Copyright 2011 by Jim Martens.
 
 */
 /** column layout **/
-.left {
+.ultimateLeft {
     float: left;
     font-size: 0.9em;
     width: 25em;
 }
 
-.right {
+.ultimateRight {
     float: right;
     font-size: 0.9em;
     width: 25em;
 }
 
-.center {
+.ultimateCenter {
     margin: 0 25em 0 25em;
 }

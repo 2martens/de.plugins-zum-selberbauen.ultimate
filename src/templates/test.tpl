@@ -7,7 +7,7 @@
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
 {include file='header' sandbox=false}
 <div class="contentHeader"></div>
-<div class="center">{@$id1}</div>
+<div class="ultimateCenter">{@$id1}</div>
 
 {include file='footer' sandbox=false}
 
