@@ -18,6 +18,11 @@ use wcf\form\AbstractForm;
 class UltimateContentEditForm extends UltimateContentAddForm {
     
     /**
+     * @see wcf\acp\form\ACPForm::$activeMenuItem
+     */
+    public $activeMenuItem = 'wcf.acp.menu.item.link.ultimate.contents';
+    
+    /**
      * @see wcf\page\AbstractPage::$neededPermissions
      */
     public $neededPermissions = array(
