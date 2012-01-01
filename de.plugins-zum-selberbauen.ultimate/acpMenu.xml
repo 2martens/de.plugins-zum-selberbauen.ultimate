@@ -15,7 +15,7 @@
         
         
         <acpmenuitem name="wcf.acp.menu.item.link.ultimate.pages.list">
-            <link>index.php/UltimatePagesList</link>
+            <link>index.php/UltimatePageList</link>
             <parent>wcf.acp.menu.item.link.ultimate.pages</parent>
             <permissions>admin.content.ultimate.canEditLink,admin.content.ultimate.canDeleteLink</permissions>
             <showorder>1</showorder>
@@ -36,7 +36,7 @@
         </acpmenuitem>
         
         <acpmenuitem name="wcf.acp.menu.item.link.ultimate.configs.list">
-            <link>index.php/UltimateConfigsList</link>
+            <link>index.php/UltimateConfigList</link>
             <parent>wcf.acp.menu.item.link.ultimate.configs</parent>
             <permissions>admin.content.ultimate.canEditConfig,admin.content.ultimate.canDeleteConfig</permissions>
             <showorder>1</showorder>
@@ -57,7 +57,7 @@
         </acpmenuitem>
         
         <acpmenuitem name="wcf.acp.menu.item.link.ultimate.contents.list">
-            <link>index.php/UltimateContentsList</link>
+            <link>index.php/UltimateContentList</link>
             <parent>wcf.acp.menu.item.link.ultimate.contents</parent>
             <permissions>admin.content.ultimate.canEditContent,admin.content.ultimate.canDeleteContent</permissions>
             <showorder>1</showorder>

@@ -11,8 +11,6 @@ use wcf\util\FileUtil;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 
-
-
 /**
  * Handles the incoming links.
  *
