@@ -5,5 +5,5 @@
     </div>
 </div>
 <div class="border content">
-    <p><pre>{@$contentText}</pre></p>
+    <p>{@$contentText}</p>
 </div>

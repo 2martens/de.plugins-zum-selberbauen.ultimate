@@ -21,3 +21,8 @@ Copyright 2011 by Jim Martens.
 .ultimateCenter {
     margin: 0 25em 0 25em;
 }
+
+/** sortables **/
+ul.sortable {
+    list-style-type: none;
+}
