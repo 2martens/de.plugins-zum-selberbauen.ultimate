@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/acpMenu.xsd">
+    <import>
+        <!-- content -->
+        <acpmenuitem name="wcf.acp.menu.item.link.ultimate">
+            <parent>wcf.acp.menu.item.link.content</parent>
+            <showorder>1</showorder>
+        </acpmenuitem>
+        
+        <!-- pages -->
+        <acpmenuitem name="wcf.acp.menu.item.link.ultimate.pages">
+            <parent>wcf.acp.menu.item.link.ultimate</parent>
+            <showorder>1</showorder>
+        </acpmenuitem>
+        
+        
+        <acpmenuitem name="wcf.acp.menu.item.link.ultimate.pages.list">
+            <link>index.php/UltimatePagesList</link>
+            <parent>wcf.acp.menu.item.link.ultimate.pages</parent>
+            <permissions>admin.content.ultimate.canEditLink,admin.content.ultimate.canDeleteLink</permissions>
+            <showorder>1</showorder>
+        </acpmenuitem>
+        
+        <acpmenuitem name="wcf.acp.menu.item.link.ultimate.pages.add">
+            <link>index.php/UltimatePageAdd</link>
+            <parent>wcf.acp.menu.item.link.ultimate.pages</parent>
+            <permissions>admin.content.ultimate.canAddLink</permissions>
+            <showorder>2</showorder>
+        </acpmenuitem>
+        <!-- /pages -->
+        
+        <!-- configs -->
+        <acpmenuitem name="wcf.acp.menu.item.link.ultimate.configs">
+            <parent>wcf.acp.menu.item.link.ultimate</parent>
+            <showorder>2</showorder>
+        </acpmenuitem>
+        
+        <acpmenuitem name="wcf.acp.menu.item.link.ultimate.configs.list">
+            <link>index.php/UltimateConfigsList</link>
+            <parent>wcf.acp.menu.item.link.ultimate.configs</parent>
+            <permissions>admin.content.ultimate.canEditConfig,admin.content.ultimate.canDeleteConfig</permissions>
+            <showorder>1</showorder>
+        </acpmenuitem>
+        
+        <acpmenuitem name="wcf.acp.menu.item.link.ultimate.configs.add">
+            <link>../index.php/ConfigEditor</link>
+            <parent>wcf.acp.menu.item.link.ultimate.configs</parent>
+            <permissions>admin.content.ultimate.canAddConfig</permissions>
+            <showorder>2</showorder>
+        </acpmenuitem>
+        <!-- /configs -->
+        
+        <!-- contents -->
+        <acpmenuitem name="wcf.acp.menu.item.link.ultimate.contents">
+            <parent>wcf.acp.menu.item.link.ultimate</parent>
+            <showorder>3</showorder>
+        </acpmenuitem>
+        
+        <acpmenuitem name="wcf.acp.menu.item.link.ultimate.contents.list">
+            <link>index.php/UltimateContentsList</link>
+            <parent>wcf.acp.menu.item.link.ultimate.contents</parent>
+            <permissions>admin.content.ultimate.canEditContent,admin.content.ultimate.canDeleteContent</permissions>
+            <showorder>1</showorder>
+        </acpmenuitem>
+        
+        <acpmenuitem name="wcf.acp.menu.item.link.ultimate.contents.add">
+            <link>index.php/UltimateContentAdd</link>
+            <parent>wcf.acp.menu.item.link.ultimate.contents</parent>
+            <permissions>admin.content.ultimate.canAddContent</permissions>
+            <showorder>2</showorder>
+        </acpmenuitem>
+        <!-- /contents -->
+        
+        <!-- additional -->
+        <acpmenuitem name="wcf.acp.menu.item.link.ultimate.additional">
+            <parent>wcf.acp.menu.item.link.ultimate</parent>
+            <showorder>4</showorder>
+        </acpmenuitem>
+        <!-- /additional -->
+    </import>
+</data>

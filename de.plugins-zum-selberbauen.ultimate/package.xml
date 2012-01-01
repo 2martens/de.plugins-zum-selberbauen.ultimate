@@ -40,6 +40,7 @@
         <instruction type="acptemplate">acptemplates.tar</instruction>
         
         <!-- xmls -->
+        <instruction type="acpMenu">acpMenu.xml</instruction>
         <instruction type="option">option.xml</instruction>
         <instruction type="userGroupOption">userGroupOption.xml</instruction>
         <instruction type="pageMenu">pagemenu.xml</instruction>
