@@ -24,15 +24,22 @@ class InstallUltimateCMS {
     }
     
     /**
-     * Creates a htaccess file.
+     * Installs important things.
      */
     protected function install() {
+        require_once(dirname(dirname(__FILE__)).'/config.inc.php');
+        $this->createHtaccess();
+    }
+    
+    /**
+     * Creates a htaccess file.
+     */
+    protected function createHtaccess() {
         $cache = 'domain-paths';
         $file = WCF_DIR.'cache/cache.'.$cache.'.php';
         $className = 'ultimate\system\cache\builder\ApplicationDomainPathCacheBuilder';
         CacheHandler::getInstance()->addResource($cache, $file, $className);
         
-        require_once(dirname(dirname(__FILE__)).'/config.inc.php');
         $domainPaths = CacheHandler::getInstance()->get($cache, 'paths');
         $domainPath = $domainPaths[PACKAGE_ID];
 
@@ -44,5 +51,6 @@ class InstallUltimateCMS {
         $file->write($output);
         $file->close();
     }
+    
 }
 new InstallUltimateCMS();

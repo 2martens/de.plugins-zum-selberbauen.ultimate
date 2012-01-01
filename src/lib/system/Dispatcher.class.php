@@ -1,14 +1,17 @@
 <?php
 namespace ultimate\system;
-use wcf\util\HeaderUtil;
-
-use wcf\system\exception\IllegalLinkException;
-use wcf\util\FileUtil;
-use wcf\util\StringUtil;
-use wcf\system\cache\CacheHandler;
-use wcf\system\SingletonFactory;
-use wcf\system\request\RequestHandler;
+use ultimate\page\IndexPage;
 use ultimate\system\UltimateCore;
+
+use wcf\system\SingletonFactory;
+use wcf\system\cache\CacheHandler;
+use wcf\system\exception\IllegalLinkException;
+use wcf\system\request\RequestHandler;
+use wcf\util\FileUtil;
+use wcf\util\HeaderUtil;
+use wcf\util\StringUtil;
+
+
 
 /**
  * Handles the incoming links.
@@ -48,7 +51,11 @@ class Dispatcher extends SingletonFactory {
         if ($pos = strpos($this->requestURI, 'index.php') !== false) {
             HeaderUtil::redirect($this->requestURI.'/');
             exit;
+        } elseif ($this->requestURI == 'index') {
+            new IndexPage();
+            exit;
         }
+        
         //loading links from cache
         $cache = 'ultimate-links-'.PACKAGE_ID;
         $file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
