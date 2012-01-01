@@ -1,6 +1,6 @@
 <?php
 namespace ultimate\acp\form;
-use ultimate\data\content\ContentEditor;
+use ultimate\data\content\ContentAction;
 use wcf\acp\form\ACPForm;
 use wcf\system\exception\UserInputException;
 
@@ -41,6 +41,12 @@ class UltimateContentAddForm extends ACPForm {
     protected $title = '';
     
     /**
+     * Contains the description of the content.
+     * @var string
+     */
+    protected $description = '';
+    
+    /**
      * Contains the text of the content.
      * @var string
      */
@@ -58,6 +64,7 @@ class UltimateContentAddForm extends ACPForm {
     public function readFormParameters() {
         parent::readFormParameters();
         if (isset($_POST['title'])) $this->title = trim($_POST['title']);
+        if (isset($_POST['description'])) $this->title = trim($_POST['description']);
         if (isset($_POST['text'])) $this->text = trim($_POST['text']);
     }
     
@@ -105,12 +112,21 @@ class UltimateContentAddForm extends ACPForm {
         parent::save();
         
         $parameters = array(
-            'title' => $this->title,
-            'text' => $this->text
+            'data' => array(
+            	'contentTitle' => $this->title,
+                'contentDescription' => $this->description,
+            	'contentText' => $this->text
+            )
         );
-        //TODO: Should it be made to a public variable to allow el's manipulation?
-        $content = ContentEditor::create($parameters);
+        
+        $action = new ContentAction(array(), 'create', $parameters);
+        $action->execute();
         $this->saved();
+        
+        UltimateCore::getTPL()->assign('success', true);
+        
+        //showing empty form
+        $this->title = $this->description = $this->text = '';
     }
     
     /**
@@ -120,7 +136,9 @@ class UltimateContentAddForm extends ACPForm {
         parent::assignVariables();
         UltimateCore::getTPL()->assign(array(
             'title' => $this->title,
-            'text' => $this->text
+            'description' => $this->description,
+            'text' => $this->text,
+            'action' => 'add'
         ));
     }
     
