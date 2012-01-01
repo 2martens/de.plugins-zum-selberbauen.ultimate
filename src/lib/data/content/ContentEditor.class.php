@@ -1,6 +1,6 @@
 <?php
 namespace ultimate\data\content;
-use ultimate\system\UltimateCMS;
+use ultimate\system\UltimateCore;
 use wcf\data\DatabaseObjectEditor;
 
 /**
@@ -24,15 +24,16 @@ class ContentEditor extends DatabaseObjectEditor {
      * @see wcf\data\DatabaseObjectEditor::deleteAll()
      */
     public static function deleteAll(array $objectIDs = array()) {
-        $sql = 'DELETE FROM ultimate'.ULTIMATE_N.'_content_to_links
+        //TODO: How to ensure that no contents are still in use?
+        /*$sql = 'DELETE FROM ultimate'.ULTIMATE_N.'_content_to_links
         		WHERE '.static::getDatabaseTableIndexName().' = ?';
-        $statement = UltimateCMS::getDB()->prepareStatement($sql);
+        $statement = UltimateCore::getDB()->prepareStatement($sql);
 
-        UltimateCMS::getDB()->beginTransaction();
+        UltimateCore::getDB()->beginTransaction();
         foreach ($objectIDs as $objectID) {
 			$statement->executeUnbuffered(array($objectID));
 		}
-		UltimateCMS::getDB()->commitTransaction();
+		UltimateCore::getDB()->commitTransaction();*/
 		
 		return DatabaseObjectEditor::deleteAll($objectIDs);
     }
