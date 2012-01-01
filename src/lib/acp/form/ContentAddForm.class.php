@@ -20,7 +20,7 @@ class ContentAddForm extends ACPForm {
     /**
      * @see wcf\acp\form\ACPForm::$activeMenuItem
      */
-    public $activeMenuItem = '';
+    public $activeMenuItem = 'wcf.acp.menu.item.link.ultimate.contents.add';
     
     /**
      * @see wcf\page\AbstractPage::$neededPermissions
