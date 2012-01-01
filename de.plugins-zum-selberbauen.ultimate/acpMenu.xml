@@ -8,22 +8,22 @@
         </acpmenuitem>
         
         <!-- pages -->
-        <acpmenuitem name="wcf.acp.menu.item.link.ultimate.pages">
+        <acpmenuitem name="wcf.acp.menu.item.link.ultimate.links">
             <parent>wcf.acp.menu.item.link.ultimate</parent>
             <showorder>1</showorder>
         </acpmenuitem>
         
         
-        <acpmenuitem name="wcf.acp.menu.item.link.ultimate.pages.list">
-            <link>index.php/UltimatePageList</link>
-            <parent>wcf.acp.menu.item.link.ultimate.pages</parent>
+        <acpmenuitem name="wcf.acp.menu.item.link.ultimate.links.list">
+            <link>index.php/UltimateLinkList</link>
+            <parent>wcf.acp.menu.item.link.ultimate.links</parent>
             <permissions>admin.content.ultimate.canEditLink,admin.content.ultimate.canDeleteLink</permissions>
             <showorder>1</showorder>
         </acpmenuitem>
         
-        <acpmenuitem name="wcf.acp.menu.item.link.ultimate.pages.add">
-            <link>index.php/UltimatePageAdd</link>
-            <parent>wcf.acp.menu.item.link.ultimate.pages</parent>
+        <acpmenuitem name="wcf.acp.menu.item.link.ultimate.links.add">
+            <link>index.php/UltimateLinkAdd</link>
+            <parent>wcf.acp.menu.item.link.ultimate.links</parent>
             <permissions>admin.content.ultimate.canAddLink</permissions>
             <showorder>2</showorder>
         </acpmenuitem>

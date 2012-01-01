@@ -68,7 +68,7 @@
         <dl{if $errorType.text|isset} class="formError"{/if}>
             <dt><label for="text">{lang}ultimate.template.content.text{/lang}</label></dt>
             <dd>
-                <textare id="text" name="text" class="medium">{@$text}</textarea>
+                <textarea id="text" name="text" class="medium">{@$text}</textarea>
                 {if $errorType.text|isset}
                     <small class="innerError">
                         {if $errorType.text == 'empty'}
