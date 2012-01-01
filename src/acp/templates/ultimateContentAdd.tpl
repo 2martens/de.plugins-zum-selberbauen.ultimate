@@ -20,7 +20,7 @@
 {/if}
 
 {if $success|isset}
-    <p class="success">{lang}wcf.global.form.{@$action}.success{/lang}</p>  
+    <p class="success">{lang}wcf.global.form.{@$action}.success{/lang}</p>
 {/if}
 
 <div class="contentHeader">
@@ -50,6 +50,21 @@
                 {/if}
             </dd>
         </dl>
+        <dl{if $errorType.description|isset} class="formError"{/if}>
+            <dt><label for="description">{lang}ultimate.template.content.description{/lang}</label></dt>
+            <dd>
+                <input type="text" id="description" name="description" value="{$description}" class="medium" />
+                {if $errorType.description|isset}
+                    <small class="innerError">
+                        {if $errorType.description == 'empty'}
+                            {lang}wcf.global.form.error.empty{/lang}
+                        {else}
+                            {lang}ultimate.template.content.description.error.{@$errorType.description}{/lang}
+                        {/if}
+                    </small>
+                {/if}
+            </dd>
+        </dl>
         <dl{if $errorType.text|isset} class="formError"{/if}>
             <dt><label for="text">{lang}ultimate.template.content.text{/lang}</label></dt>
             <dd>
@@ -74,7 +89,7 @@
         <input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
         {@SID_INPUT_TAG}
         <input type="hidden" name="action" value="{@$action}" />
-        {if $contentID|isset}<input type="hidden" name="id" value="{@$contentID}" />{/if}   
+        {if $contentID|isset}<input type="hidden" name="id" value="{@$contentID}" />{/if}
     </div>
 </form>
 

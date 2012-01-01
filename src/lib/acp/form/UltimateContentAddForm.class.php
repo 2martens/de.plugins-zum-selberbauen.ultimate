@@ -74,6 +74,7 @@ class UltimateContentAddForm extends ACPForm {
     public function validate() {
         parent::validate();
         $this->validateTitle();
+        $this->validateDescription();
         $this->validateText();
     }
     
@@ -87,6 +88,20 @@ class UltimateContentAddForm extends ACPForm {
         }
         if (strlen($this->title) < 4) {
             throw new UserInputException('title', 'tooShort');
+        }
+    }
+    
+    /**
+     * Validates content description.
+     * @throws UserInputException
+     */
+    protected function validateDescription() {
+        if (empty($this->description)) {
+            throw new UserInputException('description');
+        }
+        
+        if (strlen($this->description) < 4) {
+            throw new UserInputException('description', 'tooShort');
         }
     }
     
