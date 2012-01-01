@@ -2,7 +2,8 @@
 <meta charset="utf-8" />
 <meta name="description" content="{$metaDescription}" />
 <meta name="keywords" content="{$metaKeywords}" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+{* Removed, because it isn't W3C standard.
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />*}
 
 <script type="text/javascript">
 	//<![CDATA[
