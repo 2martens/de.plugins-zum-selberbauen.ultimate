@@ -1,5 +1,6 @@
 <?php
 namespace ultimate\acp\page;
+use ultimate\data\config\Config;
 use wcf\page\SortablePage;
 use wcf\system\menu\acp\ACPMenu;
 
@@ -40,12 +41,37 @@ class UltimateLinkListPage extends SortablePage {
     );
     
     /**
+     * Contains an array of links.
+     * @var array
+     */
+    protected $links = array();
+    
+    /**
+     * @see wcf\page\IPage::readData()
+     */
+    public function readData() {
+        parent::readData();
+        $objects = $this->objectList->getObjects();
+        $links = array();
+        
+        foreach ($objects as $object) {
+            $config = new Config($object->configID);
+            $link[] = array(
+                'linkID' => $object->linkID,
+                'linkSlug' => $object->linkSlug,
+                'configTitle' => $config->configTitle
+            );
+        }
+        $this->links = $links;
+    }
+    
+    /**
      * @see wcf\page\IPage::assignVariables()
      */
     public function assignVariables() {
         parent::assignVariables();
         //overrides objects assignment in MultipleLinkPage
-        UltimateCore::getTPL()->assign('objects', $this->objectList->getObjects());
+        UltimateCore::getTPL()->assign('objects', $this->links);
     }
     
 	/**

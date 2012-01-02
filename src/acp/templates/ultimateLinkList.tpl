@@ -59,29 +59,29 @@
         
         <tbody>
             {content}
-                {foreach from=$links item=link}
-                    <tr id="contentRow{@$link->linkID}">
-                        <td class="columnMark"><input type="checkbox" class="clipboardItem" data-object-id="{@$link->linkID}" /></td>
+                {foreach from=$objects item=link}
+                    <tr id="contentRow{@$link['linkID']}">
+                        <td class="columnMark"><input type="checkbox" class="clipboardItem" data-object-id="{@$link['linkID']}" /></td>
                         <td class="columnIcon">
                             {if $__wcf->session->getPermission('admin.content.ultimate.canEditLink')}
-                                <a href="{link controller='UltimateLinkEdit' id=$link->linkID}{/link}"><img src="{@RELATIVE_WCF_DIR}icon/edit1.svg" alt="" title="{lang}wcf.acp.ultimate.link.edit{/lang}" class="balloonTooltip" /></a>
+                                <a href="{link controller='UltimateLinkEdit' id=$link['linkID']}{/link}"><img src="{@RELATIVE_WCF_DIR}icon/edit1.svg" alt="" title="{lang}wcf.acp.ultimate.link.edit{/lang}" class="balloonTooltip" /></a>
                             {else}
                                 <img src="{@RELATIVE_WCF_DIR}icon/edit1D.svg" alt="" title="{lang}wcf.acp.ultimate.link.edit{/lang}" />
                             {/if}
                             {if $__wcf->session->getPermission('admin.content.ultimate.canDeleteLink')}
-                                <a onclick="return confirm('{lang}wcf.acp.ultimate.link.delete.sure{/lang}')" href="{link controller='UltimateLinkDelete' id=$link->linkID}url={@$encodedURL}{/link}"><img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" title="{lang}wcf.acp.ultimate.link.delete{/lang}" class="balloonTooltip" /></a>
+                                <a onclick="return confirm('{lang}wcf.acp.ultimate.link.delete.sure{/lang}')" href="{link controller='UltimateLinkDelete' id=$link['linkID']}url={@$encodedURL}{/link}"><img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" title="{lang}wcf.acp.ultimate.link.delete{/lang}" class="balloonTooltip" /></a>
                             {else}
                                 <img src="{@RELATIVE_WCF_DIR}icon/delete1D.svg" alt="" title="{lang}wcf.acp.ultimate.link.delete{/lang}" />
                             {/if}
                     
                             {event name='buttons'}
                         </td>
-                        <td class="columnID"><p>{@$link->linkID}</p></td>
-                        <td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditLink')}<a title="{lang}wcf.acp.ultimate.link.edit{/lang}" href="{link controller='UltimateLinkEdit' id=$link->linkID}{/link}">{$link->linkSlug}</a>{else}{$link->linkSlug}{/if}</p></td>
-                		<td class="columnText"><p>{$link->configTitle}</p></td>
+                        <td class="columnID"><p>{@$link['linkID']}</p></td>
+                        <td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditLink')}<a title="{lang}wcf.acp.ultimate.link.edit{/lang}" href="{link controller='UltimateLinkEdit' id=$link['linkID']}{/link}">{$link['linkSlug']}</a>{else}{$link['linkSlug']}{/if}</p></td>
+                		<td class="columnText"><p>{$link['configTitle']}</p></td>
                 		
                         {foreach from=$columnHeads key=column item=columnLanguageVariable}
-                            <td class="column{$column|ucfirst}"><p>{if $columnValues[$content->linkID][$column]|isset}{@$columnValues[$content->linkID][$column]}{/if}</p></td>
+                            <td class="column{$column|ucfirst}"><p>{if $columnValues[$link['linkID']][$column]|isset}{@$columnValues[$link['linkID']][$column]}{/if}</p></td>
                         {/foreach}
                 
                         {event name='columns'}
