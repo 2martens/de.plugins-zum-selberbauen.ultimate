@@ -1,5 +1,6 @@
 <?php
 namespace ultimate\system\config;
+use ultimate\data\component\Component;
 
 /**
  * Represents a config entry.
@@ -26,6 +27,12 @@ class ConfigEntry {
     protected $contentID = 0;
     
     /**
+     * Contains the output of the entry.
+     * @var string
+     */
+    protected $output = '';
+    
+    /**
      * Creates a new ConfigEntry object.
      *
      * @param int $componentID
@@ -34,6 +41,7 @@ class ConfigEntry {
     public function __construct($componentID, $contentID) {
         $this->componentID = intval($componentID);
         $this->contentID = intval($contentID);
+        $this->generateOutput();
     }
     
     /**
@@ -43,6 +51,7 @@ class ConfigEntry {
      */
     public function changeContentID($newID) {
         $this->contentID = intval($newID);
+        $this->generateOutput();
     }
     
     /**
@@ -52,6 +61,15 @@ class ConfigEntry {
      */
     public function changeComponentID($newID) {
         $this->componentID = intval($newID);
+        $this->generateOutput();
+    }
+    
+    /**
+     * Generates the output.
+     */
+    protected function generateOutput() {
+        $component = new Component($this->componentID);
+        $this->output = new $component->className($this->contentID);
     }
     
 }
