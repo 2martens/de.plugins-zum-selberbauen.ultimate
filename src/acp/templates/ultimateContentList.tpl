@@ -58,7 +58,7 @@
         
         <tbody>
             {content}
-                {foreach from=$contents item=content}
+                {foreach from=$objects item=content}
                     <tr id="contentRow{@$content->contentID}">
                         <td class="columnMark"><input type="checkbox" class="clipboardItem" data-object-id="{@$content->contentID}" /></td>
                         <td class="columnIcon">
