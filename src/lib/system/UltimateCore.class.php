@@ -14,7 +14,7 @@ define('ULTIMATE_VERSION', '1.0.0 Alpha 1 (Indigo)');
  * The core class of the Ultimate CMS.
  *
  * @author Jim Martens
- * @copyright 2011 Jim Martens
+ * @copyright 2011-2012 Jim Martens
  * @license http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
  * @package de.plugins-zum-selberbauen.ultimate
  * @subpackage system

@@ -6,7 +6,7 @@ use ultimate\system\UltimateCore;
  * Provides some useful functions for Links.
  *
  * @author Jim Martens
- * @copyright 2012 Jim Martens
+ * @copyright 2011-2012 Jim Martens
  * @license http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
  * @package de.plugins-zum-selberbauen.ultimate
  * @subpackage util
