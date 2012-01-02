@@ -13,13 +13,7 @@ use ultimate\system\config\ConfigEntry;
  * @category Ultimate CMS
  */
 class ConfigStorage implements \Serializable {
-    
-    /**
-     * Contains all required contents.
-     * @var array
-     */
-    protected $requiredContents = array();
-    
+        
     /**
      * Contains all positions.
      * @var array
@@ -68,6 +62,7 @@ class ConfigStorage implements \Serializable {
     
     /**
      * Serializes this object.
+     *
      * @see \Serializable::serialize()
      */
     public function serialize() {
@@ -79,6 +74,7 @@ class ConfigStorage implements \Serializable {
     
     /**
      * Unserializes this object.
+     *
      * @see \Serializable::unserialize()
      */
     public function unserialize($serialized) {
