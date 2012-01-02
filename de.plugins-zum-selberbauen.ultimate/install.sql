@@ -24,6 +24,12 @@ CREATE TABLE ultimate1_1_content (
     FULLTEXT INDEX (contentTitle, contentDescription, contentText)
 );
 
+DROP TABLE IF EXISTS ultimate1_1_component;
+CREATE TABLE ultimate1_1_component (
+    componentID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    className VARCHAR(255) NOT NULL DEFAULT ''    
+);
+
 /**** foreign keys ****/
 ALTER TABLE ultimate1_1_link ADD FOREIGN KEY (configID) REFERENCES ultimate1_1_config (configID) ON DELETE CASCADE;
 
