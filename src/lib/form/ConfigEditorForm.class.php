@@ -1,5 +1,7 @@
 <?php
 namespace ultimate\form;
+use ultimate\data\config\Config;
+
 use ultimate\system\config\storage\ConfigStorageHandler;
 
 use wcf\form\AbstractSecureForm;
@@ -26,6 +28,12 @@ class ConfigEditorForm extends AbstractSecureForm {
     protected $configID = 0;
     
     /**
+     * Contains a ConfigStorage object.
+     * @var ConfigStorage
+     */
+    protected $configStorage = null;
+    
+    /**
      * Contains all entries.
      * @var array
      */
@@ -48,8 +56,9 @@ class ConfigEditorForm extends AbstractSecureForm {
      */
     public function readData() {
         if (!count($_POST) && $this->action = 'edit') {
-            ConfigStorageHandler::getInstance()->addConfigID($configID);
-            $this->entries = ConfigStorageHandler::getInstance()->getConfigStorage()->getEntries();
+            $config = new Config($this->configID);
+            $this->configStorage = unserialize($config->storage);
+            $this->entries = $this->configStorage->getEntries();
         }
         parent::readData();
     }

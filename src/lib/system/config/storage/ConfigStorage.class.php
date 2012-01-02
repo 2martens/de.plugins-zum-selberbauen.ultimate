@@ -18,7 +18,7 @@ class ConfigStorage implements \Serializable {
      * Contains all positions.
      * @var array
      */
-    protected $positions = array(
+    protected $entries = array(
         'left' => array(),
         'center' => array(),
         'right' => array()
@@ -30,7 +30,7 @@ class ConfigStorage implements \Serializable {
      * @return array
      */
     public function getEntries() {
-        return $this->positions;
+        return $this->entries;
     }
     
     /**
