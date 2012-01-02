@@ -19,6 +19,7 @@
 	<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/3rdParty/jquery.tools.min.js"></script>
 	<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.js"></script>
 	<script type="text/javascript" src="{@RELATIVE_WCF_DIR}acp/js/WCF.ACP.js"></script>
+	<script type="text/javascript" src="{@RELATIVE_ULTIMATE_DIR}js/ULTIMATE.js"></script>
 	<script type="text/javascript" src="{@RELATIVE_ULTIMATE_DIR}acp/js/ULTIMATE.ACP.js"></script>
 	<script type="text/javascript">
 		//<![CDATA[

@@ -51,3 +51,44 @@ ULTIMATE.ACP.Content.List.prototype = {
 		}
 	}
 };
+
+/**
+ * Namespace for ULTIMATE.ACP.Link
+ */
+ULTIMATE.ACP.Link = {};
+
+/**
+ * LinkList clipboard API
+ */
+ULTIMATE.ACP.Link.List = function() { this.init(); };
+ULTIMATE.ACP.Link.List.prototype = {
+	/**
+	 * Initializes the LinkList clipboard API.
+	 */
+	init: function() {
+		$('body').bind('clipboardAction', $.proxy(this.handleClipboardEvent, this));
+	},
+	
+	/**
+	 * Event handler for clipboard editor item actions.
+	 */
+	handleClipboardEvent: function(event, type, actionName) {
+		// ignore unrelated events
+		if ((type != 'de.plugins-zum-selberbauen.ultimate.link') || (actionName != 'link.delete')) return;
+		
+		var $item = $(event.target);
+		this._delete($item);
+	},
+	
+	/**
+	 * Handle delete action.
+	 * 
+	 * @param	jQuery		item
+	 */
+	_delete: function(item) {
+		var $confirmMessage = item.data('internalData')['confirmMessage'];
+		if (confirm($confirmMessage)) {
+			WCF.Clipboard.sendRequest(item);
+		}
+	}
+};
