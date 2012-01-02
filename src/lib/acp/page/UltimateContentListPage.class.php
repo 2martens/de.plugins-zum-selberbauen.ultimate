@@ -32,11 +32,6 @@ class UltimateContentListPage extends SortablePage {
     public $objectListClassName = 'ultimate\data\content\ContentList';
     
     /**
-     * @see wcf\page\MultipleLinkPage::$items
-     */
-    public $items = 1; //workaround since the objects are only read if $items is greater than zero
-    
-    /**
 	 * @see wcf\page\SortablePage::$validSortFields
 	 */
     public $validSortFields = array(
@@ -49,6 +44,7 @@ class UltimateContentListPage extends SortablePage {
      */
     public function assignVariables() {
         parent::assignVariables();
+        //overrides objects assignment in MultipleLinkPage
         UltimateCore::getTPL()->assign('objects', $this->objectList->getObjects());
     }
     
