@@ -22,7 +22,7 @@ class ApplicationDomainPathCacheBuilder implements ICacheBuilder {
     protected $databaseTable = 'application';
     
     /**
-     * @see wcf\system\cache\builder\ICacheBuilder::getData()
+     * @see \wcf\system\cache\builder\ICacheBuilder::getData()
      */
     public function getData(array $cacheResource) {
         

@@ -37,7 +37,7 @@ class InstallUltimateCMS {
     protected function createHtaccess() {
         $cache = 'domain-paths';
         $file = WCF_DIR.'cache/cache.'.$cache.'.php';
-        $className = 'ultimate\system\cache\builder\ApplicationDomainPathCacheBuilder';
+        $className = '\ultimate\system\cache\builder\ApplicationDomainPathCacheBuilder';
         CacheHandler::getInstance()->addResource($cache, $file, $className);
         
         $domainPaths = CacheHandler::getInstance()->get($cache, 'paths');

@@ -14,8 +14,8 @@ use wcf\data\DatabaseObjectList;
  */
 class ContentList extends DatabaseObjectList {
     /**
-     * @see wcf\data\DatabaseObjectList::$className
+     * @see \wcf\data\DatabaseObjectList::$className
      */
-    public $className = 'ultimate\data\content\Content';
+    public $className = '\ultimate\data\content\Content';
     
 }

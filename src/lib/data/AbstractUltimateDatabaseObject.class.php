@@ -15,7 +15,7 @@ use wcf\data\DatabaseObject;
 abstract class AbstractUltimateDatabaseObject extends DatabaseObject {
     
 	/**
-     * @see	wcf\data\IStorableObject::getDatabaseTableName()
+     * @see	\wcf\data\IStorableObject::getDatabaseTableName()
      */
     public static function getDatabaseTableName() {
         return 'ultimate'.ULTIMATE_N.'_'.static::$databaseTableName;

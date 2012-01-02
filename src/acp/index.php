@@ -7,4 +7,4 @@
  * @category Ultimate CMS
  */
 require_once('./global.php');
-wcf\system\request\RequestHandler::getInstance()->handle('ultimate', true);
+\wcf\system\request\RequestHandler::getInstance()->handle('ultimate', true);

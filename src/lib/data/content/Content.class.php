@@ -14,17 +14,17 @@ use ultimate\data\AbstractUltimateDatabaseObject;
  */
 class Content extends AbstractUltimateDatabaseObject {
     /**
-     * @see wcf\data\DatabaseObject::$databaseTableName
+     * @see \wcf\data\DatabaseObject::$databaseTableName
      */
     protected static $databaseTableName = 'content';
     
     /**
-     * @see wcf\data\DatabaseObject::$databaseTableIndexIsIdentity
+     * @see \wcf\data\DatabaseObject::$databaseTableIndexIsIdentity
      */
     protected static $databaseTableIndexIsIdentity = false;
     
     /**
-     * @see wcf\data\DatabaseObject::$databaseTableIndexName
+     * @see \wcf\data\DatabaseObject::$databaseTableIndexName
      */
     protected static $databaseTableIndexName = 'contentID';
     

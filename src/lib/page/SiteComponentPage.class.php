@@ -14,7 +14,7 @@ use ultimate\page\AbstractComponentPage;
  */
 class SiteComponentPage extends AbstractComponentPage {
     /**
-     * @see wcf\page\AbstractPage::$templateName
+     * @see \wcf\page\AbstractPage::$templateName
      */
     public $templateName = 'site';
     

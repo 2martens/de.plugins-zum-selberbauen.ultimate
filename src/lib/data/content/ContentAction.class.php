@@ -18,27 +18,27 @@ use wcf\system\database\util\PreparedStatementConditionBuilder;
  */
 class ContentAction extends AbstractDatabaseObjectAction {
     /**
-     * @see wcf\data\AbstractDatabaseObjectAction::$className
+     * @see \wcf\data\AbstractDatabaseObjectAction::$className
      */
-    public $className = 'ultimate\data\content\ContentEditor';
+    public $className = '\ultimate\data\content\ContentEditor';
     
 	/**
-	 * @see	wcf\data\AbstractDatabaseObjectAction::$permissionsCreate
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsCreate
 	 */
 	protected $permissionsCreate = array('admin.content.ultimate.canAddContent');
 	
 	/**
-	 * @see	wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
 	 */
 	protected $permissionsDelete = array('admin.content.ultimate.canDeleteContent');
 	
 	/**
-	 * @see	wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
 	 */
 	protected $permissionsUpdate = array('admin.content.ultimate.canEditContent');
 	
 	/**
-	 * @see wcf\data\AbstractDatabaseObjectAction::validateDelete()
+	 * @see \wcf\data\AbstractDatabaseObjectAction::validateDelete()
 	 * @throws ValidateActionException
 	 */
 	public function validateDelete() {

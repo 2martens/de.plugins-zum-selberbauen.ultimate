@@ -18,12 +18,12 @@ use wcf\form\AbstractForm;
 class UltimateLinkEditForm extends UltimateLinkAddForm {
     
     /**
-     * @see wcf\acp\form\ACPForm::$activeMenuItem
+     * @see \wcf\acp\form\ACPForm::$activeMenuItem
      */
     public $activeMenuItem = 'wcf.acp.menu.item.link.ultimate.links';
     
     /**
-     * @see wcf\page\AbstractPage::$neededPermissions
+     * @see \wcf\page\AbstractPage::$neededPermissions
      */
     public $neededPermissions = array(
         'admin.content.ultimate.canEditLink'
@@ -36,7 +36,7 @@ class UltimateLinkEditForm extends UltimateLinkAddForm {
     protected $linkID = 0;
     
     /**
-     * @see wcf\page\AbstractPage::readParameters()
+     * @see \wcf\page\IPage::readParameters()
      */
     public function readParameters() {
         parent::readParameters();
@@ -44,7 +44,7 @@ class UltimateLinkEditForm extends UltimateLinkAddForm {
     }
     
     /**
-     * @see ultimate\acp\form\UltimateLinkAddForm::save()
+     * @see \wcf\form\IForm::save()
      */
     public function save() {
         AbstractForm::save();
@@ -65,7 +65,7 @@ class UltimateLinkEditForm extends UltimateLinkAddForm {
     }
     
     /**
-     * @see ultimate\acp\form.UltimateLinkAddForm::readData()
+     * @see \wcf\page\IPage::readData()
      */
     public function readData() {
         if (!count($_POST)) {
@@ -77,7 +77,7 @@ class UltimateLinkEditForm extends UltimateLinkAddForm {
     }
     
     /**
-     * @see ultimate\acp\form\UltimateLinkAddForm::assignVariables()
+     * @see \wcf\page\IPage::assignVariables()
      */
     public function assignVariables() {
         parent::assignVariables();

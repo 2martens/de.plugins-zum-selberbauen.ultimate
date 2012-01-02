@@ -22,17 +22,17 @@ class UltimateContentListPage extends SortablePage {
     public $activeMenuItem = 'wcf.acp.menu.item.link.ultimate.content.list';
     
     /**
-     * @see wcf\page\AbstractPage::$templateName
+     * @see \wcf\page\AbstractPage::$templateName
      */
     public $templateName = 'ultimateContentList';
     
     /**
-     * @see wcf\page\MultiplLinkPage::$objectListClassName
+     * @see \wcf\page\MultiplLinkPage::$objectListClassName
      */
     public $objectListClassName = 'ultimate\data\content\ContentList';
     
     /**
-	 * @see wcf\page\SortablePage::$validSortFields
+	 * @see \wcf\page\SortablePage::$validSortFields
 	 */
     public $validSortFields = array(
         'contentID',
@@ -40,7 +40,7 @@ class UltimateContentListPage extends SortablePage {
     );
     
     /**
-     * @see wcf\page\IPage::assignVariables()
+     * @see \wcf\page\IPage::assignVariables()
      */
     public function assignVariables() {
         parent::assignVariables();
@@ -49,7 +49,7 @@ class UltimateContentListPage extends SortablePage {
     }
     
 	/**
-	 * @see wcf\page\IPage::show()
+	 * @see \wcf\page\IPage::show()
 	 */
 	public function show() {
 		// set active menu item

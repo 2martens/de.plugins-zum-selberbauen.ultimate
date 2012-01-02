@@ -14,8 +14,8 @@ use wcf\data\DatabaseObjectEditor;
  */
 class ConfigEditor extends DatabaseObjectEditor {
     /**
-     * @see wcf\data\DatabaseObjectDecorator::$baseClass
+     * @see \wcf\data\DatabaseObjectDecorator::$baseClass
      */
-    protected static $baseClass = 'ultimate\data\config\Config';
+    protected static $baseClass = '\ultimate\data\config\Config';
 
 }

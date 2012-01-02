@@ -19,7 +19,7 @@ use wcf\util\StringUtil;
 abstract class AbstractComponentPage extends AbstractPage {
     
     /**
-     * @see wcf\page\AbstractPage::$useTemplate
+     * @see \wcf\page\AbstractPage::$useTemplate
      */
     public $useTemplate = false;
     
@@ -49,6 +49,7 @@ abstract class AbstractComponentPage extends AbstractPage {
     
     /**
      * Creates a new AbstractComponentPage object.
+     *
      * @param string $contentName
      */
     public function __construct($contentID) {
@@ -64,7 +65,7 @@ abstract class AbstractComponentPage extends AbstractPage {
     }
     
     /**
-     * @see wcf\page\AbstractPage::readData()
+     * @see \wcf\page\IPage::readData()
      */
     public function readData() {
         parent::readData();
@@ -79,7 +80,7 @@ abstract class AbstractComponentPage extends AbstractPage {
     }
     
     /**
-     * @see wcf\page\AbstractPage::assignVariables()
+     * @see \wcf\page\IPage::assignVariables()
      */
     public function assignVariables() {
         parent::assignVariables();
@@ -92,7 +93,7 @@ abstract class AbstractComponentPage extends AbstractPage {
     }
     
     /**
-     * @see wcf\page\AbstractPage::show()
+     * @see \wcf\page\IPage::show()
      */
     public function show() {
         parent::show();

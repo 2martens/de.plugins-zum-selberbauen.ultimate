@@ -18,12 +18,12 @@ use wcf\form\AbstractForm;
 class UltimateContentEditForm extends UltimateContentAddForm {
     
     /**
-     * @see wcf\acp\form\ACPForm::$activeMenuItem
+     * @see \wcf\acp\form\ACPForm::$activeMenuItem
      */
     public $activeMenuItem = 'wcf.acp.menu.item.link.ultimate.contents';
     
     /**
-     * @see wcf\page\AbstractPage::$neededPermissions
+     * @see \wcf\page\AbstractPage::$neededPermissions
      */
     public $neededPermissions = array(
         'admin.content.ultimate.canEditContent'
@@ -36,7 +36,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
     protected $contentID = 0;
     
     /**
-     * @see ultimate\acp\form\UltimateContentAddForm::save()
+     * @see \wcf\form\IForm::save()
      */
     public function save() {
         AbstractForm::save();
@@ -55,7 +55,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
     }
     
     /**
-     * @see wcf\page\AbstractPage::readParameters()
+     * @see \wcf\page\IPage::readParameters()
      */
     public function readParameters() {
         parent::readParameters();
@@ -63,7 +63,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
     }
     
     /**
-     * @see wcf\form\AbstractForm::readData()
+     * @see \wcf\page\IPage::readData()
      */
     public function readData() {
         if (!count($_POST)) {
@@ -76,7 +76,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
     }
     
     /**
-     * @see ultimate\acp\form\UltimateContentAddForm::assignVariables()
+     * @see \wcf\page\IPage::assignVariables()
      */
     public function assignVariables() {
         parent::assignVariables();

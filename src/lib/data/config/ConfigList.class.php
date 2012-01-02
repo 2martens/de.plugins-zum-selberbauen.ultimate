@@ -14,7 +14,7 @@ use wcf\data\DatabaseObjectList;
  */
 class ConfigList extends DatabaseObjectList {
     /**
-     * @see wcf\data\DatabaseObjectList::$className
+     * @see \wcf\data\DatabaseObjectList::$className
      */
-    public $className = 'ultimate\data\config\Config';
+    public $className = '\ultimate\data\config\Config';
 }

@@ -15,9 +15,9 @@ use wcf\data\DatabaseObjectEditor;
  */
 class ContentEditor extends DatabaseObjectEditor {
     /**
-     * @see wcf\data\DatabaseObjectDecorator::$baseClass
+     * @see \wcf\data\DatabaseObjectDecorator::$baseClass
      */
-    protected static $baseClass = 'ultimate\data\content\Content';
+    protected static $baseClass = '\ultimate\data\content\Content';
     
     /**
      * Deletes all connections of given contents with links.

@@ -19,17 +19,17 @@ use wcf\system\exception\UserInputException;
 class UltimateLinkAddForm extends ACPForm {
     
     /**
-     * @see wcf\acp\form\ACPForm::$activeMenuItem
+     * @see \wcf\acp\form\ACPForm::$activeMenuItem
      */
     public $activeMenuItem = 'wcf.menu.item.link.ultimate.links.add';
     
     /**
-     * @see wcf\page\AbstractPage::$templateName
+     * @see \wcf\page\AbstractPage::$templateName
      */
     public $templateName = 'ultimateLinkAdd';
     
     /**
-     * @see wcf\page\AbstractPage::$neededPermissions
+     * @see \wcf\page\AbstractPage::$neededPermissions
      */
     public $neededPermissions = array(
         'admin.content.ultimate.canAddLink'
@@ -54,7 +54,7 @@ class UltimateLinkAddForm extends ACPForm {
     protected $slug = '';
     
     /**
-     * @see wcf\form\AbstractForm::readFormParameters()
+     * @see \wcf\form\IForm::readFormParameters()
      */
     public function readFormParameters() {
         parent::readFormParameters();
@@ -63,7 +63,7 @@ class UltimateLinkAddForm extends ACPForm {
     }
     
     /**
-     * @see wcf\form\AbstractForm::validate()
+     * @see \wcf\form\IForm::validate()
      */
     public function validate() {
         parent::validate();
@@ -98,7 +98,7 @@ class UltimateLinkAddForm extends ACPForm {
     }
     
     /**
-     * @see wcf\form\AbstractForm::save()
+     * @see \wcf\form\IForm::save()
      */
     public function save() {
         parent::save();
@@ -123,7 +123,7 @@ class UltimateLinkAddForm extends ACPForm {
     }
     
     /**
-     * @see wcf\form\AbstractForm::readData()
+     * @see \wcf\page\IPage::readData()
      */
     public function readData() {
         if (!count($_POST)) {
@@ -138,7 +138,7 @@ class UltimateLinkAddForm extends ACPForm {
     }
     
     /**
-     * @see wcf\form\AbstractForm::assignVariables()
+     * @see \wcf\page\IPage::assignVariables()
      */
     public function assignVariables() {
         parent::assignVariables();

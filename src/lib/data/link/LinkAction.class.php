@@ -16,22 +16,22 @@ use wcf\system\database\util\PreparedStatementConditionBuilder;
  */
 class LinkAction extends AbstractDatabaseObjectAction {
     /**
-     * @see wcf\data\AbstractDatabaseObjectAction::$className
+     * @see \wcf\data\AbstractDatabaseObjectAction::$className
      */
     public $className = 'ultimate\data\link\LinkEditor';
     
 	/**
-	 * @see	wcf\data\AbstractDatabaseObjectAction::$permissionsCreate
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsCreate
 	 */
 	protected $permissionsCreate = array('admin.content.ultimate.canAddLink');
 	
 	/**
-	 * @see	wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
 	 */
 	protected $permissionsDelete = array('admin.content.ultimate.canDeleteLink');
 	
 	/**
-	 * @see	wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
 	 */
 	protected $permissionsUpdate = array('admin.content.ultimate.canEditLink');
 	

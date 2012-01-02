@@ -16,21 +16,21 @@ use wcf\page\AbstractPage;
 class GenericCMSPage extends AbstractPage {
     
     /**
-     * @see wcf\page\AbstractPage::$neededModules
+     * @see \wcf\page\AbstractPage::$neededModules
      */
     public $neededModules = array(
         'MODULE_ULTIMATEFRONTEND'
     );
     
     /**
-     * @see wcf\page\AbstractPage::$neededPermissions
+     * @see \wcf\page\AbstractPage::$neededPermissions
      */
     public $neededPermissions = array(
         'user.ultimate.canUseFrontend'
     );
     
     /**
-     * @see wcf\page\AbstractPage::$templateName
+     * @see \wcf\page\AbstractPage::$templateName
      */
     public $templateName = '';
     
@@ -42,6 +42,7 @@ class GenericCMSPage extends AbstractPage {
     
     /**
      * Creates a new GenericCMSPage object.
+     *
      * @param array $callData
      */
     public function __construct(array $callData) {
@@ -55,7 +56,7 @@ class GenericCMSPage extends AbstractPage {
     }
     
     /**
-     * @see wcf\page\AbstractPage::assignVariables()
+     * @see \wcf\page\IPage::assignVariables()
      */
     public function assignVariables() {
         foreach ($this->content as $id => $output) {

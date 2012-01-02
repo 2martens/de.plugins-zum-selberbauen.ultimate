@@ -14,19 +14,19 @@ use wcf\page\AbstractPage;
  */
 class IndexPage extends AbstractPage {
     /**
-     * @see wcf\page\AbstractPage::$templateName
+     * @see \wcf\page\AbstractPage::$templateName
      */
     public $templateName = 'index';
     
     /**
-     * @see wcf\page\AbstractPage::$neededModules
+     * @see \wcf\page\AbstractPage::$neededModules
      */
     public $neededModules = array(
         'MODULE_ULTIMATEFRONTEND'
     );
     
     /**
-     * @see wcf\page\AbstractPage::$neededPermissions
+     * @see \wcf\page\AbstractPage::$neededPermissions
      */
     public $neededPermissions = array(
         'user.ultimate.canUseFrontend'

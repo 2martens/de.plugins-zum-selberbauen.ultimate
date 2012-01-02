@@ -68,13 +68,13 @@ class Dispatcher extends SingletonFactory {
             if (false) echo $component.'<br /><pre>'.print_r(UltimateCore::getTPL()->templatePaths, true).'</pre>';
             
             require_once(ULTIMATE_DIR.'lib/page/'.$component.'.class.php');
-            $component = 'ultimate\page\\'.$component;
+            $component = '\ultimate\page\\'.$component;
             $obj = new $component($id);
             $result = $obj->getOutput(); //returns output
             $callData['content'][$id] = $result;
         }
         
-        $controllerObj = 'ultimate\page\GenericCMSPage';
+        $controllerObj = '\ultimate\page\GenericCMSPage';
         new $controllerObj($callData);
     }
     
@@ -99,7 +99,7 @@ class Dispatcher extends SingletonFactory {
         //loading domain path from cache
         $cache = 'domain-paths';
         $file = WCF_DIR.'cache/cache.'.$cache.'.php';
-        $className = 'ultimate\system\cache\builder\ApplicationDomainPathCacheBuilder';
+        $className = '\ultimate\system\cache\builder\ApplicationDomainPathCacheBuilder';
         CacheHandler::getInstance()->addResource($cache, $file, $className);
         
         $domainPaths = CacheHandler::getInstance()->get($cache, 'paths');
@@ -111,7 +111,7 @@ class Dispatcher extends SingletonFactory {
         //loading links from cache
         $cache = 'ultimate-links-'.PACKAGE_ID;
         $file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
-        $className = 'ultimate\system\cache\builder\UltimateLinksCacheBuilder';
+        $className = '\ultimate\system\cache\builder\UltimateLinksCacheBuilder';
         CacheHandler::getInstance()->addResource($cache, $file, $className);
         $this->linkList = CacheHandler::getInstance()->get($cache, 'links');
     }

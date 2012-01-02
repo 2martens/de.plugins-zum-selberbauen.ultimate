@@ -4,7 +4,6 @@ use ultimate\data\content\ContentAction;
 use wcf\acp\form\ACPForm;
 use wcf\system\exception\UserInputException;
 
-
 /**
  * Show the UltimateContentAdd form.
  *
@@ -18,17 +17,17 @@ use wcf\system\exception\UserInputException;
 class UltimateContentAddForm extends ACPForm {
     
     /**
-     * @see wcf\page\AbstractPage::$templateName
+     * @see \wcf\page\AbstractPage::$templateName
      */
     public $templateName = 'ultimateContentAdd';
     
     /**
-     * @see wcf\acp\form\ACPForm::$activeMenuItem
+     * @see \wcf\acp\form\ACPForm::$activeMenuItem
      */
     public $activeMenuItem = 'wcf.acp.menu.item.link.ultimate.contents.add';
     
     /**
-     * @see wcf\page\AbstractPage::$neededPermissions
+     * @see \wcf\page\AbstractPage::$neededPermissions
      */
     public $neededPermissions = array(
         'admin.content.ultimate.canAddContent'
@@ -59,7 +58,7 @@ class UltimateContentAddForm extends ACPForm {
     public $maxTextLength = 0;
     
     /**
-     * @see wcf\form\AbstractForm::readFormParameters()
+     * @see \wcf\form\IForm::readFormParameters()
      */
     public function readFormParameters() {
         parent::readFormParameters();
@@ -69,7 +68,7 @@ class UltimateContentAddForm extends ACPForm {
     }
     
     /**
-     * @see wcf\form\AbstractForm::validate()
+     * @see \wcf\form\IForm::validate()
      */
     public function validate() {
         parent::validate();
@@ -121,7 +120,7 @@ class UltimateContentAddForm extends ACPForm {
     }
     
     /**
-     * @see wcf\form\AbstractForm::save()
+     * @see \wcf\form\IForm::save()
      */
     public function save() {
         parent::save();
@@ -145,7 +144,7 @@ class UltimateContentAddForm extends ACPForm {
     }
     
     /**
-     * @see wcf\form\AbstractForm::assignVariables()
+     * @see \wcf\page\IPage::assignVariables()
      */
     public function assignVariables() {
         parent::assignVariables();

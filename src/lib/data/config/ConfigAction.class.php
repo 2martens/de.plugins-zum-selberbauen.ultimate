@@ -15,27 +15,27 @@ use wcf\data\AbstractDatabaseObjectAction;
  */
 class ConfigAction extends AbstractDatabaseObjectAction {
     /**
-     * @see wcf\data\AbstractDatabaseObjectAction::$className
+     * @see \wcf\data\AbstractDatabaseObjectAction::$className
      */
-    public $className = 'ultimate\data\config\ConfigEditor';
+    public $className = '\ultimate\data\config\ConfigEditor';
     
 	/**
-	 * @see	wcf\data\AbstractDatabaseObjectAction::$permissionsCreate
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsCreate
 	 */
 	protected $permissionsCreate = array('admin.content.ultimate.canAddConfig');
 	
 	/**
-	 * @see	wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
 	 */
 	protected $permissionsDelete = array('admin.content.ultimate.canDeleteConfig');
 	
 	/**
-	 * @see	wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
 	 */
 	protected $permissionsUpdate = array('admin.content.ultimate.canEditConfig');
 	
 	/**
-	 * @see wcf\data\AbstractDatabaseObjectAction::validateDelete()
+	 * @see \wcf\data\AbstractDatabaseObjectAction::validateDelete()
 	 * @throws ValidateActionException
 	 */
 	public function validateDelete() {
