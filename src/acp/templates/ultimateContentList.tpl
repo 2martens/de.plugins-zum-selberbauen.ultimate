@@ -76,7 +76,7 @@
                             {event name='buttons'}
                         </td>
                         <td class="columnID columnUserID"><p>{@$content->contentID}</p></td>
-                        <td class="columnTitle columnUsername"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditContent')}<a title="{lang}wcf.acp.ultimate.content.edit{/lang}" href="{link controller='UltimateContentEdit' id=$content->contentID}{/link}">{$content->contentTitle}</a>{else}{$cotent->contentTitle}{/if}</p></td>
+                        <td class="columnTitle columnUsername"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditContent')}<a title="{lang}wcf.acp.ultimate.content.edit{/lang}" href="{link controller='UltimateContentEdit' id=$content->contentID}{/link}">{$content->contentTitle}</a>{else}{$content->contentTitle}{/if}</p></td>
                 
                         {foreach from=$columnHeads key=column item=columnLanguageVariable}
                             <td class="column{$column|ucfirst}"><p>{if $columnValues[$content->contentID][$column]|isset}{@$columnValues[$content->contentID][$column]}{/if}</p></td>
