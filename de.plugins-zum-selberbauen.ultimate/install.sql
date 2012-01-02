@@ -4,7 +4,7 @@ CREATE TABLE ultimate1_1_config (
     configID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     configTitle VARCHAR(255) NOT NULL DEFAULT '',
     templateName VARCHAR(255) NOT NULL DEFAULT '',
-    requiredContents VARCHAR(255) NOT NULL DEFAULT ''
+    storage VARCHAR(255) NOT NULL DEFAULT ''
 );
 
 DROP TABLE IF EXISTS ultimate1_1_link;
