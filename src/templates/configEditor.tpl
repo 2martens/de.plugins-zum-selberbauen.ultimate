@@ -88,9 +88,11 @@
         	<fieldset>
         		<legend>{lang}ultimate.template.configEditor.columnLeft{/lang}</legend>
     			<div class="sortable" id="columnLeft">
-        		{foreach from=$entries['left'] key=$key item=$entry}
-    				<div id="left{$key}">{$entry->getContent()}</div>
-    			{/foreach}
+        		{content}
+        			{foreach from=$entries['left'] key=$key item=$entry}
+    					<div id="left{$key}">{$entry->getContent()}</div>
+    				{/foreach}
+    			{/content}
     			</div>
     			<ul class="largeButtons">
     				<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang}" href="javascript:addEntry('#columnLeft')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
@@ -101,9 +103,11 @@
     		<fieldset>
         		<legend>{lang}ultimate.template.configEditor.columnRight{/lang}</legend>
         		<div class="sortable" id="columnRight">
-        		{foreach from=$entries['right'] key=$key item=$entry}
-    				<div id="right{$key}">{$entry->getContent()}</div>
-    			{/foreach}
+        		{content}
+        			{foreach from=$entries['right'] key=$key item=$entry}
+    					<div id="right{$key}">{$entry->getContent()}</div>
+    				{/foreach}
+    			{/content}
         		</div>
         		<ul class="largeButtons">
     				<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang}" href="javascript:addEntry('#columnRight')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
@@ -114,9 +118,11 @@
        		<fieldset>
         		<legend>{lang}ultimate.template.configEditor.columnCenter{/lang}</legend>
     			<div class="sortable" id="columnCenter">
-       			{foreach from=$entries['center'] key=$key item=$entry}
-    				<div id="center{$key}">{$entry->getContent()}</div>
-    			{/foreach}
+       			{content}
+       				{foreach from=$entries['center'] key=$key item=$entry}
+    					<div id="center{$key}">{$entry->getContent()}</div>
+    				{/foreach}
+    			{/content}
     			</div>
     			<ul class="largeButtons">
     				<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang}" href="javascript:addEntry('#columnCenter')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
