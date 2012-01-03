@@ -72,4 +72,11 @@ class ConfigEntry {
         $this->output = new $component->className($this->contentID);
     }
     
+    /**
+     * Returns the content of the entry.
+     */
+    public function getContent() {
+        return $this->output;
+    }
+    
 }
