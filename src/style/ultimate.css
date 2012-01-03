@@ -1,4 +1,3 @@
-@CHARSET "UTF-8";
 /* 
 
 File: ultimate.css 
@@ -6,6 +5,7 @@ Copyright 2011 by Jim Martens.
 
 */
 /** column layout **/
+
 .ultimateLeft {
     float: left;
     font-size: 0.9em;
@@ -23,6 +23,12 @@ Copyright 2011 by Jim Martens.
 }
 
 /** sortables **/
+
+.sortableParent {
+    min-height: 200px;
+}
+
+ol.sortable,
 ul.sortable {
     list-style-type: none;
 }
