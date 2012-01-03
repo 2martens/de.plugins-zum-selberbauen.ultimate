@@ -12,7 +12,7 @@ use ultimate\data\component\Component;
  * @subpackage system.config
  * @category Ultimate CMS
  */
-class ConfigEntry {
+class ConfigEntry implements \Serializable {
     
     /**
      * Contains the component id.
@@ -77,6 +77,28 @@ class ConfigEntry {
      */
     public function getContent() {
         return $this->output;
+    }
+    
+    /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize() {
+        $data = array(
+            'compID' => $this->componentID,
+            'contentID' => $this->contentID,
+            'output' => $this->output
+        );
+        return serialize($data);
+    }
+    
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized) {
+        $data = unserialize($serialized);
+        $this->componentID = $data['compID'];
+        $this->contentID = $data['contentID'];
+        $this->output = $data['output'];
     }
     
 }
