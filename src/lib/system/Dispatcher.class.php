@@ -105,15 +105,13 @@ class Dispatcher extends SingletonFactory {
         $domainPaths = CacheHandler::getInstance()->get($cache, 'paths');
         $this->domainPath = $domainPaths[PACKAGE_ID];
         
-        //loading configurations from cache
-        $this->viewConfigurations = CacheHandler::getInstance()->get($cache, 'configs');
-        
         //loading links from cache
         $cache = 'ultimate-links-'.PACKAGE_ID;
         $file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
         $className = '\ultimate\system\cache\builder\UltimateLinksCacheBuilder';
         CacheHandler::getInstance()->addResource($cache, $file, $className);
         $this->linkList = CacheHandler::getInstance()->get($cache, 'links');
+        $this->viewConfigurations = CacheHandler::getInstance()->get($cache, 'configs');
     }
     
     /**
