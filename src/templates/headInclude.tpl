@@ -15,6 +15,7 @@
 <script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/3rdParty/jquery-ui.min.js"></script>
 <script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/3rdParty/jquery.tools.min.js"></script>
 <script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.js"></script>
+<script type="text/javascript" src="{@RELATIVE_ULTIMATE_DIR}js/ULTIMATE.js"></script>
 <script type="text/javascript">
 	//<![CDATA[
 	WCF.User.init({@$__wcf->user->userID}, '{@$__wcf->user->username|encodeJS}');
