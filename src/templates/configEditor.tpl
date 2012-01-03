@@ -4,8 +4,10 @@
     {include file='headInclude' sandbox=false}
     <script type="text/javascript">
     /* <![CDATA[ */
-    $(".sortable").sortable({ containment: "#columnsParent" });
-    $(".sortable").disableSelection();
+    $(function() {
+    	$(".sortable").sortable();
+    	$(".sortable").disableSelection();
+    });
     function addEntry($selector) {
     	ULTIMATE.ConfigEditor.addEntry($selector);
     }
@@ -85,43 +87,43 @@
 
 	<div id="columnsParent">
     	<div class="ultimateLeft">
-        	<fieldset>
+        	<fieldset class="sortableParent">
         		<legend>{lang}ultimate.template.configEditor.columnLeft{/lang}</legend>
     			<div class="sortable" id="columnLeft">
         		{foreach from=$entries['left'] key=$key item=$entry}
     				<div id="left{$key}">{$entry->getContent()}</div>
     			{/foreach}
     			</div>
-    			<ul class="largeButtons">
-    				<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang}" href="javascript:addEntry('#columnLeft')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
-    			</ul>
     		</fieldset>
+    		<ul class="largeButtons">
+    			<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang}" href="javascript:addEntry('#columnCenter')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
+    		</ul>
     	</div>
     	<div class="ultimateRight">
-    		<fieldset>
+    		<fieldset class="sortableParent">
         		<legend>{lang}ultimate.template.configEditor.columnRight{/lang}</legend>
         		<div class="sortable" id="columnRight">
         		{foreach from=$entries['right'] key=$key item=$entry}
     				<div id="right{$key}">{$entry->getContent()}</div>
     			{/foreach}
         		</div>
-        		<ul class="largeButtons">
-    				<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang}" href="javascript:addEntry('#columnRight')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
-    			</ul>
         	</fieldset>
+    		<ul class="largeButtons">
+    			<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang}" href="javascript:addEntry('#columnCenter')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
+    		</ul>
     	</div>
     	<div class="ultimateCenter">
-       		<fieldset>
+       		<fieldset class="sortableParent">
         		<legend>{lang}ultimate.template.configEditor.columnCenter{/lang}</legend>
     			<div class="sortable" id="columnCenter">
        			{foreach from=$entries['center'] key=$key item=$entry}
     				<div id="center{$key}">{$entry->getContent()}</div>
     			{/foreach}
     			</div>
-    			<ul class="largeButtons">
-    				<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang}" href="javascript:addEntry('#columnCenter')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
-    			</ul>
     		</fieldset>
+    		<ul class="largeButtons">
+    			<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang}" href="javascript:addEntry('#columnCenter')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
+    		</ul>
     	</div>
 	</div>
 </form>
