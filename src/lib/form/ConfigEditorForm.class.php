@@ -24,6 +24,12 @@ class ConfigEditorForm extends AbstractSecureForm {
     );
     
     /**
+     * By default the action is add.
+     * @see \wcf\page\AbstractPage::$action
+     */
+    public $action = 'add';
+    
+    /**
      * Contains the config id.
      * @var int
      */
