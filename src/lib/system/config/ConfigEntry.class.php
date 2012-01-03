@@ -69,7 +69,8 @@ class ConfigEntry implements \Serializable {
      */
     protected function generateOutput() {
         $component = new Component($this->componentID);
-        $this->output = new $component->className($this->contentID);
+        $obj = new $component->className($this->contentID);
+        $this->output = $obj->getOutput();
     }
     
     /**
