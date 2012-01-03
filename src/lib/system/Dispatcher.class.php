@@ -1,6 +1,8 @@
 <?php
 namespace ultimate\system;
 use ultimate\page\IndexPage;
+use ultimate\system\config\ConfigEntry;
+use ultimate\system\config\storage\ConfigStorage;
 use ultimate\system\UltimateCore;
 
 use wcf\system\SingletonFactory;
@@ -56,22 +58,21 @@ class Dispatcher extends SingletonFactory {
         $this->readCache();
         $this->validateRequest();
         
-        //$config['templateName'] = template name of the overall generated template
-        //$config['content'] = array ('content id' => '*ComponentPage')
         $config = $this->viewConfigurations[$this->requestURI];
         $callData = array(
         	'templateName' => $config['templateName'],
             'content' => array()
         );
-        foreach ($config['content'] as $id => $component) {
-            //if statement does nothing @todo remove for production usage
-            if (false) echo $component.'<br /><pre>'.print_r(UltimateCore::getTPL()->templatePaths, true).'</pre>';
-            
-            require_once(ULTIMATE_DIR.'lib/page/'.$component.'.class.php');
-            $component = '\ultimate\page\\'.$component;
-            $obj = new $component($id);
-            $result = $obj->getOutput(); //returns output
-            $callData['content'][$id] = $result;
+        $configStorage = unserialize($config['storage']);
+        $entries = $configStorage->getEntries();
+        foreach ($entries['left'] as $id => $entry) {
+           $callData['content']['left'.$id] = $entry->getContent();
+        }
+        foreach ($entries['center'] as $id => $entry) {
+            $callData['content']['center'.$id] = $entry->getContent();
+        }
+        foreach ($entries['right'] as $id => $entry) {
+            $callData['content']['right'.$id] = $entry->getContent();
         }
         
         $controllerObj = '\ultimate\page\GenericCMSPage';
