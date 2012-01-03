@@ -43,9 +43,9 @@ class ConfigStorage implements \Serializable {
     public function addEntry(ConfigEntry $entry, $column, $showorder) {
         $showorder = intval($showorder);
         $column = trim($column);
-        if (!array_key_exists($showorder, $this->positions[$column])) $this->positions[$column][] = $entry;
+        if (!array_key_exists($showorder, $this->entries[$column])) $this->entries[$column][] = $entry;
         else {
-            array_splice($this->positions[$column], $showorder, 0, array($entry));
+            array_splice($this->entries[$column], $showorder, 0, array($entry));
         }
     }
     
@@ -56,8 +56,8 @@ class ConfigStorage implements \Serializable {
      * @param int $showorder
      */
     public function removeEntry($column, $showorder) {
-        $secondPartOfArray = array_slice($this->positions[$column], $showorder + 1);
-        array_splice($this->positions[$column], $showorder, count($this->positions[$column]), $secondPartOfArray);
+        $secondPartOfArray = array_slice($this->entries[$column], $showorder + 1);
+        array_splice($this->entries[$column], $showorder, count($this->entries[$column]), $secondPartOfArray);
     }
     
     /**
@@ -67,7 +67,7 @@ class ConfigStorage implements \Serializable {
      */
     public function serialize() {
         $data = array(
-            'positions' => $this->positions
+            'entries' => $this->entries
         );
         return serialize($data);
     }
@@ -79,6 +79,6 @@ class ConfigStorage implements \Serializable {
      */
     public function unserialize($serialized) {
         $data = unserialize($serialized);
-        $this->positions = $data['positions'];
+        $this->entries = $data['entries'];
     }
 }
