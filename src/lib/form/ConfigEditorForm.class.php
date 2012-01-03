@@ -45,6 +45,12 @@ class ConfigEditorForm extends AbstractSecureForm {
     protected $configID = 0;
     
     /**
+     * Contains the config title.
+     * @var string
+     */
+    protected $configTitle = '';
+    
+    /**
      * Contains a ConfigStorage object.
      * @var ConfigStorage
      */
