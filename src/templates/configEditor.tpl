@@ -89,7 +89,7 @@
         		<legend>{lang}ultimate.template.configEditor.columnLeft{/lang}</legend>
     			<div class="sortable" id="columnLeft">
         		{foreach from=$entries['left'] key=$key item=$entry}
-    				<div id="left{$key}">{$entry->output}</div>
+    				<div id="left{$key}">{$entry->getContent()}</div>
     			{/foreach}
     			</div>
     			<ul class="largeButtons">
@@ -102,7 +102,7 @@
         		<legend>{lang}ultimate.template.configEditor.columnRight{/lang}</legend>
         		<div class="sortable" id="columnRight">
         		{foreach from=$entries['right'] key=$key item=$entry}
-    				<div id="right{$key}">{$entry->output}</div>
+    				<div id="right{$key}">{$entry->getContent()}</div>
     			{/foreach}
         		</div>
         		<ul class="largeButtons">
@@ -115,7 +115,7 @@
         		<legend>{lang}ultimate.template.configEditor.columnCenter{/lang}</legend>
     			<div class="sortable" id="columnCenter">
        			{foreach from=$entries['center'] key=$key item=$entry}
-    				<div id="center{$key}">{$entry->output}</div>
+    				<div id="center{$key}">{$entry->getContent()}</div>
     			{/foreach}
     			</div>
     			<ul class="largeButtons">
