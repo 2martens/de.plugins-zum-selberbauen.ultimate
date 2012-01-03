@@ -93,7 +93,7 @@
     			{/foreach}
     			</div>
     			<ul class="largeButtons">
-    				<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang} href="javascript:addEntry('#columnLeft')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
+    				<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang}" href="javascript:addEntry('#columnLeft')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
     			</ul>
     		</fieldset>
     	</div>
@@ -106,7 +106,7 @@
     			{/foreach}
         		</div>
         		<ul class="largeButtons">
-    				<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang} href="javascript:addEntry('#columnRight')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
+    				<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang}" href="javascript:addEntry('#columnRight')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
     			</ul>
         	</fieldset>
     	</div>
@@ -119,7 +119,7 @@
     			{/foreach}
     			</div>
     			<ul class="largeButtons">
-    				<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang} href="javascript:addEntry('#columnCenter')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
+    				<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang}" href="javascript:addEntry('#columnCenter')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
     			</ul>
     		</fieldset>
     	</div>
