@@ -6,8 +6,8 @@
     /* <![CDATA[ */
     $(".sortable").sortable({ containment: "#columnsParent" });
     $(".sortable").disableSelection();
-    function addEntry($column) {
-    	ULTIMATE.ConfigEditor.addEntry($column);
+    function addEntry($selector) {
+    	ULTIMATE.ConfigEditor.addEntry($selector);
     }
     /* ]]> */
     </script>
@@ -94,7 +94,7 @@
     			</div>
     			<nav>
     				<ul class="largeButtons">
-    					<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang} href="javascript:addEntry('left')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
+    					<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang} href="javascript:addEntry('#columnLeft')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
     				</ul>
     			</nav>
     		</fieldset>
@@ -109,7 +109,7 @@
         		</div>
         		<nav>
     				<ul class="largeButtons">
-    					<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang} href="javascript:addEntry('right')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
+    					<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang} href="javascript:addEntry('#columnRight')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
     				</ul>
     			</nav>
         	</fieldset>
@@ -124,7 +124,7 @@
     			</div>
     			<nav>
     				<ul class="largeButtons">
-    					<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang} href="javascript:addEntry('center')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
+    					<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang} href="javascript:addEntry('#columnCenter')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
     				</ul>
     			</nav>
     		</fieldset>
