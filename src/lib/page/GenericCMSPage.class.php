@@ -59,8 +59,12 @@ class GenericCMSPage extends AbstractPage {
      * @see \wcf\page\IPage::assignVariables()
      */
     public function assignVariables() {
+        UltimateCore::getTPL()->assign(array(
+            'metaDescription' => '', //debug purposes
+            'metaKeywords' => ''
+        ));
         foreach ($this->content as $id => $output) {
-            UltimateCore::getTPL()->assign('id'.$id, $output);
+            UltimateCore::getTPL()->assign($id, $output);
         }
     }
 }
