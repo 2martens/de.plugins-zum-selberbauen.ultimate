@@ -92,11 +92,9 @@
     				<div id="left{$key}">{$entry->output}</div>
     			{/foreach}
     			</div>
-    			<nav>
-    				<ul class="largeButtons">
-    					<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang} href="javascript:addEntry('#columnLeft')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
-    				</ul>
-    			</nav>
+    			<ul class="largeButtons">
+    				<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang} href="javascript:addEntry('#columnLeft')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
+    			</ul>
     		</fieldset>
     	</div>
     	<div class="ultimateRight">
@@ -107,11 +105,9 @@
     				<div id="right{$key}">{$entry->output}</div>
     			{/foreach}
         		</div>
-        		<nav>
-    				<ul class="largeButtons">
-    					<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang} href="javascript:addEntry('#columnRight')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
-    				</ul>
-    			</nav>
+        		<ul class="largeButtons">
+    				<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang} href="javascript:addEntry('#columnRight')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
+    			</ul>
         	</fieldset>
     	</div>
     	<div class="ultimateCenter">
@@ -122,11 +118,9 @@
     				<div id="center{$key}">{$entry->output}</div>
     			{/foreach}
     			</div>
-    			<nav>
-    				<ul class="largeButtons">
-    					<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang} href="javascript:addEntry('#columnCenter')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
-    				</ul>
-    			</nav>
+    			<ul class="largeButtons">
+    				<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang} href="javascript:addEntry('#columnCenter')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
+    			</ul>
     		</fieldset>
     	</div>
 	</div>
