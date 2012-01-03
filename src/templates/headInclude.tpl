@@ -1,7 +1,6 @@
 <base href="{$baseHref}" />
 <meta charset="utf-8" />
-<meta name="description" content="{$metaDescription}" />
-<meta name="keywords" content="{$metaKeywords}" />
+{* Removed metaDescription and metaKeywords, as this is now handled on a per page level *}
 {* Removed, because it isn't W3C standard.
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />*}
 
