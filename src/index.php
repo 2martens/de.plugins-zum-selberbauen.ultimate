@@ -9,4 +9,8 @@
 require_once('./global.php');
 require_once(ULTIMATE_DIR.'lib/system/Dispatcher.class.php');
 define('DEBUG', true); //@todo: change into false for production
-\ultimate\system\Dispatcher::getInstance()->handle();
+if (isset($_GET['request'])) {
+    \ultimate\system\Dispatcher::getInstance()->handle();
+} else {
+    \wcf\system\request\RequestHandler::getInstance()->handle('ultimate');
+}
