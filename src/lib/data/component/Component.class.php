@@ -16,7 +16,7 @@ class Component extends AbstractUltimateDatabaseObject {
     /**
      * @see \wcf\data\DatabaseObject::$databaseTableName
      */
-    protected static $databaseTableName = 'conponent';
+    protected static $databaseTableName = 'component';
     
     /**
      * @see \wcf\data\DatabaseObject::$databaseTableIndexIsIdentity
