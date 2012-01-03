@@ -1,5 +1,6 @@
 <?php
 namespace ultimate\page;
+use ultimate\system\UltimateCore;
 use wcf\page\AbstractPage;
 
 /**
@@ -31,4 +32,13 @@ class IndexPage extends AbstractPage {
     public $neededPermissions = array(
         'user.ultimate.canUseFrontend'
     );
+    
+    /**
+     * @see \wcf\page\IPage::assignVariables()
+     */
+    public function assignVariables() {
+        parent::assignVariables();
+        UltimateCore::getTPL()->assign('content', 'test');
+    }
+    
 }

@@ -11,7 +11,7 @@
 <div class="mainHeadline">
     <div class="headlineContainer">
         <h2>{lang}ultimate.template.index.title{/lang}</h2>
-        <p>{$headlineDescription}</p>
+        <p>{if 'ULTIMATE_GENERAL_INDEX_DESCRIPTION'|defined}{@ULTIMATE_GENERAL_INDEX_DESCRIPTION}{else}{/if}</p>
     </div>
 </div>
 <div class="border content">
