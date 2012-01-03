@@ -194,7 +194,10 @@ class ConfigEditorForm extends AbstractSecureForm {
     public function assignVariables() {
         parent::assignVariables();
         UltimateCore::getTPL()->assign(array(
-            'entries' => $this->entries
+            'entries' => $this->entries,
+            'configTitle' => $this->configTitle,
+            'metaDescription' => $this->metaDescription,
+            'metaKeywords' => $this->metaKeywords
         ));
     }
 }
