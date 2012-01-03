@@ -1,13 +1,22 @@
 <?php
 namespace ultimate\form;
 use ultimate\data\config\ConfigAction;
-
-use wcf\system\exception\UserInputException;
-
 use ultimate\system\config\storage\ConfigStorage;
+use ultimate\system\UltimateCore;
 use ultimate\data\config\Config;
 use wcf\form\AbstractSecureForm;
+use wcf\system\exception\UserInputException;
 
+/**
+ * Shows the ConfigEditor form.
+ *
+ * @author Jim Martens
+ * @copyright 2011-2012 Jim Martens
+ * @license http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @package de.plugins-zum-selberbauen.ultimate
+ * @subpackage form
+ * @category Ultimate CMS
+ */
 class ConfigEditorForm extends AbstractSecureForm {
     
     /**
@@ -143,6 +152,9 @@ class ConfigEditorForm extends AbstractSecureForm {
         //does nothing
     }
     
+    /**
+     * @see \wcf\form\IForm::save()
+     */
     public function save() {
         parent::save();
         
