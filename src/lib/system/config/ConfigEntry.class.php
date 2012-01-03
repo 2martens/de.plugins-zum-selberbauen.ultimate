@@ -87,7 +87,7 @@ class ConfigEntry implements \Serializable {
         $data = array(
             'compID' => $this->componentID,
             'contentID' => $this->contentID,
-            'output' => $this->output
+            'output' => base64_encode($this->output)
         );
         return serialize($data);
     }
@@ -99,7 +99,7 @@ class ConfigEntry implements \Serializable {
         $data = unserialize($serialized);
         $this->componentID = $data['compID'];
         $this->contentID = $data['contentID'];
-        $this->output = $data['output'];
+        $this->output = base64_decode($data['output']);
     }
     
 }
