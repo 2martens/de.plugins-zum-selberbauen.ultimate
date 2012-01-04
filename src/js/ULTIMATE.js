@@ -14,8 +14,7 @@ var ULTIMATE = {};
 /**
  * ConfigEditor API
  */
-ULTIMATE.ConfigEditor = function() { this.init(); };
-ULTIMATE.ConfigEditor.prototype = {
+ULTIMATE.ConfigEditor = {
 	/**
 	 * Contains the current selector.
 	 */
