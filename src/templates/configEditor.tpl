@@ -29,18 +29,18 @@
     	indexRight = $('#columnCenter').length;
     });
     
-	function addEntry(selector) {
+	function addEntry() {
     	
-    	if (selector == '#columnLeft') {
-    		ULTIMATE.ConfigEditor.addEntry(selector, indexLeft);
+    	if (column == 'Left') {
+    		ULTIMATE.ConfigEditor.addEntry(column, indexLeft);
     		indexLeft++;
     	}
-    	if (selector == '#columnCenter') {
-    		ULTIMATE.ConfigEditor.addEntry(selector, indexCenter);
+    	if (column == 'Center') {
+    		ULTIMATE.ConfigEditor.addEntry(column, indexCenter);
     		indexCenter++;
     	}
-    	if (selector == '#columnRight') {
-    		ULTIMATE.ConfigEditor.addEntry(selector, indexRight);
+    	if (column == 'Right') {
+    		ULTIMATE.ConfigEditor.addEntry(column, indexRight);
     		indexRight++;
     	}
     }
