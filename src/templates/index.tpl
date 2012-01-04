@@ -1,8 +1,8 @@
 {include file='documentHeader'}
 <head>
     <title>{lang}ultimate.template.index.title{/lang} - {lang}{PAGE_TITLE}{/lang}</title>
-    <meta name="description" content="This is the main page." />
-	<meta name="keywords" content="main, page" />
+    <meta name="description" content="{@ULTIMATE_GENERAL_INDEX_META_DESCRIPTION}" />
+	<meta name="keywords" content="{@ULTIMATE_GENERAL_INDEX_META_KEYWORDS}" />
     
     {include file='headInclude' sandbox=false}
 </head>
