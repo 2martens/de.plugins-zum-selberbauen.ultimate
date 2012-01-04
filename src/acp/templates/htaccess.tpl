@@ -1,3 +1,4 @@
+AddType 'text/html; charset=UTF-8' html
 DirectoryIndex index.php/Index/
 <IfModule mod_rewrite.c>
 RewriteEngine On
