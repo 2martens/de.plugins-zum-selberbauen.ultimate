@@ -39,6 +39,12 @@ class ConfigEditorForm extends AbstractSecureForm {
     public $action = 'add';
     
     /**
+     * Contains the maximal length for meta description and keywords.
+     * @var int
+     */
+    protected $maxLength = 255;
+    
+    /**
      * Contains the config id.
      * @var int
      */
@@ -155,7 +161,9 @@ class ConfigEditorForm extends AbstractSecureForm {
      * Validates the meta keywords.
      */
     protected function validateKeywords() {
-        //does nothing
+        if (strlen($this->metaKeywords) > $this->maxLength) {
+            throw new UserInputException('metaKeywords', 'tooLong');
+        }
     }
     
     /**
@@ -164,11 +172,15 @@ class ConfigEditorForm extends AbstractSecureForm {
     public function save() {
         parent::save();
         
+        //create template for this config
+        $templateName = '';
+        //save config data in database
         $parameters = array(
             'data' => array(
                 'configTitle' => $this->configTitle,
                 'metaDescription' => $this->metaDescription,
                 'metaKeywords' => $this->metaKeywords,
+                'template' => $templateName,
                 'storage' => serialize($this->configStorage)
             )
         );
