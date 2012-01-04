@@ -5,14 +5,51 @@
 	<meta name="keywords" content="editor, content, config, " />
 	<meta http-equiv="Content-Script-Type" content="text/javascript">
     {include file='headInclude' sandbox=false}
+    
     <script type="text/javascript">
     /* <![CDATA[ */
-    $(function() {
+    var column = '';
+    var indexLeft = 0;
+    var indexCenter = 0;
+    var indexRight = 0;
+    //initial
+    $(document).ready(function() {
     	$(".sortable").sortable();
     	$(".sortable").disableSelection();
+    	$("#addButtonLeft, #addButtonCenter, #addButtonRight").click(function() {
+    		var elementID = $(this).attr('id');
+    		column = elementID.substring(9);
+    		WCF.showDialog('popupAddEntry', true, {
+    			title: '{lang}ultimate.template.addEntry.title{/lang}'
+    		});
+    		return false;
+    	});
+    	indexLeft = $('#columnLeft').length;
+    	indexCenter = $('#columnCenter').length;
+    	indexRight = $('#columnCenter').length;
     });
-    function addEntry($selector) {
-    	ULTIMATE.ConfigEditor.addEntry($selector);
+    
+	function addEntry(selector) {
+    	
+    	if (selector == '#columnLeft') {
+    		ULTIMATE.ConfigEditor.addEntry(selector, indexLeft);
+    		indexLeft++;
+    	}
+    	if (selector == '#columnCenter') {
+    		ULTIMATE.ConfigEditor.addEntry(selector, indexCenter);
+    		indexCenter++;
+    	}
+    	if (selector == '#columnRight') {
+    		ULTIMATE.ConfigEditor.addEntry(selector, indexRight);
+    		indexRight++;
+    	}
+    }
+    function deleteEntry(selector, column) {
+    	
+    	ULTIMATE.ConfigEditor.removeEntry(selector);
+    	if (column == 'left') indexLeft--;
+    	if (column == 'center') indexCenter--;
+    	if (column == 'right') indexRight--;
     }
     /* ]]> */
     </script>
@@ -36,7 +73,7 @@
 {/if}
 
 <div class="contentHeader"></div>
-
+{include file='popupAddEntry' sandbox=false}
 <form method="post" action="{if $action == 'add'}{link controller='ConfigEditor'}{/link}{else}{link controller='ConfigEditor'}{/link}{/if}">
 	<div class="border content">
         <dl{if $errorType.configTitle|isset} class="formError"{/if}>
@@ -99,7 +136,7 @@
     			</div>
     		</fieldset>
     		<ul class="largeButtons">
-    			<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang}" href="javascript:addEntry('#columnCenter')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
+    			<li><a id="addButtonLeft" title="{lang}ultimate.template.configEditor.addEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
     		</ul>
     	</div>
     	<div class="ultimateRight">
@@ -112,7 +149,7 @@
         		</div>
         	</fieldset>
     		<ul class="largeButtons">
-    			<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang}" href="javascript:addEntry('#columnCenter')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
+    			<li><a id="addButtonRight" title="{lang}ultimate.template.configEditor.addEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
     		</ul>
     	</div>
     	<div class="ultimateCenter">
@@ -125,7 +162,7 @@
     			</div>
     		</fieldset>
     		<ul class="largeButtons">
-    			<li><a title="{lang}ultimate.template.configEditor.addEntry{/lang}" href="javascript:addEntry('#columnCenter')"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
+    			<li><a id="addButtonCenter" title="{lang}ultimate.template.configEditor.addEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
     		</ul>
     	</div>
 	</div>
