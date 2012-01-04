@@ -1,6 +1,9 @@
 {include file='documentHeader'}
 <head>
     <title>{lang}ultimate.template.configEditor.title{/lang} - {lang}{PAGE_TITLE}{/lang}</title>
+    <meta name="description" content="A comfortable editor for creating pretty website pages." />
+	<meta name="keywords" content="editor, content, config, " />
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
     {include file='headInclude' sandbox=false}
     <script type="text/javascript">
     /* <![CDATA[ */
