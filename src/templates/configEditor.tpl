@@ -46,7 +46,7 @@
     			sValue = $form.find( 'input[name="s"]' ).val(),
     			tValue = $form.find( 'input[name="t"]' ).val(),
     			formValue = $('#form').val();
-    		ULTIMATE.ConfigEditor.addEntry(column, {
+    		ULTIMATE.ConfigEditor.addEntry(column, url, {
     				componentID: componentIDValue,
     				contentID: contentIDValue,
     				s: sValue,

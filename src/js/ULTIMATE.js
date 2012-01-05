@@ -27,8 +27,8 @@ ULTIMATE.ConfigEditor = {
 		
 	},	
 
-	addEntry: function(column) {
-		var options = arguments[1] || {};
+	addEntry: function(column, url) {
+		var options = arguments[2] || {};
 		this._jqXHR = $.post(url, options,
     		function(data) {
 				$('#popupAddEntry').wcfDialog('close');
