@@ -76,7 +76,7 @@
     	if (column == 'Right') indexRight++;
     }
     function decreaseIndex() {
-    	Uif (column == 'Left') indexLeft--;
+    	if (column == 'Left') indexLeft--;
     	if (column == 'Center') indexCenter--;
     	if (column == 'Right') indexRight--;
     }
