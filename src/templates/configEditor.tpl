@@ -45,12 +45,14 @@
     			componentIDValue = $('#componentID').val(),
     			contentIDValue = $('#contentID').val(),
     			sValue = $form.find( 'input[name="s"]' ).val(),
+    			tValue = $form.find( 'input[name="t"]' ).val(),
     			formValue = $('#form').val();
     		/* sending AJAX request */
     		ULTIMATE.ConfigEditor.addEntry(column, url, {
     				componentID: componentIDValue,
     				contentID: contentIDValue,
     				s: sValue,
+    				t: tValue,
     				c: column,
     				formular: formValue,
     				ajax: '1'
@@ -173,6 +175,7 @@
         <input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
         <input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
         {@SID_INPUT_TAG}
+        {@SECURITY_TOKEN_INPUT_TAG}
         <input type="hidden" name="action" value="{@$action}" />
         {if $configID|isset}<input type="hidden" name="id" value="{@$configID}" />{/if}
     </div>
