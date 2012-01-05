@@ -1,5 +1,5 @@
 <div id="popupAddEntry" class="" style="display: none;">
-    <form method="post" onsubmit="return validate()" action="javascript:addEntry()">
+    <form id="addEntryForm" method="post" onsubmit="return validate()" action="{link controller='ConfigEditor'}{/link}">
         <dl>
             <dt><label for="componentID">{lang}ultimate.template.addEntry.componentID{/lang}</label></dt>
             <dd>
@@ -26,7 +26,9 @@
         <div class="formSubmit">
             <input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
             <input type="submit" id="loginSubmitButton" name="submitButton" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-            <input type="hidden" name="url" value="/~Jim-Standard/woltlab/wbb4/ultimate/index.php" />
+            {@SID_INPUT_TAG}
+        	{@SECURITY_TOKEN_INPUT_TAG}
+            <input type="hidden" id="form" name="form" value="addEntry" />
         </div>
     </form>
 </div>
@@ -45,5 +47,6 @@
         }
         return true;
     }
+    
     /* ]]> */
 </script>

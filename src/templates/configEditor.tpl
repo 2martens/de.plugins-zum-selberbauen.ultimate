@@ -1,9 +1,8 @@
-{include file='documentHeader'}
+{include file='documentHeader' sandbox=false}
 <head>
     <title>{lang}ultimate.template.configEditor.title{/lang} - {lang}{PAGE_TITLE}{/lang}</title>
     <meta name="description" content="A comfortable editor for creating pretty website pages." />
-	<meta name="keywords" content="editor, content, config, " />
-	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<meta name="keywords" content="editor, content, config" />
     {include file='headInclude' sandbox=false}
     
     <script type="text/javascript">
@@ -12,11 +11,14 @@
     var indexLeft = 0;
     var indexCenter = 0;
     var indexRight = 0;
-    //initial
+    /* initial */
     $(document).ready(function() {
-    	$(".sortable").sortable();
-    	$(".sortable").disableSelection();
-    	$("#addButtonLeft, #addButtonCenter, #addButtonRight").click(function() {
+    	/* initialize sortables */
+    	$('.sortable').sortable();
+    	$('.sortable').disableSelection();
+    	
+    	/* initialize button click event */
+    	$('#addButtonLeft, #addButtonCenter, #addButtonRight').click(function() {
     		var elementID = $(this).attr('id');
     		column = elementID.substring(9);
     		WCF.showDialog('popupAddEntry', true, {
@@ -24,32 +26,58 @@
     		});
     		return false;
     	});
+    	/* initializing index values */
     	indexLeft = $('#columnLeft').length;
     	indexCenter = $('#columnCenter').length;
     	indexRight = $('#columnCenter').length;
+    	
+    	/* adding submit handler to popupAddEntry */
+    	$('#addEntryForm').submit(function(event) {
+    		
+    		/* stop form from submitting normally */
+    		event.preventDefault();
+    		
+    		/* get form values */
+    		var $form = $(this),
+    			url = $form.attr('action'),
+    			componentIDValue = $('#componentID').val(),
+    			contentIDValue = $('#contentID').val(),
+    			sValue = $form.find( 'input[name="s"]' ).val(),
+    			tValue = $form.find( 'input[name="t"]' ).val(),
+    			formValue = $('#form').val(),
+    			ajax = 1;
+    		
+    		/* Send the data */
+    		var jqXHR = $.post(url,
+    			{
+    				componentID: componentIDValue,
+    				contentID: contentIDValue,
+    				s: sValue,
+    				t: tValue,
+    				form: formValue,
+    				ajax: 1
+    			},
+    			function(data) {
+    				var result = data;
+    				var selectorColumn = 'column' + column;
+    				$(selectorColumn).append(result);
+    				increaseIndex();
+    			},
+    			'html'
+    		);
+    		
+    	});
     });
     
-	function addEntry() {
-    	
-    	if (column == 'Left') {
-    		ULTIMATE.ConfigEditor.addEntry(column, indexLeft);
-    		indexLeft++;
-    	}
-    	if (column == 'Center') {
-    		ULTIMATE.ConfigEditor.addEntry(column, indexCenter);
-    		indexCenter++;
-    	}
-    	if (column == 'Right') {
-    		ULTIMATE.ConfigEditor.addEntry(column, indexRight);
-    		indexRight++;
-    	}
+	function increaseIndex() {
+    	if (column == 'Left') indexLeft++;
+    	if (column == 'Center') indexCenter++;
+    	if (column == 'Right') indexRight++;
     }
-    function deleteEntry(selector, column) {
-    	
-    	ULTIMATE.ConfigEditor.removeEntry(selector);
-    	if (column == 'left') indexLeft--;
-    	if (column == 'center') indexCenter--;
-    	if (column == 'right') indexRight--;
+    function decreaseIndex() {
+    	Uif (column == 'Left') indexLeft--;
+    	if (column == 'Center') indexCenter--;
+    	if (column == 'Right') indexRight--;
     }
     /* ]]> */
     </script>
@@ -118,6 +146,7 @@
     </div>
 	
 	<div class="formSubmit">
+        <input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
         <input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
         {@SID_INPUT_TAG}
         {@SECURITY_TOKEN_INPUT_TAG}
