@@ -40,13 +40,9 @@ class ConfigStorage implements \Serializable {
      * @param string $column
      * @param int $showorder
      */
-    public function addEntry(ConfigEntry $entry, $column, $showorder) {
-        $showorder = intval($showorder);
+    public function addEntry(ConfigEntry $entry, $column) {
         $column = trim($column);
-        if (!array_key_exists($showorder, $this->entries[$column])) $this->entries[$column][] = $entry;
-        else {
-            array_splice($this->entries[$column], $showorder, 0, array($entry));
-        }
+        $this->entries[$column][] = $entry;
     }
     
     /**
