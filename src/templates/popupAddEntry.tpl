@@ -29,7 +29,6 @@
             <input type="hidden" name="s" value="{@SID}" />
             <input type="hidden" name="t" value="{@SECURITY_TOKEN}" />
             <input type="hidden" id="form" name="form" value="addEntry" />
-            <input type="hidden" id="validated" name="validated" value="0" />
         </div>
     </form>
 </div>
@@ -46,7 +45,6 @@
             document.getElementById('contentID').focus();
             return false;
         }
-        document.getElementById('validated').value = '1';
         return true;
     }
     
