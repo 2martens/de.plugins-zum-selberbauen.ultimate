@@ -255,7 +255,7 @@ class ConfigEditorForm extends AbstractSecureForm {
     public function save() {
         parent::save();
         
-        if ($this->form == 'addEntry' && $this->ajax) {
+        if ($this->form == 'addEntry' && $this->viaAjax) {
             $entry = new ConfigEntry($this->componentID, $this->contentID);
             $echoContent = '<div id="'.$this->column.'-'.$this->componentID.'-'.$this->contentID.'">'.
                 $entry->getOutput().'</div>';
