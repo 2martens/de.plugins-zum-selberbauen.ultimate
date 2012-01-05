@@ -26,8 +26,7 @@
         <div class="formSubmit">
             <input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
             <input type="submit" id="submitButton" name="submitButton" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-            <input type="hidden" name="s" value="{@SID}" />
-            <input type="hidden" name="t" value="{@SECURITY_TOKEN}" />
+            {@SID_INPUT_TAG}
             <input type="hidden" id="form" name="form" value="addEntry" />
         </div>
     </form>

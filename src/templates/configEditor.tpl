@@ -35,22 +35,22 @@
     	$('#addEntryForm').live('submit', function(event) {
     		/* prevent default submit action */
     		event.preventDefault();
-    		
+    		/* validating form input */
     		var result = validate();
     		if (!result) return false;
+    		
     		/* get form values */
     		var $form = $(this),
     			url = $form.attr('action'),
     			componentIDValue = $('#componentID').val(),
     			contentIDValue = $('#contentID').val(),
     			sValue = $form.find( 'input[name="s"]' ).val(),
-    			tValue = $form.find( 'input[name="t"]' ).val(),
     			formValue = $('#form').val();
+    		/* sending AJAX request */
     		ULTIMATE.ConfigEditor.addEntry(column, url, {
     				componentID: componentIDValue,
     				contentID: contentIDValue,
     				s: sValue,
-    				t: tValue,
     				c: column,
     				formular: formValue,
     				ajax: '1'
@@ -94,7 +94,7 @@
 
 <div class="contentHeader"></div>
 {include file='popupAddEntry' sandbox=false}
-<form method="post" action="{if $action == 'add'}{link controller='ConfigEditor'}{/link}{else}{link controller='ConfigEditor'}{/link}{/if}">
+<form id="mainForm" method="post" action="{link controller='ConfigEditor'}">
 	<div class="border content">
         <dl{if $errorType.configTitle|isset} class="formError"{/if}>
             <dt><label for="configTitle">{lang}ultimate.template.configEditor.configTitle{/lang}</label></dt>
@@ -141,7 +141,6 @@
         <input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
         <input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
         {@SID_INPUT_TAG}
-        {@SECURITY_TOKEN_INPUT_TAG}
         <input type="hidden" name="action" value="{@$action}" />
         {if $configID|isset}<input type="hidden" name="id" value="{@$configID}" />{/if}
     </div>
