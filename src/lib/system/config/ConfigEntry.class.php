@@ -81,6 +81,24 @@ class ConfigEntry implements \Serializable {
     }
     
     /**
+     * Returns the component id.
+     *
+     * @return int
+     */
+    public function getComponentID() {
+        return $this->componentID;
+    }
+    
+    /**
+     * Returns the content id.
+     *
+     * @return int
+     */
+    public function getContentID() {
+        return $this->contentID;
+    }
+    
+    /**
      * @see \Serializable::serialize()
      */
     public function serialize() {

@@ -1,5 +1,5 @@
-<div id="popupAddEntry" class="" style="display: none;">
-    <form id="addEntryForm" method="post" onsubmit="return validate()" action="{link controller='ConfigEditor'}{/link}">
+<div id="popupAddEntry" class="ultimateHidden">
+    <form id="addEntryForm" method="post" action="{link controller='ConfigEditor'}{/link}">
         <dl>
             <dt><label for="componentID">{lang}ultimate.template.addEntry.componentID{/lang}</label></dt>
             <dd>
@@ -25,7 +25,7 @@
         
         <div class="formSubmit">
             <input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
-            <input type="submit" id="loginSubmitButton" name="submitButton" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
+            <input type="submit" id="submitButton" name="submitButton" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
             <input type="hidden" name="s" value="{@SID}" />
             <input type="hidden" name="t" value="{@SECURITY_TOKEN}" />
             <input type="hidden" id="form" name="form" value="addEntry" />
