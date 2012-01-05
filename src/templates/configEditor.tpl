@@ -126,7 +126,7 @@
 
 <div class="contentHeader"></div>
 {include file='popupAddEntry' sandbox=false}
-<form id="mainForm" method="post" action="{link controller='ConfigEditor'}">
+<form id="mainForm" method="post" action="{link controller='ConfigEditor'}{/link}">
 	<div class="border content">
         <dl{if $errorType.configTitle|isset} class="formError"{/if}>
             <dt><label for="configTitle">{lang}ultimate.template.configEditor.configTitle{/lang}</label></dt>
