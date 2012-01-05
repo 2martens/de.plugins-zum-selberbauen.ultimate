@@ -186,7 +186,7 @@ class ConfigEditorForm extends AbstractSecureForm {
     public function readFormParameters() {
         parent::readFormParameters();
         //reading general parameters
-        if (isset($_POST['form'])) $this->form = trim($_POST['form']);
+        if (isset($_POST['formular'])) $this->form = trim($_POST['formular']);
         if (isset($_POST['ajax'])) $this->viaAjax = (boolean) intval($_POST['ajax']);
                 
         //reading parameters of addEntry form
@@ -258,7 +258,7 @@ class ConfigEditorForm extends AbstractSecureForm {
         if ($this->form == 'addEntry' && $this->viaAjax) {
             $entry = new ConfigEntry($this->componentID, $this->contentID);
             $echoContent = '<div id="'.$this->column.'-'.$this->componentID.'-'.$this->contentID.'">'.
-                $entry->getOutput().'</div>';
+                $entry->getContent().'</div>';
             echo $echoContent;
             exit;
         }

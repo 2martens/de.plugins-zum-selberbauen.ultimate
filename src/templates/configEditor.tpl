@@ -32,11 +32,12 @@
     	indexRight = $('#columnCenter').length;
     	
     	/* adding submit handler to popupAddEntry */
-    	$('#addEntryForm').submit(function(event) {
-    		
-    		/* stop form from submitting normally */
+    	$('#addEntryForm').live('submit', function(event) {
+    		/* prevent default submit action */
     		event.preventDefault();
     		
+    		var result = validate();
+    		if (!result) return false;
     		/* get form values */
     		var $form = $(this),
     			url = $form.attr('action'),
@@ -44,31 +45,21 @@
     			contentIDValue = $('#contentID').val(),
     			sValue = $form.find( 'input[name="s"]' ).val(),
     			tValue = $form.find( 'input[name="t"]' ).val(),
-    			formValue = $('#form').val(),
-    			ajax = 1;
-    		
-    		/* Send the data */
-    		var jqXHR = $.post(url,
-    			{
+    			formValue = $('#form').val();
+    		ULTIMATE.ConfigEditor.addEntry(column, {
     				componentID: componentIDValue,
     				contentID: contentIDValue,
     				s: sValue,
     				t: tValue,
     				c: column,
-    				form: formValue,
+    				formular: formValue,
     				ajax: '1'
-    			},
-    			function(data) {
-    				var result = data;
-    				var selectorColumn = 'column' + column;
-    				$(selectorColumn).append(result);
-    				increaseIndex();
-    			},
-    			'html'
+    			}
     		);
-    		
+    		return false;
     	});
     });
+    
     
 	function increaseIndex() {
     	if (column == 'Left') indexLeft++;
@@ -160,8 +151,8 @@
         	<fieldset class="sortableParent">
         		<legend>{lang}ultimate.template.configEditor.columnLeft{/lang}</legend>
     			<div class="sortable" id="columnLeft">
-        		{foreach from=$entries['left'] key=$key item=$entry}
-    				<div id="left{$key}">{$entry->getContent()}</div>
+        		{foreach from=$entries['left'] item=$entry}
+    				<div id="left-{$entry->getComponentID()}-{$entry->getContentID()}">{$entry->getContent()}</div>
     			{/foreach}
     			</div>
     		</fieldset>
@@ -173,8 +164,8 @@
     		<fieldset class="sortableParent">
         		<legend>{lang}ultimate.template.configEditor.columnRight{/lang}</legend>
         		<div class="sortable" id="columnRight">
-        		{foreach from=$entries['right'] key=$key item=$entry}
-    				<div id="right{$key}">{$entry->getContent()}</div>
+        		{foreach from=$entries['right'] item=$entry}
+    				<div id="right-{$entry->getComponentID()}-{$entry->getContentID()}">{$entry->getContent()}</div>
     			{/foreach}
         		</div>
         	</fieldset>
@@ -186,8 +177,8 @@
        		<fieldset class="sortableParent">
         		<legend>{lang}ultimate.template.configEditor.columnCenter{/lang}</legend>
     			<div class="sortable" id="columnCenter">
-       			{foreach from=$entries['center'] key=$key item=$entry}
-    				<div id="center{$key}">{$entry->getContent()}</div>
+       			{foreach from=$entries['center'] item=$entry}
+    				<div id="center-{$entry->getComponentID()}-{$entry->getContentID()}">{$entry->getContent()}</div>
     			{/foreach}
     			</div>
     		</fieldset>

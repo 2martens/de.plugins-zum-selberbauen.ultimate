@@ -18,7 +18,7 @@ ULTIMATE.ConfigEditor = {
 	/**
 	 * Contains the current selector.
 	 */
-	_selector: null,
+	_jqXHR: null,
 		
 	/**
 	 * Initializes the ConfigEditor API.
@@ -27,8 +27,18 @@ ULTIMATE.ConfigEditor = {
 		
 	},	
 
-	addEntry: function(selector, id) {
-		this._selector = selector;
-		
+	addEntry: function(column) {
+		var options = arguments[1] || {};
+		this._jqXHR = $.post(url, options,
+    		function(data) {
+				$('#popupAddEntry').wcfDialog('close');
+				
+    			var result = data;
+    			var selectorColumn = '#column' + column;
+				$(selectorColumn).append(result);
+    			increaseIndex();
+    		},
+    		'html'
+    	);		
 	}
 };
