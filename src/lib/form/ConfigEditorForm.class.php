@@ -1,6 +1,11 @@
 <?php
 namespace ultimate\form;
+use ultimate\data\content\ContentList;
+
+use ultimate\data\component\ComponentList;
+
 use ultimate\data\config\ConfigAction;
+use ultimate\system\config\ConfigEntry;
 use ultimate\system\config\storage\ConfigStorage;
 use ultimate\system\UltimateCore;
 use ultimate\data\config\Config;
@@ -32,11 +37,62 @@ class ConfigEditorForm extends AbstractSecureForm {
         'admin.content.ultimate.canEditConfig'
     );
     
+    // general values - start
+    
     /**
      * By default the action is add.
      * @see \wcf\page\AbstractPage::$action
      */
     public $action = 'add';
+    
+    /**
+     * If true, the form was sended via ajax.
+     * @var boolean
+     */
+    protected $viaAjax = false;
+    
+    /**
+     * Specifies from which form the submit came.
+     * @var string
+     */
+    protected $form = 'main';
+    
+    // general values - end
+    
+    // values of addEntry form - start
+    /**
+     * Contains all available components.
+     * @var array
+     */
+    protected $components = array();
+    
+    /**
+     * Contains all available contents.
+     * @var array
+     */
+    protected $contents = array();
+    
+    /**
+     * Contains the component id of the added entry.
+     * @var int
+     */
+    protected $componentID = 0;
+    
+    /**
+     * Contains the content id of the added entry.
+     * @var int
+     */
+    protected $contentID = 0;
+    
+    /**
+     * Contains the column of the added entry.
+     * @var string
+     */
+    protected $column = '';
+    
+    // values of addEntry - end
+    
+    // values of main form - start
     
     /**
      * Contains the maximal length for meta description and keywords.
@@ -84,6 +140,8 @@ class ConfigEditorForm extends AbstractSecureForm {
      */
     protected $metaKeywords = '';
     
+    // values of main form - end
+    
     /**
      * @see \wcf\page\IPage::readParameters()
      */
@@ -97,6 +155,16 @@ class ConfigEditorForm extends AbstractSecureForm {
      */
     public function readData() {
         if (!count($_POST)) {
+            //reading components
+            $componentList = new ComponentList();
+            $componentList->readObjects();
+            $this->components = $componentList->getObjects();
+            
+            //reading contents
+            $contentList = new ContentList();
+            $contentList->readObjects();
+            $this->contents = $contentList->getObjects();
+            
             if ($this->action == 'add') {
                 $this->configStorage = new ConfigStorage();
             }
@@ -117,6 +185,16 @@ class ConfigEditorForm extends AbstractSecureForm {
      */
     public function readFormParameters() {
         parent::readFormParameters();
+        //reading general parameters
+        if (isset($_POST['form'])) $this->form = trim($_POST['form']);
+        if (isset($_POST['ajax'])) $this->viaAjax = (boolean) intval($_POST['ajax']);
+                
+        //reading parameters of addEntry form
+        if (isset($_POST['componentID'])) $this->componentID = intval($_POST['componentID']);
+        if (isset($_POST['contentID'])) $this->contentID = intval($_POST['contentID']);
+        if (isset($_POST['c'])) $this->column = lcfirst(trim($_POST['c']));
+        
+        //reading parameters of main form
         if (isset($_POST['metaDescription'])) $this->metaDescription = trim($_POST['metaDescription']);
         if (isset($_POST['metaKeywords'])) $this->metaKeywords = trim($_POST['metaKeywords']);
         if (isset($_POST['configTitle'])) $this->configTitle = trim($_POST['configTitle']);
@@ -127,9 +205,14 @@ class ConfigEditorForm extends AbstractSecureForm {
      */
     public function validate() {
         parent::validate();
-        $this->validateTitle();
-        $this->validateDescription();
-        $this->validateKeywords();
+        if ($this->form == 'addEntry') {
+            //does nothing (for now)
+        }
+        else {
+            $this->validateTitle();
+            $this->validateDescription();
+            $this->validateKeywords();
+        }
     }
     
     /**
@@ -172,6 +255,13 @@ class ConfigEditorForm extends AbstractSecureForm {
     public function save() {
         parent::save();
         
+        if ($this->form == 'addEntry' && $this->ajax) {
+            $entry = new ConfigEntry($this->componentID, $this->contentID);
+            $echoContent = '<div id="'.$this->column.'-'.$this->componentID.'-'.$this->contentID.'">'.
+                $entry->getOutput().'</div>';
+            echo $echoContent;
+            exit;
+        }
         //create template for this config
         $templateName = '';
         //save config data in database
@@ -215,7 +305,9 @@ class ConfigEditorForm extends AbstractSecureForm {
             'entries' => $this->entries,
             'configTitle' => $this->configTitle,
             'metaDescription' => $this->metaDescription,
-            'metaKeywords' => $this->metaKeywords
+            'metaKeywords' => $this->metaKeywords,
+            'components' => $this->components,
+            'contents' => $this->contents
         ));
     }
 }
