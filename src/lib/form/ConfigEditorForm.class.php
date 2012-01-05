@@ -270,7 +270,7 @@ class ConfigEditorForm extends AbstractSecureForm {
                 'configTitle' => $this->configTitle,
                 'metaDescription' => $this->metaDescription,
                 'metaKeywords' => $this->metaKeywords,
-                'template' => $templateName,
+                'templateName' => $templateName,
                 'storage' => serialize($this->configStorage)
             )
         );
