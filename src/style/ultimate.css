@@ -32,3 +32,9 @@ ol.sortable,
 ul.sortable {
     list-style-type: none;
 }
+
+/** invisible popups **/
+
+.ultimateHidden {
+    display: none;
+}
