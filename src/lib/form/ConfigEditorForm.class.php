@@ -1,9 +1,9 @@
 <?php
 namespace ultimate\form;
+use wcf\util\StringUtil;
+
 use ultimate\data\content\ContentList;
-
 use ultimate\data\component\ComponentList;
-
 use ultimate\data\config\ConfigAction;
 use ultimate\system\config\ConfigEntry;
 use ultimate\system\config\storage\ConfigStorage;
@@ -11,6 +11,7 @@ use ultimate\system\UltimateCore;
 use ultimate\data\config\Config;
 use wcf\form\AbstractSecureForm;
 use wcf\system\exception\UserInputException;
+use wcf\util\JSON;
 
 /**
  * Shows the ConfigEditor form.
@@ -198,6 +199,7 @@ class ConfigEditorForm extends AbstractSecureForm {
         if (isset($_POST['metaDescription'])) $this->metaDescription = trim($_POST['metaDescription']);
         if (isset($_POST['metaKeywords'])) $this->metaKeywords = trim($_POST['metaKeywords']);
         if (isset($_POST['configTitle'])) $this->configTitle = trim($_POST['configTitle']);
+        if (isset($_POST['entries'])) $this->readEntries = JSON::decode($_POST['entries']);
     }
     
     /**
@@ -262,8 +264,37 @@ class ConfigEditorForm extends AbstractSecureForm {
             echo $echoContent;
             exit;
         }
+        
+        if ($this->action == 'edit') $this->configStorage = new ConfigStorage();
+        
+        //filling ConfigStorage with entries
+        foreach ($this->readEntries['left'] as $index => $id) {
+            $idArray = explode('-', $id);
+            $componentID = $idArray[1];
+            $contentID = $idArray[2];
+            $entry = new ConfigEntry($componentID, $contentID);
+            $this->configStorage->addEntry($entry, 'left');
+        }
+        
+        foreach ($this->readEntries['center'] as $index => $id) {
+            $idArray = explode('-', $id);
+            $componentID = $idArray[1];
+            $contentID = $idArray[2];
+            $entry = new ConfigEntry($componentID, $contentID);
+            $this->configStorage->addEntry($entry, 'center');
+        }
+    
+        foreach ($this->readEntries['right'] as $index => $id) {
+            $idArray = explode('-', $id);
+            $componentID = $idArray[1];
+            $contentID = $idArray[2];
+            $entry = new ConfigEntry($componentID, $contentID);
+            $this->configStorage->addEntry($entry, 'right');
+        }
+        
         //create template for this config
-        $templateName = '';
+        $templateName = substr(StringUtil::getHash($this->configTitle), 0, 10);
+        
         //save config data in database
         $parameters = array(
             'data' => array(
