@@ -45,7 +45,8 @@
     			sValue = $form.find( 'input[name="s"]' ).val(),
     			tValue = $form.find( 'input[name="t"]' ).val(),
     			formValue = $('#form').val(),
-    			ajax = 1;
+    			ajax = 1,
+    			validatedValue = $('validated').val();
     		
     		/* Send the data */
     		var jqXHR = $.post(url,
@@ -55,7 +56,8 @@
     				s: sValue,
     				t: tValue,
     				form: formValue,
-    				ajax: 1
+    				ajax: 1,
+    				validated: validatedValue
     			},
     			function(data) {
     				var result = data;
