@@ -58,6 +58,38 @@
     		);
     		return false;
     	});
+    	
+    	/* adding submit handler to main form */
+    	$('#mainForm').submit(function(event) {
+    		/* prevent browser from submitting */
+    		event.preventDefault();
+    		
+    		$form = $(this);
+    		
+    		/* collecting data */
+    		var entries = new Object();
+    		entries['left'] = new Object();
+    		entries['center'] = new Object();
+    		entries['right'] = new Object();
+    		
+    		$.each($('#columnLeft').sortable('toArray'), function(index, value) {
+    			entries['left'][index] = value;
+    		});
+    		$.each($('#columnCenter').sortable('toArray'), function(index, val) {
+    			entries['center'][index] = value;
+    		});
+    		$.each($('#columnRight').sortable('toArray'), function(index, value) {
+    			entries['right'][index] = value;
+    		});
+    		/* adding entries to form */
+    		var encodedEntriesObject = $.toJSON(entries);
+    		var input = '<input type="hidden" name="entries" value="' + encodedEntriesObject + '" />';
+    		$form.find('.formSubmit').append(input);
+    		
+    		/* submitting */
+    		$form.trigger('submit');
+    		return true;
+    	});
     });
     
     
