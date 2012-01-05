@@ -276,10 +276,10 @@ class ConfigEditorForm extends AbstractSecureForm {
         );
         if ($this->action == 'add') {
             $action = new ConfigAction(array(), 'create', $parameters);
-            $action->execute();
+            $action->executeAction();
         } elseif ($this->action = 'edit') {
             $action = new ConfigAction(array($this->configID), 'update', $parameters);
-            $action->execute();
+            $action->executeAction();
         }
         $this->saved();
         
