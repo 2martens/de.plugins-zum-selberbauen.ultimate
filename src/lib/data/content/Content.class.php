@@ -21,7 +21,7 @@ class Content extends AbstractUltimateDatabaseObject {
     /**
      * @see \wcf\data\DatabaseObject::$databaseTableIndexIsIdentity
      */
-    protected static $databaseTableIndexIsIdentity = false;
+    protected static $databaseTableIndexIsIdentity = true;
     
     /**
      * @see \wcf\data\DatabaseObject::$databaseTableIndexName
