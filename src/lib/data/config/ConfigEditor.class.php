@@ -18,4 +18,11 @@ class ConfigEditor extends DatabaseObjectEditor {
      */
     protected static $baseClass = '\ultimate\data\config\Config';
 
+    /**
+     * @see \wcf\data\DatabaseObjectEditor::delete()
+     */
+    public function delete() {
+        @unlink(ULTIMATE_DIR.'templates/'.$this->__get('templateName').'.tpl');
+        parent::delete();
+    }
 }
