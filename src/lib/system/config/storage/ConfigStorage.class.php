@@ -65,7 +65,7 @@ class ConfigStorage implements \Serializable {
         $data = array(
             'entries' => $this->entries
         );
-        return serialize($data);
+        return base64_encode(serialize($data));
     }
     
     /**
@@ -74,7 +74,7 @@ class ConfigStorage implements \Serializable {
      * @see \Serializable::unserialize()
      */
     public function unserialize($serialized) {
-        $data = unserialize($serialized);
+        $data = unserialize(base64_decode($serialized));
         $this->entries = $data['entries'];
     }
 }
