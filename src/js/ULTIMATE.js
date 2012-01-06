@@ -37,6 +37,10 @@ $.extend(ULTIMATE, {
  */
 ULTIMATE.JSON = {
 	
+	init: function() {
+		
+	},
+		
     /**
      * Encodes a given variable.
      * 
@@ -45,7 +49,7 @@ ULTIMATE.JSON = {
      */
 	encode: function(variable) {
 		var type = typeof variable;
-		
+		var $JSON = this;
 		if (variable instanceof Array) {
 			var output = '[';
 			var index = 0;
@@ -53,7 +57,7 @@ ULTIMATE.JSON = {
 			$.each(variable, function(key, value) {
 				if (index > 0 && index < length) output += ',';
 				if (value instanceof Array || typeof value == 'object') {
-					output += this.encode(value);
+					output += $JSON.encode(value);
 				}
 				output += '"' + value + '"';								
 				index++;
@@ -69,9 +73,9 @@ ULTIMATE.JSON = {
 				output += '"' + key + '":';
 				var valType = typeof value;
 				if (value instanceof Array) {
-					output += this.encode(value);
+					output += $JSON.encode(value);
 				} else if (valType == 'object') {
-					output += this.encode(value);
+					output += $JSON.encode(value);
 				} else if (valType == 'string') {
 					output += '"' + value + '"';
 				}
