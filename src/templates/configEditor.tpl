@@ -83,8 +83,10 @@
     		$.each($('#columnRight').sortable('toArray'), function(index, value) {
     			entries['right'][index] = value;
     		});
+    		
     		/* adding entries to form */
-    		var encodedEntriesObject = $.toJSON(entries);
+    		/* TODO: too much recursion */
+    		var encodedEntriesObject = ULTIMATE.JSON.encode(entries);
     		var input = '<input type="hidden" name="entries" value="' + encodedEntriesObject + '" />';
     		$form.find('.formSubmit').append(input);
     		
@@ -93,7 +95,6 @@
     		return true;
     	});
     });
-    
     
 	function increaseIndex() {
     	if (column == 'Left') indexLeft++;
