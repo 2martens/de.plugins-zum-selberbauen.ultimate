@@ -167,7 +167,7 @@ class ConfigEditorForm extends AbstractSecureForm {
      */
     public function readData() {
         if (!count($_POST)) {
-            if ($this->action = 'edit') {
+            if ($this->action == 'edit') {
                 $this->configStorage = new ConfigStorage();
                 $config = new Config($this->configID);
                 $this->configTitle = $config->configTitle;
