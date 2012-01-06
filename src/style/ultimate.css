@@ -19,7 +19,13 @@ Copyright 2011 by Jim Martens.
 }
 
 .ultimateCenter {
-    margin: 0 25em 0 25em;
+    margin: 0;
+}
+.ultimateCenter .leftMargin {
+    margin-left: 25em;
+}
+.ultimateCenter .rightMargin {
+    margin-right: 25em;
 }
 
 /** sortables **/

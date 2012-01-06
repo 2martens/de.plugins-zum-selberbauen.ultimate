@@ -1,5 +1,7 @@
 <?php
 namespace ultimate\form;
+use wcf\system\io\File;
+
 use ultimate\data\content\ContentList;
 use ultimate\data\component\ComponentList;
 use ultimate\data\config\Config;
@@ -130,12 +132,6 @@ class ConfigEditorForm extends AbstractSecureForm {
     );
     
     /**
-     * Contains all read entries.
-     * @var array
-     */
-    protected $readEntries = array();
-    
-    /**
      * Contains the meta description.
      * @var string
      */
@@ -161,16 +157,17 @@ class ConfigEditorForm extends AbstractSecureForm {
      * @see \wcf\page\IPage::readData()
      */
     public function readData() {
-        if (!count($_POST)) {
-            //reading components
-            $componentList = new ComponentList();
-            $componentList->readObjects();
-            $this->components = $componentList->getObjects();
+        //reading components
+        $componentList = new ComponentList();
+        $componentList->readObjects();
+        $this->components = $componentList->getObjects();
             
-            //reading contents
-            $contentList = new ContentList();
-            $contentList->readObjects();
-            $this->contents = $contentList->getObjects();
+        //reading contents
+        $contentList = new ContentList();
+        $contentList->readObjects();
+        $this->contents = $contentList->getObjects();
+            
+        if (!count($_POST)) {
             
             if ($this->action == 'add') {
                 $this->configStorage = new ConfigStorage();
@@ -205,8 +202,8 @@ class ConfigEditorForm extends AbstractSecureForm {
         if (isset($_POST['metaDescription'])) $this->metaDescription = trim($_POST['metaDescription']);
         if (isset($_POST['metaKeywords'])) $this->metaKeywords = trim($_POST['metaKeywords']);
         if (isset($_POST['configTitle'])) $this->configTitle = trim($_POST['configTitle']);
-        if (isset($_POST['entries'])) $this->readEntries = JSON::decode($_POST['entries']);
-        var_dump($this->readEntries);
+        if (isset($_POST['entries'])) $this->entries = JSON::decode(urldecode($_POST['entries']));
+        
     }
     
     /**
@@ -274,33 +271,44 @@ class ConfigEditorForm extends AbstractSecureForm {
         
         if ($this->action == 'edit') $this->configStorage = new ConfigStorage();
         
+        $leftColumn = $centerColumn = $rightColumn = false;
+        
         //filling ConfigStorage with entries
-        foreach ($this->readEntries['left'] as $index => $id) {
+        foreach ($this->entries['left'] as $index => $id) {
             $idArray = explode('-', $id);
             $componentID = $idArray[1];
             $contentID = $idArray[2];
             $entry = new ConfigEntry($componentID, $contentID);
             $this->configStorage->addEntry($entry, 'left');
+            $leftColumn = true;
         }
         
-        foreach ($this->readEntries['center'] as $index => $id) {
+        foreach ($this->entries['center'] as $index => $id) {
             $idArray = explode('-', $id);
             $componentID = $idArray[1];
             $contentID = $idArray[2];
             $entry = new ConfigEntry($componentID, $contentID);
             $this->configStorage->addEntry($entry, 'center');
+            $centerColumn = true;
         }
     
-        foreach ($this->readEntries['right'] as $index => $id) {
+        foreach ($this->entries['right'] as $index => $id) {
             $idArray = explode('-', $id);
             $componentID = $idArray[1];
             $contentID = $idArray[2];
             $entry = new ConfigEntry($componentID, $contentID);
             $this->configStorage->addEntry($entry, 'right');
+            $rightColumn = true;
         }
         
         //create template for this config
         $templateName = substr(StringUtil::getHash($this->configTitle), 0, 10);
+        
+        $this->writeTemplate($templateName, array(
+            'leftColumn' => $leftColumn,
+            'centerColumn' => $centerColumn,
+            'rightColumn' => $rightColumn
+        ));
         
         //save config data in database
         $parameters = array(
@@ -332,6 +340,31 @@ class ConfigEditorForm extends AbstractSecureForm {
                 'right' => array()
             );
         }
+    }
+    
+    /**
+     * Writes the template of the option.
+     *
+     * @param string $templateName
+     * @param array $options
+     */
+    protected function writeTemplate($templateName, array $options) {
+        $templateDir = ULTIMATE_DIR.'templates/';
+        $file = new File($templateDir.$templateName.'.tpl');
+        $entries = $this->configStorage->getEntries();
+                
+        $localOptions = array(
+            'metaDescription' => $this->metaDescription,
+            'metaKeywords' => $this->metaKeywords,
+            'configTitle' => $this->configTitle,
+            'entriesLeft' => $entries['left'],
+            'entriesCenter' => $entries['center'],
+            'entriesRight' => $entries['right']
+        );
+        $finalOptions = array_merge($localOptions, $options);
+        $output = UltimateCore::getTPL()->fetch('generalCMSTemplate', $finalOptions);
+        $file->write($output);
+        $file->close();
     }
     
     /**
