@@ -65,7 +65,7 @@
     	$('#mainForm').submit(function(event) {
     		/* prevent browser from submitting */
     		//event.preventDefault();
-    		
+    		setTimeout(this.submit(), 500);
     		$form = $(this);
     		
     		/* collecting data */
@@ -87,8 +87,9 @@
     		/* adding entries to form */
     		var encodedEntriesObject = ULTIMATE.JSON.encode(entries);
     		    		
-    		var input = '<input type="hidden" name="entries" value="' + encodedEntriesObject + '" />';
-    		$form.find('.formSubmit').append(input);
+    		//var input = '<input type="hidden" name="entries" value="' + encodedEntriesObject + '" />';
+    		//$form.find('.formSubmit').append(input);
+    		document.getElementById('entriesInput').value = encodeURI(encodedEntriesObject);
     		
     		/* submitting */
     		return true;
@@ -177,6 +178,7 @@
         {@SID_INPUT_TAG}
         {@SECURITY_TOKEN_INPUT_TAG}
         <input type="hidden" name="action" value="{@$action}" />
+        <input id="entriesInput" type="hidden" name="entries" value="{%22left%22:[],%22center%22:[],%22right%22:[]}" />
         {if $configID|isset}<input type="hidden" name="id" value="{@$configID}" />{/if}
     </div>
 
@@ -207,7 +209,7 @@
     			<li><a id="addButtonRight" title="{lang}ultimate.template.configEditor.addEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
     		</ul>
     	</div>
-    	<div class="ultimateCenter">
+    	<div class="ultimateCenter leftMargin rightMargin">
        		<fieldset class="sortableParent">
         		<legend>{lang}ultimate.template.configEditor.columnCenter{/lang}</legend>
     			<div class="sortable" id="columnCenter">
