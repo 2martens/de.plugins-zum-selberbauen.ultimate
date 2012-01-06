@@ -89,9 +89,7 @@
             {/content}
         </tbody>
     </table>
-    {hascontentelse}
-    <p class="info">{lang}wcf.acp.ultimate.link.noContents{/lang}</p>
-    {/hascontent}
+    
 </div>
     
 <div class="contentFooter">
@@ -109,6 +107,11 @@
         </ul>
     </nav>
 </div>
+{hascontentelse}
+</div>
+
+<p class="info">{lang}wcf.acp.ultimate.link.noContents{/lang}</p>
+{/hascontent}
 
 {include file='footer'}
  
