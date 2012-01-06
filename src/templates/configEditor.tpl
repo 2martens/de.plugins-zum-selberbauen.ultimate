@@ -77,7 +77,7 @@
     		$.each($('#columnLeft').sortable('toArray'), function(index, value) {
     			entries['left'][index] = value;
     		});
-    		$.each($('#columnCenter').sortable('toArray'), function(index, val) {
+    		$.each($('#columnCenter').sortable('toArray'), function(index, value) {
     			entries['center'][index] = value;
     		});
     		$.each($('#columnRight').sortable('toArray'), function(index, value) {
