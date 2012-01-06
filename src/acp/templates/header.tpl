@@ -4,7 +4,7 @@
 	<base href="{$baseHref}" />
 	<meta charset="utf-8" />
 	<title>{if $pageTitle|isset}{@$pageTitle}{else}{lang}wcf.global.pageTitle{/lang}{/if} - {lang}wcf.acp{/lang}</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	{*<meta http-equiv="X-UA-Compatible" content="IE=edge" /> *}
 	<script type="text/javascript">
 		//<![CDATA[
 		var SID_ARG_1ST = '{@SID_ARG_1ST}';
