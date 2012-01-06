@@ -12,27 +12,6 @@
 var ULTIMATE = {};
 
 /**
- * ULTIMATE Content Management System core methods
- */
-$.extend(ULTIMATE, {
-	
-	/**
-	 * Counts the elements in an array-like object.
-	 * 
-	 * @param 	Object 	object
-	 * @return 	integer
-	 */
-	countArrayLikeObj: function(object) {
-		var length = 0;
-		if (typeof object != 'object') return null;
-		$.each(object, function(key, value) {
-			length++;
-		});
-		return length;
-	}
-});
-
-/**
  * JSON API
  */
 ULTIMATE.JSON = {
@@ -67,7 +46,7 @@ ULTIMATE.JSON = {
 		} else if (type == 'object') {
 			var output = '{';
 			var index = 0;
-			var length = ULTIMATE.countArrayLikeObj(variable);
+			var length = $.getLength(variable);
 			$.each(variable, function(key, value) {
 				if (index > 0 && index < length) output += ',';
 				output += '"' + key + '":';
