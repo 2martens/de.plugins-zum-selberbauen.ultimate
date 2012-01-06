@@ -377,7 +377,7 @@ class ConfigEditorForm extends AbstractSecureForm {
             'entriesRight' => $entries['right']
         );
         $finalOptions = array_merge($localOptions, $options);
-        $output = UltimateCore::getTPL()->fetch('generalCMSTemplate', $finalOptions);
+        $output = UltimateCore::getTPL()->fetch('generalCMSTemplate', $finalOptions, false);
         $file->write($output);
         $file->close();
     }
