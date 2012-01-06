@@ -1,9 +1,9 @@
-{include file='documentHeader'}
+{include file='documentHeader' sandbox=false}
 <head>
     <title>{@$configTitle}</title>
     <meta name="description" content="{@$metaDescription}" />
     <meta name="keywords" content="{@$metaKeywords}" />
-    {include file='headInclude'}
+    {include file='headInclude' sandbox=false}
 </head>
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
 {include file='header' sandbox=false}
