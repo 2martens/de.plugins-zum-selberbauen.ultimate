@@ -1,6 +1,7 @@
 <?php
 namespace ultimate\acp\page;
 use ultimate\data\config\Config;
+use ultimate\system\UltimateCore;
 use wcf\page\SortablePage;
 use wcf\system\menu\acp\ACPMenu;
 
@@ -30,7 +31,7 @@ class UltimateLinkListPage extends SortablePage {
     /**
      * @see \wcf\page\MultiplLinkPage::$objectListClassName
      */
-    public $objectListClassName = 'ultimate\data\content\LinkList';
+    public $objectListClassName = 'ultimate\data\link\LinkList';
     
     /**
 	 * @see \wcf\page\SortablePage::$validSortFields

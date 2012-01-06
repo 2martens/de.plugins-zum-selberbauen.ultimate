@@ -1,5 +1,6 @@
 <?php
 namespace ultimate\acp\page;
+use ultimate\system\UltimateCore;
 use wcf\page\SortablePage;
 use wcf\system\menu\acp\ACPMenu;
 
