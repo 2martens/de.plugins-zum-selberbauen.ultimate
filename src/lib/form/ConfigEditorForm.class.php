@@ -1,17 +1,16 @@
 <?php
 namespace ultimate\form;
-use wcf\system\io\File;
-
-use ultimate\data\content\ContentList;
 use ultimate\data\component\ComponentList;
 use ultimate\data\config\Config;
 use ultimate\data\config\ConfigAction;
+use ultimate\data\content\ContentList;
 use ultimate\system\config\ConfigEntry;
 use ultimate\system\config\storage\ConfigStorage;
 use ultimate\system\UltimateCore;
 use ultimate\util\ConfigUtil;
 use wcf\form\AbstractSecureForm;
 use wcf\system\exception\UserInputException;
+use wcf\system\io\File;
 use wcf\util\JSON;
 use wcf\util\StringUtil;
 
@@ -132,6 +131,16 @@ class ConfigEditorForm extends AbstractSecureForm {
     );
     
     /**
+     * Contains the read entries.
+     * @var array
+     */
+    protected $readEntries = array(
+        'left' => array(),
+        'center' => array(),
+        'right' => array()
+    );
+    
+    /**
      * Contains the meta description.
      * @var string
      */
@@ -157,6 +166,18 @@ class ConfigEditorForm extends AbstractSecureForm {
      * @see \wcf\page\IPage::readData()
      */
     public function readData() {
+        if (!count($_POST)) {
+            if ($this->action = 'edit') {
+                $this->configStorage = new ConfigStorage();
+                $config = new Config($this->configID);
+                $this->configTitle = $config->configTitle;
+                $this->metaDescription = $config->metaDescription;
+                $this->metaKeywords = $config->metaKeywords;
+                $this->configStorage = unserialize($config->storage);
+                $this->entries = $this->configStorage->getEntries();
+            }
+        }
+        
         //reading components
         $componentList = new ComponentList();
         $componentList->readObjects();
@@ -166,21 +187,7 @@ class ConfigEditorForm extends AbstractSecureForm {
         $contentList = new ContentList();
         $contentList->readObjects();
         $this->contents = $contentList->getObjects();
-            
-        if (!count($_POST)) {
-            
-            if ($this->action == 'add') {
-                $this->configStorage = new ConfigStorage();
-            }
-            elseif ($this->action = 'edit') {
-                $config = new Config($this->configID);
-                $this->configTitle = $config->configTitle;
-                $this->metaDescription = $config->metaDescription;
-                $this->metaKeywords = $config->metaKeywords;
-                $this->configStorage = unserialize($config->storage);
-                $this->entries = $this->configStorage->getEntries();
-            }
-        }
+        
         parent::readData();
     }
     
@@ -202,7 +209,7 @@ class ConfigEditorForm extends AbstractSecureForm {
         if (isset($_POST['metaDescription'])) $this->metaDescription = trim($_POST['metaDescription']);
         if (isset($_POST['metaKeywords'])) $this->metaKeywords = trim($_POST['metaKeywords']);
         if (isset($_POST['configTitle'])) $this->configTitle = trim($_POST['configTitle']);
-        if (isset($_POST['entries'])) $this->entries = JSON::decode(urldecode($_POST['entries']));
+        if (isset($_POST['entries'])) $this->readEntries = JSON::decode(urldecode($_POST['entries']));
         
     }
     
@@ -215,6 +222,10 @@ class ConfigEditorForm extends AbstractSecureForm {
             //does nothing (for now)
         }
         else {
+            //workaround to make sure that the entries will be assigned
+            //in assignVariables
+            $this->assignEntriesToStorage();
+            
             $this->validateTitle();
             $this->validateDescription();
             $this->validateKeywords();
@@ -269,37 +280,10 @@ class ConfigEditorForm extends AbstractSecureForm {
             exit;
         }
         
-        if ($this->action == 'edit') $this->configStorage = new ConfigStorage();
-        
         $leftColumn = $centerColumn = $rightColumn = false;
-        
-        //filling ConfigStorage with entries
-        foreach ($this->entries['left'] as $index => $id) {
-            $idArray = explode('-', $id);
-            $componentID = $idArray[1];
-            $contentID = $idArray[2];
-            $entry = new ConfigEntry($componentID, $contentID);
-            $this->configStorage->addEntry($entry, 'left');
-            $leftColumn = true;
-        }
-        
-        foreach ($this->entries['center'] as $index => $id) {
-            $idArray = explode('-', $id);
-            $componentID = $idArray[1];
-            $contentID = $idArray[2];
-            $entry = new ConfigEntry($componentID, $contentID);
-            $this->configStorage->addEntry($entry, 'center');
-            $centerColumn = true;
-        }
-    
-        foreach ($this->entries['right'] as $index => $id) {
-            $idArray = explode('-', $id);
-            $componentID = $idArray[1];
-            $contentID = $idArray[2];
-            $entry = new ConfigEntry($componentID, $contentID);
-            $this->configStorage->addEntry($entry, 'right');
-            $rightColumn = true;
-        }
+        if (count($this->readEntries['left'])) $leftColumn = true;
+        if (count($this->readEntries['center'])) $centerColumn = true;
+        if (count($this->readEntries['right'])) $rightColumn = true;
         
         //create template for this config
         $templateName = substr(StringUtil::getHash($this->configTitle), 0, 10);
@@ -334,12 +318,43 @@ class ConfigEditorForm extends AbstractSecureForm {
         //shows a blank form
         if ($this->action == 'add') {
             $this->configTitle = $this->metaDescription = $this->metaKeywords = '';
-            $this->entries = array(
+            $this->entries = $this->readEntries = array(
                 'left' => array(),
                 'center' => array(),
                 'right' => array()
             );
         }
+    }
+    
+    /**
+     * Assigns the read entries to the config storage object.
+     */
+    protected function assignEntriesToStorage() {
+        $this->configStorage = new ConfigStorage();
+        foreach ($this->readEntries['left'] as $index => $id) {
+            $idArray = explode('-', $id);
+            $componentID = $idArray[1];
+            $contentID = $idArray[2];
+            $entry = new ConfigEntry($componentID, $contentID);
+            $this->configStorage->addEntry($entry, 'left');
+        }
+        
+        foreach ($this->readEntries['center'] as $index => $id) {
+            $idArray = explode('-', $id);
+            $componentID = $idArray[1];
+            $contentID = $idArray[2];
+            $entry = new ConfigEntry($componentID, $contentID);
+            $this->configStorage->addEntry($entry, 'center');
+        }
+    
+        foreach ($this->readEntries['right'] as $index => $id) {
+            $idArray = explode('-', $id);
+            $componentID = $idArray[1];
+            $contentID = $idArray[2];
+            $entry = new ConfigEntry($componentID, $contentID);
+            $this->configStorage->addEntry($entry, 'right');
+        }
+        $this->entries = $this->configStorage->getEntries();
     }
     
     /**
