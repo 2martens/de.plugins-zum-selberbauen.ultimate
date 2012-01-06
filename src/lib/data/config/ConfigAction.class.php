@@ -35,6 +35,17 @@ class ConfigAction extends AbstractDatabaseObjectAction {
 	protected $permissionsUpdate = array('admin.content.ultimate.canEditConfig');
 	
 	/**
+	 * Clears the cache.
+	 *
+	 * @see \wcf\data\AbstractDatabaseObjectAction::executeAction()
+	 */
+	public function executeAction() {
+	    parent::executeAction();
+	    $cache = 'ultimate-links-'.PACKAGE_ID;
+	    CacheHandler::getInstance()->clearResource($cache);
+	}
+	
+	/**
 	 * @see \wcf\data\AbstractDatabaseObjectAction::validateDelete()
 	 * @throws ValidateActionException
 	 */

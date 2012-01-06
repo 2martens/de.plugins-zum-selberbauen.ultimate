@@ -1,9 +1,9 @@
 <?php
 namespace ultimate\data\content;
 use ultimate\data\config\ConfigList;
-
 use wcf\system\exception\ValidateActionException;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\system\cache\CacheHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 
 /**
@@ -36,7 +36,7 @@ class ContentAction extends AbstractDatabaseObjectAction {
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
 	 */
 	protected $permissionsUpdate = array('admin.content.ultimate.canEditContent');
-	
+			
 	/**
 	 * @see \wcf\data\AbstractDatabaseObjectAction::validateDelete()
 	 * @throws ValidateActionException
