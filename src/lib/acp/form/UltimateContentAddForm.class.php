@@ -1,6 +1,7 @@
 <?php
 namespace ultimate\acp\form;
 use ultimate\data\content\ContentAction;
+use ultimate\system\UltimateCore;
 use wcf\acp\form\ACPForm;
 use wcf\system\exception\UserInputException;
 

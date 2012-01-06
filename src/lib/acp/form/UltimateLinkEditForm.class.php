@@ -3,6 +3,7 @@ namespace ultimate\acp\form;
 use ultimate\acp\form\UltimateLinkAddForm;
 use ultimate\data\link\Link;
 use ultimate\data\link\LinkAction;
+use ultimate\system\UltimateCore;
 use wcf\form\AbstractForm;
 
 /**

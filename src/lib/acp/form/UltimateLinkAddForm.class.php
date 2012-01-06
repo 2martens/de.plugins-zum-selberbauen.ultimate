@@ -2,6 +2,7 @@
 namespace ultimate\acp\form;
 use ultimate\data\config\ConfigList;
 use ultimate\data\link\LinkAction;
+use ultimate\system\UltimateCore;
 use ultimate\util\LinkUtil;
 use wcf\acp\form\ACPForm;
 use wcf\system\exception\UserInputException;

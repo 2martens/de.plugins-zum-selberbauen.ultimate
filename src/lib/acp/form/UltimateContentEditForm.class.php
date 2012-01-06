@@ -3,6 +3,7 @@ namespace ultimate\acp\form;
 use ultimate\acp\form\UltimateContentAddForm;
 use ultimate\data\content\Content;
 use ultimate\data\content\ContentAction;
+use ultimate\system\UltimateCore;
 use wcf\form\AbstractForm;
 
 /**
