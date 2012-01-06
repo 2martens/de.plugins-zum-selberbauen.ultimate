@@ -35,10 +35,22 @@ class GenericCMSPage extends AbstractPage {
     public $templateName = '';
     
     /**
-     * Contains an array with the outputs of the "sub-templates".
-     * @var array
+     * Contains the meta description.
+     * @var string
      */
-    protected $content = array();
+    protected $metaDescription = '';
+    
+    /**
+     * Contains the meta keywords.
+     * @var string
+     */
+    protected $metaKeywords = '';
+    
+    /**
+     * Contains the config title.
+     * @var string
+     */
+    protected $configTitle = '';
     
     /**
      * Creates a new GenericCMSPage object.
@@ -47,7 +59,9 @@ class GenericCMSPage extends AbstractPage {
      */
     public function __construct(array $callData) {
         $this->templateName = $callData['templateName'];
-        $this->content = $callData['content'];
+        $this->configTitle = $callData['configTitle'];
+        $this->metaDescription = $callData['metaDescription'];
+        $this->metaKeywords = $callData['metaKeywords'];
         if (DEBUG) {
             $this->neededModules = array();
             $this->neededPermissions = array();
@@ -60,11 +74,9 @@ class GenericCMSPage extends AbstractPage {
      */
     public function assignVariables() {
         UltimateCore::getTPL()->assign(array(
-            'metaDescription' => '', //debug purposes
-            'metaKeywords' => ''
+            'configTitle' => $this->configTitle,
+        	'metaDescription' => $this->metaDescription, //debug purposes
+            'metaKeywords' => $this->metaKeywords
         ));
-        foreach ($this->content as $id => $output) {
-            UltimateCore::getTPL()->assign($id, $output);
-        }
     }
 }
