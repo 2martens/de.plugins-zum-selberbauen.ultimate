@@ -64,15 +64,15 @@
     	/* adding submit handler to main form */
     	$('#mainForm').submit(function(event) {
     		/* prevent browser from submitting */
-    		event.preventDefault();
+    		//event.preventDefault();
     		
     		$form = $(this);
     		
     		/* collecting data */
     		var entries = new Object();
-    		entries['left'] = new Object();
-    		entries['center'] = new Object();
-    		entries['right'] = new Object();
+    		entries['left'] = new Array();
+    		entries['center'] = new Array();
+    		entries['right'] = new Array();
     		
     		$.each($('#columnLeft').sortable('toArray'), function(index, value) {
     			entries['left'][index] = value;
@@ -83,15 +83,14 @@
     		$.each($('#columnRight').sortable('toArray'), function(index, value) {
     			entries['right'][index] = value;
     		});
-    		
+
     		/* adding entries to form */
-    		/* TODO: too much recursion */
     		var encodedEntriesObject = ULTIMATE.JSON.encode(entries);
+    		    		
     		var input = '<input type="hidden" name="entries" value="' + encodedEntriesObject + '" />';
     		$form.find('.formSubmit').append(input);
     		
     		/* submitting */
-    		$form.trigger('submit');
     		return true;
     	});
     });
@@ -131,39 +130,39 @@
 {include file='popupAddEntry' sandbox=false}
 <form id="mainForm" method="post" action="{link controller='ConfigEditor'}{/link}">
 	<div class="border content">
-        <dl{if $errorType.configTitle|isset} class="formError"{/if}>
+        <dl{if $errorField == 'configTitle'} class="formError"{/if}>
             <dt><label for="configTitle">{lang}ultimate.template.configEditor.configTitle{/lang}</label></dt>
             <dd>
                 <input type="text" id="configTitle" name="configTitle" value="{@$configTitle}" class="medium" />
-                {if $errorType.configTitle|isset}
+                {if $errorField == 'configTitle'}
                     <small class="innerError">
-                        {if $errorType.configTitle == 'empty'}
+                        {if $errorType == 'empty'}
                         	{lang}wcf.global.form.error.empty{/lang}
                         {else}
-                        	{lang}ultimate.template.configEditor.configTitle.error.{@$errorType.configTitle}{/lang}
+                        	{lang}ultimate.template.configEditor.configTitle.error.{@$errorType}{/lang}
                     	{/if}
                     </small>
                 {/if}
             </dd>
         </dl>
-        <dl{if $errorType.metaDescription|isset} class="formError"{/if}>
+        <dl{if $errorField == 'metaDescription'} class="formError"{/if}>
             <dt><label for="metaDescription">{lang}ultimate.template.configEditor.metaDescription{/lang}</label></dt>
             <dd>
                 <input type="text" id="metaDescription" name="metaDescription" value="{@$metaDescription}" class="medium" />
-                {if $errorType.metaDescription|isset}
+                {if $errorField == 'metaDescription'}
                     <small class="innerError">
-                        {lang}ultimate.template.configEditor.metaDescription.error.{@$errorType.metaDescription}{/lang}
+                        {lang}ultimate.template.configEditor.metaDescription.error.{@$errorType}{/lang}
                     </small>
                 {/if}
             </dd>
         </dl>
-        <dl{if $errorType.metaKeywords|isset} class="formError"{/if}>
+        <dl{if $errorField == 'metaKeywords'} class="formError"{/if}>
             <dt><label for="metaKeywords">{lang}ultimate.template.configEditor.metaKeywords{/lang}</label></dt>
             <dd>
                 <input type="text" id="metaKeywords" name="metaKeywords" value="{@$metaKeywords}" class="medium" />
-                {if $errorType.metaKeywords|isset}
+                {if $errorField == 'metaKeywords'}
                     <small class="innerError">
-                        {lang}ultimate.template.configEditor.metaKeywords.error.{@$errorType.metaKeywords}{/lang}
+                        {lang}ultimate.template.configEditor.metaKeywords.error.{@$errorType}{/lang}
                     </small>
                 {/if}
             </dd>
