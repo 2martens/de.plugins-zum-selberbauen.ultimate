@@ -3,6 +3,7 @@ namespace ultimate\acp\page;
 use ultimate\data\config\Config;
 use ultimate\system\UltimateCore;
 use wcf\page\SortablePage;
+use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\menu\acp\ACPMenu;
 
 /**
@@ -31,7 +32,7 @@ class UltimateLinkListPage extends SortablePage {
     /**
      * @see \wcf\page\MultiplLinkPage::$objectListClassName
      */
-    public $objectListClassName = 'ultimate\data\link\LinkList';
+    public $objectListClassName = '\ultimate\data\link\LinkList';
     
     /**
 	 * @see \wcf\page\SortablePage::$validSortFields
@@ -72,7 +73,10 @@ class UltimateLinkListPage extends SortablePage {
     public function assignVariables() {
         parent::assignVariables();
         //overrides objects assignment in MultipleLinkPage
-        UltimateCore::getTPL()->assign('objects', $this->links);
+        UltimateCore::getTPL()->assign(array(
+        	'objects' => $this->links,
+            'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems()
+        ));
     }
     
 	/**
