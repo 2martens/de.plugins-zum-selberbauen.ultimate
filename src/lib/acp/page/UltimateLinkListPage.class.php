@@ -1,5 +1,7 @@
 <?php
 namespace ultimate\acp\page;
+use wcf\system\request\LinkHandler;
+
 use ultimate\data\config\Config;
 use ultimate\system\UltimateCore;
 use wcf\page\SortablePage;
@@ -49,6 +51,12 @@ class UltimateLinkListPage extends SortablePage {
     protected $links = array();
     
     /**
+     * Contains the url.
+     * @var string
+     */
+    protected $url = '';
+    
+    /**
      * @see \wcf\page\IPage::readData()
      */
     public function readData() {
@@ -65,6 +73,7 @@ class UltimateLinkListPage extends SortablePage {
             );
         }
         $this->links = $links;
+        $this->url = LinkHandler::getInstance()->getLink('UltimateLinkList', array(), 'action='.rawurlencode($this->action).'&pageNo='.$this->pageNo.'&sortField='.$this->sortField.'&sortOrder='.$this->sortOrder);
     }
     
     /**
@@ -74,8 +83,9 @@ class UltimateLinkListPage extends SortablePage {
         parent::assignVariables();
         //overrides objects assignment in MultipleLinkPage
         UltimateCore::getTPL()->assign(array(
-        	'objects' => $this->links,
-            'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems()
+        	'links' => $this->links,
+            'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(),
+            'url' => $this->url
         ));
     }
     

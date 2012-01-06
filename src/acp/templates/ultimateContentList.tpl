@@ -16,6 +16,7 @@
     </hgroup>
 </header>
 
+{assign var=encodedURL value=$url|rawurlencode}
 {assign var=encodedAction value=$action|rawurlencode}
 <div class="contentHeader">
     {pages print=true assign=pagesLinks controller="UltimateContentList" link="pageNo=%d&action=$encodedAction&sortField=$sortField&sortOrder=$sortOrder"}
