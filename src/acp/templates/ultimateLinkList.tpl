@@ -48,9 +48,6 @@
                 <th class="columnTitle{if $sortField == 'linkSlug'} active{/if}"><a href="{link controller='UltimateLinkList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=linkSlug&sortOrder={if $sortField == 'linkSlug' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}ultimate.template.link.slug{/lang}{if $sortField == 'linkSlug'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
                 <th class="columnText{if $sortField == 'configTitle'} active{/if}"><a href="{link controller='UltimateLinkList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=configTitle&sortOrder={if $sortField == 'configTitle' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}ultimate.template.config.title{/lang}{if $sortField == 'configTitle'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
                 
-                {foreach from=$columnHeads key=column item=columnLanguageVariable}
-                    <th class="column{$column|ucfirst}{if $sortField == $column} active{/if}"><a href="{link controller='UltimateLinkList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField={$column}&sortOrder={if $sortField == $column && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}{$columnLanguageVariable}{/lang}{if $sortField == $column} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
-                {/foreach}
                     
                 {event name='headColumns'}
             </tr>
@@ -79,10 +76,6 @@
                         <td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditLink')}<a title="{lang}wcf.acp.ultimate.link.edit{/lang}" href="{link controller='UltimateLinkEdit' id=$link['linkID']}{/link}">{$link['linkSlug']}</a>{else}{$link['linkSlug']}{/if}</p></td>
                 		<td class="columnText"><p>{$link['configTitle']}</p></td>
                 		
-                        {foreach from=$columnHeads key=column item=columnLanguageVariable}
-                            <td class="column{$column|ucfirst}"><p>{if $columnValues[$link['linkID']][$column]|isset}{@$columnValues[$link['linkID']][$column]}{/if}</p></td>
-                        {/foreach}
-                
                         {event name='columns'}
                     </tr>
                 {/foreach}
