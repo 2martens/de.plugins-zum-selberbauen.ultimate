@@ -178,7 +178,7 @@
         {@SID_INPUT_TAG}
         {@SECURITY_TOKEN_INPUT_TAG}
         <input type="hidden" name="action" value="{@$action}" />
-        <input id="entriesInput" type="hidden" name="entries" value="{%22left%22:[],%22center%22:[],%22right%22:[]}" />
+        <input id="entriesInput" type="hidden" name="entries" value="{literal}{%22left%22:[],%22center%22:[],%22right%22:[]}{/literal}" />
         {if $configID|isset}<input type="hidden" name="id" value="{@$configID}" />{/if}
     </div>
 
