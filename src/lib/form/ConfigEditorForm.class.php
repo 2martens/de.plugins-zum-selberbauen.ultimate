@@ -1,17 +1,17 @@
 <?php
 namespace ultimate\form;
-use wcf\util\StringUtil;
-
 use ultimate\data\content\ContentList;
 use ultimate\data\component\ComponentList;
+use ultimate\data\config\Config;
 use ultimate\data\config\ConfigAction;
 use ultimate\system\config\ConfigEntry;
 use ultimate\system\config\storage\ConfigStorage;
 use ultimate\system\UltimateCore;
-use ultimate\data\config\Config;
+use ultimate\util\ConfigUtil;
 use wcf\form\AbstractSecureForm;
 use wcf\system\exception\UserInputException;
 use wcf\util\JSON;
+use wcf\util\StringUtil;
 
 /**
  * Shows the ConfigEditor form.
