@@ -83,7 +83,7 @@ class UltimateLinkListPage extends SortablePage {
         parent::assignVariables();
         //overrides objects assignment in MultipleLinkPage
         UltimateCore::getTPL()->assign(array(
-        	'links' => $this->links,
+        	'objects' => $this->links,
             'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(),
             'url' => $this->url
         ));
