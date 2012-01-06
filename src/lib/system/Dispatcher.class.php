@@ -61,19 +61,10 @@ class Dispatcher extends SingletonFactory {
         $config = $this->viewConfigurations[$this->requestURI];
         $callData = array(
         	'templateName' => $config['templateName'],
-            'content' => array()
+            'configTitle' => $config['configTitle'],
+            'metaDescription' => $config['metaDescription'],
+            'metaKeywords' => $config['metaKeywords']
         );
-        $configStorage = unserialize($config['storage']);
-        $entries = $configStorage->getEntries();
-        foreach ($entries['left'] as $id => $entry) {
-           $callData['content']['left'.$id] = $entry->getContent();
-        }
-        foreach ($entries['center'] as $id => $entry) {
-            $callData['content']['center'.$id] = $entry->getContent();
-        }
-        foreach ($entries['right'] as $id => $entry) {
-            $callData['content']['right'.$id] = $entry->getContent();
-        }
         
         $controllerObj = '\ultimate\page\GenericCMSPage';
         new $controllerObj($callData);
