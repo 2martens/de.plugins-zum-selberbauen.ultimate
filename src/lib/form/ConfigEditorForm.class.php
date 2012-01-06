@@ -130,6 +130,12 @@ class ConfigEditorForm extends AbstractSecureForm {
     );
     
     /**
+     * Contains all read entries.
+     * @var array
+     */
+    protected $readEntries = array();
+    
+    /**
      * Contains the meta description.
      * @var string
      */
@@ -200,6 +206,7 @@ class ConfigEditorForm extends AbstractSecureForm {
         if (isset($_POST['metaKeywords'])) $this->metaKeywords = trim($_POST['metaKeywords']);
         if (isset($_POST['configTitle'])) $this->configTitle = trim($_POST['configTitle']);
         if (isset($_POST['entries'])) $this->readEntries = JSON::decode($_POST['entries']);
+        var_dump($this->readEntries);
     }
     
     /**
