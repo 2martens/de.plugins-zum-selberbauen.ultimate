@@ -286,7 +286,8 @@ class ConfigEditorForm extends AbstractSecureForm {
         if (count($this->readEntries['right'])) $rightColumn = true;
         
         //create template for this config
-        $templateName = substr(StringUtil::getHash($this->configTitle), 0, 10);
+        $salt = StringUtil::getRandomID();
+        $templateName = substr(StringUtil::getDoubleSaltedHash($this->configTitle, $salt), 0, 10);
         
         $this->writeTemplate($templateName, array(
             'leftColumn' => $leftColumn,
