@@ -66,7 +66,7 @@ class UltimateLinkListPage extends SortablePage {
         
         foreach ($objects as $object) {
             $config = new Config($object->configID);
-            $link[] = array(
+            $links[] = array(
                 'linkID' => $object->linkID,
                 'linkSlug' => $object->linkSlug,
                 'configTitle' => $config->configTitle

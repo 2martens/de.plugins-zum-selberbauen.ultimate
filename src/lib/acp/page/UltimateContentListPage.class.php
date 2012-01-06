@@ -50,10 +50,17 @@ class UltimateContentListPage extends SortablePage {
     protected $url = '';
     
     /**
+     * Contains all content objects.
+     * @var array<Content>
+     */
+    protected $objects = array();
+    
+    /**
      * @see \wcf\page\IPage::readData()
      */
     public function readData() {
         parent::readData();
+        $this->objects = $this->objectList->getObjects();
         $this->url = LinkHandler::getInstance()->getLink('UltimateContentList', array(), 'action='.rawurlencode($this->action).'&pageNo='.$this->pageNo.'&sortField='.$this->sortField.'&sortOrder='.$this->sortOrder);
     }
     
@@ -65,7 +72,7 @@ class UltimateContentListPage extends SortablePage {
         parent::assignVariables();
         //overrides objects assignment in MultipleLinkPage
         UltimateCore::getTPL()->assign(array(
-        	'objects' => $this->links,
+        	'objects' => $this->objects,
             'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(),
             'url' => $this->url
         ));
