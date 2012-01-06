@@ -59,6 +59,8 @@ class UltimateLinksCacheBuilder implements ICacheBuilder {
             $linkSlugs = array_flip($configIDs);
             $configs[$linkSlugs[$config->configID]] = array(
                 'configTitle' => $config->configTitle,
+                'metaDescription' => $config->metaDescription,
+                'metaKeywords' => $config->metaKeywords,
                 'templateName' => $config->templateName,
                 'storage' => $config->storage
             );
