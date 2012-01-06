@@ -370,15 +370,14 @@ class ConfigEditorForm extends AbstractSecureForm {
         $entries = $this->configStorage->getEntries();
                 
         $localOptions = array(
-            'metaDescription' => $this->metaDescription,
-            'metaKeywords' => $this->metaKeywords,
-            'configTitle' => $this->configTitle,
             'entriesLeft' => $entries['left'],
             'entriesCenter' => $entries['center'],
             'entriesRight' => $entries['right']
         );
         $finalOptions = array_merge($localOptions, $options);
-        $output = UltimateCore::getTPL()->fetch('generalCMSTemplate', $finalOptions, false);
+        $outputEntries = UltimateCore::getTPL()->fetch('entries', $finalOptions, false);
+        $output = file_get_contents($templateDir.'generalCMSTemplate.tpl');
+        $output = str_replace('{@$entries}', $outputEntries, $output);
         $file->write($output);
         $file->close();
     }
