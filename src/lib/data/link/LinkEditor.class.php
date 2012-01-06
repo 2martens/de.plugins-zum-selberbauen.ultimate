@@ -1,5 +1,6 @@
 <?php
 namespace ultimate\data\link;
+use wcf\data\IEditableCachedObject;
 use wcf\data\DatabaseObjectEditor;
 
 /**
@@ -12,9 +13,43 @@ use wcf\data\DatabaseObjectEditor;
  * @subpackage data.link
  * @category Ultimate CMS
  */
-class LinkEditor extends DatabaseObjectEditor {
+class LinkEditor extends DatabaseObjectEditor implements IEditableCachedObject {
     /**
      * @see \wcf\data\DatabaseObjectDecorator::$baseClass
      */
     protected static $baseClass = '\ultimate\data\link\Link';
+    
+	/**
+     * @see \wcf\data\IEditableObject::update()
+     */
+    public function update(array $parameters = array()) {
+        parent::update($parameters);
+        self::resetCache();
+    }
+    
+	/**
+     * @see \wcf\data\IEditableObject::create()
+     */
+    public static function create(array $parameters = array()) {
+        $result = parent::create($parameters);
+        self::resetCache();
+        return $result;
+    }
+    
+    /**
+     * @see \wcf\data\IEditableObject::deleteAll()
+     */
+    public static function deleteAll(array $objectIDs = array()) {
+        $result = parent::deleteAll($objectIDs);
+        self::resetCache();
+        return $result;
+    }
+    
+	/**
+     * @see \wcf\data\IEditableCachedObject::resetCache()
+     */
+    public static function resetCache() {
+        $cache = 'ultimate-links-'.PACKAGE_ID;
+        CacheHandler::getInstance()->clearResource($cache);
+    }
 }
