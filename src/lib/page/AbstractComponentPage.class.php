@@ -88,7 +88,7 @@ abstract class AbstractComponentPage extends AbstractPage {
             'contentID' => $this->displayContent['contentID'],
             'contentTitle' => $this->displayContent['contentTitle'],
             'contentDescription' => $this->displayContent['contentDescription'],
-            'contentText' => $this->displayContent['contentText']
+            'contentText' => nl2br($this->displayContent['contentText'], true)
         ));
     }
     
