@@ -36,6 +36,25 @@
     	$('.sortable').bind('DOMNodeInserted', function(event) {
     		readEntries();
     	});
+    	
+    	/* add mouseenter event to sortable elements */
+    	$('.ultimateBorder').mouseenter(function(event) {
+    		$('.ultimateBorder').addClass('ultimateVisible');
+    	});
+    	
+    	/* add mouseleave event to sortable elements */
+    	$('.ultimateBorder').mouseleave(function(event) {
+    		$('.ultimateBorder').removeClass('ultimateVisible');
+    	});
+    	
+    	/* initialize click event for all small buttons */
+    	$('.deleteButton').click(function() {
+    		var elementID $(this).attr('id');
+    		var parentID = '#' + elementID.substring(13);
+    		$(parentID).remove();
+    		return false;
+    	});
+    	
     	/* initialize button click event */
     	$('#addButtonLeft, #addButtonCenter, #addButtonRight').click(function() {
     		var elementID = $(this).attr('id');
@@ -186,39 +205,78 @@
         		<legend>{lang}ultimate.template.configEditor.columnLeft{/lang}</legend>
     			<div class="sortable" id="columnLeft">
         		{foreach from=$entries['left'] item=$entry}
-    				<div id="left-{$entry->getComponentID()}-{$entry->getContentID()}">{@$entry->getContent()}</div>
+    				<div id="left-{$entry->getComponentID()}-{$entry->getContentID()}-{$entry->getRandomID()}" class="ultimateBorder">
+    					{@$entry->getContent()}
+    					<footer>
+    						<nav>
+    							<ul class="smallButtons">
+    								<li><a class="deleteButton" id="deleteButton-left-{$entry->getComponentID()}-{$entry->getContentID()}-{$entry->getRandomID()}" title="{lang}ultimate.template.configEditor.deleteEntry{/lang}<img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.deleteEntry{/lang}</span></a></li>
+    							</ul>
+    						</nav>
+    					</footer>
+    				</div>
     			{/foreach}
     			</div>
     		</fieldset>
-    		<ul class="largeButtons">
-    			<li><a id="addButtonLeft" title="{lang}ultimate.template.configEditor.addEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
-    		</ul>
+    		<footer>
+    			<nav>
+    				<ul class="largeButtons">
+    					<li><a id="addButtonLeft" title="{lang}ultimate.template.configEditor.addEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
+    				</ul>
+    			</nav>
+    		</footer>
     	</div>
     	<div class="ultimateRight">
     		<fieldset class="sortableParent">
         		<legend>{lang}ultimate.template.configEditor.columnRight{/lang}</legend>
         		<div class="sortable" id="columnRight">
         		{foreach from=$entries['right'] item=$entry}
-    				<div id="right-{$entry->getComponentID()}-{$entry->getContentID()}">{@$entry->getContent()}</div>
+    				<div id="right-{$entry->getComponentID()}-{$entry->getContentID()}-{$entry->getRandomID()}" class="ultimateBorder">
+    					{@$entry->getContent()}
+    					<footer>
+    						<nav>
+    							<ul class="smallButtons">
+    								<li><a class="deleteButton" id="deleteButton-right-{$entry->getComponentID()}-{$entry->getContentID()}-{$entry->getRandomID()}" title="{lang}ultimate.template.configEditor.deleteEntry{/lang}<img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.deleteEntry{/lang}</span></a></li>
+    							</ul>
+    						</nav>
+    					</footer>
+    				</div>
     			{/foreach}
         		</div>
         	</fieldset>
-    		<ul class="largeButtons">
-    			<li><a id="addButtonRight" title="{lang}ultimate.template.configEditor.addEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
-    		</ul>
+    		<footer>
+    			<nav>
+    				<ul class="largeButtons">
+    					<li><a id="addButtonRight" title="{lang}ultimate.template.configEditor.addEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
+    				</ul>
+    			</nav>
+    		</footer>
     	</div>
     	<div class="ultimateCenter leftMargin rightMargin">
        		<fieldset class="sortableParent">
         		<legend>{lang}ultimate.template.configEditor.columnCenter{/lang}</legend>
     			<div class="sortable" id="columnCenter">
        			{foreach from=$entries['center'] item=$entry}
-    				<div id="center-{$entry->getComponentID()}-{$entry->getContentID()}">{@$entry->getContent()}</div>
+    				<div id="center-{$entry->getComponentID()}-{$entry->getContentID()}-{$entry->getRandomID()}" class="ultimateBorder">
+    					{@$entry->getContent()}
+    					<footer>
+    						<nav>
+    							<ul class="smallButtons">
+    								<li><a class="deleteButton" id="deleteButton-center-{$entry->getComponentID()}-{$entry->getContentID()}-{$entry->getRandomID()}" title="{lang}ultimate.template.configEditor.deleteEntry{/lang}<img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.deleteEntry{/lang}</span></a></li>
+    							</ul>
+    						</nav>
+    					</footer>
+    				</div>
     			{/foreach}
     			</div>
     		</fieldset>
-    		<ul class="largeButtons">
-    			<li><a id="addButtonCenter" title="{lang}ultimate.template.configEditor.addEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
-    		</ul>
+    		<footer>
+    			<nav>
+    				<ul class="largeButtons">
+    					<li><a id="addButtonCenter" title="{lang}ultimate.template.configEditor.addEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
+    				</ul>
+    			</nav>
+    		</footer>
     	</div>
 	</div>
 </form>
