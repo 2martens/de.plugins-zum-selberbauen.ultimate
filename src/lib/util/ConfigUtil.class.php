@@ -1,5 +1,6 @@
 <?php
 namespace ultimate\util;
+use ultimate\data\config\Config;
 use ultimate\system\UltimateCore;
 
 /**
@@ -24,9 +25,15 @@ class ConfigUtil {
      * Checks whether the given configTitle is available or not.
      *
      * @param string $title
+     * @param int $configID
      * @return boolean
      */
-    public static function isAvailableTitle($title) {
+    public static function isAvailableTitle($title, $configID = 0) {
+        if ($configID) {
+            $config = new Config($configID);
+            if ($config->configTitle == $title) return true;
+        }
+        
         $sql = 'SELECT COUNT(configTitle) AS count
         		FROM ultimate'.ULTIMATE_N.'_'.self::$databaseTable.'
         		WHERE configTitle = ?';

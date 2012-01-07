@@ -243,7 +243,7 @@ class ConfigEditorForm extends AbstractSecureForm {
         if (empty($this->configTitle)) {
             throw new UserInputException('configTitle');
         }
-        if (!ConfigUtil::isAvailableTitle($this->configTitle)) {
+        if (!ConfigUtil::isAvailableTitle($this->configTitle, $this->configID)) {
             throw new UserInputException('configTitle', 'notUnique');
         }
     }
