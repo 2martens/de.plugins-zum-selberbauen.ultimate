@@ -31,6 +31,12 @@
     	indexCenter = $('#columnCenter').length;
     	indexRight = $('#columnCenter').length;
     	
+    	/* initializing entries object */
+    	var entries = new Object();
+    	entries['left'] = new Array();
+    	entries['center'] = new Array();
+    	entries['right'] = new Array();
+    		    	
     	/* adding submit handler to popupAddEntry */
     	$('#addEntryForm').live('submit', function(event) {
     		/* prevent default submit action */
@@ -58,22 +64,8 @@
     				ajax: '1'
     			}
     		);
-    		return false;
-    	});
-    	
-    	/* adding submit handler to main form */
-    	$('#mainForm').submit(function(event) {
-    		/* prevent browser from submitting */
-    		//event.preventDefault();
-    		setTimeout(this.submit(), 500);
-    		$form = $(this);
     		
     		/* collecting data */
-    		var entries = new Object();
-    		entries['left'] = new Array();
-    		entries['center'] = new Array();
-    		entries['right'] = new Array();
-    		
     		$.each($('#columnLeft').sortable('toArray'), function(index, value) {
     			entries['left'][index] = value;
     		});
@@ -90,9 +82,7 @@
     		//var input = '<input type="hidden" name="entries" value="' + encodedEntriesObject + '" />';
     		//$form.find('.formSubmit').append(input);
     		document.getElementById('entriesInput').value = encodeURI(encodedEntriesObject);
-    		
-    		/* submitting */
-    		return true;
+    		return false;
     	});
     });
     
