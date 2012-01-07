@@ -208,12 +208,13 @@
         		<legend>{lang}ultimate.template.configEditor.columnLeft{/lang}</legend>
     			<div class="sortable" id="columnLeft">
         		{foreach from=$entries['left'] item=$entry}
-    				<div id="left-{$entry->getComponentID()}-{$entry->getContentID()}-{$entry->getRandomID()}" class="ultimateBorder">
+    				{assign var=randomIDLeft value=$entry->getRandomID()}
+    				<div id="left-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDLeft}" class="ultimateBorder">
     					{@$entry->getContent()}
     					<footer>
     						<nav>
     							<ul class="smallButtons">
-    								<li><a class="deleteButton" id="deleteButton-left-{$entry->getComponentID()}-{$entry->getContentID()}-{$entry->getRandomID()}" title="{lang}ultimate.template.configEditor.deleteEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.deleteEntry{/lang}</span></a></li>
+    								<li><a class="deleteButton" id="deleteButton-left-{$randomIDLeft}-{$entry->getContentID()}-{$entry->getRandomID()}" title="{lang}ultimate.template.configEditor.deleteEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.deleteEntry{/lang}</span></a></li>
     							</ul>
     						</nav>
     					</footer>
@@ -234,12 +235,13 @@
         		<legend>{lang}ultimate.template.configEditor.columnRight{/lang}</legend>
         		<div class="sortable" id="columnRight">
         		{foreach from=$entries['right'] item=$entry}
-    				<div id="right-{$entry->getComponentID()}-{$entry->getContentID()}-{$entry->getRandomID()}" class="ultimateBorder">
+    				{assign var=randomIDRight value=$entry->getRandomID()}
+    				<div id="right-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDRight}" class="ultimateBorder">
     					{@$entry->getContent()}
     					<footer>
     						<nav>
     							<ul class="smallButtons">
-    								<li><a class="deleteButton" id="deleteButton-right-{$entry->getComponentID()}-{$entry->getContentID()}-{$entry->getRandomID()}" title="{lang}ultimate.template.configEditor.deleteEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.deleteEntry{/lang}</span></a></li>
+    								<li><a class="deleteButton" id="deleteButton-right-{$randomIDRight}-{$entry->getContentID()}-{$entry->getRandomID()}" title="{lang}ultimate.template.configEditor.deleteEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.deleteEntry{/lang}</span></a></li>
     							</ul>
     						</nav>
     					</footer>
@@ -260,12 +262,13 @@
         		<legend>{lang}ultimate.template.configEditor.columnCenter{/lang}</legend>
     			<div class="sortable" id="columnCenter">
        			{foreach from=$entries['center'] item=$entry}
-    				<div id="center-{$entry->getComponentID()}-{$entry->getContentID()}-{$entry->getRandomID()}" class="ultimateBorder">
+       				{assign var=randomIDCenter value=$entry->getRandomID()}
+    				<div id="center-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDCenter}" class="ultimateBorder">
     					{@$entry->getContent()}
     					<footer>
     						<nav>
     							<ul class="smallButtons">
-    								<li><a class="deleteButton" id="deleteButton-center-{$entry->getComponentID()}-{$entry->getContentID()}-{$entry->getRandomID()}" title="{lang}ultimate.template.configEditor.deleteEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.deleteEntry{/lang}</span></a></li>
+    								<li><a class="deleteButton" id="deleteButton-center-{$randomIDCenter}-{$entry->getContentID()}-{$entry->getRandomID()}" title="{lang}ultimate.template.configEditor.deleteEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.deleteEntry{/lang}</span></a></li>
     							</ul>
     						</nav>
     					</footer>

@@ -276,14 +276,15 @@ class ConfigEditorForm extends AbstractSecureForm {
         
         if ($this->form == 'addEntry' && $this->viaAjax) {
             $entry = new ConfigEntry($this->componentID, $this->contentID);
+            $randomID = $entry->getRandomID();
             $echoContent = '<div id="'.$this->column.'-'.$this->componentID.'-'.$this->contentID.
-            '-'.$entry->getRandomID().'" class="ultimateBorder">'.
+            '-'.$randomID.'" class="ultimateBorder">'.
                 $entry->getContent().
             '<footer>
             	<nav>
             		<ul class="smallButtons">
     					<li><a class="deleteButton" id="deleteButton-center-'.
-                    $this->componentID.'-'.$this->contentID.'-'.$entry->getRandomID().
+                    $this->componentID.'-'.$this->contentID.'-'.$randomID.
                     '" title="'.
                     UltimateCore::getLanguage()->get('ultimate.template.configEditor.deleteEntry').
                     '"><img src="'.RELATIVE_WCF_DIR.'icon/delete1.svg" alt="" /> <span>'.
