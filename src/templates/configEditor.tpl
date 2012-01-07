@@ -12,12 +12,7 @@
     var indexCenter = 0;
     var indexRight = 0;
     
-    /* initializing entries object */
-    var entries = new Object();
-    entries['left'] = new Array();
-    entries['center'] = new Array();
-    entries['right'] = new Array();
-        	
+    
     /* initial */
     $(document).ready(function() {
     	/* initializing index values */
@@ -107,6 +102,12 @@
     
     /* reads all sortable elements */
     function readEntries() {
+    	/* initializing entries object */
+    	var entries = new Object();
+    	entries['left'] = new Array();
+    	entries['center'] = new Array();
+    	entries['right'] = new Array();
+        	
     	/* collecting data */
     	$.each($('#columnLeft').sortable('toArray'), function(index, value) {
     		entries['left'][index] = value;
