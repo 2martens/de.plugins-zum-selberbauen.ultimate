@@ -50,6 +50,11 @@ class LinkEditor extends DatabaseObjectEditor implements IEditableCachedObject {
      */
     public static function resetCache() {
         $cache = 'ultimate-links-'.PACKAGE_ID;
-        CacheHandler::getInstance()->clearResource($cache);
+        try {
+            CacheHandler::getInstance()->clearResource($cache);
+        }
+        catch (SystemException $e) {
+            //does nothing, because cache resource doesn't exist
+        }
     }
 }
