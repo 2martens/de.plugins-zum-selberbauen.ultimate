@@ -64,7 +64,7 @@
                                 <img src="{@RELATIVE_WCF_DIR}icon/edit1D.svg" alt="" title="{lang}wcf.acp.ultimate.content.edit{/lang}" />
                             {/if}
                             {if $__wcf->session->getPermission('admin.content.ultimate.canDeleteContent')}
-                                <a onclick="return confirm('{lang}wcf.acp.ultimate.content.delete.sure{/lang}')" href="{link controller='UltimateContentDelete' id=$content->contentID}url={@$encodedURL}{/link}"><img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" title="{lang}wcf.acp.ultimate.content.delete{/lang}" class="balloonTooltip" /></a>
+                                <a onclick="return confirm('{lang}wcf.acp.ultimate.content.delete.sure{/lang}')" href="{link controller='UltimateContentDelete' id=$content->contentID}url={@$encodedURL}&t={@SECURITY_TOKEN}{/link}"><img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" title="{lang}wcf.acp.ultimate.content.delete{/lang}" class="balloonTooltip" /></a>
                             {else}
                                 <img src="{@RELATIVE_WCF_DIR}icon/delete1D.svg" alt="" title="{lang}wcf.acp.ultimate.content.delete{/lang}" />
                             {/if}
