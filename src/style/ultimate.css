@@ -33,6 +33,58 @@ Copyright 2011 by Jim Martens.
     border: 0px;
 }
 
+/** invisible borders **/
+.ultimateBorder {
+    border: 0px;
+    border-radius: 5px;
+    margin-top: 15px;
+    
+    -webkit-box-shadow: 0 10px 10px -10px rgba(0, 0, 0, .1);
+    -moz-box-shadow: 0 10px 10px -10px rgba(0, 0, 0, .1);
+    -ms-box-shadow: 0 10px 10px -10px rgba(0, 0, 0, .1);
+}
+
+.ultimateBorder .ultimateVisible {
+    border: 1px solid #ccc;   
+}
+
+.ultimateBorder footer {
+    position: relative;
+    right: -15px;
+    bottom: -15px;
+}
+
+.ultimateBorder footer nav {
+    text-align: right;
+ }
+ 
+ @media screen and (min-width: 480px), screen and (min-device-width: 480px) {
+    
+    .ultimateBorder footer nav {
+        opacity: 0;
+        
+        -webkit-transition: opacity .1s linear;
+        -moz-transition: opacity .1s linear;
+        -ms-transition: opacity .1s linear;
+        -o-transition: opacity .1s linear;
+        transition: opacity .1s linear;
+    }
+    
+    .ultimateBorder footer nav {
+        opacity: 1;
+    }
+    
+}
+
+@media screen and (max-width: 480px), screen and (max-device-width: 480px) {
+    
+    .ultimateBorder footer nav
+    .ultimateBorder:hover footer nav {
+        opacity: 1;
+    }
+    
+}
+
 /** sortables **/
 
 .sortableParent {
