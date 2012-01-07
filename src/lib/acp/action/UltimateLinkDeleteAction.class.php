@@ -1,9 +1,8 @@
 <?php
 namespace ultimate\acp\action;
-use wcf\util\HeaderUtil;
-
 use ultimate\data\link\LinkAction;
 use wcf\action\AbstractSecureAction;
+use wcf\util\HeaderUtil;
 
 /**
  * Deleted the specified link.
