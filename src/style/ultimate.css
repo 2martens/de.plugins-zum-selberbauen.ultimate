@@ -35,14 +35,10 @@ fieldset.ultimateInvisible {
 
 /** invisible borders **/
 .ultimateBorder {
-    border: 0px;
-    border-radius: 5px;
-    margin-top: 15px;
+    margin-top: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
     position: relative;
-}
-
-.ultimateBorder:hover {
-    border: 1px solid #ccc;
 }
 
 .ultimateBorder footer {
