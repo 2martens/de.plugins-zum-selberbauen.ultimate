@@ -178,7 +178,7 @@
         		<legend>{lang}ultimate.template.configEditor.columnLeft{/lang}</legend>
     			<div class="sortable" id="columnLeft">
         		{foreach from=$entries['left'] item=$entry}
-    				<div id="left-{$entry->getComponentID()}-{$entry->getContentID()}">{$entry->getContent()}</div>
+    				<div id="left-{$entry->getComponentID()}-{$entry->getContentID()}">{@$entry->getContent()}</div>
     			{/foreach}
     			</div>
     		</fieldset>
@@ -191,7 +191,7 @@
         		<legend>{lang}ultimate.template.configEditor.columnRight{/lang}</legend>
         		<div class="sortable" id="columnRight">
         		{foreach from=$entries['right'] item=$entry}
-    				<div id="right-{$entry->getComponentID()}-{$entry->getContentID()}">{$entry->getContent()}</div>
+    				<div id="right-{$entry->getComponentID()}-{$entry->getContentID()}">{@$entry->getContent()}</div>
     			{/foreach}
         		</div>
         	</fieldset>
@@ -204,7 +204,7 @@
         		<legend>{lang}ultimate.template.configEditor.columnCenter{/lang}</legend>
     			<div class="sortable" id="columnCenter">
        			{foreach from=$entries['center'] item=$entry}
-    				<div id="center-{$entry->getComponentID()}-{$entry->getContentID()}">{$entry->getContent()}</div>
+    				<div id="center-{$entry->getComponentID()}-{$entry->getContentID()}">{@$entry->getContent()}</div>
     			{/foreach}
     			</div>
     		</fieldset>
