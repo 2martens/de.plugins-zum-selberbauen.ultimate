@@ -50,12 +50,9 @@
     	/* initialize click event for all small buttons */
     	$('.deleteButton').live('click', function(event) {
     		event.preventDefault();
-    		var elementID $(this).attr('id');
-    		var parentID = '#' + elementID.substring(13);
-    		var col = parentID.substring(1, parentID.indexOf('-'));
-    		if (col == 'left') $('#columnLeft').remove(parentID);
-    		if (col == 'center') $('#columnCenter').remove(parentID);
-    		if (col == 'center') $('#columnRight').remove(parentID);
+    		var elementID = $(this).attr('id');
+    		var parentID = elementID.substring(13);
+    		document.getElementById('parentID').removeChild(elementID);
     	});
     	
     	/* initialize button click event */
