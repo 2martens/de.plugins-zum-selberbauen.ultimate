@@ -1,8 +1,10 @@
 <header class="subHeading">
     <hgroup>
         <h2>{@$contentTitle}</h2>
-        <p>{@$contentDescription}</p>
     </hgroup>
+    <div>
+        <p>{@$contentDescription}</p>
+    </div>
 </header>
 <div class="border content">
     <p>{@$contentText}</p>
