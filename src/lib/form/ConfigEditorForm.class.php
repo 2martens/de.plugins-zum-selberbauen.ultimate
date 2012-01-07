@@ -166,17 +166,6 @@ class ConfigEditorForm extends AbstractSecureForm {
      * @see \wcf\page\IPage::readData()
      */
     public function readData() {
-        if (!count($_POST)) {
-            if ($this->action == 'edit') {
-                $this->configStorage = new ConfigStorage();
-                $config = new Config($this->configID);
-                $this->configTitle = $config->configTitle;
-                $this->metaDescription = $config->metaDescription;
-                $this->metaKeywords = $config->metaKeywords;
-                $this->configStorage = unserialize($config->storage);
-                $this->entries = $this->configStorage->getEntries();
-            }
-        }
         
         //reading components
         $componentList = new ComponentList();
@@ -189,6 +178,19 @@ class ConfigEditorForm extends AbstractSecureForm {
         $this->contents = $contentList->getObjects();
         
         parent::readData();
+        
+        if (!count($_POST)) {
+            if ($this->action == 'edit') {
+                $this->configStorage = new ConfigStorage();
+                $config = new Config($this->configID);
+                $this->configTitle = $config->configTitle;
+                $this->metaDescription = $config->metaDescription;
+                $this->metaKeywords = $config->metaKeywords;
+                $this->configStorage = unserialize($config->storage);
+                $this->entries = $this->configStorage->getEntries();
+            }
+        }
+        
     }
     
     /**
