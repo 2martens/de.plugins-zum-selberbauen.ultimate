@@ -204,12 +204,12 @@
 
 	<div id="columnsParent">
     	<div class="ultimateLeft">
-        	<fieldset class="sortableParent">
+        	<fieldset class="sortableParent ultimateInvisible">
         		<legend>{lang}ultimate.template.configEditor.columnLeft{/lang}</legend>
-    			<div class="sortable" id="columnLeft">
+    			<div class="sortable" id="columnLeft border">
         		{foreach from=$entries['left'] item=$entry}
     				{assign var=randomIDLeft value=$entry->getRandomID()}
-    				<div id="left-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDLeft}" class="ultimateBorder">
+    				<fieldset id="left-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDLeft}" class="ultimateBorder">
     					<div>{@$entry->getContent()}</div>
     					<footer>
     						<nav>
@@ -218,7 +218,7 @@
     							</ul>
     						</nav>
     					</footer>
-    				</div>
+    				</fieldset>
     			{/foreach}
     			</div>
     		</fieldset>
@@ -231,12 +231,12 @@
     		</footer>
     	</div>
     	<div class="ultimateRight">
-    		<fieldset class="sortableParent">
+    		<fieldset class="sortableParent ultimateInvisible">
         		<legend>{lang}ultimate.template.configEditor.columnRight{/lang}</legend>
-        		<div class="sortable" id="columnRight">
+        		<div class="sortable" id="columnRight border">
         		{foreach from=$entries['right'] item=$entry}
     				{assign var=randomIDRight value=$entry->getRandomID()}
-    				<div id="right-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDRight}" class="ultimateBorder">
+    				<fieldset id="right-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDRight}" class="ultimateBorder">
     					<div>{@$entry->getContent()}</div>
     					<footer>
     						<nav>
@@ -245,7 +245,7 @@
     							</ul>
     						</nav>
     					</footer>
-    				</div>
+    				</fieldset>
     			{/foreach}
         		</div>
         	</fieldset>
@@ -258,12 +258,12 @@
     		</footer>
     	</div>
     	<div class="ultimateCenter leftMargin rightMargin">
-       		<fieldset class="sortableParent">
+       		<fieldset class="sortableParent ultimateInvisible">
         		<legend>{lang}ultimate.template.configEditor.columnCenter{/lang}</legend>
-    			<div class="sortable" id="columnCenter">
+    			<div class="sortable" id="columnCenter border">
        			{foreach from=$entries['center'] item=$entry}
        				{assign var=randomIDCenter value=$entry->getRandomID()}
-    				<div id="center-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDCenter}" class="ultimateBorder">
+    				<fieldset id="center-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDCenter}" class="ultimateBorder">
     					<div>{@$entry->getContent()}</div>
     					<footer>
     						<nav>
@@ -272,7 +272,7 @@
     							</ul>
     						</nav>
     					</footer>
-    				</div>
+    				</fieldset>
     			{/foreach}
     			</div>
     		</fieldset>

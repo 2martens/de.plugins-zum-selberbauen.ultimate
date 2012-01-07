@@ -29,7 +29,7 @@ Copyright 2011 by Jim Martens.
     margin-right: 25em;
 }
 
-.ultimateCenter > fieldset.ultimateInvisible {
+fieldset.ultimateInvisible {
     border: 0px;
 }
 
@@ -38,7 +38,7 @@ Copyright 2011 by Jim Martens.
     border: 0px;
     border-radius: 5px;
     margin-top: 15px;
-    position: relative;
+    position: absolute;
     
     -webkit-box-shadow: 0 10px 10px -10px rgba(0, 0, 0, .1);
     -moz-box-shadow: 0 10px 10px -10px rgba(0, 0, 0, .1);
