@@ -1,9 +1,9 @@
-<div class="mainHeadline" id="content-id-{@$contentID}">
-    <div class="headlineContainer">
+<header class="subHeading">
+    <hgroup>
         <h2>{@$contentTitle}</h2>
         <p>{@$contentDescription}</p>
-    </div>
-</div>
+    </hgroup>
+</header>
 <div class="border content">
     <p>{@$contentText}</p>
 </div>
