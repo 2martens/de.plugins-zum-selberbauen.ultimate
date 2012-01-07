@@ -34,7 +34,8 @@ fieldset.ultimateInvisible {
 }
 
 /** invisible borders **/
-.ultimateBorder {
+.ultimateBorder .ultimateVisible {
+    border: 1px solid #ccc;   
     border: #fff;
     border-radius: 5px;
     margin-top: 15px;
@@ -43,10 +44,6 @@ fieldset.ultimateInvisible {
     -webkit-box-shadow: 0 10px 10px -10px rgba(0, 0, 0, .1);
     -moz-box-shadow: 0 10px 10px -10px rgba(0, 0, 0, .1);
     -ms-box-shadow: 0 10px 10px -10px rgba(0, 0, 0, .1);
-}
-
-.ultimateBorder .ultimateVisible {
-    border: 1px solid #ccc;   
 }
 
 .ultimateBorder footer {

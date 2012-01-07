@@ -34,12 +34,12 @@
     	
     	/* add DOMNodeInserted event to sortables */
     	$('.sortable').bind('DOMNodeInserted', function(event) {
-    		readEntries();
+    		setTimeout('readEntries()', 100);
     	});
     	
     	/* add DOMNodeRemoved event to sortables */
     	$('.sortable').bind('DOMNodeRemoved', function(event) {
-    		readEntries();
+    		setTimeout('readEntries()', 100);
     	});
     	
     	/* add mouseenter event to sortable elements */
