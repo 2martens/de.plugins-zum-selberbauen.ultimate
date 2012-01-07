@@ -37,16 +37,7 @@
     		setTimeout('readEntries()', 100);
     	});
     	
-    	/* add mouseenter event to sortable elements */
-    	$('.ultimateBorder').live('mouseenter', function(event) {
-    		$('.ultimateBorder').addClass('ultimateVisible');
-    	});
-    	
-    	/* add mouseleave event to sortable elements */
-    	$('.ultimateBorder').live('mouseleave', function(event) {
-    		$('.ultimateBorder').removeClass('ultimateVisible');
-    	});
-    	
+    	   	
     	/* initialize click event for all small buttons */
     	$('.deleteButton').live('click', function(event) {
     		event.preventDefault();

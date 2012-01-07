@@ -34,16 +34,15 @@ fieldset.ultimateInvisible {
 }
 
 /** invisible borders **/
-.ultimateBorder .ultimateVisible {
-    border: 1px solid #ccc;   
-    border: #fff;
+.ultimateBorder {
+    border: 0px;
     border-radius: 5px;
     margin-top: 15px;
     position: relative;
-    
-    -webkit-box-shadow: 0 10px 10px -10px rgba(0, 0, 0, .1);
-    -moz-box-shadow: 0 10px 10px -10px rgba(0, 0, 0, .1);
-    -ms-box-shadow: 0 10px 10px -10px rgba(0, 0, 0, .1);
+}
+
+.ultimateBorder:hover {
+    border: 1px solid #ccc;
 }
 
 .ultimateBorder footer {
