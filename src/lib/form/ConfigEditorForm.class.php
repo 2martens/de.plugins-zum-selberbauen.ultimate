@@ -278,9 +278,9 @@ class ConfigEditorForm extends AbstractSecureForm {
             $entry = new ConfigEntry($this->componentID, $this->contentID);
             $randomID = $entry->getRandomID();
             $echoContent = '<div id="'.$this->column.'-'.$this->componentID.'-'.$this->contentID.
-            '-'.$randomID.'" class="ultimateBorder">'.
+            '-'.$randomID.'" class="ultimateBorder"><div>'.
                 $entry->getContent().
-            '<footer>
+            '</div><footer>
             	<nav>
             		<ul class="smallButtons">
     					<li><a class="deleteButton" id="deleteButton-center-'.
