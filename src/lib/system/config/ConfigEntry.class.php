@@ -1,5 +1,7 @@
 <?php
 namespace ultimate\system\config;
+use wcf\util\StringUtil;
+
 use ultimate\data\component\Component;
 
 /**
@@ -96,6 +98,15 @@ class ConfigEntry implements \Serializable {
      */
     public function getContentID() {
         return $this->contentID;
+    }
+    
+    /**
+     * Returns a random id of this entry.
+     */
+    public function getRandomID() {
+        $salt = StringUtil::getRandomID();
+        $value = $this->componentID.$this->contentID;
+        return StringUtil::getDoubleSaltedHash($value, $salt);
     }
     
     /**
