@@ -210,7 +210,7 @@
     					<footer>
     						<nav>
     							<ul class="smallButtons">
-    								<li><a class="deleteButton" id="deleteButton-left-{$entry->getComponentID()}-{$entry->getContentID()}-{$entry->getRandomID()}" title="{lang}ultimate.template.configEditor.deleteEntry{/lang}<img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.deleteEntry{/lang}</span></a></li>
+    								<li><a class="deleteButton" id="deleteButton-left-{$entry->getComponentID()}-{$entry->getContentID()}-{$entry->getRandomID()}" title="{lang}ultimate.template.configEditor.deleteEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.deleteEntry{/lang}</span></a></li>
     							</ul>
     						</nav>
     					</footer>
@@ -236,7 +236,7 @@
     					<footer>
     						<nav>
     							<ul class="smallButtons">
-    								<li><a class="deleteButton" id="deleteButton-right-{$entry->getComponentID()}-{$entry->getContentID()}-{$entry->getRandomID()}" title="{lang}ultimate.template.configEditor.deleteEntry{/lang}<img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.deleteEntry{/lang}</span></a></li>
+    								<li><a class="deleteButton" id="deleteButton-right-{$entry->getComponentID()}-{$entry->getContentID()}-{$entry->getRandomID()}" title="{lang}ultimate.template.configEditor.deleteEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.deleteEntry{/lang}</span></a></li>
     							</ul>
     						</nav>
     					</footer>
@@ -262,7 +262,7 @@
     					<footer>
     						<nav>
     							<ul class="smallButtons">
-    								<li><a class="deleteButton" id="deleteButton-center-{$entry->getComponentID()}-{$entry->getContentID()}-{$entry->getRandomID()}" title="{lang}ultimate.template.configEditor.deleteEntry{/lang}<img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.deleteEntry{/lang}</span></a></li>
+    								<li><a class="deleteButton" id="deleteButton-center-{$entry->getComponentID()}-{$entry->getContentID()}-{$entry->getRandomID()}" title="{lang}ultimate.template.configEditor.deleteEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.deleteEntry{/lang}</span></a></li>
     							</ul>
     						</nav>
     					</footer>
