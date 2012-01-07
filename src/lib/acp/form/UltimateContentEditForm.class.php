@@ -71,7 +71,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
             $content = new Content($this->contentID);
             $this->title = $content->contentTitle;
             $this->description = $content->contentDescription;
-            $this->text = $content->cotentText;
+            $this->text = $content->contentText;
         }
         parent::readData();
     }
