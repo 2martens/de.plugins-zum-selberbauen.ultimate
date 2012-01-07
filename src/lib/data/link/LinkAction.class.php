@@ -34,15 +34,4 @@ class LinkAction extends AbstractDatabaseObjectAction {
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
 	 */
 	protected $permissionsUpdate = array('admin.content.ultimate.canEditLink');
-	
-	/**
-	 * Clears the cache.
-	 *
-	 * @see \wcf\data\AbstractDatabaseObjectAction::executeAction()
-	 */
-	public function executeAction() {
-	    parent::executeAction();
-	    $cache = 'ultimate-links-'.PACKAGE_ID;
-	    CacheHandler::getInstance()->clearResource($cache);
-	}
 }
