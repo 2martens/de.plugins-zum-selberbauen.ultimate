@@ -52,7 +52,10 @@
     		event.preventDefault();
     		var elementID $(this).attr('id');
     		var parentID = '#' + elementID.substring(13);
-    		$(parentID).remove();
+    		var col = parentID.substring(1, parentID.indexOf('-'));
+    		if (col == 'left') $('#columnLeft').remove(parentID);
+    		if (col == 'center') $('#columnCenter').remove(parentID);
+    		if (col == 'center') $('#columnRight').remove(parentID);
     	});
     	
     	/* initialize button click event */
