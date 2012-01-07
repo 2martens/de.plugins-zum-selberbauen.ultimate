@@ -29,6 +29,10 @@ Copyright 2011 by Jim Martens.
     margin-right: 25em;
 }
 
+.ultimateCenter > fieldset.ultimateInvisible {
+    border: 0px;
+}
+
 /** sortables **/
 
 .sortableParent {
