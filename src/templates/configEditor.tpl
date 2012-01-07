@@ -35,16 +35,19 @@
     	/* add DOMNodeInserted event to sortables */
     	$('.sortable').bind('DOMNodeInserted', function(event) {
     		readEntries();
+    		return false;
     	});
     	
     	/* add mouseenter event to sortable elements */
     	$('.ultimateBorder').mouseenter(function(event) {
     		$('.ultimateBorder').addClass('ultimateVisible');
+    		return false;
     	});
     	
     	/* add mouseleave event to sortable elements */
     	$('.ultimateBorder').mouseleave(function(event) {
     		$('.ultimateBorder').removeClass('ultimateVisible');
+    		return false;
     	});
     	
     	/* initialize click event for all small buttons */
