@@ -17,6 +17,26 @@
     	$('.sortable').sortable();
     	$('.sortable').disableSelection();
     	
+    	/* add DOMNodeInserted event to sortables */
+    	$('.sortable').bind('DOMNodeInserted', function(event) {
+    		/* collecting data */
+    		$.each($('#columnLeft').sortable('toArray'), function(index, value) {
+    			entries['left'][index] = value;
+    		});
+    		$.each($('#columnCenter').sortable('toArray'), function(index, value) {
+    			entries['center'][index] = value;
+    		});
+    		$.each($('#columnRight').sortable('toArray'), function(index, value) {
+    			entries['right'][index] = value;
+    		});
+
+    		/* adding entries to form */
+    		var encodedEntriesObject = ULTIMATE.JSON.encode(entries);
+    		    		
+    		//var input = '<input type="hidden" name="entries" value="' + encodedEntriesObject + '" />';
+    		//$form.find('.formSubmit').append(input);
+    		document.getElementById('entriesInput').value = encodeURI(encodedEntriesObject);
+    	});
     	/* initialize button click event */
     	$('#addButtonLeft, #addButtonCenter, #addButtonRight').click(function() {
     		var elementID = $(this).attr('id');
@@ -64,24 +84,6 @@
     				ajax: '1'
     			}
     		);
-    		
-    		/* collecting data */
-    		$.each($('#columnLeft').sortable('toArray'), function(index, value) {
-    			entries['left'][index] = value;
-    		});
-    		$.each($('#columnCenter').sortable('toArray'), function(index, value) {
-    			entries['center'][index] = value;
-    		});
-    		$.each($('#columnRight').sortable('toArray'), function(index, value) {
-    			entries['right'][index] = value;
-    		});
-
-    		/* adding entries to form */
-    		var encodedEntriesObject = ULTIMATE.JSON.encode(entries);
-    		    		
-    		//var input = '<input type="hidden" name="entries" value="' + encodedEntriesObject + '" />';
-    		//$form.find('.formSubmit').append(input);
-    		document.getElementById('entriesInput').value = encodeURI(encodedEntriesObject);
     		return false;
     	});
     });
