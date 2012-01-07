@@ -53,9 +53,10 @@
     		var elementID = $(this).attr('id');
     		var parentID = elementID.substring(13);
     		var col = parentID.substring(0, parentID.indexOf('-'));
-    		if (col == 'left') document.getElementById('columnLeft').removeChild(parentID);
-    		if (col == 'center') document.getElementById('columnCenter').removeChild(parentID);
-    		if (col == 'right') document.getElementById('columnRight').removeChild(parentID);
+    		var parent = document.getElementById(parentID);
+    		if (col == 'left') document.getElementById('columnLeft').removeChild(parent);
+    		if (col == 'center') document.getElementById('columnCenter').removeChild(parent);
+    		if (col == 'right') document.getElementById('columnRight').removeChild(parent);
     	});
     	
     	/* initialize button click event */
