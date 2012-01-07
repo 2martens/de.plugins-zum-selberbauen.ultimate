@@ -19,7 +19,8 @@ Copyright 2011 by Jim Martens.
 }
 
 .ultimateCenter {
-    margin: 0;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 .ultimateCenter .leftMargin {
     margin-left: 25em;
