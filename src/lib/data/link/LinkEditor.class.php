@@ -2,6 +2,7 @@
 namespace ultimate\data\link;
 use wcf\data\IEditableCachedObject;
 use wcf\data\DatabaseObjectEditor;
+use wcf\system\cache\CacheHandler;
 
 /**
  * Provides functions to edit links.
