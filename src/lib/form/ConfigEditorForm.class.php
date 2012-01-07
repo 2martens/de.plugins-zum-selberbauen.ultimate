@@ -287,10 +287,14 @@ class ConfigEditorForm extends AbstractSecureForm {
         if (count($this->readEntries['center'])) $centerColumn = true;
         if (count($this->readEntries['right'])) $rightColumn = true;
         
-        //create template for this config
-        $salt = StringUtil::getRandomID();
-        $templateName = substr(StringUtil::getDoubleSaltedHash($this->configTitle, $salt), 0, 10);
-        
+        $templateName = '';
+        if ($this->action == 'add') {
+            $salt = StringUtil::getRandomID();
+            $templateName = substr(StringUtil::getDoubleSaltedHash($this->configTitle, $salt), 0, 10);
+        } elseif ($this->action == 'edit') {
+            $config = new Config($this->configID);
+            $templateName = $config->templateName;
+        }
         $this->writeTemplate($templateName, array(
             'leftColumn' => $leftColumn,
             'centerColumn' => $centerColumn,
