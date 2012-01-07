@@ -276,8 +276,19 @@ class ConfigEditorForm extends AbstractSecureForm {
         
         if ($this->form == 'addEntry' && $this->viaAjax) {
             $entry = new ConfigEntry($this->componentID, $this->contentID);
-            $echoContent = '<div id="'.$this->column.'-'.$this->componentID.'-'.$this->contentID.'">'.
-                $entry->getContent().'</div>';
+            $echoContent = '<div id="'.$this->column.'-'.$this->componentID.'-'.$this->contentID.
+            '-'.$entry->getRandomID().'" class="ultimateBorder">'.
+                $entry->getContent().
+            '<footer>
+            	<nav>
+            		<ul class="smallButtons">
+    					<li><a class="deleteButton" id="deleteButton-center-'.
+                    $this->componentID.'-'.$this->contentID.'-'.$entry->getRandomID().
+                    '" title="{lang}ultimate.template.configEditor.deleteEntry{/lang}<img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.deleteEntry{/lang}</span></a></li>
+    				</ul>
+    			</nav>
+    		</footer>
+    		</div>';
             echo $echoContent;
             exit;
         }
