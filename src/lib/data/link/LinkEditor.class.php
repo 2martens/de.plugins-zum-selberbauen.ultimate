@@ -24,6 +24,6 @@ class LinkEditor extends DatabaseObjectEditor implements IEditableCachedObject {
      * @see \wcf\data\IEditableCachedObject::resetCache()
      */
     public static function resetCache() {
-        CacheHandler::getInstance()->clearResource(ULTIMATE_DIR.'cache/', 'ultimate-links-*');
+        CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'ultimate-links-*');
     }
 }
