@@ -52,7 +52,10 @@
     		event.preventDefault();
     		var elementID = $(this).attr('id');
     		var parentID = elementID.substring(13);
-    		document.getElementById('parentID').removeChild(elementID);
+    		var col = parentID.substring(0, parentID.indexOf('-'));
+    		if (col == 'left') document.getElementById('columnLeft').removeChild(parentID);
+    		if (col == 'center') document.getElementById('columnCenter').removeChild(parentID);
+    		if (col == 'right') document.getElementById('columnRight').removeChild(parentID);
     	});
     	
     	/* initialize button click event */

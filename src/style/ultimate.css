@@ -35,10 +35,10 @@ fieldset.ultimateInvisible {
 
 /** invisible borders **/
 .ultimateBorder {
-    border: 0px;
+    border: #fff;
     border-radius: 5px;
     margin-top: 15px;
-    position: absolute;
+    position: relative;
     
     -webkit-box-shadow: 0 10px 10px -10px rgba(0, 0, 0, .1);
     -moz-box-shadow: 0 10px 10px -10px rgba(0, 0, 0, .1);
@@ -71,7 +71,7 @@ fieldset.ultimateInvisible {
         transition: opacity .1s linear;
     }
     
-    .ultimateBorder footer nav {
+    .ultimateBorder:hover footer nav {
         opacity: 1;
     }
     
