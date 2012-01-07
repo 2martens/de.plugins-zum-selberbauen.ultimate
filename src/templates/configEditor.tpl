@@ -39,19 +39,19 @@
     	});
     	
     	/* add mouseenter event to sortable elements */
-    	$('.ultimateBorder').mouseenter(function(event) {
+    	$('.ultimateBorder').live('mouseenter', function(event) {
     		$('.ultimateBorder').addClass('ultimateVisible');
     		return false;
     	});
     	
     	/* add mouseleave event to sortable elements */
-    	$('.ultimateBorder').mouseleave(function(event) {
+    	$('.ultimateBorder').live('mouseleave', function(event) {
     		$('.ultimateBorder').removeClass('ultimateVisible');
     		return false;
     	});
     	
     	/* initialize click event for all small buttons */
-    	$('.deleteButton').click(function() {
+    	$('.deleteButton').live('click', function() {
     		var elementID $(this).attr('id');
     		var parentID = '#' + elementID.substring(13);
     		$(parentID).remove();
