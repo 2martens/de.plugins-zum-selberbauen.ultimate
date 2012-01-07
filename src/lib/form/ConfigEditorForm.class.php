@@ -286,7 +286,7 @@ class ConfigEditorForm extends AbstractSecureForm {
                     $this->componentID.'-'.$this->contentID.'-'.$entry->getRandomID().
                     '" title="'.
                     UltimateCore::getLanguage()->get('ultimate.template.configEditor.deleteEntry').
-                    '"><img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>'.
+                    '"><img src="'.RELATIVE_WCF_DIR.'icon/delete1.svg" alt="" /> <span>'.
                     UltimateCore::getLanguage()->get('ultimate.template.configEditor.deleteEntry').
                     '</span></a></li>
     				</ul>
