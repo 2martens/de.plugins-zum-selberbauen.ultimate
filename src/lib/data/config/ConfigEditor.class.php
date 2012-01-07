@@ -1,8 +1,8 @@
 <?php
 namespace ultimate\data\config;
-use wcf\system\cache\CacheHandler;
-use wcf\data\IEditableCachedObject;
 use wcf\data\DatabaseObjectEditor;
+use wcf\data\IEditableCachedObject;
+use wcf\system\cache\CacheHandler;
 
 /**
  * Provides functions to edit configs.
@@ -19,14 +19,6 @@ class ConfigEditor extends DatabaseObjectEditor implements IEditableCachedObject
      * @see \wcf\data\DatabaseObjectDecorator::$baseClass
      */
     protected static $baseClass = '\ultimate\data\config\Config';
-
-    /**
-     * @see \wcf\data\IEditableObject::update()
-     */
-    public function update(array $parameters = array()) {
-        parent::update($parameters);
-        self::resetCache();
-    }
     
     /**
      * @see \wcf\data\DatabaseObjectEditor::delete()
@@ -35,35 +27,11 @@ class ConfigEditor extends DatabaseObjectEditor implements IEditableCachedObject
         @unlink(ULTIMATE_DIR.'templates/'.$this->__get('templateName').'.tpl');
         parent::delete();
     }
-    
-    /**
-     * @see \wcf\data\IEditableObject::create()
-     */
-    public static function create(array $parameters = array()) {
-        $result = parent::create($parameters);
-        self::resetCache();
-        return $result;
-    }
-    
-    /**
-     * @see \wcf\data\IEditableObject::deleteAll()
-     */
-    public static function deleteAll(array $objectIDs = array()) {
-        $result = parent::deleteAll($objectIDs);
-        self::resetCache();
-        return $result;
-    }
-    
+        
     /**
      * @see \wcf\data\IEditableCachedObject::resetCache()
      */
     public static function resetCache() {
-        $cache = 'ultimate-links-'.PACKAGE_ID;
-        try {
-            CacheHandler::getInstance()->clearResource($cache);
-        }
-        catch (SystemException $e) {
-            //does nothing, because cache resource doesn't exist
-        }
+        CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'ultimate-links-*');
     }
 }
