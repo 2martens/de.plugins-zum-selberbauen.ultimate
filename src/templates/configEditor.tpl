@@ -37,6 +37,11 @@
     		readEntries();
     	});
     	
+    	/* add DOMNodeRemoved event to sortables */
+    	$('.sortable').bind('DOMNodeRemoved', function(event) {
+    		readEntries();
+    	});
+    	
     	/* add mouseenter event to sortable elements */
     	$('.ultimateBorder').live('mouseenter', function(event) {
     		$('.ultimateBorder').addClass('ultimateVisible');
