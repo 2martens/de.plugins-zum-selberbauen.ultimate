@@ -77,7 +77,7 @@ class ConfigEntry implements \Serializable {
      * Returns the content of the entry.
      */
     public function getContent() {
-        return $this->output;
+        return nl2br($this->output, true);
     }
     
     /**
