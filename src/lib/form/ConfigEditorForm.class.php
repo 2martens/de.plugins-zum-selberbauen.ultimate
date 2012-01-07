@@ -395,7 +395,8 @@ class ConfigEditorForm extends AbstractSecureForm {
             'metaDescription' => $this->metaDescription,
             'metaKeywords' => $this->metaKeywords,
             'components' => $this->components,
-            'contents' => $this->contents
+            'contents' => $this->contents,
+            'configID' => $this->configID
         ));
     }
 }
