@@ -11,31 +11,30 @@
     var indexLeft = 0;
     var indexCenter = 0;
     var indexRight = 0;
+    
+    /* initializing entries object */
+    var entries = new Object();
+    entries['left'] = new Array();
+    entries['center'] = new Array();
+    entries['right'] = new Array();
+        	
     /* initial */
     $(document).ready(function() {
+    	/* initializing index values */
+    	indexLeft = $('#columnLeft').length;
+    	indexCenter = $('#columnCenter').length;
+    	indexRight = $('#columnCenter').length;
+    	
     	/* initialize sortables */
     	$('.sortable').sortable();
     	$('.sortable').disableSelection();
     	
+    	/* read assigned entries */
+    	readEntries();
+    	
     	/* add DOMNodeInserted event to sortables */
     	$('.sortable').bind('DOMNodeInserted', function(event) {
-    		/* collecting data */
-    		$.each($('#columnLeft').sortable('toArray'), function(index, value) {
-    			entries['left'][index] = value;
-    		});
-    		$.each($('#columnCenter').sortable('toArray'), function(index, value) {
-    			entries['center'][index] = value;
-    		});
-    		$.each($('#columnRight').sortable('toArray'), function(index, value) {
-    			entries['right'][index] = value;
-    		});
-
-    		/* adding entries to form */
-    		var encodedEntriesObject = ULTIMATE.JSON.encode(entries);
-    		    		
-    		//var input = '<input type="hidden" name="entries" value="' + encodedEntriesObject + '" />';
-    		//$form.find('.formSubmit').append(input);
-    		document.getElementById('entriesInput').value = encodeURI(encodedEntriesObject);
+    		readEntries();
     	});
     	/* initialize button click event */
     	$('#addButtonLeft, #addButtonCenter, #addButtonRight').click(function() {
@@ -46,16 +45,6 @@
     		});
     		return false;
     	});
-    	/* initializing index values */
-    	indexLeft = $('#columnLeft').length;
-    	indexCenter = $('#columnCenter').length;
-    	indexRight = $('#columnCenter').length;
-    	
-    	/* initializing entries object */
-    	var entries = new Object();
-    	entries['left'] = new Array();
-    	entries['center'] = new Array();
-    	entries['right'] = new Array();
     		    	
     	/* adding submit handler to popupAddEntry */
     	$('#addEntryForm').live('submit', function(event) {
@@ -87,6 +76,23 @@
     		return false;
     	});
     });
+    
+    /* reads all sortable elements */
+    function readEntries() {
+    	/* collecting data */
+    	$.each($('#columnLeft').sortable('toArray'), function(index, value) {
+    		entries['left'][index] = value;
+    	});
+    	$.each($('#columnCenter').sortable('toArray'), function(index, value) {
+    		entries['center'][index] = value;
+    	});
+    	$.each($('#columnRight').sortable('toArray'), function(index, value) {
+    		entries['right'][index] = value;
+    	});
+   		/* adding entries to form */
+   		var encodedEntriesObject = ULTIMATE.JSON.encode(entries);
+   		document.getElementById('entriesInput').value = encodeURI(encodedEntriesObject);
+    }
     
 	function increaseIndex() {
     	if (column == 'Left') indexLeft++;
