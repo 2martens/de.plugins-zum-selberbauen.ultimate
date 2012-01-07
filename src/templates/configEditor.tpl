@@ -35,37 +35,34 @@
     	/* add DOMNodeInserted event to sortables */
     	$('.sortable').bind('DOMNodeInserted', function(event) {
     		readEntries();
-    		return false;
     	});
     	
     	/* add mouseenter event to sortable elements */
     	$('.ultimateBorder').live('mouseenter', function(event) {
     		$('.ultimateBorder').addClass('ultimateVisible');
-    		return false;
     	});
     	
     	/* add mouseleave event to sortable elements */
     	$('.ultimateBorder').live('mouseleave', function(event) {
     		$('.ultimateBorder').removeClass('ultimateVisible');
-    		return false;
     	});
     	
     	/* initialize click event for all small buttons */
-    	$('.deleteButton').live('click', function() {
+    	$('.deleteButton').live('click', function(event) {
+    		event.preventDefault();
     		var elementID $(this).attr('id');
     		var parentID = '#' + elementID.substring(13);
     		$(parentID).remove();
-    		return false;
     	});
     	
     	/* initialize button click event */
-    	$('#addButtonLeft, #addButtonCenter, #addButtonRight').click(function() {
+    	$('#addButtonLeft, #addButtonCenter, #addButtonRight').click(function(event) {
+    		event.preventDefault();
     		var elementID = $(this).attr('id');
     		column = elementID.substring(9);
     		WCF.showDialog('popupAddEntry', true, {
     			title: '{lang}ultimate.template.addEntry.title{/lang}'
     		});
-    		return false;
     	});
     		    	
     	/* adding submit handler to popupAddEntry */
