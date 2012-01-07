@@ -2,6 +2,7 @@
 namespace ultimate\acp\form;
 use ultimate\data\content\ContentAction;
 use ultimate\system\UltimateCore;
+use ultimate\util\MessageUtil;
 use wcf\acp\form\ACPForm;
 use wcf\system\exception\UserInputException;
 
@@ -65,7 +66,7 @@ class UltimateContentAddForm extends ACPForm {
         parent::readFormParameters();
         if (isset($_POST['title'])) $this->title = trim($_POST['title']);
         if (isset($_POST['description'])) $this->title = trim($_POST['description']);
-        if (isset($_POST['text'])) $this->text = trim($_POST['text']);
+        if (isset($_POST['text'])) $this->text = MessageUtil::stripCrap(trim($_POST['text']));
     }
     
     /**
