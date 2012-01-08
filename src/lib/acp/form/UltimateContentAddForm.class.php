@@ -2,8 +2,8 @@
 namespace ultimate\acp\form;
 use ultimate\data\content\ContentAction;
 use ultimate\system\UltimateCore;
-use ultimate\util\MessageUtil;
-use wcf\acp\form\ACPForm;
+use wcf\form\MessageForm;
+use wcf\form\RecaptchaForm;
 use wcf\system\exception\UserInputException;
 
 /**
@@ -16,7 +16,7 @@ use wcf\system\exception\UserInputException;
  * @subpackage acp.form
  * @category Ultimate CMS
  */
-class UltimateContentAddForm extends ACPForm {
+class UltimateContentAddForm extends MessageForm {
     
     /**
      * @see \wcf\page\AbstractPage::$templateName
@@ -35,24 +35,14 @@ class UltimateContentAddForm extends ACPForm {
         'admin.content.ultimate.canAddContent'
     );
     
-    /**
-     * Contains the title of the content.
-     * @var string
-     */
-    protected $title = '';
-    
+        
     /**
      * Contains the description of the content.
      * @var string
      */
     protected $description = '';
     
-    /**
-     * Contains the text of the content.
-     * @var string
-     */
-    protected $text = '';
-    
+       
     /**
      * Contains the maximal length of the text.
      * @var int | 0 means there's no limitation
@@ -64,17 +54,15 @@ class UltimateContentAddForm extends ACPForm {
      */
     public function readFormParameters() {
         parent::readFormParameters();
-        if (isset($_POST['title'])) $this->title = trim($_POST['title']);
         if (isset($_POST['description'])) $this->title = trim($_POST['description']);
-        if (isset($_POST['text'])) $this->text = MessageUtil::stripCrap(trim($_POST['text']));
     }
     
     /**
      * @see \wcf\form\IForm::validate()
      */
     public function validate() {
-        parent::validate();
-        $this->validateTitle();
+        RecaptchaForm::validate();
+        $this->validateSubject();
         $this->validateDescription();
         $this->validateText();
     }
@@ -83,10 +71,8 @@ class UltimateContentAddForm extends ACPForm {
      * Validates content title.
      * @throws UserInputException
      */
-    protected function validateTitle() {
-        if (empty($this->title)) {
-            throw new UserInputException('title');
-        }
+    protected function validateSubject() {
+        parent::validateSubject();
         if (strlen($this->title) < 4) {
             throw new UserInputException('title', 'tooShort');
         }
@@ -107,21 +93,6 @@ class UltimateContentAddForm extends ACPForm {
     }
     
     /**
-     * Validates content text.
-     * @throws UserInputException
-     */
-    protected function validateText() {
-        if (empty($this->text)) {
-            throw new UserInputException('text');
-        }
-        
-        //check text length
-        if ($this->maxTextLength > 0 && strlen($this->text) > $this->maxTextLength) {
-            throw new UserInputException('text', 'tooLong');
-        }
-    }
-    
-    /**
      * @see \wcf\form\IForm::save()
      */
     public function save() {
@@ -129,7 +100,7 @@ class UltimateContentAddForm extends ACPForm {
         
         $parameters = array(
             'data' => array(
-            	'contentTitle' => $this->title,
+            	'contentTitle' => $this->subject,
                 'contentDescription' => $this->description,
             	'contentText' => $this->text
             )
@@ -142,7 +113,7 @@ class UltimateContentAddForm extends ACPForm {
         UltimateCore::getTPL()->assign('success', true);
         
         //showing empty form
-        $this->title = $this->description = $this->text = '';
+        $this->subject = $this->description = $this->text = '';
     }
     
     /**
@@ -151,9 +122,7 @@ class UltimateContentAddForm extends ACPForm {
     public function assignVariables() {
         parent::assignVariables();
         UltimateCore::getTPL()->assign(array(
-            'title' => $this->title,
             'description' => $this->description,
-            'text' => $this->text,
             'action' => 'add'
         ));
     }

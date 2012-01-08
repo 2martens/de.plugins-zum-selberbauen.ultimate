@@ -35,46 +35,46 @@
 
 <form method="post" action="{if $action == 'add'}{link controller='UltimateContentAdd'}{/link}{else}{link controller='UltimateContentEdit'}{/link}{/if}">
     <div class="border content">
-        <dl{if $errorType.title|isset} class="formError"{/if}>
-            <dt><label for="title">{lang}ultimate.template.content.title{/lang}</label></dt>
+        <dl{if $errorField == 'subject'} class="formError"{/if}>
+            <dt><label for="subject">{lang}ultimate.template.content.subject{/lang}</label></dt>
             <dd>
-                <input type="text" id="title" name="title" value="{$title}" class="medium" />
-                {if $errorType.title|isset}
+                <input type="text" id="subject" name="subject" value="{$subject}" class="medium" />
+                {if $errorField == 'subject'}
                     <small class="innerError">
-                        {if $errorType.title == 'empty'}
+                        {if $errorType == 'empty'}
                             {lang}wcf.global.form.error.empty{/lang}
                         {else}
-                            {lang}ultimate.template.content.title.error.{@$errorType.title}{/lang}
+                            {lang}ultimate.template.content.title.error.{@$errorType}{/lang}
                         {/if}
                     </small>
                 {/if}
             </dd>
         </dl>
-        <dl{if $errorType.description|isset} class="formError"{/if}>
+        <dl{if $errorField == 'description'} class="formError"{/if}>
             <dt><label for="description">{lang}ultimate.template.content.description{/lang}</label></dt>
             <dd>
                 <input type="text" id="description" name="description" value="{$description}" class="medium" />
-                {if $errorType.description|isset}
+                {if $errorField == 'description'}
                     <small class="innerError">
-                        {if $errorType.description == 'empty'}
+                        {if $errorType == 'empty'}
                             {lang}wcf.global.form.error.empty{/lang}
                         {else}
-                            {lang}ultimate.template.content.description.error.{@$errorType.description}{/lang}
+                            {lang}ultimate.template.content.description.error.{@$errorType}{/lang}
                         {/if}
                     </small>
                 {/if}
             </dd>
         </dl>
-        <dl{if $errorType.text|isset} class="formError"{/if}>
+        <dl{if $errorField == 'text'} class="formError"{/if}>
             <dt><label for="text">{lang}ultimate.template.content.text{/lang}</label></dt>
             <dd>
-                <textarea id="text" name="text" class="medium">{@$text}</textarea>
-                {if $errorType.text|isset}
+                <textarea id="text" name="text" rows="15" cols="40" class="medium">{@$text}</textarea>
+                {if $errorField == 'text'}
                     <small class="innerError">
-                        {if $errorType.text == 'empty'}
+                        {if $errorType == 'empty'}
                             {lang}wcf.global.form.error.empty{/lang}
                         {else}
-                            {lang}ultimate.template.content.text.error.{@$errorType.text}{/lang}
+                            {lang}ultimate.template.content.text.error.{@$errorType}{/lang}
                         {/if}
                     </small>
                 {/if}

@@ -4,7 +4,7 @@ use ultimate\acp\form\UltimateContentAddForm;
 use ultimate\data\content\Content;
 use ultimate\data\content\ContentAction;
 use ultimate\system\UltimateCore;
-use wcf\form\AbstractForm;
+use wcf\form\MessageForm;
 
 /**
  * Shows the UltimateContentEdit form.
@@ -40,11 +40,12 @@ class UltimateContentEditForm extends UltimateContentAddForm {
      * @see \wcf\form\IForm::save()
      */
     public function save() {
-        AbstractForm::save();
+        MessageForm::save();
         $parameters = array(
         	'data' => array(
-            	'title' => $this->title,
-            	'text' => $this->text
+            	'contentTitle' => $this->subject,
+                'contentDescription' => $this->description,
+            	'contentText' => $this->text
             )
         );
         
@@ -69,7 +70,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
     public function readData() {
         if (!count($_POST)) {
             $content = new Content($this->contentID);
-            $this->title = $content->contentTitle;
+            $this->subject = $content->contentTitle;
             $this->description = $content->contentDescription;
             $this->text = $content->contentText;
         }
