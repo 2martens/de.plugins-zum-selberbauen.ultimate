@@ -1,16 +1,16 @@
 <div class="ultimateContent">
 {if $leftColumn}
 <div class="ultimateLeft ultimatePage">
+	{foreach from=$entriesLeft item=$entry}
 	{assign var=randomIDLeft value=$entry->getRandomID()}
-    {foreach from=$entriesLeft item=$entry}
     <div class="ultimateEntry" id="left-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDLeft}">{@$entry->getContent()}</div>
     {/foreach}
 </div>
 {/if}
 {if $rightColumn}
 <div class="ultimateRight ultimatePage">
+	{foreach from=$entriesRight item=$entry}
 	{assign var=randomIDRight value=$entry->getRandomID()}
-    {foreach from=$entriesRight item=$entry}
     <div class="ultimateEntry" id="right-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDRight}">{@$entry->getContent()}</div>
     {/foreach}
 </div>
