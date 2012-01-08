@@ -1,3 +1,4 @@
+<div class="ultimateContent">
 {if $leftColumn}
 <div class="ultimateLeft ultimatePage">
     {foreach from=$entriesLeft item=$entry}
@@ -21,3 +22,4 @@
     </fieldset>
 </div>
 {/if}
+</div>
