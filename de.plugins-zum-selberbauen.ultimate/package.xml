@@ -46,6 +46,7 @@
         <instruction type="pageMenu">pagemenu.xml</instruction>
         <instruction type="language">language/*.xml</instruction>
         <instruction type="objectType">objectType.xml</instruction>
+        <instruction type="templateListener">templateListener.xml</instruction>
         
         <!-- others -->        
         <instruction type="script">acp/InstallUltimateCMS.class.php</instruction>

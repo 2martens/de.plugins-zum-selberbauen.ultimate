@@ -1,5 +1,5 @@
 {include file='header'}
-
+{include file='wysiwyg'}
 <script type="text/javascript">
     /* <![CDATA[ */
     $(function() {
