@@ -283,7 +283,7 @@ class ConfigEditorForm extends AbstractSecureForm {
             '</div><footer>
             	<nav>
             		<ul class="smallButtons">
-    					<li><a class="deleteButton" id="deleteButton-'.$this->column.'-'.
+    					<li><a href="#" class="deleteButton" id="deleteButton-'.$this->column.'-'.
                     $this->componentID.'-'.$this->contentID.'-'.$randomID.
                     '" title="'.
                     UltimateCore::getLanguage()->get('ultimate.template.configEditor.deleteEntry').

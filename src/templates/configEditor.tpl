@@ -212,7 +212,7 @@
     					<footer>
     						<nav>
     							<ul class="smallButtons">
-    								<li><a class="deleteButton" id="deleteButton-left-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDLeft}" title="{lang}ultimate.template.configEditor.deleteEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.deleteEntry{/lang}</span></a></li>
+    								<li><a href="#" class="deleteButton" id="deleteButton-left-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDLeft}" title="{lang}ultimate.template.configEditor.deleteEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.deleteEntry{/lang}</span></a></li>
     							</ul>
     						</nav>
     					</footer>
@@ -223,7 +223,7 @@
     		<footer>
     			<nav>
     				<ul class="largeButtons">
-    					<li><a id="addButtonLeft" title="{lang}ultimate.template.configEditor.addEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
+    					<li><a href="#" id="addButtonLeft" title="{lang}ultimate.template.configEditor.addEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
     				</ul>
     			</nav>
     		</footer>
@@ -239,7 +239,7 @@
     					<footer>
     						<nav>
     							<ul class="smallButtons">
-    								<li><a class="deleteButton" id="deleteButton-right-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDRight}" title="{lang}ultimate.template.configEditor.deleteEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.deleteEntry{/lang}</span></a></li>
+    								<li><a href="#" class="deleteButton" id="deleteButton-right-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDRight}" title="{lang}ultimate.template.configEditor.deleteEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.deleteEntry{/lang}</span></a></li>
     							</ul>
     						</nav>
     					</footer>
@@ -250,7 +250,7 @@
     		<footer>
     			<nav>
     				<ul class="largeButtons">
-    					<li><a id="addButtonRight" title="{lang}ultimate.template.configEditor.addEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
+    					<li><a href="#" id="addButtonRight" title="{lang}ultimate.template.configEditor.addEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
     				</ul>
     			</nav>
     		</footer>
@@ -266,7 +266,7 @@
     					<footer>
     						<nav>
     							<ul class="smallButtons">
-    								<li><a class="deleteButton" id="deleteButton-center-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDCenter}" title="{lang}ultimate.template.configEditor.deleteEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.deleteEntry{/lang}</span></a></li>
+    								<li><a href="#" class="deleteButton" id="deleteButton-center-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDCenter}" title="{lang}ultimate.template.configEditor.deleteEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.deleteEntry{/lang}</span></a></li>
     							</ul>
     						</nav>
     					</footer>
@@ -277,7 +277,7 @@
     		<footer>
     			<nav>
     				<ul class="largeButtons">
-    					<li><a id="addButtonCenter" title="{lang}ultimate.template.configEditor.addEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
+    					<li><a href="#" id="addButtonCenter" title="{lang}ultimate.template.configEditor.addEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
     				</ul>
     			</nav>
     		</footer>
