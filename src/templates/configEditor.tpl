@@ -222,7 +222,7 @@
     		</fieldset>
     		<footer>
     			<nav>
-    				<ul class="largeButtons">
+    				<ul class="ultimateLargeButtons">
     					<li><a href="#" id="addButtonLeft" title="{lang}ultimate.template.configEditor.addEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
     				</ul>
     			</nav>
@@ -249,7 +249,7 @@
         	</fieldset>
     		<footer>
     			<nav>
-    				<ul class="largeButtons">
+    				<ul class="ultimateLargeButtons">
     					<li><a href="#" id="addButtonRight" title="{lang}ultimate.template.configEditor.addEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
     				</ul>
     			</nav>
@@ -276,7 +276,7 @@
     		</fieldset>
     		<footer>
     			<nav>
-    				<ul class="largeButtons">
+    				<ul class="ultimateLargeButtons">
     					<li><a href="#" id="addButtonCenter" title="{lang}ultimate.template.configEditor.addEntry{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/add1.svg" alt="" /> <span>{lang}ultimate.template.configEditor.addEntry{/lang}</span></a></li>
     				</ul>
     			</nav>

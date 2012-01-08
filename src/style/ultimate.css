@@ -10,12 +10,14 @@ Copyright 2011 by Jim Martens.
     float: left;
     font-size: 0.9em;
     width: 25em;
+    margin-top: -14px;
 }
 
 .ultimateRight {
     float: right;
     font-size: 0.9em;
     width: 25em;
+    margin-top: -14px;
 }
 
 .ultimateCenter {
@@ -31,6 +33,57 @@ Copyright 2011 by Jim Martens.
 
 fieldset.ultimateInvisible {
     border: 0px;
+}
+
+/** large buttons - own implementation **/
+
+.ultimateLargeButtons {
+    text-align: center;   
+}
+
+.ultimateLargeButtons > li {
+    display: inline;
+}
+
+.ultimateLargeButtons > li > a img {
+    margin: -5px 1px -5px -5px;
+    vertical-align: middle;
+}
+
+@media screen and (min-width: 480px), screen and (min-device-width: 480px) {
+    
+    .ultimateLargeButtons > li > a img {
+        height: 24px;
+        width: 24px;
+    }
+    
+}
+
+@media screen and (max-width: 480px), screen and (max-device-width: 480px) {
+    
+    .ultimateLargeButtons > li {
+        font-size: 125%;
+    }
+    
+    .ultimateLargeButtons > li > a {
+        padding: 10px 15px !important;
+        white-space: nowrap;
+    }
+    
+    .ultimateLargeButtons > li > a img {
+        height: 32px;
+        width: 32px;
+    }
+    
+}
+
+.ultimateLargeButtons > li > a {
+    font-size: 100%;
+    font-weight: bold;
+    border-radius: 30px;
+    margin: 3px 2px;
+    padding: 5px 13px;
+    display: inline-block;
 }
 
 /** invisible borders **/
