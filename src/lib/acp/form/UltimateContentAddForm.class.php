@@ -55,7 +55,7 @@ class UltimateContentAddForm extends MessageForm {
      */
     public function readFormParameters() {
         parent::readFormParameters();
-        if (isset($_POST['description'])) $this->title = trim($_POST['description']);
+        if (isset($_POST['description'])) $this->description = trim($_POST['description']);
     }
     
     /**
