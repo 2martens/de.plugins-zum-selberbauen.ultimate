@@ -67,6 +67,13 @@ class ConfigEntry implements \Serializable {
     }
     
     /**
+     * Updates the current saved content.
+     */
+    public function refreshContent() {
+        $this->generateOutput();
+    }
+    
+    /**
      * Generates the output.
      */
     protected function generateOutput() {
@@ -129,6 +136,7 @@ class ConfigEntry implements \Serializable {
         $this->componentID = $data['compID'];
         $this->contentID = $data['contentID'];
         $this->output = base64_decode($data['output']);
+        $this->refreshContent();
     }
     
 }
