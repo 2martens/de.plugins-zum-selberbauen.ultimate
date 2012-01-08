@@ -89,6 +89,7 @@
         <input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
         {@SID_INPUT_TAG}
         <input type="hidden" name="action" value="{@$action}" />
+       	<input type="hidden" name="parseURL" value="1" />
         <input type="hidden" name="enableSmilies" value="1" />
         <input type="hidden" name="enableHtml" value="0" />
         <input type="hidden" name="enableBBCodes" value="1" />
