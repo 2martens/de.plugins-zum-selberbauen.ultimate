@@ -23,6 +23,9 @@ CREATE TABLE ultimate1_1_content (
     contentTitle VARCHAR(255) NOT NULL DEFAULT '',
     contentDescription VARCHAR(255) NOT NULL DEFAULT '',
     contentText MEDIUMTEXT NOT NULL,
+    enableBBCodes TINYINT(1) NOT NULL DEFAULT 1,
+    enableHtml TINYINT(1) NOT NULL DEFAULT 0,
+    enableSmilies TINYINT(1) NOT NULL DEFAULT 1,
     FULLTEXT INDEX (contentTitle, contentDescription, contentText)
 );
 
