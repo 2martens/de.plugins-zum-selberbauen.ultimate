@@ -5,6 +5,7 @@ use ultimate\system\UltimateCore;
 use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
 use wcf\system\exception\UserInputException;
+use wcf\system\menu\acp\ACPMenu;
 
 /**
  * Show the UltimateContentAdd form.
@@ -125,6 +126,16 @@ class UltimateContentAddForm extends MessageForm {
             'description' => $this->description,
             'action' => 'add'
         ));
+    }
+    
+    /**
+     * @see \wcf\page\IPage::show()
+     */
+    public function show() {
+        if (!empty($this->activeMenuItem)) {
+			ACPMenu::getInstance()->setActiveMenuItem($this->activeMenuItem);
+		}
+		parent::show();
     }
     
 }
