@@ -5,7 +5,6 @@ use ultimate\data\content\Content;
 use ultimate\data\content\ContentAction;
 use ultimate\system\UltimateCore;
 use wcf\form\MessageForm;
-use wcf\system\bbcode\MessageParser;
 
 /**
  * Shows the UltimateContentEdit form.
@@ -42,14 +41,14 @@ class UltimateContentEditForm extends UltimateContentAddForm {
      */
     public function save() {
         MessageForm::save();
-        //parse the text and replace bb codes with html
-        $this->text = MessageParser::getInstance()->parse($this->text, $this->enableSmilies, $this->enableHtml, $this->enableBBCodes, $this->doKeywordHighlighting);
-        
         $parameters = array(
         	'data' => array(
             	'contentTitle' => $this->subject,
                 'contentDescription' => $this->description,
-            	'contentText' => $this->text
+            	'contentText' => $this->text,
+                'enableBBCodes' => $this->enableBBCodes,
+                'enableHtml' => $this->enableHtml,
+                'enableSmilies' => $this->enableSmilies
             )
         );
         

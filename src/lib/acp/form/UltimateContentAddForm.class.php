@@ -4,7 +4,6 @@ use ultimate\data\content\ContentAction;
 use ultimate\system\UltimateCore;
 use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
-use wcf\system\bbcode\MessageParser;
 use wcf\system\exception\UserInputException;
 use wcf\system\menu\acp\ACPMenu;
 
@@ -36,13 +35,7 @@ class UltimateContentAddForm extends MessageForm {
     public $neededPermissions = array(
         'admin.content.ultimate.canAddContent'
     );
-    
-    /**
-     * If true keywords in query strings will be highlighted.
-     * @var boolean
-     */
-    public $doKeywordHighlighting = false;
-        
+                
     /**
      * Contains the description of the content.
      * @var string
@@ -104,14 +97,14 @@ class UltimateContentAddForm extends MessageForm {
      */
     public function save() {
         parent::save();
-        //parse the text and replace bb codes with html
-        $this->text = MessageParser::getInstance()->parse($this->text, $this->enableSmilies, $this->enableHtml, $this->enableBBCodes, $this->doKeywordHighlighting);
-        
         $parameters = array(
             'data' => array(
             	'contentTitle' => $this->subject,
                 'contentDescription' => $this->description,
-            	'contentText' => $this->text
+            	'contentText' => $text,
+                'enableBBCodes' => $this->enableBBCodes,
+                'enableHtml' => $this->enableHtml,
+                'enableSmilies' => $this->enableSmilies
             )
         );
         
