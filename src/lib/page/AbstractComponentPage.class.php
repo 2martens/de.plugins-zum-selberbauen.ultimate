@@ -4,6 +4,7 @@ use ultimate\system\UltimateCore;
 use ultimate\data\content\Content;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\page\AbstractPage;
+use wcf\system\bbcode\MessageParser;
 use wcf\util\StringUtil;
 
 /**
@@ -71,11 +72,12 @@ abstract class AbstractComponentPage extends AbstractPage {
         parent::readData();
         
         $content = new Content($this->contentID);
+        $parsedText = MessageParser::getInstance()->parse($content->contentText, $content->enableSmilies, $content->enableHtml, $content->enableBBCodes, false);
         $this->displayContent = array(
             'contentID' => intval($content->contentID),
             'contentTitle' => StringUtil::trim($content->contentTitle),
             'contentDescription' => StringUtil::trim($content->contentDescription),
-            'contentText' => StringUtil::trim($content->contentText)
+            'contentText' => $parsedText
         );
     }
     
@@ -88,7 +90,7 @@ abstract class AbstractComponentPage extends AbstractPage {
             'contentID' => $this->displayContent['contentID'],
             'contentTitle' => $this->displayContent['contentTitle'],
             'contentDescription' => $this->displayContent['contentDescription'],
-            'contentText' => nl2br($this->displayContent['contentText'], true)
+            'contentText' => $this->displayContent['contentText']
         ));
     }
     
