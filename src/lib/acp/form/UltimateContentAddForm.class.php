@@ -101,7 +101,7 @@ class UltimateContentAddForm extends MessageForm {
             'data' => array(
             	'contentTitle' => $this->subject,
                 'contentDescription' => $this->description,
-            	'contentText' => $text,
+            	'contentText' => $this->text,
                 'enableBBCodes' => $this->enableBBCodes,
                 'enableHtml' => $this->enableHtml,
                 'enableSmilies' => $this->enableSmilies
