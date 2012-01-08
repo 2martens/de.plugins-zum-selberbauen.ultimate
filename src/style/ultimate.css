@@ -23,7 +23,7 @@ Copyright 2011 by Jim Martens.
 }
 
 .ultimatePage {
-    margin-top: +32px;   
+    margin-top: +17px;   
 }
 
 .ultimateCenter {
@@ -312,27 +312,27 @@ fieldset.ultimateInvisible {
     border-color: #ccc #bbb #aaa;
 }
 
-/** invisible borders **/
-.ultimateBorder {
-    margin-top: 20px;
-    margin-left: 5px;
-    margin-right: 5px;
+/** entries **/
+.ultimateEntry {
+    margin-bottom: 20px;
+    margin-left: 1px;
+    margin-right: 0px;
     position: relative;
 }
 
-.ultimateBorder footer {
+.ultimateEntry footer {
     position: relative;
     right: -15px;
     bottom: -15px;
 }
 
-.ultimateBorder footer nav {
+.ultimateEntry footer nav {
     text-align: right;
  }
  
  @media screen and (min-width: 480px), screen and (min-device-width: 480px) {
     
-    .ultimateBorder footer nav {
+    .ultimateEntry footer nav {
         opacity: 0;
         
         -webkit-transition: opacity .1s linear;
@@ -342,7 +342,7 @@ fieldset.ultimateInvisible {
         transition: opacity .1s linear;
     }
     
-    .ultimateBorder:hover footer nav {
+    .ultimateEntry:hover footer nav {
         opacity: 1;
     }
     
@@ -350,8 +350,8 @@ fieldset.ultimateInvisible {
 
 @media screen and (max-width: 480px), screen and (max-device-width: 480px) {
     
-    .ultimateBorder footer nav
-    .ultimateBorder:hover footer nav {
+    .ultimateEntry footer nav
+    .ultimateEntry:hover footer nav {
         opacity: 1;
     }
     

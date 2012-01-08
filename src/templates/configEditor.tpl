@@ -207,7 +207,7 @@
     			<div class="sortable" id="columnLeft">
         		{foreach from=$entries['left'] item=$entry}
     				{assign var=randomIDLeft value=$entry->getRandomID()}
-    				<div id="left-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDLeft}" class="ultimateBorder">
+    				<div id="left-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDLeft}" class="ultimateEntry">
     					<div>{@$entry->getContent()}</div>
     					<footer>
     						<nav>
@@ -234,7 +234,7 @@
         		<div class="sortable" id="columnRight">
         		{foreach from=$entries['right'] item=$entry}
     				{assign var=randomIDRight value=$entry->getRandomID()}
-    				<div id="right-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDRight}" class="ultimateBorder">
+    				<div id="right-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDRight}" class="ultimateEntry">
     					<div>{@$entry->getContent()}</div>
     					<footer>
     						<nav>
@@ -261,7 +261,7 @@
     			<div class="sortable" id="columnCenter">
        			{foreach from=$entries['center'] item=$entry}
        				{assign var=randomIDCenter value=$entry->getRandomID()}
-    				<div id="center-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDCenter}" class="ultimateBorder">
+    				<div id="center-{$entry->getComponentID()}-{$entry->getContentID()}-{$randomIDCenter}" class="ultimateEntry">
     					<div>{@$entry->getContent()}</div>
     					<footer>
     						<nav>
