@@ -10,14 +10,20 @@ Copyright 2011 by Jim Martens.
     float: left;
     font-size: 0.9em;
     width: 25em;
-    margin-top: -14px;
 }
 
 .ultimateRight {
     float: right;
     font-size: 0.9em;
     width: 25em;
-    margin-top: -14px;
+}
+
+.ultimateEditor {
+    margin-top: -14px;   
+}
+
+.ultimatePage {
+    margin-top: +14px;   
 }
 
 .ultimateCenter {

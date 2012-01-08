@@ -1,12 +1,12 @@
 {if $leftColumn}
-<div class="ultimateLeft">
+<div class="ultimateLeft ultimatePage">
     {foreach from=$entriesLeft item=$entry}
     <div id="left-{$entry->getComponentID()}-{$entry->getContentID()}">{@$entry->getContent()}</div>
     {/foreach}
 </div>
 {/if}
 {if $rightColumn}
-<div class="ultimateRight">
+<div class="ultimateRight ultimatePage">
     {foreach from=$entriesRight item=$entry}
     <div id="right-{$entry->getComponentID()}-{$entry->getContentID()}">{@$entry->getContent()}</div>
     {/foreach}

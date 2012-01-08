@@ -201,7 +201,7 @@
     </div>
 
 	<div id="columnsParent">
-    	<div class="ultimateLeft">
+    	<div class="ultimateLeft ultimateEditor">
         	<fieldset class="sortableParent">
         		<legend>{lang}ultimate.template.configEditor.columnLeft{/lang}</legend>
     			<div class="sortable" id="columnLeft">
@@ -228,7 +228,7 @@
     			</nav>
     		</footer>
     	</div>
-    	<div class="ultimateRight">
+    	<div class="ultimateRight ultimateEditor">
     		<fieldset class="sortableParent">
         		<legend>{lang}ultimate.template.configEditor.columnRight{/lang}</legend>
         		<div class="sortable" id="columnRight">
