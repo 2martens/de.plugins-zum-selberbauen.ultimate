@@ -69,13 +69,13 @@ class UltimateContentAddForm extends MessageForm {
     }
     
     /**
-     * Validates content title.
+     * Validates content subject.
      * @throws UserInputException
      */
     protected function validateSubject() {
         parent::validateSubject();
-        if (strlen($this->title) < 4) {
-            throw new UserInputException('title', 'tooShort');
+        if (strlen($this->subject) < 4) {
+            throw new UserInputException('subject', 'tooShort');
         }
     }
     
