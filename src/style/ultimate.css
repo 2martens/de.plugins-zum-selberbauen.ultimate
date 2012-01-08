@@ -48,7 +48,7 @@ fieldset.ultimateInvisible {
 }
 
 .ultimateContent {
-    position: absolute;
+    position: relative;
     bottom: 10px;   
 }
 
