@@ -23,7 +23,7 @@ Copyright 2011 by Jim Martens.
 }
 
 .ultimatePage {
-    margin-top: +14px;   
+    margin-top: +32px;   
 }
 
 .ultimateCenter {
@@ -39,6 +39,11 @@ Copyright 2011 by Jim Martens.
 
 fieldset.ultimateInvisible {
     border: 0px;
+}
+
+#breadcrumbsFooter {
+    position: relative;
+    bottom: -100%;   
 }
 
 /** large buttons - own implementation **/
