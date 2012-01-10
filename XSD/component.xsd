@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.plugins-zum-selberbauen.de" targetNamespace="http://www.plugins-zum-selberbauen.de" xmlns:tns="http://www.plugins-zum-selberbauen.de" elementFormDefault="qualified">
+    <!-- include types -->
+    <xs:include schemaLocation="http://www.woltlab.com/XSD/maelstrom/types.xsd" />
+    
+    <!-- data element -->
+    <xs:include name="data">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="import" type="import" minOccurs="0" />
+                <xs:element name="delete" type="delete" minOccurs="0" />
+            </xs:all>
+        </xs:complexType>
+    </xs:include>
+    
+    <!-- import element type -->
+    <xs:complexType name="import">
+         <xs:all>
+            <xs:element name="component" type="component" maxOccurs="unbounded" />
+        </xs:all>
+    </xs:complexType>
+    
+    <!-- delete element type -->
+    <xs:complexType name="delete">
+        <xs:sequence>
+            <xs:element name="component" type="component" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- event listener element type -->
+    <xs:complexType name="component">
+        <xs:all>
+            <xs:element name="classname" minOccurs="1">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="0" />
+                        <xs:maxLength value="80" />
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:all>
+    </xs:complexType>
+</schema>
