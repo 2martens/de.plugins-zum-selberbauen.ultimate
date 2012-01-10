@@ -24,7 +24,7 @@
         </xs:sequence>
     </xs:complexType>
     
-    <!-- event listener element type -->
+    <!-- component element type -->
     <xs:complexType name="component">
         <xs:all>
             <xs:element name="classname">
