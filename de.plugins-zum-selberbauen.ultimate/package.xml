@@ -39,17 +39,21 @@
         <instruction type="template">templates.tar</instruction>
         <instruction type="acptemplate">acptemplates.tar</instruction>
         
-        <!-- xmls -->
-        <instruction type="acpMenu">acpMenu.xml</instruction>
-        <instruction type="option">option.xml</instruction>
-        <instruction type="userGroupOption">userGroupOption.xml</instruction>
-        <instruction type="pageMenu">pagemenu.xml</instruction>
-        <instruction type="language">language/*.xml</instruction>
-        <instruction type="objectType">objectType.xml</instruction>
-        <instruction type="templateListener">templateListener.xml</instruction>
-        
         <!-- others -->        
         <instruction type="script">acp/InstallUltimateCMS.class.php</instruction>
         <instruction type="sql">install.sql</instruction>
+        
+        <!-- xmls -->
+        <instruction type="packageInstallationPlugin">packageInstallatinPlugin.xml</instruction>
+        <instruction type="language">language/*.xml</instruction>
+        <instruction type="acpMenu">acpMenu.xml</instruction>
+        <instruction type="option">option.xml</instruction>
+        <instruction type="objectType">objectType.xml</instruction>
+        <instruction type="userGroupOption">userGroupOption.xml</instruction>
+        <instruction type="pageMenu">pagemenu.xml</instruction>
+        <instruction type="templateListener">templateListener.xml</instruction>
+        <instruction type="component">component.xml</instruction>
+        
+        
     </instructions>
 </package>

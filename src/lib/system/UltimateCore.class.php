@@ -32,7 +32,7 @@ class UltimateCore extends AbstractApplication {
      * Calls all init functions of the Ultimate Core class.
      */
     public function __construct() {
-        $this->packageID = PackageDependencyHandler::getPackageID('de.plugins-zum-selberbauen.cms');
+        $this->packageID = PackageDependencyHandler::getPackageID('de.plugins-zum-selberbauen.ultimate');
         
         $this->initTPL();
         PageMenu::getInstance()->setActiveMenuItem('ultimate.header.menu.index');
