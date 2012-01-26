@@ -31,6 +31,8 @@
         <requiredpackage file="requirements/com.woltlab.wcf.comment.tar.gz">com.woltlab.wcf.comment</requiredpackage>
         <requiredpackage file="requirements/com.woltlab.wcf.message.tar.gz">com.woltlab.wcf.message</requiredpackage>
         <requiredpackage file="requirements/com.woltlab.wcf.message.sidebar.tar.gz">com.woltlab.wcf.message.sidebar</requiredpackage>
+        
+        <requiredpackage file="requirements/de.plugins-zum-selberbauen.applicationDomainPathCache.tar.gz">de.plugins-zum-selberbauen.applicationDomainPathCache</requiredpackage>
     </requiredpackages>
     
     <instructions type="install">

@@ -55,4 +55,41 @@
         <!-- /config -->
         <!-- /admin -->
     </category>
+    
+    <category name="ultimate.template">
+        <!-- configEditor -->
+        <item name="ultimate.template.configEditor.title"><![CDATA[]]></item>
+        <item name="ultimate.template.configEditor.configTitle"><![CDATA[]]></item>
+        <item name="ultimate.template.configEditor.configTitle.error.notUnique"><![CDATA[]]></item>
+        <item name="ultimate.template.configEditor.metaDescription"><![CDATA[]]></item>
+        <item name="ultimate.template.configEditor.metaDescription.error.tooLong"><![CDATA[]]></item>
+        <item name="ultimate.template.configEditor.metaKeywords"><![CDATA[]]></item>
+        <item name="ultimate.template.configEditor.metaKeywords.error.tooLong"><![CDATA[]]></item>
+        <item name="ultimate.template.configEditor.columnLeft"><![CDATA[]]></item>
+        <item name="ultimate.template.configEditor.columnCenter"><![CDATA[]]></item>
+        <item name="ultimate.template.configEditor.columnRight"><![CDATA[]]></item>
+        
+        <item name="ultimate.template.configEditor.add"><![CDATA[]]></item>
+        <item name="ultimate.template.configEditor.edit"><![CDATA[]]></item>
+        <item name="ultimate.template.configEditor.delete"><![CDATA[]]></item>
+        <item name="ultimate.template.configEditor.addEntry"><![CDATA[]]></item>
+        <item name="ultimate.template.configEditor.deleteEntry"><![CDATA[]]></item>
+        <!-- /configEditor -->
+        
+        <!-- topMenu -->
+        <item name="ultimate.template.topMenu.configEditor"><![CDATA[]]></item>
+        <item name="ultimate.template.topMenu.action"><![CDATA[]]></item>
+        <item name="ultimate.template.topMenu.action.add"><![CDATA[]]></item>
+        <item name="ultimate.template.topMenu.action.edit"><![CDATA[]]></item>
+        <item name="ultimate.template.topMenu.configID"><![CDATA[]]></item>
+        <item name="ultimate.template.topMenu.configID.empty"><![CDATA[]]></item>
+        <item name="ultimate.template.topMenu.configID.select"><![CDATA[]]></item>
+        <item name="ultimate.template.topMenu.title"><![CDATA[]]></item>
+        <!-- /topMenu -->
+    </category>
+    
+    <category name="ultimate.component">
+        <!-- name of the components -->
+        <item name="ultimate.component.SiteComponentPage"><![CDATA[]]></item>
+    </category>
 </language>
