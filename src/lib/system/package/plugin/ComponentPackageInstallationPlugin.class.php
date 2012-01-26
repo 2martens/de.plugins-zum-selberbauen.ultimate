@@ -43,6 +43,7 @@ class ComponentPackageInstallationPlugin extends AbstractXMLPackageInstallationP
             		FROM wcf'.WCF_N.'_package
             		WHERE packageID = ?';
             $statement = WCF::getDB()->prepareStatement($sql);
+            $statement->execute(array($packageID));
             $row = $statement->fetchArray();
             $packageDir = $row['packageDir'];
             require_once($packageDir.'config.inc.php');
@@ -86,6 +87,7 @@ class ComponentPackageInstallationPlugin extends AbstractXMLPackageInstallationP
     
     /**
      * @see \wcf\system\package\plugin\AbstractXMLPackageInstallationPlugin::validateImport()
+     * @throws \wcf\system\exception\SystemException
      */
     protected function validateImport(array $data) {
         if (!isset($data['className']) || !isset($data['title'])) {
