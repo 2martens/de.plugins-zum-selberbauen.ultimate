@@ -69,7 +69,8 @@ class ComponentPackageInstallationPlugin extends AbstractXMLPackageInstallationP
      */
     protected function prepareImport(array $data) {
         $mapped = array(
-            'className' => $data['elements']['classname']
+            'className' => $data['elements']['classname'],
+            'title' => $data['elements']['title']
         );
         return $mapped;
     }
@@ -87,12 +88,16 @@ class ComponentPackageInstallationPlugin extends AbstractXMLPackageInstallationP
      * @see \wcf\system\package\plugin\AbstractXMLPackageInstallationPlugin::validateImport()
      */
     protected function validateImport(array $data) {
-        if (!isset($data['className'])) {
+        if (!isset($data['className']) || !isset($data['title'])) {
             throw new SystemException('The array given doesn\'t fit the form needed by the object editor class.');
         }
         
         if (empty($data['className'])) {
             throw new SystemException('The given class name can\'t be empty.');
+        }
+        
+        if (empty($data['title'])) {
+            throw new SystemException('The given title can\'t be empty.');
         }
         
         if (!strpos($data['className'], '\\')) {

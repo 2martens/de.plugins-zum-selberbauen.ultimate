@@ -32,7 +32,9 @@ CREATE TABLE ultimate1_1_content (
 DROP TABLE IF EXISTS ultimate1_1_component;
 CREATE TABLE ultimate1_1_component (
     componentID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    className VARCHAR(255) NOT NULL DEFAULT ''    
+    className VARCHAR(255) NOT NULL DEFAULT '' UNIQUE KEY,
+    title VARCHAR(255) NOT NULL DEFAULT '',
+    INDEX (className)   
 );
 
 /**** foreign keys ****/
