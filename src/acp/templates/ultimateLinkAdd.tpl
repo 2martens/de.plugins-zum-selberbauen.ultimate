@@ -35,7 +35,7 @@
 
 <form method="post" action="{if $action == 'add'}{link controller='UltimateLinkAdd'}{/link}{else}{link controller='UltimateLinkEdit'}{/link}{/if}">
     <div class="border content">
-        <dl{if $errorType.configID|isset} class="formError"{/if}>
+        <dl{if $errorField == 'configID'} class="formError"{/if}>
             <dt><label for="configID">{lang}ultimate.template.link.configTitle{/lang}</label></dt>
             <dd>
                 <select id="configID" name="configID" size="1">
@@ -44,23 +44,23 @@
                     <option value="{$key}"{if $configID == $key} selected="selected"{/if}>{$configTitle}</option>
                     {/foreach}
                 </select>
-                {if $errorType.configID|isset}
+                {if $errorField == 'configID'}
                     <small class="innerError">
-                        {lang}ultimate.template.link.configID.error.{@$errorType.configID}{/lang}
+                        {lang}ultimate.template.link.configID.error.{@$errorType}{/lang}
                     </small>
                 {/if}
             </dd>
         </dl>
-        <dl{if $errorType.slug|isset} class="formError"{/if}>
+        <dl{if $errorField == 'slug'} class="formError"{/if}>
             <dt><label for="slug">{lang}ultimate.template.link.slug{/lang}</label></dt>
             <dd>
                 <input type="text" id="slug" name="slug" value="{@$slug}" class="medium" />
-                {if $errorType.slug|isset}
+                {if $errorField == 'slug'}
                     <small class="innerError">
-                        {if $errorType.slug == 'empty'}
+                        {if $errorType == 'empty'}
                             {lang}wcf.global.form.error.empty{/lang}
                         {else}
-                            {lang}ultimate.template.link.slug.error.{@$errorType.slug}{/lang}
+                            {lang}ultimate.template.link.slug.error.{@$errorType}{/lang}
                         {/if}
                     </small>
                 {/if}
@@ -80,4 +80,3 @@
 </form>
 
 {include file='footer'}
-     
