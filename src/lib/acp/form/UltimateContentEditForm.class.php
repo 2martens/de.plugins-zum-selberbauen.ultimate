@@ -45,6 +45,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
         	'data' => array(
             	'contentTitle' => $this->subject,
                 'contentDescription' => $this->description,
+                'categoryID' => $this->categoryID,
             	'contentText' => $this->text,
                 'enableBBCodes' => $this->enableBBCodes,
                 'enableHtml' => $this->enableHtml,

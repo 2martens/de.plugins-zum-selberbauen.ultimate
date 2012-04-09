@@ -1,6 +1,7 @@
 <?php
 namespace ultimate\page;
 use ultimate\system\UltimateCore;
+
 use wcf\page\AbstractPage;
 
 /**

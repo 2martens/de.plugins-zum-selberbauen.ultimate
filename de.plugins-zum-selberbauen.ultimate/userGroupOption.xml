@@ -19,6 +19,32 @@
                 <admindefaultvalue>1</admindefaultvalue>
             </option>
             
+            <option name="admin.content.ultimate.canConfigureOptions">
+                <categoryname>admin.content.ultimate</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+            
+            <option name="admin.content.ultimate.canAddCategory">
+                <categoryname>admin.content.ultimate</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+            <option name="admin.content.ultimate.canEditCategory">
+                <categoryname>admin.content.ultimate</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+            <option name="admin.content.ultimate.canDeleteCategory">
+                <categoryname>admin.content.ultimate</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+            
             <option name="admin.content.ultimate.canAddContent">
                 <categoryname>admin.content.ultimate</categoryname>
                 <optiontype>boolean</optiontype>

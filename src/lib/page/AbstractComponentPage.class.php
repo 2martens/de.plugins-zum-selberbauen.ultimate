@@ -72,7 +72,13 @@ abstract class AbstractComponentPage extends AbstractPage {
         parent::readData();
         
         $content = new Content($this->contentID);
-        $parsedText = MessageParser::getInstance()->parse($content->contentText, $content->enableSmilies, $content->enableHtml, $content->enableBBCodes, false);
+        $parsedText = MessageParser::getInstance()->parse(
+            $content->contentText,
+            $content->enableSmilies,
+            $content->enableHtml,
+            $content->enableBBCodes,
+            false
+        );
         $this->displayContent = array(
             'contentID' => intval($content->contentID),
             'contentTitle' => StringUtil::trim($content->contentTitle),

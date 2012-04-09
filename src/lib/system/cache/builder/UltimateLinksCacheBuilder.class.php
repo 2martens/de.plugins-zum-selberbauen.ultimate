@@ -2,6 +2,7 @@
 namespace ultimate\system\cache\builder;
 use ultimate\data\config\ConfigList;
 use ultimate\data\link\LinkList;
+
 use wcf\system\cache\builder\ICacheBuilder;
 
 /**

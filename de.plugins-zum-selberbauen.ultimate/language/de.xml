@@ -76,6 +76,18 @@
         <item name="ultimate.template.configEditor.deleteEntry"><![CDATA[]]></item>
         <!-- /configEditor -->
         
+        <!-- content -->
+        <item name="ultimate.template.content.title"><![CDATA[]]></item>
+        <item name="ultimate.template.content.title.error.tooShort"><![CDATA[]]></item>
+        <item name="ultimate.template.content.description"><![CDATA[]]></item>
+        <item name="ultimate.template.content.description.error.tooShort"><![CDATA[]]></item>
+        <item name="ultimate.template.content.category"><![CDATA[]]></item>
+        <item name="ultimate.template.content.category.default"><![CDATA[]]></item>
+        <item name="ultimate.template.content.category.error.notSelected"><![CDATA[]]></item>
+        <item name="ultimate.template.content.text"><![CDATA[]]></item>
+        <item name="ultimate.template.content.text.error.tooLong"><![CDATA[]]></item>
+        <!-- /content -->
+        
         <!-- topMenu -->
         <item name="ultimate.template.topMenu.configEditor"><![CDATA[]]></item>
         <item name="ultimate.template.topMenu.action"><![CDATA[]]></item>

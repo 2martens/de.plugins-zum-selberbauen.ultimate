@@ -1,7 +1,10 @@
 <?php
 namespace ultimate\page;
+use ultimate\data\config\Config;
+use ultimate\page\GenericCMSPage;
 use ultimate\system\UltimateCore;
 use wcf\page\AbstractPage;
+use wcf\system\cache\CacheHandler;
 
 /**
  * Shows the index page.
@@ -13,32 +16,17 @@ use wcf\page\AbstractPage;
  * @subpackage page
  * @category Ultimate CMS
  */
-class IndexPage extends AbstractPage {
+class IndexPage extends GenericCMSPage {
     /**
-     * @see \wcf\page\AbstractPage::$templateName
+     * Creates a new IndexPage object.
      */
-    public $templateName = 'index';
-    
-    /**
-     * @see \wcf\page\AbstractPage::$neededModules
-     */
-    public $neededModules = array(
-        'MODULE_ULTIMATEFRONTEND'
-    );
-    
-    /**
-     * @see \wcf\page\AbstractPage::$neededPermissions
-     */
-    public $neededPermissions = array(
-        'user.ultimate.canUseFrontend'
-    );
-    
-    /**
-     * @see \wcf\page\IPage::assignVariables()
-     */
-    public function assignVariables() {
-        parent::assignVariables();
-        UltimateCore::getTPL()->assign('content', 'test');
+    public function __construct() {
+        $configID = ULTIMATE_GENERAL_INDEX_CONFIG;
+        $config = new Config($configID);
+        $this->configTitle = $config->configTitle;
+        $this->metaDescription = $config->metaDescription;
+        $this->metaKeywords = $config->metaKeywords;
+        $this->templateName = $config->templateName;
+        AbstractPage::__construct();
     }
-    
 }

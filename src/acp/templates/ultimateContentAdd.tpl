@@ -36,7 +36,7 @@
 <form method="post" action="{if $action == 'add'}{link controller='UltimateContentAdd'}{/link}{else}{link controller='UltimateContentEdit'}{/link}{/if}">
     <div class="border content">
         <dl{if $errorField == 'subject'} class="formError"{/if}>
-            <dt><label for="subject">{lang}ultimate.template.content.subject{/lang}</label></dt>
+            <dt><label for="subject">{lang}ultimate.template.content.title{/lang}</label></dt>
             <dd>
                 <input type="text" id="subject" name="subject" value="{$subject}" class="medium" />
                 {if $errorField == 'subject'}
@@ -61,6 +61,22 @@
                         {else}
                             {lang}ultimate.template.content.description.error.{@$errorType}{/lang}
                         {/if}
+                    </small>
+                {/if}
+            </dd>
+        </dl>
+        <dl{if $errorField == 'category'} class="formError"{/if}>
+            <dt><label for="category">{lang}ultimate.template.content.category{/lang}</label></dt>
+            <dd>
+                <select id="category" name="category" size="1">
+                	<option value="0">{lang}ultimate.template.content.category.default{/lang}</option>
+                	{foreach from=$selectOptions key=categoryID item=categoryTitle}
+    				<option value="{$categoryID}"{if $category == $categoryID} selected="selected"{/if}>{lang}{@$categoryTitle}{/lang}</option>
+					{/foreach}
+                </select>
+                {if $errorField == 'category'}
+                    <small class="innerError">
+                        {lang}ultimate.template.content.category.error.{@$errorType}{/lang}
                     </small>
                 {/if}
             </dd>

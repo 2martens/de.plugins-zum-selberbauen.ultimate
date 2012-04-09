@@ -9,6 +9,18 @@ CREATE TABLE ultimate1_1_config (
     storage VARCHAR(255) NOT NULL DEFAULT ''
 );
 
+DROP TABLE IF EXISTS ultimate1_1_category;
+CREATE TABLE ultimate1_1_category (
+    categoryID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    categoryTitle VARCHAR(255) NOT NULL DEFAULT ''
+);
+
+DROP TABLE IF EXISTS ultimate1_1_content_to_category;
+CREATE TABLE ultimate1_1_content_to_category (
+    contentID INT(10) NOT NULL DEFAULT 0,
+    categoryID INT(10) NOT NULL DEFAULT 0
+);
+
 DROP TABLE IF EXISTS ultimate1_1_link;
 CREATE TABLE ultimate1_1_link (
     linkID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,

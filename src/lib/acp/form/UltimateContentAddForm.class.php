@@ -2,6 +2,7 @@
 namespace ultimate\acp\form;
 use ultimate\data\content\ContentAction;
 use ultimate\system\UltimateCore;
+
 use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
 use wcf\system\exception\UserInputException;
@@ -42,6 +43,11 @@ class UltimateContentAddForm extends MessageForm {
      */
     protected $description = '';
     
+    /**
+     * Contains the chosen category.
+     * @var int
+     */
+    protected $categoryID = 0;
        
     /**
      * Contains the maximal length of the text.
@@ -55,6 +61,7 @@ class UltimateContentAddForm extends MessageForm {
     public function readFormParameters() {
         parent::readFormParameters();
         if (isset($_POST['description'])) $this->description = trim($_POST['description']);
+        if (isset($_POST['category'])) $this->categoryID = intval($_POST['category']);
     }
     
     /**
@@ -64,6 +71,7 @@ class UltimateContentAddForm extends MessageForm {
         RecaptchaForm::validate();
         $this->validateSubject();
         $this->validateDescription();
+        $this->validateCategory();
         $this->validateText();
     }
     
@@ -93,6 +101,16 @@ class UltimateContentAddForm extends MessageForm {
     }
     
     /**
+     * Validates category.
+     * @throws UserInputException
+     */
+    protected function validateCategory() {
+        if (!$this->categoryID) {
+            throw new UserInputException('category', 'notSelected');
+        }
+    }
+    
+    /**
      * @see \wcf\form\IForm::save()
      */
     public function save() {
@@ -101,6 +119,7 @@ class UltimateContentAddForm extends MessageForm {
             'data' => array(
             	'contentTitle' => $this->subject,
                 'contentDescription' => $this->description,
+                'categoryID' => $this->categoryID,
             	'contentText' => $this->text,
                 'enableBBCodes' => $this->enableBBCodes,
                 'enableHtml' => $this->enableHtml,
@@ -110,12 +129,14 @@ class UltimateContentAddForm extends MessageForm {
         
         $action = new ContentAction(array(), 'create', $parameters);
         $action->execute();
+        
         $this->saved();
         
         UltimateCore::getTPL()->assign('success', true);
         
         //showing empty form
         $this->subject = $this->description = $this->text = '';
+        $this->categoryID = 0;
     }
     
     /**
@@ -125,7 +146,8 @@ class UltimateContentAddForm extends MessageForm {
         parent::assignVariables();
         UltimateCore::getTPL()->assign(array(
             'description' => $this->description,
-            'action' => 'add'
+            'action' => 'add',
+            'category' => $this->categoryID
         ));
     }
     

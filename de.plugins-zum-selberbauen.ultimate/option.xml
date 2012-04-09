@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/option.xsd">
     <import>
+        <categories>
+            <category name="ultimate">
+                <showorder>2</showorder>
+                <permissions>admin.content.ultimate.canConfigureOptions</permissions>
+            </category>
+                <category name="ultimate.general">
+                    <parent>ultimate</parent>
+                    <showorder>1</showorder>
+                </category>
+                
+        </categories>
         <options>
             <option name="module_ultimateFrontend">
                 <categoryname>module.system</categoryname>
                 <optiontype>boolean</optiontype>
                 <defaultvalue>1</defaultvalue>
+            </option>
+            
+            <option name="ultimate_general_index_config">
+                <categoryname>ultimate.general</categoryname>
+                <optiontype>ultimateConfig</optiontype>
+                <showorder>1</showorder>
             </option>
         </options>
     </import>
