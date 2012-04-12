@@ -31,6 +31,12 @@ abstract class AbstractComponentPage extends AbstractPage {
     protected $contentID = 0;
     
     /**
+     * Contains the id of the attached category.
+     * @var int
+     */
+    protected $categoryID = 0;
+    
+    /**
      * Contains the content which will be displayed.
      * @var array
      */
@@ -51,10 +57,12 @@ abstract class AbstractComponentPage extends AbstractPage {
     /**
      * Creates a new AbstractComponentPage object.
      *
-     * @param string $contentName
+     * @param int $contentID
+     * @param int $categoryID
      */
-    public function __construct($contentID) {
-        $this->contentID = StringUtil::trim($contentID);
+    public function __construct($contentID, $categoryID = 0) {
+        $this->contentID = intval($contentID);
+        $this->categoryID = intval($categoryID);
         parent::__construct();
     }
     
@@ -94,6 +102,7 @@ abstract class AbstractComponentPage extends AbstractPage {
         parent::assignVariables();
         UltimateCore::getTPL()->assign(array(
             'contentID' => $this->displayContent['contentID'],
+            'categoryID' => $this->categoryID,
             'contentTitle' => $this->displayContent['contentTitle'],
             'contentDescription' => $this->displayContent['contentDescription'],
             'contentText' => $this->displayContent['contentText']

@@ -1,5 +1,6 @@
 <?php
 namespace ultimate\form;
+use ultimate\data\category\CategoryList;
 use ultimate\data\component\ComponentList;
 use ultimate\data\config\Config;
 use ultimate\data\config\ConfigAction;
@@ -73,6 +74,12 @@ class ConfigEditorForm extends AbstractSecureForm {
      * @var array
      */
     protected $contents = array();
+    
+    /**
+     * Contains all available categories.
+     * @var array
+     */
+    protected $categories = array();
     
     /**
      * Contains the component id of the added entry.
@@ -177,6 +184,11 @@ class ConfigEditorForm extends AbstractSecureForm {
         $contentList->readObjects();
         $this->contents = $contentList->getObjects();
         
+        //reading categories
+        $categoryList = new CategoryList();
+        $categoryList->readObjects();
+        $this->categories = $categoryList->getObjects();
+                
         parent::readData();
         
         if (!count($_POST)) {
@@ -199,12 +211,13 @@ class ConfigEditorForm extends AbstractSecureForm {
     public function readFormParameters() {
         parent::readFormParameters();
         //reading general parameters
-        if (isset($_POST['formular'])) $this->form = trim($_POST['formular']);
+        if (isset($_POST['form'])) $this->form = trim($_POST['form']);
         if (isset($_POST['ajax'])) $this->viaAjax = (boolean) intval($_POST['ajax']);
                 
         //reading parameters of addEntry form
         if (isset($_POST['componentID'])) $this->componentID = intval($_POST['componentID']);
         if (isset($_POST['contentID'])) $this->contentID = intval($_POST['contentID']);
+        if (isset($_POST['categoryID'])) $this->categoryID = intval($_POST['categoryID']);
         if (isset($_POST['c'])) $this->column = lcfirst(trim($_POST['c']));
         
         //reading parameters of main form

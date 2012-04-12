@@ -73,6 +73,7 @@
     			url = $form.attr('action'),
     			componentIDValue = $('#componentID').val(),
     			contentIDValue = $('#contentID').val(),
+    			categoryIDValue = $('#categoryID').val(),
     			sValue = $form.find( 'input[name="s"]' ).val(),
     			tValue = $form.find( 'input[name="t"]' ).val(),
     			formValue = $('#form').val();
@@ -80,6 +81,7 @@
     		ULTIMATE.ConfigEditor.addEntry(column, url, {
     				componentID: componentIDValue,
     				contentID: contentIDValue,
+    				categoryID: categoryIDValue,
     				s: sValue,
     				t: tValue,
     				c: column,
@@ -196,6 +198,7 @@
         {@SID_INPUT_TAG}
         {@SECURITY_TOKEN_INPUT_TAG}
         <input type="hidden" name="action" value="{@$action}" />
+        <input type="hidden" name="form" value="main" />
         <input id="entriesInput" type="hidden" name="entries" value="{literal}{%22left%22:[],%22center%22:[],%22right%22:[]}{/literal}" />
         {if $configID|isset}<input type="hidden" name="id" value="{@$configID}" />{/if}
     </div>

@@ -22,6 +22,17 @@
                 </select>
             </dd>
         </dl>
+        <dl>
+            <dt><label for="categoryID">{lang}ultimate.template.addEntry.categoryID{/lang}</label></dt>
+            <dd>
+                <select id="categoryID" name="categoryID" size="1">
+                    <option value="0">{lang}ultimate.template.addEntry.categoryID.select{/lang}</option>
+                    {foreach from=$categories item=$category}
+                    <option value="{$category->categoryID}">{$category->categoryTitle}</option>
+                    {/foreach}
+                </select>
+            </dd>
+        </dl>
         
         <div class="formSubmit">
             <input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
@@ -40,7 +51,7 @@
             document.getElementById('componentID').focus();
             return false;
         }
-        if (document.getElementById('contentID').value == '0') {
+        if (document.getElementById('contentID').value == '0' && document.getElementById('categoryID').value == '0') {
             alert('{lang}ultimate.template.addEntry.contentID.error.notSelected{/lang}');
             document.getElementById('contentID').focus();
             return false;

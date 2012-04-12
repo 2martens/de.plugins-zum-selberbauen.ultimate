@@ -29,6 +29,12 @@ class ConfigEntry implements \Serializable {
     protected $contentID = 0;
     
     /**
+     * Contains the category id.
+     * @var int
+     */
+    protected $categoryID = 0;
+    
+    /**
      * Contains the output of the entry.
      * @var string
      */
@@ -39,10 +45,12 @@ class ConfigEntry implements \Serializable {
      *
      * @param int $componentID
      * @param int $contentID
+     * @param int $categoryID
      */
-    public function __construct($componentID, $contentID) {
+    public function __construct($componentID, $contentID, $categoryID = 0) {
         $this->componentID = intval($componentID);
         $this->contentID = intval($contentID);
+        $this->categoryID = intval($categoryID);
         $this->generateOutput();
     }
     
@@ -67,6 +75,16 @@ class ConfigEntry implements \Serializable {
     }
     
     /**
+     * Changes the category id of this entry.
+     *
+     * @param int $newID
+     */
+    public function changeCategoryID($newID) {
+        $this->categoryID = intval($newID);
+        $this->generateOutput();
+    }
+    
+    /**
      * Updates the current saved content.
      */
     public function refreshContent() {
@@ -78,7 +96,7 @@ class ConfigEntry implements \Serializable {
      */
     protected function generateOutput() {
         $component = new Component($this->componentID);
-        $obj = new $component->className($this->contentID);
+        $obj = new $component->className($this->contentID, $this->categoryID);
         $this->output = $obj->getOutput();
     }
     
@@ -107,12 +125,21 @@ class ConfigEntry implements \Serializable {
         return $this->contentID;
     }
     
+	/**
+     * Returns the category id.
+     *
+     * @return int
+     */
+    public function getCategoryID() {
+        return $this->categoryID;
+    }
+    
     /**
      * Returns a random id of this entry.
      */
     public function getRandomID() {
         $salt = StringUtil::getRandomID();
-        $value = $this->componentID.$this->contentID;
+        $value = $this->componentID.$this->contentID.$this->categoryID;
         return StringUtil::getDoubleSaltedHash($value, $salt);
     }
     
@@ -123,6 +150,7 @@ class ConfigEntry implements \Serializable {
         $data = array(
             'compID' => $this->componentID,
             'contentID' => $this->contentID,
+            'categoryID' => $this->categoryID,
             'output' => base64_encode($this->output)
         );
         return serialize($data);
@@ -135,6 +163,7 @@ class ConfigEntry implements \Serializable {
         $data = unserialize($serialized);
         $this->componentID = $data['compID'];
         $this->contentID = $data['contentID'];
+        $this->categoryID = $data['categoryID'];
         $this->output = base64_decode($data['output']);
         $this->refreshContent();
     }
