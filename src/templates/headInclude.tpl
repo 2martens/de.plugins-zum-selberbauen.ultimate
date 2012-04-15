@@ -1,21 +1,22 @@
 <base href="{$baseHref}" />
 <meta charset="utf-8" />
-{* Removed metaDescription and metaKeywords, as this is now handled on a per page level *}
-{* Removed, because it isn't W3C standard.
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />*}
+{* Removed, because it is handled on a per page level.
+<meta name="description" content="{META_DESCRIPTION}" />
+<meta name="keywords" content="{META_KEYWORDS}" /> *}
 
 <script type="text/javascript">
 	//<![CDATA[
 	var SID_ARG_2ND	= '{@SID_ARG_2ND_NOT_ENCODED}';
-	var RELATIVE_WCF_DIR = '{@RELATIVE_WCF_DIR}';
+	var RELATIVE_WCF_DIR = '{@$__wcf->getPath()}';
 	var SECURITY_TOKEN = '{@SECURITY_TOKEN}';
 	//]]>
 </script>
-<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/3rdParty/jquery.min.js"></script>
-<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/3rdParty/jquery-ui.min.js"></script>
-<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/3rdParty/jquery.tools.min.js"></script>
-<script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/WCF.js"></script>
-<script type="text/javascript" src="{@RELATIVE_ULTIMATE_DIR}js/ULTIMATE.js"></script>
+<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.min.js"></script>
+<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui.min.js"></script>
+<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.tools.min.js"></script>
+<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui.nestedSortable.js"></script>
+<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.js"></script>
+<script type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.js"></script>
 <script type="text/javascript">
 	//<![CDATA[
 	WCF.User.init({@$__wcf->user->userID}, '{@$__wcf->user->username|encodeJS}');
@@ -24,17 +25,14 @@
 {event name='javascriptInclude'}
 
 <!-- Stylesheets -->
-<style type="text/css">
-	@import url("{@RELATIVE_WCF_DIR}acp/style/wcf.css") screen;
-	@import url("{@RELATIVE_ULTIMATE_DIR}style/ultimate.css") screen;
-	{*
-	@import url("{@RELATIVE_WCF_DIR}acp/style/style-{@$__wcf->getLanguage()->getPageDirection()}.css") screen;
-
-	@import url("{@RELATIVE_WCF_DIR}acp/style/print.css") print;
-	*}
-	
-	{event name='stylesheetImport'}
-</style>
+<link rel="stylesheet/less" type="text/css" href="{@$__wcf->getPath()}style/bootstrap.less" />
+<link rel="stylesheet/less" type="text/css" href="{@$__wcf->getPath('ultimate')}style/ultimate.less" />
+<script type="text/javascript">
+	//<![CDATA[
+	var less = { env: 'development' };
+	//]]>
+</script>
+<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/less.min.js"></script>
 
 <noscript>
 	<style type="text/css">
@@ -49,6 +47,7 @@
 	$(function() {
 		WCF.Language.addObject({
 			'wcf.global.button.next': '{lang}wcf.global.button.next{/lang}',
+			'wcf.global.button.edit': '{lang}wcf.global.button.edit{/lang}',
 			'wcf.global.error.title': '{lang}wcf.global.error.title{/lang}',
 			'wcf.global.loading': '{lang}wcf.global.loading{/lang}',
 			'wcf.date.relative.minutes': '{capture assign=relativeMinutes}{lang}wcf.date.relative.minutes{/lang}{/capture}{@$relativeMinutes|encodeJS}',
@@ -60,14 +59,25 @@
 			'wcf.global.decimalPoint': '{capture assign=decimalPoint}{lang}wcf.global.decimalPoint{/lang}{/capture}{$decimalPoint|encodeJS}',
 			'wcf.global.page.next': '{capture assign=pageNext}{lang}wcf.global.page.next{/lang}{/capture}{@$pageNext|encodeJS}',
 			'wcf.global.page.previous': '{capture assign=pagePrevious}{lang}wcf.global.page.previous{/lang}{/capture}{@$pagePrevious|encodeJS}',
-			'wcf.global.button.collapsible': '{lang}wcf.global.button.collapsible{/lang}'
+			'wcf.global.button.collapsible': '{lang}wcf.global.button.collapsible{/lang}',
+			'wcf.global.button.disable': '{lang}wcf.global.button.disable{/lang}',
+			'wcf.global.button.enable': '{lang}wcf.global.button.enable{/lang}',
+			'wcf.global.confirmation.cancel': '{lang}wcf.global.confirmation.cancel{/lang}',
+			'wcf.global.confirmation.confirm': '{lang}wcf.global.confirmation.confirm{/lang}',
+			'wcf.global.confirmation.title': '{lang}wcf.global.confirmation.title{/lang}'
 			{event name='javascriptLanguageImport'}
 		});
-
+		
 		WCF.Icon.addObject({
 			'wcf.icon.loading': '{icon size='S'}spinner1{/icon}',
 			'wcf.icon.opened': '{icon size='S'}opened2{/icon}',
-			'wcf.icon.closed': '{icon size='S'}closed2{/icon}'
+			'wcf.icon.closed': '{icon size='S'}closed2{/icon}',
+			'wcf.icon.previous': '{icon size='S'}previous1{/icon}',
+			'wcf.icon.previous.disabled': '{icon size='S'}previous1D{/icon}',
+			'wcf.icon.next': '{icon size='S'}next1{/icon}',
+			'wcf.icon.next.disabled': '{icon size='S'}next1D{/icon}',
+			'wcf.icon.dropdown': '{icon size='S'}dropdown1{/icon}',
+			'wcf.icon.edit': '{icon size='S'}edit1{/icon}'
 			{event name='javascriptIconImport'}
 		});
 		
@@ -75,7 +85,12 @@
 		new WCF.Effect.SmoothScroll();
 		new WCF.Effect.BalloonTooltip();
 		$('<span class="pointer"><span></span></span>').appendTo('.innerError');
-
+		
+		//$('#sidebarContent').wcfSidebar();
+		
+		WCF.Dropdown.init();
+		WCF.Effect.TopMenu.init();
+		
 		{event name='javascriptInit'}
 	});
 	//]]>

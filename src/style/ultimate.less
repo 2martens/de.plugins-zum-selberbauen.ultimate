@@ -1,21 +1,23 @@
 /* 
 
-File: ultimate.css 
-Copyright 2011 by Jim Martens.
+File: ultimate.less 
+Copyright 2011-2012 by Jim Martens.
 
 */
 /** column layout **/
 
-.ultimateLeft {
-    float: left;
+.ultimateSidebar (@side) {
+    float: @side;
     font-size: 0.9em;
     width: 25em;
 }
 
+.ultimateLeft {
+    .ultimateSidebar('left');
+}
+
 .ultimateRight {
-    float: right;
-    font-size: 0.9em;
-    width: 25em;
+    ultimateSidebar('right');
 }
 
 .ultimateEditor {
@@ -29,12 +31,14 @@ Copyright 2011 by Jim Martens.
 .ultimateCenter {
     margin-top: 0;
     margin-bottom: 0;
-}
-.ultimateCenter .leftMargin {
-    margin-left: 25em;
-}
-.ultimateCenter .rightMargin {
-    margin-right: 25em;
+    @margin = 25em;
+    .leftMargin {
+        margin-left: @margin;
+    }
+    
+    .rightMargin {
+        margin-right: @margin;
+    }
 }
 
 fieldset.ultimateInvisible {
@@ -318,19 +322,19 @@ fieldset.ultimateInvisible {
     margin-left: 1px;
     margin-right: 0px;
     position: relative;
+    
+    footer {
+        position: relative;
+        right: -15px;
+        bottom: -15px;
+        
+        nav {
+            text-align: right;
+        }
+    }
 }
-
-.ultimateEntry footer {
-    position: relative;
-    right: -15px;
-    bottom: -15px;
-}
-
-.ultimateEntry footer nav {
-    text-align: right;
- }
  
- @media screen and (min-width: 480px), screen and (min-device-width: 480px) {
+@media screen and (min-width: 480px), screen and (min-device-width: 480px) {
     
     .ultimateEntry footer nav {
         opacity: 0;
