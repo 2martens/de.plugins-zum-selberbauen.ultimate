@@ -1,58 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language languagecode="de-informal" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd">
-    <category name="wcf.acp.option">
-        <!-- modules -->
-        <item name="wcf.acp.option.module_ultimateFrontend"><![CDATA[]]></item>
-        <item name="wcf.acp.option.module_ultimateFrontend.description"><![CDATA[]]></item>
-        <!-- /modules -->
-    </category>
     
     <category name="wcf.acp.group">
         <!-- categories -->
         <!-- user -->
-        <item name="wcf.acp.group.option.category.user.ultimate"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.category.user.ultimate"><![CDATA[Ultimate CMS]]></item>
         <item name="wcf.acp.group.option.category.user.ultimate.description"><![CDATA[]]></item>
         <!-- /user -->
         
         <!-- admin -->
-        <item name="wcf.acp.group.option.category.admin.content.ultimate"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.category.admin.content.ultimate"><![CDATA[Ultimate CMS]]></item>
         <item name="wcf.acp.group.option.category.admin.content.ultimate.description"><![CDATA[]]></item>
         <!-- /admin -->
         <!-- /categories -->
         
         <!-- options -->
         <!-- user -->
-        <item name="wcf.acp.group.option.user.ultimate.canUseFrontend"><![CDATA[]]></item>
-        <item name="wcf.acp.group.option.user.ultimate.canUseFrontend.description"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.canUseFrontend"><![CDATA[Kann Formulare im Ultimate Frontend benutzen.]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.canUseFrontend.description"><![CDATA[Mitglieder dieser Benutzergruppe können Formulare im Ultimate Frontend benutzen. Diese Berechtigung führt dazu, dass etwaige im Frontend befindliche Formulare benutzt werden können. Diese Berechtigung schließt keine Kommentarfunktionen oder mit dem WCF verbundene Formulare mit ein. Das Profil kann demzufolge weiterhin bearbeitet werden.]]></item>
         <!-- /user -->
         
         <!-- admin -->
         <!-- content -->
-        <item name="wcf.acp.group.option.admin.content.ultimate.canAddContent"><![CDATA[]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canAddContent.description"><![CDATA[]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canEditContent"><![CDATA[]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canEditContent.description"><![CDATA[]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent"><![CDATA[]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent.description"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canAddContent"><![CDATA[Kann Inhalte hinzufügen.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canAddContent.description"><![CDATA[Mitglieder dieser Benutzergruppe können Inhalte hinzufügen.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canEditContent"><![CDATA[Kann Inhalte bearbeiten.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canEditContent.description"><![CDATA[Mitglieder dieser Benutzergruppe können Inhalte bearbeiten.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent"><![CDATA[Kann Inhalte löschen.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent.description"><![CDATA[Mitglieder dieser Benutzergruppe können Inhalte löschen.]]></item>
         <!-- /content -->
         
         <!-- link -->
-        <item name="wcf.acp.group.option.admin.content.ultimate.canAddLink"><![CDATA[]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canAddLink.description"><![CDATA[]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canEditLink"><![CDATA[]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canEditLink.description"><![CDATA[]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteLink"><![CDATA[]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteLink.description"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canAddLink"><![CDATA[Kann Links (Slugs) hinzufügen.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canAddLink.description"><![CDATA[Mitglieder dieser Benutzergruppe können Links (Slugs) hinzufügen.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canEditLink"><![CDATA[Kann Links (Slugs) bearbeiten.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canEditLink.description"><![CDATA[Mitglieder dieser Benutzergruppe können Links (Slugs) bearbeiten.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteLink"><![CDATA[Kann Links (Slugs) löschen.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteLink.description"><![CDATA[Mitglieder dieser Benutzergruppe können Links (Slugs) löschen.]]></item>
         <!-- /link -->
         
         <!-- config -->
-        <item name="wcf.acp.group.option.admin.content.ultimate.canAddConfig"><![CDATA[]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canAddConfig.description"><![CDATA[]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canEditConfig"><![CDATA[]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canEditConfig.description"><![CDATA[]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteConfig"><![CDATA[]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteConfig.description"><![CDATA[]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canAddConfig"><![CDATA[Kann Konfigurationen hinzufügen.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canAddConfig.description"><![CDATA[Mitglieder dieser Benutzergruppe können Konfigurationen hinzufügen.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canEditConfig"><![CDATA[Kann Konfigurationen bearbeiten.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canEditConfig.description"><![CDATA[Mitglieder dieser Benutzergruppe können Konfigurationen bearbeiten.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteConfig"><![CDATA[Kann Konfigurationen löschen.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteConfig.description"><![CDATA[Mitglieder dieser Benutzergruppe können Konfigurationen löschen.]]></item>
         <!-- /config -->
         <!-- /admin -->
+    </category>
+    
+    <category name="wcf.acp.menu">
+        <!-- core items -->
+        <item name="wcf.acp.menu.link.ultimate"><![CDATA[Ultimate CMS]]></item>
+        <item name="wcf.acp.menu.link.ultimate.links.add"><![CDATA[Link hinzufügen]]></item>
+        <item name="wcf.acp.menu.link.ultimate.links.list"><![CDATA[Links auflisten]]></item>
+        <item name="wcf.acp.menu.link.ultimate.categories.add"><![CDATA[Kategorie hinzufügen]]></item>
+        <item name="wcf.acp.menu.link.ultimate.categories.list"><![CDATA[Kategorien auflisten]]></item>
+        <item name="wcf.acp.menu.link.ultimate.configs.add"><![CDATA[Konfiguration hinzufügen]]></item>
+        <item name="wcf.acp.menu.link.ultimate.configs.list"><![CDATA[Konfigurationen auflisten]]></item>
+        <item name="wcf.acp.menu.link.ultimate.contents.add"><![CDATA[Inhalt hinzufügen]]></item>
+        <item name="wcf.acp.menu.link.ultimate.contents.list"><![CDATA[Inhalte auflisten]]></item>
+        <!-- /core items -->
+        
+        <!-- additional items -->
+        
+        <!-- /additional items -->
+    </category>
+    
+    <category name="wcf.acp.option">
+        <!-- modules -->
+        <item name="wcf.acp.option.module_ultimateFrontend"><![CDATA[Ultimate Frontend aktivieren]]></item>
+        <item name="wcf.acp.option.module_ultimateFrontend.description"><![CDATA[Aktiviert die Anzeige des Frontends.]]></item>
+        <!-- /modules -->
+    </category>
+    
+    <category name="ultimate.template">
+        <!-- configEditor -->
+        <item name="ultimate.template.configEditor.title"><![CDATA[Konfigurationseditor]]></item>
+        <item name="ultimate.template.configEditor.configTitle"><![CDATA[Konfigurationstitel]]></item>
+        <item name="ultimate.template.configEditor.configTitle.error.notUnique"><![CDATA[Dieser Titel existiert bereits.]]></item>
+        <item name="ultimate.template.configEditor.metaDescription"><![CDATA[Meta Description]]></item>
+        <item name="ultimate.template.configEditor.metaDescription.error.tooLong"><![CDATA[Die Beschreibung darf maximal 255 Zeichen enthalten.]]></item>
+        <item name="ultimate.template.configEditor.metaKeywords"><![CDATA[Meta Keywords]]></item>
+        <item name="ultimate.template.configEditor.metaKeywords.error.tooLong"><![CDATA[Die Schlüsselwörter dürfen maximal 255 Zeichen lang sein.]]></item>
+        <item name="ultimate.template.configEditor.columnLeft"><![CDATA[Linke Spalte]]></item>
+        <item name="ultimate.template.configEditor.columnCenter"><![CDATA[Mittlere Spalte]]></item>
+        <item name="ultimate.template.configEditor.columnRight"><![CDATA[Rechte Spalte]]></item>
+        
+        <item name="ultimate.template.configEditor.add"><![CDATA[Konfiguration hinzufügen]]></item>
+        <item name="ultimate.template.configEditor.edit"><![CDATA[Konfiguration bearbeiten]]></item>
+        <item name="ultimate.template.configEditor.delete"><![CDATA[Konfiguration löschen]]></item>
+        <item name="ultimate.template.configEditor.addEntry"><![CDATA[Hinzufügen]]></item>
+        <item name="ultimate.template.configEditor.deleteEntry"><![CDATA[Löschen]]></item>
+        <!-- /configEditor -->
+        
+        <!-- content -->
+        <item name="ultimate.template.content.title"><![CDATA[Titel]]></item>
+        <item name="ultimate.template.content.title.error.tooShort"><![CDATA[Der Titel muss mindestens 4 Zeichen lang sein.]]></item>
+        <item name="ultimate.template.content.description"><![CDATA[Beschreibung]]></item>
+        <item name="ultimate.template.content.description.error.tooShort"><![CDATA[Die Beschreibung muss mindestens 4 Zeichen lang sein.]]></item>
+        <item name="ultimate.template.content.category"><![CDATA[Kategorie]]></item>
+        <item name="ultimate.template.content.category.default"><![CDATA[Kategorie auswählen]]></item>
+        <item name="ultimate.template.content.category.error.notSelected"><![CDATA[Du musst eine Kategorie auswählen.]]></item>
+        <item name="ultimate.template.content.text"><![CDATA[Text]]></item>
+        <item name="ultimate.template.content.text.error.tooLong"><![CDATA[Der Text ist zu lang.]]></item>
+        <!-- /content -->
+        
+        <!-- topMenu -->
+        <item name="ultimate.template.topMenu.configEditor"><![CDATA[Konfigurationseditor]]></item>
+        <item name="ultimate.template.topMenu.action"><![CDATA[Konfiguration]]></item>
+        <item name="ultimate.template.topMenu.action.add"><![CDATA[Konfiguration hinzufügen]]></item>
+        <item name="ultimate.template.topMenu.action.edit"><![CDATA[Konfiguration bearbeiten]]></item>
+        <item name="ultimate.template.topMenu.configID"><![CDATA[Konfigurations-ID]]></item>
+        <item name="ultimate.template.topMenu.configID.empty"><![CDATA[Du musst eine Konfigurations-ID auswählen.]]></item>
+        <item name="ultimate.template.topMenu.configID.select"><![CDATA[Bitte Konfigurations-ID auswählen]]></item>
+        <item name="ultimate.template.topMenu.title"><![CDATA[Konfigurationsdialog]]></item>
+        <!-- /topMenu -->
+    </category>
+    
+    <category name="ultimate.component">
+        <!-- name of the components -->
+        <item name="ultimate.component.SiteComponentPage"><![CDATA[einfacher Inhalt (Titel + Text)]]></item>
     </category>
 </language>
