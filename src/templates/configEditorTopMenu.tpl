@@ -40,7 +40,7 @@
 
                 $('#configEditorPopupForm').live('submit', function(event) {
                     var action = $(this).find('input[name="action"]').val();
-                    if (action == 'add') {
+                    if (action == 'edit') {
                         if ($('#configID').val() == '0') {
                             event.preventDefault();
                             alert('{lang}ultimate.template.topMenu.configID.empty{/lang}');
