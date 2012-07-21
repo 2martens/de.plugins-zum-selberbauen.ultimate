@@ -8,7 +8,7 @@ use wcf\acp\form\ACPForm;
 use wcf\system\exception\UserInputException;
 
 /**
- * Shows the UltimateLinkAdd form.
+ * Shows the UltimatePageAdd form.
  *
  * @author Jim Martens
  * @copyright 2011-2012 Jim Martens
@@ -17,8 +17,8 @@ use wcf\system\exception\UserInputException;
  * @subpackage acp.form
  * @category Ultimate CMS
  */
-class UltimateLinkAddForm extends ACPForm {
-    
+class UltimatePageAddForm extends ACPForm {
+    //@todo Change name from link to page.
     /**
      * @see \wcf\acp\form\ACPForm::$activeMenuItem
      */

@@ -1,12 +1,11 @@
 <?php
 namespace ultimate\system\cache\builder;
 use ultimate\data\config\ConfigList;
-use ultimate\data\link\LinkList;
-
+use ultimate\data\page\PageList;
 use wcf\system\cache\builder\ICacheBuilder;
 
 /**
- * Caches the ultimate links.
+ * Caches the pages.
  *
  * @author Jim Martens
  * @copyright 2011-2012 Jim Martens
@@ -15,18 +14,7 @@ use wcf\system\cache\builder\ICacheBuilder;
  * @subpackage system.cache.builder
  * @category Ultimate CMS
  */
-class UltimateLinksCacheBuilder implements ICacheBuilder {
-    /**
-     * Contains the database table name of the link table.
-     * @var string
-     */
-    protected $databaseTableLink = 'link';
-    
-    /**
-     * Contains the database table name of the config table.
-     * @var string
-     */
-    protected $databaseTableConfig = 'config';
+class UltimatePageCacheBuilder implements ICacheBuilder {
     
     /**
      * @see wcf\system\cache\builder\ICacheBuilder::getData()
@@ -34,21 +22,21 @@ class UltimateLinksCacheBuilder implements ICacheBuilder {
     public function getData(array $cacheResource) {
         
         $data = array(
-        	'links' => array(),
+        	'pages' => array(),
             'configs' => array()
         );
         
-        //read links
-        $linkList = new LinkList();
-        $linkList->readObjects();
-        $objects = $linkList->getObjects();
-        $links = array();
+        //read pages
+        $pageList = new PageList();
+        $pageList->readObjects();
+        $objects = $pageList->getObjects();
+        $pages = array();
         $configIDs = array();
-        foreach ($objects as $link) {
-            $links[$link->linkID] = $link->linkSlug;
-            $configIDs[$link->linkSlug] = $link->configID;
+        foreach ($objects as $page) {
+            $pages[$page->pageID] = $page->pageSlug;
+            $configIDs[$page->pageSlug] = $page->configID;
         }
-        $data['links'] = $links;
+        $data['pages'] = $pages;
         
         //read configs
         $configList = new ConfigList();
@@ -57,8 +45,8 @@ class UltimateLinksCacheBuilder implements ICacheBuilder {
         $configs = array();
         foreach ($objects as $config) {
             if (!in_array($config->configID, $configIDs)) continue;
-            $linkSlugs = array_flip($configIDs);
-            $configs[$linkSlugs[$config->configID]] = array(
+            $pageSlugs = array_flip($configIDs);
+            $configs[$pageSlugs[$config->configID]] = array(
                 'configTitle' => $config->configTitle,
                 'metaDescription' => $config->metaDescription,
                 'metaKeywords' => $config->metaKeywords,

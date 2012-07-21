@@ -1,15 +1,13 @@
 <?php
 namespace ultimate\acp\page;
-use wcf\system\request\LinkHandler;
-
-use ultimate\data\config\Config;
 use ultimate\system\UltimateCore;
 use wcf\page\SortablePage;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\menu\acp\ACPMenu;
+use wcf\system\request\LinkHandler;
 
 /**
- * Shows the UltimateLinkList page.
+ * Shows the UltimatePageList page.
  *
  * @author Jim Martens
  * @copyright 2011-2012 Jim Martens
@@ -18,37 +16,37 @@ use wcf\system\menu\acp\ACPMenu;
  * @subpackage acp.page
  * @category Ultimate CMS
  */
-class UltimateLinkListPage extends SortablePage {
+class UltimatePageListPage extends SortablePage {
     
 	/**
      * Contains the active menu item.
      * @var string
      */
-    public $activeMenuItem = 'wcf.acp.menu.item.link.ultimate.link.list';
+    public $activeMenuItem = 'wcf.acp.menu.link.ultimate.page.list';
     
     /**
      * @see \wcf\page\AbstractPage::$templateName
      */
-    public $templateName = 'ultimateLinkList';
+    public $templateName = 'ultimatePageList';
     
     /**
-     * @see \wcf\page\MultiplLinkPage::$objectListClassName
+     * @see \wcf\page\MultipleLinkPage::$objectListClassName
      */
-    public $objectListClassName = '\ultimate\data\link\LinkList';
+    public $objectListClassName = '\ultimate\data\page\PageList';
     
     /**
 	 * @see \wcf\page\SortablePage::$validSortFields
 	 */
     public $validSortFields = array(
-        'linkID',
-        'linkSlug'
+        'pageID',
+        'pageSlug'
     );
     
     /**
-     * Contains an array of links.
+     * Contains an array of pages.
      * @var array
      */
-    protected $links = array();
+    protected $pages = array();
     
     /**
      * Contains the url.
@@ -62,18 +60,18 @@ class UltimateLinkListPage extends SortablePage {
     public function readData() {
         parent::readData();
         $objects = $this->objectList->getObjects();
-        $links = array();
+        $pages = array();
         
         foreach ($objects as $object) {
             $config = new Config($object->configID);
-            $links[] = array(
-                'linkID' => $object->linkID,
-                'linkSlug' => $object->linkSlug,
+            $pages[] = array(
+                'pageID' => $object->pageID,
+                'pageSlug' => $object->pageSlug,
                 'configTitle' => $config->configTitle
             );
         }
-        $this->links = $links;
-        $this->url = LinkHandler::getInstance()->getLink('UltimateLinkList', array(), 'action='.rawurlencode($this->action).'&pageNo='.$this->pageNo.'&sortField='.$this->sortField.'&sortOrder='.$this->sortOrder);
+        $this->pages = $pages;
+        $this->url = LinkHandler::getInstance()->getLink('UltimatePageList', array(), 'action='.rawurlencode($this->action).'&pageNo='.$this->pageNo.'&sortField='.$this->sortField.'&sortOrder='.$this->sortOrder);
     }
     
     /**
@@ -83,7 +81,7 @@ class UltimateLinkListPage extends SortablePage {
         parent::assignVariables();
         //overrides objects assignment in MultipleLinkPage
         UltimateCore::getTPL()->assign(array(
-        	'objects' => $this->links,
+        	'objects' => $this->pages,
             'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(),
             'url' => $this->url
         ));
