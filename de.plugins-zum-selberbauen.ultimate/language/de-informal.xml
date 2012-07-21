@@ -75,6 +75,18 @@
         <!-- /modules -->
     </category>
     
+    <category name="ultimate.header">
+        <!-- page menu -->
+        <item name="ultimate.header.menu.index"><![CDATA[Startseite]]></item>
+        <!-- /page menu -->
+    </category>
+    
+    <category name="ultimate.footer">
+        <!-- page menu -->
+        <item name="ultimate.footer.menu.index"><![CDATA[Startseite]]></item>
+        <!-- /page menu -->
+    </category>
+    
     <category name="ultimate.template">
         <!-- configEditor -->
         <item name="ultimate.template.configEditor.title"><![CDATA[Konfigurationseditor]]></item>
@@ -114,7 +126,7 @@
         <item name="ultimate.template.topMenu.action.edit"><![CDATA[Konfiguration bearbeiten]]></item>
         <item name="ultimate.template.topMenu.configID"><![CDATA[Konfigurations-ID]]></item>
         <item name="ultimate.template.topMenu.configID.empty"><![CDATA[Du musst eine Konfigurations-ID auswählen.]]></item>
-        <item name="ultimate.template.topMenu.configID.select"><![CDATA[Bitte Konfigurations-ID auswählen]]></item>
+        <item name="ultimate.template.topMenu.configID.select"><![CDATA[Bitte Konfigurations-ID auswählen!]]></item>
         <item name="ultimate.template.topMenu.title"><![CDATA[Konfigurationsdialog]]></item>
         <!-- /topMenu -->
     </category>
