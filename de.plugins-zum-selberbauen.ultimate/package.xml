@@ -7,10 +7,10 @@
         <packagedescription language="de"><![CDATA[Ein WCF-kompatibles CMS.]]></packagedescription>
         <packagedescription language="de-informal"><![CDATA[Ein WCF-kompatibles CMS.]]></packagedescription>
         
-        <standalone>1</standalone>
+        <isapplication>1</isapplication>
         <isunique>0</isunique>
         <version>1.0.0 Alpha 1</version>
-        <date>2012-03-20</date>    
+        <date>2012-07-20</date>    
     </packageinformation>
     
     <authorinformation>
