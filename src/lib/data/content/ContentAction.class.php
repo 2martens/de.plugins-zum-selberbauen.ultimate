@@ -1,10 +1,12 @@
 <?php
 namespace ultimate\data\content;
 use ultimate\data\config\ConfigList;
-use wcf\system\exception\ValidateActionException;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\cache\CacheHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
+use wcf\system\exception\PermissionDeniedException;
+use wcf\system\exception\ValidateActionException;
+
 
 /**
  * Executes content-related functions.
@@ -45,6 +47,7 @@ class ContentAction extends AbstractDatabaseObjectAction {
 	    parent::validateDelete();
 	    
 	    $configList = new ConfigList();
+	    $configList->readObjects();
 	    $objects = $configList->getObjects();
 	    foreach ($objects as $config) {
 	        $requiredContents = unserialize($config->requiredContents);
@@ -53,6 +56,48 @@ class ContentAction extends AbstractDatabaseObjectAction {
 	            if (!in_array($objectID, $flippedArray)) continue;
 	            
 	            throw new ValidateActionException('The content with the ID '.(string) $objectID.' is still needed by some configs.');
+	        }
+	    }
+	}
+	
+	/**
+	 * Creates new content.
+	 *
+	 * @return	Content
+	 */
+	public function create() {
+	    $content = parent::create();
+	    $contentEditor = new ContentEditor($content);
+	
+	    // insert categories
+	    $categoryIDs = (isset($this->parameters['categories'])) ? $this->parameters['categories'] : array();
+	    $contentEditor->addToCategories($categoryIDs, false);
+	
+	    return $content;
+	}
+	
+	/**
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::update()
+	 */
+	public function update() {
+	    if (isset($this->parameters['data'])) {
+	        parent::update();
+	    }
+	    else {
+	        if (!count($this->objects)) {
+	            $this->readObjects();
+	        }
+	    }
+	
+	    $categoryIDs = (isset($this->parameters['categories'])) ? $this->parameters['categories'] : array();
+	    
+	    foreach ($this->objects as $contentEditor) {
+	        if (!empty($categoryIDs)) {
+	            $contentEditor->addToCategories($categoryIDs);
+	        }
+	        	
+	        if (!empty($removeGroups)) {
+	            $userEditor->removeFromGroups($removeGroups);
 	        }
 	    }
 	}

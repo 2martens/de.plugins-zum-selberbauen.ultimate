@@ -12,9 +12,9 @@ use wcf\data\DatabaseObjectList;
  * @subpackage data.page
  * @category Ultimate CMS
  */
-class LinkList extends DatabaseObjectList {
+class PageList extends DatabaseObjectList {
     /**
      * @see \wcf\data\DatabaseObjectList::$className
      */
-    public $className = '\ultimate\data\page\Link';
+    public $className = '\ultimate\data\page\Page';
 }

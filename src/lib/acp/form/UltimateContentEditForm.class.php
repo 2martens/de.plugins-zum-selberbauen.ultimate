@@ -21,7 +21,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
     /**
      * @see \wcf\acp\form\ACPForm::$activeMenuItem
      */
-    public $activeMenuItem = 'wcf.acp.menu.item.link.ultimate.contents';
+    public $activeMenuItem = 'wcf.acp.menu.item.link.ultimate.content';
     
     /**
      * @see \wcf\page\AbstractPage::$neededPermissions
@@ -45,12 +45,12 @@ class UltimateContentEditForm extends UltimateContentAddForm {
         	'data' => array(
             	'contentTitle' => $this->subject,
                 'contentDescription' => $this->description,
-                'categoryID' => $this->categoryID,
             	'contentText' => $this->text,
                 'enableBBCodes' => $this->enableBBCodes,
                 'enableHtml' => $this->enableHtml,
                 'enableSmilies' => $this->enableSmilies
-            )
+            ),
+            'categories' => $this->categoryIDs
         );
         
         $action = new ContentAction(array($this->contentID), 'update', $parameters);

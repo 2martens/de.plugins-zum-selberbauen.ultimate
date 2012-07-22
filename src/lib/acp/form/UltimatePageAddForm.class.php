@@ -22,7 +22,7 @@ class UltimatePageAddForm extends ACPForm {
     /**
      * @see \wcf\acp\form\ACPForm::$activeMenuItem
      */
-    public $activeMenuItem = 'wcf.menu.link.ultimate.links.add';
+    public $activeMenuItem = 'wcf.menu.link.ultimate.page.add';
     
     /**
      * @see \wcf\page\AbstractPage::$templateName

@@ -14,24 +14,24 @@ use wcf\system\database\util\PreparedStatementConditionBuilder;
  * @subpackage data.page
  * @category Ultimate CMS
  */
-class LinkAction extends AbstractDatabaseObjectAction {
+class PageAction extends AbstractDatabaseObjectAction {
     /**
      * @see \wcf\data\AbstractDatabaseObjectAction::$className
      */
-    public $className = 'ultimate\data\page\LinkEditor';
+    public $className = 'ultimate\data\page\PageEditor';
     
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsCreate
 	 */
-	protected $permissionsCreate = array('admin.content.ultimate.canAddLink');
+	protected $permissionsCreate = array('admin.content.ultimate.canAddPage');
 	
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
 	 */
-	protected $permissionsDelete = array('admin.content.ultimate.canDeleteLink');
+	protected $permissionsDelete = array('admin.content.ultimate.canDeletePage');
 	
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
 	 */
-	protected $permissionsUpdate = array('admin.content.ultimate.canEditLink');
+	protected $permissionsUpdate = array('admin.content.ultimate.canEditPage');
 }

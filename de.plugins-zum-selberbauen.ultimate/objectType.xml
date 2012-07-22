@@ -9,7 +9,12 @@
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.content</name>
             <definitionname>com.woltlab.wcf.clipboardItem</definitionname>
-            <listclassname>ultimate\data\link\ContentList</listclassname>
+            <listclassname>ultimate\data\content\ContentList</listclassname>
+        </type>
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.category</name>
+            <definitionname>com.woltlab.wcf.clipboardItem</definitionname>
+            <listclassname>ultimate\data\category\CategoryList</listclassname>
         </type>
     </import>
 </data>

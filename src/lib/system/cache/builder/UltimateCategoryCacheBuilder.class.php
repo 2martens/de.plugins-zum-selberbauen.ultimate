@@ -1,10 +1,10 @@
 <?php
 namespace ultimate\system\cache\builder;
-use ultimate\data\content\ContentList;
+use ultimate\data\category\CategoryList;
 use wcf\system\cache\builder\ICacheBuilder;
 
 /**
- * Caches the contents.
+ * Caches the categories.
  *
  * @author Jim Martens
  * @copyright 2011-2012 Jim Martens
@@ -13,22 +13,24 @@ use wcf\system\cache\builder\ICacheBuilder;
  * @subpackage system.cache.builder
  * @category Ultimate CMS
  */
-class UltimateContentCacheBuilder implements ICacheBuilder {
-    
+class UltimateCategoryCacheBuilder implements ICacheBuilder {
+
     /**
      * @see \wcf\system\cache\builder\ICacheBuilder::getData()
      */
     public function getData(array $cacheResource) {
         $data = array(
-            'contents' => array(),
-            'contentIDs' => array()
+            'categories' => array(),
+            'categoryIDs' => array()
         );
-        
-        $contentList = new ContentList();
-        $contentList->readObjectIDs();
-        $contentList->readObjects();
-        $data['contentIDs'] = $contentList->getObjectIDs();
-        $data['contents'] = $contentList->getObjects();
+    
+        $categoryList = new CategoryList();
+        $categoryList->readObjectIDs();
+        $categoryList->readObjects();
+        $categories = $categoryList->getObjects();
+        $categoryIDs = $categoryList->getObjectIDs();
+        $data['categories'] = array_combine($categoryIDs, $categories);
+        $data['categoryIDs'] = $categoryIDs;
         
         return $data;
     }

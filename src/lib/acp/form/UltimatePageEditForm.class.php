@@ -1,10 +1,9 @@
 <?php
 namespace ultimate\acp\form;
-use ultimate\acp\form\UltimateLinkAddForm;
-use ultimate\data\link\Link;
-use ultimate\data\link\LinkAction;
+use ultimate\acp\form\UltimatePageAddForm;
+use ultimate\data\page\Page;
+use ultimate\data\page\PageAction;
 use ultimate\system\UltimateCore;
-use wcf\form\AbstractForm;
 
 /**
  * Shows the UltimatePageEdit form.
@@ -17,31 +16,31 @@ use wcf\form\AbstractForm;
  * @category Ultimate CMS
  */
 class UltimatePageEditForm extends UltimatePageAddForm {
-    //@todo link auf page ändern
+    
     /**
      * @see \wcf\acp\form\ACPForm::$activeMenuItem
      */
-    public $activeMenuItem = 'wcf.acp.menu.item.link.ultimate.links';
+    public $activeMenuItem = 'wcf.acp.menu.link.ultimate.page';
     
     /**
      * @see \wcf\page\AbstractPage::$neededPermissions
      */
     public $neededPermissions = array(
-        'admin.content.ultimate.canEditLink'
+        'admin.content.ultimate.canEditPage'
     );
     
     /**
-     * Contains the link id.
+     * Contains the page id.
      * @var int
      */
-    protected $linkID = 0;
+    protected $pageID = 0;
     
     /**
      * @see \wcf\page\IPage::readParameters()
      */
     public function readParameters() {
         parent::readParameters();
-        if (isset($_REQUEST['id'])) $this->linkID = intval($_REQUEST['id']);
+        if (isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
     }
     
     /**
@@ -53,11 +52,11 @@ class UltimatePageEditForm extends UltimatePageAddForm {
         $parameters = array(
             'data' => array(
                 'configID' => $this->configID,
-                'linkSlug' => $this->slug,
+                'pageSlug' => $this->pageSlug,
             )
         );
         
-        $action = new LinkAction(array($this->linkID), 'update', $parameters);
+        $action = new PageAction(array($this->pageID), 'update', $parameters);
         $action->executeAction();
         
         $this->saved();
@@ -70,9 +69,9 @@ class UltimatePageEditForm extends UltimatePageAddForm {
      */
     public function readData() {
         if (!count($_POST)) {
-            $link = new Link($this->linkID);
+            $link = new Page($this->pageID);
             $this->configID = $link->configID;
-            $this->slug = $link->linkSlug;
+            $this->pageSlug = $page->pageSlug;
         }
         parent::readData();
     }
@@ -83,7 +82,7 @@ class UltimatePageEditForm extends UltimatePageAddForm {
     public function assignVariables() {
         parent::assignVariables();
         UltimateCore::getTPL()->assign(array(
-            'linkID' => $this->linkID,
+            'pageID' => $this->pageID,
             'action' => 'edit'
         ));
     }

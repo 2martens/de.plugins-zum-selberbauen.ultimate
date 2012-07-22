@@ -53,4 +53,13 @@ class Category extends AbstractUltimateDatabaseObject {
         }
         return $contents;
     }
+    
+    /**
+     * Returns the title of this category.
+     *
+     * @return string
+     */
+    public function __toString() {
+        return $this->categoryTitle;
+    }
 }

@@ -14,16 +14,16 @@ use wcf\system\cache\CacheHandler;
  * @subpackage data.page
  * @category Ultimate CMS
  */
-class LinkEditor extends DatabaseObjectEditor implements IEditableCachedObject {
+class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
     /**
      * @see \wcf\data\DatabaseObjectDecorator::$baseClass
      */
-    protected static $baseClass = '\ultimate\data\page\Link';
+    protected static $baseClass = '\ultimate\data\page\Page';
     
 	/**
      * @see \wcf\data\IEditableCachedObject::resetCache()
      */
     public static function resetCache() {
-        CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.ultimate-pages-*');
+        CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.page.php');
     }
 }
