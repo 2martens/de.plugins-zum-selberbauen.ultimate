@@ -1,6 +1,5 @@
 <?php
 namespace ultimate\system\cache\builder;
-use ultimate\data\config\ConfigList;
 use ultimate\data\page\PageList;
 use wcf\system\cache\builder\ICacheBuilder;
 
@@ -17,44 +16,17 @@ use wcf\system\cache\builder\ICacheBuilder;
 class UltimatePageCacheBuilder implements ICacheBuilder {
     
     /**
-     * @see wcf\system\cache\builder\ICacheBuilder::getData()
+     * @see \wcf\system\cache\builder\ICacheBuilder::getData()
      */
     public function getData(array $cacheResource) {
-        
         $data = array(
-        	'pages' => array(),
-            'configs' => array()
+        	'pages' => array()
         );
         
-        //read pages
         $pageList = new PageList();
         $pageList->readObjects();
-        $objects = $pageList->getObjects();
-        $pages = array();
-        $configIDs = array();
-        foreach ($objects as $page) {
-            $pages[$page->pageID] = $page->pageSlug;
-            $configIDs[$page->pageSlug] = $page->configID;
-        }
-        $data['pages'] = $pages;
+        $data['pages'] = $pageList->getObjects();
         
-        //read configs
-        $configList = new ConfigList();
-        $configList->readObjects();
-        $objects = $configList->getObjects();
-        $configs = array();
-        foreach ($objects as $config) {
-            if (!in_array($config->configID, $configIDs)) continue;
-            $pageSlugs = array_flip($configIDs);
-            $configs[$pageSlugs[$config->configID]] = array(
-                'configTitle' => $config->configTitle,
-                'metaDescription' => $config->metaDescription,
-                'metaKeywords' => $config->metaKeywords,
-                'templateName' => $config->templateName,
-                'storage' => $config->storage
-            );
-        }
-        $data['configs'] = $configs;
         return $data;
     }
 }

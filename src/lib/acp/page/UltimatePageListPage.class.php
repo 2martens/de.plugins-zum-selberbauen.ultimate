@@ -1,7 +1,7 @@
 <?php
 namespace ultimate\acp\page;
 use ultimate\system\UltimateCore;
-use wcf\page\SortablePage;
+use wcf\page\AbstractCachedListPage;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\menu\acp\ACPMenu;
 use wcf\system\request\LinkHandler;
@@ -16,7 +16,7 @@ use wcf\system\request\LinkHandler;
  * @subpackage acp.page
  * @category Ultimate CMS
  */
-class UltimatePageListPage extends SortablePage {
+class UltimatePageListPage extends AbstractCachedListPage {
     
 	/**
      * Contains the active menu item.
@@ -43,10 +43,19 @@ class UltimatePageListPage extends SortablePage {
     );
     
     /**
-     * Contains an array of pages.
-     * @var array
+     * @see \wcf\page\AbstractCachedListPage::$cacheBuilderClassName
      */
-    protected $pages = array();
+    public $cacheBuilderClassName = '\ultimate\system\cache\builder\UltimatePageCacheBuilder';
+    
+    /**
+     * @see \wcf\page\AbstractCachedListPage::$cacheName
+     */
+    public $cacheName = 'page';
+    
+    /**
+     * @see \wcf\page\AbstractCachedListPage::$cacheIndex
+     */
+    public $cacheIndex = 'pages';
     
     /**
      * Contains the url.
@@ -59,19 +68,14 @@ class UltimatePageListPage extends SortablePage {
      */
     public function readData() {
         parent::readData();
-        $objects = $this->objectList->getObjects();
-        $pages = array();
-        
-        foreach ($objects as $object) {
-            $config = new Config($object->configID);
-            $pages[] = array(
-                'pageID' => $object->pageID,
-                'pageSlug' => $object->pageSlug,
-                'configTitle' => $config->configTitle
-            );
-        }
-        $this->pages = $pages;
         $this->url = LinkHandler::getInstance()->getLink('UltimatePageList', array(), 'action='.rawurlencode($this->action).'&pageNo='.$this->pageNo.'&sortField='.$this->sortField.'&sortOrder='.$this->sortOrder);
+    }
+    
+    /**
+     * @see \wcf\page\AbstractCachedListPage::loadCache()
+     */
+    public function loadCache($path = ULTIMATE_DIR) {
+        parent::loadCache($path);
     }
     
     /**
@@ -81,8 +85,7 @@ class UltimatePageListPage extends SortablePage {
         parent::assignVariables();
         //overrides objects assignment in MultipleLinkPage
         UltimateCore::getTPL()->assign(array(
-        	'objects' => $this->pages,
-            'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(),
+        	'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(),
             'url' => $this->url
         ));
     }
@@ -96,4 +99,6 @@ class UltimatePageListPage extends SortablePage {
 		
 		parent::show();
 	}
+	
+	
 }

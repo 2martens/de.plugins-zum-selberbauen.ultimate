@@ -94,17 +94,17 @@ ULTIMATE.ACP.Content.List.prototype = {
 };
 
 /**
- * Namespace for ULTIMATE.ACP.Link
+ * Namespace for ULTIMATE.ACP.Page
  */
-ULTIMATE.ACP.Link = {};
+ULTIMATE.ACP.Page = {};
 
 /**
- * LinkList clipboard API
+ * PageList clipboard API
  */
-ULTIMATE.ACP.Link.List = function() { this.init(); };
-ULTIMATE.ACP.Link.List.prototype = {
+ULTIMATE.ACP.Page.List = function() { this.init(); };
+ULTIMATE.ACP.Page.List.prototype = {
 	/**
-	 * Initializes the LinkList clipboard API.
+	 * Initializes the PageList clipboard API.
 	 */
 	init: function() {
 		$('body').bind('clipboardAction', $.proxy(this.handleClipboardEvent, this));
@@ -115,7 +115,7 @@ ULTIMATE.ACP.Link.List.prototype = {
 	 */
 	handleClipboardEvent: function(event, type, actionName) {
 		// ignore unrelated events
-		if ((type != 'de.plugins-zum-selberbauen.ultimate.link') || (actionName != 'link.delete')) return;
+		if ((type != 'de.plugins-zum-selberbauen.ultimate.page') || (actionName != 'link.delete')) return;
 		
 		var $item = $(event.target);
 		this._delete($item);

@@ -61,17 +61,19 @@
                     <tr id="categoryRow{@$category->categoryID}">
                         <td class="columnMark"><input type="checkbox" class="clipboardItem" data-object-id="{@$category->categoryID}" /></td>
                         <td class="columnIcon">
-                            {if $__wcf->session->getPermission('admin.content.ultimate.canEditContent')}
-                                <a href="{link controller='UltimateCategoryEdit' id=$category->categoryID}{/link}"><img src="{@RELATIVE_WCF_DIR}icon/edit1.svg" alt="" title="{lang}wcf.acp.ultimate.category.edit{/lang}" class="balloonTooltip" /></a>
-                            {else}
-                                <img src="{@RELATIVE_WCF_DIR}icon/edit1D.svg" alt="" title="{lang}wcf.acp.ultimate.category.edit{/lang}" />
+                            {if $category->categoryID > 1}
+                                {if $__wcf->session->getPermission('admin.content.ultimate.canEditContent')}
+                                    <a href="{link controller='UltimateCategoryEdit' id=$category->categoryID}{/link}"><img src="{@RELATIVE_WCF_DIR}icon/edit1.svg" alt="" title="{lang}wcf.acp.ultimate.category.edit{/lang}" class="balloonTooltip" /></a>
+                                {else}
+                                    <img src="{@RELATIVE_WCF_DIR}icon/edit1D.svg" alt="" title="{lang}wcf.acp.ultimate.category.edit{/lang}" />
+                                {/if}
+                                {if $__wcf->session->getPermission('admin.content.ultimate.canDeleteCategory')}
+                                    <a onclick="return confirm('{lang}wcf.acp.ultimate.category.delete.sure{/lang}')" href="{link controller='UltimateCategoryDelete' id=$category->categoryID}url={@$encodedURL}&t={@SECURITY_TOKEN}{/link}"><img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" title="{lang}wcf.acp.ultimate.category.delete{/lang}" class="balloonTooltip" /></a>
+                                {else}
+                                    <img src="{@RELATIVE_WCF_DIR}icon/delete1D.svg" alt="" title="{lang}wcf.acp.ultimate.category.delete{/lang}" />
+                                {/if}
                             {/if}
-                            {if $__wcf->session->getPermission('admin.content.ultimate.canDeleteCategory')}
-                                <a onclick="return confirm('{lang}wcf.acp.ultimate.category.delete.sure{/lang}')" href="{link controller='UltimateCategoryDelete' id=$category->categoryID}url={@$encodedURL}&t={@SECURITY_TOKEN}{/link}"><img src="{@RELATIVE_WCF_DIR}icon/delete1.svg" alt="" title="{lang}wcf.acp.ultimate.category.delete{/lang}" class="balloonTooltip" /></a>
-                            {else}
-                                <img src="{@RELATIVE_WCF_DIR}icon/delete1D.svg" alt="" title="{lang}wcf.acp.ultimate.category.delete{/lang}" />
-                            {/if}
-                    
+                            
                             {event name='buttons'}
                         </td>
                         <td class="columnID"><p>{@$category->categoryID}</p></td>

@@ -36,31 +36,31 @@
 <form method="post" action="{if $action == 'add'}{link controller='UltimatePageAdd'}{/link}{else}{link controller='UltimatePageEdit'}{/link}{/if}">
     <div class="border content">
         <dl{if $errorField == 'configID'} class="formError"{/if}>
-            <dt><label for="configID">{lang}ultimate.template.page.configTitle{/lang}</label></dt>
+            <dt><label for="configID">{lang}wcf.acp.ultimate.page.configTitle{/lang}</label></dt>
             <dd>
                 <select id="configID" name="configID" size="1">
-                    <option value="0">{lang}ultimate.template.page.configTitle.select{/lang}</option>
+                    <option value="0">{lang}wcf.acp.ultimate.page.configTitle.select{/lang}</option>
                     {foreach from=$configOptions key=$key item=$configTitle}
                     <option value="{$key}"{if $configID == $key} selected="selected"{/if}>{$configTitle}</option>
                     {/foreach}
                 </select>
                 {if $errorField == 'configID'}
                     <small class="innerError">
-                        {lang}ultimate.template.page.configID.error.{@$errorType}{/lang}
+                        {lang}wcf.acp.ultimate.page.configID.error.{@$errorType}{/lang}
                     </small>
                 {/if}
             </dd>
         </dl>
-        <dl{if $errorField == 'slug'} class="formError"{/if}>
-            <dt><label for="slug">{lang}ultimate.template.page.slug{/lang}</label></dt>
+        <dl{if $errorField == 'pageSlug'} class="formError"{/if}>
+            <dt><label for="pageSlug">{lang}wcf.acp.ultimate.page.slug{/lang}</label></dt>
             <dd>
-                <input type="text" id="slug" name="slug" value="{@$slug}" class="medium" />
-                {if $errorField == 'slug'}
+                <input type="text" id="pageSlug" name="pageSlug" value="{@$pageSlug}" class="medium" />
+                {if $errorField == 'pageSlug'}
                     <small class="innerError">
                         {if $errorType == 'empty'}
                             {lang}wcf.global.form.error.empty{/lang}
                         {else}
-                            {lang}ultimate.template.page.slug.error.{@$errorType}{/lang}
+                            {lang}wcf.acp.ultimate.page.slug.error.{@$errorType}{/lang}
                         {/if}
                     </small>
                 {/if}
