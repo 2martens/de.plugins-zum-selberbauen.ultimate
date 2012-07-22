@@ -1,7 +1,7 @@
 <?php
 namespace ultimate\data\category;
-use ultimate\data\AbstractUltimateDatabaseObject;
 use ultimate\data\content\Content;
+use ultimate\data\AbstractUltimateDatabaseObject;
 use ultimate\system\UltimateCore;
 
 /**
@@ -39,7 +39,7 @@ class Category extends AbstractUltimateDatabaseObject {
     /**
      * Returns all contents in this category.
      *
-     * @return array<Content>
+     * @return array<ultimate\data\content\Content>
      */
     public function getContents() {
         $sql = 'SELECT contentID
@@ -52,5 +52,14 @@ class Category extends AbstractUltimateDatabaseObject {
             $contents[$row['contentID']] = new Content($row['contentID']);
         }
         return $contents;
+    }
+    
+    /**
+     * Returns the title of this category.
+     *
+     * @return string
+     */
+    public function __toString() {
+        return $this->categoryTitle;
     }
 }

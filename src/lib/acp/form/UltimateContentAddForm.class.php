@@ -2,11 +2,12 @@
 namespace ultimate\acp\form;
 use ultimate\data\content\ContentAction;
 use ultimate\system\UltimateCore;
-
 use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
+use wcf\system\cache\CacheHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\menu\acp\ACPMenu;
+use wcf\util\ArrayUtil;
 
 /**
  * Show the UltimateContentAdd form.
@@ -28,7 +29,7 @@ class UltimateContentAddForm extends MessageForm {
     /**
      * @see \wcf\acp\form\ACPForm::$activeMenuItem
      */
-    public $activeMenuItem = 'wcf.acp.menu.item.link.ultimate.contents.add';
+    public $activeMenuItem = 'wcf.acp.menu.link.ultimate.content.add';
     
     /**
      * @see \wcf\page\AbstractPage::$neededPermissions
@@ -44,10 +45,16 @@ class UltimateContentAddForm extends MessageForm {
     protected $description = '';
     
     /**
-     * Contains the chosen category.
-     * @var int
+     * Contains the chosen categories.
+     * @var array
      */
-    protected $categoryID = 0;
+    protected $categoryIDs = array();
+    
+    /**
+     * Contains all categories.
+     * @var array<ultimate\data\category\Category>
+     */
+    protected $categories = array();
        
     /**
      * Contains the maximal length of the text.
@@ -61,23 +68,27 @@ class UltimateContentAddForm extends MessageForm {
     public function readFormParameters() {
         parent::readFormParameters();
         if (isset($_POST['description'])) $this->description = trim($_POST['description']);
-        if (isset($_POST['category'])) $this->categoryID = intval($_POST['category']);
+        if (isset($_POST['categoryIDs']) && is_array($_POST['categoryIDs'])) $this->categoryIDs = ArrayUtil::toIntegerArray(($_POST['categoryIDs']));
     }
     
     /**
      * @see \wcf\form\IForm::validate()
      */
     public function validate() {
-        RecaptchaForm::validate();
         $this->validateSubject();
         $this->validateDescription();
-        $this->validateCategory();
+        $this->validateCategories();
         $this->validateText();
+        // multilingualism
+        $this->validateContentLanguage();
+        
+        RecaptchaForm::validate();
     }
     
     /**
      * Validates content subject.
-     * @throws UserInputException
+     *
+     * @throws \wcf\system\exception\UserInputException
      */
     protected function validateSubject() {
         parent::validateSubject();
@@ -88,7 +99,8 @@ class UltimateContentAddForm extends MessageForm {
     
     /**
      * Validates content description.
-     * @throws UserInputException
+     *
+     * @throws \wcf\system\exception\UserInputException
      */
     protected function validateDescription() {
         if (empty($this->description)) {
@@ -102,11 +114,16 @@ class UltimateContentAddForm extends MessageForm {
     
     /**
      * Validates category.
-     * @throws UserInputException
+     *
+     * @throws \wcf\system\exception\UserInputException
      */
-    protected function validateCategory() {
-        if (!$this->categoryID) {
-            throw new UserInputException('category', 'notSelected');
+    protected function validateCategories() {
+        $cacheOutput = CacheHandler::getInstance()->get('category');
+        $categoryIDs = $cacheOutput['categoryIDs'];
+        foreach ($this->categoryIDs as $categoryID) {
+            if (in_array($categoryID, $categoryIDs)) continue;
+            throw new UserInputException('category', 'invalidIDs');
+            break;
         }
     }
     
@@ -119,12 +136,12 @@ class UltimateContentAddForm extends MessageForm {
             'data' => array(
             	'contentTitle' => $this->subject,
                 'contentDescription' => $this->description,
-                'categoryID' => $this->categoryID,
-            	'contentText' => $this->text,
+                'contentText' => $this->text,
                 'enableBBCodes' => $this->enableBBCodes,
                 'enableHtml' => $this->enableHtml,
                 'enableSmilies' => $this->enableSmilies
-            )
+            ),
+            'categories' => $this->categoryIDs
         );
         
         $action = new ContentAction(array(), 'create', $parameters);
@@ -140,6 +157,21 @@ class UltimateContentAddForm extends MessageForm {
     }
     
     /**
+     * @see \wcf\form\IForm::readData()
+     */
+    public function readData() {
+        $cache = 'category';
+        $cacheBuilderClass = '\ultimate\system\cache\builder\UltimateCategoryCacheBuilder';
+        $file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
+        CacheHandler::getInstance()->addResource($cache, $file, $cacheBuilderClass);
+        $cacheOutput = CacheHandler::getInstance()->get($cache);
+        $this->categories = $cacheOutput['categories'];
+        $this->categoryIDs = $cacheOutput['categoryIDs'];
+        
+        parent::readData();
+    }
+    
+    /**
      * @see \wcf\page\IPage::assignVariables()
      */
     public function assignVariables() {
@@ -147,7 +179,7 @@ class UltimateContentAddForm extends MessageForm {
         UltimateCore::getTPL()->assign(array(
             'description' => $this->description,
             'action' => 'add',
-            'category' => $this->categoryID
+            'categoryIDs' => $this->categoryIDs
         ));
     }
     

@@ -1,8 +1,9 @@
 <?php
 namespace ultimate\data\category;
 use ultimate\system\UltimateCore;
-
 use wcf\data\DatabaseObjectEditor;
+use wcf\data\IEditableCachedObject;
+use wcf\system\cache\CacheHandler;
 
 /**
  * Provides functions to edit categories.
@@ -14,33 +15,26 @@ use wcf\data\DatabaseObjectEditor;
  * @subpackage data.category
  * @category Ultimate CMS
  */
-class CategoryEditor extends DatabaseObjectEditor {
+class CategoryEditor extends DatabaseObjectEditor implements IEditableCachedObject {
     /**
      * @see \wcf\data\DatabaseObjectDecorator::$baseClass
      */
     protected static $baseClass = '\ultimate\data\category\Category';
     
     /**
-     * Contains the table which links contents with categories.
-     * @var string
-     */
-    protected static $contentCategoryTable = 'content_to_category';
-    
-    /**
-     * Deletes all connections of given categories with contents.
-     * @see \wcf\data\DatabaseObjectEditor::deleteAll()
-     */
-    public static function deleteAll(array $objectIDs = array()) {
-        $affectedCount = DatabaseObjectEditor::deleteAll($objectIDs);
-		
-		$sql = 'DELETE FROM ultimate'.ULTIMATE_N.'_'.self::$contentCategoryTable.'
-				WHERE categoryID = ?';
-		$statement = UltimateCore::getDB()->prepareStatement($sql);
-		UltimateCore::getDB()->beginTransaction();
-		foreach ($objectIDs as $objectID) {
-		    $statement->executeUnbuffered(array($objectID));
-		}
-		UltimateCore::getDB()->commitTransaction();
-		return $affectedCount;
-    }
+	 * @see	\wcf\data\IEditableObject::deleteAll()
+	 */
+	public static function deleteAll(array $objectIDs = array()) {
+		// unmark contents
+		ClipboardHandler::getInstance()->unmark($objectIDs, ClipboardHandler::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.ultimate.category'));
+	
+		return parent::deleteAll($objectIDs);
+	}
+	
+	/**
+	 * @see \wcf\data\IEditableCachedObject::resetCache()
+	 */
+	public function resetCache() {
+	    CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.category.php');
+	}
 }

@@ -35,68 +35,65 @@
 
 <form method="post" action="{if $action == 'add'}{link controller='UltimateContentAdd'}{/link}{else}{link controller='UltimateContentEdit'}{/link}{/if}">
     <div class="border content">
-        <dl{if $errorField == 'subject'} class="formError"{/if}>
-            <dt><label for="subject">{lang}ultimate.template.content.title{/lang}</label></dt>
-            <dd>
-                <input type="text" id="subject" name="subject" value="{$subject}" class="medium" />
-                {if $errorField == 'subject'}
-                    <small class="innerError">
-                        {if $errorType == 'empty'}
-                            {lang}wcf.global.form.error.empty{/lang}
-                        {else}
-                            {lang}ultimate.template.content.title.error.{@$errorType}{/lang}
-                        {/if}
-                    </small>
-                {/if}
-            </dd>
-        </dl>
-        <dl{if $errorField == 'description'} class="formError"{/if}>
-            <dt><label for="description">{lang}ultimate.template.content.description{/lang}</label></dt>
-            <dd>
-                <input type="text" id="description" name="description" value="{$description}" class="medium" />
-                {if $errorField == 'description'}
-                    <small class="innerError">
-                        {if $errorType == 'empty'}
-                            {lang}wcf.global.form.error.empty{/lang}
-                        {else}
-                            {lang}ultimate.template.content.description.error.{@$errorType}{/lang}
-                        {/if}
-                    </small>
-                {/if}
-            </dd>
-        </dl>
-        <dl{if $errorField == 'category'} class="formError"{/if}>
-            <dt><label for="category">{lang}ultimate.template.content.category{/lang}</label></dt>
-            <dd>
-                <select id="category" name="category" size="1">
-                	<option value="0">{lang}ultimate.template.content.category.default{/lang}</option>
-                	{foreach from=$selectOptions key=categoryID item=categoryTitle}
-    				<option value="{$categoryID}"{if $category == $categoryID} selected="selected"{/if}>{lang}{@$categoryTitle}{/lang}</option>
-					{/foreach}
-                </select>
-                {if $errorField == 'category'}
-                    <small class="innerError">
-                        {lang}ultimate.template.content.category.error.{@$errorType}{/lang}
-                    </small>
-                {/if}
-            </dd>
-        </dl>
-        <dl{if $errorField == 'text'} class="formError"{/if}>
-            <dt><label for="text">{lang}ultimate.template.content.text{/lang}</label></dt>
-            <dd>
-                <textarea id="text" name="text" rows="15" cols="40" class="medium">{@$text}</textarea>
-                {if $errorField == 'text'}
-                    <small class="innerError">
-                        {if $errorType == 'empty'}
-                            {lang}wcf.global.form.error.empty{/lang}
-                        {else}
-                            {lang}ultimate.template.content.text.error.{@$errorType}{/lang}
-                        {/if}
-                    </small>
-                {/if}
-            </dd>
-        </dl>
-        
+        <fieldset>
+            <legend>{lang}wcf.global.form.data{/lang}</legend>
+            <dl{if $errorField == 'subject'} class="formError"{/if}>
+                <dt><label for="subject">{lang}wcf.acp.ultimate.content.title{/lang}</label></dt>
+                <dd>
+                    <input type="text" id="subject" name="subject" value="{$subject}" class="medium" />
+                    {if $errorField == 'subject'}
+                        <small class="innerError">
+                            {if $errorType == 'empty'}
+                                {lang}wcf.global.form.error.empty{/lang}
+                            {else}
+                                {lang}wcf.acp.ultimate.content.title.error.{@$errorType}{/lang}
+                            {/if}
+                        </small>
+                    {/if}
+                </dd>
+            </dl>
+            <dl{if $errorField == 'description'} class="formError"{/if}>
+                <dt><label for="description">{lang}wcf.acp.ultimate.content.description{/lang}</label></dt>
+                <dd>
+                    <input type="text" id="description" name="description" value="{$description}" class="medium" />
+                    {if $errorField == 'description'}
+                        <small class="innerError">
+                            {if $errorType == 'empty'}
+                                {lang}wcf.global.form.error.empty{/lang}
+                            {else}
+                                {lang}wcf.acp.ultimate.content.description.error.{@$errorType}{/lang}
+                            {/if}
+                        </small>
+                    {/if}
+                </dd>
+            </dl>
+            <dl {if $errorField == 'category'} class="formError"{/if}>
+                <dt><label>{lang}wcf.acp.ultimate.content.categories{/lang}</label></dt>
+                <dd>
+                    {htmlCheckboxes options=$categories name=categoryIDs selected=$categoryIDs}
+                    {if $errorField == 'category'}
+                        <small class="innerError">
+                            {lang}wcf.acp.ultimate.content.category.error.{@$errorType}{/lang}
+                        </small>
+                    {/if}
+                </dd>
+            </dl>
+            <dl{if $errorField == 'text'} class="formError"{/if}>
+                <dt><label for="text">{lang}wcf.acp.ultimate.content.text{/lang}</label></dt>
+                <dd>
+                    <textarea id="text" name="text" rows="15" cols="40" class="medium">{@$text}</textarea>
+                    {if $errorField == 'text'}
+                        <small class="innerError">
+                            {if $errorType == 'empty'}
+                                {lang}wcf.global.form.error.empty{/lang}
+                            {else}
+                                {lang}wcf.acp.ultimate.content.text.error.{@$errorType}{/lang}
+                            {/if}
+                        </small>
+                    {/if}
+                </dd>
+            </dl>
+        </fieldset>
         {event name='fieldsets'}
     </div>
     
