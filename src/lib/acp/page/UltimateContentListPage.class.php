@@ -1,11 +1,11 @@
 <?php
 namespace ultimate\acp\page;
-use wcf\system\request\LinkHandler;
-
+use ultimate\data\category\Category;
 use ultimate\system\UltimateCore;
-use wcf\page\SortablePage;
+use wcf\page\AbstractCachedListPage;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\menu\acp\ACPMenu;
+use wcf\system\request\LinkHandler;
 
 /**
  * Shows the UltimateContentList page.
@@ -17,13 +17,13 @@ use wcf\system\menu\acp\ACPMenu;
  * @subpackage acp.page
  * @category Ultimate CMS
  */
-class UltimateContentListPage extends SortablePage {
+class UltimateContentListPage extends AbstractCachedListPage {
     
     /**
      * Contains the active menu item.
      * @var string
      */
-    public $activeMenuItem = 'wcf.acp.menu.item.link.ultimate.content.list';
+    public $activeMenuItem = 'wcf.acp.menu.link.ultimate.content.list';
     
     /**
      * @see \wcf\page\AbstractPage::$templateName
@@ -31,7 +31,7 @@ class UltimateContentListPage extends SortablePage {
     public $templateName = 'ultimateContentList';
     
     /**
-     * @see \wcf\page\MultiplLinkPage::$objectListClassName
+     * @see \wcf\page\MultipleLinkPage::$objectListClassName
      */
     public $objectListClassName = '\ultimate\data\content\ContentList';
     
@@ -40,8 +40,24 @@ class UltimateContentListPage extends SortablePage {
 	 */
     public $validSortFields = array(
         'contentID',
-        'contentTitle'
+        'contentTitle',
+        'contentAuthor'
     );
+    
+    /**
+     * @see \wcf\page\AbstractCachedListPage::$cacheBuilderClassName
+     */
+    public $cacheBuilderClassName = '\ultimate\system\cache\builder\UltimateContentCacheBuilder';
+    
+    /**
+     * @see \wcf\page\AbstractCachedListPage::$cacheName
+     */
+    public $cacheName = 'content';
+    
+    /**
+     * @see \wcf\page\AbstractCachedListPage::$cacheIndex
+     */
+    public $cacheIndex = 'contents';
     
     /**
      * Contains the url.
@@ -50,20 +66,47 @@ class UltimateContentListPage extends SortablePage {
     protected $url = '';
     
     /**
-     * Contains all content objects.
-     * @var array<Content>
+     * If given only contents associated with this category are loaded.
+     * @var int
      */
-    protected $objects = array();
+    protected $categoryID = 0;
+    
+    /**
+     * @see \wcf\page\IPage::readParameters()
+     */
+    public function readParameters() {
+        parent::readParameters();
+        
+        if (isset($_GET['categoryID'])) $this->categoryID = intval($_GET['categoryID']);
+    }
     
     /**
      * @see \wcf\page\IPage::readData()
      */
     public function readData() {
         parent::readData();
-        $this->objects = $this->objectList->getObjects();
         $this->url = LinkHandler::getInstance()->getLink('UltimateContentList', array(), 'action='.rawurlencode($this->action).'&pageNo='.$this->pageNo.'&sortField='.$this->sortField.'&sortOrder='.$this->sortOrder);
+        
+        //if no category id specified, proceed as always
+        if (!$this->categoryID) return;
+        
+        //if category id provided, change object variables and load the new cache
+        $this->cacheBuilderClassName = '\ultimate\cache\builder\UltimateContentCategoryCacheBuilder';
+        $this->cacheName = 'content-to-category';
+        $this->cacheIndex = 'contentsToCategoryID';
+        $this->loadCache();
+        
+        $this->objects = $this->objects[$this->categoryID];
+        //calculate the pages again, because the objects changed
+        $this->calculateNumberOfPages();
     }
     
+    /**
+     * @see \wcf\page\AbstractCachedListPage::loadCache()
+     */
+    public function loadCache($path = ULTIMATE_DIR) {
+        parent::loadCache($path);
+    }
     
     /**
      * @see \wcf\page\IPage::assignVariables()
@@ -72,8 +115,7 @@ class UltimateContentListPage extends SortablePage {
         parent::assignVariables();
         //overrides objects assignment in MultipleLinkPage
         UltimateCore::getTPL()->assign(array(
-        	'objects' => $this->objects,
-            'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(),
+        	'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(),
             'url' => $this->url
         ));
     }

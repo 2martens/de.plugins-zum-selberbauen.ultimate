@@ -1,6 +1,8 @@
 <?php
 namespace ultimate\data\content;
+use ultimate\data\category\Category;
 use ultimate\data\AbstractUltimateDatabaseObject;
+use ultimate\system\UltimateCore;
 
 /**
  * Represents a content entry.
@@ -28,5 +30,26 @@ class Content extends AbstractUltimateDatabaseObject {
      */
     protected static $databaseTableIndexName = 'contentID';
     
+    /**
+     * Contains the content to category database table name.
+     * @var string
+     */
+    protected $contentCategoryTable = 'content_to_category';
     
+    /**
+     * Returns the categories associated with this content.
+     *
+     * @return array<ultimate\data\category\Category>
+     */
+    public function getCategories() {
+        $sql = 'SELECT categoryID
+        		FROM ultimate'.ULTIMATE_N.'_'.$this->contentCategoryTable.'
+        		WHERE contentID = ?';
+        $statement = UltimateCore::getDB()->prepareStatement($sql);
+        $statement->execute(array($this->contentID));
+        $contents = array();
+        while ($row = $statement->fetchArray()) {
+            $categories[$row['categoryID']] = new Category($row['categoryID']);
+        }
+    }
 }

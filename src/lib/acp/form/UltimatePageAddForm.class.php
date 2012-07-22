@@ -1,14 +1,14 @@
 <?php
 namespace ultimate\acp\form;
 use ultimate\data\config\ConfigList;
-use ultimate\data\link\LinkAction;
+use ultimate\data\page\PageAction;
 use ultimate\system\UltimateCore;
-use ultimate\util\LinkUtil;
+use ultimate\util\PageUtil;
 use wcf\acp\form\ACPForm;
 use wcf\system\exception\UserInputException;
 
 /**
- * Shows the UltimateLinkAdd form.
+ * Shows the UltimatePageAdd form.
  *
  * @author Jim Martens
  * @copyright 2011-2012 Jim Martens
@@ -17,23 +17,23 @@ use wcf\system\exception\UserInputException;
  * @subpackage acp.form
  * @category Ultimate CMS
  */
-class UltimateLinkAddForm extends ACPForm {
+class UltimatePageAddForm extends ACPForm {
     
     /**
      * @see \wcf\acp\form\ACPForm::$activeMenuItem
      */
-    public $activeMenuItem = 'wcf.menu.item.link.ultimate.links.add';
+    public $activeMenuItem = 'wcf.menu.link.ultimate.links.add';
     
     /**
      * @see \wcf\page\AbstractPage::$templateName
      */
-    public $templateName = 'ultimateLinkAdd';
+    public $templateName = 'ultimatePageAdd';
     
     /**
      * @see \wcf\page\AbstractPage::$neededPermissions
      */
     public $neededPermissions = array(
-        'admin.content.ultimate.canAddLink'
+        'admin.content.ultimate.canAddPage'
     );
     
     /**
@@ -49,10 +49,10 @@ class UltimateLinkAddForm extends ACPForm {
     protected $configOptions = array();
     
     /**
-     * Contains the link slug.
+     * Contains the page slug.
      * @var string
      */
-    protected $slug = '';
+    protected $pageSlug = '';
     
     /**
      * @see \wcf\form\IForm::readFormParameters()
@@ -93,7 +93,7 @@ class UltimateLinkAddForm extends ACPForm {
             throw new UserInputException('slug');
         }
         
-        if (!LinkUtil::isAvailableSlug($this->slug)) {
+        if (!PageUtil::isAvailableSlug($this->slug)) {
             throw new UserInputException('slug', 'notUnique');
         }
     }

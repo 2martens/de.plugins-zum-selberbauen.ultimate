@@ -7,7 +7,7 @@ use ultimate\system\UltimateCore;
 use wcf\form\AbstractForm;
 
 /**
- * Shows the UltimateLinkEdit form.
+ * Shows the UltimatePageEdit form.
  *
  * @author Jim Martens
  * @copyright 2011-2012 Jim Martens
@@ -16,8 +16,8 @@ use wcf\form\AbstractForm;
  * @subpackage acp.form
  * @category Ultimate CMS
  */
-class UltimateLinkEditForm extends UltimateLinkAddForm {
-    
+class UltimatePageEditForm extends UltimatePageAddForm {
+    //@todo link auf page ändern
     /**
      * @see \wcf\acp\form\ACPForm::$activeMenuItem
      */

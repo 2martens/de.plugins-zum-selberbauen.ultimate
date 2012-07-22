@@ -28,7 +28,7 @@ class UltimateContentAddForm extends MessageForm {
     /**
      * @see \wcf\acp\form\ACPForm::$activeMenuItem
      */
-    public $activeMenuItem = 'wcf.acp.menu.item.link.ultimate.contents.add';
+    public $activeMenuItem = 'wcf.acp.menu.link.ultimate.contents.add';
     
     /**
      * @see \wcf\page\AbstractPage::$neededPermissions

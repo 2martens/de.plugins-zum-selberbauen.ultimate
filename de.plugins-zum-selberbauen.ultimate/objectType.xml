@@ -2,9 +2,9 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/object-type.xsd">
     <import>
         <type>
-            <name>de.plugins-zum-selberbauen.ultimate.link</name>
+            <name>de.plugins-zum-selberbauen.ultimate.page</name>
             <definitionname>com.woltlab.wcf.clipboardItem</definitionname>
-            <listclassname>ultimate\data\link\LinkList</listclassname>
+            <listclassname>ultimate\data\page\PageList</listclassname>
         </type>
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.content</name>
