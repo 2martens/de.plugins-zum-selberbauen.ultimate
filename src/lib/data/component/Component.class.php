@@ -27,4 +27,13 @@ class Component extends AbstractUltimateDatabaseObject {
      * @see \wcf\data\DatabaseObject::$databaseTableIndexName
      */
     protected static $databaseTableIndexName = 'componentID';
+    
+    /**
+     * Returns the title of this component.
+     *
+     * @return string
+     */
+    public function __toString() {
+        return $this->title;
+    }
 }

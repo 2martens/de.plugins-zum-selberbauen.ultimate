@@ -26,7 +26,7 @@
 <div class="contentHeader">
     <nav>
         <ul class="largeButtons">
-            <li><a href="{link controller='UltimatePageList'}{/link}" title="{lang}wcf.acp.menu.link.ultimate.pages.list{/lang}">{*<img src="{@RELATIVE_WCF_DIR}icon/users1.svg" alt="" /> *}<span>{lang}wcf.acp.menu.link.ultimate.pages.list{/lang}</span></a></li>
+            <li><a href="{link controller='UltimatePageList'}{/link}" title="{lang}wcf.acp.menu.link.ultimate.page.list{/lang}">{*<img src="{@RELATIVE_WCF_DIR}icon/users1.svg" alt="" /> *}<span>{lang}wcf.acp.menu.link.ultimate.page.list{/lang}</span></a></li>
             
             {event name='largeButtons'}
         </ul>
@@ -35,18 +35,30 @@
 
 <form method="post" action="{if $action == 'add'}{link controller='UltimatePageAdd'}{/link}{else}{link controller='UltimatePageEdit'}{/link}{/if}">
     <div class="border content">
-        <dl{if $errorField == 'configID'} class="formError"{/if}>
-            <dt><label for="configID">{lang}wcf.acp.ultimate.page.configTitle{/lang}</label></dt>
+        <dl{if $errorField == 'pageTitle'} class="formError"{/if}>
+            <dt><label for="pageTitle">{lang}wcf.acp.ultimate.page.title{/lang}</label></dt>
             <dd>
-                <select id="configID" name="configID" size="1">
-                    <option value="0">{lang}wcf.acp.ultimate.page.configTitle.select{/lang}</option>
-                    {foreach from=$configOptions key=$key item=$configTitle}
-                    <option value="{$key}"{if $configID == $key} selected="selected"{/if}>{$configTitle}</option>
-                    {/foreach}
-                </select>
-                {if $errorField == 'configID'}
+               {if $supportI18n}
+               <script type="text/javascript">
+                //<![CDATA[
+                    $(function() {
+                        var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
+                        var $optionValues = { {implode from=$i18nValues['pageTitle'] key=languageID item=value}'{@$languageID}': '{$value}'{/implode} };
+                        new WCF.MultipleLanguageInput('pageTitle', true, $optionValues, $availableLanguages);
+                    });
+                //]]>
+                </script>
+                <input type="text" id="pageTitle" name="pageTitle_i18n" value="{$i18nPlainValues['pageTitle']}" />
+                {else}
+                <input type="text" id="pageTitle" name="pageTitle" value="{@$pageTitle}" class="long" />
+                {/if}
+                {if $errorField == 'pageTitle'}
                     <small class="innerError">
-                        {lang}wcf.acp.ultimate.page.configID.error.{@$errorType}{/lang}
+                        {if $errorType == 'empty'}
+                            {lang}wcf.global.form.error.empty{/lang}
+                        {else}
+                            {lang}wcf.acp.ultimate.page.title.error.{@$errorType}{/lang}
+                        {/if}
                     </small>
                 {/if}
             </dd>
@@ -62,6 +74,20 @@
                         {else}
                             {lang}wcf.acp.ultimate.page.slug.error.{@$errorType}{/lang}
                         {/if}
+                    </small>
+                {/if}
+            </dd>
+        </dl>
+        <dl{if $errorField == 'content'} class="formError"{/if}>
+            <dt><label for="content">{lang}wcf.acp.ultimate.page.content{/lang}</label></dt>
+            <dd>
+                <select name="content">
+                <option value="0">{lang}wcf.acp.ultimate.page.content.select{/lang}</option>
+                {htmloptions options=$contents selected=$contentID}
+                </select>
+                {if $errorField == 'content'}
+                    <small class="innerError">
+                        {lang}wcf.acp.ultimate.page.content.error.{@$errorType}{/lang}
                     </small>
                 {/if}
             </dd>

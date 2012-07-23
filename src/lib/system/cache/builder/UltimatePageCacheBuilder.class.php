@@ -20,12 +20,23 @@ class UltimatePageCacheBuilder implements ICacheBuilder {
      */
     public function getData(array $cacheResource) {
         $data = array(
-        	'pages' => array()
+        	'pages' => array(),
+            'pageIDs' => array()
         );
         
         $pageList = new PageList();
+        // order by default
+        $sortField = ULTIMATE_SORT_PAGE_SORTFIELD;
+        $sortOrder = ULTIMATE_SORT_PAGE_SORTORDER;
+        $sqlOrderBy = $sortField." ".$sortOrder;
+        $pageList->sqlOrderBy = $sqlOrderBy;
+        
+        $pageList->readObjectIDs();
         $pageList->readObjects();
-        $data['pages'] = $pageList->getObjects();
+        $pages = $pageList->getObjects();
+        $pageIDs = $pageList->getObjectIDs();
+        $data['pages'] = array_combine($pageIDs, $pages);
+        $data['pageIDs'] = $pageIDs;
         
         return $data;
     }

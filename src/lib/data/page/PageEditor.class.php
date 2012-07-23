@@ -20,6 +20,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
      */
     protected static $baseClass = '\ultimate\data\page\Page';
     
+    
 	/**
      * @see \wcf\data\IEditableCachedObject::resetCache()
      */

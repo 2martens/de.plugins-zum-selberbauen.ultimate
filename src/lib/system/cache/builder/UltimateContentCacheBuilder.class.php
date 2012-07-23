@@ -25,6 +25,12 @@ class UltimateContentCacheBuilder implements ICacheBuilder {
         );
         
         $contentList = new ContentList();
+        // order by default
+        $sortField = ULTIMATE_SORT_CONTENT_SORTFIELD;
+        $sortOrder = ULTIMATE_SORT_CONTENT_SORTORDER;
+        $sqlOrderBy = $sortField." ".$sortOrder;
+        $contentList->sqlOrderBy = $sqlOrderBy;
+        
         $contentList->readObjectIDs();
         $contentList->readObjects();
         $data['contentIDs'] = $contentList->getObjectIDs();

@@ -1,7 +1,7 @@
 <?php
 namespace ultimate\acp\page;
 use ultimate\system\UltimateCore;
-use wcf\page\SortablePage;
+use wcf\page\AbstractCachedListPage;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\menu\acp\ACPMenu;
 use wcf\system\request\LinkHandler;
@@ -16,8 +16,29 @@ use wcf\system\request\LinkHandler;
  * @subpackage acp.page
  * @category Ultimate CMS
  */
-class UltimateCategoryListPage extends SortablePage {
+class UltimateCategoryListPage extends AbstractCachedListPage {
 
+    /**
+     * @see \wcf\page\SortablePage::$validSortFields
+     */
+    public $validSortFields = array(
+        'categoryID',
+        'categoryTitle',
+        'categoryDescription',
+        'categorySlug',
+        'categoryContents'
+    );
+    
+    /**
+     * @see \wcf\page\SortablePage::$defaultSortField
+    */
+    public $defaultSortField = ULTIMATE_SORT_CATEGORY_SORTFIELD;
+    
+    /**
+     * @see \wcf\page\SortablePage::$defaultSortOrder
+     */
+    public $defaultSortOrder = ULTIMATE_SORT_CATEGORY_SORTORDER;
+    
     /**
      * Contains the active menu item.
      * @var string
@@ -33,16 +54,21 @@ class UltimateCategoryListPage extends SortablePage {
      * @see \wcf\page\MultipleLinkPage::$objectListClassName
      */
     public $objectListClassName = '\ultimate\data\category\CategoryList';
-
+    
     /**
-     * @see \wcf\page\SortablePage::$validSortFields
+     * @see \wcf\page\AbstractCachedListPage::$cacheBuilderClassName
      */
-    public $validSortFields = array(
-        'categoryID',
-        'categoryTitle',
-        'categoryDescription',
-        'categorySlug'
-    );
+    public $cacheBuilderClassName = '\ultimate\system\cache\builder\UltimateCategoryCacheBuilder';
+    
+    /**
+     * @see \wcf\page\AbstractCachedListPage::$cacheName
+     */
+    public $cacheName = 'category';
+    
+    /**
+     * @see \wcf\page\AbstractCachedListPage::$cacheIndex
+     */
+    public $cacheIndex = 'categories';
 
     /**
      * Contains the url.
@@ -51,19 +77,18 @@ class UltimateCategoryListPage extends SortablePage {
     protected $url = '';
 
     /**
-     * Contains all category objects.
-     * @var array<ultimate\date\category\Category>
-     */
-    protected $objects = array();
-
-
-    /**
      * @see \wcf\page\IPage::readData()
     */
     public function readData() {
         parent::readData();
-        $this->objects = $this->objectList->getObjects();
         $this->url = LinkHandler::getInstance()->getLink('UltimateCategoryList', array(), 'action='.rawurlencode($this->action).'&pageNo='.$this->pageNo.'&sortField='.$this->sortField.'&sortOrder='.$this->sortOrder);
+    }
+    
+    /**
+     * @see \wcf\page\AbstractCachedListPage::loadCache()
+     */
+    public function loadCache($path = ULTIMATE_DIR) {
+        parent::loadCache($path);
     }
 
     /**
@@ -71,9 +96,8 @@ class UltimateCategoryListPage extends SortablePage {
      */
     public function assignVariables() {
         parent::assignVariables();
-        //overrides objects assignment in MultipleLinkPage
+        
         UltimateCore::getTPL()->assign(array(
-            'objects' => $this->objects,
             'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(),
             'url' => $this->url
         ));

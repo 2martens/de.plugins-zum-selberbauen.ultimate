@@ -1,6 +1,8 @@
 <?php
 namespace ultimate\data\component;
 use wcf\data\DatabaseObjectEditor;
+use wcf\data\IEditableCachedObject;
+use wcf\system\cache\CacheHandler;
 
 /**
  * Provides functions to edit components.
@@ -12,9 +14,16 @@ use wcf\data\DatabaseObjectEditor;
  * @subpackage data.component
  * @category Ultimate CMS
  */
-class ComponentEditor extends DatabaseObjectEditor {
+class ComponentEditor extends DatabaseObjectEditor implements IEditableCachedObject {
     /**
      * @see \wcf\data\DatabaseObjectDecorator::$baseClass
      */
     protected static $baseClass = '\ultimate\data\component\Component';
+    
+    /**
+     * @see \wcf\data\IEditableCachedObject::resetCache()
+     */
+    public function resetCache() {
+        CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.component.php');
+    }
 }

@@ -20,6 +20,25 @@ use wcf\system\request\LinkHandler;
 class UltimateContentListPage extends AbstractCachedListPage {
     
     /**
+     * @see \wcf\page\SortablePage::$validSortFields
+     */
+    public $validSortFields = array(
+        'contentID',
+        'contentTitle',
+        'contentAuthor'
+    );
+    
+    /**
+     * @see \wcf\page\SortablePage::$defaultSortOrder
+     */
+    public $defaultSortOrder = ULTIMATE_SORT_CONTENT_SORTORDER;
+    
+    /**
+     * @see \wcf\page\SortablePage::$defaultSortField
+     */
+    public $defaultSortField = ULTIMATE_SORT_CONTENT_SORTFIELD;
+    
+    /**
      * Contains the active menu item.
      * @var string
      */
@@ -34,15 +53,6 @@ class UltimateContentListPage extends AbstractCachedListPage {
      * @see \wcf\page\MultipleLinkPage::$objectListClassName
      */
     public $objectListClassName = '\ultimate\data\content\ContentList';
-    
-    /**
-	 * @see \wcf\page\SortablePage::$validSortFields
-	 */
-    public $validSortFields = array(
-        'contentID',
-        'contentTitle',
-        'contentAuthor'
-    );
     
     /**
      * @see \wcf\page\AbstractCachedListPage::$cacheBuilderClassName
@@ -77,7 +87,7 @@ class UltimateContentListPage extends AbstractCachedListPage {
     public function readParameters() {
         parent::readParameters();
         
-        if (isset($_GET['categoryID'])) $this->categoryID = intval($_GET['categoryID']);
+        if (isset($_REQUEST['categoryID'])) $this->categoryID = intval($_REQUEST['categoryID']);
     }
     
     /**
@@ -87,19 +97,20 @@ class UltimateContentListPage extends AbstractCachedListPage {
         parent::readData();
         $this->url = LinkHandler::getInstance()->getLink('UltimateContentList', array(), 'action='.rawurlencode($this->action).'&pageNo='.$this->pageNo.'&sortField='.$this->sortField.'&sortOrder='.$this->sortOrder);
         
-        //if no category id specified, proceed as always
+        // if no category id specified, proceed as always
         if (!$this->categoryID) return;
         
-        //if category id provided, change object variables and load the new cache
+        // if category id provided, change object variables and load the new cache
         $this->cacheBuilderClassName = '\ultimate\cache\builder\UltimateContentCategoryCacheBuilder';
         $this->cacheName = 'content-to-category';
         $this->cacheIndex = 'contentsToCategoryID';
         $this->loadCache();
         
         $this->objects = $this->objects[$this->categoryID];
-        //calculate the pages again, because the objects changed
+        // calculate the pages again, because the objects changed
         $this->calculateNumberOfPages();
     }
+    
     
     /**
      * @see \wcf\page\AbstractCachedListPage::loadCache()
@@ -113,7 +124,7 @@ class UltimateContentListPage extends AbstractCachedListPage {
      */
     public function assignVariables() {
         parent::assignVariables();
-        //overrides objects assignment in MultipleLinkPage
+        
         UltimateCore::getTPL()->assign(array(
         	'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(),
             'url' => $this->url

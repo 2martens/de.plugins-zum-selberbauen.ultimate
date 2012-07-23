@@ -3,6 +3,7 @@ namespace ultimate\data\content;
 use ultimate\data\category\Category;
 use ultimate\data\AbstractUltimateDatabaseObject;
 use ultimate\system\UltimateCore;
+use wcf\data\user\User;
 
 /**
  * Represents a content entry.
@@ -47,9 +48,30 @@ class Content extends AbstractUltimateDatabaseObject {
         		WHERE contentID = ?';
         $statement = UltimateCore::getDB()->prepareStatement($sql);
         $statement->execute(array($this->contentID));
-        $contents = array();
+        $categories = array();
         while ($row = $statement->fetchArray()) {
             $categories[$row['categoryID']] = new Category($row['categoryID']);
         }
+        return $categories;
     }
+    
+    /**
+     * Returns the title of this content.
+     *
+     * @return string
+     */
+    public function __toString() {
+        return $this->contentTitle;
+    }
+    
+    /**
+     * @see \wcf\data\DatabaseObject::handleData()
+     */
+    protected function handleData($data) {
+        $authorID = intval($data['authorID']);
+        $data['author'] = new User($authorID);
+        parent::handleData($data);
+    }
+    
+    
 }

@@ -115,6 +115,9 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
         }
     }
     
+    /**
+     * @see \wcf\data\IEditableCachedObject::resetCache()
+     */
     public function resetCache() {
         CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.content.php');
     }

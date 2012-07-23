@@ -1,10 +1,14 @@
 <?php
 namespace ultimate\acp\form;
-use ultimate\data\config\ConfigList;
+use wcf\system\language\I18nHandler;
+
+use ultimate\data\content\ContentList;
 use ultimate\data\page\PageAction;
 use ultimate\system\UltimateCore;
 use ultimate\util\PageUtil;
 use wcf\acp\form\ACPForm;
+use wcf\system\cache\CacheHandler;
+use wcf\system\event\EventHandler;
 use wcf\system\exception\UserInputException;
 
 /**
@@ -37,30 +41,50 @@ class UltimatePageAddForm extends ACPForm {
     );
     
     /**
-     * Contains the config id.
+     * Contains the content id.
      * @var int
      */
-    protected $configID = 0;
+    public $contentID = 0;
     
     /**
-     * Contains an array of config options.
-     * @var array
+     * Contains all available contents.
+     * @var array<ultimate\data\content\Content>
      */
-    protected $configOptions = array();
+    public $contents = array();
+    
+    /**
+     * Contains the title of the page.
+     * @var string
+     */
+    public $pageTitle = '';
     
     /**
      * Contains the page slug.
      * @var string
      */
-    protected $pageSlug = '';
+    public $pageSlug = '';
+    
+    /**
+     * If true, the I18n feature will be used.
+     * @var boolean
+     */
+    protected $supportI18n = true;
     
     /**
      * @see \wcf\form\IForm::readFormParameters()
      */
     public function readFormParameters() {
         parent::readFormParameters();
-        if (isset($_POST['configID'])) $this->configID = intval($_POST['configID']);
-        if (isset($_POST['slug'])) $this->slug = trim($_POST['slug']);
+        if (isset($_POST['content'])) $this->contentID = intval($_POST['content']);
+        if (isset($_POST['pageTitle'])) $this->pageTitle = trim($_POST['pageTitle']);
+        if (isset($_POST['pageSlug'])) $this->pageSlug = trim($_POST['pageSlug']);
+        
+        if ($this->supportI18n) {
+            // testing I18n
+            I18nHandler::getInstance()->register('pageTitle');
+            I18nHandler::getInstance()->setOptions('pageTitle', PACKAGE_ID, '', '');
+            I18nHandler::getInstance()->readValues();
+        }
     }
     
     /**
@@ -68,33 +92,55 @@ class UltimatePageAddForm extends ACPForm {
      */
     public function validate() {
         parent::validate();
-        $this->validateConfigID();
+        $this->validateContentID();
+        $this->validateTitle();
         $this->validateSlug();
     }
     
     /**
-     * Validates link configID.
+     * Validates the contentID.
      *
      * @throws UserInputException
      */
-    protected function validateConfigID() {
-        if (!$this->configID) {
-            throw new UserInputException('configID');
+    protected function validateContentID() {
+        if (!$this->contentID) {
+            throw new UserInputException('content', 'notSelected');
+        }
+        if (!array_key_exists($this->contentID, $this->contents)) {
+            throw new UserInputException('content', 'notAvailable');
         }
     }
     
     /**
-     * Validates link slug.
+     * Validates the page title.
+     *
+     * @throws UserInputException
+     */
+    protected function validateTitle() {
+        if ($this->supportI18n) {
+            if (!I18nHandler::getInstance()->validateValue('pageTitle')) {
+                throw new UserInputException('pageTitle');
+            }
+        }
+        else {
+            if (empty($this->pageTitle)) {
+                throw new UserInputException('pageTitle');
+            }
+        }
+    }
+    
+    /**
+     * Validates page slug.
      *
      * @throws UserInputException
      */
     protected function validateSlug() {
         if (empty($this->slug)) {
-            throw new UserInputException('slug');
+            throw new UserInputException('pageSlug');
         }
         
-        if (!PageUtil::isAvailableSlug($this->slug)) {
-            throw new UserInputException('slug', 'notUnique');
+        if (!PageUtil::isAvailableSlug($this->pageSlug)) {
+            throw new UserInputException('pageSlug', 'notUnique');
         }
     }
     
@@ -106,21 +152,31 @@ class UltimatePageAddForm extends ACPForm {
         
         $parameters = array(
             'data' => array(
-                'configID' => $this->configID,
-                'linkSlug' => $this->slug
+                'authorID' => UltimateCore::getUser()->userID,
+                'contentID' => $this->contentID,
+                'pageTitle' => $this->pageTitle,
+                'pageSlug' => $this->pageSlug,
+                'lastModified' => TIME_NOW
             )
         );
         
-        $action = new LinkAction(array(), 'create', $parameters);
+        if ($this->supportI18n) {
+            I18nHandler::getInstance()->save('pageTitle', 'ultimate.page.'.$this->slug, 'ultimate.page', PACKAGE_ID);
+        }
+        
+        $action = new PageAction(array(), 'create', $parameters);
         $action->executeAction();
         
         $this->saved();
         
-        UltimateCore::getTPL()->assign('success', true);
+        UltimateCore::getTPL()->assign(
+            'success', true
+        );
         
         //showing empty form
-        $this->configID = 0;
-        $this->slug = '';
+        $this->contentID = 0;
+        $this->pageSlug = '';
+        $this->contentIDs = $this->contents = array();
     }
     
     /**
@@ -128,14 +184,28 @@ class UltimatePageAddForm extends ACPForm {
      */
     public function readData() {
         if (!count($_POST)) {
-            $configList = new ConfigList();
-            $configList->readObjects();
-            $objects = $configList->getObjects();
-            foreach ($objects as $object) {
-                $this->configOptions[$object->configID] = $object->configTitle;
+            $this->loadCache();
+            foreach ($this->contents as $contentID => $content) {
+                if (!count($content->getCategories())) continue;
+                unset($this->contents[$contentID]);
             }
         }
         parent::readData();
+    }
+    
+    /**
+     * Loads the cache.
+     */
+    public function loadCache() {
+        // fire event
+        EventHandler::getInstance()->fireEvent($this, 'loadCache');
+        
+        $cache = 'content';
+        $cacheBuilderClass = '\ultimate\system\cache\builder\UltimateContentCacheBuilder';
+        $file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
+        CacheHandler::getInstance()->addResource($cache, $file, $cacheBuilderClass);
+        $result = CacheHandler::getInstance()->get($cache);
+        $this->contents = $result['contents'];
     }
     
     /**
@@ -143,10 +213,17 @@ class UltimatePageAddForm extends ACPForm {
      */
     public function assignVariables() {
         parent::assignVariables();
+        
+        if ($this->supportI18n) {
+            $useRequestData = (count($_POST)) ? true : false;
+            I18nHandler::getInstance()->assignVariables($useRequestData);
+        }
         UltimateCore::getTPL()->assign(array(
-            'configID' => $this->configID,
-            'configOptions' => $this->configOptions,
-            'slug' => $this->slug,
+            'contentID' => $this->contentID,
+            'contents' => $this->contents,
+            'pageTitle' => $this->pageTitle,
+            'pageSlug' => $this->pageSlug,
+            'supportI18n' => $this->supportI18n,
             'action' => 'add'
         ));
     }

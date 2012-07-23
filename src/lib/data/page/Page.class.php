@@ -1,6 +1,7 @@
 <?php
 namespace ultimate\data\page;
 use ultimate\data\AbstractUltimateDatabaseObject;
+use wcf\data\user\User;
 
 /**
  * Represents a page.
@@ -27,5 +28,23 @@ class Link extends AbstractUltimateDatabaseObject {
      * @see \wcf\data\DatabaseObject::$databaseTableIndexName
      */
     protected static $databaseTableIndexName = 'pageID';
+    
+    /**
+     * Returns the title of this page.
+     *
+     * @return string
+     */
+    public function __toString() {
+        return $this->pageTitle;
+    }
+    
+    /**
+     * @see \wcf\data\DatabaseObject::handleData()
+     */
+    protected function handleData($data) {
+        $authorID = intval($data['authorID']);
+        $data['author'] = new User($authorID);
+        parent::handleData($data);
+    }
     
 }

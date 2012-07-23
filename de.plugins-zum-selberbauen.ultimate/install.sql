@@ -28,9 +28,13 @@ CREATE TABLE ultimate1_1_content_to_category (
 DROP TABLE IF EXISTS ultimate1_1_page;
 CREATE TABLE ultimate1_1_page (
     pageID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    configID INT(10) NOT NULL DEFAULT 0,
+    authorID INT(10) NOT NULL DEFAULT 0,
+    contentID INT(10) NOT NULL DEFAULT 0,
+    pageTitle VARCHAR(255) NOT NULL DEFAULT '',
     pageSlug VARCHAR(255) NOT NULL DEFAULT '',
-    KEY (configID)
+    lastModified INT(10) NOT NULL DEFAULT 0,
+    KEY (authorID),
+    KEY (contentID)
 );
 
 DROP TABLE IF EXISTS ultimate1_1_content;
@@ -43,6 +47,8 @@ CREATE TABLE ultimate1_1_content (
     enableBBCodes TINYINT(1) NOT NULL DEFAULT 1,
     enableHtml TINYINT(1) NOT NULL DEFAULT 0,
     enableSmilies TINYINT(1) NOT NULL DEFAULT 1,
+    lastModified INT(10) NOT NULL DEFAULT 0,
+    KEY (authorID),
     FULLTEXT INDEX (contentTitle, contentDescription, contentText)
 );
 
@@ -55,7 +61,9 @@ CREATE TABLE ultimate1_1_component (
 );
 
 /**** foreign keys ****/
-ALTER TABLE ultimate1_1_page ADD FOREIGN KEY (configID) REFERENCES ultimate1_1_config (configID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_page ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID);
+ALTER TABLE ultimate1_1_page ADD FOREIGN KEY (contentID) REFERENCES ultimate1_1_content (contentID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_content ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID);
 ALTER TABLE ultimate1_1_content_to_category ADD FOREIGN KEY (contentID) REFERENCES ultimate1_1_content (contentID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_content_to_category ADD FOREIGN KEY (categoryID) REFERENCES ultimate1_1_category (categoryID) ON DELETE CASCADE;
 

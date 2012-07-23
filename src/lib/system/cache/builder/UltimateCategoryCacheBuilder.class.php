@@ -25,6 +25,12 @@ class UltimateCategoryCacheBuilder implements ICacheBuilder {
         );
     
         $categoryList = new CategoryList();
+        // order by default
+        $sortField = ULTIMATE_SORT_CATEGORY_SORTFIELD;
+        $sortOrder = ULTIMATE_SORT_CATEGORY_SORTORDER;
+        $sqlOrderBy = $sortField." ".$sortOrder;
+        $categoryList->sqlOrderBy = $sqlOrderBy;
+        
         $categoryList->readObjectIDs();
         $categoryList->readObjects();
         $categories = $categoryList->getObjects();

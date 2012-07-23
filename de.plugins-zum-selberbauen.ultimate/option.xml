@@ -10,6 +10,22 @@
                     <parent>ultimate</parent>
                     <showorder>1</showorder>
                 </category>
+                <category name="ultimate.sort">
+                    <parent>ultimate</parent>
+                    <showorder>2</showorder>
+                </category>
+                    <category name="ultimate.sort.category">
+                        <parent>ultimate.sort</parent>
+                        <showorder>1</showorder>
+                    </category>
+                    <category name="ultimate.sort.content">
+                        <parent>ultimate.sort</parent>
+                        <showorder>2</showorder>
+                    </category>
+                    <category name="ultimate.sort.page">
+                        <parent>ultimate.sort</parent>
+                        <showorder>3</showorder>
+                    </category>
                 
         </categories>
         <options>
@@ -19,11 +35,77 @@
                 <defaultvalue>1</defaultvalue>
             </option>
             
+            
             <option name="ultimate_general_index_config">
                 <categoryname>ultimate.general</categoryname>
                 <optiontype>ultimateConfig</optiontype>
                 <showorder>1</showorder>
             </option>
+            
+            <!-- sort order/field for UltimateCategoryListPage -->
+            <option name="ultimate_sort_category_sortField">
+                <categoryname>ultimate.sort.category</categoryname>
+                <optiontype>select</optiontype>
+                <defaultvalue><![CDATA[categoryID]]></defaultvalue>
+                <selectoptions>
+                    <![CDATA[categoryID:wcf.acp.option.ultimate_sort_category_sortField.categoryID
+categoryTitle:wcf.acp.option.ultimate_sort_category_sortField.categoryTitle
+categoryDescription:wcf.acp.option.ultimate_sort_category_sortField.categoryDescription
+categorySlug:wcf.acp.option.ultimate_sort_category_sortField.categorySlug
+categoryContents:wcf.acp.option.ultimate_sort_category_sortField.categoryContents]]>
+                </selectoptions>
+            </option>
+            <option name="ultimate_sort_category_sortOrder">
+                <categoryname>ultimate.sort.category</categoryname>
+                <optiontype>select</optiontype>
+                <defaultvalue><![CDATA[ASC]]></defaultvalue>
+                <selectoptions>
+                    <![CDATA[ASC:wcf.global.sortOrder.ascending
+DESC:wcf.global.sortOrder.descending]]>
+                </selectoptions>
+            </option>
+            <!-- /sort order/field for UltimateCategoryListPage -->
+            <!-- sort order/field for UltimateContentListPage -->
+            <option name="ultimate_sort_content_sortField">
+                <categoryname>ultimate.sort.content</categoryname>
+                <optiontype>select</optiontype>
+                <defaultvalue><![CDATA[contentID]]></defaultvalue>
+                <selectoptions>
+                    <![CDATA[contentID:wcf.acp.option.ultimate_sort_content_sortField.contentID
+contentTitle:wcf.acp.option.ultimate_sort_content_sortField.contentTitle
+contentAuthor:wcf.acp.option.ultimate_sort_content_sortField.contentAuthor]]>
+                </selectoptions>
+            </option>
+            <option name="ultimate_sort_content_sortOrder">
+                <categoryname>ultimate.sort.content</categoryname>
+                <optiontype>select</optiontype>
+                <defaultvalue><![CDATA[ASC]]></defaultvalue>
+                <selectoptions>
+                    <![CDATA[ASC:wcf.global.sortOrder.ascending
+DESC:wcf.global.sortOrder.descending]]>
+                </selectoptions>
+            </option>
+            <!-- /sort order/field for UltimateContentListPage -->
+            <!-- sort order/field for UltimatePageListPage -->
+            <option name="ultimate_sort_page_sortField">
+                <categoryname>ultimate.sort.page</categoryname>
+                <optiontype>select</optiontype>
+                <defaultvalue><![CDATA[pageID]]></defaultvalue>
+                <selectoptions>
+                    <![CDATA[pageID:wcf.acp.option.ultimate_sort_page_sortField.pageID
+pageSlug:wcf.acp.option.ultimate_sort_page_sortField.pageSlug]]>
+                </selectoptions>
+            </option>
+            <option name="ultimate_sort_page_sortOrder">
+                <categoryname>ultimate.sort.page</categoryname>
+                <optiontype>select</optiontype>
+                <defaultvalue><![CDATA[ASC]]></defaultvalue>
+                <selectoptions>
+                    <![CDATA[ASC:wcf.global.sortOrder.ascending
+DESC:wcf.global.sortOrder.descending]]>
+                </selectoptions>
+            </option>
+            <!-- /sort order/field for UltimatePageListPage -->
         </options>
     </import>
 </data>
