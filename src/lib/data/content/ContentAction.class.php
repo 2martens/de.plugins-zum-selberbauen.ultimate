@@ -90,14 +90,15 @@ class ContentAction extends AbstractDatabaseObjectAction {
 	    }
 	
 	    $categoryIDs = (isset($this->parameters['categories'])) ? $this->parameters['categories'] : array();
+	    $removeCategories = (isset($this->parameters['removeCategories'])) ? $this->parameters['removeCategories'] : array();
 	    
 	    foreach ($this->objects as $contentEditor) {
 	        if (!empty($categoryIDs)) {
 	            $contentEditor->addToCategories($categoryIDs);
 	        }
 	        	
-	        if (!empty($removeGroups)) {
-	            $userEditor->removeFromGroups($removeGroups);
+	        if (!empty($removeCategories)) {
+	            $contentEditor->removeFromCategories($removeCategories);
 	        }
 	    }
 	}

@@ -38,8 +38,7 @@
         <dl{if $errorField == 'pageTitle'} class="formError"{/if}>
             <dt><label for="pageTitle">{lang}wcf.acp.ultimate.page.title{/lang}</label></dt>
             <dd>
-               {if $supportI18n}
-               <script type="text/javascript">
+                <script type="text/javascript">
                 //<![CDATA[
                     $(function() {
                         var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
@@ -48,10 +47,7 @@
                     });
                 //]]>
                 </script>
-                <input type="text" id="pageTitle" name="pageTitle_i18n" value="{$i18nPlainValues['pageTitle']}" />
-                {else}
-                <input type="text" id="pageTitle" name="pageTitle" value="{@$pageTitle}" class="long" />
-                {/if}
+                <input type="text" id="pageTitle" name="pageTitle" value="{$i18nPlainValues['pageTitle']}" />
                 {if $errorField == 'pageTitle'}
                     <small class="innerError">
                         {if $errorType == 'empty'}

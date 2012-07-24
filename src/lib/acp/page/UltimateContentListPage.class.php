@@ -82,12 +82,21 @@ class UltimateContentListPage extends AbstractCachedListPage {
     protected $categoryID = 0;
     
     /**
+     * If given only contents associated with this tag are loaded.
+     * @var int
+     */
+    protected $tagID = 0;
+    
+    /**
      * @see \wcf\page\IPage::readParameters()
      */
     public function readParameters() {
         parent::readParameters();
         
+        // these two are exclusive to each other
+        // don't use both at the same time
         if (isset($_REQUEST['categoryID'])) $this->categoryID = intval($_REQUEST['categoryID']);
+        if (isset($_REQUEST['tagID'])) $this->tagID = intval($_REQUEST['tagID']);
     }
     
     /**
@@ -97,15 +106,21 @@ class UltimateContentListPage extends AbstractCachedListPage {
         parent::readData();
         $this->url = LinkHandler::getInstance()->getLink('UltimateContentList', array(), 'action='.rawurlencode($this->action).'&pageNo='.$this->pageNo.'&sortField='.$this->sortField.'&sortOrder='.$this->sortOrder);
         
-        // if no category id specified, proceed as always
-        if (!$this->categoryID) return;
-        
-        // if category id provided, change object variables and load the new cache
-        $this->cacheBuilderClassName = '\ultimate\cache\builder\UltimateContentCategoryCacheBuilder';
-        $this->cacheName = 'content-to-category';
-        $this->cacheIndex = 'contentsToCategoryID';
+        // if no category id and no tag id specified, proceed as always
+        if (!$this->categoryID && !$this->tagID) return;
+        elseif($categoryID) {
+            // if category id provided, change object variables and load the new cache
+            $this->cacheBuilderClassName = '\ultimate\cache\builder\UltimateContentCategoryCacheBuilder';
+            $this->cacheName = 'content-to-category';
+            $this->cacheIndex = 'contentsToCategoryID';
+            
+        }
+        // both category id and tag id are provided, the category id wins
+        elseif ($tagID) {
+            // @todo implement tags
+        }
+        else return; // shouldn' be called anyway
         $this->loadCache();
-        
         $this->objects = $this->objects[$this->categoryID];
         // calculate the pages again, because the objects changed
         $this->calculateNumberOfPages();

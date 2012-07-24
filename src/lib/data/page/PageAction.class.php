@@ -34,4 +34,40 @@ class PageAction extends AbstractDatabaseObjectAction {
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
 	 */
 	protected $permissionsUpdate = array('admin.content.ultimate.canEditPage');
+	
+	/**
+	 * @see \wcf\data\AbstractDatabaseObjectAction::create()
+	 */
+	public function create() {
+	    $page = parent::create();
+	    $pageEditor = new PageEditor($page);
+	    
+	    // connect with content
+	    $contentID = (isset($this->parameters['contentID'])) ? intval($this->parameters['contentID']) : 0;
+	    $pageEditor->addContent($contentID, false);
+	    
+	    return $page;
+	}
+	
+	/**
+	 * @see \wcf\data\AbstractDatabaseObjectAction::update()
+	 */
+	public function update() {
+	    if (isset($this->parameters['data'])) {
+	        parent::update();
+	    }
+	    else {
+	        if (!count($this->objects)) {
+	            $this->readObjects();
+	        }
+	    }
+	    
+	    $contentID = (isset($this->parameters['contentID'])) ? intval($this->parameters['contentID']) : 0;
+	    
+	    foreach ($this->objects as $pageEditor) {
+	        if (!$contentID) {
+	            $pageEditor->addContent($contentID);
+	        }
+	    }
+	}
 }

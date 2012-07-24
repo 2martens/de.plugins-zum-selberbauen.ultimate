@@ -49,7 +49,9 @@
                 <th class="columnTitle{if $sortField == 'contentTitle'} active{/if}"><a href="{link controller='UltimateContentList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=contentTitle&sortOrder={if $sortField == 'contentTitle' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.general.title{/lang}{if $sortField == 'contentTitle'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}.svg" alt="{if $sortOrder == 'ASC'}{lang}wcf.global.sortOrder.ascending{/lang}{else}{lang}wcf.global.sortOrder.descending{/lang}{/if}" />{/if}</a></th>
                 <th class="columnAuthor{if $sortField == 'contentAuthor'} active{/if}"><a href="{link controller='UltimateContentList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=contentAuthor&sortOrder={if $sortField == 'contentAuthor' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.general.author{/lang}{if $sortField == 'contentAuthor'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}.svg" alt="{if $sortOrder == 'ASC'}{lang}wcf.global.sortOrder.ascending{/lang}{else}{lang}wcf.global.sortOrder.descending{/lang}{/if}" />{/if}</a></th>
                 <th class="columnCategories">{lang}wcf.acp.ultimate.content.categories{/lang}</th>
+                {* need to implement tags
                 <th class="columnTags">{lang}wcf.acp.ultimate.content.tags{/lang}</th>
+                *}
                 <th class="columnLastModified">{lang}wcf.acp.ultimate.general.lastModified{/lang}</th>
                      
                 {event name='headColumns'}
@@ -80,20 +82,21 @@
                         <td class="columnAuthor"><p><a href="{link controller='UltimateContentList'}author={@$content->author}{/link}">{@$content->author}</a></p></td>
                         <td class="columnCategories">
                             <p>
-                                {foreach from=$content->categories item=category}
+                                {foreach from=$content->getCategories() item=category}
                                     {counter name=categoryCounter assign=categoryCounter print=false start=0}
                                     {if $categoryCounter > 0}, {/if}<a href="{link controller='UltimateContentList'}category={@$category}{/link}">{@$category}</a>
                                 {/foreach}
                             </p>
                         </td>
+                        {* need to implement tags
                         <td class="columnTags">
                             <p>
-                                {foreach from=$content->tags item=tag}
+                                {foreach from=$content->getTags() item=tag}
                                     {counter name=tagCounter assign=tagCounter print=false start=0}
                                     {if $tagCounter > 0}, {/if}<a href="{link controller='UltimateContentList'}tag={@$tag}{/link}">{@$tag}</a>
                                 {/foreach}
                             </p>
-                        </td>
+                        </td> *}
                         <td class="columnLastModified"><p>{@$content->lastModified|time}</p></td>
                         
                         {event name='columns'}

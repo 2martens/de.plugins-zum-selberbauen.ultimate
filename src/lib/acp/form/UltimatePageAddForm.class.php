@@ -1,15 +1,14 @@
 <?php
 namespace ultimate\acp\form;
-use wcf\system\language\I18nHandler;
-
 use ultimate\data\content\ContentList;
 use ultimate\data\page\PageAction;
+use ultimate\data\page\PageEditor;
 use ultimate\system\UltimateCore;
 use ultimate\util\PageUtil;
 use wcf\acp\form\ACPForm;
 use wcf\system\cache\CacheHandler;
-use wcf\system\event\EventHandler;
 use wcf\system\exception\UserInputException;
+use wcf\system\language\I18nHandler;
 
 /**
  * Shows the UltimatePageAdd form.
@@ -64,27 +63,34 @@ class UltimatePageAddForm extends ACPForm {
      */
     public $pageSlug = '';
     
+    
     /**
-     * If true, the I18n feature will be used.
-     * @var boolean
+     * @see \wcf\page\IPage::readParameters()
      */
-    protected $supportI18n = true;
+    public function readParameters() {
+        parent::readParameters();
+        I18nHandler::getInstance()->register('pageTitle');
+    }
+    
+    /**
+     * @see \wcf\page\IPage::readData()
+     */
+    public function readData() {
+        $this->contents = PageUtil::getAvailableContents();
+        parent::readData();
+    }
     
     /**
      * @see \wcf\form\IForm::readFormParameters()
      */
     public function readFormParameters() {
         parent::readFormParameters();
-        if (isset($_POST['content'])) $this->contentID = intval($_POST['content']);
-        if (isset($_POST['pageTitle'])) $this->pageTitle = trim($_POST['pageTitle']);
-        if (isset($_POST['pageSlug'])) $this->pageSlug = trim($_POST['pageSlug']);
         
-        if ($this->supportI18n) {
-            // testing I18n
-            I18nHandler::getInstance()->register('pageTitle');
-            I18nHandler::getInstance()->setOptions('pageTitle', PACKAGE_ID, '', '');
-            I18nHandler::getInstance()->readValues();
-        }
+        I18nHandler::getInstance()->readValues();
+        if (I18nHandler::getInstance()->isPlainValue('pageTitle')) $this->pageTitle = trim(I18nHandler::getInstance()->getValue('pageTitle'));
+        
+        if (isset($_POST['content'])) $this->contentID = intval($_POST['content']);
+        if (isset($_POST['pageSlug'])) $this->pageSlug = trim($_POST['pageSlug']);
     }
     
     /**
@@ -100,24 +106,24 @@ class UltimatePageAddForm extends ACPForm {
     /**
      * Validates the contentID.
      *
-     * @throws UserInputException
+     * @throws \wcf\system\exception\UserInputException
      */
     protected function validateContentID() {
         if (!$this->contentID) {
             throw new UserInputException('content', 'notSelected');
         }
         if (!array_key_exists($this->contentID, $this->contents)) {
-            throw new UserInputException('content', 'notAvailable');
+            throw new UserInputException('content', 'notValid');
         }
     }
     
     /**
      * Validates the page title.
      *
-     * @throws UserInputException
+     * @throws \wcf\system\exception\UserInputException
      */
     protected function validateTitle() {
-        if ($this->supportI18n) {
+        if (!I18nHandler::getInstance()->isPlainValue('pageTitle')) {
             if (!I18nHandler::getInstance()->validateValue('pageTitle')) {
                 throw new UserInputException('pageTitle');
             }
@@ -132,10 +138,10 @@ class UltimatePageAddForm extends ACPForm {
     /**
      * Validates page slug.
      *
-     * @throws UserInputException
+     * @throws \wcf\system\exception\UserInputException
      */
     protected function validateSlug() {
-        if (empty($this->slug)) {
+        if (empty($this->pageSlug)) {
             throw new UserInputException('pageSlug');
         }
         
@@ -153,19 +159,26 @@ class UltimatePageAddForm extends ACPForm {
         $parameters = array(
             'data' => array(
                 'authorID' => UltimateCore::getUser()->userID,
-                'contentID' => $this->contentID,
                 'pageTitle' => $this->pageTitle,
                 'pageSlug' => $this->pageSlug,
                 'lastModified' => TIME_NOW
-            )
+            ),
+            'contentID' => $this->contentID
         );
         
-        if ($this->supportI18n) {
-            I18nHandler::getInstance()->save('pageTitle', 'ultimate.page.'.$this->slug, 'ultimate.page', PACKAGE_ID);
-        }
+        $this->objectAction = new PageAction(array(), 'create', $parameters);
+        $this->objectAction->executeAction();
         
-        $action = new PageAction(array(), 'create', $parameters);
-        $action->executeAction();
+        if (!I18nHandler::getInstance()->isPlainValue('pageTitle')) {
+            $returnValues = $this->objectAction->getReturnValues();
+            $pageID = $returnValues['returnValues']->pageID;
+            I18nHandler::getInstance()->save('pageTitle', 'ultimate.page.'.$pageID.'.pageTitle', 'ultimate.page', PACKAGE_ID);
+        
+            $pageEditor = new PageEditor($returnValues['returnValues']);
+            $pageEditor->update(array(
+                'pageTitle' => 'ultimate.page.'.$pageID.'.pageTitle'
+            ));
+        }
         
         $this->saved();
         
@@ -175,38 +188,11 @@ class UltimatePageAddForm extends ACPForm {
         
         //showing empty form
         $this->contentID = 0;
-        $this->pageSlug = '';
-        $this->contentIDs = $this->contents = array();
+        $this->pageTitle = $this->pageSlug = '';
+        $this->contents = array();
     }
     
-    /**
-     * @see \wcf\page\IPage::readData()
-     */
-    public function readData() {
-        if (!count($_POST)) {
-            $this->loadCache();
-            foreach ($this->contents as $contentID => $content) {
-                if (!count($content->getCategories())) continue;
-                unset($this->contents[$contentID]);
-            }
-        }
-        parent::readData();
-    }
     
-    /**
-     * Loads the cache.
-     */
-    public function loadCache() {
-        // fire event
-        EventHandler::getInstance()->fireEvent($this, 'loadCache');
-        
-        $cache = 'content';
-        $cacheBuilderClass = '\ultimate\system\cache\builder\UltimateContentCacheBuilder';
-        $file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
-        CacheHandler::getInstance()->addResource($cache, $file, $cacheBuilderClass);
-        $result = CacheHandler::getInstance()->get($cache);
-        $this->contents = $result['contents'];
-    }
     
     /**
      * @see \wcf\page\IPage::assignVariables()
@@ -214,16 +200,12 @@ class UltimatePageAddForm extends ACPForm {
     public function assignVariables() {
         parent::assignVariables();
         
-        if ($this->supportI18n) {
-            $useRequestData = (count($_POST)) ? true : false;
-            I18nHandler::getInstance()->assignVariables($useRequestData);
-        }
+        I18nHandler::getInstance()->assignVariables();
         UltimateCore::getTPL()->assign(array(
             'contentID' => $this->contentID,
             'contents' => $this->contents,
             'pageTitle' => $this->pageTitle,
             'pageSlug' => $this->pageSlug,
-            'supportI18n' => $this->supportI18n,
             'action' => 'add'
         ));
     }

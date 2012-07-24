@@ -3,8 +3,10 @@ namespace ultimate\acp\form;
 use ultimate\acp\form\UltimateContentAddForm;
 use ultimate\data\content\Content;
 use ultimate\data\content\ContentAction;
+use ultimate\data\content\ContentEditor;
 use ultimate\system\UltimateCore;
 use wcf\form\MessageForm;
+use wcf\form\RecaptchaForm;
 
 /**
  * Shows the UltimateContentEdit form.
@@ -34,21 +36,85 @@ class UltimateContentEditForm extends UltimateContentAddForm {
      * Contains the content id.
      * @var int
      */
-    protected $contentID = 0;
+    public $contentID = 0;
+    
+    /**
+     * Contains the ContentEditor object of this content.
+     * @var \ultimate\data\content\ContentEditor
+     */
+    public $content = null;
+    
+    /**
+     * @see \wcf\page\IPage::readParameters()
+     */
+    public function readParameters() {
+        parent::readParameters();
+        if (isset($_REQUEST['id'])) $this->contentID = intval($_REQUEST['id']);
+        $content = new Content($this->contentID);
+        if (!$content->contentID) {
+            throw new IllegalLinkException();
+        }
+        
+        $this->content = new ContentEditor($content);
+    }
+    
+    /**
+     * @see \wcf\page\IPage::readData()
+     */
+    public function readData() {
+        if (!count($_POST)) {
+            $this->subject = $this->content->contentTitle;
+            $this->description = $this->content->contentDescription;
+            $this->text = $this->content->contentText;
+            $this->lastModified = $this->content->lastModified;
+            I18nHandler::getInstance()->setOptions('subject', PACKAGE_ID, $this->subject, 'ultimate.content.\d+.contentTitle');
+            I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->description, 'ultimate.content.\d+.contentDescription');
+            I18nHandler::getInstance()->setOptions('text', PACKAGE_ID, $this->text, 'ultimate.content.\d+.contentText');
+        }
+        parent::readData();
+    }
     
     /**
      * @see \wcf\form\IForm::save()
      */
     public function save() {
-        MessageForm::save();
+        if (!I18nHandler::getInstance()->isPlainValue('text')) RecaptchaForm::save();
+        else parent::save();
+        
+        $this->subject = 'ultimate.content.'.$this->contentID.'.contentTitle';
+        if (I18nHandler::getInstance()->isPlainValue('subject')) {
+            I18nHandler::getInstance()->remove($this->subject, PACKAGE_ID);
+            $this->subject = I18nHandler::getInstance()->getValue('subject');
+        } else {
+            I18nHandler::getInstance()->save('subject', $this->subject, 'ultimate.content', PACKAGE_ID);
+        }
+        
+        $this->description = 'ultimate.content.'.$this->contentID.'.contentDescription';
+        if (I18nHandler::getInstance()->isPlainValue('description')) {
+            I18nHandler::getInstance()->remove($this->description, PACKAGE_ID);
+            $this->description = I18nHandler::getInstance()->getValue('description');
+        } else {
+            I18nHandler::getInstance()->save('description', $this->description, 'ultimate.content', PACKAGE_ID);
+        }
+        
+        $text = 'ultimate.content.'.$this->contentID.'.contentText';
+        if (I18nHandler::getInstance()->isPlainValue('text')) {
+            I18nHandler::getInstance()->remove($text, PACKAGE_ID);
+        } else {
+            $this->text = $text;
+            I18nHandler::getInstance()->save('text', $this->text, 'ultimate.content', PACKAGE_ID);
+        }
+        
         $parameters = array(
         	'data' => array(
+        	    'authorID' => UltimateCore::getUser()->userID,
             	'contentTitle' => $this->subject,
                 'contentDescription' => $this->description,
             	'contentText' => $this->text,
                 'enableBBCodes' => $this->enableBBCodes,
                 'enableHtml' => $this->enableHtml,
-                'enableSmilies' => $this->enableSmilies
+                'enableSmilies' => $this->enableSmilies,
+        	    'lastModified' => TIME_NOW
             ),
             'categories' => $this->categoryIDs
         );
@@ -60,32 +126,17 @@ class UltimateContentEditForm extends UltimateContentAddForm {
         UltimateCore::getTPL()->assign('success', true);
     }
     
-    /**
-     * @see \wcf\page\IPage::readParameters()
-     */
-    public function readParameters() {
-        parent::readParameters();
-        if (isset($_REQUEST['id'])) $this->contentID = intval($_REQUEST['id']);
-    }
     
-    /**
-     * @see \wcf\page\IPage::readData()
-     */
-    public function readData() {
-        if (!count($_POST)) {
-            $content = new Content($this->contentID);
-            $this->subject = $content->contentTitle;
-            $this->description = $content->contentDescription;
-            $this->text = $content->contentText;
-        }
-        parent::readData();
-    }
     
     /**
      * @see \wcf\page\IPage::assignVariables()
      */
     public function assignVariables() {
         parent::assignVariables();
+        
+        $useRequestData = (count($_POST)) ? true : false;
+        I18nHandler::getInstance()->assignVariables($useRequestData);
+        
         UltimateCore::getTPL()->assign(array(
         	'contentID' => $this->contentID,
             'action' => 'edit'

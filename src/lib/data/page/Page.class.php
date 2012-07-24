@@ -1,6 +1,8 @@
 <?php
 namespace ultimate\data\page;
+use ultimate\data\content\Content;
 use ultimate\data\AbstractUltimateDatabaseObject;
+use ultimate\system\UltimateCore;
 use wcf\data\user\User;
 
 /**
@@ -13,7 +15,7 @@ use wcf\data\user\User;
  * @subpackage data.page
  * @category Ultimate CMS
  */
-class Link extends AbstractUltimateDatabaseObject {
+class Page extends AbstractUltimateDatabaseObject {
     /**
      * @see \wcf\data\DatabaseObject::$databaseTableName
      */
@@ -28,6 +30,28 @@ class Link extends AbstractUltimateDatabaseObject {
      * @see \wcf\data\DatabaseObject::$databaseTableIndexName
      */
     protected static $databaseTableIndexName = 'pageID';
+    
+    /**
+     * Contains the content to page database table name.
+     * @var string
+     */
+    protected $contentPageTable = 'content_to_page';
+    
+    /**
+     * Returns the content of this page.
+     *
+     * @return \ultimate\data\content\Content
+     */
+    public function getContent() {
+        $sql = 'SELECT    contentID
+                FROM      ultimate'.ULTIMATE_N.'_'.$this->contentPageTable.'
+                WHERE     pageID = ?';
+        $statement = UltimateCore::getDB()->prepareStatement($sql);
+        $statement->execute(array($this->pageID));
+        
+        $row = $statement->fetchArray();
+        return new Content($row['contentID']);
+    }
     
     /**
      * Returns the title of this page.

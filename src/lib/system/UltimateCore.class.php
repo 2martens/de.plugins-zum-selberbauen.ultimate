@@ -1,11 +1,11 @@
 <?php
 namespace ultimate\system;
-use wcf\system\WCF;
-use wcf\system\menu\page\PageMenu;
-use wcf\system\breadcrumb\Breadcrumb;
-use wcf\system\request\LinkHandler;
-use wcf\system\package\PackageDependencyHandler;
 use wcf\system\application\AbstractApplication;
+use wcf\system\breadcrumb\Breadcrumb;
+use wcf\system\menu\page\PageMenu;
+use wcf\system\package\PackageDependencyHandler;
+use wcf\system\request\LinkHandler;
+use wcf\system\WCF;
 
 //defines global version
 define('ULTIMATE_VERSION', '1.0.0 Alpha 1 (Indigo)');
@@ -22,17 +22,11 @@ define('ULTIMATE_VERSION', '1.0.0 Alpha 1 (Indigo)');
  */
 class UltimateCore extends AbstractApplication {
     
-    /**
-     * Contains the packageID of this package.
-     * @var int
-     */
-    protected $packageID = 0;
     
     /**
      * Calls all init functions of the Ultimate Core class.
      */
     public function __construct() {
-        $this->packageID = PackageDependencyHandler::getPackageID('de.plugins-zum-selberbauen.ultimate');
         
         $this->initTPL();
         PageMenu::getInstance()->setActiveMenuItem('ultimate.header.menu.index');

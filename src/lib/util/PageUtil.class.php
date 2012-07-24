@@ -1,5 +1,6 @@
 <?php
 namespace ultimate\util;
+use ultimate\data\content\ContentList;
 use wcf\system\cache\CacheHandler;
 
 /**
@@ -14,22 +15,21 @@ use wcf\system\cache\CacheHandler;
  */
 class PageUtil {
     
-    /**
-     * Contains the cached objects.
-     * @var array
-     */
-    protected static $objects = array();
     
     /**
      * Checks whether the given slug is available or not.
      *
-     * @param string $slug
-     * @return boolean
+     * @param   string    $slug
+     * @return  boolean   $isAvailable
      */
     public static function isAvailableSlug($slug) {
-        
+        $objects = self::loadCache(
+            'page',
+            '\ultimate\system\cache\builder\UltimatePageCacheBuilder',
+            'pages'
+        );
         $isAvailable = true;
-        foreach (self::$objects as $object) {
+        foreach ($objects as $object) {
             if ($object->pageSlug != $slug) continue;
             $isAvailable = false;
             break;
@@ -39,14 +39,45 @@ class PageUtil {
     }
     
     /**
-     * Loads the cache.
+     * Returns all contents which are available.
+     *
+     * @param  int      $pageID    0 by default; give page id to get all unbound contents plus the one already in use by the page
+     * @return array    $contents
      */
-    protected static function loadCache() {
-        $cache = 'page';
-        $cacheBuilderClass = '\ultimate\system\cache\builder\UltimatePageCacheBuilder';
+    public static function getAvailableContents($pageID = 0) {
+        $contents = self::loadCache(
+            'content',
+            '\ultimate\system\cache\builder\UltimateContentCacheBuilder',
+            'contents'
+        );
+        $unavailableContentIDs = self::loadCache(
+            'content-to-page',
+            '\ultimate\system\cache\builder\UltimateContentPageCacheBuilder',
+            'contentIDsToPageID'
+        );
+        
+        foreach ($unavailableContentIDs as $key => $contentID) {
+            if ($pageID == $key) continue;
+            unset($contents[$contentID]);
+        }
+        
+        return $contents;
+    }
+    
+    /**
+     * Loads the cache.
+     *
+     * @return array    $objects
+     */
+    protected static function loadCache($cache, $cacheBuilderClass, $cacheIndex) {
         $file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
         CacheHandler::getInstance()->addResource($cache, $file, $cacheBuilderClass);
         $objects = CacheHandler::getInstance()->get($cache);
-        self::$objects = $objects['pages'];
+        return $objects[$cacheIndex];
     }
+    
+    /**
+     * Constructor not supported.
+     */
+    private function __construct() {}
 }
