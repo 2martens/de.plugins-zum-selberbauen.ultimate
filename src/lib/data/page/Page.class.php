@@ -59,7 +59,7 @@ class Page extends AbstractUltimateDatabaseObject {
      * @return string
      */
     public function __toString() {
-        return $this->pageTitle;
+        return UltimateCore::getLanguage()->get($this->pageTitle);
     }
     
     /**

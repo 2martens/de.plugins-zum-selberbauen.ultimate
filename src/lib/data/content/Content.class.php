@@ -61,7 +61,7 @@ class Content extends AbstractUltimateDatabaseObject {
      * @return string
      */
     public function __toString() {
-        return $this->contentTitle;
+        return UltimateCore::getLanguage()->get($this->contentTitle);
     }
     
     /**

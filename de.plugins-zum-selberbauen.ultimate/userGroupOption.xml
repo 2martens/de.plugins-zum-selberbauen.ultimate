@@ -64,19 +64,19 @@
                 <admindefaultvalue>1</admindefaultvalue>
             </option>
             
-            <option name="admin.content.ultimate.canAddLink">
+            <option name="admin.content.ultimate.canAddPage">
                 <categoryname>admin.content.ultimate</categoryname>
                 <optiontype>boolean</optiontype>
                 <defaultvalue>0</defaultvalue>
                 <admindefaultvalue>1</admindefaultvalue>
             </option>
-            <option name="admin.content.ultimate.canEditLink">
+            <option name="admin.content.ultimate.canEditPage">
                 <categoryname>admin.content.ultimate</categoryname>
                 <optiontype>boolean</optiontype>
                 <defaultvalue>0</defaultvalue>
                 <admindefaultvalue>1</admindefaultvalue>
             </option>
-            <option name="admin.content.ultimate.canDeleteLink">
+            <option name="admin.content.ultimate.canDeletePage">
                 <categoryname>admin.content.ultimate</categoryname>
                 <optiontype>boolean</optiontype>
                 <defaultvalue>0</defaultvalue>

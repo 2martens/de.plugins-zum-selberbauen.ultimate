@@ -20,6 +20,16 @@ use wcf\system\request\LinkHandler;
 class UltimateContentListPage extends AbstractCachedListPage {
     
     /**
+     * @see \wcf\page\AbstractPage::$templateName
+     */
+    public $templateName = 'ultimateContentList';
+    
+    /**
+     * @see \wcf\page\MultipleLinkPage::$objectListClassName
+     */
+    public $objectListClassName = '\ultimate\data\content\ContentList';
+    
+    /**
      * @see \wcf\page\SortablePage::$validSortFields
      */
     public $validSortFields = array(
@@ -39,22 +49,6 @@ class UltimateContentListPage extends AbstractCachedListPage {
     public $defaultSortField = ULTIMATE_SORT_CONTENT_SORTFIELD;
     
     /**
-     * Contains the active menu item.
-     * @var string
-     */
-    public $activeMenuItem = 'wcf.acp.menu.link.ultimate.content.list';
-    
-    /**
-     * @see \wcf\page\AbstractPage::$templateName
-     */
-    public $templateName = 'ultimateContentList';
-    
-    /**
-     * @see \wcf\page\MultipleLinkPage::$objectListClassName
-     */
-    public $objectListClassName = '\ultimate\data\content\ContentList';
-    
-    /**
      * @see \wcf\page\AbstractCachedListPage::$cacheBuilderClassName
      */
     public $cacheBuilderClassName = '\ultimate\system\cache\builder\UltimateContentCacheBuilder';
@@ -68,6 +62,12 @@ class UltimateContentListPage extends AbstractCachedListPage {
      * @see \wcf\page\AbstractCachedListPage::$cacheIndex
      */
     public $cacheIndex = 'contents';
+    
+    /**
+     * Contains the active menu item.
+     * @var string
+     */
+    public $activeMenuItem = 'wcf.acp.menu.link.ultimate.content.list';
     
     /**
      * Contains the url.

@@ -31,36 +31,26 @@
         <!-- /content -->
         
         <!-- link -->
-        <item name="wcf.acp.group.option.admin.content.ultimate.canAddLink"><![CDATA[Kann Links (Slugs) hinzufügen.]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canAddLink.description"><![CDATA[Mitglieder dieser Benutzergruppe können Links (Slugs) hinzufügen.]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canEditLink"><![CDATA[Kann Links (Slugs) bearbeiten.]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canEditLink.description"><![CDATA[Mitglieder dieser Benutzergruppe können Links (Slugs) bearbeiten.]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteLink"><![CDATA[Kann Links (Slugs) löschen.]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteLink.description"><![CDATA[Mitglieder dieser Benutzergruppe können Links (Slugs) löschen.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canAddPage"><![CDATA[Kann Seiten hinzufügen.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canAddPage.description"><![CDATA[Mitglieder dieser Benutzergruppe können Seiten hinzufügen.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canEditPage"><![CDATA[Kann Seiten bearbeiten.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canEditPage.description"><![CDATA[Mitglieder dieser Benutzergruppe können Seiten bearbeiten.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canDeletePage"><![CDATA[Kann Seiten löschen.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canDeletePage.description"><![CDATA[Mitglieder dieser Benutzergruppe können Seiten löschen.]]></item>
         <!-- /link -->
         
-        <!-- config -->
-        <item name="wcf.acp.group.option.admin.content.ultimate.canAddConfig"><![CDATA[Kann Konfigurationen hinzufügen.]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canAddConfig.description"><![CDATA[Mitglieder dieser Benutzergruppe können Konfigurationen hinzufügen.]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canEditConfig"><![CDATA[Kann Konfigurationen bearbeiten.]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canEditConfig.description"><![CDATA[Mitglieder dieser Benutzergruppe können Konfigurationen bearbeiten.]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteConfig"><![CDATA[Kann Konfigurationen löschen.]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteConfig.description"><![CDATA[Mitglieder dieser Benutzergruppe können Konfigurationen löschen.]]></item>
-        <!-- /config -->
         <!-- /admin -->
     </category>
     
     <category name="wcf.acp.menu">
         <!-- core items -->
         <item name="wcf.acp.menu.link.ultimate"><![CDATA[Ultimate CMS]]></item>
-        <item name="wcf.acp.menu.link.ultimate.links.add"><![CDATA[Link hinzufügen]]></item>
-        <item name="wcf.acp.menu.link.ultimate.links.list"><![CDATA[Links auflisten]]></item>
-        <item name="wcf.acp.menu.link.ultimate.categories.add"><![CDATA[Kategorie hinzufügen]]></item>
-        <item name="wcf.acp.menu.link.ultimate.categories.list"><![CDATA[Kategorien auflisten]]></item>
-        <item name="wcf.acp.menu.link.ultimate.configs.add"><![CDATA[Konfiguration hinzufügen]]></item>
-        <item name="wcf.acp.menu.link.ultimate.configs.list"><![CDATA[Konfigurationen auflisten]]></item>
-        <item name="wcf.acp.menu.link.ultimate.contents.add"><![CDATA[Inhalt hinzufügen]]></item>
-        <item name="wcf.acp.menu.link.ultimate.contents.list"><![CDATA[Inhalte auflisten]]></item>
+        <item name="wcf.acp.menu.link.ultimate.content.add"><![CDATA[Inhalt hinzufügen]]></item>
+        <item name="wcf.acp.menu.link.ultimate.content.list"><![CDATA[Inhalte auflisten]]></item>
+        <item name="wcf.acp.menu.link.ultimate.category.add"><![CDATA[Kategorie hinzufügen]]></item>
+        <item name="wcf.acp.menu.link.ultimate.category.list"><![CDATA[Kategorien auflisten]]></item>
+        <item name="wcf.acp.menu.link.ultimate.page.add"><![CDATA[Seite hinzufügen]]></item>
+        <item name="wcf.acp.menu.link.ultimate.page.list"><![CDATA[Seiten auflisten]]></item>
         <!-- /core items -->
         
         <!-- additional items -->
@@ -73,6 +63,132 @@
         <item name="wcf.acp.option.module_ultimateFrontend"><![CDATA[Ultimate Frontend aktivieren]]></item>
         <item name="wcf.acp.option.module_ultimateFrontend.description"><![CDATA[Aktiviert die Anzeige des Frontends.]]></item>
         <!-- /modules -->
+        
+        <!-- categories -->
+        <item name="wcf.acp.option.category.ultimate"><![CDATA[Ultimate CMS]]></item>
+        <item name="wcf.acp.option.category.ultimate.description"><![CDATA[]]></item>
+        <item name="wcf.acp.option.category.ultimate.general"><![CDATA[Allgemein]]></item>
+        <item name="wcf.acp.option.category.ultimate.general.description"><![CDATA[]]></item>
+        <item name="wcf.acp.option.category.ultimate.sort"><![CDATA[Sortierung]]></item>
+        <item name="wcf.acp.option.category.ultimate.sort.description"><![CDATA[]]></item>
+        <item name="wcf.acp.option.category.ultimate.sort.category"><![CDATA[Kategorien]]></item>
+        <item name="wcf.acp.option.category.ultimate.sort.category.description"><![CDATA[]]></item>
+        <item name="wcf.acp.option.category.ultimate.sort.content"><![CDATA[Inhalte]]></item>
+        <item name="wcf.acp.option.category.ultimate.sort.content.description"><![CDATA[]]></item>
+        <item name="wcf.acp.option.category.ultimate.sort.page"><![CDATA[Seiten]]></item>
+        <item name="wcf.acp.option.category.ultimate.sort.page.description"><![CDATA[]]></item>
+        <!-- /categories -->
+        
+        <!-- ultimate.sort.category -->
+        <item name="wcf.acp.option.ultimate_sort_category_sortField"><![CDATA[Sortierfeld]]></item>
+        <item name="wcf.acp.option.ultimate_sort_category_sortField.description"><![CDATA[Geben Sie hier an nach welchem Element sortiert werden soll.]]></item>
+        <item name="wcf.acp.option.ultimate_sort_category_sortOrder"><![CDATA[Sortierreihenfolge]]></item>
+        <item name="wcf.acp.option.ultimate_sort_category_sortOrder.description"><![CDATA[Geben Sie hier die Sortierreihenfolge für die Kategorieliste an.]]></item>
+        <!-- /ultimate.sort.category -->
+        <!-- ultimate.sort.content -->
+        <item name="wcf.acp.option.ultimate_sort_content_sortField"><![CDATA[Sortierfeld]]></item>
+        <item name="wcf.acp.option.ultimate_sort_content_sortField.description"><![CDATA[Geben Sie hier an nach welchem Element sortiert werden soll.]]></item>
+        <item name="wcf.acp.option.ultimate_sort_content_sortOrder"><![CDATA[Sortierreihenfolge]]></item>
+        <item name="wcf.acp.option.ultimate_sort_content_sortOrder.description"><![CDATA[Geben Sie hier die Sortierreihenfolge für die Inhaltsliste an.]]></item>
+        <!-- /ultimate.sort.content -->
+        <!-- ultimate.sort.page -->
+        <item name="wcf.acp.option.ultimate_sort_page_sortField"><![CDATA[Sortierfeld]]></item>
+        <item name="wcf.acp.option.ultimate_sort_page_sortField.description"><![CDATA[Geben Sie hier an nach welchem Element sortiert werden soll.]]></item>
+        <item name="wcf.acp.option.ultimate_sort_page_sortOrder"><![CDATA[Sortierreihenfolge]]></item>
+        <item name="wcf.acp.option.ultimate_sort_page_sortOrder.description"><![CDATA[Geben Sie hier die Sortierreihenfolge für die Seitenliste an.]]></item>
+        <!-- /ultimate.sort.page -->
+    </category>
+    
+    <category name="wcf.acp.ultimate">
+        <!-- category -->
+        <item name="wcf.acp.ultimate.category.add"><![CDATA[Kategorie hinzufügen]]></item>
+        <item name="wcf.acp.ultimate.category.edit"><![CDATA[Kategorie bearbeiten]]></item>
+        <item name="wcf.acp.ultimate.category.title"><![CDATA[Name]]></item>
+        <item name="wcf.acp.ultimate.category.title.placeholder"><![CDATA[Gute Inhalte]]></item>
+        <item name="wcf.acp.ultimate.category.title.error.notUnique"><![CDATA[Der angegebene Name existiert bereits bei einer Kategorie auf gleichem Level.]]></item>
+        <item name="wcf.acp.ultimate.category.slug"><![CDATA[URL-kompatibler Name]]></item>
+        <item name="wcf.acp.ultimate.category.slug.placeholder"><![CDATA[good-contents]]></item>
+        <item name="wcf.acp.ultimate.category.slug.error.notUnique"><![CDATA[Der angegebene Name existiert bereits bei einer Kategorie auf gleichem Level.]]></item>
+        <item name="wcf.acp.ultimate.category.parent"><![CDATA[Übergeordnete Kategorie]]></item>
+        <item name="wcf.acp.ultimate.category.parent.none"><![CDATA[Keine]]></item>
+        <item name="wcf.acp.ultimate.category.parent.error.notValid"><![CDATA[Die gewählte Kategorie ist ungültig, da sie nicht zur Auswahl stand.]]></item>
+        <item name="wcf.acp.ultimate.category.description"><![CDATA[Beschreibung]]></item>
+        <item name="wcf.acp.ultimate.category.description.placeholder"><![CDATA[]]></item>
+        <item name="wcf.acp.ultimate.category.general"><![CDATA[Allgemeine Daten]]></item>
+        <item name="wcf.acp.ultimate.category.contents"><![CDATA[Inhalte]]></item>
+        <item name="wcf.acp.ultimate.category.noContents"><![CDATA[Keine Kategorien gefunden.]]></item>
+        <item name="wcf.acp.ultimate.category.list.all"><![CDATA[Alle Kategorien]]></item>
+        <item name="wcf.acp.ultimate.category.list.count"><![CDATA[{#$items} Kategorie{if $items != 1}n{/if}]]></item>
+        <!-- /category -->
+        <!-- content -->
+        <item name="wcf.acp.ultimate.content.add"><![CDATA[Inhalt hinzufügen]]></item>
+        <item name="wcf.acp.ultimate.content.edit"><![CDATA[Inhalt bearbeiten]]></item>
+        <item name="wcf.acp.ultimate.content.title"><![CDATA[Titel]]></item>
+        <item name="wcf.acp.ultimate.content.title.error.tooShort"><![CDATA[Der Titel muss mindestens 4 Zeichen lang sein.]]></item>
+        <item name="wcf.acp.ultimate.content.title.placeholder"><![CDATA[Ein schöner Inhalt]]></item>
+        <item name="wcf.acp.ultimate.content.description"><![CDATA[Beschreibung]]></item>
+        <item name="wcf.acp.ultimate.content.description.placeholder"><![CDATA[]]></item>
+        <item name="wcf.acp.ultimate.content.description.error.tooShort"><![CDATA[Die Beschreibung muss mindestens 4 Zeichen lang sein.]]></item>
+        <item name="wcf.acp.ultimate.content.categories"><![CDATA[Kategorien]]></item>
+        <item name="wcf.acp.ultimate.content.categories.error.invalidIDs"><![CDATA[Mindestens einer der "ausgewählten" Kategorien stand nicht zur Auswahl.]]></item>
+        <item name="wcf.acp.ultimate.content.message"><![CDATA[Nachricht]]></item>
+        <item name="wcf.acp.ultimate.content.text"><![CDATA[Text]]></item>
+        <item name="wcf.acp.ultimate.content.text.placeholder"><![CDATA[Ein wunderschöner Inhalt
+der auch über mehrere Zeilen gehen kann.]]></item>
+        <item name="wcf.acp.ultimate.content.text.error.tooLong"><![CDATA[Der Text ist zu lang.]]></item>        
+        <item name="wcf.acp.ultimate.content.general"><![CDATA[Allgemeine Daten]]></item>
+        <item name="wcf.acp.ultimate.content.author"><![CDATA[Autor]]></item>
+        <item name="wcf.acp.ultimate.content.noContents"><![CDATA[Keine Inhalte gefunden.]]></item>
+        <item name="wcf.acp.ultimate.content.list.all"><![CDATA[Alle Inhalte]]></item>
+        <item name="wcf.acp.ultimate.content.list.count"><![CDATA[{#$items} Inhalt{if $items != 1}e{/if}]]></item>
+        <!-- /content -->
+        <!-- page -->
+        <item name="wcf.acp.ultimate.page.add"><![CDATA[Seite hinzufügen]]></item>
+        <item name="wcf.acp.ultimate.page.edit"><![CDATA[Seite bearbeiten]]></item>
+        <item name="wcf.acp.ultimate.page.title"><![CDATA[Titel]]></item>
+        <item name="wcf.acp.ultimate.page.title.placeholder"><![CDATA[Beispielseite mit viel Gewürz]]></item>
+        <item name="wcf.acp.ultimate.page.title.error.notUnique"><![CDATA[Der angegebene Titel existiert bereits bei einer Seite auf gleichem Level.]]></item>
+        <item name="wcf.acp.ultimate.page.slug"><![CDATA[URL-kompatibler Titel]]></item>
+        <item name="wcf.acp.ultimate.page.slug.placeholder"><![CDATA[samplepage-with-much-spice]]></item>
+        <item name="wcf.acp.ultimate.page.slug.error.notUnique"><![CDATA[Der angegebene URL-kompatible Titel existiert bereits bei einer Seite auf gleichem Level.]]></item>
+        <item name="wcf.acp.ultimate.page.content"><![CDATA[Zugeordneter Inhalt]]></item>
+        <item name="wcf.acp.ultimate.page.content.select"><![CDATA[Bitte Inhalt auswählen]]></item>
+        <item name="wcf.acp.ultimate.page.content.error.notSelected"><![CDATA[Sie müssen einen Inhalt auswählen.]]></item>
+        <item name="wcf.acp.ultimate.page.content.error.notValid"><![CDATA[Der "ausgewählte Inhalt stand nicht nur Auswahl.]]></item>
+        <item name="wcf.acp.ultimate.page.general"><![CDATA[Allgemeine Daten]]></item>
+        <item name="wcf.acp.ultimate.page.noContents"><![CDATA[Keine Seiten gefunden.]]></item>
+        <item name="wcf.acp.ultimate.page.list.all"><![CDATA[Alle Seiten]]></item>
+        <item name="wcf.acp.ultimate.page.list.count"><![CDATA[{#$items} Seite{if $items != 1}n{/if}]]></item>
+        <!-- /page -->
+    </category>
+    
+    <category name="wcf.clipboard">
+        <item name="wcf.clipboard.item.category.delete"><![CDATA[Kategorie löschen]]></item>
+        <item name="wcf.clipboard.item.category.delete.confirmMessage"><![CDATA[{if $count == 1}Eine{else}{#$count}{/if} Kategorie{if $count != 1}n{/if} löschen?]]></item>
+        <item name="wcf.clipboard.label.category.marked"><![CDATA[{if $count == 1}Eine{else}{#$count}{/if} Kategorie{if $count > 1}n{/if} markiert]]></item>
+        <item name="wcf.clipboard.item.content.delete"><![CDATA[Inhalt löschen]]></item>
+        <item name="wcf.clipboard.item.content.delete.confirmMessage"><![CDATA[{if $count == 1}Einen{else}{#$count}{/if} Inhalt{if $count != 1}e{/if} löschen?]]></item>
+        <item name="wcf.clipboard.label.content.marked"><![CDATA[{if $count == 1}Einen{else}{#$count}{/if} Inhalt{if $count > 1}e{/if} markiert]]></item>
+        <item name="wcf.clipboard.item.page.delete"><![CDATA[Seite löschen]]></item>
+        <item name="wcf.clipboard.item.page.delete.confirmMessage"><![CDATA[{if $count == 1}Eine{else}{#$count}{/if} Seite{if $count != 1}n{/if} löschen?]]></item>
+        <item name="wcf.clipboard.label.page.marked"><![CDATA[{if $count == 1}Eine{else}{#$count}{/if} Seite{if $count != 1}n{/if} markiert]]></item>
+    </category>
+    
+    <!-- this category is used for all multilingual category fields -->
+    <category name="ultimate.category">
+        <item name="ultimate.category.1.categoryTitle"><![CDATA[Allgemein]]></item>
+    </category>
+    
+    <!-- this category is used for all multilingual content fields -->
+    <category name="ultimate.content">
+        <!-- this item is just a placeholder -->
+        <item name="ultimate.content.default"><![CDATA[Wer das hier liest ist dumm, denn dieser Eintrag wird nicht benötigt.]]></item>
+    </category>
+    
+    <!-- this category is used for all multilingual page fields -->
+    <category name="ultimate.page">
+        <!-- this item is just a placeholder -->
+        <item name="ultimate.page.default"><![CDATA[Wer das hier liest ist dumm, denn dieser Eintrag wird nicht benötigt.]]></item>
     </category>
     
     <category name="ultimate.header">
@@ -88,47 +204,7 @@
     </category>
     
     <category name="ultimate.template">
-        <!-- configEditor -->
-        <item name="ultimate.template.configEditor.title"><![CDATA[Konfigurationseditor]]></item>
-        <item name="ultimate.template.configEditor.configTitle"><![CDATA[Konfigurationstitel]]></item>
-        <item name="ultimate.template.configEditor.configTitle.error.notUnique"><![CDATA[Dieser Titel existiert bereits.]]></item>
-        <item name="ultimate.template.configEditor.metaDescription"><![CDATA[Meta Description]]></item>
-        <item name="ultimate.template.configEditor.metaDescription.error.tooLong"><![CDATA[Die Beschreibung darf maximal 255 Zeichen enthalten.]]></item>
-        <item name="ultimate.template.configEditor.metaKeywords"><![CDATA[Meta Keywords]]></item>
-        <item name="ultimate.template.configEditor.metaKeywords.error.tooLong"><![CDATA[Die Schlüsselwörter dürfen maximal 255 Zeichen lang sein.]]></item>
-        <item name="ultimate.template.configEditor.columnLeft"><![CDATA[Linke Spalte]]></item>
-        <item name="ultimate.template.configEditor.columnCenter"><![CDATA[Mittlere Spalte]]></item>
-        <item name="ultimate.template.configEditor.columnRight"><![CDATA[Rechte Spalte]]></item>
-        
-        <item name="ultimate.template.configEditor.add"><![CDATA[Konfiguration hinzufügen]]></item>
-        <item name="ultimate.template.configEditor.edit"><![CDATA[Konfiguration bearbeiten]]></item>
-        <item name="ultimate.template.configEditor.delete"><![CDATA[Konfiguration löschen]]></item>
-        <item name="ultimate.template.configEditor.addEntry"><![CDATA[Hinzufügen]]></item>
-        <item name="ultimate.template.configEditor.deleteEntry"><![CDATA[Löschen]]></item>
-        <!-- /configEditor -->
-        
-        <!-- content -->
-        <item name="ultimate.template.content.title"><![CDATA[Titel]]></item>
-        <item name="ultimate.template.content.title.error.tooShort"><![CDATA[Der Titel muss mindestens 4 Zeichen lang sein.]]></item>
-        <item name="ultimate.template.content.description"><![CDATA[Beschreibung]]></item>
-        <item name="ultimate.template.content.description.error.tooShort"><![CDATA[Die Beschreibung muss mindestens 4 Zeichen lang sein.]]></item>
-        <item name="ultimate.template.content.category"><![CDATA[Kategorie]]></item>
-        <item name="ultimate.template.content.category.default"><![CDATA[Kategorie auswählen]]></item>
-        <item name="ultimate.template.content.category.error.notSelected"><![CDATA[Sie müssen eine Kategorie auswählen.]]></item>
-        <item name="ultimate.template.content.text"><![CDATA[Text]]></item>
-        <item name="ultimate.template.content.text.error.tooLong"><![CDATA[Der Text ist zu lang.]]></item>
-        <!-- /content -->
-        
-        <!-- topMenu -->
-        <item name="ultimate.template.topMenu.configEditor"><![CDATA[Konfigurationseditor]]></item>
-        <item name="ultimate.template.topMenu.action"><![CDATA[Konfiguration]]></item>
-        <item name="ultimate.template.topMenu.action.add"><![CDATA[Konfiguration hinzufügen]]></item>
-        <item name="ultimate.template.topMenu.action.edit"><![CDATA[Konfiguration bearbeiten]]></item>
-        <item name="ultimate.template.topMenu.configID"><![CDATA[Konfigurations-ID]]></item>
-        <item name="ultimate.template.topMenu.configID.empty"><![CDATA[Sie müssen eine Konfigurations-ID auswählen.]]></item>
-        <item name="ultimate.template.topMenu.configID.select"><![CDATA[Bitte Konfigurations-ID auswählen!]]></item>
-        <item name="ultimate.template.topMenu.title"><![CDATA[Konfigurationsdialog]]></item>
-        <!-- /topMenu -->
+        <item name="ultimate.template.default"><![CDATA[]]></item>
     </category>
     
     <category name="ultimate.component">

@@ -1,13 +1,5 @@
 /**** tables ****/
-DROP TABLE IF EXISTS ultimate1_1_config;
-CREATE TABLE ultimate1_1_config (
-    configID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    configTitle VARCHAR(255) NOT NULL DEFAULT '',
-    metaDescription VARCHAR(255) NOT NULL DEFAULT '',
-    metaKeywords VARCHAR(255) NOT NULL DEFAULT '',
-    templateName VARCHAR(255) NOT NULL DEFAULT '',
-    storage VARCHAR(255) NOT NULL DEFAULT ''
-);
+
 
 DROP TABLE IF EXISTS ultimate1_1_category;
 CREATE TABLE ultimate1_1_category (
@@ -16,7 +8,8 @@ CREATE TABLE ultimate1_1_category (
     categoryTitle VARCHAR(255) NOT NULL DEFAULT '',
     categoryDescription VARCHAR(255) NOT NULL DEFAULT '',
     categorySlug VARCHAR(255) NOT NULL DEFAULT '',
-    KEY (parentCategoryID)
+    UNIQUE KEY categoryTitle (parentCategoryID, categoryTitle),
+    UNIQUE KEY categorySlug (parentCategoryID, slug)
 );
 
 DROP TABLE IF EXISTS ultimate1_1_content_to_category;
@@ -74,7 +67,4 @@ ALTER TABLE ultimate1_1_content_to_page ADD FOREIGN KEY (pageID) REFERENCES ulti
 
 /**** default entries ****/
 -- default category
-INSERT INTO ultimate1_1_category (categoryTitle, categorySlug) VALUES ('wcf.acp.ultimate.category.default', 'wcf.acp.ultimate.category.default.slug');
--- INSERT INTO ultimate1_1_content (contentTitle, contentDescription, contentText) VALUES ('Test', 'Ein kleiner Test', 'Das ist ein schöner Testtext, um zu prüfen, ob alles klappt.');
--- INSERT INTO ultimate1_1_config (templateName, requiredContents) VALUES ('test', 'a:1:{i:1;s:17:"SiteComponentPage";}');
--- INSERT INTO ultimate1_1_link (configID, linkSlug) VALUES (1, 'test');
+INSERT INTO ultimate1_1_category (categoryTitle, categorySlug) VALUES ('ultimate.category.1.categoryTitle', 'uncategorized');

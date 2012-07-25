@@ -1,9 +1,12 @@
 <?php
 namespace ultimate\acp\form;
+use wcf\util\ArrayUtil;
+
 use ultimate\data\category\CategoryList;
 use ultimate\data\category\CategoryAction;
 use ultimate\data\category\CategoryEditor;
 use ultimate\system\UltimateCore;
+use ultimate\util\CategoryUtil;
 use wcf\acp\form\ACPForm;
 use wcf\system\cache\CacheHandler;
 use wcf\system\exception\UserInputException;
@@ -118,65 +121,7 @@ class UltimateCategoryAddForm extends ACPForm {
         $this->validateTitle();
         $this->validateSlug();
         $this->validateParent();
-        $this->validateDescription();
-    }
-    
-    /**
-     * Validates the category title.
-     *
-     * @throws \wcf\system\exception\UserInputException
-     */
-    protected function validateTitle() {
-        if (!I18nHandler::getInstance()->isPlainValue('categoryTitle')) {
-            if (!I18nHandler::getInstance()->validateValue('categoryTitle')) {
-                throw new UserInputException('categoryTitle');
-            }
-        }
-        else {
-            if (empty($this->pageTitle)) {
-                throw new UserInputException('categoryTitle');
-            }
-        }
-    }
-    
-    /**
-     * Validates category parent.
-     *
-     * @throws \wcf\system\exception\UserInputException
-     */
-    protected function validateParent() {
-        if (!array_key_exists($this->categoryParent, $this->categories)) {
-            throw new UserInputException('categoryParent', 'notValid');
-        }
-    }
-    
-    /**
-     * Validates category slug.
-     *
-     * @throws \wcf\system\exception\UserInputException
-     */
-    protected function validateSlug() {
-        if (empty($this->categorySlug)) {
-            throw new UserInputException('categorySlug');
-        }
-    }
-    
-    /**
-     * Validates the category description.
-     *
-     * @throws \wcf\system\exception\UserInputException
-     */
-    protected function validateDescription() {
-        if (!I18nHandler::getInstance()->isPlainValue('categoryDescription')) {
-            if (!I18nHandler::getInstance()->validateValue('categoryDescription')) {
-                throw new UserInputException('categoryTitle');
-            }
-        }
-        else {
-            if (empty($this->pageTitle)) {
-                throw new UserInputException('categoryTitle');
-            }
-        }
+        // $this->validateDescription();
     }
     
     /**
@@ -205,8 +150,16 @@ class UltimateCategoryAddForm extends ACPForm {
             $updateValues['categoryTitle'] = 'ultimate.category.'.$categoryID.'.categoryTitle';
         }
         if (!I18nHandler::getInstance()->isPlainValue('categoryDescription')) {
-            I18nHandler::getInstance()->save('categoryDescription', 'ultimate.category.'.$categoryID.'.categoryDescription', 'ultimate.category', PACKAGE_ID);
-            $updateValues['categoryDescription'] = 'ultimate.category.'.$categoryID.'.categoryDescription';
+            $values = I18nHandler::getInstance()->getValues('categoryDescription');
+            $update = true;
+            foreach ($values as $value) {
+                if (!empty($value)) continue;
+                $update = false;
+            }
+            if ($update) {
+                I18nHandler::getInstance()->save('categoryDescription', 'ultimate.category.'.$categoryID.'.categoryDescription', 'ultimate.category', PACKAGE_ID);
+                $updateValues['categoryDescription'] = 'ultimate.category.'.$categoryID.'.categoryDescription';
+            }
         }
         if (count($updateValues)) {
             $categoryEditor = new CategoryEditor($returnValues['returnValues']);
@@ -238,5 +191,69 @@ class UltimateCategoryAddForm extends ACPForm {
             'categorySlug' => $this->categorySlug,
             'action' => 'add'
         ));
+    }
+    
+    /**
+     * Validates the category title.
+     *
+     * @throws \wcf\system\exception\UserInputException
+     */
+    protected function validateTitle() {
+        if (!I18nHandler::getInstance()->isPlainValue('categoryTitle')) {
+            if (!I18nHandler::getInstance()->validateValue('categoryTitle')) {
+                throw new UserInputException('categoryTitle');
+            }
+        }
+        else {
+            if (empty($this->categoryTitle)) {
+                throw new UserInputException('categoryTitle');
+            }
+            if (!CategoryUtil::isAvailableTitle($this->categoryTitle, $this->categoryParent)) {
+                throw new UserInputException('categoryTitle', 'notUnique');
+            }
+        }
+    }
+    
+    /**
+     * Validates category parent.
+     *
+     * @throws \wcf\system\exception\UserInputException
+     */
+    protected function validateParent() {
+        if ($this->categoryParent != 0 && !array_key_exists($this->categoryParent, $this->categories)) {
+            throw new UserInputException('categoryParent', 'notValid');
+        }
+    }
+    
+    /**
+     * Validates category slug.
+     *
+     * @throws \wcf\system\exception\UserInputException
+     */
+    protected function validateSlug() {
+        if (empty($this->categorySlug)) {
+            throw new UserInputException('categorySlug');
+        }
+        if (!CategoryUtil::isAvailableSlug($this->categorySlug, $this->categoryParent)) {
+            throw new UserInputException('categorySlug', 'notUnique');
+        }
+    }
+    
+    /**
+     * Validates the category description.
+     *
+     * @throws \wcf\system\exception\UserInputException
+     */
+    protected function validateDescription() {
+        if (!I18nHandler::getInstance()->isPlainValue('categoryDescription')) {
+            if (!I18nHandler::getInstance()->validateValue('categoryDescription')) {
+                throw new UserInputException('categoryDescription');
+            }
+        }
+        else {
+            if (empty($this->categoryDescription)) {
+                throw new UserInputException('categoryDescription');
+            }
+        }
     }
 }

@@ -21,7 +21,8 @@ class UltimateCategoryCacheBuilder implements ICacheBuilder {
     public function getData(array $cacheResource) {
         $data = array(
             'categories' => array(),
-            'categoryIDs' => array()
+            'categoryIDs' => array(),
+            'categoriesToParent' => array()
         );
     
         $categoryList = new CategoryList();
@@ -37,6 +38,10 @@ class UltimateCategoryCacheBuilder implements ICacheBuilder {
         $categoryIDs = $categoryList->getObjectIDs();
         $data['categories'] = array_combine($categoryIDs, $categories);
         $data['categoryIDs'] = $categoryIDs;
+        
+        foreach ($data['categories'] as $id => $category) {
+            $data['categoriesToParent'][$id] = $category->childCategories;
+        }
         
         return $data;
     }

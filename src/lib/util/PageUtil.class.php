@@ -1,6 +1,5 @@
 <?php
 namespace ultimate\util;
-use ultimate\data\content\ContentList;
 use wcf\system\cache\CacheHandler;
 
 /**
@@ -15,6 +14,28 @@ use wcf\system\cache\CacheHandler;
  */
 class PageUtil {
     
+    /**
+     * Checks whether the given slug is available or not.
+     *
+     * @param   string    $title
+     * @return  boolean   $isAvailable
+     */
+    public static function isAvailableTitle($title) {
+        $title = trim($title);
+        $objects = self::loadCache(
+                'page',
+                '\ultimate\system\cache\builder\UltimatePageCacheBuilder',
+                'pages'
+        );
+        $isAvailable = true;
+        foreach ($objects as $object) {
+            if ($object->pageTitle != $title) continue;
+            $isAvailable = false;
+            break;
+        }
+    
+        return $isAvailable;
+    }
     
     /**
      * Checks whether the given slug is available or not.
@@ -23,6 +44,7 @@ class PageUtil {
      * @return  boolean   $isAvailable
      */
     public static function isAvailableSlug($slug) {
+        $slug = trim($slug);
         $objects = self::loadCache(
             'page',
             '\ultimate\system\cache\builder\UltimatePageCacheBuilder',

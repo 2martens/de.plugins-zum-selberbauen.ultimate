@@ -35,13 +35,6 @@
                 <defaultvalue>1</defaultvalue>
             </option>
             
-            
-            <option name="ultimate_general_index_config">
-                <categoryname>ultimate.general</categoryname>
-                <optiontype>ultimateConfig</optiontype>
-                <showorder>1</showorder>
-            </option>
-            
             <!-- sort order/field for UltimateCategoryListPage -->
             <option name="ultimate_sort_category_sortField">
                 <categoryname>ultimate.sort.category</categoryname>

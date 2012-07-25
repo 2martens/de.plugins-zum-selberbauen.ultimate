@@ -19,6 +19,16 @@ use wcf\system\request\LinkHandler;
 class UltimateCategoryListPage extends AbstractCachedListPage {
 
     /**
+     * @see \wcf\page\AbstractPage::$templateName
+     */
+    public $templateName = 'ultimateCategoryList';
+    
+    /**
+     * @see \wcf\page\MultipleLinkPage::$objectListClassName
+     */
+    public $objectListClassName = '\ultimate\data\category\CategoryList';
+    
+    /**
      * @see \wcf\page\SortablePage::$validSortFields
      */
     public $validSortFields = array(
@@ -40,22 +50,6 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
     public $defaultSortOrder = ULTIMATE_SORT_CATEGORY_SORTORDER;
     
     /**
-     * Contains the active menu item.
-     * @var string
-     */
-    public $activeMenuItem = 'wcf.acp.menu.link.ultimate.category.list';
-
-    /**
-     * @see \wcf\page\AbstractPage::$templateName
-     */
-    public $templateName = 'ultimateCategoryList';
-
-    /**
-     * @see \wcf\page\MultipleLinkPage::$objectListClassName
-     */
-    public $objectListClassName = '\ultimate\data\category\CategoryList';
-    
-    /**
      * @see \wcf\page\AbstractCachedListPage::$cacheBuilderClassName
      */
     public $cacheBuilderClassName = '\ultimate\system\cache\builder\UltimateCategoryCacheBuilder';
@@ -69,6 +63,12 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
      * @see \wcf\page\AbstractCachedListPage::$cacheIndex
      */
     public $cacheIndex = 'categories';
+    
+    /**
+     * Contains the active menu item.
+     * @var string
+     */
+    public $activeMenuItem = 'wcf.acp.menu.link.ultimate.category.list';
 
     /**
      * Contains the url.

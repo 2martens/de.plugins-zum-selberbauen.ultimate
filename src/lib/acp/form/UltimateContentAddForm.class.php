@@ -128,99 +128,6 @@ class UltimateContentAddForm extends MessageForm {
     }
     
     /**
-     * Validates content subject.
-     *
-     * @throws \wcf\system\exception\UserInputException
-     */
-    protected function validateSubject() {
-        if (!I18nHandler::getInstance()->isPlainValue('subject')) {
-            if (!I18nHandler::getInstance()->validateValue('subject')) {
-                throw new UserInputException('subject');
-            }
-            $subjectValues = I18nHandler::getInstance()->getValues('subject');
-            foreach ($subjectValues as $languageID => $subject) {
-               if (strlen($subject) < 4) {
-                   throw new UserInputException('subject', 'oneTooShort');
-               }
-           }
-        } else {
-            // checks if subject is empty; we don't have to do it twice
-            parent::validateSubject();
-            
-            if (strlen($this->subject) < 4) {
-                throw new UserInputException('subject', 'tooShort');
-            }
-        }
-    }
-    
-    /**
-     * Validates content description.
-     *
-     * @throws \wcf\system\exception\UserInputException
-     */
-    protected function validateDescription() {
-        if (!I18nHandler::getInstance()->isPlainValue('description')) {
-            if (!I18nHandler::getInstance()->validateValue('description')) {
-                throw new UserInputException('description');
-            }
-            $descriptionValues = I18nHandler::getInstance()->getValues('description');
-            foreach ($descriptionValues as $languageID => $description) {
-                if (strlen($description) < 4) {
-                    throw new UserInputException('description', 'tooShort');
-                }
-            }
-        }
-        else {
-            if (empty($this->description)) {
-                throw new UserInputException('description');
-            }
-        
-            if (strlen($this->description) < 4) {
-                throw new UserInputException('description', 'tooShort');
-            }
-        }
-    }
-    
-    /**
-     * Validates content text.
-     *
-     * @throws \wcf\system\exception\UserInputException
-     */
-    protected function validateText() {
-        if (!I18nHandler::getInstance()->isPlainValue('text')) {
-            if (!I18nHandler::getInstance()->validateValue('text')) {
-                throw new UserInputException('text');
-            }
-            $textValues = I18nHandler::getInstance()->getValues('description');
-            foreach ($textValues as $languageID => $text) {
-                if ($this->maxTextLength != 0 && strlen($text) > $this->maxTextLength) {
-                    throw new UserInputException('text', 'tooLong');
-                }
-            }
-        }
-        else {
-            parent::validateText();
-        }
-    }
-    
-    /**
-     * Validates category.
-     *
-     * @throws \wcf\system\exception\UserInputException
-     */
-    protected function validateCategories() {
-        $cacheOutput = CacheHandler::getInstance()->get('category');
-        $categoryIDs = $cacheOutput['categoryIDs'];
-        foreach ($this->categoryIDs as $categoryID) {
-            if (in_array($categoryID, $categoryIDs)) continue;
-            throw new UserInputException('category', 'invalidIDs');
-            break;
-        }
-    }
-    
-    
-    
-    /**
      * @see \wcf\form\IForm::save()
      */
     public function save() {
@@ -272,6 +179,7 @@ class UltimateContentAddForm extends MessageForm {
                         AND    languageItem      = ?
                         AND    packageID         = ?';
                 $statement = UltimateCore::getDB()->prepareStatement($sql);
+                UltimateCore::getDB()->beginTransaction();
                 foreach ($textValues as $languageID => $text) {
                     $statement->execute(array(
                         $text,
@@ -280,6 +188,7 @@ class UltimateContentAddForm extends MessageForm {
                         PACKAGE_ID
                     ));
                 }
+                UltimateCore::getDB()->commitTransaction();
             }
         }
         if (count($updateEntries)) {
@@ -316,6 +225,97 @@ class UltimateContentAddForm extends MessageForm {
 			ACPMenu::getInstance()->setActiveMenuItem($this->activeMenuItem);
 		}
 		parent::show();
+    }
+    
+    /**
+     * Validates content subject.
+     *
+     * @throws \wcf\system\exception\UserInputException
+     */
+    protected function validateSubject() {
+        if (!I18nHandler::getInstance()->isPlainValue('subject')) {
+            if (!I18nHandler::getInstance()->validateValue('subject')) {
+                throw new UserInputException('subject');
+            }
+            $subjectValues = I18nHandler::getInstance()->getValues('subject');
+            foreach ($subjectValues as $languageID => $subject) {
+                if (strlen($subject) < 4) {
+                    throw new UserInputException('subject', 'tooShort');
+                }
+            }
+        } else {
+            // checks if subject is empty; we don't have to do it twice
+            parent::validateSubject();
+    
+            if (strlen($this->subject) < 4) {
+                throw new UserInputException('subject', 'tooShort');
+            }
+        }
+    }
+    
+    /**
+     * Validates content description.
+     *
+     * @throws \wcf\system\exception\UserInputException
+     */
+    protected function validateDescription() {
+        if (!I18nHandler::getInstance()->isPlainValue('description')) {
+            if (!I18nHandler::getInstance()->validateValue('description')) {
+                throw new UserInputException('description');
+            }
+            $descriptionValues = I18nHandler::getInstance()->getValues('description');
+            foreach ($descriptionValues as $languageID => $description) {
+                if (strlen($description) < 4) {
+                    throw new UserInputException('description', 'tooShort');
+                }
+            }
+        }
+        else {
+            if (empty($this->description)) {
+                throw new UserInputException('description');
+            }
+    
+            if (strlen($this->description) < 4) {
+                throw new UserInputException('description', 'tooShort');
+            }
+        }
+    }
+    
+    /**
+     * Validates content text.
+     *
+     * @throws \wcf\system\exception\UserInputException
+     */
+    protected function validateText() {
+        if (!I18nHandler::getInstance()->isPlainValue('text')) {
+            if (!I18nHandler::getInstance()->validateValue('text')) {
+                throw new UserInputException('text');
+            }
+            $textValues = I18nHandler::getInstance()->getValues('description');
+            foreach ($textValues as $languageID => $text) {
+                if ($this->maxTextLength != 0 && strlen($text) > $this->maxTextLength) {
+                    throw new UserInputException('text', 'tooLong');
+                }
+            }
+        }
+        else {
+            parent::validateText();
+        }
+    }
+    
+    /**
+     * Validates category.
+     *
+     * @throws \wcf\system\exception\UserInputException
+     */
+    protected function validateCategories() {
+        $cacheOutput = CacheHandler::getInstance()->get('category');
+        $categoryIDs = $cacheOutput['categoryIDs'];
+        foreach ($this->categoryIDs as $categoryID) {
+            if (in_array($categoryID, $categoryIDs)) continue;
+            throw new UserInputException('category', 'invalidIDs');
+            break;
+        }
     }
     
 }

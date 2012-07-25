@@ -1,7 +1,6 @@
 {include file='header'}
 
-<header class="mainHeading">
-    <img {if $contentID|isset}id="contentEdit{@$contentID}" {/if}src="{@RELATIVE_WCF_DIR}icon/{@$action}1.svg" alt="" />
+<header class="boxHeadline">
     <hgroup>
         <h1>{lang}wcf.acp.ultimate.content.{@$action}{/lang}</h1>
     </hgroup>
@@ -15,10 +14,10 @@
     <p class="success">{lang}wcf.global.form.{@$action}.success{/lang}</p>
 {/if}
 
-<div class="contentHeader">
+<div class="contentNavigation">
     <nav>
-        <ul class="largeButtons">
-            <li><a href="{link controller='UltimateContentList'}{/link}" title="{lang}wcf.acp.menu.link.ultimate.contents.list{/lang}">{*<img src="{@RELATIVE_WCF_DIR}icon/users1.svg" alt="" /> *}<span>{lang}wcf.acp.menu.link.ultimate.contents.list{/lang}</span></a></li>
+        <ul>
+            <li><a href="{link controller='UltimateContentList'}{/link}" title="{lang}wcf.acp.menu.link.ultimate.content.list{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/list.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.menu.link.ultimate.content.list{/lang}</span></a></li>
             
             {event name='largeButtons'}
         </ul>
@@ -26,9 +25,9 @@
 </div>
 
 <form method="post" action="{if $action == 'add'}{link controller='UltimateContentAdd'}{/link}{else}{link controller='UltimateContentEdit'}{/link}{/if}">
-    <div class="border content">
+    <div class="container containerPadding marginTop shadow">
         <fieldset>
-            <legend>{lang}wcf.global.form.data{/lang}</legend>
+            <legend>{lang}wcf.acp.ultimate.category.general{/lang}</legend>
             <dl{if $errorField == 'subject'} class="formError"{/if}>
                 <dt><label for="subject">{lang}wcf.acp.ultimate.content.title{/lang}</label></dt>
                 <dd>
@@ -41,7 +40,7 @@
                         });
                     //]]>
                     </script>
-                    <input type="text" id="subject" name="subject" value="{@$i18nPlainValues['subject']}" class="medium" />
+                    <input type="text" id="subject" name="subject" value="{@$i18nPlainValues['subject']}" class="medium" autofocus="autofocus" placeholder="{lang}wcf.acp.ultimate.content.title.placeholder{/lang}" />
                     {if $errorField == 'subject'}
                         <small class="innerError">
                             {if $errorType == 'empty'}
@@ -65,7 +64,7 @@
                         });
                     //]]>
                     </script>
-                    <input type="text" id="description" name="description" value="{@$i18nPlainValues['description']}" class="medium" />
+                    <input type="text" id="description" name="description" value="{@$i18nPlainValues['description']}" class="medium" placeholder="{lang}wcf.acp.ultimate.content.description.placeholder{/lang}" />
                     {if $errorField == 'description'}
                         <small class="innerError">
                             {if $errorType == 'empty'}
@@ -83,14 +82,15 @@
                     {htmlCheckboxes options=$categories name=categoryIDs selected=$categoryIDs}
                     {if $errorField == 'category'}
                         <small class="innerError">
-                            {lang}wcf.acp.ultimate.content.category.error.{@$errorType}{/lang}
+                            {lang}wcf.acp.ultimate.content.categories.error.{@$errorType}{/lang}
                         </small>
                     {/if}
                 </dd>
             </dl>
+        {*
         </fieldset>
         <fieldset>
-            <legend>{lang}wcf.acp.ultimate.content.message{/lang}</legend>
+            <legend>{lang}wcf.acp.ultimate.content.message{/lang}</legend> *}
             {* {include file='messageFormMultilangualism'} *}
             <dl{if $errorField == 'text'} class="formError"{/if}>
                 <dt><label for="text">{lang}wcf.acp.ultimate.content.text{/lang}</label></dt>
@@ -104,7 +104,7 @@
                         });
                     //]]>
                     </script>
-                    <textarea id="text" name="text" rows="15" cols="40" class="medium">{@$i18nPlainValues['text']}</textarea>
+                    <textarea id="text" name="text" rows="15" cols="40" class="medium" placeholder="{lang}wcf.acp.ultimate.content.text.placeholder{/lang}">{@$i18nPlainValues['text']}</textarea>
                     
                     {if $errorField == 'text'}
                         <small class="innerError">

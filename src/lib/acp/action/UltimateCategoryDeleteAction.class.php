@@ -1,11 +1,11 @@
 <?php
 namespace ultimate\acp\action;
-use ultimate\data\content\ContentAction;
+use ultimate\data\category\CategoryAction;
 use wcf\action\AbstractSecureAction;
 use wcf\util\HeaderUtil;
 
 /**
- * Deletes the specified content.
+ * Deleted the specified category.
  *
  * @author Jim Martens
  * @copyright 2011-2012 Jim Martens
@@ -14,20 +14,20 @@ use wcf\util\HeaderUtil;
  * @subpackage acp.action
  * @category Ultimate CMS
  */
-class UltimateContentDeleteAction extends AbstractSecureAction {
+class UltimatePageDeleteAction extends AbstractSecureAction {
     
     /**
      * @see \wcf\action\AbstractAction::$neededPermissions
      */
     public $neededPermissions = array(
-        'admin.content.ultimate.canDeleteContent'
+        'admin.content.ultimate.canDeleteCategory'
     );
-    
+
     /**
-     * Contains the content id.
+     * Contains the category id.
      * @var int
      */
-    public $contentID = 0;
+    public $categoryID = 0;
     
     /**
      * Contains the redirect url.
@@ -40,7 +40,7 @@ class UltimateContentDeleteAction extends AbstractSecureAction {
      */
     public function readParameters() {
         parent::readParameters();
-        if (isset($_GET['id'])) $this->contentID = intval($_GET['id']);
+        if (isset($_GET['id'])) $this->categoryID = intval($_GET['id']);
         if (isset($_GET['url'])) $this->url = trim($_GET['url']);
     }
     
@@ -49,11 +49,11 @@ class UltimateContentDeleteAction extends AbstractSecureAction {
      */
     public function execute() {
         parent::execute();
-        $contentAction = new ContentAction(array($this->contentID), 'delete');
-        $contentAction->executeAction();
+        $categoryAction = new CategoryAction(array($this->categoryID), 'delete');
+        $categoryAction->executeAction();
         $this->executed();
         
-        //redirect
+        //redirecting back to referrer
         HeaderUtil::redirect($this->url);
         exit;
     }

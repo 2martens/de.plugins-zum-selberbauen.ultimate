@@ -19,6 +19,16 @@ use wcf\system\request\LinkHandler;
 class UltimatePageListPage extends AbstractCachedListPage {
     
     /**
+     * @see \wcf\page\AbstractPage::$templateName
+     */
+    public $templateName = 'ultimatePageList';
+    
+    /**
+     * @see \wcf\page\MultipleLinkPage::$objectListClassName
+     */
+    public $objectListClassName = '\ultimate\data\page\PageList';
+    
+    /**
      * @see \wcf\page\SortablePage::$validSortFields
      */
     public $validSortFields = array(
@@ -38,23 +48,6 @@ class UltimatePageListPage extends AbstractCachedListPage {
      */
     public $defaultSortField = ULTIMATE_SORT_PAGE_SORTFIELD;
     
-	/**
-     * Contains the active menu item.
-     * @var string
-     */
-    public $activeMenuItem = 'wcf.acp.menu.link.ultimate.page.list';
-    
-    /**
-     * @see \wcf\page\AbstractPage::$templateName
-     */
-    public $templateName = 'ultimatePageList';
-    
-    /**
-     * @see \wcf\page\MultipleLinkPage::$objectListClassName
-     */
-    public $objectListClassName = '\ultimate\data\page\PageList';
-    
-    
     /**
      * @see \wcf\page\AbstractCachedListPage::$cacheBuilderClassName
      */
@@ -69,6 +62,12 @@ class UltimatePageListPage extends AbstractCachedListPage {
      * @see \wcf\page\AbstractCachedListPage::$cacheIndex
      */
     public $cacheIndex = 'pages';
+    
+	/**
+     * Contains the active menu item.
+     * @var string
+     */
+    public $activeMenuItem = 'wcf.acp.menu.link.ultimate.page.list';
     
     /**
      * Contains the url.
@@ -112,6 +111,4 @@ class UltimatePageListPage extends AbstractCachedListPage {
 		
 		parent::show();
 	}
-	
-	
 }

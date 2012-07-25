@@ -1,6 +1,7 @@
 <?php
 namespace ultimate\data\component;
 use ultimate\data\AbstractUltimateDatabaseObject;
+use ultimate\system\UltimateCore;
 
 /**
  * Represents a component entry.
@@ -34,6 +35,6 @@ class Component extends AbstractUltimateDatabaseObject {
      * @return string
      */
     public function __toString() {
-        return $this->title;
+        return UltimateCore::getLanguage()->get($this->title);
     }
 }

@@ -36,7 +36,7 @@ class ComponentPackageInstallationPlugin extends AbstractXMLPackageInstallationP
     public function __construct(PackageInstallationDispatcher $installation, $instruction = array()) {
         parent::__construct();
         
-        //We're installing the CMS itself.
+        // We're installing the CMS itself.
         if (!defined('ULTIMATE_N')) {
             $packageID = $this->installation->getPackageID();
             $sql = 'SELECT packageDir

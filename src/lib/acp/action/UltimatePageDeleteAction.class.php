@@ -1,11 +1,11 @@
 <?php
 namespace ultimate\acp\action;
-use ultimate\data\link\LinkAction;
+use ultimate\data\page\PageAction;
 use wcf\action\AbstractSecureAction;
 use wcf\util\HeaderUtil;
 
 /**
- * Deleted the specified link.
+ * Deleted the specified page.
  *
  * @author Jim Martens
  * @copyright 2011-2012 Jim Martens
@@ -14,20 +14,20 @@ use wcf\util\HeaderUtil;
  * @subpackage acp.action
  * @category Ultimate CMS
  */
-class UltimateLinkDeleteAction extends AbstractSecureAction {
+class UltimatePageDeleteAction extends AbstractSecureAction {
     
     /**
      * @see \wcf\action\AbstractAction::$neededPermissions
      */
     public $neededPermissions = array(
-        'admin.content.ultimate.canDeleteLink'
+        'admin.content.ultimate.canDeletePage'
     );
 
     /**
-     * Contains the link id.
+     * Contains the page id.
      * @var int
      */
-    protected $linkID = 0;
+    public $pageID = 0;
     
     /**
      * Contains the redirect url.
@@ -40,7 +40,7 @@ class UltimateLinkDeleteAction extends AbstractSecureAction {
      */
     public function readParameters() {
         parent::readParameters();
-        if (isset($_GET['id'])) $this->linkID = intval($_GET['id']);
+        if (isset($_GET['id'])) $this->pageID = intval($_GET['id']);
         if (isset($_GET['url'])) $this->url = trim($_GET['url']);
     }
     
@@ -49,8 +49,8 @@ class UltimateLinkDeleteAction extends AbstractSecureAction {
      */
     public function execute() {
         parent::execute();
-        $linkAction = new LinkAction(array($this->linkID), 'delete');
-        $linkAction->executeAction();
+        $pageAction = new PageAction(array($this->pageID), 'delete');
+        $pageAction->executeAction();
         $this->executed();
         
         //redirecting back to referrer

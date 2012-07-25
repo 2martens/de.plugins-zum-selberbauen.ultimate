@@ -88,7 +88,7 @@ class UltimatePageAddForm extends ACPForm {
         
         I18nHandler::getInstance()->readValues();
         if (I18nHandler::getInstance()->isPlainValue('pageTitle')) $this->pageTitle = trim(I18nHandler::getInstance()->getValue('pageTitle'));
-        
+        // @todo: implement parent page
         if (isset($_POST['content'])) $this->contentID = intval($_POST['content']);
         if (isset($_POST['pageSlug'])) $this->pageSlug = trim($_POST['pageSlug']);
     }
@@ -101,53 +101,6 @@ class UltimatePageAddForm extends ACPForm {
         $this->validateContentID();
         $this->validateTitle();
         $this->validateSlug();
-    }
-    
-    /**
-     * Validates the contentID.
-     *
-     * @throws \wcf\system\exception\UserInputException
-     */
-    protected function validateContentID() {
-        if (!$this->contentID) {
-            throw new UserInputException('content', 'notSelected');
-        }
-        if (!array_key_exists($this->contentID, $this->contents)) {
-            throw new UserInputException('content', 'notValid');
-        }
-    }
-    
-    /**
-     * Validates the page title.
-     *
-     * @throws \wcf\system\exception\UserInputException
-     */
-    protected function validateTitle() {
-        if (!I18nHandler::getInstance()->isPlainValue('pageTitle')) {
-            if (!I18nHandler::getInstance()->validateValue('pageTitle')) {
-                throw new UserInputException('pageTitle');
-            }
-        }
-        else {
-            if (empty($this->pageTitle)) {
-                throw new UserInputException('pageTitle');
-            }
-        }
-    }
-    
-    /**
-     * Validates page slug.
-     *
-     * @throws \wcf\system\exception\UserInputException
-     */
-    protected function validateSlug() {
-        if (empty($this->pageSlug)) {
-            throw new UserInputException('pageSlug');
-        }
-        
-        if (!PageUtil::isAvailableSlug($this->pageSlug)) {
-            throw new UserInputException('pageSlug', 'notUnique');
-        }
     }
     
     /**
@@ -208,5 +161,55 @@ class UltimatePageAddForm extends ACPForm {
             'pageSlug' => $this->pageSlug,
             'action' => 'add'
         ));
+    }
+    
+    /**
+     * Validates the contentID.
+     *
+     * @throws \wcf\system\exception\UserInputException
+     */
+    protected function validateContentID() {
+        if (!$this->contentID) {
+            throw new UserInputException('content', 'notSelected');
+        }
+        if (!array_key_exists($this->contentID, $this->contents)) {
+            throw new UserInputException('content', 'notValid');
+        }
+    }
+    
+    /**
+     * Validates the page title.
+     *
+     * @throws \wcf\system\exception\UserInputException
+     */
+    protected function validateTitle() {
+        if (!I18nHandler::getInstance()->isPlainValue('pageTitle')) {
+            if (!I18nHandler::getInstance()->validateValue('pageTitle')) {
+                throw new UserInputException('pageTitle');
+            }
+        }
+        else {
+            if (empty($this->pageTitle)) {
+                throw new UserInputException('pageTitle');
+            }
+            if (!PageUtil::isAvailableTitle($this->pageTitle)) {
+                throw new UserInputException('pageTitle', 'notUnique');
+            }
+        }
+    }
+    
+    /**
+     * Validates page slug.
+     *
+     * @throws \wcf\system\exception\UserInputException
+     */
+    protected function validateSlug() {
+        if (empty($this->pageSlug)) {
+            throw new UserInputException('pageSlug');
+        }
+    
+        if (!PageUtil::isAvailableSlug($this->pageSlug)) {
+            throw new UserInputException('pageSlug', 'notUnique');
+        }
     }
 }
