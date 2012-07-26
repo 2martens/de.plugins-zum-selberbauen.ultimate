@@ -94,8 +94,7 @@ class UltimateCategoryAddForm extends ACPForm {
         $cacheBuilderClass = '\ultimate\system\cache\builder\UltimateCategoryCacheBuilder';
         $file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
         CacheHandler::getInstance()->addResource($cache, $file, $cacheBuilderClass);
-        $cacheOutput = CacheHandler::getInstance()->get($cache);
-        $this->categories = $cacheOutput['categories'];
+        $this->categories = CacheHandler::getInstance()->get($cache, 'categories');
         parent::readData();
     }
     

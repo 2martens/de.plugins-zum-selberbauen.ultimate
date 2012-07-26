@@ -76,8 +76,7 @@ class CategoryUtil {
     protected static function loadCache($cache, $cacheBuilderClass, $cacheIndex) {
         $file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
         CacheHandler::getInstance()->addResource($cache, $file, $cacheBuilderClass);
-        $objects = CacheHandler::getInstance()->get($cache);
-        return $objects[$cacheIndex];
+        return CacheHandler::getInstance()->get($cache, $cacheIndex);
     }
     
     /**

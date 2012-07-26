@@ -35,7 +35,8 @@ class UltimateContentListPage extends AbstractCachedListPage {
     public $validSortFields = array(
         'contentID',
         'contentTitle',
-        'contentAuthor'
+        'contentAuthor',
+        'lastModified'
     );
     
     /**
@@ -119,7 +120,7 @@ class UltimateContentListPage extends AbstractCachedListPage {
         elseif ($tagID) {
             // @todo implement tags
         }
-        else return; // shouldn' be called anyway
+        else return; // shouldn't be called anyway
         $this->loadCache();
         $this->objects = $this->objects[$this->categoryID];
         // calculate the pages again, because the objects changed

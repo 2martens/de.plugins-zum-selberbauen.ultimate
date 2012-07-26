@@ -61,7 +61,7 @@
                     {* need to implement tags
                     <th class="columnTags">{lang}wcf.acp.ultimate.content.tags{/lang}</th>
                     *}
-                    <th class="columnLastModified">{lang}wcf.acp.ultimate.general.lastModified{/lang}</th>
+                    <th class="columnLastModified">{if $sortField == 'lastModified'} active{/if}"><a href="{link controller='UltimateContentList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=lastModified&sortOrder={if $sortField == 'lastModified' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.content.lastModified{/lang}{if $sortField == 'lastModified'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="{if $sortOrder == 'ASC'}{lang}wcf.global.sortOrder.ascending{/lang}{else}{lang}wcf.global.sortOrder.descending{/lang}{/if}" />{/if}</a></th>
                      
                     {event name='headColumns'}
                 </tr>
