@@ -25,7 +25,7 @@ class UltimatePageAddForm extends ACPForm {
     /**
      * @see \wcf\acp\form\ACPForm::$activeMenuItem
      */
-    public $activeMenuItem = 'wcf.menu.link.ultimate.page.add';
+    public $activeMenuItem = 'wcf.acp.menu.link.ultimate.page.add';
     
     /**
      * @see \wcf\page\AbstractPage::$templateName
@@ -87,6 +87,7 @@ class UltimatePageAddForm extends ACPForm {
         parent::readFormParameters();
         
         I18nHandler::getInstance()->readValues();
+        I18nHandler::getInstance()->enableAssignValueVariables();
         if (I18nHandler::getInstance()->isPlainValue('pageTitle')) $this->pageTitle = trim(I18nHandler::getInstance()->getValue('pageTitle'));
         // @todo: implement parent page
         if (isset($_POST['content'])) $this->contentID = intval($_POST['content']);
@@ -142,6 +143,7 @@ class UltimatePageAddForm extends ACPForm {
         //showing empty form
         $this->contentID = 0;
         $this->pageTitle = $this->pageSlug = '';
+        I18nHandler::getInstance()->disableAssignValueVariables();
         $this->contents = array();
     }
     

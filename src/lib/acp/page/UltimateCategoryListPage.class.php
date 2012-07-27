@@ -96,7 +96,6 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
      */
     public function assignVariables() {
         parent::assignVariables();
-        
         UltimateCore::getTPL()->assign(array(
             'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(),
             'url' => $this->url

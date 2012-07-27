@@ -66,8 +66,10 @@ class Page extends AbstractUltimateDatabaseObject {
      * @see \wcf\data\DatabaseObject::handleData()
      */
     protected function handleData($data) {
-        $authorID = intval($data['authorID']);
-        $data['author'] = new User($authorID);
+        $data['pageID'] = intval($data['pageID']);
+        $data['authorID'] = intval($data['authorID']);
+        $data['author'] = new User($data['authorID']);
+        $data['lastModified'] = intval($data['lastModified']);
         parent::handleData($data);
     }
     

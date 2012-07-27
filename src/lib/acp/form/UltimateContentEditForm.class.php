@@ -7,6 +7,8 @@ use ultimate\data\content\ContentEditor;
 use ultimate\system\UltimateCore;
 use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
+use wcf\system\language\I18nHandler;
+use wcf\system\menu\acp\ACPMenu;
 
 /**
  * Shows the UltimateContentEdit form.
@@ -23,7 +25,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
     /**
      * @see \wcf\acp\form\ACPForm::$activeMenuItem
      */
-    public $activeMenuItem = 'wcf.acp.menu.item.link.ultimate.content';
+    public $activeMenuItem = 'wcf.acp.menu.link.ultimate.content';
     
     /**
      * @see \wcf\page\AbstractPage::$neededPermissions
@@ -49,6 +51,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
      */
     public function readParameters() {
         parent::readParameters();
+        //I18nHandler::getInstance()->disableAssignValueVariables();
         if (isset($_REQUEST['id'])) $this->contentID = intval($_REQUEST['id']);
         $content = new Content($this->contentID);
         if (!$content->contentID) {
@@ -67,6 +70,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
             $this->description = $this->content->contentDescription;
             $this->text = $this->content->contentText;
             $this->lastModified = $this->content->lastModified;
+            $this->categoryIDs = array_keys($this->content->getCategories());
             I18nHandler::getInstance()->setOptions('subject', PACKAGE_ID, $this->subject, 'ultimate.content.\d+.contentTitle');
             I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->description, 'ultimate.content.\d+.contentDescription');
             I18nHandler::getInstance()->setOptions('text', PACKAGE_ID, $this->text, 'ultimate.content.\d+.contentText');
@@ -137,9 +141,26 @@ class UltimateContentEditForm extends UltimateContentAddForm {
         $useRequestData = (count($_POST)) ? true : false;
         I18nHandler::getInstance()->assignVariables($useRequestData);
         
+        // nasty workaround for javascript problem with multiple line strings
+        $i18nValues = UltimateCore::getTPL()->get('i18nValues');
+        foreach ($i18nValues['text'] as $languageID => $value) {
+            $i18nValues['text'][$languageID] = str_replace("\r", '_specialNewline\\', $value);
+        }
+        
         UltimateCore::getTPL()->assign(array(
         	'contentID' => $this->contentID,
+        	'i18nValues' => $i18nValues,
             'action' => 'edit'
         ));
+    }
+    
+    /**
+     * @see \wcf\form\IForm::show()
+     */
+    public function show() {
+        if (!empty($this->activeMenuItem)) {
+            ACPMenu::getInstance()->setActiveMenuItem($this->activeMenuItem);
+        }
+        MessageForm::show();
     }
 }

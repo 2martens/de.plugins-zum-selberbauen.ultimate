@@ -34,33 +34,25 @@
         <requiredpackage file="requirements/com.woltlab.wcf.search.tar.gz">com.woltlab.wcf.search</requiredpackage>
         <requiredpackage file="requirements/com.woltlab.wcf.conversation.tar.gz">com.woltlab.wcf.conversation</requiredpackage>
         <requiredpackage file="requirements/com.woltlab.wcf.label.tar.gz">com.woltlab.wcf.label</requiredpackage>
-        <requiredpackage file="requirements/com.woltlab.wcf.notification.tar.gz">com.woltlab.wcf.notification</requiredpackage>
         <requiredpackage file="requirements/com.woltlab.wcf.tagging.tar.gz">com.woltlab.wcf.tagging</requiredpackage>
         <requiredpackage file="requirements/com.woltlab.wcf.visitTracker.tar.gz">com.woltlab.wcf.visitTracker</requiredpackage>
         <requiredpackage file="requirements/de.plugins-zum-selberbauen.cachedList.tar">de.plugins-zum-selberbauen.cachedList</requiredpackage>
+        <requiredpackage file="requirements/de.plugins-zum-selberbauen.componentPIP.tar">de.plugins-zum-selberbauen.componentPIP</requiredpackage>
+        <requiredpackage file="requirements/de.plugins-zum-selberbauen.messageACP.tar">de.plugins-zum-selberbauen.messageACP</requiredpackage>
     </requiredpackages>
     
     <instructions type="install">
-        <!-- files -->
         <instruction type="file">files.tar</instruction>
-        <instruction type="template">templates.tar</instruction>
-        <instruction type="acptemplate">acptemplates.tar</instruction>
-        
-        <!-- others -->        
-        <instruction type="script">acp/InstallUltimateCMS.class.php</instruction>
         <instruction type="sql">install.sql</instruction>
-        
-        <!-- xmls -->
-        <instruction type="packageInstallationPlugin">packageInstallatinPlugin.xml</instruction>
-        <instruction type="language">language/*.xml</instruction>
-        <instruction type="acpMenu">acpMenu.xml</instruction>
-        <instruction type="option">option.xml</instruction>
+        <instruction type="acpTemplate">acptemplates.tar</instruction>
+        <instruction type="template">templates.tar</instruction>
         <instruction type="objectType">objectType.xml</instruction>
-        <instruction type="userGroupOption">userGroupOption.xml</instruction>
-        <instruction type="pageMenu">pagemenu.xml</instruction>
-        <!-- <instruction type="templateListener">templateListener.xml</instruction> -->
         <instruction type="component">component.xml</instruction>
-        
-        
+        <instruction type="option">option.xml</instruction>
+        <instruction type="language">language/*.xml</instruction>
+        <instruction type="userGroupOption">userGroupOption.xml</instruction>
+        <instruction type="pageMenu">pageMenu.xml</instruction>
+        <instruction type="acpMenu">acpMenu.xml</instruction>
+        <instruction type="script">acp/InstallUltimateCMS.class.php</instruction>
     </instructions>
 </package>

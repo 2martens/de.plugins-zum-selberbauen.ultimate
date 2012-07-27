@@ -4,6 +4,7 @@ use ultimate\system\UltimateCore;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 use wcf\system\cache\CacheHandler;
+use wcf\system\clipboard\ClipboardHandler;
 
 /**
  * Provides functions to edit pages.

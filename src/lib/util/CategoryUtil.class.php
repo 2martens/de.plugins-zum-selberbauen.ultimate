@@ -25,18 +25,32 @@ class CategoryUtil {
     public static function isAvailableTitle($categoryTitle, $categoryParent) {
         $categoryTitle = trim($categoryTitle);
         $categoryParent = intval($categoryParent);
-        
-        $categories = self::loadCache(
+        $isAvailable = true;
+        if ($categoryParent) {
+            $categories = self::loadCache(
                 'category',
                 '\ultimate\system\cache\builder\UltimateCategoryCacheBuilder',
                 'categoriesToParent'
-        );
+            );
         
-        $isAvailable = true;
-        foreach ($categories as $categoryID => $category) {
-            if (!$category->categoryTitle == $categoryTitle) continue;
-            $isAvailable = false;
-            break;
+            $relevantCategories = $categories[$categoryParent];
+            foreach ($relevantCategories as $categoryID => $category) {
+                if ($category->categoryTitle != $categoryTitle) continue;
+                $isAvailable = false;
+                break;
+            }
+        }
+        else {
+            $categories = self::loadCache(
+                    'category',
+                    '\ultimate\system\cache\builder\UltimateCategoryCacheBuilder',
+                    'categories'
+            );
+            foreach ($categories as $categoryID => $category) {
+                if ($category->categoryTitle != $categoryTitle) continue;
+                $isAvailable = false;
+                break;
+            }
         }
         return $isAvailable;
     }
@@ -49,21 +63,35 @@ class CategoryUtil {
      *
      * @return boolean $isAvailable
      */
-    public static function isAvailableTitle($categorySlug, $categoryParent) {
+    public static function isAvailableSlug($categorySlug, $categoryParent) {
         $categorySlug = trim($categorySlug);
         $categoryParent = intval($categoryParent);
-    
-        $categories = self::loadCache(
+        $isAvailable = true;
+        if ($categoryParent) {
+            $categories = self::loadCache(
                 'category',
                 '\ultimate\system\cache\builder\UltimateCategoryCacheBuilder',
                 'categoriesToParent'
-        );
-    
-        $isAvailable = true;
-        foreach ($categories as $categoryID => $category) {
-            if (!$category->categorySlug == $categorySlug) continue;
-            $isAvailable = false;
-            break;
+            );
+        
+            $relevantCategories = $categories[$categoryParent];
+            foreach ($relevantCategories as $categoryID => $category) {
+                if ($category->categorySlug != $categorySlug) continue;
+                $isAvailable = false;
+                break;
+            }
+        }
+        else {
+            $categories = self::loadCache(
+                    'category',
+                    '\ultimate\system\cache\builder\UltimateCategoryCacheBuilder',
+                    'categories'
+            );
+            foreach ($categories as $categoryID => $category) {
+                if ($category->categorySlug != $categorySlug) continue;
+                $isAvailable = false;
+                break;
+            }
         }
         return $isAvailable;
     }

@@ -33,8 +33,16 @@ class UltimateContentCacheBuilder implements ICacheBuilder {
         
         $contentList->readObjectIDs();
         $contentList->readObjects();
-        $data['contentIDs'] = $contentList->getObjectIDs();
-        $data['contents'] = $contentList->getObjects();
+        $contentIDs = $contentList->getObjectIDs();
+        $contents = $contentList->getObjects();
+        if (!count($contentIDs) || !count($contents)) return $data;
+        
+        foreach ($contents as &$content) {
+            $content->categories = $content->getCategories();
+        }
+        
+        $data['contents'] = array_combine($contentIDs, $contents);
+        $data['contentIDs'] = $contentIDs;
         
         return $data;
     }

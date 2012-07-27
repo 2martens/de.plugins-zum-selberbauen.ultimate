@@ -9,7 +9,7 @@
 		//<![CDATA[
 		var SID_ARG_1ST = '{@SID_ARG_1ST}';
 		var SID_ARG_2ND	= '{@SID_ARG_2ND_NOT_ENCODED}';
-		var RELATIVE_WCF_DIR = '{@RELATIVE_WCF_DIR}';
+		var RELATIVE_WCF_DIR = '{@RELATIVE_WCF_DIR}'; // todo: still needed?
 		var SECURITY_TOKEN = '{@SECURITY_TOKEN}';
 		var LANGUAGE_ID = {@$__wcf->getLanguage()->languageID};
 		//]]>
@@ -17,15 +17,18 @@
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.min.js"></script>
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.tools.min.js"></script>
+	<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui.nestedSortable.js"></script>
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.js"></script>
 	<script type="text/javascript" src="{@$__wcf->getPath()}acp/js/WCF.ACP.js"></script>
+	<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.Message.js"></script>
 	<script type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.js"></script>
-	<script type="text/javascript" src="{@$__wcf->getPath('ultimate')}acp/js/ULTIMATE.ACP.js"></script>
+	{* <script type="text/javascript" src="{@$__wcf->getPath('ultimate')}acp/js/ULTIMATE.ACP.js"></script> *}
 	<script type="text/javascript">
 		//<![CDATA[
 		WCF.User.init({$__wcf->user->userID}, '{@$__wcf->user->username|encodeJS}');
 		//]]>
 	</script>
+	{event name='javascriptInclude'}
 	
 	<!-- Stylesheets -->
     <link rel="stylesheet/less" type="text/css" href="{@$__wcf->getPath()}style/bootstrap.less" />

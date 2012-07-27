@@ -41,7 +41,7 @@
     </nav>
 </div>
 
-<div id="contentTableContainer" class="tabularBox tabularBoxTitle marginTop shadow">
+<div id="contentTableContainer" class="tabularBox marginTop shadow">
     <nav class="wcf-menu">
         <ul>
             <li{if $action == ''} class="active"{/if}><a href="{link controller='UltimateContentList'}{/link}"><span>{lang}wcf.acp.ultimate.content.list.all{/lang}</span> <span class="wcf-badge badgeInverse" title="{lang}wcf.acp.ultimate.content.list.count{/lang}">{#$items}</span></a></li>
@@ -61,7 +61,7 @@
                     {* need to implement tags
                     <th class="columnTags">{lang}wcf.acp.ultimate.content.tags{/lang}</th>
                     *}
-                    <th class="columnLastModified">{if $sortField == 'lastModified'} active{/if}"><a href="{link controller='UltimateContentList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=lastModified&sortOrder={if $sortField == 'lastModified' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.content.lastModified{/lang}{if $sortField == 'lastModified'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="{if $sortOrder == 'ASC'}{lang}wcf.global.sortOrder.ascending{/lang}{else}{lang}wcf.global.sortOrder.descending{/lang}{/if}" />{/if}</a></th>
+                    <th class="columnLastModified{if $sortField == 'lastModified'} active{/if}"><a href="{link controller='UltimateContentList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=lastModified&sortOrder={if $sortField == 'lastModified' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.content.lastModified{/lang}{if $sortField == 'lastModified'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="{if $sortOrder == 'ASC'}{lang}wcf.global.sortOrder.ascending{/lang}{else}{lang}wcf.global.sortOrder.descending{/lang}{/if}" />{/if}</a></th>
                      
                     {event name='headColumns'}
                 </tr>
@@ -87,23 +87,17 @@
                                 {event name='buttons'}
                             </td>
                             <td class="columnID"><p>{@$content->contentID}</p></td>
-                            <td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditContent')}<a title="{lang}wcf.acp.ultimate.content.edit{/lang}" href="{link controller='UltimateContentEdit' id=$content->contentID}{/link}">{$content->contentTitle}</a>{else}{$content->contentTitle}{/if}</p></td>
+                            <td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditContent')}<a title="{lang}wcf.acp.ultimate.content.edit{/lang}" href="{link controller='UltimateContentEdit' id=$content->contentID}{/link}">{lang}{@$content->contentTitle}{/lang}</a>{else}{lang}{@$content->contentTitle}{/lang}{/if}</p></td>
                             <td class="columnAuthor"><p><a href="{link controller='UltimateContentList'}author={@$content->author}{/link}">{@$content->author}</a></p></td>
                             <td class="columnCategories">
                                 <p>
-                                    {foreach from=$content->getCategories() item=category}
-                                        {counter name=categoryCounter assign=categoryCounter print=false start=0}
-                                        {if $categoryCounter > 0}, {/if}<a href="{link controller='UltimateContentList'}categoryID={@$category->categoryID}{/link}">{@$category}</a>
-                                    {/foreach}
+                                    {implode from=$content->categories key=categoryID item=category}<a href="{link controller='UltimateContentList'}categoryID={@$category->categoryID}{/link}">{@$category}</a>{/implode}
                                 </p>
                             </td>
                             {* need to implement tags
                             <td class="columnTags">
                                 <p>
-                                    {foreach from=$content->getTags() item=tag}
-                                        {counter name=tagCounter assign=tagCounter print=false start=0}
-                                        {if $tagCounter > 0}, {/if}<a href="{link controller='UltimateContentList'}tagID={@$tag->tagID}{/link}">{@$tag}</a>
-                                    {/foreach}
+                                    {implode from=$content->tags key=tagID item=tag}<a href="{link controller='UltimateContentList'}tagID={@$tag->tagID}{/link}">{@$tag}</a>{/implode}
                                 </p>
                             </td> *}
                             <td class="columnLastModified"><p>{@$content->lastModified|time}</p></td>

@@ -35,6 +35,8 @@ class UltimatePageCacheBuilder implements ICacheBuilder {
         $pageList->readObjects();
         $pages = $pageList->getObjects();
         $pageIDs = $pageList->getObjectIDs();
+        if (!count($pages) || !count($pageIDs)) return $data;
+        
         $data['pages'] = array_combine($pageIDs, $pages);
         $data['pageIDs'] = $pageIDs;
         

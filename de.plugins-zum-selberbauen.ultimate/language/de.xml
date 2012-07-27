@@ -125,6 +125,7 @@
         <!-- category -->
         <item name="wcf.acp.ultimate.category.add"><![CDATA[Kategorie hinzufügen]]></item>
         <item name="wcf.acp.ultimate.category.edit"><![CDATA[Kategorie bearbeiten]]></item>
+        <item name="wcf.acp.ultimate.category.delete"><![CDATA[Kategorie löschen]]></item>
         <item name="wcf.acp.ultimate.category.title"><![CDATA[Name]]></item>
         <item name="wcf.acp.ultimate.category.title.placeholder"><![CDATA[Gute Inhalte]]></item>
         <item name="wcf.acp.ultimate.category.title.error.notUnique"><![CDATA[Der angegebene Name existiert bereits bei einer Kategorie auf gleichem Level.]]></item>
@@ -138,13 +139,16 @@
         <item name="wcf.acp.ultimate.category.description.placeholder"><![CDATA[]]></item>
         <item name="wcf.acp.ultimate.category.general"><![CDATA[Kategoriedaten]]></item>
         <item name="wcf.acp.ultimate.category.contents"><![CDATA[Inhalte]]></item>
+        <item name="wcf.acp.ultimate.category.showContents"><![CDATA[Zeige die Inhalte dieser Kategorie]]></item>
         <item name="wcf.acp.ultimate.category.noContents"><![CDATA[Keine Kategorien gefunden.]]></item>
+        <item name="wcf.acp.ultimate.category.list"><![CDATA[Kategorieliste]]></item>
         <item name="wcf.acp.ultimate.category.list.all"><![CDATA[Alle Kategorien]]></item>
         <item name="wcf.acp.ultimate.category.list.count"><![CDATA[{#$items} Kategorie{if $items != 1}n{/if}]]></item>
         <!-- /category -->
         <!-- content -->
         <item name="wcf.acp.ultimate.content.add"><![CDATA[Inhalt hinzufügen]]></item>
         <item name="wcf.acp.ultimate.content.edit"><![CDATA[Inhalt bearbeiten]]></item>
+        <item name="wcf.acp.ultimate.content.delete"><![CDATA[Inhalt löschen]]></item>
         <item name="wcf.acp.ultimate.content.title"><![CDATA[Titel]]></item>
         <item name="wcf.acp.ultimate.content.title.error.tooShort"><![CDATA[Der Titel muss mindestens 4 Zeichen lang sein.]]></item>
         <item name="wcf.acp.ultimate.content.title.placeholder"><![CDATA[Eine schöne Geschichte]]></item>
@@ -162,12 +166,14 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
         <item name="wcf.acp.ultimate.content.author"><![CDATA[Autor]]></item>
         <item name="wcf.acp.ultimate.content.lastModified"><![CDATA[Datum]]></item>
         <item name="wcf.acp.ultimate.content.noContents"><![CDATA[Keine Inhalte gefunden.]]></item>
+        <item name="wcf.acp.ultimate.content.list"><![CDATA[Inhaltsliste]]></item>
         <item name="wcf.acp.ultimate.content.list.all"><![CDATA[Alle Inhalte]]></item>
         <item name="wcf.acp.ultimate.content.list.count"><![CDATA[{#$items} Inhalt{if $items != 1}e{/if}]]></item>
         <!-- /content -->
         <!-- page -->
         <item name="wcf.acp.ultimate.page.add"><![CDATA[Seite hinzufügen]]></item>
         <item name="wcf.acp.ultimate.page.edit"><![CDATA[Seite bearbeiten]]></item>
+        <item name="wcf.acp.ultimate.page.delete"><![CDATA[Seite löschen]]></item>
         <item name="wcf.acp.ultimate.page.title"><![CDATA[Titel]]></item>
         <item name="wcf.acp.ultimate.page.title.placeholder"><![CDATA[Beispielseite mit viel Gewürz]]></item>
         <item name="wcf.acp.ultimate.page.title.error.notUnique"><![CDATA[Der angegebene Titel existiert bereits bei einer Seite auf gleichem Level.]]></item>
@@ -180,6 +186,7 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
         <item name="wcf.acp.ultimate.page.content.error.notValid"><![CDATA[Der "ausgewählte" Inhalt stand nicht nur Auswahl.]]></item>
         <item name="wcf.acp.ultimate.page.general"><![CDATA[Seitendaten]]></item>
         <item name="wcf.acp.ultimate.page.noContents"><![CDATA[Keine Seiten gefunden.]]></item>
+        <item name="wcf.acp.ultimate.page.list"><![CDATA[Seitenliste]]></item>
         <item name="wcf.acp.ultimate.page.list.all"><![CDATA[Alle Seiten]]></item>
         <item name="wcf.acp.ultimate.page.list.count"><![CDATA[{#$items} Seite{if $items != 1}n{/if}]]></item>
         <!-- /page -->

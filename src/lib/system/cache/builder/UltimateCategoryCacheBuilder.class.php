@@ -34,8 +34,16 @@ class UltimateCategoryCacheBuilder implements ICacheBuilder {
         
         $categoryList->readObjectIDs();
         $categoryList->readObjects();
+        
         $categories = $categoryList->getObjects();
         $categoryIDs = $categoryList->getObjectIDs();
+        if (!count($categoryIDs) || !count($categories)) return $data;
+        
+        foreach ($categories as &$category) {
+            $category->contents = $category->getContents();
+            $category->childCategories = $category->getChildCategories();
+        }
+        
         $data['categories'] = array_combine($categoryIDs, $categories);
         $data['categoryIDs'] = $categoryIDs;
         

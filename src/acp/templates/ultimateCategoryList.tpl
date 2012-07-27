@@ -42,7 +42,7 @@
 </div>
 
 
-<div id="categoryTableContainer" class="tabularBox tabularBoxTitle marginTop shadow">
+<div id="categoryTableContainer" class="tabularBox marginTop shadow">
     <nav class="wcf-menu">
         <ul>
             <li{if $action == ''} class="active"{/if}><a href="{link controller='UltimateCategoryList'}{/link}"><span>{lang}wcf.acp.ultimate.category.list.all{/lang}</span> <span class="wcf-badge badgeInverse" title="{lang}wcf.acp.ultimate.category.list.count{/lang}">{#$items}</span></a></li>
@@ -58,7 +58,7 @@
                     <th class="columnID{if $sortField == 'categoryID'} active{/if}" colspan="2"><a href="{link controller='UltimateCategoryList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=categoryID&sortOrder={if $sortField == 'categoryID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}{if $sortField == 'categoryID'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
                     <th class="columnTitle{if $sortField == 'categoryTitle'} active{/if}"><a href="{link controller='UltimateCategoryList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=categoryTitle&sortOrder={if $sortField == 'categoryTitle' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.category.title{/lang}{if $sortField == 'categoryTitle'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
                     <th class="columnDescription{if $sortField == 'categoryDescription'} active{/if}"><a href="{link controller='UltimateCategoryList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=categoryDescription&sortOrder={if $sortField == 'categoryDescription' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.category.description{/lang}{if $sortField == 'categoryDescription'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
-                    <th class="columnSlug{if $sortField == 'categorySlug'} active{/if}"><a href="{link controller='UltimateCategoryList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=categorySlug&sortOrder={if $sortField == 'categorySlug' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate..category.slug{/lang}{if $sortField == 'categorySlug'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
+                    <th class="columnSlug{if $sortField == 'categorySlug'} active{/if}"><a href="{link controller='UltimateCategoryList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=categorySlug&sortOrder={if $sortField == 'categorySlug' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.category.slug{/lang}{if $sortField == 'categorySlug'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
                     <th class="columnDigits columnContents{if $sortField == 'categoryContents'} active{/if}"><a href="{link controller='UltimateCategoryList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=categoryContents&sortOrder={if $sortField == 'categoryContents' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.category.contents{/lang}{if $sortField == 'categoryContents'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
                         
                     {event name='headColumns'}
@@ -90,7 +90,7 @@
                             <td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditCategory')}<a title="{lang}wcf.acp.ultimate.category.edit{/lang}" href="{link controller='UltimateCategoryEdit' id=$category->categoryID}{/link}">{lang}{@$category->categoryTitle}{/lang}</a>{else}{lang}{@$category->categoryTitle}{/lang}{/if}</p></td>
                             <td class="columnDescription"><p>{lang}{@$category->categoryDescription}{/lang}</p></td>
                             <td class="columnSlug"><p>{@$category->categorySlug}</p></td>
-                            <td class="columnContents"><p><a title="{lang}wcf.acp.ultimate.category.showContents{/lang}" href="{link controller='UltimateContentList'}categoryID={@$category->categoryID}{/link}>{$category->contents|count}</a></p></td>
+                            <td class="columnContents"><p><a title="{lang}wcf.acp.ultimate.category.showContents{/lang}" href="{link controller='UltimateContentList'}categoryID={@$category->categoryID}{/link}">{$category->contents|count}</a></p></td>
                     
                             {event name='columns'}
                         </tr>

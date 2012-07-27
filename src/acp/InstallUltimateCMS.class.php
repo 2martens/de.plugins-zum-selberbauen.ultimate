@@ -22,7 +22,7 @@ class InstallUltimateCMS {
     public function __construct() {
         $this->install();
     }
-    
+    // @todo Fixing!!!
     /**
      * Installs important things.
      */
@@ -43,9 +43,9 @@ class InstallUltimateCMS {
         $applications = CacheHandler::getInstance()->get($cache, 'application');
         $ourApp = $applications[PACKAGE_ID];
         
-        WCF::getTPL()->addTemplatePath($packageID, ULTIMATE_DIR.'acp/templates/');
+        WCF::getTPL()->addTemplatePath(PACKAGE_ID, ULTIMATE_DIR.'acp/templates/');
         
-        WCF::getTPL()->assign('relDir', $ourApp->domainPath);
+        WCF::getTPL()->assign('relDir', $ourApp->domainPath."\n");
         $output = WCF::getTPL()->fetch('htaccess');
         $file = new File(ULTIMATE_DIR.'.htaccess');
         $file->write($output);

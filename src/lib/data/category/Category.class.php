@@ -37,6 +37,18 @@ class Category extends AbstractUltimateDatabaseObject {
     protected $contentCategoryTable = 'content_to_category';
     
     /**
+     * Contains all contents in this category.
+     * @var array<ultimate\data\content\Content>
+     */
+    public $contents = array();
+    
+    /**
+     * Contains all child categories of this category.
+     * @var array<ultimate\data\category\Category>
+     */
+    public $childCategories = array();
+    
+    /**
      * Returns all contents in this category.
      *
      * @return array<ultimate\data\content\Content>
@@ -45,6 +57,7 @@ class Category extends AbstractUltimateDatabaseObject {
         $sql = 'SELECT contentID
         		FROM   ultimate'.ULTIMATE_N.'_'.$this->contentCategoryTable.'
         		WHERE  categoryID = ?';
+        
         $statement = UltimateCore::getDB()->prepareStatement($sql);
         $statement->execute(array($this->categoryID));
         $contents = array();
@@ -62,7 +75,7 @@ class Category extends AbstractUltimateDatabaseObject {
     public function getChildCategories() {
         $sql = 'SELECT categoryID
                 FROM   ultimate'.ULTIMATE_N.'_'.self::$databaseTableName.'
-                WHERE  parentCategory = ?';
+                WHERE  parentCategoryID = ?';
         $statement = UltimateCore::getDB()->prepareStatement($sql);
         $statement->execute(array($this->categoryID));
         $categories = array();
@@ -86,10 +99,8 @@ class Category extends AbstractUltimateDatabaseObject {
      * @see \wcf\data\DatabaseObject::handleData()
      */
     protected function handleData($data) {
-        $contents = $this->getContents();
-        $childCategories = $this->getChildCategories();
-        $data['contents'] = $contents;
-        $data['childCategories'] = $childCategories;
+        $data['categoryID'] = intval($data['categoryID']);
+        $data['parentCategoryID'] = intval($data['parentCategoryID']);
         parent::handleData($data);
     }
 }

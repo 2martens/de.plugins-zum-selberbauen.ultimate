@@ -44,11 +44,11 @@
                         $(function() {
                             var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
                             var $optionValues = { {implode from=$i18nValues['categoryTitle'] key=languageID item=value}'{@$languageID}': '{$value}'{/implode} };
-                            new WCF.MultipleLanguageInput('categoryTitle', true, $optionValues, $availableLanguages);
+                            new WCF.MultipleLanguageInput('categoryTitle', false, $optionValues, $availableLanguages);
                         });
                     //]]>
                     </script>
-                    <input type="text" id="categoryTitle" name="categoryTitle" value="{@$i18nPlainValues['categoryTitle']}" class="medium" autofocus="autofocus" placeholder="{lang}wcf.acp.ultimate.category.title.placeholder{/lang}" />
+                    <input type="text" id="categoryTitle" name="categoryTitle" value="{@$i18nPlainValues['categoryTitle']}" class="long" autofocus="autofocus" placeholder="{lang}wcf.acp.ultimate.category.title.placeholder{/lang}" />
                     {if $errorField == 'categoryTitle'}
                         <small class="innerError">
                             {if $errorType == 'empty'}
@@ -63,7 +63,7 @@
             <dl{if $errorField == 'categorySlug'} class="formError"{/if}>
                 <dt><label for="categorySlug">{lang}wcf.acp.ultimate.category.slug{/lang}</label></dt>
             <dd>
-                <input type="text" id="categorySlug" name="categorySlug" value="{@$categorySlug}" class="medium" required="required" pattern="^[^,\nA-Z]+$" placeholder="{lang}wcf.acp.ultimate.category.slug.placeholder{/lang}" />
+                <input type="text" id="categorySlug" name="categorySlug" value="{@$categorySlug}" class="long" required="required" pattern="^[^,\nA-Z]+$" placeholder="{lang}wcf.acp.ultimate.category.slug.placeholder{/lang}" />
                     {if $errorField == 'categorySlug'}
                         <small class="innerError">
                             {if $errorType == 'empty'}
@@ -96,15 +96,16 @@
             <dl{if $errorField == 'categoryDescription'} class="formError"{/if}>
                 <dt><label for="categoryDescription">{lang}wcf.acp.ultimate.category.description{/lang}</label></dt>
                 <dd>
+                    <script type="text/javascript">
                     //<![CDATA[
                         $(function() {
                             var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
                             var $optionValues = { {implode from=$i18nValues['categoryDescription'] key=languageID item=value}'{@$languageID}': '{$value}'{/implode} };
-                            new WCF.MultipleLanguageInput('categoryDescription', true, $optionValues, $availableLanguages);
+                            new WCF.MultipleLanguageInput('categoryDescription', false, $optionValues, $availableLanguages);
                         });
                     //]]>
                     </script>
-                    <input type="text" id="categoryDescription" name="categoryDescription" value="{@$i18nPlainValues['categoryDescription']}" class="medium" placeholder="{lang}wcf.acp.ultimate.category.description.placeholder{/lang}" />
+                    <input type="text" id="categoryDescription" name="categoryDescription" value="{@$i18nPlainValues['categoryDescription']}" class="long" placeholder="{lang}wcf.acp.ultimate.category.description.placeholder{/lang}" />
                     {if $errorField == 'categoryDescription'}
                         <small class="innerError">
                             {if $errorType == 'empty'}

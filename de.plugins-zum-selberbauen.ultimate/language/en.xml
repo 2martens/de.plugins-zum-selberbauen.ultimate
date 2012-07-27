@@ -124,6 +124,7 @@
         <!-- category -->
         <item name="wcf.acp.ultimate.category.add"><![CDATA[Add category]]></item>
         <item name="wcf.acp.ultimate.category.edit"><![CDATA[Edit category]]></item>
+        <item name="wcf.acp.ultimate.category.delete"><![CDATA[Delete category]]></item>
         <item name="wcf.acp.ultimate.category.title"><![CDATA[Name]]></item>
         <item name="wcf.acp.ultimate.category.title.placeholder"><![CDATA[Good contents]]></item>
         <item name="wcf.acp.ultimate.category.title.error.notUnique"><![CDATA[A category with the specified name already exists with this parent.]]></item>
@@ -137,13 +138,16 @@
         <item name="wcf.acp.ultimate.category.description.placeholder"><![CDATA[]]></item>
         <item name="wcf.acp.ultimate.category.general"><![CDATA[Category data]]></item>
         <item name="wcf.acp.ultimate.category.contents"><![CDATA[Contents]]></item>
+        <item name="wcf.acp.ultimate.category.showContents"><![CDATA[Show the contents of this category]]></item>
         <item name="wcf.acp.ultimate.category.noContents"><![CDATA[No categories found.]]></item>
+        <item name="wcf.acp.ultimate.category.list"><![CDATA[Category list]]></item>
         <item name="wcf.acp.ultimate.category.list.all"><![CDATA[All categories]]></item>
         <item name="wcf.acp.ultimate.category.list.count"><![CDATA[{#$items} Categor{if $items == 1}y{else}ies{/if}]]></item>
         <!-- /category -->
         <!-- content -->
         <item name="wcf.acp.ultimate.content.add"><![CDATA[Add content]]></item>
         <item name="wcf.acp.ultimate.content.edit"><![CDATA[Edit content]]></item>
+        <item name="wcf.acp.ultimate.content.delete"><![CDATA[Delete content]]></item>
         <item name="wcf.acp.ultimate.content.title"><![CDATA[Title]]></item>
         <item name="wcf.acp.ultimate.content.title.error.tooShort"><![CDATA[The title has to be at least 4 characters long.]]></item>
         <item name="wcf.acp.ultimate.content.title.placeholder"><![CDATA[A nice story]]></item>
@@ -161,12 +165,14 @@ Tom likes the warm water and the wunderful beach.]]></item>
         <item name="wcf.acp.ultimate.content.author"><![CDATA[Author]]></item>
         <item name="wcf.acp.ultimate.content.lastModified"><![CDATA[Date]]></item>
         <item name="wcf.acp.ultimate.content.noContents"><![CDATA[No contents found.]]></item>
+        <item name="wcf.acp.ultimate.content.list"><![CDATA[Content list]]></item>
         <item name="wcf.acp.ultimate.content.list.all"><![CDATA[All contents]]></item>
         <item name="wcf.acp.ultimate.content.list.count"><![CDATA[{#$items} Content{if $items != 1}s{/if}]]></item>
         <!-- /content -->
         <!-- page -->
         <item name="wcf.acp.ultimate.page.add"><![CDATA[Add page]]></item>
         <item name="wcf.acp.ultimate.page.edit"><![CDATA[Edit page]]></item>
+        <item name="wcf.acp.ultimate.page.delete"><![CDATA[Delete page]]></item>
         <item name="wcf.acp.ultimate.page.title"><![CDATA[Title]]></item>
         <item name="wcf.acp.ultimate.page.title.placeholder"><![CDATA[Company profile]]></item>
         <item name="wcf.acp.ultimate.page.title.error.notUnique"><![CDATA[A page with the specified title already exists with this parent.]]></item>
@@ -180,6 +186,7 @@ Tom likes the warm water and the wunderful beach.]]></item>
         <item name="wcf.acp.ultimate.page.general"><![CDATA[Page data]]></item>
         <item name="wcf.acp.ultimate.page.lastModified"><![CDATA[Date]]></item>
         <item name="wcf.acp.ultimate.page.noContents"><![CDATA[No pages found.]]></item>
+        <item name="wcf.acp.ultimate.page.list"><![CDATA[Page list]]></item>
         <item name="wcf.acp.ultimate.page.list.all"><![CDATA[All pages]]></item>
         <item name="wcf.acp.ultimate.page.list.count"><![CDATA[{#$items} Page{if $items != 1}s{/if}]]></item>
         <!-- /page -->

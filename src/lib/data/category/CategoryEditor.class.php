@@ -4,6 +4,7 @@ use ultimate\system\UltimateCore;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 use wcf\system\cache\CacheHandler;
+use wcf\system\clipboard\ClipboardHandler;
 
 /**
  * Provides functions to edit categories.
@@ -34,7 +35,7 @@ class CategoryEditor extends DatabaseObjectEditor implements IEditableCachedObje
 	/**
 	 * @see \wcf\data\IEditableCachedObject::resetCache()
 	 */
-	public function resetCache() {
+	public static function resetCache() {
 	    CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.category.php');
 	}
 }

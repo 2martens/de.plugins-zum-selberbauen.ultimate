@@ -9,19 +9,21 @@ CREATE TABLE ultimate1_1_category (
     categoryDescription VARCHAR(255) NOT NULL DEFAULT '',
     categorySlug VARCHAR(255) NOT NULL DEFAULT '',
     UNIQUE KEY categoryTitle (parentCategoryID, categoryTitle),
-    UNIQUE KEY categorySlug (parentCategoryID, slug)
+    UNIQUE KEY categorySlug (parentCategoryID, categorySlug)
 );
 
 DROP TABLE IF EXISTS ultimate1_1_content_to_category;
 CREATE TABLE ultimate1_1_content_to_category (
-    contentID INT(10) NOT NULL DEFAULT 0,
-    categoryID INT(10) NOT NULL DEFAULT 0
+    contentID INT(10) NOT NULL,
+    categoryID INT(10) NOT NULL,
+    KEY (contentID),
+    KEY (categoryID)
 );
 
 DROP TABLE IF EXISTS ultimate1_1_content_to_page;
 CREATE TABLE ultimate1_1_content_to_page (
-    contentID INT(10) NOT NULL DEFAULT 0 UNIQUE KEY,
-    pageID INT(10) NOT NULL DEFAULT 0 UNIQUE KEY
+    contentID INT(10) NOT NULL UNIQUE KEY,
+    pageID INT(10) NOT NULL UNIQUE KEY
 );
 
 DROP TABLE IF EXISTS ultimate1_1_page;
@@ -45,21 +47,13 @@ CREATE TABLE ultimate1_1_content (
     enableHtml TINYINT(1) NOT NULL DEFAULT 0,
     enableSmilies TINYINT(1) NOT NULL DEFAULT 1,
     lastModified INT(10) NOT NULL DEFAULT 0,
-    KEY (authorID),
-    FULLTEXT INDEX (contentTitle, contentDescription, contentText)
+    KEY (authorID)
 );
 
-DROP TABLE IF EXISTS ultimate1_1_component;
-CREATE TABLE ultimate1_1_component (
-    componentID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    className VARCHAR(255) NOT NULL DEFAULT '' UNIQUE KEY,
-    title VARCHAR(255) NOT NULL DEFAULT '',
-    INDEX (className)   
-);
 
 /**** foreign keys ****/
-ALTER TABLE ultimate1_1_page ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID);
-ALTER TABLE ultimate1_1_content ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID);
+ALTER TABLE ultimate1_1_page ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_content ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_content_to_category ADD FOREIGN KEY (contentID) REFERENCES ultimate1_1_content (contentID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_content_to_category ADD FOREIGN KEY (categoryID) REFERENCES ultimate1_1_category (categoryID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_content_to_page ADD FOREIGN KEY (contentID) REFERENCES ultimate1_1_content (contentID) ON DELETE CASCADE;

@@ -109,20 +109,22 @@ class UltimateContentListPage extends AbstractCachedListPage {
         
         // if no category id and no tag id specified, proceed as always
         if (!$this->categoryID && !$this->tagID) return;
-        elseif($categoryID) {
+        elseif($this->categoryID) {
             // if category id provided, change object variables and load the new cache
-            $this->cacheBuilderClassName = '\ultimate\cache\builder\UltimateContentCategoryCacheBuilder';
+            $this->cacheBuilderClassName = '\ultimate\system\cache\builder\UltimateContentCategoryCacheBuilder';
             $this->cacheName = 'content-to-category';
             $this->cacheIndex = 'contentsToCategoryID';
             
         }
         // both category id and tag id are provided, the category id wins
-        elseif ($tagID) {
+        elseif ($this->tagID) {
             // @todo implement tags
         }
         else return; // shouldn't be called anyway
         $this->loadCache();
         $this->objects = $this->objects[$this->categoryID];
+        $this->currentObjects = $this->currentObjects[$this->categoryID];
+        
         // calculate the pages again, because the objects changed
         $this->calculateNumberOfPages();
     }

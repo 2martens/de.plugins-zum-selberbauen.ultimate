@@ -64,7 +64,7 @@
         
         <acpmenuitem name="wcf.acp.menu.link.ultimate.page.add">
             <link>index.php/UltimatePageAdd</link>
-            <parent>wcf.acp.menu.link.ultimate.link</parent>
+            <parent>wcf.acp.menu.link.ultimate.page</parent>
             <permissions>admin.content.ultimate.canAddPage</permissions>
             <showorder>2</showorder>
         </acpmenuitem>

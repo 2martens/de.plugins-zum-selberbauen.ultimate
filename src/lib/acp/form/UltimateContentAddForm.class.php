@@ -1,7 +1,5 @@
 <?php
 namespace ultimate\acp\form;
-use wcf\data\language\item\LanguageItemAction;
-
 use ultimate\data\content\ContentAction;
 use ultimate\data\content\ContentEditor;
 use ultimate\system\UltimateCore;
@@ -88,15 +86,13 @@ class UltimateContentAddForm extends MessageForm {
      * @see \wcf\form\IForm::readData()
      */
     public function readData() {
-        parent::readData();
-        
         $cache = 'category';
         $cacheBuilderClass = '\ultimate\system\cache\builder\UltimateCategoryCacheBuilder';
         $file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
         CacheHandler::getInstance()->addResource($cache, $file, $cacheBuilderClass);
         $cacheOutput = CacheHandler::getInstance()->get($cache);
         $this->categories = $cacheOutput['categories'];
-        $this->categoryIDs = $cacheOutput['categoryIDs'];
+        parent::readData();
     }
     
     /**
@@ -106,7 +102,6 @@ class UltimateContentAddForm extends MessageForm {
         parent::readFormParameters();
         
         I18nHandler::getInstance()->readValues();
-        
         if (I18nHandler::getInstance()->isPlainValue('subject')) $this->subject = trim(I18nHandler::getInstance()->getValue('subject'));
         if (I18nHandler::getInstance()->isPlainValue('description')) $this->description = trim(I18nHandler::getInstance()->getValue('description'));
         if (isset($_POST['categoryIDs']) && is_array($_POST['categoryIDs'])) $this->categoryIDs = ArrayUtil::toIntegerArray(($_POST['categoryIDs']));
@@ -148,7 +143,7 @@ class UltimateContentAddForm extends MessageForm {
         );
         
         $this->objectAction = new ContentAction(array(), 'create', $parameters);
-        $this->objectAction->execute();
+        $this->objectAction->executeAction();
         
         $returnValues = $this->objectAction->getReturnValues();
         $contentID = $returnValues['returnValues']->contentID;
@@ -168,7 +163,7 @@ class UltimateContentAddForm extends MessageForm {
             // parse URLs
             if ($this->parseURL == 1) {
                 $textValues = I18nHandler::getInstance()->getValues('text');
-                foreach ($subjectValues as $languageID => $text) {
+                foreach ($textValues as $languageID => $text) {
                     $textValues[$languageID] = URLParser::getInstance()->parse($text);
                 }
                 
@@ -201,7 +196,8 @@ class UltimateContentAddForm extends MessageForm {
         
         //showing empty form
         $this->subject = $this->description = $this->text = '';
-        $this->categoryID = 0;
+        I18nHandler::getInstance()->disableAssignValueVariables();
+        $this->categoryIDs = array();
     }
     
     /**
@@ -209,10 +205,13 @@ class UltimateContentAddForm extends MessageForm {
      */
     public function assignVariables() {
         parent::assignVariables();
+        
+        I18nHandler::getInstance()->assignVariables();
         UltimateCore::getTPL()->assign(array(
             'description' => $this->description,
             'action' => 'add',
             'categoryIDs' => $this->categoryIDs,
+            'categories' => $this->categories,
             'languageID' => ($this->languageID ? $this->languageID : 0)
         ));
     }

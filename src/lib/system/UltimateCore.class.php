@@ -26,7 +26,7 @@ class UltimateCore extends AbstractApplication {
     /**
      * Calls all init functions of the Ultimate Core class.
      */
-    public function __construct() {
+    protected function init() {
         
         $this->initTPL();
         PageMenu::getInstance()->setActiveMenuItem('ultimate.header.menu.index');

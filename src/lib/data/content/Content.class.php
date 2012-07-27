@@ -38,6 +38,12 @@ class Content extends AbstractUltimateDatabaseObject {
     protected $contentCategoryTable = 'content_to_category';
     
     /**
+     * Contains the categories to which this content belongs.
+     * @var array<ultimate\data\category\Category>
+     */
+    public $categories = array();
+    
+    /**
      * Returns the categories associated with this content.
      *
      * @return array<ultimate\data\category\Category>
@@ -68,8 +74,13 @@ class Content extends AbstractUltimateDatabaseObject {
      * @see \wcf\data\DatabaseObject::handleData()
      */
     protected function handleData($data) {
-        $authorID = intval($data['authorID']);
-        $data['author'] = new User($authorID);
+        $data['contentID'] = intval($data['contentID']);
+        $data['authorID'] = intval($data['authorID']);
+        $data['author'] = new User($data['authorID']);
+        $data['enableSmilies'] = (boolean) intval($data['enableSmilies']);
+        $data['enableHtml'] = (boolean) intval($data['enableHtml']);
+        $data['enableBBCodes'] = (boolean) intval($data['enableBBCodes']);
+        $data['lastModified'] = intval($data['lastModified']);
         parent::handleData($data);
     }
     

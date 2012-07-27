@@ -27,7 +27,7 @@ class UltimateCategoryAddForm extends ACPForm {
     /**
      * @see \wcf\acp\form\ACPForm::$activeMenuItem
      */
-    public $activeMenuItem = 'wcf.menu.link.ultimate.category.add';
+    public $activeMenuItem = 'wcf.acp.menu.link.ultimate.category.add';
     
     /**
      * @see \wcf\page\AbstractPage::$templateName
@@ -41,12 +41,7 @@ class UltimateCategoryAddForm extends ACPForm {
         'admin.content.ultimate.canAddCategory'
     );
     
-    /**
-     * Contains the category id.
-     * @var int
-    */
-    public $categoryID = 0;
-    
+        
     /**
      * Contains all available categories.
      * @var array<ultimate\data\category\Category>
@@ -105,6 +100,7 @@ class UltimateCategoryAddForm extends ACPForm {
         parent::readFormParameters();
     
         I18nHandler::getInstance()->readValues();
+        I18nHandler::getInstance()->enableAssignValueVariables();
         if (I18nHandler::getInstance()->isPlainValue('categoryTitle')) $this->categoryTitle = trim(I18nHandler::getInstance()->getValue('categoryTitle'));
         if (I18nHandler::getInstance()->isPlainValue('categoryDescription')) $this->categoryDescription = trim(I18nHandler::getInstance()->getValue('categoryDescription'));
     
@@ -133,7 +129,7 @@ class UltimateCategoryAddForm extends ACPForm {
             'data' => array(
                 'categoryTitle' => $this->categoryTitle,
                 'categorySlug' => $this->categorySlug,
-                'categoryParent' => $this->categoryParent,
+                'parentCategoryID' => $this->categoryParent,
                 'categoryDescription' => $this->categoryDescription
             )
         );
@@ -171,8 +167,9 @@ class UltimateCategoryAddForm extends ACPForm {
         );
     
         //showing empty form
-        $this->categoryID = 0;
+        $this->categoryParent = 0;
         $this->categoryTitle = $this->categorySlug = $this->categoryDescription = '';
+        I18nHandler::getInstance()->disableAssignValueVariables();
         $this->categories = array();
     }
     
@@ -184,7 +181,7 @@ class UltimateCategoryAddForm extends ACPForm {
     
         I18nHandler::getInstance()->assignVariables();
         UltimateCore::getTPL()->assign(array(
-            'categoryID' => $this->categoryID,
+            'categoryParent' => $this->categoryParent,
             'categories' => $this->categories,
             'categoryTitle' => $this->categoryTitle,
             'categorySlug' => $this->categorySlug,

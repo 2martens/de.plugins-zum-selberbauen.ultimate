@@ -18,7 +18,7 @@ class UltimateContentPageCacheBuilder implements ICacheBuilder {
     /**
      * @see \wcf\system\cache\builder\ICacheBuilder::getData()
      */
-    public function getData($cacheResource) {
+    public function getData(array $cacheResource) {
         $data = array(
             'contentsToPageID' => array(),
             'contentIDsToPageID' => array()

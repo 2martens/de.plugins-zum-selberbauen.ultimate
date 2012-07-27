@@ -8,7 +8,7 @@
     /* ]]> */
 </script>
 
-<header class="mainHeading">
+<header class="boxHeadline">
     <hgroup>
         <h1>{lang}wcf.acp.ultimate.page.{@$action}{/lang}</h1>
     </hgroup>
@@ -44,11 +44,11 @@
                         $(function() {
                             var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
                             var $optionValues = { {implode from=$i18nValues['pageTitle'] key=languageID item=value}'{@$languageID}': '{$value}'{/implode} };
-                            new WCF.MultipleLanguageInput('pageTitle', true, $optionValues, $availableLanguages);
+                            new WCF.MultipleLanguageInput('pageTitle', false, $optionValues, $availableLanguages);
                         });
                     //]]>
                     </script>
-                    <input type="text" id="pageTitle" name="pageTitle" value="{$i18nPlainValues['pageTitle']}" placeholder="{lang}wcf.acp.ultimate.page.title.placeholder{/lang}" autofocus="autofocus" class="medium" />
+                    <input type="text" id="pageTitle" name="pageTitle" value="{$i18nPlainValues['pageTitle']}" placeholder="{lang}wcf.acp.ultimate.page.title.placeholder{/lang}" autofocus="autofocus" class="long" />
                     {if $errorField == 'pageTitle'}
                         <small class="innerError">
                             {if $errorType == 'empty'}
@@ -63,7 +63,7 @@
             <dl{if $errorField == 'pageSlug'} class="formError"{/if}>
                 <dt><label for="pageSlug">{lang}wcf.acp.ultimate.page.slug{/lang}</label></dt>
                 <dd>
-                    <input type="text" id="pageSlug" name="pageSlug" value="{@$pageSlug}" required="required" placeholder="{lang}wcf.acp.ultimate.page.slug.placeholder{/lang}" pattern="^[^,\nA-Z]+$" class="medium" />
+                    <input type="text" id="pageSlug" name="pageSlug" value="{@$pageSlug}" required="required" placeholder="{lang}wcf.acp.ultimate.page.slug.placeholder{/lang}" pattern="^[^,\nA-Z]+$" class="long" />
                     {if $errorField == 'pageSlug'}
                         <small class="innerError">
                             {if $errorType == 'empty'}
