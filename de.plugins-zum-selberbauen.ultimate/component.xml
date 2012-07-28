@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<data xmlns="http://www.plugins-zum-selberbauen.de" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.plugins-zum-selberbauen.de http://www.plugins-zum-selberbauen.de/XSD/component.xsd">
-    <import>
-        <component>
-            <classname>\ultimate\page\SiteComponentPage</classname>
-            <title>ultimate.component.SiteComponentPage</title>
-        </component>
-    </import>
-</data>

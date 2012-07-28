@@ -101,7 +101,7 @@
                         $(function() {
                             var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
                             var $optionValues = { {implode from=$i18nValues['text'] key=languageID item=value}'{@$languageID}': "{$value}"{/implode} };
-                            new ULTIMATE.MultipleLanguageInput('text', false, $optionValues, $availableLanguages);
+                            new WCF.MultipleLanguageInput('text', false, $optionValues, $availableLanguages);
                         });
                     //]]>
                     </script>

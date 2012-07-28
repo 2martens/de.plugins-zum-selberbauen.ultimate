@@ -141,16 +141,9 @@ class UltimateContentEditForm extends UltimateContentAddForm {
         $useRequestData = (count($_POST)) ? true : false;
         I18nHandler::getInstance()->assignVariables($useRequestData);
         
-        // nasty workaround for javascript problem with multiple line strings
-        $i18nValues = UltimateCore::getTPL()->get('i18nValues');
-        foreach ($i18nValues['text'] as $languageID => $value) {
-            $i18nValues['text'][$languageID] = str_replace("\r", '_specialNewline\\', $value);
-        }
-        
         UltimateCore::getTPL()->assign(array(
         	'contentID' => $this->contentID,
-        	'i18nValues' => $i18nValues,
-            'action' => 'edit'
+        	'action' => 'edit'
         ));
     }
     
