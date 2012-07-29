@@ -39,19 +39,20 @@ class Content extends AbstractUltimateDatabaseObject {
     
     /**
      * Contains the categories to which this content belongs.
-     * @var array<ultimate\data\category\Category>
+     * @var \ultimate\data\category\Category[]
      */
     public $categories = array();
     
     /**
      * Returns the categories associated with this content.
      *
-     * @return array<ultimate\data\category\Category>
+     * @return \ultimate\data\category\Category[]
      */
     public function getCategories() {
         $sql = 'SELECT categoryID
         		FROM ultimate'.ULTIMATE_N.'_'.$this->contentCategoryTable.'
         		WHERE contentID = ?';
+        /* @var $statement \wcf\system\database\statement\PreparedStatement */
         $statement = UltimateCore::getDB()->prepareStatement($sql);
         $statement->execute(array($this->contentID));
         $categories = array();

@@ -1,6 +1,7 @@
 <?php
 namespace ultimate\util;
 use wcf\system\cache\CacheHandler;
+use wcf\util\StringUtil;
 
 /**
  * Provides some useful functions for Pages.
@@ -15,56 +16,115 @@ use wcf\system\cache\CacheHandler;
 class PageUtil {
     
     /**
-     * Checks whether the given slug is available or not.
+     * Checks whether the given title is available or not.
      *
-     * @param   string    $title
+     * @param   string    $pageTitle
+     * @param   integer   $pageParent
      * @return  boolean   $isAvailable
      */
-    public static function isAvailableTitle($title) {
-        $title = trim($title);
-        $objects = self::loadCache(
+    public static function isAvailableTitle($pageTitle, $pageParent = 0) {
+        $pageTitle = StringUtil::trim($pageTitle);
+        $pageParent = intval($pageParent);
+        $isAvailable = true;
+        
+        if ($pageParent) {
+            $pages = self::loadCache(
+                    'page',
+                    '\ultimate\system\cache\builder\UltimatePageCacheBuilder',
+                    'pagesToParent'
+            );
+            
+            $relevantPages = $pages[$pageParent];
+            foreach ($relevantPages as $page) {
+                /* @var $page \ultimate\data\page\Page */
+                if ($page->__get('pageTitle') != $pageTitle) continue;
+                $isAvailable = false;
+                break;
+            }
+        }
+        else {
+            $pages = self::loadCache(
                 'page',
                 '\ultimate\system\cache\builder\UltimatePageCacheBuilder',
                 'pages'
-        );
-        $isAvailable = true;
-        foreach ($objects as $object) {
-            if ($object->pageTitle != $title) continue;
-            $isAvailable = false;
-            break;
+            );
+        
+            foreach ($pages as $page) {
+                /* @var $page \ultimate\data\page\Page */
+                if ($page->__get('pageTitle') != $pageTitle) continue;
+                $isAvailable = false;
+                break;
+            }
         }
-    
         return $isAvailable;
     }
     
     /**
      * Checks whether the given slug is available or not.
      *
-     * @param   string    $slug
+     * @param   string    $pageSlug
+     * @param   integer   $pageParent
      * @return  boolean   $isAvailable
      */
-    public static function isAvailableSlug($slug) {
-        $slug = trim($slug);
-        $objects = self::loadCache(
+    public static function isAvailableSlug($pageSlug, $pageParent = 0) {
+        $pageSlug = StringUtil::trim($slug);
+        $pageParent = intval($pageParent);
+        $isAvailable = true;
+        
+        if ($pageParent) {
+            $pages = self::loadCache(
+                    'page',
+                    '\ultimate\system\cache\builder\UltimatePageCacheBuilder',
+                    'pagesToParent'
+            );
+            
+            $relevantPages = $pages[$pageParent];
+            foreach ($relevantPages as $page) {
+                /* @var $page \ultimate\data\page\Page */
+                if ($page->__get('pageSlug') != $pageSlug) continue;
+                $isAvailable = false;
+                break;
+            }
+        }
+        else {
+            $pages = self::loadCache(
+                'page',
+                '\ultimate\system\cache\builder\UltimatePageCacheBuilder',
+                'pages'
+            );
+        
+            foreach ($pages as $page) {
+                /* @var $page \ultimate\data\page\Page */
+                if ($page->__get('pageSlug') != $pageSlug) continue;
+                $isAvailable = false;
+                break;
+            }
+        }
+        return $isAvailable;
+    }
+    
+    /**
+     * Returns all pages which are available.
+     *
+     * @param  integer  $pageID    0 by default; give page id to get all pages except the one belonging to the given page id
+     * @return \ultimate\data\page\Page[]
+     */
+    public static function getAvailablePages($pageID = 0) {
+        $pages = self::loadCache(
             'page',
             '\ultimate\system\cache\builder\UltimatePageCacheBuilder',
             'pages'
         );
-        $isAvailable = true;
-        foreach ($objects as $object) {
-            if ($object->pageSlug != $slug) continue;
-            $isAvailable = false;
-            break;
-        }
         
-        return $isAvailable;
+        if ($pageID) unset($pages[$pageID]);
+        return $pages;
     }
     
     /**
      * Returns all contents which are available.
      *
-     * @param  int      $pageID    0 by default; give page id to get all unbound contents plus the one already in use by the page
-     * @return array    $contents
+     * @param  integer  $pageID    0 by default; give page id to get all unbound contents plus the one already in use by the page
+     * @return \ultimate\data\content\Content[]
      */
     public static function getAvailableContents($pageID = 0) {
         $contents = self::loadCache(
@@ -89,7 +149,7 @@ class PageUtil {
     /**
      * Loads the cache.
      *
-     * @return array    $objects
+     * @return (\ultimate\data\content\Content|integer|\ultimate\data\page\Page)[]
      */
     protected static function loadCache($cache, $cacheBuilderClass, $cacheIndex) {
         $file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';

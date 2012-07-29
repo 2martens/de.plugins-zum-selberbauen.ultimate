@@ -180,6 +180,9 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
         <item name="wcf.acp.ultimate.page.slug"><![CDATA[URL-kompatibler Titel]]></item>
         <item name="wcf.acp.ultimate.page.slug.placeholder"><![CDATA[samplepage-with-much-spice]]></item>
         <item name="wcf.acp.ultimate.page.slug.error.notUnique"><![CDATA[Der angegebene URL-kompatible Titel existiert bereits bei einer Seite auf gleichem Level.]]></item>
+        <item name="wcf.acp.ultimate.page.parent"><![CDATA[Übergeordnete Seite]]></item>
+        <item name="wcf.acp.ultimate.page.parent.none"><![CDATA[Keine]]></item>
+        <item name="wcf.acp.ultimate.page.parent.error.notValid"><![CDATA[Die "ausgewählte" Seite ist ungültig, da sie nicht zur Auswahl stand.]]></item>
         <item name="wcf.acp.ultimate.page.content"><![CDATA[Zugeordneter Inhalt]]></item>
         <item name="wcf.acp.ultimate.page.content.select"><![CDATA[Bitte Inhalt auswählen]]></item>
         <item name="wcf.acp.ultimate.page.content.error.notSelected"><![CDATA[Du musst einen Inhalt auswählen.]]></item>

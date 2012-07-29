@@ -7,10 +7,4 @@
  * @category Ultimate CMS
  */
 require_once('./global.php');
-require_once(ULTIMATE_DIR.'lib/system/Dispatcher.class.php');
-define('DEBUG', true); //@todo: change into false for production
-if (isset($_GET['request'])) {
-    \ultimate\system\Dispatcher::getInstance()->handle();
-} else {
-    \wcf\system\request\RequestHandler::getInstance()->handle('ultimate');
-}
+\wcf\system\request\RequestHandler::getInstance()->handle('ultimate');

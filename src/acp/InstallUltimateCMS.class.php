@@ -5,16 +5,15 @@ use wcf\system\io\File;
 use wcf\system\WCF;
 
 /**
- * Does some important stuff.
+ * Is called during installation of Ultimate CMS.
  *
  * @author Jim Martens
  * @copyright 2011-2012 Jim Martens
  * @license http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
  * @package de.plugins-zum-selberbauen.ultimate
- * @subpackage acp
  * @category Ultimate CMS
  */
-class InstallUltimateCMS {
+final class InstallUltimateCMS {
     
     /**
      * Creates a new InstallUltimateCMS object.
@@ -22,7 +21,7 @@ class InstallUltimateCMS {
     public function __construct() {
         $this->install();
     }
-    // @todo Fixing!!!
+    
     /**
      * Installs important things.
      */

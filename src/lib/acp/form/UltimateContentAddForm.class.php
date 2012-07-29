@@ -12,6 +12,7 @@ use wcf\system\language\I18nHandler;
 use wcf\system\menu\acp\ACPMenu;
 use wcf\util\ArrayUtil;
 use wcf\util\MessageUtil;
+use wcf\util\StringUtil;
 
 /**
  * Show the UltimateContentAdd form.
@@ -55,19 +56,19 @@ class UltimateContentAddForm extends MessageForm {
     
     /**
      * Contains the chosen categories.
-     * @var array
+     * @var int[]
      */
     public $categoryIDs = array();
     
     /**
      * Contains all categories.
-     * @var array<ultimate\data\category\Category>
+     * @var \ultimate\data\category\Category[]
      */
     public $categories = array();
        
     /**
      * Contains the maximal length of the text.
-     * @var int | 0 means there's no limitation
+     * @var integer 0 means there's no limitation
      */
     public $maxTextLength = 0;
     
@@ -102,8 +103,8 @@ class UltimateContentAddForm extends MessageForm {
         parent::readFormParameters();
         
         I18nHandler::getInstance()->readValues();
-        if (I18nHandler::getInstance()->isPlainValue('subject')) $this->subject = trim(I18nHandler::getInstance()->getValue('subject'));
-        if (I18nHandler::getInstance()->isPlainValue('description')) $this->description = trim(I18nHandler::getInstance()->getValue('description'));
+        if (I18nHandler::getInstance()->isPlainValue('subject')) $this->subject = StringUtil::trim(I18nHandler::getInstance()->getValue('subject'));
+        if (I18nHandler::getInstance()->isPlainValue('description')) $this->description = StringUtil::trim(I18nHandler::getInstance()->getValue('description'));
         if (isset($_POST['categoryIDs']) && is_array($_POST['categoryIDs'])) $this->categoryIDs = ArrayUtil::toIntegerArray(($_POST['categoryIDs']));
         if (I18nHandler::getInstance()->isPlainValue('text')) $this->text = MessageUtil::stripCrap(trim(I18nHandler::getInstance()->getValue('text')));
     }
@@ -173,10 +174,11 @@ class UltimateContentAddForm extends MessageForm {
                         WHERE  languageID        = ?
                         AND    languageItem      = ?
                         AND    packageID         = ?';
+                /* @var $statement \wcf\system\database\statement\PreparedStatement */
                 $statement = UltimateCore::getDB()->prepareStatement($sql);
                 UltimateCore::getDB()->beginTransaction();
                 foreach ($textValues as $languageID => $text) {
-                    $statement->execute(array(
+                    $statement->executeUnbuffered(array(
                         $text,
                         $languageID,
                         'ultimate.content.'.$contentID.'.contentText',

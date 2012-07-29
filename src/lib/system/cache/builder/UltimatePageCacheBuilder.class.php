@@ -21,7 +21,9 @@ class UltimatePageCacheBuilder implements ICacheBuilder {
     public function getData(array $cacheResource) {
         $data = array(
         	'pages' => array(),
-            'pageIDs' => array()
+            'pageIDs' => array(),
+            'pagesToParent' => array(),
+            'pagesToSlug' => array()
         );
         
         $pageList = new PageList();
@@ -39,6 +41,12 @@ class UltimatePageCacheBuilder implements ICacheBuilder {
         
         $data['pages'] = array_combine($pageIDs, $pages);
         $data['pageIDs'] = $pageIDs;
+        
+        foreach ($data['pages'] as $id => $page) {
+            /* @var $page \ultimate\data\page\Page */
+            $data['pagesToParent'][$id] = $page->__get('childPages');
+            $data['pagesToSlug'][$page->__get('pageSlug')] = $page;
+        }
         
         return $data;
     }

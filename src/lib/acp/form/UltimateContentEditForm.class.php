@@ -41,8 +41,8 @@ class UltimateContentEditForm extends UltimateContentAddForm {
     public $contentID = 0;
     
     /**
-     * Contains the ContentEditor object of this content.
-     * @var \ultimate\data\content\ContentEditor
+     * Contains the Content object of this content.
+     * @var \ultimate\data\content\Content
      */
     public $content = null;
     
@@ -58,7 +58,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
             throw new IllegalLinkException();
         }
         
-        $this->content = new ContentEditor($content);
+        $this->content = $content;
     }
     
     /**
@@ -82,8 +82,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
      * @see \wcf\form\IForm::save()
      */
     public function save() {
-        if (!I18nHandler::getInstance()->isPlainValue('text')) RecaptchaForm::save();
-        else parent::save();
+        RecaptchaForm::save();
         
         $this->subject = 'ultimate.content.'.$this->contentID.'.contentTitle';
         if (I18nHandler::getInstance()->isPlainValue('subject')) {
@@ -107,6 +106,32 @@ class UltimateContentEditForm extends UltimateContentAddForm {
         } else {
             $this->text = $text;
             I18nHandler::getInstance()->save('text', $this->text, 'ultimate.content', PACKAGE_ID);
+            // parse URLs
+            if ($this->parseURL == 1) {
+                $textValues = I18nHandler::getInstance()->getValues('text');
+                foreach ($textValues as $languageID => $text) {
+                    $textValues[$languageID] = URLParser::getInstance()->parse($text);
+                }
+            
+                // nasty workaround, because you can't change the values of I18nHandler before save
+                $sql = 'UPDATE wcf'.WCF_N.'_language_item
+                        SET    languageItemValue = ?
+                        WHERE  languageID        = ?
+                        AND    languageItem      = ?
+                        AND    packageID         = ?';
+                /* @var $statement \wcf\system\database\statement\PreparedStatement */
+                $statement = UltimateCore::getDB()->prepareStatement($sql);
+                UltimateCore::getDB()->beginTransaction();
+                foreach ($textValues as $languageID => $text) {
+                    $statement->executeUnbuffered(array(
+                        $text,
+                        $languageID,
+                        'ultimate.content.'.$contentID.'.contentText',
+                        PACKAGE_ID
+                    ));
+                }
+                UltimateCore::getDB()->commitTransaction();
+            }
         }
         
         $parameters = array(

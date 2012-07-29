@@ -15,14 +15,32 @@ use wcf\system\cache\CacheHandler;
 class CategoryUtil {
     
     /**
+     * Returns all categories which are available.
+     *
+     * @param integer $categoryID 0 by default; give category id to get all categories except the one belonging to the given category id
+     * @return \ultimate\data\category\Category[]
+     */
+    public static function getAvailableCategories($categoryID = 0) {
+        $categoryID = intval($categoryID);
+        $categories = self::loadCache(
+            'category',
+            '\ultimate\system\cache\builder\UltimateCategoryCacheBuilder',
+            'categories'
+        );
+        
+        if ($categoryID) unset($categories[$categoryID]);
+        
+        return $categories;
+    }
+    
+    /**
      * Checks if the given title is available.
      *
      * @param  string  $categoryTitle
      * @param  integer $categoryParent
-     *
      * @return boolean $isAvailable
      */
-    public static function isAvailableTitle($categoryTitle, $categoryParent) {
+    public static function isAvailableTitle($categoryTitle, $categoryParent = 0) {
         $categoryTitle = trim($categoryTitle);
         $categoryParent = intval($categoryParent);
         $isAvailable = true;
@@ -42,9 +60,9 @@ class CategoryUtil {
         }
         else {
             $categories = self::loadCache(
-                    'category',
-                    '\ultimate\system\cache\builder\UltimateCategoryCacheBuilder',
-                    'categories'
+                'category',
+                '\ultimate\system\cache\builder\UltimateCategoryCacheBuilder',
+                'categories'
             );
             foreach ($categories as $categoryID => $category) {
                 if ($category->categoryTitle != $categoryTitle) continue;
@@ -60,10 +78,9 @@ class CategoryUtil {
      *
      * @param  string  $categorySlug
      * @param  integer $categoryParent
-     *
      * @return boolean $isAvailable
      */
-    public static function isAvailableSlug($categorySlug, $categoryParent) {
+    public static function isAvailableSlug($categorySlug, $categoryParent = 0) {
         $categorySlug = trim($categorySlug);
         $categoryParent = intval($categoryParent);
         $isAvailable = true;
@@ -99,7 +116,7 @@ class CategoryUtil {
     /**
      * Loads the cache.
      *
-     * @return array  $objects
+     * @return \ultimate\data\category\Category[]
      */
     protected static function loadCache($cache, $cacheBuilderClass, $cacheIndex) {
         $file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';

@@ -5,6 +5,7 @@ use ultimate\data\category\Category;
 use ultimate\data\category\CategoryAction;
 use ultimate\data\category\CategoryEditor;
 use ultimate\system\UltimateCore;
+use ultimate\util\CategoryUtil;
 use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
@@ -21,11 +22,13 @@ use wcf\system\language\I18nHandler;
  */
 class UltimateCategoryEditForm extends UltimateCategoryAddForm {
     /**
+     * @var string
      * @see \wcf\acp\form\ACPForm::$activeMenuItem
      */
     public $activeMenuItem = 'wcf.acp.menu.link.ultimate.category';
     
     /**
+     * @var string[]
      * @see \wcf\page\AbstractPage::$neededPermissions
      */
     public $neededPermissions = array(
@@ -34,13 +37,13 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
     
     /**
      * Contains the category id.
-     * @var int
+     * @var integer
     */
     public $categoryID = 0;
     
     /**
-     * Contains the CategoryEditor object of this category.
-     * @var \ultimate\data\category\CategoryEditor
+     * Contains the Category object of this category.
+     * @var \ultimate\data\category\Category
      */
     public $category = null;
     
@@ -51,11 +54,11 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
         parent::readParameters();
         if (isset($_REQUEST['id'])) $this->categoryID = intval($_REQUEST['id']);
         $category = new Category($this->categoryID);
-        if (!$category->categoryID) {
+        if (!$category->__get('categoryID')) {
             throw new IllegalLinkException();
         }
     
-        $this->category = new CategoryEditor($category);
+        $this->category = $category;
     }
     
     /**
@@ -63,9 +66,10 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
      */
     public function readData() {
         if (!count($_POST)) {
-            $this->categoryTitle = $this->category->categoryTitle;
-            $this->categorySlug = $this->category->categorySlug;
-            $this->categoryDescription = $this->category->categoryDescription;
+            $this->categoryTitle = $this->category->__get('categoryTitle');
+            $this->categorySlug = $this->category->__get('categorySlug');
+            $this->categoryDescription = $this->category->__get('categoryDescription');
+            $this->categories = CategoryUtil::getAvailableCategories($this->categoryID);
             I18nHandler::getInstance()->setOptions('categoryTitle', PACKAGE_ID, $this->categoryTitle, 'ultimate.category.\d+.categoryTitle');
             I18nHandler::getInstance()->setOptions('categoryDescription', PACKAGE_ID, $this->categoryDescription, 'ultimate.category.\d+.categoryDescription');
         }

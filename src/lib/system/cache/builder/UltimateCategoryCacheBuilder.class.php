@@ -40,6 +40,7 @@ class UltimateCategoryCacheBuilder implements ICacheBuilder {
         if (!count($categoryIDs) || !count($categories)) return $data;
         
         foreach ($categories as &$category) {
+            /* @var $category \ultimate\data\category\Category */
             $category->contents = $category->getContents();
             $category->childCategories = $category->getChildCategories();
         }

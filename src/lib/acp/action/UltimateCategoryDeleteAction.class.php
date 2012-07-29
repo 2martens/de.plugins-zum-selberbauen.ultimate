@@ -3,6 +3,7 @@ namespace ultimate\acp\action;
 use ultimate\data\category\CategoryAction;
 use wcf\action\AbstractSecureAction;
 use wcf\util\HeaderUtil;
+use wcf\util\StringUtil;
 
 /**
  * Deleted the specified category.
@@ -25,7 +26,7 @@ class UltimatePageDeleteAction extends AbstractSecureAction {
 
     /**
      * Contains the category id.
-     * @var int
+     * @var integer
      */
     public $categoryID = 0;
     
@@ -41,7 +42,7 @@ class UltimatePageDeleteAction extends AbstractSecureAction {
     public function readParameters() {
         parent::readParameters();
         if (isset($_GET['id'])) $this->categoryID = intval($_GET['id']);
-        if (isset($_GET['url'])) $this->url = trim($_GET['url']);
+        if (isset($_GET['url'])) $this->url = StringUtil::trim($_GET['url']);
     }
     
     /**

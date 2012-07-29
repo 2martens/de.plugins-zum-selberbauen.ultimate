@@ -29,9 +29,10 @@ class UltimateContentPageCacheBuilder implements ICacheBuilder {
         $pages = $pageList->getObjects();
         
         foreach ($pages as $page) {
+            /* @var $page \ultimate\data\page\Page */
             $content = $page->getContent();
-            $data['contentsToPageID'][$page->pageID] = $content;
-            $data['contentIDsToPageID'][$page->pageID] = $content->contentID;
+            $data['contentsToPageID'][$page->__get('pageID')] = $content;
+            $data['contentIDsToPageID'][$page->__get('pageID')] = $content->__get('contentID')';
         }
         
         return $data;

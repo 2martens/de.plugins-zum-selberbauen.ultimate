@@ -63,13 +63,31 @@
             <dl{if $errorField == 'pageSlug'} class="formError"{/if}>
                 <dt><label for="pageSlug">{lang}wcf.acp.ultimate.page.slug{/lang}</label></dt>
                 <dd>
-                    <input type="text" id="pageSlug" name="pageSlug" value="{@$pageSlug}" required="required" placeholder="{lang}wcf.acp.ultimate.page.slug.placeholder{/lang}" pattern="^[^,\nA-Z]+$" class="long" />
+                    <input type="text" id="pageSlug" name="pageSlug" value="{@$pageSlug}" required="required" placeholder="{lang}wcf.acp.ultimate.page.slug.placeholder{/lang}" pattern="^[a-z]+(\-{1}[a-z]+)*$" class="long" />
                     {if $errorField == 'pageSlug'}
                         <small class="innerError">
                             {if $errorType == 'empty'}
                                 {lang}wcf.global.form.error.empty{/lang}
                             {else}
                                 {lang}wcf.acp.ultimate.page.slug.error.{@$errorType}{/lang}
+                            {/if}
+                        </small>
+                    {/if}
+                </dd>
+            </dl>
+            <dl{if $errorField == 'pageParent'} class="formError"{/if}>
+                <dt><label for="pageParent">{lang}wcf.acp.ultimate.page.parent{/lang}</label></dt>
+                <dd>
+                    <select name="pageParent">
+                    <option value="0">{lang}wcf.acp.ultimate.page.parent.none{/lang}</option>
+                    {htmloptions options=$pages selected=$pageParent}
+                    </select>
+                    {if $errorField == 'pageParent'}
+                        <small class="innerError">
+                            {if $errorType == 'empty'}
+                                {lang}wcf.global.form.error.empty{/lang}
+                            {else}
+                                {lang}wcf.acp.ultimate.page.parent.error.{@$errorType}{/lang}
                             {/if}
                         </small>
                     {/if}

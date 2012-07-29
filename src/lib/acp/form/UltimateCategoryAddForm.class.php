@@ -1,7 +1,5 @@
 <?php
 namespace ultimate\acp\form;
-use wcf\util\ArrayUtil;
-
 use ultimate\data\category\CategoryList;
 use ultimate\data\category\CategoryAction;
 use ultimate\data\category\CategoryEditor;
@@ -11,6 +9,7 @@ use wcf\acp\form\ACPForm;
 use wcf\system\cache\CacheHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
+use wcf\util\StringUtil;
 
 /**
  * Shows the UltimateCategoryAdd form.
@@ -25,16 +24,19 @@ use wcf\system\language\I18nHandler;
 class UltimateCategoryAddForm extends ACPForm {
     
     /**
+     * @var string
      * @see \wcf\acp\form\ACPForm::$activeMenuItem
      */
     public $activeMenuItem = 'wcf.acp.menu.link.ultimate.category.add';
     
     /**
+     * @var string
      * @see \wcf\page\AbstractPage::$templateName
      */
     public $templateName = 'ultimateCategoryAdd';
     
     /**
+     * @var string[]
      * @see \wcf\page\AbstractPage::$neededPermissions
      */
     public $neededPermissions = array(
@@ -44,7 +46,7 @@ class UltimateCategoryAddForm extends ACPForm {
         
     /**
      * Contains all available categories.
-     * @var array<ultimate\data\category\Category>
+     * @var ultimate\data\category\Category[]
      */
     public $categories = array();
     
@@ -62,7 +64,7 @@ class UltimateCategoryAddForm extends ACPForm {
     
     /**
      * Contains the parent id of this category.
-     * @var int if 0 this category has no parent
+     * @var integer if 0 this category has no parent
      */
     public $categoryParent = 0;
     
@@ -85,11 +87,7 @@ class UltimateCategoryAddForm extends ACPForm {
      * @see \wcf\page\IPage::readData()
      */
     public function readData() {
-        $cache = 'category';
-        $cacheBuilderClass = '\ultimate\system\cache\builder\UltimateCategoryCacheBuilder';
-        $file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
-        CacheHandler::getInstance()->addResource($cache, $file, $cacheBuilderClass);
-        $this->categories = CacheHandler::getInstance()->get($cache, 'categories');
+        $this->categories = CategoryUtil::getAvailableCategories();
         parent::readData();
     }
     
@@ -101,11 +99,11 @@ class UltimateCategoryAddForm extends ACPForm {
     
         I18nHandler::getInstance()->readValues();
         I18nHandler::getInstance()->enableAssignValueVariables();
-        if (I18nHandler::getInstance()->isPlainValue('categoryTitle')) $this->categoryTitle = trim(I18nHandler::getInstance()->getValue('categoryTitle'));
-        if (I18nHandler::getInstance()->isPlainValue('categoryDescription')) $this->categoryDescription = trim(I18nHandler::getInstance()->getValue('categoryDescription'));
+        if (I18nHandler::getInstance()->isPlainValue('categoryTitle')) $this->categoryTitle = StringUtil::trim(I18nHandler::getInstance()->getValue('categoryTitle'));
+        if (I18nHandler::getInstance()->isPlainValue('categoryDescription')) $this->categoryDescription = StringUtil::trim(I18nHandler::getInstance()->getValue('categoryDescription'));
     
         if (isset($_POST['categoryParent'])) $this->categoryParent = intval($_POST['categoryParent']);
-        if (isset($_POST['categorySlug'])) $this->categorySlug = trim($_POST['categorySlug']);
+        if (isset($_POST['categorySlug'])) $this->categorySlug = StringUtil::trim($_POST['categorySlug']);
     }
     
     /**
@@ -116,7 +114,7 @@ class UltimateCategoryAddForm extends ACPForm {
         $this->validateTitle();
         $this->validateSlug();
         $this->validateParent();
-        // $this->validateDescription();
+        $this->validateDescription();
     }
     
     /**
@@ -129,7 +127,7 @@ class UltimateCategoryAddForm extends ACPForm {
             'data' => array(
                 'categoryTitle' => $this->categoryTitle,
                 'categorySlug' => $this->categorySlug,
-                'parentCategoryID' => $this->categoryParent,
+                'categoryParent' => $this->categoryParent,
                 'categoryDescription' => $this->categoryDescription
             )
         );

@@ -4,7 +4,7 @@
 DROP TABLE IF EXISTS ultimate1_1_category;
 CREATE TABLE ultimate1_1_category (
     categoryID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    parentCategoryID INT(10) NOT NULL DEFAULT 0,
+    categoryParent INT(10) NOT NULL DEFAULT 0,
     categoryTitle VARCHAR(255) NOT NULL DEFAULT '',
     categoryDescription VARCHAR(255) NOT NULL DEFAULT '',
     categorySlug VARCHAR(255) NOT NULL DEFAULT '',
@@ -29,7 +29,8 @@ CREATE TABLE ultimate1_1_content_to_page (
 DROP TABLE IF EXISTS ultimate1_1_page;
 CREATE TABLE ultimate1_1_page (
     pageID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    authorID INT(10) NOT NULL DEFAULT 0,
+    authorID INT(10) NOT NULL,
+    pageParent INT(10) NOT NULL DEFAULT 0,    
     pageTitle VARCHAR(255) NOT NULL DEFAULT '',
     pageSlug VARCHAR(255) NOT NULL DEFAULT '' UNIQUE KEY,
     lastModified INT(10) NOT NULL DEFAULT 0,

@@ -38,26 +38,25 @@ class Category extends AbstractUltimateDatabaseObject {
     
     /**
      * Contains all contents in this category.
-     * @var array<ultimate\data\content\Content>
+     * @var \ultimate\data\content\Content[]
      */
     public $contents = array();
     
     /**
      * Contains all child categories of this category.
-     * @var array<ultimate\data\category\Category>
+     * @var \ultimate\data\category\Category[]
      */
     public $childCategories = array();
     
     /**
      * Returns all contents in this category.
      *
-     * @return array<ultimate\data\content\Content>
+     * @return \ultimate\data\content\Content[]
      */
     public function getContents() {
         $sql = 'SELECT contentID
         		FROM   ultimate'.ULTIMATE_N.'_'.$this->contentCategoryTable.'
         		WHERE  categoryID = ?';
-        
         $statement = UltimateCore::getDB()->prepareStatement($sql);
         $statement->execute(array($this->categoryID));
         $contents = array();
@@ -70,12 +69,13 @@ class Category extends AbstractUltimateDatabaseObject {
     /**
      * Returns all child categories of this category.
      *
-     * @return array<ultimate\data\category\Category>
+     * @return \ultimate\data\category\Category[]
      */
     public function getChildCategories() {
         $sql = 'SELECT categoryID
                 FROM   ultimate'.ULTIMATE_N.'_'.self::$databaseTableName.'
-                WHERE  parentCategoryID = ?';
+                WHERE  categoryParent = ?';
+        /* @var $statement \wcf\system\database\statement\PreparedStatement */
         $statement = UltimateCore::getDB()->prepareStatement($sql);
         $statement->execute(array($this->categoryID));
         $categories = array();
@@ -100,7 +100,7 @@ class Category extends AbstractUltimateDatabaseObject {
      */
     protected function handleData($data) {
         $data['categoryID'] = intval($data['categoryID']);
-        $data['parentCategoryID'] = intval($data['parentCategoryID']);
+        $data['categoryParent'] = intval($data['categoryParent']);
         parent::handleData($data);
     }
 }

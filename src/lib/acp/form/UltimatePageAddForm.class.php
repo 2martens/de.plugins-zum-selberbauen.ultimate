@@ -41,7 +41,7 @@ class UltimatePageAddForm extends ACPForm {
     
     /**
      * Contains the content id.
-     * @var int
+     * @var integer
      */
     public $contentID = 0;
     
@@ -63,6 +63,18 @@ class UltimatePageAddForm extends ACPForm {
      */
     public $pageSlug = '';
     
+    /**
+     * Contains all possible parent pages.
+     * @var array
+     */
+    public $pages = array();
+    
+    /**
+     * Contains the parent page id.
+     * @var integer
+     */
+    public $pageParent = 0;
+    
     
     /**
      * @see \wcf\page\IPage::readParameters()
@@ -77,6 +89,7 @@ class UltimatePageAddForm extends ACPForm {
      */
     public function readData() {
         $this->contents = PageUtil::getAvailableContents();
+        $this->pages = PageUtil::getAvailablePages();
         parent::readData();
     }
     
@@ -89,7 +102,7 @@ class UltimatePageAddForm extends ACPForm {
         I18nHandler::getInstance()->readValues();
         I18nHandler::getInstance()->enableAssignValueVariables();
         if (I18nHandler::getInstance()->isPlainValue('pageTitle')) $this->pageTitle = trim(I18nHandler::getInstance()->getValue('pageTitle'));
-        // @todo: implement parent page
+        if (isset($_POST['pageParent'])) $this->pageParent = intval($_POST['pageParent']);
         if (isset($_POST['content'])) $this->contentID = intval($_POST['content']);
         if (isset($_POST['pageSlug'])) $this->pageSlug = trim($_POST['pageSlug']);
     }
@@ -100,6 +113,7 @@ class UltimatePageAddForm extends ACPForm {
     public function validate() {
         parent::validate();
         $this->validateContentID();
+        $this->validatePageParent();
         $this->validateTitle();
         $this->validateSlug();
     }
@@ -113,6 +127,7 @@ class UltimatePageAddForm extends ACPForm {
         $parameters = array(
             'data' => array(
                 'authorID' => UltimateCore::getUser()->userID,
+                'pageParent' => $this->pageParent,
                 'pageTitle' => $this->pageTitle,
                 'pageSlug' => $this->pageSlug,
                 'lastModified' => TIME_NOW
@@ -141,10 +156,10 @@ class UltimatePageAddForm extends ACPForm {
         );
         
         //showing empty form
-        $this->contentID = 0;
+        $this->contentID = $this->pageParent = 0;
         $this->pageTitle = $this->pageSlug = '';
         I18nHandler::getInstance()->disableAssignValueVariables();
-        $this->contents = array();
+        $this->contents = $this->pages = array();
     }
     
     
@@ -159,6 +174,8 @@ class UltimatePageAddForm extends ACPForm {
         UltimateCore::getTPL()->assign(array(
             'contentID' => $this->contentID,
             'contents' => $this->contents,
+            'pages' => $this->pages,
+            'pageParent' => $this->pageParent,
             'pageTitle' => $this->pageTitle,
             'pageSlug' => $this->pageSlug,
             'action' => 'add'
@@ -180,6 +197,17 @@ class UltimatePageAddForm extends ACPForm {
     }
     
     /**
+     * Validates the parent page.
+     *
+     * @throws \wcf\system\exception\UserInputException
+     */
+    protected function validatePageParent() {
+        if ($this->pageParent != 0 && !array_key_exists($this->pageParent, $this->pages)) {
+            throw new UserInputException('pageParent', 'notValid');
+        }
+    }
+    
+    /**
      * Validates the page title.
      *
      * @throws \wcf\system\exception\UserInputException
@@ -194,7 +222,7 @@ class UltimatePageAddForm extends ACPForm {
             if (empty($this->pageTitle)) {
                 throw new UserInputException('pageTitle');
             }
-            if (!PageUtil::isAvailableTitle($this->pageTitle)) {
+            if (!PageUtil::isAvailableTitle($this->pageTitle, $this->pageParent)) {
                 throw new UserInputException('pageTitle', 'notUnique');
             }
         }
@@ -210,7 +238,7 @@ class UltimatePageAddForm extends ACPForm {
             throw new UserInputException('pageSlug');
         }
     
-        if (!PageUtil::isAvailableSlug($this->pageSlug)) {
+        if (!PageUtil::isAvailableSlug($this->pageSlug, $this->pageParent)) {
             throw new UserInputException('pageSlug', 'notUnique');
         }
     }

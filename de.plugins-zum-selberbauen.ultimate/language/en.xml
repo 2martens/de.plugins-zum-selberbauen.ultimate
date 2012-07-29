@@ -179,6 +179,9 @@ Tom likes the warm water and the wunderful beach.]]></item>
         <item name="wcf.acp.ultimate.page.slug"><![CDATA[Slug]]></item>
         <item name="wcf.acp.ultimate.page.slug.placeholder"><![CDATA[company-profile]]></item>
         <item name="wcf.acp.ultimate.page.slug.error.notUnique"><![CDATA[A page with the specified slug already exists with this parent.]]></item>
+        <item name="wcf.acp.ultimate.page.parent"><![CDATA[Parent]]></item>
+        <item name="wcf.acp.ultimate.page.parent.none"><![CDATA[None]]></item>
+        <item name="wcf.acp.ultimate.page.parent.error.notValid"><![CDATA[The "selected" page is invalid, because you couldn't select it.]]></item>
         <item name="wcf.acp.ultimate.page.content"><![CDATA[Content]]></item>
         <item name="wcf.acp.ultimate.page.content.select"><![CDATA[Please select one content]]></item>
         <item name="wcf.acp.ultimate.page.content.error.notSelected"><![CDATA[You have to select one content.]]></item>

@@ -3,6 +3,8 @@ namespace ultimate\acp\action;
 use ultimate\data\content\ContentAction;
 use wcf\action\AbstractSecureAction;
 use wcf\util\HeaderUtil;
+use wcf\util\StringUtil;
+
 
 /**
  * Deletes the specified content.
@@ -25,7 +27,7 @@ class UltimateContentDeleteAction extends AbstractSecureAction {
     
     /**
      * Contains the content id.
-     * @var int
+     * @var integer
      */
     public $contentID = 0;
     
@@ -41,7 +43,7 @@ class UltimateContentDeleteAction extends AbstractSecureAction {
     public function readParameters() {
         parent::readParameters();
         if (isset($_GET['id'])) $this->contentID = intval($_GET['id']);
-        if (isset($_GET['url'])) $this->url = trim($_GET['url']);
+        if (isset($_GET['url'])) $this->url = StringUtil::trim($_GET['url']);
     }
     
     /**

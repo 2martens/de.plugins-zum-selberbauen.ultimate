@@ -29,9 +29,10 @@ class UltimateContentCategoryCacheBuilder implements ICacheBuilder {
         $categories = $categoryList->getObjects();
         
         foreach ($categories as $category) {
+            /* @var $category \ultimate\data\category\Category */
             $contents = $category->getContents();
-            $data['contentsToCategoryID'][$category->categoryID] = $contents;
-            $data['contentsToCategoryTitle'][$category->categoryTitle] = $contents;
+            $data['contentsToCategoryID'][$category->__get('categoryID')] = $contents;
+            $data['contentsToCategoryTitle'][$category->__get('categoryTitle')'] = $contents;
         }
         
         return $data;

@@ -41,8 +41,8 @@ class UltimatePageEditForm extends UltimatePageAddForm {
     public $pageID = 0;
     
     /**
-     * Contains the PageEditor object of this page.
-     * @var \ultimate\data\page\PageEditor
+     * Contains the Page object of this page.
+     * @var \ultimate\data\page\Page
      */
     public $page = null;
     
@@ -53,11 +53,11 @@ class UltimatePageEditForm extends UltimatePageAddForm {
         parent::readParameters();
         if (isset($_REQUEST['id'])) $this->pageID = intval($_REQUEST['id']);
         $page = new Page($this->pageID);
-        if (!$page->pageID) {
+        if (!$page->__get('pageID')) {
             throw new IllegalLinkException();
         }
         
-        $this->page = new PageEditor($page);
+        $this->page = $page;
     }
     
     /**
@@ -66,10 +66,12 @@ class UltimatePageEditForm extends UltimatePageAddForm {
     public function readData() {
         if (!count($_POST)) {
             $this->contentID = $this->page->getContent();
-            $this->pageTitle = $this->page->pageTitle;
-            $this->pageSlug = $this->page->pageSlug;
-            $this->lastModified = $this->page->lastModified;
+            $this->pageTitle = $this->page->__get('pageTitle');
+            $this->pageSlug = $this->page->__get('pageSlug');
+            $this->pageParent = $this->page->__get('pageParent');
+            $this->lastModified = $this->page->__get('lastModified');
             $this->contents = PageUtil::getAvailableContents($this->pageID);
+            $this->pages = PageUtil::getAvailablePages($this->pageID);
             I18nHandler::getInstance()->setOptions('pageTitle', PACKAGE_ID, $this->pageTitle, 'ultimate.page.\d+.pageTitle');
         }
         AbstractForm::readData();
@@ -94,6 +96,7 @@ class UltimatePageEditForm extends UltimatePageAddForm {
         $parameters = array(
             'data' => array(
                 'authorID' => UltimateCore::getUser()->userID,
+                'pageParent' => $this->pageParent,
                 'pageTitle' => $this->pageTitle,
                 'pageSlug' => $this->pageSlug,
                 'lastModified' => TIME_NOW
