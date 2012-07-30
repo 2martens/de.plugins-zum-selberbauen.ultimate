@@ -88,6 +88,13 @@
         <item name="wcf.acp.option.category.ultimate.sort.page.description"><![CDATA[]]></item>
         <!-- /categories -->
         
+        <!-- ultimate.general -->
+        <item name="wcf.acp.option.ultimate_general_englishLanguage"><![CDATA[Variante der englischen Sprache]]></item>
+        <item name="wcf.acp.option.ultimate_general_englishLanguage.description"><![CDATA[Bitte wählen Sie aus, ob britisches Englisch oder amerikanisches Englisch verwendet werden soll.]]></item>
+        <item name="wcf.acp.option.ultimate_general_englishLanguage.BE"><![CDATA[Britisches Englisch]]></item>
+        <item name="wcf.acp.option.ultimate_general_englishLanguage.AE"><![CDATA[Amerikanisches Englisch]]></item>
+        <!-- /ultimate.general -->
+        
         <!-- ultimate.sort.category -->
         <item name="wcf.acp.option.ultimate_sort_category_sortField"><![CDATA[Sortierfeld]]></item>
         <item name="wcf.acp.option.ultimate_sort_category_sortField.categoryID"><![CDATA[ID]]></item>
@@ -104,7 +111,7 @@
         <item name="wcf.acp.option.ultimate_sort_content_sortField.contentID"><![CDATA[ID]]></item>
         <item name="wcf.acp.option.ultimate_sort_content_sortField.contentTitle"><![CDATA[Titel]]></item>
         <item name="wcf.acp.option.ultimate_sort_content_sortField.contentAuthor"><![CDATA[Autor]]></item>
-        <item name="wcf.acp.option.ultimate_sort_content_sortField.lastModified"><![CDATA[Datum]]></item>
+        <item name="wcf.acp.option.ultimate_sort_content_sortField.lastModified"><![CDATA[Zuletzt bearbeitet]]></item>
         <item name="wcf.acp.option.ultimate_sort_content_sortField.description"><![CDATA[Geben Sie hier an nach welchem Element sortiert werden soll.]]></item>
         <item name="wcf.acp.option.ultimate_sort_content_sortOrder"><![CDATA[Sortierreihenfolge]]></item>
         <item name="wcf.acp.option.ultimate_sort_content_sortOrder.description"><![CDATA[Geben Sie hier die Sortierreihenfolge für die Inhaltsliste an.]]></item>
@@ -114,7 +121,8 @@
         <item name="wcf.acp.option.ultimate_sort_page_sortField.pageID"><![CDATA[ID]]></item>
         <item name="wcf.acp.option.ultimate_sort_page_sortField.pageTitle"><![CDATA[Titel]]></item>
         <item name="wcf.acp.option.ultimate_sort_page_sortField.pageAuthor"><![CDATA[Autor]]></item>
-        <item name="wcf.acp.option.ultimate_sort_page_sortField.lastModified"><![CDATA[Datum]]></item>
+        <item name="wcf.acp.option.ultimate_sort_page_sortField.lastModified"><![CDATA[Zuletzt bearbeitet]]></item>
+        <item name="wcf.acp.option.ultimate_sort_page_sortField.publishDate"><![CDATA[Datum]]></item>
         <item name="wcf.acp.option.ultimate_sort_page_sortField.description"><![CDATA[Geben Sie hier an nach welchem Element sortiert werden soll.]]></item>
         <item name="wcf.acp.option.ultimate_sort_page_sortOrder"><![CDATA[Sortierreihenfolge]]></item>
         <item name="wcf.acp.option.ultimate_sort_page_sortOrder.description"><![CDATA[Geben Sie hier die Sortierreihenfolge für die Seitenliste an.]]></item>
@@ -218,6 +226,10 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
         <item name="ultimate.content.default"><![CDATA[Wer das hier liest ist dumm, denn dieser Eintrag wird nicht benötigt.]]></item>
     </category>
     
+    <category name="ultimate.date">
+        <item name="ultimate.date.dateFormat"><![CDATA[d.m.Y]]></item>
+    </category>
+    
     <!-- this category is used for all multilingual page fields -->
     <category name="ultimate.page">
         <!-- this item is just a placeholder -->
@@ -234,14 +246,5 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
         <!-- page menu -->
         <item name="ultimate.footer.menu.index"><![CDATA[Startseite]]></item>
         <!-- /page menu -->
-    </category>
-    
-    <category name="ultimate.template">
-        <item name="ultimate.template.default"><![CDATA[]]></item>
-    </category>
-    
-    <category name="ultimate.component">
-        <!-- name of the components -->
-        <item name="ultimate.component.SiteComponentPage"><![CDATA[einfacher Inhalt (Titel + Text)]]></item>
     </category>
 </language>

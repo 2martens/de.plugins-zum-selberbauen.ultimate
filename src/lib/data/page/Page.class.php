@@ -4,6 +4,7 @@ use ultimate\data\content\Content;
 use ultimate\data\AbstractUltimateDatabaseObject;
 use ultimate\system\UltimateCore;
 use wcf\data\user\User;
+use wcf\util\DateUtil;
 
 /**
  * Represents a page.
@@ -89,6 +90,8 @@ class Page extends AbstractUltimateDatabaseObject {
         $data['pageID'] = intval($data['pageID']);
         $data['authorID'] = intval($data['authorID']);
         $data['author'] = new User($data['authorID']);
+        $data['publishDate'] = intval($data['publishDate']);
+        $data['publishDateObject'] = DateUtil::getDateTimeByTimestamp($data['publishDate']);
         $data['lastModified'] = intval($data['lastModified']);
         
         parent::handleData($data);

@@ -48,7 +48,7 @@
                         });
                     //]]>
                     </script>
-                    <input type="text" id="pageTitle" name="pageTitle" value="{$i18nPlainValues['pageTitle']}" placeholder="{lang}wcf.acp.ultimate.page.title.placeholder{/lang}" autofocus="autofocus" class="long" />
+                    <input type="text" id="pageTitle" name="pageTitle" value="{$i18nPlainValues['pageTitle']}" placeholder="{lang}wcf.acp.ultimate.page.title.placeholder{/lang}" required="required" autofocus="autofocus" class="long" />
                     {if $errorField == 'pageTitle'}
                         <small class="innerError">
                             {if $errorType == 'empty'}
@@ -108,7 +108,94 @@
                 </dd>
             </dl>
         </fieldset>
-            
+        <fieldset>
+            <legend>{lang}wcf.acp.ultimate.publish{lang}</legend>
+            <dl{if $errorField == 'status'} class="formError"{/if}>
+                <dt><label for="status">{lang}wcf.acp.ultimate.page.status{/lang}</label></dt>
+                <dd>
+                    <select name="status">
+                    {htmloptions options=$statusOptions selected=$statusID}
+                    </select>
+                    {if $errorField == 'status'}
+                        <small class="innerError">
+                            {lang}wcf.acp.ultimate.page.content.error.{@$errorType}{/lang}
+                        </small>
+                    {/if}
+                </dd>
+            </dl>
+            <dl{if $errorField == 'visibility'} class="formError"{/if}>
+                <dt><label for="visibility">{lang}wcf.acp.ultimate.page.visibility{/lang}</label></dt>
+                <dd>
+                    <select id="selectVisibility" name="visibility">
+                    <option value="public"{if $visibility == 'public'} selected="selected"{/if}>{lang}wcf.acp.ultimate.page.visibility.public{/lang}</option>
+                    <option value="protected"{if $visibility == 'protected'} selected="selected"{/if}>{lang}wcf.acp.ultimate.page.visibility.protected{/lang}</option>
+                    <option value="private"{if $visibility == 'private'} selected="selected"{/if}>{lang}wcf.acp.ultimate.page.visibility.private{/lang}</option>
+                    </select>
+                    <div id="groupCheckboxes" style="display: none;">
+                        {htmlcheckboxes name="groupIDs" options=$groups selected=$groupIDs}
+                        {if $errorField == 'groupIDs'}
+                        <small class="innerError">
+                            {lang}wcf.acp.ultimate.page.visibility.groupIDs.error.{@$errorType}{/lang}
+                        </small>
+                        {/if}
+                    </div>
+                    <script type="text/javascript">
+                    /* <![CDATA[ */
+                    $(function() {
+                        $('#selectVisibility').change(function () {
+                            var selectedIndex = $('#selectVisibility option:selected').attr('value');
+                            if (selectedIndex == 'protected') {
+                                $('#groupCheckboxes').fadeIn(1000, 'swing');
+                            } else {
+                                $('#groupCheckboxes').fadeOut(1000, 'swing');
+                            }
+                        });
+                    });
+                    /* ]]> */
+                    </script>
+                    {if $errorField == 'visibility'}
+                        <small class="innerError">
+                            {lang}wcf.acp.ultimate.page.visibility.error.{@$errorType}{/lang}
+                        </small>
+                    {/if}
+                    <small>{lang}wcf.acp.ultimate.page.visibility.description{/lang}</small>
+                </dd>
+            </dl>
+            <dl{if $errorField == 'publishDate'} class="formError"{/if}>
+                <dt><label for="publishDate">{lang}wcf.acp.ultimate.page.publishDate{/lang}</label></dt>
+                <dd>
+                    <input type="datetime" id="publishDateInput" name="publishDate" value="{@$publishDate}" class="long" />
+                    <script type="text/javascript">
+                    /* <![CDATA[*/
+                    $(function() {
+                        $.datepicker.setDefaults( $.datepicker.regional[ "" ] );
+                        $('#publishDateInput').datepicker( {
+                            showOn: 'button',
+                            buttonImage: {icon}calendar.gif{/icon},
+                            buttonImageOnly: true,
+                            buttonText: '{lang}wcf.acp.ultimate.page.publishDate.editDate{/lang}',
+                            showOtherMonths: true,
+                            selectOtherMonths: true,
+                            showAnim: 'fadeIn'                            
+                        } );
+                        $('#publishDateInput').datepicker( 'option', 
+                            $.datepicker.regional[ "{if $__wcf->getLanguage()->languageCode == 'en'}en-GB{else}{@$__wcf->getLanguage()->languageCode}{/if}" ]);
+                        var $dateFormat = $('#publishDateInput').datepicker( 'option', 'dateFormat');
+                        $('#dateFormatInput').val($dateFormat);
+                        $('form').submit(function() {
+                            $('#publishDateInput').datepicker( 'option', 'dateFormat', 'yy-mm-dd' );                            
+                        });
+                    });
+                    /* ]]> */
+                    </script>
+                    {if $errorField == 'publishDate'}
+                        <small class="innerError">
+                            {lang}wcf.acp.ultimate.page.publishDate.error.{@$errorType}{/lang}
+                        </small>
+                    {/if}
+                </dd>
+            </dl>
+        </fieldset>
         {event name='fieldsets'}
     </div>
     
@@ -116,6 +203,7 @@
         <input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
         <input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
         {@SID_INPUT_TAG}
+        <input type="hidden" id="dateFormatInput" name="dateFormat" value="yy-mm-dd" />
         <input type="hidden" name="action" value="{@$action}" />
         {if $pageID|isset}<input type="hidden" name="id" value="{@$pageID}" />{/if}
     </div>

@@ -69,6 +69,18 @@ class UltimatePageEditForm extends UltimatePageAddForm {
             $this->pageTitle = $this->page->__get('pageTitle');
             $this->pageSlug = $this->page->__get('pageSlug');
             $this->pageParent = $this->page->__get('pageParent');
+            
+            /* @var $dateTime \DateTime */
+            $dateTime = $this->page->__get('publishDateObject');
+            $format = UltimateCore::getLanguage()->getDynamicVariable(
+                'ultimate.date.dateFormat',
+                array(
+                    'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
+                )
+            );
+            $this->publishDate = $dateTime->format($format);
+            $this->publishDateTimestamp = $dateTime->getTimestamp();
+            
             $this->lastModified = $this->page->__get('lastModified');
             $this->contents = PageUtil::getAvailableContents($this->pageID);
             $this->pages = PageUtil::getAvailablePages($this->pageID);

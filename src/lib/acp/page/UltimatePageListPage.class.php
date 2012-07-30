@@ -35,6 +35,7 @@ class UltimatePageListPage extends AbstractCachedListPage {
         'pageID',
         'pageTitle',
         'pageAuthor',
+        'publishDate',
         'lastModified'
     );
     

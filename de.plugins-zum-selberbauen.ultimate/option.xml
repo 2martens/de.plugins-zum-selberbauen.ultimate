@@ -35,6 +35,16 @@
                 <defaultvalue>1</defaultvalue>
             </option>
             
+            <option name="ultimate_general_englishLanguage">
+                <categoryname>ultimate.general</categoryname>
+                <optiontype>select</optiontype>
+                <defaultvalue><![CDATA[true]]></defaultvalue>
+                <selectoptions>
+                    <![CDATA[true:wcf.acp.option.ultimate_general_englishLanguage.BE
+false:wcf.acp.option.ultimate_general_englishLanguage.AE]]>
+                </selectoptions>
+            </option>
+            
             <!-- sort order/field for UltimateCategoryListPage -->
             <option name="ultimate_sort_category_sortField">
                 <categoryname>ultimate.sort.category</categoryname>
@@ -89,6 +99,7 @@ DESC:wcf.global.sortOrder.descending]]>
                     <![CDATA[pageID:wcf.acp.option.ultimate_sort_page_sortField.pageID
 pageTitle:wcf.acp.option.ultimate_sort_page_sortField.pageTitle
 pageAuthor:wcf.acp.option.ultimate_sort_page_sortField.pageAuthor
+publishDate:wcf.acp.option.ultimate_sort_page_sortField.publishDate
 lastModified:wcf.acp.option.ultimate_sort_page_sortField.lastModified]]>
                 </selectoptions>
             </option>

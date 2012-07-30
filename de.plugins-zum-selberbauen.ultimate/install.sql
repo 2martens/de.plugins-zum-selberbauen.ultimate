@@ -33,7 +33,9 @@ CREATE TABLE ultimate1_1_page (
     pageParent INT(10) NOT NULL DEFAULT 0,    
     pageTitle VARCHAR(255) NOT NULL DEFAULT '',
     pageSlug VARCHAR(255) NOT NULL DEFAULT '' UNIQUE KEY,
+    publishDate INT(10) NOT NULL DEFAULT 0,
     lastModified INT(10) NOT NULL DEFAULT 0,
+    status INT(1) NOT NULL DEFAULT 0,
     KEY (authorID)
 );
 
@@ -47,7 +49,9 @@ CREATE TABLE ultimate1_1_content (
     enableBBCodes TINYINT(1) NOT NULL DEFAULT 1,
     enableHtml TINYINT(1) NOT NULL DEFAULT 0,
     enableSmilies TINYINT(1) NOT NULL DEFAULT 1,
+    publishDate INT(10) NOT NULL DEFAULT 0,
     lastModified INT(10) NOT NULL DEFAULT 0,
+    status INT(1) NOT NULL DEFAULT 0,
     KEY (authorID)
 );
 

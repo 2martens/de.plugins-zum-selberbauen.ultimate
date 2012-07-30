@@ -18,6 +18,7 @@
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.tools.min.js"></script>
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui.nestedSortable.js"></script>
+	<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui-i18n.min.js"></script>
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.js"></script>
 	<script type="text/javascript" src="{@$__wcf->getPath()}acp/js/WCF.ACP.js"></script>
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.Message.js"></script>
