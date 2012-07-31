@@ -72,15 +72,42 @@ class UltimatePageEditForm extends UltimatePageAddForm {
             
             /* @var $dateTime \DateTime */
             $dateTime = $this->page->__get('publishDateObject');
-            $format = UltimateCore::getLanguage()->getDynamicVariable(
+            $date = UltimateCore::getLanguage()->getDynamicVariable(
                 'ultimate.date.dateFormat',
                 array(
                     'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
                 )
             );
+            $time = UltimateCore::getLanguage()->get('wcf.date.timeFormat');
+            $format = str_replace(
+                '%time%',
+                $time,
+                str_replace(
+                    '%date',
+                    $date,
+                    UltimateCore::getLanguage()->get('ultimate.date.dateTimeFormat')
+                )
+            );
             $this->publishDate = $dateTime->format($format);
             $this->publishDateTimestamp = $dateTime->getTimestamp();
             
+            // get status data
+            $this->statusID = $this->page->__get('status');
+            $this->statusOptions = array(
+                0 => UltimateCore::getLanguage()->get('wcf.acp.ultimate.status.draft'),
+                1 => UltimateCore::getLanguage()->get('wcf.acp.ultimate.status.pendingReview'),
+            );
+            if ($this->statusID == 2) {
+                $this->statusOptions[2] = UltimateCore::getLanguage()->get('wcf.acp.ultimate.status.scheduled');
+            } elseif ($this->statusID == 3) {
+                $this->statusOptions[3] = UltimateCore::getLanguage()->get('wcf.acp.ultimate.status.published');
+            }
+            
+            // get visibility data
+            $this->visibility = $this->page->__get('visibility');
+            // @todo get visibility data
+            
+            // get remaining data
             $this->lastModified = $this->page->__get('lastModified');
             $this->contents = PageUtil::getAvailableContents($this->pageID);
             $this->pages = PageUtil::getAvailablePages($this->pageID);
@@ -105,16 +132,32 @@ class UltimatePageEditForm extends UltimatePageAddForm {
             }
         }
         
+        // change status to planned or publish
+        if ($this->saveType == 'publish') {
+            if ($this->publishDateTimestamp > TIME_NOW) {
+                $this->statusID = 2; // scheduled
+            } elseif ($this->publishDateTimestamp < TIME_NOW) {
+                $this->statusID = 3; // published
+            }
+        }
+        
         $parameters = array(
             'data' => array(
                 'authorID' => UltimateCore::getUser()->userID,
                 'pageParent' => $this->pageParent,
                 'pageTitle' => $this->pageTitle,
                 'pageSlug' => $this->pageSlug,
-                'lastModified' => TIME_NOW
+                'publishDate' => $this->publishDateTimestamp,
+                'lastModified' => TIME_NOW,
+                'status' => $this->statusID,
+                'visibility' => $this->visibility
             ),
             'contentID' => $this->contentID
         );
+        
+        if ($this->visibility == 'protected') {
+            $parameters['userGroupIDs'] = $this->groupIDs;
+        }
         
         $this->objectAction = new PageAction(array($this->pageID), 'update', $parameters);
         $this->objectAction->executeAction();

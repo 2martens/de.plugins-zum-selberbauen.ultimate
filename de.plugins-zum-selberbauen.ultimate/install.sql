@@ -26,6 +26,14 @@ CREATE TABLE ultimate1_1_content_to_page (
     pageID INT(10) NOT NULL UNIQUE KEY
 );
 
+DROP TABLE IF EXISTS ultimate1_1_user_group_to_page;
+CREATE TABLE ultimate1_1_user_group_to_page (
+    userGroupID INT(10) NOT NULL,
+    pageID INT(10) NOT NULL,
+    KEY (userGroupID),
+    KEY (pageID)
+);
+
 DROP TABLE IF EXISTS ultimate1_1_page;
 CREATE TABLE ultimate1_1_page (
     pageID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -36,6 +44,7 @@ CREATE TABLE ultimate1_1_page (
     publishDate INT(10) NOT NULL DEFAULT 0,
     lastModified INT(10) NOT NULL DEFAULT 0,
     status INT(1) NOT NULL DEFAULT 0,
+    visibility ENUM('public, 'protected', 'private') NOT NULL DEFAULT 'public',
     KEY (authorID)
 );
 
@@ -63,6 +72,8 @@ ALTER TABLE ultimate1_1_content_to_category ADD FOREIGN KEY (contentID) REFERENC
 ALTER TABLE ultimate1_1_content_to_category ADD FOREIGN KEY (categoryID) REFERENCES ultimate1_1_category (categoryID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_content_to_page ADD FOREIGN KEY (contentID) REFERENCES ultimate1_1_content (contentID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_content_to_page ADD FOREIGN KEY (pageID) REFERENCES ultimate1_1_page (pageID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_user_group_to_page ADD FOREIGN KEY (pageID) REFERENCES ultimate1_1_page (pageID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_user_group_to_page ADD FOREIGN KEY (userGroupID) REFERENCES wcf1_user_group (userGroupID) ON DELETE CASCADE;
 
 /**** default entries ****/
 -- default category

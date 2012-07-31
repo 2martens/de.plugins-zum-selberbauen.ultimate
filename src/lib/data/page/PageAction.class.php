@@ -1,5 +1,7 @@
 <?php
 namespace ultimate\data\page;
+use wcf\util\ArrayUtil;
+
 use wcf\system\exception\ValidateActionException;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
@@ -46,6 +48,12 @@ class PageAction extends AbstractDatabaseObjectAction {
 	    $contentID = (isset($this->parameters['contentID'])) ? intval($this->parameters['contentID']) : 0;
 	    $pageEditor->addContent($contentID, false);
 	    
+	    // connect with userGroups
+	    $groupIDs = (isset($this->parameters['userGroupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['userGroupIDs']) : array();
+	    if (count($groupIDs)) {
+	        // @todo add method PageEditor::addGroups(array)
+	        $pageEditor->addGroups($groupIDs);
+	    }
 	    return $page;
 	}
 	

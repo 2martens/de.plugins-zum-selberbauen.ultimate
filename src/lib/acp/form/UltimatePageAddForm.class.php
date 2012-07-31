@@ -1,7 +1,5 @@
 <?php
 namespace ultimate\acp\form;
-use wcf\util\DateUtil;
-
 use ultimate\data\content\ContentList;
 use ultimate\data\page\PageAction;
 use ultimate\data\page\PageEditor;
@@ -14,11 +12,13 @@ use wcf\system\exception\SystemException;
 use wcf\system\language\I18nHandler;
 use wcf\system\Regex;
 use wcf\util\ArrayUtil;
+use wcf\util\DateUtil;
+use wcf\util\DateTimeUtil;
 use wcf\util\StringUtil;
 
 /**
  * Shows the UltimatePageAdd form.
- *
+ * 
  * @author Jim Martens
  * @copyright 2011-2012 Jim Martens
  * @license http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
@@ -120,10 +120,22 @@ class UltimatePageAddForm extends ACPForm {
     public $statusID = 0;
     
     /**
+     * Contains the save type.
+     * @var string
+     */
+    public $saveType = '';
+    
+    /**
      * jQuery datepicker date format.
      * @var string
      */
     protected $dateFormat = 'yy-mm-dd';
+    
+    /**
+     * Contains the timestamp from the begin of the add process.
+     * @var integer
+     */
+    protected $startTime = 0;
     
     
     /**
@@ -150,17 +162,27 @@ class UltimatePageAddForm extends ACPForm {
         $this->statusOptions = array(
             0 => UltimateCore::getLanguage()->get('wcf.acp.ultimate.status.draft'),
             1 => UltimateCore::getLanguage()->get('wcf.acp.ultimate.status.pendingReview'),
-            2 => UltimateCore::getLanguage()->get('wcf.acp.ultimate.status.published')
         );
         
         // fill publishDate with default value (today)
+        $this->startTime = TIME_NOW;
         $dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
         $dateTime->setTimezone(UltimateCore::getUser()->getTimezone());
-        $format = UltimateCore::getLanguage()->getDynamicVariable(
-                'ultimate.date.dateFormat',
-                array(
-                    'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
-                )
+        $date = UltimateCore::getLanguage()->getDynamicVariable(
+            'ultimate.date.dateFormat',
+            array(
+                'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
+            )
+        );
+        $time = UltimateCore::getLanguage()->get('wcf.date.timeFormat');
+        $format = str_replace(
+            '%time%',
+            $time,
+            str_replace(
+                '%date',
+                $date,
+                UltimateCore::getLanguage()->get('ultimate.date.dateTimeFormat')
+            )
         );
         $this->publishDate = $dateTime->format($format);
         
@@ -183,6 +205,9 @@ class UltimatePageAddForm extends ACPForm {
         if (isset($_POST['groupIDs'])) $this->groupIDs = ArrayUtil::toIntegerArray($_POST['groupIDs']);
         if (isset($_POST['publishDate'])) $this->publishDate = StringUtil::trim($_POST['publishDate']);
         if (isset($_POST['dateFormat'])) $this->dateFormat = StringUtil::trim($_POST['dateFormat']);
+        if (isset($_POST['save'])) $this->saveType = 'save';
+        if (isset($_POST['publish'])) $this->saveType = 'publish';
+        if (isset($_POST['startTime'])) $this->startTime = intval($_POST['startTime']);
     }
     
     /**
@@ -194,6 +219,7 @@ class UltimatePageAddForm extends ACPForm {
         $this->validatePageParent();
         $this->validateTitle();
         $this->validateSlug();
+        $this->validateStatus();
         $this->validateVisibility();
         $this->validatePublishDate();
     }
@@ -204,6 +230,15 @@ class UltimatePageAddForm extends ACPForm {
     public function save() {
         parent::save();
         
+        // change status to planned or publish
+        if ($this->saveType == 'publish') {
+            if ($this->publishDateTimestamp > TIME_NOW) {
+                $this->statusID = 2; // planned
+            } elseif ($this->publishDateTimestamp < TIME_NOW) {
+                $this->statusID = 3; // published
+            }
+        }
+        
         $parameters = array(
             'data' => array(
                 'authorID' => UltimateCore::getUser()->userID,
@@ -211,10 +246,16 @@ class UltimatePageAddForm extends ACPForm {
                 'pageTitle' => $this->pageTitle,
                 'pageSlug' => $this->pageSlug,
                 'publishDate' => $this->publishDateTimestamp,
-                'lastModified' => TIME_NOW
+                'lastModified' => TIME_NOW,
+                'status' => $this->statusID,
+                'visibility' => $this->visibility
             ),
             'contentID' => $this->contentID
         );
+        
+        if ($this->visibility == 'protected') {
+            $parameters['userGroupIDs'] = $this->groupIDs;
+        }
         
         $this->objectAction = new PageAction(array(), 'create', $parameters);
         $this->objectAction->executeAction();
@@ -243,8 +284,6 @@ class UltimatePageAddForm extends ACPForm {
         $this->contents = $this->pages = $this->groupIDs = array();
     }
     
-    
-    
     /**
      * @see \wcf\page\IPage::assignVariables()
      */
@@ -261,6 +300,10 @@ class UltimatePageAddForm extends ACPForm {
             'pageSlug' => $this->pageSlug,
             'groups' => $this->groups,
             'groupIDs' => $this->groupIDs,
+            'statusOptions' => $this->statusOptions,
+            'statusID' => $this->statusID,
+            'visibility' => $this->visibility,
+            'startTime' => $this->startTime,
             'action' => 'add'
         ));
     }
@@ -281,7 +324,7 @@ class UltimatePageAddForm extends ACPForm {
     
     /**
      * Validates the parent page.
-     *
+     * 
      * @throws \wcf\system\exception\UserInputException
      */
     protected function validatePageParent() {
@@ -292,7 +335,7 @@ class UltimatePageAddForm extends ACPForm {
     
     /**
      * Validates the page title.
-     *
+     * 
      * @throws \wcf\system\exception\UserInputException
      */
     protected function validateTitle() {
@@ -313,7 +356,7 @@ class UltimatePageAddForm extends ACPForm {
     
     /**
      * Validates page slug.
-     *
+     * 
      * @throws \wcf\system\exception\UserInputException
      */
     protected function validateSlug() {
@@ -326,9 +369,21 @@ class UltimatePageAddForm extends ACPForm {
         }
     }
     
+    
+    /**
+     * Validates status.
+     * 
+     * @throws \wcf\system\exception\UserInputException
+     */
+    protected function validateStatus() {
+        if (!array_key_exists($this->statusID, $this->statusOptions)) {
+            throw new UserInputException('status', 'notValid');
+        }
+    }
+    
     /**
      * Validates visibility.
-     *
+     * 
      * @throws \wcf\system\exception\UserInputException
      */
     protected function validateVisibility() {
@@ -344,6 +399,10 @@ class UltimatePageAddForm extends ACPForm {
         // validate groupIDs, only important for protected
         if ($this->visibility != 'protected') return;
         
+        if (!count($this->groupIDs)) {
+            throw new UserInputException('groupIDs', 'notSelected');
+        }
+        
         foreach ($this->groupIDs as $groupID) {
             if (array_key_exists($groupID, $this->groups)) continue;
             throw new UserInputException('groupIDs', 'notValid');
@@ -353,11 +412,16 @@ class UltimatePageAddForm extends ACPForm {
     
     /**
      * Validates the publish date.
-     *
+     * 
+     * @throws \wcf\system\exception\UserInputException
      * @throws \wcf\system\exception\SystemException
      */
     protected function validatePublishDate() {
-        $pattern = '\d{4}-\d{2}-\d{2}';
+        if (empty($this->publishDate)) {
+            throw new UserInputException('publishDate');
+        }
+        
+        $pattern = '\d{4}-\d{2}-\d{2} \d{2}:\d{2}';
         $regex = new Regex($pattern);
         $dateTimeNow = new \DateTime('@'.TIME_NOW, UltimateCore::getUser()->getTimezone());
         if ($regex->match($this->publishDate)) {
@@ -365,46 +429,22 @@ class UltimatePageAddForm extends ACPForm {
             // or (more likely) the user hasn't changed the jQuery code
             // that means we get the date in the right order for processing
             $dateTime = \DateTime::createFromFormat(
-                    'Y-m-d',
+                    'Y-m-d H:i',
                     $this->publishDate,
                     UltimateCore::getUser()->getTimezone()
             );
-            if ($dateTime->format('Y-m-d') == $dateTimeNow->format('Y-m-d')) {
-                $this->publishDateTimestamp = $dateTimeNow->getTimestamp();
-            }
-            else {
-                $this->publishDateTimestamp = $dateTime->getTimestamp();
-            }
+            $this->publishDateTimestamp = $dateTime->getTimestamp();
             return;
         }
         // for the very unlikely reason that the date is not in the format
         // Y-m-d, we have to make it that way
-        $phpDateFormat = '';
-        switch ($this->dateFormat) {
-            case 'mm/dd/yy':
-                $phpDateFormat = 'm/d/Y';
-                break;
-            case 'd M, y':
-                $phpDateFormat = 'j M, y';
-                break;
-            case 'd MM, y':
-                $phpDateFormat = 'j F, y';
-                break;
-            case 'DD, d MM, yy':
-                $phpDateFormat = 'l, j F, Y';
-                break;
-        }
-            
+        $phpDateFormat = DateTimeUtil::getPHPDateFormatFromDateTimePicker($this->dateFormat);
+        $phpDateFormat .= ' H:i';
         $dateTime = \DateTime::createFromFormat(
             $phpDateFormat,
             $this->publishDate,
             UltimateCore::getUser()->getTimezone()
         );
-        if ($dateTime->format('Y-m-d') == $dateTimeNow->format('Y-m-d')) {
-            $this->publishDateTimestamp = $dateTimeNow->getTimestamp();
-        }
-        else {
-            $this->publishDateTimestamp = $dateTime->getTimestamp();
-        }
+        $this->publishDateTimestamp = $dateTime->getTimestamp();
     }
 }

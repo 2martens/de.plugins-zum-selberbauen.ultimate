@@ -93,7 +93,7 @@ class Page extends AbstractUltimateDatabaseObject {
         $data['publishDate'] = intval($data['publishDate']);
         $data['publishDateObject'] = DateUtil::getDateTimeByTimestamp($data['publishDate']);
         $data['lastModified'] = intval($data['lastModified']);
-        
+        $data['status'] = intval($data['status']);
         parent::handleData($data);
         
         $this->data['childPages'] = $this->getChildPages();

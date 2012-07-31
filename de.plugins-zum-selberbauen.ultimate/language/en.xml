@@ -193,6 +193,21 @@ Tom likes the warm water and the wunderful beach.]]></item>
         <item name="wcf.acp.ultimate.page.content.select"><![CDATA[Please select one content]]></item>
         <item name="wcf.acp.ultimate.page.content.error.notSelected"><![CDATA[You have to select one content.]]></item>
         <item name="wcf.acp.ultimate.page.content.error.notValid"><![CDATA[The "selected" content wasn't selectable.]]></item>
+        <item name="wcf.acp.ultimate.page.status"><![CDATA[Status]]></item>
+        <item name="wcf.acp.ultimate.page.status.draft"><![CDATA[Draft]]></item>
+        <item name="wcf.acp.ultimate.page.status.pendingReview"><![CDATA[Pending Review]]></item>
+        <item name="wcf.acp.ultimate.page.status.scheduled"><![CDATA[Geplant]]></item>
+        <item name="wcf.acp.ultimate.page.status.published"><![CDATA[Published]]></item>
+        <item name="wcf.acp.ultimate.page.status.error.notValid"><![CDATA[The "selected" status is invalid, because you couldn't select it.]]></item>
+        <item name="wcf.acp.ultimate.page.visibility"><![CDATA[Visibility]]></item>
+        <item name="wcf.acp.ultimate.page.visibility.public"><![CDATA[Public]]></item>
+        <item name="wcf.acp.ultimate.page.visibility.protected"><![CDATA[Protected]]></item>
+        <item name="wcf.acp.ultimate.page.visibility.private"><![CDATA[Private]]></item>
+        <item name="wcf.acp.ultimate.page.visibility.groupIDs.error.notValid"><![CDATA[At least one of the "selected" groups wasn't selectable.]]></item>
+        <item name="wcf.acp.ultimate.page.visibility.groupIDs.error.notSelected"><![CDATA[You have to select at least one group.]]></item>
+        <item name="wcf.acp.ultimate.page.visibility.description"><![CDATA[Please select here the visibility of the page. Public means everybody can see the page. Protected means that only selected groups can see the page. Private means that only you can see the page.]]></item>
+        <item name="wcf.acp.ultimate.page.visibility.error.notValid"><![CDATA[The "selected" visibility wasn't selectable.]]></item>
+        <item name="wcf.acp.ultimate.page.publishDate"><![CDATA[Publish date and time]]></item>
         <item name="wcf.acp.ultimate.page.general"><![CDATA[Page data]]></item>
         <item name="wcf.acp.ultimate.page.lastModified"><![CDATA[Date]]></item>
         <item name="wcf.acp.ultimate.page.noContents"><![CDATA[No pages found.]]></item>
@@ -200,6 +215,13 @@ Tom likes the warm water and the wunderful beach.]]></item>
         <item name="wcf.acp.ultimate.page.list.all"><![CDATA[All pages]]></item>
         <item name="wcf.acp.ultimate.page.list.count"><![CDATA[{#$items} Page{if $items != 1}s{/if}]]></item>
         <!-- /page -->
+    </category>
+    
+    <category name="ultimate.button">
+        <item name="ultimate.button.saveAsDraft"><![CDATA[Save as Draft]]></item>
+        <item name="ultimate.button.saveAsPending"><![CDATA[Save as Pending]]></item>
+        <item name="ultimate.button.schedule"><![CDATA[Schedule]]></item>
+        <item name="ultimate.button.publish"><![CDATA[Publish]]></item>
     </category>
     
     <category name="wcf.clipboard">
@@ -227,6 +249,7 @@ Tom likes the warm water and the wunderful beach.]]></item>
     
     <category name="ultimate.date">
         <item name="ultimate.date.dateFormat"><![CDATA[{if $britishEnglish|isset && $britishEnglish == true}d/m/Y{else}m/d/Y{/if}]]></item>
+        <item name="ultimate.date.dateTimeFormat"><![CDATA[%date% %time%]]></item>
     </category>
     
     <!-- this category is used for all multilingual page fields -->

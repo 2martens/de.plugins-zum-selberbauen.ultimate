@@ -118,7 +118,7 @@
                     </select>
                     {if $errorField == 'status'}
                         <small class="innerError">
-                            {lang}wcf.acp.ultimate.page.content.error.{@$errorType}{/lang}
+                            {lang}wcf.acp.ultimate.page.status.error.{@$errorType}{/lang}
                         </small>
                     {/if}
                 </dd>
@@ -164,33 +164,37 @@
             <dl{if $errorField == 'publishDate'} class="formError"{/if}>
                 <dt><label for="publishDate">{lang}wcf.acp.ultimate.page.publishDate{/lang}</label></dt>
                 <dd>
-                    <input type="datetime" id="publishDateInput" name="publishDate" value="{@$publishDate}" class="long" />
+                    <input type="datetime" id="publishDateInput" name="publishDate" value="{@$publishDate}" class="long" required="required" />
                     <script type="text/javascript">
                     /* <![CDATA[*/
                     $(function() {
-                        $.datepicker.setDefaults( $.datepicker.regional[ "" ] );
-                        $('#publishDateInput').datepicker( {
+                        $.timepicker.setDefaults( $.timepicker.regional[ "{if $__wcf->getLanguage()->languageCode == 'en'}en-GB{else}{@$__wcf->getLanguage()->languageCode}{/if}" ] );
+                        $.datepicker.setDefaults( $.datepicker.regional[ "{if $__wcf->getLanguage()->languageCode == 'en'}en-GB{else}{@$__wcf->getLanguage()->languageCode}{/if}" ] );
+                        $('#publishDateInput').datetimepicker( {
                             showOn: 'button',
                             buttonImage: {icon}calendar.gif{/icon},
                             buttonImageOnly: true,
                             buttonText: '{lang}wcf.acp.ultimate.page.publishDate.editDate{/lang}',
                             showOtherMonths: true,
                             selectOtherMonths: true,
-                            showAnim: 'fadeIn'                            
+                            showAnim: 'fadeIn',
+                            timeFormat: 'hh:mm'
                         } );
-                        $('#publishDateInput').datepicker( 'option', 
-                            $.datepicker.regional[ "{if $__wcf->getLanguage()->languageCode == 'en'}en-GB{else}{@$__wcf->getLanguage()->languageCode}{/if}" ]);
-                        var $dateFormat = $('#publishDateInput').datepicker( 'option', 'dateFormat');
+                        var $dateFormat = $('#publishDateInput').datetimepicker( 'option', 'dateFormat');
                         $('#dateFormatInput').val($dateFormat);
                         $('form').submit(function() {
-                            $('#publishDateInput').datepicker( 'option', 'dateFormat', 'yy-mm-dd' );                            
+                            $('#publishDateInput').datetimepicker( 'option', 'dateFormat', 'yy-mm-dd' );
                         });
                     });
                     /* ]]> */
                     </script>
                     {if $errorField == 'publishDate'}
                         <small class="innerError">
-                            {lang}wcf.acp.ultimate.page.publishDate.error.{@$errorType}{/lang}
+                            {if $errorType == 'empty'}
+                                {lang}wcf.global.form.error.empty{/lang}
+                            {else}
+                                {lang}wcf.acp.ultimate.page.publishDate.error.{@$errorType}{/lang}
+                            {/if}
                         </small>
                     {/if}
                 </dd>
@@ -201,8 +205,10 @@
     
     <div class="formSubmit">
         <input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
-        <input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
+        <input type="submit" name="save" id="saveButton" value="{lang}ultimate.button.saveAsDraft{/lang}" />
+        <input type="submit" name="publish" id="publishButton" value="{lang}ultimate.button.publish{/lang}" accesskey="s" />
         {@SID_INPUT_TAG}
+        <input type="hidden" name="startTime" value="{@$startTime}" />
         <input type="hidden" id="dateFormatInput" name="dateFormat" value="yy-mm-dd" />
         <input type="hidden" name="action" value="{@$action}" />
         {if $pageID|isset}<input type="hidden" name="id" value="{@$pageID}" />{/if}
