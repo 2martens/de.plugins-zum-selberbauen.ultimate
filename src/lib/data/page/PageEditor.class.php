@@ -33,9 +33,40 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
     }
     
     /**
+     * Adds new groups to this page.
+     * 
+     * @param array   $groupIDs
+     * @param boolean $replaceOldGroups
+     */
+    public function addGroups(array $groupIDs, $deleteOldGroups = true) {
+        if ($deleteOldGroups) {
+            $sql = 'DELETE FROM ultimate'.ULTIMATE_N.'_user_group_to_page
+                    WHERE       pageID      = ?';
+            /* @var $statement \wcf\system\database\statement\PreparedStatement */
+            $statement = UltimateCore::getDB()->prepareStatement($sql);
+            $statement->execute(array(
+                    $this->object->__get('pageID')
+            ));
+        } 
+        $sql = 'INSERT INTO ultimate'.ULTIMATE_N.'_user_group_to_page
+                (userGroupID, pageID)
+                VALUES
+                (?, ?)';
+        $statement = UltimateCore::getDB()->prepareStatement($sql);
+        UltimateCore::getDB()->beginTransaction();
+        foreach ($groupIDs as $groupID) {
+            $statement->executeUnbuffered(array(
+                $groupID, 
+                $this->object->__get('pageID')
+            ));
+        }
+        UltimateCore::getDB()->commitTransaction();
+    }
+    
+    /**
      * Adds the specified content to this page.
      *
-     * @param int     $contentID
+     * @param integer $contentID
      * @param boolean $replaceOldContent
      */
     public function addContent($contentID, $replaceOldContent = true) {

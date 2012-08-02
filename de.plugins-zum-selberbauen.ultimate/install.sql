@@ -1,6 +1,5 @@
 /**** tables ****/
 
-
 DROP TABLE IF EXISTS ultimate1_1_category;
 CREATE TABLE ultimate1_1_category (
     categoryID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -10,6 +9,23 @@ CREATE TABLE ultimate1_1_category (
     categorySlug VARCHAR(255) NOT NULL DEFAULT '',
     UNIQUE KEY categoryTitle (parentCategoryID, categoryTitle),
     UNIQUE KEY categorySlug (parentCategoryID, categorySlug)
+);
+
+DROP TABLE IF EXISTS ultimate1_1_content;
+CREATE TABLE ultimate1_1_content (
+    contentID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    authorID INT(10) NOT NULL DEFAULT 0,
+    contentTitle VARCHAR(255) NOT NULL DEFAULT '',
+    contentDescription VARCHAR(255) NOT NULL DEFAULT '',
+    contentText MEDIUMTEXT NOT NULL,
+    enableBBCodes TINYINT(1) NOT NULL DEFAULT 1,
+    enableHtml TINYINT(1) NOT NULL DEFAULT 0,
+    enableSmilies TINYINT(1) NOT NULL DEFAULT 1,
+    publishDate INT(10) NOT NULL DEFAULT 0,
+    lastModified INT(10) NOT NULL DEFAULT 0,
+    status INT(1) NOT NULL DEFAULT 0,
+    visibility ENUM('public, 'protected', 'private') NOT NULL DEFAULT 'public',
+    KEY (authorID)
 );
 
 DROP TABLE IF EXISTS ultimate1_1_content_to_category;
@@ -26,14 +42,6 @@ CREATE TABLE ultimate1_1_content_to_page (
     pageID INT(10) NOT NULL UNIQUE KEY
 );
 
-DROP TABLE IF EXISTS ultimate1_1_user_group_to_page;
-CREATE TABLE ultimate1_1_user_group_to_page (
-    userGroupID INT(10) NOT NULL,
-    pageID INT(10) NOT NULL,
-    KEY (userGroupID),
-    KEY (pageID)
-);
-
 DROP TABLE IF EXISTS ultimate1_1_page;
 CREATE TABLE ultimate1_1_page (
     pageID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -48,20 +56,20 @@ CREATE TABLE ultimate1_1_page (
     KEY (authorID)
 );
 
-DROP TABLE IF EXISTS ultimate1_1_content;
-CREATE TABLE ultimate1_1_content (
-    contentID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    authorID INT(10) NOT NULL DEFAULT 0,
-    contentTitle VARCHAR(255) NOT NULL DEFAULT '',
-    contentDescription VARCHAR(255) NOT NULL DEFAULT '',
-    contentText MEDIUMTEXT NOT NULL,
-    enableBBCodes TINYINT(1) NOT NULL DEFAULT 1,
-    enableHtml TINYINT(1) NOT NULL DEFAULT 0,
-    enableSmilies TINYINT(1) NOT NULL DEFAULT 1,
-    publishDate INT(10) NOT NULL DEFAULT 0,
-    lastModified INT(10) NOT NULL DEFAULT 0,
-    status INT(1) NOT NULL DEFAULT 0,
-    KEY (authorID)
+DROP TABLE IF EXISTS ultimate1_1_user_group_to_content;
+CREATE TABLE ultimate1_1_user_group_to_content (
+    userGroupID INT(10) NOT NULL,
+    contentID INT(10) NOT NULL,
+    KEY (userGroupID),
+    KEY (contentID)
+);
+
+DROP TABLE IF EXISTS ultimate1_1_user_group_to_page;
+CREATE TABLE ultimate1_1_user_group_to_page (
+    userGroupID INT(10) NOT NULL,
+    pageID INT(10) NOT NULL,
+    KEY (userGroupID),
+    KEY (pageID)
 );
 
 
@@ -74,6 +82,8 @@ ALTER TABLE ultimate1_1_content_to_page ADD FOREIGN KEY (contentID) REFERENCES u
 ALTER TABLE ultimate1_1_content_to_page ADD FOREIGN KEY (pageID) REFERENCES ultimate1_1_page (pageID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_user_group_to_page ADD FOREIGN KEY (pageID) REFERENCES ultimate1_1_page (pageID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_user_group_to_page ADD FOREIGN KEY (userGroupID) REFERENCES wcf1_user_group (userGroupID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_user_group_to_content ADD FOREIGN KEY (contentID) REFERENCES ultimate1_1_content (contentID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_user_group_to_content ADD FOREIGN KEY (userGroupID) REFERENCES wcf1_user_group (userGroupID) ON DELETE CASCADE;
 
 /**** default entries ****/
 -- default category

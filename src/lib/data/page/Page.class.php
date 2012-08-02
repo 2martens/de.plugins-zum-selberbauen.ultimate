@@ -3,6 +3,7 @@ namespace ultimate\data\page;
 use ultimate\data\content\Content;
 use ultimate\data\AbstractUltimateDatabaseObject;
 use ultimate\system\UltimateCore;
+use wcf\data\user\group\UserGroup;
 use wcf\data\user\User;
 use wcf\util\DateUtil;
 
@@ -75,6 +76,25 @@ class Page extends AbstractUltimateDatabaseObject {
     }
     
     /**
+     * Returns all user groups associated with this page.
+     * 
+     * @return \wcf\data\user\group\UserGroup[]
+     */
+    public function getGroups() {
+        $sql = 'SELECT    userGroupID
+                FROM      ultimate'.ULTIMATE_N.'_user_group_to_page
+                WHERE     pageID = ?';
+        $statement = UltimateCore::getDB()->prepareStatement($sql);
+        $statement->execute(array($this->pageID));
+        
+        $groups = array();
+        while ($row = $statement->fetchArray()) {
+            $groups[$row['userGroupID']] = new UserGroup($row['userGroupID']);
+        }
+        return $groups;
+    }
+    
+    /**
      * Returns the title of this page.
      *
      * @return string
@@ -95,7 +115,7 @@ class Page extends AbstractUltimateDatabaseObject {
         $data['lastModified'] = intval($data['lastModified']);
         $data['status'] = intval($data['status']);
         parent::handleData($data);
-        
+        $this->data['groups'] = $this->getGroups();
         $this->data['childPages'] = $this->getChildPages();
     }
     

@@ -6,6 +6,7 @@ use wcf\system\cache\CacheHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\ValidateActionException;
+use wcf\util\ArrayUtil;
 
 
 /**
@@ -72,6 +73,12 @@ class ContentAction extends AbstractDatabaseObjectAction {
 	    // insert categories
 	    $categoryIDs = (isset($this->parameters['categories'])) ? $this->parameters['categories'] : array();
 	    $contentEditor->addToCategories($categoryIDs, false);
+	    
+	    // connect with userGroups
+	    $groupIDs = (isset($this->parameters['userGroupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['userGroupIDs']) : array();
+	    if (count($groupIDs)) {
+	        $contentEditor->addGroups($groupIDs);
+	    }
 	
 	    return $content;
 	}
@@ -91,14 +98,20 @@ class ContentAction extends AbstractDatabaseObjectAction {
 	
 	    $categoryIDs = (isset($this->parameters['categories'])) ? $this->parameters['categories'] : array();
 	    $removeCategories = (isset($this->parameters['removeCategories'])) ? $this->parameters['removeCategories'] : array();
-	    
+	    $groupIDs = (isset($this->parameters['userGroupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['userGroupIDs']) : array();
+	     
 	    foreach ($this->objects as $contentEditor) {
+	        /* @var $contentEditor \ultimate\data\content\ContentEditor */
 	        if (!empty($categoryIDs)) {
 	            $contentEditor->addToCategories($categoryIDs);
 	        }
 	        	
 	        if (!empty($removeCategories)) {
 	            $contentEditor->removeFromCategories($removeCategories);
+	        }
+	        
+	        if (count($groupIDs)) {
+	            $contentEditor->addGroups($groupIDs);
 	        }
 	    }
 	}

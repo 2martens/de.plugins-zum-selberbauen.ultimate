@@ -5,6 +5,7 @@ use ultimate\data\content\Content;
 use ultimate\data\content\ContentAction;
 use ultimate\data\content\ContentEditor;
 use ultimate\system\UltimateCore;
+use wcf\form\AbstractForm;
 use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
 use wcf\system\language\I18nHandler;
@@ -47,6 +48,18 @@ class UltimateContentEditForm extends UltimateContentAddForm {
     public $content = null;
     
     /**
+     * Contains the language output for the save button.
+     * @var string
+     */
+    protected $saveButtonLang = '';
+    
+    /**
+     * Contains the language output for the publish button.
+     * @var string
+     */
+    protected $publishButtonLang = '';
+    
+    /**
      * @see \wcf\page\IPage::readParameters()
      */
     public function readParameters() {
@@ -66,6 +79,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
      */
     public function readData() {
         if (!count($_POST)) {
+            // reading object fields
             $this->subject = $this->content->contentTitle;
             $this->description = $this->content->contentDescription;
             $this->text = $this->content->contentText;
@@ -74,8 +88,72 @@ class UltimateContentEditForm extends UltimateContentAddForm {
             I18nHandler::getInstance()->setOptions('subject', PACKAGE_ID, $this->subject, 'ultimate.content.\d+.contentTitle');
             I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->description, 'ultimate.content.\d+.contentDescription');
             I18nHandler::getInstance()->setOptions('text', PACKAGE_ID, $this->text, 'ultimate.content.\d+.contentText');
+            
+            // reading cache
+            $cacheName = 'category';
+            $cacheBuilderClassName = '\ultimate\system\cache\builder\UltimateCategoryCacheBuilder';
+            $file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
+            CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
+            $this->categories = CacheHandler::getInstance()->get($cacheName, 'categoris');
+            
+            $cacheName = 'usergroups';
+            $cacheBuilderClassName = '\wcf\system\cache\builder\UserGroupCacheBuilder';
+            $file = WCF_DIR.'cache/cache.'.$cacheName.'.php';
+            CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
+            $this->groups = CacheHandler::getInstance()->get($cacheName, 'groups');
+            
+            /* @var $dateTime \DateTime */
+            $dateTime = $this->content->__get('publishDateObject');
+            $date = UltimateCore::getLanguage()->getDynamicVariable(
+                'ultimate.date.dateFormat',
+                array(
+                    'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
+                )
+            );
+            $time = UltimateCore::getLanguage()->get('wcf.date.timeFormat');
+            $format = str_replace(
+                '%time%',
+                $time,
+                str_replace(
+                    '%date',
+                    $date,
+                    UltimateCore::getLanguage()->get('ultimate.date.dateTimeFormat')
+                )
+            );
+            $this->publishDate = $dateTime->format($format);
+            $this->publishDateTimestamp = $dateTime->getTimestamp();
+            
+            // get status data
+            $this->statusID = $this->content->__get('status');
+            $this->statusOptions = array(
+                0 => UltimateCore::getLanguage()->get('wcf.acp.ultimate.status.draft'),
+                1 => UltimateCore::getLanguage()->get('wcf.acp.ultimate.status.pendingReview'),
+            );
+            
+            // fill publish button with fitting language
+            $this->publishButtonLang = UltimateCore::getLanguage()->get('ultimate.button.publish');
+            if ($this->statusID == 2) {
+                $this->statusOptions[2] = UltimateCore::getLanguage()->get('wcf.acp.ultimate.status.scheduled');
+                $this->publishButtonLang = UltimateCore::getLanguage()->get('ultimate.button.update');
+            } elseif ($this->statusID == 3) {
+                $this->statusOptions[3] = UltimateCore::getLanguage()->get('wcf.acp.ultimate.status.published');
+                $this->publishButtonLang = UltimateCore::getLanguage()->get('ultimate.button.update');
+            }
+            
+            // fill save button with fitting language
+            $saveButtonLangArray = array(
+                0 => UltimateCore::getLanguage()->get('ultimate.button.saveAsDraft'),
+                1 => UltimateCore::getLanguage()->get('ultimate.button.saveAsPending'),
+                2 => '',
+                3 => ''
+            );
+            $this->saveButtonLang = $saveButtonLangArray[$this->statusID];
+            
+            // get visibility data
+            $this->visibility = $this->content->__get('visibility');
+            $this->groupIDs = array_keys($this->content->__get('groups'));
         }
-        parent::readData();
+        AbstractForm::readData();
     }
     
     /**
@@ -134,6 +212,15 @@ class UltimateContentEditForm extends UltimateContentAddForm {
             }
         }
         
+        // change status to planned or publish
+        if ($this->saveType == 'publish') {
+            if ($this->publishDateTimestamp > TIME_NOW) {
+                $this->statusID = 2; // scheduled
+            } elseif ($this->publishDateTimestamp < TIME_NOW) {
+                $this->statusID = 3; // published
+            }
+        }
+        
         $parameters = array(
         	'data' => array(
         	    'authorID' => UltimateCore::getUser()->userID,
@@ -147,6 +234,10 @@ class UltimateContentEditForm extends UltimateContentAddForm {
             ),
             'categories' => $this->categoryIDs
         );
+        
+        if ($this->visibility == 'protected') {
+            $parameters['userGroupIDs'] = $this->groupIDs;
+        }
         
         $action = new ContentAction(array($this->contentID), 'update', $parameters);
         $action->executeAction();
@@ -168,8 +259,19 @@ class UltimateContentEditForm extends UltimateContentAddForm {
         
         UltimateCore::getTPL()->assign(array(
         	'contentID' => $this->contentID,
+            'publishButtonLang' => $this->publishButtonLang,
         	'action' => 'edit'
         ));
+        
+        // hide the save button if you edit a page which is already scheduled or published
+        if (!empty($this->saveButtonLang)) {
+            // status id == (0|1)
+            UltimateCore::getTPL()->assign('saveButtonLang', $this->saveButtonLang);
+        }
+        else {
+            // status id == (2|3)
+            UltimateCore::getTPL()->assign('disableSaveButton', true);
+        }
     }
     
     /**

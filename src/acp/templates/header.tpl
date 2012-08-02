@@ -85,7 +85,12 @@
                 'wcf.global.confirmation.cancel': '{lang}wcf.global.confirmation.cancel{/lang}',
                 'wcf.global.confirmation.confirm': '{lang}wcf.global.confirmation.confirm{/lang}',
                 'wcf.global.confirmation.title': '{lang}wcf.global.confirmation.title{/lang}',
-                'wcf.global.form.edit.success': '{lang}wcf.global.form.edit.success{/lang}'
+                'wcf.global.form.edit.success': '{lang}wcf.global.form.edit.success{/lang}',
+                'ultimate.button.saveAsDraft': '{lang}ultimate.button.saveAsDraft{/lang}',
+                'ultimate.button.saveAsPending': '{lang}ultimate.button.saveAsPending{/lang}',
+                'ultimate.button.schedule': '{lang}ultimate.button.schedule{/lang}',
+                'ultimate.button.publish': '{lang}ultimate.button.publish{/lang}',
+                'ultimate.button.update': {lang}ultimate.button.update{/lang}'
             });
             WCF.Icon.addObject({
                 'wcf.icon.closed': '{@$__wcf->getPath()}icon/arrowRightInverse.svg',

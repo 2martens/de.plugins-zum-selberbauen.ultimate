@@ -130,6 +130,27 @@
     </category>
     
     <category name="wcf.acp.ultimate">
+        <!-- general -->
+        <item name="wcf.acp.ultimate.publish"><![CDATA[Veröffentlichen]]></item>
+        <item name="wcf.acp.ultimate.publishDateList"><![CDATA[Veröffentlicht]]></item>
+        <item name="wcf.acp.ultimate.status"><![CDATA[Status]]></item>
+        <item name="wcf.acp.ultimate.status.draft"><![CDATA[Entwurf]]></item>
+        <item name="wcf.acp.ultimate.status.pendingReview"><![CDATA[Ausstehendes Review]]></item>
+        <item name="wcf.acp.ultimate.status.scheduled"><![CDATA[Geplant]]></item>
+        <item name="wcf.acp.ultimate.status.published"><![CDATA[Veröffentlicht]]></item>
+        <item name="wcf.acp.ultimate.status.error.notValid"><![CDATA[Der "ausgewählte" Status stand nicht zur Auswahl.]]></item>
+        <item name="wcf.acp.ultimate.visibility"><![CDATA[Sichtbarkeit]]></item>
+        <item name="wcf.acp.ultimate.visibility.public"><![CDATA[Öffentlich]]></item>
+        <item name="wcf.acp.ultimate.visibility.protected"><![CDATA[Eingeschränkt]]></item>
+        <item name="wcf.acp.ultimate.visibility.private"><![CDATA[Privat]]></item>
+        <item name="wcf.acp.ultimate.visibility.groupIDs.error.notValid"><![CDATA[Mindestens eine der "ausgewählten" Gruppen stand nicht nur Auswahl.]]></item>
+        <item name="wcf.acp.ultimate.visibility.groupIDs.error.notSelected"><![CDATA[Mindestens eine Gruppe muss ausgewählt werden.]]></item>
+        <item name="wcf.acp.ultimate.visibility.error.notValid"><![CDATA[Die "ausgewählte" Sichtbarkeitsstufe stand nicht zur Auswahl.]]></item>
+        <item name="wcf.acp.ultimate.publishDate"><![CDATA[Veröffentlichungsdatum und -uhrzeit]]></item>
+        <item name="wcf.acp.ultimate.author"><![CDATA[Autor]]></item>
+        <item name="wcf.acp.ultimate.lastModified"><![CDATA[Zuletzt bearbeitet]]></item>
+        <!-- /general -->
+        
         <!-- category -->
         <item name="wcf.acp.ultimate.category.add"><![CDATA[Kategorie hinzufügen]]></item>
         <item name="wcf.acp.ultimate.category.edit"><![CDATA[Kategorie bearbeiten]]></item>
@@ -170,9 +191,8 @@
         <item name="wcf.acp.ultimate.content.text.placeholder"><![CDATA[Zwei Freunde gehen während der Sommerzeit fast jeden Tag zum Strand. Dort spielen sie miteinander und haben sehr viel Spaß.
 Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
         <item name="wcf.acp.ultimate.content.text.error.tooLong"><![CDATA[Der Text ist zu lang.]]></item>        
+        <item name="wcf.acp.ultimate.content.visibility.description"><![CDATA[Bitte gib hier die Sichtbarkeit des Inhalts an. Öffentlich bedeutet, dass jeder Besucher dein Inhalt sehen kann. Eingeschränkt bedeutet, dass nur ausgewählte Gruppen deinen Inhalt sehen können. Privat bedeutet, dass nur du den Inhalt sehen kannst.]]></item>
         <item name="wcf.acp.ultimate.content.general"><![CDATA[Allgemeine Daten]]></item>
-        <item name="wcf.acp.ultimate.content.author"><![CDATA[Autor]]></item>
-        <item name="wcf.acp.ultimate.content.lastModified"><![CDATA[Datum]]></item>
         <item name="wcf.acp.ultimate.content.noContents"><![CDATA[Keine Inhalte gefunden.]]></item>
         <item name="wcf.acp.ultimate.content.list"><![CDATA[Inhaltsliste]]></item>
         <item name="wcf.acp.ultimate.content.list.all"><![CDATA[Alle Inhalte]]></item>
@@ -195,23 +215,9 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
         <item name="wcf.acp.ultimate.page.content.select"><![CDATA[Bitte Inhalt auswählen]]></item>
         <item name="wcf.acp.ultimate.page.content.error.notSelected"><![CDATA[Du musst einen Inhalt auswählen.]]></item>
         <item name="wcf.acp.ultimate.page.content.error.notValid"><![CDATA[Der "ausgewählte" Inhalt stand nicht nur Auswahl.]]></item>
-        <item name="wcf.acp.ultimate.page.status"><![CDATA[Status]]></item>
-        <item name="wcf.acp.ultimate.page.status.draft"><![CDATA[Entwurf]]></item>
-        <item name="wcf.acp.ultimate.page.status.pendingReview"><![CDATA[Ausstehendes Review]]></item>
-        <item name="wcf.acp.ultimate.page.status.scheduled"><![CDATA[Geplant]]></item>
-        <item name="wcf.acp.ultimate.page.status.published"><![CDATA[Veröffentlicht]]></item>
-        <item name="wcf.acp.ultimate.page.status.error.notValid"><![CDATA[Der "ausgewählte" Status stand nicht zur Auswahl.]]></item>
-        <item name="wcf.acp.ultimate.page.visibility"><![CDATA[Sichtbarkeit]]></item>
-        <item name="wcf.acp.ultimate.page.visibility.public"><![CDATA[Öffentlich]]></item>
-        <item name="wcf.acp.ultimate.page.visibility.protected"><![CDATA[Eingeschränkt]]></item>
-        <item name="wcf.acp.ultimate.page.visibility.private"><![CDATA[Privat]]></item>
-        <item name="wcf.acp.ultimate.page.visibility.groupIDs.error.notValid"><![CDATA[Mindestens eine der "ausgewählten" Gruppen stand nicht nur Auswahl.]]></item>
-        <item name="wcf.acp.ultimate.page.visibility.groupIDs.error.notSelected"><![CDATA[Mindestens eine Gruppe muss ausgewählt werden.]]></item>
         <item name="wcf.acp.ultimate.page.visibility.description"><![CDATA[Bitte gib hier die Sichtbarkeit der Seite an. Öffentlich bedeutet, dass jeder Besucher die Seite sehen kann. Eingeschränkt bedeutet, dass nur ausgewählte Gruppen deine Seite sehen können. Privat bedeutet, dass nur du die Seite sehen kannst.]]></item>
-        <item name="wcf.acp.ultimate.page.visibility.error.notValid"><![CDATA[Die "ausgewählte" Sichtbarkeitsstufe stand nicht zur Auswahl.]]></item>
-        <item name="wcf.acp.ultimate.page.publishDate"><![CDATA[Veröffentlichungsdatum und -uhrzeit]]></item>
+        
         <item name="wcf.acp.ultimate.page.general"><![CDATA[Allgemeine Daten]]></item>
-        <item name="wcf.acp.ultimate.page.lastModified"><![CDATA[Datum]]></item>
         <item name="wcf.acp.ultimate.page.noContents"><![CDATA[Keine Seiten gefunden.]]></item>
         <item name="wcf.acp.ultimate.page.list"><![CDATA[Seitenliste]]></item>
         <item name="wcf.acp.ultimate.page.list.all"><![CDATA[Alle Seiten]]></item>
@@ -224,6 +230,7 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
         <item name="ultimate.button.saveAsPending"><![CDATA[Als Ausstehend speichern]]></item>
         <item name="ultimate.button.schedule"><![CDATA[Planen]]></item>
         <item name="ultimate.button.publish"><![CDATA[Veröffentlichen]]></item>
+        <item name="ultimate.button.update"><![CDATA[Aktualisieren]]></item>
     </category>
     
     <category name="wcf.clipboard">

@@ -10,7 +10,10 @@ use wcf\system\cache\CacheHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\menu\acp\ACPMenu;
+use wcf\system\Regex;
 use wcf\util\ArrayUtil;
+use wcf\util\DateUtil;
+use wcf\util\DateTimeUtil;
 use wcf\util\MessageUtil;
 use wcf\util\StringUtil;
 
@@ -73,6 +76,66 @@ class UltimateContentAddForm extends MessageForm {
     public $maxTextLength = 0;
     
     /**
+     * Contains the visibility.
+     * @var string
+     */
+    public $visibility = 'public';
+    
+    /**
+     * Contains the chosen groupIDs.
+     * @var integer[]
+     */
+    public $groupIDs = array();
+    
+    /**
+     * Contains all available groups.
+     * @var \wcf\data\user\group\UserGroup[]
+    */
+    public $groups = array();
+    
+    /**
+     * Contains the publish date.
+     * @var string
+    */
+    public $publishDate = '';
+    
+    /**
+     * Contains the publish date as timestamp.
+     * @var integer
+     */
+    public $publishDateTimestamp = TIME_NOW;
+    
+    /**
+     * Contains all status options.
+     * @var string[]
+     */
+    public $statusOptions = array();
+    
+    /**
+     * Contains the status id.
+     * @var integer
+    */
+    public $statusID = 0;
+    
+    /**
+     * Contains the save type.
+     * @var string
+     */
+    public $saveType = '';
+    
+    /**
+     * jQuery datepicker date format.
+     * @var string
+     */
+    protected $dateFormat = 'yy-mm-dd';
+    
+    /**
+     * Contains the timestamp from the begin of the add process.
+     * @var integer
+     */
+    protected $startTime = 0;
+    
+    /**
      * @see \wcf\form\IForm::readParameters()
      */
     public function readParameters() {
@@ -87,12 +150,46 @@ class UltimateContentAddForm extends MessageForm {
      * @see \wcf\form\IForm::readData()
      */
     public function readData() {
-        $cache = 'category';
-        $cacheBuilderClass = '\ultimate\system\cache\builder\UltimateCategoryCacheBuilder';
-        $file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
-        CacheHandler::getInstance()->addResource($cache, $file, $cacheBuilderClass);
-        $cacheOutput = CacheHandler::getInstance()->get($cache);
-        $this->categories = $cacheOutput['categories'];
+        $cacheName = 'category';
+        $cacheBuilderClassName = '\ultimate\system\cache\builder\UltimateCategoryCacheBuilder';
+        $file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
+        CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
+        $this->categories = CacheHandler::getInstance()->get($cacheName, 'categoris');
+        
+        $cacheName = 'usergroups';
+        $cacheBuilderClassName = '\wcf\system\cache\builder\UserGroupCacheBuilder';
+        $file = WCF_DIR.'cache/cache.'.$cacheName.'.php';
+        CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
+        $this->groups = CacheHandler::getInstance()->get($cacheName, 'groups');
+        
+        // fill status options
+        $this->statusOptions = array(
+            0 => UltimateCore::getLanguage()->get('wcf.acp.ultimate.status.draft'),
+            1 => UltimateCore::getLanguage()->get('wcf.acp.ultimate.status.pendingReview'),
+        );
+        
+        // fill publishDate with default value (today)
+        $this->startTime = TIME_NOW;
+        $dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
+        $dateTime->setTimezone(UltimateCore::getUser()->getTimezone());
+        $date = UltimateCore::getLanguage()->getDynamicVariable(
+            'ultimate.date.dateFormat',
+            array(
+                'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
+            )
+        );
+        $time = UltimateCore::getLanguage()->get('wcf.date.timeFormat');
+        $format = str_replace(
+            '%time%',
+            $time,
+            str_replace(
+                '%date',
+                $date,
+                UltimateCore::getLanguage()->get('ultimate.date.dateTimeFormat')
+            )
+        );
+        $this->publishDate = $dateTime->format($format);
+        
         parent::readData();
     }
     
@@ -107,6 +204,13 @@ class UltimateContentAddForm extends MessageForm {
         if (I18nHandler::getInstance()->isPlainValue('description')) $this->description = StringUtil::trim(I18nHandler::getInstance()->getValue('description'));
         if (isset($_POST['categoryIDs']) && is_array($_POST['categoryIDs'])) $this->categoryIDs = ArrayUtil::toIntegerArray(($_POST['categoryIDs']));
         if (I18nHandler::getInstance()->isPlainValue('text')) $this->text = MessageUtil::stripCrap(trim(I18nHandler::getInstance()->getValue('text')));
+        if (isset($_POST['visibility'])) $this->visibility = StringUtil::trim($_POST['visibility']);
+        if (isset($_POST['groupIDs'])) $this->groupIDs = ArrayUtil::toIntegerArray($_POST['groupIDs']);
+        if (isset($_POST['publishDate'])) $this->publishDate = StringUtil::trim($_POST['publishDate']);
+        if (isset($_POST['dateFormat'])) $this->dateFormat = StringUtil::trim($_POST['dateFormat']);
+        if (isset($_POST['save'])) $this->saveType = 'save';
+        if (isset($_POST['publish'])) $this->saveType = 'publish';
+        if (isset($_POST['startTime'])) $this->startTime = intval($_POST['startTime']);
     }
     
     /**
@@ -119,6 +223,9 @@ class UltimateContentAddForm extends MessageForm {
         $this->validateText();
         // multilingualism
         $this->validateContentLanguage();
+        $this->validateStatus();
+        $this->validateVisibility();
+        $this->validatePublishDate();
         
         RecaptchaForm::validate();
     }
@@ -129,6 +236,16 @@ class UltimateContentAddForm extends MessageForm {
     public function save() {
         if (!I18nHandler::getInstance()->isPlainValue('text')) RecaptchaForm::save();
         else parent::save();
+        
+        // change status to planned or publish
+        if ($this->saveType == 'publish') {
+            if ($this->publishDateTimestamp > TIME_NOW) {
+                $this->statusID = 2; // planned
+            } elseif ($this->publishDateTimestamp < TIME_NOW) {
+                $this->statusID = 3; // published
+            }
+        }
+        
         $parameters = array(
             'data' => array(
                 'authorID' => UltimateCore::getUser()->userID,
@@ -138,10 +255,16 @@ class UltimateContentAddForm extends MessageForm {
                 'enableBBCodes' => $this->enableBBCodes,
                 'enableHtml' => $this->enableHtml,
                 'enableSmilies' => $this->enableSmilies,
-                'lastModified' => TIME_NOW
+                'lastModified' => TIME_NOW,
+                'status' => $this->statusID,
+                'visibility' => $this->visibility
             ),
             'categories' => $this->categoryIDs
         );
+        
+        if ($this->visibility == 'protected') {
+            $parameters['userGroupIDs'] = $this->groupIDs;
+        }
         
         $this->objectAction = new ContentAction(array(), 'create', $parameters);
         $this->objectAction->executeAction();
@@ -197,9 +320,11 @@ class UltimateContentAddForm extends MessageForm {
         UltimateCore::getTPL()->assign('success', true);
         
         //showing empty form
-        $this->subject = $this->description = $this->text = '';
+        $this->subject = $this->description = $this->text = $this->publishDate = '';
+        $this->publishDateTimestamp = $this->statusID = 0;
+        $this->visibility = 'public';
         I18nHandler::getInstance()->disableAssignValueVariables();
-        $this->categoryIDs = array();
+        $this->categoryIDs = $this->groupIDs = array();
     }
     
     /**
@@ -214,7 +339,13 @@ class UltimateContentAddForm extends MessageForm {
             'action' => 'add',
             'categoryIDs' => $this->categoryIDs,
             'categories' => $this->categories,
-            'languageID' => ($this->languageID ? $this->languageID : 0)
+            'languageID' => ($this->languageID ? $this->languageID : 0),
+            'groups' => $this->groups,
+            'groupIDs' => $this->groupIDs,
+            'statusOptions' => $this->statusOptions,
+            'statusID' => $this->statusID,
+            'visibility' => $this->visibility,
+            'startTime' => $this->startTime
         ));
     }
     
@@ -317,6 +448,84 @@ class UltimateContentAddForm extends MessageForm {
             throw new UserInputException('category', 'invalidIDs');
             break;
         }
+    }
+    
+    /**
+     * Validates status.
+     *
+     * @throws \wcf\system\exception\UserInputException
+     */
+    protected function validateStatus() {
+        if (!array_key_exists($this->statusID, $this->statusOptions)) {
+            throw new UserInputException('status', 'notValid');
+        }
+    }
+    
+    /**
+     * Validates visibility.
+     *
+     * @throws \wcf\system\exception\UserInputException
+     */
+    protected function validateVisibility() {
+        $allowedValues = array(
+            'public',
+            'protected',
+            'private'
+        );
+        if (!in_array($this->visibility, $allowedValues)) {
+            throw new UserInputException('visibility', 'notValid');
+        }
+    
+        // validate groupIDs, only important for protected
+        if ($this->visibility != 'protected') return;
+    
+        if (!count($this->groupIDs)) {
+            throw new UserInputException('groupIDs', 'notSelected');
+        }
+    
+        foreach ($this->groupIDs as $groupID) {
+            if (array_key_exists($groupID, $this->groups)) continue;
+            throw new UserInputException('groupIDs', 'notValid');
+            break;
+        }
+    }
+    
+    /**
+     * Validates the publish date.
+     *
+     * @throws \wcf\system\exception\UserInputException
+     * @throws \wcf\system\exception\SystemException
+     */
+    protected function validatePublishDate() {
+        if (empty($this->publishDate)) {
+            throw new UserInputException('publishDate');
+        }
+    
+        $pattern = '\d{4}-\d{2}-\d{2} \d{2}:\d{2}';
+        $regex = new Regex($pattern);
+        $dateTimeNow = new \DateTime('@'.TIME_NOW, UltimateCore::getUser()->getTimezone());
+        if ($regex->match($this->publishDate)) {
+            // the browser has implemented the input type date
+            // or (more likely) the user hasn't changed the jQuery code
+            // that means we get the date in the right order for processing
+            $dateTime = \DateTime::createFromFormat(
+                'Y-m-d H:i',
+                $this->publishDate,
+                UltimateCore::getUser()->getTimezone()
+            );
+            $this->publishDateTimestamp = $dateTime->getTimestamp();
+            return;
+        }
+        // for the very unlikely reason that the date is not in the format
+        // Y-m-d, we have to make it that way
+        $phpDateFormat = DateTimeUtil::getPHPDateFormatFromDateTimePicker($this->dateFormat);
+        $phpDateFormat .= ' H:i';
+        $dateTime = \DateTime::createFromFormat(
+            $phpDateFormat,
+            $this->publishDate,
+            UltimateCore::getUser()->getTimezone()
+        );
+        $this->publishDateTimestamp = $dateTime->getTimestamp();
     }
     
 }

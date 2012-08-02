@@ -3,7 +3,9 @@ namespace ultimate\data\content;
 use ultimate\data\category\Category;
 use ultimate\data\AbstractUltimateDatabaseObject;
 use ultimate\system\UltimateCore;
+use wcf\data\user\group\UserGroup;
 use wcf\data\user\User;
+use wcf\util\DateUtil;
 
 /**
  * Represents a content entry.
@@ -63,6 +65,25 @@ class Content extends AbstractUltimateDatabaseObject {
     }
     
     /**
+     * Returns all user groups associated with this content.
+     *
+     * @return \wcf\data\user\group\UserGroup[]
+     */
+    public function getGroups() {
+        $sql = 'SELECT    userGroupID
+                FROM      ultimate'.ULTIMATE_N.'_user_group_to_content
+                WHERE     contentID = ?';
+        $statement = UltimateCore::getDB()->prepareStatement($sql);
+        $statement->execute(array($this->contentID));
+    
+        $groups = array();
+        while ($row = $statement->fetchArray()) {
+            $groups[$row['userGroupID']] = new UserGroup($row['userGroupID']);
+        }
+        return $groups;
+    }
+    
+    /**
      * Returns the title of this content.
      *
      * @return string
@@ -81,8 +102,11 @@ class Content extends AbstractUltimateDatabaseObject {
         $data['enableSmilies'] = (boolean) intval($data['enableSmilies']);
         $data['enableHtml'] = (boolean) intval($data['enableHtml']);
         $data['enableBBCodes'] = (boolean) intval($data['enableBBCodes']);
+        $data['publishDate'] = intval($data['publishDate']);
+        $data['publishDateObject'] = DateUtil::getDateTimeByTimestamp($data['publishDate']);
         $data['lastModified'] = intval($data['lastModified']);
         parent::handleData($data);
+        $this->data['groups'] = $this->getGroups();
     }
     
     

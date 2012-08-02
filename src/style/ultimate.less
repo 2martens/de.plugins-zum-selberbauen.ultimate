@@ -5,58 +5,6 @@ Copyright 2011-2012 by Jim Martens.
 
 */
 
-/** column layout **/
-
-.ultimateSidebar (@side) {
-    float: @side;
-    font-size: 0.9em;
-    width: 25em;
-}
-
-.ultimateLeft {
-    .ultimateSidebar('left');
-}
-
-.ultimateRight {
-    ultimateSidebar('right');
-}
-
-.ultimateEditor {
-    margin-top: -14px;   
-}
-
-.ultimatePage {
-    margin-top: +17px;   
-}
-
-.ultimateCenter {
-    margin-top: 0;
-    margin-bottom: 0;
-    @margin = 25em;
-    
-    .leftMargin {
-        margin-left: @margin;
-    }
-    
-    .rightMargin {
-        margin-right: @margin;
-    }
-}
-
-fieldset.ultimateInvisible {
-    border: 0px;
-}
-
-#breadcrumbsFooter {
-    position: absolute;
-    bottom: 0%;   
-    width: 94%;
-}
-
-.ultimateContent {
-    position: relative;
-    bottom: 10px;   
-}
 
 /** large buttons - own implementation **/
 
@@ -318,51 +266,6 @@ fieldset.ultimateInvisible {
     border-color: #ccc #bbb #aaa;
 }
 
-/** entries **/
-.ultimateEntry {
-    margin-bottom: 20px;
-    margin-left: 1px;
-    margin-right: 0px;
-    position: relative;
-    
-    footer {
-        position: relative;
-        right: -15px;
-        bottom: -15px;
-        
-        nav {
-            text-align: right;
-        }
-    }
-}
- 
-@media screen and (min-width: 480px), screen and (min-device-width: 480px) {
-    
-    .ultimateEntry footer nav {
-        opacity: 0;
-        
-        -webkit-transition: opacity .1s linear;
-        -moz-transition: opacity .1s linear;
-        -ms-transition: opacity .1s linear;
-        -o-transition: opacity .1s linear;
-        transition: opacity .1s linear;
-    }
-    
-    .ultimateEntry:hover footer nav {
-        opacity: 1;
-    }
-    
-}
-
-@media screen and (max-width: 480px), screen and (max-device-width: 480px) {
-    
-    .ultimateEntry footer nav
-    .ultimateEntry:hover footer nav {
-        opacity: 1;
-    }
-    
-}
-
 /** sortables **/
 
 .sortableParent {
@@ -374,7 +277,7 @@ ul.sortable {
     list-style-type: none;
 }
 
-/** invisible popups **/
+/** invisible **/
 
 .ultimateHidden {
     display: none;

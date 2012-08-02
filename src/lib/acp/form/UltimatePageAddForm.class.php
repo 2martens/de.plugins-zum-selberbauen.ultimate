@@ -96,6 +96,12 @@ class UltimatePageAddForm extends ACPForm {
     public $groupIDs = array();
     
     /**
+     * Contains all available groups.
+     * @var \wcf\data\user\group\UserGroup[]
+     */
+    public $groups = array();
+    
+    /**
      * Contains the publish date.
      * @var string
      */
@@ -278,8 +284,9 @@ class UltimatePageAddForm extends ACPForm {
         );
         
         //showing empty form
-        $this->contentID = $this->pageParent = $this->publishDateTimestamp = 0;
+        $this->contentID = $this->pageParent = $this->statusID = $this->publishDateTimestamp = 0;
         $this->pageTitle = $this->pageSlug = $this->publishDate = '';
+        $this->visibility = 'public';
         I18nHandler::getInstance()->disableAssignValueVariables();
         $this->contents = $this->pages = $this->groupIDs = array();
     }

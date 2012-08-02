@@ -128,6 +128,27 @@
     </category>
     
     <category name="wcf.acp.ultimate">
+        <!-- general -->
+        <item name="wcf.acp.ultimate.publish"><![CDATA[Publish]]></item>
+        <item name="wcf.acp.ultimate.publishDateList"><![CDATA[Published]]></item>
+        <item name="wcf.acp.ultimate.status"><![CDATA[Status]]></item>
+        <item name="wcf.acp.ultimate.status.draft"><![CDATA[Draft]]></item>
+        <item name="wcf.acp.ultimate.status.pendingReview"><![CDATA[Pending Review]]></item>
+        <item name="wcf.acp.ultimate.status.scheduled"><![CDATA[Geplant]]></item>
+        <item name="wcf.acp.ultimate.status.published"><![CDATA[Published]]></item>
+        <item name="wcf.acp.ultimate.status.error.notValid"><![CDATA[The "selected" status is invalid, because you couldn't select it.]]></item>
+        <item name="wcf.acp.ultimate.visibility"><![CDATA[Visibility]]></item>
+        <item name="wcf.acp.ultimate.visibility.public"><![CDATA[Public]]></item>
+        <item name="wcf.acp.ultimate.visibility.protected"><![CDATA[Protected]]></item>
+        <item name="wcf.acp.ultimate.visibility.private"><![CDATA[Private]]></item>
+        <item name="wcf.acp.ultimate.visibility.groupIDs.error.notValid"><![CDATA[At least one of the "selected" groups wasn't selectable.]]></item>
+        <item name="wcf.acp.ultimate.visibility.groupIDs.error.notSelected"><![CDATA[You have to select at least one group.]]></item>
+        <item name="wcf.acp.ultimate.visibility.error.notValid"><![CDATA[The "selected" visibility wasn't selectable.]]></item>
+        <item name="wcf.acp.ultimate.publishDate"><![CDATA[Publish date and time]]></item>
+        <item name="wcf.acp.ultimate.author"><![CDATA[Author]]></item>
+        <item name="wcf.acp.ultimate.lastModified"><![CDATA[Last modified]]></item>
+        <!-- /general -->
+        
         <!-- category -->
         <item name="wcf.acp.ultimate.category.add"><![CDATA[Add category]]></item>
         <item name="wcf.acp.ultimate.category.edit"><![CDATA[Edit category]]></item>
@@ -168,9 +189,9 @@
         <item name="wcf.acp.ultimate.content.text.placeholder"><![CDATA[Two friends go to the beach nearly every day during summer time. They play with each other and have extremely much fun.
 Tom likes the warm water and the wunderful beach.]]></item>
         <item name="wcf.acp.ultimate.content.text.error.tooLong"><![CDATA[The text is too long.]]></item>        
+        <item name="wcf.acp.ultimate.content.visibility.description"><![CDATA[Please select here the visibility of the content. Public means everybody can see the content. Protected means that only selected groups can see the content. Private means that only you can see the content.]]></item>
+        
         <item name="wcf.acp.ultimate.content.general"><![CDATA[Content data]]></item>
-        <item name="wcf.acp.ultimate.content.author"><![CDATA[Author]]></item>
-        <item name="wcf.acp.ultimate.content.lastModified"><![CDATA[Date]]></item>
         <item name="wcf.acp.ultimate.content.noContents"><![CDATA[No contents found.]]></item>
         <item name="wcf.acp.ultimate.content.list"><![CDATA[Content list]]></item>
         <item name="wcf.acp.ultimate.content.list.all"><![CDATA[All contents]]></item>
@@ -193,23 +214,9 @@ Tom likes the warm water and the wunderful beach.]]></item>
         <item name="wcf.acp.ultimate.page.content.select"><![CDATA[Please select one content]]></item>
         <item name="wcf.acp.ultimate.page.content.error.notSelected"><![CDATA[You have to select one content.]]></item>
         <item name="wcf.acp.ultimate.page.content.error.notValid"><![CDATA[The "selected" content wasn't selectable.]]></item>
-        <item name="wcf.acp.ultimate.page.status"><![CDATA[Status]]></item>
-        <item name="wcf.acp.ultimate.page.status.draft"><![CDATA[Draft]]></item>
-        <item name="wcf.acp.ultimate.page.status.pendingReview"><![CDATA[Pending Review]]></item>
-        <item name="wcf.acp.ultimate.page.status.scheduled"><![CDATA[Geplant]]></item>
-        <item name="wcf.acp.ultimate.page.status.published"><![CDATA[Published]]></item>
-        <item name="wcf.acp.ultimate.page.status.error.notValid"><![CDATA[The "selected" status is invalid, because you couldn't select it.]]></item>
-        <item name="wcf.acp.ultimate.page.visibility"><![CDATA[Visibility]]></item>
-        <item name="wcf.acp.ultimate.page.visibility.public"><![CDATA[Public]]></item>
-        <item name="wcf.acp.ultimate.page.visibility.protected"><![CDATA[Protected]]></item>
-        <item name="wcf.acp.ultimate.page.visibility.private"><![CDATA[Private]]></item>
-        <item name="wcf.acp.ultimate.page.visibility.groupIDs.error.notValid"><![CDATA[At least one of the "selected" groups wasn't selectable.]]></item>
-        <item name="wcf.acp.ultimate.page.visibility.groupIDs.error.notSelected"><![CDATA[You have to select at least one group.]]></item>
         <item name="wcf.acp.ultimate.page.visibility.description"><![CDATA[Please select here the visibility of the page. Public means everybody can see the page. Protected means that only selected groups can see the page. Private means that only you can see the page.]]></item>
-        <item name="wcf.acp.ultimate.page.visibility.error.notValid"><![CDATA[The "selected" visibility wasn't selectable.]]></item>
-        <item name="wcf.acp.ultimate.page.publishDate"><![CDATA[Publish date and time]]></item>
+        
         <item name="wcf.acp.ultimate.page.general"><![CDATA[Page data]]></item>
-        <item name="wcf.acp.ultimate.page.lastModified"><![CDATA[Date]]></item>
         <item name="wcf.acp.ultimate.page.noContents"><![CDATA[No pages found.]]></item>
         <item name="wcf.acp.ultimate.page.list"><![CDATA[Page list]]></item>
         <item name="wcf.acp.ultimate.page.list.all"><![CDATA[All pages]]></item>
@@ -222,6 +229,7 @@ Tom likes the warm water and the wunderful beach.]]></item>
         <item name="ultimate.button.saveAsPending"><![CDATA[Save as Pending]]></item>
         <item name="ultimate.button.schedule"><![CDATA[Schedule]]></item>
         <item name="ultimate.button.publish"><![CDATA[Publish]]></item>
+        <item name="ultimate.button.update"><![CDATA[Update]]></item>
     </category>
     
     <category name="wcf.clipboard">
