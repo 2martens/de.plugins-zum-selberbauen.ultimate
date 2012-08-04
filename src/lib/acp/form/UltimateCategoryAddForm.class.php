@@ -3,12 +3,12 @@ namespace ultimate\acp\form;
 use ultimate\data\category\CategoryList;
 use ultimate\data\category\CategoryAction;
 use ultimate\data\category\CategoryEditor;
-use ultimate\system\UltimateCore;
 use ultimate\util\CategoryUtil;
 use wcf\acp\form\ACPForm;
 use wcf\system\cache\CacheHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
+use wcf\system\WCF;
 use wcf\util\StringUtil;
 
 /**
@@ -160,7 +160,7 @@ class UltimateCategoryAddForm extends ACPForm {
         }
         $this->saved();
     
-        UltimateCore::getTPL()->assign(
+        WCF::getTPL()->assign(
             'success', true
         );
     
@@ -178,7 +178,7 @@ class UltimateCategoryAddForm extends ACPForm {
         parent::assignVariables();
     
         I18nHandler::getInstance()->assignVariables();
-        UltimateCore::getTPL()->assign(array(
+        WCF::getTPL()->assign(array(
             'categoryParent' => $this->categoryParent,
             'categories' => $this->categories,
             'categoryTitle' => $this->categoryTitle,

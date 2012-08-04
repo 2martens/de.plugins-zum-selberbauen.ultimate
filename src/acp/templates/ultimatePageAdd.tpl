@@ -48,7 +48,7 @@
                         });
                     //]]>
                     </script>
-                    <input type="text" id="pageTitle" name="pageTitle" value="{$i18nPlainValues['pageTitle']}" placeholder="{lang}wcf.acp.ultimate.page.title.placeholder{/lang}" required="required" autofocus="autofocus" class="long" />
+                    <input type="text" id="pageTitle" name="pageTitle" value="{$i18nPlainValues['pageTitle']}" placeholder="{lang}wcf.acp.ultimate.page.title.placeholder{/lang}" required="required" class="long" />
                     {if $errorField == 'pageTitle'}
                         <small class="innerError">
                             {if $errorType == 'empty'}
@@ -97,8 +97,8 @@
                 <dt><label for="content">{lang}wcf.acp.ultimate.page.content{/lang}</label></dt>
                 <dd>
                     <select name="content">
-                    <option value="0">{lang}wcf.acp.ultimate.page.content.select{/lang}</option>
-                    {htmloptions options=$contents selected=$contentID}
+                        <option value="0">{lang}wcf.acp.ultimate.page.content.select{/lang}</option>
+                        {htmloptions options=$contents selected=$contentID}
                     </select>
                     {if $errorField == 'content'}
                         <small class="innerError">
@@ -109,7 +109,7 @@
             </dl>
         </fieldset>
         <fieldset>
-            <legend>{lang}wcf.acp.ultimate.publish{lang}</legend>
+            <legend>{lang}wcf.acp.ultimate.publish{/lang}</legend>
             <dl{if $errorField == 'status'} class="formError"{/if}>
                 <dt><label for="status">{lang}wcf.acp.ultimate.status{/lang}</label></dt>
                 <dd>
@@ -138,14 +138,17 @@
                     <option value="protected"{if $visibility == 'protected'} selected="selected"{/if}>{lang}wcf.acp.ultimate.visibility.protected{/lang}</option>
                     <option value="private"{if $visibility == 'private'} selected="selected"{/if}>{lang}wcf.acp.ultimate.visibility.private{/lang}</option>
                     </select>
-                    <div id="groupCheckboxes" style="display: none;">
-                        {htmlcheckboxes name="groupIDs" options=$groups selected=$groupIDs}
-                        {if $errorField == 'groupIDs'}
-                        <small class="innerError">
-                            {lang}wcf.acp.ultimate.visibility.groupIDs.error.{@$errorType}{/lang}
-                        </small>
-                        {/if}
-                    </div>
+                    <dl id="groupCheckboxes" class="container containerPadding marginTop{if $visibility != 'protected'} ultimateHidden{/if}">
+                        <dt><label>{lang}wcf.acp.ultimate.visibility.groupIDs{/lang}</label></dt>
+                        <dd>
+                            {htmlcheckboxes name="groupIDs" options=$groups selected=$groupIDs}
+                            {if $errorField == 'groupIDs'}
+                                <small class="innerError">
+                                    {lang}wcf.acp.ultimate.visibility.groupIDs.error.{@$errorType}{/lang}
+                                </small>
+                            {/if}
+                        </dd>
+                    </dl>
                     <script type="text/javascript">
                     /* <![CDATA[ */
                     $(function() {
@@ -171,7 +174,7 @@
             <dl{if $errorField == 'publishDate'} class="formError"{/if}>
                 <dt><label for="publishDate">{lang}wcf.acp.ultimate.publishDate{/lang}</label></dt>
                 <dd>
-                    <input type="datetime" id="publishDateInput" name="publishDate" value="{@$publishDate}" readonly="readonly" class="long" required="required" />
+                    <input type="datetime" id="publishDateInput" name="publishDate" value="{@$publishDate}" readonly="readonly" class="medium" required="required" />
                     <script type="text/javascript">
                     /* <![CDATA[*/
                     $(function() {
@@ -180,7 +183,7 @@
                         $.datepicker.setDefaults( $.datepicker.regional[ "{if $__wcf->getLanguage()->languageCode == 'en'}en-GB{else}{@$__wcf->getLanguage()->languageCode}{/if}" ] );
                         $('#publishDateInput').datetimepicker( {
                             showOn: 'both',
-                            buttonImage: {icon}calendar.gif{/icon},
+                            buttonImage: '{@$__wcf->getPath('ultimate')}icon/calendar.gif',
                             buttonImageOnly: true,
                             buttonText: '{lang}wcf.acp.ultimate.publishDate.editDate{/lang}',
                             showOtherMonths: true,

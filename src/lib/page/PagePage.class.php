@@ -65,7 +65,7 @@ class PagePage extends AbstractPage {
         }
         $this->page = $page;
         
-        // @todo: get template
+        // TODO implement template
     }
     
     /**
@@ -96,7 +96,7 @@ class PagePage extends AbstractPage {
      */
     protected function loadCache() {
         $cacheName = 'page';
-        $cacheBuilderClassName = '\ultimate\system\cache\builder\UltimatePageCacheBuilder';
+        $cacheBuilderClassName = '\ultimate\system\cache\builder\PageCacheBuilder';
         $file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
         CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
         return CacheHandler::getInstance()->get($cacheName, 'pagesToSlug');

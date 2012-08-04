@@ -49,7 +49,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
             ));
         } 
         $sql = 'INSERT INTO ultimate'.ULTIMATE_N.'_user_group_to_page
-                (userGroupID, pageID)
+                (groupID, pageID)
                 VALUES
                 (?, ?)';
         $statement = UltimateCore::getDB()->prepareStatement($sql);

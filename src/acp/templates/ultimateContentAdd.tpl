@@ -41,7 +41,7 @@
                         });
                     //]]>
                     </script>
-                    <input type="text" id="subject" name="subject" value="{@$i18nPlainValues['subject']}" class="long" required="required" autofocus="autofocus" placeholder="{lang}wcf.acp.ultimate.content.title.placeholder{/lang}" />
+                    <input type="text" id="subject" name="subject" value="{@$i18nPlainValues['subject']}" class="long" required="required" placeholder="{lang}wcf.acp.ultimate.content.title.placeholder{/lang}" />
                     {if $errorField == 'subject'}
                         <small class="innerError">
                             {if $errorType == 'empty'}
@@ -72,6 +72,21 @@
                                 {lang}wcf.global.form.error.empty{/lang}
                             {else}
                                 {lang}wcf.acp.ultimate.content.description.error.{@$errorType}{/lang}
+                            {/if}
+                        </small>
+                    {/if}
+                </dd>
+            </dl>
+            <dl{if $errorField == 'slug'} class="formError"{/if}>
+                <dt><label for="slug">{lang}wcf.acp.ultimate.content.slug{/lang}</label></dt>
+                <dd>
+                    <input type="text" id="slug" name="slug" value="{@$slug}" class="long" required="required" placeholder="{lang}wcf.acp.ultimate.content.slug.placeholder{/lang}" />
+                    {if $errorField == 'slug'}
+                        <small class="innerError">
+                            {if $errorType == 'empty'}
+                                {lang}wcf.global.form.error.empty{/lang}
+                            {else}
+                                {lang}wcf.acp.ultimate.content.slug.error.{@$errorType}{/lang}
                             {/if}
                         </small>
                     {/if}
@@ -116,7 +131,7 @@
             </dl>
         </fieldset>
         <fieldset>
-            <legend>{lang}wcf.acp.ultimate.publish{lang}</legend>
+            <legend>{lang}wcf.acp.ultimate.publish{/lang}</legend>
             <dl{if $errorField == 'status'} class="formError"{/if}>
                 <dt><label for="status">{lang}wcf.acp.ultimate.status{/lang}</label></dt>
                 <dd>
@@ -145,14 +160,17 @@
                     <option value="protected"{if $visibility == 'protected'} selected="selected"{/if}>{lang}wcf.acp.ultimate.visibility.protected{/lang}</option>
                     <option value="private"{if $visibility == 'private'} selected="selected"{/if}>{lang}wcf.acp.ultimate.visibility.private{/lang}</option>
                     </select>
-                    <div id="groupCheckboxes" style="display: none;">
-                        {htmlcheckboxes name="groupIDs" options=$groups selected=$groupIDs}
-                        {if $errorField == 'groupIDs'}
-                        <small class="innerError">
-                            {lang}wcf.acp.ultimate.visibility.groupIDs.error.{@$errorType}{/lang}
-                        </small>
-                        {/if}
-                    </div>
+                    <dl id="groupCheckboxes" class="container containerPadding marginTop{if $visibility != 'protected'} ultimateHidden{/if}">
+                        <dt><label>{lang}wcf.acp.ultimate.visibility.groupIDs{/lang}</label></dt>
+                        <dd>
+                            {htmlcheckboxes name="groupIDs" options=$groups selected=$groupIDs}
+                            {if $errorField == 'groupIDs'}
+                                <small class="innerError">
+                                    {lang}wcf.acp.ultimate.visibility.groupIDs.error.{@$errorType}{/lang}
+                                </small>
+                            {/if}
+                        </dd>
+                    </dl>
                     <script type="text/javascript">
                     /* <![CDATA[ */
                     $(function() {
@@ -178,7 +196,7 @@
             <dl{if $errorField == 'publishDate'} class="formError"{/if}>
                 <dt><label for="publishDate">{lang}wcf.acp.ultimate.publishDate{/lang}</label></dt>
                 <dd>
-                    <input type="datetime" id="publishDateInput" name="publishDate" value="{@$publishDate}" readonly="readonly" class="long" required="required" />
+                    <input type="datetime" id="publishDateInput" name="publishDate" value="{@$publishDate}" readonly="readonly" class="medium" required="required" />
                     <script type="text/javascript">
                     /* <![CDATA[*/
                     $(function() {
@@ -186,8 +204,8 @@
                         $.timepicker.setDefaults( $.timepicker.regional[ "{if $__wcf->getLanguage()->languageCode == 'en'}en-GB{else}{@$__wcf->getLanguage()->languageCode}{/if}" ] );
                         $.datepicker.setDefaults( $.datepicker.regional[ "{if $__wcf->getLanguage()->languageCode == 'en'}en-GB{else}{@$__wcf->getLanguage()->languageCode}{/if}" ] );
                         $('#publishDateInput').datetimepicker( {
-                            showOn: 'button',
-                            buttonImage: {icon}calendar.gif{/icon},
+                            showOn: 'both',
+                            buttonImage: '{@$__wcf->getPath('ultimate')}icon/calendar.gif',
                             buttonImageOnly: true,
                             buttonText: '{lang}wcf.acp.ultimate.publishDate.editDate{/lang}',
                             showOtherMonths: true,

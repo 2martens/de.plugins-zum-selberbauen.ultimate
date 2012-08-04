@@ -39,6 +39,15 @@
         <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent.description"><![CDATA[Members of this usergroup can delete contents.]]></item>
         <!-- /content -->
         
+        <!-- menu -->
+        <item name="wcf.acp.group.option.admin.content.ultimate.canAddMenu"><![CDATA[Can add menus.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canAddMenu.description"><![CDATA[Members of this usergroup can add menus.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canEditMenu"><![CDATA[Can edit menus.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canEditMenu.description"><![CDATA[Members of this usergroup can edit menus.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteMenu"><![CDATA[Can delete menus.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteMenu.description"><![CDATA[Members of this usergroup can delete menus.]]></item>
+        <!-- /menu -->
+        
         <!-- page -->
         <item name="wcf.acp.group.option.admin.content.ultimate.canAddPage"><![CDATA[Can add pages.]]></item>
         <item name="wcf.acp.group.option.admin.content.ultimate.canAddPage.description"><![CDATA[Members of this usergroup can add pages.]]></item>
@@ -60,6 +69,15 @@
         <item name="wcf.acp.menu.link.ultimate.page.add"><![CDATA[Add page]]></item>
         <item name="wcf.acp.menu.link.ultimate.page.list"><![CDATA[List pages]]></item>
         <!-- /core items -->
+        
+        <!-- appearance items -->
+        
+        <!-- menu items -->
+        <item name="wcf.acp.menu.link.ultimate.appearance.menu.add"><![CDATA[Add menu]]></item>
+        <item name="wcf.acp.menu.link.ultimate.appearance.menu.list"><![CDATA[List menus]]></item>
+        <!-- /menu items -->
+        
+        <!-- /appearance items -->
         
         <!-- additional items -->
         
@@ -182,6 +200,9 @@
         <item name="wcf.acp.ultimate.content.description"><![CDATA[Description]]></item>
         <item name="wcf.acp.ultimate.content.description.placeholder"><![CDATA[This story is about two friends having fun with each other.]]></item>
         <item name="wcf.acp.ultimate.content.description.error.tooShort"><![CDATA[The description has to be at least 4 characters long.]]></item>
+        <item name="wcf.acp.ultimate.content.slug"><![CDATA[Slug]]></item>
+        <item name="wcf.acp.ultimate.content.slug.placeholder"><![CDATA[a-nice-story]]></item>
+        <item name="wcf.acp.ultimate.content.slug.error.notUnique"><![CDATA[A content with the specified slug already exists.]]></item>
         <item name="wcf.acp.ultimate.content.categories"><![CDATA[Categories]]></item>
         <item name="wcf.acp.ultimate.content.categories.error.invalidIDs"><![CDATA[At least one of the "selected" categories wasn't selectable.]]></item>
         <item name="wcf.acp.ultimate.content.message"><![CDATA[Content Message]]></item>
@@ -268,13 +289,13 @@ Tom likes the warm water and the wunderful beach.]]></item>
     
     <category name="ultimate.header">
         <!-- page menu -->
-        <item name="ultimate.header.menu.index"><![CDATA[Home]]></item>
+        <item name="ultimate.header.menu.index"><![CDATA[Website]]></item>
         <!-- /page menu -->
     </category>
     
     <category name="ultimate.footer">
         <!-- page menu -->
-        <item name="ultimate.footer.menu.index"><![CDATA[Home]]></item>
+        <item name="ultimate.footer.menu.index"><![CDATA[Website]]></item>
         <!-- /page menu -->
     </category>
 </language>

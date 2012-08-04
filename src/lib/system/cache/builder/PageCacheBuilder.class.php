@@ -13,7 +13,7 @@ use wcf\system\cache\builder\ICacheBuilder;
  * @subpackage system.cache.builder
  * @category Ultimate CMS
  */
-class UltimatePageCacheBuilder implements ICacheBuilder {
+class PageCacheBuilder implements ICacheBuilder {
     
     /**
      * @see \wcf\system\cache\builder\ICacheBuilder::getData()
@@ -33,18 +33,15 @@ class UltimatePageCacheBuilder implements ICacheBuilder {
         $sqlOrderBy = $sortField." ".$sortOrder;
         $pageList->sqlOrderBy = $sqlOrderBy;
         
-        $pageList->readObjectIDs();
         $pageList->readObjects();
         $pages = $pageList->getObjects();
-        $pageIDs = $pageList->getObjectIDs();
-        if (!count($pages) || !count($pageIDs)) return $data;
+        if (!count($pages)) return $data;
         
-        $data['pages'] = array_combine($pageIDs, $pages);
-        $data['pageIDs'] = $pageIDs;
-        
-        foreach ($data['pages'] as $id => $page) {
+        foreach ($pages as $page) {
             /* @var $page \ultimate\data\page\Page */
-            $data['pagesToParent'][$id] = $page->__get('childPages');
+            $data['pages'][$page->__get('pageID')] = $page;
+            $data['pageIDs'][] = $page->__get('pageID');
+            $data['pagesToParent'][$page->__get('pageID')] = $page->__get('childPages');
             $data['pagesToSlug'][$page->__get('pageSlug')] = $page;
         }
         

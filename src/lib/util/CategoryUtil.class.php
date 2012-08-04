@@ -1,6 +1,7 @@
 <?php
 namespace ultimate\util;
 use wcf\system\cache\CacheHandler;
+use wcf\util\StringUtil;
 
 /**
  * Provides category-related functions.
@@ -24,7 +25,7 @@ class CategoryUtil {
         $categoryID = intval($categoryID);
         $categories = self::loadCache(
             'category',
-            '\ultimate\system\cache\builder\UltimateCategoryCacheBuilder',
+            '\ultimate\system\cache\builder\CategoryCacheBuilder',
             'categories'
         );
         
@@ -41,13 +42,13 @@ class CategoryUtil {
      * @return boolean $isAvailable
      */
     public static function isAvailableTitle($categoryTitle, $categoryParent = 0) {
-        $categoryTitle = trim($categoryTitle);
+        $categoryTitle = StringUtil::trim($categoryTitle);
         $categoryParent = intval($categoryParent);
         $isAvailable = true;
         if ($categoryParent) {
             $categories = self::loadCache(
                 'category',
-                '\ultimate\system\cache\builder\UltimateCategoryCacheBuilder',
+                '\ultimate\system\cache\builder\CategoryCacheBuilder',
                 'categoriesToParent'
             );
         
@@ -61,7 +62,7 @@ class CategoryUtil {
         else {
             $categories = self::loadCache(
                 'category',
-                '\ultimate\system\cache\builder\UltimateCategoryCacheBuilder',
+                '\ultimate\system\cache\builder\CategoryCacheBuilder',
                 'categories'
             );
             foreach ($categories as $categoryID => $category) {
@@ -81,13 +82,13 @@ class CategoryUtil {
      * @return boolean $isAvailable
      */
     public static function isAvailableSlug($categorySlug, $categoryParent = 0) {
-        $categorySlug = trim($categorySlug);
+        $categorySlug = StringUtil::trim($categorySlug);
         $categoryParent = intval($categoryParent);
         $isAvailable = true;
         if ($categoryParent) {
             $categories = self::loadCache(
                 'category',
-                '\ultimate\system\cache\builder\UltimateCategoryCacheBuilder',
+                '\ultimate\system\cache\builder\CategoryCacheBuilder',
                 'categoriesToParent'
             );
         
@@ -101,7 +102,7 @@ class CategoryUtil {
         else {
             $categories = self::loadCache(
                     'category',
-                    '\ultimate\system\cache\builder\UltimateCategoryCacheBuilder',
+                    '\ultimate\system\cache\builder\CategoryCacheBuilder',
                     'categories'
             );
             foreach ($categories as $categoryID => $category) {

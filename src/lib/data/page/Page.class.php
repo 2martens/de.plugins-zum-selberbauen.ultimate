@@ -81,7 +81,7 @@ class Page extends AbstractUltimateDatabaseObject {
      * @return \wcf\data\user\group\UserGroup[]
      */
     public function getGroups() {
-        $sql = 'SELECT    userGroupID
+        $sql = 'SELECT    groupID
                 FROM      ultimate'.ULTIMATE_N.'_user_group_to_page
                 WHERE     pageID = ?';
         $statement = UltimateCore::getDB()->prepareStatement($sql);
@@ -89,7 +89,7 @@ class Page extends AbstractUltimateDatabaseObject {
         
         $groups = array();
         while ($row = $statement->fetchArray()) {
-            $groups[$row['userGroupID']] = new UserGroup($row['userGroupID']);
+            $groups[$row['groupID']] = new UserGroup($row['groupID']);
         }
         return $groups;
     }

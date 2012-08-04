@@ -1,5 +1,31 @@
 /**** tables ****/
 
+DROP TABLE IF EXISTS ultimate1_1_block;
+CREATE TABLE ultimate1_1_block (
+    blockID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    blockTypeID INT(10) NOT NULL,
+    query VARCHAR(255) NOT NULL DEFAULT '',
+    parameters VARCHAR(255) NOT NULL DEFAULT '',
+    KEY (blockTypeID)
+);
+
+DROP TABLE IF EXISTS ultimate1_1_blocktype;
+CREATE TABLE ultimate1_1_blocktype (
+    blockTypeID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    packageID INT(10) NOT NULL,
+    blockTypeName VARCHAR(255) NOT NULL DEFAULT '',
+    blockTypeClassName VARCHAR(255) NOT NULL DEFAULT '',
+    UNIQUE KEY packageID (packageID, blockTypeName)
+);
+
+DROP TABLE IF EXISTS ultimate1_1_block_to_template;
+CREATE TABLE ultimate1_1_block_to_template (
+    blockID INT(10) NOT NULL,
+    templateID INT(10) NOT NULL,
+    KEY (blockID),
+    KEY (templateID)
+);
+
 DROP TABLE IF EXISTS ultimate1_1_category;
 CREATE TABLE ultimate1_1_category (
     categoryID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -7,16 +33,17 @@ CREATE TABLE ultimate1_1_category (
     categoryTitle VARCHAR(255) NOT NULL DEFAULT '',
     categoryDescription VARCHAR(255) NOT NULL DEFAULT '',
     categorySlug VARCHAR(255) NOT NULL DEFAULT '',
-    UNIQUE KEY categoryTitle (parentCategoryID, categoryTitle),
-    UNIQUE KEY categorySlug (parentCategoryID, categorySlug)
+    UNIQUE KEY categoryTitle (categoryParent, categoryTitle),
+    UNIQUE KEY categorySlug (categoryParent, categorySlug)
 );
 
 DROP TABLE IF EXISTS ultimate1_1_content;
 CREATE TABLE ultimate1_1_content (
     contentID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    authorID INT(10) NOT NULL DEFAULT 0,
+    authorID INT(10) NOT NULL,
     contentTitle VARCHAR(255) NOT NULL DEFAULT '',
     contentDescription VARCHAR(255) NOT NULL DEFAULT '',
+    contentSlug VARCHAR(255) NOT NULL DEFAULT '',
     contentText MEDIUMTEXT NOT NULL,
     enableBBCodes TINYINT(1) NOT NULL DEFAULT 1,
     enableHtml TINYINT(1) NOT NULL DEFAULT 0,
@@ -24,7 +51,7 @@ CREATE TABLE ultimate1_1_content (
     publishDate INT(10) NOT NULL DEFAULT 0,
     lastModified INT(10) NOT NULL DEFAULT 0,
     status INT(1) NOT NULL DEFAULT 0,
-    visibility ENUM('public, 'protected', 'private') NOT NULL DEFAULT 'public',
+    visibility ENUM('public', 'protected', 'private') NOT NULL DEFAULT 'public',
     KEY (authorID)
 );
 
@@ -42,6 +69,25 @@ CREATE TABLE ultimate1_1_content_to_page (
     pageID INT(10) NOT NULL UNIQUE KEY
 );
 
+DROP TABLE IF EXISTS ultimate1_1_menu;
+CREATE TABLE ultimate1_1_menu (
+    menuID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    menuName VARCHAR(255) NOT NULL DEFAULT ''    
+);
+
+DROP TABLE IF EXISTS ultimate1_1_menu_item;
+CREATE TABLE ultimate1_1_menu_item (
+    menuItemID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    menuID INT(10) NOT NULL,
+    menuItemName VARCHAR(255) NOT NULL DEFAULT '',
+    menuItemParent VARCHAR(255) NOT NULL DEFAULT '',
+    menuItemLink VARCHAR(255) NOT NULL DEFAULT '',
+    showOrder INT(10) NOT NULL DEFAULT 0,
+    type ENUM('category', 'content', 'custom', 'page') NOT NULL,
+    isDisabled TINYINT(1) NOT NULL DEFAULT 0,
+    UNIQUE KEY (menuID, menuItemName)
+);
+
 DROP TABLE IF EXISTS ultimate1_1_page;
 CREATE TABLE ultimate1_1_page (
     pageID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -52,38 +98,54 @@ CREATE TABLE ultimate1_1_page (
     publishDate INT(10) NOT NULL DEFAULT 0,
     lastModified INT(10) NOT NULL DEFAULT 0,
     status INT(1) NOT NULL DEFAULT 0,
-    visibility ENUM('public, 'protected', 'private') NOT NULL DEFAULT 'public',
+    visibility ENUM('public', 'protected', 'private') NOT NULL DEFAULT 'public',
     KEY (authorID)
+);
+
+DROP TABLE IF EXISTS ultimate1_1_template;
+CREATE TABLE ultimate1_1_template (
+    templateID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    packageID INT(10) NOT NULL,
+    templateName VARCHAR(255) NOT NULL DEFAULT '',
+    templateBlocks VARCHAR(255) NOT NULL DEFAULT '',
+    KEY (packageID)
 );
 
 DROP TABLE IF EXISTS ultimate1_1_user_group_to_content;
 CREATE TABLE ultimate1_1_user_group_to_content (
-    userGroupID INT(10) NOT NULL,
+    groupID INT(10) NOT NULL,
     contentID INT(10) NOT NULL,
-    KEY (userGroupID),
+    KEY (groupID),
     KEY (contentID)
 );
 
 DROP TABLE IF EXISTS ultimate1_1_user_group_to_page;
 CREATE TABLE ultimate1_1_user_group_to_page (
-    userGroupID INT(10) NOT NULL,
+    groupID INT(10) NOT NULL,
     pageID INT(10) NOT NULL,
-    KEY (userGroupID),
+    KEY (groupID),
     KEY (pageID)
 );
 
 
 /**** foreign keys ****/
-ALTER TABLE ultimate1_1_page ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_block ADD FOREIGN KEY (blockTypeID) REFERENCES ultimate1_1_blocktype (blockTypeID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_block_to_template ADD FOREIGN KEY (blockID) REFERENCES ultimate1_1_block (blockID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_block_to_template ADD FOREIGN KEY (templateID) REFERENCES ultimate1_1_template (templateID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_blocktype ADD FOREIGN KEY (packageID) REFERENCES wcf1_package (packageID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_content ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_content_to_category ADD FOREIGN KEY (contentID) REFERENCES ultimate1_1_content (contentID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_content_to_category ADD FOREIGN KEY (categoryID) REFERENCES ultimate1_1_category (categoryID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_content_to_page ADD FOREIGN KEY (contentID) REFERENCES ultimate1_1_content (contentID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_content_to_page ADD FOREIGN KEY (pageID) REFERENCES ultimate1_1_page (pageID) ON DELETE CASCADE;
-ALTER TABLE ultimate1_1_user_group_to_page ADD FOREIGN KEY (pageID) REFERENCES ultimate1_1_page (pageID) ON DELETE CASCADE;
-ALTER TABLE ultimate1_1_user_group_to_page ADD FOREIGN KEY (userGroupID) REFERENCES wcf1_user_group (userGroupID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_menu_item ADD FOREIGN KEY (menuID) REFERENCES ultimate1_1_menu (menuID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_page ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_template ADD FOREIGN KEY (packageID) REFERENCES wcf1_package (packageID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_user_group_to_content ADD FOREIGN KEY (contentID) REFERENCES ultimate1_1_content (contentID) ON DELETE CASCADE;
-ALTER TABLE ultimate1_1_user_group_to_content ADD FOREIGN KEY (userGroupID) REFERENCES wcf1_user_group (userGroupID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_user_group_to_content ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_user_group_to_page ADD FOREIGN KEY (pageID) REFERENCES ultimate1_1_page (pageID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_user_group_to_page ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE CASCADE;
+
 
 /**** default entries ****/
 -- default category

@@ -14,14 +14,14 @@
         </acpmenuitem>
         
         <acpmenuitem name="wcf.acp.menu.link.ultimate.content.list">
-            <link>index.php/UltimateContentList</link>
+            <link>index.php/UltimateContentList/</link>
             <parent>wcf.acp.menu.link.ultimate.content</parent>
             <permissions>admin.content.ultimate.canEditContent,admin.content.ultimate.canDeleteContent</permissions>
             <showorder>1</showorder>
         </acpmenuitem>
         
         <acpmenuitem name="wcf.acp.menu.link.ultimate.content.add">
-            <link>index.php/UltimateContentAdd</link>
+            <link>index.php/UltimateContentAdd/</link>
             <parent>wcf.acp.menu.link.ultimate.content</parent>
             <permissions>admin.content.ultimate.canAddContent</permissions>
             <showorder>2</showorder>
@@ -35,14 +35,14 @@
         </acpmenuitem>
         
         <acpmenuitem name="wcf.acp.menu.link.ultimate.category.list">
-            <link>index.php/UltimateCategoryList</link>
+            <link>index.php/UltimateCategoryList/</link>
             <parent>wcf.acp.menu.link.ultimate.category</parent>
             <permissions>admin.content.ultimate.canEditCategory,admin.content.ultimate.canDeleteCategory</permissions>
             <showorder>1</showorder>
         </acpmenuitem>
         
         <acpmenuitem name="wcf.acp.menu.link.ultimate.category.add">
-            <link>index.php/UltimateCategoryAdd</link>
+            <link>index.php/UltimateCategoryAdd/</link>
             <parent>wcf.acp.menu.link.ultimate.category</parent>
             <permissions>admin.content.ultimate.canAddCategory</permissions>
             <showorder>2</showorder>
@@ -56,19 +56,48 @@
         </acpmenuitem>        
         
         <acpmenuitem name="wcf.acp.menu.link.ultimate.page.list">
-            <link>index.php/UltimatePageList</link>
+            <link>index.php/UltimatePageList/</link>
             <parent>wcf.acp.menu.link.ultimate.page</parent>
             <permissions>admin.content.ultimate.canEditPage,admin.content.ultimate.canDeletePage</permissions>
             <showorder>1</showorder>
         </acpmenuitem>
         
         <acpmenuitem name="wcf.acp.menu.link.ultimate.page.add">
-            <link>index.php/UltimatePageAdd</link>
+            <link>index.php/UltimatePageAdd/</link>
             <parent>wcf.acp.menu.link.ultimate.page</parent>
             <permissions>admin.content.ultimate.canAddPage</permissions>
             <showorder>2</showorder>
         </acpmenuitem>
         <!-- /pages -->
+        
+        <!-- appearance -->
+        <acpmenuitem name="wcf.acp.menu.link.ultimate.appearance">
+            <parent>wcf.acp.menu.link.ultimate</parent>
+            <showorder>4</showorder>
+        </acpmenuitem>
+        
+        <!-- menus -->
+        <acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.menu">
+            <parent>wcf.acp.menu.link.ultimate.appearance</parent>
+            <showorder>1</showorder>
+        </acpmenuitem>
+        
+        <acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.menu.list">
+            <link>index.php/UltimateMenuList/</link>
+            <parent>wcf.acp.menu.link.ultimate.appearance.menu</parent>
+            <permissions>admin.content.ultimate.canEditMenu,admin.content.ultimate.canDeleteMenu</permissions>
+            <showorder>1</showorder>
+        </acpmenuitem>
+        
+        <acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.menu.add">
+            <link>index.php/UltimateMenuAdd/</link>
+            <parent>wcf.acp.menu.link.ultimate.appearance.menu</parent>
+            <permissions>admin.content.ultimate.canAddMenu</permissions>
+            <showorder>2</showorder>
+        </acpmenuitem>
+        <!-- /menus -->
+        
+        <!-- /appearance -->
         
         <!-- additional -->
         <acpmenuitem name="wcf.acp.menu.link.ultimate.additional">

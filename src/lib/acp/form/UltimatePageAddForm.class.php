@@ -3,7 +3,6 @@ namespace ultimate\acp\form;
 use ultimate\data\content\ContentList;
 use ultimate\data\page\PageAction;
 use ultimate\data\page\PageEditor;
-use ultimate\system\UltimateCore;
 use ultimate\util\PageUtil;
 use wcf\acp\form\ACPForm;
 use wcf\system\cache\CacheHandler;
@@ -11,6 +10,7 @@ use wcf\system\exception\UserInputException;
 use wcf\system\exception\SystemException;
 use wcf\system\language\I18nHandler;
 use wcf\system\Regex;
+use wcf\system\WCF;
 use wcf\util\ArrayUtil;
 use wcf\util\DateUtil;
 use wcf\util\DateTimeUtil;
@@ -166,28 +166,28 @@ class UltimatePageAddForm extends ACPForm {
         
         // fill status options
         $this->statusOptions = array(
-            0 => UltimateCore::getLanguage()->get('wcf.acp.ultimate.status.draft'),
-            1 => UltimateCore::getLanguage()->get('wcf.acp.ultimate.status.pendingReview'),
+            0 => WCF::getLanguage()->get('wcf.acp.ultimate.status.draft'),
+            1 => WCF::getLanguage()->get('wcf.acp.ultimate.status.pendingReview'),
         );
         
         // fill publishDate with default value (today)
         $this->startTime = TIME_NOW;
         $dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
-        $dateTime->setTimezone(UltimateCore::getUser()->getTimezone());
-        $date = UltimateCore::getLanguage()->getDynamicVariable(
+        $dateTime->setTimezone(WCF::getUser()->getTimezone());
+        $date = WCF::getLanguage()->getDynamicVariable(
             'ultimate.date.dateFormat',
             array(
                 'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
             )
         );
-        $time = UltimateCore::getLanguage()->get('wcf.date.timeFormat');
+        $time = WCF::getLanguage()->get('wcf.date.timeFormat');
         $format = str_replace(
             '%time%',
             $time,
             str_replace(
-                '%date',
+                '%date%',
                 $date,
-                UltimateCore::getLanguage()->get('ultimate.date.dateTimeFormat')
+                WCF::getLanguage()->get('ultimate.date.dateTimeFormat')
             )
         );
         $this->publishDate = $dateTime->format($format);
@@ -247,7 +247,7 @@ class UltimatePageAddForm extends ACPForm {
         
         $parameters = array(
             'data' => array(
-                'authorID' => UltimateCore::getUser()->userID,
+                'authorID' => WCF::getUser()->userID,
                 'pageParent' => $this->pageParent,
                 'pageTitle' => $this->pageTitle,
                 'pageSlug' => $this->pageSlug,
@@ -260,7 +260,7 @@ class UltimatePageAddForm extends ACPForm {
         );
         
         if ($this->visibility == 'protected') {
-            $parameters['userGroupIDs'] = $this->groupIDs;
+            $parameters['groupIDs'] = $this->groupIDs;
         }
         
         $this->objectAction = new PageAction(array(), 'create', $parameters);
@@ -279,7 +279,7 @@ class UltimatePageAddForm extends ACPForm {
         
         $this->saved();
         
-        UltimateCore::getTPL()->assign(
+        WCF::getTPL()->assign(
             'success', true
         );
         
@@ -298,7 +298,7 @@ class UltimatePageAddForm extends ACPForm {
         parent::assignVariables();
         
         I18nHandler::getInstance()->assignVariables();
-        UltimateCore::getTPL()->assign(array(
+        WCF::getTPL()->assign(array(
             'contentID' => $this->contentID,
             'contents' => $this->contents,
             'pages' => $this->pages,
@@ -307,6 +307,7 @@ class UltimatePageAddForm extends ACPForm {
             'pageSlug' => $this->pageSlug,
             'groups' => $this->groups,
             'groupIDs' => $this->groupIDs,
+            'publishDate' => $this->publishDate,
             'statusOptions' => $this->statusOptions,
             'statusID' => $this->statusID,
             'visibility' => $this->visibility,
@@ -430,7 +431,7 @@ class UltimatePageAddForm extends ACPForm {
         
         $pattern = '\d{4}-\d{2}-\d{2} \d{2}:\d{2}';
         $regex = new Regex($pattern);
-        $dateTimeNow = new \DateTime('@'.TIME_NOW, UltimateCore::getUser()->getTimezone());
+        $dateTimeNow = new \DateTime('@'.TIME_NOW, WCF::getUser()->getTimezone());
         if ($regex->match($this->publishDate)) {
             // the browser has implemented the input type date
             // or (more likely) the user hasn't changed the jQuery code
@@ -438,7 +439,7 @@ class UltimatePageAddForm extends ACPForm {
             $dateTime = \DateTime::createFromFormat(
                     'Y-m-d H:i',
                     $this->publishDate,
-                    UltimateCore::getUser()->getTimezone()
+                    WCF::getUser()->getTimezone()
             );
             $this->publishDateTimestamp = $dateTime->getTimestamp();
             return;
@@ -450,7 +451,7 @@ class UltimatePageAddForm extends ACPForm {
         $dateTime = \DateTime::createFromFormat(
             $phpDateFormat,
             $this->publishDate,
-            UltimateCore::getUser()->getTimezone()
+            WCF::getUser()->getTimezone()
         );
         $this->publishDateTimestamp = $dateTime->getTimestamp();
     }

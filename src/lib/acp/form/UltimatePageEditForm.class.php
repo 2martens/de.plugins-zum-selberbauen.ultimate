@@ -4,12 +4,13 @@ use ultimate\acp\form\UltimatePageAddForm;
 use ultimate\data\page\Page;
 use ultimate\data\page\PageAction;
 use ultimate\data\page\PageEditor;
-use ultimate\system\UltimateCore;
 use ultimate\util\PageUtil;
 use wcf\form\AbstractForm;
 use wcf\system\cache\CacheHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
+use wcf\system\WCF;
+use wcf\util\DateUtil;
 
 /**
  * Shows the UltimatePageEdit form.
@@ -96,20 +97,24 @@ class UltimatePageEditForm extends UltimatePageAddForm {
             
             /* @var $dateTime \DateTime */
             $dateTime = $this->page->__get('publishDateObject');
-            $date = UltimateCore::getLanguage()->getDynamicVariable(
+            if (!$dateTime->getTimestamp()) {
+                $dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
+                $dateTime->setTimezone(WCF::getUser()->getTimezone());
+            }
+            $date = WCF::getLanguage()->getDynamicVariable(
                 'ultimate.date.dateFormat',
                 array(
                     'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
                 )
             );
-            $time = UltimateCore::getLanguage()->get('wcf.date.timeFormat');
+            $time = WCF::getLanguage()->get('wcf.date.timeFormat');
             $format = str_replace(
                 '%time%',
                 $time,
                 str_replace(
-                    '%date',
+                    '%date%',
                     $date,
-                    UltimateCore::getLanguage()->get('ultimate.date.dateTimeFormat')
+                    WCF::getLanguage()->get('ultimate.date.dateTimeFormat')
                 )
             );
             $this->publishDate = $dateTime->format($format);
@@ -118,24 +123,24 @@ class UltimatePageEditForm extends UltimatePageAddForm {
             // get status data
             $this->statusID = $this->page->__get('status');
             $this->statusOptions = array(
-                0 => UltimateCore::getLanguage()->get('wcf.acp.ultimate.status.draft'),
-                1 => UltimateCore::getLanguage()->get('wcf.acp.ultimate.status.pendingReview'),
+                0 => WCF::getLanguage()->get('wcf.acp.ultimate.status.draft'),
+                1 => WCF::getLanguage()->get('wcf.acp.ultimate.status.pendingReview'),
             );
             
             // fill publish button with fitting language
-            $this->publishButtonLang = UltimateCore::getLanguage()->get('ultimate.button.publish');
+            $this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.publish');
             if ($this->statusID == 2) {
-                $this->statusOptions[2] = UltimateCore::getLanguage()->get('wcf.acp.ultimate.status.scheduled');
-                $this->publishButtonLang = UltimateCore::getLanguage()->get('ultimate.button.update');
+                $this->statusOptions[2] = WCF::getLanguage()->get('wcf.acp.ultimate.status.scheduled');
+                $this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.update');
             } elseif ($this->statusID == 3) {
-                $this->statusOptions[3] = UltimateCore::getLanguage()->get('wcf.acp.ultimate.status.published');
-                $this->publishButtonLang = UltimateCore::getLanguage()->get('ultimate.button.update');
+                $this->statusOptions[3] = WCF::getLanguage()->get('wcf.acp.ultimate.status.published');
+                $this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.update');
             }
             
             // fill save button with fitting language
             $saveButtonLangArray = array(
-                0 => UltimateCore::getLanguage()->get('ultimate.button.saveAsDraft'),
-                1 => UltimateCore::getLanguage()->get('ultimate.button.saveAsPending'),
+                0 => WCF::getLanguage()->get('ultimate.button.saveAsDraft'),
+                1 => WCF::getLanguage()->get('ultimate.button.saveAsPending'),
                 2 => '',
                 3 => ''
             );
@@ -175,7 +180,7 @@ class UltimatePageEditForm extends UltimatePageAddForm {
         
         $parameters = array(
             'data' => array(
-                'authorID' => UltimateCore::getUser()->userID,
+                'authorID' => WCF::getUser()->userID,
                 'pageParent' => $this->pageParent,
                 'pageTitle' => $this->pageTitle,
                 'pageSlug' => $this->pageSlug,
@@ -188,7 +193,7 @@ class UltimatePageEditForm extends UltimatePageAddForm {
         );
         
         if ($this->visibility == 'protected') {
-            $parameters['userGroupIDs'] = $this->groupIDs;
+            $parameters['groupIDs'] = $this->groupIDs;
         }
         
         $this->objectAction = new PageAction(array($this->pageID), 'update', $parameters);
@@ -196,7 +201,7 @@ class UltimatePageEditForm extends UltimatePageAddForm {
         
         $this->saved();
         
-        UltimateCore::getTPL()->assign('success', true);
+        WCF::getTPL()->assign('success', true);
     }
     
     /**
@@ -208,7 +213,7 @@ class UltimatePageEditForm extends UltimatePageAddForm {
         $useRequestData = (count($_POST)) ? true : false;
         I18nHandler::getInstance()->assignVariables($useRequestData);
         
-        UltimateCore::getTPL()->assign(array(
+        WCF::getTPL()->assign(array(
             'pageID' => $this->pageID,
             'publishButtonLang' => $this->publishButtonLang,
             'action' => 'edit'
@@ -217,11 +222,11 @@ class UltimatePageEditForm extends UltimatePageAddForm {
         // hide the save button if you edit a page which is already scheduled or published
         if (!empty($this->saveButtonLang)) {
             // status id == (0|1)
-            UltimateCore::getTPL()->assign('saveButtonLang', $this->saveButtonLang);
+            WCF::getTPL()->assign('saveButtonLang', $this->saveButtonLang);
         }
         else {
             // status id == (2|3)
-            UltimateCore::getTPL()->assign('disableSaveButton', true);
+            WCF::getTPL()->assign('disableSaveButton', true);
         }
     }
     

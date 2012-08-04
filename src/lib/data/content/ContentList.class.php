@@ -17,5 +17,4 @@ class ContentList extends DatabaseObjectList {
      * @see \wcf\data\DatabaseObjectList::$className
      */
     public $className = '\ultimate\data\content\Content';
-    
 }

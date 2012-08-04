@@ -13,7 +13,7 @@ use wcf\system\cache\builder\ICacheBuilder;
  * @subpackage system.cache.builder
  * @category Ultimate CMS
  */
-class UltimateCategoryCacheBuilder implements ICacheBuilder {
+class CategoryCacheBuilder implements ICacheBuilder {
 
     /**
      * @see \wcf\system\cache\builder\ICacheBuilder::getData()
@@ -32,24 +32,18 @@ class UltimateCategoryCacheBuilder implements ICacheBuilder {
         $sqlOrderBy = $sortField." ".$sortOrder;
         $categoryList->sqlOrderBy = $sqlOrderBy;
         
-        $categoryList->readObjectIDs();
         $categoryList->readObjects();
         
         $categories = $categoryList->getObjects();
-        $categoryIDs = $categoryList->getObjectIDs();
-        if (!count($categoryIDs) || !count($categories)) return $data;
+        if (!count($categories)) return $data;
         
         foreach ($categories as &$category) {
             /* @var $category \ultimate\data\category\Category */
             $category->contents = $category->getContents();
             $category->childCategories = $category->getChildCategories();
-        }
-        
-        $data['categories'] = array_combine($categoryIDs, $categories);
-        $data['categoryIDs'] = $categoryIDs;
-        
-        foreach ($data['categories'] as $id => $category) {
-            $data['categoriesToParent'][$id] = $category->childCategories;
+            $data['categories'][$category->__get('categoryID')] = $category;
+            $data['categoryIDs'][] = $category->__get('categoryID');
+            $data['categoriesToParent'][$category->__get('categoryID')] = $category->childCategories;
         }
         
         return $data;

@@ -101,7 +101,7 @@
                                     {implode from=$content->tags key=tagID item=tag}<a href="{link controller='UltimateContentList'}tagID={@$tag->tagID}{/link}">{@$tag}</a>{/implode}
                                 </p>
                             </td> *}
-                            <td class="columnDate"><p>{@$page->publishDate|dateExtended:"{lang britishEnglish={@ULTIMATE_GENERAL_ENGLISHLANGUAGE}}ultimate.date.dateFormat{/lang}"}</p></td>
+                            <td class="columnDate"><p>{if $content->publishDate}{@$content->publishDate|dateExtended}{else}{/if}</p></td>
                             <td class="columnLastModified"><p>{@$content->lastModified|time}</p></td>
                         
                             {event name='columns'}

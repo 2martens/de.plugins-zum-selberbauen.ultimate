@@ -13,7 +13,7 @@ use wcf\system\cache\builder\ICacheBuilder;
  * @subpackage system.cache.builder
  * @category Ultimate CMS
  */
-class UltimateContentCacheBuilder implements ICacheBuilder {
+class ContentCacheBuilder implements ICacheBuilder {
     
     /**
      * @see \wcf\system\cache\builder\ICacheBuilder::getData()
@@ -31,18 +31,16 @@ class UltimateContentCacheBuilder implements ICacheBuilder {
         $sqlOrderBy = $sortField." ".$sortOrder;
         $contentList->sqlOrderBy = $sqlOrderBy;
         
-        $contentList->readObjectIDs();
         $contentList->readObjects();
-        $contentIDs = $contentList->getObjectIDs();
         $contents = $contentList->getObjects();
-        if (!count($contentIDs) || !count($contents)) return $data;
+        if (!count($contents)) return $data;
         
         foreach ($contents as &$content) {
+            /* @var $content \ultimate\data\content\Content */
             $content->categories = $content->getCategories();
+            $data['contents'][$content->__get('contentID')] = $content;
+            $data['contentIDs'][] = $content->__get('contentID');
         }
-        
-        $data['contents'] = array_combine($contentIDs, $contents);
-        $data['contentIDs'] = $contentIDs;
         
         return $data;
     }

@@ -1,6 +1,5 @@
 <?php
 namespace ultimate\acp;
-use wcf\system\cache\CacheHandler;
 use wcf\system\io\File;
 use wcf\system\WCF;
 
@@ -34,17 +33,8 @@ final class InstallUltimateCMS {
      * Creates a htaccess file.
      */
     protected function createHtaccess() {
-        $cache = 'application-'.PACKAGE_ID;
-        $file = WCF_DIR.'cache/cache.'.$cache.'.php';
-        $className = '\wcf\system\cache\builder\ApplicationCacheBuilder';
-        CacheHandler::getInstance()->addResource($cache, $file, $className);
-        
-        $applications = CacheHandler::getInstance()->get($cache, 'application');
-        $ourApp = $applications[PACKAGE_ID];
-        
         WCF::getTPL()->addTemplatePath(PACKAGE_ID, ULTIMATE_DIR.'acp/templates/');
         
-        WCF::getTPL()->assign('relDir', $ourApp->domainPath."\n");
         $output = WCF::getTPL()->fetch('htaccess');
         $file = new File(ULTIMATE_DIR.'.htaccess');
         $file->write($output);

@@ -66,16 +66,16 @@
             <tbody>
                 {content}
                     {foreach from=$objects item=page}
-                        <tr id="pageContainer{@$page->pageID}">
+                        <tr id="pageContainer{@$page->pageID}" class="jsPageRow">
                             <td class="columnMark"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$page->pageID}" /></td>
                             <td class="columnIcon">
                                 {if $__wcf->session->getPermission('admin.content.ultimate.canEditPage')}
-                                    <a href="{link controller='UltimatePageEdit' id=$page['pageID']}{/link}"><img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.acp.ultimate.page.edit{/lang}" class="icon16 jsTooltip" /></a>
+                                    <a href="{link controller='UltimatePageEdit' id=$page->pageID}{/link}"><img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.acp.ultimate.page.edit{/lang}" class="icon16 jsTooltip" /></a>
                                 {else}
                                     <img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.acp.ultimate.page.edit{/lang}" class="icon16 disabled" />
                                 {/if}
                                 {if $__wcf->session->getPermission('admin.content.ultimate.canDeletePage')}
-                                    <a onclick="return confirm('{lang}wcf.acp.ultimate.page.delete.sure{/lang}')" href="{link controller='UltimatePageDelete' id=$page->pageID}url={@$encodedURL}&t={@SECURITY_TOKEN}{/link}"><img src="{@$__wcf->getPath()}con/delete.svg" alt="" title="{lang}wcf.acp.ultimate.page.delete{/lang}" class="icon16 jsTooltip" /></a>
+                                    <img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.page.delete{/lang}" class="icon16 jsTooltip jsDeleteButton" data-object-id="{@$page->pageID}" data-confirm-message="{lang}wcf.acp.ultimate.page.delete.sure{/lang}" />
                                 {else}
                                     <img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.page.delete{/lang}" class="icon16 disabled" />
                                 {/if}
@@ -85,16 +85,16 @@
                             <td class="columnID"><p>{@$page->pageID}</p></td>
                             <td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditPage')}<a title="{lang}wcf.acp.ultimate.page.edit{/lang}" href="{link controller='UltimatePageEdit' id=$page->pageID}{/link}">{lang}{@$page->pageTitle}{/lang}</a>{else}{lang}{@$page->pageTitle}{/lang}{/if}</p></td>
                 		    <td class="columnAuthor"><p>{if $__wcf->session->getPermission('admin.user.canEditUser')}<a title="{lang}wcf.acp.user.edit{/lang}" href="{link controller='UserEdit' id=$page->authorID}{/link}">{@$page->author->username}</a>{else}{@$page->author->username}{/if}</p></td>
-                		    <td class="columnDate"><p>{@$page->publishDate|dateExtended:"{lang britishEnglish={@ULTIMATE_GENERAL_ENGLISHLANGUAGE}}ultimate.date.dateFormat{/lang}"}</p></td>
+                		    <td class="columnDate"><p>{if $page->publishDate}{@$page->publishDate|dateExtended}{else}{/if}</p></td>
                 		    <td class="columnLastModified"><p>{@$page->lastModified|time}</p></td>
                 		
                             {event name='columns'}
                         </tr>
+                    
                     {/foreach}
                 {/content}
             </tbody>
-        </table>
-       
+        </table>       
     </div>
     
     <div class="contentNavigation">

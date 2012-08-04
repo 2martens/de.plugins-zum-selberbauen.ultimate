@@ -32,6 +32,7 @@
 	{event name='javascriptInclude'}
 	
 	<!-- Stylesheets -->
+	<link rel="stylesheet/less" type="text/css" href="{@$__wcf->getPath('ultimate')}style/ultimate.less" />
     <link rel="stylesheet/less" type="text/css" href="{@$__wcf->getPath()}style/bootstrap.less" />
     <script type="text/javascript">
         //<![CDATA[
@@ -90,7 +91,7 @@
                 'ultimate.button.saveAsPending': '{lang}ultimate.button.saveAsPending{/lang}',
                 'ultimate.button.schedule': '{lang}ultimate.button.schedule{/lang}',
                 'ultimate.button.publish': '{lang}ultimate.button.publish{/lang}',
-                'ultimate.button.update': {lang}ultimate.button.update{/lang}'
+                'ultimate.button.update': '{lang}ultimate.button.update{/lang}'
             });
             WCF.Icon.addObject({
                 'wcf.icon.closed': '{@$__wcf->getPath()}icon/arrowRightInverse.svg',

@@ -1,11 +1,11 @@
 <?php
 namespace ultimate\acp\page;
 use ultimate\data\category\Category;
-use ultimate\system\UltimateCore;
 use wcf\page\AbstractCachedListPage;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\menu\acp\ACPMenu;
 use wcf\system\request\LinkHandler;
+use wcf\system\WCF;
 
 /**
  * Shows the UltimateContentList page.
@@ -36,6 +36,7 @@ class UltimateContentListPage extends AbstractCachedListPage {
         'contentID',
         'contentTitle',
         'contentAuthor',
+        'publishDate',
         'lastModified'
     );
     
@@ -52,7 +53,7 @@ class UltimateContentListPage extends AbstractCachedListPage {
     /**
      * @see \wcf\page\AbstractCachedListPage::$cacheBuilderClassName
      */
-    public $cacheBuilderClassName = '\ultimate\system\cache\builder\UltimateContentCacheBuilder';
+    public $cacheBuilderClassName = '\ultimate\system\cache\builder\ContentCacheBuilder';
     
     /**
      * @see \wcf\page\AbstractCachedListPage::$cacheName
@@ -111,20 +112,20 @@ class UltimateContentListPage extends AbstractCachedListPage {
         if (!$this->categoryID && !$this->tagID) return;
         elseif($this->categoryID) {
             // if category id provided, change object variables and load the new cache
-            $this->cacheBuilderClassName = '\ultimate\system\cache\builder\UltimateContentCategoryCacheBuilder';
+            $this->cacheBuilderClassName = '\ultimate\system\cache\builder\ContentCategoryCacheBuilder';
             $this->cacheName = 'content-to-category';
             $this->cacheIndex = 'contentsToCategoryID';
             
         }
         // both category id and tag id are provided, the category id wins
         elseif ($this->tagID) {
-            // @todo implement tags
+            // TODO implement tags   
         }
         else return; // shouldn't be called anyway
         $this->loadCache();
         $this->objects = $this->objects[$this->categoryID];
         $this->currentObjects = $this->currentObjects[$this->categoryID];
-        
+        // TODO items should show all available contents
         // calculate the pages again, because the objects changed
         $this->calculateNumberOfPages();
     }
@@ -143,7 +144,7 @@ class UltimateContentListPage extends AbstractCachedListPage {
     public function assignVariables() {
         parent::assignVariables();
         
-        UltimateCore::getTPL()->assign(array(
+        WCF::getTPL()->assign(array(
         	'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(),
             'url' => $this->url
         ));

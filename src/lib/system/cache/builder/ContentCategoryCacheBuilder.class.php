@@ -13,7 +13,7 @@ use wcf\system\cache\builder\ICacheBuilder;
  * @subpackage system.cache.builder
  * @category Ultimate CMS
  */
-class UltimateContentCategoryCacheBuilder implements ICacheBuilder {
+class ContentCategoryCacheBuilder implements ICacheBuilder {
     
     /**
      * @see wcf\system\cache\builder\ICacheBuilder::getData()
@@ -32,7 +32,7 @@ class UltimateContentCategoryCacheBuilder implements ICacheBuilder {
             /* @var $category \ultimate\data\category\Category */
             $contents = $category->getContents();
             $data['contentsToCategoryID'][$category->__get('categoryID')] = $contents;
-            $data['contentsToCategoryTitle'][$category->__get('categoryTitle')'] = $contents;
+            $data['contentsToCategoryTitle'][$category->__get('categoryTitle')] = $contents;
         }
         
         return $data;

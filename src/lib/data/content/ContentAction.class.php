@@ -1,6 +1,5 @@
 <?php
 namespace ultimate\data\content;
-use ultimate\data\config\ConfigList;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\cache\CacheHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
@@ -39,27 +38,6 @@ class ContentAction extends AbstractDatabaseObjectAction {
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
 	 */
 	protected $permissionsUpdate = array('admin.content.ultimate.canEditContent');
-			
-	/**
-	 * @see \wcf\data\AbstractDatabaseObjectAction::validateDelete()
-	 * @throws ValidateActionException
-	 */
-	public function validateDelete() {
-	    parent::validateDelete();
-	    
-	    $configList = new ConfigList();
-	    $configList->readObjects();
-	    $objects = $configList->getObjects();
-	    foreach ($objects as $config) {
-	        $requiredContents = unserialize($config->requiredContents);
-	        $flippedArray = array_flip($requiredContents);
-	        foreach ($this->objectIDs as $objectID) {
-	            if (!in_array($objectID, $flippedArray)) continue;
-	            
-	            throw new ValidateActionException('The content with the ID '.(string) $objectID.' is still needed by some configs.');
-	        }
-	    }
-	}
 	
 	/**
 	 * Creates new content.
@@ -75,7 +53,7 @@ class ContentAction extends AbstractDatabaseObjectAction {
 	    $contentEditor->addToCategories($categoryIDs, false);
 	    
 	    // connect with userGroups
-	    $groupIDs = (isset($this->parameters['userGroupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['userGroupIDs']) : array();
+	    $groupIDs = (isset($this->parameters['groupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['groupIDs']) : array();
 	    if (count($groupIDs)) {
 	        $contentEditor->addGroups($groupIDs);
 	    }
@@ -98,7 +76,7 @@ class ContentAction extends AbstractDatabaseObjectAction {
 	
 	    $categoryIDs = (isset($this->parameters['categories'])) ? $this->parameters['categories'] : array();
 	    $removeCategories = (isset($this->parameters['removeCategories'])) ? $this->parameters['removeCategories'] : array();
-	    $groupIDs = (isset($this->parameters['userGroupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['userGroupIDs']) : array();
+	    $groupIDs = (isset($this->parameters['groupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['groupIDs']) : array();
 	     
 	    foreach ($this->objects as $contentEditor) {
 	        /* @var $contentEditor \ultimate\data\content\ContentEditor */

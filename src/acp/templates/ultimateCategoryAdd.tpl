@@ -48,7 +48,7 @@
                         });
                     //]]>
                     </script>
-                    <input type="text" id="categoryTitle" name="categoryTitle" value="{@$i18nPlainValues['categoryTitle']}" class="long" autofocus="autofocus" placeholder="{lang}wcf.acp.ultimate.category.title.placeholder{/lang}" />
+                    <input type="text" id="categoryTitle" name="categoryTitle" value="{@$i18nPlainValues['categoryTitle']}" class="long" required="required" placeholder="{lang}wcf.acp.ultimate.category.title.placeholder{/lang}" />
                     {if $errorField == 'categoryTitle'}
                         <small class="innerError">
                             {if $errorType == 'empty'}

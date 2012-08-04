@@ -72,7 +72,7 @@
                             <td class="columnMark"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$category->categoryID}" /></td>
                             <td class="columnIcon">
                                 
-                                {if $__wcf->session->getPermission('admin.content.ultimate.canEditContent')}
+                                {if $__wcf->session->getPermission('admin.content.ultimate.canEditCategory')}
                                     <a href="{link controller='UltimateCategoryEdit' id=$category->categoryID}{/link}"><img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.acp.ultimate.category.edit{/lang}" class="icon16 jsTooltip" /></a>
                                 {else}
                                     <img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.acp.ultimate.category.edit{/lang}" class="icon16 disabled" />

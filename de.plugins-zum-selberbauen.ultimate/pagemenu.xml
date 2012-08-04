@@ -2,13 +2,8 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/pagemnu.xsd">
     <import>
         <pagemenuitem name="ultimate.header.menu.index">
-            <link>index</link>
+            <link>index.php/Index/</link>
             <position>header</position>
-        </pagemenuitem>
-        
-        <pagemenuitem name="ultimate.footer.menu.index">
-            <link>index</link>
-            <position>footer</position>
         </pagemenuitem>
     </import>
 </data>

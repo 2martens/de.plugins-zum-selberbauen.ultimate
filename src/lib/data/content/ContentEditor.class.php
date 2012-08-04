@@ -31,60 +31,6 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 	
 		return parent::deleteAll($objectIDs);
 	}
-	
-	/**
-	 * Adds new groups to this page.
-	 *
-	 * @param array   $groupIDs
-	 * @param boolean $replaceOldGroups
-	 */
-	public function addGroups(array $groupIDs, $replaceOldGroups = true) {
-	    if ($replaceOldGroups) {
-	        $oldGroups = $this->object->__get('groups');
-	        $deleteGroupIDs = array();
-	
-	        // delete groups which are not anymore needed
-	        foreach ($oldGroups as $groupID => $group) {
-	            if (in_array($groupID, $groupIDs)) continue;
-	            $deleteGroupIDs[] = $groupID;
-	            unset($oldGroups[$groupID]);
-	        }
-	
-	        // remove already existing groups from groupIDs array
-	        foreach ($groupIDs as $key => $groupID) {
-	            if (array_key_exists($groupID, $oldGroups)) {
-	                unset($groupIDs[$key]);
-	            }
-	        }
-	
-	        $sql = 'DELETE FROM ultimate'.ULTIMATE_N.'_user_group_to_content
-                    WHERE       contentID   = ?
-                    AND         userGroupID = ?';
-	        /* @var $statement \wcf\system\database\statement\PreparedStatement */
-	        $statement = UltimateCore::getDB()->prepareStatement($sql);
-	        UltimateCore::getDB()->beginTransaction();
-	        foreach ($deleteGroupIDs as $groupID) {
-	            $statement->executeUnbuffered(array(
-	                $this->object->__get('contentID'),
-	                $groupID
-	            ));
-	        }
-	        UltimateCore::getDB()->commitTransaction();
-	    }
-	    $sql = 'INSERT INTO ultimate'.ULTIMATE_N.'_user_group_to_content
-                (userGroupID, pageID)
-                VALUES
-                (?, ?)';
-	    $statement = UltimateCore::getDB()->prepareStatement($sql);
-	    UltimateCore::getDB()->beginTransaction();
-	    foreach ($groupIDs as $groupID) {
-	        $statement->executeUnbuffered(array(
-	            $groupID,
-	            $this->object->__get('contentID')
-	        ));
-	    }
-	    UltimateCore::getDB()->commitTransaction();
-	}
     
     /**
      * Adds the content to the specified categories.
@@ -201,7 +147,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
             ));
         }
         $sql = 'INSERT INTO ultimate'.ULTIMATE_N.'_user_group_to_content
-                (userGroupID, contentID)
+                (groupID, contentID)
                 VALUES
                 (?, ?)';
         $statement = UltimateCore::getDB()->prepareStatement($sql);

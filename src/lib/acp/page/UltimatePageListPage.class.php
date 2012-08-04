@@ -1,10 +1,10 @@
 <?php
 namespace ultimate\acp\page;
-use ultimate\system\UltimateCore;
 use wcf\page\AbstractCachedListPage;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\menu\acp\ACPMenu;
 use wcf\system\request\LinkHandler;
+use wcf\system\WCF;
 
 /**
  * Shows the UltimatePageList page.
@@ -52,7 +52,7 @@ class UltimatePageListPage extends AbstractCachedListPage {
     /**
      * @see \wcf\page\AbstractCachedListPage::$cacheBuilderClassName
      */
-    public $cacheBuilderClassName = '\ultimate\system\cache\builder\UltimatePageCacheBuilder';
+    public $cacheBuilderClassName = '\ultimate\system\cache\builder\PageCacheBuilder';
     
     /**
      * @see \wcf\page\AbstractCachedListPage::$cacheName
@@ -97,7 +97,7 @@ class UltimatePageListPage extends AbstractCachedListPage {
     public function assignVariables() {
         parent::assignVariables();
         
-        UltimateCore::getTPL()->assign(array(
+        WCF::getTPL()->assign(array(
         	'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(),
             'url' => $this->url
         ));

@@ -4,11 +4,11 @@ use ultimate\acp\form\UltimateCategoryAddForm;
 use ultimate\data\category\Category;
 use ultimate\data\category\CategoryAction;
 use ultimate\data\category\CategoryEditor;
-use ultimate\system\UltimateCore;
 use ultimate\util\CategoryUtil;
 use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
+use wcf\system\WCF;
 
 /**
  * Shows the UltimateCategoryEdit form.
@@ -112,7 +112,7 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
     
         $this->saved();
     
-        UltimateCore::getTPL()->assign('success', true);
+        WCF::getTPL()->assign('success', true);
     }
     
     /**
@@ -124,7 +124,7 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
         $useRequestData = (count($_POST)) ? true : false;
         I18nHandler::getInstance()->assignVariables($useRequestData);
     
-        UltimateCore::getTPL()->assign(array(
+        WCF::getTPL()->assign(array(
             'categoryID' => $this->categoryID,
             'action' => 'edit'
         ));

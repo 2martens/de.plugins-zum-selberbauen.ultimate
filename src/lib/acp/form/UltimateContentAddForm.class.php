@@ -2,7 +2,7 @@
 namespace ultimate\acp\form;
 use ultimate\data\content\ContentAction;
 use ultimate\data\content\ContentEditor;
-use ultimate\system\UltimateCore;
+use ultimate\util\ContentUtil;
 use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
 use wcf\system\bbcode\URLParser;
@@ -11,6 +11,7 @@ use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\menu\acp\ACPMenu;
 use wcf\system\Regex;
+use wcf\system\WCF;
 use wcf\util\ArrayUtil;
 use wcf\util\DateUtil;
 use wcf\util\DateTimeUtil;
@@ -56,6 +57,12 @@ class UltimateContentAddForm extends MessageForm {
      * @var string
      */
     public $description = '';
+    
+    /**
+     * Contains the slug of the content.
+     * @var string
+     */
+    public $slug = '';
     
     /**
      * Contains the chosen categories.
@@ -151,10 +158,10 @@ class UltimateContentAddForm extends MessageForm {
      */
     public function readData() {
         $cacheName = 'category';
-        $cacheBuilderClassName = '\ultimate\system\cache\builder\UltimateCategoryCacheBuilder';
+        $cacheBuilderClassName = '\ultimate\system\cache\builder\CategoryCacheBuilder';
         $file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
         CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-        $this->categories = CacheHandler::getInstance()->get($cacheName, 'categoris');
+        $this->categories = CacheHandler::getInstance()->get($cacheName, 'categories');
         
         $cacheName = 'usergroups';
         $cacheBuilderClassName = '\wcf\system\cache\builder\UserGroupCacheBuilder';
@@ -164,28 +171,28 @@ class UltimateContentAddForm extends MessageForm {
         
         // fill status options
         $this->statusOptions = array(
-            0 => UltimateCore::getLanguage()->get('wcf.acp.ultimate.status.draft'),
-            1 => UltimateCore::getLanguage()->get('wcf.acp.ultimate.status.pendingReview'),
+            0 => WCF::getLanguage()->get('wcf.acp.ultimate.status.draft'),
+            1 => WCF::getLanguage()->get('wcf.acp.ultimate.status.pendingReview'),
         );
         
         // fill publishDate with default value (today)
         $this->startTime = TIME_NOW;
         $dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
-        $dateTime->setTimezone(UltimateCore::getUser()->getTimezone());
-        $date = UltimateCore::getLanguage()->getDynamicVariable(
+        $dateTime->setTimezone(WCF::getUser()->getTimezone());
+        $date = WCF::getLanguage()->getDynamicVariable(
             'ultimate.date.dateFormat',
             array(
                 'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
             )
         );
-        $time = UltimateCore::getLanguage()->get('wcf.date.timeFormat');
+        $time = WCF::getLanguage()->get('wcf.date.timeFormat');
         $format = str_replace(
             '%time%',
             $time,
             str_replace(
-                '%date',
+                '%date%',
                 $date,
-                UltimateCore::getLanguage()->get('ultimate.date.dateTimeFormat')
+                WCF::getLanguage()->get('ultimate.date.dateTimeFormat')
             )
         );
         $this->publishDate = $dateTime->format($format);
@@ -202,6 +209,7 @@ class UltimateContentAddForm extends MessageForm {
         I18nHandler::getInstance()->readValues();
         if (I18nHandler::getInstance()->isPlainValue('subject')) $this->subject = StringUtil::trim(I18nHandler::getInstance()->getValue('subject'));
         if (I18nHandler::getInstance()->isPlainValue('description')) $this->description = StringUtil::trim(I18nHandler::getInstance()->getValue('description'));
+        if (isset($_POST['slug'])) $this->slug = StringUtil::trim($_POST['slug']);
         if (isset($_POST['categoryIDs']) && is_array($_POST['categoryIDs'])) $this->categoryIDs = ArrayUtil::toIntegerArray(($_POST['categoryIDs']));
         if (I18nHandler::getInstance()->isPlainValue('text')) $this->text = MessageUtil::stripCrap(trim(I18nHandler::getInstance()->getValue('text')));
         if (isset($_POST['visibility'])) $this->visibility = StringUtil::trim($_POST['visibility']);
@@ -219,6 +227,7 @@ class UltimateContentAddForm extends MessageForm {
     public function validate() {
         $this->validateSubject();
         $this->validateDescription();
+        $this->validateSlug();
         $this->validateCategories();
         $this->validateText();
         // multilingualism
@@ -248,9 +257,10 @@ class UltimateContentAddForm extends MessageForm {
         
         $parameters = array(
             'data' => array(
-                'authorID' => UltimateCore::getUser()->userID,
+                'authorID' => WCF::getUser()->userID,
             	'contentTitle' => $this->subject,
                 'contentDescription' => $this->description,
+                'contentSlug' => $this->slug,
                 'contentText' => $this->text,
                 'enableBBCodes' => $this->enableBBCodes,
                 'enableHtml' => $this->enableHtml,
@@ -263,7 +273,7 @@ class UltimateContentAddForm extends MessageForm {
         );
         
         if ($this->visibility == 'protected') {
-            $parameters['userGroupIDs'] = $this->groupIDs;
+            $parameters['groupIDs'] = $this->groupIDs;
         }
         
         $this->objectAction = new ContentAction(array(), 'create', $parameters);
@@ -297,9 +307,8 @@ class UltimateContentAddForm extends MessageForm {
                         WHERE  languageID        = ?
                         AND    languageItem      = ?
                         AND    packageID         = ?';
-                /* @var $statement \wcf\system\database\statement\PreparedStatement */
-                $statement = UltimateCore::getDB()->prepareStatement($sql);
-                UltimateCore::getDB()->beginTransaction();
+                $statement = WCF::getDB()->prepareStatement($sql);
+                WCF::getDB()->beginTransaction();
                 foreach ($textValues as $languageID => $text) {
                     $statement->executeUnbuffered(array(
                         $text,
@@ -308,7 +317,7 @@ class UltimateContentAddForm extends MessageForm {
                         PACKAGE_ID
                     ));
                 }
-                UltimateCore::getDB()->commitTransaction();
+                WCF::getDB()->commitTransaction();
             }
         }
         if (count($updateEntries)) {
@@ -317,7 +326,7 @@ class UltimateContentAddForm extends MessageForm {
         }
         $this->saved();
         
-        UltimateCore::getTPL()->assign('success', true);
+        WCF::getTPL()->assign('success', true);
         
         //showing empty form
         $this->subject = $this->description = $this->text = $this->publishDate = '';
@@ -334,8 +343,9 @@ class UltimateContentAddForm extends MessageForm {
         parent::assignVariables();
         
         I18nHandler::getInstance()->assignVariables();
-        UltimateCore::getTPL()->assign(array(
+        WCF::getTPL()->assign(array(
             'description' => $this->description,
+            'slug' => $this->slug,
             'action' => 'add',
             'categoryIDs' => $this->categoryIDs,
             'categories' => $this->categories,
@@ -345,7 +355,8 @@ class UltimateContentAddForm extends MessageForm {
             'statusOptions' => $this->statusOptions,
             'statusID' => $this->statusID,
             'visibility' => $this->visibility,
-            'startTime' => $this->startTime
+            'startTime' => $this->startTime,
+            'publishDate' => $this->publishDate
         ));
     }
     
@@ -410,6 +421,20 @@ class UltimateContentAddForm extends MessageForm {
             if (strlen($this->description) < 4) {
                 throw new UserInputException('description', 'tooShort');
             }
+        }
+    }
+    
+    /**
+     * Validates the slug.
+     * 
+     * @throws \wcf\system\exception\UserInputException
+     */
+    protected function validateSlug() {
+        if (empty($this->slug)) {
+            throw new UserInputException('slug');
+        }
+        if (!ContentUtil::isAvailableSlug($this->slug)) {
+            throw new UserInputException('slug', 'notUnique');
         }
     }
     
@@ -503,7 +528,7 @@ class UltimateContentAddForm extends MessageForm {
     
         $pattern = '\d{4}-\d{2}-\d{2} \d{2}:\d{2}';
         $regex = new Regex($pattern);
-        $dateTimeNow = new \DateTime('@'.TIME_NOW, UltimateCore::getUser()->getTimezone());
+        $dateTimeNow = new \DateTime('@'.TIME_NOW, WCF::getUser()->getTimezone());
         if ($regex->match($this->publishDate)) {
             // the browser has implemented the input type date
             // or (more likely) the user hasn't changed the jQuery code
@@ -511,7 +536,7 @@ class UltimateContentAddForm extends MessageForm {
             $dateTime = \DateTime::createFromFormat(
                 'Y-m-d H:i',
                 $this->publishDate,
-                UltimateCore::getUser()->getTimezone()
+                WCF::getUser()->getTimezone()
             );
             $this->publishDateTimestamp = $dateTime->getTimestamp();
             return;
@@ -523,7 +548,7 @@ class UltimateContentAddForm extends MessageForm {
         $dateTime = \DateTime::createFromFormat(
             $phpDateFormat,
             $this->publishDate,
-            UltimateCore::getUser()->getTimezone()
+            WCF::getUser()->getTimezone()
         );
         $this->publishDateTimestamp = $dateTime->getTimestamp();
     }

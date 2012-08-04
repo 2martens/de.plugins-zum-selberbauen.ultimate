@@ -49,7 +49,7 @@ class PageAction extends AbstractDatabaseObjectAction {
 	    $pageEditor->addContent($contentID, false);
 	    
 	    // connect with userGroups
-	    $groupIDs = (isset($this->parameters['userGroupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['userGroupIDs']) : array();
+	    $groupIDs = (isset($this->parameters['groupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['groupIDs']) : array();
 	    if (count($groupIDs)) {
 	        $pageEditor->addGroups($groupIDs, false);
 	    }
@@ -70,7 +70,7 @@ class PageAction extends AbstractDatabaseObjectAction {
 	    }
 	    
 	    $contentID = (isset($this->parameters['contentID'])) ? intval($this->parameters['contentID']) : 0;
-	    $groupIDs = (isset($this->parameters['userGroupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['userGroupIDs']) : array();
+	    $groupIDs = (isset($this->parameters['groupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['groupIDs']) : array();
 	     
 	    foreach ($this->objects as $pageEditor) {
 	        /* @var $pageEditor \ultimate\data\page\PageEditor */

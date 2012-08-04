@@ -156,6 +156,7 @@ ULTIMATE.Button.Replacement.prototype = {
         }
         
         this._checkElement.change($.proxy(this._change, this));
+        this._change();
     },
 
     _change: function() {
@@ -174,7 +175,7 @@ ULTIMATE.Button.Replacement.prototype = {
             var $insertedDateTime = this._checkElement.val();
             var $dateObj = new Date($insertedDateTime);
             var $timestamp = WCF.Date.Util.gmdate($dateObj);
-            var $timestampNow = WCF.DateUtil.gmdate();
+            var $timestampNow = WCF.Date.Util.gmdate();
             
             var $updateButton = WCF.Language.get(this._publishMap[2]);
             var $isUpdateSzenario = ($updateButton == this._buttonValue);

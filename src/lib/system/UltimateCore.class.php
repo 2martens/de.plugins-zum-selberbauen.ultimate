@@ -1,5 +1,7 @@
 <?php
 namespace ultimate\system;
+use wcf\system\style\StyleHandler;
+
 use wcf\system\application\AbstractApplication;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\menu\page\PageMenu;
@@ -29,9 +31,9 @@ class UltimateCore extends AbstractApplication {
      * Calls all init functions of the Ultimate Core class.
      */
     protected function init() {
-        
         $this->initTPL();
         $this->initRoutes();
+        $this->initStyle();
         PageMenu::getInstance()->setActiveMenuItem('ultimate.header.menu.index');
         WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('ultimate.header.menu.index'), LinkHandler::getInstance()->getLink('Index', array('application' => 'ultimate'))));
     }
@@ -66,6 +68,10 @@ class UltimateCore extends AbstractApplication {
         $contentRoute->setSchema('/{date}/{contentSlug}}/', 'Content');
         $contentRoute->setParameterOption('date', null, '2[0-9]{3}\/[0-9]{2}\/[0-9]{2}');
         $contentRoute->setParameterOption('contentSlug', null, '[a-z]+(\-{1}[a-z]+)*');
-        RouteHandler::getInstance()->addRoute($categoryRoute);
+        RouteHandler::getInstance()->addRoute($contentRoute);
+    }
+    
+    protected function initStyle() {
+        
     }
 }

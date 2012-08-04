@@ -30,7 +30,7 @@ class PageUtil {
         if ($pageParent) {
             $pages = self::loadCache(
                     'page',
-                    '\ultimate\system\cache\builder\UltimatePageCacheBuilder',
+                    '\ultimate\system\cache\builder\PageCacheBuilder',
                     'pagesToParent'
             );
             
@@ -45,7 +45,7 @@ class PageUtil {
         else {
             $pages = self::loadCache(
                 'page',
-                '\ultimate\system\cache\builder\UltimatePageCacheBuilder',
+                '\ultimate\system\cache\builder\PageCacheBuilder',
                 'pages'
             );
         
@@ -67,14 +67,14 @@ class PageUtil {
      * @return  boolean   $isAvailable
      */
     public static function isAvailableSlug($pageSlug, $pageParent = 0) {
-        $pageSlug = StringUtil::trim($slug);
+        $pageSlug = StringUtil::trim($pageSlug);
         $pageParent = intval($pageParent);
         $isAvailable = true;
         
         if ($pageParent) {
             $pages = self::loadCache(
                     'page',
-                    '\ultimate\system\cache\builder\UltimatePageCacheBuilder',
+                    '\ultimate\system\cache\builder\PageCacheBuilder',
                     'pagesToParent'
             );
             
@@ -89,7 +89,7 @@ class PageUtil {
         else {
             $pages = self::loadCache(
                 'page',
-                '\ultimate\system\cache\builder\UltimatePageCacheBuilder',
+                '\ultimate\system\cache\builder\PageCacheBuilder',
                 'pages'
             );
         
@@ -112,7 +112,7 @@ class PageUtil {
     public static function getAvailablePages($pageID = 0) {
         $pages = self::loadCache(
             'page',
-            '\ultimate\system\cache\builder\UltimatePageCacheBuilder',
+            '\ultimate\system\cache\builder\PageCacheBuilder',
             'pages'
         );
         
@@ -129,12 +129,12 @@ class PageUtil {
     public static function getAvailableContents($pageID = 0) {
         $contents = self::loadCache(
             'content',
-            '\ultimate\system\cache\builder\UltimateContentCacheBuilder',
+            '\ultimate\system\cache\builder\ContentCacheBuilder',
             'contents'
         );
         $unavailableContentIDs = self::loadCache(
             'content-to-page',
-            '\ultimate\system\cache\builder\UltimateContentPageCacheBuilder',
+            '\ultimate\system\cache\builder\ContentPageCacheBuilder',
             'contentIDsToPageID'
         );
         
