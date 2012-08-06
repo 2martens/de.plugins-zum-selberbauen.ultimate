@@ -2,6 +2,7 @@
 namespace ultimate\data\menu\item;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
+use wcf\system\cache\CacheHandler;
 use wcf\system\clipboard\ClipboardHandler;
 
 /**

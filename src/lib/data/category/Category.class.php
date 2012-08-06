@@ -81,6 +81,7 @@ class Category extends AbstractUltimateDatabaseObject {
         $categories = array();
         while ($row = $statement->fetchArray()) {
             $categories[$row['categoryID']] = new Category($row['categoryID']);
+            $categories[$row['categoryID']]->childCategories = $categories[$row['categoryID']]->getChildCategories();
         }
         return $categories;
     }

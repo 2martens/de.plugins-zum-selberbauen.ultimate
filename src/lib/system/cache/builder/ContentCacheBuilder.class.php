@@ -35,11 +35,11 @@ class ContentCacheBuilder implements ICacheBuilder {
         $contents = $contentList->getObjects();
         if (!count($contents)) return $data;
         
-        foreach ($contents as &$content) {
+        foreach ($contents as $contentID => &$content) {
             /* @var $content \ultimate\data\content\Content */
             $content->categories = $content->getCategories();
-            $data['contents'][$content->__get('contentID')] = $content;
-            $data['contentIDs'][] = $content->__get('contentID');
+            $data['contents'][$contentID] = $content;
+            $data['contentIDs'][] = $contentID;
         }
         
         return $data;

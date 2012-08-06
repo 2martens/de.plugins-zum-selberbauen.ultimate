@@ -48,6 +48,15 @@
         <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteMenu.description"><![CDATA[Members of this usergroup can delete menus.]]></item>
         <!-- /menu -->
         
+        <!-- menu item -->
+        <item name="wcf.acp.group.option.admin.content.ultimate.canAddMenuItem"><![CDATA[Can add menu items.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canAddMenuItem.description"><![CDATA[Members of this usergroup can add menu items.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canEditMenuItem"><![CDATA[Can edit menu items.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canEditMenuItem.description"><![CDATA[Members of this usergroup can edit menu items.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteMenuItem"><![CDATA[Can delete menu items.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteMenuItem.description"><![CDATA[Members of this usergroup can delete menu items.]]></item>
+        <!-- /menu item -->
+        
         <!-- page -->
         <item name="wcf.acp.group.option.admin.content.ultimate.canAddPage"><![CDATA[Can add pages.]]></item>
         <item name="wcf.acp.group.option.admin.content.ultimate.canAddPage.description"><![CDATA[Members of this usergroup can add pages.]]></item>
@@ -218,6 +227,30 @@ Tom likes the warm water and the wunderful beach.]]></item>
         <item name="wcf.acp.ultimate.content.list.all"><![CDATA[All contents]]></item>
         <item name="wcf.acp.ultimate.content.list.count"><![CDATA[{#$items} Content{if $items != 1}s{/if}]]></item>
         <!-- /content -->
+        
+        <!-- menu -->
+        <item name="wcf.acp.ultimate.menu.add"><![CDATA[Add menu]]></item>
+        <item name="wcf.acp.ultimate.menu.addToMenu"><![CDATA[Add to menu]]></item>
+        <item name="wcf.acp.ultimate.menu.edit"><![CDATA[Edit menu]]></item>
+        <item name="wcf.acp.ultimate.menu.delete"><![CDATA[Delete menu]]></item>
+        <item name="wcf.acp.ultimate.menu.delete.sure"><![CDATA[Are you sure that you want to delete this menu?]]></item>
+        <item name="wcf.acp.ultimate.menu.general"><![CDATA[Menu data]]></item>
+        <item name="wcf.acp.ultimate.menu.name"><![CDATA[Menu name]]></item>
+        <item name="wcf.acp.ultimate.menu.name.error.notUnique"><![CDATA[A menu with the specified name already exists.]]></item>
+        <item name="wcf.acp.ultimate.menu.categories"><![CDATA[Categories]]></item>
+        <item name="wcf.acp.ultimate.menu.categories.description"><![CDATA[Please select here the categories, that you want to add to the menu.]]></item>
+        <item name="wcf.acp.ultimate.menu.pages"><![CDATA[Pages]]></item>
+        <item name="wcf.acp.ultimate.menu.pages.description"><![CDATA[Please select here the pages, that you want to add to the menu.]]></item>
+        <item name="wcf.acp.ultimate.menu.custom.link"><![CDATA[URL]]></item>
+        <item name="wcf.acp.ultimate.menu.custom.linkTitle"><![CDATA[Title]]></item>
+        <item name="wcf.acp.ultimate.menu.custom.linkTitle.placeholder"><![CDATA[Menu item]]></item>
+        <item name="wcf.acp.ultimate.menu.items"><![CDATA[Menu items]]></item>
+        <item name="wcf.acp.ultimate.menu.list"><![CDATA[Menu list]]></item>
+        <item name="wcf.acp.ultimate.menu.list.all"><![CDATA[All menus]]></item>
+        <item name="wcf.acp.ultimate.menu.list.count"><![CDATA[{#$items} menu{if $items != 1}s{/if}]]></item>
+        <item name="wcf.acp.ultimate.menu.noContents"><![CDATA[No menus found]]></item>
+        <!-- /menu -->
+        
         <!-- page -->
         <item name="wcf.acp.ultimate.page.add"><![CDATA[Add page]]></item>
         <item name="wcf.acp.ultimate.page.edit"><![CDATA[Edit page]]></item>
@@ -279,6 +312,10 @@ Tom likes the warm water and the wunderful beach.]]></item>
     <category name="ultimate.date">
         <item name="ultimate.date.dateFormat"><![CDATA[{if $britishEnglish|isset && $britishEnglish == true}d/m/Y{else}m/d/Y{/if}]]></item>
         <item name="ultimate.date.dateTimeFormat"><![CDATA[%date% %time%]]></item>
+    </category>
+    
+    <category name="ultimate.menu">
+        <item name="ultimate.menu.item"><![CDATA[Default]]></item>
     </category>
     
     <!-- this category is used for all multilingual page fields -->

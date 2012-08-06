@@ -48,6 +48,15 @@
         <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteMenu.description"><![CDATA[Mitglieder dieser Benutzergruppe können Menüs löschen.]]></item>
         <!-- /menu -->
         
+        <!-- menu item -->
+        <item name="wcf.acp.group.option.admin.content.ultimate.canAddMenuItem"><![CDATA[Kann Menüeinträge hinzufügen.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canAddMenuItem.description"><![CDATA[Mitglieder dieser Benutzergruppe können Menüeinträge hinzufügen.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canEditMenuItem"><![CDATA[Kann Menüeinträge bearbeiten.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canEditMenuItem.description"><![CDATA[Mitglieder dieser Benutzergruppe können Menüeinträge bearbeiten.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteMenuItem"><![CDATA[Kann Menüeinträge löschen.]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canDeleteMenuItem.description"><![CDATA[Mitglieder dieser Benutzergruppe können Menüeinträge löschen.]]></item>
+        <!-- /menu item -->
+        
         <!-- page -->
         <item name="wcf.acp.group.option.admin.content.ultimate.canAddPage"><![CDATA[Kann Seiten hinzufügen.]]></item>
         <item name="wcf.acp.group.option.admin.content.ultimate.canAddPage.description"><![CDATA[Mitglieder dieser Benutzergruppe können Seiten hinzufügen.]]></item>
@@ -56,7 +65,7 @@
         <item name="wcf.acp.group.option.admin.content.ultimate.canDeletePage"><![CDATA[Kann Seiten löschen.]]></item>
         <item name="wcf.acp.group.option.admin.content.ultimate.canDeletePage.description"><![CDATA[Mitglieder dieser Benutzergruppe können Seiten löschen.]]></item>
         <!-- /page -->
-        
+        <!-- TODO: add missing language variables -->
         <!-- /admin -->
     </category>
     
@@ -161,6 +170,7 @@
         <item name="wcf.acp.ultimate.visibility.public"><![CDATA[Öffentlich]]></item>
         <item name="wcf.acp.ultimate.visibility.protected"><![CDATA[Eingeschränkt]]></item>
         <item name="wcf.acp.ultimate.visibility.private"><![CDATA[Privat]]></item>
+        <item name="wcf.acp.ultimate.visibility.groupIDs"><![CDATA[Berechtigte Gruppen]]></item>
         <item name="wcf.acp.ultimate.visibility.groupIDs.error.notValid"><![CDATA[Mindestens eine der "ausgewählten" Gruppen stand nicht nur Auswahl.]]></item>
         <item name="wcf.acp.ultimate.visibility.groupIDs.error.notSelected"><![CDATA[Mindestens eine Gruppe muss ausgewählt werden.]]></item>
         <item name="wcf.acp.ultimate.visibility.error.notValid"><![CDATA[Die "ausgewählte" Sichtbarkeitsstufe stand nicht zur Auswahl.]]></item>
@@ -173,6 +183,7 @@
         <item name="wcf.acp.ultimate.category.add"><![CDATA[Kategorie hinzufügen]]></item>
         <item name="wcf.acp.ultimate.category.edit"><![CDATA[Kategorie bearbeiten]]></item>
         <item name="wcf.acp.ultimate.category.delete"><![CDATA[Kategorie löschen]]></item>
+        <item name="wcf.acp.ultimate.category.delete.sure"><![CDATA[Sind Sie sicher, dass Sie diese Kategorie löschen wollen?]]></item>
         <item name="wcf.acp.ultimate.category.title"><![CDATA[Name]]></item>
         <item name="wcf.acp.ultimate.category.title.placeholder"><![CDATA[Gute Inhalte]]></item>
         <item name="wcf.acp.ultimate.category.title.error.notUnique"><![CDATA[Der angegebene Name existiert bereits bei einer Kategorie auf gleichem Level.]]></item>
@@ -196,6 +207,7 @@
         <item name="wcf.acp.ultimate.content.add"><![CDATA[Inhalt hinzufügen]]></item>
         <item name="wcf.acp.ultimate.content.edit"><![CDATA[Inhalt bearbeiten]]></item>
         <item name="wcf.acp.ultimate.content.delete"><![CDATA[Inhalt löschen]]></item>
+        <item name="wcf.acp.ultimate.content.delete.sure"><![CDATA[Sind Sie sicher, dass Sie diesen Inhalt löschen wollen?]]></item>
         <item name="wcf.acp.ultimate.content.title"><![CDATA[Titel]]></item>
         <item name="wcf.acp.ultimate.content.title.error.tooShort"><![CDATA[Der Titel muss mindestens 4 Zeichen lang sein.]]></item>
         <item name="wcf.acp.ultimate.content.title.placeholder"><![CDATA[Eine schöne Geschichte]]></item>
@@ -220,10 +232,35 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
         <item name="wcf.acp.ultimate.content.list.all"><![CDATA[Alle Inhalte]]></item>
         <item name="wcf.acp.ultimate.content.list.count"><![CDATA[{#$items} Inhalt{if $items != 1}e{/if}]]></item>
         <!-- /content -->
+        
+        <!-- menu -->
+        <item name="wcf.acp.ultimate.menu.add"><![CDATA[Menü hinzufügen]]></item>
+        <item name="wcf.acp.ultimate.menu.addToMenu"><![CDATA[Zum Menü hinzufügen]]></item>
+        <item name="wcf.acp.ultimate.menu.edit"><![CDATA[Menü bearbeiten]]></item>
+        <item name="wcf.acp.ultimate.menu.delete"><![CDATA[Menü löschen]]></item>
+        <item name="wcf.acp.ultimate.menu.delete.sure"><![CDATA[Sind Sie sicher, dass Sie dieses Menü löschen wollen?]]></item>
+        <item name="wcf.acp.ultimate.menu.general"><![CDATA[Menüdaten]]></item>
+        <item name="wcf.acp.ultimate.menu.name"><![CDATA[Menüname]]></item>
+        <item name="wcf.acp.ultimate.menu.name.error.notUnique"><![CDATA[Der angegebene Name existiert bereits bei einem Menü.]]></item>
+        <item name="wcf.acp.ultimate.menu.categories"><![CDATA[Kategorien]]></item>
+        <item name="wcf.acp.ultimate.menu.categories.description"><![CDATA[Wählen Sie die Kategorien aus, die Sie zum Menü hinzufügen möchten.]]></item>
+        <item name="wcf.acp.ultimate.menu.pages"><![CDATA[Seiten]]></item>
+        <item name="wcf.acp.ultimate.menu.pages.description"><![CDATA[Wählen Sie die Seiten aus, die Sie zum Menü hinzufügen möchten.]]></item>
+        <item name="wcf.acp.ultimate.menu.custom.link"><![CDATA[URL]]></item>
+        <item name="wcf.acp.ultimate.menu.custom.linkTitle"><![CDATA[Titel]]></item>
+        <item name="wcf.acp.ultimate.menu.custom.linkTitle.placeholder"><![CDATA[Menüeintrag]]></item>
+        <item name="wcf.acp.ultimate.menu.items"><![CDATA[Menüeinträge]]></item>
+        <item name="wcf.acp.ultimate.menu.list"><![CDATA[Menüliste]]></item>
+        <item name="wcf.acp.ultimate.menu.list.all"><![CDATA[Alle Menüs]]></item>
+        <item name="wcf.acp.ultimate.menu.list.count"><![CDATA[{#$items} Menü{if $items != 1}s{/if}]]></item>
+        <item name="wcf.acp.ultimate.menu.noContents"><![CDATA[Keine Menüs gefunden]]></item>
+        <!-- /menu -->
+        
         <!-- page -->
         <item name="wcf.acp.ultimate.page.add"><![CDATA[Seite hinzufügen]]></item>
         <item name="wcf.acp.ultimate.page.edit"><![CDATA[Seite bearbeiten]]></item>
         <item name="wcf.acp.ultimate.page.delete"><![CDATA[Seite löschen]]></item>
+        <item name="wcf.acp.ultiamte.page.delete.sure"><![CDATA[Sind Sie sicher, dass Sie diese Seite löschen wollen?]]></item>
         <item name="wcf.acp.ultimate.page.title"><![CDATA[Titel]]></item>
         <item name="wcf.acp.ultimate.page.title.placeholder"><![CDATA[Beispielseite mit viel Gewürz]]></item>
         <item name="wcf.acp.ultimate.page.title.error.notUnique"><![CDATA[Der angegebene Titel existiert bereits bei einer Seite auf gleichem Level.]]></item>
@@ -281,6 +318,10 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
     <category name="ultimate.date">
         <item name="ultimate.date.dateFormat"><![CDATA[d.m.Y]]></item>
         <item name="ultimate.date.dateTimeFormat"><![CDATA[%date% %time%]]></item>
+    </category>
+    
+    <category name="ultimate.menu">
+        <item name="ultimate.menu.item"><![CDATA[]]></item>
     </category>
     
     <!-- this category is used for all multilingual page fields -->

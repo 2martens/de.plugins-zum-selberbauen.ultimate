@@ -107,6 +107,8 @@ class UltimateContentListPage extends AbstractCachedListPage {
     public function readData() {
         parent::readData();
         $this->url = LinkHandler::getInstance()->getLink('UltimateContentList', array(), 'action='.rawurlencode($this->action).'&pageNo='.$this->pageNo.'&sortField='.$this->sortField.'&sortOrder='.$this->sortOrder);
+        // save the items count
+        $items = $this->items;
         
         // if no category id and no tag id specified, proceed as always
         if (!$this->categoryID && !$this->tagID) return;
@@ -125,9 +127,12 @@ class UltimateContentListPage extends AbstractCachedListPage {
         $this->loadCache();
         $this->objects = $this->objects[$this->categoryID];
         $this->currentObjects = $this->currentObjects[$this->categoryID];
-        // TODO items should show all available contents
+        
         // calculate the pages again, because the objects changed
         $this->calculateNumberOfPages();
+        
+        // restore old items count
+        $this->items = $items;
     }
     
     

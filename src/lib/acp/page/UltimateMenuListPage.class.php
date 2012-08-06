@@ -39,12 +39,12 @@ class UltimateMenuListPage extends AbstractCachedListPage {
     /**
      * @see \wcf\page\SortablePage::$defaultSortField
     */
-    public $defaultSortField = ULTIMATE_SORT_MENU_SORTFIELD;
+    public $defaultSortField = 'menuID';
     
     /**
      * @see \wcf\page\SortablePage::$defaultSortOrder
      */
-    public $defaultSortOrder = ULTIMATE_SORT_MENU_SORTORDER;
+    public $defaultSortOrder = 'ASC';
     
     /**
      * @see \wcf\page\AbstractCachedListPage::$cacheBuilderClassName

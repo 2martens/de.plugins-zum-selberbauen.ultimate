@@ -1,11 +1,16 @@
 <?php
 namespace ultimate\acp\form;
+use wcf\util\HeaderUtil;
+
+use wcf\system\request\LinkHandler;
+
 use ultimate\data\menu\item\MenuItemNodeList;
 use ultimate\data\menu\MenuAction;
 use ultimate\util\MenuUtil;
 use wcf\acp\form\ACPForm;
 use wcf\system\cache\CacheHandler;
 use wcf\system\exception\UserInputException;
+use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -53,10 +58,45 @@ class UltimateMenuAddForm extends ACPForm {
     public $menuItemNodeList = null;
     
     /**
+     * Contains all categories.
+     * @var (\ultimate\data\category\Category|array)[]
+     */
+    public $categories = array();
+    
+    
+    /**
+     * Contains all pages.
+     * @var (\ultimate\data\page\Page|array)[]
+     */
+    public $pages = array();
+    
+    /**
+     * @see \wcf\page\IPage::readParameters()
+     */
+    public function readParameters() {
+        parent::readParameters();
+        I18nHandler::getInstance()->register('title');
+    }
+    
+    /**
      * @see \wcf\page\IPage::readData()
      */
     public function readData() {
         $this->menuItemNodeList = new MenuItemNodeList(0, 0, true);
+        // read category cache
+        $cacheName = 'category';
+        $cacheBuilderClassName = '\ultimate\system\cache\builder\CategoryCacheBuilder';
+        $file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
+        CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
+        $this->categories = CacheHandler::getInstance()->get($cacheName, 'categoriesNested');
+        
+        // read page cache
+        $cacheName = 'page';
+        $cacheBuilderClassName = '\ultimate\system\cache\builder\PageCacheBuilder';
+        $file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
+        CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
+        $this->pages = CacheHandler::getInstance()->get($cacheName, 'pagesNested');
+        
         parent::readData();
     }
     
@@ -101,9 +141,14 @@ class UltimateMenuAddForm extends ACPForm {
         WCF::getTPL()->assign(
             'success', true
         );
-    
-        //showing empty form
-        $this->menuName = '';
+        
+        $url = LinkHandler::getInstance()->getLink('UltimateMenuEdit', 
+            array(
+                'id' => $menuID
+            )
+        );
+        HeaderUtil::redirect($url);
+        exit;
     }
     
     /**
@@ -112,9 +157,12 @@ class UltimateMenuAddForm extends ACPForm {
     public function assignVariables() {
         parent::assignVariables();
     
+        I18nHandler::getInstance()->assignVariables();
         WCF::getTPL()->assign(array(
             'menuName' => $this->menuName,
             'menuItemNodeList' => $this->menuItemNodeList,
+            'categories' => $this->categories,
+            'pages' => $this->pages,
             'action' => 'add'
         ));
     }

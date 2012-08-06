@@ -94,8 +94,8 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
     protected function handleData($data) {
         $data['menuItemID'] = intval($data['menuItemID']);
         $data['menuID'] = intval($data['menuID']);
-        $data['showorder'] = intval($data['showorder']);
-        $data['isDisabled'] = intval($data['isDisabled']);
+        $data['showOrder'] = intval($data['showOrder']);
+        $data['isDisabled'] = (boolean) intval($data['isDisabled']);
         parent::handleData($data);
         $this->data['childItems'] = $this->getChildItems();
     }

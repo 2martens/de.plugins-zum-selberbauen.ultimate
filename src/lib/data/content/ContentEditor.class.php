@@ -1,10 +1,10 @@
 <?php
 namespace ultimate\data\content;
-use ultimate\system\UltimateCore;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 use wcf\system\cache\CacheHandler;
 use wcf\system\clipboard\ClipboardHandler;
+use wcf\system\WCF;
 
 /**
  * Provides functions to edit content.
@@ -43,7 +43,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
         if ($deleteOldCategories) {
             $sql = "DELETE FROM	ultimate".ULTIMATE_N."_content_to_category
                     WHERE       contentID = ?";
-            $statement = UltimateCore::getDB()->prepareStatement($sql);
+            $statement = WCF::getDB()->prepareStatement($sql);
             $statement->execute(array(
                 $this->object->__get('contentID')
             ));
@@ -54,15 +54,15 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
             $sql = "INSERT INTO	ultimate".ULTIMATE_N."_content_to_category
                     (contentID, categoryID)
                     VALUES      (?, ?)";
-            $statement = UltimateCore::getDB()->prepareStatement($sql);
-            UltimateCore::getDB()->beginTransaction();
+            $statement = WCF::getDB()->prepareStatement($sql);
+            WCF::getDB()->beginTransaction();
             foreach ($categoryIDs as $categoryID) {
                 $statement->executeUnbuffered(array(
                     $this->object->__get('contentID'), 
                     $categoryID
                 ));
             }
-            UltimateCore::getDB()->commitTransaction();
+            WCF::getDB()->commitTransaction();
         }
     }
     
@@ -76,7 +76,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
                 FROM     ultimate".ULTIMATE_N."_content_to_category
                 WHERE    contentID = ?
 				AND      categoryID = ?";
-        $statement = UltimateCore::getDB()->prepareStatement($sql);
+        $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute(array(
             $this->contentID,
             $categoryID
@@ -87,7 +87,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
             $sql = "INSERT INTO	ultimate".ULTIMATE_N."_content_to_category
                     (contentID, categoryID)
                     VALUES      (?, ?)";
-            $statement = UltimateCore::getDB()->prepareStatement($sql);
+            $statement = WCF::getDB()->prepareStatement($sql);
             $statement->execute(array(
                 $this->object->__get('contentID'), 
                 $categoryID
@@ -104,7 +104,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
         $sql = "DELETE FROM	ultimate".ULTIMATE_N."_content_to_category
                 WHERE       contentID = ?
                 AND         categoryID = ?";
-        $statement = UltimateCore::getDB()->prepareStatement($sql);
+        $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute(array(
             $this->object->__get('contentID'), 
             $categoryID
@@ -120,15 +120,15 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
         $sql = "DELETE FROM	ultimate".ULTIMATE_N."_content_to_category
                 WHERE       contentID = ?
                 AND         categoryID = ?";
-        $statement = UltimateCore::getDB()->prepareStatement($sql);
-        UltimateCore::getDB()->beginTransaction();
+        $statement = WCF::getDB()->prepareStatement($sql);
+        WCF::getDB()->beginTransaction();
         foreach ($categoryIDs as $categoryID) {
             $statement->executeUnbuffered(array(
                 $this->object->__get('contentID'),
                 $categoryID
             ));
         }
-        UltimateCore::getDB()->commitTransaction();
+        WCF::getDB()->commitTransaction();
     }
     
     /**
@@ -141,7 +141,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
         if ($deleteOldGroups) {
             $sql = 'DELETE FROM ultimate'.ULTIMATE_N.'_user_group_to_content
                     WHERE       contentID      = ?';
-            $statement = UltimateCore::getDB()->prepareStatement($sql);
+            $statement = WCF::getDB()->prepareStatement($sql);
             $statement->execute(array(
                 $this->object->__get('contentID')
             ));
@@ -150,15 +150,15 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
                 (groupID, contentID)
                 VALUES
                 (?, ?)';
-        $statement = UltimateCore::getDB()->prepareStatement($sql);
-        UltimateCore::getDB()->beginTransaction();
+        $statement = WCF::getDB()->prepareStatement($sql);
+        WCF::getDB()->beginTransaction();
         foreach ($groupIDs as $groupID) {
             $statement->executeUnbuffered(array(
                 $groupID,
                 $this->object->__get('contentID')
             ));
         }
-        UltimateCore::getDB()->commitTransaction();
+        WCF::getDB()->commitTransaction();
     }
     
     /**

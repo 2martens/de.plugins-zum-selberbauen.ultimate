@@ -1,10 +1,10 @@
 <?php
 namespace ultimate\data\page;
-use ultimate\system\UltimateCore;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 use wcf\system\cache\CacheHandler;
 use wcf\system\clipboard\ClipboardHandler;
+use wcf\system\WCF;
 
 /**
  * Provides functions to edit pages.
@@ -42,8 +42,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
         if ($deleteOldGroups) {
             $sql = 'DELETE FROM ultimate'.ULTIMATE_N.'_user_group_to_page
                     WHERE       pageID      = ?';
-            /* @var $statement \wcf\system\database\statement\PreparedStatement */
-            $statement = UltimateCore::getDB()->prepareStatement($sql);
+            $statement = WCF::getDB()->prepareStatement($sql);
             $statement->execute(array(
                     $this->object->__get('pageID')
             ));
@@ -52,15 +51,15 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
                 (groupID, pageID)
                 VALUES
                 (?, ?)';
-        $statement = UltimateCore::getDB()->prepareStatement($sql);
-        UltimateCore::getDB()->beginTransaction();
+        $statement = WCF::getDB()->prepareStatement($sql);
+        WCF::getDB()->beginTransaction();
         foreach ($groupIDs as $groupID) {
             $statement->executeUnbuffered(array(
                 $groupID, 
                 $this->object->__get('pageID')
             ));
         }
-        UltimateCore::getDB()->commitTransaction();
+        WCF::getDB()->commitTransaction();
     }
     
     /**
@@ -74,7 +73,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
             $sql = 'UPDATE ultimate'.ULTIMATE_N.'_content_to_page
                     SET    contentID = ?
                     WHERE  pageID    = ?';
-            $statement = UltimateCore::getDB()->prepareStatement($sql);
+            $statement = WCF::getDB()->prepareStatement($sql);
             $statement->execute(array(
                 $contentID,
                 $this->pageID
@@ -85,7 +84,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
                     (contentID, pageID)
                     VALUES
                     (?, ?)';
-            $statement = UltimateCore::getDB()->prepareStatement($sql);
+            $statement = WCF::getDB()->prepareStatement($sql);
             $statement->execute(array(
                 $contentID,
                 $this->pageID

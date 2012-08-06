@@ -83,6 +83,25 @@
                 <admindefaultvalue>1</admindefaultvalue>
             </option>
             
+            <option name="admin.content.ultimate.canAddMenuItem">
+                <categoryname>admin.content.ultimate</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+            <option name="admin.content.ultimate.canEditMenuItem">
+                <categoryname>admin.content.ultimate</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+            <option name="admin.content.ultimate.canDeleteMenuItem">
+                <categoryname>admin.content.ultimate</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+            
             <option name="admin.content.ultimate.canAddPage">
                 <categoryname>admin.content.ultimate</categoryname>
                 <optiontype>boolean</optiontype>

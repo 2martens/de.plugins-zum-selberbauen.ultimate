@@ -61,34 +61,11 @@ class PagePage extends AbstractPage {
         /* @var $page \ultimate\data\page\Page */
         $page = $pagesToSlug[$this->pageSlugs[0]];
         if (count($this->pageSlugs > 1)) {
-            $page = $this->getRealPage($page);
+            $page = PageUtil::getRealPage($page, 1, $this->pageSlugs);
         }
         $this->page = $page;
         
         // TODO implement template
-    }
-    
-    /**
-     * Returns the real page for this request.
-     *
-     * @param \ultimate\data\page\Page $page
-     * @param integer                  $i
-     * @return \ultimate\data\page\Page
-     */
-    protected function getRealPage(\ultimate\data\page\Page $page, $i = 1) {
-        $childPages = $page->__get('childPages');
-        $maxI = count($this->pageSlugs) - 1;
-        /* @var $returnPage \ultimate\data\page\Page */
-        $returnPage = null;
-        foreach ($childPages as $pageID => $page) {
-            if ($page->__get('pageSlug') != $this->pageSlugs[$i]) continue;
-            if ($i == $maxI) {
-                $returnPage = $page;
-                break;
-            }
-            $returnPage = $this->getPage($page, ++$i);
-        }
-        return $returnPage;
     }
     
     /**

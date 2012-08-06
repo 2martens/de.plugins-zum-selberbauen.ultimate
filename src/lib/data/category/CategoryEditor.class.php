@@ -1,6 +1,5 @@
 <?php
 namespace ultimate\data\category;
-use ultimate\system\UltimateCore;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 use wcf\system\cache\CacheHandler;

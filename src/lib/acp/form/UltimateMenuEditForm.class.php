@@ -3,6 +3,7 @@ namespace ultimate\acp\form;
 use ultimate\data\menu\item\MenuItemNodeList;
 use ultimate\data\menu\Menu;
 use wcf\form\AbstractForm;
+use wcf\system\cache\CacheHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\WCF;
 
@@ -22,7 +23,7 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
      * @var string
      * @see \wcf\acp\form\ACPForm::$activeMenuItem
      */
-    public $activeMenuItem = 'wcf.acp.menu.link.ultimate.appearance.menu';
+    public $activeMenuItem = 'wcf.acp.menu.link.ultimate.appearance';
     
     /**
      * Contains the menu id.
@@ -59,6 +60,20 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
             // reading object fields
             $this->menuName = $this->menu->__get('menuName');
             $this->menuItemNodeList = new MenuItemNodeList($this->menuID, 0, false);
+            
+            // read category cache
+            $cacheName = 'category';
+            $cacheBuilderClassName = '\ultimate\system\cache\builder\CategoryCacheBuilder';
+            $file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
+            CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
+            $this->categories = CacheHandler::getInstance()->get($cacheName, 'categoriesNested');
+            
+            // read page cache
+            $cacheName = 'page';
+            $cacheBuilderClassName = '\ultimate\system\cache\builder\PageCacheBuilder';
+            $file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
+            CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
+            $this->pages = CacheHandler::getInstance()->get($cacheName, 'pagesNested');
         }
         AbstractForm::readData();
     }

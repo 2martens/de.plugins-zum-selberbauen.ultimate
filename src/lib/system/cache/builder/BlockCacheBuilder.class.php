@@ -28,15 +28,12 @@ class UltimateBlockCacheBuilder implements ICacheBuilder {
         
         $blockList = new BlockList();
         
-        $blockList->readObjectIDs();
         $blockList->readObjects();
-        $blockIDs = $blockList->getObjectIDs();
         $blocks = $blockList->getObjects();
-        if (!count($blockIDs) || !count($blocks)) return $data;
+        if (!count($blocks)) return $data;
         
-        $data['blocks'] = array_combine($blockIDs, $blocks);
-        $data['blockIDs'] = $blockIDs;
-        
+        $data['blocks'] = $blocks;
+        $data['blockIDs'] = array_keys($blocks);
         
         foreach ($data['blocks'] as $blockID => $block) {
             /* @var $block \wcf\data\ultimate\block\Block */

@@ -57,7 +57,9 @@ class MenuItemNodeList extends \RecursiveIteratorIterator implements \Countable 
                 'menuItemID' => 0,
                 'menuID' => $this->menuID,
                 'menuItemName' => '',
-                'menuItemParent' => ''                
+                'menuItemParent' => '',
+                'showOrder' => 0,
+                'isDisabled' => false             
             ));
         }
         else {

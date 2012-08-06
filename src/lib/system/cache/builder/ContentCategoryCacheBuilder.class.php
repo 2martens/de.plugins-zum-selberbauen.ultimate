@@ -28,10 +28,13 @@ class ContentCategoryCacheBuilder implements ICacheBuilder {
         $categoryList->readObjects();
         $categories = $categoryList->getObjects();
         
-        foreach ($categories as $category) {
+        foreach ($categories as $categoryID => $category) {
             /* @var $category \ultimate\data\category\Category */
             $contents = $category->getContents();
-            $data['contentsToCategoryID'][$category->__get('categoryID')] = $contents;
+            foreach ($contents as $contentID => &$content) {
+                $content->categories = $content->getCategories();
+            }
+            $data['contentsToCategoryID'][$categoryID] = $contents;
             $data['contentsToCategoryTitle'][$category->__get('categoryTitle')] = $contents;
         }
         

@@ -85,7 +85,10 @@
                             <td class="columnID"><p>{@$page->pageID}</p></td>
                             <td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditPage')}<a title="{lang}wcf.acp.ultimate.page.edit{/lang}" href="{link controller='UltimatePageEdit' id=$page->pageID}{/link}">{lang}{@$page->pageTitle}{/lang}</a>{else}{lang}{@$page->pageTitle}{/lang}{/if}</p></td>
                 		    <td class="columnAuthor"><p>{if $__wcf->session->getPermission('admin.user.canEditUser')}<a title="{lang}wcf.acp.user.edit{/lang}" href="{link controller='UserEdit' id=$page->authorID}{/link}">{@$page->author->username}</a>{else}{@$page->author->username}{/if}</p></td>
-                		    <td class="columnDate"><p>{if $page->publishDate}{@$page->publishDate|dateExtended}{else}{/if}</p></td>
+                		    {assign var='englishAccent' value={@ULTIMATE_GENERAL_ENGLISHLANGUAGE} }
+                            {capture assign='publishDateFormat'}{lang britishEnglish=$englishAccent}ultimate.date.dateFormat{/lang}{/capture}
+                            {assign var='publishDateFormat' value=$publishDateFormat}
+                            <td class="columnDate"><p>{if $page->publishDate}{@$page->publishDate|dateExtended:$publishDateFormat}{else}{/if}</p></td>
                 		    <td class="columnLastModified"><p>{@$page->lastModified|time}</p></td>
                 		
                             {event name='columns'}

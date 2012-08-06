@@ -1,6 +1,7 @@
 <?php
 namespace ultimate\data\template;
 use wcf\data\DatabaseObjectEditor;
+use wcf\system\cache\CacheHandler;
 
 /**
  * Provides functions to edit templates.

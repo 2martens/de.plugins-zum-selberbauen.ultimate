@@ -77,21 +77,16 @@
         </acpmenuitem>
         
         <!-- menus -->
-        <acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.menu">
-            <parent>wcf.acp.menu.link.ultimate.appearance</parent>
-            <showorder>1</showorder>
-        </acpmenuitem>
-        
         <acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.menu.list">
             <link>index.php/UltimateMenuList/</link>
-            <parent>wcf.acp.menu.link.ultimate.appearance.menu</parent>
+            <parent>wcf.acp.menu.link.ultimate.appearance</parent>
             <permissions>admin.content.ultimate.canEditMenu,admin.content.ultimate.canDeleteMenu</permissions>
             <showorder>1</showorder>
         </acpmenuitem>
         
         <acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.menu.add">
             <link>index.php/UltimateMenuAdd/</link>
-            <parent>wcf.acp.menu.link.ultimate.appearance.menu</parent>
+            <parent>wcf.acp.menu.link.ultimate.appearance</parent>
             <permissions>admin.content.ultimate.canAddMenu</permissions>
             <showorder>2</showorder>
         </acpmenuitem>

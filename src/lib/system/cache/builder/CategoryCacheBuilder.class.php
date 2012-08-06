@@ -22,7 +22,8 @@ class CategoryCacheBuilder implements ICacheBuilder {
         $data = array(
             'categories' => array(),
             'categoryIDs' => array(),
-            'categoriesToParent' => array()
+            'categoriesToParent' => array(),
+            'categoriesNested' => array()
         );
     
         $categoryList = new CategoryList();
@@ -37,15 +38,57 @@ class CategoryCacheBuilder implements ICacheBuilder {
         $categories = $categoryList->getObjects();
         if (!count($categories)) return $data;
         
-        foreach ($categories as &$category) {
+        foreach ($categories as $categoryID => &$category) {
             /* @var $category \ultimate\data\category\Category */
             $category->contents = $category->getContents();
             $category->childCategories = $category->getChildCategories();
-            $data['categories'][$category->__get('categoryID')] = $category;
-            $data['categoryIDs'][] = $category->__get('categoryID');
-            $data['categoriesToParent'][$category->__get('categoryID')] = $category->childCategories;
+            $data['categories'][$categoryID] = $category;
+            $data['categoryIDs'][] = $categoryID;
+            $data['categoriesToParent'][$categoryID] = $category->childCategories;
+        }
+        
+        // add categories without parent to the categoriesToParent cache index
+        foreach ($data['categories'] as $categoryID => $category) {
+            if ($category->__get('categoryParent')) continue;
+            $data['categoriesToParent'][0][$categoryID] = $category;
+        }
+        
+        foreach ($data['categoriesToParent'][0] as $categoryID => $category) {
+            $data['categoriesNested'][$categoryID] = array(
+                0 => $category,
+                1 => $this->buildNestedCategories($categoryID, $category, true)
+            );
         }
         
         return $data;
+    }
+    
+    /**
+     * Builds nested category hierarchy.
+     * 
+     * @param integer                          $categoryID
+     * @param \ultimate\data\category\Category $category
+     * @param boolean                          $returnCompleteArray
+     * @return (\ultimate\data\category\Category|array)[]
+     */
+    protected function buildNestedCategories($categoryID, \ultimate\data\category\Category $category, $returnCompleteArray = false) {
+        $array = array();
+        $childCategories = array();
+        if (count($category->childCategories)) {
+            foreach ($category->childCategories as $__categoryID => $__category) {
+                $childCategories[$__categoryID] = array(
+                    0 => $__category,
+                    1 => $this->buildNestedCategories($__categoryID, $__category)
+                );
+            }
+        }
+        if (!$returnCompleteArray) return $childCategories;
+        
+        $array[$categoryID] = array(
+            0 => $category,
+            1 => $childCategories
+        );
+        
+        return $array;
     }
 }

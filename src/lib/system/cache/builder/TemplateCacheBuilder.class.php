@@ -26,14 +26,12 @@ class UltimateTemplateCacheBuilder implements ICacheBuilder {
         
         $templateList = new TemplateList();
         
-        $templateList->readObjectIDs();
         $templateList->readObjects();
-        $templateIDs = $templateList->getObjectIDs();
         $templates = $templateList->getObjects();
-        if (!count($templateIDs) || !count($templates)) return $data;
+        if (!count($templates)) return $data;
         
-        $data['templates'] = array_combine($templateIDs, $templates);
-        $data['templateIDs'] = $templateIDs;
+        $data['templates'] = $templates;
+        $data['templateIDs'] = array_keys($templates);
         
         return $data;
     }

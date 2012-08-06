@@ -33,7 +33,7 @@
     <nav>
         <ul>
             {if $__wcf->session->getPermission('admin.content.ultimate.canAddCategory')}
-                <li><a href="{link controller='UltimateMenuAdd'}{/link}" title="{lang}wcf.acp.ultimate.menu.add{/lang}" class="button"><img src="{@RELATIVE_WCF_DIR}icon/add.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.ultimate.menu.add{/lang}</span></a></li>
+                <li><a href="{link controller='UltimateMenuAdd'}{/link}" title="{lang}wcf.acp.ultimate.menu.add{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/add.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.ultimate.menu.add{/lang}</span></a></li>
             {/if}
             
             {event name='largeButtons'}

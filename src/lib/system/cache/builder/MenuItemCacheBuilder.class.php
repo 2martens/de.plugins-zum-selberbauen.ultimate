@@ -28,16 +28,16 @@ class MenuItemCacheBuilder implements ICacheBuilder {
         $menuItemList->readObjects();
         $menuItems = $menuItemList->getObjects();
         
-        foreach ($menuItems as $menuItem) {
+        foreach ($menuItems as $menuItemID => $menuItem) {
             /* @var $menuItem \ultimate\data\menu\item\MenuItem */
-            $data['menuItems'][$menuItem->__get('menuItemID')] = $menuItem;
-            $data['menuItemIDs'][] = $menuItem->__get('menuItemID');
+            $data['menuItems'][$menuItemID] = $menuItem;
+            $data['menuItemIDs'][] = $menuItemID;
             $data['menuItemsToParent'][$menuItem->__get('menuItemName')] = $menuItem->__get('childItems');
         }
         
         $data['menuItemsToParent'][''] = array();
         foreach ($data['menuItems'] as $menuItemID => $menuItem) {
-            if (!empty($menuItem->__get('menuItemParent'))) continue;
+            if ($menuItem->__get('menuItemParent') != '') continue;
             $data['menuItemsToParent'][''][$menuItemID] = $menuItem;
         }
         

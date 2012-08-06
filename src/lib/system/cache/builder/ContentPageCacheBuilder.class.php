@@ -28,11 +28,11 @@ class ContentPageCacheBuilder implements ICacheBuilder {
         $pageList->readObjects();
         $pages = $pageList->getObjects();
         
-        foreach ($pages as $page) {
+        foreach ($pages as $pageID => $page) {
             /* @var $page \ultimate\data\page\Page */
             $content = $page->getContent();
-            $data['contentsToPageID'][$page->__get('pageID')] = $content;
-            $data['contentIDsToPageID'][$page->__get('pageID')] = $content->__get('contentID');
+            $data['contentsToPageID'][$pageID] = $content;
+            $data['contentIDsToPageID'][$pageID] = $content->__get('contentID');
         }
         
         return $data;

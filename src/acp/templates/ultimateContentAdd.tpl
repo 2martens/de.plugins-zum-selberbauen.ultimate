@@ -127,6 +127,7 @@
                             {/if}
                         </small>
                     {/if}
+                    {include file='messageFormTabs'}
                 </dd>
             </dl>
         </fieldset>
@@ -236,7 +237,6 @@
             </dl>
         </fieldset>
         {event name='fieldsets'}
-        {include file='messageFormTabs'}
     </div>
     
     <div class="formSubmit">

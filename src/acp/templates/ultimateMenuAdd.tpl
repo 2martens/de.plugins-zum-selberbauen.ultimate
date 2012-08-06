@@ -54,13 +54,14 @@
         </fieldset>
         <fieldset>
             <legend>{lang}wcf.acp.ultimate.menu.items{/lang}</legend>
-            <div id="menuItemList" class="container containerPadding marginTop shadow{if $objectType->getProcessor()->canEditMenuItem() && $menuItemNodeList|count > 1} sortableListContainer{/if}">
+            <div id="menuItemList" class="container containerPadding marginTop shadow{if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem') && $menuItemNodeList|count > 1} sortableListContainer{/if}">
+                {if $action == 'edit'}
                 <ol class="sortableList" data-object-id="0">
                     {assign var=oldDepth value=0}
                     {foreach from=$menuItemNodeList item=menuItem}
                         {section name=i loop=$oldDepth-$menuItemNodeList->getDepth()}</ol></li>{/section}
                 
-                        <li class="{if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem') && $menuItemNodeList|count > 1}sortableNode {if $menuItemNodeList->getDepth() == $objectType->getProcessor()->getMaximumNestingLevel()}sortableNoNesting {/if}{/if}jsMenuItem" data-object-id="{@$menuItem->menuItemID}"{* {if $collapsedMenuItemIDs|is_array} data-is-open="{if $collapsedMenuItemIDs[$menuItem->menuItemID]|isset}0{else}1{/if}"{/if} *}>
+                        <li class="{if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem') && $menuItemNodeList|count > 1}sortableNode {/if}jsMenuItem" data-object-id="{@$menuItem->menuItemID}"{* {if $collapsedMenuItemIDs|is_array} data-is-open="{if $collapsedMenuItemIDs[$menuItem->menuItemID]|isset}0{else}1{/if}"{/if} *}>
                             <span class="sortableNodeLabel">
                                 <span class="buttons">
                                     
@@ -93,37 +94,18 @@
                     {/foreach}
                     {section name=i loop=$oldDepth}</ol></li>{/section}  
                 </ol>
-                {if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem') && menuItemNodeList|count > 1}
+                {else}
+                    <p>{lang}wcf.acp.ultimate.menu.addMenuFirst{/lang}</p>
+                {/if}
+                {if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem')}
                     <div class="formSubmit">
-                        <button class="button default" data-type="submit">{lang}wcf.global.button.save{/lang}</button>
+                        <button class="button default{if $action == 'add'} disabled" disabled="disabled{/if}" type="button" data-type="submit">{lang}wcf.global.button.save{/lang}</button>
                     </div>
                 {/if}
             </div>
-            
-            <script type="text/javascript">
-            /* <![CDATA[ */
-                $(function() {
-                    {if $__wcf->session->getPermission('admin.content.ultimate.canDeleteMenuItem')}
-                        new WCF.Action.Delete('ultimate\\data\\menu\\item\\MenuItemAction', $('.jsMenuItem'));
-                    {/if}
-                    {if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem')}
-                        new WCF.Action.Toggle('ultimate\\data\\menu\\item\\MenuItemAction', $('.jsMenuItem'), '> .buttons > .jsToggleButton');
-                        {if $menuItemNodeList|count > 1}
-                            var sortableNodes = $('.sortableNode');
-                            sortableNodes.each(function(index, node) {
-                                $(node).wcfIdentify();
-                            });
-                            new WCF.Sortable.List('menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, { }, false);
-                        {/if}
-                    {/if}
-                });
-            /* ]]> */
-            </script>
-                
         </fieldset>    
         {event name='fieldsets'}
     </div>
-        
     <div class="formSubmit">
         <input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
         <input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
@@ -132,5 +114,108 @@
         {if $menuID|isset}<input type="hidden" name="id" value="{@$menuID}" />{/if}
     </div>
 </form>
+<form method="post" action="#">    
+    <div id="categorySelectContainer" class="container containerPadding marginTop shadow{if $action == 'add'} disabled{/if}">
+        <dl>
+            <dt><label>{lang}wcf.acp.ultimate.menu.categories{/lang}</label></dt>
+            <dd>
+                {if $action == 'add'}
+                    {nestedHtmlCheckboxes options=$categories name='categoryIDs' disabled='disabled'}
+                {else}
+                    {nestedHtmlCheckboxes options=$categories name='categoryIDs'}
+                {/if}
+                <small>
+                    {lang}wcf.acp.ultimate.menu.categories.description{/lang}
+                </small>
+            </dd>
+        </dl>
+        <div class="formSubmit">
+            <button class="button default{if $action == 'add'} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.acp.ultimate.menu.addToMenu{/lang}</button>
+        </div>
+    </div>
+</form>
+<form method="post" action="#">
+    <div id="pageSelectContainer" class="container containerPadding marginTop shadow{if $action == 'add'} disabled{/if}">
+        <dl>
+            <dt><label>{lang}wcf.acp.ultimate.menu.pages{/lang}</label></dt>
+            <dd>
+                {if $action == 'add'}
+                    {nestedHtmlCheckboxes options=$pages name='pageIDs' disabled='disabled'}
+                {else}
+                    {nestedHtmlCheckboxes options=$pages name='pageIDs'}
+                {/if}
+                <small>
+                    {lang}wcf.acp.ultimate.menu.pages.description{/lang}
+                </small>
+            </dd>
+        </dl>
+        <div class="formSubmit">
+            <button class="button default{if $action == 'add'} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.acp.ultimate.menu.addToMenu{/lang}</button>
+        </div>
+    </div>
+</form>
+<form method="post" action="#">        
+    <div id="customContainer" class="container containerPadding marginTop shadow{if $action == 'add'} disabled{/if}">
+        <dl>
+            <dt><label for="link">{lang}wcf.acp.ultimate.menu.custom.link{/lang}</label></dt>
+            <dd>
+                <input type="url" name="link" id="link" value="http://" class="medium{if $action == 'add'} disabled" disabled="disabled{/if}" />
+            </dd>
+        </dl>
+        <dl>
+            <dt><label for="title">{lang}wcf.acp.ultimate.menu.custom.linkTitle{/lang}</label></dt>
+            <dd>
+                <script type="text/javascript">
+                //<![CDATA[
+                    {if $action == 'edit'}
+                    $(function() {
+                        var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
+                        var $optionValues = { {implode from=$i18nValues['title'] key=languageID item=value}'{@$languageID}': '{$value}'{/implode} };
+                        new WCF.MultipleLanguageInput('title', false, $optionValues, $availableLanguages);
+                    });
+                    {/if}
+                //]]>
+                </script>
+                <input type="text" id="title" name="title" value="{@$i18nPlainValues['title']}" class="medium{if $action == 'add'} disabled" disabled="disabled{/if}" placeholder="{lang}wcf.acp.ultimate.menu.custom.linkTitle.placeholder{/lang}" />
+            </dd>
+        </dl>
+        <div class="formSubmit">
+            <button class="button default{if $action == 'add'} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.acp.ultimate.menu.addToMenu{/lang}</button>
+        </div>
+    </div>
+</form>            
+<script type="text/javascript">
+    /* <![CDATA[ */
+        $(function() {
+            {if $action == 'edit'}
+                {if $__wcf->session->getPermission('admin.content.ultimate.canDeleteMenuItem')}
+                    new WCF.Action.Delete('ultimate\\data\\menu\\item\\MenuItemAction', $('.jsMenuItem'));
+                {/if}
+                {if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem')}
+                    new WCF.Action.Toggle('ultimate\\data\\menu\\item\\MenuItemAction', $('.jsMenuItem'), '> .buttons > .jsToggleButton');
+                    {if $menuItemNodeList|count > 1}
+                        var sortableNodes = $('.sortableNode');
+                        sortableNodes.each(function(index, node) {
+                            $(node).wcfIdentify();
+                        });
+                    {/if}
+                    new WCF.Sortable.List('menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, { }, false);
+                    ULTIMATE.Permission.addObject({
+                        'admin.content.ultimate.canEditMenuItem': {if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem')}true{else}false{/if}
+                        'admin.content.ultimate.canDeleteMenuItem': {if $__wcf->session->getPermission('admin.content.ultimate.canDeleteMenuItem')}true{else}false{/if}
+                    });
+                    WCF.Icon.addObject({
+                        'wcf.icon.delete': '{@$__wcf->getPath()}icon/delete.svg',
+                        'wcf.icon.enabled': '{@$__wcf->getPath()}icon/enabled.svg',
+                        'wcf.icon.disabled': '{@$__wcf->getPath()}icon/disabled.svg'
+                    });
+                    new ULTIMATE.Menu.Item.Transfer('categorySelectContainer', 'menuItemList, 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'category');
+                    new ULTIMATE.Menu.Item.Transfer('pageSelectContainer', 'menuItemList, 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'page');
+                    new ULTIMATE.Menu.Item.Transfer('customContainer', 'menuItemList, 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'custom');
+                {/if}
+            {/if}
+        });
+    /* ]]> */
+</script>
 
 {include file='footer'}

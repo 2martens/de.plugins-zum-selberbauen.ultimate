@@ -14,7 +14,7 @@ use wcf\data\DatabaseObjectDecorator;
  * @subpackage data.menu.item
  * @category Ultimate CMS
  */
-class CategoryNode extends DatabaseObjectDecorator implements \RecursiveIterator, \Countable {
+class MenuItemNode extends DatabaseObjectDecorator implements \RecursiveIterator, \Countable {
     
     /**
      * Contains the current index.

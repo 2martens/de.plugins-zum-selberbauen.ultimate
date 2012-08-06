@@ -23,7 +23,8 @@ class PageCacheBuilder implements ICacheBuilder {
         	'pages' => array(),
             'pageIDs' => array(),
             'pagesToParent' => array(),
-            'pagesToSlug' => array()
+            'pagesToSlug' => array(),
+            'pagesNested' => array()
         );
         
         $pageList = new PageList();
@@ -37,14 +38,56 @@ class PageCacheBuilder implements ICacheBuilder {
         $pages = $pageList->getObjects();
         if (!count($pages)) return $data;
         
-        foreach ($pages as $page) {
+        foreach ($pages as $pageID => $page) {
             /* @var $page \ultimate\data\page\Page */
-            $data['pages'][$page->__get('pageID')] = $page;
-            $data['pageIDs'][] = $page->__get('pageID');
-            $data['pagesToParent'][$page->__get('pageID')] = $page->__get('childPages');
+            $data['pages'][$pageID] = $page;
+            $data['pageIDs'][] = $pageID;
+            $data['pagesToParent'][$pageID] = $page->__get('childPages');
             $data['pagesToSlug'][$page->__get('pageSlug')] = $page;
         }
         
+        // add pages without parent to the pagesToParent cache index
+        foreach ($data['pages'] as $pageID => $page) {
+            if ($page->__get('pageParent')) continue;
+            $data['pagesToParent'][0][$pageID] = $page;
+        }
+        
+        foreach ($data['pagesToParent'][0] as $pageID => $page) {
+            $data['pagesNested'][$pageID] = array(
+                0 => $page,
+                1 => $this->buildNestedPages($pageID, $page, true)
+            );
+        }
+        
         return $data;
+    }
+    
+    /**
+     * Builds nested page hierarchy.
+     *
+     * @param integer                  $pageID
+     * @param \ultimate\data\page\Page $page
+     * @param boolean                  $returnCompleteArray
+     * @return (\ultimate\data\page\Page|array)[]
+     */
+    protected function buildNestedPages($pageID, \ultimate\data\page\Page $page, $returnCompleteArray = false) {
+        $array = array();
+        $childPages = array();
+        if (count($page->__get('childPages'))) {
+            foreach ($page->__get('childPages') as $__pageID => $__page) {
+                $childPages[$__pageID] = array(
+                    0 => $__page,
+                    1 => $this->buildNestedPages($__pageID, $__page)
+                );
+            }
+        }
+        if (!$returnCompleteArray) return $childPages;
+    
+        $array[$pageID] = array(
+            0 => $page,
+            1 => $childPages
+        );
+    
+        return $array;
     }
 }

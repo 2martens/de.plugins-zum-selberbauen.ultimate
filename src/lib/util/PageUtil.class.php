@@ -121,6 +121,30 @@ class PageUtil {
     }
     
     /**
+     * Returns the real page for a hierarchy of page slugs.
+     *
+     * @param \ultimate\data\page\Page $page
+     * @param integer                  $i
+     * @param string[]                 $pageSlugs
+     * @return \ultimate\data\page\Page
+     */
+    public static function getRealPage(\ultimate\data\page\Page $page, $i = 1, $pageSlugs) {
+        $childPages = $page->__get('childPages');
+        $maxI = count($pageSlugs) - 1;
+        /* @var $returnPage \ultimate\data\page\Page */
+        $returnPage = null;
+        foreach ($childPages as $pageID => $page) {
+            if ($page->__get('pageSlug') != $pageSlugs[$i]) continue;
+            if ($i == $maxI) {
+                $returnPage = $page;
+                break;
+            }
+            $returnPage = self::getRealPage($page, ++$i);
+        }
+        return $returnPage;
+    }
+    
+    /**
      * Returns all contents which are available.
      *
      * @param  integer  $pageID    0 by default; give page id to get all unbound contents plus the one already in use by the page

@@ -26,14 +26,12 @@ class UltimateBlockTypeCacheBuilder implements ICacheBuilder {
         
         $blockTypeList = new BlockTypeList();
                 
-        $blockTypeList->readObjectIDs();
         $blockTypeList->readObjects();
-        $blockTypeIDs = $blockTypeList->getObjectIDs();
         $blockTypes = $blockTypeList->getObjects();
-        if (!count($blockTypeIDs) || !count($blockTypes)) return $data;
+        if (!count($blockTypes)) return $data;
         
-        $data['blockTypes'] = array_combine($blockTypeIDs, $blockTypes);
-        $data['blockTypeIDs'] = $blockTypeIDs;
+        $data['blockTypes'] = $blockTypes;
+        $data['blockTypeIDs'] = array_keys($blockTypes);
         
         return $data;
     }
