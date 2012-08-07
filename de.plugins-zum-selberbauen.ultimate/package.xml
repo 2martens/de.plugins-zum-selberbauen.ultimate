@@ -54,7 +54,9 @@
         <!-- /other -->
         
         <!-- xml -->
+        <!-- applications can't have PIPs 
         <instruction type="packageInstallationPlugin">packageInstallationPlugin.xml</instruction>
+         -->
         <instruction type="objectType">objectType.xml</instruction>
         <instruction type="coreObject">coreObject.xml</instruction>
         <instruction type="option">option.xml</instruction>
