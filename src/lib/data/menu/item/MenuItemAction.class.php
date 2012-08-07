@@ -129,7 +129,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
                 foreach ($elementIDs as $elementID) {
                     $element = null;
                     
-                    switch ($parameters['data']['type']) {
+                    switch ($this->parameters['data']['type']) {
                         case 'category':
                             $element = $this->categories[$elementID];
                             $parameters['menuItemName'] = $element->__get('categoryTitle');

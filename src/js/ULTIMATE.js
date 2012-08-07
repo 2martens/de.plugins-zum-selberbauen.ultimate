@@ -410,6 +410,9 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 				if ($parentID !== undefined) {
 					$checkedParent = $listItem.prop('checked');
 					this._getNestedElements($parent, $parentID);
+					if (!this._structure[0]) {
+						this._structure[0] = [ ];
+					}
 					if ($checkedParent) this._structure[0].push($parentID);
 					$listItem.prop('checked', false);
 				}
