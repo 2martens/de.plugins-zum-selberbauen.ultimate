@@ -323,19 +323,55 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 		});
 		this._structure = { };
 		
+		this._element.find('button[data-type="submit"]').click($.proxy(this._click, this));
 		this._element.parents('form').submit($.proxy(this._submit, this));
+	},
+	
+	/**
+	 * Triggers the form's submit event.
+	 * 
+	 * @param jQuery.Event event
+	 */
+	_click: function(event) {
+		this._element.parents('form').trigger('submit');
 	},
 
 	/**
 	 * Saves object structure.
 	 * 
-	 * @param object event
+	 * @param jQuery.Event event
 	 */
 	_submit: function(event) {
+		event.preventDefault();
 		this._structure = { };
 		if (this._type == 'custom') {
 			var link = $('#link').val();
-			var linkTitle = $('#title').val();
+			var linkTitleFound = this._element.find('input[name="title"]');
+			var linkTitle = '';
+			var $data = {
+				actionName: 'createAJAX',
+				className: this._className,
+				parameters: $parameters			
+			};
+			// only add title to post values if linkTitle is not i18n
+			if (linkTitleFound.length == 1) {
+				linkTitle = $('#title').val();
+				$data = $.extend(true, {
+					title: linkTitle
+				}, $data);
+			} else if (linkTitleFound.length == 0) {
+				// if it is i18n add it to post values accordingly
+				var linkTitle_i18n = {};
+				this._element.find('input[name^="title_i18n"]').each($.proxy(function(index, listItem) {
+					var $listItem = $(listItem);
+					var $languageID = $listItem.attr('name').substring(11);
+					$languageID = $languageID.substr(0, $languageID.length - 1);
+					linkTitle_i18n[$languageID] = $listItem.val();
+				}, this));
+				$data = $.extend(true, {
+					title_i18n: linkTitle_i18n
+				}, $data);
+			}
 			this._structure['link'] = link;
 			this._structure['linkTitle'] = linkTitle;
 			
@@ -349,11 +385,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 				}
 			}, { });
 			
-			this._proxy.setOption('data', {
-				actionName: 'createAJAX',
-				className: this._className,
-				parameters: $parameters			
-			});
+			this._proxy.setOption('data', $data);
 		}
 		else {
 			this._element.find('dl > dd > input[type="checkbox"]').each($.proxy(function(index, listItem) {
@@ -368,6 +400,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 						}
 						
 						if ($checked) this._structure[$parentID].push($objectID);
+						$(listItem).prop('checked', false);
 					}, this));
 				}
 			}, this));
