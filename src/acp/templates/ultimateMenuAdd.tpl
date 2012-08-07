@@ -36,12 +36,12 @@
     <div class="container containerPadding marginTop shadow">
         <fieldset>
             <legend>{lang}wcf.acp.ultimate.menu.general{/lang}</legend>
-            <dl{if $errorField == 'menuName'} class="formError"{/if}>
+            <dl{if $errorField == 'menuName'} class="wcf-formError"{/if}>
                 <dt><label for="menuName">{lang}wcf.acp.ultimate.menu.name{/lang}</label></dt>
                 <dd>
                     <input type="text" id="menuName" name="menuName" value="{@$menuName}" class="long" required="required" placeholder="{lang}wcf.acp.ultimate.menu.name.placeholder{/lang}" />
                     {if $errorField == 'menuName'}
-                        <small class="innerError">
+                        <small class="wcf-innerError">
                             {if $errorType == 'empty'}
                                 {lang}wcf.global.form.error.empty{/lang}
                             {else}
