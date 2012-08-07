@@ -33,6 +33,7 @@
 	
 	<!-- Stylesheets -->
 	<link rel="stylesheet/less" type="text/css" href="{@$__wcf->getPath()}style/bootstrap.less" />
+	<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}acp/style/setup/WCFSetup.css" />
     <link rel="stylesheet" type="text/css" href="{@$__wcf->getPath('ultimate')}style/ultimate.css" />
     {event name='stylesheetInclude'}
     <script type="text/javascript">
