@@ -27,7 +27,8 @@
 
 <!-- Stylesheets -->
 <link rel="stylesheet/less" type="text/css" href="{@$__wcf->getPath()}style/bootstrap.less" />
-<link rel="stylesheet/less" type="text/css" href="{@$__wcf->getPath('ultimate')}style/ultimate.less" />
+<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath('ultimate')}style/ultimate.css" />
+{event name='stylesheetInclude'}
 <script type="text/javascript">
     //<![CDATA[
     var less = { env: 'development' };
