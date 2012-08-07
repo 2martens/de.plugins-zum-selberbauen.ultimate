@@ -307,6 +307,12 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	_type: '',
 	
 	/**
+	 * true if the submit is done
+	 * @var boolean
+	 */
+	_submitDone: false,
+	
+	/**
 	 * Initializes a menu item transfer.
 	 * 
 	 * @param string elementID
@@ -323,36 +329,39 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 		});
 		this._structure = { };
 		
-		this._element.find('button[data-type="submit"]').click($.proxy(this._click, this));
-		this._element.parents('form').submit($.proxy(this._submit, this));
+		this._element.parent('form').submit($.proxy(this._stopFormSubmit, this));
+		if (this._type != 'custom') {
+			this._element.find('button[data-type="submit"]').click($.proxy(this._submit, this));
+		}
 	},
 	
 	/**
-	 * Triggers the form's submit event.
+	 * Stops the form submit event.
 	 * 
 	 * @param jQuery.Event event
+	 * @return boolean
 	 */
-	_click: function(event) {
-		this._element.parents('form').trigger('submit');
+	_stopFormSubmit: function(event) {
+		if (this._type != 'custom') return false;
+		if (this._element.find('input[name="title"]').length == 0) {
+			this._submit();
+		} 
+		else if (this._element.find('input[name="title"]').length == 1) {
+			this._submit();
+		}
+		return false;
 	},
 
 	/**
 	 * Saves object structure.
-	 * 
-	 * @param jQuery.Event event
 	 */
-	_submit: function(event) {
-		event.preventDefault();
+	_submit: function() {
 		this._structure = { };
 		if (this._type == 'custom') {
 			var link = $('#link').val();
 			var linkTitleFound = this._element.find('input[name="title"]');
 			var linkTitle = '';
-			var $data = {
-				actionName: 'createAJAX',
-				className: this._className,
-				parameters: $parameters			
-			};
+			var $data = {};
 			// only add title to post values if linkTitle is not i18n
 			if (linkTitleFound.length == 1) {
 				linkTitle = $('#title').val();
@@ -381,27 +390,28 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 					offset: this._offset,
 					structure: this._structure,
 					type: this._type,
-					menuID: $('#id').val()
+					menuID: $('input[name="id"]').val()
 				}
 			}, { });
+			
+			$data = $.extend(true, {
+				actionName: 'createAJAX',
+				className: this._className,
+				parameters: $parameters			
+			}, $data);
 			
 			this._proxy.setOption('data', $data);
 		}
 		else {
-			this._element.find('dl > dd > input[type="checkbox"]').each($.proxy(function(index, listItem) {
+			this._element.find('dl > dd > ul > li > label > input[type="checkbox"]').each($.proxy(function(index, listItem) {
 				var $listItem = $(listItem);
 				var $parentID = $listItem.val();
+				var $parent = $listItem.parent().parent();
 				if ($parentID !== undefined) {
-					$listItem.children('input[type="checkbox"]').each($.proxy(function(index, listItem) {
-						var $objectID = $(listItem).val();
-						var $checked = $(listItem).prop('checked');
-						if (!this._structure[$parentID]) {
-							this._structure[$parentID] = [ ];
-						}
-						
-						if ($checked) this._structure[$parentID].push($objectID);
-						$(listItem).prop('checked', false);
-					}, this));
+					$checkedParent = $listItem.prop('checked');
+					this._getNestedElements($parent, $parentID);
+					if ($checkedParent) this._structure[0].push($parentID);
+					$listItem.prop('checked', false);
 				}
 			}, this));
 			// send request
@@ -410,10 +420,10 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 					offset: this._offset,
 					structure: this._structure,
 					type: this._type,
-					menuID: $('#id').val()
+					menuID: $('input[name="id"]').val()
 				}
 			}, { });
-			
+			alert($.param($parameters));
 			this._proxy.setOption('data', {
 				actionName: 'createAJAX',
 				className: this._className,
@@ -421,6 +431,29 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 			});
 		}
 		this._proxy.sendRequest();
+		this._submitDone = true;
+	},
+	
+	/**
+	 * Builds all nested elements.
+	 * 
+	 * @param jQuery  $parent
+	 * @param integer $parentID
+	 */
+	_getNestedElements: function($parent, $parentID) {
+		$parent.find('ul > li > label > input[type="checkbox"]').each($.proxy(function(index, listItem) {
+			var $objectID = $(listItem).val();
+			var $checked = $(listItem).prop('checked');
+			var $__parent = $(listItem).parent().parent();
+			
+			this._getNestedElements($__parent, $objectID);
+			
+			if (!this._structure[$parentID]) {
+				this._structure[$parentID] = [ ];
+			}
+			if ($checked) this._structure[$parentID].push($objectID);
+			$(listItem).prop('checked', false);
+		}, this));
 	},
 	
 	/**

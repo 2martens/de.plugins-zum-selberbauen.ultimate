@@ -70,8 +70,7 @@ class PageCacheBuilder implements ICacheBuilder {
      * @param boolean                  $returnCompleteArray
      * @return (\ultimate\data\page\Page|array)[]
      */
-    protected function buildNestedPages($pageID, \ultimate\data\page\Page $page, $returnCompleteArray = false) {
-        $array = array();
+    protected function buildNestedPages($pageID, \ultimate\data\page\Page $page) {
         $childPages = array();
         if (count($page->__get('childPages'))) {
             foreach ($page->__get('childPages') as $__pageID => $__page) {
@@ -81,13 +80,6 @@ class PageCacheBuilder implements ICacheBuilder {
                 );
             }
         }
-        if (!$returnCompleteArray) return $childPages;
-    
-        $array[$pageID] = array(
-            0 => $page,
-            1 => $childPages
-        );
-    
-        return $array;
+        return $childPages;
     }
 }

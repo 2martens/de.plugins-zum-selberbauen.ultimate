@@ -56,7 +56,7 @@ class CategoryCacheBuilder implements ICacheBuilder {
         foreach ($data['categoriesToParent'][0] as $categoryID => $category) {
             $data['categoriesNested'][$categoryID] = array(
                 0 => $category,
-                1 => $this->buildNestedCategories($categoryID, $category, true)
+                1 => $this->buildNestedCategories($categoryID, $category)
             );
         }
         
@@ -68,11 +68,9 @@ class CategoryCacheBuilder implements ICacheBuilder {
      * 
      * @param integer                          $categoryID
      * @param \ultimate\data\category\Category $category
-     * @param boolean                          $returnCompleteArray
      * @return (\ultimate\data\category\Category|array)[]
      */
-    protected function buildNestedCategories($categoryID, \ultimate\data\category\Category $category, $returnCompleteArray = false) {
-        $array = array();
+    protected function buildNestedCategories($categoryID, \ultimate\data\category\Category $category) {
         $childCategories = array();
         if (count($category->childCategories)) {
             foreach ($category->childCategories as $__categoryID => $__category) {
@@ -82,13 +80,6 @@ class CategoryCacheBuilder implements ICacheBuilder {
                 );
             }
         }
-        if (!$returnCompleteArray) return $childCategories;
-        
-        $array[$categoryID] = array(
-            0 => $category,
-            1 => $childCategories
-        );
-        
-        return $array;
+        return $childCategories;
     }
 }

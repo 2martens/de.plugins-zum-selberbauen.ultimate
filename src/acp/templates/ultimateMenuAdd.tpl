@@ -114,7 +114,7 @@
         {if $menuID|isset}<input type="hidden" name="id" value="{@$menuID}" />{/if}
     </div>
 </form>
-<form method="post" action="#">    
+<form method="post">    
     <div id="categorySelectContainer" class="container containerPadding marginTop shadow{if $action == 'add'} disabled{/if}">
         <dl>
             <dt><label>{lang}wcf.acp.ultimate.menu.categories{/lang}</label></dt>
@@ -130,11 +130,11 @@
             </dd>
         </dl>
         <div class="formSubmit">
-            <button class="button default{if $action == 'add'} disabled" disabled="disabled{/if}" type="button" data-type="submit">{lang}wcf.acp.ultimate.menu.addToMenu{/lang}</button>
+            <button class="button default{if $action == 'add'} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.acp.ultimate.menu.addToMenu{/lang}</button>
         </div>
     </div>
 </form>
-<form method="post" action="#">
+<form method="post">
     <div id="pageSelectContainer" class="container containerPadding marginTop shadow{if $action == 'add'} disabled{/if}">
         <dl>
             <dt><label>{lang}wcf.acp.ultimate.menu.pages{/lang}</label></dt>
@@ -150,11 +150,11 @@
             </dd>
         </dl>
         <div class="formSubmit">
-            <button class="button default{if $action == 'add'} disabled" disabled="disabled{/if}" type="button" data-type="submit">{lang}wcf.acp.ultimate.menu.addToMenu{/lang}</button>
+            <button class="button default{if $action == 'add'} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.acp.ultimate.menu.addToMenu{/lang}</button>
         </div>
     </div>
 </form>
-<form method="post" action="#">        
+<form method="post">        
     <div id="customContainer" class="container containerPadding marginTop shadow{if $action == 'add'} disabled{/if}">
         <dl>
             <dt><label for="link">{lang}wcf.acp.ultimate.menu.custom.link{/lang}</label></dt>
@@ -180,7 +180,7 @@
             </dd>
         </dl>
         <div class="formSubmit">
-            <button class="button default{if $action == 'add'} disabled" disabled="disabled{/if}" type="button" data-type="submit">{lang}wcf.acp.ultimate.menu.addToMenu{/lang}</button>
+            <button class="button default{if $action == 'add'} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.acp.ultimate.menu.addToMenu{/lang}</button>
         </div>
     </div>
 </form>            
@@ -201,7 +201,7 @@
                     {/if}
                     new WCF.Sortable.List('menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, { }, false);
                     ULTIMATE.Permission.addObject({
-                        'admin.content.ultimate.canEditMenuItem': {if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem')}true{else}false{/if}
+                        'admin.content.ultimate.canEditMenuItem': {if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem')}true{else}false{/if},
                         'admin.content.ultimate.canDeleteMenuItem': {if $__wcf->session->getPermission('admin.content.ultimate.canDeleteMenuItem')}true{else}false{/if}
                     });
                     WCF.Icon.addObject({
@@ -209,9 +209,9 @@
                         'wcf.icon.enabled': '{@$__wcf->getPath()}icon/enabled.svg',
                         'wcf.icon.disabled': '{@$__wcf->getPath()}icon/disabled.svg'
                     });
-                    new ULTIMATE.Menu.Item.Transfer('categorySelectContainer', 'menuItemList, 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'category');
-                    new ULTIMATE.Menu.Item.Transfer('pageSelectContainer', 'menuItemList, 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'page');
-                    new ULTIMATE.Menu.Item.Transfer('customContainer', 'menuItemList, 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'custom');
+                    new ULTIMATE.Menu.Item.Transfer('categorySelectContainer', 'menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'category');
+                    new ULTIMATE.Menu.Item.Transfer('pageSelectContainer', 'menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'page');
+                    new ULTIMATE.Menu.Item.Transfer('customContainer', 'menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'custom');
                 {/if}
             {/if}
         });
