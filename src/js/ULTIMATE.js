@@ -556,7 +556,12 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
                 	$('#' + this._menuItemListID).find('button[data-type="submit"]').prop('disabled', false).removeClass('disabled');
                 }
 			}
-			
+			if (ULTIMATE.Permission.get('admin.content.ultimate.canDeleteMenuItem')) {
+				new WCF.Action.Delete('ultimate\\data\\menu\\item\\MenuItemAction', $('.jsMenuItem'));
+			}
+			if (ULTIMATE.Permission.get('admin.content.ultimate.canEditMenuItem')) {
+				new WCF.Action.Toggle('ultimate\\data\\menu\\item\\MenuItemAction', $('.jsMenuItem'), '> .buttons > .jsToggleButton');
+			}
 			this._notification.show();
 		}
 		// something happened
