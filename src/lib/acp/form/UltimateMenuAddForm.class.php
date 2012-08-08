@@ -102,9 +102,9 @@ class UltimateMenuAddForm extends ACPForm {
         $this->categories = CacheHandler::getInstance()->get($cacheName, 'categoriesNested');
         
         // get categories which are already used in this menu
-        foreach ($this->categories as $categoryID => $category) {
+        foreach ($this->categories as $categoryID => $categoryArray) {
             foreach ($this->menuItemNodeList as $menuItem) {
-                if ($category->__get('categoryTitle') != $menuItem->__get('menuItemName')) continue;
+                if ($categoryArray[0]->__get('categoryTitle') != $menuItem->__get('menuItemName')) continue;
                 $this->disabledCategoryIDs[] = $categoryID;
                 break;
             }
@@ -118,9 +118,9 @@ class UltimateMenuAddForm extends ACPForm {
         $this->pages = CacheHandler::getInstance()->get($cacheName, 'pagesNested');
         
         // get pages which are already used in this menu
-        foreach ($this->pages as $pageID => $page) {
+        foreach ($this->pages as $pageID => $pageArray) {
             foreach ($this->menuItemNodeList as $menuItem) {
-                if ($page->__get('pageTitle') != $menuItem->__get('menuItemName')) continue;
+                if ($pageArray[0]->__get('pageTitle') != $menuItem->__get('menuItemName')) continue;
                 $this->disabledPageIDs[] = $pageID;
                 break;
             }
