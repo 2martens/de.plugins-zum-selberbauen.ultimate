@@ -4,6 +4,7 @@ use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 use wcf\system\cache\CacheHandler;
 use wcf\system\clipboard\ClipboardHandler;
+use wcf\system\WCF;
 
 /**
  * Provides functions to edit menu items.
@@ -28,6 +29,15 @@ class MenuItemEditor extends DatabaseObjectEditor implements IEditableCachedObje
         // unmark contents
         ClipboardHandler::getInstance()->unmark($objectIDs, ClipboardHandler::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.ultimate.menuItem'));
     
+        // deletes language items
+        $sql = 'DELETE FROM wcf'.WCF_N.'_language_item
+                WHERE       languageItem = ?';
+        $statement = WCF::getDB()->prepareStatement($sql);
+        WCF::getDB()->beginTransaction();
+        foreach ($objectIDs as $objectID) {
+            $statement->executeUnbuffered(array('ultimate.menu.item.'.$objectID.'.%'));
+        }
+        WCF::getDB()->commitTransaction();
         return parent::deleteAll($objectIDs);
     }
     

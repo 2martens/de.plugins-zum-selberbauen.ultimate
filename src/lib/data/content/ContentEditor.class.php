@@ -29,6 +29,16 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 		// unmark contents
 		ClipboardHandler::getInstance()->unmark($objectIDs, ClipboardHandler::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.ultimate.content'));
 	
+		// delete language items
+		$sql = 'DELETE FROM wcf'.WCF_N.'_language_item
+		        WHERE       languageID = ?';
+		$statement = WCF::getDB()->prepareStatement($sql);
+		
+		WCF::getDB()->beginTransaction();
+		foreach ($objectIDs as $objectID) {
+		    $statement->executeUnbuffered(array('ultimate.content.'.$objectID.'.%'));
+		}
+		WCF::getDB()->commitTransaction();
 		return parent::deleteAll($objectIDs);
 	}
     

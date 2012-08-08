@@ -28,6 +28,17 @@ class CategoryEditor extends DatabaseObjectEditor implements IEditableCachedObje
 		// unmark contents
 		ClipboardHandler::getInstance()->unmark($objectIDs, ClipboardHandler::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.ultimate.category'));
 	
+		// delete language items
+		$sql = 'DELETE FROM wcf'.WCF_N.'_language_item
+		        WHERE       languageID = ?';
+		$statement = WCF::getDB()->prepareStatement($sql);
+		
+		WCF::getDB()->beginTransaction();
+		foreach ($objectIDs as $objectID) {
+		    $statement->executeUnbuffered(array('ultimate.category.'.$objectID.'.%'));
+		}
+		WCF::getDB()->commitTransaction();
+		
 		return parent::deleteAll($objectIDs);
 	}
 	
