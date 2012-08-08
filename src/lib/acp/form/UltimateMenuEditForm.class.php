@@ -59,7 +59,7 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
         if (!count($_POST)) {
             // reading object fields
             $this->menuName = $this->menu->__get('menuName');
-            $this->menuItemNodeList = new MenuItemNodeList($this->menuID, 0, false);
+            $this->menuItemNodeList = new MenuItemNodeList($this->menuID, 0, true);
             
             // read category cache
             $cacheName = 'category';
