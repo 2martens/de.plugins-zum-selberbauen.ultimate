@@ -519,10 +519,10 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 					$newItemHtml += '<img src="' + WCF.Icon.get('wcf.icon.delete') + '" alt="" title="' + WCF.Language.get('wcf.global.button.delete') + '" class="icon16 disabled" />';
 				}
 				if (ULTIMATE.Permission.get('admin.content.ultimate.canEditMenuItem')) {
-					$newItemHtml += '<img src="' + ((data[$menuItemID]['isDisabled']) ? WCF.Icon.get('wcf.icon.disabled') : WCF.Icon.get('wcf.icon.enabled')) + '" alt="" title="' + ((data[$menuItemID]['isDisabled']) ? WCF.Language.get('wcf.global.button.enable') : WCF.Language.get('wcf.global.button.disable')) + '" class="icon16 jsToggleButton jsTooltip" data-object-id="' + $menuItemID + '" />';
+					$newItemHtml += '&nbsp;<img src="' + ((data[$menuItemID]['isDisabled']) ? WCF.Icon.get('wcf.icon.disabled') : WCF.Icon.get('wcf.icon.enabled')) + '" alt="" title="' + ((data[$menuItemID]['isDisabled']) ? WCF.Language.get('wcf.global.button.enable') : WCF.Language.get('wcf.global.button.disable')) + '" class="icon16 jsToggleButton jsTooltip" data-object-id="' + $menuItemID + '" />';
 				}
                 else {
-                	$newItemHtml += '<img src="' + (data[$menuItemID]['isDisabled']) ? WCF.Icon.get('wcf.icon.disabled') : WCF.Icon.get('wcf.icon.enabled') + '" alt="" title="' + (data[$menuItemID]['isDisabled']) ? WCF.Language.get('wcf.global.button.enable') : WCF.Language.get('wcf.global.button.disable') + '" class="icon16 disabled" />';
+                	$newItemHtml += '&nbsp;<img src="' + (data[$menuItemID]['isDisabled']) ? WCF.Icon.get('wcf.icon.disabled') : WCF.Icon.get('wcf.icon.enabled') + '" alt="" title="' + (data[$menuItemID]['isDisabled']) ? WCF.Language.get('wcf.global.button.enable') : WCF.Language.get('wcf.global.button.disable') + '" class="icon16 disabled" />';
                 }
                 $newItemHtml += '</span><span class="title">';                
                 $newItemHtml += data[$menuItemID]['menuItemName'] + '</span></span></li>';
