@@ -338,9 +338,26 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 		
 		this._element.find('input:checkbox').change($.proxy(this._change, this));
 		this._element.parent('form').submit($.proxy(this._stopFormSubmit, this));
+		$('#' + this._menuItemListID).bind('DOMNodeRemoved', $.proxy(this._remove, this));
 		if (this._type != 'custom') {
 			this._element.find('button[data-type="submit"]').click($.proxy(this._submit, this));
 		}
+	},
+	
+	/**
+	 * Called each time a menu item is removed.
+	 * @param jQuery.event event
+	 */
+	_remove: function(event) {
+		var $target = $(event.target);
+		var $elementID = $target.data(this._type + 'ID');
+		this._element.find('input:disabled').each($.proxy(function(index, item) {
+			var $item = $(item);
+			var $itemID = $item.data('id');
+			if ($elementID == $itemID) {
+				$item.prop('disabled', false).removeClass('disabled');
+			}
+		}, this));
 	},
 	
 	/**
@@ -514,7 +531,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 		try {
 			var data = data['returnValues'];
 			for (var $menuItemID in data) {
-				var $newItemHtml = '<li id="' + WCF.getRandomID() + '" class="sortableNode jsMenuItem" data-object-id="' + $menuItemID + '">';
+				var $newItemHtml = '<li id="' + WCF.getRandomID() + '" class="sortableNode jsMenuItem" data-object-id="' + $menuItemID + '"  data-' + this._type + '-id="' + '">';
 				$newItemHtml += '<span class="sortableNodeLabel"><span class="buttons">';
 				if (ULTIMATE.Permission.get('admin.content.ultimate.canDeleteMenuItem')) {
 					$newItemHtml += '<img src="' + WCF.Icon.get('wcf.icon.delete') + '" alt="" title="' + WCF.Language.get('wcf.global.button.delete') + '" class="icon16 jsDeleteButton jsTooltip" data-object-id="' + $menuItemID + '" data-confirm-message="' + WCF.Language.get('wcf.acp.ultimate.menu.item.delete.sure') + '" />';
