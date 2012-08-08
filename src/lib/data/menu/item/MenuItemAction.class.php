@@ -7,6 +7,7 @@ use ultimate\system\menu\item\MenuItemHandler;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\cache\CacheHandler;
 use wcf\system\exception\PermissionDeniedException;
+use wcf\system\exception\SystemException;
 use wcf\system\exception\ValidateActionException;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
@@ -91,12 +92,13 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
      * Creates a bunch of menu items.
      */
     public function createAJAX() {
+        
         $this->loadCache();
         $menuItems = array();
         $parameters = array(
             'menuID' => intval($this->parameters['data']['menuID']),
-            'menuItemParent' => 0,
-            'menuItemName' => '',
+            'menuItemParent' => '',
+            'menuItemName' => '~TESTREPLACE~',
             'showOrder' => 0,
             'isDisabled' => 0
         );
@@ -109,6 +111,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
             $parameters['menuItemLink'] = StringUtil::trim($this->parameters['data']['structure']['link']);
             $parameters['type'] = 'custom';
             $menuItem = MenuItemEditor::create($parameters);
+            
             $menuItems[$menuItem->__get('menuItemID')] = $menuItem;
             $updateEntries = array();
             
@@ -125,6 +128,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
         }
         else {
             WCF::getDB()->beginTransaction();
+            
             foreach ($this->parameters['data']['structure'] as $parentElementID => $elementIDs) {
                 foreach ($elementIDs as $elementID) {
                     $element = null;
@@ -161,8 +165,9 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
                 }
             }
             WCF::getDB()->commitTransaction();
-            
         }
+        
+        try {
         $menuItemsAJAX = array();
         foreach ($menuItems as $menuItemID => $menuItem) {
             $menuItemsAJAX[$menuItemID] = array(
@@ -176,6 +181,11 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
             );
         }
         return $menuItemsAJAX;
+        }
+        catch (Exception $e) {
+            echo $e->getMessage();
+            throw new SystemException($e->getMessage(), $e->getCode(), '', $e);
+        }
     }
     
     /**
