@@ -343,6 +343,9 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	 */
 	_stopFormSubmit: function(event) {
 		if (this._type != 'custom') return false;
+		else {
+			event.preventDefault();
+		}
 		if (this._element.find('input[name="title"]').length == 0) {
 			this._submit();
 		} 
