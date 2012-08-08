@@ -352,7 +352,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 			this._element.find('button[data-type="submit"]').removeClass('disabled').prop('disabled', false);
 		}
 		else {
-			this._element.find('button[data-type="submit]').addClass('disabled').prop('disabled', true);
+			this._element.find('button[data-type="submit"]').addClass('disabled').prop('disabled', true);
 		}
 	},
 	
