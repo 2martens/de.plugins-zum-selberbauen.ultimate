@@ -371,7 +371,8 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 			} else if (linkTitleFound.length == 0) {
 				// if it is i18n add it to post values accordingly
 				var linkTitle_i18n = {};
-				this._element.find('input[name^="title_i18n"]').each($.proxy(function(index, listItem) {
+				var $parent = this._element.parent();
+				$parent.find('input[name^="title_i18n"]').each($.proxy(function(index, listItem) {
 					var $listItem = $(listItem);
 					var $languageID = $listItem.attr('name').substring(11);
 					$languageID = $languageID.substr(0, $languageID.length - 1);
@@ -426,7 +427,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 					menuID: $('input[name="id"]').val()
 				}
 			}, { });
-			alert($.param($parameters));
+			
 			this._proxy.setOption('data', {
 				actionName: 'createAJAX',
 				className: this._className,
