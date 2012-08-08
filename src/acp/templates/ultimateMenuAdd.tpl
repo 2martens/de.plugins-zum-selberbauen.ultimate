@@ -99,7 +99,7 @@
                 {/if}
                 {if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem')}
                     <div class="formSubmit">
-                        <button class="button default{if $action == 'add'} disabled" disabled="disabled{/if}" type="button" data-type="submit">{lang}wcf.global.button.save{/lang}</button>
+                        <button class="button default{if $action == 'add'} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.global.button.save{/lang}</button>
                     </div>
                 {/if}
             </div>
@@ -212,6 +212,10 @@
                     new ULTIMATE.Menu.Item.Transfer('categorySelectContainer', 'menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'category');
                     new ULTIMATE.Menu.Item.Transfer('pageSelectContainer', 'menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'page');
                     new ULTIMATE.Menu.Item.Transfer('customContainer', 'menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'custom');
+                    
+                    $('#menuItemList').find('button[data-type="submit"]').click(function(event) {
+                        return false;
+                    });
                 {/if}
             {/if}
         });
