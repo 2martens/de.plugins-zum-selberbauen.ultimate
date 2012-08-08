@@ -1,10 +1,10 @@
 <?php
 namespace ultimate\data\menu\item;
 use ultimate\data\AbstractUltimateProcessibleDatabaseObject;
-use ultimate\system\UltimateCore;
 use ultimate\system\menu\custom\DefaultCustomMenuItemProvider;
 use wcf\system\menu\ITreeMenuItem;
 use wcf\system\request\LinkHandler;
+use wcf\system\WCF;
 
 /**
  * Represents a menu item entry.
@@ -55,7 +55,7 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
      * @return string
      */
     public function __toString() {
-        return UltimateCore::getLanguage()->get($this->menuItemName);
+        return WCF::getLanguage()->get($this->menuItemName);
     }
     
     /**
@@ -68,8 +68,7 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
                 FROM      '.self::getDatabaseTableName().'
                 WHERE     menuItemParent = ?
                 AND       menuID         = ?';
-        /* @var $statement \wcf\system\database\statement\PreparedStatement */
-        $statement = UltimateCore::getDB()->prepareStatement($sql);
+        $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute(array($this->menuItemName, $this->menuID));
         
         $childItems = array();
