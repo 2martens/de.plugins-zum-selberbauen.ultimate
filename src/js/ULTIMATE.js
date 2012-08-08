@@ -462,6 +462,9 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 				parameters: $parameters
 			});
 		}
+		if (this._element.find('input:not(:disabled)').length == 0) {
+			this._change();
+		}
 		if (this._sendRequest) {
 			this._proxy.sendRequest();
 			this._submitDone = true;
