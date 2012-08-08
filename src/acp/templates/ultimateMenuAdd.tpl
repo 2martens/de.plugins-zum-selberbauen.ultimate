@@ -99,7 +99,7 @@
                 {/if}
                 {if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem')}
                     <div class="formSubmit">
-                        <button class="button default{if $action == 'add'} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.global.button.save{/lang}</button>
+                        <button class="button default{if $action == 'add' || $menuItemNodeList|count == 0} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.global.button.save{/lang}</button>
                     </div>
                 {/if}
             </div>

@@ -552,8 +552,8 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
                 $newItemHtml += data[$menuItemID]['menuItemName'] + '</span></span></li>';
                 
                 $('#' + this._menuItemListID + '> .sortableList').append($newItemHtml);
-                if ($('#' + this._menuItemListID).find('button[data-type="submit]').prop('disabled')) {
-                	$('#' + this._menuItemListID).find('button[data-type="submit]').prop('disabled', false).removeClass('disabled');
+                if ($('#' + this._menuItemListID).find('button[data-type="submit"]').prop('disabled')) {
+                	$('#' + this._menuItemListID).find('button[data-type="submit"]').prop('disabled', false).removeClass('disabled');
                 }
 			}
 			
