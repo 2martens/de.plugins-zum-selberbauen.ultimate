@@ -124,6 +124,10 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
             if (count($updateEntries)) {
                 $menuItemEditor = new MenuItemEditor($menuItem);
                 $menuItemEditor->update($updateEntries);
+                
+                // get new menu item
+                $menuItem = new MenuItem($menuItem->__get('menuItemID'));
+                $menuItems[$menuItem->__get('menuItemID')] = $menuItem;
             }
         }
         else {
@@ -180,6 +184,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
                 'isDisabled' => $menuItem->__get('isDisabled')
             );
         }
+        
         return $menuItemsAJAX;
         }
         catch (Exception $e) {
