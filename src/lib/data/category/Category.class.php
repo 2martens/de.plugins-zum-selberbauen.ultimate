@@ -2,7 +2,8 @@
 namespace ultimate\data\category;
 use ultimate\data\content\Content;
 use ultimate\data\AbstractUltimateDatabaseObject;
-use ultimate\system\UltimateCore;
+use wcf\data\ITitledDatabaseObject;
+use wcf\system\WCF;
 
 /**
  * Represents a category entry.
@@ -14,7 +15,7 @@ use ultimate\system\UltimateCore;
  * @subpackage data.category
  * @category Ultimate CMS
  */
-class Category extends AbstractUltimateDatabaseObject {
+class Category extends AbstractUltimateDatabaseObject implements ITitledDatabaseObject {
     /**
      * @see \wcf\data\DatabaseObject::$databaseTableName
      */
@@ -57,13 +58,24 @@ class Category extends AbstractUltimateDatabaseObject {
         $sql = 'SELECT contentID
         		FROM   ultimate'.ULTIMATE_N.'_'.$this->contentCategoryTable.'
         		WHERE  categoryID = ?';
-        $statement = UltimateCore::getDB()->prepareStatement($sql);
+        $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute(array($this->categoryID));
         $contents = array();
         while ($row = $statement->fetchArray()) {
             $contents[$row['contentID']] = new Content($row['contentID']);
         }
         return $contents;
+    }
+    
+    /**
+     * Returns the title of this category (without language interpreting).
+     * 
+     * To use language interpreting, use magic toString method.
+     * 
+     * @return string
+     */
+    public function getTitle() {
+        return $this->categoryTitle;
     }
     
     /**
@@ -76,7 +88,7 @@ class Category extends AbstractUltimateDatabaseObject {
                 FROM   ultimate'.ULTIMATE_N.'_'.self::$databaseTableName.'
                 WHERE  categoryParent = ?';
         /* @var $statement \wcf\system\database\statement\PreparedStatement */
-        $statement = UltimateCore::getDB()->prepareStatement($sql);
+        $statement = WCF::getDB()->prepareStatement($sql);
         $statement->execute(array($this->categoryID));
         $categories = array();
         while ($row = $statement->fetchArray()) {
@@ -92,7 +104,7 @@ class Category extends AbstractUltimateDatabaseObject {
      * @return string
      */
     public function __toString() {
-        return UltimateCore::getLanguage()->get($this->categoryTitle);
+        return WCF::getLanguage()->get($this->categoryTitle);
     }
     
 

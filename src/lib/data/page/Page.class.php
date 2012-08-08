@@ -5,6 +5,7 @@ use ultimate\data\AbstractUltimateDatabaseObject;
 use ultimate\system\UltimateCore;
 use wcf\data\user\group\UserGroup;
 use wcf\data\user\User;
+use wcf\data\ITitledDatabaseObject;
 use wcf\util\DateUtil;
 
 /**
@@ -17,7 +18,7 @@ use wcf\util\DateUtil;
  * @subpackage data.page
  * @category Ultimate CMS
  */
-class Page extends AbstractUltimateDatabaseObject {
+class Page extends AbstractUltimateDatabaseObject implements ITitledDatabaseObject {
     /**
      * @see \wcf\data\DatabaseObject::$databaseTableName
      */
@@ -54,6 +55,17 @@ class Page extends AbstractUltimateDatabaseObject {
         
         $row = $statement->fetchArray();
         return new Content($row['contentID']);
+    }
+    
+    /**
+     * Returns the page title without language interpreting.
+     * 
+     * To use language interpreting, use magic toString method.
+     * 
+     * @return string
+     */
+    public function getTitle() {
+        return $this->pageTitle;
     }
     
     /**
