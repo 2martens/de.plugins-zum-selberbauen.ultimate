@@ -130,7 +130,7 @@
             </dd>
         </dl>
         <div class="formSubmit">
-            <button class="button default{if $action == 'add'} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.acp.ultimate.menu.addToMenu{/lang}</button>
+            <button class="button default disabled" disabled="disabled" data-type="submit">{lang}wcf.acp.ultimate.menu.addToMenu{/lang}</button>
         </div>
     </div>
 </form>
@@ -150,7 +150,7 @@
             </dd>
         </dl>
         <div class="formSubmit">
-            <button class="button default{if $action == 'add'} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.acp.ultimate.menu.addToMenu{/lang}</button>
+            <button class="button default disabled" disabled="disabled" data-type="submit">{lang}wcf.acp.ultimate.menu.addToMenu{/lang}</button>
         </div>
     </div>
 </form>

@@ -313,6 +313,13 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	_submitDone: false,
 	
 	/**
+	 * true if the request should be sent
+	 * @var boolean
+	 */
+	_sendRequest: false,
+	
+	
+	/**
 	 * Initializes a menu item transfer.
 	 * 
 	 * @param string elementID
@@ -329,9 +336,23 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 		});
 		this._structure = { };
 		
+		this._element.find('input:checkbox').change($.proxy(this._change, this));
 		this._element.parent('form').submit($.proxy(this._stopFormSubmit, this));
 		if (this._type != 'custom') {
 			this._element.find('button[data-type="submit"]').click($.proxy(this._submit, this));
+		}
+	},
+	
+	/**
+	 * Changes the state of the buttons.
+	 */
+	_change: function() {
+		var checkedCheckboxes = this._element.find('input:checked').length;
+		if (checkedCheckboxes) {
+			this._element.find('button[data-type="submit"]').removeClass('disabled').prop('disabled', false);
+		}
+		else {
+			this._element.find('button[data-type="submit]').addClass('disabled').prop('disabled', true);
 		}
 	},
 	
@@ -405,6 +426,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 			}, $data);
 			
 			this._proxy.setOption('data', $data);
+			this._sendRequest = true;
 		}
 		else {
 			this._element.find('dl > dd > ul > li > label > input[type="checkbox"]').each($.proxy(function(index, listItem) {
@@ -417,7 +439,10 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 					if (!this._structure[0]) {
 						this._structure[0] = [ ];
 					}
-					if ($checkedParent) this._structure[0].push($parentID);
+					if ($checkedParent) {
+						this._structure[0].push($parentID);
+						this._sendRequest = true;
+					}
 					$listItem.prop('checked', false);
 				}
 			}, this));
@@ -437,8 +462,13 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 				parameters: $parameters
 			});
 		}
-		this._proxy.sendRequest();
-		this._submitDone = true;
+		if (this._sendRequest) {
+			this._proxy.sendRequest();
+			this._submitDone = true;
+		} else {
+			this._notification = new WCF.System.Notification(WCF.Language.get('wcf.acp.ultimate.menu.noItemsSelected'));
+			this._notification.show();
+		}
 	},
 	
 	/**
@@ -458,7 +488,10 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 			if (!this._structure[$parentID]) {
 				this._structure[$parentID] = [ ];
 			}
-			if ($checked) this._structure[$parentID].push($objectID);
+			if ($checked) {
+				this._structure[$parentID].push($objectID);
+				this._sendRequest = true;
+			}
 			$(listItem).prop('checked', false);
 		}, this));
 	},
