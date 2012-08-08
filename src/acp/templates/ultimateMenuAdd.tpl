@@ -142,7 +142,7 @@
                 {if $action == 'add'}
                     {nestedHtmlCheckboxes options=$pages name='pageIDs' disabled='disabled'}
                 {else}
-                    {nestedHtmlCheckboxes options=$pages name='pageIDs'}
+                    {nestedHtmlCheckboxes options=$pages name='pageIDs' disabled=$disabledPageIDs}
                 {/if}
                 <small>
                     {lang}wcf.acp.ultimate.menu.pages.description{/lang}
