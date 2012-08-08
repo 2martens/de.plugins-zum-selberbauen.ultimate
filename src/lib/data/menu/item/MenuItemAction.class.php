@@ -118,7 +118,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
             // save menu item name to database
             if (!I18nHandler::getInstance()->isPlainValue('title')) {
                 I18nHandler::getInstance()->save('title', 'ultimate.menu.item.'.$menuItem->__get('menuItemID').'.menuItemName', 'ultimate.menu', PACKAGE_ID);
-                $updateEntries['menuItemName'] = 'ultimate.content.'.$menuItem->__get('menuItemID').'.menuItemName';
+                $updateEntries['menuItemName'] = 'ultimate.menu.item.'.$menuItem->__get('menuItemID').'.menuItemName';
             }
             // replace empty menu item name with language variable
             if (count($updateEntries)) {

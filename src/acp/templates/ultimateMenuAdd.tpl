@@ -82,7 +82,7 @@
                                 </span>
 
                                 <span class="title">
-                                    {lang}{@$menuItem->menuItemName}{/lang}
+                                    {$menuItem}
                                 </span>
                             </span>
                     
