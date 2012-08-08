@@ -442,8 +442,8 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 					if ($checkedParent) {
 						this._structure[0].push($parentID);
 						this._sendRequest = true;
+						$listItem.prop('checked', false).prop('disabled', true).addClass('disabled');
 					}
-					$listItem.prop('checked', false);
 				}
 			}, this));
 			// send request
@@ -491,8 +491,9 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 			if ($checked) {
 				this._structure[$parentID].push($objectID);
 				this._sendRequest = true;
+				$(listItem).prop('checked', false).prop('disabled', true).addClass('disabled');
 			}
-			$(listItem).prop('checked', false);
+			
 		}, this));
 	},
 	
@@ -524,7 +525,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
                 else {
                 	$newItemHtml += '&nbsp;<img src="' + (data[$menuItemID]['isDisabled']) ? WCF.Icon.get('wcf.icon.disabled') : WCF.Icon.get('wcf.icon.enabled') + '" alt="" title="' + (data[$menuItemID]['isDisabled']) ? WCF.Language.get('wcf.global.button.enable') : WCF.Language.get('wcf.global.button.disable') + '" class="icon16 disabled" />';
                 }
-                $newItemHtml += '</span><span class="title">';                
+                $newItemHtml += '</span>&nbsp;<span class="title">';                
                 $newItemHtml += data[$menuItemID]['menuItemName'] + '</span></span></li>';
                 
                 $('#' + this._menuItemListID + '> .sortableList').append($newItemHtml);

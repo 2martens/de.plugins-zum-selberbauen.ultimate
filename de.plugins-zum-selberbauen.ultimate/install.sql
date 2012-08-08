@@ -85,7 +85,7 @@ CREATE TABLE ultimate1_1_menu_item (
     showOrder INT(10) NOT NULL DEFAULT 0,
     type ENUM('category', 'content', 'custom', 'page') NOT NULL,
     isDisabled TINYINT(1) NOT NULL DEFAULT 0,
-    KEY (menuID)
+    UNIQUE KEY (menuID, menuItemName)
 );
 
 DROP TABLE IF EXISTS ultimate1_1_page;

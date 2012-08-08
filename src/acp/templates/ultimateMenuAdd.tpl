@@ -122,7 +122,7 @@
                 {if $action == 'add'}
                     {nestedHtmlCheckboxes options=$categories name='categoryIDs' disabled='disabled'}
                 {else}
-                    {nestedHtmlCheckboxes options=$categories name='categoryIDs'}
+                    {nestedHtmlCheckboxes options=$categories name='categoryIDs' disabled=$disabledCategoryIDs}
                 {/if}
                 <small>
                     {lang}wcf.acp.ultimate.menu.categories.description{/lang}

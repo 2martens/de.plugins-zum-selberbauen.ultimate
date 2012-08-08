@@ -63,12 +63,23 @@ class UltimateMenuAddForm extends ACPForm {
      */
     public $categories = array();
     
+    /**
+     * Contains all categories which already exist as menu item in this menu.
+     * @var integer[]
+     */
+    public $disabledCategoryIDs = array();
     
     /**
      * Contains all pages.
      * @var (\ultimate\data\page\Page|array)[]
      */
     public $pages = array();
+    
+    /**
+     * Contains all pages which already exist as menu item in this menu.
+     * @var integer[]
+     */
+    public $disabledPageIDs = array();
     
     /**
      * @see \wcf\page\IPage::readParameters()
@@ -90,12 +101,30 @@ class UltimateMenuAddForm extends ACPForm {
         CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
         $this->categories = CacheHandler::getInstance()->get($cacheName, 'categoriesNested');
         
+        // get categories which are already used in this menu
+        foreach ($this->categories as $categoryID => $category) {
+            foreach ($this->menuItemNodeList as $menuItem) {
+                if ($category->__get('categoryTitle') != $menuItem->__get('menuItemName')) continue;
+                $this->disabledCategoryIDs[] = $categoryID;
+                break;
+            }
+        }
+        
         // read page cache
         $cacheName = 'page';
         $cacheBuilderClassName = '\ultimate\system\cache\builder\PageCacheBuilder';
         $file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
         CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
         $this->pages = CacheHandler::getInstance()->get($cacheName, 'pagesNested');
+        
+        // get pages which are already used in this menu
+        foreach ($this->pages as $pageID => $page) {
+            foreach ($this->menuItemNodeList as $menuItem) {
+                if ($page->__get('pageTitle') != $menuItem->__get('menuItemName')) continue;
+                $this->disabledPageIDs[] = $pageID;
+                break;
+            }
+        }
         
         parent::readData();
     }
@@ -162,7 +191,9 @@ class UltimateMenuAddForm extends ACPForm {
             'menuName' => $this->menuName,
             'menuItemNodeList' => $this->menuItemNodeList,
             'categories' => $this->categories,
+            'disabledCategoryIDs' => $this->disabledCategoryIDs,
             'pages' => $this->pages,
+            'disabledPageIDs' => $this->disabledPageIDs,
             'action' => 'add'
         ));
     }

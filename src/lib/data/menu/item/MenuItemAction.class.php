@@ -110,6 +110,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
             
             $parameters['menuItemLink'] = StringUtil::trim($this->parameters['data']['structure']['link']);
             $parameters['type'] = 'custom';
+            
             $menuItem = MenuItemEditor::create($parameters);
             
             $menuItems[$menuItem->__get('menuItemID')] = $menuItem;
@@ -164,8 +165,14 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
                             $parameters['type'] = 'page';
                             break;
                     }
-                    $menuItem = MenuItemEditor::create($parameters); 
-                    $menuItems[$menuItem->__get('menuItemID')] = $menuItem;
+                    try {
+                        $menuItem = MenuItemEditor::create($parameters); 
+                        $menuItems[$menuItem->__get('menuItemID')] = $menuItem;
+                    }
+                    catch (DatabaseException $e) {
+                        WCF::getDB()->rollbackTransaction();
+                        throw new SystemException('Couldn\'t create menu item.', $e->getCode(), 'You can\'t create menu items with the same name in the same menu.', $e);
+                    }
                 }
             }
             WCF::getDB()->commitTransaction();

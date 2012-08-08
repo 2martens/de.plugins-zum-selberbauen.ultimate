@@ -68,12 +68,30 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
             CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
             $this->categories = CacheHandler::getInstance()->get($cacheName, 'categoriesNested');
             
+            // get categories which are already used in this menu
+            foreach ($this->categories as $categoryID => $category) {
+                foreach ($this->menuItemNodeList as $menuItem) {
+                    if ($category->__get('categoryTitle') != $menuItem->__get('menuItemName')) continue;
+                    $this->disabledCategoryIDs[] = $categoryID;
+                    break;
+                }
+            }
+            
             // read page cache
             $cacheName = 'page';
             $cacheBuilderClassName = '\ultimate\system\cache\builder\PageCacheBuilder';
             $file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
             CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
             $this->pages = CacheHandler::getInstance()->get($cacheName, 'pagesNested');
+            
+            // get pages which are already used in this menu
+            foreach ($this->pages as $pageID => $page) {
+                foreach ($this->menuItemNodeList as $menuItem) {
+                    if ($page->__get('pageTitle') != $menuItem->__get('menuItemName')) continue;
+                    $this->disabledPageIDs[] = $pageID;
+                    break;
+                }
+            }
         }
         AbstractForm::readData();
     }
