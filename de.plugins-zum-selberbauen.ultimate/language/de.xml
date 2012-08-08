@@ -239,6 +239,7 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
         <item name="wcf.acp.ultimate.menu.edit"><![CDATA[Menü bearbeiten]]></item>
         <item name="wcf.acp.ultimate.menu.delete"><![CDATA[Menü löschen]]></item>
         <item name="wcf.acp.ultimate.menu.delete.sure"><![CDATA[Sind Sie sicher, dass Sie dieses Menü löschen wollen?]]></item>
+        <item name="wcf.acp.ultimate.menu.item.delete.sure"><![CDATA[Sind Sie sicher, dass Sie diesen Menüeintrag löschen wollen?]]></item>
         <item name="wcf.acp.ultimate.menu.general"><![CDATA[Menüdaten]]></item>
         <item name="wcf.acp.ultimate.menu.name"><![CDATA[Menüname]]></item>
         <item name="wcf.acp.ultimate.menu.name.error.notUnique"><![CDATA[Der angegebene Name existiert bereits bei einem Menü.]]></item>
