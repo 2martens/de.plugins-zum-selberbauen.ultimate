@@ -508,41 +508,36 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 			this._notification = new WCF.System.Notification(WCF.Language.get('wcf.global.form.edit.success'));
 		}
 		try {
-			var dataResponse = $.parseJSON(data);
-			var data = dataResponse['returnValues'];
+			var data = data['returnValues'];
 			for (var $menuItemID in data) {
 				var $newItemHtml = '<li id="' + WCF.getRandomID() + '" class="sortableNode jsMenuItem" data-object-id="' + $menuItemID + '">';
-				$newItemHtml = $newItemHtml + '<span class="sortableNodeLabel"><span class="buttons">';
+				$newItemHtml += '<span class="sortableNodeLabel"><span class="buttons">';
 				if (ULTIMATE.Permission.get('admin.content.ultimate.canDeleteMenuItem')) {
-					$newItemHtml = $newItemHtml + '<img src="' + WCF.Icon.get('wcf.icon.delete') + '" alt="" title="' + WCF.Language.get('wcf.global.button.delete') + '" class="icon16 jsDeleteButton jsTooltip" data-object-id="' + $menuItemID + '" data-confirm-message="' + WCF.Language.get('wcf.acp.ultimate.menu.item.delete.sure') + '" />';
+					$newItemHtml += '<img src="' + WCF.Icon.get('wcf.icon.delete') + '" alt="" title="' + WCF.Language.get('wcf.global.button.delete') + '" class="icon16 jsDeleteButton jsTooltip" data-object-id="' + $menuItemID + '" data-confirm-message="' + WCF.Language.get('wcf.acp.ultimate.menu.item.delete.sure') + '" />';
 				}
 				else {
-					$newItemHtml = $newItemHtml + '<img src="' + WCF.Icon.get('wcf.icon.delete') + '" alt="" title="' + WCF.Language.get('wcf.global.button.delete') + '" class="icon16 disabled" />';
+					$newItemHtml += '<img src="' + WCF.Icon.get('wcf.icon.delete') + '" alt="" title="' + WCF.Language.get('wcf.global.button.delete') + '" class="icon16 disabled" />';
 				}
 				if (ULTIMATE.Permission.get('admin.content.ultimate.canEditMenuItem')) {
-					$newItemHtml = $newItemHtml + '<img src="' + (data[$menuItemID][isDisabled]) ? WCF.Icon.get('wcf.icon.disabled') : WCF.Icon.get('wcf.icon.enabled') + '" alt="" title="' + (data[$menuItemID][isDisabled]) ? WCF.Language.get('wcf.global.button.enable') : WCF.Language.get('wcf.global.button.disable') + '" class="icon16 jsToggleButton jsTooltip" data-object-id="' + $menuItemID + '" />';
+					$newItemHtml += '<img src="' + ((data[$menuItemID]['isDisabled']) ? WCF.Icon.get('wcf.icon.disabled') : WCF.Icon.get('wcf.icon.enabled')) + '" alt="" title="' + ((data[$menuItemID]['isDisabled']) ? WCF.Language.get('wcf.global.button.enable') : WCF.Language.get('wcf.global.button.disable')) + '" class="icon16 jsToggleButton jsTooltip" data-object-id="' + $menuItemID + '" />';
 				}
                 else {
-                	$newItemHtml = $newItemHtml + '<img src="' + (data[$menuItemID][isDisabled]) ? WCF.Icon.get('wcf.icon.disabled') : WCF.Icon.get('wcf.icon.enabled') + '" alt="" title="' + (data[$menuItemID][isDisabled]) ? WCF.Language.get('wcf.global.button.enable') : WCF.Language.get('wcf.global.button.disable') + '" class="icon16 disabled" />';
+                	$newItemHtml += '<img src="' + (data[$menuItemID]['isDisabled']) ? WCF.Icon.get('wcf.icon.disabled') : WCF.Icon.get('wcf.icon.enabled') + '" alt="" title="' + (data[$menuItemID]['isDisabled']) ? WCF.Language.get('wcf.global.button.enable') : WCF.Language.get('wcf.global.button.disable') + '" class="icon16 disabled" />';
                 }
-                $newItemHtml = $newItemHtml + '</span><span class="title">';                
-                $newItemHtml = $newItemHtml + data[$menuItemID][menuItemName] + '</span></span></li>';
+                $newItemHtml += '</span><span class="title">';                
+                $newItemHtml += data[$menuItemID]['menuItemName'] + '</span></span></li>';
                 
-                $(this._menuItemListID + '> .sortableList').append($newItemHtml);
+                $('#' + this._menuItemListID + '> .sortableList').append($newItemHtml);
 			}
 			
 			this._notification.show();
 		}
-		// failed to parse JSON
+		// something happened
 		catch (e) {
 			// call child method if applicable
 			var $showError = true;
-			if ($.isFunction(this.options.failure)) {
-				$showError = this.options.failure(jqXHR, textStatus, errorThrown, jqXHR.responseText);
-			}
-			
-			if (!this._suppressErrors && $showError !== false) {
-				$('<div class="ajaxDebugMessage"><p>' + jqXHR.responseText + '</p></div>').wcfDialog({ title: WCF.Language.get('wcf.global.error.title') });
+			if ($showError !== false) {
+				$('<div class="ajaxDebugMessage"><p>' + e.message + '</p></div>').wcfDialog({ title: WCF.Language.get('wcf.global.error.title') });
 			}
 		}
 		
