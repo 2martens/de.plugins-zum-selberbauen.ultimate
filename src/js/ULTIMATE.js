@@ -358,6 +358,9 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 				$item.prop('disabled', false).removeClass('disabled');
 			}
 		}, this));
+		if ($('#' + this._menuItemListID).find('.jsMenuItem').length == 0) {
+			$('#' + this._menuItemListID).find('button[data-type="submit"]').prop('disabled', true).addClass('disabled');
+		} 
 	},
 	
 	/**
@@ -549,6 +552,9 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
                 $newItemHtml += data[$menuItemID]['menuItemName'] + '</span></span></li>';
                 
                 $('#' + this._menuItemListID + '> .sortableList').append($newItemHtml);
+                if ($('#' + this._menuItemListID).find('button[data-type="submit]').prop('disabled')) {
+                	$('#' + this._menuItemListID).find('button[data-type="submit]').prop('disabled', false).removeClass('disabled');
+                }
 			}
 			
 			this._notification.show();
