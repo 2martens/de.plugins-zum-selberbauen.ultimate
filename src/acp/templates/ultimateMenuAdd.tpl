@@ -61,7 +61,7 @@
                     {foreach from=$menuItemNodeList item=menuItem}
                         {section name=i loop=$oldDepth-$menuItemNodeList->getDepth()}</ol></li>{/section}
                 
-                        <li class="{if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem') && $menuItemNodeList|count > 1}sortableNode {/if}jsMenuItem" data-object-id="{@$menuItem->menuItemID}"{* {if $collapsedMenuItemIDs|is_array} data-is-open="{if $collapsedMenuItemIDs[$menuItem->menuItemID]|isset}0{else}1{/if}"{/if} *}>
+                        <li class="{if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem') && $menuItemNodeList|count > 1}sortableNode {/if}jsMenuItem" data-object-name="{@$menuItem->menuItemName}" data-object-id="{@$menuItem->menuItemID}"{* {if $collapsedMenuItemIDs|is_array} data-is-open="{if $collapsedMenuItemIDs[$menuItem->menuItemID]|isset}0{else}1{/if}"{/if} *}>
                             <span class="sortableNodeLabel">
                                 <span class="buttons">
                                     

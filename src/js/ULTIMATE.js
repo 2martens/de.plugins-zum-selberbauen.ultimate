@@ -350,11 +350,11 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	 */
 	_remove: function(event) {
 		var $target = $(event.target);
-		var $elementID = $target.data(this._type + 'ID');
+		var $elementName = $target.data('objectName');
 		this._element.find('input:disabled').each($.proxy(function(index, item) {
 			var $item = $(item);
-			var $itemID = $item.data('id');
-			if ($elementID == $itemID) {
+			var $itemName = $item.data('name');
+			if ($elementName == $itemName) {
 				$item.prop('disabled', false).removeClass('disabled');
 			}
 		}, this));
@@ -531,7 +531,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 		try {
 			var data = data['returnValues'];
 			for (var $menuItemID in data) {
-				var $newItemHtml = '<li id="' + WCF.getRandomID() + '" class="sortableNode jsMenuItem" data-object-id="' + $menuItemID + '"  data-' + this._type + '-id="' + '">';
+				var $newItemHtml = '<li id="' + WCF.getRandomID() + '" class="sortableNode jsMenuItem" data-object-id="' + $menuItemID + '"  data-object-name="' + data[$menuItemID]['menuItemName'] + '">';
 				$newItemHtml += '<span class="sortableNodeLabel"><span class="buttons">';
 				if (ULTIMATE.Permission.get('admin.content.ultimate.canDeleteMenuItem')) {
 					$newItemHtml += '<img src="' + WCF.Icon.get('wcf.icon.delete') + '" alt="" title="' + WCF.Language.get('wcf.global.button.delete') + '" class="icon16 jsDeleteButton jsTooltip" data-object-id="' + $menuItemID + '" data-confirm-message="' + WCF.Language.get('wcf.acp.ultimate.menu.item.delete.sure') + '" />';
