@@ -6,6 +6,15 @@
  * @license http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
  */
 
+// a little tweak to know, when remove was used
+(function($, undefined) {
+	var _empty = $.fn.empty;
+	$.fn.empty = function() {
+		$( this ).triggerHandler( "empty" );
+		return _empty.call( $(this) );
+	};
+	
+})( jQuery );
 
 /**
  * Initialize the UTLIMATE namespace.
@@ -335,21 +344,34 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 			success: $.proxy(this._success, this)
 		});
 		this._structure = { };
-		
-		this._element.find('input:checkbox').change($.proxy(this._change, this));
 		this._element.parent('form').submit($.proxy(this._stopFormSubmit, this));
-		$('#' + this._menuItemListID).bind('DOMNodeRemoved', $.proxy(this._remove, this));
 		if (this._type != 'custom') {
+			this._element.find('input:checkbox').change($.proxy(this._change, this));
 			this._element.find('button[data-type="submit"]').click($.proxy(this._submit, this));
 		}
+		this._init();
 	},
 	
 	/**
-	 * Called each time a menu item is removed.
+	 * Initializes the event handler.
+	 */
+	_init: function() {
+		$('.jsMenuItem').on('empty', $.proxy(this._empty, this));
+	},
+	
+	/**
+	 * Called each time a menu item is removed with empty().remove().
 	 * @param jQuery.event event
 	 */
-	_remove: function(event) {
+	_empty: function(event) {
 		var $target = $(event.target);
+		var $parent = $target.parent();
+		var $index = $parent.index($target);
+		var $before = $parent.get($index - 1);
+		var usePrepend = false;
+		if ($before == undefined) {
+			usePrepend = true;
+		}
 		var $elementName = $target.data('objectName');
 		this._element.find('input:disabled').each($.proxy(function(index, item) {
 			var $item = $(item);
@@ -358,7 +380,16 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 				$item.prop('disabled', false).removeClass('disabled');
 			}
 		}, this));
-		if ($('#' + this._menuItemListID).find('.jsMenuItem').length == 0) {
+		$target.children('.sortableList').each($.proxy(function(index, item) {
+			$list = $(item);
+			$list.children('.jsMenuItem').each($.proxy(function(index, listItem) {
+				$listItem = $(listItem);
+				$listItem.detach();
+				if (usePrepend) $listItem.prependTo($parent);
+				else $listItem.insertAfter($before);
+			}, this));
+		}, this));
+		if ($('#' + this._menuItemListID).find('.jsMenuItem').length <= 1) {
 			$('#' + this._menuItemListID).find('button[data-type="submit"]').prop('disabled', true).addClass('disabled');
 		} 
 	},
@@ -383,17 +414,14 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	 * @return boolean
 	 */
 	_stopFormSubmit: function(event) {
-		if (this._type != 'custom') return false;
-		else {
-			event.preventDefault();
-		}
+		event.preventDefault();
+		if (this._type != 'custom') return;
 		if (this._element.find('input[name="title"]').length == 0) {
 			this._submit();
 		} 
 		else if (this._element.find('input[name="title"]').length == 1) {
 			this._submit();
 		}
-		return false;
 	},
 
 	/**
@@ -428,7 +456,9 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 			}
 			this._structure['link'] = link;
 			this._structure['linkTitle'] = linkTitle;
-			
+			// resets the form
+			$('#link').val('http://');
+			$('#title').val('');
 			// send request
 			var $parameters = $.extend(true, {
 				data: {
@@ -518,6 +548,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 			}
 			
 		}, this));
+		
 	},
 	
 	/**
@@ -534,7 +565,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 		try {
 			var data = data['returnValues'];
 			for (var $menuItemID in data) {
-				var $newItemHtml = '<li id="' + WCF.getRandomID() + '" class="sortableNode jsMenuItem" data-object-id="' + $menuItemID + '"  data-object-name="' + data[$menuItemID]['menuItemName'] + '">';
+				var $newItemHtml = '<li id="' + WCF.getRandomID() + '" class="sortableNode jsMenuItem" data-object-id="' + $menuItemID + '"  data-object-name="' + data[$menuItemID]['menuItemNameRaw'] + '">';
 				$newItemHtml += '<span class="sortableNodeLabel"><span class="buttons">';
 				if (ULTIMATE.Permission.get('admin.content.ultimate.canDeleteMenuItem')) {
 					$newItemHtml += '<img src="' + WCF.Icon.get('wcf.icon.delete') + '" alt="" title="' + WCF.Language.get('wcf.global.button.delete') + '" class="icon16 jsDeleteButton jsTooltip" data-object-id="' + $menuItemID + '" data-confirm-message="' + WCF.Language.get('wcf.acp.ultimate.menu.item.delete.sure') + '" />';
@@ -549,7 +580,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
                 	$newItemHtml += '&nbsp;<img src="' + (data[$menuItemID]['isDisabled']) ? WCF.Icon.get('wcf.icon.disabled') : WCF.Icon.get('wcf.icon.enabled') + '" alt="" title="' + (data[$menuItemID]['isDisabled']) ? WCF.Language.get('wcf.global.button.enable') : WCF.Language.get('wcf.global.button.disable') + '" class="icon16 disabled" />';
                 }
                 $newItemHtml += '</span>&nbsp;<span class="title">';                
-                $newItemHtml += data[$menuItemID]['menuItemName'] + '</span></span></li>';
+                $newItemHtml += data[$menuItemID]['menuItemName'] + '</span></span><ol class="sortableList" data-object-id="' + $menuItemID + '"></ol></li>';
                 
                 $('#' + this._menuItemListID + '> .sortableList').append($newItemHtml);
                 if ($('#' + this._menuItemListID).find('button[data-type="submit"]').prop('disabled')) {
@@ -562,6 +593,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 			if (ULTIMATE.Permission.get('admin.content.ultimate.canEditMenuItem')) {
 				new WCF.Action.Toggle('ultimate\\data\\menu\\item\\MenuItemAction', $('.jsMenuItem'), '> .buttons > .jsToggleButton');
 			}
+			this._init();
 			this._notification.show();
 		}
 		// something happened

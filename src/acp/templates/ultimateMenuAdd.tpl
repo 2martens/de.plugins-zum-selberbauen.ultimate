@@ -86,7 +86,7 @@
                                 </span>
                             </span>
                     
-                            <ol class="menuItemList sortableList" data-object-id="{@$menuItem->menuItemID}">
+                            <ol class="sortableList" data-object-id="{@$menuItem->menuItemID}">
                         {if !$menuItemNodeList->current()->hasChildren()}
                             </ol></li>
                         {/if}
@@ -199,6 +199,14 @@
                             $(node).wcfIdentify();
                         });
                     {/if}
+                    $('#menuItemList').find('button[data-type="submit"]').click(function(event) {
+                        event.preventDefault();
+                        if ($('#menuItemList').find('.jsMenuItem').length == 0) {
+                            event.stopImmediatePropagation();
+                        } else {
+                            event.stopPropagation();
+                        }
+                    });
                     new WCF.Sortable.List('menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, { }, false);
                     ULTIMATE.Permission.addObject({
                         'admin.content.ultimate.canEditMenuItem': {if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem')}true{else}false{/if},
@@ -213,9 +221,7 @@
                     new ULTIMATE.Menu.Item.Transfer('pageSelectContainer', 'menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'page');
                     new ULTIMATE.Menu.Item.Transfer('customContainer', 'menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'custom');
                     
-                    $('#menuItemList').find('button[data-type="submit"]').click(function(event) {
-                        return false;
-                    });
+                    
                 {/if}
             {/if}
         });

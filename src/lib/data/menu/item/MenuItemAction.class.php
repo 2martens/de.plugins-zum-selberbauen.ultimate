@@ -184,6 +184,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
             $menuItemsAJAX[$menuItemID] = array(
                 'menuID' => $menuItem->__get('menuID'),
                 'menuItemName' => WCF::getLanguage()->get($menuItem->__get('menuItemName')),
+                'menuItemNameRaw' => $menuItem->__get('menuItemName'),
                 'menuItemParent' => $menuItem->__get('menuItemParent'),
                 'menuItemLink' => $menuItem->__get('menuItemLink'),
                 'showOrder' => $menuItem->__get('showOrder'),
