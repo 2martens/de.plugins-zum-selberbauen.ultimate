@@ -231,6 +231,7 @@ Tom likes the warm water and the wunderful beach.]]></item>
         <!-- menu -->
         <item name="wcf.acp.ultimate.menu.add"><![CDATA[Add menu]]></item>
         <item name="wcf.acp.ultimate.menu.addToMenu"><![CDATA[Add to menu]]></item>
+        <item name="wcf.acp.ultimate.menu.addMenuFirst"><![CDATA[You have to create the menu before you can add menu items.]]></item>
         <item name="wcf.acp.ultimate.menu.edit"><![CDATA[Edit menu]]></item>
         <item name="wcf.acp.ultimate.menu.delete"><![CDATA[Delete menu]]></item>
         <item name="wcf.acp.ultimate.menu.delete.sure"><![CDATA[Are you sure that you want to delete this menu?]]></item>
@@ -238,6 +239,7 @@ Tom likes the warm water and the wunderful beach.]]></item>
         <item name="wcf.acp.ultimate.menu.general"><![CDATA[Menu data]]></item>
         <item name="wcf.acp.ultimate.menu.name"><![CDATA[Menu name]]></item>
         <item name="wcf.acp.ultimate.menu.name.error.notUnique"><![CDATA[A menu with the specified name already exists.]]></item>
+        <item name="wcf.acp.ultimate.menu.name.placeholder"><![CDATA[Sample menu]]></item>
         <item name="wcf.acp.ultimate.menu.categories"><![CDATA[Categories]]></item>
         <item name="wcf.acp.ultimate.menu.categories.description"><![CDATA[Please select here the categories, that you want to add to the menu.]]></item>
         <item name="wcf.acp.ultimate.menu.pages"><![CDATA[Pages]]></item>
