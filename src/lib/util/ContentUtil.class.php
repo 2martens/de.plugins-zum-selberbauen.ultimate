@@ -19,10 +19,12 @@ class ContentUtil {
      * Checks whether the given slug is available or not.
      *
      * @param   string    $contentSlug
+     * @param   integer   $contentID
      * @return  boolean   $isAvailable
      */
-    public static function isAvailableSlug($contentSlug) {
+    public static function isAvailableSlug($contentSlug, $contentID) {
         $contentSlug = StringUtil::trim($contentSlug);
+        $contentID = intval($contentID);
         $isAvailable = true;
     
         $contents = self::loadCache(
@@ -33,7 +35,7 @@ class ContentUtil {
 
         foreach ($contents as $content) {
             /* @var $page \ultimate\data\content\Content */
-            if ($content->__get('contentSlug') != $contentSlug) continue;
+            if ($content->__get('contentID') == $contentID || $content->__get('contentSlug') != $contentSlug) continue;
             $isAvailable = false;
             break;
         }

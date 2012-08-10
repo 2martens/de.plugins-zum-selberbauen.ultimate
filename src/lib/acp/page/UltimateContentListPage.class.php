@@ -151,7 +151,8 @@ class UltimateContentListPage extends AbstractCachedListPage {
         
         WCF::getTPL()->assign(array(
         	'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(),
-            'url' => $this->url
+            'url' => $this->url,
+            'timeNow' => TIME_NOW
         ));
     }
     

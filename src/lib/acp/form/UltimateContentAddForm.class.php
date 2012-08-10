@@ -265,6 +265,7 @@ class UltimateContentAddForm extends MessageForm {
                 'enableBBCodes' => $this->enableBBCodes,
                 'enableHtml' => $this->enableHtml,
                 'enableSmilies' => $this->enableSmilies,
+                'publishDate' => $this->publishDateTimestamp,
                 'lastModified' => TIME_NOW,
                 'status' => $this->statusID,
                 'visibility' => $this->visibility
@@ -433,7 +434,7 @@ class UltimateContentAddForm extends MessageForm {
         if (empty($this->slug)) {
             throw new UserInputException('slug');
         }
-        if (!ContentUtil::isAvailableSlug($this->slug)) {
+        if (!ContentUtil::isAvailableSlug($this->slug, (isset($this->contentID)) ? $this->contentID : 0)) {
             throw new UserInputException('slug', 'notUnique');
         }
     }
@@ -466,8 +467,12 @@ class UltimateContentAddForm extends MessageForm {
      * @throws \wcf\system\exception\UserInputException
      */
     protected function validateCategories() {
-        $cacheOutput = CacheHandler::getInstance()->get('category');
-        $categoryIDs = $cacheOutput['categoryIDs'];
+        // reading cache
+        $cacheName = 'category';
+        $cacheBuilderClassName = '\ultimate\system\cache\builder\CategoryCacheBuilder';
+        $file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
+        CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
+        $categoryIDs = CacheHandler::getInstance()->get($cacheName, 'categoryIDs');
         foreach ($this->categoryIDs as $categoryID) {
             if (in_array($categoryID, $categoryIDs)) continue;
             throw new UserInputException('category', 'invalidIDs');

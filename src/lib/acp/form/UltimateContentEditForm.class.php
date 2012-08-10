@@ -7,6 +7,7 @@ use ultimate\data\content\ContentEditor;
 use wcf\form\AbstractForm;
 use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
+use wcf\system\bbcode\URLParser;
 use wcf\system\cache\CacheHandler;
 use wcf\system\language\I18nHandler;
 use wcf\system\menu\acp\ACPMenu;
@@ -80,7 +81,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
      * @see \wcf\page\IPage::readData()
      */
     public function readData() {
-        if (!count($_POST)) {
+        
             // reading object fields
             $this->subject = $this->content->__get('contentTitle');
             $this->description = $this->content->__get('contentDescription');
@@ -109,8 +110,8 @@ class UltimateContentEditForm extends UltimateContentAddForm {
             $dateTime = $this->content->__get('publishDateObject');
             if (!$dateTime->getTimestamp()) {
                 $dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
-                $dateTime->setTimezone(WCF::getUser()->getTimezone());
             }
+            $dateTime->setTimezone(WCF::getUser()->getTimezone());
             $date = WCF::getLanguage()->getDynamicVariable(
                 'ultimate.date.dateFormat',
                 array(
@@ -159,8 +160,8 @@ class UltimateContentEditForm extends UltimateContentAddForm {
             // get visibility data
             $this->visibility = $this->content->__get('visibility');
             $this->groupIDs = array_keys($this->content->__get('groups'));
-        }
-        AbstractForm::readData();
+        
+        MessageForm::readData();
     }
     
     /**
@@ -210,7 +211,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
                     $statement->executeUnbuffered(array(
                         $text,
                         $languageID,
-                        'ultimate.content.'.$contentID.'.contentText',
+                        'ultimate.content.'.$this->contentID.'.contentText',
                         PACKAGE_ID
                     ));
                 }
@@ -236,7 +237,10 @@ class UltimateContentEditForm extends UltimateContentAddForm {
                 'enableBBCodes' => $this->enableBBCodes,
                 'enableHtml' => $this->enableHtml,
                 'enableSmilies' => $this->enableSmilies,
-        	    'lastModified' => TIME_NOW
+        	    'publishDate' => $this->publishDateTimestamp,
+        	    'lastModified' => TIME_NOW,
+                'status' => $this->statusID,
+                'visibility' => $this->visibility
             ),
             'categories' => $this->categoryIDs
         );
@@ -248,6 +252,26 @@ class UltimateContentEditForm extends UltimateContentAddForm {
         $action = new ContentAction(array($this->contentID), 'update', $parameters);
         $action->executeAction();
         $this->saved();
+        
+        $date = WCF::getLanguage()->getDynamicVariable(
+            'ultimate.date.dateFormat',
+            array(
+                'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
+            )
+        );
+        $time = WCF::getLanguage()->get('wcf.date.timeFormat');
+        $format = str_replace(
+            '%time%',
+            $time,
+            str_replace(
+                '%date%',
+                $date,
+                WCF::getLanguage()->get('ultimate.date.dateTimeFormat')
+            )
+        );
+        $dateTime = DateUtil::getDateTimeByTimestamp($this->publishDateTimestamp);
+        $dateTime->setTimezone(WCF::getUser()->getTimezone());
+        $this->publishDate = $dateTime->format($format);
         
         WCF::getTPL()->assign('success', true);
     }

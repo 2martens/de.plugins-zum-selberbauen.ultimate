@@ -106,7 +106,7 @@
                             {assign var='englishAccent' value={@ULTIMATE_GENERAL_ENGLISHLANGUAGE}}
                             {capture assign='publishDateFormat'}{lang britishEnglish=$englishAccent}ultimate.date.dateFormat{/lang}{/capture}
                             {assign var='publishDateFormat' value=$publishDateFormat}
-                            <td class="columnDate"><p>{if $content->publishDate}{@$content->publishDate|dateExtended:$publishDateFormat}{else}{/if}</p></td>
+                            <td class="columnDate"><p>{if $content->publishDate > 0 && $content->publishDate <= $timeNow}{@$content->publishDate|dateExtended:$publishDateFormat}{else}{/if}</p></td>
                             <td class="columnLastModified"><p>{@$content->lastModified|time}</p></td>
                         
                             {event name='columns'}
