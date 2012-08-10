@@ -235,7 +235,7 @@ ul.sortable {
 }
 /** invisible **/
 .ultimateHidden {
-  display: none;
+  display: none !important;
 }
 /** general lists **/
 ul.nestedList > li {
