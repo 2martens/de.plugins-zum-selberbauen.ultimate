@@ -159,8 +159,7 @@ ULTIMATE.Button.Replacement.prototype = {
         if (this._action == 'save') {
             this._initialStatusID = this._checkElement.val();
         } else if (this._action == 'publish') {
-            var $initialDateTime = this._checkElement.val();
-            var $dateObj = new Date($initialDateTime);
+            var $dateObj = this._checkElement.datetimepicker( 'getDate' );
             this._initialDateTime = WCF.Date.Util.gmdate($dateObj);
         }
         
@@ -181,8 +180,7 @@ ULTIMATE.Button.Replacement.prototype = {
                 this._button.val($languageOutput);
             }
         } else if (this._action == 'publish') {
-            var $insertedDateTime = this._checkElement.val();
-            var $dateObj = new Date($insertedDateTime);
+            var $dateObj = this._checkElement.datetimepicker( 'getDate' );
             var $timestamp = WCF.Date.Util.gmdate($dateObj);
             var $timestampNow = WCF.Date.Util.gmdate();
             

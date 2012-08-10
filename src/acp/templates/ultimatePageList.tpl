@@ -44,9 +44,9 @@
 <div id="pageTableContainer" class="tabularBox marginTop shadow">
     <nav class="wcf-menu">
         <ul>
-            <li{if $action == ''} class="active"{/if}><a href="{link controller='UltimatePageList'}{/link}"><span>{lang}wcf.acp.ultimate.page.list.all{/lang}</span> <span class="wcf-badge badgeInverse" title="{lang}wcf.acp.ultimate.page.list.count{/lang}">{#$items}</span></a></li>
+            <li{if $action == ''} class="active"{/if}><a href="{link controller='UltimatePageList'}{/link}"><span>{lang}wcf.acp.ultimate.page.list.all{/lang}</span> <span class="wcf-badge" title="{lang}wcf.acp.ultimate.page.list.count{/lang}">{#$items}</span></a></li>
             
-            {event name='ultimateContentListOptions'}
+            {event name='ultimatePageListOptions'}
         </ul>
     </nav>
     {hascontent}
@@ -69,11 +69,13 @@
                         <tr id="pageContainer{@$page->pageID}" class="jsPageRow">
                             <td class="columnMark"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$page->pageID}" /></td>
                             <td class="columnIcon">
+                                
                                 {if $__wcf->session->getPermission('admin.content.ultimate.canEditPage')}
                                     <a href="{link controller='UltimatePageEdit' id=$page->pageID}{/link}"><img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.acp.ultimate.page.edit{/lang}" class="icon16 jsTooltip" /></a>
                                 {else}
                                     <img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.acp.ultimate.page.edit{/lang}" class="icon16 disabled" />
                                 {/if}
+                                
                                 {if $__wcf->session->getPermission('admin.content.ultimate.canDeletePage')}
                                     <img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.page.delete{/lang}" class="icon16 jsTooltip jsDeleteButton" data-object-id="{@$page->pageID}" data-confirm-message="{lang}wcf.acp.ultimate.page.delete.sure{/lang}" />
                                 {else}
@@ -85,15 +87,14 @@
                             <td class="columnID"><p>{@$page->pageID}</p></td>
                             <td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditPage')}<a title="{lang}wcf.acp.ultimate.page.edit{/lang}" href="{link controller='UltimatePageEdit' id=$page->pageID}{/link}">{lang}{@$page->pageTitle}{/lang}</a>{else}{lang}{@$page->pageTitle}{/lang}{/if}</p></td>
                 		    <td class="columnAuthor"><p>{if $__wcf->session->getPermission('admin.user.canEditUser')}<a title="{lang}wcf.acp.user.edit{/lang}" href="{link controller='UserEdit' id=$page->authorID}{/link}">{@$page->author->username}</a>{else}{@$page->author->username}{/if}</p></td>
-                		    {assign var='englishAccent' value={@ULTIMATE_GENERAL_ENGLISHLANGUAGE} }
+                		    {assign var='englishAccent' value={@ULTIMATE_GENERAL_ENGLISHLANGUAGE}}
                             {capture assign='publishDateFormat'}{lang britishEnglish=$englishAccent}ultimate.date.dateFormat{/lang}{/capture}
                             {assign var='publishDateFormat' value=$publishDateFormat}
                             <td class="columnDate"><p>{if $page->publishDate}{@$page->publishDate|dateExtended:$publishDateFormat}{else}{/if}</p></td>
                 		    <td class="columnLastModified"><p>{@$page->lastModified|time}</p></td>
                 		
                             {event name='columns'}
-                        </tr>
-                    
+                        </tr>                    
                     {/foreach}
                 {/content}
             </tbody>
@@ -103,7 +104,7 @@
     <div class="contentNavigation">
         {@$pagesLinks}
     
-        <div class="jsClipboardEditor" data-types="[ 'de.plugins-zum-selberbauen.ultimate.page' ]"></div>
+        <div class="wcf-clipboardEditor jsClipboardEditor" data-types="[ 'de.plugins-zum-selberbauen.ultimate.page' ]"></div>
      
         <nav>
             <ul>
@@ -118,7 +119,7 @@
 {hascontentelse}
 </div>
 
-<p class="info">{lang}wcf.acp.ultimate.page.noContents{/lang}</p>
+<p class="wcf-info">{lang}wcf.acp.ultimate.page.noContents{/lang}</p>
 {/hascontent}
 
 {include file='footer'}

@@ -14,7 +14,7 @@
             options.refreshPage = true;
         {/if}
         
-        new WCF.Table.EmptyTableHandler($('#menuTableContainer'), 'jsCategoryRow', options);
+        new WCF.Table.EmptyTableHandler($('#menuTableContainer'), 'jsMenuRow', options);
     });
     //]]>
 </script>
@@ -32,7 +32,7 @@
     
     <nav>
         <ul>
-            {if $__wcf->session->getPermission('admin.content.ultimate.canAddCategory')}
+            {if $__wcf->session->getPermission('admin.content.ultimate.canAddMenu')}
                 <li><a href="{link controller='UltimateMenuAdd'}{/link}" title="{lang}wcf.acp.ultimate.menu.add{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/add.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.ultimate.menu.add{/lang}</span></a></li>
             {/if}
             
@@ -41,11 +41,10 @@
     </nav>
 </div>
 
-
 <div id="menuTableContainer" class="tabularBox marginTop shadow">
     <nav class="wcf-menu">
         <ul>
-            <li{if $action == ''} class="active"{/if}><a href="{link controller='UltimateMenuList'}{/link}"><span>{lang}wcf.acp.ultimate.menu.list.all{/lang}</span> <span class="wcf-badge badgeInverse" title="{lang}wcf.acp.ultimate.menu.list.count{/lang}">{#$items}</span></a></li>
+            <li{if $action == ''} class="active"{/if}><a href="{link controller='UltimateMenuList'}{/link}"><span>{lang}wcf.acp.ultimate.menu.list.all{/lang}</span> <span class="wcf-badge" title="{lang}wcf.acp.ultimate.menu.list.count{/lang}">{#$items}</span></a></li>
             
             {event name='ultimateMenuListOptions'}
         </ul>
@@ -65,7 +64,7 @@
             <tbody>
                 {content}
                     {foreach from=$objects item=menu}
-                        <tr id="menuContainer{@$menu->menuID}" class="jsCategoryRow">
+                        <tr id="menuContainer{@$menu->menuID}" class="jsMenuRow">
                             <td class="columnMark"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$menu->menuID}" /></td>
                             <td class="columnIcon">
                                 
@@ -91,8 +90,7 @@
                     {/foreach}
                 {/content}
             </tbody>
-        </table>
-        
+        </table>        
     </div>
         
     <div class="contentNavigation">

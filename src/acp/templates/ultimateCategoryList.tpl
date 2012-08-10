@@ -41,11 +41,10 @@
     </nav>
 </div>
 
-
 <div id="categoryTableContainer" class="tabularBox marginTop shadow">
     <nav class="wcf-menu">
         <ul>
-            <li{if $action == ''} class="active"{/if}><a href="{link controller='UltimateCategoryList'}{/link}"><span>{lang}wcf.acp.ultimate.category.list.all{/lang}</span> <span class="wcf-badge badgeInverse" title="{lang}wcf.acp.ultimate.category.list.count{/lang}">{#$items}</span></a></li>
+            <li{if $action == ''} class="active"{/if}><a href="{link controller='UltimateCategoryList'}{/link}"><span>{lang}wcf.acp.ultimate.category.list.all{/lang}</span> <span class="wcf-badge" title="{lang}wcf.acp.ultimate.category.list.count{/lang}">{#$items}</span></a></li>
             
             {event name='ultimateCategoryListOptions'}
         </ul>
@@ -97,8 +96,7 @@
                     {/foreach}
                 {/content}
             </tbody>
-        </table>
-        
+        </table>        
     </div>
         
     <div class="contentNavigation">

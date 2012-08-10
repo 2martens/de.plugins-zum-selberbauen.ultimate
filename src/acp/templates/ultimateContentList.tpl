@@ -44,7 +44,7 @@
 <div id="contentTableContainer" class="tabularBox marginTop shadow">
     <nav class="wcf-menu">
         <ul>
-            <li{if $action == ''} class="active"{/if}><a href="{link controller='UltimateContentList'}{/link}"><span>{lang}wcf.acp.ultimate.content.list.all{/lang}</span> <span class="wcf-badge badgeInverse" title="{lang}wcf.acp.ultimate.content.list.count{/lang}">{#$items}</span></a></li>
+            <li{if $action == ''} class="active"{/if}><a href="{link controller='UltimateContentList'}{/link}"><span>{lang}wcf.acp.ultimate.content.list.all{/lang}</span> <span class="wcf-badge" title="{lang}wcf.acp.ultimate.content.list.count{/lang}">{#$items}</span></a></li>
             
             {event name='ultimateContentListOptions'}
         </ul>
@@ -74,11 +74,13 @@
                         <tr id="contentContainer{@$content->contentID}" class="jsContentRow">
                             <td class="columnMark"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$content->contentID}" /></td>
                             <td class="columnIcon">
+                            
                                 {if $__wcf->session->getPermission('admin.content.ultimate.canEditContent')}
                                     <a href="{link controller='UltimateContentEdit' id=$content->contentID}{/link}"><img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.acp.ultimate.content.edit{/lang}" class="icon16 jsTooltip" /></a>
                                 {else}
                                     <img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.acp.ultimate.content.edit{/lang}" class="icon16 disabled" />
                                 {/if}
+                                
                                 {if $__wcf->session->getPermission('admin.content.ultimate.canDeleteContent')}
                                     <a onclick="return confirm('{lang}wcf.acp.ultimate.content.delete.sure{/lang}')" href="{link controller='UltimateContentDelete' id=$content->contentID}url={@$encodedURL}&t={@SECURITY_TOKEN}{/link}"><img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.content.delete{/lang}" class="icon16 jsTooltip" /></a>
                                 {else}
@@ -101,7 +103,7 @@
                                     {implode from=$content->tags key=tagID item=tag}<a href="{link controller='UltimateContentList'}tagID={@$tag->tagID}{/link}">{@$tag}</a>{/implode}
                                 </p>
                             </td> *}
-                            {assign var='englishAccent' value={@ULTIMATE_GENERAL_ENGLISHLANGUAGE} }
+                            {assign var='englishAccent' value={@ULTIMATE_GENERAL_ENGLISHLANGUAGE}}
                             {capture assign='publishDateFormat'}{lang britishEnglish=$englishAccent}ultimate.date.dateFormat{/lang}{/capture}
                             {assign var='publishDateFormat' value=$publishDateFormat}
                             <td class="columnDate"><p>{if $content->publishDate}{@$content->publishDate|dateExtended:$publishDateFormat}{else}{/if}</p></td>
@@ -112,14 +114,13 @@
                     {/foreach}
                 {/content}
             </tbody>
-        </table>
-    
+        </table>    
     </div>
     
     <div class="contentNavigation">
         {@$pagesLinks}
     
-        <div class="clipboardEditor" data-types="[ 'de.plugins-zum-selberbauen.ultimate.content' ]"></div>
+        <div class="wcf-clipboardEditor jsClipboardEditor" data-types="[ 'de.plugins-zum-selberbauen.ultimate.content' ]"></div>
      
         <nav>
             <ul>
@@ -134,7 +135,7 @@
 {hascontentelse}
 </div>
 
-<p class="info">{lang}wcf.acp.ultimate.content.noContents{/lang}</p>
+<p class="wcf-info">{lang}wcf.acp.ultimate.content.noContents{/lang}</p>
 {/hascontent}
 {include file='footer'}
  
