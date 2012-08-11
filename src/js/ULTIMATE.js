@@ -30,12 +30,12 @@ ULTIMATE.JSON = {
 		
 	},
 		
-    /**
-     * Encodes a given variable.
-     * 
-     * @param 	Object variable
-     * @return 	string
-     */
+	/**
+	 * Encodes a given variable.
+	 * 
+	 * @param	Object	variable
+	 * @return	string
+	 */
 	encode: function(variable) {
 		var type = typeof variable;
 		var $JSON = this;
@@ -86,116 +86,116 @@ ULTIMATE.Button = {};
 /**
  * Handles button replacements.
  * 
- * @param   string buttonID
- * @param   string checkElementID
- * @param   string action
+ * @param	String	buttonID
+ * @param	String	checkElementID
+ * @param	String	action
  */
 ULTIMATE.Button.Replacement = function(buttonID, checkElementID, action) { this.init(buttonID, checkElementID, action); };
 ULTIMATE.Button.Replacement.prototype = {
-    /**
-     * target input[type=submit] element
-     * @var jQuery
-     */
-    _button: null,
-    
-    /**
-     * the button value
-     * @var String
-     */
-    _buttonValue: '',
-    
-    /**
-     * element to check for changes
-     * @var jQuery
-     */
-    _checkElement: null,
-    
-    /**
-     * the initial timestamp
-     * @var integer
-     */
-    _initialValueDateTime: 0,
-    
-    /**
-     * the initial status id
-     * @var integer
-     */
-    _initialStatusID: 0,
-    
-    /**
-     * action parameter
-     * @var String
-     */
-    _action: '',
-    
-    /**
-     * Contains the language variables for the save action.
-     * @var Object
-     */
-    _saveMap: {
-        0: 'ultimate.button.saveAsDraft',
-        1: 'ultimate.button.saveAsPending'
-    },
-    
-    /**
-     * Contains the language variables for the publish action.
-     * @var object
-     */
-    _publishMap: {
-        0: 'ultimate.button.publish',
-        1: 'ultimate.button.schedule',
-        2: 'ultimate.button.update'
-    },
-    
-    /**
-     * Initializes the ButtonReplacement API.
-     */
-    init: function(buttonID, checkElementID, action) {
-        this._button = $('#' + $.wcfEscapeID(buttonID));
-        this._buttonValue = this._button.val();
-        this._checkElement = $('#' + $.wcfEscapeID(checkElementID));
-        this._action = action;
-        
-        if (this._action == 'save') {
-            this._initialStatusID = this._checkElement.val();
-        } else if (this._action == 'publish') {
-            var $dateObj = this._checkElement.datetimepicker( 'getDate' );
-            this._initialDateTime = WCF.Date.Util.gmdate($dateObj);
-        }
-        
-        this._checkElement.change($.proxy(this._change, this));
-        this._change();
-    },
+	/**
+	 * target input[type=submit] element
+	 * @var	jQuery
+	 */
+	_button: null,
+	
+	/**
+	 * the button value
+	 * @var String
+	 */
+	_buttonValue: '',
+	
+	/**
+	 * element to check for changes
+	 * @var	jQuery
+	 */
+	_checkElement: null,
+	
+	/**
+	 * the initial timestamp
+	 * @var	integer
+	 */
+	_initialValueDateTime: 0,
+	
+	/**
+	 * the initial status id
+	 * @var	integer
+	 */
+	_initialStatusID: 0,
+	
+	/**
+	 * action parameter
+	 * @var	String
+	 */
+	_action: '',
+	
+	/**
+	 * Contains the language variables for the save action.
+	 * @var	Object
+	 */
+	_saveMap: {
+		0: 'ultimate.button.saveAsDraft',
+		1: 'ultimate.button.saveAsPending'
+	},
+	
+	/**
+	 * Contains the language variables for the publish action.
+	 * @var	object
+	 */
+	_publishMap: {
+		0: 'ultimate.button.publish',
+		1: 'ultimate.button.schedule',
+		2: 'ultimate.button.update'
+	},
+	
+	/**
+	 * Initializes the ButtonReplacement API.
+	 */
+	init: function(buttonID, checkElementID, action) {
+		this._button = $('#' + $.wcfEscapeID(buttonID));
+		this._buttonValue = this._button.val();
+		this._checkElement = $('#' + $.wcfEscapeID(checkElementID));
+		this._action = action;
+		
+		if (this._action == 'save') {
+			this._initialStatusID = this._checkElement.val();
+		} else if (this._action == 'publish') {
+			var $dateObj = this._checkElement.datetimepicker( 'getDate' );
+			this._initialDateTime = WCF.Date.Util.gmdate($dateObj);
+		}
+		
+		this._checkElement.change($.proxy(this._change, this));
+		this._change();
+	},
 
-    _change: function() {
-        if (this._action == 'save') {
-            var $currentValue = this._checkElement.val();
-            var $languageOutput = WCF.Language.get(this._saveMap[$currentValue]);
-            if ($currentValue >= 2) {
-                this._button.attr('disabled', 'disabled');
-                this._button.addClass('ultimateHidden');
-            } else if ($currentValue == 0 || $currentValue == 1) {
-                this._button.removeClass('ultimateHidden');
-                this._button.removeAttr('disabled');
-                this._button.val($languageOutput);
-            }
-        } else if (this._action == 'publish') {
-            var $dateObj = this._checkElement.datetimepicker( 'getDate' );
-            var $timestamp = WCF.Date.Util.gmdate($dateObj);
-            var $timestampNow = WCF.Date.Util.gmdate();
-            
-            var $updateButton = WCF.Language.get(this._publishMap[2]);
-            var $isUpdateSzenario = ($updateButton == this._buttonValue);
-            
-            if ($timestamp > $timestampNow) {
-                if ($isUpdateSzenario && (this._initialDateTime > $timestampNow)) return;
-                this._button.val(WCF.Language.get(this._publishMap[1]));
-            } else {
-                if ($isUpdateSzenario && (this._initialDateTime < $timestampNow)) return;
-                this._button.val(WCF.Language.get(this._publishMap[0]));
-            }
-        }
-    }
+	_change: function() {
+		if (this._action == 'save') {
+			var $currentValue = this._checkElement.val();
+			var $languageOutput = WCF.Language.get(this._saveMap[$currentValue]);
+			if ($currentValue >= 2) {
+				this._button.attr('disabled', 'disabled');
+				this._button.addClass('ultimateHidden');
+			} else if ($currentValue == 0 || $currentValue == 1) {
+				this._button.removeClass('ultimateHidden');
+				this._button.removeAttr('disabled');
+				this._button.val($languageOutput);
+			}
+		} else if (this._action == 'publish') {
+			var $dateObj = this._checkElement.datetimepicker( 'getDate' );
+			var $timestamp = WCF.Date.Util.gmdate($dateObj);
+			var $timestampNow = WCF.Date.Util.gmdate();
+			
+			var $updateButton = WCF.Language.get(this._publishMap[2]);
+			var $isUpdateSzenario = ($updateButton == this._buttonValue);
+			
+			if ($timestamp > $timestampNow) {
+				if ($isUpdateSzenario && (this._initialDateTime > $timestampNow)) return;
+				this._button.val(WCF.Language.get(this._publishMap[1]));
+			} else {
+				if ($isUpdateSzenario && (this._initialDateTime < $timestampNow)) return;
+				this._button.val(WCF.Language.get(this._publishMap[0]));
+			}
+		}
+	}
 };
 
 /**
@@ -207,9 +207,9 @@ ULTIMATE.Permission = {
 	_variables: new WCF.Dictionary(),
 	
 	/**
-	 * @param string  key
-	 * @param boolean value
-	 * @see	WCF.Dictionary.add()
+	 * @param	String	key
+	 * @param	boolean	value
+	 * @see		WCF.Dictionary.add()
 	 */
 	add: function(key, value) {
 		this._variables.add(key, value);
@@ -225,7 +225,7 @@ ULTIMATE.Permission = {
 	/**
 	 * Retrieves a variable.
 	 * 
-	 * @param	string		key
+	 * @param	String	key
 	 * @return	boolean
 	 */
 	get: function(key, parameters) {
@@ -256,30 +256,30 @@ ULTIMATE.Menu.Item = {};
 /**
  * Adds menu items to a menu item list.
  * 
- * @param string  elementID
- * @param string  menuItemListID
- * @param string  className
- * @param integer offset
- * @param string  type
+ * @param	String	elementID
+ * @param	String	menuItemListID
+ * @param	String	className
+ * @param	integer	offset
+ * @param	String	type
  */
 ULTIMATE.Menu.Item.Transfer = function(elementID, menuItemListID, className, offset, type) { this.init(elementID, menuItemListID, className, offset, type); };
 ULTIMATE.Menu.Item.Transfer.prototype = {
 	
 	/**
 	 * Contains the element from which the items should be transferred.
-	 * @var jQuery
+	 * @var	jQuery
 	 */
 	_element: null,
 	
 	/**
 	 * menu item list id
-	 * @var string
+	 * @var	String
 	 */
 	_menuItemListID: '',
 	
 	/**
 	 * action class name
-	 * @var	string
+	 * @var	String
 	 */
 	_className: '',
 	
@@ -309,19 +309,19 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	
 	/**
 	 * type of IDs (page, category, content, custom)
-	 * @var string
+	 * @var	String
 	 */
 	_type: '',
 	
 	/**
 	 * true if the submit is done
-	 * @var boolean
+	 * @var	boolean
 	 */
 	_submitDone: false,
 	
 	/**
 	 * true if the request should be sent
-	 * @var boolean
+	 * @var	boolean
 	 */
 	_sendRequest: false,
 	
@@ -329,8 +329,8 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	/**
 	 * Initializes a menu item transfer.
 	 * 
-	 * @param string elementID
-	 * @param string menuItemListID
+	 * @param	String	elementID
+	 * @param	String	menuItemListID
 	 */
 	init: function(elementID, menuItemListID, className, offset, type) {
 		this._element = $('#' + $.wcfEscapeID(elementID));
@@ -359,7 +359,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	
 	/**
 	 * Called each time a menu item is removed with empty().remove().
-	 * @param jQuery.event event
+	 * @param	jQuery.event	event
 	 */
 	_empty: function(event) {
 		var $target = $(event.target);
@@ -408,8 +408,8 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	/**
 	 * Stops the form submit event.
 	 * 
-	 * @param jQuery.Event event
-	 * @return boolean
+	 * @param	jQuery.Event	event
+	 * @return	boolean
 	 */
 	_stopFormSubmit: function(event) {
 		event.preventDefault();
@@ -525,8 +525,8 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	/**
 	 * Builds all nested elements.
 	 * 
-	 * @param jQuery  $parent
-	 * @param integer $parentID
+	 * @param	jQuery	$parent
+	 * @param	integer	$parentID
 	 */
 	_getNestedElements: function($parent, $parentID) {
 		$parent.find('ul > li > label > input[type="checkbox"]').each($.proxy(function(index, listItem) {
@@ -552,9 +552,9 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	/**
 	 * Shows notification upon success.
 	 * 
-	 * @param	object		data
-	 * @param	string		textStatus
-	 * @param	jQuery		jqXHR
+	 * @param	Object	data
+	 * @param	String	textStatus
+	 * @param	jQuery	jqXHR
 	 */
 	_success: function(data, textStatus, jqXHR) {
 		if (this._notification === null) {
@@ -574,16 +574,16 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 				if (ULTIMATE.Permission.get('admin.content.ultimate.canEditMenuItem')) {
 					$newItemHtml += '&nbsp;<img src="' + ((data[$menuItemID]['isDisabled']) ? WCF.Icon.get('wcf.icon.disabled') : WCF.Icon.get('wcf.icon.enabled')) + '" alt="" title="' + ((data[$menuItemID]['isDisabled']) ? WCF.Language.get('wcf.global.button.enable') : WCF.Language.get('wcf.global.button.disable')) + '" class="icon16 jsToggleButton jsTooltip" data-object-id="' + $menuItemID + '" />';
 				}
-                else {
-                	$newItemHtml += '&nbsp;<img src="' + (data[$menuItemID]['isDisabled']) ? WCF.Icon.get('wcf.icon.disabled') : WCF.Icon.get('wcf.icon.enabled') + '" alt="" title="' + (data[$menuItemID]['isDisabled']) ? WCF.Language.get('wcf.global.button.enable') : WCF.Language.get('wcf.global.button.disable') + '" class="icon16 disabled" />';
-                }
-                $newItemHtml += '</span>&nbsp;<span class="title">';                
-                $newItemHtml += data[$menuItemID]['menuItemName'] + '</span></span><ol class="sortableList" data-object-id="' + $menuItemID + '"></ol></li>';
-                
-                $('#' + this._menuItemListID + '> .sortableList').append($newItemHtml);
-                if ($('#' + this._menuItemListID).find('button[data-type="submit"]').prop('disabled')) {
-                	$('#' + this._menuItemListID).find('button[data-type="submit"]').prop('disabled', false).removeClass('disabled');
-                }
+				else {
+					$newItemHtml += '&nbsp;<img src="' + (data[$menuItemID]['isDisabled']) ? WCF.Icon.get('wcf.icon.disabled') : WCF.Icon.get('wcf.icon.enabled') + '" alt="" title="' + (data[$menuItemID]['isDisabled']) ? WCF.Language.get('wcf.global.button.enable') : WCF.Language.get('wcf.global.button.disable') + '" class="icon16 disabled" />';
+				}
+				$newItemHtml += '</span>&nbsp;<span class="title">';		
+				$newItemHtml += data[$menuItemID]['menuItemName'] + '</span></span><ol class="sortableList" data-object-id="' + $menuItemID + '"></ol></li>';
+				
+				$('#' + this._menuItemListID + '> .sortableList').append($newItemHtml);
+				if ($('#' + this._menuItemListID).find('button[data-type="submit"]').prop('disabled')) {
+					$('#' + this._menuItemListID).find('button[data-type="submit"]').prop('disabled', false).removeClass('disabled');
+				}
 			}
 			if (ULTIMATE.Permission.get('admin.content.ultimate.canDeleteMenuItem')) {
 				new WCF.Action.Delete('ultimate\\data\\menu\\item\\MenuItemAction', $('.jsMenuItem'));

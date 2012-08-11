@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/templateListener.xsd">
-    <import>
-        <templatelistener name="buttonLanguage">
-            <environment>user</environment>
-            <templatename>headInclude</templatename>
-            <eventname>javascriptLanguageImport</eventname>
-            <templatecode><![CDATA[,
+	<import>
+		<templatelistener name="buttonLanguage">
+			<environment>user</environment>
+			<templatename>headInclude</templatename>
+			<eventname>javascriptLanguageImport</eventname>
+			<templatecode><![CDATA[,
 'ultimate.button.saveAsDraft': '{lang}ultimate.button.saveAsDraft{/lang}',
 'ultimate.button.saveAsPending': '{lang}ultimate.button.saveAsPending{/lang}',
 'ultimate.button.schedule': '{lang}ultimate.button.schedule{/lang}',
 'ultimate.button.publish': '{lang}ultimate.button.publish{/lang}',
 'ultimate.button.update': '{lang}ultimate.button.update{/lang}']]></templatecode>
-        </templatelistener>
-    </import>
+		</templatelistener>
+	</import>
 </data>
