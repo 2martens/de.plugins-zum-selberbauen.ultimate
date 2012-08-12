@@ -50,7 +50,7 @@ class PageAction extends AbstractDatabaseObjectAction {
 		
 		// connect with userGroups
 		$groupIDs = (isset($this->parameters['groupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['groupIDs']) : array();
-		if (count($groupIDs)) {
+		if (!empty($groupIDs)) {
 			$pageEditor->addGroups($groupIDs, false);
 		}
 		return $page;
@@ -64,7 +64,7 @@ class PageAction extends AbstractDatabaseObjectAction {
 			parent::update();
 		}
 		else {
-			if (!count($this->objects)) {
+			if (empty($this->objects)) {
 				$this->readObjects();
 			}
 		}
@@ -78,7 +78,7 @@ class PageAction extends AbstractDatabaseObjectAction {
 				$pageEditor->addContent($contentID);
 			}
 			
-			if (count($groupIDs)) {
+			if (!empty($groupIDs)) {
 				$pageEditor->addGroups($groupIDs);
 			}
 		}

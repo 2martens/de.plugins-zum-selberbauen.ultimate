@@ -35,7 +35,7 @@ class CategoryCacheBuilder implements ICacheBuilder {
 		$categoryList->readObjects();
 		
 		$categories = $categoryList->getObjects();
-		if (!count($categories)) return $data;
+		if (empty($categories)) return $data;
 		
 		foreach ($categories as $categoryID => &$category) {
 			/* @var $category \ultimate\data\category\Category */
@@ -71,7 +71,7 @@ class CategoryCacheBuilder implements ICacheBuilder {
 	 */
 	protected function buildNestedCategories($categoryID, \ultimate\data\category\Category $category) {
 		$childCategories = array();
-		if (count($category->childCategories)) {
+		if (!empty($category->childCategories)) {
 			foreach ($category->childCategories as $__categoryID => $__category) {
 				$childCategories[$__categoryID] = array(
 					0 => $__category,

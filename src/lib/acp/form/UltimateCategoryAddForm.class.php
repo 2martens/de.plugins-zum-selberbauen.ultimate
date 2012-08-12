@@ -152,7 +152,7 @@ class UltimateCategoryAddForm extends ACPForm {
 				$updateValues['categoryDescription'] = 'ultimate.category.'.$categoryID.'.categoryDescription';
 			}
 		}
-		if (count($updateValues)) {
+		if (!empty($updateValues)) {
 			$categoryEditor = new CategoryEditor($returnValues['returnValues']);
 			$categoryEditor->update($updateValues);
 		}

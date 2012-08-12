@@ -122,7 +122,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
 				$updateEntries['menuItemName'] = 'ultimate.menu.item.'.$menuItem->__get('menuItemID').'.menuItemName';
 			}
 			// replace empty menu item name with language variable
-			if (count($updateEntries)) {
+			if (!empty($updateEntries)) {
 				$menuItemEditor = new MenuItemEditor($menuItem);
 				$menuItemEditor->update($updateEntries);
 				
@@ -249,7 +249,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
 	 */
 	public function validateUpdatePosition() {
 		// validate permissions
-		if (count($this->permissionsUpdate)) {
+		if (!empty($this->permissionsUpdate)) {
 			try {
 				WCF::getSession()->checkPermissions($this->permissionsUpdate);
 			}

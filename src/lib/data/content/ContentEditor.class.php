@@ -55,12 +55,12 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 			        WHERE       contentID = ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute(array(
-				$this->object->__get('contentID')
+				$this->__get('contentID')
 			));
 		}
 		
 		// insert new categories
-		if (count($categoryIDs) > 0) {
+		if (!empty($categoryIDs) > 0) {
 			$sql = "INSERT INTO	ultimate".ULTIMATE_N."_content_to_category
 			               (contentID, categoryID)
 			        VALUES (?, ?)";
@@ -68,7 +68,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 			WCF::getDB()->beginTransaction();
 			foreach ($categoryIDs as $categoryID) {
 				$statement->executeUnbuffered(array(
-					$this->object->__get('contentID'),
+					$this->__get('contentID'),
 					$categoryID
 				));
 			}
@@ -99,7 +99,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 			        VALUES (?, ?)";
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute(array(
-				$this->object->__get('contentID'),
+				$this->__get('contentID'),
 				$categoryID
 			));
 		}

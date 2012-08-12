@@ -54,7 +54,7 @@ class ContentAction extends AbstractDatabaseObjectAction {
 		
 		// connect with userGroups
 		$groupIDs = (isset($this->parameters['groupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['groupIDs']) : array();
-		if (count($groupIDs)) {
+		if (!empty($groupIDs)) {
 			$contentEditor->addGroups($groupIDs);
 		}
 		
@@ -69,7 +69,7 @@ class ContentAction extends AbstractDatabaseObjectAction {
 			parent::update();
 		}
 		else {
-			if (!count($this->objects)) {
+			if (empty($this->objects)) {
 				$this->readObjects();
 			}
 		}
@@ -88,7 +88,7 @@ class ContentAction extends AbstractDatabaseObjectAction {
 				$contentEditor->removeFromCategories($removeCategories);
 			}
 			
-			if (count($groupIDs)) {
+			if (!empty($groupIDs)) {
 				$contentEditor->addGroups($groupIDs);
 			}
 		}

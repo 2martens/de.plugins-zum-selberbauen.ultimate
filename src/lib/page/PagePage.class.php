@@ -60,7 +60,7 @@ class PagePage extends AbstractPage {
 		$pagesToSlug = $this->loadCache();
 		/* @var $page \ultimate\data\page\Page */
 		$page = $pagesToSlug[$this->pageSlugs[0]];
-		if (count($this->pageSlugs > 1)) {
+		if (count($this->pageSlugs) > 1) {
 			$page = PageUtil::getRealPage($page, 1, $this->pageSlugs);
 		}
 		$this->page = $page;

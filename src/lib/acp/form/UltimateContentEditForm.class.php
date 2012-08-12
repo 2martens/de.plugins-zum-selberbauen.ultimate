@@ -282,7 +282,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 	public function assignVariables() {
 		parent::assignVariables();
 		
-		$useRequestData = (count($_POST)) ? true : false;
+		$useRequestData = (!empty($_POST)) ? true : false;
 		I18nHandler::getInstance()->assignVariables($useRequestData);
 		
 		WCF::getTPL()->assign(array(

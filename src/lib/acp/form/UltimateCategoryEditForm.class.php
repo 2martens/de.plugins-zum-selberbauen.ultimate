@@ -65,11 +65,11 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 	 * @see	\wcf\page\IPage::readData()
 	 */
 	public function readData() {
-		if (!count($_POST)) {
+		$this->categories = CategoryUtil::getAvailableCategories($this->categoryID);
+		if (empty($_POST)) {
 			$this->categoryTitle = $this->category->__get('categoryTitle');
 			$this->categorySlug = $this->category->__get('categorySlug');
 			$this->categoryDescription = $this->category->__get('categoryDescription');
-			$this->categories = CategoryUtil::getAvailableCategories($this->categoryID);
 			I18nHandler::getInstance()->setOptions('categoryTitle', PACKAGE_ID, $this->categoryTitle, 'ultimate.category.\d+.categoryTitle');
 			I18nHandler::getInstance()->setOptions('categoryDescription', PACKAGE_ID, $this->categoryDescription, 'ultimate.category.\d+.categoryDescription');
 		}
@@ -121,7 +121,7 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 	public function assignVariables() {
 		parent::assignVariables();
 		
-		$useRequestData = (count($_POST)) ? true : false;
+		$useRequestData = (!empty($_POST)) ? true : false;
 		I18nHandler::getInstance()->assignVariables($useRequestData);
 		
 		WCF::getTPL()->assign(array(

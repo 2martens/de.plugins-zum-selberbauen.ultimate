@@ -77,77 +77,79 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 	 * @see	\wcf\page\IPage::readData()
 	 */
 	public function readData() {
-		if (!count($_POST)) {
+		$this->contents = PageUtil::getAvailableContents($this->pageID);
+		$this->pages = PageUtil::getAvailablePages($this->pageID);
+		
+		// reading cache
+		$cacheName = 'usergroups';
+		$cacheBuilderClassName = '\wcf\system\cache\builder\UserGroupCacheBuilder';
+		$file = WCF_DIR.'cache/cache.'.$cacheName.'.php';
+		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
+		$this->groups = CacheHandler::getInstance()->get($cacheName, 'groups');
+			
+		/* @var $dateTime \DateTime */
+		$dateTime = $this->page->__get('publishDateObject');
+		if (!$dateTime->getTimestamp()) {
+			$dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
+			$dateTime->setTimezone(WCF::getUser()->getTimezone());
+		}
+		$date = WCF::getLanguage()->getDynamicVariable(
+			'ultimate.date.dateFormat',
+			array(
+				'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
+			)
+		);
+		$time = WCF::getLanguage()->get('wcf.date.timeFormat');
+		$format = str_replace(
+			'%time%',
+			$time,
+			str_replace(
+				'%date%',
+				$date,
+				WCF::getLanguage()->get('ultimate.date.dateTimeFormat')
+			)
+		);
+		$this->publishDate = $dateTime->format($format);
+		$this->publishDateTimestamp = $dateTime->getTimestamp();
+			
+		// get status data
+		$this->statusID = $this->page->__get('status');
+		$this->statusOptions = array(
+			0 => WCF::getLanguage()->get('wcf.acp.ultimate.status.draft'),
+			1 => WCF::getLanguage()->get('wcf.acp.ultimate.status.pendingReview'),
+		);
+			
+		// fill publish button with fitting language
+		$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.publish');
+		if ($this->statusID == 2) {
+			$this->statusOptions[2] = WCF::getLanguage()->get('wcf.acp.ultimate.status.scheduled');
+			$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.update');
+		} elseif ($this->statusID == 3) {
+			$this->statusOptions[3] = WCF::getLanguage()->get('wcf.acp.ultimate.status.published');
+			$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.update');
+		}
+			
+		// fill save button with fitting language
+		$saveButtonLangArray = array(
+			0 => WCF::getLanguage()->get('ultimate.button.saveAsDraft'),
+			1 => WCF::getLanguage()->get('ultimate.button.saveAsPending'),
+			2 => '',
+			3 => ''
+		);
+		$this->saveButtonLang = $saveButtonLangArray[$this->statusID];
+			
+		// get visibility data
+		$this->visibility = $this->page->__get('visibility');
+		$this->groupIDs = array_keys($this->page->__get('groups'));
+		
+		if (empty($_POST)) {
 			$this->contentID = $this->page->getContent();
 			$this->pageTitle = $this->page->__get('pageTitle');
 			$this->pageSlug = $this->page->__get('pageSlug');
 			$this->pageParent = $this->page->__get('pageParent');
 			$this->lastModified = $this->page->__get('lastModified');
-			$this->contents = PageUtil::getAvailableContents($this->pageID);
-			$this->pages = PageUtil::getAvailablePages($this->pageID);
+			
 			I18nHandler::getInstance()->setOptions('pageTitle', PACKAGE_ID, $this->pageTitle, 'ultimate.page.\d+.pageTitle');
-			
-			// reading cache
-			$cacheName = 'usergroups';
-			$cacheBuilderClassName = '\wcf\system\cache\builder\UserGroupCacheBuilder';
-			$file = WCF_DIR.'cache/cache.'.$cacheName.'.php';
-			CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-			$this->groups = CacheHandler::getInstance()->get($cacheName, 'groups');
-			
-			/* @var $dateTime \DateTime */
-			$dateTime = $this->page->__get('publishDateObject');
-			if (!$dateTime->getTimestamp()) {
-				$dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
-				$dateTime->setTimezone(WCF::getUser()->getTimezone());
-			}
-			$date = WCF::getLanguage()->getDynamicVariable(
-				'ultimate.date.dateFormat',
-				array(
-					'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
-				)
-			);
-			$time = WCF::getLanguage()->get('wcf.date.timeFormat');
-			$format = str_replace(
-				'%time%',
-				$time,
-				str_replace(
-					'%date%',
-					$date,
-					WCF::getLanguage()->get('ultimate.date.dateTimeFormat')
-				)
-			);
-			$this->publishDate = $dateTime->format($format);
-			$this->publishDateTimestamp = $dateTime->getTimestamp();
-			
-			// get status data
-			$this->statusID = $this->page->__get('status');
-			$this->statusOptions = array(
-				0 => WCF::getLanguage()->get('wcf.acp.ultimate.status.draft'),
-				1 => WCF::getLanguage()->get('wcf.acp.ultimate.status.pendingReview'),
-			);
-			
-			// fill publish button with fitting language
-			$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.publish');
-			if ($this->statusID == 2) {
-				$this->statusOptions[2] = WCF::getLanguage()->get('wcf.acp.ultimate.status.scheduled');
-				$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.update');
-			} elseif ($this->statusID == 3) {
-				$this->statusOptions[3] = WCF::getLanguage()->get('wcf.acp.ultimate.status.published');
-				$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.update');
-			}
-			
-			// fill save button with fitting language
-			$saveButtonLangArray = array(
-				0 => WCF::getLanguage()->get('ultimate.button.saveAsDraft'),
-				1 => WCF::getLanguage()->get('ultimate.button.saveAsPending'),
-				2 => '',
-				3 => ''
-			);
-			$this->saveButtonLang = $saveButtonLangArray[$this->statusID];
-			
-			// get visibility data
-			$this->visibility = $this->page->__get('visibility');
-			$this->groupIDs = array_keys($this->page->__get('groups'));
 		}
 		AbstractForm::readData();
 	}
@@ -209,7 +211,7 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 	public function assignVariables() {
 		parent::assignVariables();
 		
-		$useRequestData = (count($_POST)) ? true : false;
+		$useRequestData = (!empty($_POST)) ? true : false;
 		I18nHandler::getInstance()->assignVariables($useRequestData);
 		
 		WCF::getTPL()->assign(array(

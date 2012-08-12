@@ -405,7 +405,7 @@ class UltimatePageAddForm extends ACPForm {
 		// validate groupIDs, only important for protected
 		if ($this->visibility != 'protected') return;
 		
-		if (!count($this->groupIDs)) {
+		if (empty($this->groupIDs)) {
 			throw new UserInputException('groupIDs', 'notSelected');
 		}
 		

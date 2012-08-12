@@ -320,7 +320,7 @@ class UltimateContentAddForm extends MessageForm {
 				WCF::getDB()->commitTransaction();
 			}
 		}
-		if (count($updateEntries)) {
+		if (!empty($updateEntries)) {
 			$contentEditor = new ContentEditor($returnValues['returnValues']);
 			$contentEditor->update($updateEntries);
 		}
@@ -508,7 +508,7 @@ class UltimateContentAddForm extends MessageForm {
 		// validate groupIDs, only important for protected
 		if ($this->visibility != 'protected') return;
 		
-		if (!count($this->groupIDs)) {
+		if (empty($this->groupIDs)) {
 			throw new UserInputException('groupIDs', 'notSelected');
 		}
 		

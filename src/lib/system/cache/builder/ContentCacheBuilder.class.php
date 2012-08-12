@@ -32,7 +32,7 @@ class ContentCacheBuilder implements ICacheBuilder {
 		
 		$contentList->readObjects();
 		$contents = $contentList->getObjects();
-		if (!count($contents)) return $data;
+		if (empty($contents)) return $data;
 		
 		foreach ($contents as $contentID => &$content) {
 			/* @var $content \ultimate\data\content\Content */

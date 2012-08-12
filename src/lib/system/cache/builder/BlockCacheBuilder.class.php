@@ -29,7 +29,7 @@ class UltimateBlockCacheBuilder implements ICacheBuilder {
 		
 		$blockList->readObjects();
 		$blocks = $blockList->getObjects();
-		if (!count($blocks)) return $data;
+		if (empty($blocks)) return $data;
 		
 		$data['blocks'] = $blocks;
 		$data['blockIDs'] = array_keys($blocks);

@@ -55,7 +55,7 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
 	 * @see	\wcf\page\IPage::readData()
 	 */
 	public function readData() {
-		if (!count($_POST)) {
+		
 			// reading object fields
 			$this->menuName = $this->menu->__get('menuName');
 			$this->menuItemNodeList = new MenuItemNodeList($this->menuID, 0, true);
@@ -93,7 +93,7 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
 					break;
 				}
 			}
-		}
+		
 		AbstractForm::readData();
 	}
 	

@@ -35,7 +35,7 @@ class PageCacheBuilder implements ICacheBuilder {
 		
 		$pageList->readObjects();
 		$pages = $pageList->getObjects();
-		if (!count($pages)) return $data;
+		if (empty($pages)) return $data;
 		
 		foreach ($pages as $pageID => $page) {
 			/* @var $page \ultimate\data\page\Page */
@@ -71,7 +71,7 @@ class PageCacheBuilder implements ICacheBuilder {
 	 */
 	protected function buildNestedPages($pageID, \ultimate\data\page\Page $page) {
 		$childPages = array();
-		if (count($page->__get('childPages'))) {
+		if (!empty($page->__get('childPages'))) {
 			foreach ($page->__get('childPages') as $__pageID => $__page) {
 				$childPages[$__pageID] = array(
 					0 => $__page,
