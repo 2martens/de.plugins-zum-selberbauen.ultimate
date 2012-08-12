@@ -75,7 +75,7 @@
 								{/if}
 								
 								{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteMenu') && $menu->menuID > 1}
-									<a onclick="return confirm('{lang}wcf.acp.ultimate.menu.delete.sure{/lang}')" href="{link controller='UltimateMenuDelete' id=$menu->menuID}url={@$encodedURL}&t={@SECURITY_TOKEN}{/link}"><img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.menu.delete{/lang}" class="icon16 jsTooltip" /></a>
+									<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.menu.delete{/lang}" class="icon16 jsTooltip jsDeleteButton" data-object-id="{@$menu->menuID}" data-confirm-message="{lang}wcf.acp.ultimate.menu.delete.sure{/lang}" />
 								{else}
 									<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.menu.delete{/lang}" class="icon16 disabled" />
 								{/if}

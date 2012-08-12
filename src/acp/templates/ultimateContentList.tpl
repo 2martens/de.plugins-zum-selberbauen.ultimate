@@ -82,7 +82,7 @@
 								{/if}
 								
 								{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteContent')}
-									<a onclick="return confirm('{lang}wcf.acp.ultimate.content.delete.sure{/lang}')" href="{link controller='UltimateContentDelete' id=$content->contentID}url={@$encodedURL}&t={@SECURITY_TOKEN}{/link}"><img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.content.delete{/lang}" class="icon16 jsTooltip" /></a>
+									<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.content.delete{/lang}" class="icon16 jsTooltip jsDeleteButton" data-object-id="{@$content->contentID}" data-confirm-message="{lang}wcf.acp.ultimate.content.delete.sure{/lang}" />
 								{else}
 									<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.content.delete{/lang}" class="icon16 disabled" />
 								{/if}

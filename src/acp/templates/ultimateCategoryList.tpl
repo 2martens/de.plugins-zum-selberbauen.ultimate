@@ -78,7 +78,7 @@
 								{/if}
 								
 								{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteCategory') && $category->categoryID > 1}
-									<a onclick="return confirm('{lang}wcf.acp.ultimate.category.delete.sure{/lang}')" href="{link controller='UltimateCategoryDelete' id=$category->categoryID}url={@$encodedURL}&t={@SECURITY_TOKEN}{/link}"><img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.category.delete{/lang}" class="icon16 jsTooltip" /></a>
+									<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.category.delete{/lang}" class="icon16 jsTooltip jsDeleteButton" data-object-id="{@$category->categoryID}" data-confirm-message="{lang}wcf.acp.ultimate.category.delete.sure{/lang}" />
 								{else}
 									<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.category.delete{/lang}" class="icon16 disabled" />
 								{/if}
