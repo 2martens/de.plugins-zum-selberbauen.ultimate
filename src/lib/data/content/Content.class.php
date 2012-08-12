@@ -1,9 +1,9 @@
 <?php
 namespace ultimate\data\content;
-use ultimate\data\category\Category;
-use ultimate\data\AbstractUltimateDatabaseObject;
-use wcf\data\user\group\UserGroup;
-use wcf\data\user\User;
+use ultimate\data\AbstractUltimateProcessibleDatabaseObject;
+use wcf\data\object\type\ObjectTypeCache;
+use wcf\system\tagging\ITaggable;
+use wcf\system\tagging\ITagged;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
 
@@ -17,7 +17,7 @@ use wcf\util\DateUtil;
  * @subpackage	data.content
  * @category	Ultimate CMS
  */
-class Content extends AbstractUltimateDatabaseObject {
+class Content extends AbstractUltimateProcessibleDatabaseObject implements ITaggable {
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
 	 */
@@ -32,6 +32,11 @@ class Content extends AbstractUltimateDatabaseObject {
 	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexName
 	 */
 	protected static $databaseTableIndexName = 'contentID';
+	
+	/**
+	 * @see	\wcf\data\ProcessibleDatabaseObject::$processorInterface
+	 */
+	protected static $processorInterface = '\wcf\data\IDatabaseObjectProcessor';
 	
 	/**
 	 * Contains the content to category database table name.
@@ -93,6 +98,14 @@ class Content extends AbstractUltimateDatabaseObject {
 	 */
 	public function __toString() {
 		return WCF::getLanguage()->get($this->contentTitle);
+	}
+	
+	/**
+	 * @see \wcf\system\tagging\ITaggable::getObjectTypeID()
+	 */
+	public function getObjectTypeID() {
+		$objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.tagging.taggableObject', 'de.plugins-zum-selberbauen.ultimate.contentTaggable');
+		return $objectType->__get('objectTypeID');
 	}
 	
 	/**

@@ -26,5 +26,11 @@
 			<definitionname>com.woltlab.wcf.clipboardItem</definitionname>
 			<listclassname>ultimate\data\page\PageList</listclassname>
 		</type>
+		
+		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.contentTaggable</name>
+			<definitionname>com.woltlab.wcf.tagging.taggableObject</definitionname>
+			<listclassname>ultimate\data\content\ContentList</listclassname>
+		</type>
 	</import>
 </data>

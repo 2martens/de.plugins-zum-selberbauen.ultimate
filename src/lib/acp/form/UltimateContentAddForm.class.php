@@ -3,6 +3,8 @@ namespace ultimate\acp\form;
 use ultimate\data\content\ContentAction;
 use ultimate\data\content\ContentEditor;
 use ultimate\util\ContentUtil;
+use wcf\data\object\type\ObjectTypeCache;
+use wcf\data\tag\Tag;
 use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
 use wcf\system\bbcode\URLParser;
@@ -10,6 +12,7 @@ use wcf\system\cache\CacheHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\menu\acp\ACPMenu;
+use wcf\system\tagging\TagEngine;
 use wcf\system\Regex;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
@@ -74,6 +77,18 @@ class UltimateContentAddForm extends MessageForm {
 	 * @var	\ultimate\data\category\Category[]
 	 */
 	public $categories = array();
+	
+	/**
+	 * Contains all tags.
+	 * @var \wcf\data\tag\Tag[]
+	 */
+	public $availableTags = array();
+	
+	/**
+	 * Contains all chosen tags.
+	 * @var string[]
+	 */
+	public $tags = array();
 	   
 	/**
 	 * Contains the maximal length of the text.
@@ -149,6 +164,7 @@ class UltimateContentAddForm extends MessageForm {
 		
 		I18nHandler::getInstance()->register('subject');
 		I18nHandler::getInstance()->register('description');
+		I18nHandler::getInstance()->register('tags');
 		I18nHandler::getInstance()->register('text');
 	}
 	
@@ -167,6 +183,38 @@ class UltimateContentAddForm extends MessageForm {
 		$file = WCF_DIR.'cache/cache.'.$cacheName.'.php';
 		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
 		$this->groups = CacheHandler::getInstance()->get($cacheName, 'groups');
+		
+		// read tags
+		$cacheName = 'tag-'.PACKAGE_ID;
+		$cacheBuilderClassName = '\wcf\system\cache\builder\TagCloudCacheBuilder';
+		$file = WCF_DIR.'cache/cache.'.$cacheName.'.php';
+		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
+		$tags = CacheHandler::getInstance()->get($cacheName);
+		
+		$languages = WCF::getLanguage()->getLanguages();
+		$sql = 'SELECT tagID
+		        FROM   wcf'.WCF_N.'_tag_to_object
+		        WHERE  objectTypeID = ?';
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array(
+			ObjectTypeCache::getInstance()->getObjectTypeByName('de.plugins-zum-selberbauen.ultimate.contentTaggable')->__get('objectTypeID'),
+		));
+		$tagIDs = array();
+		while ($row = $statement->fetchArray()) {
+			$tagIDs[] = $row['tagID'];
+		}
+		
+		/* @var $language \wcf\data\language\Language */
+		/* @var $tag \wcf\data\tag\TagCloudTag */
+		foreach ($languages as $languageID => $language) {
+			$this->availableTags[$languageID] = array();
+			
+			foreach ($tags as $tagName => $tag) {
+				if ($tag->__get('languageID') != $languageID) continue;
+				if (!in_array($tag->__get('tagID'), $tagIDs)) continue;
+				$this->availableTags[$languageID] = $tag;
+			}
+		}
 		
 		// fill status options
 		$this->statusOptions = array(
@@ -228,6 +276,7 @@ class UltimateContentAddForm extends MessageForm {
 		$this->validateDescription();
 		$this->validateSlug();
 		$this->validateCategories();
+		$this->validateTags();
 		$this->validateText();
 		// multilingualism
 		$this->validateContentLanguage();
@@ -324,6 +373,12 @@ class UltimateContentAddForm extends MessageForm {
 			$contentEditor = new ContentEditor($returnValues['returnValues']);
 			$contentEditor->update($updateEntries);
 		}
+		
+		// save tags
+		foreach ($this->tags as $languageID => $tags) {
+			TagEngine::getInstance()->addObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $contentID, $tags, $languageID);
+		}
+		
 		$this->saved();
 		
 		WCF::getTPL()->assign('success', true);
@@ -350,6 +405,8 @@ class UltimateContentAddForm extends MessageForm {
 			'categoryIDs' => $this->categoryIDs,
 			'categories' => $this->categories,
 			'languageID' => ($this->languageID ? $this->languageID : 0),
+			'availableTags' => $this->availableTags,
+			'tags' => $tags,
 			'groups' => $this->groups,
 			'groupIDs' => $this->groupIDs,
 			'statusOptions' => $this->statusOptions,
@@ -476,6 +533,21 @@ class UltimateContentAddForm extends MessageForm {
 			if (in_array($categoryID, $categoryIDs)) continue;
 			throw new UserInputException('category', 'invalidIDs');
 			break;
+		}
+	}
+	
+	/**
+	 * Validates the tags.
+	 * 
+	 * @throws \wcf\system\exception\UserInputException
+	 */
+	protected function validateTags() {
+		if (!I18nHandler::getInstance()->validateValue('tags')) {
+			throw new UserInputException('tags');
+		}
+		$tagValues = I18nHandler::getInstance()->getValues('tags');
+		foreach ($tagValues as $languageID => $tags) {
+			$this->tags[$languageID] = Tag::splitString($tags);
 		}
 	}
 	

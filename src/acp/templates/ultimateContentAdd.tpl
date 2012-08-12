@@ -103,6 +103,66 @@
 					{/if}
 				</dd>
 			</dl>
+			<dl {if $errorField == 'tags'} class="wcf-formError"{/if}>
+				<dt><label for="tags">{lang}wcf.acp.ultimate.content.tags{/lang}</label></dt>
+				<dd>
+					<script type="text/javascript">
+					/* <![CDATA[ */
+						$(function() {
+							var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
+							var $optionValues = { {implode from=$tags key=languageID item=value}'{@$languageID}': "{$value}"{/implode} };
+							new WCF.MultipleLanguageInput('tags', true, $optionValues, $availableLanguages);
+							var $availableTags = {};
+							{foreach from=$availableLanguages key=languageID item=languageName}
+								$availableTags[{$languageID}] = [ {implode from=$availableTags[$languageID] item=tag}"{@$tag->getTitle()}"{/implode} ];
+							{/foreach}
+							function split( val ) {
+								return val.split( /,\s*/ );
+							}
+							function extractLast( term ) {
+								return split( term ).pop();
+							}
+							$('#tags').bind( "keydown", function( event ) {
+								if ( event.keyCode === $.ui.keyCode.TAB &&
+									$( this ).data( "autocomplete" ).menu.active ) {
+									event.preventDefault();
+								}
+							})
+							.autocomplete({
+								minLength: 1,
+								source: function( request, response ) {
+									// delegate back to autocomplete, but extract the last term
+									var $currentLanguageID = $('#wcf2 > .dropdownMenu > .active').data('languageID');
+									response( $.ui.autocomplete.filter(
+										$availableTags[$currentLanguageID], extractLast( request.term ) ) );
+								},
+								focus: function() {
+									// prevent value inserted on focus
+									return false;
+								},
+								select: function( event, ui ) {
+									var terms = split( this.value );
+									// remove the current input
+									terms.pop();
+									// add the selected item
+									terms.push( ui.item.value );
+									// add placeholder to get the comma-and-space at the end
+									terms.push( "" );
+									this.value = terms.join( ", " );
+									return false;
+								}
+							});
+						});
+					/* ]]> */
+					</script>
+					<input type="text" name="tags" id="tags" class="long" value="{@$tags[$__wcf->getLanguage()->getLanguageID()]}" />
+					{if $errorField == 'tags'}
+						<small class="wcf-innerError">
+							{lang}wcf.acp.ultimate.content.tags.error.{@$errorType}{/lang}
+						</small>
+					{/if}
+				</dd>
+			</dl>
 			
 			<dl{if $errorField == 'text'} class="wcf-formError"{/if}>
 				<dt><label for="text">{lang}wcf.acp.ultimate.content.text{/lang}</label></dt>

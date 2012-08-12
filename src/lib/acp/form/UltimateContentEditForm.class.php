@@ -1,5 +1,9 @@
 <?php
 namespace ultimate\acp\form;
+use wcf\data\tag\Tag;
+
+use wcf\system\tagging\TagEngine;
+
 use ultimate\acp\form\UltimateContentAddForm;
 use ultimate\data\content\Content;
 use ultimate\data\content\ContentAction;
@@ -80,19 +84,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 	 * @see	\wcf\page\IPage::readData()
 	 */
 	public function readData() {
-		
-			// reading object fields
-			$this->subject = $this->content->__get('contentTitle');
-			$this->description = $this->content->__get('contentDescription');
-			$this->slug = $this->content->__get('contentSlug');
-			$this->text = $this->content->__get('contentText');
-			$this->lastModified = $this->content->__get('lastModified');
-			$this->categoryIDs = array_keys($this->content->getCategories());
-			I18nHandler::getInstance()->setOptions('subject', PACKAGE_ID, $this->subject, 'ultimate.content.\d+.contentTitle');
-			I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->description, 'ultimate.content.\d+.contentDescription');
-			I18nHandler::getInstance()->setOptions('text', PACKAGE_ID, $this->text, 'ultimate.content.\d+.contentText');
-			
-			// reading cache
+					// reading cache
 			$cacheName = 'category';
 			$cacheBuilderClassName = '\ultimate\system\cache\builder\CategoryCacheBuilder';
 			$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
@@ -104,6 +96,38 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 			$file = WCF_DIR.'cache/cache.'.$cacheName.'.php';
 			CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
 			$this->groups = CacheHandler::getInstance()->get($cacheName, 'groups');
+			
+			// read tags
+			$cacheName = 'tag-'.PACKAGE_ID;
+			$cacheBuilderClassName = '\wcf\system\cache\builder\TagCloudCacheBuilder';
+			$file = WCF_DIR.'cache/cache.'.$cacheName.'.php';
+			CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
+			$tags = CacheHandler::getInstance()->get($cacheName);
+			
+			$languages = WCF::getLanguage()->getLanguages();
+			$sql = 'SELECT tagID
+		        FROM   wcf'.WCF_N.'_tag_to_object
+		        WHERE  objectTypeID = ?';
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array(
+				ObjectTypeCache::getInstance()->getObjectTypeByName('de.plugins-zum-selberbauen.ultimate.contentTaggable')->__get('objectTypeID'),
+			));
+			$tagIDs = array();
+			while ($row = $statement->fetchArray()) {
+				$tagIDs[] = $row['tagID'];
+			}
+			
+			/* @var $language \wcf\data\language\Language */
+			/* @var $tag \wcf\data\tag\TagCloudTag */
+			foreach ($languages as $languageID => $language) {
+				$this->availableTags[$languageID] = array();
+				$this->tags[$languageID] = Tag::buildString(TagEngine::getInstance()->getObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->content->__get('contentID'), $languageID));	
+				foreach ($tags as $tagName => $tag) {
+					if ($tag->__get('languageID') != $languageID) continue;
+					if (!in_array($tag->__get('tagID'), $tagIDs)) continue;
+					$this->availableTags[$languageID] = $tag;
+				}
+			}
 			
 			/* @var $dateTime \DateTime */
 			$dateTime = $this->content->__get('publishDateObject');
@@ -159,7 +183,19 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 			// get visibility data
 			$this->visibility = $this->content->__get('visibility');
 			$this->groupIDs = array_keys($this->content->__get('groups'));
-		
+			
+			if (!empty($_POST)) {
+				// reading object fields
+				$this->subject = $this->content->__get('contentTitle');
+				$this->description = $this->content->__get('contentDescription');
+				$this->slug = $this->content->__get('contentSlug');
+				$this->text = $this->content->__get('contentText');
+				$this->lastModified = $this->content->__get('lastModified');
+				$this->categoryIDs = array_keys($this->content->getCategories());
+				I18nHandler::getInstance()->setOptions('subject', PACKAGE_ID, $this->subject, 'ultimate.content.\d+.contentTitle');
+				I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->description, 'ultimate.content.\d+.contentDescription');
+				I18nHandler::getInstance()->setOptions('text', PACKAGE_ID, $this->text, 'ultimate.content.\d+.contentText');
+			}
 		MessageForm::readData();
 	}
 	
@@ -250,6 +286,11 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		
 		$action = new ContentAction(array($this->contentID), 'update', $parameters);
 		$action->executeAction();
+		
+		// save tags
+		foreach ($this->tags as $languageID => $tags) {
+			TagEngine::getInstance()->addObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->content->__get('contentID', $tags, $languageID));
+		}
 		$this->saved();
 		
 		$date = WCF::getLanguage()->getDynamicVariable(
