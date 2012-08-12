@@ -93,8 +93,8 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledDatabaseObje
 	 */
 	public function getGroups() {
 		$sql = 'SELECT	groupID
-				FROM	  ultimate'.ULTIMATE_N.'_user_group_to_page
-				WHERE	 pageID = ?';
+		        FROM    ultimate'.ULTIMATE_N.'_user_group_to_page
+		        WHERE   pageID = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->pageID));
 		

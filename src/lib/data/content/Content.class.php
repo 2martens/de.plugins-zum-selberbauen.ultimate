@@ -2,9 +2,9 @@
 namespace ultimate\data\content;
 use ultimate\data\category\Category;
 use ultimate\data\AbstractUltimateDatabaseObject;
-use ultimate\system\UltimateCore;
 use wcf\data\user\group\UserGroup;
 use wcf\data\user\User;
+use wcf\system\WCF;
 use wcf\util\DateUtil;
 
 /**
@@ -54,8 +54,7 @@ class Content extends AbstractUltimateDatabaseObject {
 		$sql = 'SELECT categoryID
 		        FROM ultimate'.ULTIMATE_N.'_'.$this->contentCategoryTable.'
 		        WHERE contentID = ?';
-		/* @var $statement \wcf\system\database\statement\PreparedStatement */
-		$statement = UltimateCore::getDB()->prepareStatement($sql);
+		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->contentID));
 		$categories = array();
 		while ($row = $statement->fetchArray()) {
@@ -73,7 +72,7 @@ class Content extends AbstractUltimateDatabaseObject {
 		$sql = 'SELECT	groupID
 		        FROM    ultimate'.ULTIMATE_N.'_user_group_to_content
 		        WHERE   contentID = ?';
-		$statement = UltimateCore::getDB()->prepareStatement($sql);
+		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->contentID));
 		
 		$groups = array();
@@ -89,7 +88,7 @@ class Content extends AbstractUltimateDatabaseObject {
 	 * @return	string
 	 */
 	public function __toString() {
-		return UltimateCore::getLanguage()->get($this->contentTitle);
+		return WCF::getLanguage()->get($this->contentTitle);
 	}
 	
 	/**
@@ -105,6 +104,7 @@ class Content extends AbstractUltimateDatabaseObject {
 		$data['publishDate'] = intval($data['publishDate']);
 		$data['publishDateObject'] = DateUtil::getDateTimeByTimestamp($data['publishDate']);
 		$data['lastModified'] = intval($data['lastModified']);
+		$data['status'] = intval($data['status']);
 		parent::handleData($data);
 		$this->data['groups'] = $this->getGroups();
 	}
