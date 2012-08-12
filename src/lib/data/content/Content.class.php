@@ -51,14 +51,16 @@ class Content extends AbstractUltimateDatabaseObject {
 	 * @return	\ultimate\data\category\Category[]
 	 */
 	public function getCategories() {
-		$sql = 'SELECT categoryID
-		        FROM ultimate'.ULTIMATE_N.'_'.$this->contentCategoryTable.'
-		        WHERE contentID = ?';
+		$sql = 'SELECT    category.*
+		        FROM      ultimate'.ULTIMATE_N.'_'.$this->contentCategoryTable.' contentToCategory
+		        LEFT JOIN ultimate'.ULTIMATE_N.'_category category
+		        ON        (category.categoryID = contentToCategory.categoryID)
+		        WHERE     contentToCategory.contentID = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->contentID));
 		$categories = array();
-		while ($row = $statement->fetchArray()) {
-			$categories[$row['categoryID']] = new Category($row['categoryID']);
+		while ($category = $statement->fetchObject('\ultimate\data\category\Category')) {
+			$categories[$category->__get('categoryID')] = $category;
 		}
 		return $categories;
 	}
@@ -69,15 +71,17 @@ class Content extends AbstractUltimateDatabaseObject {
 	 * @return	\wcf\data\user\group\UserGroup[]
 	 */
 	public function getGroups() {
-		$sql = 'SELECT	groupID
-		        FROM    ultimate'.ULTIMATE_N.'_user_group_to_content
-		        WHERE   contentID = ?';
+		$sql = 'SELECT	  group.*
+		        FROM      ultimate'.ULTIMATE_N.'_user_group_to_content groupToContent
+		        LEFT JOIN wcf'.WCF_N.'_user_group group
+		        ON        (group.groupID = groupToContent.groupID)
+		        WHERE     groupToContent.contentID = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->contentID));
 		
 		$groups = array();
-		while ($row = $statement->fetchArray()) {
-			$groups[$row['groupID']] = new UserGroup($row['groupID']);
+		while ($group = $statement->fetchObject('\wcf\data\user\group\UserGroup')) {
+			$groups[$group->groupID] = $group;
 		}
 		return $groups;
 	}

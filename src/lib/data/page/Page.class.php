@@ -46,14 +46,16 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledDatabaseObje
 	 * @return	\ultimate\data\content\Content
 	 */
 	public function getContent() {
-		$sql = 'SELECT	contentID
-		        FROM    ultimate'.ULTIMATE_N.'_'.$this->contentPageTable.'
-		        WHERE   pageID = ?';
+		$sql = 'SELECT	  content.*
+		        FROM      ultimate'.ULTIMATE_N.'_'.$this->contentPageTable.' contentToPage
+		        LEFT JOIN ultimate'.ULTIMATE_N.'_content content
+		        ON        (content.contentID = contentToPage.contentID)
+		        WHERE     contentToPage.pageID = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->pageID));
 		
-		$row = $statement->fetchArray();
-		return new Content($row['contentID']);
+		$content = $statement->fetchObject('\ultimate\data\content\Content');
+		return $content;
 	}
 	
 	/**
@@ -73,15 +75,15 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledDatabaseObje
 	 * @return	\ultimate\data\page\Page[]
 	 */
 	public function getChildPages() {
-		$sql = 'SELECT	pageID
+		$sql = 'SELECT	*
 		        FROM    '.self::getDatabaseTableName().'
 		        WHERE   pageParent = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->pageID));
 		
 		$childPages = array();
-		while ($row = $statement->fetchArray()) {
-			$childPages[$row['pageID']] = new Page($row['pageID']);
+		while ($page = $statement->fetchObject(get_class($this))) {
+			$childPages[$page->pageID] = $page;
 		}
 		return $childPages;
 	}
@@ -92,15 +94,17 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledDatabaseObje
 	 * @return	\wcf\data\user\group\UserGroup[]
 	 */
 	public function getGroups() {
-		$sql = 'SELECT	groupID
-		        FROM    ultimate'.ULTIMATE_N.'_user_group_to_page
-		        WHERE   pageID = ?';
+		$sql = 'SELECT	  group.*
+		        FROM      ultimate'.ULTIMATE_N.'_user_group_to_page groupToPage
+		        LEFT JOIN wcf'.WCF_N.'_user_group group
+		        ON        (group.groupID = groupToPage.groupID)
+		        WHERE     groupToPage.pageID = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->pageID));
 		
 		$groups = array();
-		while ($row = $statement->fetchArray()) {
-			$groups[$row['groupID']] = new UserGroup($row['groupID']);
+		while ($group = $statement->fetchObject('\wcf\data\user\group\UserGroup')) {
+			$groups[$group->__get('groupID')] = $group;
 		}
 		return $groups;
 	}

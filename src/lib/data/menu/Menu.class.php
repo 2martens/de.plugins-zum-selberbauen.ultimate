@@ -1,7 +1,7 @@
 <?php
 namespace ultimate\data\menu;
 use ultimate\data\AbstractUltimateDatabaseObject;
-use ultimate\system\UltimateCore;
+use wcf\system\WCF;
 
 /**
  * Represents a menu entry.
@@ -35,7 +35,7 @@ class Menu extends AbstractUltimateDatabaseObject {
 	 * @return	string
 	 */
 	public function __toString() {
-		return UltimateCore::getLanguage()->get($this->menuName);
+		return WCF::getLanguage()->get($this->menuName);
 	}
 	
 	/**

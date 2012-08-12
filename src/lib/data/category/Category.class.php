@@ -55,14 +55,16 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledDatabase
 	 * @return	\ultimate\data\content\Content[]
 	 */
 	public function getContents() {
-		$sql = 'SELECT contentID
-		        FROM   ultimate'.ULTIMATE_N.'_'.$this->contentCategoryTable.'
-		        WHERE  categoryID = ?';
+		$sql = 'SELECT    content.*
+		        FROM      ultimate'.ULTIMATE_N.'_'.$this->contentCategoryTable.' contentToCategory
+		        LEFT JOIN ultimate'.ULTIMATE_N.'_content content
+		        ON        (content.contentID = contentToCategory.contentID)
+		        WHERE     contentToCategory.categoryID = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->categoryID));
 		$contents = array();
-		while ($row = $statement->fetchArray()) {
-			$contents[$row['contentID']] = new Content($row['contentID']);
+		while ($content = $statement->fetchObject('\ultimate\data\content\Content')) {
+			$contents[$content->__get('contentID')] = $content;
 		}
 		return $contents;
 	}
@@ -84,16 +86,15 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledDatabase
 	 * @return	\ultimate\data\category\Category[]
 	 */
 	public function getChildCategories() {
-		$sql = 'SELECT categoryID
+		$sql = 'SELECT *
 		        FROM   ultimate'.ULTIMATE_N.'_'.self::$databaseTableName.'
 		        WHERE  categoryParent = ?';
-		/* @var $statement \wcf\system\database\statement\PreparedStatement */
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->categoryID));
 		$categories = array();
-		while ($row = $statement->fetchArray()) {
-			$categories[$row['categoryID']] = new Category($row['categoryID']);
-			$categories[$row['categoryID']]->childCategories = $categories[$row['categoryID']]->getChildCategories();
+		while ($category = $statement->fetchObject(get_class($this))) {
+			$categories[$category->categoryID] = $category;
+			$categories[$category->categoryID]->childCategories = $category->getChildCategories();
 		}
 		return $categories;
 	}

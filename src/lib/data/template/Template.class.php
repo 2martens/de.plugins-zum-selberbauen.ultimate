@@ -36,14 +36,16 @@ class Template extends AbstractUltimateDatabaseObject {
 	 * @return	\wcf\data\ultimate\block\Block[]
 	 */
 	public function getBlocks() {
-		$sql = 'SELECT blockID
-		        FROM   ultimate'.ULTIMATE_N.'_block_to_template
-		        WHERE  templateID = ?';
+		$sql = 'SELECT    block.*
+		        FROM      ultimate'.ULTIMATE_N.'_block_to_template blockToTemplate
+		        LEFT JOIN ultimate'.ULTIMATE_N.'_block block
+		        ON        (block.blockID = blockToTemplate.blockID)
+		        WHERE     blockToTemplate.templateID = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->templateID));
 		$blocks = array();
-		while ($row = $statement->fetchArray()) {
-			$blocks[$row['blockID']] = new Block($row['blockID']);
+		while ($block = $statement->fetchObject('\ultimate\data\block\Block')) {
+			$blocks[$block->__get('blockID')] = $block;
 		}
 		return $blocks;
 	}

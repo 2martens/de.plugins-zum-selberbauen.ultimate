@@ -64,7 +64,7 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 	 * @return	\ultimate\data\menu\item\MenuItem[]
 	 */
 	public function getChildItems() {
-		$sql = 'SELECT	menuItemID, menuItemName
+		$sql = 'SELECT	*
 		        FROM    '.self::getDatabaseTableName().'
 		        WHERE   menuItemParent = ?
 		        AND     menuID         = ?';
@@ -72,8 +72,8 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 		$statement->execute(array($this->menuItemName, $this->menuID));
 		
 		$childItems = array();
-		while ($row = $statement->fetchArray()) {
-			$childItems[$row['menuItemID']] = new MenuItem($row['menuItemID']);
+		while ($menuItem = $statement->fetchObject(get_class($this))) {
+			$childItems[$menuItem->menuItemID] = $menuItem;
 		}
 		return $childItems;
 	}
