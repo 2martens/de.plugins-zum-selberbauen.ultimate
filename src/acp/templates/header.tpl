@@ -32,8 +32,12 @@
 	{event name='javascriptInclude'}
 	
 	<!-- Stylesheets -->
-	<link rel="stylesheet/less" type="text/css" href="{@$__wcf->getPath('ultimate')}style/ultimate.less" />
 	<link rel="stylesheet/less" type="text/css" href="{@$__wcf->getPath()}style/bootstrap.less" />
+	<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}acp/style/setup/WCFSetup.css" />
+	<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/3rdParty/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/ultimateCore.css" />
+	<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath('ultimate')}style/ultimate.css" />
+	
 	<script type="text/javascript">
 		//<![CDATA[
 		var less = { env: 'development' };
@@ -92,11 +96,13 @@
 				'ultimate.button.schedule': '{lang}ultimate.button.schedule{/lang}',
 				'ultimate.button.publish': '{lang}ultimate.button.publish{/lang}',
 				'ultimate.button.update': '{lang}ultimate.button.update{/lang}'
+				{event name='javascriptLanguageImport'}
 			});
 			WCF.Icon.addObject({
 				'wcf.icon.closed': '{@$__wcf->getPath()}icon/arrowRightInverse.svg',
 				'wcf.icon.loading': '{@$__wcf->getPath()}icon/spinner.svg',
 				'wcf.icon.opened': '{@$__wcf->getPath()}icon/arrowDownInverse.svg'
+				{event name='javascriptIconImport'}
 			});
 			new WCF.Date.Time();
 			new WCF.Effect.SmoothScroll();
