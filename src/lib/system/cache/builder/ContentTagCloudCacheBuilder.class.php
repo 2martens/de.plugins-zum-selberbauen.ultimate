@@ -14,7 +14,6 @@ use wcf\system\cache\builder\TagCloudCacheBuilder;
  * @category	Ultimate CMS
  */
 class ContentTagCloudCacheBuilder extends TagCloudCacheBuilder {
-	
 	/**
 	 * @see \wcf\system\cache\builder\ICacheBuilder::getData()
 	 */

@@ -4,6 +4,7 @@ use ultimate\data\AbstractUltimateProcessibleDatabaseObject;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\tagging\ITaggable;
 use wcf\system\tagging\ITagged;
+use wcf\system\tagging\TagEngine;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
 
@@ -92,6 +93,25 @@ class Content extends AbstractUltimateProcessibleDatabaseObject implements ITagg
 	}
 	
 	/**
+	 * Returns the tags of this content.
+	 * 
+	 * @return array[]
+	 */
+	public function getTags() {
+		$languages = WCF::getLanguage()->getLanguages();
+		$tags = array();
+		foreach ($languages as $languageID => $language) {
+			/* @var $language \wcf\data\language\Language */
+			$tags[$languageID] = TagEngine::getInstance()->getObjectTags(
+				'de.plugins-zum-selberbauen.ultimate.contentTaggable',
+				$this->contentID,
+				$languageID
+			);
+		}
+		return $tags;
+	}
+	
+	/**
 	 * Returns the title of this content.
 	 * 
 	 * @return	string
@@ -123,6 +143,7 @@ class Content extends AbstractUltimateProcessibleDatabaseObject implements ITagg
 		$data['lastModified'] = intval($data['lastModified']);
 		$data['status'] = intval($data['status']);
 		parent::handleData($data);
+		$this->data['tags'] = $this->getTags();
 		$this->data['groups'] = $this->getGroups();
 	}
 }
