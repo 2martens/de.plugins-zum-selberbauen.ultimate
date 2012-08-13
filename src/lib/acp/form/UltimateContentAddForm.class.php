@@ -185,24 +185,13 @@ class UltimateContentAddForm extends MessageForm {
 		$this->groups = CacheHandler::getInstance()->get($cacheName, 'groups');
 		
 		// read tags
-		$cacheName = 'tag-'.PACKAGE_ID;
-		$cacheBuilderClassName = '\wcf\system\cache\builder\TagCloudCacheBuilder';
-		$file = WCF_DIR.'cache/cache.'.$cacheName.'.php';
+		$cacheName = 'content-tag';
+		$cacheBuilderClassName = '\ultimate\system\cache\builder\ContentTagCloudCacheBuilder';
+		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
 		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
 		$tags = CacheHandler::getInstance()->get($cacheName);
 		
 		$languages = WCF::getLanguage()->getLanguages();
-		$sql = 'SELECT tagID
-		        FROM   wcf'.WCF_N.'_tag_to_object
-		        WHERE  objectTypeID = ?';
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array(
-			ObjectTypeCache::getInstance()->getObjectTypeByName('de.plugins-zum-selberbauen.ultimate.contentTaggable')->__get('objectTypeID'),
-		));
-		$tagIDs = array();
-		while ($row = $statement->fetchArray()) {
-			$tagIDs[] = $row['tagID'];
-		}
 		
 		/* @var $language \wcf\data\language\Language */
 		/* @var $tag \wcf\data\tag\TagCloudTag */
@@ -211,7 +200,6 @@ class UltimateContentAddForm extends MessageForm {
 			
 			foreach ($tags as $tagName => $tag) {
 				if ($tag->__get('languageID') != $languageID) continue;
-				if (!in_array($tag->__get('tagID'), $tagIDs)) continue;
 				$this->availableTags[$languageID] = $tag;
 			}
 		}
