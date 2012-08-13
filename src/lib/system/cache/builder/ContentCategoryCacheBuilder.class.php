@@ -5,39 +5,38 @@ use wcf\system\cache\builder\ICacheBuilder;
 
 /**
  * Caches the contents in relation with the categories.
- *
- * @author Jim Martens
- * @copyright 2011-2012 Jim Martens
- * @license http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
- * @package de.plugins-zum-selberbauen.ultimate
- * @subpackage system.cache.builder
- * @category Ultimate CMS
+ * 
+ * @author		Jim Martens
+ * @copyright	2011-2012 Jim Martens
+ * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @package		de.plugins-zum-selberbauen.ultimate
+ * @subpackage	system.cache.builder
+ * @category	Ultimate CMS
  */
 class ContentCategoryCacheBuilder implements ICacheBuilder {
-    
-    /**
-     * @see wcf\system\cache\builder\ICacheBuilder::getData()
-     */
-    public function getData(array $cacheResource) {
-        $data = array(
-            'contentsToCategoryID' => array(),
-            'contentsToCategoryTitle' => array()
-        );
-        
-        $categoryList = new CategoryList();
-        $categoryList->readObjects();
-        $categories = $categoryList->getObjects();
-        
-        foreach ($categories as $categoryID => $category) {
-            /* @var $category \ultimate\data\category\Category */
-            $contents = $category->getContents();
-            foreach ($contents as $contentID => &$content) {
-                $content->categories = $content->getCategories();
-            }
-            $data['contentsToCategoryID'][$categoryID] = $contents;
-            $data['contentsToCategoryTitle'][$category->__get('categoryTitle')] = $contents;
-        }
-        
-        return $data;
-    }
+	/**
+	 * @see	\wcf\system\cache\builder\ICacheBuilder::getData()
+	 */
+	public function getData(array $cacheResource) {
+		$data = array(
+			'contentsToCategoryID' => array(),
+			'contentsToCategoryTitle' => array()
+		);
+		
+		$categoryList = new CategoryList();
+		$categoryList->readObjects();
+		$categories = $categoryList->getObjects();
+		
+		foreach ($categories as $categoryID => $category) {
+			/* @var $category \ultimate\data\category\Category */
+			$contents = $category->getContents();
+			foreach ($contents as $contentID => &$content) {
+				$content->categories = $content->getCategories();
+			}
+			$data['contentsToCategoryID'][$categoryID] = $contents;
+			$data['contentsToCategoryTitle'][$category->__get('categoryTitle')] = $contents;
+		}
+		
+		return $data;
+	}
 }

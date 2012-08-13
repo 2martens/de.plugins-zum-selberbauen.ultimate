@@ -10,20 +10,20 @@ use wcf\util\ArrayUtil;
 
 /**
  * Executes content-related functions.
- *
- * @author Jim Martens
- * @copyright 2011-2012 Jim Martens
- * @license http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
- * @package de.plugins-zum-selberbauen.ultimate
- * @subpackage data.content
- * @category Ultimate CMS
+ * 
+ * @author		Jim Martens
+ * @copyright	2011-2012 Jim Martens
+ * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @package		de.plugins-zum-selberbauen.ultimate
+ * @subpackage	data.content
+ * @category	Ultimate CMS
  */
 class ContentAction extends AbstractDatabaseObjectAction {
-    /**
-     * @see \wcf\data\AbstractDatabaseObjectAction::$className
-     */
-    public $className = '\ultimate\data\content\ContentEditor';
-    
+	/**
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::$className
+	 */
+	public $className = '\ultimate\data\content\ContentEditor';
+	
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsCreate
 	 */
@@ -41,57 +41,56 @@ class ContentAction extends AbstractDatabaseObjectAction {
 	
 	/**
 	 * Creates new content.
-	 *
+	 * 
 	 * @return	Content
 	 */
 	public function create() {
-	    $content = parent::create();
-	    $contentEditor = new ContentEditor($content);
-	
-	    // insert categories
-	    $categoryIDs = (isset($this->parameters['categories'])) ? $this->parameters['categories'] : array();
-	    $contentEditor->addToCategories($categoryIDs, false);
-	    
-	    // connect with userGroups
-	    $groupIDs = (isset($this->parameters['groupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['groupIDs']) : array();
-	    if (count($groupIDs)) {
-	        $contentEditor->addGroups($groupIDs);
-	    }
-	
-	    return $content;
+		$content = parent::create();
+		$contentEditor = new ContentEditor($content);
+		
+		// insert categories
+		$categoryIDs = (isset($this->parameters['categories'])) ? $this->parameters['categories'] : array();
+		$contentEditor->addToCategories($categoryIDs, false);
+		
+		// connect with userGroups
+		$groupIDs = (isset($this->parameters['groupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['groupIDs']) : array();
+		if (!empty($groupIDs)) {
+			$contentEditor->addGroups($groupIDs);
+		}
+		
+		return $content;
 	}
 	
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::update()
 	 */
 	public function update() {
-	    if (isset($this->parameters['data'])) {
-	        parent::update();
-	    }
-	    else {
-	        if (!count($this->objects)) {
-	            $this->readObjects();
-	        }
-	    }
-	
-	    $categoryIDs = (isset($this->parameters['categories'])) ? $this->parameters['categories'] : array();
-	    $removeCategories = (isset($this->parameters['removeCategories'])) ? $this->parameters['removeCategories'] : array();
-	    $groupIDs = (isset($this->parameters['groupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['groupIDs']) : array();
-	     
-	    foreach ($this->objects as $contentEditor) {
-	        /* @var $contentEditor \ultimate\data\content\ContentEditor */
-	        if (!empty($categoryIDs)) {
-	            $contentEditor->addToCategories($categoryIDs);
-	        }
-	        	
-	        if (!empty($removeCategories)) {
-	            $contentEditor->removeFromCategories($removeCategories);
-	        }
-	        
-	        if (count($groupIDs)) {
-	            $contentEditor->addGroups($groupIDs);
-	        }
-	    }
+		if (isset($this->parameters['data'])) {
+			parent::update();
+		}
+		else {
+			if (empty($this->objects)) {
+				$this->readObjects();
+			}
+		}
+		
+		$categoryIDs = (isset($this->parameters['categories'])) ? $this->parameters['categories'] : array();
+		$removeCategories = (isset($this->parameters['removeCategories'])) ? $this->parameters['removeCategories'] : array();
+		$groupIDs = (isset($this->parameters['groupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['groupIDs']) : array();
+		
+		foreach ($this->objects as $contentEditor) {
+			/* @var $contentEditor \ultimate\data\content\ContentEditor */
+			if (!empty($categoryIDs)) {
+				$contentEditor->addToCategories($categoryIDs);
+			}
+			
+			if (!empty($removeCategories)) {
+				$contentEditor->removeFromCategories($removeCategories);
+			}
+			
+			if (!empty($groupIDs)) {
+				$contentEditor->addGroups($groupIDs);
+			}
+		}
 	}
-	
 }

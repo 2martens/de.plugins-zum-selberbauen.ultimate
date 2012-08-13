@@ -1,5 +1,5 @@
-<div class="block block-type-header">    
-    <!-- logo -->
+<div class="block block-type-header">
+	<!-- logo -->
 	<div id="logo" class="logo">
 		<!-- clickable area -->
 		<a href="{link controller='Index'}{/link}">

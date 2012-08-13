@@ -2,129 +2,129 @@
 
 DROP TABLE IF EXISTS ultimate1_1_block;
 CREATE TABLE ultimate1_1_block (
-    blockID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    blockTypeID INT(10) NOT NULL,
-    query VARCHAR(255) NOT NULL DEFAULT '',
-    parameters VARCHAR(255) NOT NULL DEFAULT '',
-    KEY (blockTypeID)
+	blockID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	blockTypeID INT(10) NOT NULL,
+	query VARCHAR(255) NOT NULL DEFAULT '',
+	parameters VARCHAR(255) NOT NULL DEFAULT '',
+	KEY (blockTypeID)
 );
 
 DROP TABLE IF EXISTS ultimate1_1_blocktype;
 CREATE TABLE ultimate1_1_blocktype (
-    blockTypeID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    packageID INT(10) NOT NULL,
-    blockTypeName VARCHAR(255) NOT NULL DEFAULT '',
-    blockTypeClassName VARCHAR(255) NOT NULL DEFAULT '',
-    UNIQUE KEY packageID (packageID, blockTypeName)
+	blockTypeID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	packageID INT(10) NOT NULL,
+	blockTypeName VARCHAR(255) NOT NULL DEFAULT '',
+	blockTypeClassName VARCHAR(255) NOT NULL DEFAULT '',
+	UNIQUE KEY packageID (packageID, blockTypeName)
 );
 
 DROP TABLE IF EXISTS ultimate1_1_block_to_template;
 CREATE TABLE ultimate1_1_block_to_template (
-    blockID INT(10) NOT NULL,
-    templateID INT(10) NOT NULL,
-    KEY (blockID),
-    KEY (templateID)
+	blockID INT(10) NOT NULL,
+	templateID INT(10) NOT NULL,
+	KEY (blockID),
+	KEY (templateID)
 );
 
 DROP TABLE IF EXISTS ultimate1_1_category;
 CREATE TABLE ultimate1_1_category (
-    categoryID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    categoryParent INT(10) NOT NULL DEFAULT 0,
-    categoryTitle VARCHAR(255) NOT NULL DEFAULT '',
-    categoryDescription VARCHAR(255) NOT NULL DEFAULT '',
-    categorySlug VARCHAR(255) NOT NULL DEFAULT '',
-    UNIQUE KEY categoryTitle (categoryParent, categoryTitle),
-    UNIQUE KEY categorySlug (categoryParent, categorySlug)
+	categoryID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	categoryParent INT(10) NOT NULL DEFAULT 0,
+	categoryTitle VARCHAR(255) NOT NULL DEFAULT '',
+	categoryDescription VARCHAR(255) NOT NULL DEFAULT '',
+	categorySlug VARCHAR(255) NOT NULL DEFAULT '',
+	UNIQUE KEY categoryTitle (categoryParent, categoryTitle),
+	UNIQUE KEY categorySlug (categoryParent, categorySlug)
 );
 
 DROP TABLE IF EXISTS ultimate1_1_content;
 CREATE TABLE ultimate1_1_content (
-    contentID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    authorID INT(10) NOT NULL,
-    contentTitle VARCHAR(255) NOT NULL DEFAULT '',
-    contentDescription VARCHAR(255) NOT NULL DEFAULT '',
-    contentSlug VARCHAR(255) NOT NULL DEFAULT '',
-    contentText MEDIUMTEXT NOT NULL,
-    enableBBCodes TINYINT(1) NOT NULL DEFAULT 1,
-    enableHtml TINYINT(1) NOT NULL DEFAULT 0,
-    enableSmilies TINYINT(1) NOT NULL DEFAULT 1,
-    publishDate INT(10) NOT NULL DEFAULT 0,
-    lastModified INT(10) NOT NULL DEFAULT 0,
-    status INT(1) NOT NULL DEFAULT 0,
-    visibility ENUM('public', 'protected', 'private') NOT NULL DEFAULT 'public',
-    KEY (authorID)
+	contentID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	authorID INT(10) NOT NULL,
+	contentTitle VARCHAR(255) NOT NULL DEFAULT '',
+	contentDescription VARCHAR(255) NOT NULL DEFAULT '',
+	contentSlug VARCHAR(255) NOT NULL DEFAULT '',
+	contentText MEDIUMTEXT NOT NULL,
+	enableBBCodes TINYINT(1) NOT NULL DEFAULT 1,
+	enableHtml TINYINT(1) NOT NULL DEFAULT 0,
+	enableSmilies TINYINT(1) NOT NULL DEFAULT 1,
+	publishDate INT(10) NOT NULL DEFAULT 0,
+	lastModified INT(10) NOT NULL DEFAULT 0,
+	status INT(1) NOT NULL DEFAULT 0,
+	visibility ENUM('public', 'protected', 'private') NOT NULL DEFAULT 'public',
+	KEY (authorID)
 );
 
 DROP TABLE IF EXISTS ultimate1_1_content_to_category;
 CREATE TABLE ultimate1_1_content_to_category (
-    contentID INT(10) NOT NULL,
-    categoryID INT(10) NOT NULL,
-    KEY (contentID),
-    KEY (categoryID)
+	contentID INT(10) NOT NULL,
+	categoryID INT(10) NOT NULL,
+	KEY (contentID),
+	KEY (categoryID)
 );
 
 DROP TABLE IF EXISTS ultimate1_1_content_to_page;
 CREATE TABLE ultimate1_1_content_to_page (
-    contentID INT(10) NOT NULL UNIQUE KEY,
-    pageID INT(10) NOT NULL UNIQUE KEY
+	contentID INT(10) NOT NULL UNIQUE KEY,
+	pageID INT(10) NOT NULL UNIQUE KEY
 );
 
 DROP TABLE IF EXISTS ultimate1_1_menu;
 CREATE TABLE ultimate1_1_menu (
-    menuID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    menuName VARCHAR(255) NOT NULL DEFAULT ''    
+	menuID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	menuName VARCHAR(255) NOT NULL DEFAULT ''
 );
 
 DROP TABLE IF EXISTS ultimate1_1_menu_item;
 CREATE TABLE ultimate1_1_menu_item (
-    menuItemID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    menuID INT(10) NOT NULL,
-    menuItemName VARCHAR(255) NOT NULL DEFAULT '',
-    menuItemParent VARCHAR(255) NOT NULL DEFAULT '',
-    menuItemLink VARCHAR(255) NOT NULL DEFAULT '',
-    showOrder INT(10) NOT NULL DEFAULT 0,
-    type ENUM('category', 'content', 'custom', 'page') NOT NULL,
-    isDisabled TINYINT(1) NOT NULL DEFAULT 0,
-    UNIQUE KEY (menuID, menuItemName)
+	menuItemID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	menuID INT(10) NOT NULL,
+	menuItemName VARCHAR(255) NOT NULL DEFAULT '',
+	menuItemParent VARCHAR(255) NOT NULL DEFAULT '',
+	menuItemLink VARCHAR(255) NOT NULL DEFAULT '',
+	showOrder INT(10) NOT NULL DEFAULT 0,
+	type ENUM('category', 'content', 'custom', 'page') NOT NULL,
+	isDisabled TINYINT(1) NOT NULL DEFAULT 0,
+	UNIQUE KEY (menuID, menuItemName)
 );
 
 DROP TABLE IF EXISTS ultimate1_1_page;
 CREATE TABLE ultimate1_1_page (
-    pageID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    authorID INT(10) NOT NULL,
-    pageParent INT(10) NOT NULL DEFAULT 0,    
-    pageTitle VARCHAR(255) NOT NULL DEFAULT '',
-    pageSlug VARCHAR(255) NOT NULL DEFAULT '' UNIQUE KEY,
-    publishDate INT(10) NOT NULL DEFAULT 0,
-    lastModified INT(10) NOT NULL DEFAULT 0,
-    status INT(1) NOT NULL DEFAULT 0,
-    visibility ENUM('public', 'protected', 'private') NOT NULL DEFAULT 'public',
-    KEY (authorID)
+	pageID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	authorID INT(10) NOT NULL,
+	pageParent INT(10) NOT NULL DEFAULT 0,
+	pageTitle VARCHAR(255) NOT NULL DEFAULT '',
+	pageSlug VARCHAR(255) NOT NULL DEFAULT '' UNIQUE KEY,
+	publishDate INT(10) NOT NULL DEFAULT 0,
+	lastModified INT(10) NOT NULL DEFAULT 0,
+	status INT(1) NOT NULL DEFAULT 0,
+	visibility ENUM('public', 'protected', 'private') NOT NULL DEFAULT 'public',
+	KEY (authorID)
 );
 
 DROP TABLE IF EXISTS ultimate1_1_template;
 CREATE TABLE ultimate1_1_template (
-    templateID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    packageID INT(10) NOT NULL,
-    templateName VARCHAR(255) NOT NULL DEFAULT '',
-    templateBlocks VARCHAR(255) NOT NULL DEFAULT '',
-    KEY (packageID)
+	templateID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	packageID INT(10) NOT NULL,
+	templateName VARCHAR(255) NOT NULL DEFAULT '',
+	templateBlocks VARCHAR(255) NOT NULL DEFAULT '',
+	KEY (packageID)
 );
 
 DROP TABLE IF EXISTS ultimate1_1_user_group_to_content;
 CREATE TABLE ultimate1_1_user_group_to_content (
-    groupID INT(10) NOT NULL,
-    contentID INT(10) NOT NULL,
-    KEY (groupID),
-    KEY (contentID)
+	groupID INT(10) NOT NULL,
+	contentID INT(10) NOT NULL,
+	KEY (groupID),
+	KEY (contentID)
 );
 
 DROP TABLE IF EXISTS ultimate1_1_user_group_to_page;
 CREATE TABLE ultimate1_1_user_group_to_page (
-    groupID INT(10) NOT NULL,
-    pageID INT(10) NOT NULL,
-    KEY (groupID),
-    KEY (pageID)
+	groupID INT(10) NOT NULL,
+	pageID INT(10) NOT NULL,
+	KEY (groupID),
+	KEY (pageID)
 );
 
 

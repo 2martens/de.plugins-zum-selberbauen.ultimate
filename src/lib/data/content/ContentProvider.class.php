@@ -1,9 +1,9 @@
 <?php
 namespace ultimate\data\content;
-use wcf\data\DatabaseObjectList;
+use wcf\data\object\type\AbstractObjectTypeProvider;
 
 /**
- * Represents a list of contents
+ * Provides contents.
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
@@ -12,9 +12,14 @@ use wcf\data\DatabaseObjectList;
  * @subpackage	data.content
  * @category	Ultimate CMS
  */
-class ContentList extends DatabaseObjectList {
+class ContentProvider extends AbstractObjectTypeProvider {
 	/**
-	 * @see	\wcf\data\DatabaseObjectList::$className
+	 * @see	\wcf\data\object\type\AbstractObjectTypeProvider::$className
 	 */
 	public $className = '\ultimate\data\content\Content';
+	
+	/**
+	 * @see	\wcf\data\object\type\AbstractObjectTypeProvider::$listClassName
+	 */
+	public $listClassName = '\ultimate\data\content\ContentList';
 }
