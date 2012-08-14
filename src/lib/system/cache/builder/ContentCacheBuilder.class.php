@@ -1,6 +1,8 @@
 <?php
 namespace ultimate\system\cache\builder;
 use ultimate\data\content\ContentList;
+use ultimate\data\content\TaggableContent;
+use ultimate\data\content\TaggedContent;
 use wcf\system\cache\builder\ICacheBuilder;
 
 /**
@@ -34,11 +36,15 @@ class ContentCacheBuilder implements ICacheBuilder {
 		$contents = $contentList->getObjects();
 		if (empty($contents)) return $data;
 		
-		foreach ($contents as $contentID => &$content) {
+		foreach ($contents as $contentID => $content) {
 			/* @var $content \ultimate\data\content\Content */
-			$content->categories = $content->getCategories();
-			$data['contents'][$contentID] = $content;
+			$data['contents'][$contentID] = new TaggableContent($content);
 			$data['contentIDs'][] = $contentID;
+			
+			$taggedContent = new TaggedContent($content);
+			if (!empty($taggedContent->tags)) {
+				$data['contents'][$contentID] = $taggedContent;
+			}
 		}
 		
 		return $data;

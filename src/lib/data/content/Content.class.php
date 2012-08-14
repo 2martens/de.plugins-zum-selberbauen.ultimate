@@ -1,10 +1,6 @@
 <?php
 namespace ultimate\data\content;
-use ultimate\data\AbstractUltimateProcessibleDatabaseObject;
-use wcf\data\object\type\ObjectTypeCache;
-use wcf\system\tagging\ITaggable;
-use wcf\system\tagging\ITagged;
-use wcf\system\tagging\TagEngine;
+use ultimate\data\AbstractUltimateDatabaseObject;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
 
@@ -18,7 +14,7 @@ use wcf\util\DateUtil;
  * @subpackage	data.content
  * @category	Ultimate CMS
  */
-class Content extends AbstractUltimateProcessibleDatabaseObject implements ITaggable {
+class Content extends AbstractUltimateDatabaseObject {
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
 	 */
@@ -35,41 +31,10 @@ class Content extends AbstractUltimateProcessibleDatabaseObject implements ITagg
 	protected static $databaseTableIndexName = 'contentID';
 	
 	/**
-	 * @see	\wcf\data\ProcessibleDatabaseObject::$processorInterface
-	 */
-	protected static $processorInterface = '\wcf\data\IDatabaseObjectProcessor';
-	
-	/**
 	 * Contains the content to category database table name.
 	 * @var	string
 	 */
 	protected $contentCategoryTable = 'content_to_category';
-	
-	/**
-	 * Contains the categories to which this content belongs.
-	 * @var	\ultimate\data\category\Category[]
-	 */
-	public $categories = array();
-	
-	/**
-	 * Returns the categories associated with this content.
-	 * 
-	 * @return	\ultimate\data\category\Category[]
-	 */
-	public function getCategories() {
-		$sql = 'SELECT    category.*
-		        FROM      ultimate'.ULTIMATE_N.'_'.$this->contentCategoryTable.' contentToCategory
-		        LEFT JOIN ultimate'.ULTIMATE_N.'_category category
-		        ON        (category.categoryID = contentToCategory.categoryID)
-		        WHERE     contentToCategory.contentID = ?';
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($this->contentID));
-		$categories = array();
-		while ($category = $statement->fetchObject('\ultimate\data\category\Category')) {
-			$categories[$category->__get('categoryID')] = $category;
-		}
-		return $categories;
-	}
 	
 	/**
 	 * Returns all user groups associated with this content.
@@ -93,39 +58,12 @@ class Content extends AbstractUltimateProcessibleDatabaseObject implements ITagg
 	}
 	
 	/**
-	 * Returns the tags of this content.
-	 * 
-	 * @return array[]
-	 */
-	public function getTags() {
-		$languages = WCF::getLanguage()->getLanguages();
-		$tags = array();
-		foreach ($languages as $languageID => $language) {
-			/* @var $language \wcf\data\language\Language */
-			$tags[$languageID] = TagEngine::getInstance()->getObjectTags(
-				'de.plugins-zum-selberbauen.ultimate.contentTaggable',
-				$this->contentID,
-				$languageID
-			);
-		}
-		return $tags;
-	}
-	
-	/**
 	 * Returns the title of this content.
 	 * 
 	 * @return	string
 	 */
 	public function __toString() {
 		return WCF::getLanguage()->get($this->contentTitle);
-	}
-	
-	/**
-	 * @see \wcf\system\tagging\ITaggable::getObjectTypeID()
-	 */
-	public function getObjectTypeID() {
-		$objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.tagging.taggableObject', 'de.plugins-zum-selberbauen.ultimate.contentTaggable');
-		return $objectType->__get('objectTypeID');
 	}
 	
 	/**
@@ -143,7 +81,6 @@ class Content extends AbstractUltimateProcessibleDatabaseObject implements ITagg
 		$data['lastModified'] = intval($data['lastModified']);
 		$data['status'] = intval($data['status']);
 		parent::handleData($data);
-		$this->data['tags'] = $this->getTags();
 		$this->data['groups'] = $this->getGroups();
 	}
 }

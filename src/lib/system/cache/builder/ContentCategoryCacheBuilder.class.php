@@ -1,6 +1,7 @@
 <?php
 namespace ultimate\system\cache\builder;
 use ultimate\data\category\CategoryList;
+use ultimate\data\content\TaggedContent;
 use wcf\system\cache\builder\ICacheBuilder;
 
 /**
@@ -29,12 +30,14 @@ class ContentCategoryCacheBuilder implements ICacheBuilder {
 		
 		foreach ($categories as $categoryID => $category) {
 			/* @var $category \ultimate\data\category\Category */
-			$contents = $category->getContents();
-			foreach ($contents as $contentID => &$content) {
-				$content->categories = $content->getCategories();
+			$contents = $category->contents;
+			$categorizedContents = array();
+			foreach ($contents as $contentID => $content) {
+				$categorizedContent = new TaggedContent($content);
+				$categorizedContents[$contentID] = $categorizedContents;
 			}
-			$data['contentsToCategoryID'][$categoryID] = $contents;
-			$data['contentsToCategoryTitle'][$category->__get('categoryTitle')] = $contents;
+			$data['contentsToCategoryID'][$categoryID] = $categorizedContents;
+			$data['contentsToCategoryTitle'][$category->__get('categoryTitle')] = $categorizedContents;
 		}
 		
 		return $data;
