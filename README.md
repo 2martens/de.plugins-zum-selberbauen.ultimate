@@ -45,6 +45,7 @@ class A {
 	 * 
 	 * @param	integer	$groupID
 	 * @return	\wcf\data\user\User[]
+	 */
 	public function getUser($groupID) {
 		$sql = 'SELECT    user.*
 		        FROM      wcf'.WCF_N.'_user user
