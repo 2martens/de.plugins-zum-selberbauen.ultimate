@@ -70,6 +70,41 @@
 		</acpmenuitem>
 		<!-- /pages -->
 		
+		<!-- links -->
+		<acpmenuitem name="wcf.acp.menu.link.ultimate.link">
+			<parent>wcf.acp.menu.link.ultimate</parent>
+			<showorder>4</showorder>
+		</acpmenuitem>
+		
+		<acpmenuitem name="wcf.acp.menu.link.ultimate.link.list">
+			<link>index.php/UltimateLinkList/</link>
+			<parent>wcf.acp.menu.link.ultimate.link</parent>
+			<permissions>admin.content.ultimate.canEditLink,admin.content.ultimate.canDeleteLink</permissions>
+			<showorder>1</showorder>
+		</acpmenuitem>
+		
+		<acpmenuitem name="wcf.acp.menu.link.ultimate.link.add">
+			<link>index.php/UltimateLinkAdd/</link>
+			<parent>wcf.acp.menu.link.ultimate.link</parent>
+			<permissions>admin.content.ultimate.canAddLink</permissions>
+			<showorder>2</showorder>
+		</acpmenuitem>
+		
+		<acpmenuitem name="wcf.acp.menu.link.ultimate.link.category.list">
+			<link>index.php/UltimateLinkCategoryList/</link>
+			<parent>wcf.acp.menu.link.ultimate.link</parent>
+			<permissions>admin.content.ultimate.canEditCategory,admin.content.ultimate.canDeleteCategory</permissions>
+			<showorder>3</showorder>
+		</acpmenuitem>
+		
+		<acpmenuitem name="wcf.acp.menu.link.ultimate.link.category.add">
+			<link>index.php/UltimateLinkCategoryAdd/</link>
+			<parent>wcf.acp.menu.link.ultimate.link</parent>
+			<permissions>admin.content.ultimate.canAddCategory</permissions>
+			<showorder>4</showorder>
+		</acpmenuitem>
+		<!-- /links -->
+		
 		<!-- appearance -->
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.appearance">
 			<parent>wcf.acp.menu.link.ultimate</parent>

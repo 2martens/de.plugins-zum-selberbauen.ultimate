@@ -26,11 +26,22 @@
 			<definitionname>com.woltlab.wcf.clipboardItem</definitionname>
 			<listclassname>ultimate\data\page\PageList</listclassname>
 		</type>
+		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.link</name>
+			<definitionname>com.woltlab.wcf.clipboardItem</definitionname>
+			<listclassname>ultimate\data\link\LinkList</listclassname>
+		</type>
 		
 		<type>
 			<name>de.plugins-zum-selberbauen.ultimate.contentTaggable</name>
 			<definitionname>com.woltlab.wcf.tagging.taggableObject</definitionname>
-			<listclassname>ultimate\data\content\ContentList</listclassname>
+			<classname>ultimate\data\content\Content</classname>
+		</type>
+		
+		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.linkCategory</name>
+			<definitionname>com.woltlab.wcf.category</definitionname>
+			<classname>ultimate\system\category\LinkCategoryType</classname>
 		</type>
 	</import>
 </data>

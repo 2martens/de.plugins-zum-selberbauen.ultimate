@@ -317,6 +317,10 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="ultimate.date.dateTimeFormat"><![CDATA[%date% %time%]]></item>
 	</category>
 	
+	<category name="ultimate.link">
+		<item name="ultimate.link.item"><![CDATA[]]></item>
+	</category>
+	
 	<category name="ultimate.menu">
 		<item name="ultimate.menu.item"><![CDATA[Default]]></item>
 	</category>
