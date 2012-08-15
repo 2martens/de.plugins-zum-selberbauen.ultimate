@@ -46,13 +46,4 @@ class LinkCategoryType extends AbstractCategoryType {
 	protected $objectTypes = array(
 		'com.woltlab.wcf.clipboardItem' => 'de.plugins-zum-selberbauen.ultimate.link'
 	);
-	
-	/**
-	 * @see	\wcf\system\category\ICategoryType::getI18nLangVarPrefix()
-	 */
-	public function getI18nLangVarPrefix() {
-		return $this->i18nLangVarCategory.'.link.category';
-	}
-	
-	
 }

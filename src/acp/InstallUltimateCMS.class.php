@@ -1,5 +1,7 @@
 <?php
 namespace ultimate\acp;
+use wcf\data\category\CategoryAction;
+use wcf\system\category\CategoryHandler;
 use wcf\system\io\File;
 use wcf\system\WCF;
 
@@ -27,6 +29,7 @@ final class InstallUltimateCMS {
 	protected function install() {
 		require_once(dirname(dirname(__FILE__)).'/config.inc.php');
 		$this->createHtaccess();
+		$this->createDefaultLinkCategory();
 	}
 	
 	/**
@@ -39,6 +42,24 @@ final class InstallUltimateCMS {
 		$file = new File(ULTIMATE_DIR.'.htaccess');
 		$file->write($output);
 		$file->close();
+	}
+	
+	/**
+	 * Creates a default link category.
+	 */
+	protected function createDefaultLinkCategory() {
+		$parameters = array(
+			'data' => array(
+				'objectTypeID' => CategoryHandler::getObjectTypeByName(
+					'de.plugins-zum-selberbauen.ultimate.linkCategory')->__get('objectTypeID'),
+				'parentCategoryID' => 0,
+				'showOrder' => 0,
+				'title' => 'ultimate.link.category.title.category1',
+				'time' => TIME_NOW
+			)
+		);
+		$action = new CategoryAction(array(), 'create', $parameters);
+		$action->executeAction();
 	}
 	
 }

@@ -251,6 +251,16 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.link.edit"><![CDATA[Link bearbeiten]]></item>
 		<item name="wcf.acp.ultimate.link.delete"><![CDATA[Link löschen]]></item>
 		<item name="wcf.acp.ultimate.link.delete.sure"><![CDATA[Sind Sie sicher, dass Sie diesen Link löschen wollen?]]></item>
+		<item name="wcf.acp.ultimate.link.name"><![CDATA[Name]]></item>
+		<item name="wcf.acp.ultimate.link.name.placeholder"><![CDATA[Mein schöner Link]]></item>
+		<item name="wcf.acp.ultimate.link.description"><![CDATA[Beschreibung]]></item>
+		<item name="wcf.acp.ultimate.link.description.placeholder"><![CDATA[Diese Seite zeigt Beispiele zur Verwendung von Beispielen.]]></item>
+		<item name="wcf.acp.ultimate.link.url"><![CDATA[URL]]></item>
+		<item name="wcf.acp.ultimate.link.url.placeholder"><![CDATA[http://www.test.com]]></item>
+		<item name="wcf.acp.ultimate.link.url.error.notValid"><![CDATA[Sie haben einen ungültigen Link angegeben.]]></item>
+		<item name="wcf.acp.ultimate.link.url.error.notUnique"><![CDATA[Der angegebene URL existiert bereits bei einem anderen Link.]]></item>
+		<item name="wcf.acp.ultimate.link.categories"><![CDATA[Kategorien]]></item>
+		<item name="wcf.acp.ultimate.link.categories.error.notValid"><![CDATA[Mindestens eine der "ausgewählten" Kategorien stand nicht zur Auswahl.]]></item>
 		<item name="wcf.acp.ultimate.link.items"><![CDATA[Linkeinträge]]></item>
 		<item name="wcf.acp.ultimate.link.list"><![CDATA[Linkliste]]></item>
 		<item name="wcf.acp.ultimate.link.list.all"><![CDATA[Alle Links]]></item>
@@ -334,7 +344,7 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 	
 	<!-- this category is used for all multilingual category fields -->
 	<category name="ultimate.category">
-		<item name="ultimate.category.1.categoryTitle"><![CDATA[Allgemein]]></item>
+		<item name="ultimate.category.1.categoryTitle"><![CDATA[Nicht kategorisiert]]></item>
 	</category>
 	
 	<!-- this category is used for all multilingual content fields -->
@@ -348,11 +358,14 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="ultimate.date.dateTimeFormat"><![CDATA[%date% %time%]]></item>
 	</category>
 	
+	<!-- this category is used for all multilingual link fields -->
 	<category name="ultimate.link">
-		<item name="ultimate.link.item"><![CDATA[]]></item>
+		<item name="ultimate.link.category.title.category1"><![CDATA[Nicht kategorisiert]]></item>
 	</category>
 	
+	<!-- this category is used for all multilingual menu fields -->
 	<category name="ultimate.menu">
+		<!-- this item is just a placeholder -->
 		<item name="ultimate.menu.item"><![CDATA[]]></item>
 	</category>
 	
