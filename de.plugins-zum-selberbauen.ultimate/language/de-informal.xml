@@ -39,6 +39,15 @@
 		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent.description"><![CDATA[Mitglieder dieser Benutzergruppe können Inhalte löschen.]]></item>
 		<!-- /content -->
 		
+		<!-- link -->
+		<item name="wcf.acp.group.option.admin.content.ultimate.canAddLink"><![CDATA[Kann Links hinzufügen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canAddLink.description"><![CDATA[Mitglieder dieser Benutzergruppe können Links hinzufügen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canEditLink"><![CDATA[Kann Links bearbeiten.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canEditLink.description"><![CDATA[Mitglieder dieser Benutzergruppe können Links bearbeiten.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteLink"><![CDATA[Kann Links löschen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteLink.description"><![CDATA[Mitglieder dieser Benutzergruppe können Links löschen.]]></item>
+		<!-- /link -->
+		
 		<!-- menu -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canAddMenu"><![CDATA[Kann Menüs hinzufügen.]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canAddMenu.description"><![CDATA[Mitglieder dieser Benutzergruppe können Menüs hinzufügen.]]></item>
@@ -78,6 +87,10 @@
 		<item name="wcf.acp.menu.link.ultimate.category.list"><![CDATA[Kategorien auflisten]]></item>
 		<item name="wcf.acp.menu.link.ultimate.page.add"><![CDATA[Seite hinzufügen]]></item>
 		<item name="wcf.acp.menu.link.ultimate.page.list"><![CDATA[Seiten auflisten]]></item>
+		<item name="wcf.acp.menu.link.ultimate.link.add"><![CDATA[Link hinzufügen]]></item>
+		<item name="wcf.acp.menu.link.ultimate.link.list"><![CDATA[Links auflisten]]></item>
+		<item name="wcf.acp.menu.link.ultimate.link.category.add"><![CDATA[Linkkategorie hinzufügen]]></item>
+		<item name="wcf.acp.menu.link.ultimate.link.category.list"><![CDATA[Linkkategorien auflisten]]></item>
 		<!-- /core items -->
 		
 		<!-- appearance items -->
@@ -229,6 +242,28 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.content.list.count"><![CDATA[{#$items} Inhalt{if $items != 1}e{/if}]]></item>
 		<!-- /content -->
 		
+		<!-- link -->
+		<item name="wcf.acp.ultimate.link.add"><![CDATA[Link hinzufügen]]></item>
+		<item name="wcf.acp.ultimate.link.edit"><![CDATA[Link bearbeiten]]></item>
+		<item name="wcf.acp.ultimate.link.delete"><![CDATA[Link löschen]]></item>
+		<item name="wcf.acp.ultimate.link.delete.sure"><![CDATA[Bist du sicher, dass du diesen Link löschen willst?]]></item>
+		<item name="wcf.acp.ultimate.link.name"><![CDATA[Name]]></item>
+		<item name="wcf.acp.ultimate.link.name.placeholder"><![CDATA[Mein schöner Link]]></item>
+		<item name="wcf.acp.ultimate.link.description"><![CDATA[Beschreibung]]></item>
+		<item name="wcf.acp.ultimate.link.description.placeholder"><![CDATA[Diese Seite zeigt Beispiele zur Verwendung von Beispielen.]]></item>
+		<item name="wcf.acp.ultimate.link.url"><![CDATA[URL]]></item>
+		<item name="wcf.acp.ultimate.link.url.placeholder"><![CDATA[http://www.test.com]]></item>
+		<item name="wcf.acp.ultimate.link.url.error.notValid"><![CDATA[Du hast einen ungültigen Link angegeben.]]></item>
+		<item name="wcf.acp.ultimate.link.url.error.notUnique"><![CDATA[Der angegebene URL existiert bereits bei einem anderen Link.]]></item>
+		<item name="wcf.acp.ultimate.link.categories"><![CDATA[Kategorien]]></item>
+		<item name="wcf.acp.ultimate.link.categories.error.notValid"><![CDATA[Mindestens eine der "ausgewählten" Kategorien stand nicht zur Auswahl.]]></item>
+		<item name="wcf.acp.ultimate.link.items"><![CDATA[Linkeinträge]]></item>
+		<item name="wcf.acp.ultimate.link.list"><![CDATA[Linkliste]]></item>
+		<item name="wcf.acp.ultimate.link.list.all"><![CDATA[Alle Links]]></item>
+		<item name="wcf.acp.ultimate.link.list.count"><![CDATA[{#$items} Link{if $items != 1}s{/if}]]></item>
+		<item name="wcf.acp.ultimate.link.noContents"><![CDATA[Keine Links gefunden]]></item>
+		<!-- /link -->
+		
 		<!-- menu -->
 		<item name="wcf.acp.ultimate.menu.add"><![CDATA[Menü hinzufügen]]></item>
 		<item name="wcf.acp.ultimate.menu.addToMenu"><![CDATA[Zum Menü hinzufügen]]></item>
@@ -304,7 +339,7 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 	
 	<!-- this category is used for all multilingual category fields -->
 	<category name="ultimate.category">
-		<item name="ultimate.category.1.categoryTitle"><![CDATA[Allgemein]]></item>
+		<item name="ultimate.category.1.categoryTitle"><![CDATA[Nicht kategorisiert]]></item>
 	</category>
 	
 	<!-- this category is used for all multilingual content fields -->
@@ -318,7 +353,14 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="ultimate.date.dateTimeFormat"><![CDATA[%date% %time%]]></item>
 	</category>
 	
+	<!-- this category is used for all multilingual link fields -->
+	<category name="ultimate.link">
+		<item name="ultimate.link.category.title.category1"><![CDATA[Nicht kategorisiert]]></item>
+	</category>
+	
+	<!-- this category is used for all multilingual menu fields -->
 	<category name="ultimate.menu">
+		<!-- this item is just a placeholder -->
 		<item name="ultimate.menu.item"><![CDATA[]]></item>
 	</category>
 	

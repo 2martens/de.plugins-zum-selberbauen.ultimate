@@ -69,6 +69,22 @@ CREATE TABLE ultimate1_1_content_to_page (
 	pageID INT(10) NOT NULL UNIQUE KEY
 );
 
+DROP TABLE IF EXISTS ultimate1_1_link;
+CREATE TABLE ultimate1_1_link (
+	linkID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	linkName VARCHAR(255) NOT NULL DEFAULT '',
+	linkDescription VARCHAR(255) NOT NULL DEFAULT '',
+	linkURL VARCHAR(255) NOT NULL DEFAULT '' UNIQUE KEY
+);
+
+DROP TABLE IF EXISTS ultimate1_1_link_to_category;
+CREATE TABLE ultimate1_1_link_to_category (
+	linkID INT(10) NOT NULL,
+	categoryID INT(10) NOT NULL,
+	KEY (linkID),
+	KEY (categoryID)
+);
+
 DROP TABLE IF EXISTS ultimate1_1_menu;
 CREATE TABLE ultimate1_1_menu (
 	menuID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -138,6 +154,8 @@ ALTER TABLE ultimate1_1_content_to_category ADD FOREIGN KEY (contentID) REFERENC
 ALTER TABLE ultimate1_1_content_to_category ADD FOREIGN KEY (categoryID) REFERENCES ultimate1_1_category (categoryID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_content_to_page ADD FOREIGN KEY (contentID) REFERENCES ultimate1_1_content (contentID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_content_to_page ADD FOREIGN KEY (pageID) REFERENCES ultimate1_1_page (pageID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_link_to_category ADD FOREIGN KEY (linkID) REFERENCES ultimate1_1_link (linkID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_link_to_category ADD FOREIGN KEY (categoryID) REFERENCES wcf1_category (categoryID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_menu_item ADD FOREIGN KEY (menuID) REFERENCES ultimate1_1_menu (menuID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_page ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_template ADD FOREIGN KEY (packageID) REFERENCES wcf1_package (packageID) ON DELETE CASCADE;

@@ -39,6 +39,15 @@
 		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent.description"><![CDATA[Members of this usergroup can delete contents.]]></item>
 		<!-- /content -->
 		
+		<!-- link -->
+		<item name="wcf.acp.group.option.admin.content.ultimate.canAddLink"><![CDATA[Can add links.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canAddLink.description"><![CDATA[Members of this usergroup can add links.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canEditLink"><![CDATA[Can edit links.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canEditLink.description"><![CDATA[Members of this usergroup can edit links.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteLink"><![CDATA[Can delete links.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteLink.description"><![CDATA[Members of this usergroup can delete contents.]]></item>
+		<!-- /link -->
+		
 		<!-- menu -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canAddMenu"><![CDATA[Can add menus.]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canAddMenu.description"><![CDATA[Members of this usergroup can add menus.]]></item>
@@ -77,6 +86,10 @@
 		<item name="wcf.acp.menu.link.ultimate.content.list"><![CDATA[List content]]></item>
 		<item name="wcf.acp.menu.link.ultimate.page.add"><![CDATA[Add page]]></item>
 		<item name="wcf.acp.menu.link.ultimate.page.list"><![CDATA[List pages]]></item>
+		<item name="wcf.acp.menu.link.ultimate.link.add"><![CDATA[Add link]]></item>
+		<item name="wcf.acp.menu.link.ultimate.link.list"><![CDATA[List links]]></item>
+		<item name="wcf.acp.menu.link.ultimate.link.category.add"><![CDATA[Add link category]]></item>
+		<item name="wcf.acp.menu.link.ultimate.link.category.list"><![CDATA[List link categories]]></item>
 		<!-- /core items -->
 		
 		<!-- appearance items -->
@@ -228,6 +241,28 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.content.list.count"><![CDATA[{#$items} Content{if $items != 1}s{/if}]]></item>
 		<!-- /content -->
 		
+		<!-- link -->
+		<item name="wcf.acp.ultimate.link.add"><![CDATA[Add link]]></item>
+		<item name="wcf.acp.ultimate.link.edit"><![CDATA[Edit link]]></item>
+		<item name="wcf.acp.ultimate.link.delete"><![CDATA[Delete link]]></item>
+		<item name="wcf.acp.ultimate.link.delete.sure"><![CDATA[Are you sure that you want to delete the link?]]></item>
+		<item name="wcf.acp.ultimate.link.name"><![CDATA[Name]]></item>
+		<item name="wcf.acp.ultimate.link.name.placeholder"><![CDATA[My wonderful link]]></item>
+		<item name="wcf.acp.ultimate.link.description"><![CDATA[Description]]></item>
+		<item name="wcf.acp.ultimate.link.description.placeholder"><![CDATA[This page shows examples about the usage of examples.]]></item>
+		<item name="wcf.acp.ultimate.link.url"><![CDATA[URL]]></item>
+		<item name="wcf.acp.ultimate.link.url.placeholder"><![CDATA[http://www.test.com]]></item>
+		<item name="wcf.acp.ultimate.link.url.error.notValid"><![CDATA[You have inserted an illegal URL.]]></item>
+		<item name="wcf.acp.ultimate.link.url.error.notUnique"><![CDATA[A link with the specified URL already exists.]]></item>
+		<item name="wcf.acp.ultimate.link.categories"><![CDATA[Categories]]></item>
+		<item name="wcf.acp.ultimate.link.categories.error.notValid"><![CDATA[At least one of the "selected" categories wasn't selectable.]]></item>
+		<item name="wcf.acp.ultimate.link.items"><![CDATA[Link entries]]></item>
+		<item name="wcf.acp.ultimate.link.list"><![CDATA[Link list]]></item>
+		<item name="wcf.acp.ultimate.link.list.all"><![CDATA[All links]]></item>
+		<item name="wcf.acp.ultimate.link.list.count"><![CDATA[{#$items} link{if $items != 1}s{/if}]]></item>
+		<item name="wcf.acp.ultimate.link.noContents"><![CDATA[No links found]]></item>
+		<!-- /link -->
+		
 		<!-- menu -->
 		<item name="wcf.acp.ultimate.menu.add"><![CDATA[Add menu]]></item>
 		<item name="wcf.acp.ultimate.menu.addToMenu"><![CDATA[Add to menu]]></item>
@@ -317,7 +352,14 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="ultimate.date.dateTimeFormat"><![CDATA[%date% %time%]]></item>
 	</category>
 	
+	<!-- this category is used for all multilingual link fields -->
+	<category name="ultimate.link">
+		<item name="ultimate.link.category..title.category1"><![CDATA[Uncategorized]]></item>
+	</category>
+	
+	<!-- this category is used for all multilingual menu fields -->
 	<category name="ultimate.menu">
+		<!-- this item is just a placeholder -->
 		<item name="ultimate.menu.item"><![CDATA[Default]]></item>
 	</category>
 	
