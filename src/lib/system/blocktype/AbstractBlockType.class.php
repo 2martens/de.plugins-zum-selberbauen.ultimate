@@ -137,14 +137,14 @@ abstract class AbstractBlockType implements IBlockType {
 	 */
 	protected function loadCache() {
 		if (!empty($this->block->query)) {
-			$cacheName = 'ultimate-block-'.PACKAGE_ID;
-			$cacheBuilderClassName = '\wcf\system\cache\builder\UltimateBlockCacheBuilder';
-			$file = WCF_DIR.'cache/cache'.$cacheName.'.php';
+			$cacheName = 'block';
+			$cacheBuilderClassName = '\ultimate\system\cache\builder\BlockCacheBuilder';
+			$file = ULTIMATE_DIR.'cache/cache'.$cacheName.'.php';
 			CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
 			$result = CacheHandler::getInstance()->get($cacheName, 'cachedQueryToBlockID');
 			$this->queryResult = $result[$this->blockID];
 		} else {
-			$file = WCF_DIR.'cache/cache.'.$this->cacheName.'.php';
+			$file = ULTIMATE_DIR.'cache/cache.'.$this->cacheName.'.php';
 			CacheHandler::getInstance()->addResource($this->cacheName, $file, $this->cacheBuilderClassName);
 			$this->objects = CacheHandler::getInstance()->get($this->cacheName, $this->cacheIndex);
 		}
