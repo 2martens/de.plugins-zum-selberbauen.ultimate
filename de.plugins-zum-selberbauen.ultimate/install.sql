@@ -104,6 +104,14 @@ CREATE TABLE ultimate1_1_menu_item (
 	UNIQUE KEY (menuID, menuItemName)
 );
 
+DROP TABLE IF EXISTS ultimate1_1_menu_to_block;
+CREATE TABLE ultimate1_1_menu_to_block (
+	menuID INT(10) NOT NULL,
+	blockID INT(10) NOT NULL,
+	KEY (menuID),
+	KEY (blockID)
+);
+
 DROP TABLE IF EXISTS ultimate1_1_page;
 CREATE TABLE ultimate1_1_page (
 	pageID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -157,6 +165,8 @@ ALTER TABLE ultimate1_1_content_to_page ADD FOREIGN KEY (pageID) REFERENCES ulti
 ALTER TABLE ultimate1_1_link_to_category ADD FOREIGN KEY (linkID) REFERENCES ultimate1_1_link (linkID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_link_to_category ADD FOREIGN KEY (categoryID) REFERENCES wcf1_category (categoryID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_menu_item ADD FOREIGN KEY (menuID) REFERENCES ultimate1_1_menu (menuID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_menu_to_block ADD FOREIGN KEY (menuID) REFERENCES ultimate1_1_menu (menuID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_menu_to_block ADD FOREIGN KEY (blockID) REFERENCES ultimate1_1_block (blockID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_page ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_template ADD FOREIGN KEY (packageID) REFERENCES wcf1_package (packageID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_user_group_to_content ADD FOREIGN KEY (contentID) REFERENCES ultimate1_1_content (contentID) ON DELETE CASCADE;

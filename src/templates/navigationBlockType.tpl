@@ -1,4 +1,4 @@
-<div class="block block-type-navigation">
+<div id="navigationBlock-{$blockID}" class="block block-type-navigation">
 	<!-- main menu -->
 	{if $__wcf->getCustomMenu()->getMenuItems('')|count > 0}
 	<nav id="mainMenu" class="mainMenu">
@@ -15,7 +15,7 @@
 	<nav class="navigation navigationHeader clearfix">
 		<!-- sub menu -->
 		{foreach from=$__wcf->getCustomMenu()->getMenuItems('') item=menuItem}
-			{if $__wcf->getCustomMenu()->getMenuItems($menuItem->menuItemName)|count > 0 && $__wcf->getPageMenu()->getActiveMenuItem() == $menuItem->menuItem}
+			{if $__wcf->getCustomMenu()->getMenuItems($menuItem->menuItemName)|count > 0 && $__wcf->getCustomMenu()->getActiveMenuItem() == $menuItem->menuItem}
 				<ul>
 					{foreach from=$__wcf->getCustomMenu()->getMenuItems($menuItem->menuItemName) item=subMenuItem}
 						<li><a href="{$subMenuItem->getProcessor()->getLink()}"><span>{lang}{$subMenuItem->menuItemName}{/lang}</span></a>{if $subMenuItem->getProcessor()->getNotifications()} <span class="wcf-badge">{#$subMenuItem->getProcessor()->getNotifications()}</span>{/if}</li>
@@ -28,6 +28,8 @@
 		<ul class="navigationIcons">
 			<li id="toBottomLink"><a href="{$__wcf->getAnchor('bottom')}" title="{lang}wcf.global.scrollDown{/lang}" class="jsTooltip"><img src="{icon size='S'}circleArrowDownColored{/icon}" alt="" class="icon16" /> <span class="invisible">{lang}wcf.global.scrollDown{/lang}</span></a></li>
 			<li id="sitemap"><a title="{lang}wcf.sitemap.title{/lang}" class="jsTooltip"><img src="{icon size='S'}switchColored{/icon}" alt="" class="icon16" /> <span class="invisible">{lang}wcf.sitemap.title{/lang}</span></a></li>
+			{if $headerNavigation|isset}{@$headerNavigation}{/if}
+			{event name='headerNavigation'}
 		</ul>
 	</nav>
 	<!-- /navigation -->

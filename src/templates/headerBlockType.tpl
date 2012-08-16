@@ -1,4 +1,4 @@
-<div class="block block-type-header">
+<div id="headerBlock-{$blockID}" class="block block-type-header">
 	<!-- logo -->
 	<div id="logo" class="logo">
 		<!-- clickable area -->

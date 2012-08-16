@@ -26,8 +26,8 @@
 		</nav>
 		<!-- /top menu -->
 		
-		{if $headerBlock}{include file='header'}{/if}
-		{if $navigationBlock}{include file='navigation'}{/if}
+		{if $headerBlock}{include file='headerBlockType'}{/if}
+		{if $navigationBlock}{include file='navigationBlockType'}{/if}
 		
 	</div>
 </header>
