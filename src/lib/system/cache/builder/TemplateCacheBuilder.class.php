@@ -9,11 +9,11 @@ use wcf\system\cache\builder\ICacheBuilder;
  * @author		Jim Martens
  * @copyright	2012 Jim Martens
  * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
- * @package		de.plugins-zum-selberbauen.ultimateCore
+ * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.cache.builder
  * @category	Ultimate CMS
  */
-class UltimateTemplateCacheBuilder implements ICacheBuilder {
+class TemplateCacheBuilder implements ICacheBuilder {
 	/**
 	 * @see	\wcf\system\cache\builder\ICacheBuilder::getData()
 	 */
@@ -27,10 +27,11 @@ class UltimateTemplateCacheBuilder implements ICacheBuilder {
 		
 		$templateList->readObjects();
 		$templates = $templateList->getObjects();
+		$templateIDs = $templateList->getObjectIDs();
 		if (empty($templates)) return $data;
 		
 		$data['templates'] = $templates;
-		$data['templateIDs'] = array_keys($templates);
+		$data['templateIDs'] = $templateIDs;
 		
 		return $data;
 	}

@@ -10,11 +10,11 @@ use wcf\system\WCF;
  * @author		Jim Martens
  * @copyright	2012 Jim Martens
  * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
- * @package		de.plugins-zum-selberbauen.ultimateCore
+ * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.cache.builder
  * @category	Ultimate CMS
  */
-class UltimateBlockCacheBuilder implements ICacheBuilder {
+class BlockCacheBuilder implements ICacheBuilder {
 	/**
 	 * @see	\wcf\system\cache\builder\ICacheBuilder::getData()
 	 */
@@ -29,10 +29,11 @@ class UltimateBlockCacheBuilder implements ICacheBuilder {
 		
 		$blockList->readObjects();
 		$blocks = $blockList->getObjects();
+		$blockIDs = $blockList->getObjectsIDs();
 		if (empty($blocks)) return $data;
 		
 		$data['blocks'] = $blocks;
-		$data['blockIDs'] = array_keys($blocks);
+		$data['blockIDs'] = $blockIDs;
 		
 		foreach ($data['blocks'] as $blockID => $block) {
 			/* @var $block \wcf\data\ultimate\block\Block */

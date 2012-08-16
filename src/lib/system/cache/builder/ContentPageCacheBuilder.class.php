@@ -1,5 +1,6 @@
 <?php
 namespace ultimate\system\cache\builder;
+use ultimate\data\content\TaggedContent;
 use ultimate\data\page\PageList;
 use wcf\system\cache\builder\ICacheBuilder;
 
@@ -30,7 +31,7 @@ class ContentPageCacheBuilder implements ICacheBuilder {
 		foreach ($pages as $pageID => $page) {
 			/* @var $page \ultimate\data\page\Page */
 			$content = $page->getContent();
-			$data['contentsToPageID'][$pageID] = $content;
+			$data['contentsToPageID'][$pageID] = new TaggedContent($content);
 			$data['contentIDsToPageID'][$pageID] = $content->__get('contentID');
 		}
 		
