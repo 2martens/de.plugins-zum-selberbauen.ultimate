@@ -97,7 +97,9 @@
 							</td>
 							<td class="columnTags">
 								<p>
-									{implode from=$content->tags[$__wcf->getLanguage()->languageID] key=tagID item=tag}<a href="{link controller='UltimateContentList'}tagID={@$tag->tagID}{/link}">{@$tag->getTitle()}</a>{/implode}
+									{if $content->tags|isset}
+										{implode from=$content->tags[$__wcf->getLanguage()->languageID] key=tagID item=tag}<a href="{link controller='UltimateContentList'}tagID={@$tag->tagID}{/link}">{@$tag->getTitle()}</a>{/implode}
+									{/if}
 								</p>
 							</td>
 							{assign var='englishAccent' value={@ULTIMATE_GENERAL_ENGLISHLANGUAGE}}

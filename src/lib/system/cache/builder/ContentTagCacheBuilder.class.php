@@ -1,5 +1,7 @@
 <?php
 namespace ultimate\system\cache\builder;
+use ultimate\data\content\TaggedContent;
+
 use wcf\system\cache\CacheHandler;
 
 use ultimate\data\content\ContentList;
@@ -44,9 +46,10 @@ class ContentTagCacheBuilder implements ICacheBuilder {
 			foreach ($contents as $contentID => $content) {
 				/* @var $content \ultimate\data\content\Content */
 				/* @var $__tags \wcf\data\tag\Tag[] */
-				$__tags = $content->__get('tags');
+				$taggedContent = new TaggedContent($content);
+				$__tags = $taggedContent->tags;
 				if (!array_key_exists($tagID, array_keys($__tags))) continue;
-				$data['contentsToTagID'][$tagID][$contentID] = $content;
+				$data['contentsToTagID'][$tagID][$contentID] = $taggedContent;
 			}
 		}
 		return $data;

@@ -7,7 +7,6 @@ use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\ValidateActionException;
 use wcf\util\ArrayUtil;
 
-
 /**
  * Executes content-related functions.
  * 

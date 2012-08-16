@@ -1,5 +1,7 @@
 <?php
 namespace ultimate\data\content;
+use wcf\system\tagging\TagEngine;
+
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 use wcf\system\cache\CacheHandler;
@@ -37,6 +39,9 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 		WCF::getDB()->beginTransaction();
 		foreach ($objectIDs as $objectID) {
 			$statement->executeUnbuffered(array('ultimate.content.'.$objectID.'.%'));
+			$taggedContent = new TaggedContent(new Content($objectID));
+			$languageIDs = array_keys($taggedContent->tags);
+			TagEngine::getInstance()->deleteObjectTags($taggedContent, $languageIDs);
 		}
 		WCF::getDB()->commitTransaction();
 		return parent::deleteAll($objectIDs);

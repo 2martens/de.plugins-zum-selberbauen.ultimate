@@ -38,23 +38,49 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledDatabase
 	protected $contentCategoryTable = 'content_to_category';
 	
 	/**
-	 * Contains all contents in this category.
-	 * @var	\ultimate\data\content\Content[]
+	 * Returns the title of this category (without language interpreting).
+	 * 
+	 * To use language interpreting, use magic toString method.
+	 * 
+	 * @return	string
 	 */
-	public $contents = array();
+	public function getTitle() {
+		return $this->categoryTitle;
+	}
 	
 	/**
-	 * Contains all child categories of this category.
-	 * @var	\ultimate\data\category\Category[]
+	 * Returns the title of this category.
+	 * 
+	 * @return	string
 	 */
-	public $childCategories = array();
+	public function __toString() {
+		return WCF::getLanguage()->get($this->categoryTitle);
+	}
+	
+	/**
+	 * Returns all child categories of this category.
+	 *
+	 * @return	\ultimate\data\category\Category[]
+	 */
+	protected function getChildCategories() {
+		$sql = 'SELECT *
+		        FROM   ultimate'.ULTIMATE_N.'_'.self::$databaseTableName.'
+		        WHERE  categoryParent = ?';
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array($this->categoryID));
+		$categories = array();
+		while ($category = $statement->fetchObject(get_class($this))) {
+			$categories[$category->categoryID] = $category;
+		}
+		return $categories;
+	}
 	
 	/**
 	 * Returns all contents in this category.
-	 * 
+	 *
 	 * @return	\ultimate\data\content\Content[]
 	 */
-	public function getContents() {
+	protected function getContents() {
 		$sql = 'SELECT    content.*
 		        FROM      ultimate'.ULTIMATE_N.'_'.$this->contentCategoryTable.' contentToCategory
 		        LEFT JOIN ultimate'.ULTIMATE_N.'_content content
@@ -68,45 +94,6 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledDatabase
 		}
 		return $contents;
 	}
-	
-	/**
-	 * Returns the title of this category (without language interpreting).
-	 * 
-	 * To use language interpreting, use magic toString method.
-	 * 
-	 * @return	string
-	 */
-	public function getTitle() {
-		return $this->categoryTitle;
-	}
-	
-	/**
-	 * Returns all child categories of this category.
-	 * 
-	 * @return	\ultimate\data\category\Category[]
-	 */
-	public function getChildCategories() {
-		$sql = 'SELECT *
-		        FROM   ultimate'.ULTIMATE_N.'_'.self::$databaseTableName.'
-		        WHERE  categoryParent = ?';
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($this->categoryID));
-		$categories = array();
-		while ($category = $statement->fetchObject(get_class($this))) {
-			$categories[$category->categoryID] = $category;
-			$categories[$category->categoryID]->childCategories = $category->getChildCategories();
-		}
-		return $categories;
-	}
-	
-	/**
-	 * Returns the title of this category.
-	 * 
-	 * @return	string
-	 */
-	public function __toString() {
-		return WCF::getLanguage()->get($this->categoryTitle);
-	}
 
 	/**
 	 * @see	\wcf\data\DatabaseObject::handleData()
@@ -115,5 +102,7 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledDatabase
 		$data['categoryID'] = intval($data['categoryID']);
 		$data['categoryParent'] = intval($data['categoryParent']);
 		parent::handleData($data);
+		$this->data['childCategories'] = $this->getChildCategories();
+		$this->data['contents'] = $this->getContents();
 	}
 }
