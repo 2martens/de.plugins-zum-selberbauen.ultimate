@@ -1,6 +1,9 @@
 {include file='header'}
 {include file='wysiwyg'} 
 
+{include file='multipleLanguageInputJavascript' elementIdentifier='subject'}
+{include file='multipleLanguageInputJavascript' elementIdentifier='description'}
+{include file='multipleLanguageInputJavascript' elementIdentifier='text'}
 <header class="boxHeadline">
 	<hgroup>
 		<h1>{lang}wcf.acp.ultimate.content.{@$action}{/lang}</h1>
@@ -32,15 +35,6 @@
 			<dl{if $errorField == 'subject'} class="wcf-formError"{/if}>
 				<dt><label for="subject">{lang}wcf.acp.ultimate.content.title{/lang}</label></dt>
 				<dd>
-					<script type="text/javascript">
-					//<![CDATA[
-						$(function() {
-							var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
-							var $optionValues = { {implode from=$i18nValues['subject'] key=languageID item=value}'{@$languageID}': '{$value}'{/implode} };
-							new WCF.MultipleLanguageInput('subject', false, $optionValues, $availableLanguages);
-						});
-					//]]>
-					</script>
 					<input type="text" id="subject" name="subject" value="{@$i18nPlainValues['subject']}" class="long" required="required" placeholder="{lang}wcf.acp.ultimate.content.title.placeholder{/lang}" />
 					{if $errorField == 'subject'}
 						<small class="wcf-innerError">
@@ -56,15 +50,6 @@
 			<dl{if $errorField == 'description'} class="wcf-formError"{/if}>
 				<dt><label for="description">{lang}wcf.acp.ultimate.content.description{/lang}</label></dt>
 				<dd>
-					<script type="text/javascript">
-					//<![CDATA[
-						$(function() {
-							var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
-							var $optionValues = { {implode from=$i18nValues['description'] key=languageID item=value}'{@$languageID}': '{$value}'{/implode} };
-							new WCF.MultipleLanguageInput('description', false, $optionValues, $availableLanguages);
-						});
-					//]]>
-					</script>
 					<input type="text" id="description" name="description" value="{@$i18nPlainValues['description']}" class="long" required="required" placeholder="{lang}wcf.acp.ultimate.content.description.placeholder{/lang}" />
 					{if $errorField == 'description'}
 						<small class="wcf-innerError">
@@ -167,15 +152,6 @@
 			<dl{if $errorField == 'text'} class="wcf-formError"{/if}>
 				<dt><label for="text">{lang}wcf.acp.ultimate.content.text{/lang}</label></dt>
 				<dd>
-					<script type="text/javascript">
-					//<![CDATA[
-						$(function() {
-							var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
-							var $optionValues = { {implode from=$i18nValues['text'] key=languageID item=value}'{@$languageID}': "{$value}"{/implode} };
-							new WCF.MultipleLanguageInput('text', false, $optionValues, $availableLanguages);
-						});
-					//]]>
-					</script>
 					<textarea id="text" name="text" rows="15" cols="40" class="long" {* placeholder="{lang}wcf.acp.ultimate.content.text.placeholder{/lang}"*} >{@$i18nPlainValues['text']}</textarea>
 					
 					{if $errorField == 'text'}

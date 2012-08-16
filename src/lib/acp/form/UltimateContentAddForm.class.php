@@ -177,6 +177,7 @@ class UltimateContentAddForm extends MessageForm {
 		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
 		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
 		$this->categories = CacheHandler::getInstance()->get($cacheName, 'categories');
+		unset ($this->categories[1]);
 		
 		$cacheName = 'usergroups';
 		$cacheBuilderClassName = '\wcf\system\cache\builder\UserGroupCacheBuilder';
@@ -205,14 +206,16 @@ class UltimateContentAddForm extends MessageForm {
 		}
 		
 		// fill status options
-		$this->statusOptions = array(
-			0 => WCF::getLanguage()->get('wcf.acp.ultimate.status.draft'),
-			1 => WCF::getLanguage()->get('wcf.acp.ultimate.status.pendingReview'),
-		);
+		$this->statusOptions[0] = WCF::getLanguage()->get('wcf.acp.ultimate.status.draft');
+		$this->statusOptions[1] = WCF::getLanguage()->get('wcf.acp.ultimate.status.pendingReview');
 		
 		// fill publishDate with default value (today)
-		$this->startTime = TIME_NOW;
-		$dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
+		/* @var $dateTime \DateTime */
+		$dateTime = null;
+		if (isset($this->content)) {
+			$dateTime = $this->content->__get('publishDateObject');
+		}
+		if (!$dateTime->getTimestamp()) $dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
 		$dateTime->setTimezone(WCF::getUser()->getTimezone());
 		$date = WCF::getLanguage()->getDynamicVariable(
 			'ultimate.date.dateFormat',
@@ -231,6 +234,7 @@ class UltimateContentAddForm extends MessageForm {
 			)
 		);
 		$this->publishDate = $dateTime->format($format);
+		$this->publishDateTimestamp = $dateTime->getTimestamp();
 		
 		parent::readData();
 	}
@@ -521,6 +525,10 @@ class UltimateContentAddForm extends MessageForm {
 			if (in_array($categoryID, $categoryIDs)) continue;
 			throw new UserInputException('category', 'invalidIDs');
 			break;
+		}
+		// add default category
+		if (empty($this->categoryIDs)) {
+			$this->categoryIDs[] = 1;
 		}
 	}
 	

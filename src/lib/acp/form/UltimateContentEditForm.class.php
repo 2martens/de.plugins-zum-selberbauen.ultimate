@@ -84,26 +84,6 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 	 * @see	\wcf\page\IPage::readData()
 	 */
 	public function readData() {
-			// reading cache
-			$cacheName = 'category';
-			$cacheBuilderClassName = '\ultimate\system\cache\builder\CategoryCacheBuilder';
-			$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-			CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-			$this->categories = CacheHandler::getInstance()->get($cacheName, 'categories');
-			
-			$cacheName = 'usergroups';
-			$cacheBuilderClassName = '\wcf\system\cache\builder\UserGroupCacheBuilder';
-			$file = WCF_DIR.'cache/cache.'.$cacheName.'.php';
-			CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-			$this->groups = CacheHandler::getInstance()->get($cacheName, 'groups');
-			
-			// read tags
-			$cacheName = 'content-tag';
-			$cacheBuilderClassName = '\ultimate\system\cache\builder\ContentTagCloudCacheBuilder';
-			$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-			CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-			$tags = CacheHandler::getInstance()->get($cacheName);
-			
 			// get languages
 			$languages = WCF::getLanguage()->getLanguages();
 			
@@ -111,45 +91,11 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 			/* @var $tag \wcf\data\tag\TagCloudTag */
 			foreach ($languages as $languageID => $language) {
 				// group tags by language
-				$this->availableTags[$languageID] = array();
 				$this->tags[$languageID] = Tag::buildString(TagEngine::getInstance()->getObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->content->__get('contentID'), $languageID));	
-				foreach ($tags as $tagName => $tag) {
-					if ($tag->__get('languageID') != $languageID) continue;
-					$this->availableTags[$languageID] = $tag;
-				}
 			}
-			
-			/* @var $dateTime \DateTime */
-			$dateTime = $this->content->__get('publishDateObject');
-			if (!$dateTime->getTimestamp()) {
-				$dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
-			}
-			$dateTime->setTimezone(WCF::getUser()->getTimezone());
-			$date = WCF::getLanguage()->getDynamicVariable(
-				'ultimate.date.dateFormat',
-				array(
-					'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
-				)
-			);
-			$time = WCF::getLanguage()->get('wcf.date.timeFormat');
-			$format = str_replace(
-				'%time%',
-				$time,
-				str_replace(
-					'%date%',
-					$date,
-					WCF::getLanguage()->get('ultimate.date.dateTimeFormat')
-				)
-			);
-			$this->publishDate = $dateTime->format($format);
-			$this->publishDateTimestamp = $dateTime->getTimestamp();
 			
 			// get status data
 			$this->statusID = $this->content->__get('status');
-			$this->statusOptions = array(
-				0 => WCF::getLanguage()->get('wcf.acp.ultimate.status.draft'),
-				1 => WCF::getLanguage()->get('wcf.acp.ultimate.status.pendingReview'),
-			);
 			
 			// fill publish button with fitting language
 			$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.publish');
@@ -186,7 +132,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 				I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->description, 'ultimate.content.\d+.contentDescription');
 				I18nHandler::getInstance()->setOptions('text', PACKAGE_ID, $this->text, 'ultimate.content.\d+.contentText');
 			}
-		MessageForm::readData();
+			parent::readData();
 	}
 	
 	/**
