@@ -45,8 +45,8 @@ class BlockTypeHandler extends SingletonFactory {
 	/**
 	 * Handles the request.
 	 * 
-	 * @since	1.0.0
-	 * @internal Calls the method getHTML on each relevant BlockType.
+	 * @since		1.0.0
+	 * @internal	Calls the method getHTML on each relevant BlockType.
 	 * 
 	 * @param	string	$requestType
 	 * @param	integer	$templateID
@@ -80,9 +80,9 @@ class BlockTypeHandler extends SingletonFactory {
 	 * Reads the templates from cache.
 	 */
 	protected function loadCache() {
-		$cacheName = 'ultimate-template-'.PACKAGE_ID;
-		$cacheBuilderClassName = '\wcf\system\cache\builder\UltimateTemplateCacheBuilder';
-		$file = WCF_DIR.'cache/cache.'.$cacheName.'.php';
+		$cacheName = 'template';
+		$cacheBuilderClassName = '\ultimate\system\cache\builder\TemplateCacheBuilder';
+		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
 		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
 		$this->objects = CacheHandler::getInstance()->get($cacheName, 'templates');
 	}
