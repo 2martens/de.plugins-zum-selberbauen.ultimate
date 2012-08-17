@@ -65,7 +65,7 @@ class BlockTypeHandler extends SingletonFactory {
 	}
 	
 	/**
-	 * Reads the templates from cache.
+	 * Reads the block types from cache.
 	 * 
 	 * @since	1.0.0
 	 */
