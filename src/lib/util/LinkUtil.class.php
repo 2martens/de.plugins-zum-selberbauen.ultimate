@@ -132,23 +132,12 @@ class LinkUtil {
 	}
 	
 	/**
-	 * Loads the cache.
-	 *
-	 * @return	\ultimate\data\link\CategorizedLink[]
-	 */
-	protected static function loadCache($cache, $cacheBuilderClass, $cacheIndex) {
-		$file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
-		CacheHandler::getInstance()->addResource($cache, $file, $cacheBuilderClass);
-		return CacheHandler::getInstance()->get($cache, $cacheIndex);
-	}
-	
-	/**
 	 * Parses a given URL and encodes it to punycode if necessary.
-	 * 
+	 *
 	 * @param	string	$url
 	 * @return	string|false	the parsed URL or false on failure
 	 */
-	protected static function parseURL($url) {
+	public static function parseURL($url) {
 		$hostname = parse_url($url);
 		if (isset($hostname) && $hostname !== false && isset($hostname['host'])) {
 			$hostname = StringUtil::trim($hostname['host']);
@@ -165,6 +154,17 @@ class LinkUtil {
 			return false;
 		}
 		return $url;
+	}
+	
+	/**
+	 * Loads the cache.
+	 *
+	 * @return	\ultimate\data\link\CategorizedLink[]
+	 */
+	protected static function loadCache($cache, $cacheBuilderClass, $cacheIndex) {
+		$file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
+		CacheHandler::getInstance()->addResource($cache, $file, $cacheBuilderClass);
+		return CacheHandler::getInstance()->get($cache, $cacheIndex);
 	}
 	
 	/**
