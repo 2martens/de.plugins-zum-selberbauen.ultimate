@@ -6,6 +6,7 @@ CREATE TABLE ultimate1_1_block (
 	blockTypeID INT(10) NOT NULL,
 	query VARCHAR(255) NOT NULL DEFAULT '',
 	parameters VARCHAR(255) NOT NULL DEFAULT '',
+	additionalData TEXT NOT NULL,
 	KEY (blockTypeID)
 );
 
@@ -83,6 +84,12 @@ CREATE TABLE ultimate1_1_link_to_category (
 	categoryID INT(10) NOT NULL,
 	KEY (linkID),
 	KEY (categoryID)
+);
+
+DROP TABLE IF EXISTS ultimate1_1_media_mimetype;
+CREATE TABLE ultimate1_1_media_mimetype (
+	mimeTypeID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	mimeType VARCHAR(255) NOT NULL DEFAULT ''
 );
 
 DROP TABLE IF EXISTS ultimate1_1_menu;
