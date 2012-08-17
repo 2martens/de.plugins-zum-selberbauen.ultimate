@@ -19,11 +19,6 @@ class ContentBlockType extends AbstractBlockType {
 	protected $templateName = 'contentBlockType';
 	
 	/**
-	 * @see \ultimate\system\blocktype\AbstractBlockType::$useTemplate
-	 */
-	protected $useTemplate = false;
-	
-	/**
 	 * @see \ultimate\system\blocktype\AbstractBlockType::$cacheName
 	 */
 	protected $cacheName = 'content';
