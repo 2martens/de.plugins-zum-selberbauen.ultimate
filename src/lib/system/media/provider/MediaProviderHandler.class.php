@@ -44,6 +44,10 @@ class MediaProviderHandler extends SingletonFactory {
 		while (false !== ($entry = $dir->read())) {
 			// stripping away .class.php {10}
 			$className = substr($entry, 0, strlen($entry) - 10);
+			// checking for AbstractMediaProvider, IMediaProvider and this file
+			if ($className == 'AbstractMediaProvider' 
+				|| $className == 'IMediaProvider' 
+				|| $className == 'MediaProviderHandler') continue;
 			$className = __NAMESPACE__.'\\'.$className;
 			$this->mediaProviders[] = new $className();
 		}
