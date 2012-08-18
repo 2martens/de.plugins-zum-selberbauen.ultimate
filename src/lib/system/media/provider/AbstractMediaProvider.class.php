@@ -60,4 +60,15 @@ abstract class AbstractMediaProvider implements IMediaProvider {
 	protected function getAttributeHTML($name, $value) {
 		return $name.'="'.$value.'"';
 	}
+	
+	/**
+	 * Returns the embed source URL.
+	 *
+	 * @since	1.0.0
+	 * @internal Overwrite this method if you need it.
+	 *
+	 * @param	string	$source
+	 * @return	string
+	 */
+	protected function getEmbedSource($source) {}
 }
