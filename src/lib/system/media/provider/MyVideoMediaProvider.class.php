@@ -40,7 +40,7 @@ class MyVideoMediaProvider extends AbstractMediaProvider {
 	}
 	
 	protected function getEmbedSource($source) {
-		$regex = '^http:\/\/(?:www\.myvideo\.de)\/watch\/(\d{7,})';
+		$regex = '^http:\/\/(?:www\.myvideo\.de)\/watch\/(\d+)';
 		$regexObj = new Regex($regex);
 		if (!$regexObj->match($source)) {
 			throw new SystemException('invalid source', 0, 'The given source URL is not a valid MyVideo share link.');
