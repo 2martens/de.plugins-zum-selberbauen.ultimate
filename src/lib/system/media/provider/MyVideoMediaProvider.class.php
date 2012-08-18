@@ -39,18 +39,10 @@ class MyVideoMediaProvider extends AbstractMediaProvider {
 		return $html;
 	}
 	
-	/**
-	 * Returns the embed source URL.
-	 *
-	 * @since	1.0.0
-	 *
-	 * @param	string	$source
-	 * @return	string
-	 */
 	protected function getEmbedSource($source) {
 		$regex = '^http:\/\/(?:www\.myvideo\.de)\/watch\/(\d{7,})';
 		$regexObj = new Regex($regex);
-		if (!$regexObj->match($source, true)) {
+		if (!$regexObj->match($source)) {
 			throw new SystemException('invalid source', 0, 'The given source URL is not a valid MyVideo share link.');
 		}
 		$matches = $regexObj->getMatches();

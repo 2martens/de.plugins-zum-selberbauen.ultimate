@@ -32,16 +32,8 @@ class YoutubeMediaProvider extends AbstractMediaProvider {
 		return parent::getHTML($source, $height, $width);
 	}
 	
-	/**
-	 * Returns the embed source URL.
-	 * 
-	 * @since	1.0.0
-	 * 
-	 * @param	string	$source
-	 * @return	string
-	 */
 	protected function getEmbedSource($source) {
-		$regex = '^http:\/\/(?:www\.youtube\.com|youtu\.be)\/(?:watch\?v=)?(\w{11})([\?&]\w+=[\w\d]+(?:[\?&]\w+=[\w\d]+)*)?';
+		$regex = '^http:\/\/(?:www\.youtube\.com|youtu\.be)\/(?:watch\?v=)?(\w{11,})([\?&]\w+=[\w\d]+(?:[\?&]\w+=[\w\d]+)*)?';
 		$regexObj = new Regex($regex);
 		if (!$regexObj->match($source, true)) {
 			throw new SystemException('invalid source', 0, 'The given source URL is not a valid Youtube share link.');
