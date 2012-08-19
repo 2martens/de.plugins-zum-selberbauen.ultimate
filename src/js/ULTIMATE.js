@@ -18,11 +18,14 @@
 
 /**
  * Initialize the UTLIMATE namespace.
+ * @namespace
  */
 var ULTIMATE = {};
 
 /**
  * JSON API
+ * 
+ * @since	version 1.0.0
  */
 ULTIMATE.JSON = {
 	
@@ -33,8 +36,8 @@ ULTIMATE.JSON = {
 	/**
 	 * Encodes a given variable.
 	 * 
-	 * @param	Object	variable
-	 * @return	string
+	 * @param	{Object}	variable
+	 * @return	{String}
 	 */
 	encode: function(variable) {
 		var type = typeof variable;
@@ -80,57 +83,60 @@ ULTIMATE.JSON = {
 
 /**
  * Namespace for ULTIMATE.Button
+ * @namespace
  */
 ULTIMATE.Button = {};
 
 /**
  * Handles button replacements.
  * 
- * @param	String	buttonID
- * @param	String	checkElementID
- * @param	String	action
+ * @param	{String}	buttonID
+ * @param	{String}	checkElementID
+ * @param	{String}	action
+ * @constructor
+ * @since	version 1.0.0
  */
 ULTIMATE.Button.Replacement = function(buttonID, checkElementID, action) { this.init(buttonID, checkElementID, action); };
 ULTIMATE.Button.Replacement.prototype = {
 	/**
 	 * target input[type=submit] element
-	 * @var	jQuery
+	 * @type	jQuery
 	 */
 	_button: null,
 	
 	/**
 	 * the button value
-	 * @var String
+	 * @type String
 	 */
 	_buttonValue: '',
 	
 	/**
 	 * element to check for changes
-	 * @var	jQuery
+	 * @type	jQuery
 	 */
 	_checkElement: null,
 	
 	/**
 	 * the initial timestamp
-	 * @var	integer
+	 * @type	Number
 	 */
 	_initialValueDateTime: 0,
 	
 	/**
 	 * the initial status id
-	 * @var	integer
+	 * @type	Number
 	 */
 	_initialStatusID: 0,
 	
 	/**
 	 * action parameter
-	 * @var	String
+	 * @type	String
 	 */
 	_action: '',
 	
 	/**
 	 * Contains the language variables for the save action.
-	 * @var	Object
+	 * @type	Object
 	 */
 	_saveMap: {
 		0: 'ultimate.button.saveAsDraft',
@@ -139,7 +145,7 @@ ULTIMATE.Button.Replacement.prototype = {
 	
 	/**
 	 * Contains the language variables for the publish action.
-	 * @var	object
+	 * @type	Object
 	 */
 	_publishMap: {
 		0: 'ultimate.button.publish',
@@ -149,6 +155,10 @@ ULTIMATE.Button.Replacement.prototype = {
 	
 	/**
 	 * Initializes the ButtonReplacement API.
+	 * 
+	 * @param	{String}	buttonID
+	 * @param	{String}	checkElementID
+	 * @param	{String}	action
 	 */
 	init: function(buttonID, checkElementID, action) {
 		this._button = $('#' + $.wcfEscapeID(buttonID));
@@ -167,6 +177,9 @@ ULTIMATE.Button.Replacement.prototype = {
 		this._change();
 	},
 
+	/**
+	 * Changes button label.
+	 */
 	_change: function() {
 		if (this._action == 'save') {
 			var $currentValue = this._checkElement.val();
@@ -202,13 +215,18 @@ ULTIMATE.Button.Replacement.prototype = {
  * Global permission storage.
  * 
  * @see	WCF.Dictionary
+ * @since	version 1.0.0
  */
 ULTIMATE.Permission = {
+	/**
+	 * Contains the permissions.
+	 * @type	WCF.Dictionary
+	 */
 	_variables: new WCF.Dictionary(),
 	
 	/**
-	 * @param	String	key
-	 * @param	boolean	value
+	 * @param	{String}	key
+	 * @param	{Boolean}	value
 	 * @see		WCF.Dictionary.add()
 	 */
 	add: function(key, value) {
@@ -225,8 +243,8 @@ ULTIMATE.Permission = {
 	/**
 	 * Retrieves a variable.
 	 * 
-	 * @param	String	key
-	 * @return	boolean
+	 * @param	{String}	key
+	 * @return	{Boolean}
 	 */
 	get: function(key, parameters) {
 		// initialize parameters with an empty object
@@ -245,83 +263,87 @@ ULTIMATE.Permission = {
 
 /**
  * Namespace for ULTIMATE.Menu
+ * @namespace
  */
 ULTIMATE.Menu = {};
 
 /**
  * Namespace for ULTIMATE.Menu.Item
+ * @namespace
  */
 ULTIMATE.Menu.Item = {};
 
 /**
- * Adds menu items to a menu item list.
+ * Creates a new MenuItemTransfer.
  * 
- * @param	String	elementID
- * @param	String	menuItemListID
- * @param	String	className
- * @param	integer	offset
- * @param	String	type
+ * @param	{String}	elementID
+ * @param	{String}	menuItemListID
+ * @param	{String}	className
+ * @param	{Number}	offset
+ * @param	{String}	type
+ * @class	Adds menu items to a menu item list.
+ * @since	version 1.0.0
  */
 ULTIMATE.Menu.Item.Transfer = function(elementID, menuItemListID, className, offset, type) { this.init(elementID, menuItemListID, className, offset, type); };
 ULTIMATE.Menu.Item.Transfer.prototype = {
 	
 	/**
 	 * Contains the element from which the items should be transferred.
-	 * @var	jQuery
+	 * @tspe	jQuery
 	 */
 	_element: null,
 	
 	/**
 	 * menu item list id
-	 * @var	String
+	 * @type	String
 	 */
 	_menuItemListID: '',
 	
 	/**
 	 * action class name
-	 * @var	String
+	 * @type	String
 	 */
 	_className: '',
 	
 	/**
 	 * notification object
-	 * @var	WCF.System.Notification
+	 * @type	WCF.System.Notification
 	 */
 	_notification: null,
 	
 	/**
 	 * show order offset
-	 * @var	integer
+	 * @type	Number
 	 */
 	_offset: 0,
 	
 	/**
 	 * proxy object
-	 * @var	WCF.Action.Proxy
+	 * @type	WCF.Action.Proxy
 	 */
 	_proxy: null,
 	
 	/**
 	 * object structure
-	 * @var	object
+	 * @type	Object
 	 */
 	_structure: { },
 	
 	/**
 	 * type of IDs (page, category, content, custom)
-	 * @var	String
+	 * @type	String
 	 */
 	_type: '',
 	
 	/**
 	 * true if the submit is done
-	 * @var	boolean
+	 * @type	Boolean
 	 */
 	_submitDone: false,
 	
 	/**
 	 * true if the request should be sent
-	 * @var	boolean
+	 * @type	Boolean
 	 */
 	_sendRequest: false,
 	
@@ -329,8 +351,8 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	/**
 	 * Initializes a menu item transfer.
 	 * 
-	 * @param	String	elementID
-	 * @param	String	menuItemListID
+	 * @param	{String}	elementID
+	 * @param	{String}	menuItemListID
 	 */
 	init: function(elementID, menuItemListID, className, offset, type) {
 		this._element = $('#' + $.wcfEscapeID(elementID));
@@ -359,7 +381,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	
 	/**
 	 * Called each time a menu item is removed with empty().remove().
-	 * @param	jQuery.event	event
+	 * @param	{jQuery.event}	event
 	 */
 	_empty: function(event) {
 		var $target = $(event.target);
@@ -408,8 +430,8 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	/**
 	 * Stops the form submit event.
 	 * 
-	 * @param	jQuery.Event	event
-	 * @return	boolean
+	 * @param	{jQuery.event}	event
+	 * @return	{Boolean}
 	 */
 	_stopFormSubmit: function(event) {
 		event.preventDefault();
@@ -525,8 +547,8 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	/**
 	 * Builds all nested elements.
 	 * 
-	 * @param	jQuery	$parent
-	 * @param	integer	$parentID
+	 * @param	{jQuery}	$parent
+	 * @param	{Number}	$parentID
 	 */
 	_getNestedElements: function($parent, $parentID) {
 		$parent.find('ul > li > label > input[type="checkbox"]').each($.proxy(function(index, listItem) {
@@ -552,9 +574,9 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	/**
 	 * Shows notification upon success.
 	 * 
-	 * @param	Object	data
-	 * @param	String	textStatus
-	 * @param	jQuery	jqXHR
+	 * @param	{Object}	data
+	 * @param	{String}	textStatus
+	 * @param	{jQuery}	jqXHR
 	 */
 	_success: function(data, textStatus, jqXHR) {
 		if (this._notification === null) {
@@ -606,3 +628,36 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	}
 };
 
+/**
+ * Creates a new VisualEditor.
+ * 
+ * @param	{String}	elementID
+ * @class	Represents the VisualEditor.
+ */
+ULTIMATE.VisualEditor = function(elementID) { this.init(elementID); };
+ULTIMATE.VisualEditor.prototype = {
+	/**
+	 * Contains the element.
+	 * @type jQuery
+	 */
+	_element: null,
+	
+	/**
+	 * Initializes the VisualEditor.
+	 * 
+	 * @param	{String}	elementID
+	 */
+	init: function(elementID) {
+		this._element = $('#' + $.wcfEscapeID(elementID));
+		this._element.selectArea({
+			select: function(top, left, bottom, right, width, height) {
+				var div = $('<div class="selected" />').hide().css({
+					'top': top,
+					'left': left,
+					'width': width,
+					'height': height
+				});
+			}
+		});
+	}
+};
