@@ -13,8 +13,18 @@
 		$( this ).triggerHandler( "empty" );
 		return _empty.call( $(this) );
 	};
-	
 })( jQuery );
+
+// extends $.ui.resizable to avoid using deprecated method
+(function($, undefined) {
+	$.extend($.ui.resizable, {
+		_propagate: function(n, event) {
+			// prevents deprecated usage
+			n.call(this, [event, this.ui()]);
+			(n != "resize" && this._trigger(n, event, this.ui()));
+		}
+	});
+});
 
 /**
  * Initialize the UTLIMATE namespace.
@@ -381,7 +391,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	
 	/**
 	 * Called each time a menu item is removed with empty().remove().
-	 * @param	{jQuery.event}	event
+	 * @param	{jQuery.Event}	event
 	 */
 	_empty: function(event) {
 		var $target = $(event.target);
@@ -430,7 +440,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	/**
 	 * Stops the form submit event.
 	 * 
-	 * @param	{jQuery.event}	event
+	 * @param	{jQuery.Event}	event
 	 * @return	{Boolean}
 	 */
 	_stopFormSubmit: function(event) {
@@ -631,28 +641,149 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 /**
  * Creates a new VisualEditor.
  * 
- * @param	{String}	elementID
+ * @param	{String}	selectAreaID
+ * @param	{String}	selectAreaContainerID
+ * @param	{String}	selectBlockTypeDialogID
  * @class	Represents the VisualEditor.
  */
-ULTIMATE.VisualEditor = function(elementID) { this.init(elementID); };
+ULTIMATE.VisualEditor = function(selectAreaID, selectAreaContainerID, selectBlockTypeDialogID) { this.init(selectAreaID, selectAreaContainerID, selectBlockTypeDialogID); };
 ULTIMATE.VisualEditor.prototype = {
 	/**
-	 * Contains the element.
-	 * @type jQuery
+	 * Contains the select area.
+	 * @type	jQuery
 	 */
-	_element: null,
+	_selectArea: null,
+	
+	/**
+	 * Contains the container for both the select area and the added Resizables.
+	 * @type	jQuery
+	 */
+	_selectAreaContainer: null,
+	
+	/**
+	 * Contains the select area container id.
+	 * @type	String
+	 */
+	_selectAreaContainerID: '',
+	
+	/**
+	 * Contains the select block type dialog id.
+	 * @type	String
+	 */
+	_selectBlockTypeDialogID: '',
 	
 	/**
 	 * Initializes the VisualEditor.
 	 * 
-	 * @param	{String}	elementID
+	 * @param	{String}	selectAreaID
+	 * @param	{String}	selectAreaContainerID
+	 * @param	{String}	selectBlockTypeDialogID
 	 */
-	init: function(elementID) {
-		this._element = $('#' + $.wcfEscapeID(elementID));
+	init: function(selectAreaID, selectAreaContainerID, selectBlockTypeDialogID) {
+		this._selectArea = $('#' + $.wcfEscapeID(selectAreaID));
+		this._selectAreaContainer = $('#' + $.wcfEscapeID(selectAreaContainerID));
+		this._selectAreaContainerID = $.wcfEscapeID(selectAreaContainerID);
+		this._selectBlockTypeDialogID = selectBlockTypeDialogID;
 		this._element.selectArea({
-			select: function(top, left, bottom, right, width, height) {
-				
-			}
+			select: $.proxy(this._select, this)
 		});
+		
+		// TODO add html for VisualEditor
+	},
+	
+	/**
+	 * Called each time an area was selected.
+	 * 
+	 * @param	{Integer}	top
+	 * @param	{Integer}	left
+	 * @param	{Integer}	bottom
+	 * @param	{Integer}	right
+	 * @param	{Integer}	width
+	 * @param	{Integer}	height
+	 */
+	_select: function(top, left, bottom, right, width, height) {
+		var $resizable = $('<div data-width="' + width + '" '
+			+ 'data-height="' + height + '" '
+			+ 'data-top="' + top + '" '
+			+ 'data-left="' + left + '" '
+			+ 'class="resizable" '
+			+ '></div>');
+		$resizable.resizable({
+			handles: 'all',
+			containment: '#' + this._containerID,
+			autoHide: true
+		});
+		$resizable.css({
+			top: top,
+			left: left,
+			width: width,
+			height: height,
+			position: absolute
+		});
+		$resizable.bind('resizestop', $.proxy(this._resizeStop, this));
+		$resizable.bind('resize', this._resize);
+		/* TODO replace against custom solution */
+		WCF.showDialog(this._dialogID, {
+			modal: false,
+			title: WCF.Language.get('ultimate.visualEditor.selectBlockType'),
+			zIndex: 10
+		});
+		
+		$resizable.appendTo(this._selectAreaContainer);
+	},
+	
+	/**
+	 * Called during the resize operation.
+	 * 
+	 * @param	{jQuery.event}	event
+	 * @param	{Object}		ui
+	 */
+	_resize: function(event, ui) {
+		var $resizables = $('.resizable');
+		var top = ui.position.top;
+		var left = ui.position.left;
+		var width = ui.size.width;
+		var height = ui.size.height;
+		
+		$resizables.each($.proxy(function(index, item) {
+			var $item = $(item);
+			var $position = $item.position();
+			var $width = $item.width();
+			var $height = $item.height();
+			
+			// exclude all other resizables which are unaffected
+			// and prevent further resizing if otherwise
+			if (($position.top + $height) < top) continue;
+			else {
+				$(this).resizable('option', 'maxHeight', height);
+			}
+			if (($position.left + $width) < left) continue;
+			else {
+				$(this).resizable('option', 'maxWidth', width);
+			}
+			if ((top + height) < $top) continue;
+			else {
+				$(this).resizable('option', 'maxHeight', height);
+			}
+			if ((left + width) < $left) continue;
+			else {
+				$(this).resizable('option', 'maxWidth', width);
+			}
+		}, this));
+	},
+	
+	/**
+	 * Called on the end of a resize operation.
+	 * 
+	 * @param	{jQuery.Event}	event
+	 * @param	{Object}		ui
+	 */
+	_resizeStop: function(event, ui) {
+		var width = ui.size.width;
+		var height = ui.size.height;
+		var top = ui.position.top;
+		var left = ui.position.left;
+		var $target = $(event.target);
+		$target.data('width', width).data('height', height).data('left', left).data('top', top);
 	}
 };
