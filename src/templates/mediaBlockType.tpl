@@ -13,4 +13,7 @@
 			<source type="{$mediaMimeType->mimeType}" src="{@$mediaSource}" />
 		</audio>
 	{/if}
+	{if $mediaType == 'photo'}
+		<img src="{@$mediaSource}" alt="" width="{$mediaWidth}" height="{$mediaHeight}" />
+	{/if}
 </div>

@@ -45,7 +45,8 @@ class MediaBlockType extends AbstractBlockType {
 	 */
 	protected $mediaTypes = array(
 		'audio',
-		'video'
+		'video',
+		'photo'
 	);
 	
 	/**
@@ -143,7 +144,10 @@ class MediaBlockType extends AbstractBlockType {
 			$this->mediaSourceType = 'file'; 
 			return;
 		}
-		
+		if ($this->mediaType == 'photo') {
+			$this->mediaSourceType = 'file';
+			return;
+		}
 		$url = LinkUtil::parseURL($this->mediaSource);
 		$host = parse_url($url, PHP_URL_HOST);		
 		

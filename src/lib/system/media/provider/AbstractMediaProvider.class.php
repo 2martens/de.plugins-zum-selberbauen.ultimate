@@ -49,6 +49,20 @@ abstract class AbstractMediaProvider implements IMediaProvider {
 	}
 	
 	/**
+	 * Returns variables.
+	 *
+	 * @param	string	$name
+	 * @return	mixed|null	null if no fitting variable was found
+	 */
+	public function __get($name) {
+		if (isset($this->{$name})) {
+			return $this->{$name};
+		}
+	
+		return null;
+	}
+	
+	/**
 	 * Returns the HTML for the attribute with the given name and value.
 	 *
 	 * @since	1.0.0
