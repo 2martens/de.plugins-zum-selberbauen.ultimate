@@ -20,10 +20,11 @@ interface IBlockType {
 	 * 
 	 * @since	1.0.0
 	 * 
-	 * @param	string	$requestType
-	 * @param	integer	$blockID
+	 * @param	string											$requestType
+	 * @param	\ultimate\data\AbstractUltimateDatabaseObject	$requestObject
+	 * @param	integer											$blockID
 	 */
-	public function run($requestType, $blockID);
+	public function run($requestType, \ultimate\data\AbstractUltimateDatabaseObject $requestObject, $blockID);
 	
 	/**
 	 * Reads the necessary data.
@@ -49,5 +50,4 @@ interface IBlockType {
 	 * @return	string
 	 */
 	public function getHTML();
-	
 }

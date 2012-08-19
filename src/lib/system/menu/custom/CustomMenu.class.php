@@ -2,10 +2,10 @@
 namespace ultimate\system\menu\custom;
 use ultimate\data\menu\item\MenuItem;
 use ultimate\data\menu\Menu;
-use ultimate\system\UltimateCore;
 use wcf\system\cache\CacheHandler;
 use wcf\system\event\EventHandler;
 use wcf\system\menu\TreeMenu;
+use wcf\system\WCF;
 
 /**
  * Builds a custom menu.
@@ -160,7 +160,7 @@ class CustomMenu extends TreeMenu {
 					// then the name of the menu item equals the one of the content
 					if ($content->__get('contentTitle') != $menuItem->__get('menuItemName')) continue;
 					$groups = $content->__get('groups');
-					$accessibleGroups = UltimateCore::getSession()->getUser()->getGroupIDs();
+					$accessibleGroups = WCF::getSession()->getUser()->getGroupIDs();
 					foreach ($accessibleGroups as $groupID) {
 						if (!isset($groups[$groupID])) continue;
 						$hasPermission = true;
@@ -174,8 +174,9 @@ class CustomMenu extends TreeMenu {
 					// if you added a menu item associated with a page
 					// then the name of the menu item equals the one of the page
 					if ($page->__get('pageTitle') != $menuItem->__get('menuItemName')) continue;
+					// TODO If visibility is public/private there are no groups, so it shouldn't check for them.
 					$groups = $page->__get('groups');
-					$accessibleGroups = UltimateCore::getSession()->getUser()->getGroupIDs();
+					$accessibleGroups = WCF::getSession()->getUser()->getGroupIDs();
 					foreach ($accessibleGroups as $groupID) {
 						if (!isset($groups[$groupID])) continue;
 						$hasPermission = true;

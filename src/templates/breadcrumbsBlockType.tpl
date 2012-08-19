@@ -1,4 +1,4 @@
-<div class="block block-type-breadcrumbs">
+<div id="breadcrumbsBlock-{$blockID}" class="block block-type-breadcrumbs">
 	{if !$__microdata|isset}{assign var=__microdata value=true}{/if}
 	{if $__wcf->getBreadcrumbs()|count}
 	<nav class="breadcrumbs marginTop">

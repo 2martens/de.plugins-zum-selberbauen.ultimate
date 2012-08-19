@@ -3,6 +3,7 @@ namespace ultimate\system\blocktype;
 use ultimate\data\block\Block;
 use wcf\system\cache\CacheHandler;
 use wcf\system\event\EventHandler;
+use wcf\system\WCF;
 use wcf\util\StringUtil;
 
 /**
@@ -23,38 +24,50 @@ abstract class AbstractBlockType implements IBlockType {
 	 * Contains the template name.
 	 * @var	string
 	 */
-	public $templateName = '';
+	protected $templateName = '';
+	
+	/**
+	 * True if the template shall be used.
+	 * @var boolean
+	 */
+	protected $useTemplate = true;
 	
 	/**
 	 * Contains the read rows of custom query.
 	 * @var	array[]
 	 */
-	public $queryResult = array();
+	protected $queryResult = array();
 	
 	/**
 	 * Contains the read objects (no custom query specified).
 	 * @var	object[]
 	 */
-	public $objects = array();
+	protected $objects = array();
 	
 	/**
 	 * Contains the request type.
 	 * The request type is one of the following values: page, content, category.
 	 * @var	string
 	 */
-	public $requestType = '';
+	protected $requestType = '';
+	
+	/**
+	 * Contains the request object.
+	 * @var object
+	 */
+	protected $requestObject = null;
 	
 	/**
 	 * Contains the block id.
 	 * @var	integer
 	 */
-	public $blockID = 0;
+	protected $blockID = 0;
 	
 	/**
 	 * Contains a Block object.
-	 * @var	\wcf\data\ultimate\block\Block
+	 * @var	\ultimate\data\block\Block
 	 */
-	public $block = null;
+	protected $block = null;
 	
 	/**
 	 * Contains the cache name.
@@ -84,13 +97,14 @@ abstract class AbstractBlockType implements IBlockType {
 	
 	/**
 	 * @internal Calls the methods readData and assignVariables.
-	 * @see	\wcf\system\ultimate\blockType\IBlockType::run()
+	 * @see	\ultimate\system\blocktype\IBlockType::run()
 	 */
-	public function run($requestType, $blockID) {
+	public function run($requestType, \ultimate\data\AbstractUltimateDatabaseObject $requestObject, $blockID) {
 		// fire event
 		EventHandler::getInstance()->fireAction($this, 'run');
 		
 		$this->requestType = StringUtil::trim($requestType);
+		$this->requestObject = $requestObject;
 		$this->blockID = intval($blockID);
 		$this->block = new Block($this->blockID);
 		
@@ -100,7 +114,7 @@ abstract class AbstractBlockType implements IBlockType {
 	
 	/**
 	 * @internal Calls the method loadCache().
-	 * @see	\wcf\system\ultimate\blockType\IBlockType::readData()
+	 * @see	\ultimate\system\blocktype\IBlockType::readData()
 	 */
 	public function readData() {
 	   // fire event
@@ -110,21 +124,54 @@ abstract class AbstractBlockType implements IBlockType {
 	}
 	
 	/**
-	 * @see	\wcf\system\ultimate\blockType\IBlockType::assignVariables()
+	 * @see	\ultimate\system\blocktype\IBlockType::assignVariables()
 	 */
 	public function assignVariables() {
 		// fire event
 		EventHandler::getInstance()->fireAction($this, 'assignVariables');
+		WCF::getTPL()->assign(array(
+			'blockID' => $this->blockID,
+			'block' => $this->block,
+			'requestType' => $this->requestType
+		));
 	}
 	
 	/**
-	 * @internal You have to override this method.
-	 * @see	\wcf\system\ultimate\blockType\IBlockType::getHTML()
+	 * @internal If you want to do more than fetching a template, you have to override this method.
+	 * Returns the fetched template if $this->useTemplate or a string {include file='$this->templateName'}.
+	 * @see	\ultimate\system\blocktype\IBlockType::getHTML()
 	 */
 	public function getHTML() {
 		// fire event
 		EventHandler::getInstance()->fireAction($this, 'getHTML');
-		return ''; // you have to override this method
+		// guess template name
+		if (empty($this->templateName)) {
+			$classParts = explode('\\', get_class($this));
+			$className = array_pop($classParts);
+			$this->templateName = lcfirst($className);
+		}
+		$output = '';
+		// only fetch template if the template should be used
+		if ($this->useTemplate) $output = WCF::getTPL()->fetch($this->templateName);
+		// otherwise include template
+		else {
+			$output = '{include file=\''.$this->templateName.'\'}';
+		}
+		return $output;
+	}
+	
+	/**
+	 * Returns variables.
+	 * 
+	 * @param	string	$name
+	 * @return	mixed|null	null if no fitting variable was found
+	 */
+	public function __get($name) {
+		if (isset($this->{$name})) {
+			return $this->{$name};
+		}
+		
+		return null;
 	}
 	
 	/**
@@ -137,14 +184,16 @@ abstract class AbstractBlockType implements IBlockType {
 	 */
 	protected function loadCache() {
 		if (!empty($this->block->query)) {
-			$cacheName = 'ultimate-block-'.PACKAGE_ID;
-			$cacheBuilderClassName = '\wcf\system\cache\builder\UltimateBlockCacheBuilder';
-			$file = WCF_DIR.'cache/cache'.$cacheName.'.php';
+			$cacheName = 'block';
+			$cacheBuilderClassName = '\ultimate\system\cache\builder\BlockCacheBuilder';
+			$file = ULTIMATE_DIR.'cache/cache'.$cacheName.'.php';
 			CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
 			$result = CacheHandler::getInstance()->get($cacheName, 'cachedQueryToBlockID');
 			$this->queryResult = $result[$this->blockID];
 		} else {
-			$file = WCF_DIR.'cache/cache.'.$this->cacheName.'.php';
+			// prevents error
+			if (empty($this->cacheName)) return;
+			$file = ULTIMATE_DIR.'cache/cache.'.$this->cacheName.'.php';
 			CacheHandler::getInstance()->addResource($this->cacheName, $file, $this->cacheBuilderClassName);
 			$this->objects = CacheHandler::getInstance()->get($this->cacheName, $this->cacheIndex);
 		}

@@ -25,5 +25,6 @@ class BlockEditor extends DatabaseObjectEditor implements IEditableCachedObject 
 	 */
 	public function resetCache() {
 		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.block.php');
+		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.menu-to-block.php');
 	}
 }

@@ -30,11 +30,26 @@ class Block extends AbstractUltimateDatabaseObject {
 	protected static $databaseTableIndexName = 'blockID';
 	
 	/**
+	 * @see \wcf\data\DatabaseObject::__get()
+	 */
+	public function __get($name) {
+		$value = parent::__get($name);
+		// makes additional data adressable like normal variables
+		if ($value === null) {
+			if (isset($this->data['additionalData'][$name])) {
+				return $this->data['additionalData'][$name];
+			}
+		}
+		return $value;
+	}
+	
+	/**
 	 * @see	\wcf\data\DatabaseObject::handleData()
 	 */
 	protected function handleData($data) {
 		$data['parameters'] = unserialize($data['parameters']);
 		$data['blockType'] = new BlockType($data['blockTypeID']);
+		$data['additionalData'] = unserialize($data['additionalData']);
 		parent::handleData($data);
 	}
 }

@@ -95,9 +95,13 @@ class LinkUtil {
 		// prevents HTTP requests if URL is invalid anyway
 		if (!$isValid) return $isValid;
 		
+		if (ini_get('allow_url_fopen') == '0') {
+			// prevents exception
+			return $isValid;
+		}
 		// checks if URL is accessible
 		// Source: http://www.php.net/manual/en/function.file-exists.php#84918
-		$hdrs = @get_headers($url);
+		$hdrs = get_headers($url);
 		$headerRegex = new Regex('^HTTP\\/\\d+\\.\\d+\\s+2\\d\\d\\s+.*$');
 		$isValid =  is_array($hdrs) ? (boolean) $headerRegex->match($hdrs[0]) : false;
 		return $isValid;
@@ -132,23 +136,12 @@ class LinkUtil {
 	}
 	
 	/**
-	 * Loads the cache.
-	 *
-	 * @return	\ultimate\data\link\CategorizedLink[]
-	 */
-	protected static function loadCache($cache, $cacheBuilderClass, $cacheIndex) {
-		$file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
-		CacheHandler::getInstance()->addResource($cache, $file, $cacheBuilderClass);
-		return CacheHandler::getInstance()->get($cache, $cacheIndex);
-	}
-	
-	/**
 	 * Parses a given URL and encodes it to punycode if necessary.
-	 * 
+	 *
 	 * @param	string	$url
 	 * @return	string|false	the parsed URL or false on failure
 	 */
-	protected static function parseURL($url) {
+	public static function parseURL($url) {
 		$hostname = parse_url($url);
 		if (isset($hostname) && $hostname !== false && isset($hostname['host'])) {
 			$hostname = StringUtil::trim($hostname['host']);
@@ -165,6 +158,17 @@ class LinkUtil {
 			return false;
 		}
 		return $url;
+	}
+	
+	/**
+	 * Loads the cache.
+	 *
+	 * @return	\ultimate\data\link\CategorizedLink[]
+	 */
+	protected static function loadCache($cache, $cacheBuilderClass, $cacheIndex) {
+		$file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
+		CacheHandler::getInstance()->addResource($cache, $file, $cacheBuilderClass);
+		return CacheHandler::getInstance()->get($cache, $cacheIndex);
 	}
 	
 	/**

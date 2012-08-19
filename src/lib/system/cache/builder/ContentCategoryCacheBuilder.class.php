@@ -34,7 +34,7 @@ class ContentCategoryCacheBuilder implements ICacheBuilder {
 			$categorizedContents = array();
 			foreach ($contents as $contentID => $content) {
 				$categorizedContent = new TaggedContent($content);
-				$categorizedContents[$contentID] = $categorizedContents;
+				$categorizedContents[$contentID] = $categorizedContent;
 			}
 			$data['contentsToCategoryID'][$categoryID] = $categorizedContents;
 			$data['contentsToCategoryTitle'][$category->__get('categoryTitle')] = $categorizedContents;

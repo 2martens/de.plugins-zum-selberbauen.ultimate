@@ -36,5 +36,6 @@ class MenuEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 */
 	public static function resetCache() {
 		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.menu.php');
+		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.menu-to-block.php');
 	}
 }
