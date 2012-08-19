@@ -95,9 +95,13 @@ class LinkUtil {
 		// prevents HTTP requests if URL is invalid anyway
 		if (!$isValid) return $isValid;
 		
+		if (ini_get('allow_url_fopen') == '0') {
+			// prevents exception
+			return $isValid;
+		}
 		// checks if URL is accessible
 		// Source: http://www.php.net/manual/en/function.file-exists.php#84918
-		$hdrs = @get_headers($url);
+		$hdrs = get_headers($url);
 		$headerRegex = new Regex('^HTTP\\/\\d+\\.\\d+\\s+2\\d\\d\\s+.*$');
 		$isValid =  is_array($hdrs) ? (boolean) $headerRegex->match($hdrs[0]) : false;
 		return $isValid;
