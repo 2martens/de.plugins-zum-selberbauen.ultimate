@@ -118,13 +118,13 @@ ULTIMATE.Button.Replacement.prototype = {
 	
 	/**
 	 * the initial timestamp
-	 * @type	Number
+	 * @type	Integer
 	 */
 	_initialValueDateTime: 0,
 	
 	/**
 	 * the initial status id
-	 * @type	Number
+	 * @type	Integer
 	 */
 	_initialStatusID: 0,
 	
@@ -279,7 +279,7 @@ ULTIMATE.Menu.Item = {};
  * @param	{String}	elementID
  * @param	{String}	menuItemListID
  * @param	{String}	className
- * @param	{Number}	offset
+ * @param	{Integer}	offset
  * @param	{String}	type
  * @class	Adds menu items to a menu item list.
  * @since	version 1.0.0
@@ -313,7 +313,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	
 	/**
 	 * show order offset
-	 * @type	Number
+	 * @type	Integer
 	 */
 	_offset: 0,
 	
@@ -548,7 +548,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	 * Builds all nested elements.
 	 * 
 	 * @param	{jQuery}	$parent
-	 * @param	{Number}	$parentID
+	 * @param	{Integer}	$parentID
 	 */
 	_getNestedElements: function($parent, $parentID) {
 		$parent.find('ul > li > label > input[type="checkbox"]').each($.proxy(function(index, listItem) {
@@ -651,12 +651,7 @@ ULTIMATE.VisualEditor.prototype = {
 		this._element = $('#' + $.wcfEscapeID(elementID));
 		this._element.selectArea({
 			select: function(top, left, bottom, right, width, height) {
-				var div = $('<div class="selected" />').hide().css({
-					'top': top,
-					'left': left,
-					'width': width,
-					'height': height
-				});
+				
 			}
 		});
 	}
