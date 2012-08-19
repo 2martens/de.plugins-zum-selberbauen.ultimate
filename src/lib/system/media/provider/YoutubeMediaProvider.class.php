@@ -28,11 +28,11 @@ class YoutubeMediaProvider extends AbstractMediaProvider {
 	 * @see \ultimate\system\media\provider\IMediaProvider::getHTML()
 	 */
 	public function getHTML($source, $width, $height) {
-		$source = $this->getEmbedSource(StringUtil::trim($source));
+		$source = $this->getEmbedInformation(StringUtil::trim($source));
 		return parent::getHTML($source, $height, $width);
 	}
 	
-	protected function getEmbedSource($source) {
+	protected function getEmbedInformation($source) {
 		$regex = '^http:\/\/(?:www\.youtube\.com|youtu\.be)\/(?:watch\?v=)?(\w+)([\?&]\w+=[\w\d]+(?:[\?&]\w+=[\w\d]+)*)?';
 		$regexObj = new Regex($regex);
 		if (!$regexObj->match($source, true)) {

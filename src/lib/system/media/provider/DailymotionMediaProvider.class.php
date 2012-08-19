@@ -26,11 +26,11 @@ class DailymotionMediaProvider extends AbstractMediaProvider {
 	 * @see \ultimate\system\media\provider\IMediaProvider::getHTML()
 	 */
 	public function getHTML($source, $width, $height) {
-		$source = $this->getEmbedSource(StringUtil::trim($source));
+		$source = $this->getEmbedInformation(StringUtil::trim($source));
 		return parent::getHTML($source, $width, $height);
 	}
 	
-	protected function getEmbedSource($source) {
+	protected function getEmbedInformation($source) {
 		$regex = '^http:\/\/(?:www\.dailymotion\.com)\/video\/(\w{6,})';
 		$regexObj = new Regex($regex);
 		if (!$regexObj->match($source)) {

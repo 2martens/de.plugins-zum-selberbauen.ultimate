@@ -62,13 +62,18 @@ abstract class AbstractMediaProvider implements IMediaProvider {
 	}
 	
 	/**
-	 * Returns the embed source URL.
+	 * Returns embed information.
+	 * 
+	 * This can be simply the embed URL but also an imploded array with the new videoID, width and height.
 	 *
 	 * @since	1.0.0
-	 * @internal Overwrite this method if you need it.
+	 * @internal Overwrite this method if you need it. If the media provider requires allow_url_fopen (e.g. oembed usage), check it and
+	 * throw an exception if it is not set.
 	 *
 	 * @param	string	$source
+	 * @param	integer	$maxwidth	(optional) the maximum of width available
+	 * @param	integer	$maxheight	(optional) the maximum of height available
 	 * @return	string
 	 */
-	protected function getEmbedSource($source) {}
+	protected function getEmbedInformation($source, $maxwidth = 0, $maxheight = 0) {}
 }

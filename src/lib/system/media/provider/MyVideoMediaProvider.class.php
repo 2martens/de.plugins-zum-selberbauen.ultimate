@@ -26,7 +26,7 @@ class MyVideoMediaProvider extends AbstractMediaProvider {
 	 * @see \ultimate\system\media\provider\IMediaProvider::getHTML()
 	 */
 	public function getHTML($source, $width, $height) {
-		$source = $this->getEmbedSource(StringUtil::trim($source));
+		$source = $this->getEmbedInformation(StringUtil::trim($source));
 		$html = '<iframe';
 		$html .= ' '.$this->getAttributeHTML('src', $source);
 		$html .= ' '.$this->getAttributeHTML('width', integer($width));
@@ -39,7 +39,7 @@ class MyVideoMediaProvider extends AbstractMediaProvider {
 		return $html;
 	}
 	
-	protected function getEmbedSource($source) {
+	protected function getEmbedInformation($source) {
 		$regex = '^http:\/\/(?:www\.myvideo\.de)\/watch\/(\d+)';
 		$regexObj = new Regex($regex);
 		if (!$regexObj->match($source)) {

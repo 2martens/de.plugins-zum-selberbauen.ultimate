@@ -2,8 +2,8 @@
 namespace ultimate\system\media\provider;
 use wcf\system\exception\SystemException;
 use wcf\system\Regex;
+use wcf\util\JSON;
 use wcf\util\StringUtil;
-use wcf\util\XML;
 
 /**
  * Represents blipTV as media provider.
@@ -27,32 +27,32 @@ class BlipTVMediaProvider extends AbstractMediaProvider {
 	 * @see \ultimate\system\media\provider\IMediaProvider::getHTML()
 	 */
 	public function getHTML($source, $width, $height) {
-		$source = $this->getEmbedSource(StringUtil::trim($source));
+		$sourceArray = explode('|' , $this->getEmbedInformation(StringUtil::trim($source), intval($width), intval($height)));
+		$source = $sourceArray[0];
+		$width = $sourceArray[1];
+		$height = $sourceArray[2];
 		
 		$html = '<iframe';
 		$html .= ' '.$this->getAttributeHTML('src', 'http://blip.tv/play/'.$source.'.html?p=1');
-		$html .= ' '.$this->getAttributeHTML('width', integer($width));
-		$html .= ' '.$this->getAttributeHTML('height', integer($height));
+		$html .= ' '.$this->getAttributeHTML('width', $width);
+		$html .= ' '.$this->getAttributeHTML('height', $height);
 		$html .= '></iframe>';
 		
 		$html .= '<embed';
 		$html .= ' '.$this->getAttributeHTML('type', 'application/x-shockwave-flash');
 		$html .= ' '.$this->getAttributeHTML('src', 'http://a.blip.tv/api.swf#'.$source);
 		$html .= ' '.$this->getAttributeHTML('style', 'display: none;');
-		$html .= '></embed>';
+		$html .= ' />';
 		
 		return $html;
 	}
 	
-	protected function getEmbedSource($source) {
+	protected function getEmbedInformation($source, $maxwidth, $maxheight) {
 		$regex = '^http:\/\/blip\.tv\/[\w\d-]+\/[\w\d-]+-(\d+)$';
 		$regexObj = new Regex($regex);
 		if (!$regexObj->match($source)) {
 			throw new SystemException('invalid source', 0, 'The given source URL is not a valid blip.tv share link.');
 		}
-		
-		$matches = $regexObj->getMatches();
-		$videoID = $matches[1];
 		
 		// if this ini value is set to off, the following code cannot be executed
 		if (ini_get('allow_url_fopen') == '0') {
@@ -62,26 +62,22 @@ class BlipTVMediaProvider extends AbstractMediaProvider {
 		// get embed code
 		$opts = array(
 			'http' => array(
-				'user_agent' => 'PHP libxml agent'
+				'user_agent' => 'PHP JSON agent'
 			)
 		);
 		// bugfix to avoid SERVER ERROR due to missing user agent
 		$context = stream_context_create($opts);
+		$queryParts = array(
+			'maxwidth' => $maxwidth,
+			'maxheight' => $maxheight
+		);
+		$query = http_build_query($queryParts, '', '&');
 		
-		$xml = new XML();
-		try {
-			libxml_set_streams_context($context);
-			$xml->load('http://blip.tv/rss/view/'.$videoID);
-		}
-		catch (\Exception $e) { // bugfix to avoid file caching problems
-			libxml_set_streams_context($context);
-			$xml->load('http://blip.tv/rss/view/'.$videoID);
-		}
-		
-		// parse xml
-		$xpath = $xml->xpath();
-		$mediaPlayer = $xpath->query('/rss/item/media:player')->item(0);
-		$embedCode = $mediaPlayer->nodeValue;
+		$jsonResponse = file_get_contents('http://blip.tv/oembed/?url='.urlencode($source).$query, 0, $context);
+		$jsonData = JSON::decode($jsonResponse);
+		$width = $jsonData['width'];
+		$height = $jsonData['height'];
+		$embedCode = $jsonData['html'];
 		
 		// get new video id
 		$regex = '^<iframe src="http:\/\/blip\.tv\/play\/(\w+)\.html\?p=1"';
@@ -91,6 +87,11 @@ class BlipTVMediaProvider extends AbstractMediaProvider {
 		$matches = $regexObj->getMatches();
 		$videoID = $matches[1];
 		
-		return $videoID;
+		$returnArray = array(
+			$videoID,
+			$width,
+			$height
+		);
+		return implode('|', $returnArray);
 	}
 }

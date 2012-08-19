@@ -26,12 +26,13 @@ class MySpaceMediaProvider extends AbstractMediaProvider {
 	 * @see \ultimate\system\media\provider\IMediaProvider::getHTML()
 	 */
 	public function getHTML($source, $width, $height) {
-		$source = $this->getEmbedSource(StringUtil::trim($source));
+		$source = $this->getEmbedInformation(StringUtil::trim($source));
 		
 		$html = '<object';
 		$html .= ' '.$this->getAttributeHTML('width', intval($width));
 		$html .= ' '.$this->getAttributeHTML('height', intval($height));
 		$html .= ' '.$this->getAttributeHTML('type', 'application/x-shockwave-flash');
+		$html .= ' '.$this->getAttributeHTML('data', $source);
 		$html .= '>';
 		// param allowFullScreen
 		$html .= '<param';
@@ -55,13 +56,13 @@ class MySpaceMediaProvider extends AbstractMediaProvider {
 		$html .= ' '.$this->getAttributeHTML('width', intval($width));
 		$html .= ' '.$this->getAttributeHTML('height', intval($height));
 		$html .= ' '.$this->getAttributeHTML('type', 'application/x-shockwave-flash');
-		$html .= '></embed>';
+		$html .= ' />';
 		
 		$html .= '</object>';
 		return $html;
 	}
 	
-	protected function getEmbedSource($source) {
+	protected function getEmbedInformation($source) {
 		$regex = '^http:\/\/(?:www\.myspace\.com)\/video\/[\w\d-]+\/[\w\d-]+\/(\d+)';
 		$regexObj = new Regex($regex);
 		if (!$regexObj->match($source)) {
