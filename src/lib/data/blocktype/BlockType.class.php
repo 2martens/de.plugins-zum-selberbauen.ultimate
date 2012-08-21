@@ -37,4 +37,12 @@ class BlockType extends AbstractUltimateDatabaseObject {
 	public function __toString() {
 		return WCF::getLanguage()->get($this->blockTypeName);
 	}
+	
+	/**
+	 * @see \wcf\data\DatabaseObject::handleData()
+	 */
+	protected function handleData($data) {
+		$data['cssIdentifier'] = strtolower($data['blockTypeName']);
+		parent::handleData($data);
+	}
 }
