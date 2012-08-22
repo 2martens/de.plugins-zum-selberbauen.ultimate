@@ -30,6 +30,7 @@
 <link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/3rdParty/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/ultimateCore.css" />
 <link rel="stylesheet" type="text/css" href="{@$__wcf->getPath('ultimate')}style/ultimate.css" />
+<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath('ultimate')}style/bootstrapVisualEditor.css" />
 {event name='stylesheetInclude'}
 <script type="text/javascript">
 	//<![CDATA[

@@ -31,14 +31,17 @@
 	user-select: text !important;
 }
 
-/* grid */
-.grid-color(@rgbaBackground, @rgbaBorderLeft, @rgbaBorderRight) {
-	background: rgba(@rgbaBackground); 
-	border-left: 1px solid rgba(@rgbaBorderLeft);
-	border-right: 1px solid rgba(@rgbaBorderRight);
+.transitionEditor(@transition) {
+	-webkit-transition: e(@transition);
+	-moz-transition: e(@transition);
+	transition: e(@transition);
 }
-.grid-column(@rgbaBackground, @rgbaBorderLeft, @rgbaBorderRight) {
-	div.grid-column {
-		.grid-color(@rgbaBackground, @rgbaBorderLeft, @rgbaBorderRight);
-	}
+
+/* grid */
+.background(@rgbaBackground1, @rgbaBackground2, @rgbaBackground3, @rgbaBackground4) {
+	background: rgba(@rgbaBackground1, @rgbaBackground2, @rgbaBackground3, @rgbaBackground4);
+}
+.borderSide (@1, @2, @3, @4) {
+	border-left: 1px solid rgba(@1, @2, @3, @4);
+	border-right: 1px solid rgba(@1, @2, @3, @4);
 }

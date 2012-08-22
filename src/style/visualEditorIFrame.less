@@ -1,5 +1,3 @@
-@import '3rdParty/mixins.less';
-@import 'ultimateMixins.less';
 /** General **/
 body { 
 	float: left;
@@ -67,7 +65,7 @@ body:not(.inspector-disabled) .inspector-element-selected {
 }
 	
 	
-/* Block Info */
+/** Block Info **/
 body.visual-editor-mode-design div.block-info * { cursor: help !important; }
 
 div.block-info { 
@@ -128,7 +126,7 @@ div.block-info {
 	}
 }	
 
-/* Block Controls */
+/** Block Controls **/
 div.block-controls { 
 	top: 5px;
 	right: 5px;
@@ -171,7 +169,7 @@ div.block-controls {
 	}
 }
 	
-/* Block Type Popup */
+/** Block Type Popup **/
 div#blockTypePopup {
 	width: 200px;
 	top: -9999px;
@@ -266,7 +264,7 @@ div#blockTypePopup {
 	}
 }
 
-/* Template Notice */
+/** Template Notice **/
 div#template-notice {
 	background: rgba(0, 0, 0, 0.7);
     display: block;
@@ -295,17 +293,17 @@ div#template-notice {
 	}
 }	
 
-/* Unknown and new blocks */
+/** Unknown and new blocks **/
 div.block-type-unknown div.block-controls { display: none !important; }
 body.visual-editor-iframe-grid div.block-type-unknown div.block-controls { display: block !important; }
 
-/* Hide options button */
+/** Hide options button **/
 div.blank-block div.block-controls span.options, 
 div.block-type-unknown div.block-controls span.options { 
 	display: none !important; 
 }
 
-/* jQuery UI Staples */
+/** jQuery UI Staples **/
 .ui-resizable {
 	position: relative;
 }
