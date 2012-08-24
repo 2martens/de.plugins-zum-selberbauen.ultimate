@@ -58,7 +58,8 @@ class UltimateCore extends AbstractApplication {
 		RouteHandler::getInstance()->addRoute($pageRoute);
 		
 		$categoryRoute = new Route('categoryRoute-'.PACKAGE_ID);
-		$categoryRoute->setSchema('/category/{categorySlug}/', 'Category');
+		$categoryRoute->setSchema('/{category}/{categorySlug}/', 'Category');
+		$categoryRoute->setParameterOption('category', null, 'category');
 		$categoryRoute->setParameterOption('categorySlug', null, '[a-z]+(?:\-{1}[a-z]+)*(?:\/{1}[a-z]+(?:\-{1}[a-z]+)*)*');
 		RouteHandler::getInstance()->addRoute($categoryRoute);
 		
