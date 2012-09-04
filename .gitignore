@@ -49,5 +49,9 @@ nbactions.xml
 *.tar
 *.tar.gz
 
+# phpdoc
+phpdoc.dist.xml
+phpdoc.xml
+
 # xsd files
 *types.xsd
