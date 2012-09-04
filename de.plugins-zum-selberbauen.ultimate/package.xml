@@ -10,7 +10,7 @@
 		<isapplication>1</isapplication>
 		<isunique>0</isunique>
 		<version>1.0.0 Alpha 1</version>
-		<date>2012-07-26</date>
+		<date>2012-09-04</date>
 	</packageinformation>
 	
 	<authorinformation>
@@ -62,6 +62,7 @@
 		<instruction type="userGroupOption">userGroupOption.xml</instruction>
 		<instruction type="pageMenu">pageMenu.xml</instruction>
 		<instruction type="acpMenu">acpMenu.xml</instruction>
+		<instruction type="blockType">blockType.xml</instruction>
 		<!-- /xml -->
 		
 		<instruction type="script">acp/InstallUltimateCMS.class.php</instruction>

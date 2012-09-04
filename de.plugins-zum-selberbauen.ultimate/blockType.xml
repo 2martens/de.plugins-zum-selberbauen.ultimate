@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.plugins-zum-selberbauen.de" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.plugins-zum-selberbauen.de http://www.plugins-zum-selberbauen.de/XSD/blockType.xsd">
+	<import>
+		<blocktype>
+			<blocktypeclassname><![CDATA[ultimate\system\blocktype\ContentBlockType]]></blocktypeclassname>
+			<blocktypename><![CDATA[ultimate.blocktype.content]]></blocktypename>
+			<fixedHeight>0</fixedHeight>
+		</blocktype>
+		<blocktype>
+			<blocktypeclassname><![CDATA[ultimate\system\blocktype\MediaBlockType]]></blocktypeclassname>
+			<blocktypename><![CDATA[ultimate.blocktype.media]]></blocktypename>
+			<fixedHeight>1</fixedHeight>
+		</blocktype>
+	</import>
+</data>
