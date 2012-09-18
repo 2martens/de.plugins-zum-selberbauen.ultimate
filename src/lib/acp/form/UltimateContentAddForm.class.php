@@ -157,7 +157,7 @@ class UltimateContentAddForm extends MessageForm {
 	protected $startTime = 0;
 	
 	/**
-	 * @seehttp://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
 	 */
 	public function readParameters() {
 		parent::readParameters();
