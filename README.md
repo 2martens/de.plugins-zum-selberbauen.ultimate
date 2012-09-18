@@ -63,8 +63,22 @@ namespace ultimate\system\test;
  * @category	Ultimate CMS
  */
 class A {
+	/**
+	 * Contains an object of Test.
+	 * @var	\ultimate\system\test\Test
+	 */
 	public $test = null;
+	
+	/**
+	 * Contains the name of a test.
+	 * @var	string
+	 */
 	protected $test2 = 'test2';
+	
+	/**
+	 * Contains an array of options.
+	 * @var	array
+	 */
 	private $test3 = array('test3');
 	
 	/**
