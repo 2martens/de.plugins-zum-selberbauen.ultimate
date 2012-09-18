@@ -8,14 +8,14 @@ use wcf\system\cache\builder\ICacheBuilder;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.cache.builder
  * @category	Ultimate CMS
  */
 class MenuCacheBuilder implements ICacheBuilder {
 	/**
-	 * @see	\wcf\system\cache\builder\ICacheBuilder::getData()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.cache.builder.ICacheBuilder.html#getData
 	 */
 	public function getData(array $cacheResource) {
 		$data = array(
@@ -28,8 +28,10 @@ class MenuCacheBuilder implements ICacheBuilder {
 		$menus = $menuList->getObjects();
 		$menuIDs = $menuList->getObjectIDs();
 		
+		if (empty($menus)) return $data;
+		
 		$data['menus'] = $menus;
-		$data['menuIDs'] = (is_null($menuIDs) ? array() : $menuIDs);
+		$data['menuIDs'] = $menuIDs;
 		
 		return $data;
 	}

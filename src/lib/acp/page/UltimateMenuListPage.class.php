@@ -11,24 +11,24 @@ use wcf\system\WCF;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	acp.page
  * @category	Ultimate CMS
  */
 class UltimateMenuListPage extends AbstractCachedListPage {
 	/**
-	 * @see	\wcf\page\AbstractPage::$templateName
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
 	 */
 	public $templateName = 'ultimateMenuList';
 	
 	/**
-	 * @see	\wcf\page\MultipleLinkPage::$objectListClassName
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.MultipleLinkPage.html#$objectListClassName
 	 */
 	public $objectListClassName = '\ultimate\data\menu\MenuList';
 	
 	/**
-	 * @see	\wcf\page\SortablePage::$validSortFields
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#$validSortFields
 	 */
 	public $validSortFields = array(
 		'menuID',
@@ -36,27 +36,27 @@ class UltimateMenuListPage extends AbstractCachedListPage {
 	);
 	
 	/**
-	 * @see	\wcf\page\SortablePage::$defaultSortField
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#$defaultSortField
 	*/
 	public $defaultSortField = 'menuID';
 	
 	/**
-	 * @see	\wcf\page\SortablePage::$defaultSortOrder
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#$defaultSortOrder
 	 */
 	public $defaultSortOrder = 'ASC';
 	
 	/**
-	 * @see	\wcf\page\AbstractCachedListPage::$cacheBuilderClassName
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractCachedListPage.html#$cacheBuilderClassName
 	 */
 	public $cacheBuilderClassName = '\ultimate\system\cache\builder\MenuCacheBuilder';
 	
 	/**
-	 * @see	\wcf\page\AbstractCachedListPage::$cacheName
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractCachedListPage.html#$cacheName
 	 */
 	public $cacheName = 'menu';
 	
 	/**
-	 * @see	\wcf\page\AbstractCachedListPage::$cacheIndex
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractCachedListPage.html#$cacheIndex
 	 */
 	public $cacheIndex = 'menus';
 	
@@ -73,7 +73,7 @@ class UltimateMenuListPage extends AbstractCachedListPage {
 	protected $url = '';
 	
 	/**
-	 * @see	\wcf\page\IPage::readData()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
 		parent::readData();
@@ -81,14 +81,14 @@ class UltimateMenuListPage extends AbstractCachedListPage {
 	}
 	
 	/**
-	 * @see	\wcf\page\AbstractCachedListPage::loadCache()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractCachedListPage.html#loadCache
 	 */
 	public function loadCache($path = ULTIMATE_DIR) {
 		parent::loadCache($path);
 	}
 	
 	/**
-	 * @see	\wcf\page\IPage::assignVariables()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -99,7 +99,7 @@ class UltimateMenuListPage extends AbstractCachedListPage {
 	}
 	
 	/**
-	 * @see	\wcf\page\IPage::show()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#show
 	 */
 	public function show() {
 		// set active menu item

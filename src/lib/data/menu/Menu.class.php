@@ -8,24 +8,24 @@ use wcf\system\WCF;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.menu
  * @category	Ultimate CMS
  */
 class Menu extends AbstractUltimateDatabaseObject {
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableName
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableName
 	 */
 	protected static $databaseTableName = 'menu';
 	
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexIsIdentity
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableIndexIsIdentity
 	 */
 	protected static $databaseTableIndexIsIdentity = true;
 	
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexName
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableIndexName
 	 */
 	protected static $databaseTableIndexName = 'menuID';
 	
@@ -39,7 +39,7 @@ class Menu extends AbstractUltimateDatabaseObject {
 	}
 	
 	/**
-	 * @see	\wcf\data\DatabaseObject::handleData()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#handleData
 	 */
 	protected function handleData($data) {
 		$data['menuID'] = intval($data['menuID']);

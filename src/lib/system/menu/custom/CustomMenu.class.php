@@ -12,7 +12,7 @@ use wcf\system\WCF;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.menu.custom
  * @category	Ultimate CMS
@@ -47,7 +47,10 @@ class CustomMenu extends TreeMenu {
 	 * 
 	 * You have to call this method before using getMenuItems in order to get the menu items for your menu.
 	 * 
+	 * @since	1.0.0
+	 * 
 	 * @param	\ultimate\data\menu\Menu	$menu
+	 * @return	void 
 	 */
 	public function buildMenu(Menu $menu) {
 		$this->menu = $menu;
@@ -67,6 +70,8 @@ class CustomMenu extends TreeMenu {
 	 * 
 	 * This method should be called inside a template.
 	 * 
+	 * @since	1.0.0
+	 * 
 	 * @return	(\ultimate\data\menu\item\MenuItem|array)[]|null
 	 * @see		\wcf\system\menu\TreeMenu::getMenuItems()
 	 */
@@ -77,7 +82,7 @@ class CustomMenu extends TreeMenu {
 	}
 	
 	/**
-	 * @see	\wcf\system\menu\TreeMenu::init()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.menu.TreeMenu.html#init
 	 */
 	protected function init() {
 		// get menu items from cache
@@ -88,7 +93,7 @@ class CustomMenu extends TreeMenu {
 	}
 	
 	/**
-	 * @see	\wcf\system\menu\TreeMenu::loadCache()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.menu.TreeMenu.html#loadCache
 	 */
 	protected function loadCache() {
 		parent::loadCache();

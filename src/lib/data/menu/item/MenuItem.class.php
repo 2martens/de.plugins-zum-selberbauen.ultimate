@@ -11,29 +11,29 @@ use wcf\system\WCF;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.menu.item
  * @category	Ultimate CMS
  */
 class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITreeMenuItem {
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableName
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableName
 	 */
 	protected static $databaseTableName = 'menu_item';
 	
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexIsIdentity
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableIndexIsIdentity
 	 */
 	protected static $databaseTableIndexIsIdentity = true;
 	
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexName
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableIndexName
 	 */
 	protected static $databaseTableIndexName = 'menuItemID';
 	
 	/**
-	 * @see	\wcf\data\ProcessibleDatabaseObject::$processorInterface
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.ProcessibleDatabaseObject.html#$processorInterface
 	 */
 	protected static $processorInterface = '\wcf\system\menu\page\IPageMenuItemProvider';
 	
@@ -79,7 +79,7 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 	}
 	
 	/**
-	 * @see	\wcf\system\menu\ITreeMenuItem::getLink()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.menu.ITreeMenuItem.html#getLink
 	 */
 	public function getLink() {
 		$parameters = array();
@@ -88,7 +88,7 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 	}
 	
 	/**
-	 * @see	\wcf\data\DatabaseObject::handleData()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#handleData
 	 */
 	protected function handleData($data) {
 		$data['menuItemID'] = intval($data['menuItemID']);
