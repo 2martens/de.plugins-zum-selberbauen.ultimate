@@ -8,29 +8,29 @@ use ultimate\data\AbstractUltimateDatabaseObject;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
- * @package		de.plugins-zum-selberbauen.ultimateCore
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
+ * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.ultimate.block
  * @category	Ultimate CMS
  */
 class Block extends AbstractUltimateDatabaseObject {
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableName
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableName
 	 */
 	protected static $databaseTableName = 'block';
 	
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexIsIdentity
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableIndexIsIdentity
 	 */
 	protected static $databaseTableIndexIsIdentity = true;
 	
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexName
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableIndexName
 	 */
 	protected static $databaseTableIndexName = 'blockID';
 	
 	/**
-	 * @see \wcf\data\DatabaseObject::__get()
+	 * @see http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#__get
 	 */
 	public function __get($name) {
 		$value = parent::__get($name);
@@ -44,7 +44,7 @@ class Block extends AbstractUltimateDatabaseObject {
 	}
 	
 	/**
-	 * @see	\wcf\data\DatabaseObject::handleData()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#handleData
 	 */
 	protected function handleData($data) {
 		$data['parameters'] = unserialize($data['parameters']);

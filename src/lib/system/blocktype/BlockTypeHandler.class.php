@@ -10,7 +10,7 @@ use wcf\system\SingletonFactory;
  * 
  * @author		Jim Martens
  * @copyright	2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.blocktype
  * @category	Ultimate CMS
@@ -32,9 +32,10 @@ class BlockTypeHandler extends SingletonFactory {
 	 * Returns the block type of the given id.
 	 * 
 	 * @since	1.0.0
+	 * @api
 	 * 
 	 * @param	integer	$blockTypeID
-	 * @return \ultimate\system\blocktype\IBlockType[]|null	null if there is no such object
+	 * @return	\ultimate\system\blocktype\IBlockType[]|null	null if there is no such object
 	 */
 	public function getBlockType($blockTypeID) {
 		$blockTypeID = intval($blockTypeID);
@@ -56,9 +57,55 @@ class BlockTypeHandler extends SingletonFactory {
 	}
 	
 	/**
+	 * Returns the block type object of the given type.
+	 * 
+	 * @since	1.0.0
+	 * @api
+	 * 
+	 * @param	string	$blockTypeName	block type in lowercase
+	 * @return	\ultimate\system\blocktype\IBlockType[]|null	null if there is no such object
+	 */
+	public function getBlockTypeByName($blockTypeName) {
+		foreach ($this->objects as $blockTypeID => $blockType) {
+			$className = $blockType->__get('blockTypeClassName');
+			$parts = explode('\\', $className);
+			$parts = array_reverse($parts);
+			$className = $parts[0];
+			$blockType = strtolower(str_replace('BlockType', '', $className));
+			if (strtolower($blockTypeName) == $blockType) {
+				return $this->getBlockType($blockTypeID);
+			}
+			continue;
+		}
+		return null;
+	}
+	
+	/**
+	 * Returns the block type id of the block type with the given name.
+	 * 
+	 * @param	string	$blockTypeName
+	 * @return	integer	0 if there is no such id
+	 */
+	public function getBlockTypeIDByName($blockTypeName) {
+		foreach ($this->objects as $blockTypeID => $blockType) {
+			$className = $blockType->__get('blockTypeClassName');
+			$parts = explode('\\', $className);
+			$parts = array_reverse($parts);
+			$className = $parts[0];
+			$blockType = strtolower(str_replace('BlockType', '', $className));
+			if (strtolower($blockTypeName) == $blockType) {
+				return intval($blockTypeID);
+				break;
+			}
+			continue;
+		}
+		return 0;
+	}
+	
+	/**
 	 * Loads the cache.
 	 * 
-	 * @see \wcf\system\SingletonFactory::init()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.SingletonFactory.html#init
 	 */
 	protected function init() {
 		$this->loadCache();

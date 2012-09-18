@@ -13,7 +13,7 @@ use wcf\util\StringUtil;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.blocktype
  * @category	Ultimate CMS
@@ -105,8 +105,10 @@ class MediaBlockType extends AbstractBlockType {
 		if (isset($this->objects[$mimeType])) {
 			$this->mediaMimeType = $this->objects[$mimeType];
 		}
-		$this->mediaHeight = intval($this->block->__get('mediaHeight'));
-		$this->mediaWidth = intval($this->block->__get('mediaWidth'));
+		$parameters = $this->block->__get('parameters');
+		$dimensions = explode(',', $parameters['dimensions']);
+		$this->mediaHeight = intval($dimensions[1]);
+		$this->mediaWidth = intval($dimensions[0]);
 		$this->mediaType = StringUtil::trim($this->block->__get('mediaType'));
 		
 		$this->determineSourceType();
@@ -117,9 +119,17 @@ class MediaBlockType extends AbstractBlockType {
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
+		// gathering dimensions and position
+		$dimensions = explode(',', $this->block->__get('dimensions'));
+		$position = explode(',', $this->block->__get('position'));
+		
 		WCF::getTPL()->assign(array(
 			'mediaType' => $this->mediaType,
-			'mediaSourceType' => $this->mediaSourceType
+			'mediaSourceType' => $this->mediaSourceType,
+			'width' => $dimensions[0],
+			'height' => $dimensions[1],
+			'left' => $position[0],
+			'top' => $position[1]
 		));
 		
 		if ($this->mediaSourceType == 'file') {
@@ -133,6 +143,29 @@ class MediaBlockType extends AbstractBlockType {
 		elseif ($this->mediaSourceType == 'provider') {
 			WCF::getTPL()->assign('mediaHTML', $this->mediaHTML);
 		}
+	}
+	
+	/**
+	 * @see \ultimate\system\blocktype\IBlockType::getOptionsHTML()
+	 */
+	public function getOptionsHTML() {
+		parent::getOptionsHTML();
+		$options = $this->block->__get('additionalData');
+		$optionsSelect = array(
+			'mediaType',
+			'mimeType'
+		);
+		WCF::getTPL()->assign('mimeTypes', $this->objects);
+		// assigning values
+		foreach ($options as $optionName => $optionValue) {
+			if (in_array($optionName, $optionsSelect)) {
+				WCF::getTPL()->assign($optionName.'Selected', $optionValue);
+			}
+			else {
+				WCF::getTPL()->assign($optionName, $optionValue);
+			}
+		}
+		return WCF::getTPL()->fetch('mediaBlockOptions');
 	}
 	
 	/**
@@ -153,7 +186,7 @@ class MediaBlockType extends AbstractBlockType {
 		
 		/* @var $mediaProvider \ultimate\system\media\provider\IMediaProvider */
 		$mediaProvider = MediaProviderHandler::getInstance()->getMediaProvider($host);
-		if (is_null($mediaProvider)) {
+		if ($mediaProvider === null) {
 			// assume source is a file
 			$this->mediaSourceType = 'file';
 		}

@@ -1,4 +1,4 @@
-<div id="mediaBlock-{$blockID}" class="block media-block-type">
+<div{if !$visualEditorMode} id="block-{$blockID}" class="block media-block-type" data-id="{$blockID}" data-width="{$width}" data-height="{$height}" data-left="{$left}" data-top="{$top}"{/if}>
 	{if $mediaType == 'video'}
 		{if $mediaSourceType == 'provider'}
 			{@$mediaHTML}
