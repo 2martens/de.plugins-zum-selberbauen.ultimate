@@ -10,9 +10,17 @@
 					<parent>ultimate</parent>
 					<showorder>1</showorder>
 				</category>
-				<category name="ultimate.sort">
+					<category name="ultimate.content">
+						<parent>ultimate.general</parent>
+						<showorder>1</showorder>
+					</category>
+				<category name="ultimate.grid">
 					<parent>ultimate</parent>
 					<showorder>2</showorder>
+				</category>
+				<category name="ultimate.sort">
+					<parent>ultimate</parent>
+					<showorder>3</showorder>
 				</category>
 					<category name="ultimate.sort.category">
 						<parent>ultimate.sort</parent>
@@ -25,6 +33,10 @@
 					<category name="ultimate.sort.page">
 						<parent>ultimate.sort</parent>
 						<showorder>3</showorder>
+					</category>
+					<category name="ultimate.sort.template">
+						<parent>ultimate.sort</parent>
+						<showorder>4</showorder>
 					</category>
 				
 		</categories>
@@ -44,6 +56,60 @@
 false:wcf.acp.option.ultimate_general_englishLanguage.AE]]>
 				</selectoptions>
 			</option>
+			
+			<!-- general/content options -->
+			<option name="ultimate_general_content_readMoreText">
+				<categoryname>ultimate.general.content</categoryname>
+				<optiontype>textI18n</optiontype>
+				<supporti18n>1</supporti18n>
+				<requirei18n>0</requirei18n>
+			</option>
+			<option name="ultimate_general_content_metaAboveContent">
+				<categoryname>ultimate.general.content</categoryname>
+				<optiontype>textareaI18n</optiontype>
+				<supporti18n>1</supporti18n>
+				<requirei18n>0</requirei18n>
+			</option>
+			<option name="ultimate_general_content_metaBelowContent">
+				<categoryname>ultimate.general.content</categoryname>
+				<optiontype>textareaI18n</optiontype>
+				<supporti18n>1</supporti18n>
+				<requirei18n>0</requirei18n>
+			</option>
+			<!-- /general/content options -->
+			
+			<!-- grid options -->
+			<option name="ultimate_grid_color">
+				<categoryname>ultimate.grid</categoryname>
+				<optiontype>text</optiontype>
+				<defaultvalue>grey</defaultvalue>
+				<hidden>1</hidden>
+			</option>
+			<option name="ultimate_grid_columnWidth">
+				<categoryname>ultimate.grid</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>20</defaultvalue>
+				<hidden>1</hidden>
+			</option>
+			<option name="ultimate_grid_gutterWidth">
+				<categoryname>ultimate.grid</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>20</defaultvalue>
+				<hidden>1</hidden>
+			</option>
+			<option name="ultimate_grid_wrapperTopMargin">
+				<categoryname>ultimate.grid</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>30</defaultvalue>
+				<hidden>1</hidden>
+			</option>
+			<option name="ultimate_grid_wrapperBottomMargin">
+				<categoryname>ultimate.grid</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>30</defaultvalue>
+				<hidden>1</hidden>
+			</option>
+			<!-- /grid options -->
 			
 			<!-- sort order/field for UltimateCategoryListPage -->
 			<option name="ultimate_sort_category_sortField">
@@ -113,6 +179,27 @@ DESC:wcf.global.sortOrder.descending]]>
 				</selectoptions>
 			</option>
 			<!-- /sort order/field for UltimatePageListPage -->
+			
+			<!-- sort order/field for UltimateTemplateListPage -->
+			<option name="ultimate_sort_template_sortField">
+				<categoryname>ultimate.sort.template</categoryname>
+				<optiontype>select</optiontype>
+				<defaultvalue><![CDATA[templateID]]></defaultvalue>
+				<selectoptions>
+					<![CDATA[templateID:wcf.acp.option.ultimate_sort_template_sortField.templateID
+templateName:wcf.acp.option.ultimate_sort_template_sortField.templateName]]>
+				</selectoptions>
+			</option>
+			<option name="ultimate_sort_template_sortOrder">
+				<categoryname>ultimate.sort.template</categoryname>
+				<optiontype>select</optiontype>
+				<defaultvalue><![CDATA[ASC]]></defaultvalue>
+				<selectoptions>
+					<![CDATA[ASC:wcf.global.sortOrder.ascending
+DESC:wcf.global.sortOrder.descending]]>
+				</selectoptions>
+			</option>
+			<!-- /sort order/field for UltimateTemplateListPage -->
 		</options>
 	</import>
 </data>
