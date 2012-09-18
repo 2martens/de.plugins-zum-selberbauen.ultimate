@@ -81,11 +81,8 @@ div.block-info {
 	.borderRadius(6px);
 	z-index: 99999;
 	font-family: helvetica, sans-serif;
-	box-shadow: 1px 1px 0 rgba(255, 255, 255, .15);
-	
-	-moz-transition: opacity 0.125s linear; 
-	-webkit-transition: opacity 0.125s linear; 
-	transition: opacity 0.125s linear;
+	.boxShadowNative(1px 1px rgba(255, 255, 255, .15));
+	.transition(opacity, 0.125s, linear);
 	
 	span {
 		display: block;
@@ -97,7 +94,7 @@ div.block-info {
 		&.id {
 			border-right: 1px solid rgba(255, 255, 255, 0.3);
 	   	 	color: rgba(255, 255, 255, .8);
-	    	font-size: 13px;
+	    	font-size: @wcfBaseFontSize;
 	    	height: 24px;
 	    	line-height: 24px;
 	    	margin: -2px 9px 0 2px;
@@ -117,7 +114,7 @@ div.block-info {
 		&.mirroring {
 			border-left: 1px solid rgba(255, 255, 255, 0.3);
 	    	color: rgba(255, 255, 255, .8);
-	    	font-size: 12px;
+	    	font-size: @wcfBaseFontSize;
 	    	height: 24px;
 	    	line-height: 24px;
 	    	margin: -2px 2px 0 9px;
@@ -139,12 +136,9 @@ div.block-controls {
 	background: rgba(0, 0, 0, .75); 
 	.borderRadius(6px);
 	z-index: 99999;
-	font-family: helvetica, sans-serif;
-	box-shadow: 1px 1px 0 rgba(255, 255, 255, .15);
-	
-	-moz-transition: opacity 0.125s linear; 
-	-webkit-transition: opacity 0.125s linear; 
-	transition: opacity 0.125s linear;
+	font-family: @wcfBaseFontFamily;
+	.boxShadowNative(1px 1px 0 rgba(255, 255, 255, .15));
+	.transition(opacity, 0.125s, linear);
 	
 	span {
 		display: block;
@@ -174,30 +168,30 @@ div#blockTypePopup {
 	width: 200px;
 	top: -9999px;
 	left: -9999px;
-	color: #BBBBBB;
-	background: #333333;
+	color: @wcfColor;
+	background: @wcfContainerBackgroundColor;
 	position: absolute;
 	z-index: 999991;
-	box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.35);
+	.boxShadowNative(3px 3px 6px rgba(0, 0, 0, 0.35));
 	.borderRadius(5px);
-	font-family: helvetica, sans-serif;
-	font-size: 12px;
+	font-family: @wcfBaseFontFamily;
+	font-size: @wcfBaseFontSize;
 	
 	h4#blockTypePopupHeading {
 		.linear-gradient(#414141, #242424);
-	    border-bottom: 1px solid #555 !important;
+	    border-bottom: 1px solid @wcfContainerBorderColor !important;
 	    .borderRadius(5px 5px 0 0);
-	    color: #EEEEEE !important;
+	    color: @wcfColor;
 	    display: block !important;
-	    font-family: helvetica, sans-serif !important;
-	    font-size: 12px !important;
+	    font-family: @wcfBaseFontFamily;
+		font-size: @wcfBaseFontSize;
 	    font-weight: 600 !important;
 	    height: 32px !important;
 	    line-height: 35px !important;
 	    margin: 0 !important;
 	    padding: 0 !important;
 	    text-align: center !important; 
-		text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3) !important;
+	    .textShadow(@wcfContainerBackgroundColor);
 	}
 	ul {
 		margin: 0;
@@ -212,13 +206,13 @@ div#blockTypePopup {
 			display: block;
 			background-repeat: no-repeat;
 			background-position: 9px 10px;
-			border-bottom: 1px solid #4e4e4e;
+			border-bottom: 1px solid @wcfContainerBorderColor;
 			position: relative;
 			z-index: 100;
 			
 			&:hover {
-				background-color: #282828; 
-				color: #fff;
+				background-color: @wcfContainerHoverBackgroundColor; 
+				color: @wcfColor;
 			}
 			&.block-type-hidden {
 				display: none;
@@ -235,7 +229,7 @@ div#blockTypePopup {
 			&#add-more-blocks {
 				padding: 0;
 				a {
-					color: #777;
+					color: @wcfColor;
 					display: block;
 					text-align: center;
 					text-decoration: none;
@@ -244,7 +238,7 @@ div#blockTypePopup {
 			&#more-blocks {
 				background: none no-repeat 13px 12px;
 				&:hover {
-					background-color: #282828;
+					background-color: @wcfContainerHoverBackgroundColor;
 					ul {
 						display: block;
 					}
@@ -253,10 +247,10 @@ div#blockTypePopup {
 					z-index: 49;
 					width: 200px;
 					display: none;
-					background: #333;
+					background: @wcfContainerBackgroundColor;
 					position: absolute;
 					margin: -35px 0 0 -230px;
-					box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.35);
+					.boxShadowNative(3px 3px 6px rgba(0, 0, 0, 0.35));
 					.borderRadius(5px);
 				}
 			}
@@ -266,14 +260,14 @@ div#blockTypePopup {
 
 /** Template Notice **/
 div#template-notice {
-	background: rgba(0, 0, 0, 0.7);
+	background: @wcfContainerBackgroundColor;
     display: block;
     height: 100%;
     position: fixed;
     width: 105%;
     z-index: 15000;
 	left: -50px;
-	font-family: helvetica, sans-serif;
+	font-family: @wcfBaseFontFamily;
 	
 	h1 {
 		background: rgba(0, 0, 0, 0.5);
@@ -287,7 +281,7 @@ div#template-notice {
 	    padding: 30px;
 	    position: fixed;
 	    text-align: center;
-	    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+	    .textShadow(@wcfContainerBackgroundColor);
 	    top: 150px;
 	    width: 470px;
 	}

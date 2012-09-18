@@ -1,6 +1,6 @@
 /** Structure **/
 body {
-	background: url(../images/grid-mode-bg.png) repeat;
+	background: url(../images/grid-mode-bg.png) repeat !important;
 }
 
 body * {
@@ -12,8 +12,8 @@ div {
 	&.wrapper { 
 		margin: 0 auto; 
 		position: relative;
-		background: #fff;
-		box-shadow: 4px 4px 0 rgba(0, 0, 0, .2);
+		background: @wcfContainerBackgroundColor;
+		.boxShadowNative(4px 4px 0 rgba(0, 0, 0, .2));
 		padding: 15px;
 	}
 	&#whitewrap { 
@@ -35,15 +35,15 @@ div {
 /** Grid and Blocks **/
 .block {
 	box-shadow: none;
-	background: rgba(0, 0, 0, .05);
+	background: @wcfContainerBackgroundColor;
 	position: absolute !important;
 	cursor: move;
 	margin-bottom: 10px;
 	overflow: hidden;
 	min-height: 0 !important;
 	
-	box-sizing: content-box !important; 
 	-moz-box-sizing: content-box !important;
+	box-sizing: content-box !important;
 	
 	outline: 1px dotted #999;
 	margin: 0 !important;
@@ -52,10 +52,7 @@ div {
 	.borderRadius(2px);
 	
 	opacity: .8;
-	
-	-moz-transition: box-shadow 0.125s linear, opacity 0.125s linear, background 0.125s linear; 
-	-webkit-transition: box-shadow 0.125s linear, opacity 0.125s linear, background 0.125s linear;
-	transition: box-shadow 0.125s linear, opacity 0.125s linear, background 0.125s linear;
+	.transitionMultiple(box-shadow 0.125s linear, opacity 0.125s linear, background 0.125s linear);
 	
 	&.hide-content-in-grid {
 		div {
@@ -72,7 +69,7 @@ div {
 						height: 100%;
 						.border-box;
 						line-height: 150%;
-						font-size: 12px;
+						font-size: @wcfBaseFontSize;
 						padding: 10px;
 						display: block;
 					}
@@ -84,7 +81,7 @@ div {
 
 .block:hover, .block-hover {
 	background: rgba(0, 0, 0, .1);
-	box-shadow: 0 0 6px rgba(20, 192, 241, .7) !important;
+	.boxShadowNative(0 0 6px rgba(20, 192, 241, .7));
 	opacity: 1;
 }
 
@@ -108,11 +105,11 @@ div {
 /** Error Blocks and Unknown Block Types **/
 .block-error, .block-type-unknown {
 	outline: 1px dashed rgba(255, 0, 0, .8);
-	box-shadow: 0 0 4px rgba(255, 0, 0, .5) !important;
+	.boxShadowNative(0 0 4px rgba(255, 0, 0, .5));
 }
 
 .block-error:hover, .block-type-unknown:hover {
-	box-shadow: 0 0 6px rgba(255, 0, 0, .7) !important;
+	.boxShadowNative(0 0 6px rgba(255, 0, 0, .7));
 }
 	
 
@@ -122,7 +119,7 @@ div.grouping-active {
 		opacity: .3 !important; 
 	}
 	.grouped-block {
-		box-shadow: 0 0 5px rgba(20, 192, 241, .6) !important;
+		.boxShadowNative(0 0 5px rgba(20, 192, 241, .6));
 		opacity: 1 !important; 
 	}
 }
@@ -134,21 +131,19 @@ h3.block-type {
 	position: absolute;
 	top: 50%;
 	margin: -12px 0 0 0;
-	font-size: 13px;
-	line-height: 15px;
+	font-size: @wcfBaseFontSize;
+	line-height: @wcfBaseLineHeight;
 	z-index: 9;
 	opacity: .35;
-	-moz-transition: opacity 0.125s linear; 
-	-webkit-transition: opacity 0.125s linear; 
-	transition: opacity 0.125s linear;
+	.transition(opacity, 0.125s, linear);
 	
 	> span {
 		background: rgba(0, 0, 0, .75); 
 		.borderRadius(8px);
 		padding: 5px 10px;
-		color: rgba(255, 255, 255, .8);
-		text-shadow: -1px -1px 0 rgba(0, 0, 0, .4);
-		box-shadow: 1px 1px 0 rgba(255, 255, 255, .1);
+		color: @wcfColor;
+		.textShadow(rgba(0, 0, 0, .75));
+		.boxShadowNative(1px 1px 0 rgba(255, 255, 255, .1));
 		display: inline-block;
 		height: 15px;
 	}
@@ -201,9 +196,6 @@ div {
 		}
 	}
 	&.grid-grey {
-		@rgbaBackground: '0, 0, 0, .035';
-		@rgbaBorderLeft: '0, 0, 0, .07';
-		@rgbaBorderRight: '0, 0, 0, .07';
 		div.grid-column {
 			.background(0, 0, 0, .035);
 			.borderSide(0, 0, 0, .07);
@@ -221,9 +213,9 @@ div#grid-height-buttons {
 	span {
 		background: rgba(0, 0, 0, .75); 
 		.borderRadius(13px);
-		color: rgba(255, 255, 255, .8);
-		text-shadow: 1px 1px 0 rgba(0, 0, 0, .4);
-		box-shadow: 1px 1px 0 rgba(255, 255, 255, .1);
+		color: @wcfColor;
+		.textShadow(rgba(0, 0, 0, .75));
+		.boxShadowNative(1px 1px 0 rgba(255, 255, 255, .1));
 		
 		cursor: pointer;
 		opacity: .7;
@@ -231,7 +223,7 @@ div#grid-height-buttons {
 		margin: 0 3px;
 		width: 26px;
 		height: 26px;
-		line-height: 26px;
+		line-height: @wcfBaseLineHeight;
 		text-align: center;
 		display: inline-block;
 		
@@ -249,11 +241,11 @@ div#grid-height-buttons {
 /** Helper **/
 div.ui-grid-helper { 
 	z-index: 10000;
-	border: 1px dashed rgba(0, 0, 0, .25);
+	border: 1px dashed @wcfContainerBorderColor;
 	display: block; 
 	position: absolute;
 	margin: -1px 0 0 -1px; 
-	box-shadow: 0 0 4px rgba(20, 192, 241, .6);
-	background: rgba(0, 0, 0, .1);
+	.boxShadowNative(0 0 4px rgba(20, 192, 241, .6));
+	.background(0, 0, 0, .1);
 	.borderRadius(3px);
 }

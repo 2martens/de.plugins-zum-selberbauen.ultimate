@@ -7,6 +7,8 @@ Copyright 2011-2012 by Jim Martens.
 
 body {
 	overflow: hidden;
+	background-color: rgb(28, 28, 28);
+	height: 0px;
 	* {
 		font-size: @wcfBaseFontSize;
 		font-family: @wcfBaseFontFamily; 
@@ -24,7 +26,17 @@ select {
 	-webkit-appearance: none;
 }
 
+#visualEditorForm {
+	height: 0px;
+}
 
+#main {
+	z-index: auto !important;
+}
+
+#pageHeader {
+	margin-top: 40px !important;
+}
 /** For some reason these two selection declarations cannot be grouped using a comma, so they are separate. **/
 ::selection {
 	background: #43A58B;
@@ -177,18 +189,18 @@ div.scrollbarpaper-drag {
 
 /** Scroll Bar Styling for WebKit **/
 /** Scroll bars **/
-.sub-tabs::-webkit-scrollbar, 
-.sub-tabs-content-container::-webkit-scrollbar, 
+.subTabs::-webkit-scrollbar, 
+.subTabs-content-container::-webkit-scrollbar, 
 .design-editor-options-container::-webkit-scrollbar,
-.layout-selector-content::-webkit-scrollbar {
+.layoutSelectorContent::-webkit-scrollbar {
 	-webkit-appearance: none;
 	width: 7px;
 }
 		
-.sub-tabs::-webkit-scrollbar-thumb, 
-.sub-tabs-content-container::-webkit-scrollbar-thumb, 
+.subTabs::-webkit-scrollbar-thumb, 
+.subTabsContentContainer::-webkit-scrollbar-thumb, 
 .design-editor-options-container::-webkit-scrollbar-thumb,
-.layout-selector-content::-webkit-scrollbar-thumb {
+.layoutSelectorContent::-webkit-scrollbar-thumb {
 	border-radius: 4px;
 	background-color: rgba(255, 255, 255, .05);
 	box-shadow: 0 0 1px rgba(255, 255, 255, .5);
@@ -198,8 +210,7 @@ div.scrollbarpaper-drag {
 /** Random **/
 span.button {
 	float: left;
-	color: @wcfColor;
-    display: block;
+	display: block;
     font-size: 12px;
 	padding: 0 11px;
 	margin: 0 0 0 5px;
@@ -218,10 +229,9 @@ span.button {
 	&:hover,
 	&:active,
 	&.button-depressed {
-		border-right-color: @wcfContainerBorderColor;
-		border-bottom-color: @wcfContainerBorderColor;
-		border-left-color: @wcfContainerBorderColor;
-		color: @wcfColor;
+		border-right-color: @wcfButtonBorderColor;
+		border-bottom-color: @wcfButtonBorderColor;
+		border-left-color: @wcfButtonBorderColor;
 	}
 	
 	&:active,
@@ -366,7 +376,7 @@ div {
 			.boxShadowInset(-1px, -1px, rgba(255, 255, 255, .15), 0);
 		}
 	}
-	&#current-layout {
+	&#currentLayout {
 		.linear-gradient(#3e3e3e, #2a2a2a);
 		display: block;
 		height: 22px;
@@ -391,7 +401,7 @@ div {
 }
 
 /** Save Buttons **/
-.save-button-container {
+.saveButtonContainer {
 	position: relative;
 	float: right;
 	display: block;
@@ -399,7 +409,7 @@ div {
 	width: 76px;
 }
 
-span.save-button {
+span.saveButton {
 	color: #fff;
     display: block;
     font-size: 12px;
@@ -416,7 +426,7 @@ span.save-button {
 
 /** Save Button **/
 span {
-	&#save-button {
+	&#saveButton {
 		opacity: 0;
 		position: absolute;
 		display: none;
@@ -427,7 +437,7 @@ span {
 			.linear-gradient(#43a58b, #8ac2b5);
 		}
 	}
-	&#inactive-save-button {
+	&#inactiveSaveButton {
 		.linear-gradient(#777, #444);
 		color: @wcfButtonColor;
 		cursor: default;
@@ -436,12 +446,12 @@ span {
 }
 
 /** Preview Button **/
-#preview-button-container, span.preview-button {
+#previewButtonContainer, span.previewButton {
 	width: 82px;
 }
 
 span {
-	&#preview-button {
+	&#previewButton {
 		position: absolute;
 		display: none;
 		opacity: 0;
@@ -455,7 +465,7 @@ span {
 			display: block !important;
 		}
 	}
-	&#inactive-preview-button {
+	&#inactivePreviewButton {
 		display: block;
 		.linear-gradient(#777, #444);
 		color: @wcfButtonColor;
@@ -469,7 +479,7 @@ span {
 iframe.content { 
 	width: 100%;
 	height: 100%;
-	padding: 45px 0 270px 295px;
+	padding: 0 0 270px 295px;
 	margin: 0;
 	overflow: auto;
 	position: fixed;
@@ -478,31 +488,30 @@ iframe.content {
 	.transitionEditor("padding-left 500ms cubic-bezier(0.165, 0.840, 0.440, 1.000), padding-bottom 500ms cubic-bezier(0.165, 0.840, 0.440, 1.000)");
 }
 	
-div#iframe-overlay {
+div#iframeOverlay {
 	display: none;
 	position: fixed;
-	background: none;
 	z-index: 4; 
 }
 		
-div#iframe-loading-overlay {
+div#iframeLoadingOverlay {
 	position: fixed;
 	z-index: 4;
 	background: rgba(0, 0, 0, .6);
 	width: 100%;
 	height: 100%;
 	display: none;
-	div.cog-container {
+	div.cogContainer {
 		position: absolute;
 		top: 50%;
 		left: 50%; 
 		margin: -125px 0 0 120px;
 	}
 }
-body.panel-hidden div#iframe-loading-overlay div.cog-container { margin-top: -15px; }
+body.panel-hidden div#iframeLoadingOverlay div.cogContainer { margin-top: -15px; }
 	
 /** Panel **/
-div#panel {
+div#bottomPanel {
 	width: 100%;
 	min-width: 800px;
 	height: 220px;
@@ -510,7 +519,8 @@ div#panel {
 	position: fixed;
 	bottom: 0;
 	background: @wcfContainerBackgroundColor;
-	z-index: 7; 
+	z-index: 7;
+	left: 0; 
 	.transitionEditor("bottom 500ms cubic-bezier(0.165, 0.840, 0.440, 1.000)");
 	
 	div.panel {
@@ -522,21 +532,8 @@ div#panel {
 		position: absolute;
 	}
 }
-/** Panel Top **/
-ul#panel-top { 
-	width: 100%;
-	height: 50px;
-	margin: -50px 0 0 0;
-	float: left;
-	.linear-gradient(#5c5c5c, #2e2e2e);
-	display: block;
-	position: relative;
-	z-index: 2;
-	.boxShadowNative(0 -5px 10px rgba(0, 0, 0, .3));
-}
-	
 /** Panel Top Resize Handle **/
-div#panel-top-handle {
+div#bottomPanelTopHandle {
 	width: 100px;
 	height: auto;
 	position: absolute;
@@ -556,58 +553,6 @@ div#panel-top-handle {
 	}
 }
 	
-/** Panel Top Tabs **/
-ul#panel-top li { 
-	margin: 0 -55px 0 60px;
-	float: left; 
-	a {
-		text-decoration: none;
-		color: @wcfLinkColor;
-		font-size: 14px;
-		padding: 0 10px;
-		height: 50px;
-		line-height: 50px;
-		display: block;
-		text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
-		&:hover {
-			color: @wcfLinkHoverColor;			
-		}
-	}
-	span.close {
-		display: none;
-		position: absolute;
-		background: none;
-    	height: 10px;
-    	right: -4px;
-    	text-indent: -9999px;
-    	top: 25%;
-    	width: 10px;
-		cursor: pointer;
-		opacity: .6;
-		&:hover {
-			opacity: 1;
-		}
-	}
-	&:hover {
-		span.close {
-			display: block;
-		}
-		a {
-			color: @wcfLinkColor;
-		}
-	}
-	&.ui-corner-top {
-		position: relative; 
-	}
-	&:ui-state-active {
-		a {
-			color: @wcfLinkColor !important;
-		}
-		span.close {
-			display: block;
-		}
-	}
-}		
 /** Options **/
 li#options span {
 	width: 37px;
@@ -648,8 +593,103 @@ li#options span {
 	}
 }			
 /** Mode Buttons **/
-ul#panel-top { 
-	span.mode-button {
+#bottomPanelTabs {
+	padding: 0 !important;
+	margin: 0 !important;
+
+	> ul {
+	//background: none !important;
+	width: 100%;
+	height: 50px;
+	margin: -50px 0 0 0;
+	float: left;
+	box-shadow: 0 -5px 10px rgba(0,0,0,0.3);
+	@ulBackground: (#5c5c5c + #2e2e2e) / 2;
+	.linear-gradient(#5c5c5c, #2e2e2e);
+	display: block;
+	position: relative;
+	border: 0 !important;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	z-index: 2;
+	
+	//.boxShadowNative(0 -5px 10px rgba(0, 0, 0, .3));
+	li {
+		border: 0 !important;
+		margin: 0 -55px 0 60px;
+		float: left;
+		height: 50px;
+		&.ui-state-active {
+			a {
+				color: white !important;
+				background-color: transparent !important;
+				font-weight: normal !important;
+				margin-top: 0 !important;
+				&:before {
+					border: 0 !important;
+					border-bottom-right-radius: 0 !important;
+					width: 0 !important;
+					height: 0 !important;
+				}
+				&:after {
+					border: 0 !important;
+					width: 0 !important;
+					height: 0 !important;
+					border-bottom-left-radius: 0 !important;
+				}
+			}
+			span.close {
+				display: block;
+			}
+		}
+		a {
+			background-color: transparent !important;
+			border-top-left-radius: 0 !important;
+			border-top-right-radius: 0 !important;
+			border-bottom-left-radius: 0 !important;
+			border-bottom-right-radius: 0 !important;
+			border-width: 0 !important;
+			text-decoration: none;
+			font-size: 14px;
+			color: #8C8C8C;
+			padding: 0 10px !important;
+			display: block;
+			height: 50px;
+			line-height: 50px;
+			text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+			cursor: pointer !important;
+		}
+		span.close {
+			display: none;
+			position: absolute;
+			background: none;
+    		height: 10px;
+    		right: -4px;
+    		text-indent: -9999px;
+    		top: 25%;
+    		width: 10px;
+			cursor: pointer;
+			opacity: .6;
+			&:hover {
+				opacity: 1;
+			}
+		}
+		&:hover {
+			span.close {
+				display: block;
+			}
+			a {
+				color: white !important;
+			}	
+		}
+		&.ui-corner-top {
+			position: relative; 
+		}
+		
+	} 
+	span.modeButton {
 		float: right;
 		margin: 9px 0 0 13px;
 		color: @wcfButtonColor;
@@ -671,7 +711,7 @@ ul#panel-top {
 			.linear-gradient(#1d1d1d, #404040);
 		}
 	}
-	span.mode-button-green {
+	span.modeButtonGreen {
 		text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
 		border-bottom: 1px solid #444;
 		.linear-gradient(#8ac2b5, #43a58b);
@@ -682,7 +722,7 @@ ul#panel-top {
 			.linear-gradient(#43a58b, #8ac2b5);
 		}
 	}
-	#toggle-inspector {
+	#toggleInspector {
 		width: 100px;
 	}
 	li#minimize {
@@ -690,24 +730,21 @@ ul#panel-top {
 		float: right;
 		span {
 			cursor: pointer;
-			width: 37px; 
-			height: 37px; 
-			background: none no-repeat; 
-			display: block; 
+			width: 32px; 
+			height: 32px; 
+			background-color: white; 
 			text-indent: -9999px;
-			padding: 0;
-			&.active,
-			&:active {
-				background: none no-repeat;
-			}
+			padding: 7px 0;
 		}
+	}
 	}
 }
 /** Visual Editor Panel Sub Tabs **/
-div.sub-tabs-content-container {
+div.subTabsContentContainer {
 	overflow-x: hidden;
 	overflow-y: auto;
 	height: 100%;
+	border: 0 !important;
 }
 	
 /** Sub Tabs Content Scolling **/
@@ -715,34 +752,39 @@ div.scrollbarpaper-container-sub-tabs-content-container {
 	right: 0;
 	top: 50px;
 } 
-	
-ul.sub-tabs { 
-	float: left;
-	width: 220px; 
+nav.subTabsContainer {
 	height: 100%;
-	background: @wcfContainerBackgroundColor; 
-	position: relative;
+	margin: 0 !important;
+	padding: 0 !important;
+	float: left !important;
+}
+ul.subTabs { 
+	float: left !important;
+	width: 220px !important; 
+	height: 100% !important;
 	overflow-y: auto;
+	overflow-x: hidden;
+	display: block !important;
+	border: 0 !important;
+	background-color: darken(@wcfContainerBackgroundColor, 10%) !important;
+	
 	li {
+		display: block !important;
+		&.ui-state-active {
+			a {
+				background-color: @wcfContainerBackgroundColor !important;
+				margin-top: 0 !important;
+				padding-top: 0 !important;
+				padding-bottom: 0 !important;
+			}
+		}
 		> a,
 		> span {
-			text-decoration: none;
-			color: @wcfLinkColor;
-			display: block;
+			display: block !important;
 			padding: 12px;
-			font-size: @wcfBaseFontSize;
-			text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
-			cursor: pointer;
-			&:hover {
-				color: @wcfLinkHoverColor;
-			}
+			cursor: pointer !important;
 		}
-		&.ui-state-active {
-			> a,
-			> span {
-				color: @wcfLinkColor;
-			}
-		}
+		
 	}
 }		
 /** Sub Tabs Scrolling **/
@@ -783,12 +825,39 @@ p {
 }		
 	
 /** Visual Editor Panel Sub Tabs Content **/
-div.sub-tabs-content {
-	padding: 20px;
-	margin: 0; 
-	height: 100%;
+div.subTabsContent {
+	padding: 20px !important;
+	margin: 0 !important; 
+	height: 100% !important;
+	overflow-y: auto;
 	.border-box;
-	div.tooltip-button {
+	border: 0 !important;
+	
+	dd {
+		display: block;
+		margin-top: 5px;
+		margin-bottom: 5px;
+		> div {
+			display: block;
+			label {
+				float: left;
+			}
+			> div {
+				display: inline-block;
+				input {
+					margin-left: 10px;
+					border: 0 !important;
+					width: 40px;
+					text-align: right;
+					overflow-x: hidden;
+				}
+				span.sliderUnit {
+					margin-left: 10px;
+				}
+			}
+		}
+	}
+	div.tooltipButton {
 		width: 17px;
 		height: 16px;
 		display: block;
@@ -803,11 +872,11 @@ div.sub-tabs-content {
 	}
 }
 /** Layout Selector **/
-div#layout-selector-offset {
+div#layoutSelectorOffset {
 	bottom: 0;
     display: block;
     height: auto;
-    padding: 44px 0 304px;
+    padding: 41px 0 304px;
     position: fixed;
     left: -60px;
     top: 0;
@@ -816,147 +885,272 @@ div#layout-selector-offset {
  	.transitionEditor("left 500ms cubic-bezier(0.165, 0.840, 0.440, 1.000), padding-bottom 500ms cubic-bezier(0.165, 0.840, 0.440, 1.000)");
 }
 
-div#layout-selector-container {	
+div#layoutSelectorContainer {	
 	border: 0 solid rgba(0, 0, 0, .1);
 	border-width: 0 5px 0 0;
 	height: 100%;
 	position: relative; 
-}
 	
-span#layout-selector-toggle {
-	-moz-transform: rotate(90deg);
-	-webkit-transform: rotate(90deg);
-	.linear-gradient(#2f2f2f, #1e1e1e);
-    .borderRadius(5px 5px 0 0);
-    color: @wcfButtonColor;
-    /** display: block; **/
-	display: block;
-    height: 38px;
-    right: -93px;
-    line-height: @wcfBaseLineHeight;
-    margin: -3px 0 0 0;
-    position: absolute;
-    text-align: center;
-    top: 50%;
-    width: 150px;
-    z-index: 10;
- 	cursor: pointer;
-	.boxShadowNative(4px -4px 0 rgba(0, 0, 0, .1));
-}
-		
-div#layout-selector {
-	padding: 0 0 0 60px;
-	background: @wcfButtonBackgroundColor;
-	height: 100%;
-	position: relative; 
-}
-		
-div.layout-selector-content { 
-	float: left;
-	clear: both;
-	width: 290px;
-	height: auto;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	margin: 2px 0 5px 0;
-	overflow-y: auto;
-	overflow-x: hidden;
+	span#layoutSelectorToggle {
+		-moz-transform: rotate(90deg);
+		-webkit-transform: rotate(90deg);
+		.linear-gradient(@wcfContainerBackgroundColor, darken(@wcfContainerBackgroundColor, 10%));
+    	.borderRadius(5px 5px 0 0);
+    	color: @wcfButtonColor;
+    	//background-color: @wcfButtonBackgroundColor;
+	    /** display: block; **/
+		display: block;
+	    height: 38px;
+	    right: -93px;
+	    line-height: @wcfBaseLineHeight;
+	    margin: -3px 0 0 0;
+	    position: absolute;
+	    text-align: center;
+	    top: 50%;
+	    width: 150px;
+	    z-index: 10;
+	 	cursor: pointer;
+		.boxShadowNative(4px -4px 0 rgba(0, 0, 0, .1));
+	}
 	
-	ul {
-		li {
-			display: block;
+	div#layoutSelector {
+		padding: 0 0 0 60px;
+		background: darken(@wcfContainerBackgroundColor, 10%);
+		height: 100%;
+		position: relative; 
+		overflow: visible !important;
+		border-top-left-radius: 0px;
+		border-top-right-radius: 0px;
+		border-bottom-left-radius: 0px;
+		border-bottom-right-radius: 0px;
+		border: 0;
+		div.scrollbarpaper-container { 
+			background: @wcfContainerBackgroundColor;
+    		right: 5px;
+    		top: 1px;
+    	}
+    	div.scrollbarpaper-drag { 
+			background: @wcfContainerBackgroundColor;
 		}
-		ul {
-			display: none;
-			padding: 0 0 0 25px;
-		}
-	}
-}
-									
-/** Style big boy layout **/
-div.layout-selector-content li.layout-item span.layout {
-	padding: 7px 15px;
-	cursor: pointer;
-	display: block;
-	border-bottom: 1px solid #292929;
-	position: relative;
-	float: left;
-	width: 100%;
-	min-height: 18px;
-	line-height: 18px;
-	.border-box;
-	clear: both;
-	text-shadow: 1px 1px 1px #282828;
-	strong { 
-		float: left;
-		color: @wcfColor; 
-		&:hover {
-			color: @wcfLinkHoverColor;
-		}
-	}
-	span.status {
-		color: @wcfColor;
-		float: left;
-		margin: 0 0 0 10px;
-		/** Hide all statuses by default **/
-		display: none;
-	}
-	span.layout-page {
-		padding-left: 30px;
-		span.layout-selector-button {
-			right: 3px;
-		}
-	}
-	span.layout-template {
-		span.edit {
-			right: 3px;
-		}
-		span.assign-template { 
-			right: 50px;
-		}
-		span.delete-template {
-			text-indent: -9999px;
-			/** Hide the delete template button by default **/
-			display: none;
-			cursor: pointer;
-			background: none no-repeat;
-			width: 15px;
-			height: 14px;
-			margin: 1px 0 -3px 6px;
-			opacity: .35;
-			float: left;
-			&:hover {
-				opacity: .9;
+		div.tabMenuContent {
+			margin-top: 0 !important;
+			min-height: 0 !important;
+			position: static !important;
+			z-index: auto !important;
+			border: 0 !important;
+			div.layoutSelectorContent { 
+				float: left;
+				clear: both;
+				width: 290px;
+				height: auto;
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				margin: 2px 0 5px 0;
+				overflow-y: auto;
+				overflow-x: hidden;
+				
+				li.has-children {
+					> span.layout { 
+						background: none no-repeat 16px 10px; 
+					}
+					> span.layoutOpen { 
+						background: none no-repeat 15px 13px; 
+					}
+				}
+				li.layoutItem {
+					&:not(.layoutItemTemplateUsed):not(.layoutSelected) {
+						> span.layout:hover span.edit {
+							display: block;
+						}
+					}
+					&:not(.layoutSelected) > span.layoutTemplate:hover span.assignTemplate {
+						display: block;
+					}
+					> span.layoutTemplate:hover span.deleteTemplate {
+						display: block;
+					}
+					&.hasCustomizedChildren {
+						position: relative;
+						clear: both;
+						> span.layoutHasCustomizedChildren {
+							display: inline;
+						}
+					}
+					> span.layoutHasCustomizedChildren {
+						display: none;
+						font-size: 14px;
+						margin: 0;
+						font-weight: 200;
+						top: 10px;
+						left: 5px;
+						position: absolute;
+						z-index: 2;
+						cursor: help;
+					}
+					span.layout {
+						padding: 7px 15px;
+						cursor: pointer;
+						display: block;
+						border-bottom: 1px solid #292929;
+						position: relative;
+						float: left;
+						width: 100%;
+						min-height: 18px;
+						line-height: 18px;
+						clear: both;
+						//text-shadow: 1px 1px 1px #282828;
+						.border-box;
+				
+						strong { 
+							float: left;
+							color: @wcfColor; 
+							&:hover {
+								color: @wcfColor;
+							}
+						}
+						span.status {
+							color: @wcfColor;
+							float: left;
+							margin: 0 0 0 10px;
+							// Hide all statuses by default.
+							display: none;
+						}		
+						span.layoutPage {
+							padding-left: 30px;
+							span.layoutSelectorButton {
+								right: 3px;
+							}
+						}
+						span.layoutTemplate {
+							span.edit {
+								right: 3px;
+							}
+							span.assignTemplate { 
+								right: 50px;
+							}
+							span.deleteTemplate {
+								text-indent: -9999px;
+								// Hide the delete template button by default.
+								display: none;
+								cursor: pointer;
+								background: none no-repeat;
+								width: 15px;
+								height: 14px;
+								margin: 1px 0 -3px 6px;
+								opacity: .35;
+								float: left;
+								&:hover {
+									opacity: .9;
+								}
+							}
+						}
+					}
+				}
+				li.layoutItemCustomized {
+					> span.layout {
+						span.statusCustomized {
+							display: block;
+						}
+						span.edit,
+						span.revert {
+							display: none;
+						}
+						span.statusTemplate {
+							display: block;
+						}
+						&:hover {
+							span.edit,
+							span.revert {
+								display: none;
+							}
+							span.removeTemplate {
+								display: block;
+							}
+						}
+					}
+				}
+				li.layoutSelected {
+					> span.layout {
+						strong {
+							color: #eee !important;
+						}
+						span.status {
+							display: none;
+						}
+						span.statusCurrentlyEditing {
+							display: block;
+						}
+						span.layoutSelectorButton {
+							display: none;
+						}
+					}
+					&:hover {
+						span.layout-selector-button {
+							display: none;
+						}
+					}
+					&.layoutItemCustomized > span.layout span.revert {
+						display: block;
+					}
+					&.layoutItemTemplateUsed > span.layout span.removeTemplate {
+						display: block;
+					}
+					> span.layoutTemplate span.deleteTemplate {
+						display: block;
+					}
+				}
+				li.layoutItemNoEdit {
+					> span.layout {
+						strong {
+							color: @wcfColor;
+						}
+						span.layoutSelectorButton {
+							display: none !important;
+						}	
+					}
+					&.hasChildren {
+						> span.layout {
+							background-image: none;
+						}	
+						> span.layoutOpen { 
+							background-image: none; 
+						}
+					}
+				}
+				li.infoLayoutItem {
+					span.layout {
+						strong,
+						strong:hover {
+							color: @wcfColor;
+							cursor: default;
+						}
+					}
+				}
+				ul {
+					width: 275px !important;
+					margin: 0; 
+					height: 100%;
+					float: left;
+					li {
+						display: block;
+						span.status {
+							display: none;
+						}
+					}
+					ul {
+						display: none;
+						padding: 0 0 0 25px;
+					}
+				}
 			}
 		}
 	}
 }
+
 /** Style buttons and hide them **/
-span.layout-selector-button { 
-	display: none; 
-	position: absolute; 
-	cursor: pointer;
-	top: 5px;
-	border-top: 1px solid @wcfButtonBorderColor;
-	border-bottom: 1px solid @wcfButtonBorderColor;
-	.linear-gradient(#333, #111);
-	height: 21px;
-	line-height: @wcfBaseLineHeight;
-	padding: 0 11px;
-	color: @wcfButtonColor;
-	font-size: 11px;
-	text-decoration: none;
-	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
-	.borderRadius(6px);
-	&:hover {
-		color: @wcfButtonHoverColor;
-		border-top: 1px solid @wcfButtonHoverBorderColor;
-		border-bottom: 1px solid @wcfButtonHoverBorderColor;
-	}
-	&:active {
-		.linear-gradient(#111, #333);
-	}
+span.layoutSelectorButton { 
+	display: none;
 }
 /** Hide the revert button in the manage and design modes. **/
 body.visual-editor-mode-design span.revert, 
@@ -966,154 +1160,19 @@ body.visual-editor-mode-manage span.revert {
 				
 /** Conditionals **/
 /** Hierarchial indicators **/
-div.layout-selector-content {
-	li.has-children {
-		> span.layout { 
-			background: none no-repeat 16px 10px; 
-		}
-		> span.layout-open { 
-			background: none no-repeat 15px 13px; 
-		}
-	}
-	li.layout-item {
-		&:not(.layout-item-template-used):not(.layout-selected) {
-			> span.layout:hover span.edit {
-				display: block;
-			}
-		}
-		&:not(.layout-selected) > span.layout-template:hover span.assign-template {
-			display: block;
-		}
-		> span.layout-template:hover span.delete-template {
-			display: block;
-		}
-		&.has-customized-children {
-			position: relative;
-			clear: both;
-			> span.layout-has-customized-children {
-				display: inline;
-			}
-		}
-		> span.layout-has-customized-children {
-			display: none;
-			font-size: 14px;
-			margin: 0;
-			font-weight: 200;
-			top: 10px;
-			left: 5px;
-			position: absolute;
-			color: @wcfColor;
-			z-index: 2;
-			cursor: help;
-		}
-	}
-	li.layout-item-customized {
-		> span.layout {
-			span.status-customized {
-				display: block;
-			}
-			span.edit,
-			span.revert {
-				display: none;
-			}
-			span.status-template {
-				display: block;
-			}
-			&:hover {
-				span.edit,
-				span.revert {
-					display: none;
-				}
-				span.remove-template {
-					display: block;
-				}
-			}
-		}
-	}
-	li.layout-selected {
-		> span.layout {
-			strong {
-				color: #eee !important;
-			}
-			span.status {
-				display: none;
-			}
-			span.status-currently-editing {
-				display: block;
-			}
-			span.layout-selector-button {
-				display: none;
-			}
-		}
-		&:hover {
-			span.layout-selector-button {
-				display: none;
-			}
-		}
-		&.layout-item-customized > span.layout span.revert {
-			display: block;
-		}
-		&.layout-item-template-used > span.layout span.remove-template {
-			display: block;
-		}
-		> span.layout-template span.delete-template {
-			display: block;
-		}
-	}
-	li.layout-item-no-edit {
-		> span.layout {
-			strong {
-				color: @wcfColor;
-			}
-			span.layout-selector-button {
-				display: none !important;
-			}	
-		}
-		&.has-children {
-			> span.layout {
-				background-image: url(%VISUALEDITOR%/images/layout-selector-caret-closed-transparent.png);
-			}
-			> span.layout-open { 
-				background-image: url(%VISUALEDITOR%/images/layout-selector-caret-open-transparent.png); 
-			}
-		}
-	}
-	li.info-layout-item {
-		span.layout {
-			strong,
-			strong:hover {
-				color: @wcfColor;
-				cursor: default;
-			}
-		}
-	}
-	> ul {
-		width: 275px !important;
-		margin: 0; 
-		height: 100%;
-		float: left;
-	}
+div.layoutSelectorContent {
+	
 }
-div.layout-selector-disallow-revert span.layout span.revert {
+div.layoutSelectorDisallowRevert span.layout span.revert {
 	display: none !important;
 }
 
-div#layout-selector {
-	div.scrollbarpaper-container { 
-		background: @wcfContainerBackgroundColor;
-    	right: 5px;
-    	top: 1px;
-    }
-    div.scrollbarpaper-drag { 
-		background: @wcfContainerBackgroundColor;
-	}
-}
 /** Template Input **/
-div#layout-selector-templates {
+div#layoutSelectorTemplates {
 	bottom: 35px;
 }
 
-div#template-name-input-container {
+div#templateNameInputContainer {
 	float: left;
 	position: absolute;
 	bottom: 0;
@@ -1121,7 +1180,7 @@ div#template-name-input-container {
 	border-top: 1px solid @wcfContainerBorderColor;
 	width: 255px;
 	padding: 6px 20px;
-	background: @wcfContainerBackgroundColor;
+	background: darken(@wcfContainerBackgroundColor, 10%);
 	
 	input {
 		float: left;
@@ -1137,7 +1196,7 @@ div#template-name-input-container {
 			opacity: .5;
 		}
 	}
-	span.add-template {
+	span.addTemplate {
 		display: block;
 		position: static;
 		top: auto;
@@ -1154,55 +1213,69 @@ body.visual-editor-mode-design div#template-name-input-container {
 }
 /** End Template Inputs **/
 		
-div#layout-selector-tabs { 
-	border: 0 solid @wcfContainerBorderColor; 	
-	border-width: 0 5px 0 0;
-	position: absolute;
+nav#layoutSelectorTabs { 
+	position: absolute !important;
 	bottom: -34px;
 	z-index: 5;
 	width: 355px;
 	left: 0;
-	.boxShadowNative(-10px -5px 5px rgba(0, 0, 0, 0.15));
+	padding: 0 !important;
 	
-	ul.tabs { 
-		.linear-gradient(#333, #222);
+	ul { 
 		width: 295px;
 		float: left;
-		display: block;
 		height: 34px;
+		position: static !important;
+		display: block;
 		list-style: none;
 		margin: 0;
 		padding: 0 0 0 60px;
-	}
-	li {
-		float: left;
-		&.ui-tabs-selected a {
-			color: @wcfLinkColor;
+		border: 0 !important;
+		border-top-left-radius: 0px;
+		border-top-right-radius: 0px;
+		border-bottom-left-radius: 0px;
+		border-bottom-right-radius: 0px;
+		.linear-gradient(@wcfContainerBackgroundColor, darken(@wcfContainerBackgroundColor, 10%));
+		li {
+			&.ui-state-active {
+				margin-left: 0 !important;
+				margin-right: 0 !important;
+				a {
+					background-color: transparent !important;
+					font-weight: normal !important;
+					margin-top: 0 !important;
+					border-top-left-radius: 0 !important;
+					border-top-right-radius: 0 !important;
+					&:before {
+						border: 0 !important;
+						border-bottom-right-radius: 0 !important;
+						width: 0 !important;
+						height: 0 !important;
+					}
+					&:after {
+						border: 0 !important;
+						width: 0 !important;
+						height: 0 !important;
+						border-bottom-left-radius: 0 !important;
+					}
+				}
+			}
+			a {
+				border-top-left-radius: 0 !important;
+				border-top-right-radius: 0 !important;
+				background-color: transparent !important;
+				border-bottom-left-radius: 0 !important;
+				border-bottom-right-radius: 0 !important;
+				border-width: 0 !important;
+				text-decoration: none;
+				font-size: 14px;
+				padding: 0 10px !important;
+				display: block;
+				height: 34px;
+				line-height: 34px;
+				cursor: pointer !important;
+			}
 		}
-	}
-	a {
-		color: @wcfLinkColor;
-		height: 34px;
-		line-height: @wcfBaseLineHeight;
-		padding: 0 10px;
-		display: block;
-		text-decoration: none;
-		&:hover {
-			color: @wcfLinkHoverColor;
-		}
-	}
-	input {
-		display: none;
-		background: @wcfInputBackgroundColor;
-		border: none;
-		.boxShadowInset(0, 1px, rgba(0, 0, 0, 0.5), 2px);
-		color: @wcfInputColor;
-		float: right;
-		font-size: @wcfBaseFontSize;
-		height: 12px;
-		margin: 5px;
-		padding: 6px 10px;
-		width: 120px;
 	}
 }
 
@@ -1311,7 +1384,7 @@ div.box-content {
 }
 	
 /** Live CSS Box **/		
-textarea#live-css {
+textarea#liveCSS {
 	.border-box;
 	width: 100%;
 	height: 100%;
@@ -1319,16 +1392,14 @@ textarea#live-css {
 	font-family: monospace;
 	border: 2px solid @wcfInputBorderColor;
 	resize: none;
-	font-size: @wcfBaseFontSize;
-	line-height: @wcfBaseLineHeight;
 }
 
 /** Grid Wizard **/
-div#box-grid-wizard { 
+div#boxGridWizard { 
 	margin: -220px 0 0 -153px;
 	top: 50%;
 	left: 50%;
-	div.tab-content {
+	div.tabContent {
 		float: left;
 		width: 415px;
 		height: 340px;
@@ -1337,10 +1408,10 @@ div#box-grid-wizard {
 	}
 }
 
-body.layout-selector-hidden div#box-grid-wizard {
+body.layoutSelectorHidden div#boxGridWizard {
 	margin-left: -300px;
 }
-div.grid-wizard-buttons {
+div.gridWizardButtons {
 	display: block;
 	clear: both;
 	float: left;
@@ -1476,65 +1547,13 @@ div#grid-wizard-presets-mirroring-column-1 {
 }
 	
 /** Black Overlay **/
-div.black-overlay {
+div.blackOverlay {
 	position: fixed;
 	width: 100%;
 	height: 100%;
 	display: none;
 	z-index: 14;
 	background: @wcfContainerBackgroundColor; 
-}
-
-/** Notifications **/
-div.notification {
-	position: fixed;
-	top: 70px;
-	right: 20px;
-	background: @wcfContainerBackgroundColor;
-	color: @wcfColor;
-	min-height: 18px;
-	line-height: 18px;
-	width: auto;
-	display: block;
-	.borderRadius(5px);
-	padding: 9px 17px;
-	float: left;
-	z-index: 7;
-	max-width: 280px;
-	.border-box;
-	&-close {
-		padding: 9px 35px 9px 17px;
-	}
-	p {
-		display: inline-block;
-		float: left;
-	}
-	strong {
-		font-weight: bold;
-	}
-	em {
-		font-style: italic;
-	}
-	span.close {
-		display: block;
-		width: 15px;
-		height: 14px;
-		background: none;
-		text-indent: -9999px;
-		cursor: pointer;
-		opacity: .6;
-		position: absolute;
-		top: 11px;
-		right: 10px;
-		&:hover {
-			opacity: 1;
-		}
-	}
-}
-
-div.notification-error {
-	background: @wcfContainerBackgroundColor;
-	color: @wcfColor;
 }
 
 .ui-tooltip-tour {
