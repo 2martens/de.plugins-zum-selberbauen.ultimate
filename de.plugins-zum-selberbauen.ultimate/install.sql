@@ -16,6 +16,7 @@ CREATE TABLE ultimate1_1_blocktype (
 	packageID INT(10) NOT NULL,
 	blockTypeName VARCHAR(255) NOT NULL DEFAULT '',
 	blockTypeClassName VARCHAR(255) NOT NULL DEFAULT '',
+	fixedHeight TINYINT(1) NOT NULL DEFAULT 1,
 	UNIQUE KEY packageID (packageID, blockTypeName)
 );
 
@@ -70,6 +71,12 @@ CREATE TABLE ultimate1_1_content_to_page (
 	pageID INT(10) NOT NULL UNIQUE KEY
 );
 
+DROP TABLE IF EXISTS ultimate1_1_layout;
+CREATE TABLE ultimate1_1_layout (
+	layoutID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	layoutName VARCHAR(255) NOT NULL DEFAULT ''
+);
+
 DROP TABLE IF EXISTS ultimate1_1_link;
 CREATE TABLE ultimate1_1_link (
 	linkID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -111,12 +118,12 @@ CREATE TABLE ultimate1_1_menu_item (
 	UNIQUE KEY (menuID, menuItemName)
 );
 
-DROP TABLE IF EXISTS ultimate1_1_menu_to_block;
-CREATE TABLE ultimate1_1_menu_to_block (
+DROP TABLE IF EXISTS ultimate1_1_menu_to_template;
+CREATE TABLE ultimate1_1_menu_to_template (
 	menuID INT(10) NOT NULL,
-	blockID INT(10) NOT NULL,
+	templateID INT(10) NOT NULL,
 	KEY (menuID),
-	KEY (blockID)
+	UNIQUE KEY (templateID)
 );
 
 DROP TABLE IF EXISTS ultimate1_1_page;
@@ -136,10 +143,17 @@ CREATE TABLE ultimate1_1_page (
 DROP TABLE IF EXISTS ultimate1_1_template;
 CREATE TABLE ultimate1_1_template (
 	templateID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	packageID INT(10) NOT NULL,
 	templateName VARCHAR(255) NOT NULL DEFAULT '',
-	templateBlocks VARCHAR(255) NOT NULL DEFAULT '',
+	widgetAreaSide ENUM('left', 'right') NOT NULL DEFAULT 'right',
+	showWidgetArea TINYINT(1) NOT NULL DEFAULT 1,
 	KEY (packageID)
+);
+
+DROP TABLE IF EXISTS ultimate1_1_template_to_layout;
+CREATE TABLE ultimate1_1_template_to_layout (
+	layoutID INT(10) NOT NULL UNIQUE KEY,
+	templateID INT(10) NOT NULL,
+	KEY (templateID)
 );
 
 DROP TABLE IF EXISTS ultimate1_1_user_group_to_content;
@@ -158,6 +172,42 @@ CREATE TABLE ultimate1_1_user_group_to_page (
 	KEY (pageID)
 );
 
+DROP TABLE IF EXISTS ultimate1_1_widget;
+CREATE TABLE ultimate1_1_widget (
+	widgetID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	widgetAreaID INT(10) NOT NULL,
+	widgetTypeID INT(10) NOT NULL,
+	widgetName VARCHAR(255) NOT NULL DEFAULT '',
+	widgetParent VARCHAR(255) NOT NULL DEFAULT '',
+	showOrder INT(10) NOT NULL DEFAULT 0,
+	isDisabled TINYINT(1) NOT NULL DEFAULT 0,
+	additionalData TEXT,
+	UNIQUE KEY (widgetAreaID, widgetName),
+	KEY (widgetTypeID)
+);
+
+DROP TABLE IF EXISTS ultimate1_1_widget_area;
+CREATE TABLE ultimate1_1_widget_area (
+	widgetAreaID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	widgetAreaName VARCHAR(255) NOT NULL DEFAULT ''
+);
+
+DROP TABLE IF EXISTS ultimate1_1_widget_area_to_template;
+CREATE TABLE ultimate1_1_widget_area_to_template (
+	templateID INT(10) NOT NULL,
+	widgetAreaID INT(10) NOT NULL,
+	UNIQUE KEY (templateID),
+	KEY (widgetAreaID)
+);
+
+DROP TABLE IF EXISTS ultimate1_1_widgettype;
+CREATE TABLE ultimate1_1_widgettype (
+	widgetTypeID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	packageID INT(10) NOT NULL,
+	widgetTypeName VARCHAR(255) NOT NULL DEFAULT '',
+	widgetTypeClassName VARCHAR(255) NOT NULL DEFAULT '',
+	UNIQUE KEY packageID (packageID, widgetName)
+);
 
 /**** foreign keys ****/
 ALTER TABLE ultimate1_1_block ADD FOREIGN KEY (blockTypeID) REFERENCES ultimate1_1_blocktype (blockTypeID) ON DELETE CASCADE;
@@ -174,14 +224,53 @@ ALTER TABLE ultimate1_1_link_to_category ADD FOREIGN KEY (categoryID) REFERENCES
 ALTER TABLE ultimate1_1_menu_item ADD FOREIGN KEY (menuID) REFERENCES ultimate1_1_menu (menuID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_menu_to_block ADD FOREIGN KEY (menuID) REFERENCES ultimate1_1_menu (menuID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_menu_to_block ADD FOREIGN KEY (blockID) REFERENCES ultimate1_1_block (blockID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_menu_to_template ADD FOREIGN KEY (menuID) REFERENCES ultimate1_1_menu (menuID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_menu_to_template ADD FOREIGN KEY (templateID) REFERENCES ultimate1_1_template (templateID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_page ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
-ALTER TABLE ultimate1_1_template ADD FOREIGN KEY (packageID) REFERENCES wcf1_package (packageID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_user_group_to_content ADD FOREIGN KEY (contentID) REFERENCES ultimate1_1_content (contentID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_user_group_to_content ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_user_group_to_page ADD FOREIGN KEY (pageID) REFERENCES ultimate1_1_page (pageID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_1_user_group_to_page ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE CASCADE;
-
+ALTER TABLE ultimate1_1_template_to_layout ADD FOREIGN KEY (layoutID) REFERENCES ultimate1_1_layout (layoutID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_template_to_layout ADD FOREIGN KEY (templateID) REFERENCES ultimate1_1_template (templateID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_widget ADD FOREIGN KEY (widgetAreaID) REFERENCES ultimate1_1_widget_area (widgetAreaID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_widget ADD FOREIGN KEY (widgetTypeID) REFERENCES ultimate1_1_widgettype (widgetTypeID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_widget_area_to_template ADD FOREIGN KEY (templateID) REFERENCES ultimate1_1_template (templateID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_widget_area_to_template ADD FOREIGN KEY (widgetAreaID) REFERENCES ultimate1_1_widget_area (widgetAreaID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_1_widgettype ADD FOREIGN KEY (packageID) REFERENCES wcf1_package (packageID) ON DELETE CASCADE;
 
 /**** default entries ****/
 -- default category
 INSERT INTO ultimate1_1_category (categoryTitle, categorySlug) VALUES ('ultimate.category.1.categoryTitle', 'uncategorized');
+
+-- default layouts
+INSERT INTO ultimate1_1_layout (layoutName) VALUES ('ultimate.layout.index');
+INSERT INTO ultimate1_1_layout (layoutName) VALUES ('ultimate.layout.category');
+INSERT INTO ultimate1_1_layout (layoutName) VALUES ('ultimate.layout.content');
+INSERT INTO ultimate1_1_layout (layoutName) VALUES ('ultimate.layout.page');
+
+-- mime types
+INSERT INTO ultimate1_1_media_mimetype (mimeType) VALUES 
+('application/x-dvi'),
+('application/x-shockwave-flash'),
+('audio/basic'),
+('audio/x-mpeg'),
+('audio/x-pn-realaudio'),
+('audio/x-pn-realaudio-plugin'),
+('audio/x-qt-stream'),
+('audio/x-wav'),
+('image/gif'),
+('image/jpeg'),
+('image/png'),
+('image/tiff'),
+('image/vnd.wap.wbmp'),
+('image/x-portable-anymap'),
+('image/x-portable-bitmap'),
+('image/x-portable-graymap'),
+('image/x-portable-pixmap'),
+('image/x-rgb'),
+('video/mpeg'),
+('video/quicktime'),
+('video/vnd.vivo'),
+('video/x-msvideo'),
+('video/x-sgi-movie');
