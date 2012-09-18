@@ -27,6 +27,11 @@
 			<listclassname>ultimate\data\page\PageList</listclassname>
 		</type>
 		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.template</name>
+			<definitionname>com.woltlab.wcf.clipboardItem</definitionname>
+			<listclassname>ultimate\data\template\TemplateList</listclassname>
+		</type>
+		<type>
 			<name>de.plugins-zum-selberbauen.ultimate.link</name>
 			<definitionname>com.woltlab.wcf.clipboardItem</definitionname>
 			<listclassname>ultimate\data\link\LinkList</listclassname>
