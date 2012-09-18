@@ -8,7 +8,7 @@ use wcf\util\StringUtil;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	util
  * @category	Ultimate CMS
@@ -16,6 +16,9 @@ use wcf\util\StringUtil;
 class CategoryUtil {
 	/**
 	 * Returns all categories which are available.
+	 * 
+	 * @since	1.0.0
+	 * @api
 	 * 
 	 * @param	integer	$categoryID	0 by default; give category id to get all categories except the one belonging to the given category id
 	 * @return	\ultimate\data\category\Category[]
@@ -35,6 +38,9 @@ class CategoryUtil {
 	
 	/**
 	 * Checks if the given title is available.
+	 * 
+	 * @since	1.0.0
+	 * @api
 	 * 
 	 * @param	string	$categoryTitle
 	 * @param	integer	$categoryParent
@@ -76,6 +82,9 @@ class CategoryUtil {
 	/**
 	 * Checks if the given slug is available.
 	 * 
+	 * @since	1.0.0
+	 * @api
+	 * 
 	 * @param	string	$categorySlug
 	 * @param	integer	$categoryParent
 	 * @return	boolean	$isAvailable
@@ -111,6 +120,33 @@ class CategoryUtil {
 			}
 		}
 		return $isAvailable;
+	}
+	
+	/**
+	 * Returns the real category for a hierarchy of category slugs.
+	 *
+	 * @since	1.0.0
+	 * @api
+	 *
+	 * @param	\ultimate\data\category\Category	$category
+	 * @param	integer					 			$i
+	 * @param	string[]				 			$categorySlugs
+	 * @return	\ultimate\data\category\Category
+	 */
+	public static function getRealCategory(\ultimate\data\category\Category $category, $i = 1, $categorySlugs) {
+		$childCategories = $category->__get('childCategories');
+		$maxI = count($categorySlugs) - 1;
+		/* @var $returnCategory \ultimate\data\category\Category|null */
+		$returnCategory = null;
+		foreach ($childCategories as $categoryID => $category) {
+			if ($category->__get('categorySlug') != $categorySlugs[$i]) continue;
+			if ($i == $maxI) {
+				$returnCategory = $category;
+				break;
+			}
+			$returnCategory = self::getRealCategory($category, ++$i, $categorySlugs);
+		}
+		return $returnCategory;
 	}
 	
 	/**

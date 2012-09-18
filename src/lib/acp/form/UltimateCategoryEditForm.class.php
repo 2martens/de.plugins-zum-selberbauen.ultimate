@@ -15,7 +15,7 @@ use wcf\system\WCF;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	acp.form
  * @category	Ultimate CMS
@@ -23,13 +23,13 @@ use wcf\system\WCF;
 class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 	/**
 	 * @var	string
-	 * @see	\wcf\acp\form\ACPForm::$activeMenuItem
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.acp.form.ACPForm.html#$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.category';
 	
 	/**
 	 * @var	string[]
-	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededPermissions
 	 */
 	public $neededPermissions = array(
 		'admin.content.ultimate.canEditCategory'
@@ -48,7 +48,7 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 	public $category = null;
 	
 	/**
-	 * @see	\wcf\page\IPage::readParameters()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -62,7 +62,7 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 	}
 	
 	/**
-	 * @see	\wcf\page\IPage::readData()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
 		$this->categories = CategoryUtil::getAvailableCategories($this->categoryID);
@@ -77,7 +77,7 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 	}
 	
 	/**
-	 * @see	\wcf\form\IForm::save()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
 	 */
 	public function save() {
 		AbstractForm::save();
@@ -116,7 +116,7 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 	}
 	
 	/**
-	 * @see	\wcf\page\IPage::assignVariables()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

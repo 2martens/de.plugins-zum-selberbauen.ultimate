@@ -10,24 +10,24 @@ use wcf\system\WCF;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.category
  * @category	Ultimate CMS
  */
 class Category extends AbstractUltimateDatabaseObject implements ITitledDatabaseObject {
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableName
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableName
 	 */
 	protected static $databaseTableName = 'category';
 	
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexIsIdentity
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableIndexIsIdentity
 	 */
 	protected static $databaseTableIndexIsIdentity = true;
 	
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexName
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableIndexName
 	 */
 	protected static $databaseTableIndexName = 'categoryID';
 	
@@ -85,7 +85,8 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledDatabase
 		        FROM      ultimate'.ULTIMATE_N.'_'.$this->contentCategoryTable.' contentToCategory
 		        LEFT JOIN ultimate'.ULTIMATE_N.'_content content
 		        ON        (content.contentID = contentToCategory.contentID)
-		        WHERE     contentToCategory.categoryID = ?';
+		        WHERE     contentToCategory.categoryID = ?
+		        ORDER BY '.ULTIMATE_SORT_CONTENT_SORTFIELD.' '.ULTIMATE_SORT_CONTENT_SORTORDER;
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->categoryID));
 		$contents = array();
@@ -96,7 +97,7 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledDatabase
 	}
 
 	/**
-	 * @see	\wcf\data\DatabaseObject::handleData()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#handleData
 	 */
 	protected function handleData($data) {
 		$data['categoryID'] = intval($data['categoryID']);
