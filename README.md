@@ -77,7 +77,7 @@ class A {
 	
 	/**
 	 * Contains an array of options.
-	 * @var	array
+	 * @var	string[]
 	 */
 	private $test3 = array('test3');
 	
