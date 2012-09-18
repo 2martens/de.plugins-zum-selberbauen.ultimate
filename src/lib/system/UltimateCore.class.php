@@ -19,7 +19,7 @@ define('ULTIMATE_VERSION', '1.0.0 Alpha 1 (Indigo)');
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system
  * @category	Ultimate CMS
@@ -37,7 +37,7 @@ class UltimateCore extends AbstractApplication {
 	}
 	
 	/**
-	 * @see	\wcf\system\WCF::initTPL()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.WCF.html#initTPL
 	 */
 	protected function initTPL() {
 		if (class_exists('wcf\system\WCFACP', false)) {
@@ -59,7 +59,7 @@ class UltimateCore extends AbstractApplication {
 		
 		$categoryRoute = new Route('categoryRoute-'.PACKAGE_ID);
 		$categoryRoute->setSchema('/{category}/{categorySlug}/', 'Category');
-		$categoryRoute->setParameterOption('category', null, 'category');
+		$categoryRoute->setParameterOption('category', 'category', 'category');
 		$categoryRoute->setParameterOption('categorySlug', null, '[a-z]+(?:\-{1}[a-z]+)*(?:\/{1}[a-z]+(?:\-{1}[a-z]+)*)*');
 		RouteHandler::getInstance()->addRoute($categoryRoute);
 		

@@ -1,11 +1,17 @@
+/* 
+
+File: ultimateMixins.less 
+Copyright 2011-2012 by Jim Martens.
+
+*/
+
 .linear-gradient(@start, @end) {
-	background: (@start + @end) / 2;
-	background: -moz-linear-gradient(top, @start 0%, @end 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @start), color-stop(100%, @end));
-	background: -webkit-linear-gradient(top, @start 0%, @end 100%); /* Chrome 10+, Safari 5.1+ */
-	background: -o-linear-gradient(top, @start 0%, @end 100%); /* Opera */
-	background: -ms-linear-gradient(top, @start 0%, @end 100%); /* IE10+ */
-	background: linear-gradient(top, @start 0%, @end 100%); /* W3C */ 
+	background-color: (@start + @end) / 2;
+	background-image: -moz-linear-gradient(top, @start, @end);
+	background-image: -webkit-linear-gradient(top, @start, @end); /* Chrome 10+, Safari 5.1+ */
+	background-image: -o-linear-gradient(top, @start, @end); /* Opera */
+	background-image: -ms-linear-gradient(top, @start, @end); /* IE10+ */
+	background-image: linear-gradient(top, @start, @end); /* W3C */ 
 }
 
 /* Box Sizing */

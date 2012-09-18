@@ -8,7 +8,9 @@
 	//<![CDATA[
 	var SID_ARG_2ND = '{@SID_ARG_2ND_NOT_ENCODED}';
 	var RELATIVE_WCF_DIR = '{@$__wcf->getPath()}';
+	var RELATIVE_ULTIMATE_DIR = '{@$__wcf->getPath('ultimate')}';
 	var SECURITY_TOKEN = '{@SECURITY_TOKEN}';
+	var PACKAGE_ID = {@PACKAGE_ID};
 	var LANGUAGE_ID = {@$__wcf->getLanguage()->languageID};
 	//]]>
 </script>
@@ -17,6 +19,11 @@
 <script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.tools.min.js"></script>
 <script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui.nestedSortable.js"></script>
 <script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.js"></script>
+<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.cookie.js"></script>
+<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/codemirror.js"></script>
+<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.textarea.js"></script>
+<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.qtip-1.0.0.min.js"></script>
+<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/css.js"></script>
 <script type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.js"></script>
 <script type="text/javascript">
 	//<![CDATA[
@@ -28,9 +35,9 @@
 <!-- Stylesheets -->
 <link rel="stylesheet/less" type="text/css" href="{@$__wcf->getPath()}style/bootstrap.less" />
 <link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/3rdParty/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/3rdParty/codemirror.css" />
 <link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/ultimateCore.css" />
 <link rel="stylesheet" type="text/css" href="{@$__wcf->getPath('ultimate')}style/ultimate.css" />
-<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath('ultimate')}style/bootstrapVisualEditor.css" />
 {event name='stylesheetInclude'}
 <script type="text/javascript">
 	//<![CDATA[
@@ -79,7 +86,7 @@
 			'wcf.global.confirmation.cancel': '{lang}wcf.global.confirmation.cancel{/lang}',
 			'wcf.global.confirmation.confirm': '{lang}wcf.global.confirmation.confirm{/lang}',
 			'wcf.global.confirmation.title': '{lang}wcf.global.confirmation.title{/lang}',
-			'wcf.sitemap.title': '{lang}wcf.sitemap.title{/lang}'
+			'wcf.sitemap.title': '{lang}wcf.sitemap.title{/lang}',
 			{event name='javascriptLanguageImport'}
 		});
 		
@@ -96,7 +103,12 @@
 			'wcf.icon.arrow.up': '{icon size='S'}arrowUp{/icon}',
 			'wcf.icon.arrow.up.circle': '{icon size='S'}circleArrowUp{/icon}',
 			'wcf.icon.dropdown': '{icon size='S'}dropdown{/icon}',
-			'wcf.icon.edit': '{icon size='S'}edit{/icon}'
+			'wcf.icon.add': '{icon size='S'}add{/icon}',
+			'wcf.icon.delete': '{icon size='S'}delete{/icon}',
+			'wcf.icon.edit': '{icon size='S'}edit{/icon}',
+			'wcf.icon.remove': '{icon size='S'}remove{/icon}',
+			'wcf.global.opened': '{icon size='S'}opened{/icon}',
+			'wcf.global.closed': '{icon size='S'}closed{/icon}'
 			{event name='javascriptIconImport'}
 		});
 		
@@ -106,7 +118,7 @@
 		new WCF.Sitemap();
 		WCF.Dropdown.init();
 		
-		{event name='javascriptInit'}
+		{*event name='javascriptInit'*}
 
 		{if $executeCronjobs}
 			new WCF.Action.Proxy({
