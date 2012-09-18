@@ -21,7 +21,7 @@ use wcf\util\StringUtil;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	acp.form
  * @category	Ultimate CMS
@@ -29,18 +29,18 @@ use wcf\util\StringUtil;
 class UltimatePageAddForm extends ACPForm {
 	/**
 	 * @var	string[]
-	 * @see	\wcf\acp\form\ACPForm::$activeMenuItem
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.acp.form.ACPForm.html#$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.page.add';
 	
 	/**
-	 * @see	\wcf\page\AbstractPage::$templateName
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
 	 */
 	public $templateName = 'ultimatePageAdd';
 	
 	/**
 	 * @var	string[]
-	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededPermissions
 	 */
 	public $neededPermissions = array(
 		'admin.content.ultimate.canAddPage'
@@ -143,7 +143,7 @@ class UltimatePageAddForm extends ACPForm {
 	protected $startTime = 0;
 	
 	/**
-	 * @see \wcf\page\IPage::readParameters()
+	 * @see http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -151,7 +151,7 @@ class UltimatePageAddForm extends ACPForm {
 	}
 	
 	/**
-	 * @see	\wcf\page\IPage::readData()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
 		$this->contents = PageUtil::getAvailableContents();
@@ -194,7 +194,7 @@ class UltimatePageAddForm extends ACPForm {
 	}
 	
 	/**
-	 * @see	\wcf\form\IForm::readFormParameters()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#readFormParameters
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -215,7 +215,7 @@ class UltimatePageAddForm extends ACPForm {
 	}
 	
 	/**
-	 * @see	\wcf\form\IForm::validate()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#validate
 	 */
 	public function validate() {
 		parent::validate();
@@ -229,7 +229,7 @@ class UltimatePageAddForm extends ACPForm {
 	}
 	
 	/**
-	 * @see	\wcf\form\IForm::save()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
 	 */
 	public function save() {
 		parent::save();
@@ -290,7 +290,7 @@ class UltimatePageAddForm extends ACPForm {
 	}
 	
 	/**
-	 * @see	\wcf\page\IPage::assignVariables()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

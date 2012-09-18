@@ -8,7 +8,7 @@ use wcf\util\StringUtil;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	util
  * @category	Ultimate CMS
@@ -16,6 +16,9 @@ use wcf\util\StringUtil;
 class PageUtil {
 	/**
 	 * Checks whether the given title is available or not.
+	 * 
+	 * @since	1.0.0
+	 * @api
 	 * 
 	 * @param	string	$pageTitle
 	 * @param	integer	$pageParent
@@ -60,7 +63,10 @@ class PageUtil {
 	
 	/**
 	 * Checks whether the given slug is available or not.
-	 *
+	 * 
+	 * @since	1.0.0
+	 * @api
+	 * 
 	 * @param	string	$pageSlug
 	 * @param	integer	$pageParent
 	 * @return	boolean	$isAvailable
@@ -105,6 +111,9 @@ class PageUtil {
 	/**
 	 * Returns all pages which are available.
 	 * 
+	 * @since	1.0.0
+	 * @api
+	 * 
 	 * @param	integer	$pageID	0 by default; give page id to get all pages except the one belonging to the given page id
 	 * @return	\ultimate\data\page\Page[]
 	 */
@@ -122,6 +131,9 @@ class PageUtil {
 	/**
 	 * Returns the real page for a hierarchy of page slugs.
 	 * 
+	 * @since	1.0.0
+	 * @api
+	 * 
 	 * @param	\ultimate\data\page\Page $page
 	 * @param	integer					 $i
 	 * @param	string[]				 $pageSlugs
@@ -138,13 +150,16 @@ class PageUtil {
 				$returnPage = $page;
 				break;
 			}
-			$returnPage = self::getRealPage($page, ++$i);
+			$returnPage = self::getRealPage($page, ++$i, $pageSlugs);
 		}
 		return $returnPage;
 	}
 	
 	/**
 	 * Returns all contents which are available.
+	 * 
+	 * @since	1.0.0
+	 * @api
 	 * 
 	 * @param	integer	$pageID	0 by default; give page id to get all unbound contents plus the one already in use by the page
 	 * @return	\ultimate\data\content\Content[]
