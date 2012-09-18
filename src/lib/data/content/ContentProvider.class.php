@@ -7,19 +7,19 @@ use wcf\data\object\type\AbstractObjectTypeProvider;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.content
  * @category	Ultimate CMS
  */
 class ContentProvider extends AbstractObjectTypeProvider {
 	/**
-	 * @see	\wcf\data\object\type\AbstractObjectTypeProvider::$className
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.object.type.AbstractObjectTypeProvider.html#$className
 	 */
 	public $className = '\ultimate\data\content\Content';
 	
 	/**
-	 * @see	\wcf\data\object\type\AbstractObjectTypeProvider::$listClassName
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.object.type.AbstractObjectTypeProvider.html#$listClassName
 	 */
 	public $listClassName = '\ultimate\data\content\ContentList';
 }

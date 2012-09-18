@@ -10,19 +10,20 @@ use wcf\system\cache\builder\ICacheBuilder;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.cache.builder
  * @category	Ultimate CMS
  */
 class ContentCacheBuilder implements ICacheBuilder {
 	/**
-	 * @see	\wcf\system\cache\builder\ICacheBuilder::getData()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.cache.builder.ICacheBuilder.html#getData
 	 */
 	public function getData(array $cacheResource) {
 		$data = array(
 			'contents' => array(),
-			'contentIDs' => array()
+			'contentIDs' => array(),
+			'contentsToSlug' => array()
 		);
 		
 		$contentList = new ContentList();
@@ -40,9 +41,10 @@ class ContentCacheBuilder implements ICacheBuilder {
 			/* @var $content \ultimate\data\content\Content */
 			$data['contents'][$contentID] = new TaggableContent($content);
 			$data['contentIDs'][] = $contentID;
+			$data['contentsToSlug'][$content->__get('contentSlug')] = $content;
 			
 			$taggedContent = new TaggedContent($content);
-			if (!empty($taggedContent->tags)) {
+			if (!empty($taggedContent->__get('tags'))) {
 				$data['contents'][$contentID] = $taggedContent;
 			}
 		}

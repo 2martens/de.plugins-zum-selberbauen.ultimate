@@ -22,37 +22,37 @@ use wcf\util\MessageUtil;
 use wcf\util\StringUtil;
 
 /**
- * Show the UltimateContentAdd form.
+ * Shows the UltimateContentAdd form.
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	acp.form
  * @category	Ultimate CMS
  */
 class UltimateContentAddForm extends MessageForm {
 	/**
-	 * @see	\wcf\page\AbstractPage::$templateName
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
 	 */
 	public $templateName = 'ultimateContentAdd';
 	
 	/**
-	 * @see	\wcf\acp\form\ACPForm::$activeMenuItem
-	 */
-	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.content.add';
-	
-	/**
-	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededPermissions
 	 */
 	public $neededPermissions = array(
 		'admin.content.ultimate.canAddContent'
 	);
 	
 	/**
-	 * @see	\wcf\form\MessageForm::$enableMultilangualism
-	 */
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.MessageForm.html#$enableMultilangualism
+	*/
 	public $enableMultilangualism = true;
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.acp.form.ACPForm.html#$activeMenuItem
+	 */
+	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.content.add';
 	
 	/**
 	 * Contains the description of the content.
@@ -157,7 +157,7 @@ class UltimateContentAddForm extends MessageForm {
 	protected $startTime = 0;
 	
 	/**
-	 * @see	\wcf\form\IForm::readParameters()
+	 * @seehttp://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -169,7 +169,7 @@ class UltimateContentAddForm extends MessageForm {
 	}
 	
 	/**
-	 * @see	\wcf\form\IForm::readData()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
 		$cacheName = 'category';
@@ -240,7 +240,7 @@ class UltimateContentAddForm extends MessageForm {
 	}
 	
 	/**
-	 * @see	\wcf\form\IForm::readFormParameters()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#readFormParameters
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -261,7 +261,7 @@ class UltimateContentAddForm extends MessageForm {
 	}
 	
 	/**
-	 * @see	\wcf\form\IForm::validate()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#validate
 	 */
 	public function validate() {
 		$this->validateSubject();
@@ -280,7 +280,7 @@ class UltimateContentAddForm extends MessageForm {
 	}
 	
 	/**
-	 * @see	\wcf\form\IForm::save()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
 	 */
 	public function save() {
 		if (!I18nHandler::getInstance()->isPlainValue('text')) RecaptchaForm::save();
@@ -384,7 +384,7 @@ class UltimateContentAddForm extends MessageForm {
 	}
 	
 	/**
-	 * @see	\wcf\page\IPage::assignVariables()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -410,7 +410,7 @@ class UltimateContentAddForm extends MessageForm {
 	}
 	
 	/**
-	 * @see	\wcf\page\IPage::show()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#show
 	 */
 	public function show() {
 		if (!empty($this->activeMenuItem)) {
