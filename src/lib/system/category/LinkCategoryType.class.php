@@ -7,7 +7,7 @@ use wcf\system\category\AbstractCategoryType;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.category
  * @category	Ultimate CMS
@@ -30,18 +30,18 @@ class LinkCategoryType extends AbstractCategoryType {
 	protected $i18nLangVarCategory = 'wcf.acp.ultimate';
 	
 	/**
-	 * @see	\wcf\system\category\AbstractCategoryType::$langVarPrefix
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.category.AbstractCategoryType.html#$langVarPrefix
 	 */
 	protected $langVarPrefix = 'wcf.acp.ultimate.link';
 	
 	/**
-	 * @see	\wcf\system\category\AbstractCategoryType::$permissionPrefix
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.category.AbstractCategoryType.html#$permissionPrefix
 	 */
 	protected $permissionPrefix = 'admin.content.ultimate';
 	
 	/**
 	 * @var string[]
-	 * @see	\wcf\system\category\AbstractCategoryType::$objectTypes
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.category.AbstractCategoryType.html#$objectTypes
 	 */
 	protected $objectTypes = array(
 		'com.woltlab.wcf.clipboardItem' => 'de.plugins-zum-selberbauen.ultimate.link'

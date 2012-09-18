@@ -10,7 +10,7 @@ use wcf\util\StringUtil;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	util
  * @category	Ultimate CMS
@@ -18,7 +18,10 @@ use wcf\util\StringUtil;
 class LinkUtil {
 	/**
 	 * Checks whether the given URL is available or not.
-	 *
+	 * 
+	 * @since	1.0.0
+	 * @api
+	 * 
 	 * @param	string	$linkURL
 	 * @param	integer	$linkID		optional, default is 0
 	 * @return	boolean	$isAvailable
@@ -46,6 +49,9 @@ class LinkUtil {
 	
 	/**
 	 * Checks whether the given url is valid or not.
+	 * 
+	 * @since	1.0.0
+	 * @api
 	 * 
 	 * @param	string	$url
 	 * @return	boolean
@@ -109,7 +115,10 @@ class LinkUtil {
 	
 	/**
 	 * Decode Punycode-Domain to IDN-Domain.
-	 *
+	 * 
+	 * @since	1.0.0
+	 * @api
+	 * 
 	 * @param	string	$punycodeDomain
 	 * @author	Herbert Walde
 	 * @see		http://hx3.de/software-webentwicklung-23/php-e-mail-validation-idn-internationalized-domain-name-support-17398/
@@ -123,7 +132,10 @@ class LinkUtil {
 	
 	/**
 	 * Encode IDN-Domain to Punycode.
-	 *
+	 * 
+	 * @since	1.0.0
+	 * @api
+	 * 
 	 * @param	string	$unicodeDomain
 	 * @author	Herbert Walde
 	 * @see		http://hx3.de/software-webentwicklung-23/php-e-mail-validation-idn-internationalized-domain-name-support-17398/
@@ -137,7 +149,10 @@ class LinkUtil {
 	
 	/**
 	 * Parses a given URL and encodes it to punycode if necessary.
-	 *
+	 * 
+	 * @since	1.0.0
+	 * @api
+	 * 
 	 * @param	string	$url
 	 * @return	string|false	the parsed URL or false on failure
 	 */
