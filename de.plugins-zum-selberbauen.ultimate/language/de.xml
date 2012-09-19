@@ -279,6 +279,8 @@ Verfügbare Variablen:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$aut
 		<item name="wcf.acp.ultimate.content.edit"><![CDATA[Inhalt bearbeiten]]></item>
 		<item name="wcf.acp.ultimate.content.delete"><![CDATA[Inhalt löschen]]></item>
 		<item name="wcf.acp.ultimate.content.delete.sure"><![CDATA[Sind Sie sicher, dass Sie diesen Inhalt löschen wollen?]]></item>
+		<item name="wcf.acp.ultimate.content.assignToCategory"><![CDATA[Kategorie zuweisen]]></item>
+		<item name="wcf.acp.ultimate.content.assignToCategory.markedContents"><![CDATA[Folgende Inhalte den unten ausgewählten Kategorien zuweisen]]></item>
 		<item name="wcf.acp.ultimate.content.title"><![CDATA[Titel]]></item>
 		<item name="wcf.acp.ultimate.content.title.error.tooShort"><![CDATA[Der Titel muss mindestens 4 Zeichen lang sein.]]></item>
 		<item name="wcf.acp.ultimate.content.title.placeholder"><![CDATA[Eine schöne Geschichte]]></item>
@@ -309,6 +311,8 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.link.edit"><![CDATA[Link bearbeiten]]></item>
 		<item name="wcf.acp.ultimate.link.delete"><![CDATA[Link löschen]]></item>
 		<item name="wcf.acp.ultimate.link.delete.sure"><![CDATA[Sind Sie sicher, dass Sie diesen Link löschen wollen?]]></item>
+		<item name="wcf.acp.ultimate.link.assignToCategory"><![CDATA[Kategorie zuweisen]]></item>
+		<item name="wcf.acp.ultimate.link.assignToCategory.markedLinks"><![CDATA[Folgende Links den unten ausgewählten Kategorien zuweisen]]></item>
 		<item name="wcf.acp.ultimate.link.name"><![CDATA[Name]]></item>
 		<item name="wcf.acp.ultimate.link.name.placeholder"><![CDATA[Mein schöner Link]]></item>
 		<item name="wcf.acp.ultimate.link.description"><![CDATA[Beschreibung]]></item>
@@ -413,6 +417,9 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.clipboard.item.content.delete"><![CDATA[Inhalt löschen]]></item>
 		<item name="wcf.clipboard.item.content.delete.confirmMessage"><![CDATA[{if $count == 1}Einen{else}{#$count}{/if} Inhalt{if $count != 1}e{/if} löschen?]]></item>
 		<item name="wcf.clipboard.label.content.marked"><![CDATA[{if $count == 1}Einen{else}{#$count}{/if} Inhalt{if $count != 1}e{/if} markiert]]></item>
+		<item name="wcf.clipboard.item.link.delete"><![CDATA[Link löschen]]></item>
+		<item name="wcf.clipboard.item.link.delete.confirmMessage"><![CDATA[{if $count == 1}Einen{else}{#$count}{/if} Link{if $count != 1}s{/if} löschen?]]></item>
+		<item name="wcf.clipboard.label.link.marked"><![CDATA[{if $count == 1}Einen{else}{#$count}{/if} Link{if $count != 1}s{/if} markiert]]></item>
 		<item name="wcf.clipboard.item.page.delete"><![CDATA[Seite löschen]]></item>
 		<item name="wcf.clipboard.item.page.delete.confirmMessage"><![CDATA[{if $count == 1}Eine{else}{#$count}{/if} Seite{if $count != 1}n{/if} löschen?]]></item>
 		<item name="wcf.clipboard.label.page.marked"><![CDATA[{if $count == 1}Eine{else}{#$count}{/if} Seite{if $count != 1}n{/if} markiert]]></item>
