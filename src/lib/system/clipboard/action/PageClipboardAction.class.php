@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the CategoryClipboardAction class.
+ * Contains the PageClipboardAction class.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -32,7 +32,7 @@ use wcf\system\exception\SystemException;
 use wcf\system\WCF;
 
 /**
- * Prepares clipboard editor items for category objects.
+ * Prepares the clipboard editor items for page objects.
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
@@ -41,18 +41,18 @@ use wcf\system\WCF;
  * @subpackage	system.clipboard.action
  * @category	Ultimate CMS
  */
-class CategoryClipboardAction implements IClipboardAction {
+class PageClipboardAction implements IClipboardAction {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.clipboard.action.IClipboardAction.html#getTypeName
 	 */
 	public function getTypeName() {
-		return 'de.plugins-zum-selberbauen.category';
+		return 'de.plugins-zum-selberbauen.page';
 	}
 	
 	/**
-	 * @param	\ultimate\data\category\Category[]	$objects
-	 * @param	string								$actionName
-	 * @param	array								$typeData
+	 * @param	\ultimate\data\page\Page[]	$objects
+	 * @param	string						$actionName
+	 * @param	array						$typeData
 	 * @return	\wcf\system\clipboard\ClipboardEditorItem|null
 	 * 
 	 * @throws	\wcf\system\exception\SystemException	if given action name is invalid
@@ -63,18 +63,18 @@ class CategoryClipboardAction implements IClipboardAction {
 		
 		// handle actions
 		switch ($actionName) {
-			case 'deleteCategory':
-				$categoryIDs = array();
-				$categoryIDs = $this->validateDelete($objects);
-				if (empty($categoryIDs)) {
+			case 'deletePage':
+				$pageIDs = array();
+				$pageIDs = $this->validateDelete($objects);
+				if (empty($pageIDs)) {
 					return null;
 				}
 				
-				$item->addInternalData('confirmMessage', WCF::getLanguage()->getDynamicVariable('wcf.clipboard.item.category.delete.confirmMessage', array('count' => count($categoryIDs))));
+				$item->addInternalData('confirmMessage', WCF::getLanguage()->getDynamicVariable('wcf.clipboard.item.page.delete.confirmMessage', array('count' => count($pageIDs))));
 				$item->addParameter('actionName', 'delete');
-				$item->addParameter('className', '\ultimate\data\category\CategoryAction');
-				$item->addParameter('objectIDs', $categoryIDs);
-				$item->setName('category.delete');
+				$item->addParameter('className', '\ultimate\data\page\PageAction');
+				$item->addParameter('objectIDs', $pageIDs);
+				$item->setName('page.delete');
 				break;
 			default:
 				throw new SystemException("Action '".$actionName."' is invalid.");
@@ -88,18 +88,18 @@ class CategoryClipboardAction implements IClipboardAction {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.clipboard.action.IClipboardAction.html#getEditorLabel
 	 */
 	public function getEditorLabel(array $objects) {
-		return WCF::getLanguage()->getDynamicVariable('wcf.clipboard.label.category.marked', array('count' => count($objects)));
+		return WCF::getLanguage()->getDynamicVariable('wcf.clipboard.label.page.marked', array('count' => count($objects)));
 	}
 	
 	/**
 	 * Validates the delete action.
-	 * 
-	 * @param	\ultimate\data\category\Category[]	$objects
+	 *
+	 * @param	\ultimate\data\page\Page[]	$objects
 	 * @return	integer[]
 	 */
 	protected function validateDelete(array $objects) {
 		// checking permission
-		if (!WCF::getSession()->getPermission('admin.content.ultimate.canDeleteCategory')) {
+		if (!WCF::getSession()->getPermission('admin.content.ultimate.canDeletePage')) {
 			return array();
 		}
 		
@@ -107,7 +107,7 @@ class CategoryClipboardAction implements IClipboardAction {
 		if (empty($objects)) return array();
 		
 		// get ids
-		$categoryIDs = array_keys($objects);
-		return $categoryIDs;		
+		$pageIDs = array_keys($objects);
+		return $pageIDs;
 	}
 }

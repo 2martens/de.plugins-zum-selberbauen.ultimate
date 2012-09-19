@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the CategoryClipboardAction class.
+ * Contains the ContentClipboardAction class.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -22,17 +22,18 @@
  * @copyright	2011-2012 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
- * @subpackage	system.clipboard.action
+ * @subpackage	system.slipboard.action
  * @category	Ultimate CMS
  */
 namespace ultimate\system\clipboard\action;
 use wcf\system\clipboard\action\IClipboardAction;
 use wcf\system\clipboard\ClipboardEditorItem;
 use wcf\system\exception\SystemException;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
 /**
- * Prepares clipboard editor items for category objects.
+ * Prepares the clipboard editor items for content objects.
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
@@ -41,16 +42,16 @@ use wcf\system\WCF;
  * @subpackage	system.clipboard.action
  * @category	Ultimate CMS
  */
-class CategoryClipboardAction implements IClipboardAction {
+class ContentClipboardAction implements IClipboardAction {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.clipboard.action.IClipboardAction.html#getTypeName
 	 */
 	public function getTypeName() {
-		return 'de.plugins-zum-selberbauen.category';
+		return 'de.plugins-zum-selberbauen.content';
 	}
 	
 	/**
-	 * @param	\ultimate\data\category\Category[]	$objects
+	 * @param	\ultimate\data\content\Content[]	$objects
 	 * @param	string								$actionName
 	 * @param	array								$typeData
 	 * @return	\wcf\system\clipboard\ClipboardEditorItem|null
@@ -63,18 +64,22 @@ class CategoryClipboardAction implements IClipboardAction {
 		
 		// handle actions
 		switch ($actionName) {
-			case 'deleteCategory':
-				$categoryIDs = array();
-				$categoryIDs = $this->validateDelete($objects);
-				if (empty($categoryIDs)) {
+			case 'assignContentToCategory':
+				$item->setName('content.assignToCategory');
+				$item->setURL(LinkHandler::getInstance()->getLink('UltimateContentAssignToCategory'));
+				break;
+			case 'deleteContent':
+				$contentIDs = array();
+				$contentIDs = $this->validateDelete($objects);
+				if (empty($contentIDs)) {
 					return null;
 				}
 				
-				$item->addInternalData('confirmMessage', WCF::getLanguage()->getDynamicVariable('wcf.clipboard.item.category.delete.confirmMessage', array('count' => count($categoryIDs))));
+				$item->addInternalData('confirmMessage', WCF::getLanguage()->getDynamicVariable('wcf.clipboard.item.content.delete.confirmMessage', array('count' => count($contentIDs))));
 				$item->addParameter('actionName', 'delete');
-				$item->addParameter('className', '\ultimate\data\category\CategoryAction');
-				$item->addParameter('objectIDs', $categoryIDs);
-				$item->setName('category.delete');
+				$item->addParameter('className', '\ultimate\data\content\ContentAction');
+				$item->addParameter('objectIDs', $contentIDs);
+				$item->setName('content.delete');
 				break;
 			default:
 				throw new SystemException("Action '".$actionName."' is invalid.");
@@ -88,18 +93,18 @@ class CategoryClipboardAction implements IClipboardAction {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.clipboard.action.IClipboardAction.html#getEditorLabel
 	 */
 	public function getEditorLabel(array $objects) {
-		return WCF::getLanguage()->getDynamicVariable('wcf.clipboard.label.category.marked', array('count' => count($objects)));
+		return WCF::getLanguage()->getDynamicVariable('wcf.clipboard.label.content.marked', array('count' => count($objects)));
 	}
 	
 	/**
 	 * Validates the delete action.
-	 * 
-	 * @param	\ultimate\data\category\Category[]	$objects
+	 *
+	 * @param	\ultimate\data\content\Content[]	$objects
 	 * @return	integer[]
 	 */
 	protected function validateDelete(array $objects) {
 		// checking permission
-		if (!WCF::getSession()->getPermission('admin.content.ultimate.canDeleteCategory')) {
+		if (!WCF::getSession()->getPermission('admin.content.ultimate.canDeleteContent')) {
 			return array();
 		}
 		
@@ -107,7 +112,7 @@ class CategoryClipboardAction implements IClipboardAction {
 		if (empty($objects)) return array();
 		
 		// get ids
-		$categoryIDs = array_keys($objects);
-		return $categoryIDs;		
+		$contentIDs = array_keys($objects);
+		return $contentIDs;
 	}
 }
