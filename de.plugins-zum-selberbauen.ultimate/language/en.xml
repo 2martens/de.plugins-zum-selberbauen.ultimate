@@ -193,6 +193,7 @@
 		<item name="wcf.acp.ultimate.category.add"><![CDATA[Add category]]></item>
 		<item name="wcf.acp.ultimate.category.edit"><![CDATA[Edit category]]></item>
 		<item name="wcf.acp.ultimate.category.delete"><![CDATA[Delete category]]></item>
+		<item name="wcf.acp.ultimate.category.delete.sure"><![CDATA[Are you sure that you want to delete this category?]]></item>
 		<item name="wcf.acp.ultimate.category.title"><![CDATA[Name]]></item>
 		<item name="wcf.acp.ultimate.category.title.placeholder"><![CDATA[Good contents]]></item>
 		<item name="wcf.acp.ultimate.category.title.error.notUnique"><![CDATA[A category with the specified name already exists with this parent.]]></item>
@@ -216,6 +217,7 @@
 		<item name="wcf.acp.ultimate.content.add"><![CDATA[Add content]]></item>
 		<item name="wcf.acp.ultimate.content.edit"><![CDATA[Edit content]]></item>
 		<item name="wcf.acp.ultimate.content.delete"><![CDATA[Delete content]]></item>
+		<item name="wcf.acp.ultimate.content.delete.sure"><![CDATA[Are you sure that you want to delete this content?]]></item>
 		<item name="wcf.acp.ultimate.content.assignToCategory"><![CDATA[Category assignment]]></item>
 		<item name="wcf.acp.ultimate.content.assignToCategory.markedContents"><![CDATA[Assign the following contents to the selected categories]]></item>
 		<item name="wcf.acp.ultimate.content.title"><![CDATA[Title]]></item>
