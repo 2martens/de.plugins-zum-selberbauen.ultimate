@@ -216,6 +216,8 @@
 		<item name="wcf.acp.ultimate.content.add"><![CDATA[Add content]]></item>
 		<item name="wcf.acp.ultimate.content.edit"><![CDATA[Edit content]]></item>
 		<item name="wcf.acp.ultimate.content.delete"><![CDATA[Delete content]]></item>
+		<item name="wcf.acp.ultimate.content.assignToCategory"><![CDATA[Category assignment]]></item>
+		<item name="wcf.acp.ultimate.content.assignToCategory.markedContents"><![CDATA[Assign the following contents to the selected categories]]></item>
 		<item name="wcf.acp.ultimate.content.title"><![CDATA[Title]]></item>
 		<item name="wcf.acp.ultimate.content.title.error.tooShort"><![CDATA[The title has to be at least 4 characters long.]]></item>
 		<item name="wcf.acp.ultimate.content.title.placeholder"><![CDATA[A nice story]]></item>
@@ -246,6 +248,8 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.link.edit"><![CDATA[Edit link]]></item>
 		<item name="wcf.acp.ultimate.link.delete"><![CDATA[Delete link]]></item>
 		<item name="wcf.acp.ultimate.link.delete.sure"><![CDATA[Are you sure that you want to delete the link?]]></item>
+		<item name="wcf.acp.ultimate.link.assignToCategory"><![CDATA[Category assignment]]></item>
+		<item name="wcf.acp.ultimate.link.assignToCategory.markedLinks"><![CDATA[Assign the following links to the selected categories]]></item>
 		<item name="wcf.acp.ultimate.link.name"><![CDATA[Name]]></item>
 		<item name="wcf.acp.ultimate.link.name.placeholder"><![CDATA[My wonderful link]]></item>
 		<item name="wcf.acp.ultimate.link.description"><![CDATA[Description]]></item>
