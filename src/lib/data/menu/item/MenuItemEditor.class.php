@@ -11,19 +11,19 @@ use wcf\system\WCF;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.menu.item
  * @category	Ultimate CMS
  */
 class MenuItemEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
-	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObjectDecorator.html#$baseClass
 	 */
 	protected static $baseClass = '\ultimate\data\menu\item\MenuItem';
 	
 	/**
-	 * @see	\wcf\data\IEditableObject::deleteAll()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableObject.html#deleteAll
 	 */
 	public static function deleteAll(array $objectIDs = array()) {
 		// unmark contents
@@ -42,7 +42,7 @@ class MenuItemEditor extends DatabaseObjectEditor implements IEditableCachedObje
 	}
 	
 	/**
-	 * @see	\wcf\data\IEditableCachedObject::resetCache()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableCachedObject.html#resetCache
 	 */
 	public static function resetCache() {
 		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.menu-item.php');

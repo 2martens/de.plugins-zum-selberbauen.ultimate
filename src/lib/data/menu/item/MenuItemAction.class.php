@@ -18,29 +18,29 @@ use wcf\util\StringUtil;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.menu.item
  * @category	Ultimate CMS
  */
 class MenuItemAction extends AbstractDatabaseObjectAction {
 	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::$className
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$className
 	 */
 	public $className = '\ultimate\data\menu\item\MenuItemEditor';
 	
 	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsCreate
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsCreate
 	 */
 	protected $permissionsCreate = array('admin.content.ultimate.canAddMenuItem');
 	
 	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsDelete
 	*/
 	protected $permissionsDelete = array('admin.content.ultimate.canDeleteMenuItem');
 	
 	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsUpdate
 	*/
 	protected $permissionsUpdate = array('admin.content.ultimate.canEditMenuItem');
 	
@@ -90,10 +90,12 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
 	
 	/**
 	 * Creates a bunch of menu items.
+	 * 
+	 * @since	1.0.0
+	 * 
+	 * @return	array[]
 	 */
 	public function createAJAX() {
-		
-		$this->loadCache();
 		$menuItems = array();
 		$parameters = array(
 			'menuID' => intval($this->parameters['data']['menuID']),
@@ -130,6 +132,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
 				$menuItem = new MenuItem($menuItem->__get('menuItemID'));
 				$menuItems[$menuItem->__get('menuItemID')] = $menuItem;
 			}
+			MenuItemEditor::resetCache();
 		}
 		else {
 			WCF::getDB()->beginTransaction();
@@ -168,6 +171,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
 					try {
 						$menuItem = MenuItemEditor::create($parameters);
 						$menuItems[$menuItem->__get('menuItemID')] = $menuItem;
+						MenuItemEditor::resetCache();
 					}
 					catch (DatabaseException $e) {
 						WCF::getDB()->rollbackTransaction();
@@ -203,6 +207,8 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
 	
 	/**
 	 * Updates the position of menu items.
+	 * 
+	 * @since	1.0.0
 	 */
 	public function updatePosition() {
 		$showOrders = array();
@@ -221,10 +227,14 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
 			}
 		}
 		WCF::getDB()->commitTransaction();
+		MenuItemEditor::resetCache();
 	}
 	
 	/**
 	 * Validates the 'createAJAX' action.
+	 * 
+	 * @since	1.0.0
+	 * @internal	Calls validateCreate.
 	 */
 	public function validateCreateAJAX() {
 		$this->validateCreate();
@@ -232,6 +242,9 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
 	
 	/**
 	 * Validates the 'toggle' action.
+	 * 
+	 * @since	1.0.0
+	 * @internal	Calls validateUpdate.
 	 */
 	public function validateToggle() {
 		$this->validateUpdate();
@@ -239,6 +252,9 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
 	
 	/**
 	 * Validates the 'toggleContainer' action.
+	 * 
+	 * @since	1.0.0
+	 * @internal	Calls validateUpdate.
 	 */
 	public function validateToggleContainer() {
 		$this->validateUpdate();
@@ -246,6 +262,8 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
 	
 	/**
 	 * Validates the 'updatePosition' action.
+	 * 
+	 * @since	1.0.0
 	 */
 	public function validateUpdatePosition() {
 		// validate permissions
@@ -294,6 +312,8 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
 	/**
 	 * Returns the ready-to-use category link.
 	 * 
+	 * @since	1.0.0
+	 * 
 	 * @param	\ultimate\data\category\Category $category
 	 * @param	boolean							 $implode
 	 * @return	string[]|string
@@ -314,6 +334,8 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
 	
 	/**
 	 * Returns the ready-to-use page link.
+	 * 
+	 * @since	1.0.0
 	 *
 	 * @param	\ultimate\data\page\Page	$page
 	 * @param	boolean						$implode
@@ -335,6 +357,8 @@ class MenuItemAction extends AbstractDatabaseObjectAction {
 	
 	/**
 	 * Loads the cache.
+	 * 
+	 * @since	1.0.0
 	 */
 	protected function loadCache() {
 		$cacheName = 'category';

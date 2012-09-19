@@ -9,19 +9,19 @@ use wcf\system\cache\CacheHandler;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
- * @package		de.plugins-zum-selberbauen.ultimateCore
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
+ * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.ultimate.block
  * @category	Ultimate CMS
  */
 class BlockEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
-	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObjectDecorator.html#$baseClass
 	 */
 	protected static $baseClass = '\ultimate\data\block\Block';
 	
 	/**
-	 * @see	\wcf\data\IEditableCachedObject::resetCache()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableCachedObject.html#resetCache
 	 */
 	public function resetCache() {
 		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.block.php');

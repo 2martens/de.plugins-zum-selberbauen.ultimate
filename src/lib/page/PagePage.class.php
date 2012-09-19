@@ -1,8 +1,38 @@
 <?php
+/**
+ * Contains the PagePage class.
+ * 
+ * LICENSE:
+ * This file is part of the Ultimate CMS.
+ *
+ * The Ultimate CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * The Ultimate CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
+ * 
+ * @author		Jim Martens
+ * @copyright	2011-2012 Jim Martens
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
+ * @package		de.plugins-zum-selberbauen.ultimate
+ * @subpackage	page
+ * @category	Ultimate CMS
+ */
 namespace ultimate\page;
+use ultimate\system\template\TemplateHandler;
+use ultimate\util\PageUtil;
 use wcf\page\AbstractPage;
 use wcf\system\cache\CacheHandler;
 use wcf\system\request\RouteHandler;
+use wcf\system\WCF;
+use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 
 /**
@@ -10,20 +40,20 @@ use wcf\util\StringUtil;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	page
  * @category	Ultimate CMS
  */
 class PagePage extends AbstractPage {
 	/**
-	 * @see	\wcf\page\AbstractPage::$useTemplate
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$useTemplate
 	 * @var	boolean
 	 */
 	public $useTemplate = false;
 	
 	/**
-	 * @see	\wcf\page\AbstractPage::$neededModules
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededModules
 	 * @var	string[]
 	 */
 	public $neededModules = array(
@@ -43,7 +73,13 @@ class PagePage extends AbstractPage {
 	public $pageSlugs = array();
 	
 	/**
-	 * @see	\wcf\page\AbstractPage::readParameters()
+	 * Contains the output.
+	 * @var string
+	 */
+	public $output = '';
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -53,7 +89,7 @@ class PagePage extends AbstractPage {
 	}
 	
 	/**
-	 * @see	\wcf\page\AbstractPage::readData()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
 		parent::readData();
@@ -64,8 +100,19 @@ class PagePage extends AbstractPage {
 			$page = PageUtil::getRealPage($page, 1, $this->pageSlugs);
 		}
 		$this->page = $page;
-		
-		// TODO implement template
+		$layout = LayoutHandler::getInstance()->getLayoutFromName($this->page->__get('pageTitle'));
+		// get output
+		$this->output = TemplateHandler::getInstance()->getOutput('page', $layout);
+	}
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#show
+	 */
+	public function show() {
+		parent::show();
+		HeaderUtil::sendHeaders();
+		echo $this->output;
+		exit;
 	}
 	
 	/**

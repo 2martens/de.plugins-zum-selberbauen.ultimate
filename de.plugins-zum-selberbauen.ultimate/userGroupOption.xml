@@ -18,8 +18,34 @@
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
+			<option name="user.ultimate.canUseVisualEditor">
+				<categoryname>user.ultimate</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+				<permissions>user.ultimate.canUseFrontend</permissions>
+			</option>
 			
 			<option name="admin.content.ultimate.canConfigureOptions">
+				<categoryname>admin.content.ultimate</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			
+			<option name="admin.content.ultimate.canAddBlock">
+				<categoryname>admin.content.ultimate</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="admin.content.ultimate.canEditBlock">
+				<categoryname>admin.content.ultimate</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="admin.content.ultimate.canDeleteBlock">
 				<categoryname>admin.content.ultimate</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
@@ -134,6 +160,25 @@
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			<option name="admin.content.ultimate.canDeletePage">
+				<categoryname>admin.content.ultimate</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			
+			<option name="admin.content.ultimate.canAddTemplate">
+				<categoryname>admin.content.ultimate</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="admin.content.ultimate.canEditTemplate">
+				<categoryname>admin.content.ultimate</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="admin.content.ultimate.canDeleteTemplate">
 				<categoryname>admin.content.ultimate</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>

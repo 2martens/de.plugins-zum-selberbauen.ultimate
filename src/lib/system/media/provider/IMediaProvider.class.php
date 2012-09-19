@@ -8,7 +8,7 @@ namespace ultimate\system\media\provider;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.media.provider
  * @category	Ultimate CMS
@@ -18,6 +18,7 @@ interface IMediaProvider {
 	 * Returns the HTML for this provider.
 	 * 
 	 * @since	1.0.0
+	 * @api
 	 * 
 	 * @param	string	$source
 	 * @param	integer	$width
@@ -30,6 +31,7 @@ interface IMediaProvider {
 	 * Returns whether this MediaProvider can handle the given URL host.
 	 * 
 	 * @since	1.0.0
+	 * @api
 	 * 
 	 * @param	string	$host
 	 * @return	boolean

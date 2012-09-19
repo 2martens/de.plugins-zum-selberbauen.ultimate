@@ -12,7 +12,7 @@ use wcf\system\WCF;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	acp.form
  * @category	Ultimate CMS
@@ -20,7 +20,7 @@ use wcf\system\WCF;
 class UltimateMenuEditForm extends UltimateMenuAddForm {
 	/**
 	 * @var	string
-	 * @see	\wcf\acp\form\ACPForm::$activeMenuItem
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.acp.form.ACPForm.html#$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.appearance';
 	
@@ -37,7 +37,7 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
 	public $menu = null;
 	
 	/**
-	 * @see	\wcf\page\IPage::readParameters()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -52,7 +52,7 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
 	}
 	
 	/**
-	 * @see	\wcf\page\IPage::readData()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
 		
@@ -98,7 +98,7 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
 	}
 	
 	/**
-	 * @see	\wcf\form\IForm::save()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
 	 */
 	public function save() {
 		AbstractForm::save();
@@ -120,7 +120,7 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
 	}
 	
 	/**
-	 * @see	\wcf\page\IPage::assignVariables()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

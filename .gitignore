@@ -55,3 +55,7 @@ phpdoc.xml
 
 # xsd files
 *types.xsd
+
+# php doc files
+phpdoc.dist.xml
+phpdoc.xml

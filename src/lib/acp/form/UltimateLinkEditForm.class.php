@@ -11,7 +11,7 @@ use wcf\system\WCF;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	acp.form
  * @category	Ultimate CMS
@@ -19,7 +19,7 @@ use wcf\system\WCF;
 class UltimateLinkEditForm extends UltimateLinkAddForm {
 	/**
 	 * @var	string[]
-	 * @see	\wcf\acp\form\ACPForm::$activeMenuItem
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.acp.form.ACPForm.html#$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.link';
 	
@@ -36,7 +36,7 @@ class UltimateLinkEditForm extends UltimateLinkAddForm {
 	public $link = null;
 	
 	/**
-	 * @see	\wcf\page\IPage::readParameters()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -51,7 +51,7 @@ class UltimateLinkEditForm extends UltimateLinkAddForm {
 	}
 	
 	/**
-	 * @see \wcf\page\IPage::readData()
+	 * @see http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
 		$this->linkName = $this->link->__get('linkName');
@@ -62,7 +62,7 @@ class UltimateLinkEditForm extends UltimateLinkAddForm {
 	}
 	
 	/**
-	 * @see \wcf\form\IForm::save()
+	 * @see http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
 	 */
 	public function save() {
 		AbstractForm::save();
@@ -103,7 +103,7 @@ class UltimateLinkEditForm extends UltimateLinkAddForm {
 	}
 	
 	/**
-	 * @see \wcf\page\IPage::assignVariables()
+	 * @see http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

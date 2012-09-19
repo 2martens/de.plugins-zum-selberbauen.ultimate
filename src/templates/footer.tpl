@@ -1,3 +1,5 @@
+			{if $skipBreadcrumbs|empty}{include file='breadcrumbs' __microdata=false}{/if}
+		
 		</section>
 		<!-- /CONTENT -->
 	</div>

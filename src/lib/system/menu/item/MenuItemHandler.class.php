@@ -9,7 +9,7 @@ use wcf\system\SingletonFactory;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.menu.item
  * @category	Ultimate CMS
@@ -22,9 +22,12 @@ class MenuItemHandler extends SingletonFactory {
 	protected $menuItems = array();
 
 	/**
-	 * Returns all menu item objects
+	 * Returns all menu item objects.
 	 * 
-	 * @return	mixed[]
+	 * @since	1.0.0
+	 * @api
+	 * 
+	 * @return	\ultimate\data\menu\item\MenuItem[]
 	*/
 	public function getMenuItems() {
 		return $this->menuItems;
@@ -32,6 +35,9 @@ class MenuItemHandler extends SingletonFactory {
 	
 	/**
 	 * Returns the menu item object with the given menu item id or null if there is no such object.
+	 * 
+	 * @since	1.0.0
+	 * @api
 	 * 
 	 * @param	integer	$menuItemID
 	 * @return	\ultimate\data\menu\item\MenuItem|null
@@ -46,6 +52,9 @@ class MenuItemHandler extends SingletonFactory {
 	
 	/**
 	 * Returns the child menu items of the given menu item.
+	 * 
+	 * @since	1.0.0
+	 * @api
 	 * 
 	 * @param	\ultimate\data\menu\item\MenuItem	$menuItem
 	 * @return	\ultimate\data\menu\item\MenuItem[]
@@ -63,7 +72,7 @@ class MenuItemHandler extends SingletonFactory {
 	}
 	
 	/**
-	 * @see	\wcf\system\SingletonFactory::init()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.SingletonFactory.html#init
 	 */
 	protected function init() {
 		$cacheName = 'menu-item';
@@ -77,6 +86,8 @@ class MenuItemHandler extends SingletonFactory {
 	
 	/**
 	 * Reloads the menuItem cache.
+	 * 
+	 * @internal Calls the init method.
 	 */
 	public function reloadCache() {
 		CacheHandler::getInstance()->clearResource('menu-item');

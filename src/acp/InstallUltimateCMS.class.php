@@ -1,7 +1,30 @@
 <?php
+/**
+ * Contains the installation script.
+ * 
+ * LICENSE:
+ * This file is part of the Ultimate CMS.
+ *
+ * Foobar is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * The Ultimate CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
+ * 
+ * @author		Jim Martens
+ * @copyright	2011-2012 Jim Martens
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
+ * @package		de.plugins-zum-selberbauen.ultimate
+ * @category	Ultimate CMS
+ */
 namespace ultimate\acp;
-use wcf\data\category\CategoryAction;
-use wcf\system\category\CategoryHandler;
 use wcf\system\io\File;
 use wcf\system\WCF;
 
@@ -10,7 +33,7 @@ use wcf\system\WCF;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @category	Ultimate CMS
  */
@@ -29,7 +52,6 @@ final class InstallUltimateCMS {
 	protected function install() {
 		require_once(dirname(dirname(__FILE__)).'/config.inc.php');
 		$this->createHtaccess();
-		$this->createDefaultLinkCategory();
 	}
 	
 	/**
@@ -42,24 +64,6 @@ final class InstallUltimateCMS {
 		$file = new File(ULTIMATE_DIR.'.htaccess');
 		$file->write($output);
 		$file->close();
-	}
-	
-	/**
-	 * Creates a default link category.
-	 */
-	protected function createDefaultLinkCategory() {
-		$parameters = array(
-			'data' => array(
-				'objectTypeID' => CategoryHandler::getObjectTypeByName(
-					'de.plugins-zum-selberbauen.ultimate.linkCategory')->__get('objectTypeID'),
-				'parentCategoryID' => 0,
-				'showOrder' => 0,
-				'title' => 'ultimate.link.category.title.category1',
-				'time' => TIME_NOW
-			)
-		);
-		$action = new CategoryAction(array(), 'create', $parameters);
-		$action->executeAction();
 	}
 	
 }

@@ -1,5 +1,7 @@
 <?php
 namespace ultimate\data\page;
+use ultimate\data\layout\LayoutAction;
+use ultimate\system\layout\LayoutHandler;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 use wcf\system\cache\CacheHandler;
@@ -11,19 +13,34 @@ use wcf\system\WCF;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.page
  * @category	Ultimate CMS
  */
 class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
-	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObjectDecorator.html#$baseClass
 	 */
 	protected static $baseClass = '\ultimate\data\page\Page';
 	
 	/**
-	 * @see	\wcf\data\IEditableObject::deleteAll()
+	 * @see \wcf\data\IEditableObject::create()
+	 */
+	public static function create(array $parameters = array()) {
+		$page = parent::create($parameters);
+		$parameters = array(
+			'data' => array(
+				'layoutName' => $page->getTitle()
+			)
+		);
+		$layoutAction = new LayoutAction(array(), 'create', $parameters);
+		$layoutAction->executeAction();
+		return $page;
+	}
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableObject.html#deleteAll
 	 */
 	public static function deleteAll(array $objectIDs = array()) {
 		// unmark contents
@@ -31,7 +48,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		
 		// delete language items
 		$sql = 'DELETE FROM wcf'.WCF_N.'_language_item
-		        WHERE       languageID = ?';
+		        WHERE       languageItem = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		
 		WCF::getDB()->beginTransaction();
@@ -41,6 +58,17 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		WCF::getDB()->commitTransaction();
 		
 		return parent::deleteAll($objectIDs);
+	}
+	
+	/**
+	 * @see \wcf\data\IEditableObject::delete()
+	 */
+	public function delete() {
+		/* @var $layout \ultimate\data\layout\Layout */
+		$layout = LayoutHandler::getInstance()->getLayoutFromLayoutName($this->object->getTitle());
+		$layoutAction = new LayoutAction(array($layout->__get('layoutID')), 'delete', array());
+		$layoutAction->executeAction();
+		parent::delete();
 	}
 	
 	/**
@@ -102,7 +130,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	}
 	
 	/**
-	 * @see	\wcf\data\IEditableCachedObject::resetCache()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableCachedObject.html#resetCache
 	 */
 	public static function resetCache() {
 		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.page.php');

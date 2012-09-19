@@ -8,20 +8,21 @@ use wcf\system\cache\builder\ICacheBuilder;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.cache.builder
  * @category	Ultimate CMS
  */
 class CategoryCacheBuilder implements ICacheBuilder {
 	/**
-	 * @see	\wcf\system\cache\builder\ICacheBuilder::getData()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.cache.builder.ICacheBuilder.html#getData
 	 */
 	public function getData(array $cacheResource) {
 		$data = array(
 			'categories' => array(),
 			'categoryIDs' => array(),
 			'categoriesToParent' => array(),
+			'categoriesToSlug' => array(),
 			'categoriesNested' => array()
 		);
 		
@@ -39,17 +40,16 @@ class CategoryCacheBuilder implements ICacheBuilder {
 		
 		foreach ($categories as $categoryID => &$category) {
 			/* @var $category \ultimate\data\category\Category */
-			$category->contents = $category->getContents();
-			$category->childCategories = $category->getChildCategories();
 			$data['categories'][$categoryID] = $category;
 			$data['categoryIDs'][] = $categoryID;
 			$data['categoriesToParent'][$categoryID] = $category->childCategories;
+			$data['categoriesToSlug'][$category->__get('categorySlug')] = $category;
 		}
 		
 		// add categories without parent to the categoriesToParent cache index
 		foreach ($data['categories'] as $categoryID => $category) {
 			if ($category->__get('categoryParent')) continue;
-			$data['categoriesToParent'][0][$categoryID] = $category;
+			$data['categoriesToParent'][0][$categoryID] = $category;			
 		}
 		
 		foreach ($data['categoriesToParent'][0] as $categoryID => $category) {

@@ -8,7 +8,7 @@ use wcf\util\FileUtil;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.media.provider
  * @category	Ultimate CMS
@@ -22,6 +22,9 @@ class MediaProviderHandler extends SingletonFactory {
 	
 	/**
 	 * Returns the media provider for the given host.
+	 * 
+	 * @since	1.0.0
+	 * @api
 	 * 
 	 * @param	string	$host
 	 * @return	null|\ultimate\system\media\provider\IMediaProvider null if no media provider can handle the host

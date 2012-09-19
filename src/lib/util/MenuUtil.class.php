@@ -8,7 +8,7 @@ use wcf\util\StringUtil;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	util
  * @category	Ultimate CMS
@@ -16,6 +16,9 @@ use wcf\util\StringUtil;
 class MenuUtil {
 	/**
 	 * Checks whether the given name is available or not.
+	 * 
+	 * @since	1.0.0
+	 * @api
 	 * 
 	 * @param	string	$menuName
 	 * @return	boolean	$isAvailable

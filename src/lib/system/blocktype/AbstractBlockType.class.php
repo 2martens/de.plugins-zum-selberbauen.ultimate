@@ -14,8 +14,8 @@ use wcf\util\StringUtil;
  * 
  * @author		Jim Martens
  * @copyright	2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
- * @package		de.plugins-zum-selberbauen.ultimateCore
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
+ * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.blocktype
  * @category	Ultimate CMS
  */
@@ -25,6 +25,12 @@ abstract class AbstractBlockType implements IBlockType {
 	 * @var	string
 	 */
 	protected $templateName = '';
+	
+	/**
+	 * Contains the block options template name.
+	 * @var string
+	 */
+	protected $blockOptionsTemplateName = '';
 	
 	/**
 	 * True if the template shall be used.
@@ -52,10 +58,10 @@ abstract class AbstractBlockType implements IBlockType {
 	protected $requestType = '';
 	
 	/**
-	 * Contains the request object.
-	 * @var object
+	 * Contains the layout object.
+	 * @var \ultimate\data\layout\Layout
 	 */
-	protected $requestObject = null;
+	protected $layout = null;
 	
 	/**
 	 * Contains the block id.
@@ -88,6 +94,12 @@ abstract class AbstractBlockType implements IBlockType {
 	protected $cacheIndex = '';
 	
 	/**
+	 * True if the request is in connection with the VisualEditor.
+	 * @var boolean
+	 */
+	protected $visualEditorMode = false;
+	
+	/**
 	 * Creates a new BlockType object.
 	 * 
 	 * @internal The constructor does nothing and is final, because you can't control what the constructor
@@ -96,20 +108,17 @@ abstract class AbstractBlockType implements IBlockType {
 	public final function __construct() {}
 	
 	/**
-	 * @internal Calls the methods readData and assignVariables.
-	 * @see	\ultimate\system\blocktype\IBlockType::run()
+	 * @see	\ultimate\system\blocktype\IBlockType::init()
 	 */
-	public function run($requestType, \ultimate\data\AbstractUltimateDatabaseObject $requestObject, $blockID) {
+	public function init($requestType, \ultimate\data\layout\Layout $layout, $blockID, $visualEditorMode = false) {
 		// fire event
-		EventHandler::getInstance()->fireAction($this, 'run');
+		EventHandler::getInstance()->fireAction($this, 'init');
 		
 		$this->requestType = StringUtil::trim($requestType);
-		$this->requestObject = $requestObject;
+		$this->layout = $layout;
 		$this->blockID = intval($blockID);
+		$this->visualEditorMode = $visualEditorMode;
 		$this->block = new Block($this->blockID);
-		
-		$this->readData();
-		$this->assignVariables();
 	}
 	
 	/**
@@ -120,7 +129,6 @@ abstract class AbstractBlockType implements IBlockType {
 	   // fire event
 	   EventHandler::getInstance()->fireAction($this, 'readData');
 	   $this->loadCache();
-	   
 	}
 	
 	/**
@@ -132,18 +140,23 @@ abstract class AbstractBlockType implements IBlockType {
 		WCF::getTPL()->assign(array(
 			'blockID' => $this->blockID,
 			'block' => $this->block,
-			'requestType' => $this->requestType
+			'requestType' => $this->requestType,
+			'visualEditorMode' => $this->visualEditorMode
 		));
 	}
 	
 	/**
-	 * @internal If you want to do more than fetching a template, you have to override this method.
-	 * Returns the fetched template if $this->useTemplate or a string {include file='$this->templateName'}.
+	 * @internal If you want to do more than fetching a template, you have to override this method.<br />
+	 * Returns the fetched template if $this->useTemplate is true and otherwise a string {include file='$this->templateName'}.<br />
+	 * Calls readData and assignVariables.
 	 * @see	\ultimate\system\blocktype\IBlockType::getHTML()
 	 */
 	public function getHTML() {
 		// fire event
 		EventHandler::getInstance()->fireAction($this, 'getHTML');
+		$this->readData();
+		$this->assignVariables();
+		
 		// guess template name
 		if (empty($this->templateName)) {
 			$classParts = explode('\\', get_class($this));
@@ -155,13 +168,37 @@ abstract class AbstractBlockType implements IBlockType {
 		if ($this->useTemplate) $output = WCF::getTPL()->fetch($this->templateName);
 		// otherwise include template
 		else {
-			$output = '{include file=\''.$this->templateName.'\'}';
+			$output = "{include file='".$this->templateName."'}";
 		}
 		return $output;
 	}
 	
 	/**
+	 * @internal If you want to do more than fetching a template, you have to override this method.<br />
+	 * Calls readData and assignVariables.
+	 * @see \ultimate\system\blocktype\IBlockType::getOptionsHTML()
+	 */
+	public function getOptionsHTML() {
+		// fire event
+		EventHandler::getInstance()->fireAction($this, 'getOptionsHTML');
+		$this->readData();
+		$this->assignVariables();
+		
+		// guess template name
+		if (empty($this->blockOptionsTemplateName)) {
+			$classParts = explode('\\', get_class($this));
+			$className = array_pop($classParts);
+			$this->blockOptionsTemplateName = str_replace('Type', 'Options', lcfirst($className));
+		}
+		$output = '';
+		$output = WCF::getTPL()->fetch($this->blockOptionsTemplateName);
+		return $output;
+	}
+	
+	/**
 	 * Returns variables.
+	 * 
+	 * @since	1.0.0
 	 * 
 	 * @param	string	$name
 	 * @return	mixed|null	null if no fitting variable was found
@@ -178,12 +215,15 @@ abstract class AbstractBlockType implements IBlockType {
 	 * Loads the cache.
 	 * 
 	 * Use this method instead of defining an own one. Each BlockType should only need one kind of objects.
-	 * If a custom query for the block type exists, use the results from it instead of reading the general cache.
+	 * If the optional parameter loadCustomQuery is given and setted with true the saved custom query will be loaded.
+	 * If no custom query is saved, then the cache defined by the object variables is loaded.
 	 * 
-	 * @since 1.0.0
+	 * @since	1.0.0
+	 * 
+	 * @param	boolean	$loadCustomQuery	optional
 	 */
-	protected function loadCache() {
-		if (!empty($this->block->query)) {
+	protected function loadCache($loadCustomQuery = false) {
+		if ($loadCustomQuery && !empty($this->block->__get('query'))) {
 			$cacheName = 'block';
 			$cacheBuilderClassName = '\ultimate\system\cache\builder\BlockCacheBuilder';
 			$file = ULTIMATE_DIR.'cache/cache'.$cacheName.'.php';

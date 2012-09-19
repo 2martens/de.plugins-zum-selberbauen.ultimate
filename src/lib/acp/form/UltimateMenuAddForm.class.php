@@ -1,9 +1,5 @@
 <?php
 namespace ultimate\acp\form;
-use wcf\util\HeaderUtil;
-
-use wcf\system\request\LinkHandler;
-
 use ultimate\data\menu\item\MenuItemNodeList;
 use ultimate\data\menu\MenuAction;
 use ultimate\util\MenuUtil;
@@ -11,7 +7,9 @@ use wcf\acp\form\ACPForm;
 use wcf\system\cache\CacheHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
+use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 
 /**
@@ -19,7 +17,7 @@ use wcf\util\StringUtil;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	acp.form
  * @category	Ultimate CMS
@@ -27,19 +25,19 @@ use wcf\util\StringUtil;
 class UltimateMenuAddForm extends ACPForm {
 	/**
 	 * @var	string
-	 * @see	\wcf\acp\form\ACPForm::$activeMenuItem
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.acp.form.ACPForm.html#$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.appearance.menu.add';
 	
 	/**
 	 * @var	string
-	 * @see	\wcf\page\AbstractPage::$templateName
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
 	 */
 	public $templateName = 'ultimateMenuAdd';
 	
 	/**
 	 * @var	string[]
-	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededPermissions
 	 */
 	public $neededPermissions = array(
 		'admin.content.ultimate.canAddMenu'
@@ -82,7 +80,7 @@ class UltimateMenuAddForm extends ACPForm {
 	public $disabledPageIDs = array();
 	
 	/**
-	 * @see	\wcf\page\IPage::readParameters()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -90,7 +88,7 @@ class UltimateMenuAddForm extends ACPForm {
 	}
 	
 	/**
-	 * @see	\wcf\page\IPage::readData()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
 		$this->menuItemNodeList = new MenuItemNodeList(0, 0, true);
@@ -130,7 +128,7 @@ class UltimateMenuAddForm extends ACPForm {
 	}
 	
 	/**
-	 * @see	\wcf\form\IForm::readFormParameters()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#readFormParameters
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -139,7 +137,7 @@ class UltimateMenuAddForm extends ACPForm {
 	}
 	
 	/**
-	 * @see	\wcf\form\IForm::validate()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#validate
 	 */
 	public function validate() {
 		parent::validate();
@@ -147,7 +145,7 @@ class UltimateMenuAddForm extends ACPForm {
 	}
 	
 	/**
-	 * @see	\wcf\form\IForm::save()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
 	 */
 	public function save() {
 		parent::save();
@@ -181,7 +179,7 @@ class UltimateMenuAddForm extends ACPForm {
 	}
 	
 	/**
-	 * @see	\wcf\page\IPage::assignVariables()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
