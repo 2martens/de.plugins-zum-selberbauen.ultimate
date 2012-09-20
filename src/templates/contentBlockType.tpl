@@ -54,7 +54,11 @@
 			{/if}
 			{if $block->commentsVisibility == 'show' || ($block->commentsVisibility == 'auto' && $requestType == 'content')}
 			<div id="content-{$contentID}-comments" class="content">
-				{* TODO: comments *}
+				{include file='__commentJavaScript'}
+
+				<ul data-object-id="{@$contentID}" data-object-type-id="{@$commentObjectTypeID}" class="commentList containerList">
+					{include file='commentList' commentList=$commentLists[$contentID]}
+				</ul>
 			</div>
 			{/if}
 		{/if}

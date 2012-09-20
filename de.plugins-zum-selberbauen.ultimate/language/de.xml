@@ -6,6 +6,8 @@
 		<!-- user -->
 		<item name="wcf.acp.group.option.category.user.ultimate"><![CDATA[Ultimate CMS]]></item>
 		<item name="wcf.acp.group.option.category.user.ultimate.description"><![CDATA[]]></item>
+		<item name="wcf.acp.group.option.category.user.ultimate.content"><![CDATA[Inhalt]]></item>
+		<item name="wcf.acp.group.option.category.user.ultimate.content.description"><![CDATA[]]></item>
 		<!-- /user -->
 		
 		<!-- admin -->
@@ -18,6 +20,16 @@
 		<!-- user -->
 		<item name="wcf.acp.group.option.user.ultimate.canUseFrontend"><![CDATA[Kann Formulare im Ultimate Frontend benutzen.]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.canUseFrontend.description"><![CDATA[Mitglieder dieser Benutzergruppe können Formulare im Ultimate Frontend benutzen. Diese Berechtigung führt dazu, dass etwaige im Frontend befindliche Formulare benutzt werden können. Diese Berechtigung schließt keine Kommentarfunktionen oder mit dem WCF verbundene Formulare mit ein. Das Profil kann demzufolge weiterhin bearbeitet werden.]]></item>
+		
+		<!-- user.content -->
+		<item name="wcf.acp.group.option.user.ultimate.content.canAddComment"><![CDATA[Kann Kommentar hinzufügen]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.content.canAddComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kommentare zu Inhalten schreiben.]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.content.canEditComment"><![CDATA[Kann Kommentar bearbeiten]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.content.canEditComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Ihre eigenen Kommentare zu Inhalten bearbeiten.]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.content.canDeleteComment"><![CDATA[Kann Kommentar löschen]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.content.canDeleteComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Ihre eigenen Kommentare zu Inhalten löschen.]]></item>
+		<!-- /user.content -->
+		
 		<!-- /user -->
 		
 		<!-- admin -->
@@ -134,6 +146,11 @@
 		<item name="wcf.acp.option.ultimate_general_englishLanguage.BE"><![CDATA[Britisches Englisch]]></item>
 		<item name="wcf.acp.option.ultimate_general_englishLanguage.AE"><![CDATA[Amerikanisches Englisch]]></item>
 		<!-- /ultimate.general -->
+		
+		<!-- ultimate.general.content -->
+		<item name="wcf.acp.option.ultimate_general_content_comments_per_page"><![CDATA[Kommentare pro Seite]]></item>
+		<item name="wcf.acp.option.ultimate_general_content_comments_per_page.description"><![CDATA[Bitte geben Sie hier an, wie viele Kommentare pro Seite angezeigt werden sollen. Diese Einstellung ist unabhängig davon, ob die Kommentare überhaupt angezeigt werden (hängt von den Einstellungen im jeweiligen Inhaltsblock ab).]]></item>
+		<!-- /ultimate.general.content -->
 		
 		<!-- ultimate.sort.category -->
 		<item name="wcf.acp.option.ultimate_sort_category_sortField"><![CDATA[Sortierfeld]]></item>
@@ -342,6 +359,11 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.clipboard.item.template.delete"><![CDATA[Template löschen]]></item>
 		<item name="wcf.clipboard.item.template.delete.confirmMessage"><![CDATA[{if $count == 1}Ein{else}{#$count}{/if} Template{if $count != 1}s{/if} löschen?]]></item>
 		<item name="wcf.clipboard.label.template.marked"><![CDATA[{if $count == 1}Ein{else}{#$count}{/if} Template{if $count != 1}s{/if} markiert]]></item>
+	</category>
+	
+	<category name="wcf.user.profile">
+		<item name="wcf.user.profile.recentActivity.contentComment"><![CDATA[Hat einen Kommentar zu <a href="{link controller='' date=$content->publishDateObj->format('Y/m/d') contentSlug=$content->contentSlug}{/link}">{$content}</a> von <a href="{link controller='User' object=$author}{/link}">{$author->username}</a> geschrieben.]]></item>
+		<item name="wcf.user.profile.recentActivity.contentCommentResponse"><![CDATA[Hat auf einen Kommentar von <a href="{link controller='User' object=$commentAuthor}{/link}">{$commentAuthor->username}</a> zu <a href="{link controller='' date=$content->publishDateObj->format('Y/m/d') contentSlug=$content->contentSlug}{/link}">{$content}</a> von <a href="{link controller='User' object=$author}{/link}">{$author->username}</a> geantwortet.]]></item>
 	</category>
 	
 	<category name="ultimate.button">

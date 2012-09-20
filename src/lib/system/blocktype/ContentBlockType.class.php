@@ -26,6 +26,8 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\blocktype;
+use wcf\system\comment\CommentHandler;
+
 use ultimate\data\content\Content;
 use wcf\data\user\UserList;
 use wcf\system\language\I18nHandler;
@@ -93,6 +95,30 @@ class ContentBlockType extends AbstractBlockType {
 	 * @var mixed[]
 	 */
 	protected $options = array();
+	
+	/**
+	 * Contains the object type name for a comment.
+	 * @var string
+	 */
+	protected $objectType = 'de.plugins-zum-selberbauen.ultimate.content.comment';
+	
+	/**
+	 * Contains the id of the object type.
+	 * @var integer
+	 */
+	protected $objectTypeID = 0;
+	
+	/**
+	 * Contains a CommentManager object.
+	 * @var \wcf\system\comment\manager\ICommentManager
+	 */
+	protected $commentManager = null;
+	
+	/**
+	 * Contains a list of CommentList objects.
+	 * @var \wcf\data\comment\StructuredCommentList[]
+	 */
+	protected $commentLists = array();
 	
 	/**
 	 * @see \ultimate\system\blocktype\IBlockType::readData()
@@ -271,6 +297,15 @@ class ContentBlockType extends AbstractBlockType {
 			}
 			$this->contents = $contents;
 		}
+		
+		// comments
+		$this->objectTypeID = CommentHandler::getInstance()->getObjectTypeID($this->objectType);
+		/* @var $objectType \wcf\data\object\type\ObjectType */
+		$objectType = CommentHandler::getInstance()->getObjectType($this->objectTypeID);
+		$this->commentManager = $objectType->getProcessor();
+		foreach ($this->contents as $contentID => $content) {
+			$this->commentList[$contentID] = CommentHandler::getInstance()->getCommentList($this->objectTypeID, $this->commentManager, $content->__get('authorID'));
+		}
 	}
 	
 	/**
@@ -352,9 +387,17 @@ class ContentBlockType extends AbstractBlockType {
 		WCF::getTPL()->assign('authors', $this->authors);
 		
 		WCF::getTPL()->assign(array(
+			// settings
 			'metaAbove' => $metaAbove,
 			'metaBelow' => $metaBelow,
+			// contents
 			'contents' => $this->contents,
+			// comments
+			'commentObjectTypeID' => $this->objectTypeID,
+			'commentCanAdd' => $this->commentManager->canAdd(),
+			'commentsPerPage' => $this->commentManager->commentsPerPage(),
+			'commentLists' => $this->commentLists,
+			// dimensions and position
 			'height' => $dimensions[1],
 			'width' => $dimensions[0],
 			'top' => $position[1],

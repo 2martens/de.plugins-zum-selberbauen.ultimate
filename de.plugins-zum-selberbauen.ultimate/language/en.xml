@@ -6,6 +6,8 @@
 		<!-- user -->
 		<item name="wcf.acp.group.option.category.user.ultimate"><![CDATA[Ultimate CMS]]></item>
 		<item name="wcf.acp.group.option.category.user.ultimate.description"><![CDATA[]]></item>
+		<item name="wcf.acp.group.option.category.user.ultimate.content"><![CDATA[Content]]></item>
+		<item name="wcf.acp.group.option.category.user.ultimate.content.description"><![CDATA[]]></item>
 		<!-- /user -->
 		
 		<!-- admin -->
@@ -18,6 +20,16 @@
 		<!-- user -->
 		<item name="wcf.acp.group.option.user.ultimate.canUseFrontend"><![CDATA[Can use forms in the Ultimate frontend.]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.canUseFrontend.description"><![CDATA[Members of this usergroup can use forms in the Ultimate Frontend. This permission means that all forms in the frontend can be used. This permission do not include comment forms or forms related with the WCF (for example: the user profile).]]></item>
+		
+		<!-- user.content -->
+		<item name="wcf.acp.group.option.user.ultimate.content.canAddComment"><![CDATA[Can add comment]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.content.canAddComment.description"><![CDATA[Members of this usergroup can write comments to contents.]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.content.canEditComment"><![CDATA[Can edit comment]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.content.canEditComment.description"><![CDATA[Members of this usergroup can edit their own comments to contents.]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.content.canDeleteComment"><![CDATA[Can delete comment]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.content.canDeleteComment.description"><![CDATA[Members of this usergroup can delete their own comments to contents.]]></item>
+		<!-- /user.content -->
+		
 		<!-- /user -->
 		
 		<!-- admin -->
@@ -133,6 +145,11 @@
 		<item name="wcf.acp.option.ultimate_general_englishLanguage.BE"><![CDATA[British English]]></item>
 		<item name="wcf.acp.option.ultimate_general_englishLanguage.AE"><![CDATA[American English]]></item>
 		<!-- /ultimate.general -->
+		
+		<!-- ultimate.general.content -->
+		<item name="wcf.acp.option.ultimate_general_content_comments_per_page"><![CDATA[Comments per page]]></item>
+		<item name="wcf.acp.option.ultimate_general_content_comments_per_page.description"><![CDATA[Please insert here how many comments should be displayed per page. This setting doesn't influence the visability of comments (that depends on settings of the specific content blocks).]]></item>
+		<!-- /ultimate.general.content -->
 		
 		<!-- ultimate.sort.category -->
 		<item name="wcf.acp.option.ultimate_sort_category_sortField"><![CDATA[Sort field]]></item>
@@ -346,6 +363,11 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.clipboard.item.template.delete"><![CDATA[Delete template]]></item>
 		<item name="wcf.clipboard.item.template.delete.confirmMessage"><![CDATA[Delete {if $count == 1}one{else}{#$count}{/if} template{if $count != 1}s{/if}?]]></item>
 		<item name="wcf.clipboard.label.template.marked"><![CDATA[{if $count == 1}One{else}{#$count}{/if} template{if $count != 1}s{/if} marked]]></item>
+	</category>
+	
+	<category name="wcf.user.profile">
+		<item name="wcf.user.profile.recentActivity.contentComment"><![CDATA[Posted a comment to <a href="{link controller='' date=$content->publishDateObj->format('Y/m/d') contentSlug=$content->contentSlug}{/link}">{$content}</a> by <a href="{link controller='User' object=$author}{/link}">{$author->username}</a>.]]></item>
+		<item name="wcf.user.profile.recentActivity.contentCommentResponse"><![CDATA[Replied to a comment by <a href="{link controller='User' object=$commentAuthor}{/link}">{$commentAuthor->username}</a> to <a href="{link controller='' date=$content->publishDateObj->format('Y/m/d') contentSlug=$content->contentSlug}{/link}">{$content}</a> b< <a href="{link controller='User' object=$author}{/link}">{$author->username}</a>.]]></item>
 	</category>
 	
 	<!-- this category is used for all multilingual category fields -->

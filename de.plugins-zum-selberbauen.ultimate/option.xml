@@ -76,6 +76,11 @@ false:wcf.acp.option.ultimate_general_englishLanguage.AE]]>
 				<supporti18n>1</supporti18n>
 				<requirei18n>0</requirei18n>
 			</option>
+			<option name="ultimate_general_content_comments_per_page">
+				<categoryname>ultimate.general.content</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>10</defaultvalue>
+			</option>
 			<!-- /general/content options -->
 			
 			<!-- grid options -->
