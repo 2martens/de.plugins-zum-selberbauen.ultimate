@@ -62,7 +62,7 @@
         
         <!-- IndexFirstTime listener -->
         <eventlistener>
-            <eventclassname>wcf\acp\page\Index</eventclassname>
+            <eventclassname>wcf\acp\page\IndexPage</eventclassname>
             <eventname>readData</eventname>
             <environment>admin</environment>
             <inherit>0</inherit>
