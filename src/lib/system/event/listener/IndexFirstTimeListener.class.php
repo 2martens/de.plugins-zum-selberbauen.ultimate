@@ -1,5 +1,6 @@
 <?php
 namespace ultimate\system\event\listener;
+use ultimate\system\exception\DebugException;
 use wcf\data\category\CategoryAction;
 use wcf\system\cache\CacheHandler;
 use wcf\system\event\IEventListener;
@@ -31,6 +32,14 @@ class IndexFirstTimeListener implements IEventListener {
 		if (!$initiatedDefaultLinkCategory) {
 			$this->createDefaultLinkCategory();
 			$this->updateConfigFile();
+		}
+		
+		// debug
+		try {
+			throw new DebugException('testCall');
+		}
+		catch (DebugException $e) {
+			die('logID => '.$e->getLogID());
 		}
 	}
 	
