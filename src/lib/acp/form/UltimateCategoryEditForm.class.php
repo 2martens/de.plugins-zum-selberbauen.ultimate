@@ -93,7 +93,7 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 		$this->categoryDescription = 'ultimate.category.'.$this->categoryID.'.categoryDescription';
 		if (I18nHandler::getInstance()->isPlainValue('categoryDescription')) {
 			I18nHandler::getInstance()->remove($this->categoryDescription, PACKAGE_ID);
-			$this->categoryTitle = I18nHandler::getInstance()->getValue('categoryDescription');
+			$this->categoryDescription = I18nHandler::getInstance()->getValue('categoryDescription');
 		} else {
 			I18nHandler::getInstance()->save('categoryDescription', $this->categoryDescription, 'ultimate.category', PACKAGE_ID);
 		}
