@@ -398,7 +398,7 @@ class UltimateContentAddForm extends MessageForm {
 			'categories' => $this->categories,
 			'languageID' => ($this->languageID ? $this->languageID : 0),
 			'availableTags' => $this->availableTags,
-			'tags' => $tags,
+			'tags' => $this->tags,
 			'groups' => $this->groups,
 			'groupIDs' => $this->groupIDs,
 			'statusOptions' => $this->statusOptions,
