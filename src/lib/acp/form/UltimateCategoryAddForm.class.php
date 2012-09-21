@@ -199,7 +199,7 @@ class UltimateCategoryAddForm extends ACPForm {
 			if (empty($this->categoryTitle)) {
 				throw new UserInputException('categoryTitle');
 			}
-			if (!CategoryUtil::isAvailableTitle($this->categoryTitle, $this->categoryParent)) {
+			if (!CategoryUtil::isAvailableTitle($this->categoryTitle, (isset($this->categoryID) ? $this->categoryID : 0), $this->categoryParent)) {
 				throw new UserInputException('categoryTitle', 'notUnique');
 			}
 		}
@@ -211,7 +211,7 @@ class UltimateCategoryAddForm extends ACPForm {
 	 * @throws	\wcf\system\exception\UserInputException
 	 */
 	protected function validateParent() {
-		if ($this->categoryParent != 0 && !array_key_exists($this->categoryParent, (isset($this->categoryID) ? $this->categoryID : 0), $this->categories)) {
+		if ($this->categoryParent != 0 && !array_key_exists($this->categoryParent, $this->categories)) {
 			throw new UserInputException('categoryParent', 'notValid');
 		}
 	}
