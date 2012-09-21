@@ -67,7 +67,7 @@ class UltimateLinkAddForm extends ACPForm {
 	
 	/**
 	 * Contains all categories.
-	 * @var	\wcf\data\category\Category[]
+	 * @var	\wcf\data\category\Category[]|string[]
 	*/
 	public $categories = array();
 	
@@ -86,6 +86,13 @@ class UltimateLinkAddForm extends ACPForm {
 	public function readData() {
 		$this->categories = CategoryHandler::getInstance()->getCategories('de.plugins-zum-selberbauen.ultimate.linkCategory');
 		unset($this->categories[1]);
+		// workaround for html checkboxes
+		$categories = array();
+		foreach ($this->categories as $categoryID => $category) {
+			/* @var $category \wcf\data\category\Category */
+			$categories[$categoryID] = $category->getTitle();
+		}
+		$this->categories = $categories;
 		parent::readData();
 	}
 	

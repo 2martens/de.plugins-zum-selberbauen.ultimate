@@ -301,7 +301,6 @@ class UltimatePageAddForm extends ACPForm {
 			'contents' => $this->contents,
 			'pages' => $this->pages,
 			'pageParent' => $this->pageParent,
-			'pageTitle' => $this->pageTitle,
 			'pageSlug' => $this->pageSlug,
 			'groups' => $this->groups,
 			'groupIDs' => $this->groupIDs,

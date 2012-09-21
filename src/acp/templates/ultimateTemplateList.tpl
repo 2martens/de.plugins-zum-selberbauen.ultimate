@@ -10,7 +10,7 @@
 		WCF.Clipboard.init('ultimate\\acp\\page\\UltimateTemplateListPage', {@$hasMarkedItems}, actionObjects);
 		
 		var options = { };
-		{if $templates > 1}
+		{if $pages > 1}
 			options.refreshPage = true;
 		{/if}
 		

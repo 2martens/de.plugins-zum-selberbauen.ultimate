@@ -340,6 +340,19 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.link.noContents"><![CDATA[Keine Links gefunden]]></item>
 		<!-- /link -->
 		
+		<!-- link category -->
+		<item name="wcf.acp.ultimate.linkCategory.add"><![CDATA[Linkkategorie hinzufügen]]></item>
+		<item name="wcf.acp.ultimate.linkCategory.edit"><![CDATA[Linkkategorie bearbeiten]]></item>
+		<item name="wcf.acp.ultimate.linkCategory.delete"><![CDATA[Linkkategorie löschen]]></item>
+		<item name="wcf.acp.ultimate.linkCategory.delete.sure"><![CDATA[Bist du sicher, dass du diese Linkkategorie löschen willst?]]></item>
+		<item name="wcf.acp.ultimate.linkCategory.button.list"><![CDATA[Linkkategorieliste]]></item>
+		<item name="wcf.acp.ultimate.linkCategory.parentCategoryID"><![CDATA[ID der übergeordneten Kategorie]]></item>
+		<item name="wcf.acp.ultimate.linkCategory.parentCategoryID.error.invalid"><![CDATA[Die "ausgewählte" Kategorie existiert nicht.]]></item>
+		<item name="wcf.acp.ultimate.linkCategory.title"><![CDATA[Name]]></item>
+		<item name="wcf.acp.ultimate.linkCategory.isDisabled"><![CDATA[Deaktiviert]]></item>
+		<item name="wcf.acp.ultimate.linkCategory.showOrder"><![CDATA[Position]]></item>
+		<!-- /link category -->
+		
 		<!-- menu -->
 		<item name="wcf.acp.ultimate.menu.add"><![CDATA[Menü hinzufügen]]></item>
 		<item name="wcf.acp.ultimate.menu.addToMenu"><![CDATA[Zum Menü hinzufügen]]></item>

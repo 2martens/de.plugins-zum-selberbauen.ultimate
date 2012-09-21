@@ -215,7 +215,7 @@ class UltimateContentAddForm extends MessageForm {
 		if (isset($this->content)) {
 			$dateTime = $this->content->__get('publishDateObject');
 		}
-		if (!$dateTime->getTimestamp()) $dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
+		if ($dateTime === null) $dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
 		$dateTime->setTimezone(WCF::getUser()->getTimezone());
 		$date = WCF::getLanguage()->getDynamicVariable(
 			'ultimate.date.dateFormat',

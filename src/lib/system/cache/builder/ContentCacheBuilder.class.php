@@ -44,7 +44,8 @@ class ContentCacheBuilder implements ICacheBuilder {
 			$data['contentsToSlug'][$content->__get('contentSlug')] = $content;
 			
 			$taggedContent = new TaggedContent($content);
-			if (!empty($taggedContent->__get('tags'))) {
+			$tags = $taggedContent->__get('tags');
+			if (!empty($tags)) {
 				$data['contents'][$contentID] = $taggedContent;
 			}
 		}

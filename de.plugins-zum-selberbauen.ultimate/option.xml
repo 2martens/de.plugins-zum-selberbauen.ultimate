@@ -10,7 +10,7 @@
 					<parent>ultimate</parent>
 					<showorder>1</showorder>
 				</category>
-					<category name="ultimate.content">
+					<category name="ultimate.general.content">
 						<parent>ultimate.general</parent>
 						<showorder>1</showorder>
 					</category>

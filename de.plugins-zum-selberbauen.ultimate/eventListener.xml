@@ -52,6 +52,15 @@
         </eventlistener>
         <!-- /PIP listener -->
         
+        <!-- IndexFirstTime listener -->
+        <eventlistener>
+            <eventclassname>wcf\acp\page\Index</eventclassname>
+            <eventname>readData</eventname>
+            <inherit>0</inherit>
+            <listenerclassname>ultimate\system\event\listener\IndexFirstTimeListener</listenerclassname>
+        </eventlistener>
+        <!-- /IndexFirstTimeListener -->
+        
         <!-- block action listener -->
         <eventlistener>
             <eventclassname>ultimate\action\BlockAction</eventclassname>
