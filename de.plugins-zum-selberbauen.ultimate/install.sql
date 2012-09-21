@@ -205,7 +205,7 @@ CREATE TABLE ultimate1_1_widgettype (
 	packageID INT(10) NOT NULL,
 	widgetTypeName VARCHAR(255) NOT NULL DEFAULT '',
 	widgetTypeClassName VARCHAR(255) NOT NULL DEFAULT '',
-	UNIQUE KEY packageID (packageID, widgetName)
+	UNIQUE KEY packageID (packageID, widgetTypeName)
 );
 
 /**** foreign keys ****/
