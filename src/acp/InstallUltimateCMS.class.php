@@ -82,6 +82,7 @@ final class InstallUltimateCMS {
 			)
 		);
 		// workaround for installation
+		require_once(ULTIMATE_DIR.'lib/data/AbstractUltimateDatabaseObject.class.php');
 		require_once(ULTIMATE_DIR.'lib/data/blocktype/BlockType.class.php');
 		require_once(ULTIMATE_DIR.'lib/data/blocktype/BlockTypeAction.class.php');
 		require_once(ULTIMATE_DIR.'lib/data/blocktype/BlockTypeEditor.class.php');
