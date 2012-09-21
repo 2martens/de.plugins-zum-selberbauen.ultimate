@@ -97,7 +97,7 @@
 							var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
 							var $optionValues = { {implode from=$tags key=languageID item=value}'{@$languageID}': "{$value}"{/implode} };
 							new WCF.MultipleLanguageInput('tags', true, $optionValues, $availableLanguages);
-							var $availableTags = {};
+							var $availableTags = { };
 							{foreach from=$availableLanguages key=languageID item=languageName}
 								$availableTags[{$languageID}] = [ {implode from=$availableTags[$languageID] item=tag}"{@$tag->getTitle()}"{/implode} ];
 							{/foreach}
