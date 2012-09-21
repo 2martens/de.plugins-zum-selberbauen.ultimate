@@ -346,6 +346,7 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.delete"><![CDATA[Delete link category]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.delete.sure"><![CDATA[Are you sure that you want to delete this link category?]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.button.list"><![CDATA[Link category list]]></item>
+		<item name="wcf.acp.ultimate.linkCategory.list"><![CDATA[Link categories]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.parentCategoryID"><![CDATA[Parent category ID]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.parentCategoryID.error.invalid"><![CDATA[The "selected" category doesn't exist.]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.title"><![CDATA[Name]]></item>
