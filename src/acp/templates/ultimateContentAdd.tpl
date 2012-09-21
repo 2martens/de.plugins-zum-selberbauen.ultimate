@@ -65,7 +65,7 @@
 			<dl{if $errorField == 'slug'} class="wcf-formError"{/if}>
 				<dt><label for="slug">{lang}wcf.acp.ultimate.content.slug{/lang}</label></dt>
 				<dd>
-					<input type="text" id="slug" name="slug" value="{@$slug}" class="long" required="required" placeholder="{lang}wcf.acp.ultimate.content.slug.placeholder{/lang}" />
+					<input type="text" id="slug" name="slug" value="{@$slug}" class="long" required="required" pattern="^[a-z]+(?:\-{literal}{{/literal}1{literal}}{/literal}[a-z]+)*(?:\/{literal}{{/literal}1{literal}}{/literal}[a-z]+(?:\-{literal}{{/literal}1{literal}}{/literal}[a-z]+)*)*$" placeholder="{lang}wcf.acp.ultimate.content.slug.placeholder{/lang}" />
 					{if $errorField == 'slug'}
 						<small class="wcf-innerError">
 							{if $errorType == 'empty'}

@@ -63,7 +63,7 @@
 			<dl{if $errorField == 'categorySlug'} class="wcf-formError"{/if}>
 				<dt><label for="categorySlug">{lang}wcf.acp.ultimate.category.slug{/lang}</label></dt>
 			<dd>
-				<input type="text" id="categorySlug" name="categorySlug" value="{@$categorySlug}" class="long" required="required" pattern="^[^,\nA-Z]+$" placeholder="{lang}wcf.acp.ultimate.category.slug.placeholder{/lang}" />
+				<input type="text" id="categorySlug" name="categorySlug" value="{@$categorySlug}" class="long" required="required" pattern="^[a-z]+(?:\-{literal}{{/literal}1{literal}}{/literal}[a-z]+)*(?:\/{literal}{{/literal}1{literal}}{/literal}[a-z]+(?:\-{literal}{{/literal}1{literal}}{/literal}[a-z]+)*)*$" placeholder="{lang}wcf.acp.ultimate.category.slug.placeholder{/lang}" />
 					{if $errorField == 'categorySlug'}
 						<small class="wcf-innerError">
 							{if $errorType == 'empty'}
