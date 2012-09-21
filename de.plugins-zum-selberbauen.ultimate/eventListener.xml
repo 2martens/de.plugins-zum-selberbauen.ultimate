@@ -3,48 +3,56 @@
     <import>
         <!-- PIP listener -->
         <eventlistener>
+        	<environment>admin</environment>
             <eventclassname>wcf\system\package\plugin\BlockTypePackageInstallationPlugin</eventclassname>
             <eventname>install</eventname>
             <inherit>0</inherit>
             <listenerclassname>ultimate\system\event\listener\PIPReplacementListener</listenerclassname>
         </eventlistener>
          <eventlistener>
+         	<environment>admin</environment>
             <eventclassname>wcf\system\package\plugin\WidgetTypePackageInstallationPlugin</eventclassname>
             <eventname>install</eventname>
             <inherit>0</inherit>
             <listenerclassname>ultimate\system\event\listener\PIPReplacementListener</listenerclassname>
         </eventlistener>
         <eventlistener>
+            <environment>admin</environment>
             <eventclassname>wcf\system\package\plugin\BlockTypePackageInstallationPlugin</eventclassname>
             <eventname>hasUninstall</eventname>
             <inherit>0</inherit>
             <listenerclassname>ultimate\system\event\listener\PIPReplacementListener</listenerclassname>
         </eventlistener>
          <eventlistener>
+            <environment>admin</environment>
             <eventclassname>wcf\system\package\plugin\WidgetTypePackageInstallationPlugin</eventclassname>
             <eventname>hasUninstall</eventname>
             <inherit>0</inherit>
             <listenerclassname>ultimate\system\event\listener\PIPReplacementListener</listenerclassname>
         </eventlistener>
         <eventlistener>
+            <environment>admin</environment>
             <eventclassname>wcf\system\package\plugin\BlockTypePackageInstallationPlugin</eventclassname>
             <eventname>uninstall</eventname>
             <inherit>0</inherit>
             <listenerclassname>ultimate\system\event\listener\PIPReplacementListener</listenerclassname>
         </eventlistener>
          <eventlistener>
+            <environment>admin</environment>
             <eventclassname>wcf\system\package\plugin\WidgetTypePackageInstallationPlugin</eventclassname>
             <eventname>uninstall</eventname>
             <inherit>0</inherit>
             <listenerclassname>ultimate\system\event\listener\PIPReplacementListener</listenerclassname>
         </eventlistener>
         <eventlistener>
+            <environment>admin</environment>
             <eventclassname>wcf\system\package\plugin\BlockTypePackageInstallationPlugin</eventclassname>
             <eventname>findExistingItem</eventname>
             <inherit>0</inherit>
             <listenerclassname>ultimate\system\event\listener\PIPReplacementListener</listenerclassname>
         </eventlistener>
          <eventlistener>
+            <environment>admin</environment>
             <eventclassname>wcf\system\package\plugin\WidgetTypePackageInstallationPlugin</eventclassname>
             <eventname>findExistingItem</eventname>
             <inherit>0</inherit>
@@ -56,6 +64,7 @@
         <eventlistener>
             <eventclassname>wcf\acp\page\Index</eventclassname>
             <eventname>readData</eventname>
+            <environment>admin</environment>
             <inherit>0</inherit>
             <listenerclassname>ultimate\system\event\listener\IndexFirstTimeListener</listenerclassname>
         </eventlistener>
