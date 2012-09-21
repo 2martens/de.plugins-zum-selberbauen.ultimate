@@ -115,9 +115,9 @@ class UltimateLinkAddForm extends ACPForm {
 	 */
 	public function validate() {
 		parent::validate();
-		$this->validateName();
-		$this->validateURL();
-		$this->validateDescription();
+		$this->validateLinkName();
+		$this->validateLinkURL();
+		$this->validateLinkDescription();
 		$this->validateCategories();
 	}
 	
@@ -222,6 +222,24 @@ class UltimateLinkAddForm extends ACPForm {
 		 if (!LinkUtil::isAvailableURL($this->linkURL)) {
 		 	throw new UserInputException('linkURL', 'notUnique');
 		 }
+	}
+	
+	/**
+	 * Validates link description.
+	 *
+	 * @throws	\wcf\system\exception\UserInputException
+	 */
+	protected function validateLinkDescription() {
+		if (!I18nHandler::getInstance()->isPlainValue('linkDescription')) {
+			if (!I18nHandler::getInstance()->validateValue('linkDescription')) {
+				throw new UserInputException('linkDescription');
+			}
+		}
+		else {
+			if (empty($this->linkDescription)) {
+				throw new UserInputException('linkDescription');
+			}
+		}
 	}
 	
 	/**
