@@ -63,11 +63,8 @@
 		<instruction type="userGroupOption">userGroupOption.xml</instruction>
 		<instruction type="pageMenu">pageMenu.xml</instruction>
 		<instruction type="acpMenu">acpMenu.xml</instruction>
-<<<<<<< HEAD
 		<instruction type="blockType">blockType.xml</instruction>
-=======
 		<instruction type="userNotificationEvent">userNotificationEvent.xml</instruction>
->>>>>>> dev
 		<!-- /xml -->
 		
 		<instruction type="script">acp/InstallUltimateCMS.class.php</instruction>
