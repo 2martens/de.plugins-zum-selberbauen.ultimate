@@ -145,8 +145,7 @@ CREATE TABLE ultimate1_1_template (
 	templateID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	templateName VARCHAR(255) NOT NULL DEFAULT '',
 	widgetAreaSide ENUM('left', 'right') NOT NULL DEFAULT 'right',
-	showWidgetArea TINYINT(1) NOT NULL DEFAULT 1,
-	KEY (packageID)
+	showWidgetArea TINYINT(1) NOT NULL DEFAULT 1
 );
 
 DROP TABLE IF EXISTS ultimate1_1_template_to_layout;
