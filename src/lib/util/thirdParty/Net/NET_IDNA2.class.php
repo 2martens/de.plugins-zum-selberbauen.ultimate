@@ -24,8 +24,8 @@ use ultimate\util\thirdParty\Net\IDNA2;
 //
 
 // }}}
-require_once 'Net/IDNA2/Exception.php';
-require_once 'Net/IDNA2/Exception/Nameprep.php';
+require_once 'IDNA2/Exception.php';
+require_once 'IDNA2/Exception/Nameprep.php';
 
 /**
  * Encode/decode Internationalized Domain Names.
@@ -56,7 +56,7 @@ require_once 'Net/IDNA2/Exception/Nameprep.php';
  * @author  Stefan Neufeind <pear.neufeind@speedpartner.de>
  * @version $Id: IDNA2.php 305344 2010-11-14 23:52:42Z neufeind $
  */
-class Net_IDNA2
+class NET_IDNA2
 {
     // {{{ npdata
     /**

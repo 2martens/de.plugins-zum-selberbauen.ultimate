@@ -71,10 +71,8 @@ class LinkUtil {
 		
 		// The scheme
 		$pattern =	'^';
-		$patterm .= '(?:https?|ftp)\:\/\/';
+		$pattern .= '(?:https?|ftp)\:\/\/';
 		// The domain
-		$pattern .= '(?:';
-		
 		$pattern .= '(?:';
 		// Domain name or IPv4
 		$pattern .=	'(?:(?:[a-zA-Z][a-zA-Z0-9\-]+\.)+[a-zA-Z\-]+)|'.
@@ -92,7 +90,7 @@ class LinkUtil {
 		// The path (optional)
         $pattern .= '(?:\/(?:[\w0-9+,;\$_-]\.?)+)*\/?';
 		// GET Query (optional)
-		$pattern .= '(\?[a-z+&\$_.-][a-z0-9;:@/&%=+\$_.-]*)?';
+		$pattern .= '(?:\?[a-z+&\$_.-][a-z0-9;:@\/&%=+\$_.-]*)?';
 		$pattern .= '$';
 		
 		// checks if URL is valid
