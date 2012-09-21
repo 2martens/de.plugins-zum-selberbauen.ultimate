@@ -112,7 +112,6 @@ class UltimateCategoryAddForm extends ACPForm {
 		$this->validateTitle();
 		$this->validateSlug();
 		$this->validateParent();
-		$this->validateDescription();
 	}
 	
 	/**
