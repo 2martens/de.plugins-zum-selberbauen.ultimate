@@ -39,5 +39,15 @@ use wcf\data\DatabaseObjectEditor;
  * @category	Ultimate CMS
  */
 class WidgetTypeEditor extends DatabaseObjectEditor {
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObjectDecorator.html#$baseClass
+	 */
+	protected static $baseClass = '\ultimate\data\widgettype\WidgetType';
 	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableCachedObject.html#resetCache
+	 */
+	public static function resetCache() {
+		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.widget-type.php');
+	}
 }

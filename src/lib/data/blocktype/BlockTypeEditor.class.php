@@ -23,7 +23,7 @@ class BlockTypeEditor extends DatabaseObjectEditor implements IEditableCachedObj
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableCachedObject.html#resetCache
 	 */
-	public function resetCache() {
+	public static function resetCache() {
 		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.blocktype.php');
 	}
 }
