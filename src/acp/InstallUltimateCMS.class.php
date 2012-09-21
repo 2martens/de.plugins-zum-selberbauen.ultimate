@@ -81,6 +81,8 @@ final class InstallUltimateCMS {
 				'fixedHeight' => 0			
 			)
 		);
+		// workaround for installation
+		require_once(ULTIMATE_DIR.'lib/data/blocktype/BlockTypeAction.class.php');
 		$objectAction = new BlockTypeAction(array(), 'create', $parameters);
 		$objectAction->executeAction();
 		
