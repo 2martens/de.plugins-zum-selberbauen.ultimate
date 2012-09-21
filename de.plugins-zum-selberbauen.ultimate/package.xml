@@ -63,7 +63,6 @@
 		<instruction type="userGroupOption">userGroupOption.xml</instruction>
 		<instruction type="pageMenu">pageMenu.xml</instruction>
 		<instruction type="acpMenu">acpMenu.xml</instruction>
-		<instruction type="blockType">blockType.xml</instruction>
 		<instruction type="userNotificationEvent">userNotificationEvent.xml</instruction>
 		<!-- /xml -->
 		
