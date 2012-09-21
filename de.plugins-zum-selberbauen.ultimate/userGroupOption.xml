@@ -5,6 +5,9 @@
 			<category name="user.ultimate">
 				<parent>user</parent>
 			</category>
+				<category name="user.ultimate.content">
+					<parent>user.ultimate</parent>
+				</category>
 			
 			<category name="admin.content.ultimate">
 				<parent>admin.content</parent>
@@ -24,6 +27,25 @@
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 				<permissions>user.ultimate.canUseFrontend</permissions>
+			</option>
+			
+			<option name="user.ultimate.content.canAddComment">
+				<categoryname>user.ultimate.content</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.ultimate.content.canEditComment">
+				<categoryname>user.ultimate.content</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.ultimate.content.canDeleteComment">
+				<categoryname>user.ultimate.content</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			
 			<option name="admin.content.ultimate.canConfigureOptions">

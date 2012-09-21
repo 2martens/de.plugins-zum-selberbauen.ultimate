@@ -30,37 +30,16 @@
 					{if ($block->contentBodyDisplay == 'default' && ($displayedFeaturedContents < $block->featuredContents || $requestType == 'content' || $requestType == 'page')) || $block->contentBodyDisplay == 'full'}
 						{counter name=displayedFeaturedContents assign=displayedFeaturedContents print=false start=0}
 						{assign var=displayedFeaturedContents value=$displayedFeaturedContents}
-						{if $content->enableHtml}
-							{capture assign='contentText'}{lang}{@$content->contentText}{/lang}{/capture}
-							{assign var='contentText' value=$contentText}
-							{if $requestType == 'content' || $requestType == 'page'}
-								{@$contentText}
-							{/if}
-							{if $requestType == 'index' || $requestType == 'category'}
-								{@$contentText|truncateMore:0}
-							{/if}
-						{else}
-							{capture assign='contentText'}{lang}{$content->contentText}{/lang}{/capture}
-							{assign var='contentText' value=$contentText}
-							{if $requestType == 'content' || $requestType == 'page'}
-								{$contentText}
-							{/if}
-							{if $requestType == 'index' || $requestType == 'category'}
-								{$contentText|truncateMore:0}
-							{/if}
+						{if $requestType == 'content' || $requestType == 'page'}
+							{$content->getParsedContent()}
+						{/if}
+						{if $requestType == 'index' || $requestType == 'category'}
+							{$content->getParsedContent()|truncateMore:0}
 						{/if}
 					{else}
-						{if $content->enableHtml}
-							{capture assign='languageText'}{lang}{@$content->contentText}{/lang}{/capture}
-							{assign var='languageText' value=$languageText}
-							{@$languageText|truncateMore:ULTIMATE_CONTENT_CONTINUE_READING_LENGTH}
-						{else}
-							{capture assign='languageText'}{lang}{$content->contentText}{/lang}{/capture}
-							{assign var='languageText' value=$languageText}
-							{$languageText|truncateMore:ULTIMATE_CONTENT_CONTINUE_READING_LENGTH}
-						{/if}
+						{$content->getParsedContent()|truncateMore:ULTIMATE_GENERAL_CONTENT_CONTINUEREADINGLENGTH}
 						
-						<a href="{link controller='' date=$content->publishDateObj->format('Y/m/d') contentSlug=$content->contentSlug}#more-{$content->contentID}{/link}">{lang}{$readMoreText}{/lang}&nbsp;-&gt;</a>
+						<a href="{link controller='' date=$content->publishDateObj->format('Y/m/d') contentSlug=$content->contentSlug}#more{/link}">{lang}{$readMoreText}{/lang}&nbsp;-&gt;</a>
 					{/if}
 				</p>
 				{/if}
@@ -75,7 +54,11 @@
 			{/if}
 			{if $block->commentsVisibility == 'show' || ($block->commentsVisibility == 'auto' && $requestType == 'content')}
 			<div id="content-{$contentID}-comments" class="content">
-				{* TODO: comments *}
+				{include file='__commentJavaScript'}
+
+				<ul data-object-id="{@$contentID}" data-object-type-id="{@$commentObjectTypeID}" class="commentList containerList">
+					{include file='commentList' commentList=$commentLists[$contentID]}
+				</ul>
 			</div>
 			{/if}
 		{/if}

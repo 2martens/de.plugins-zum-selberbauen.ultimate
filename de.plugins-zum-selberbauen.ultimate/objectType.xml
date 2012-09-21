@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/object-type.xsd">
 	<import>
+		<!-- clipboard types -->
 		<type>
 			<name>de.plugins-zum-selberbauen.ultimate.category</name>
 			<definitionname>com.woltlab.wcf.clipboardItem</definitionname>
@@ -36,17 +37,61 @@
 			<definitionname>com.woltlab.wcf.clipboardItem</definitionname>
 			<listclassname>ultimate\data\link\LinkList</listclassname>
 		</type>
+		<!-- /clipboard types -->
 		
+		<!-- commentable types -->
+		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.content.comment</name>
+			<definitionname>com.woltlab.wcf.comment.commentableContent</definitionname>
+			<classname>ultimate\system\comment\manager\ContentCommentManager</classname>
+		</type>
+		<!-- /commentable types -->
+		
+		<!-- notification types -->
+		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.content.comment.notification</name>
+			<definitionname>com.woltlab.wcf.notification.objectType</definitionname>
+			<classname>ultimate\system\user\notification\object\type\ContentCommentUserNotificationObjectType</classname>
+		</type>
+		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.content.comment.response.notification</name>
+			<definitionname>com.woltlab.wcf.notification.objectType</definitionname>
+			<classname>ultimate\system\user\notification\object\type\ContentCommentUserNotificationObjectType</classname>
+		</type>
+		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.content.comment.response.notificationOwner</name>
+			<definitionname>com.woltlab.wcf.notification.objectType</definitionname>
+			<classname>ultimate\system\user\notification\object\type\ContentCommentUserNotificationObjectType</classname>
+		</type>
+		<!-- /notification types -->
+		
+		<!-- recent activity types -->
+		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.content.comment.recentActivityEvent</name>
+			<definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
+			<classname>ultimate\system\user\activity\event\ContentCommentUserActivityEvent</classname>
+		</type>
+		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.content.comment.response.recentActivityEvent</name>
+			<definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
+			<classname>ultimate\system\user\activity\event\ContentCommentResponseUserActivityEvent</classname>
+		</type>
+		<!-- /recent activity types -->
+		
+		<!-- taggable items -->
 		<type>
 			<name>de.plugins-zum-selberbauen.ultimate.contentTaggable</name>
 			<definitionname>com.woltlab.wcf.tagging.taggableObject</definitionname>
 			<classname>ultimate\data\content\Content</classname>
 		</type>
+		<!-- /taggable types -->
 		
+		<!-- category types -->
 		<type>
 			<name>de.plugins-zum-selberbauen.ultimate.linkCategory</name>
 			<definitionname>com.woltlab.wcf.category</definitionname>
 			<classname>ultimate\system\category\LinkCategoryType</classname>
 		</type>
+		<!-- /category types -->
 	</import>
 </data>

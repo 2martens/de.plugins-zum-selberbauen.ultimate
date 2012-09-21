@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/userNotificationEvent.xsd">
+	<import>
+		<event>
+			<name>comment</name>
+			<objecttype>de.plugins-zum-selberbauen.ultimate.content.comment.notification</objecttype>
+			<classname>ultimate\system\user\notification\event\ContentCommentUserNotificationEvent</classname>
+		</event>
+		<event>
+			<name>commentResponse</name>
+			<objecttype>de.plugins-zum-selberbauen.ultimate.content.comment.response.notification</objecttype>
+			<classname>wcf\system\user\notification\event\ContentCommentResponseUserNotificationEvent</classname>
+		</event>
+		<event>
+			<name>commentResponseOwner</name>
+			<objecttype>de.plugins-zum-selberbauen.ultimate.content.comment.response.notificationOwner</objecttype>
+			<classname>ultimate\system\user\notification\event\ContentCommentResponseOwnerUserNotificationEvent</classname>
+		</event>
+	</import>
+</data>

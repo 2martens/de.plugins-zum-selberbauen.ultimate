@@ -1,6 +1,7 @@
 <?php
 namespace ultimate\data\content;
 use ultimate\data\AbstractUltimateDatabaseObject;
+use wcf\system\bbcode\MessageParser;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
 
@@ -64,6 +65,15 @@ class Content extends AbstractUltimateDatabaseObject {
 	 */
 	public function __toString() {
 		return WCF::getLanguage()->get($this->contentTitle);
+	}
+	
+	/**
+	 * Returns the parsed content.
+	 * 
+	 * @return	string
+	 */
+	public function getParsedContent() {
+		return MessageParser::getInstance()->parse(WCF::getLanguage()->get($this->contentText), $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
 	}
 	
 	/**
