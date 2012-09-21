@@ -198,10 +198,10 @@ class UltimateContentAddForm extends MessageForm {
 		/* @var $tag \wcf\data\tag\TagCloudTag */
 		foreach ($languages as $languageID => $language) {
 			$this->availableTags[$languageID] = array();
-			
+			$this->tags[$languageID] = array();
 			foreach ($tags as $tagName => $tag) {
 				if ($tag->__get('languageID') != $languageID) continue;
-				$this->availableTags[$languageID] = $tag;
+				$this->availableTags[$languageID][] = $tag;
 			}
 		}
 		
@@ -250,6 +250,7 @@ class UltimateContentAddForm extends MessageForm {
 		if (I18nHandler::getInstance()->isPlainValue('description')) $this->description = StringUtil::trim(I18nHandler::getInstance()->getValue('description'));
 		if (isset($_POST['slug'])) $this->slug = StringUtil::trim($_POST['slug']);
 		if (isset($_POST['categoryIDs']) && is_array($_POST['categoryIDs'])) $this->categoryIDs = ArrayUtil::toIntegerArray(($_POST['categoryIDs']));
+		$this->tags = I18nHandler::getInstance()->getValues('tags');
 		if (I18nHandler::getInstance()->isPlainValue('text')) $this->text = MessageUtil::stripCrap(trim(I18nHandler::getInstance()->getValue('text')));
 		if (isset($_POST['visibility'])) $this->visibility = StringUtil::trim($_POST['visibility']);
 		if (isset($_POST['groupIDs'])) $this->groupIDs = ArrayUtil::toIntegerArray($_POST['groupIDs']);

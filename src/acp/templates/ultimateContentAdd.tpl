@@ -140,7 +140,7 @@
 						});
 					/* ]]> */
 					</script>
-					<input type="text" name="tags" id="tags" class="long" value="{@$tags[$__wcf->getLanguage()->getLanguageID()]}" />
+					<input type="text" name="tags" id="tags" class="long" value="{@$tags[$__wcf->getLanguage()->languageID]}" />
 					{if $errorField == 'tags'}
 						<small class="wcf-innerError">
 							{lang}wcf.acp.ultimate.content.tags.error.{@$errorType}{/lang}
