@@ -1,6 +1,7 @@
 <?php
 namespace ultimate\data\content;
 use ultimate\data\AbstractUltimateDatabaseObject;
+use wcf\data\user\User;
 use wcf\system\bbcode\MessageParser;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
