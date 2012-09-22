@@ -1,9 +1,9 @@
 <?php
 namespace ultimate\acp\form;
-use wcf\form\AbstractForm;
-
 use ultimate\data\link\CategorizedLink;
 use ultimate\data\link\Link;
+use wcf\form\AbstractForm;
+use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
 
 /**
