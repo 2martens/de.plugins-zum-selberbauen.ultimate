@@ -66,7 +66,7 @@
 				{content}
 					{foreach from=$objects item=link}
 						<tr id="linkContainer{@$link->linkID}" class="jsLinkRow">
-							<td class="columnMark"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$content->contentID}" /></td>
+							<td class="columnMark"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$link->linkID}" /></td>
 							<td class="columnIcon">
 								
 								{if $__wcf->session->getPermission('admin.content.ultimate.canEditLink')}
