@@ -71,7 +71,7 @@ class LinkUtil {
 		
 		// The scheme
 		$pattern =	'^';
-		$pattern .= '(?:https?|ftp)\:\/\/';
+		$pattern .= '(?:https?|ftp)\://';
 		// The domain
 		$pattern .= '(?:';
 		// Domain name or IPv4
@@ -88,9 +88,9 @@ class LinkUtil {
 		// Server port number (optional)";
 		$pattern .= '(?:\:[0-9]{1,5})?';
 		// The path (optional)
-        $pattern .= '(?:\/(?:[\w0-9+,;\$_-]\.?)+)*\/?';
+        $pattern .= '(?:/(?:[\w0-9+,;\$_-]\.?)+)*/?';
 		// GET Query (optional)
-		$pattern .= '(?:\?[a-z+&\$_.-][a-z0-9;:@\/&%=+\$_.-]*)?';
+		$pattern .= '(?:\?[a-z+&\$_.-][a-z0-9;:@/&%=+\$_.-]*)?';
 		$pattern .= '$';
 		
 		// checks if URL is valid
@@ -106,7 +106,7 @@ class LinkUtil {
 		// checks if URL is accessible
 		// Source: http://www.php.net/manual/en/function.file-exists.php#84918
 		$hdrs = get_headers($url);
-		$headerRegex = new Regex('^HTTP\\/\\d+\\.\\d+\\s+2\\d\\d\\s+.*$');
+		$headerRegex = new Regex('^HTTP/\\d+\\.\\d+\\s+2\\d\\d\\s+.*$');
 		$isValid =  is_array($hdrs) ? (boolean) $headerRegex->match($hdrs[0]) : false;
 		return $isValid;
 	}
