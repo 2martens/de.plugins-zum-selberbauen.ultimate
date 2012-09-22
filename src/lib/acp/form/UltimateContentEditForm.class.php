@@ -109,61 +109,62 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
-			// get languages
-			$languages = WCF::getLanguage()->getLanguages();
-			
-			/* @var $language \wcf\data\language\Language */
-			/* @var $tag \wcf\data\tag\TagCloudTag */
-			foreach ($languages as $languageID => $language) {
-				// group tags by language
-				$this->tags[$languageID] = Tag::buildString(TagEngine::getInstance()->getObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->content->__get('contentID'), $languageID));	
-			}
-			
-			// get status data
-			$this->statusID = $this->content->__get('status');
-			
-			// fill publish button with fitting language
-			$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.publish');
-			if ($this->statusID == 2) {
-				$this->statusOptions[2] = WCF::getLanguage()->get('wcf.acp.ultimate.status.scheduled');
-				$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.update');
-			} elseif ($this->statusID == 3) {
-				$this->statusOptions[3] = WCF::getLanguage()->get('wcf.acp.ultimate.status.published');
-				$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.update');
-			}
-			
-			// fill save button with fitting language
-			$saveButtonLangArray = array(
-				0 => WCF::getLanguage()->get('ultimate.button.saveAsDraft'),
-				1 => WCF::getLanguage()->get('ultimate.button.saveAsPending'),
-				2 => '',
-				3 => ''
-			);
-			$this->saveButtonLang = $saveButtonLangArray[$this->statusID];
-			
-			// get visibility data
-			$this->visibility = $this->content->__get('visibility');
-			$this->groupIDs = array_keys($this->content->__get('groups'));
-			
-			// reading object fields
-			$this->subject = $this->content->__get('contentTitle');
-			$this->description = $this->content->__get('contentDescription');
-			$this->slug = $this->content->__get('contentSlug');
-			$this->text = $this->content->__get('contentText');
-			$this->lastModified = $this->content->__get('lastModified');
-			$this->categoryIDs = array_keys($this->content->__get('categories'));
-			
-			$languages = WCF::getLanguage()->getLanguages();
-			foreach ($languages as $languageID => $language) {
-				$this->tags[$languageID] = TagEngine::getInstance()->getObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->contentID, $languageID);
-			}	
-			
-			I18nHandler::getInstance()->setOptions('subject', PACKAGE_ID, $this->subject, 'ultimate.content.\d+.contentTitle');
-			I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->description, 'ultimate.content.\d+.contentDescription');
-			I18nHandler::getInstance()->setOptions('text', PACKAGE_ID, $this->text, 'ultimate.content.\d+.contentText');
-			I18nHandler::getInstance()->setOptions('tags', PACKAGE_ID, '', 'ultimate.content.\d+.contentTags');
-			
-			parent::readData();
+		// get languages
+		$languages = WCF::getLanguage()->getLanguages();
+		
+		/* @var $language \wcf\data\language\Language */
+		/* @var $tag \wcf\data\tag\TagCloudTag */
+		foreach ($languages as $languageID => $language) {
+			// group tags by language
+			$this->tags[$languageID] = Tag::buildString(TagEngine::getInstance()->getObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->content->__get('contentID'), $languageID));	
+		}
+		
+		// get status data
+		$this->statusID = $this->content->__get('status');
+		
+		// fill publish button with fitting language
+		$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.publish');
+		if ($this->statusID == 2) {
+			$this->statusOptions[2] = WCF::getLanguage()->get('wcf.acp.ultimate.status.scheduled');
+			$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.update');
+		} elseif ($this->statusID == 3) {
+			$this->statusOptions[3] = WCF::getLanguage()->get('wcf.acp.ultimate.status.published');
+			$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.update');
+		}
+		
+		// fill save button with fitting language
+		$saveButtonLangArray = array(
+			0 => WCF::getLanguage()->get('ultimate.button.saveAsDraft'),
+			1 => WCF::getLanguage()->get('ultimate.button.saveAsPending'),
+			2 => '',
+			3 => ''
+		);
+		$this->saveButtonLang = $saveButtonLangArray[$this->statusID];
+		
+		// get visibility data
+		$this->visibility = $this->content->__get('visibility');
+		$this->groupIDs = array_keys($this->content->__get('groups'));
+		
+		// reading object fields
+		$this->subject = $this->content->__get('contentTitle');
+		$this->description = $this->content->__get('contentDescription');
+		$this->slug = $this->content->__get('contentSlug');
+		$this->text = $this->content->__get('contentText');
+		$this->lastModified = $this->content->__get('lastModified');
+		$this->categoryIDs = array_keys($this->content->__get('categories'));
+		
+		$languages = WCF::getLanguage()->getLanguages();
+		foreach ($languages as $languageID => $language) {
+			$tags = TagEngine::getInstance()->getObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->contentID, $languageID);
+			if (!empty($tags)) $this->tagsI18n[$languageID] = implode(',', $tags);
+		}
+		
+		I18nHandler::getInstance()->setOptions('subject', PACKAGE_ID, $this->subject, 'ultimate.content.\d+.contentTitle');
+		I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->description, 'ultimate.content.\d+.contentDescription');
+		I18nHandler::getInstance()->setOptions('text', PACKAGE_ID, $this->text, 'ultimate.content.\d+.contentText');
+		I18nHandler::getInstance()->setOptions('tags', PACKAGE_ID, '', 'ultimate.content.\d+.contentTags');
+		
+		parent::readData();
 	}
 	
 	/**
@@ -255,8 +256,13 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		$action->executeAction();
 		
 		// save tags
-		foreach ($this->tags as $languageID => $tags) {
-			TagEngine::getInstance()->addObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->content->__get('contentID', $tags, $languageID));
+		foreach ($this->tagsI18n as $languageID => $tags) {
+			if (empty($tags)) {
+				$this->tagsI18n[$languageID] = '';
+				continue;
+			}
+			TagEngine::getInstance()->addObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->content->__get('contentID'), $tags, $languageID);
+			$this->tagsI18n[$languageID] = implode(',', $tags);
 		}
 		$this->saved();
 		

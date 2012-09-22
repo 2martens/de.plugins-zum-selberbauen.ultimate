@@ -1,4 +1,30 @@
 <?php
+/**
+ * Contains the UltimateContentAdd form.
+ * 
+ * LICENSE:
+ * This file is part of the Ultimate CMS.
+ *
+ * The Ultimate CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * The Ultimate CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
+ * 
+ * @author		Jim Martens
+ * @copyright	2011-2012 Jim Martens
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
+ * @package		de.plugins-zum-selberbauen.ultimate
+ * @subpackage	acp.form
+ * @category	Ultimate CMS
+ */
 namespace ultimate\acp\form;
 use ultimate\data\content\ContentAction;
 use ultimate\data\content\ContentEditor;
@@ -86,9 +112,15 @@ class UltimateContentAddForm extends MessageForm {
 	
 	/**
 	 * Contains all chosen tags.
-	 * @var string[]
+	 * @var string
 	 */
-	public $tags = array();
+	public $tags = '';
+	
+	/**
+	 * Contains the i18n tags.
+	 * @var (string|array)[]
+	 */
+	public $tagsI18n = array();
 	   
 	/**
 	 * Contains the maximal length of the text.
@@ -198,7 +230,6 @@ class UltimateContentAddForm extends MessageForm {
 		/* @var $tag \wcf\data\tag\TagCloudTag */
 		foreach ($languages as $languageID => $language) {
 			$this->availableTags[$languageID] = array();
-			if (!isset($this->tags[$languageID])) $this->tags[$languageID] = array();
 			foreach ($tags as $tagName => $tag) {
 				if ($tag->__get('languageID') != $languageID) continue;
 				$this->availableTags[$languageID][] = $tag;
@@ -250,7 +281,7 @@ class UltimateContentAddForm extends MessageForm {
 		if (I18nHandler::getInstance()->isPlainValue('description')) $this->description = StringUtil::trim(I18nHandler::getInstance()->getValue('description'));
 		if (isset($_POST['slug'])) $this->slug = StringUtil::trim($_POST['slug']);
 		if (isset($_POST['categoryIDs']) && is_array($_POST['categoryIDs'])) $this->categoryIDs = ArrayUtil::toIntegerArray(($_POST['categoryIDs']));
-		$this->tags = I18nHandler::getInstance()->getValues('tags');
+		$this->tagsI18n = I18nHandler::getInstance()->getValues('tags');
 		if (I18nHandler::getInstance()->isPlainValue('text')) $this->text = MessageUtil::stripCrap(trim(I18nHandler::getInstance()->getValue('text')));
 		if (isset($_POST['visibility'])) $this->visibility = StringUtil::trim($_POST['visibility']);
 		if (isset($_POST['groupIDs'])) $this->groupIDs = ArrayUtil::toIntegerArray($_POST['groupIDs']);
@@ -368,8 +399,13 @@ class UltimateContentAddForm extends MessageForm {
 		}
 		
 		// save tags
-		foreach ($this->tags as $languageID => $tags) {
+		foreach ($this->tagsI18n as $languageID => $tags) {
+			if (empty($tags)) {
+				$this->tags[$languageID] = '';
+				continue;
+			}
 			TagEngine::getInstance()->addObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $contentID, $tags, $languageID);
+			$this->tagsI18n[$languageID] = implode(',', $tags);
 		}
 		
 		$this->saved();
@@ -400,6 +436,7 @@ class UltimateContentAddForm extends MessageForm {
 			'languageID' => ($this->languageID ? $this->languageID : 0),
 			'availableTags' => $this->availableTags,
 			'tags' => $this->tags,
+			'tagsI18n' => $this->tagsI18n,
 			'groups' => $this->groups,
 			'groupIDs' => $this->groupIDs,
 			'statusOptions' => $this->statusOptions,
@@ -539,12 +576,11 @@ class UltimateContentAddForm extends MessageForm {
 	 * @throws \wcf\system\exception\UserInputException
 	 */
 	protected function validateTags() {
-		if (!I18nHandler::getInstance()->validateValue('tags')) {
+		if (!I18nHandler::getInstance()->validateValue('tags', true)) {
 			throw new UserInputException('tags');
 		}
-		$tagValues = I18nHandler::getInstance()->getValues('tags');
-		foreach ($tagValues as $languageID => $tags) {
-			$this->tags[$languageID] = Tag::splitString($tags);
+		foreach ($this->tagsI18n as $languageID => $tags) {
+			$this->tagsI18n[$languageID] = (!empty($tags) ? Tag::splitString($tags) : array());
 		}
 	}
 	

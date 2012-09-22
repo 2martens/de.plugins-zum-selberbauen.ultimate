@@ -95,7 +95,7 @@
 					/* <![CDATA[ */
 						$(function() {
 							var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
-							var $optionValues = { {implode from=$tags key=languageID item=value}'{@$languageID}': "{$value}"{/implode} };
+							var $optionValues = { {implode from=$tagsI18n key=languageID item=value}'{@$languageID}': "{$value}"{/implode} };
 							new WCF.MultipleLanguageInput('tags', true, $optionValues, $availableLanguages);
 							var $availableTags = { };
 							{foreach from=$availableLanguages key=languageID item=languageName}
@@ -140,10 +140,14 @@
 						});
 					/* ]]> */
 					</script>
-					<input type="text" name="tags" id="tags" class="long" value="{@$tags[$__wcf->getLanguage()->languageID]}" />
+					<input type="text" name="tags" id="tags" class="long" value="{@$tags}" />
 					{if $errorField == 'tags'}
 						<small class="wcf-innerError">
-							{lang}wcf.acp.ultimate.content.tags.error.{@$errorType}{/lang}
+							{if $errorType == 'empty'}
+								{lang}wcf.global.form.error.empty{/lang}
+							{else}
+								{lang}wcf.acp.ultimate.content.tags.error.{@$errorType}{/lang}
+							{/if}
 						</small>
 					{/if}
 				</dd>

@@ -1,4 +1,30 @@
 <?php
+/**
+ * Contains the UltimateContentList page.
+ * 
+ * LICENSE:
+ * This file is part of the Ultimate CMS.
+ *
+ * The Ultimate CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * The Ultimate CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
+ * 
+ * @author		Jim Martens
+ * @copyright	2011-2012 Jim Martens
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
+ * @package		de.plugins-zum-selberbauen.ultimate
+ * @subpackage	acp.page
+ * @category	Ultimate CMS
+ */
 namespace ultimate\acp\page;
 use ultimate\data\category\Category;
 use wcf\page\AbstractCachedListPage;
@@ -119,7 +145,8 @@ class UltimateContentListPage extends AbstractCachedListPage {
 			
 			$this->loadCache();
 			$this->objects = $this->objects[$this->categoryID];
-			$this->currentObjects = $this->currentObjects[$this->categoryID];
+			$this->calculateNumberOfPages();
+			$this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
 		}
 		// both category id and tag id are provided, the category id wins
 		elseif ($this->tagID) {
@@ -130,12 +157,10 @@ class UltimateContentListPage extends AbstractCachedListPage {
 			
 			$this->loadCache();
 			$this->objects = $this->objects[$this->tagID];
-			$this->currentObjects = $this->currentObjects[$this->tagID];
+			$this->calculateNumberOfPages();
+			$this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
 		}
 		else return; // shouldn't be called anyway
-		
-		// calculate the pages again, because the objects changed
-		$this->calculateNumberOfPages();
 		
 		// restore old items count
 		$this->items = $items;
