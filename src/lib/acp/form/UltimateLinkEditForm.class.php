@@ -101,7 +101,7 @@ class UltimateLinkEditForm extends UltimateLinkAddForm {
 			'categories' => $this->categoryIDs
 		);
 		
-		$this->objectAction = new LinkAction(array(), 'update', $parameters);
+		$this->objectAction = new LinkAction(array($this->linkID), 'update', $parameters);
 		$this->objectAction->executeAction();
 		
 		$this->saved();
