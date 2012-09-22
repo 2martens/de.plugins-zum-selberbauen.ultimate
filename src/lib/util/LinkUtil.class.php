@@ -134,19 +134,19 @@ class LinkUtil {
 		// Source: http://www.php.net/manual/en/function.file-exists.php#84918
 		try {
 			$parsedURL = parse_url($url);
-			$resource = new RemoteFile($parsedURL['host'], $parsedURL['port']);
+			$resource = new RemoteFile($parsedURL['host'], (isset ($parsedURL['port']) ? $parsedURL['port'] : 80));
 			$out = "HEAD / HTTP/1.1\r\n";
 			$out .= 'Host: '.$parsedURL['host']."\r\n";
 			$out .= "Connection: Close\r\n\r\n";
 			$resource->write($out);
 			
 			$headers = array();
-			while ($resource->eof()) {
+			while (!$resource->eof()) {
 				$headers[] = $resource->gets();
 			}
 			$resource->close();
-			$headerRegex = new Regex('^HTTP/\\d+\\.\\d+\\s+2\\d\\d\\s+.*$');
-			$isValid =  !empty($headers) ? (boolean) $headerRegex->match($headers[0]) : false;
+			$headerRegex = new Regex('^HTTP/\d+\.\d+\s+2\d\d\s+.*$');
+			$isValid =  !empty($headers) ? (boolean) $headerRegex->match(StringUtil::trim($headers[0])) : false;
 		}
 		catch (\wcf\system\exception\SystemException $e) {
 			$isValid = false;

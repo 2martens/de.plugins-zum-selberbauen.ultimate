@@ -57,7 +57,12 @@ class UltimateLinkEditForm extends UltimateLinkAddForm {
 		$this->linkName = $this->link->__get('linkName');
 		$this->linkDescription = $this->link->__get('linkDescription');
 		$this->linkURL = $this->link->__get('linkURL');
-		$this->categoryIDs = array_keys($this->link->__get('categories'));
+		
+		// fixes problem with wrong validation
+		$categories = $this->link->__get('categories');
+		require(ULTIMATE_DIR.'acp/config.inc.php');
+		unset($categories[$categoryID]);
+		$this->categoryIDs = array_keys($categories);
 		
 		I18nHandler::getInstance()->setOptions('linkName', PACKAGE_ID, $this->linkName, 'ultimate.link.\d+.linkName');
 		I18nHandler::getInstance()->setOptions('linkDescription', PACKAGE_ID, $this->linkDescription, 'ultimate.link.\d+.linkDescription');

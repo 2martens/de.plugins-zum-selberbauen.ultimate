@@ -37,12 +37,12 @@
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
 			<legend>{lang}wcf.acp.ultimate.link.general{/lang}</legend>
-			<dl{if $errorField == 'linkName'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'linkName'} class="formError"{/if}>
 				<dt><label for="linkName">{lang}wcf.acp.ultimate.link.name{/lang}</label></dt>
 				<dd>
 					<input type="text" id="linkName" name="linkName" value="{$i18nPlainValues['linkName']}" placeholder="{lang}wcf.acp.ultimate.link.name.placeholder{/lang}" required="required" class="long" />
 					{if $errorField == 'linkName'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}
@@ -52,12 +52,12 @@
 					{/if}
 				</dd>
 			</dl>
-			<dl{if $errorField == 'linkURL'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'linkURL'} class="formError"{/if}>
 				<dt><label for="linkURL">{lang}wcf.acp.ultimate.link.url{/lang}</label></dt>
 				<dd>
 					<input type="url" id="linkURL" name="linkURL" value="{@$linkURL}" required="required" placeholder="{lang}wcf.acp.ultimate.link.url.placeholder{/lang}" class="long" />
 					{if $errorField == 'linkURL'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}
@@ -67,12 +67,12 @@
 					{/if}
 				</dd>
 			</dl>
-			<dl{if $errorField == 'linkDescription'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'linkDescription'} class="formError"{/if}>
 				<dt><label for="linkDescription">{lang}wcf.acp.ultimate.link.description{/lang}</label></dt>
 				<dd>
 					<input type="text" id="linkDescription" name="linkDescription" value="{$i18nPlainValues['linkDescription']}" placeholder="{lang}wcf.acp.ultimate.link.description.placeholder{/lang}" required="required" class="long" />
 					{if $errorField == 'linkDescription'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}
@@ -82,12 +82,12 @@
 					{/if}
 				</dd>
 			</dl>
-			<dl {if $errorField == 'category'} class="wcf-formError"{/if}>
+			<dl {if $errorField == 'category'} class="formError"{/if}>
 				<dt><label>{lang}wcf.acp.ultimate.link.categories{/lang}</label></dt>
 				<dd>
 					{htmlCheckboxes options=$categories name=categoryIDs selected=$categoryIDs}
 					{if $errorField == 'category'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{lang}wcf.acp.ultimate.link.categories.error.{@$errorType}{/lang}
 						</small>
 					{/if}
