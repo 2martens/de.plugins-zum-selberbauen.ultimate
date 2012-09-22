@@ -26,6 +26,8 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\util;
+use wcf\system\io\RemoteFile;
+
 use ultimate\util\thirdParty\Net\NET_IDNA2; // changed class to work with namespaces
 use wcf\system\cache\CacheHandler;
 use wcf\system\Regex;
@@ -125,15 +127,31 @@ class LinkUtil {
 		// prevents HTTP requests if URL is invalid anyway
 		if (!$isValid) return $isValid;
 		
-		if (ini_get('allow_url_fopen') == '0') {
+		if (ini_get('allow_url_fopen') == '0' || !function_exists('fsockopen')) {
 			// prevents exception
 			return $isValid;
 		}
 		// checks if URL is accessible
 		// Source: http://www.php.net/manual/en/function.file-exists.php#84918
-		$hdrs = get_headers($url);
-		$headerRegex = new Regex('^HTTP/\\d+\\.\\d+\\s+2\\d\\d\\s+.*$');
-		$isValid =  is_array($hdrs) ? (boolean) $headerRegex->match($hdrs[0]) : false;
+		try {
+			$parsedURL = parse_url($url);
+			$resource = new RemoteFile($parsedURL['host'], $parsedURL['port']);
+			$out = "HEAD / HTTP/1.1\r\n";
+			$out .= 'Host: '.$parsedURL['host']."\r\n";
+			$out .= "Connection: Close\r\n\r\n";
+			$resource->write($out);
+			
+			$headers = array();
+			while ($resource->eof()) {
+				$headers[] = $resource->gets();
+			}
+			$resource->close();
+			$headerRegex = new Regex('^HTTP/\\d+\\.\\d+\\s+2\\d\\d\\s+.*$');
+			$isValid =  !empty($headers) ? (boolean) $headerRegex->match($headers[0]) : false;
+		}
+		catch (\wcf\system\exception\SystemException $e) {
+			$isValid = false;
+		}
 		return $isValid;
 	}
 	

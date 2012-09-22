@@ -238,15 +238,11 @@ class UltimateLinkAddForm extends ACPForm {
 		 if (empty($this->linkURL)) {
 		 	throw new UserInputException('linkURL');
 		 }
-		 
+		 // add http scheme if no scheme exists
+		 $parsedURL = parse_url($this->linkURL);
+		 if (!isset($parsedURL['scheme'])) $this->linkURL = 'http://'.$this->linkURL;
 		 if (!LinkUtil::isValidURL($this->linkURL)) {
-		 	// try http scheme
-		 	$this->linkURL = 'http://'.$this->linkURL;
-		 	
-		 	// if it still doesn't match
-		 	if (!LinkUtil::isValidURL($this->linkURL)) {
-		 		throw new UserInputException('linkURL', 'notValid');
-		 	}
+		 	throw new UserInputException('linkURL', 'notValid');
 		 }
 		 
 		 if (!LinkUtil::isAvailableURL($this->linkURL)) {
