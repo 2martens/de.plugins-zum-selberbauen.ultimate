@@ -26,10 +26,9 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\util;
-use wcf\system\io\RemoteFile;
-
 use ultimate\util\thirdParty\Net\NET_IDNA2; // changed class to work with namespaces
 use wcf\system\cache\CacheHandler;
+use wcf\system\io\RemoteFile;
 use wcf\system\Regex;
 use wcf\util\StringUtil;
 
