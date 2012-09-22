@@ -33,18 +33,8 @@
 {event name='javascriptInclude'}
 
 <!-- Stylesheets -->
-<link rel="stylesheet/less" type="text/css" href="{@$__wcf->getPath()}style/bootstrap.less" />
+{@$__wcf->getStyleHandler()->getStylesheet()}
 <link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/3rdParty/jquery-ui.css" />
-<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/3rdParty/codemirror.css" />
-<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/ultimateCore.css" />
-<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath('ultimate')}style/ultimate.css" />
-{event name='stylesheetInclude'}
-<script type="text/javascript">
-	//<![CDATA[
-	var less = { env: 'development' };
-	//]]>
-</script>
-<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/less.min.js"></script>
 
 <noscript>
 	<style type="text/css">

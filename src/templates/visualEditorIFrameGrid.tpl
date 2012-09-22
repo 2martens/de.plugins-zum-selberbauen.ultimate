@@ -4,7 +4,7 @@
 	<title>{PAGE_TITLE}</title>
 		
 	{include file='headInclude'}
-	<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath('ultimate')}style/bootstrapIFrameGrid.css" />
+	{@$__wcf->getUltimateStyleHandler()->getVisualEditorGridStylesheet()}
 </head>
 <body class="visualEditorIFrameGrid" {if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
 	<div id="whitewrap">

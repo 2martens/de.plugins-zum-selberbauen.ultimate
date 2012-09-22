@@ -4,5 +4,8 @@
 		<coreobject>
 			<objectname><![CDATA[ultimate\system\menu\custom\CustomMenu]]></objectname>
 		</coreobject>
+		<coreobject>
+			<objectname><![CDATA[ultimate\system\style\UltimateStyleHandler]]></objectname>
+		</coreobject>
 	</import>
 </data>

@@ -3,7 +3,7 @@
 	<title>VisualEditor - {lang}{PAGE_TITLE}{/lang}</title>
 	
 	{include file='headInclude'}
-	<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath('ultimate')}style/bootstrapVisualEditor.css" />
+	{@$__wcf->getUltimateStyleHandler()->getVisualEditorStylesheet()}
 	<script type="text/javascript">
 	/* <![CDATA[ */
 	$(function() {
