@@ -58,6 +58,9 @@ class UltimateLinkEditForm extends UltimateLinkAddForm {
 		$this->linkDescription = $this->link->__get('linkDescription');
 		$this->linkURL = $this->link->__get('linkURL');
 		$this->categoryIDs = array_keys($this->link->__get('categories'));
+		
+		I18nHandler::getInstance()->setOptions('linkName', PACKAGE_ID, $this->linkName, 'ultimate.link.\d+.linkName');
+		I18nHandler::getInstance()->setOptions('linkDescription', PACKAGE_ID, $this->linkDescription, 'ultimate.link.\d+.linkDescription');
 		parent::readData();
 	}
 	
