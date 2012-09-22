@@ -161,7 +161,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 			I18nHandler::getInstance()->setOptions('subject', PACKAGE_ID, $this->subject, 'ultimate.content.\d+.contentTitle');
 			I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->description, 'ultimate.content.\d+.contentDescription');
 			I18nHandler::getInstance()->setOptions('text', PACKAGE_ID, $this->text, 'ultimate.content.\d+.contentText');
-			I18nHandler::getInstance()->setOptions('tags', PACKAGE_ID, $this->tags, 'ultimate.content.\d+.contentTags');
+			I18nHandler::getInstance()->setOptions('tags', PACKAGE_ID, '', 'ultimate.content.\d+.contentTags');
 			
 			parent::readData();
 	}
