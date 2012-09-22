@@ -98,20 +98,19 @@ class UltimateLinkListPage extends AbstractCachedListPage {
 		
 		// if no category id specified, proceed as always
 		if (!$this->categoryID) return;
-		else {
-			// if category id provided, change object variables and load the new cache
-			$this->cacheBuilderClassName = '\ultimate\system\cache\builder\LinkCategoryCacheBuilder';
-			$this->cacheName = 'link-to-category';
-			$this->cacheIndex = 'linksToCategoryID';
+		// if category id provided, change object variables and load the new cache
+		$this->cacheBuilderClassName = '\ultimate\system\cache\builder\LinkCategoryCacheBuilder';
+		$this->cacheName = 'link-to-category';
+		$this->cacheIndex = 'linksToCategoryID';
 				
-			$this->loadCache();
-			$this->objects = $this->objects[$this->categoryID];
-			$this->currentObjects = $this->currentObjects[$this->categoryID];
-		}
+		$this->loadCache();
+		$this->objects = $this->objects[$this->categoryID];
 		
 		// calculate the pages again, because the objects changed
 		$this->calculateNumberOfPages();
 		
+		$this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
+				
 		// restore old items count
 		$this->items = $items;
 	}

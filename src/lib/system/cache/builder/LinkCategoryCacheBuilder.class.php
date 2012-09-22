@@ -48,7 +48,7 @@ class LinkCategoryCacheBuilder implements ICacheBuilder {
 		// group links by categories
 		foreach ($categories as $categoryID => $category) {
 			/* @var $category \wcf\data\category\Category */
-			if (!isset($data['linksToCategoryIDs'][$categoryID])) {
+			if (!isset($data['linksToCategoryID'][$categoryID])) {
 				$data['linksToCategoryID'][$categoryID] = array();
 			}
 			if (!isset($data['linksToCategoryName'][$category->__get('title')])) {
@@ -57,8 +57,8 @@ class LinkCategoryCacheBuilder implements ICacheBuilder {
 			foreach ($links as $linkID => $link) {
 				if (!in_array($categoryID, array_keys($link->__get('categories')))) continue;
 				
-				$data['linksToCategoryID'][$categoryID] = $link;
-				$data['linksToCategoryName'][$category->__get('title')] = $link;
+				$data['linksToCategoryID'][$categoryID][$linkID] = $link;
+				$data['linksToCategoryName'][$category->__get('title')][$linkID] = $link;
 			}
 		}
 		return $data;
