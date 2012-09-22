@@ -86,7 +86,10 @@ class UltimateLinkAddForm extends ACPForm {
 	 */
 	public function readData() {
 		$this->categories = CategoryHandler::getInstance()->getCategories('de.plugins-zum-selberbauen.ultimate.linkCategory');
-		unset($this->categories[1]);
+		// get category id
+		require(ULTIMATE_DIR.'acp/config.inc.php');		
+		unset($this->categories[$categoryID]);
+		
 		// workaround for html checkboxes
 		$categories = array();
 		foreach ($this->categories as $categoryID => $category) {
@@ -256,7 +259,8 @@ class UltimateLinkAddForm extends ACPForm {
 		}
 		if (empty($this->categoryIDs)) {
 			// if no categories chosen, put link into uncategorized category
-			$this->categoryIDs[] = 1;
+			require(ULTIMATE_DIR.'acp/config.inc.php');
+			$this->categoryIDs[] = $categoryID;
 		}
 	}
 }

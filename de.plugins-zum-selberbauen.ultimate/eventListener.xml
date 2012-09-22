@@ -60,15 +60,15 @@
         </eventlistener>
         <!-- /PIP listener -->
         
-        <!-- IndexFirstTime listener -->
+        <!-- ACPFirstTime listener -->
         <eventlistener>
-            <eventclassname>wcf\acp\page\IndexPage</eventclassname>
+            <eventclassname>wcf\page\AbstractPage</eventclassname>
             <eventname>readData</eventname>
             <environment>admin</environment>
-            <inherit>0</inherit>
-            <listenerclassname>ultimate\system\event\listener\IndexFirstTimeListener</listenerclassname>
+            <inherit>1</inherit>
+            <listenerclassname>ultimate\system\event\listener\ACPFirstTimeListener</listenerclassname>
         </eventlistener>
-        <!-- /IndexFirstTimeListener -->
+        <!-- /ACPFirstTimeListener -->
         
         <!-- block action listener -->
         <eventlistener>

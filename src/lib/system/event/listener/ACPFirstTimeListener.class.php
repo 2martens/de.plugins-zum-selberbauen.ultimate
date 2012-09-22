@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the IndexFirstTimeListener class.
+ * Contains the ACPFirstTimeListener class.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -42,7 +42,7 @@ use wcf\system\io\File;
  * @subpackage	system.event.listener
  * @category	Ultimate CMS
  */
-class IndexFirstTimeListener implements IEventListener {
+class ACPFirstTimeListener implements IEventListener {
 	/**
 	 * Contains the name of the config file.
 	 * @var	string
@@ -50,11 +50,17 @@ class IndexFirstTimeListener implements IEventListener {
 	const CONFIG_FILE = 'config.inc.php';
 	
 	/**
+	 * Contains the category id of the default link category.
+	 * @var integer
+	 */
+	protected $categoryID = 0;
+	
+	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.event.IEventListener.html#execute
 	 */
 	public function execute($eventObj, $className, $eventName) {
 		// adds default link category
-		require_once(ULTIMATE_DIR.'acp/'.self::CONFIG_FILE);
+		require(ULTIMATE_DIR.'acp/'.self::CONFIG_FILE);
 		if (!$initiatedDefaultLinkCategory) {
 			$this->createDefaultLinkCategory();
 			$this->updateConfigFile();
@@ -81,7 +87,8 @@ class IndexFirstTimeListener implements IEventListener {
 			)
 		);
 		$action = new CategoryAction(array(), 'create', $parameters);
-		$action->executeAction();
+		$returnValues = $action->executeAction();
+		$this->categoryID = $returnValues['returnValues']->__get('categoryID');
 	}
 	
 	/**
@@ -92,6 +99,7 @@ class IndexFirstTimeListener implements IEventListener {
 		$content = '<?php'."\n";
 		$content .= '/*'."\n".' * This file was automatically generated. To not modify it.'."\n".' */'."\n\n";
 		$content .= '$initiatedDefaultLinkCategory = true;'."\n";
+		$content .= '$categoryID = '.(string) $this->categoryID.';'."\n";
 		$file->write($content);
 		$file->close();
 	}
