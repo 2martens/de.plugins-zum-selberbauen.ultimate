@@ -192,6 +192,11 @@ class UltimateLinkAssignToCategoryForm extends ACPForm {
 	 */
 	protected function loadCache() {
 		$this->categories = CategoryHandler::getInstance()->getCategories('de.plugins-zum-selberbauen.linkCategory');
+		
+		// fix missing __toString method
+		foreach ($this->categories as $categoryID => $category) {
+			$this->categories[$categoryID] = $category->getTitle();
+		}
 	}
 	
 	/**

@@ -87,7 +87,7 @@
 							<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditLink')}<a title="{lang}wcf.acp.ultimate.link.edit{/lang}" href="{link controller='UltimateLinkEdit' id=$link->linkID}{/link}">{lang}{@$link->linkName}{/lang}</a>{else}{lang}{@$link->linkName}{/lang}{/if}</p></td>
 							<td class="columnCategories">
 								<p>
-									{implode from=$link->categories key=categoryID item=category}<a href="{link controller='UltimateLinkList'}categoryID={@$category->categoryID}{/link}">{@$category}</a>{/implode}
+									{implode from=$link->categories key=categoryID item=category}<a href="{link controller='UltimateLinkList'}categoryID={@$category->categoryID}{/link}">{@$category->getTitle()}</a>{/implode}
 								</p>
 							</td>
 							
