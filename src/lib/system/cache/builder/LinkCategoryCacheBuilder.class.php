@@ -30,7 +30,7 @@ class LinkCategoryCacheBuilder implements ICacheBuilder {
 		$categoryIDs = array_keys($categories);
 		
 		$conditions = new PreparedStatementConditionBuilder();
-		$conditions->add('linkToCategory.categoryID IN (?)', $categoryIDs);
+		$conditions->add('linkToCategory.categoryID IN (?)', array($categoryIDs));
 		
 		$sql = 'SELECT    link.*
 		        FROM      ultimate'.ULTIMATE_N.'_link_to_category linkToCategory
