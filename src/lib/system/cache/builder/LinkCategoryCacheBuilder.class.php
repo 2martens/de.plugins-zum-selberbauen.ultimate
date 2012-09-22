@@ -1,5 +1,6 @@
 <?php
 namespace ultimate\system\cache\builder;
+use ultimate\data\link\CategorizedLink;
 use wcf\system\cache\builder\ICacheBuilder;
 use wcf\system\category\CategoryHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
@@ -40,8 +41,8 @@ class LinkCategoryCacheBuilder implements ICacheBuilder {
 		$statement->execute($conditions->getParameters());
 		
 		$links = array();
-		while ($link = $statement->fetchObject('\ultimate\data\link\CategorizedLink')) {
-			$links[$link->__get('linkID')] = $link;
+		while ($link = $statement->fetchObject('\ultimate\data\link\Link')) {
+			$links[$link->__get('linkID')] = new CategorizedLink($link);
 		}
 		
 		// group links by categories
