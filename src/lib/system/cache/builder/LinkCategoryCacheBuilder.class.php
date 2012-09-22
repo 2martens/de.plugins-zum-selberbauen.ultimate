@@ -52,7 +52,7 @@ class LinkCategoryCacheBuilder implements ICacheBuilder {
 				$data['linksToCategoryIDs'][$categoryID] = array();
 			}
 			if (!isset($data['linksToCategoryName'][$category->__get('title')])) {
-				$data['linksToCategoryName'][$category->__get('title')];
+				$data['linksToCategoryName'][$category->__get('title')] = array();
 			}
 			foreach ($links as $linkID => $link) {
 				if (!in_array($categoryID, array_keys($link->__get('categories')))) continue;
