@@ -66,7 +66,7 @@ class CategorizedLink extends DatabaseObjectDecorator {
 	 * @see \wcf\data\DatabaseObjectDecorator::__get()
 	 */
 	public function __get($name) {
-		$value == parent::__get($name);
+		$value = parent::__get($name);
 		
 		if ($value === null && $name == 'categories') {
 			$value = $this->categories;
