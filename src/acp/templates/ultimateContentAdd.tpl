@@ -118,8 +118,12 @@
 								source: function( request, response ) {
 									// delegate back to autocomplete, but extract the last term
 									var $currentLanguageID = $('#wcf3 > .dropdownMenu > .active').data('languageID');
-									response( $.ui.autocomplete.filter(
-										$availableTags[$currentLanguageID], extractLast( request.term ) ) );
+									var pattern = extractLast( request.term );
+									var matcher = new RegExp('^' + $.ui.autocomplete.escapeRegex(pattern), "i");
+									var $resultingOptions = $.grep( $availableTags[$currentLanguageID], function(value) {
+										return matcher.test( value.label || value.value || value );
+									});
+									response( $resultingOptions );
 								},
 								focus: function() {
 									// prevent value inserted on focus
