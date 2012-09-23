@@ -143,7 +143,7 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 		$this->groupIDs = array_keys($this->page->__get('groups'));
 		
 		if (empty($_POST)) {
-			$this->contentID = $this->page->getContent();
+			$this->contentID = $this->page->getContent()->__get('contentID');
 			$this->pageTitle = $this->page->__get('pageTitle');
 			$this->pageSlug = $this->page->__get('pageSlug');
 			$this->pageParent = $this->page->__get('pageParent');

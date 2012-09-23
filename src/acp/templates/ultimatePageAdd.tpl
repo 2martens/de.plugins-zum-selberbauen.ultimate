@@ -183,10 +183,7 @@
 						$.timepicker.setDefaults( $.timepicker.regional[ "{if $__wcf->getLanguage()->languageCode == 'en'}en-GB{else}{@$__wcf->getLanguage()->languageCode}{/if}" ] );
 						$.datepicker.setDefaults( $.datepicker.regional[ "{if $__wcf->getLanguage()->languageCode == 'en'}en-GB{else}{@$__wcf->getLanguage()->languageCode}{/if}" ] );
 						$('#publishDateInput').datetimepicker( {
-							showOn: 'both',
-							buttonImage: '{@$__wcf->getPath('ultimate')}icon/calendar.gif',
-							buttonImageOnly: true,
-							buttonText: '{lang}wcf.acp.ultimate.publishDate.editDate{/lang}',
+							showOn: 'focus',
 							showOtherMonths: true,
 							selectOtherMonths: true,
 							showAnim: 'fadeIn',
