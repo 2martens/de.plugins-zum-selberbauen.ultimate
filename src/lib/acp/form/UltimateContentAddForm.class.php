@@ -230,7 +230,7 @@ class UltimateContentAddForm extends MessageForm {
 		/* @var $tag \wcf\data\tag\TagCloudTag */
 		foreach ($languages as $languageID => $language) {
 			$this->availableTags[$languageID] = array();
-			foreach ($tags as $tagName => $tag) {
+			foreach ($tags as $tagID => $tag) {
 				if ($tag->__get('languageID') != $languageID) continue;
 				$this->availableTags[$languageID][] = $tag;
 			}
