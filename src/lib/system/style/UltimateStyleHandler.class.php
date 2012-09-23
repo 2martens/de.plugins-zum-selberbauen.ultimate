@@ -49,10 +49,10 @@ class UltimateStyleHandler extends StyleHandler {
 		if (RequestHandler::getInstance()->isACPRequest()) {
 			// ACP
 			$filename = 'acp/style/style.css';
-			if (!file_exists(ULTIMATE_DIR.$filename)) {
+			if (!file_exists(WCF_DIR.$filename)) {
 				UltimateStyleCompiler::getInstance()->compileACP();
 			}
-			return '<link rel="stylesheet" type="text/css" href="'.WCF::getPath('ultimate').$filename.'" />';
+			return '<link rel="stylesheet" type="text/css" href="'.WCF::getPath().$filename.'" />';
 		}
 		else {
 			// frontend

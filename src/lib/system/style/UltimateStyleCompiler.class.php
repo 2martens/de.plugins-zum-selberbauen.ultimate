@@ -140,7 +140,7 @@ class UltimateStyleCompiler extends StyleCompiler {
 		$files[] = ULTIMATE_DIR.'style/ultimate.less';
 	
 		$this->compileStylesheet(
-			ULTIMATE_DIR.'acp/style/style',
+			WCF_DIR.'acp/style/style',
 			$files,
 			array(),
 			'',
