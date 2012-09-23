@@ -2,6 +2,7 @@
 namespace ultimate\system\cache\builder;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\cache\builder\TagCloudCacheBuilder;
+use wcf\system\WCF;
 
 /**
  * Caches all content tags.
@@ -24,7 +25,8 @@ class ContentTagCloudCacheBuilder extends TagCloudCacheBuilder {
 		$this->objectTypeIDs = array(
 		    $objectType->__get('objectTypeID')
 		);
-		
+		// workaround
+		$this->languageIDs = array_keys(WCF::getLanguage()->getLanguages());
 		$this->getTags();
 		
 		return $this->tags;
