@@ -139,7 +139,7 @@
 					<option value="protected"{if $visibility == 'protected'} selected="selected"{/if}>{lang}wcf.acp.ultimate.visibility.protected{/lang}</option>
 					<option value="private"{if $visibility == 'private'} selected="selected"{/if}>{lang}wcf.acp.ultimate.visibility.private{/lang}</option>
 					</select>
-					<dl id="groupCheckboxes" class="container containerPadding marginTop{if $visibility != 'protected'} ultimateHidden{/if}">
+					<dl id="groupCheckboxes" class="container containerPadding marginTop"{if $visibility != 'protected'} style="display: none;"{/if}>
 						<dt><label>{lang}wcf.acp.ultimate.visibility.groupIDs{/lang}</label></dt>
 						<dd>
 							{htmlcheckboxes name="groupIDs" options=$groups selected=$groupIDs}
@@ -191,7 +191,7 @@
 						} );
 						var $dateFormat = $('#publishDateInput').datetimepicker( 'option', 'dateFormat');
 						$('#dateFormatInput').val($dateFormat);
-						
+						new ULTIMATE.Button.Replacement('publishButton', 'publishDateInput', 'publish');
 						$('form').submit(function() {
 							$('#publishDateInput').datetimepicker( 'option', 'dateFormat', 'yy-mm-dd' );
 						});

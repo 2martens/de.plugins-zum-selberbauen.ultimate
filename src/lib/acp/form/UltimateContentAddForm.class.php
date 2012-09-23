@@ -401,6 +401,7 @@ class UltimateContentAddForm extends MessageForm {
 		$this->categoryIDs = $this->groupIDs = array();
 		$this->tags = '';
 		$this->tagsI18n = array();
+		$this->formatDate();
 	}
 	
 	/**

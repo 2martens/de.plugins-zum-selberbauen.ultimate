@@ -89,28 +89,7 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 			
 		/* @var $dateTime \DateTime */
 		$dateTime = $this->page->__get('publishDateObject');
-		if (!$dateTime->getTimestamp()) {
-			$dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
-			$dateTime->setTimezone(WCF::getUser()->getTimezone());
-		}
-		$date = WCF::getLanguage()->getDynamicVariable(
-			'ultimate.date.dateFormat',
-			array(
-				'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
-			)
-		);
-		$time = WCF::getLanguage()->get('wcf.date.timeFormat');
-		$format = str_replace(
-			'%time%',
-			$time,
-			str_replace(
-				'%date%',
-				$date,
-				WCF::getLanguage()->get('ultimate.date.dateTimeFormat')
-			)
-		);
-		$this->publishDate = $dateTime->format($format);
-		$this->publishDateTimestamp = $dateTime->getTimestamp();
+		$this->formatDate($dateTime);
 			
 		// get status data
 		$this->statusID = $this->page->__get('status');
@@ -160,23 +139,12 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 	public function save() {
 		AbstractForm::save();
 		
-		if ($this->supportI18n) {
-			$this->pageTitle = 'ultimate.page.'.$this->pageID.'.pageTitle';
-			if (I18nHandler::getInstance()->isPlainValue('pageTitle')) {
-				I18nHandler::getInstance()->remove($this->pageTitle, PACKAGE_ID);
-				$this->pageTitle = I18nHandler::getInstance()->getValue('pageTitle');
-			} else {
-				I18nHandler::getInstance()->save('pageTitle', $this->pageTitle, 'ultimate.page', PACKAGE_ID);
-			}
-		}
-		
-		// change status to planned or publish
-		if ($this->saveType == 'publish') {
-			if ($this->publishDateTimestamp > TIME_NOW) {
-				$this->statusID = 2; // scheduled
-			} elseif ($this->publishDateTimestamp < TIME_NOW) {
-				$this->statusID = 3; // published
-			}
+		$this->pageTitle = 'ultimate.page.'.$this->pageID.'.pageTitle';
+		if (I18nHandler::getInstance()->isPlainValue('pageTitle')) {
+			I18nHandler::getInstance()->remove($this->pageTitle, PACKAGE_ID);
+			$this->pageTitle = I18nHandler::getInstance()->getValue('pageTitle');
+		} else {
+			I18nHandler::getInstance()->save('pageTitle', $this->pageTitle, 'ultimate.page', PACKAGE_ID);
 		}
 		
 		$parameters = array(

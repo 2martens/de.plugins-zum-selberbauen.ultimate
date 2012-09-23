@@ -169,26 +169,7 @@ class UltimatePageAddForm extends ACPForm {
 		);
 		
 		// fill publishDate with default value (today)
-		$this->startTime = TIME_NOW;
-		$dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
-		$dateTime->setTimezone(WCF::getUser()->getTimezone());
-		$date = WCF::getLanguage()->getDynamicVariable(
-			'ultimate.date.dateFormat',
-			array(
-				'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
-			)
-		);
-		$time = WCF::getLanguage()->get('wcf.date.timeFormat');
-		$format = str_replace(
-			'%time%',
-			$time,
-			str_replace(
-				'%date%',
-				$date,
-				WCF::getLanguage()->get('ultimate.date.dateTimeFormat')
-			)
-		);
-		$this->publishDate = $dateTime->format($format);
+		$this->formatDate();
 		
 		parent::readData();
 	}
@@ -223,9 +204,9 @@ class UltimatePageAddForm extends ACPForm {
 		$this->validatePageParent();
 		$this->validateTitle();
 		$this->validateSlug();
+		$this->validatePublishDate();
 		$this->validateStatus();
 		$this->validateVisibility();
-		$this->validatePublishDate();
 	}
 	
 	/**
@@ -233,15 +214,6 @@ class UltimatePageAddForm extends ACPForm {
 	 */
 	public function save() {
 		parent::save();
-		
-		// change status to planned or publish
-		if ($this->saveType == 'publish') {
-			if ($this->publishDateTimestamp > TIME_NOW) {
-				$this->statusID = 2; // planned
-			} elseif ($this->publishDateTimestamp < TIME_NOW) {
-				$this->statusID = 3; // published
-			}
-		}
 		
 		$parameters = array(
 			'data' => array(
@@ -287,6 +259,7 @@ class UltimatePageAddForm extends ACPForm {
 		$this->visibility = 'public';
 		I18nHandler::getInstance()->disableAssignValueVariables();
 		$this->contents = $this->pages = $this->groupIDs = array();
+		$this->formatDate();
 	}
 	
 	/**
@@ -311,6 +284,34 @@ class UltimatePageAddForm extends ACPForm {
 			'startTime' => $this->startTime,
 			'action' => 'add'
 		));
+	}
+	
+	/**
+	 * Formats the date.
+	 *
+	 * @param	\DateTime	$dateTime	optional
+	 */
+	protected function formatDate(\DateTime $dateTime = null) {
+		if ($dateTime === null) $dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
+		$dateTime->setTimezone(WCF::getUser()->getTimezone());
+		$date = WCF::getLanguage()->getDynamicVariable(
+			'ultimate.date.dateFormat',
+			array(
+				'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
+			)
+		);
+		$time = WCF::getLanguage()->get('wcf.date.timeFormat');
+		$format = str_replace(
+			'%time%',
+			$time,
+			str_replace(
+				'%date%',
+				$date,
+				WCF::getLanguage()->get('ultimate.date.dateTimeFormat')
+			)
+		);
+		$this->publishDate = $dateTime->format($format);
+		$this->publishDateTimestamp = $dateTime->getTimestamp();
 	}
 	
 	/**
@@ -381,6 +382,21 @@ class UltimatePageAddForm extends ACPForm {
 	 * @throws	\wcf\system\exception\UserInputException
 	 */
 	protected function validateStatus() {
+		if ($this->saveType == 'publish') {
+			if ($this->publishDateTimestamp > TIME_NOW) {
+				$this->statusID = 2; // planned
+				if (!isset($this->statusOptions[2])) $this->statusOptions[2] = WCF::getLanguage()->get('wcf.acp.ultimate.status.scheduled');
+				if (isset($this->statusOptions[3])) unset($this->statusOptions[3]);
+			} elseif ($this->publishDateTimestamp < TIME_NOW) {
+				$this->statusID = 3; // published
+				if (isset($this->statusOptions[2])) unset($this->statusOptions[2]);
+				if (!isset($this->statusOptions[3])) $this->statusOptions[3] = WCF::getLanguage()->get('wcf.acp.ultimate.status.published');
+			}
+		} else {
+			if (isset($this->statusOptions[2])) unset($this->statusOptions[2]);
+			if (isset($this->statusOptions[3])) unset($this->statusOptions[3]);
+		}
+		
 		if (!array_key_exists($this->statusID, $this->statusOptions)) {
 			throw new UserInputException('status', 'notValid');
 		}
