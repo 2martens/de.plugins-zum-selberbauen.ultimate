@@ -5,7 +5,7 @@
 	$(function() {
 		var actionObjects = { };
 		actionObjects['de.plugins-zum-selberbauen.ultimate.template'] = { };
-		actionObjects['de.plugins-zum-selberbauen.ultimate.template']['delete'] = new WCF.Action.Delete('ultimate\\data\\template\\TemplateAction', $('.jsTemplateRow'), $('#templateTableContainer .wcf-menu li:first-child .wcf-badge'));
+		actionObjects['de.plugins-zum-selberbauen.ultimate.template']['delete'] = new WCF.Action.Delete('ultimate\\data\\template\\TemplateAction', $('.jsTemplateRow'), $('#templateTableContainer .menu li:first-child .badge'));
 		
 		WCF.Clipboard.init('ultimate\\acp\\page\\UltimateTemplateListPage', {@$hasMarkedItems}, actionObjects);
 		
