@@ -1,6 +1,7 @@
 <?php
 namespace ultimate\acp\page;
 use wcf\acp\page\AbstractCategoryListPage;
+use wcf\system\WCF;
 
 /**
  * Shows the UltimateLinkCategoryList page.
@@ -22,4 +23,19 @@ class UltimateLinkCategoryListPage extends AbstractCategoryListPage {
 	 * @see \wcf\acp\form\AbstractCategoryAddForm::$objectTypeName
 	 */
 	public $objectTypeName = 'de.plugins-zum-selberbauen.ultimate.linkCategory';
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
+	 */
+	public $templateName = 'ultimateLinkCategoryList';
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 */
+	public function assignVariables() {
+		parent::assignVariables();
+		
+		require(ULTIMATE_DIR.'acp/config.inc.php');
+		WCF::getTPL()->assign('defaultLinkCategoryID', $categoryID);
+	}
 }
