@@ -28,6 +28,7 @@
 namespace ultimate\system\style;
 use wcf\system\application\ApplicationHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
+use wcf\system\request\RequestHandler;
 use wcf\system\style\StyleCompiler;
 use wcf\system\Callback;
 use wcf\system\WCF;
@@ -164,7 +165,8 @@ class UltimateStyleCompiler extends StyleCompiler {
 	 */
 	protected function bootstrap(array $variables, $individualLess = '') {
 		// add reset like a boss
-		$content = $this->prepareFile(WCF_DIR.'style/bootstrap/reset.less');
+		$content = '';
+		if (!RequestHandler::getInstance()->isACPRequest()) $content .= $this->prepareFile(WCF_DIR.'style/bootstrap/reset.less');
 	
 		// override LESS variables
 		$variablesContent = $this->prepareFile(WCF_DIR.'style/bootstrap/variables.less');
