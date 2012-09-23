@@ -99,7 +99,7 @@
 							new WCF.MultipleLanguageInput('tags', true, $optionValues, $availableLanguages);
 							var $availableTags = { };
 							{foreach from=$availableLanguages key=languageID item=languageName}
-								$availableTags[{$languageID}] = [ {implode from=$availableTags[$languageID] item=tag}"{@$tag->getTitle()}"{/implode} ];
+								$availableTags[{$languageID}] = [ {implode from=$availableTags[$languageID] item=tag}"{@$tag->name}"{/implode} ];
 							{/foreach}
 							function split( val ) {
 								return val.split( /,\s*/ );
@@ -117,7 +117,7 @@
 								minLength: 1,
 								source: function( request, response ) {
 									// delegate back to autocomplete, but extract the last term
-									var $currentLanguageID = $('#wcf2 > .dropdownMenu > .active').data('languageID');
+									var $currentLanguageID = $('#wcf3 > .dropdownMenu > .active').data('languageID');
 									response( $.ui.autocomplete.filter(
 										$availableTags[$currentLanguageID], extractLast( request.term ) ) );
 								},
