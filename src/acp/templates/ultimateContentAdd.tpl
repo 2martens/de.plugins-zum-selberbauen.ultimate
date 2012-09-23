@@ -32,12 +32,12 @@
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
 			<legend>{lang}wcf.acp.ultimate.content.general{/lang}</legend>
-			<dl{if $errorField == 'subject'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'subject'} class="formError"{/if}>
 				<dt><label for="subject">{lang}wcf.acp.ultimate.content.title{/lang}</label></dt>
 				<dd>
 					<input type="text" id="subject" name="subject" value="{@$i18nPlainValues['subject']}" class="long" required="required" placeholder="{lang}wcf.acp.ultimate.content.title.placeholder{/lang}" />
 					{if $errorField == 'subject'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}
@@ -47,12 +47,12 @@
 					{/if}
 				</dd>
 			</dl>
-			<dl{if $errorField == 'description'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'description'} class="formError"{/if}>
 				<dt><label for="description">{lang}wcf.acp.ultimate.content.description{/lang}</label></dt>
 				<dd>
 					<input type="text" id="description" name="description" value="{@$i18nPlainValues['description']}" class="long" required="required" placeholder="{lang}wcf.acp.ultimate.content.description.placeholder{/lang}" />
 					{if $errorField == 'description'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}
@@ -62,12 +62,12 @@
 					{/if}
 				</dd>
 			</dl>
-			<dl{if $errorField == 'slug'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'slug'} class="formError"{/if}>
 				<dt><label for="slug">{lang}wcf.acp.ultimate.content.slug{/lang}</label></dt>
 				<dd>
 					<input type="text" id="slug" name="slug" value="{@$slug}" class="long" required="required" pattern="^[a-z]+(?:\-{literal}{{/literal}1{literal}}{/literal}[a-z]+)*(?:\/{literal}{{/literal}1{literal}}{/literal}[a-z]+(?:\-{literal}{{/literal}1{literal}}{/literal}[a-z]+)*)*$" placeholder="{lang}wcf.acp.ultimate.content.slug.placeholder{/lang}" />
 					{if $errorField == 'slug'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}
@@ -77,18 +77,18 @@
 					{/if}
 				</dd>
 			</dl>
-			<dl {if $errorField == 'category'} class="wcf-formError"{/if}>
+			<dl {if $errorField == 'category'} class="formError"{/if}>
 				<dt><label>{lang}wcf.acp.ultimate.content.categories{/lang}</label></dt>
 				<dd>
 					{htmlCheckboxes options=$categories name=categoryIDs selected=$categoryIDs}
 					{if $errorField == 'category'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{lang}wcf.acp.ultimate.content.categories.error.{@$errorType}{/lang}
 						</small>
 					{/if}
 				</dd>
 			</dl>
-			<dl {if $errorField == 'tags'} class="wcf-formError"{/if}>
+			<dl {if $errorField == 'tags'} class="formError"{/if}>
 				<dt><label for="tags">{lang}wcf.acp.ultimate.content.tags{/lang}</label></dt>
 				<dd>
 					<script type="text/javascript">
@@ -146,7 +146,7 @@
 					</script>
 					<input type="text" name="tags" id="tags" class="long" value="{@$tags}" />
 					{if $errorField == 'tags'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}
@@ -157,13 +157,13 @@
 				</dd>
 			</dl>
 			
-			<dl{if $errorField == 'text'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'text'} class="formError"{/if}>
 				<dt><label for="text">{lang}wcf.acp.ultimate.content.text{/lang}</label></dt>
 				<dd>
 					<textarea id="text" name="text" rows="15" cols="40" class="long" {* placeholder="{lang}wcf.acp.ultimate.content.text.placeholder{/lang}"*} >{@$i18nPlainValues['text']}</textarea>
 					
 					{if $errorField == 'text'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}
@@ -177,7 +177,7 @@
 		</fieldset>
 		<fieldset>
 			<legend>{lang}wcf.acp.ultimate.publish{/lang}</legend>
-			<dl{if $errorField == 'status'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'status'} class="formError"{/if}>
 				<dt><label for="status">{lang}wcf.acp.ultimate.status{/lang}</label></dt>
 				<dd>
 					<select id="statusSelect" name="status">
@@ -191,13 +191,13 @@
 					/* ]]> */
 					</script>
 					{if $errorField == 'status'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{lang}wcf.acp.ultimate.status.error.{@$errorType}{/lang}
 						</small>
 					{/if}
 				</dd>
 			</dl>
-			<dl{if $errorField == 'visibility'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'visibility'} class="formError"{/if}>
 				<dt><label for="visibility">{lang}wcf.acp.ultimate.visibility{/lang}</label></dt>
 				<dd>
 					<select id="selectVisibility" name="visibility">
@@ -210,7 +210,7 @@
 						<dd>
 							{htmlcheckboxes name="groupIDs" options=$groups selected=$groupIDs}
 							{if $errorField == 'groupIDs'}
-								<small class="wcf-innerError">
+								<small class="innerError">
 									{lang}wcf.acp.ultimate.visibility.groupIDs.error.{@$errorType}{/lang}
 								</small>
 							{/if}
@@ -231,14 +231,14 @@
 					/* ]]> */
 					</script>
 					{if $errorField == 'visibility'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{lang}wcf.acp.ultimate.visibility.error.{@$errorType}{/lang}
 						</small>
 					{/if}
 					<small>{lang}wcf.acp.ultimate.content.visibility.description{/lang}</small>
 				</dd>
 			</dl>
-			<dl{if $errorField == 'publishDate'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'publishDate'} class="formError"{/if}>
 				<dt><label for="publishDate">{lang}wcf.acp.ultimate.publishDate{/lang}</label></dt>
 				<dd>
 					<input type="datetime" id="publishDateInput" name="publishDate" value="{@$publishDate}" readonly="readonly" class="medium" required="required" />
@@ -266,7 +266,7 @@
 					</script>
 					
 					{if $errorField == 'publishDate'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}

@@ -22,7 +22,7 @@
 		<fieldset>
 			<legend>{lang}wcf.acp.ultimate.link.categories{/lang}</legend>
 			
-			<dl{if $errorField == 'categoryIDs'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'categoryIDs'} class="formError"{/if}>
 				<dd>
 					{htmlCheckboxes options=$categories name=categoryIDs selected=$categoryIDs}
 					{if $errorField == 'categoryIDs'}

@@ -36,12 +36,12 @@
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
 			<legend>{lang}wcf.acp.ultimate.template.general{/lang}</legend>
-			<dl{if $errorField == 'templateName'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'templateName'} class="formError"{/if}>
 				<dt><label for="templateName">{lang}wcf.acp.ultimate.template.name{/lang}</label></dt>
 				<dd>
 					<input type="text" id="templateName" name="templateName" value="{$ultimateTemplateName}" placeholder="{lang}wcf.acp.ultimate.template.name.placeholder{/lang}" required="required" class="long" />
 					{if $errorField == 'templateName'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}
@@ -51,12 +51,12 @@
 					{/if}
 				</dd>
 			</dl>
-			<dl{if $errorField == 'showWidgetArea'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'showWidgetArea'} class="formError"{/if}>
 				<dt><label for="showWidgetArea">{lang}wcf.acp.ultimate.template.showWidgetArea{/lang}</label></dt>
 				<dd>
 					<input type="checkbox" id="showWidgetArea" name="showWidgetArea" value="{$showWidgetArea}"{if $showWidgetArea} checked="checked"{/if} />
 					{if $errorField == 'showWidgetArea'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{lang}wcf.acp.ultimate.template.showWidgetArea.error.{@$errorType}{/lang}
 						</small>
 					{/if}
@@ -65,7 +65,7 @@
 					</small>
 				</dd>
 			</dl>
-			<dl{if $errorField == 'widgetAreaSide'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'widgetAreaSide'} class="formError"{/if}>
 				<dt><label for="widgetAreaSide">{lang}wcf.acp.ultimate.template.widgetAreaSide{/lang}</label></dt>
 				<dd>
 					<select type="checkbox" id="widgetAreaSide" name="widgetAreaSide">
@@ -73,7 +73,7 @@
 						<option label="{lang}wcf.acp.ultimate.template.widgetAreaSide.right{/lang}" value="right"{if $widgetAreaSide == 'right'} selected="selected"{/if}>{lang}wcf.acp.ultimate.template.widgetAreaSide.right{/lang}</option>
 					</select>
 					{if $errorField == 'widgetAreaSide'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{lang}wcf.acp.ultimate.template.widgetAreaSide.error.{@$errorType}{/lang}
 						</small>
 					{/if}
@@ -99,7 +99,7 @@
 					</script>
 				</dd>
 			</dl>
-			<dl{if $errorField == 'selectWidgetArea'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'selectWidgetArea'} class="formError"{/if}>
 				<dt><label for="selectWidgetArea">{lang}wcf.acp.ultimate.template.selectWidgetArea{/lang}</label></dt>
 				<dd>
 					<select id="selectWidgetArea" name="selectWidgetArea">
@@ -107,7 +107,7 @@
 						{htmlOptions options=$widgetAreas selected=$selectedWidgetArea}
 					</select>
 					{if $errorField == 'selectWidgetArea'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{lang}wcf.acp.ultimate.template.selectWidgetArea.error.{@$errorType}{/lang}
 						</small>
 					{/if}
@@ -133,7 +133,7 @@
 					</script>
 				</dd>
 			</dl>
-			<dl{if $errorField == 'selectMenu'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'selectMenu'} class="formError"{/if}>
 				<dt><label for="selectMenu">{lang}wcf.acp.ultimate.template.selectMenu{/lang}</label></dt>
 				<dd>
 					<select id="selectMenu" name="selectMenu">
@@ -141,7 +141,7 @@
 						{htmlOptions options=$menus selected=$selectedMenu}
 					</select>
 					{if $errorField == 'selectMenu'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{lang}wcf.acp.ultimate.template.selectMenu.error.{@$errorType}{/lang}
 						</small>
 					{/if}

@@ -36,12 +36,12 @@
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
 			<legend>{lang}wcf.acp.ultimate.widgetArea.general{/lang}</legend>
-			<dl{if $errorField == 'widgetAreaName'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'widgetAreaName'} class="formError"{/if}>
 				<dt><label for="widgetAreaName">{lang}wcf.acp.ultimate.widgetArea.name{/lang}</label></dt>
 				<dd>
 					<input type="text" id="widgetAreaName" name="widgetAreaName" value="{$widgetAreaName}" class="long" required="required" placeholder="{lang}wcf.acp.ultimate.widgetArea.name.placeholder{/lang}" />
 					{if $errorField == 'categoryTitle'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}

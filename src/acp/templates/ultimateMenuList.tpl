@@ -42,9 +42,9 @@
 </div>
 
 <div id="menuTableContainer" class="tabularBox marginTop shadow">
-	<nav class="wcf-menu">
+	<nav class="menu">
 		<ul>
-			<li{if $action == ''} class="active"{/if}><a href="{link controller='UltimateMenuList'}{/link}"><span>{lang}wcf.acp.ultimate.menu.list.all{/lang}</span> <span class="wcf-badge" title="{lang}wcf.acp.ultimate.menu.list.count{/lang}">{#$items}</span></a></li>
+			<li{if $action == ''} class="active"{/if}><a href="{link controller='UltimateMenuList'}{/link}"><span>{lang}wcf.acp.ultimate.menu.list.all{/lang}</span> <span class="badge" title="{lang}wcf.acp.ultimate.menu.list.count{/lang}">{#$items}</span></a></li>
 			
 			{event name='ultimateMenuListOptions'}
 		</ul>
@@ -96,7 +96,7 @@
 	<div class="contentNavigation">
 		{@$pagesLinks}
 		
-		<div class="wcf-clipboardEditor jsClipboardEditor" data-types="[ 'de.plugins-zum-selberbauen.ultimate.menu' ]"></div>
+		<div class="clipboardEditor jsClipboardEditor" data-types="[ 'de.plugins-zum-selberbauen.ultimate.menu' ]"></div>
 		
 		<nav>
 			<ul>
@@ -111,7 +111,7 @@
 {hascontentelse}
 </div>
 
-<p class="wcf-info">{lang}wcf.acp.ultimate.menu.noContents{/lang}</p>
+<p class="info">{lang}wcf.acp.ultimate.menu.noContents{/lang}</p>
 {/hascontent}
 
 {include file='footer'}
