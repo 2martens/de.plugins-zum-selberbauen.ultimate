@@ -10,6 +10,7 @@
 		WCF.Clipboard.init('ultimate\\acp\\page\\UltimateCategoryListPage', {@$hasMarkedItems}, actionObjects);
 		
 		var options = { };
+		options.emptyMessage = '{lang}wcf.acp.ultimate.category.noContents{/lang}';
 		{if $pages > 1}
 			options.refreshPage = true;
 		{/if}
