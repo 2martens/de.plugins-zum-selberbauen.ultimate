@@ -28,7 +28,6 @@
 namespace ultimate\system\style;
 use wcf\system\application\ApplicationHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
-use wcf\system\request\RequestHandler;
 use wcf\system\style\StyleCompiler;
 use wcf\system\Callback;
 use wcf\system\WCF;
@@ -44,6 +43,12 @@ use wcf\system\WCF;
  * @category	Ultimate CMS
  */
 class UltimateStyleCompiler extends StyleCompiler {
+	/**
+	 * If true we have an ACP request.
+	 * @var boolean
+	 */
+	protected $isACPRequest = false;
+	
 	/**
 	 * Compiles the visualEditor stylesheets.
 	 *
@@ -138,7 +143,7 @@ class UltimateStyleCompiler extends StyleCompiler {
 	 */
 	public function compileACP() {
 		$files = array(ULTIMATE_DIR.'style/ultimate.less');
-	
+		$this->isACPRequest = true;
 		$this->compileStylesheet(
 			ULTIMATE_DIR.'acp/style/style',
 			$files,
@@ -166,7 +171,7 @@ class UltimateStyleCompiler extends StyleCompiler {
 	protected function bootstrap(array $variables, $individualLess = '') {
 		// add reset like a boss
 		$content = '';
-		if (!RequestHandler::getInstance()->isACPRequest()) $content .= $this->prepareFile(WCF_DIR.'style/bootstrap/reset.less');
+		if (!$this->isACPRequest) $content .= $this->prepareFile(WCF_DIR.'style/bootstrap/reset.less');
 	
 		// override LESS variables
 		$variablesContent = $this->prepareFile(WCF_DIR.'style/bootstrap/variables.less');
