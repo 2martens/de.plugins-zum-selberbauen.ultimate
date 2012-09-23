@@ -74,7 +74,7 @@
 									<img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.acp.ultimate.menu.edit{/lang}" class="icon16 disabled" />
 								{/if}
 								
-								{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteMenu') && $menu->menuID > 1}
+								{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteMenu')}
 									<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.menu.delete{/lang}" class="icon16 jsTooltip jsDeleteButton" data-object-id="{@$menu->menuID}" data-confirm-message="{lang}wcf.acp.ultimate.menu.delete.sure{/lang}" />
 								{else}
 									<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.menu.delete{/lang}" class="icon16 disabled" />
