@@ -246,26 +246,7 @@ class UltimateContentAddForm extends MessageForm {
 		if (isset($this->content)) {
 			$dateTime = $this->content->__get('publishDateObject');
 		}
-		if ($dateTime === null) $dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
-		$dateTime->setTimezone(WCF::getUser()->getTimezone());
-		$date = WCF::getLanguage()->getDynamicVariable(
-			'ultimate.date.dateFormat',
-			array(
-				'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
-			)
-		);
-		$time = WCF::getLanguage()->get('wcf.date.timeFormat');
-		$format = str_replace(
-			'%time%',
-			$time,
-			str_replace(
-				'%date%',
-				$date,
-				WCF::getLanguage()->get('ultimate.date.dateTimeFormat')
-			)
-		);
-		$this->publishDate = $dateTime->format($format);
-		$this->publishDateTimestamp = $dateTime->getTimestamp();
+		$this->formatDate($dateTime);
 		
 		parent::readData();
 	}
@@ -281,8 +262,10 @@ class UltimateContentAddForm extends MessageForm {
 		if (I18nHandler::getInstance()->isPlainValue('description')) $this->description = StringUtil::trim(I18nHandler::getInstance()->getValue('description'));
 		if (isset($_POST['slug'])) $this->slug = StringUtil::trim($_POST['slug']);
 		if (isset($_POST['categoryIDs']) && is_array($_POST['categoryIDs'])) $this->categoryIDs = ArrayUtil::toIntegerArray(($_POST['categoryIDs']));
+		else $this->categoryIDs = array();
 		$this->tagsI18n = I18nHandler::getInstance()->getValues('tags');
 		if (I18nHandler::getInstance()->isPlainValue('text')) $this->text = MessageUtil::stripCrap(trim(I18nHandler::getInstance()->getValue('text')));
+		if (isset($_POST['status'])) $this->statusID = intval($_POST['status']);
 		if (isset($_POST['visibility'])) $this->visibility = StringUtil::trim($_POST['visibility']);
 		if (isset($_POST['groupIDs'])) $this->groupIDs = ArrayUtil::toIntegerArray($_POST['groupIDs']);
 		if (isset($_POST['publishDate'])) $this->publishDate = StringUtil::trim($_POST['publishDate']);
@@ -301,14 +284,21 @@ class UltimateContentAddForm extends MessageForm {
 		$this->validateSlug();
 		$this->validateCategories();
 		$this->validateTags();
-		$this->validateText();
-		// multilingualism
-		$this->validateContentLanguage();
-		$this->validateStatus();
-		$this->validateVisibility();
-		$this->validatePublishDate();
-		
-		RecaptchaForm::validate();
+		try {
+			$this->validateText();
+			// multilingualism
+			$this->validateContentLanguage();
+			$this->validatePublishDate();
+			$this->validateStatus();
+			$this->validateVisibility();
+			RecaptchaForm::validate();
+		}
+		catch (UserInputException $e) {
+			foreach ($this->tagsI18n as $languageID => $tags) {
+				$this->tagsI18n[$languageID] = implode(',', $tags);
+			}
+			throw $e;
+		}
 	}
 	
 	/**
@@ -317,15 +307,6 @@ class UltimateContentAddForm extends MessageForm {
 	public function save() {
 		if (!I18nHandler::getInstance()->isPlainValue('text')) RecaptchaForm::save();
 		else parent::save();
-		
-		// change status to planned or publish
-		if ($this->saveType == 'publish') {
-			if ($this->publishDateTimestamp > TIME_NOW) {
-				$this->statusID = 2; // planned
-			} elseif ($this->publishDateTimestamp < TIME_NOW) {
-				$this->statusID = 3; // published
-			}
-		}
 		
 		$parameters = array(
 			'data' => array(
@@ -413,11 +394,13 @@ class UltimateContentAddForm extends MessageForm {
 		WCF::getTPL()->assign('success', true);
 		
 		// showing empty form
-		$this->subject = $this->description = $this->text = $this->publishDate = '';
+		$this->subject = $this->description = $this->slug = $this->text = $this->publishDate = '';
 		$this->publishDateTimestamp = $this->statusID = 0;
 		$this->visibility = 'public';
 		I18nHandler::getInstance()->disableAssignValueVariables();
 		$this->categoryIDs = $this->groupIDs = array();
+		$this->tags = '';
+		$this->tagsI18n = array();
 	}
 	
 	/**
@@ -427,6 +410,7 @@ class UltimateContentAddForm extends MessageForm {
 		parent::assignVariables();
 		
 		I18nHandler::getInstance()->assignVariables();
+		ksort($this->statusOptions);
 		WCF::getTPL()->assign(array(
 			'description' => $this->description,
 			'slug' => $this->slug,
@@ -455,6 +439,34 @@ class UltimateContentAddForm extends MessageForm {
 			ACPMenu::getInstance()->setActiveMenuItem($this->activeMenuItem);
 		}
 		parent::show();
+	}
+	
+	/**
+	 * Formats the date.
+	 * 
+	 * @param	\DateTime	$dateTime	optional
+	 */
+	protected function formatDate(\DateTime $dateTime = null) {
+		if ($dateTime === null) $dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
+		$dateTime->setTimezone(WCF::getUser()->getTimezone());
+		$date = WCF::getLanguage()->getDynamicVariable(
+			'ultimate.date.dateFormat',
+			array(
+				'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
+			)
+		);
+		$time = WCF::getLanguage()->get('wcf.date.timeFormat');
+		$format = str_replace(
+			'%time%',
+			$time,
+			str_replace(
+				'%date%',
+				$date,
+				WCF::getLanguage()->get('ultimate.date.dateTimeFormat')
+			)
+		);
+		$this->publishDate = $dateTime->format($format);
+		$this->publishDateTimestamp = $dateTime->getTimestamp();
 	}
 	
 	/**
@@ -590,6 +602,22 @@ class UltimateContentAddForm extends MessageForm {
 	 * @throws	\wcf\system\exception\UserInputException
 	 */
 	protected function validateStatus() {
+		// change status to planned or publish
+		if ($this->saveType == 'publish') {
+			if ($this->publishDateTimestamp > TIME_NOW) {
+				$this->statusID = 2; // planned
+				if (!isset($this->statusOptions[2])) $this->statusOptions[2] = WCF::getLanguage()->get('wcf.acp.ultimate.status.scheduled');
+				if (isset($this->statusOptions[3])) unset($this->statusOptions[3]);
+			} elseif ($this->publishDateTimestamp < TIME_NOW) {
+				$this->statusID = 3; // published
+				if (isset($this->statusOptions[2])) unset($this->statusOptions[2]);
+				if (!isset($this->statusOptions[3])) $this->statusOptions[3] = WCF::getLanguage()->get('wcf.acp.ultimate.status.published');
+			}
+		} else {
+			if (isset($this->statusOptions[2])) unset($this->statusOptions[2]);
+			if (isset($this->statusOptions[3])) unset($this->statusOptions[3]);
+		}
+		
 		if (!array_key_exists($this->statusID, $this->statusOptions)) {
 			throw new UserInputException('status', 'notValid');
 		}
@@ -647,7 +675,7 @@ class UltimateContentAddForm extends MessageForm {
 				$this->publishDate,
 				WCF::getUser()->getTimezone()
 			);
-			$this->publishDateTimestamp = $dateTime->getTimestamp();
+			$this->publishDateTimestamp = $dateTime->format('U');
 			return;
 		}
 		// for the very unlikely reason that the date is not in the format
@@ -659,7 +687,7 @@ class UltimateContentAddForm extends MessageForm {
 			$this->publishDate,
 			WCF::getUser()->getTimezone()
 		);
-		$this->publishDateTimestamp = $dateTime->getTimestamp();
+		$this->publishDateTimestamp = $dateTime->format('U');
 	}
 	
 }

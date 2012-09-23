@@ -123,13 +123,13 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		$this->statusID = $this->content->__get('status');
 		
 		// fill publish button with fitting language
-		$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.publish');
+		$this->publishButtonLang = 'ultimate.button.publish';
 		if ($this->statusID == 2) {
 			$this->statusOptions[2] = WCF::getLanguage()->get('wcf.acp.ultimate.status.scheduled');
-			$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.update');
+			$this->publishButtonLang = 'ultimate.button.update';
 		} elseif ($this->statusID == 3) {
 			$this->statusOptions[3] = WCF::getLanguage()->get('wcf.acp.ultimate.status.published');
-			$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.update');
+			$this->publishButtonLang = 'ultimate.button.update';
 		}
 		
 		// fill save button with fitting language
@@ -222,15 +222,6 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 			}
 		}
 		
-		// change status to planned or publish
-		if ($this->saveType == 'publish') {
-			if ($this->publishDateTimestamp > TIME_NOW) {
-				$this->statusID = 2; // scheduled
-			} elseif ($this->publishDateTimestamp < TIME_NOW) {
-				$this->statusID = 3; // published
-			}
-		}
-		
 		$parameters = array(
 			'data' => array(
 				'authorID' => WCF::getUser()->userID,
@@ -301,7 +292,8 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		
 		WCF::getTPL()->assign(array(
 			'contentID' => $this->contentID,
-			'publishButtonLang' => $this->publishButtonLang,
+			'publishButtonLang' => WCF::getLanguage()->get($this->publishButtonLang),
+			'publishButtonLangRaw' => $this->publishButtonLang,
 			'action' => 'edit'
 		));
 		
