@@ -41,7 +41,7 @@
 		</ul>
 	</nav>
 </div>
-
+{hascontent}
 <div id="menuTableContainer" class="tabularBox marginTop shadow">
 	<nav class="menu">
 		<ul>
@@ -50,69 +50,66 @@
 			{event name='ultimateMenuListOptions'}
 		</ul>
 	</nav>
-	{hascontent}
-		<table class="table jsClipboardContainer" data-type="de.plugins-zum-selberbauen.ultimate.menu">
-			<thead>
-				<tr>
-					<th class="columnMark"><label><input type="checkbox" class="jsClipboardMarkAll" /></label></th>
-					<th class="columnID{if $sortField == 'menuID'} active{/if}" colspan="2"><a href="{link controller='UltimateMenuList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=menuID&sortOrder={if $sortField == 'menuID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}{if $sortField == 'menuID'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
-					<th class="columnTitle{if $sortField == 'menuName'} active{/if}"><a href="{link controller='UltimateMenuList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=menuName&sortOrder={if $sortField == 'menuName' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.menu.name{/lang}{if $sortField == 'menuName'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
-					
-					{event name='headColumns'}
-				</tr>
-			</thead>
-			
-			<tbody>
-				{content}
-					{foreach from=$objects item=menu}
-						<tr id="menuContainer{@$menu->menuID}" class="jsMenuRow">
-							<td class="columnMark"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$menu->menuID}" /></td>
-							<td class="columnIcon">
-								
-								{if $__wcf->session->getPermission('admin.content.ultimate.canEditMenu')}
-									<a href="{link controller='UltimateMenuEdit' id=$menu->menuID}{/link}"><img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.acp.ultimate.menu.edit{/lang}" class="icon16 jsTooltip" /></a>
-								{else}
-									<img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.acp.ultimate.menu.edit{/lang}" class="icon16 disabled" />
-								{/if}
-								
-								{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteMenu')}
-									<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.menu.delete{/lang}" class="icon16 jsTooltip jsDeleteButton" data-object-id="{@$menu->menuID}" data-confirm-message="{lang}wcf.acp.ultimate.menu.delete.sure{/lang}" />
-								{else}
-									<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.menu.delete{/lang}" class="icon16 disabled" />
-								{/if}
-								
-								{event name='buttons'}
-							</td>
-							<td class="columnID"><p>{@$menu->menuID}</p></td>
-							<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditMenu')}<a title="{lang}wcf.acp.ultimate.menu.edit{/lang}" href="{link controller='UltimateMenuEdit' id=$menu->menuID}{/link}">{lang}{@$menu->menuName}{/lang}</a>{else}{lang}{@$menu->menuName}{/lang}{/if}</p></td>
-							
-							{event name='columns'}
-						</tr>
-					{/foreach}
-				{/content}
-			</tbody>
-		</table>
-	</div>
-	
-	<div class="contentNavigation">
-		{@$pagesLinks}
-		
-		<div class="clipboardEditor jsClipboardEditor" data-types="[ 'de.plugins-zum-selberbauen.ultimate.menu' ]"></div>
-		
-		<nav>
-			<ul>
-				{if $__wcf->session->getPermission('admin.content.ultimate.canAddMenu')}
-					<li><a href="{link controller='UltimateMenuAdd'}{/link}" title="{lang}wcf.acp.ultimate.menu.add{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/add.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.ultimate.menu.add{/lang}</span></a></li>
-				{/if}
+	<table class="table jsClipboardContainer" data-type="de.plugins-zum-selberbauen.ultimate.menu">
+		<thead>
+			<tr>
+				<th class="columnMark"><label><input type="checkbox" class="jsClipboardMarkAll" /></label></th>
+				<th class="columnID{if $sortField == 'menuID'} active{/if}" colspan="2"><a href="{link controller='UltimateMenuList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=menuID&sortOrder={if $sortField == 'menuID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}{if $sortField == 'menuID'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
+				<th class="columnTitle{if $sortField == 'menuName'} active{/if}"><a href="{link controller='UltimateMenuList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=menuName&sortOrder={if $sortField == 'menuName' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.menu.name{/lang}{if $sortField == 'menuName'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
 				
-				{event name='largeButtons'}
-			</ul>
-		</nav>
-	</div>
-{hascontentelse}
+				{event name='headColumns'}
+			</tr>
+		</thead>
+		
+		<tbody>
+			{content}
+				{foreach from=$objects item=menu}
+					<tr id="menuContainer{@$menu->menuID}" class="jsMenuRow">
+						<td class="columnMark"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$menu->menuID}" /></td>
+						<td class="columnIcon">
+							
+							{if $__wcf->session->getPermission('admin.content.ultimate.canEditMenu')}
+								<a href="{link controller='UltimateMenuEdit' id=$menu->menuID}{/link}"><img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.acp.ultimate.menu.edit{/lang}" class="icon16 jsTooltip" /></a>
+							{else}
+								<img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.acp.ultimate.menu.edit{/lang}" class="icon16 disabled" />
+							{/if}
+							
+							{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteMenu')}
+								<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.menu.delete{/lang}" class="icon16 jsTooltip jsDeleteButton" data-object-id="{@$menu->menuID}" data-confirm-message="{lang}wcf.acp.ultimate.menu.delete.sure{/lang}" />
+							{else}
+								<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.menu.delete{/lang}" class="icon16 disabled" />
+							{/if}
+							
+							{event name='buttons'}
+						</td>
+						<td class="columnID"><p>{@$menu->menuID}</p></td>
+						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditMenu')}<a title="{lang}wcf.acp.ultimate.menu.edit{/lang}" href="{link controller='UltimateMenuEdit' id=$menu->menuID}{/link}">{lang}{@$menu->menuName}{/lang}</a>{else}{lang}{@$menu->menuName}{/lang}{/if}</p></td>
+						
+						{event name='columns'}
+					</tr>
+				{/foreach}
+			{/content}
+		</tbody>
+	</table>
 </div>
-
+{hascontentelse}
 <p class="info">{lang}wcf.acp.ultimate.menu.noContents{/lang}</p>
 {/hascontent}
+<div class="contentNavigation">
+	{@$pagesLinks}
+	
+	<div class="clipboardEditor jsClipboardEditor" data-types="[ 'de.plugins-zum-selberbauen.ultimate.menu' ]"></div>
+	
+	<nav>
+		<ul>
+			{if $__wcf->session->getPermission('admin.content.ultimate.canAddMenu')}
+				<li><a href="{link controller='UltimateMenuAdd'}{/link}" title="{lang}wcf.acp.ultimate.menu.add{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/add.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.ultimate.menu.add{/lang}</span></a></li>
+			{/if}
+			
+			{event name='largeButtons'}
+		</ul>
+	</nav>
+</div>
+</div>
 
 {include file='footer'}
