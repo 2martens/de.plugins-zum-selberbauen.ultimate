@@ -45,7 +45,9 @@
 <div id="pageTableContainer" class="tabularBox marginTop shadow">
 	<nav class="menu tableMenu">
 		<ul>
-			<li{if $action == ''} class="active"{/if}><a href="{link controller='UltimatePageList'}{/link}"><span>{lang}wcf.acp.ultimate.page.list.all{/lang}</span> <span class="badge" title="{lang}wcf.acp.ultimate.page.list.count{/lang}">{#$items}</span></a></li>
+			<li{if $action == ''} class="active"{/if}>
+				<a href="{link controller='UltimatePageList'}{/link}"><span>{lang}wcf.acp.ultimate.page.list.all{/lang}</span> <span class="badge badgeInverse" title="{lang}wcf.acp.ultimate.page.list.count{/lang}">{#$items}</span></a>
+			</li>
 			
 			{event name='ultimatePageListOptions'}
 		</ul>

@@ -45,7 +45,9 @@
 <div id="categoryTableContainer" class="tabularBox marginTop shadow">
 	<nav class="menu tableMenu">
 		<ul>
-			<li{if $action == ''} class="active"{/if}><a href="{link controller='UltimateCategoryList'}{/link}"><span>{lang}wcf.acp.ultimate.category.list.all{/lang}</span> <span class="badge" title="{lang}wcf.acp.ultimate.category.list.count{/lang}">{#$items}</span></a></li>
+			<li{if $action == ''} class="active"{/if}>
+				<a href="{link controller='UltimateCategoryList'}{/link}"><span>{lang}wcf.acp.ultimate.category.list.all{/lang}</span> <span class="badge badgeInverse" title="{lang}wcf.acp.ultimate.category.list.count{/lang}">{#$items}</span></a>
+			</li>
 			
 			{event name='ultimateCategoryListOptions'}
 		</ul>
