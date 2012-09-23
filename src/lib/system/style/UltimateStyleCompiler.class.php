@@ -136,11 +136,10 @@ class UltimateStyleCompiler extends StyleCompiler {
 	 * Compiles LESS stylesheets for ACP usage.
 	 */
 	public function compileACP() {
-		$files = glob(WCF_DIR.'style/*.less');
-		$files[] = ULTIMATE_DIR.'style/ultimate.less';
+		$files = array(ULTIMATE_DIR.'style/ultimate.less');
 	
 		$this->compileStylesheet(
-			WCF_DIR.'acp/style/style',
+			ULTIMATE_DIR.'acp/style/style',
 			$files,
 			array(),
 			'',
