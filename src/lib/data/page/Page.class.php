@@ -43,7 +43,7 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledDatabaseObje
 	/**
 	 * Returns the content of this page.
 	 * 
-	 * @return	\ultimate\data\content\Content
+	 * @return	\ultimate\data\content\Content|null
 	 */
 	public function getContent() {
 		$sql = 'SELECT	  content.*
