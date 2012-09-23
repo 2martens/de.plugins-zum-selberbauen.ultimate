@@ -2,6 +2,7 @@
 namespace ultimate\acp\form;
 use ultimate\data\menu\item\MenuItemNodeList;
 use ultimate\data\menu\Menu;
+use ultimate\data\menu\MenuAction;
 use wcf\form\AbstractForm;
 use wcf\system\cache\CacheHandler;
 use wcf\system\exception\IllegalLinkException;
