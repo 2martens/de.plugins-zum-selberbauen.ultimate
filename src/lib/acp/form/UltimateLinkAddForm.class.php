@@ -177,7 +177,7 @@ class UltimateLinkAddForm extends ACPForm {
 			I18nHandler::getInstance()->save('linkName', 'ultimate.link.'.$linkID.'.linkName', 'ultimate.link', PACKAGE_ID);
 			$updateEntries['linkName'] = 'ultimate.link.'.$linkID.'.linkName';
 		}
-		if (!I18nHandler::getInstance()->isPlainValue('linDescription')) {
+		if (!I18nHandler::getInstance()->isPlainValue('linkDescription')) {
 			I18nHandler::getInstance()->save('linkDescription', 'ultimate.link.'.$linkID.'.linkDescription', 'ultimate.link', PACKAGE_ID);
 			$updateEntries['linkDescription'] = 'ultimate.link.'.$linkID.'.linkDescription';
 		}
