@@ -444,10 +444,16 @@ ULTIMATE.Button.Replacement.prototype = {
 	_checkElement: null,
 	
 	/**
-	 * the initial timestamp
-	 * @type	Integer
+	 * the initial date
+	 * @type	Date
 	 */
-	_initialValueDateTime: 0,
+	_initialValueDateTime: null,
+	
+	/**
+	 * the last date
+	 * @type	Date
+	 */
+	_lastValueDateTime: null,
 	
 	/**
 	 * the initial status id
@@ -497,7 +503,8 @@ ULTIMATE.Button.Replacement.prototype = {
 			this._initialStatusID = this._checkElement.val();
 		} else if (this._action == 'publish') {
 			var $dateObj = this._checkElement.datetimepicker( 'getDate' );
-			this._initialDateTime = WCF.Date.Util.gmdate($dateObj);
+			this._initialValueDateTime = $dateObj;
+			this._lastValueDateTime = $dateObj;
 		}
 		
 		this._checkElement.change($.proxy(this._change, this));
@@ -521,19 +528,25 @@ ULTIMATE.Button.Replacement.prototype = {
 			}
 		} else if (this._action == 'publish') {
 			var $dateObj = this._checkElement.datetimepicker( 'getDate' );
-			var $timestamp = WCF.Date.Util.gmdate($dateObj);
-			var $timestampNow = WCF.Date.Util.gmdate();
+			var $dateNow = new Date();
 			
 			var $updateButton = WCF.Language.get(this._publishMap[2]);
 			var $isUpdateSzenario = ($updateButton == this._buttonValue);
 			
-			if ($timestamp > $timestampNow) {
-				if ($isUpdateSzenario && (this._initialDateTime > $timestampNow)) return;
-				this._button.val(WCF.Language.get(this._publishMap[1]));
+			if ($dateObj > $dateNow) {
+				if ($isUpdateSzenario && (this._lastValueDateTime > $dateNow)) {
+					return;
+				}
+				if ($isUpdateSzenario && this._initialValueDateTime > $dateNow) this._button.val($updateButton);
+				else this._button.val(WCF.Language.get(this._publishMap[1]));
 			} else {
-				if ($isUpdateSzenario && (this._initialDateTime < $timestampNow)) return;
-				this._button.val(WCF.Language.get(this._publishMap[0]));
+				if ($isUpdateSzenario && (this._lastValueDateTime < $dateNow)) {
+					return;
+				}
+				if ($isUpdateSzenario && this._initialValueDateTime < $dateNow) this._button.val($updateButton);
+				else this._button.val(WCF.Language.get(this._publishMap[0]));
 			}
+			this._lastValueDateTime = $dateObj;
 		}
 	}
 };
