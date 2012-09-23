@@ -519,11 +519,11 @@ ULTIMATE.Button.Replacement.prototype = {
 			var $currentValue = this._checkElement.val();
 			var $languageOutput = WCF.Language.get(this._saveMap[$currentValue]);
 			if ($currentValue >= 2) {
-				this._button.attr('disabled', 'disabled');
+				this._button.attr('disabled', 'disabled').prop('disabled', true);
 				this._button.addClass('ultimateHidden');
 			} else if ($currentValue == 0 || $currentValue == 1) {
 				this._button.removeClass('ultimateHidden');
-				this._button.removeAttr('disabled');
+				this._button.removeAttr('disabled').prop('disabled', false);
 				this._button.val($languageOutput);
 			}
 		} else if (this._action == 'publish') {
