@@ -69,10 +69,11 @@ class CategoryUtil {
 	 * @api
 	 * 
 	 * @param	string	$categoryTitle
-	 * @param	integer	$categoryParent
+	 * @param	integer	$categoryID
+	 * @param	integer	$categoryParent	optional
 	 * @return	boolean	$isAvailable
 	 */
-	public static function isAvailableTitle($categoryTitle, $categoryID = 0, $categoryParent = 0) {
+	public static function isAvailableTitle($categoryTitle, $categoryID, $categoryParent = 0) {
 		$categoryTitle = StringUtil::trim($categoryTitle);
 		$categoryID = intval($categoryID);
 		$categoryParent = intval($categoryParent);
@@ -113,10 +114,11 @@ class CategoryUtil {
 	 * @api
 	 * 
 	 * @param	string	$categorySlug
-	 * @param	integer	$categoryParent
+	 * @param	integer	$categoryID
+	 * @param	integer	$categoryParent	optional
 	 * @return	boolean	$isAvailable
 	 */
-	public static function isAvailableSlug($categorySlug, $categoryID = 0, $categoryParent = 0) {
+	public static function isAvailableSlug($categorySlug, $categoryID, $categoryParent = 0) {
 		$categorySlug = StringUtil::trim($categorySlug);
 		$categoryID = intval($categoryID);
 		$categoryParent = intval($categoryParent);

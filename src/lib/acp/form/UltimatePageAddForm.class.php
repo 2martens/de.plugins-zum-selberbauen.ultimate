@@ -353,7 +353,7 @@ class UltimatePageAddForm extends ACPForm {
 			if (empty($this->pageTitle)) {
 				throw new UserInputException('pageTitle');
 			}
-			if (!PageUtil::isAvailableTitle($this->pageTitle, $this->pageParent)) {
+			if (!PageUtil::isAvailableTitle($this->pageTitle, (isset($this->pageID) ? $this->pageID : 0), $this->pageParent)) {
 				throw new UserInputException('pageTitle', 'notUnique');
 			}
 		}
@@ -369,7 +369,7 @@ class UltimatePageAddForm extends ACPForm {
 			throw new UserInputException('pageSlug');
 		}
 	
-		if (!PageUtil::isAvailableSlug($this->pageSlug, $this->pageParent)) {
+		if (!PageUtil::isAvailableSlug($this->pageSlug, (isset($this->pageID) ? $this->pageID : 0), $this->pageParent)) {
 			throw new UserInputException('pageSlug', 'notUnique');
 		}
 	}

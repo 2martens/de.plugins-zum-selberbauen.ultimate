@@ -205,7 +205,7 @@ class UltimateMenuAddForm extends ACPForm {
 		if (empty($this->menuName)) {
 				throw new UserInputException('menuName');
 		}
-		if (!MenuUtil::isAvailableName($this->menuName)) {
+		if (!MenuUtil::isAvailableName($this->menuName, (isset($this->menuID) ? $this->menuID : 0))) {
 			throw new UserInputException('menuName', 'notUnique');
 		}
 	}

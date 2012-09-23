@@ -245,7 +245,7 @@ class UltimateLinkAddForm extends ACPForm {
 		 	throw new UserInputException('linkURL', 'notValid');
 		 }
 		 
-		 if (!LinkUtil::isAvailableURL($this->linkURL)) {
+		 if (!LinkUtil::isAvailableURL($this->linkURL, (isset($this->linkID) ? $this->linkID : 0))) {
 		 	throw new UserInputException('linkURL', 'notUnique');
 		 }
 	}
