@@ -1,6 +1,8 @@
 <?php
 namespace ultimate\system\cache\builder;
 use wcf\data\object\type\ObjectTypeCache;
+use wcf\data\tag\Tag;
+use wcf\data\tag\TagCloudTag;
 use wcf\system\cache\builder\TagCloudCacheBuilder;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\WCF;
