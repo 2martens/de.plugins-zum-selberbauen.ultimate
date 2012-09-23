@@ -42,10 +42,12 @@
 	</nav>
 </div>
 {hascontent}
-<div id="contentTableContainer" class="tabularBox marginTop shadow">
-	<nav class="menu">
+<div id="contentTableContainer" class="tabularBox tabularBoxTitle marginTop shadow">
+	<nav class="menu tableMenu">
 		<ul>
-			<li{if $action == ''} class="active"{/if}><a href="{link controller='UltimateContentList'}{/link}"><span>{lang}wcf.acp.ultimate.content.list.all{/lang}</span> <span class="badge" title="{lang}wcf.acp.ultimate.content.list.count{/lang}">{#$items}</span></a></li>
+			<li{if $action == ''} class="active"{/if}>
+				<a href="{link controller='UltimateContentList'}{/link}"><span>{lang}wcf.acp.ultimate.content.list.all{/lang}</span> <span class="badge badgeInverse" title="{lang}wcf.acp.ultimate.content.list.count{/lang}">{#$items}</span></a>
+			</li>
 			
 			{event name='ultimateContentListOptions'}
 		</ul>

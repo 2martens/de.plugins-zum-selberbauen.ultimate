@@ -43,7 +43,7 @@
 </div>
 {hascontent}
 <div id="linkTableContainer" class="tabularBox marginTop shadow">
-	<nav class="menu">
+	<nav class="menu tableMenu">
 		<ul>
 			<li{if $action == ''} class="active"{/if}><a href="{link controller='UltimateLinkList'}{/link}"><span>{lang}wcf.acp.ultimate.link.list.all{/lang}</span> <span class="badge" title="{lang}wcf.acp.ultimate.link.list.count{/lang}">{#$items}</span></a></li>
 			
