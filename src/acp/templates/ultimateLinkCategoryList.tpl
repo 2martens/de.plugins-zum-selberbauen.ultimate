@@ -105,7 +105,7 @@
 								<img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.global.button.edit{/lang}" class="icon16 disabled" />
 							{/if}
 
-							{if $objectType->getProcessor()->canDeleteCategory() && $category->categoryID != $defaultLinkCategory}
+							{if $objectType->getProcessor()->canDeleteCategory() && $category->categoryID != $defaultLinkCategoryID}
 								<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.global.button.delete{/lang}" class="icon16 jsDeleteButton jsTooltip" data-object-id="{@$category->categoryID}" data-confirm-message="{@$objectType->getProcessor()->getLanguageVariable('delete.sure')}" />
 							{else}
 								<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.global.button.delete{/lang}" class="icon16 disabled" />
