@@ -257,26 +257,8 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		}
 		$this->saved();
 		
-		$date = WCF::getLanguage()->getDynamicVariable(
-			'ultimate.date.dateFormat',
-			array(
-				'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
-			)
-		);
-		$time = WCF::getLanguage()->get('wcf.date.timeFormat');
-		$format = str_replace(
-			'%time%',
-			$time,
-			str_replace(
-				'%date%',
-				$date,
-				WCF::getLanguage()->get('ultimate.date.dateTimeFormat')
-			)
-		);
-		
 		$dateTime = DateUtil::getDateTimeByTimestamp($this->publishDateTimestamp);
-		$dateTime->setTimezone(WCF::getUser()->getTimezone());
-		$this->publishDate = $dateTime->format($format);
+		$this->formatDate($dateTime);
 		
 		WCF::getTPL()->assign('success', true);
 	}

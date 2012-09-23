@@ -170,6 +170,9 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 		
 		$this->saved();
 		
+		$dateTime = DateUtil::getDateTimeByTimestamp($this->publishDateTimestamp);
+		$this->formatDate($dateTime);
+		
 		WCF::getTPL()->assign('success', true);
 	}
 	
