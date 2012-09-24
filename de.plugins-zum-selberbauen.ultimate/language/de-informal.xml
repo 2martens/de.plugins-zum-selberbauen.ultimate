@@ -303,6 +303,7 @@ Verfügbare Variablen:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$aut
 		<item name="wcf.acp.ultimate.content.slug.error.notUnique"><![CDATA[Der angegebene URL-kompatible Titel existiert bereits bei einem Inhalt.]]></item>
 		<item name="wcf.acp.ultimate.content.categories"><![CDATA[Kategorien]]></item>
 		<item name="wcf.acp.ultimate.content.categories.error.invalidIDs"><![CDATA[Mindestens eine der "ausgewählten" Kategorien stand nicht zur Auswahl.]]></item>
+		<item name="wcf.acp.ultimate.content.tags"><![CDATA[Tags]]></item>
 		<item name="wcf.acp.ultimate.content.message"><![CDATA[Nachricht]]></item>
 		<item name="wcf.acp.ultimate.content.text"><![CDATA[Text]]></item>
 		<item name="wcf.acp.ultimate.content.text.placeholder"><![CDATA[Zwei Freunde gehen während der Sommerzeit fast jeden Tag zum Strand. Dort spielen sie miteinander und haben sehr viel Spaß.
@@ -333,6 +334,7 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.link.url.error.notUnique"><![CDATA[Der angegebene URL existiert bereits bei einem anderen Link.]]></item>
 		<item name="wcf.acp.ultimate.link.categories"><![CDATA[Kategorien]]></item>
 		<item name="wcf.acp.ultimate.link.categories.error.notValid"><![CDATA[Mindestens eine der "ausgewählten" Kategorien stand nicht zur Auswahl.]]></item>
+		<item name="wcf.acp.ultimate.link.general"><![CDATA[Linkdaten]]></item>
 		<item name="wcf.acp.ultimate.link.items"><![CDATA[Linkeinträge]]></item>
 		<item name="wcf.acp.ultimate.link.list"><![CDATA[Linkliste]]></item>
 		<item name="wcf.acp.ultimate.link.list.all"><![CDATA[Alle Links]]></item>
@@ -347,7 +349,7 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.delete.sure"><![CDATA[Bist du sicher, dass du diese Linkkategorie löschen willst?]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.button.list"><![CDATA[Linkkategorieliste]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.list"><![CDATA[Linkkategorien]]></item>
-		<item name="wcf.acp.ultimate.linkCategory.parentCategoryID"><![CDATA[ID der übergeordneten Kategorie]]></item>
+		<item name="wcf.acp.ultimate.linkCategory.parentCategoryID"><![CDATA[Übergeordnete Kategorie]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.parentCategoryID.error.invalid"><![CDATA[Die "ausgewählte" Kategorie existiert nicht.]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.title"><![CDATA[Name]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.isDisabled"><![CDATA[Deaktiviert]]></item>
