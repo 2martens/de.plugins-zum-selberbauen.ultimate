@@ -76,19 +76,24 @@ class UltimateContentListPage extends AbstractCachedListPage {
 	public $defaultSortField = ULTIMATE_SORT_CONTENT_SORTFIELD;
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractCachedListPage.html#$cacheBuilderClassName
+	 * @see \wcf\page\AbstractCachedListPage::$cacheBuilderClassName
 	 */
 	public $cacheBuilderClassName = '\ultimate\system\cache\builder\ContentCacheBuilder';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractCachedListPage.html#$cacheName
+	 * @see \wcf\page\AbstractCachedListPage::$cacheName
 	 */
 	public $cacheName = 'content';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractCachedListPage.html#$cacheIndex
+	 * @see \wcf\page\AbstractCachedListPage::$cacheIndex
 	 */
 	public $cacheIndex = 'contents';
+	
+	/**
+	 * @see \wcf\page\AbstractCachedListPage::$objectDecoratorClass
+	 */
+	public $objectDecoratorClass = '\ultimate\data\content\TaggedContent';
 	
 	/**
 	 * Contains the active menu item.
@@ -113,6 +118,18 @@ class UltimateContentListPage extends AbstractCachedListPage {
 	 * @var	integer
 	 */
 	protected $tagID = 0;
+	
+	/**
+	 * Contains a temporarily saved sort field.
+	 * @var string
+	 */
+	protected $tempSortField = '';
+	
+	/**
+	 * Contains a temporarily saved sort order.
+	 * @var string
+	 */
+	protected $tempSortOrder = '';
 	
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
@@ -167,6 +184,43 @@ class UltimateContentListPage extends AbstractCachedListPage {
 	}
 	
 	/**
+	 * Validates the sort field.
+	 * 
+	 * Validates the sort field and sorts the array if the sort field is contentAuthor.
+	 * 
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#validateSortField
+	 */
+	public function validateSortField() {
+		parent::validateSortField();
+		if ($this->sortField == 'contentAuthor') {
+			$contents = $this->objects;
+			$newContents = array();
+			$contentIDs = array();
+			// get array with usernames
+			/* @var $content \ultimate\data\content\Content */
+			foreach ($contents as $contentID => $content) {
+				$newContents[$content->__get('author')->__get('username')] = $content;
+			}
+			// actually sort the array
+			if ($this->sortOrder == 'ASC') ksort($newContents);
+			else krsort($newContents);
+			// refill the sorted values into the original array
+			foreach ($newContents as $authorName => $content) {
+				$contents[$content->__get('contentID')] = $content;
+			}
+			// return the sorted array
+			$this->objects = $contents;
+			$this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
+			
+			// refill sort values with default values to prevent a second sort process
+			$this->tempSortField = $this->sortField;
+			$this->tempSortOrder = $this->sortOrder;
+			$this->sortField = $this->defaultSortField;
+			$this->sortOrder = $this->defaultSortOrder;
+		}
+	}
+	
+	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractCachedListPage.html#loadCache
 	 */
 	public function loadCache($path = ULTIMATE_DIR) {
@@ -177,6 +231,9 @@ class UltimateContentListPage extends AbstractCachedListPage {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
 	 */
 	public function assignVariables() {
+		if (!empty($this->tempSortField)) $this->sortField = $this->tempSortField;
+		if (!empty($this->tempSortOrder)) $this->sortOrder = $this->tempSortOrder;
+		
 		parent::assignVariables();
 		
 		WCF::getTPL()->assign(array(
