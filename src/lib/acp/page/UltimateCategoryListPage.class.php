@@ -49,17 +49,17 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
 	public $defaultSortOrder = ULTIMATE_SORT_CATEGORY_SORTORDER;
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractCachedListPage.html#$cacheBuilderClassName
+	 * @see \wcf\page\AbstractCachedListPage::$cacheBuilderClassName
 	 */
 	public $cacheBuilderClassName = '\ultimate\system\cache\builder\CategoryCacheBuilder';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractCachedListPage.html#$cacheName
+	 * @see \wcf\page\AbstractCachedListPage::$cacheName
 	 */
 	public $cacheName = 'category';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractCachedListPage.html#$cacheIndex
+	 * @see \wcf\page\AbstractCachedListPage::$cacheIndex
 	 */
 	public $cacheIndex = 'categories';
 	
@@ -84,7 +84,41 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractCachedListPage.html#loadCache
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#validateSortField
+	 */
+	public function validateSortField() {
+		parent::validateSortField();
+		
+		if ($this->sortField == 'categoryContents') {
+			$categories = $this->objects;
+			$newCategories = array();
+			// get array with content count
+			foreach ($categories as $categoryID => $category) {
+				$newCategories[count($category->__get('contents'))] = $category;
+			}
+			// actually sort the array
+			if ($this->sortOrder == 'ASC') ksort($newCategories);
+			else krsort($newCategories);
+			// refill the original array with the sorted values
+			foreach ($newCategories as $category) {
+				$categories[$category->__get('categoryID')] = $category;
+			}
+			
+			// save the sort field and order temporarily and restore them to default
+			// prevents second sort attempt
+			$this->tempSortField = $this->sortField;
+			$this->tempSortOrder = $this->sortOrder;
+			$this->sortField = $this->defaultSortField;
+			$this->sortOrder = $this->defaultSortOrder;
+			
+			// return the sorted array
+			$this->objects = $categories;
+			$this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
+		}
+	}
+	
+	/**
+	 * @see \wcf\page\AbstractCachedListPage::loadCache
 	 */
 	public function loadCache($path = ULTIMATE_DIR) {
 		parent::loadCache($path);

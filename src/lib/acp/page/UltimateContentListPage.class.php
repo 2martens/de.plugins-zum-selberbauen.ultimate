@@ -195,7 +195,6 @@ class UltimateContentListPage extends AbstractCachedListPage {
 		if ($this->sortField == 'contentAuthor') {
 			$contents = $this->objects;
 			$newContents = array();
-			$contentIDs = array();
 			// get array with usernames
 			/* @var $content \ultimate\data\content\Content */
 			foreach ($contents as $contentID => $content) {
@@ -221,7 +220,7 @@ class UltimateContentListPage extends AbstractCachedListPage {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractCachedListPage.html#loadCache
+	 * @see \wcf\page\AbstractCachedListPage::loadCache
 	 */
 	public function loadCache($path = ULTIMATE_DIR) {
 		parent::loadCache($path);
@@ -231,6 +230,7 @@ class UltimateContentListPage extends AbstractCachedListPage {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
 	 */
 	public function assignVariables() {
+		// reset sort field and order to temporarily saved values
 		if (!empty($this->tempSortField)) $this->sortField = $this->tempSortField;
 		if (!empty($this->tempSortOrder)) $this->sortOrder = $this->tempSortOrder;
 		
