@@ -46,7 +46,7 @@ class LinkClipboardAction implements IClipboardAction {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.clipboard.action.IClipboardAction.html#getTypeName
 	 */
 	public function getTypeName() {
-		return 'de.plugins-zum-selberbauen.link';
+		return 'de.plugins-zum-selberbauen.ultimate.link';
 	}
 	
 	/**
