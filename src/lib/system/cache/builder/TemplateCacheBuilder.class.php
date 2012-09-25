@@ -1,5 +1,7 @@
 <?php
 namespace ultimate\system\cache\builder;
+use wcf\system\database\util\PreparedStatementConditionBuilder;
+
 use ultimate\data\template\TemplateList;
 use wcf\system\cache\builder\ICacheBuilder;
 
@@ -20,7 +22,8 @@ class TemplateCacheBuilder implements ICacheBuilder {
 	public function getData(array $cacheResource) {
 		$data = array(
 			'templates' => array(),
-			'templateIDs' => array()
+			'templateIDs' => array(),
+			'templatesToLayoutID' => array()
 		);
 		
 		$templateList = new TemplateList();
@@ -32,6 +35,20 @@ class TemplateCacheBuilder implements ICacheBuilder {
 		
 		$data['templates'] = $templates;
 		$data['templateIDs'] = $templateIDs;
+		
+		// read layout ids
+		$conditionBuilder = new PreparedStatementConditionBuilder();
+		$conditionBuilder->add('templateID IN (?)', array($templateIDs));
+		
+		$sql = 'SELECT layoutID, templateID
+		        FROM   ultimate'.ULTIMATE_N.'_template_to_layout
+		        '.$conditionBuilder->__toString();
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute($conditionBuilder->getParameters());
+		
+		while ($row = $statement->fetchArray()) {
+			$data['templatesToLayoutID'][intval($row['layoutID'])] = $templates[intval($row['templateID'])];
+		}
 		
 		return $data;
 	}
