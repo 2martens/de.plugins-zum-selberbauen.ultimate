@@ -68,16 +68,9 @@ class UltimateStyleCompiler extends StyleCompiler {
 		
 		$variables = array();
 		$individualCss = $individualLess = '';
-		while ($row = $statement->fetchArray()) {
-			if ($row['variableName'] == 'individualCss') {
-				$individualCss = $row['variableValue'];
-			}
-			else if ($row['variableName'] == 'individualLess') {
-				$individualLess = $row['variableValue'];
-			}
-			else {
-				$variables[$row['variableName']] = $row['variableValue'];
-			}
+		if (isset($variables['individualCss'])) {
+			$individualCss = $variables['individualCss'];
+			unset($variables['individualCss']);
 		}
 		
 		$this->compileStylesheet(
@@ -85,7 +78,6 @@ class UltimateStyleCompiler extends StyleCompiler {
 			$files,
 			$variables,
 			$individualCss,
-			$individualLess,
 			new Callback(function($content) use ($style) {
 				return "/* stylesheet for '".$style->styleName."', generated on ".gmdate('r')." -- DO NOT EDIT */\n\n" . $content;
 			})
@@ -144,11 +136,23 @@ class UltimateStyleCompiler extends StyleCompiler {
 	public function compileACP() {
 		$files = array(ULTIMATE_DIR.'style/ultimate.less');
 		$this->isACPRequest = true;
+		
+		// read default values
+		$sql = 'SELECT   variableName, defaultValue
+		        FROM     wcf'.WCF_N.'_style_variable
+		        ORDER BY variableID ASC';
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute();
+		
+		$variables = array();
+		while ($row = $statement->fetchArray()) {
+			$variables[$row['variableName']] = $row['defaultValue'];
+		}
+		
 		$this->compileStylesheet(
 			ULTIMATE_DIR.'acp/style/style',
 			$files,
-			array(),
-			'',
+			$variables,
 			'',
 			new Callback(function($content) {
 				// fix relative paths
@@ -161,36 +165,15 @@ class UltimateStyleCompiler extends StyleCompiler {
 	}
 	
 	/**
-	 * Prepares the style compiler, adding variables to environment and appending
-	 * individual LESS declarations to override variables.less's values.
+	 * Prepares the style compiler by adding variables to environment.
 	 *
 	 * @param	string[]	$variables
-	 * @param	string		$individualLess
 	 * @return	string
 	 */
-	protected function bootstrap(array $variables, $individualLess = '') {
+	protected function bootstrap(array $variables) {
 		// add reset like a boss
 		$content = '';
 		if (!$this->isACPRequest) $content .= $this->prepareFile(WCF_DIR.'style/bootstrap/reset.less');
-	
-		// override LESS variables
-		$variablesContent = $this->prepareFile(WCF_DIR.'style/bootstrap/variables.less');
-		if ($individualLess) {
-			list($keywords, $values) = explode('=', explode("\n", $individualLess));
-			if (count($keywords) != count($values)) {
-				throw new SystemException("Could not override LESS variables, invalid input");
-			}
-				
-			foreach ($keywords as $i => $keyword) {
-				$variablesContent = preg_replace(
-					'~^@'.$keyword.':.*$~imU',
-					'@'.$keyword.': '.$values[$i].';',
-					$variablesContent
-				);
-			}
-		}
-		$content .= $variablesContent;
-	
 	
 		// apply style variables
 		$this->compiler->setVariables($variables);
