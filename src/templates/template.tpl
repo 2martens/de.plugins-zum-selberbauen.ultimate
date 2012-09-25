@@ -6,28 +6,7 @@
 </head>
 
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
-<a id="top"></a>
-<!-- HEADER -->
-<header id="pageHeader" class="layoutFluid">
-	<div>
-		{include file='header'}		
-	</div>
-</header>
-<!-- /HEADER -->
-
-<!-- MAIN -->
-<div id="main" class="layoutFluid{if $sidebarOrientation|isset && $sidebar|isset} sidebarOrientation{@$sidebarOrientation|ucfirst} clearfix{/if}">
-	<div>
-		{if $sidebar|isset}
-			<aside class="sidebar">
-				{@$sidebar}
-			</aside>
-		{/if}
-			
-		<!-- CONTENT -->
-		<section id="content" class="content clearfix" style="position: relative;">
-			
-			{if $skipBreadcrumbs|empty}{include file='breadcrumbs'}{/if}
+{include file='header'}		
 			<!-- custom area -->
 			<script type="text/javascript">
 			/* <![CDATA[ */
