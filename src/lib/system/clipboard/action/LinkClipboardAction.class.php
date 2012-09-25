@@ -29,6 +29,7 @@ namespace ultimate\system\clipboard\action;
 use wcf\system\clipboard\action\IClipboardAction;
 use wcf\system\clipboard\ClipboardEditorItem;
 use wcf\system\exception\SystemException;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
 /**
