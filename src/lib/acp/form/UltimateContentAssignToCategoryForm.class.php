@@ -174,7 +174,7 @@ class UltimateContentAssignToCategoryForm extends ACPForm {
 		$this->objectAction = new ContentAction($this->contentIDs, 'update', $parameters);
 		$this->objectAction->executeAction();
 		
-		ClipboardHandler::getInstance()->unmark($this->categoryIDs, $this->typeID);
+		ClipboardHandler::getInstance()->unmark($this->contentIDs, $this->typeID);
 		
 		$this->saved();
 		
