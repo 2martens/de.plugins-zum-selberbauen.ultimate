@@ -32,6 +32,7 @@ use ultimate\system\blocktype\BlockTypeHandler;
 use ultimate\system\layout\LayoutHandler;
 use ultimate\system\widgettype\WidgetTypeHandler;
 use wcf\system\cache\CacheHandler;
+use wcf\system\exception\NamedUserException;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
@@ -75,7 +76,10 @@ class TemplateHandler extends SingletonFactory {
 		
 		// get sidebar content
 		/* @var $widgetArea \ultimate\data\widget\area\WidgetArea|null */
-		$widgetArea = $template->__get('widgetArea');
+		if ($template !== null) $widgetArea = $template->__get('widgetArea');
+		else {
+			throw new NamedUserException(WCF::getLanguage()->get('ultimate.error.missingTemplate'));
+		}
 		if ($widgetArea !== null && $template->__get('showWidgetArea')) {
 			$sidebarOutput = '';
 			$sidebarOrientation = $template->__get('widgetAreaSide');
