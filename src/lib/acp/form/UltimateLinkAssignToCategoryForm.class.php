@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\acp\form;
+use ultimate\data\link\CategorizedLink;
 use ultimate\data\link\LinkAction;
 use wcf\acp\form\ACPForm;
 use wcf\system\category\CategoryHandler;
@@ -56,7 +57,7 @@ class UltimateLinkAssignToCategoryForm extends ACPForm {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededPermissions
 	 */
 	public $neededPermissions = array(
-		'admin.link.ultimate.canEditLink'
+		'admin.content.ultimate.canEditLink'
 	);
 	
 	/**
@@ -112,6 +113,9 @@ class UltimateLinkAssignToCategoryForm extends ACPForm {
 		// load links
 		$this->linkIDs = array_keys($links['de.plugins-zum-selberbauen.ultimate.link']);
 		$this->links = $links['de.plugins-zum-selberbauen.ultimate.link'];
+		foreach ($this->links as $linkID => $link) {
+			$this->links[$linkID] = new CategorizedLink($link);
+		}
 	}
 	
 	/**
