@@ -37,20 +37,7 @@
 </head>
 
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
-<a id="top"></a>
-<!-- HEADER -->
-<header id="pageHeader" class="layoutFluid">
-	<div>
-		{include file='header' visualEditor=true}
-	</div>
-</header>
-<!-- /HEADER -->
-
-<!-- MAIN -->
-<div id="main" class="clearfix">
-	<div>
-		<!-- CONTENT -->
-		<section id="content" class="clearfix">
+{include file='header' visualEditor=true skipBreadcrumbs='yes'}
 			{* implement iFrame, panels, etc. *}
 			<div id="loading">
 				<div class="loading-message">
