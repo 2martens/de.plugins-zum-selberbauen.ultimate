@@ -1,6 +1,7 @@
 <?php
 namespace ultimate\data\link;
 use ultimate\data\AbstractUltimateDatabaseObject;
+use wcf\system\WCF;
 
 /**
  * Represents a link.
