@@ -42,7 +42,7 @@
 	</nav>
 </div>
 {hascontent}
-<div id="pageTableContainer" class="tabularBox marginTop shadow">
+<div id="pageTableContainer" class="tabularBox tabularBoxTitle marginTop shadow">
 	<nav class="menu tableMenu">
 		<ul>
 			<li{if $action == ''} class="active"{/if}>
