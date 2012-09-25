@@ -26,12 +26,15 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\acp\form;
+use ultimate\data\content\CategorizedContent;
 use ultimate\data\content\ContentAction;
 use wcf\acp\form\ACPForm;
 use wcf\system\cache\CacheHandler;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\SystemException;
+use wcf\system\exception\UserInputException;
+use wcf\system\WCF;
 use wcf\util\ArrayUtil;
 
 /**
@@ -98,18 +101,21 @@ class UltimateContentAssignToCategoryForm extends ACPForm {
 	public function readParameters() {
 		parent::readParameters();
 		// get type id
-		$this->typeID = ClipboardHandler::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.content');
+		$this->typeID = ClipboardHandler::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.ultimate.content');
 		if ($this->typeID === null) {
 			throw new SystemException("Clipboard item type 'de.plugins-zum-selberbauen.content' is unknown.");
 		}
 		
 		// get content ids
 		$contents = ClipboardHandler::getInstance()->getMarkedItems($this->typeID);
-		if (!isset($contents['de.plugins-zum-selberbauen.content']) || empty($contents['de.plugins-zum-selberbauen.content'])) throw new IllegalLinkException();
+		if (!isset($contents['de.plugins-zum-selberbauen.ultimate.content']) || empty($contents['de.plugins-zum-selberbauen.ultimate.content'])) throw new IllegalLinkException();
 		
 		// load contents
-		$this->contentIDs = array_keys($contents['de.plugins-zum-selberbauen.content']);
-		$this->contents = $contents['de.plugins-zum-selberbauen.content'];
+		$this->contentIDs = array_keys($contents['de.plugins-zum-selberbauen.ultimate.content']);
+		$this->contents = $contents['de.plugins-zum-selberbauen.ultimate.content'];
+		foreach ($this->contents as $contentID => $content) {
+			$this->contents[$contentID] = new CategorizedContent($content);
+		}
 	}
 	
 	/**
@@ -126,6 +132,8 @@ class UltimateContentAssignToCategoryForm extends ACPForm {
 				$invalidCategoryIDs[] = $categoryID;
 			}
 		}
+		// default category may never be in list of assignable categories
+		$invalidCategoryIDs[] = 1;
 		// delete those from the available categories
 		$invalidCategoryIDs = array_unique($invalidCategoryIDs);
 		foreach ($invalidCategoryIDs as $categoryID) {
@@ -160,16 +168,17 @@ class UltimateContentAssignToCategoryForm extends ACPForm {
 		parent::save();
 		
 		$parameters = array(
-			'categories' => $this->categoryIDs
+			'categories' => $this->categoryIDs,
+			'removeCategories' => (!empty($this->categoryIDs) ? array(1) : array())
 		);
 		$this->objectAction = new ContentAction($this->contentIDs, 'update', $parameters);
 		$this->objectAction->executeAction();
 		
-		ClipboardHandler::getInstance()->removeItems($this->typeID);
+		ClipboardHandler::getInstance()->unmark($this->categoryIDs, $this->typeID);
 		
 		$this->saved();
 		
-		WCF::getTPL()->assign('message', 'wcf.acp.ultimate.content.assignToCategory.success');
+		WCF::getTPL()->assign('message', 'wcf.clipboard.item.content.assignToCategory.success');
 		WCF::getTPL()->display('success');
 		exit;
 	}
