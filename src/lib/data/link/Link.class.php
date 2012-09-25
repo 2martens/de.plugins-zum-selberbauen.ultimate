@@ -29,6 +29,15 @@ class Link extends AbstractUltimateDatabaseObject {
 	protected static $databaseTableIndexName = 'linkID';
 	
 	/**
+	 * Returns the name of this link.
+	 * 
+	 * @return	string
+	 */
+	public function __toString() {
+		return WCF::getLanguage()->get($this->linkName);
+	}
+	
+	/**
 	 * @see \wcf\data\DatabaseObject::handleData()
 	 */
 	protected function handleData($data) {
