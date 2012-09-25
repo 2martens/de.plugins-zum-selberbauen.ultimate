@@ -436,24 +436,24 @@ Tom likes the warm water and the wunderful beach.]]></item>
 	</category>
 	
 	<category name="wcf.clipboard">
-		<item name="wcf.clipboard.item.category.delete"><![CDATA[Delete category]]></item>
+		<item name="wcf.clipboard.item.category.delete"><![CDATA[Delete category/ies]]></item>
 		<item name="wcf.clipboard.item.category.delete.confirmMessage"><![CDATA[Delete {if $count == 1}one{else}{#$count}{/if} categor{if $count == 1}y{else}ies{/if}?]]></item>
 		<item name="wcf.clipboard.label.category.marked"><![CDATA[{if $count == 1}One{else}{#$count}{/if} categor{if $count == 1}y{else}ies{/if} marked]]></item>
 		<item name="wcf.clipboard.item.content.assignToCategory"><![CDATA[Assign to category]]></item>
-		<item name="wcf.clipboard.item.content.delete"><![CDATA[Delete content]]></item>
+		<item name="wcf.clipboard.item.content.delete"><![CDATA[Delete content(s)]]></item>
 		<item name="wcf.clipboard.item.content.delete.confirmMessage"><![CDATA[Delete {if $count == 1}one{else}{#$count}{/if} content{if $count != 1}s{/if}?]]></item>
 		<item name="wcf.clipboard.label.content.marked"><![CDATA[{if $count == 1}One{else}{#$count}{/if} content{if $count != 1}s{/if} marked]]></item>
 		<item name="wcf.clipboard.item.link.assignToCategory"><![CDATA[Assign to category]]></item>
-		<item name="wcf.clipboard.item.link.delete"><![CDATA[Delete link]]></item>
+		<item name="wcf.clipboard.item.link.delete"><![CDATA[Delete link(s)]]></item>
 		<item name="wcf.clipboard.item.link.delete.confirmMessage"><![CDATA[Delete {if $count == 1}one{else}{#$count}{/if} link{if $count != 1}s{/if}?]]></item>
 		<item name="wcf.clipboard.label.link.marked"><![CDATA[{if $count == 1}One{else}{#$count}{/if} link{if $count != 1}s{/if} marked]]></item>
-		<item name="wcf.clipboard.item.menu.delete"><![CDATA[Delete menu]]></item>
+		<item name="wcf.clipboard.item.menu.delete"><![CDATA[Delete menu(s)]]></item>
 		<item name="wcf.clipboard.item.menu.delete.confirmMessage"><![CDATA[Delete {if $count == 1}one{else}{#$count}{/if} menu{if $count != 1}s{/if}?]]></item>
 		<item name="wcf.clipboard.label.menu.marked"><![CDATA[{if $count == 1}One{else}{#$count}{/if} menu{if $count != 1}s{/if} marked]]></item>
-		<item name="wcf.clipboard.item.page.delete"><![CDATA[Delete page]]></item>
+		<item name="wcf.clipboard.item.page.delete"><![CDATA[Delete page(s)]]></item>
 		<item name="wcf.clipboard.item.page.delete.confirmMessage"><![CDATA[Delete {if $count == 1}one{else}{#$count}{/if} page{if $count != 1}s{/if}?]]></item>
 		<item name="wcf.clipboard.label.page.marked"><![CDATA[{if $count == 1}One{else}{#$count}{/if} page{if $count != 1}s{/if} marked]]></item>
-		<item name="wcf.clipboard.item.template.delete"><![CDATA[Delete template]]></item>
+		<item name="wcf.clipboard.item.template.delete"><![CDATA[Delete template(s)]]></item>
 		<item name="wcf.clipboard.item.template.delete.confirmMessage"><![CDATA[Delete {if $count == 1}one{else}{#$count}{/if} template{if $count != 1}s{/if}?]]></item>
 		<item name="wcf.clipboard.label.template.marked"><![CDATA[{if $count == 1}One{else}{#$count}{/if} template{if $count != 1}s{/if} marked]]></item>
 	</category>

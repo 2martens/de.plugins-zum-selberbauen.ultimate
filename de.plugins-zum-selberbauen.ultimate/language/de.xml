@@ -441,24 +441,24 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 	</category>
 	
 	<category name="wcf.clipboard">
-		<item name="wcf.clipboard.item.category.delete"><![CDATA[Kategorie löschen]]></item>
+		<item name="wcf.clipboard.item.category.delete"><![CDATA[Kategorie(n) löschen]]></item>
 		<item name="wcf.clipboard.item.category.delete.confirmMessage"><![CDATA[{if $count == 1}Eine{else}{#$count}{/if} Kategorie{if $count != 1}n{/if} löschen?]]></item>
 		<item name="wcf.clipboard.label.category.marked"><![CDATA[{if $count == 1}Eine{else}{#$count}{/if} Kategorie{if $count != 1}n{/if} markiert]]></item>
 		<item name="wcf.clipboard.item.content.assignToCategory"><![CDATA[Kategorie zuweisen]]></item>
-		<item name="wcf.clipboard.item.content.delete"><![CDATA[Inhalt löschen]]></item>
+		<item name="wcf.clipboard.item.content.delete"><![CDATA[Inhalt(e) löschen]]></item>
 		<item name="wcf.clipboard.item.content.delete.confirmMessage"><![CDATA[{if $count == 1}Einen{else}{#$count}{/if} Inhalt{if $count != 1}e{/if} löschen?]]></item>
 		<item name="wcf.clipboard.label.content.marked"><![CDATA[{if $count == 1}Einen{else}{#$count}{/if} Inhalt{if $count != 1}e{/if} markiert]]></item>
 		<item name="wcf.clipboard.item.link.assignToCategory"><![CDATA[Kategorie zuweisen]]></item>
-		<item name="wcf.clipboard.item.link.delete"><![CDATA[Link löschen]]></item>
+		<item name="wcf.clipboard.item.link.delete"><![CDATA[Link(s) löschen]]></item>
 		<item name="wcf.clipboard.item.link.delete.confirmMessage"><![CDATA[{if $count == 1}Einen{else}{#$count}{/if} Link{if $count != 1}s{/if} löschen?]]></item>
 		<item name="wcf.clipboard.label.link.marked"><![CDATA[{if $count == 1}Einen{else}{#$count}{/if} Link{if $count != 1}s{/if} markiert]]></item>
-		<item name="wcf.clipboard.item.menu.delete"><![CDATA[Menü löschen]]></item>
+		<item name="wcf.clipboard.item.menu.delete"><![CDATA[Menü(s) löschen]]></item>
 		<item name="wcf.clipboard.item.menu.delete.confirmMessage"><![CDATA[{if $count == 1}Ein{else}{#$count}{/if} Menü{if $count != 1}s{/if} löschen?]]></item>
 		<item name="wcf.clipboard.label.menu.marked"><![CDATA[{if $count == 1}Ein{else}{#$count}{/if} Menü{if $count != 1}s{/if} markiert]]></item>
-		<item name="wcf.clipboard.item.page.delete"><![CDATA[Seite löschen]]></item>
+		<item name="wcf.clipboard.item.page.delete"><![CDATA[Seite(n) löschen]]></item>
 		<item name="wcf.clipboard.item.page.delete.confirmMessage"><![CDATA[{if $count == 1}Eine{else}{#$count}{/if} Seite{if $count != 1}n{/if} löschen?]]></item>
 		<item name="wcf.clipboard.label.page.marked"><![CDATA[{if $count == 1}Eine{else}{#$count}{/if} Seite{if $count != 1}n{/if} markiert]]></item>
-		<item name="wcf.clipboard.item.template.delete"><![CDATA[Template löschen]]></item>
+		<item name="wcf.clipboard.item.template.delete"><![CDATA[Template(s) löschen]]></item>
 		<item name="wcf.clipboard.item.template.delete.confirmMessage"><![CDATA[{if $count == 1}Ein{else}{#$count}{/if} Template{if $count != 1}s{/if} löschen?]]></item>
 		<item name="wcf.clipboard.label.template.marked"><![CDATA[{if $count == 1}Ein{else}{#$count}{/if} Template{if $count != 1}s{/if} markiert]]></item>
 	</category>
