@@ -93,6 +93,6 @@
 		{/if}
 			
 		<!-- CONTENT -->
-		<section id="content" class="content clearfix" style="position: relative;">
+		<section id="content" class="content clearfix"{if $visualEditor|isset && $visualEditor}{else} style="position: relative;"{/if}>
 			
 			{if $skipBreadcrumbs|empty}{include file='breadcrumbs'}{/if}
