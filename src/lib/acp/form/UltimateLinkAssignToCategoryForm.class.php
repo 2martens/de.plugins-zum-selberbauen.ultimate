@@ -100,18 +100,18 @@ class UltimateLinkAssignToCategoryForm extends ACPForm {
 	public function readParameters() {
 		parent::readParameters();
 		// get type id
-		$this->typeID = ClipboardHandler::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.link');
+		$this->typeID = ClipboardHandler::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.ultimate.link');
 		if ($this->typeID === null) {
-			throw new SystemException("Clipboard item type 'de.plugins-zum-selberbauen.link' is unknown.");
+			throw new SystemException("Clipboard item type 'de.plugins-zum-selberbauen.ultimate.link' is unknown.");
 		}
 		
 		// get link ids
 		$links = ClipboardHandler::getInstance()->getMarkedItems($this->typeID);
-		if (!isset($links['de.plugins-zum-selberbauen.link']) || empty($links['de.plugins-zum-selberbauen.link'])) throw new IllegalLinkException();
+		if (!isset($links['de.plugins-zum-selberbauen.ultimate.link']) || empty($links['de.plugins-zum-selberbauen.ultimate.link'])) throw new IllegalLinkException();
 		
 		// load links
-		$this->linkIDs = array_keys($links['de.plugins-zum-selberbauen.link']);
-		$this->links = $links['de.plugins-zum-selberbauen.link'];
+		$this->linkIDs = array_keys($links['de.plugins-zum-selberbauen.ultimate.link']);
+		$this->links = $links['de.plugins-zum-selberbauen.ultimate.link'];
 	}
 	
 	/**
@@ -167,11 +167,11 @@ class UltimateLinkAssignToCategoryForm extends ACPForm {
 		$this->objectAction = new LinkAction($this->linkIDs, 'update', $parameters);
 		$this->objectAction->executeAction();
 		
-		ClipboardHandler::getInstance()->removeItems($this->typeID);
+		ClipboardHandler::getInstance()->unmark($this->linkIDs, $this->typeID);
 		
 		$this->saved();
 		
-		WCF::getTPL()->assign('message', 'wcf.acp.ultimate.link.assignToCategory.success');
+		WCF::getTPL()->assign('message', 'wcf.clipboard.item.link.assignToCategory.success');
 		WCF::getTPL()->display('success');
 		exit;
 	}
@@ -193,7 +193,7 @@ class UltimateLinkAssignToCategoryForm extends ACPForm {
 	 * Loads the cache.
 	 */
 	protected function loadCache() {
-		$this->categories = CategoryHandler::getInstance()->getCategories('de.plugins-zum-selberbauen.linkCategory');
+		$this->categories = CategoryHandler::getInstance()->getCategories('de.plugins-zum-selberbauen.ultimate.linkCategory');
 		
 		// fix missing __toString method
 		foreach ($this->categories as $categoryID => $category) {
