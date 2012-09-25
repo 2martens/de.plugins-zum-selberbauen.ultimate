@@ -42,6 +42,15 @@
 			</pages>
 		</action>
 		<!-- /link actions -->
+		<!-- menu actions -->
+		<action name="deleteMenu">
+			<actionclassname><![CDATA[ultimate\system\clipboard\action\MenuClipboardAction]]></actionclassname>
+			<showorder>1</showorder>
+			<pages>
+				<page><![CDATA[ultimate\acp\menu\UltimateMenuListPage]]></page>
+			</pages>
+		</action>
+		<!-- /menu actins -->
 		<!-- page actions -->
 		<action name="deletePage">
 			<actionclassname><![CDATA[ultimate\system\clipboard\action\PageClipboardAction]]></actionclassname>

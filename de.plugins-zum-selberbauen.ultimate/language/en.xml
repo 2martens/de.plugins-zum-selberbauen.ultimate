@@ -447,6 +447,9 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.clipboard.item.link.delete"><![CDATA[Delete link]]></item>
 		<item name="wcf.clipboard.item.link.delete.confirmMessage"><![CDATA[Delete {if $count == 1}one{else}{#$count}{/if} link{if $count != 1}s{/if}?]]></item>
 		<item name="wcf.clipboard.label.link.marked"><![CDATA[{if $count == 1}One{else}{#$count}{/if} link{if $count != 1}s{/if} marked]]></item>
+		<item name="wcf.clipboard.item.menu.delete"><![CDATA[Delete menu]]></item>
+		<item name="wcf.clipboard.item.menu.delete.confirmMessage"><![CDATA[Delete {if $count == 1}one{else}{#$count}{/if} menu{if $count != 1}s{/if}?]]></item>
+		<item name="wcf.clipboard.label.menu.marked"><![CDATA[{if $count == 1}One{else}{#$count}{/if} menu{if $count != 1}s{/if} marked]]></item>
 		<item name="wcf.clipboard.item.page.delete"><![CDATA[Delete page]]></item>
 		<item name="wcf.clipboard.item.page.delete.confirmMessage"><![CDATA[Delete {if $count == 1}one{else}{#$count}{/if} page{if $count != 1}s{/if}?]]></item>
 		<item name="wcf.clipboard.label.page.marked"><![CDATA[{if $count == 1}One{else}{#$count}{/if} page{if $count != 1}s{/if} marked]]></item>
