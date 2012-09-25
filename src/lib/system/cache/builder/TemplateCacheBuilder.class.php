@@ -1,9 +1,9 @@
 <?php
 namespace ultimate\system\cache\builder;
-use wcf\system\database\util\PreparedStatementConditionBuilder;
-
 use ultimate\data\template\TemplateList;
 use wcf\system\cache\builder\ICacheBuilder;
+use wcf\system\database\util\PreparedStatementConditionBuilder;
+use wcf\system\WCF;
 
 /**
  * Caches the templates.
