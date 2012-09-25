@@ -224,14 +224,12 @@ class UltimateContentAssignToCategoryForm extends ACPForm {
 	 * @throws UserInputException	if selected categories are invalid
 	 */
 	protected function validateCategoryIDs() {
+		if (empty($this->categoryIDs)) {
+			throw new UserInputException('categoryIDs');
+		}
 		foreach ($this->categoryIDs as $categoryID) {
 			if (!isset($this->categories[$categoryID])) {
 				throw new UserInputException('categoryIDs', 'notValid');
-			} else {
-				$category = $this->categories[$categoryID];
-				if (!$category->__get('categoryID')) {
-					throw new UserInputException('categoryIDs');
-				}
 			}
 		}
 	}
