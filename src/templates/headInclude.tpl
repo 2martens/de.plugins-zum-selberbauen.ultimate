@@ -20,10 +20,6 @@
 <script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui.nestedSortable.js"></script>
 <script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.js"></script>
 <script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.cookie.js"></script>
-<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/codemirror.js"></script>
-<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.textarea.js"></script>
-<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.qtip-1.0.0.min.js"></script>
-<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/css.js"></script>
 <script type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.js"></script>
 <script type="text/javascript">
 	//<![CDATA[
@@ -33,8 +29,9 @@
 {event name='javascriptInclude'}
 
 <!-- Stylesheets -->
-{@$__wcf->getStyleHandler()->getStylesheet()}
 <link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/3rdParty/jquery-ui.css" />
+{@$__wcf->getStyleHandler()->getStylesheet()}
+
 
 <noscript>
 	<style type="text/css">
@@ -76,29 +73,29 @@
 			'wcf.global.confirmation.cancel': '{lang}wcf.global.confirmation.cancel{/lang}',
 			'wcf.global.confirmation.confirm': '{lang}wcf.global.confirmation.confirm{/lang}',
 			'wcf.global.confirmation.title': '{lang}wcf.global.confirmation.title{/lang}',
-			'wcf.sitemap.title': '{lang}wcf.sitemap.title{/lang}',
+			'wcf.sitemap.title': '{lang}wcf.sitemap.title{/lang}'
 			{event name='javascriptLanguageImport'}
 		});
 		
 		WCF.Icon.addObject({
-			'wcf.icon.loading': '{icon size='S'}spinner{/icon}',
-			'wcf.icon.opened': '{icon size='S'}arrowDownInverse{/icon}',
-			'wcf.icon.closed': '{icon size='S'}arrowRightInverse{/icon}',
-			'wcf.icon.arrow.left': '{icon size='S'}arrowLeft{/icon}',
-			'wcf.icon.arrow.left.circle': '{icon size='S'}circleArrowLeft{/icon}',
-			'wcf.icon.arrow.right': '{icon size='S'}arrowRight{/icon}',
-			'wcf.icon.arrow.right.circle': '{icon size='S'}circleArrowRight{/icon}',
-			'wcf.icon.arrow.down': '{icon size='S'}arrowDown{/icon}',
-			'wcf.icon.arrow.down.circle': '{icon size='S'}circleArroDown{/icon}',
-			'wcf.icon.arrow.up': '{icon size='S'}arrowUp{/icon}',
-			'wcf.icon.arrow.up.circle': '{icon size='S'}circleArrowUp{/icon}',
-			'wcf.icon.dropdown': '{icon size='S'}dropdown{/icon}',
-			'wcf.icon.add': '{icon size='S'}add{/icon}',
-			'wcf.icon.delete': '{icon size='S'}delete{/icon}',
-			'wcf.icon.edit': '{icon size='S'}edit{/icon}',
-			'wcf.icon.remove': '{icon size='S'}remove{/icon}',
-			'wcf.global.opened': '{icon size='S'}opened{/icon}',
-			'wcf.global.closed': '{icon size='S'}closed{/icon}'
+			'wcf.icon.loading': '{icon}spinner{/icon}',
+			'wcf.icon.opened': '{icon}arrowDownInverse{/icon}',
+			'wcf.icon.closed': '{icon}arrowRightInverse{/icon}',
+			'wcf.icon.arrow.left': '{icon}arrowLeft{/icon}',
+			'wcf.icon.arrow.left.circle': '{icon}circleArrowLeft{/icon}',
+			'wcf.icon.arrow.right': '{icon}arrowRight{/icon}',
+			'wcf.icon.arrow.right.circle': '{icon}circleArrowRight{/icon}',
+			'wcf.icon.arrow.down': '{icon}arrowDown{/icon}',
+			'wcf.icon.arrow.down.circle': '{icon}circleArroDown{/icon}',
+			'wcf.icon.arrow.up': '{icon}arrowUp{/icon}',
+			'wcf.icon.arrow.up.circle': '{icon}circleArrowUp{/icon}',
+			'wcf.icon.dropdown': '{icon}dropdown{/icon}',
+			'wcf.icon.add': '{icon}add{/icon}',
+			'wcf.icon.delete': '{icon}delete{/icon}',
+			'wcf.icon.edit': '{icon}edit{/icon}',
+			'wcf.icon.remove': '{icon}remove{/icon}',
+			'wcf.global.opened': '{icon}opened{/icon}',
+			'wcf.global.closed': '{icon}closed{/icon}'
 			{event name='javascriptIconImport'}
 		});
 		
