@@ -100,7 +100,7 @@ class UltimatePageListPage extends AbstractCachedListPage {
 			if ($this->sortOrder == 'ASC') ksort($newPages);
 			else krsort($newPages);
 			// refill the sorted values into the original array
-			foreach ($newCPages as $authorName => $page) {
+			foreach ($newPages as $authorName => $page) {
 				$pages[$page->__get('pageID')] = $page;
 			}
 			// return the sorted array
