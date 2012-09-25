@@ -47,7 +47,7 @@
 			<actionclassname><![CDATA[ultimate\system\clipboard\action\MenuClipboardAction]]></actionclassname>
 			<showorder>1</showorder>
 			<pages>
-				<page><![CDATA[ultimate\acp\menu\UltimateMenuListPage]]></page>
+				<page><![CDATA[ultimate\acp\page\UltimateMenuListPage]]></page>
 			</pages>
 		</action>
 		<!-- /menu actins -->
