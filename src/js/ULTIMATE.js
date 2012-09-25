@@ -1359,7 +1359,7 @@ ULTIMATE.Widget.Transfer.prototype = {
  * @class	Represents the VisualEditor.
  * @since	version 1.0.0
  */
-ULTIMATE.VisualEditor = function(selectBlockTypeDialogID) { this.init(selectBlockTypeDialogID, allBlockTypes); };
+ULTIMATE.VisualEditor = function(selectBlockTypeDialogID, allBlockTypes) { this.init(selectBlockTypeDialogID, allBlockTypes); };
 ULTIMATE.VisualEditor.prototype = {
 	/**
 	 * Contains the select block type dialog id.
