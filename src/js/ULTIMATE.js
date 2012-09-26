@@ -2965,7 +2965,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 		}, this));
 		
 		// checkboxes
-		this._element.find('dd.inputCheckbox').bind('click', $proxy(function(event) {
+		this._element.find('dd.inputCheckbox').bind('click', $.proxy(function(event) {
 			var $target = $(event.target);
 			var input = $target.find('input');
 			var label = $target.find('label');
