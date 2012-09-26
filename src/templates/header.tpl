@@ -84,7 +84,7 @@
 <!-- /HEADER -->
 
 <!-- MAIN -->
-<div id="main" class="layoutFluid{if $sidebarOrientation|isset && $sidebar|isset} sidebarOrientation{@$sidebarOrientation|ucfirst} clearfix{/if}">
+<div id="main" class="{if $visualEditor|isset && $visualEditor}clearfix{else}layoutFluid{if $sidebarOrientation|isset && $sidebar|isset} sidebarOrientation{@$sidebarOrientation|ucfirst} clearfix{/if}{/if}">
 	<div>
 		{if $sidebar|isset}
 			<aside class="sidebar">
@@ -93,6 +93,6 @@
 		{/if}
 			
 		<!-- CONTENT -->
-		<section id="content" class="content clearfix"{if $visualEditor|isset && $visualEditor}{else} style="position: relative;"{/if}>
+		<section id="content" class="{if $visualEditor|isset && $visualEditor}{else}content {/if}clearfix"{if $visualEditor|isset && $visualEditor}{else} style="position: relative;"{/if}>
 			
 			{if $skipBreadcrumbs|empty}{include file='breadcrumbs'}{/if}
