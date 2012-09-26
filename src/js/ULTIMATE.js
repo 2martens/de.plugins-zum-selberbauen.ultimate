@@ -1572,7 +1572,7 @@ ULTIMATE.VisualEditor.prototype = {
 		var iframeURL = RELATIVE_ULTIMATE_DIR + 'index.php/VisualEditor/?visualEditorIFrame=true&layout=' + this.currentLayout;
 				
 		// since the default iframe load function is used for all modes, we can just pack it in with the normal callback				
-		var callback_with_default = function() {
+		var callback_with_default = $.proxy(function() {
 			this._setLoadingBar(85);
 						
 			if ( typeof callback === 'function' ) {
@@ -1580,7 +1580,7 @@ ULTIMATE.VisualEditor.prototype = {
 			}
 			
 			this._defaultIFrameLoad();
-		}						
+		}, this);					
 								
 		// use iframe plugin so it can detect a timeout.  If there's a timeout, refresh the entire page.
 		this.iframe.src(iframeURL, callback_with_default, {
