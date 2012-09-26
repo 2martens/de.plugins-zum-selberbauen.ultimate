@@ -80,7 +80,7 @@ class UltimateStyleCompiler extends StyleCompiler {
 		}
 		
 		$this->compileStylesheet(
-			ULTIMATE_DIR.'style/visualEditor-'.ApplicationHandler::getInstance()->getPrimaryApplication()->packageID.'-'.$style->styleID,
+			ULTIMATE_DIR.'style/visualEditor-'.$style->styleID,
 			$files,
 			$variables,
 			$individualCss,
@@ -125,7 +125,7 @@ class UltimateStyleCompiler extends StyleCompiler {
 		}
 	
 		$this->compileStylesheet(
-			ULTIMATE_DIR.'style/visualEditorGrid-'.ApplicationHandler::getInstance()->getPrimaryApplication()->packageID.'-'.$style->styleID,
+			ULTIMATE_DIR.'style/visualEditorGrid-'.$style->styleID,
 			$files,
 			$variables,
 			$individualCss,

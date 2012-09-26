@@ -71,7 +71,7 @@ class UltimateStyleHandler extends StyleHandler {
 	 * @return	string
 	 */
 	public function getVisualEditorStylesheet() {
-		$filename = 'style/visualEditor-'.ApplicationHandler::getInstance()->getPrimaryApplication()->packageID.'-'.$this->getStyle()->styleID.'.css';
+		$filename = 'style/visualEditor-'.$this->getStyle()->styleID.'.css';
 		if (!file_exists(ULTIMATE_DIR.$filename)) {
 			UltimateStyleCompiler::getInstance()->compileVisualEditor($this->getStyle()->getDecoratedObject());
 		}
@@ -84,7 +84,7 @@ class UltimateStyleHandler extends StyleHandler {
 	 * @return	string
 	 */
 	public function getVisualEditorGridStylesheet() {
-		$filename = 'style/visualEditorGrid-'.ApplicationHandler::getInstance()->getPrimaryApplication()->packageID.'-'.$this->getStyle()->styleID.'.css';
+		$filename = 'style/visualEditorGrid-'.$this->getStyle()->styleID.'.css';
 		if (!file_exists(ULTIMATE_DIR.$filename)) {
 			UltimateStyleCompiler::getInstance()->compileVisualEditorGrid($this->getStyle()->getDecoratedObject());
 		}
