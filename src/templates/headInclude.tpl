@@ -20,6 +20,7 @@
 <script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui.nestedSortable.js"></script>
 <script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.js"></script>
 <script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.cookie.js"></script>
+<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.iframe.js"></script>
 <script type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.js"></script>
 <script type="text/javascript">
 	//<![CDATA[
