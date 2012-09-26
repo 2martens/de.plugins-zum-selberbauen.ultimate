@@ -50,6 +50,12 @@ class UltimateStyleCompiler extends StyleCompiler {
 	protected $isACPRequest = false;
 	
 	/**
+	 * If true we have a visual editor grid request.
+	 * @var boolean
+	 */
+	protected $isVisualEditorGrid = false;
+	
+	/**
 	 * Compiles the visualEditor stylesheets.
 	 *
 	 * @param	\wcf\data\style\Style	$style
@@ -96,7 +102,7 @@ class UltimateStyleCompiler extends StyleCompiler {
 			ULTIMATE_DIR.'style/visualEditor/visualEditorIFrameGrid.less',
 			ULTIMATE_DIR.'style/visualEditor/gridUtil.less'
 		);
-	
+		$this->isVisualEditorGrid = true;
 		// load style variables
 		$sql = 'SELECT variableName, variableValue
 		        FROM   wcf'.WCF_N.'_style_variable
@@ -119,7 +125,7 @@ class UltimateStyleCompiler extends StyleCompiler {
 		}
 	
 		$this->compileStylesheet(
-			ULTIMATE_DIR.'style/visualEditor-'.ApplicationHandler::getInstance()->getPrimaryApplication()->packageID.'-'.$style->styleID,
+			ULTIMATE_DIR.'style/visualEditorGrid-'.ApplicationHandler::getInstance()->getPrimaryApplication()->packageID.'-'.$style->styleID,
 			$files,
 			$variables,
 			$individualCss,
@@ -173,7 +179,7 @@ class UltimateStyleCompiler extends StyleCompiler {
 	protected function bootstrap(array $variables) {
 		// add reset like a boss
 		$content = '';
-		if (!$this->isACPRequest) $content .= $this->prepareFile(WCF_DIR.'style/bootstrap/reset.less');
+		if (!$this->isACPRequest && !$this->isVisualEditorGrid) $content .= $this->prepareFile(WCF_DIR.'style/bootstrap/reset.less');
 	
 		// apply style variables
 		$this->compiler->setVariables($variables);
