@@ -2900,34 +2900,34 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 		// initialize input events
 		
 		// selects	
-		this.element.find('dd.inputSelect select').bind('change', $.proxy(function(event) {
+		this._element.find('dd.inputSelect select').bind('change', $.proxy(function(event) {
 			var $target = $(event.target);
 			this.updatePanelInputHidden({input: $target, value: $target.val()});
 			this._visualEditor.allowSaving();
 		}, this));
 		
-		this.element.find('dd.inputMultiSelect select').bind('change', $.proxy(function(event) {
+		this._element.find('dd.inputMultiSelect select').bind('change', $.proxy(function(event) {
 			var $target = $(event.target);
 			this.updatePanelInputHidden({input: $target, value: $target.val()});
 			this._visualEditor.allowSaving();
 		}, this));
 		
 		// text
-		this.element.find('dd.inputText input').bind('keyup blur', $.proxy(function(event) {
+		this._element.find('dd.inputText input').bind('keyup blur', $.proxy(function(event) {
 			var $target = $(event.target);
 			this.updatePanelInputHidden({input: $target, value: $target.val()});
 			this._visualEditor.allowSaving();
 		}, this));
 		
 		// textarea
-		this.element.find('dd.inputTextarea textarea').bind('keyup blur', $.proxy(function(event) {
+		this._element.find('dd.inputTextarea textarea').bind('keyup blur', $.proxy(function(event) {
 			var $target = $(event.target);
 			this.updatePanelInputHidden({input: $target, value: $target.val()});
 			this._visualEditor.allowSaving();
 		}, this));
 		
 		// integer
-		this.element.find('dd.inputInteger input').bind('focus', $.proxy(function(event) {
+		this._element.find('dd.inputInteger input').bind('focus', $.proxy(function(event) {
 			var $target = $(event.target);
 			if ( typeof this.originalValues !== 'undefined' ) {
 				delete this.originalValues;
@@ -2937,7 +2937,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 			this.originalValues[$target.attr('name')] = $target.val();
 		}, this));
 		
-		this.element.find('dd.inputInteger input').bind('keyup blur', $.proxy(function(event) {
+		this._element.find('dd.inputInteger input').bind('keyup blur', $.proxy(function(event) {
 			var $target = $(event.target);
 			var value = $(this).val();
 			if ( event.type == 'keyup' && value == '-' )
@@ -2965,7 +2965,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 		}, this));
 		
 		// checkboxes
-		this.element.find('dd.inputCheckbox').bind('click', $proxy(function(event) {
+		this._element.find('dd.inputCheckbox').bind('click', $proxy(function(event) {
 			var $target = $(event.target);
 			var input = $target.find('input');
 			var label = $target.find('label');
@@ -2984,7 +2984,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 		}, this));
 		
 		// sliders
-		this.element.find('dd > div.sliderBar').each($.proxy(function(index, item) {
+		this._element.find('dd > div.sliderBar').each($.proxy(function(index, item) {
 			var $item = $(item);
 			var value = parseInt($item.parent().find('div.sliderBarText input').val());
 			var min = parseInt($item.data('sliderMin'));
