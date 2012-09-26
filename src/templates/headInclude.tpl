@@ -95,8 +95,8 @@
 			'wcf.icon.delete': '{icon}delete{/icon}',
 			'wcf.icon.edit': '{icon}edit{/icon}',
 			'wcf.icon.remove': '{icon}remove{/icon}',
-			'wcf.global.opened': '{icon}opened{/icon}',
-			'wcf.global.closed': '{icon}closed{/icon}'
+			'wcf.global.opened': '{icon}arrowDown{/icon}',
+			'wcf.global.closed': '{icon}arrowRight{/icon}'
 			{event name='javascriptIconImport'}
 		});
 		
