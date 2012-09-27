@@ -65,15 +65,8 @@ class UltimateStyleCompiler extends StyleCompiler {
 			ULTIMATE_DIR.'style/visualEditor/visualEditor.less'
 		);
 		
-		// load style variables
-		$sql = 'SELECT variableName, variableValue
-		        FROM   wcf'.WCF_N.'_style_variable
-		        WHERE  styleID = ?';
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($style->__get('styleID')));
-		
-		$variables = array();
-		$individualCss = $individualLess = '';
+		$variables = $style->getVariables();
+		$individualCss = '';
 		if (isset($variables['individualCss'])) {
 			$individualCss = $variables['individualCss'];
 			unset($variables['individualCss']);
@@ -103,25 +96,12 @@ class UltimateStyleCompiler extends StyleCompiler {
 			ULTIMATE_DIR.'style/visualEditor/gridUtil.less'
 		);
 		$this->isVisualEditorGrid = true;
-		// load style variables
-		$sql = 'SELECT variableName, variableValue
-		        FROM   wcf'.WCF_N.'_style_variable
-		        WHERE  styleID = ?';
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($style->__get('styleID')));
-	
-		$variables = array();
-		$individualCss = $individualLess = '';
-		while ($row = $statement->fetchArray()) {
-			if ($row['variableName'] == 'individualCss') {
-				$individualCss = $row['variableValue'];
-			}
-			else if ($row['variableName'] == 'individualLess') {
-				$individualLess = $row['variableValue'];
-			}
-			else {
-				$variables[$row['variableName']] = $row['variableValue'];
-			}
+		
+		$variables = $style->getVariables();
+		$individualCss = '';
+		if (isset($variables['individualCss'])) {
+			$individualCss = $variables['individualCss'];
+			unset($variables['individualCss']);
 		}
 	
 		$this->compileStylesheet(
@@ -129,7 +109,6 @@ class UltimateStyleCompiler extends StyleCompiler {
 			$files,
 			$variables,
 			$individualCss,
-			$individualLess,
 			new Callback(function($content) use ($style) {
 				return "/* stylesheet for '".$style->styleName."', generated on ".gmdate('r')." -- DO NOT EDIT */\n\n" . $content;
 			})
@@ -171,6 +150,36 @@ class UltimateStyleCompiler extends StyleCompiler {
 	}
 	
 	/**
+	 * Compiles the Ultimate CMS style files.
+	 * 
+	 * @param	\wcf\data\style\Style	$style
+	 */
+	public function compile(\wcf\data\style\Style $style) {
+		$files = array(
+			WCF_DIR.'style/ultimate/ultimateCore.less',
+			ULTIMATE_DIR.'style/general/ultimate.less'
+		);
+		
+		// get style variables
+		$variables = $style->getVariables();
+		$individualCss = '';
+		if (isset($variables['individualCss'])) {
+			$individualCss = $variables['individualCss'];
+			unset($variables['individualCss']);
+		}
+		
+		$this->compileStylesheet(
+			ULTIMATE_DIR.'style/style-'.$style->styleID,
+			$files,
+			$variables,
+			$individualCss,
+			new Callback(function($content) use ($style) {
+				return "/* stylesheet for '".$style->styleName."', generated on ".gmdate('r')." -- DO NOT EDIT */\n\n" . $content;
+			})
+		);
+	}
+	
+	/**
 	 * Prepares the style compiler by adding variables to environment.
 	 *
 	 * @param	string[]	$variables
@@ -180,7 +189,8 @@ class UltimateStyleCompiler extends StyleCompiler {
 		// add reset like a boss
 		$content = '';
 		if (!$this->isACPRequest && !$this->isVisualEditorGrid) $content .= $this->prepareFile(WCF_DIR.'style/bootstrap/reset.less');
-	
+		// until style system works completely, we have to use this
+		$content .= $this->prepareFile(WCF_DIR.'style/bootstrap/variables.less');
 		// apply style variables
 		$this->compiler->setVariables($variables);
 	

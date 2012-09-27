@@ -56,11 +56,11 @@ class UltimateStyleHandler extends StyleHandler {
 		}
 		else {
 			// frontend
-			$filename = 'style/style-'.ApplicationHandler::getInstance()->getPrimaryApplication()->packageID.'-'.$this->getStyle()->styleID.'.css';
-			if (!file_exists(WCF_DIR.$filename)) {
+			$filename = 'style/style-'.$this->getStyle()->styleID.'.css';
+			if (!file_exists(ULTIMATE_DIR.$filename)) {
 				UltimateStyleCompiler::getInstance()->compile($this->getStyle()->getDecoratedObject());
 			}
-			return '<link rel="stylesheet" type="text/css" href="'.WCF::getPath().$filename.'" />';
+			return '<link rel="stylesheet" type="text/css" href="'.WCF::getPath('ultimate').$filename.'" />';
 		}
 		
 	}
