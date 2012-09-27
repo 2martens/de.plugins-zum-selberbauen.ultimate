@@ -21,6 +21,7 @@
 <script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.js"></script>
 <script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.cookie.js"></script>
 <script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.iframe.js"></script>
+<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/ITStylesheet.js"></script>
 <script type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.js"></script>
 <script type="text/javascript">
 	//<![CDATA[
@@ -30,8 +31,9 @@
 {event name='javascriptInclude'}
 
 <!-- Stylesheets -->
-<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/3rdParty/jquery-ui.css" />
 {@$__wcf->getStyleHandler()->getStylesheet()}
+<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/3rdParty/jquery-ui.css" />
+{@$__wcf->getUltimateStyleHandler()->getStylesheet()}
 
 
 <noscript>
