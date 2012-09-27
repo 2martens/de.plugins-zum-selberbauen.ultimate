@@ -37,10 +37,12 @@
 			</div>
 			<div class="grid-container ui-grid">
 			</div>
+			{*
 			<div id="grid-height-buttons">
 				<span class="grid-height-adjustment jsTooltip wcf-badge" id="grid-height-decrease" title="{lang}ultimate.visualEditor.decreaseHeight{/lang}">-</span>
 				<span class="grid-height-adjustment jsTooltip wcf-badge" id="grid-height-increase" title="{lang}ultimate.visualEditor.increaseHeight{/lang}">+</span>
 			</div>
+			*}
 		</div>
 	</div>
 </body>
