@@ -24,9 +24,9 @@
 			'admin.content.ultimate.canDeleteTemplate': {if $__wcf->session->getPermission('admin.content.ultimate.canDeleteTemplate')}true{else}false{/if}
 		});
 		WCF.TabMenu.init();
-		var allBlockTypes = $.parseJSON({@$blockTypesJSON});
+		var allBlockTypes = $.parseJSON('{@$blockTypesJSON}');
 		
-		new ULTIMATE.VisualEditor('blockTypePopup', allBlockTypes);
+		var visualEditor = ULTIMATE.VisualEditorUtil.getVisualEditor('blockTypePopup', allBlockTypes);
 		
 		{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteTemplate')}
 			new WCF.Action.Delete('ultimate\\data\\template\\TemplateAction', $('.jsLayoutItem'));

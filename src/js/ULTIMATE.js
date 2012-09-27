@@ -123,9 +123,10 @@ ULTIMATE.Block = {
 	 * @returns	{Object}
 	 */
 	getBlockTypeObject: function(blockType) {
-		var blockTypes = ULTIMATE.VisualEditor.getVisualEditor().allBlockTypes;
+		var visualEditor = ULTIMATE.VisualEditorUtil.getVisualEditor();
+		var blockTypes = visualEditor.allBlockTypes;
 		
-		if ( typeof blockTypes[blockType] === 'undefined' )
+		if ( typeof blockTypes === 'undefined' || typeof blockTypes === 'null' || typeof blockTypes[blockType] === 'undefined' )
 			return {'fixed-height': false};
 		
 		return blockTypes[blockType];
@@ -300,19 +301,19 @@ ULTIMATE.Block = {
 	getAvailableBlockID: function() {
 		
 		// get the ready block ID
-		var readyBlockID = ULTIMATE.VisualEditor.getVisualEditor().availableBlockID;
+		var readyBlockID = ULTIMATE.VisualEditorUtil.getVisualEditor().availableBlockID;
 		
 		// Retrieve the block ID that can be used.
-		var blockIDBlacklist = [readyBlockID];
+		var blockIDBlackList = [readyBlockID];
 		
-		ULTIMATE.VisualEditor.getVisualEditor()._i('.block').each(function() {
-			blockIDBlacklist.push(ULTIMATE.Block.getBlockID($(this)));
+		ULTIMATE.VisualEditorUtil.getVisualEditor()._i('.block').each(function() {
+			blockIDBlackList.push(ULTIMATE.Block.getBlockID($(this)));
 		});
 		var $proxy = new WCF.Action.Proxy({
 			success: function(data, textStatus, jqXHR) {
 				if ( isNaN(data['returnValues']) )
 					return;
-				ULTIMATE.VisualEditor.getVisualEditor().availableBlockID = response;
+				ULTIMATE.VisualEditorUtil.getVisualEditor().availableBlockID = response;
 			},
 			showLoadingOverlay: false,
 			data: {
@@ -1368,6 +1369,12 @@ ULTIMATE.VisualEditorUtil = {
 	allowVECloseSwitch: false,
 	
 	/**
+	 * Contains a VisualEditor object.
+	 * @type	ULTIMATE.VisualEditor
+	 */
+	_visualEditor: null,
+	
+	/**
 	 * Allowes saving.
 	 * 
 	 * @param	{jQuery}	iframe
@@ -1470,6 +1477,20 @@ ULTIMATE.VisualEditorUtil = {
 		setTimeout(function(){
 			$('div#iframeOverlay').hide();
 		}, 250);
+	},
+	
+	/**
+	 * Returns an object of the VisualEditor.
+	 * 
+	 * @param	{String}	selectBlockTypeDialogID	optional
+	 * @param	{Object}	allBlockTypes
+	 * @returns {ULTIMATE.VisualEditor}
+	 */
+	getVisualEditor: function(selectBlockTypeDialogID, allBlockTypes) {
+		if (ULTIMATE.VisualEditorUtil._visualEditor === null) {
+			ULTIMATE.VisualEditorUtil._visualEditor = new ULTIMATE.VisualEditor(selectBlockTypeDialogID, allBlockTypes);
+		}
+		return ULTIMATE.VisualEditorUtil._visualEditor;
 	}
 };
 
@@ -1628,15 +1649,6 @@ ULTIMATE.VisualEditor.prototype = {
 	 */
 	_i: function(element) {
 		return this.iframe.contents().find(element);
-	},
-	
-	/**
-	 * Returns an object of the VisualEditor.
-	 * 
-	 * @returns {ULTIMATE.VisualEditor}
-	 */
-	getVisualEditor: function() {
-		return this;
 	},
 	
 	/**
@@ -1808,9 +1820,9 @@ ULTIMATE.VisualEditor.prototype = {
 			&& !layoutLi.hasClass('layoutItemTemplateUsed')
 		) {
 			this._bottomPanel.hidePanel();
-			openBox('grid-wizard');
+			//openBox('grid-wizard');
 		} else {
-			closeBox('grid-wizard');
+			//closeBox('grid-wizard');
 		}
 		
 		// clear out and disable iframe loading indicator
@@ -2008,11 +2020,11 @@ ULTIMATE.VisualEditor.prototype = {
 		// Block Dimensions
 		this._i('body').delegate('.block', 'mouseenter', $.proxy(function(event) {
 			var block = ULTIMATE.Block.getBlock(event.target);
-			
+			if (typeof block == 'undefined' || !block) return;
 			var blockWidth = ULTIMATE.Block.getBlockDimensionsPixels(block).width;	
 			var blockHeight = ULTIMATE.Block.getBlockDimensionsPixels(block).height;					
 			var blockType = ULTIMATE.Block.getBlockType(block);		
-			var heighText = '';
+			var heightText = '';
 			if ( ULTIMATE.Block.getBlockTypeObject(blockType)['fixedHeight'] ) {
 				heightText = WCF.Language.get('ultimate.visualEditor.block.height');
 			} else {
@@ -3043,7 +3055,8 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 		var result = this._super();
 		if (result == false) return false;
 		// Re-select the block if a block option panel tab is open.
-		this._i('#' + this._element.find('nav.tabMenu > ul li.ui-state-active a').attr('href').replace('#', '').replace('-tab', '')).addClass('block-selected block-hover');
+		var $list = this._element.find('nav.tabMenu > ul li.ui-state-active a');
+		if ($list.length) this._i('#' + $list.attr('href').replace('#', '').replace('-tab', '')).addClass('block-selected block-hover');
 		$.removeCookie('hideBottomPanel');
 		$.cookie('hideBottomPanel', false);
 		this._element.find('nav.tabMenu > ul li#minimize img').attr('src', WCF.Icon.get('wcf.icon.remove'));
@@ -3409,10 +3422,22 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 		
 		var iframeBottomPadding = this._element.hasClass('panelHidden') ? (this._element.find('> nav.tabMenu > ul').outerHeight() + 41) : (this._element.outerHeight() + 41);
 		var layoutSelectorBottomPadding = this._element.hasClass('panelHidden') ? this._element.find('> nav.tabMenu > ul').outerHeight()  + $('#layoutSelectorTabs').height() : this._element.outerHeight() + $('#layoutSelectorTabs').height();
-		this._visualEditor.iframe.css({paddingBottom: iframeBottomPadding});
+		this._iframe.css({paddingBottom: iframeBottomPadding});
 		$('#layoutSelectorOffset').css({paddingBottom: layoutSelectorBottomPadding});
 		$.removeCookie('bottomPanelHeight');
 		return $.cookie('bottomPanelHeight', panelHeight);
+	},
+	
+	/**
+	 * Removes the tabs which should be deleted on layout switch.
+	 */
+	removeLayoutSwitchPanels: function() {
+		$('li.tab-close-on-layout-switch').each($.proxy(function(index, item){
+			var $item = $(item);
+			var id = $item.find('a').attr('href').replace('#', '');
+			this.element.wcfTabs('remove', id);
+		}, this));
+		
 	}
 });
 
@@ -3538,10 +3563,10 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 		destroy: function () {
 			this.element.removeClass('ui-grid ui-grid-disabled').removeData('grid').unbind('.grid');
 			this._mouseDestroy();
-			this.contents.unbind('mousedown', this._iFrameMouseDown);
-			this.contents.unbind('mouseup', this._iFrameMouseUp);
-			this.contents.unbind('mousemove', this._iFrameMouseMove);
-			this.element.unbind('mouseleave', this._iFrameMouseUp);
+			this.contents.unbind('mousedown', $.proxy(this._iFrameMouseDown, this));
+			this.contents.unbind('mouseup', $.proxy(this._iFrameMouseUp, this));
+			this.contents.unbind('mousemove', $.proxy(this._iFrameMouseMove, this));
+			this.element.unbind('mouseleave', $.proxy(this._iFrameMouseUp, this));
 			$.Widget.prototype.destroy.apply(this, arguments);
 			return this;
 		},
@@ -3586,7 +3611,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 			this.mouseEventDown = event;
 			this.mouseEventElement = $(this.mouseEventDown.originalEvent.target);
 			if (typeof this.bindMouseMove === 'undefined') {
-				this.contents.mousemove(this._iFrameMouseMove);
+				this.contents.mousemove($.proxy(this._iFrameMouseMove, this));
 				this.bindMouseMove = true;
 			}
 			if (this.mouseEventElement.hasClass('ui-resizable-handle')) {
@@ -3614,7 +3639,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 				if (this.mouseEventElement.hasClass('ui-resizable-handle')) {
 					ULTIMATE.Block.getBlock(this.mouseEventElement).data('resizable')._mouseMove(event);
 				} else {
-					if (getBlock(this.mouseEventElement) && getBlock(this.mouseEventElement).hasClass(this.options.defaultBlockClass.replace('.', ''))) {
+					if (ULTIMATE.Block.getBlock(this.mouseEventElement) && ULTIMATE.Block.getBlock(this.mouseEventElement).hasClass(this.options.defaultBlockClass.replace('.', ''))) {
 						if (ULTIMATE.Block.getBlock(this.mouseEventElement).data('draggable')) {
 							ULTIMATE.Block.getBlock(this.mouseEventElement).data('draggable')._mouseMove(event);
 						}
@@ -3627,10 +3652,10 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 			} else {
 				if (typeof this.doingHoverBlockToTop == 'undefined') {
 					this.doingHoverBlockToTop = true;
-					setTimeout(function () {
+					setTimeout($.proxy(function () {
 						var $blocks = [];
-						var $pageX = c.pageX;
-						var $pageY = c.pageY;
+						var $pageX = event.pageX;
+						var $pageY = event.pageY;
 						this._i('.block').each(function () {
 							var $offsetLeft = $(this).offset().left;
 							var $offsetTop = $(this).offset().top;
@@ -3652,7 +3677,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 						});
 						this.sendBlockToTop($($blocks.pop()));
 						delete this.doingHoverBlockToTop;
-					}, 50)
+					}, this), 50)
 				}
 			}
 		},
@@ -3671,7 +3696,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 				if (block && typeof block.data('draggable') != 'undefined') {
 					block.data('draggable')._mouseUp(event);
 				}
-				if (typeof block != 'undefined' && typeof block.data('grid') != 'undefined') {
+				if (typeof block != 'undefined' && block && typeof block.data('grid') != 'undefined') {
 					block.data('grid')._mouseUp(event);
 				}
 				delete this.mouseEventDown;
@@ -3728,25 +3753,25 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 			var offsetTopNew = $(this.container).offset().top;
 			var height = $(this.container).height();
 			var width = $(this.container).width();
-			if (offsetLeft >= width && mouseLeftPosition >= width) {
+			if (offsetLeft >= width && leftMousePosition >= width) {
 				return;
 			}
-			if (offsetTop >= height && mouseTopPosition >= height) {
+			if (offsetTop >= height && topMousePosition >= height) {
 				return;
 			}
-			if (mouseLeftPosition < 0) {
-				mouseLeftPosition = 0;
+			if (leftMousePosition < 0) {
+				leftMousePosition = 0;
 			}
-			if (mouseTopPosition < 0) {
-				mouseTopPosition = 0;
+			if (topMousePosition < 0) {
+				topMousePosition = 0;
 			}
 			if (offsetTop > height) {
 				offsetTop = height;
 			}
-			var leftBlock = mouseLeftPosition.toNearest(this.options.columnWidth + this.options.gutterWidth);
-			var topBlock = mouseTopPosition.toNearest(this.options.yGridInterval);
+			var leftBlock = leftMousePosition.toNearest(this.options.columnWidth + this.options.gutterWidth);
+			var topBlock = topMousePosition.toNearest(this.options.yGridInterval);
 			var widthBlock = offsetLeft.toNearest(this.options.columnWidth + this.options.gutterWidth) - leftBlock - this.options.gutterWidth;
-			var heightBlock = offsetTop.toNearest(this.options.yGridInterval) - mouseTopPosition.toNearest(this.options.yGridInterval);
+			var heightBlock = offsetTop.toNearest(this.options.yGridInterval) - topMousePosition.toNearest(this.options.yGridInterval);
 			var css = {
 				display: 'block',
 				left: leftBlock,
@@ -3907,7 +3932,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 			ULTIMATE.Block.updateBlockDimensionsHidden(ULTIMATE.Block.getBlockID(block), ULTIMATE.Block.getBlockDimensions(block));
 			ULTIMATE.Block.updateBlockPositionHidden(ULTIMATE.Block.getBlockID(block), ULTIMATE.Block.getBlockPosition(block));
 			
-			ULTIMATE.VisualEditorUtil.allowSaving(ULTIMATE.VisualEditor.getVisualEditor().iframe);
+			ULTIMATE.VisualEditorUtil.allowSaving(ULTIMATE.VisualEditorUtil.getVisualEditor().iframe);
 			new WCF.Effect.BalloonTooltip();
 			block.removeClass('block-hover');
 		},
@@ -4015,7 +4040,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 				});
 				$item.css('left', '');
 				ULTIMATE.Block.updateBlockPositionHidden(ULTIMATE.Block.getBlockID($item), ULTIMATE.Block.getBlockPosition($item));
-				ULTIMATE.VisualEditorUtil.allowSaving(ULTIMATE.VisualEditor.getVisualEditor().iframe);
+				ULTIMATE.VisualEditorUtil.allowSaving(ULTIMATE.VisualEditorUtil.getVisualEditor().iframe);
 			});
 			$(document).focus();
 			$target.data('hoverWaitTimeout', setTimeout(function () {
@@ -4151,7 +4176,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 			blockIntersectCheck(newBlock);
 			if (isOldBlock == false) {
 				new WCF.Effect.BalloonTooltip();
-				ULTIMATE.VisualEditor.getVisualEditor().showBlockTypePopup($($blankBlock));
+				ULTIMATE.VisualEditorUtil.getVisualEditor().showBlockTypePopup($($blankBlock));
 			}
 			this.blankBlock = $blankBlock;
 			return newBlock;
@@ -4171,12 +4196,12 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 			this.blankBlock.removeClass('blank-block');
 			this.blankBlock.addClass('block-type-' + blockType);
 			this.blankBlock.find('.block-info span.type').attr('class', '').addClass('type').addClass('type-' + blockType).html(ULTIMATE.Block.getBlockTypeNice(blockType));
-			ULTIMATE.VisualEditor.getVisualEditor().loadBlockContent({
+			ULTIMATE.VisualEditorUtil.getVisualEditor().loadBlockContent({
 				blockElement: this.blankBlock,
 				blockOrigin: {
 					blockType: blockType,
 					id: 0,
-					layout: ULTIMATE.VisualEditor.getVisualEditor().currentLayout
+					layout: ULTIMATE.VisualEditorUtil.getVisualEditor().currentLayout
 				},
 				blockSettings: {
 					dimensions: ULTIMATE.Block.getBlockDimensions(this.blankBlock),
@@ -4191,13 +4216,13 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 			this.blankBlock.find('h3.block-type span').text(ULTIMATE.Block.getBlockTypeNice(blockType));
 			this.blankBlock.find('h3.block-type').show();
 			if (isNewBlock == false) {
-				ULTIMATE.VisualEditor.getVisualEditor().hideBlockTypePopup();
+				ULTIMATE.VisualEditorUtil.getVisualEditor().hideBlockTypePopup();
 			}
-			ULTIMATE.VisualEditor.getVisualEditor()._addNewBlockHidden(ULTIMATE.Block.getBlockID(this.blankBlock), ULTIMATE.Block.getBlockType(this.blankBlock));
+			ULTIMATE.VisualEditorUtil.getVisualEditor()._addNewBlockHidden(ULTIMATE.Block.getBlockID(this.blankBlock), ULTIMATE.Block.getBlockType(this.blankBlock));
 			ULTIMATE.Block.updateBlockPositionHidden(ULTIMATE.Block.getBlockID(this.blankBlock), ULTIMATE.Block.getBlockPosition(this.blankBlock));
 			ULTIMATE.Block.updateBlockDimensionsHidden(ULTIMATE.Block.getBlockID(this.blankBlock), ULTIMATE.Block.getBlockDimensions(this.blankBlock));
 			
-			ULTIMATE.VisualEditorUtil.allowSaving(ULTIMATE.VisualEditor.getVisualEditor().iframe);
+			ULTIMATE.VisualEditorUtil.allowSaving(ULTIMATE.VisualEditorUtil.getVisualEditor().iframe);
 			var block = this.blankBlock;
 			delete this.blankBlock;
 			delete this.blankBlockOptions;
