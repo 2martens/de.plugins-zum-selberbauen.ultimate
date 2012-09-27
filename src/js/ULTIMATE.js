@@ -1352,6 +1352,128 @@ ULTIMATE.Widget.Transfer.prototype = {
 };
 
 /**
+ * Provides some useful utilities for the VisualEditor.
+ */
+ULTIMATE.VisualEditorUtil = {
+	/**
+	 * If true saving is allowed.
+	 * @type	Boolean
+	 */
+	isSavingAllowed: false,
+	
+	/**
+	 * If true the VE can be closed.
+	 * @type	Boolean
+	 */
+	allowVECloseSwitch: false,
+	
+	/**
+	 * Allowes saving.
+	 * 
+	 * @param	{jQuery}	iframe
+	 * @return	{Boolean}
+	 */
+	allowSaving: function(iframe) {
+		// if there are no blocks on the page, then do not allow saving.
+		if ( iframe.contents().find('.block').length === 0 ) {
+			ULTIMATE.VisualEditorUtil.disallowSaving();
+			return false;
+		}
+		// if saving is already allowed, don't do anything else
+		if ( typeof ULTIMATE.VisualEditorUtil.isSavingAllowed !== 'undefined' && ULTIMATE.VisualEditorUtil.isSavingAllowed === true ) {
+			return;
+		}
+		
+		$('#saveButton').removeClass('disabled').prop('disabled', false);
+		ULTIMATE.VisualEditorUtil.isSavingAllowed = true;
+		
+		// Set reminder whne trying to leave that there are changes.
+		ULTIMATE.VisualEditorUtil.prohibitVEClose();
+		return true;
+	},
+	
+	/**
+	 * Disallowes saving.
+	 * 
+	 * @return	{Boolean}
+	 */
+	disallowSaving: function() {
+		ULTIMATE.VisualEditorUtil.isSavingAllowed = false;
+		
+		$('#saveButton').addClass('disabled').prop('disabled', true);
+		
+		// User can safely leave VE now--changes are saved.
+		ULTIMATE.VisualEditorUtil.allowVEClose();
+		return true;
+	},
+	
+	/**
+	 * Allowes the user to close the VisualEditor.
+	 */
+	allowVEClose: function() {
+		$(window).unbind('beforeunload', function(event){
+			event.returnValue = WCF.Language.get('ultimate.visualEditor.unsavedChangesOnLeaving.sure');
+			return WCF.Language.get('ultimate.visualEditor.unsavedChangesOnLeaving.sure');
+		});
+		
+		ULTIMATE.VisualEditorUtil.allowVECloseSwitch = true;
+	},
+	
+	/**
+	 * Disallowes the user to close the VisualEditor.
+	 */
+	prohibitVEClose: function () {
+		$(window).bind('beforeunload', function(event){
+			event.returnValue = WCF.Language.get('ultimate.visualEditor.unsavedChangesOnLeaving.sure');
+			return WCF.Language.get('ultimate.visualEditor.unsavedChangesOnLeaving.sure');
+		});
+		
+		ULTIMATE.VisualEditorUtil.allowVECloseSwitch = false;
+	},
+	
+	/**
+	 * Shows the IFrameOverlay.
+	 * 
+	 * @param	{jQuery}	iframe
+	 */
+	showIFrameOverlay: function(iframe) {
+		var overlay = $('div#iframeOverlay');
+		var iframeWidth = iframe.width();
+		var iframeHeight = iframe.height() + 41;
+		iframe.css({
+			'z-index': -1
+		})
+		
+		overlay.css({
+			top: iframe.css('paddingTop'),
+			left: iframe.css('paddingLeft'),
+			width: iframeWidth,
+			height: iframeHeight
+		});
+		
+		overlay.show();
+	},
+	
+	/**
+	 * Hides the IFrameOverlay.
+	 * 
+	 * @param	[jQuery}	iframe
+	 * @param	{Integer}	delay
+	 */
+	hideIFrameOverlay: function(iframe, delay) {
+		if ( typeof delay != 'undefined' && delay == false )
+			return $('div#iframeOverlay').hide();
+		iframe.css({
+			'z-index': 4
+		});
+		// Add a timeout for intense draggers.
+		setTimeout(function(){
+			$('div#iframeOverlay').hide();
+		}, 250);
+	}
+};
+
+/**
  * Creates a new VisualEditor.
  * 
  * @param	{String}	selectBlockTypeDialogID
@@ -1442,7 +1564,7 @@ ULTIMATE.VisualEditor.prototype = {
 			$(this).trigger('focus');
 		});
 		
-		this._loadIFrame(this._iFrameCallback);
+		this._loadIFrame($.proxy(this._iFrameCallback, this));
 		
 		// initialize LayoutSelector
 		$('#layoutSelectorToggle').click($.proxy(this._toggleLayoutSelector, this));
@@ -1491,7 +1613,7 @@ ULTIMATE.VisualEditor.prototype = {
 		// initialize bottom panel
 		var panelMinHeight = 120;
 		var panelMaxHeight = function() { return $(window).height() - 275; };
-		this._bottomPanel = new ULTIMATE.VisualEditor.BottomPanel(this, 'bottomPanel', panelMinHeight, panelMaxHeight);
+		this._bottomPanel = new ULTIMATE.VisualEditor.BottomPanel(this.iframe, 'bottomPanel', panelMinHeight, panelMaxHeight);
 		
 		// initialize save button
 		$('#visualEditorForm').submit($.proxy(this._stopFormSubmit, this));
@@ -1570,17 +1692,17 @@ ULTIMATE.VisualEditor.prototype = {
 	 */
 	_loadIFrame: function(callback) {
 		var iframeURL = RELATIVE_ULTIMATE_DIR + 'index.php/VisualEditor/?visualEditorIFrame=true&layout=' + this.currentLayout;
-				
+		
 		// since the default iframe load function is used for all modes, we can just pack it in with the normal callback				
 		var callback_with_default = $.proxy(function() {
 			this._setLoadingBar(85);
-						
+			
 			if ( typeof callback === 'function' ) {
 				callback();
 			}
 			
 			this._defaultIFrameLoad();
-		}, this);					
+		}, this);
 								
 		// use iframe plugin so it can detect a timeout.  If there's a timeout, refresh the entire page.
 		this.iframe.src(iframeURL, callback_with_default, {
@@ -1618,7 +1740,7 @@ ULTIMATE.VisualEditor.prototype = {
 
 		if ( typeof callback !== 'function' )
 			callback = function(){};
-
+			
 		setTimeout(callback, 120);
 		
 		if ( percent == 100 )
@@ -1631,21 +1753,21 @@ ULTIMATE.VisualEditor.prototype = {
 	_defaultIFrameLoad: function() {
 		changeTitle('VisualEditor: ' + this.currentLayoutName);
 		$('div#current-layout strong span').text(this.currentLayoutName);
-	
+		
 		new WCF.Effect.BalloonTooltip();
 		
 		// handle layout selector cookie
 		if ( $.cookie('hideLayoutSelector') === 'true' ) {
 			this._hideLayoutSelector();
 		}
-	
+		
 		this._setLoadingBar(100, 'Complete', function(){
 			$('div#loading').animate({opacity: 0}, 400, function(){ 
-				$(this).remove(); 
+				$(this).remove();
 			});
 		});
 		
-
+		
 		this._stylesheet = new ITStylesheet({document: this.iframe.contents()[0], href: RELATIVE_ULTIMATE_DIR + 'style/bootstrapVisualEditor.css'}, 'find');
 		this._css = new ITStylesheet({document: this.iframe.contents()[0]}, 'load');
 		
@@ -1679,7 +1801,7 @@ ULTIMATE.VisualEditor.prototype = {
 		// show the grid wizard if the current layout isn't customized and not using a tmeplate
 		var layoutNode = $('div#layoutSelector span.layout[layout_id="' + this.currentLayout + '"]');
 		var layoutLi = layoutNode.parent();
-				
+		
 		if ( 
 			!layoutNode.hasClass('layoutTemplate') 
 			&& !layoutLi.hasClass('layout-item-customized') 
@@ -1704,7 +1826,7 @@ ULTIMATE.VisualEditor.prototype = {
 	_addBlockControls: function(showOptions, showDelete) {
 		if ( typeof showOptions == 'undefined' )
 			var showOptions = false;
-			
+		
 		if ( typeof showDelete == 'undefined' )
 			var showDelete = false;
 		
@@ -1714,7 +1836,7 @@ ULTIMATE.VisualEditor.prototype = {
 			var id = ULTIMATE.Block.getBlockID(this);
 			var type = ULTIMATE.Block.getBlockType(this);	
 			var typeNice = ULTIMATE.Block.getBlockTypeNice(type);
-				
+			
 			var idTooltip = 'This is the ID for the block.  The ID of the block is displayed in the WordPress admin panel if it is a widget area or navigation block.  Also, this can be used with advanced developer functions.';
 			idTooltip = WCF.Language.get('ultimate.visualEditor.block.idTooltip');
 			var changeBlockTypeTooltip = 'Click to change the block type.';
@@ -1772,7 +1894,7 @@ ULTIMATE.VisualEditor.prototype = {
 		var hiddenInputClass = 'block-' + id + '-delete';
 		$('<input type="hidden" class="' + hiddenInputClass + '" name="blocks[' + id + '][delete]" value="true"  />')
 			.appendTo('div#hiddenInputs');
-			
+		
 		// remove the hidden input flags that may exist for the block
 		$('div#hiddenInputs input.block-' + id + '-new').remove();
 		$('div#hiddenInputs input.block-' + id + '-position').remove();
@@ -1796,7 +1918,7 @@ ULTIMATE.VisualEditor.prototype = {
 		
 		$('<input type="hidden" class="' + hiddenInputClass + '" name="blocks[' + id + '][new]" value="' + type + '"  />')
 			.appendTo('div#hiddenInputs');
-			
+		
 		// remove the delete hidden if it exists
 		$('div#hiddenInputs input.block-' + id + '-delete').remove();
 	},
@@ -1818,11 +1940,11 @@ ULTIMATE.VisualEditor.prototype = {
 			if ( !block.hasClass('block-info-show') ) {
 				// force the ID and block type icon to stay visible
 				block.addClass('block-info-show');
-			
+				
 				// keep track of this block so we can remove the block-info-show class later.
 				this._blockTypeSwitchBlock = block;
 				this.showBlockTypePopup({top: block.position().top + 36, left: block.position().left + 5}, true);
-			
+				
 				// hide the current block type from the list
 				this._blockTypePopup.find('li#block-' + type).addClass('blockTypeHidden');
 			} else {			
@@ -1842,7 +1964,7 @@ ULTIMATE.VisualEditor.prototype = {
 			var blockID = ULTIMATE.Block.getBlockID(block);		    
 			var blockType = ULTIMATE.Block.getBlockType(block);		
 			var blockTypeName = ULTIMATE.Block.getBlockTypeNice(blockType);
-									
+								
 			var readyTabs = $.proxy(function(data, textStatus, jqXHR) {
 				var tab = $('div#block-' + blockID + '-tab');
 				
@@ -1865,7 +1987,7 @@ ULTIMATE.VisualEditor.prototype = {
 			}, this);						
 			
 			var blockIDForTab = isNaN(blockID) ? ': ' + blockID : ' #' + blockID;
-						
+			
 			this._bottomPanel.addPanelTab('block-' + blockID, blockTypeName + ' Block' + blockIDForTab, {
 				url: 'index.php/Block/?t=' + SECURITY_TOKEN + SID_ARG_2ND,
 				data: {
@@ -1878,11 +2000,11 @@ ULTIMATE.VisualEditor.prototype = {
 						unsavedBlockOptions: ULTIMATE.Block.getUnsavedBlockOptionValues(blockID),
 						templateID: this.currentLayoutTemplate
 					}
-				}, 
+				},
 				success: readyTabs}, true, true, 'block-type-' + blockType);
 			this.element.wcfTabs('select', 'block-' + blockID + '-tab');
 		}, this));
-	
+		
 		// Block Dimensions
 		this._i('body').delegate('.block', 'mouseenter', $.proxy(function(event) {
 			var block = ULTIMATE.Block.getBlock(event.target);
@@ -1896,12 +2018,12 @@ ULTIMATE.VisualEditor.prototype = {
 			} else {
 				heightText = WCF.Language.get('ultimate.visualEditor.block.minHeight');
 			}
-						
+				
 			var height = '<span class="block-height"><strong>' + heightText + ':</strong> ' + blockHeight + '<small>px</small></span>';
 			var width = '<span class="block-width"><strong>' + WCF.Language.get('ultimate.visualEditor.block.width') + '</strong> ' + blockWidth + '<small>px</small></span>';
-
+			
 			var fluidMessage = !ULTIMATE.Block.getBlockTypeObject(blockType)['fixedHeight'] ? '<span class="block-fluid-height-message">' + WCF.Language.get('ultimate.visualEditor.block.height.autoExpand') + '</span>'  : '';
-
+			
 			block.attr('title', width + ' <span class="block-dimensions-separator">&#9747;</span> ' + height + fluidMessage);
 			new WCF.Effect.BalloonTooltip();
 			// if tooltip is hidden
@@ -1925,7 +2047,7 @@ ULTIMATE.VisualEditor.prototype = {
 				$('#balloonTooltip').wcfFadeIn();
 			}, 300));
 		});
-
+		
 	},
 	
 	/**
@@ -1937,7 +2059,7 @@ ULTIMATE.VisualEditor.prototype = {
 		var columns = 24;
 		var columnWidth = 20;
 		var gutterWidth = 20;	
-						
+					
 		this.iframe.grid({
 			columns: columns,
 			container: 'div.grid-container',
@@ -2039,8 +2161,8 @@ ULTIMATE.VisualEditor.prototype = {
 		// show all block types again
 		this._blockTypePopup.find('.block-type-hidden').removeClass('block-type-hidden');
 		this._blockTypePopup.show().css(blockTypePopupCSS);
-		$(document).bind('mousedown', {hideBlock: true}, this.hideBlockTypePopup);
-		this.iframe.contents().bind('mousedown', {hideBlock: true}, this.hideBlockTypePopup);
+		$(document).bind('mousedown', {hideBlock: true}, $.proxy(this.hideBlockTypePopup, this));
+		this.iframe.contents().bind('mousedown', {hideBlock: true}, $.proxy(this.hideBlockTypePopup, this));
 	},
 
 	/**
@@ -2163,56 +2285,11 @@ ULTIMATE.VisualEditor.prototype = {
 		block.find('div.block-info span.id').text(newBlockID);
 		
 		// allow saving now that the type has been switched
-		this.allowSaving();
+		ULTIMATE.VisualEditorUtil.allowSaving(this.iframe);
 		new WCF.Effect.BalloonTooltip();
 	},
 	
-	/**
-	 * Allowes saving.
-	 */
-	allowSaving: function() {
-		// if there are no blocks on the page, then do not allow saving.
-		if ( this._i('.block').length === 0 ) {
-			this.disallowSaving();
-			return false;
-		}				
-		// if saving is already allowed, don't do anything else
-		if ( typeof this.isSavingAllowed !== 'undefined' && this.isSavingAllowed === true ) {
-			return;
-		}		
-				
-		$('#saveButton').removeClass('disabled').prop('disabled', false);
-		this.isSavingAllowed = true;
-		
-		// Set reminder whne trying to leave that there are changes.
-		this.prohibitVEClose();
-		return true;
-	},
 	
-	/**
-	 * Disallowes saving.
-	 */
-	disallowSaving: function() {
-		this.isSavingAllowed = false;
-		
-		$('#saveButton').addClass('disabled').prop('disabled', true);
-		
-		// User can safely leave VE now--changes are saved.
-		this.allowVEClose();
-		return true;
-	},
-	
-	/**
-	 * Disallowes the user to close the VisualEditor.
-	 */
-	prohibitVEClose: function () {	
-		$(window).bind('beforeunload', function(event){
-			event.returnValue = WCF.Language.get('ultimate.visualEditor.unsavedChangesOnLeaving.sure');
-			return WCF.Language.get('ultimate.visualEditor.unsavedChangesOnLeaving.sure');
-		});
-		
-		this.allowVECloseSwitch = false;
-	},
 	
 	/**
 	 * Stops the form from being submitted.
@@ -2235,7 +2312,7 @@ ULTIMATE.VisualEditor.prototype = {
 	save: function() {
 		var $target = $('#saveButton');
 		// If saving isn't allowed, don't try to save.
-		if ( typeof this.isSavingAllowed === 'undefined' || this.isSavingAllowed === false ) {
+		if ( typeof ULTIMATE.VisualEditorUtil.isSavingAllowed === 'undefined' || ULTIMATE.VisualEditorUtil.isSavingAllowed === false ) {
 			return false;
 		}
 		
@@ -2316,7 +2393,7 @@ ULTIMATE.VisualEditor.prototype = {
 				$('#hiddenInputs').html('');
 				
 				// disable button
-				this.disallowSaving();				
+				ULTIMATE.VisualEditorUtil.disallowSaving();				
 				
 				// reset the title and show the saving complete notification
 				setTimeout(function() {
@@ -2326,7 +2403,7 @@ ULTIMATE.VisualEditor.prototype = {
 				}, 150);
 			}, 350);
 
-			this.allowVEClose();
+			ULTIMATE.VisualEditorUtil.allowVEClose();
 		}
 	},
 	
@@ -2362,18 +2439,6 @@ ULTIMATE.VisualEditor.prototype = {
 			event.preventDefault();
 			return false;
 		}
-	},
-
-	/**
-	 * Allowes the user to close the VisualEditor.
-	 */
-	allowVEClose: function() {
-		$(window).unbind('beforeunload', function(event){
-			event.returnValue = WCF.Language.get('ultimate.visualEditor.unsavedChangesOnLeaving.sure');
-			return WCF.Language.get('ultimate.visualEditor.unsavedChangesOnLeaving.sure');
-		});
-	
-		this.allowVECloseSwitch = true;
 	},
 	
 	/**
@@ -2466,7 +2531,7 @@ ULTIMATE.VisualEditor.prototype = {
 		
 		// reload iframe and new layout right away
 		if ( typeof reloadIframe == 'undefined' || reloadIframe == true ) {
-			this._loadIframe(this._iFrameCallback);
+			this._loadIframe($.proxy(this._iFrameCallback, this));
 		}			
 		return true;
 	},
@@ -2535,7 +2600,7 @@ ULTIMATE.VisualEditor.prototype = {
 				
 				//Reload iframe and new layout
 				this._iframeLoadNotification = new WCF.System.Notification(WCF.Language.get('ultimate.visualEditor.assignTemplate.success'));
-				this._loadIframe(this._iFrameCallback);
+				this._loadIframe($.proxy(this._iFrameCallback, this));
 			}, this)
 		}, { });
 		this._proxy.setOption('data', $data);
@@ -2579,7 +2644,7 @@ ULTIMATE.VisualEditor.prototype = {
 					this.currentLayoutTemplate = false;
 					// reload iframe and new layout
 					this.iFrameLoadNotification = WCF.Language.get('ultimate.visualEditor.removeTemplate.success');
-					this.loadIframe(this.iFrameCallback);
+					this.loadIframe($.proxy(this.iFrameCallback, this));
 					return true;
 				}
 				return true;
@@ -2621,53 +2686,13 @@ ULTIMATE.VisualEditor.prototype = {
 			new WCF.Action.Delete('ultimate\\data\\template\\TemplateAction', $('.jsLayoutItem'));
 		}
 		catch (e) {}
-	},
-	
-	/**
-	 * Shows the IFrameOverlay.
-	 */
-	showIFrameOverlay: function() {
-		var overlay = $('div#iframeOverlay');
-		var iframe = this.iframe;
-		
-		var iframeWidth = iframe.width();
-		var iframeHeight = iframe.height() + 41;
-		iframe.css({
-			'z-index': -1
-		})
-				
-		overlay.css({
-			top: iframe.css('paddingTop'),
-			left: iframe.css('paddingLeft'),
-			width: iframeWidth,
-			height: iframeHeight
-		});
-		
-		overlay.show();
-	},
-	
-	/**
-	 * Hides the IFrameOverlay.
-	 * 
-	 * @param	{Integer}	delay
-	 */
-	hideIFrameOverlay: function(delay) {
-		if ( typeof delay != 'undefined' && delay == false )
-			return $('div#iframeOverlay').hide();
-		this.iframe.css({
-			'z-index': 4
-		});
-		// Add a timeout for intense draggers.
-		setTimeout(function(){
-			$('div#iframeOverlay').hide();
-		}, 250);
 	}
 };
 
 /**
  * Creates a new VisualEditor panel.
  * 
- * @param	{ULTIMATE.VisualEditor}	visualEditor
+ * @param	{jQuery}	iframe
  * @param	{String}	elementID
  * @param	{Integer}	minHeight
  * @param	{Object}	maxHeightCallback
@@ -2694,21 +2719,21 @@ ULTIMATE.VisualEditor.Panel = Class.extend({
 	_element: null,
 	
 	/**
-	 * Contains the VisualEditor this panel belongs to.
-	 * @type	ULTIMATE.VisualEditor
+	 * Contains the VisualEditor iframe.
+	 * @type	jQuery
 	 */
-	_visualEditor: null,
+	_iframe: null,
 	
 	/**
 	 * Initializes the panel.
 	 * 
-	 * @param	{ULTIMATE.VisualEditor}	visualEditor
+	 * @param	{jQuery}	iframe
 	 * @param	{String}	elementID
 	 * @param	{Integer}	minHeight
 	 * @param	{Object}	maxHeightCallback
 	 */
-	init: function(visualEditor, elementID, minHeight, maxHeightCallback) {
-		this._visualEditor = visualEditor;
+	init: function(iframe, elementID, minHeight, maxHeightCallback) {
+		this._iframe = iframe;
 		this._element = $('#' + $.wcfEscapeID(elementID));
 		this._minHeight = minHeight;
 		this._maxHeightCallback = maxHeightCallback;
@@ -2721,7 +2746,7 @@ ULTIMATE.VisualEditor.Panel = Class.extend({
 	 * @return	{jQuery}
 	 */
 	_i: function(element) {
-		return this._visualEditor.iframe.contents().find(element);
+		return this._iframe.contents().find(element);
 	},
 	
 	/**
@@ -2764,7 +2789,7 @@ ULTIMATE.VisualEditor.Panel = Class.extend({
 		var layoutSelectorCSS = {paddingBottom: this._element.find('> nav.tabMenu ul').outerHeight() + $('nav#layoutSelectorTabs').height() - 3};
 
 		this._element.css(panelCSS).addClass('panelHidden');
-		this._visualEditor.iframe.css(iframeCSS);
+		this._iframe.css(iframeCSS);
 		$('div#layoutSelectorOffset').css(layoutSelectorCSS);
 		//setTimeout(repositionTooltips, 400);
 
@@ -2793,7 +2818,7 @@ ULTIMATE.VisualEditor.Panel = Class.extend({
 		var layoutSelectorCSS = {paddingBottom: this._element.outerHeight() + $('nav#layoutSelectorTabs').height()};
 				
 		this._element.css(panelCSS).removeClass('panelHidden');
-		this._visualEditor.iframe.css(iframeCSS);
+		this._iframe.css(iframeCSS);
 		$('div#layoutSelectorOffset').css(layoutSelectorCSS);
 		//setTimeout(repositionTooltips, 400);
 		$('body').removeClass('panelHidden');
@@ -2833,8 +2858,8 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 	 * 
 	 * @see		ULTIMATE.VisualEditor.Panel#init
 	 */
-	init: function(visualEditor, elementID, minHeight, maxHeightCallback) {
-		this._super(visualEditor, elementID, minHeight, maxHeightCallback);
+	init: function(iframe, elementID, minHeight, maxHeightCallback) {
+		this._super(iframe, elementID, minHeight, maxHeightCallback);
 		this._proxy = new WCF.Action.Proxy({
 			success: $.proxy(this._success, this)
 		});
@@ -2850,15 +2875,17 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 					bottom: 0,
 					top: ''
 				})
-				$self._visualEditor.iframe.css({'paddingBottom': ($self._element.outerHeight() + 41)});
+				$self._iframe.css({'paddingBottom': ($self._element.outerHeight() + 41)});
 				$('div#layoutSelectorOffset').css({paddingBottom: $self._element.outerHeight() + $('nav#layoutSelectorTabs').height()});
-				$.proxy($self._visualEditor.showIFrameOverlay, $self._visualEditor)();
+				ULTIMATE.VisualEditorUtil.showIFrameOverlay($self._iframe);
 			},
-			start: $.proxy(this._visualEditor.showIFrameOverlay, this._visualEditor),
+			start: function() {
+				ULTIMATE.VisualEditorUtil.showIFrameOverlay($self._iframe)
+			},
 			stop: function() {
 				$.removeCookie('bottomPanelHeight');
 				$.cookie('bottomPanelHeight', $(this).height());
-				$.proxy($self._visualEditor.hideIFrameOverlay, $self._visualEditor)();
+				ULTIMATE.VisualEditorUtil.hideIFrameOverlay($self._iframe);
 			}
 		});
 		
@@ -2903,27 +2930,27 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 		this._element.find('dd.inputSelect select').bind('change', $.proxy(function(event) {
 			var $target = $(event.target);
 			this.updatePanelInputHidden({input: $target, value: $target.val()});
-			this._visualEditor.allowSaving();
+			ULTIMATE.VisualEditorUtil.allowSaving(this._iframe);
 		}, this));
 		
 		this._element.find('dd.inputMultiSelect select').bind('change', $.proxy(function(event) {
 			var $target = $(event.target);
 			this.updatePanelInputHidden({input: $target, value: $target.val()});
-			this._visualEditor.allowSaving();
+			ULTIMATE.VisualEditorUtil.allowSaving(this._iframe);
 		}, this));
 		
 		// text
 		this._element.find('dd.inputText input').bind('keyup blur', $.proxy(function(event) {
 			var $target = $(event.target);
 			this.updatePanelInputHidden({input: $target, value: $target.val()});
-			this._visualEditor.allowSaving();
+			ULTIMATE.VisualEditorUtil.allowSaving(this._iframe);
 		}, this));
 		
 		// textarea
 		this._element.find('dd.inputTextarea textarea').bind('keyup blur', $.proxy(function(event) {
 			var $target = $(event.target);
 			this.updatePanelInputHidden({input: $target, value: $target.val()});
-			this._visualEditor.allowSaving();
+			ULTIMATE.VisualEditorUtil.allowSaving(this._iframe);
 		}, this));
 		
 		// integer
@@ -2961,7 +2988,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 				$target.val(value);
 			}
 			this.updatePanelInputHidden({input: $target, value: value});
-			this._visualEditor.allowSaving();
+			ULTIMATE.VisualEditorUtil.allowSaving();
 		}, this));
 		
 		// checkboxes
@@ -2980,7 +3007,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 				input.val(true);
 				this.updatePanelInputHidden({input: input, value: true});
 			}
-			this._visualEditor.allowSaving();
+			ULTIMATE.VisualEditorUtil.allowSaving(this._iframe);
 		}, this));
 		
 		// sliders
@@ -3003,7 +3030,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 					
 					// handle hidden input
 					this.updatePanelInputHidden({input: $target.parent().find('div.sliderBarText input.sliderValue'), value: ui.value});
-					this._visualEditor.allowSaving();
+					ULTIMATE.VisualEditorUtil.allowSaving(this._iframe);
 				}, this)
 			});
 		}, this));
@@ -3134,7 +3161,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 				this._element.find('> nav.tabMenu li#options ul').hide();
 				this._element.find('> nav.tabMenu li#options span').removeClass('active');
 				$(document).unbind('click', hideOptions);
-				this._visualEditor.iframe.contents().unbind('click', hideOptions);
+				this._iframe.contents().unbind('click', hideOptions);
 			}
 		}, this);
 
@@ -3146,13 +3173,13 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 				$(this).siblings('ul').hide();
 				$(this).removeClass('active');
 				$(document).unbind('click', hideOptions);
-				$self._visualEditor.iframe.contents().unbind('click', hideOptions);
+				$self._iframe.contents().unbind('click', hideOptions);
 			} else {
 				$(this).siblings('ul').show();
 				$(this).addClass('active');
 
 				$(document).bind('click', hideOptions);
-				$self._visualEditor.iframe.contents().bind('click', hideOptions);
+				$self._iframe.contents().bind('click', hideOptions);
 			}
 		});
 		
@@ -3164,7 +3191,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 			$button.removeClass('active');
 
 			$(document).unbind('click', hideOptions);
-			$self._visualEditor.iframe.contents().unbind('click', hideOptions);
+			$self._iframe.contents().unbind('click', hideOptions);
 
 		});
 
@@ -3196,7 +3223,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 							var value = instance.getValue();
 							$self.updatePanelInputHidden({input: $('textarea#liveCSS'), value: value});
 							$('style#liveCSSHolder').html(value);
-							$self._visualEditor.allowSaving();
+							ULTIMATE.VisualEditorUtil.allowSaving($self._iframe);
 						},
 						undoDepth: 80
 					});
@@ -3208,7 +3235,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 					$('textarea#liveCSS').bind('keyup', function(){
 						$self.updatePanelInputHidden({input: $(this), value: $(this).val()});
 						$self._i('style#liveCSSHolder').html($(this).val());
-						$self._visualEditor.allowSaving();
+						ULTIMATE.VisualEditorUtil.allowSaving($self._iframe);
 					});
 
 				}
@@ -3880,7 +3907,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 			ULTIMATE.Block.updateBlockDimensionsHidden(ULTIMATE.Block.getBlockID(block), ULTIMATE.Block.getBlockDimensions(block));
 			ULTIMATE.Block.updateBlockPositionHidden(ULTIMATE.Block.getBlockID(block), ULTIMATE.Block.getBlockPosition(block));
 			
-			ULTIMATE.VisualEditor.getVisualEditor().allowSaving();
+			ULTIMATE.VisualEditorUtil.allowSaving(ULTIMATE.VisualEditor.getVisualEditor().iframe);
 			new WCF.Effect.BalloonTooltip();
 			block.removeClass('block-hover');
 		},
@@ -3988,7 +4015,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 				});
 				$item.css('left', '');
 				ULTIMATE.Block.updateBlockPositionHidden(ULTIMATE.Block.getBlockID($item), ULTIMATE.Block.getBlockPosition($item));
-				ULTIMATE.VisualEditor.getVisualEditor().allowSaving();
+				ULTIMATE.VisualEditorUtil.allowSaving(ULTIMATE.VisualEditor.getVisualEditor().iframe);
 			});
 			$(document).focus();
 			$target.data('hoverWaitTimeout', setTimeout(function () {
@@ -4170,7 +4197,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 			ULTIMATE.Block.updateBlockPositionHidden(ULTIMATE.Block.getBlockID(this.blankBlock), ULTIMATE.Block.getBlockPosition(this.blankBlock));
 			ULTIMATE.Block.updateBlockDimensionsHidden(ULTIMATE.Block.getBlockID(this.blankBlock), ULTIMATE.Block.getBlockDimensions(this.blankBlock));
 			
-			ULTIMATE.VisualEditor.getVisualEditor().allowSaving();
+			ULTIMATE.VisualEditorUtil.allowSaving(ULTIMATE.VisualEditor.getVisualEditor().iframe);
 			var block = this.blankBlock;
 			delete this.blankBlock;
 			delete this.blankBlockOptions;
