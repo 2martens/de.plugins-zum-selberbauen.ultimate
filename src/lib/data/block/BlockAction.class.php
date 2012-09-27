@@ -1,6 +1,7 @@
 <?php
 namespace ultimate\data\block;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\system\cache\CacheHandler;
 
 /**
  * Executes block-related actions.
