@@ -45,9 +45,10 @@ class BlockAction extends AbstractDatabaseObjectAction {
 		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
 		$blockIDs = CacheHandler::getInstance()->get($cacheName, 'blockIDs');
 		// determine next available id
-		$blackList = $this->parameters['data']['blockIDBlackList'];
+		$blackList = (isset($this->parameters['data']['blockIDBlackList']) ? $this->parameters['data']['blockIDBlackList'] : array());
 		$realBlackList = array_merge($blockIDs, $blackList);
-		$lastID = max($realBlackList);
+		if (!empty($realBlackList)) $lastID = max($realBlackList);
+		else $lastID = 0;
 		
 		$nextAvailableID = $lastID++;
 		return $nextAvailableID;

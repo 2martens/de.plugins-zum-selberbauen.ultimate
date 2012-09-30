@@ -41,20 +41,38 @@ ULTIMATE.Block = {
 	/**
 	 * Returns the real block element.
 	 * 
-	 * @param	{String}	element
+	 * @param	{String}|{jQuery}	element
 	 * @returns	{jQuery}
 	 */
 	getBlock: function(element) {
 		// if invalid selector, do not go any further
-		if ( $(element).length === 0 ) {
-			return $;
+		try {
+			if ( typeof element.attr('class') != 'undefined') {
+				if (element.length === 0) {
+					return $;
+				}				
+			} 
+		}
+		catch (e) {
+			if ($(element).length === 0 ) {
+				return $;
+			}
 		}
 		var block = null;
+		var $element = null;
+		try {
+			if (typeof element.attr('class') != 'undefined') {
+				$element = element;
+			} 
+		}
+		catch (e) {
+			$element = $(element);			
+		}
 		// find the actual block node
-		if ( $(element).hasClass('block') ) {
-			block = $(element);
-		} else if ( $(element).parents('.block').length === 1 ) {
-			block = $(element).parents('.block');
+		if ( $element.hasClass('block') ) {
+			block = $element;
+		} else if ( $element.parents('.block').length === 1 ) {
+			block = $element.parents('.block');
 		} else {
 			block = false;
 		}
@@ -302,9 +320,10 @@ ULTIMATE.Block = {
 		
 		// get the ready block ID
 		var readyBlockID = ULTIMATE.VisualEditorUtil.getVisualEditor().availableBlockID;
-		
+		if (typeof readyBlockID == 'undefined') readyBlockID = 1;
 		// Retrieve the block ID that can be used.
-		var blockIDBlackList = [readyBlockID];
+		var blockIDBlackList = [];
+		blockIDBlackList.push(readyBlockID);
 		
 		ULTIMATE.VisualEditorUtil.getVisualEditor()._i('.block').each(function() {
 			blockIDBlackList.push(ULTIMATE.Block.getBlockID($(this)));
@@ -313,19 +332,20 @@ ULTIMATE.Block = {
 			success: function(data, textStatus, jqXHR) {
 				if ( isNaN(data['returnValues']) )
 					return;
-				ULTIMATE.VisualEditorUtil.getVisualEditor().availableBlockID = response;
+				ULTIMATE.VisualEditorUtil.getVisualEditor().availableBlockID = data['returnValues'];
 			},
-			showLoadingOverlay: false,
-			data: {
-				className: 'ultimate\\data\\block\\BlockAction',
-				actionName: 'getAvailableBlockID',
-				parameters: {
-					data: {
-						blockIDBlackList: blockIDBlackList
-					}
+			showLoadingOverlay: false
+		})
+		var $data = {
+			className: 'ultimate\\data\\block\\BlockAction',
+			actionName: 'getAvailableBlockID',
+			parameters: {
+				data: {
+					blockIDBlackList: blockIDBlackList
 				}
 			}
-		})
+		};
+		$proxy.setOption('data', $data);
 		$proxy.sendRequest();
 		// return the ID stored before
 		return readyBlockID;
@@ -1561,6 +1581,7 @@ ULTIMATE.VisualEditor.prototype = {
 	init: function(selectBlockTypeDialogID, allBlockTypes) {
 		this._selectBlockTypeDialogID = $.wcfEscapeID(selectBlockTypeDialogID);
 		this.allBlockTypes = allBlockTypes;
+		this._blockTypeDialog = $('#blockTypePopup');
 		// initialize proxy
 		this._proxy = new WCF.Action.Proxy({
 			showLoadingOverlay: false
@@ -1958,7 +1979,7 @@ ULTIMATE.VisualEditor.prototype = {
 				this.showBlockTypePopup({top: block.position().top + 36, left: block.position().left + 5}, true);
 				
 				// hide the current block type from the list
-				this._blockTypePopup.find('li#block-' + type).addClass('blockTypeHidden');
+				this._blockTypeDialog.find('li#block-' + type).addClass('blockTypeHidden');
 			} else {			
 				this._blockTypeSwitchBlock.removeClass('block-info-show');
 				this.hideBlockTypePopup();
@@ -2036,7 +2057,8 @@ ULTIMATE.VisualEditor.prototype = {
 			
 			var fluidMessage = !ULTIMATE.Block.getBlockTypeObject(blockType)['fixedHeight'] ? '<span class="block-fluid-height-message">' + WCF.Language.get('ultimate.visualEditor.block.height.autoExpand') + '</span>'  : '';
 			
-			block.attr('title', width + ' <span class="block-dimensions-separator">&#9747;</span> ' + height + fluidMessage);
+			//block.attr('title', width + ' <span class="block-dimensions-separator">&#9747;</span> ' + height + fluidMessage);
+			block.addClass('jsTooltip');
 			new WCF.Effect.BalloonTooltip();
 			// if tooltip is hidden
 			$('#balloonTooltip').wcfFadeIn();
@@ -2088,8 +2110,8 @@ ULTIMATE.VisualEditor.prototype = {
 	 * Initializes the block type popup.
 	 */
 	_initBlockTypePopup: function() {
-		this._blockTypePopup = $(this.selectBlockTypeDialogID).clone();
-		this._blockTypePopup.appendTo(this._i('.grid-container'));
+		this._blockTypeDialog = $('#' + this._selectBlockTypeDialogID).clone();
+		this._blockTypeDialog.appendTo(this._i('.grid-container'));
 		
 		this._i(this._selectBlockTypeDialogID).delegate('li:not(.not-block-type)', 'click', $.proxy(function(event) {			
 			var $target = $(event.target);
@@ -2128,8 +2150,8 @@ ULTIMATE.VisualEditor.prototype = {
 			this._blockTypeSwitch = true;
 		}
 				
-		var blockTypePopupWidth = this._blockTypePopup.width();
-		var blockTypePopupHeight = this._blockTypePopup.height();
+		var blockTypePopupWidth = this._blockTypeDialog.width();
+		var blockTypePopupHeight = this._blockTypeDialog.height();
 				
 		var bodyWidth = this._i('body').width();
 		var bodyHeight = this._i('body').height();
@@ -2171,8 +2193,8 @@ ULTIMATE.VisualEditor.prototype = {
 		}
 
 		// show all block types again
-		this._blockTypePopup.find('.block-type-hidden').removeClass('block-type-hidden');
-		this._blockTypePopup.show().css(blockTypePopupCSS);
+		this._blockTypeDialog.find('.block-type-hidden').removeClass('block-type-hidden');
+		this._blockTypeDialog.show().removeClass('ultimateHidden').css(blockTypePopupCSS);
 		$(document).bind('mousedown', {hideBlock: true}, $.proxy(this.hideBlockTypePopup, this));
 		this.iframe.contents().bind('mousedown', {hideBlock: true}, $.proxy(this.hideBlockTypePopup, this));
 	},
@@ -2191,16 +2213,16 @@ ULTIMATE.VisualEditor.prototype = {
 				return false;
 			
 			// if the popup isn't visible, don't try to hide
-			if ( !this._blockTypePopup.is(':visible') )
+			if ( !this._blockTypeDialog.is(':visible') )
 				return false;
 			
 			// if clicking a block type option, do not let this function run
-			if ( $(event.target).parents(this._selectBlockTypeDialogID)[0] === this._blockTypePopup[0] )
+			if ( $(event.target).parents(this._selectBlockTypeDialogID)[0] === this._blockTypeDialog[0] )
 				return false;
 		}
 			
 		// commence hiding
-		this._blockTypePopup.hide();
+		this._blockTypeDialog.hide();
 		
 		// delete the block if it exists
 		if ( event.data.hideBlock && typeof this._blankBlock !== 'undefined' )
@@ -3615,15 +3637,18 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 				this.bindMouseMove = true;
 			}
 			if (this.mouseEventElement.hasClass('ui-resizable-handle')) {
-				ULTIMATE.Block.getBlock(this.mouseEventElement).data('resizable')._mouseDown(event);
+				var block = ULTIMATE.Block.getBlock(this.mouseEventElement);
+				if (typeof block != 'undefined' && block !== false) block.trigger('mousedown.widget');
 			} else {
-				if (ULTIMATE.Block.getBlock(this.mouseEventElement) && ULTIMATE.Block.getBlock(this.mouseEventElement).hasClass(this.options.defaultBlockClass.replace('.', ''))) {
-					if (ULTIMATE.Block.getBlock(this.mouseEventElement).data('draggable')) {
-						ULTIMATE.Block.getBlock(this.mouseEventElement).data('draggable')._mouseDown(event);
+				var block = ULTIMATE.Block.getBlock(this.mouseEventElement);
+				if (typeof block != 'undefined' && block !== false) block.trigger('mousedown.widget');
+				if (block && block.hasClass(this.options.defaultBlockClass.replace('.', ''))) {
+					if (block.data('draggable')) {
+						block.trigger('mousedown.widget');
 					}
 				} else {
-					if (this.element.data('grid') && (this.mouseEventElement[0] == this.container[0] || this.mouseEventElement[0] == this.container.parents('div.wrapper')[0])) {
-						this.element.data('grid')._mouseDown(event);
+					if ((this.mouseEventElement[0] == this.container[0] || this.mouseEventElement[0] == this.container.parents('div.wrapper')[0])) {
+						this._mouseDown(event);
 					}
 				}
 			}
@@ -3637,15 +3662,18 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 		_iFrameMouseMove: function (event) {
 			if (typeof this.mouseEventDown !== 'undefined') {
 				if (this.mouseEventElement.hasClass('ui-resizable-handle')) {
-					ULTIMATE.Block.getBlock(this.mouseEventElement).data('resizable')._mouseMove(event);
+					var block = ULTIMATE.Block.getBlock(this.mouseEventElement);
+					if (typeof block != 'undefined' && block !== false) block.trigger('mousemove.widget');
 				} else {
-					if (ULTIMATE.Block.getBlock(this.mouseEventElement) && ULTIMATE.Block.getBlock(this.mouseEventElement).hasClass(this.options.defaultBlockClass.replace('.', ''))) {
-						if (ULTIMATE.Block.getBlock(this.mouseEventElement).data('draggable')) {
-							ULTIMATE.Block.getBlock(this.mouseEventElement).data('draggable')._mouseMove(event);
+					var block = ULTIMATE.Block.getBlock(this.mouseEventElement);
+					if (typeof block != 'undefined' && block !== false) block.trigger('mousemove.widget');
+					if (block && block.hasClass(this.options.defaultBlockClass.replace('.', ''))) {
+						if (block.data('draggable')) {
+							block.trigger('mousemove.widget');
 						}
 					} else {
-						if (this.element.data('grid') && (this.mouseEventElement[0] == this.container[0] || this.mouseEventElement[0] == this.container.parents('div.wrapper')[0])) {
-							this.element.data('grid')._mouseMove(event);
+						if ((this.mouseEventElement[0] == this.container[0] || this.mouseEventElement[0] == this.container.parents('div.wrapper')[0])) {
+							this._mouseMove(event);
 						}
 					}
 				}
@@ -3690,15 +3718,13 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 		_iFrameMouseUp: function (event) {
 			if (typeof this.mouseEventDown !== 'undefined') {
 				var block = ULTIMATE.Block.getBlock(this.mouseEventElement);
-				if (block && typeof block.data('resizable') != 'undefined') {
-					block.data('resizable')._mouseUp(event);
-				}
-				if (block && typeof block.data('draggable') != 'undefined') {
-					block.data('draggable')._mouseUp(event);
-				}
-				if (typeof block != 'undefined' && block && typeof block.data('grid') != 'undefined') {
-					block.data('grid')._mouseUp(event);
-				}
+				if (block && typeof block.data("resizable") != "undefined") {
+                    block.trigger('mouseup.widget');
+                }
+                if (block && typeof block.data("draggable") != "undefined") {
+                	block.trigger('mouseup.widget');
+                }
+                this._mouseUp(event);
 				delete this.mouseEventDown;
 			}
 		},
@@ -3872,6 +3898,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 				resize: $.proxy(this._resizableResize, this),
 				stop: $.proxy(this._resizableStop, this)
 			});
+			element.data('resizable', element.resizable());
 		},
 		
 		/**
@@ -3957,6 +3984,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 				stop: $.proxy(this._draggableStop, this),
 				drag: $.proxy(this._draggableDrag, this)
 			});
+			element.data('draggable', element.draggable());
 		},
 		
 		/**
@@ -4071,7 +4099,7 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 						var $notification = new WCF.System.Notification(WCF.Language.get('ultimate.visualEditor.massBlockSelectionMode'), 'info');
 						$notification.show($.proxy(function () {
 							this._i('.grouped-block').removeClass('grouped-block');
-							this.options.iframe.data('grid').container.removeClass('grouping-active');
+							this.container.removeClass('grouping-active');
 						}, this));
 					}
 				}
@@ -4162,18 +4190,16 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 				gridWidth = parseInt(data.width);
 				gridLeft = parseInt(data.left)
 			}
-			newBlock.data({
-				'width': gridWidth,
-				'height': parseInt(data.height),
-				'gridTtop': parseInt(data.top),
-				'gridLeft': gridLeft
-			});
+			newBlock.data('width', gridWidth)
+				.data('height', parseInt(data.height))
+				.data('gridTop', parseInt(data.top))
+				.data('gridLeft', gridLeft);
 			newBlock.css('width', '').addClass('grid-width-' + gridWidth);
 			newBlock.css('left', '').addClass('grid-left-' + gridLeft);
 			newBlock.css('visibility', 'visible');
 			this._initResizable(newBlock);
 			this._initDraggable(newBlock);
-			blockIntersectCheck(newBlock);
+			//blockIntersectCheck(newBlock);
 			if (isOldBlock == false) {
 				new WCF.Effect.BalloonTooltip();
 				ULTIMATE.VisualEditorUtil.getVisualEditor().showBlockTypePopup($($blankBlock));
@@ -4190,8 +4216,8 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 		 * @returns	{jQuery}
 		 */
 		setupBlankBlock: function (blockType, showBlockTypePopup) {
-			if (typeof isNewBlock == 'undefined') {
-				var showBlockTypePopup = false
+			if (typeof showBlockTypePopup == 'undefined') {
+				var showBlockTypePopup = false;
 			}
 			this.blankBlock.removeClass('blank-block');
 			this.blankBlock.addClass('block-type-' + blockType);
@@ -4215,8 +4241,10 @@ ULTIMATE.VisualEditor.BottomPanel = ULTIMATE.VisualEditor.Panel.extend({
 			}
 			this.blankBlock.find('h3.block-type span').text(ULTIMATE.Block.getBlockTypeNice(blockType));
 			this.blankBlock.find('h3.block-type').show();
-			if (isNewBlock == false) {
+			if (showBlockTypePopup == false) {
 				ULTIMATE.VisualEditorUtil.getVisualEditor().hideBlockTypePopup();
+			} else {
+				ULTIMATE.VisualEditorUtil.getVisualEditor().showBlockTypePopup();
 			}
 			ULTIMATE.VisualEditorUtil.getVisualEditor()._addNewBlockHidden(ULTIMATE.Block.getBlockID(this.blankBlock), ULTIMATE.Block.getBlockType(this.blankBlock));
 			ULTIMATE.Block.updateBlockPositionHidden(ULTIMATE.Block.getBlockID(this.blankBlock), ULTIMATE.Block.getBlockPosition(this.blankBlock));
