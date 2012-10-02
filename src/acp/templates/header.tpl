@@ -37,8 +37,8 @@
 	<!-- Stylesheets -->
 	{* work-around for unknown core-object during WCFSetup *}
 	{@$__wcf->getStyleHandler()->getStylesheet()}
-	{@$__wcf->getUltimateStyleHandler()->getStylesheet()}
 	<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/3rdParty/jquery-ui.css" />
+	{@$__wcf->getUltimateStyleHandler()->getStylesheet()}
 	
 	{*
 	{if $specialStyles|isset}

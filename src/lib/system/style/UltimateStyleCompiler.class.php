@@ -119,7 +119,10 @@ class UltimateStyleCompiler extends StyleCompiler {
 	 * Compiles LESS stylesheets for ACP usage.
 	 */
 	public function compileACP() {
-		$files = array(ULTIMATE_DIR.'style/ultimate.less');
+		$files = array(
+			WCF_DIR.'style/ultimate/ultimateCore.less',
+			ULTIMATE_DIR.'style/general/ultimate.less'
+		);
 		$this->isACPRequest = true;
 		
 		// read default values
