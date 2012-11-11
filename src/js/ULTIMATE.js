@@ -1621,7 +1621,7 @@ ULTIMATE.VisualEditor.prototype = {
 					$item = $(item);
 					$item.removeClass('ultimateHidden');
 				}, this));
-				$target.find('img').each($.proxy(function(index, item) {
+				$target.find('img').not('a.jsCollapsible img').each($.proxy(function(index, item) {
 					$item = $(item);
 					$item.removeClass('ultimateHidden');
 				}, this));
@@ -1634,7 +1634,7 @@ ULTIMATE.VisualEditor.prototype = {
 					$item = $(item);
 					$item.addClass('ultimateHidden');
 				}, this));
-				$target.find('img').each($.proxy(function(index, item) {
+				$target.find('img').not('a.jsCollapsible img').each($.proxy(function(index, item) {
 					$item = $(item);
 					$item.addClass('ultimateHidden');
 				}, this));

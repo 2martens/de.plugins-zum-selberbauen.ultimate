@@ -43,18 +43,7 @@ use wcf\system\WCF;
  * @category	Ultimate CMS
  */
 class UltimateStyleCompiler extends StyleCompiler {
-	/**
-	 * If true we have an ACP request.
-	 * @var boolean
-	 */
-	protected $isACPRequest = false;
-	
-	/**
-	 * If true we have a visual editor grid request.
-	 * @var boolean
-	 */
-	protected $isVisualEditorGrid = false;
-	
+		
 	/**
 	 * Compiles the visualEditor stylesheets.
 	 *
@@ -95,7 +84,6 @@ class UltimateStyleCompiler extends StyleCompiler {
 			ULTIMATE_DIR.'style/visualEditor/visualEditorIFrameGrid.less',
 			ULTIMATE_DIR.'style/visualEditor/gridUtil.less'
 		);
-		$this->isVisualEditorGrid = true;
 		
 		$variables = $style->getVariables();
 		$individualCss = '';
@@ -123,7 +111,6 @@ class UltimateStyleCompiler extends StyleCompiler {
 			WCF_DIR.'style/ultimate/ultimateCore.less',
 			ULTIMATE_DIR.'style/general/ultimate.less'
 		);
-		$this->isACPRequest = true;
 		
 		// read default values
 		$sql = 'SELECT   variableName, defaultValue
@@ -191,9 +178,8 @@ class UltimateStyleCompiler extends StyleCompiler {
 	protected function bootstrap(array $variables) {
 		// add reset like a boss
 		$content = '';
-		if (!$this->isACPRequest && !$this->isVisualEditorGrid) $content .= $this->prepareFile(WCF_DIR.'style/bootstrap/reset.less');
 		// until style system works completely, we have to use this
-		$content .= $this->prepareFile(WCF_DIR.'style/bootstrap/variables.less');
+		//$content .= $this->prepareFile(WCF_DIR.'style/bootstrap/variables.less');
 		// apply style variables
 		$this->compiler->setVariables($variables);
 	

@@ -89,8 +89,8 @@
 										</span>
 									</li>
 									<li class="layoutItem hasChildren">
-										<a class="collapsibleButton jsCollapsible jsTooltip" isOpen="0" data-collapsible-container="collapsibleSingle" title="{lang}wcf.global.button.collapsible{/lang}"><img src="{@$__wcf->getPath()}icon/arrowRight.svg" alt="" class="icon16" /></a>
 										<span class="layout layoutPage" data-layout-id="single">
+											<a class="jsCollapsible jsTooltip" isOpen="0" data-collapsible-container="collapsibleSingle" title="{lang}wcf.global.button.collapsible{/lang}"><img src="{@$__wcf->getPath()}icon/arrowRight.svg" alt="" class="icon16" /></a>
 											<strong>{lang}ultimate.visualEditor.layoutSelector.pages.single{/lang}</strong>
 											<span class="status statusTemplate" data-template-id="none">
 											</span>
@@ -109,8 +109,8 @@
 										</span>
 										<ul id="collapsibleSingle">
 											<li class="layoutItem">
-												<a class="collapsibleButton jsCollapsible jsTooltip" isOpen="0" data-collapsible-container="collapsibleSingleContent" title="{lang}wcf.global.button.collapsible{/lang}"><img src="{@$__wcf->getPath()}icon/arrowRight.svg" alt="" class="icon16" /></a>
 												<span class="layout layoutPage" data-layout-id="singleContent">
+													<a class="jsCollapsible jsTooltip" isOpen="0" data-collapsible-container="collapsibleSingleContent" title="{lang}wcf.global.button.collapsible{/lang}"><img src="{@$__wcf->getPath()}icon/arrowRight.svg" alt="" class="icon16" /></a>
 													<strong>{lang}ultimate.visualEditor.layoutSelector.pages.single.content{/lang}</strong>
 													<span class="status statusTemplate" data-template-id="none">
 													</span>
@@ -152,8 +152,8 @@
 												</ul>
 											</li>
 											<li class="layoutItem">
-												<a class="collapsibleButton jsCollapsible jsTooltip" isOpen="0" data-collapsible-container="collapsibleSinglePage" title="{lang}wcf.global.button.collapsible{/lang}"><img src="{@$__wcf->getPath()}icon/arrowRight.svg" alt="" class="icon16" /></a>
 												<span class="layout layoutPage" data-layout-id="singlePage">
+													<a class="jsCollapsible jsTooltip" isOpen="0" data-collapsible-container="collapsibleSinglePage" title="{lang}wcf.global.button.collapsible{/lang}"><img src="{@$__wcf->getPath()}icon/arrowRight.svg" alt="" class="icon16" /></a>
 													<strong>{lang}ultimate.visualEditor.layoutSelector.pages.single.page{/lang}</strong>
 													<span class="status statusTemplate" data-template-id="none">
 													</span>
@@ -197,8 +197,8 @@
 										</ul>
 									</li>
 									<li class="layoutItem hasChildren">
-										<a class="collapsibleButton jsCollapsible jsTooltip" isOpen="0" data-collapsible-container="collapsibleArchive" title="{lang}wcf.global.button.collapsible{/lang}"><img src="{@$__wcf->getPath()}icon/arrowRight.svg" alt="" class="icon16" /></a>
 										<span class="layout layoutPage" data-layout-id="archive">
+											<a class="jsCollapsible jsTooltip" isOpen="0" data-collapsible-container="collapsibleArchive" title="{lang}wcf.global.button.collapsible{/lang}"><img src="{@$__wcf->getPath()}icon/arrowRight.svg" alt="" class="icon16" /></a>
 											<strong>{lang}ultimate.visualEditor.layoutSelector.pages.archive{/lang}</strong>
 											<span class="status statusTemplate" data-template-id="none">
 											</span>
@@ -217,8 +217,8 @@
 										</span>
 										<ul id="collapsibleArchive">
 											<li class="layoutItem">
-												<a class="collapsibleButton jsCollapsible jsTooltip" isOpen="0" data-collapsible-container="collapsibleArchiveCategory" title="{lang}wcf.global.button.collapsible{/lang}"><img src="{@$__wcf->getPath()}icon/arrowRight.svg" alt="" class="icon16" /></a>
 												<span class="layout layoutPage" data-layout-id="archiveCategory">
+													<a class="jsCollapsible jsTooltip" isOpen="0" data-collapsible-container="collapsibleArchiveCategory" title="{lang}wcf.global.button.collapsible{/lang}"><img src="{@$__wcf->getPath()}icon/arrowRight.svg" alt="" class="icon16" /></a>
 													<strong>{lang}ultimate.visualEditor.layoutSelector.pages.archive.category{/lang}</strong>
 													<span class="status statusTemplate" data-template-id="none">
 													</span>
@@ -294,8 +294,7 @@
 								<dl>
 									<dd>
 										<label for="templateName" style="display: none;">{lang}ultimate.visualEditor.layoutSelector.templates.templateName{/lang}</label>
-										<input type="text" name="templateName" id="templateName" value="" placeholder="{lang}ultimate.visualEditor.layoutSelector.templates.templateName.placeholder{/lang}" />
-										<span class="button addTemplate">{lang}ultimate.visualEditor.layoutSelector.button.addTemplate{/lang}</span>
+										<input type="text" name="templateName" id="templateName" value="" placeholder="{lang}ultimate.visualEditor.layoutSelector.templates.templateName.placeholder{/lang}" /><span class="button addTemplate">{lang}ultimate.visualEditor.layoutSelector.button.addTemplate{/lang}</span>
 									</dd>
 								</dl>
 							</div>

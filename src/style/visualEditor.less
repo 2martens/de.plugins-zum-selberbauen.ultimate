@@ -37,15 +37,6 @@ select {
 #pageHeader {
 	margin-top: 40px !important;
 }
-
-.layoutItem {
-	a.jsCollapsible {
-		left: 0px;
-		float: left;
-		margin-right: 10px;
-	}
-}
-
 /** For some reason these two selection declarations cannot be grouped using a comma, so they are separate. **/
 ::selection {
 	background: #43A58B;
@@ -219,12 +210,12 @@ div.scrollbarpaper-drag {
 /** Random **/
 span.button {
 	float: left;
-	//display: block;
+	display: block;
     font-size: 12px;
 	padding: 0 11px;
 	margin: 0 0 0 5px;
-	//height: 24px;
-	//line-height: 25px;
+	height: 24px;
+	line-height: 25px;
 	text-align: center;
     text-decoration: none;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
@@ -889,7 +880,7 @@ div#layoutSelectorOffset {
     position: fixed;
     left: -60px;
     top: 0;
-    width: 500px;
+    width: 360px;
  	z-index: 6;
  	.transitionEditor("left 500ms cubic-bezier(0.165, 0.840, 0.440, 1.000), padding-bottom 500ms cubic-bezier(0.165, 0.840, 0.440, 1.000)");
 }
@@ -950,7 +941,7 @@ div#layoutSelectorContainer {
 			div.layoutSelectorContent { 
 				float: left;
 				clear: both;
-				width: 430px;
+				width: 290px;
 				height: auto;
 				position: absolute;
 				top: 0;
@@ -970,14 +961,14 @@ div#layoutSelectorContainer {
 				li.layoutItem {
 					&:not(.layoutItemTemplateUsed):not(.layoutSelected) {
 						> span.layout:hover span.edit {
-							//display: block;
+							display: block;
 						}
 					}
 					&:not(.layoutSelected) > span.layoutTemplate:hover span.assignTemplate {
-						//display: block;
+						display: block;
 					}
 					> span.layoutTemplate:hover span.deleteTemplate {
-						//display: block;
+						display: block;
 					}
 					&.hasCustomizedChildren {
 						position: relative;
@@ -1137,7 +1128,7 @@ div#layoutSelectorContainer {
 					}
 				}
 				ul {
-					width: 415px !important;
+					width: 275px !important;
 					margin: 0; 
 					height: 100%;
 					float: left;
@@ -1226,12 +1217,12 @@ nav#layoutSelectorTabs {
 	position: absolute !important;
 	bottom: -34px;
 	z-index: 5;
-	width: 495px;
+	width: 355px;
 	left: 0;
 	padding: 0 !important;
 	
 	ul { 
-		width: 435px;
+		width: 295px;
 		float: left;
 		height: 34px;
 		position: static !important;
