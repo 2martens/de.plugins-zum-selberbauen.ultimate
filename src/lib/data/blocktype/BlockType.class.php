@@ -8,24 +8,24 @@ use wcf\system\WCF;
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
- * @license		http://www.plugins-zum-selberbauen.de/index.php?page=CMSLicense CMS License
- * @package		de.plugins-zum-selberbauen.ultimateCore
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
+ * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.ultimate.blockType
  * @category	Ultimate CMS
  */
 class BlockType extends AbstractUltimateDatabaseObject {
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableName
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableName
 	 */
 	protected static $databaseTableName = 'blocktype';
 	
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexIsIdentity
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableIndexIsIdentity
 	 */
 	protected static $databaseTableIndexIsIdentity = true;
 	
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexName
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableIndexName
 	 */
 	protected static $databaseTableIndexName = 'blockTypeID';
 	
@@ -36,5 +36,14 @@ class BlockType extends AbstractUltimateDatabaseObject {
 	 */
 	public function __toString() {
 		return WCF::getLanguage()->get($this->blockTypeName);
+	}
+	
+	/**
+	 * @see \wcf\data\DatabaseObject::handleData()
+	 */
+	protected function handleData($data) {
+		$data['cssIdentifier'] = strtolower($data['blockTypeName']);
+		$data['fixedHeight'] = (boolean) intval($data['fixedHeight']);
+		parent::handleData($data);
 	}
 }

@@ -21,7 +21,7 @@ class CategorizedContent extends DatabaseObjectDecorator {
 	
 	/**
 	 * Contains the categories of this content.
-	 * @var array[]
+	 * @var \ultimate\data\category\Category[]
 	 */
 	protected $categories = array();
 	
@@ -39,8 +39,12 @@ class CategorizedContent extends DatabaseObjectDecorator {
 	 * @see \wcf\data\DatabaseObjectDecorator::__get()
 	 */
 	public function __get($name) {
-		if ($name == 'categories') return $this->categories;
-		parent::__get($name);
+		$value = parent::__get($name);
+		
+		if ($value === null) {
+			if ($name == 'categories') $value = $this->categories;
+		}
+		return $value;
 	}
 	
 	/**

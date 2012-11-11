@@ -2,6 +2,7 @@
 namespace ultimate\acp\form;
 use ultimate\data\menu\item\MenuItemNodeList;
 use ultimate\data\menu\Menu;
+use ultimate\data\menu\MenuAction;
 use wcf\form\AbstractForm;
 use wcf\system\cache\CacheHandler;
 use wcf\system\exception\IllegalLinkException;
@@ -55,45 +56,43 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
+		// reading object fields
+		$this->menuName = $this->menu->__get('menuName');
+		$this->menuItemNodeList = new MenuItemNodeList($this->menuID, 0, true);
+			
+		// read category cache
+		$cacheName = 'category';
+		$cacheBuilderClassName = '\ultimate\system\cache\builder\CategoryCacheBuilder';
+		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
+		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
+		$this->categories = CacheHandler::getInstance()->get($cacheName, 'categoriesNested');
 		
-			// reading object fields
-			$this->menuName = $this->menu->__get('menuName');
-			$this->menuItemNodeList = new MenuItemNodeList($this->menuID, 0, true);
-			
-			// read category cache
-			$cacheName = 'category';
-			$cacheBuilderClassName = '\ultimate\system\cache\builder\CategoryCacheBuilder';
-			$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-			CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-			$this->categories = CacheHandler::getInstance()->get($cacheName, 'categoriesNested');
-			
-			// get categories which are already used in this menu
-			foreach ($this->categories as $categoryID => $categoryArray) {
-				foreach ($this->menuItemNodeList as $menuItem) {
-					/* @var $category \ultimate\data\category\Category */
-					/* @var $menuItem \ultimate\data\menu\item\MenuItemNode */
-					if ($categoryArray[0]->__get('categoryTitle') != $menuItem->__get('menuItemName')) continue;
-					$this->disabledCategoryIDs[] = $categoryID;
-					break;
-				}
+		// get categories which are already used in this menu
+		foreach ($this->categories as $categoryID => $categoryArray) {
+			foreach ($this->menuItemNodeList as $menuItem) {
+				/* @var $category \ultimate\data\category\Category */
+				/* @var $menuItem \ultimate\data\menu\item\MenuItemNode */
+				if ($categoryArray[0]->__get('categoryTitle') != $menuItem->__get('menuItemName')) continue;
+				$this->disabledCategoryIDs[] = $categoryID;
+				break;
 			}
-			
-			// read page cache
-			$cacheName = 'page';
-			$cacheBuilderClassName = '\ultimate\system\cache\builder\PageCacheBuilder';
-			$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-			CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-			$this->pages = CacheHandler::getInstance()->get($cacheName, 'pagesNested');
-			
-			// get pages which are already used in this menu
-			foreach ($this->pages as $pageID => $pageArray) {
-				foreach ($this->menuItemNodeList as $menuItem) {
-					if ($pageArray[0]->__get('pageTitle') != $menuItem->__get('menuItemName')) continue;
-					$this->disabledPageIDs[] = $pageID;
-					break;
-				}
-			}
+		}
 		
+		// read page cache
+		$cacheName = 'page';
+		$cacheBuilderClassName = '\ultimate\system\cache\builder\PageCacheBuilder';
+		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
+		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
+		$this->pages = CacheHandler::getInstance()->get($cacheName, 'pagesNested');
+		
+		// get pages which are already used in this menu
+		foreach ($this->pages as $pageID => $pageArray) {
+			foreach ($this->menuItemNodeList as $menuItem) {
+				if ($pageArray[0]->__get('pageTitle') != $menuItem->__get('menuItemName')) continue;
+				$this->disabledPageIDs[] = $pageID;
+				break;
+			}
+		}
 		AbstractForm::readData();
 	}
 	

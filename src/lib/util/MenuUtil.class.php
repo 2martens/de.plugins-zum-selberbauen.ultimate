@@ -21,10 +21,12 @@ class MenuUtil {
 	 * @api
 	 * 
 	 * @param	string	$menuName
+	 * @param	integer	$menuID
 	 * @return	boolean	$isAvailable
 	 */
-	public static function isAvailableName($menuName) {
+	public static function isAvailableName($menuName, $menuID) {
 		$menuName = StringUtil::trim($menuName);
+		$menuID = intval($menuID);
 		$isAvailable = true;
 		
 		$menus = self::loadCache(
@@ -35,7 +37,7 @@ class MenuUtil {
 		
 		foreach ($menus as $menu) {
 			/* @var $menu \ultimate\data\menu\Menu */
-			if ($menu->__get('menuName') != $menuName) continue;
+			if ($menu->__get('menuName') != $menuName || $menu->__get('menuID') == $menuID) continue;
 			$isAvailable = false;
 			break;
 		}

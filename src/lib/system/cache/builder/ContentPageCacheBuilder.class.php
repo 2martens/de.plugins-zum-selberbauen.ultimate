@@ -31,6 +31,7 @@ class ContentPageCacheBuilder implements ICacheBuilder {
 		foreach ($pages as $pageID => $page) {
 			/* @var $page \ultimate\data\page\Page */
 			$content = $page->getContent();
+			if ($content === null) continue;
 			$data['contentsToPageID'][$pageID] = new TaggedContent($content);
 			$data['contentIDsToPageID'][$pageID] = $content->__get('contentID');
 		}

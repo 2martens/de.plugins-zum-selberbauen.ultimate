@@ -36,12 +36,12 @@
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
 			<legend>{lang}wcf.acp.ultimate.menu.general{/lang}</legend>
-			<dl{if $errorField == 'menuName'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'menuName'} class="formError"{/if}>
 				<dt><label for="menuName">{lang}wcf.acp.ultimate.menu.name{/lang}</label></dt>
 				<dd>
 					<input type="text" id="menuName" name="menuName" value="{@$menuName}" class="long" required="required" placeholder="{lang}wcf.acp.ultimate.menu.name.placeholder{/lang}" />
 					{if $errorField == 'menuName'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}
@@ -212,10 +212,11 @@
 						'admin.content.ultimate.canEditMenuItem': {if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem')}true{else}false{/if},
 						'admin.content.ultimate.canDeleteMenuItem': {if $__wcf->session->getPermission('admin.content.ultimate.canDeleteMenuItem')}true{else}false{/if}
 					});
+					{* icon is buggy *}
 					WCF.Icon.addObject({
-						'wcf.icon.delete': '{icon size='S'}delete{/icon}',
-						'wcf.icon.enabled': '{icon size='S'}enabled{/icon}',
-						'wcf.icon.disabled': '{icon size='S'}disabled{/icon}'
+						'wcf.icon.delete': '../{icon size='S'}delete{/icon}',
+						'wcf.icon.enabled': '../{icon size='S'}enabled{/icon}',
+						'wcf.icon.disabled': '../{icon size='S'}disabled{/icon}'
 					});
 					new ULTIMATE.Menu.Item.Transfer('categorySelectContainer', 'menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'category');
 					new ULTIMATE.Menu.Item.Transfer('pageSelectContainer', 'menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'page');

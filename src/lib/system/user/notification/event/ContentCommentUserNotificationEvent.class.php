@@ -44,7 +44,7 @@ class ContentCommentUserNotificationEvent extends AbstractUserNotificationEvent 
 	/**
 	 * @see	\wcf\system\user\notification\event\IUserNotificationEvent::getMessage()
 	 */
-	public function getMessage(IUserNotificationType $notificationType) {
+	public function getMessage() {
 		return '';
 	}
 	

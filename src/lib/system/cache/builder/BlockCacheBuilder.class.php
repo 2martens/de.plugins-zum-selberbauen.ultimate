@@ -29,7 +29,7 @@ class BlockCacheBuilder implements ICacheBuilder {
 		
 		$blockList->readObjects();
 		$blocks = $blockList->getObjects();
-		$blockIDs = $blockList->getObjectsIDs();
+		$blockIDs = $blockList->getObjectIDs();
 		if (empty($blocks)) return $data;
 		
 		$data['blocks'] = $blocks;

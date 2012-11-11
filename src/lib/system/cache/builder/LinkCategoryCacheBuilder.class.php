@@ -1,5 +1,6 @@
 <?php
 namespace ultimate\system\cache\builder;
+use ultimate\data\link\CategorizedLink;
 use wcf\system\cache\builder\ICacheBuilder;
 use wcf\system\category\CategoryHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
@@ -29,7 +30,7 @@ class LinkCategoryCacheBuilder implements ICacheBuilder {
 		$categoryIDs = array_keys($categories);
 		
 		$conditions = new PreparedStatementConditionBuilder();
-		$conditions->add('linkToCategory.categoryID IN (?)', $categoryIDs);
+		$conditions->add('linkToCategory.categoryID IN (?)', array($categoryIDs));
 		
 		$sql = 'SELECT    link.*
 		        FROM      ultimate'.ULTIMATE_N.'_link_to_category linkToCategory
@@ -40,24 +41,24 @@ class LinkCategoryCacheBuilder implements ICacheBuilder {
 		$statement->execute($conditions->getParameters());
 		
 		$links = array();
-		while ($link = $statement->fetchObject('\ultimate\data\link\CategorizedLink')) {
-			$links[$link->__get('linkID')] = $link;
+		while ($link = $statement->fetchObject('\ultimate\data\link\Link')) {
+			$links[$link->__get('linkID')] = new CategorizedLink($link);
 		}
 		
 		// group links by categories
 		foreach ($categories as $categoryID => $category) {
 			/* @var $category \wcf\data\category\Category */
-			if (!isset($data['linksToCategoryIDs'][$categoryID])) {
-				$data['linksToCategoryIDs'][$categoryID] = array();
+			if (!isset($data['linksToCategoryID'][$categoryID])) {
+				$data['linksToCategoryID'][$categoryID] = array();
 			}
 			if (!isset($data['linksToCategoryName'][$category->__get('title')])) {
-				$data['linksToCategoryName'][$category->__get('title')];
+				$data['linksToCategoryName'][$category->__get('title')] = array();
 			}
 			foreach ($links as $linkID => $link) {
 				if (!in_array($categoryID, array_keys($link->__get('categories')))) continue;
 				
-				$data['linksToCategoryIDs'][$categoryID] = $link;
-				$data['linksToCategoryName'][$category->__get('title')] = $link;
+				$data['linksToCategoryID'][$categoryID][$linkID] = $link;
+				$data['linksToCategoryName'][$category->__get('title')][$linkID] = $link;
 			}
 		}
 		return $data;

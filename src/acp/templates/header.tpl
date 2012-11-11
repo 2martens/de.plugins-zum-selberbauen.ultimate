@@ -19,6 +19,9 @@
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.tools.min.js"></script>
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui.nestedSortable.js"></script>
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui-i18n.min.js"></script>
+	<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui-timepicker-addon.min.js"></script>
+	<script type="text/javascript" src="{@$__wcf->getPath()}js/jquery-ui-timepicker-addon-i18n.js"></script>
+	{*<script type="text/javascript" src="{@$__wcf->getPath()}js/ultimateCore.js"></script>*}
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.js"></script>
 	<script type="text/javascript" src="{@$__wcf->getPath()}acp/js/WCF.ACP.js"></script>
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.Message.js"></script>
@@ -32,18 +35,10 @@
 	{event name='javascriptInclude'}
 	
 	<!-- Stylesheets -->
-	<link rel="stylesheet/less" type="text/css" href="{@$__wcf->getPath()}style/bootstrap.less" />
-	<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}acp/style/setup/WCFSetup.css" />
+	{* work-around for unknown core-object during WCFSetup *}
+	{@$__wcf->getStyleHandler()->getStylesheet()}
 	<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/3rdParty/jquery-ui.css" />
-	<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/ultimateCore.css" />
-	<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath('ultimate')}style/ultimate.css" />
-	
-	<script type="text/javascript">
-		//<![CDATA[
-		var less = { env: 'development' };
-		//]]>
-	</script>
-	<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/less.min.js"></script>
+	{@$__wcf->getUltimateStyleHandler()->getStylesheet()}
 	
 	{*
 	{if $specialStyles|isset}

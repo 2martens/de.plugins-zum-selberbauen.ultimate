@@ -1,0 +1,1692 @@
+/* 
+
+File: visualEditor.less 
+Copyright 2011-2012 by Jim Martens.
+
+*/
+
+body {
+	overflow: hidden;
+	background-color: rgb(28, 28, 28);
+	height: 0px;
+	* {
+		font-size: @wcfBaseFontSize;
+		font-family: @wcfBaseFontFamily; 
+	
+		outline: none;
+		.no-highlight;
+	}
+}
+
+input, textarea {
+	.allow-highlight;
+}
+
+select { 
+	-webkit-appearance: none;
+}
+
+#visualEditorForm {
+	height: 0px;
+}
+
+#main {
+	z-index: auto !important;
+}
+
+#pageHeader {
+	margin-top: 40px !important;
+}
+
+.layoutItem {
+	a.jsCollapsible {
+		left: 0px;
+		float: left;
+		margin-right: 10px;
+	}
+}
+
+/** For some reason these two selection declarations cannot be grouped using a comma, so they are separate. **/
+::selection {
+	background: #43A58B;
+}
+	
+::-moz-selection {
+	background: #43A58B;
+}
+
+	
+/** jQuery UI **/
+
+/** Tabs **/
+div.ui-tabs-hide { 
+	position: absolute; 
+	top: -9999px; 
+	left: -9999px; 
+}
+
+/** Autocomplete **/
+.ui-autocomplete { 
+	position: absolute; 
+	cursor: default; 
+}	
+
+/** Menu **/
+.ui-menu {
+	list-style:none;
+	padding: 2px;
+	margin: 0;
+	display:block;
+	float: left;
+	
+	.ui-menu {
+		margin-top: -3px;
+	}
+}
+	
+.ui-menu-item {
+	margin:0;
+	padding: 0;
+	zoom: 1;
+	float: left;
+	clear: left;
+	width: 100%;
+	a {
+		text-decoration:none;
+		display:block;
+		padding:0;
+		line-height:100%;
+		zoom:1;
+		
+		&.ui-state-hover,
+		&.ui-state-active {
+			font-weight: normal;
+		} 
+	}
+}
+			
+/** Resizable **/
+.ui-resizable {
+	position: relative;
+}
+.ui-resizable-handle {
+	display: block;
+	font-size: 0.1px;
+	position: absolute;
+	z-index: 10;
+}
+
+.ui-resizable-n {
+	cursor: n-resize;
+	height: 15px;
+	left: 0;
+	top: -5px;
+	width: 100%;
+}
+
+.ui-resizable-s {
+	bottom: -5px;
+	cursor: s-resize;
+	height: 15px;
+	left: 0;
+	width: 98%;
+}
+
+.ui-resizable-e {
+	cursor: e-resize;
+	height: 98%;
+	right: -5px;
+	top: 0;
+	width: 15px;
+}
+
+.ui-resizable-w {
+	cursor: w-resize;
+	height: 100%;
+	left: -5px;
+	top: 0;
+	width: 15px;
+}
+
+.ui-resizable-se {
+	bottom: -5px;
+	cursor: se-resize;
+	height: 15px;
+	right: -5px;
+	width: 15px;
+}
+
+.ui-resizable-sw {
+	bottom: -5px;
+	cursor: sw-resize;
+	height: 15px;
+	left: -5px;
+	width: 15px;
+}
+
+.ui-resizable-nw {
+	top: -5px;
+	cursor: nw-resize;
+	height: 15px;
+	left: -5px;
+	width: 15px;
+}
+
+/** Generic scrollbarPaper Styling **/
+div.scrollbarpaper-container { 
+	position: absolute;
+    z-index: 4;
+	background: #1c1c1c;
+	display: none;
+	width: 17px;
+}
+
+div.scrollbarpaper-track { 
+	margin: 5px 0 0; 
+	height: 100%; 
+	position: relative; 
+}
+
+div.scrollbarpaper-drag { 
+	cursor: move;
+	position: absolute;
+	width: 8px;
+	.borderRadius(4px);
+	background: #050505;
+	margin: 0 0 0 6px; 
+}
+
+/** Scroll Bar Styling for WebKit **/
+/** Scroll bars **/
+.subTabs::-webkit-scrollbar, 
+.subTabs-content-container::-webkit-scrollbar, 
+.design-editor-options-container::-webkit-scrollbar,
+.layoutSelectorContent::-webkit-scrollbar {
+	-webkit-appearance: none;
+	width: 7px;
+}
+		
+.subTabs::-webkit-scrollbar-thumb, 
+.subTabsContentContainer::-webkit-scrollbar-thumb, 
+.design-editor-options-container::-webkit-scrollbar-thumb,
+.layoutSelectorContent::-webkit-scrollbar-thumb {
+	border-radius: 4px;
+	background-color: rgba(255, 255, 255, .05);
+	box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+
+/** Random **/
+span.button {
+	float: left;
+	//display: block;
+    font-size: 12px;
+	padding: 0 11px;
+	margin: 0 0 0 5px;
+	//height: 24px;
+	//line-height: 25px;
+	text-align: center;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+ 	.borderRadius(3px);
+ 	cursor: pointer;
+	border-right: 1px solid @wcfButtonBorderColor;
+	border-bottom: 1px solid @wcfButtonBorderColor;
+	border-left: 1px solid @wcfButtonBorderColor;
+	.linear-gradient(#333, #111);
+	
+	&:hover,
+	&:active,
+	&.button-depressed {
+		border-right-color: @wcfButtonBorderColor;
+		border-bottom-color: @wcfButtonBorderColor;
+		border-left-color: @wcfButtonBorderColor;
+	}
+	
+	&:active,
+	&.button-depressed {
+		.linear-gradient(#111, #333);
+	}
+	
+	&.button-small {
+		font-size: @wcfSmallFontSize;
+    	height: 20px;
+    	line-height: 20px;
+	}
+}
+	
+/** Image Uploader **/
+span {
+	&.src {
+		float: left;
+		margin: 0 10px;
+		line-height: 25px;
+		color: #ddd;
+		word-wrap: break-word;
+		user-select: none;
+		-webkit-user-select: none;
+	}
+	&.delete-image {
+		background: none repeat scroll 0 0 transparent;
+    	display: block;
+    	float: left;
+   		height: 14px;
+    	margin: 6px 5px 0 -4px;
+    	opacity: 0.3;
+    	text-indent: -9999px;
+    	width: 15px;
+		cursor: pointer;
+		&:hover {
+			opacity: .65;
+		}
+	}
+}
+
+/** Menu **/
+div#menu { 
+	width: 100%;
+	min-width: 870px;
+	height: 45px; 
+	.linear-gradient(#5d5d5d, #1e1e1e);
+	position: fixed;
+	z-index: 7;
+	.boxShadowNative(0 5px 10px rgba(0, 0, 0, .3));
+}
+			
+a#logo { 
+	width: 35px;
+	height: 45px;
+	background: none no-repeat 0 7px; 
+	display: block; 
+	margin: 0 0 0 14px;
+	float: left;
+	text-indent: -9999px;
+}
+		
+/** Modes **/
+ul#modes { 
+	float: left; 
+	margin: 0 0 0 10px; 
+	li {
+		float: left;
+		height: 45px; 
+		color: @wcfColor;
+		a {
+			text-decoration: none;
+			height: 45px;
+			line-height: 45px;
+			padding: 0 20px 0 40px;
+			display: block;
+			opacity: .75;
+			text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+			font-size: @wcfBaseFontSize;
+			color: @wcfLinkColor;
+			
+			&:hover {
+				opacity: .9;
+				color: @wcfLinkHoverColor;
+			}
+		}
+		&.current-mode {
+			.linear-gradient(#3d3d3d, #111);
+			.boxShadowInset(0, 5px, rgba(0, 0, 0, .45), 15px);
+			a {
+				opacity: 1 !important;
+			}
+		}
+		&#mode-grid a {
+			background: none no-repeat 20px 50%;
+		}
+		&#mode-manage a {
+			background: none no-repeat 20px 49%;
+		}
+		&#mode-design a {
+			background: none no-repeat 20px 50%;
+		}
+		&:not(.current-mode) {
+			a:hover span {
+				border-bottom: 1px dotted #888;
+				padding-bottom: 2px;
+			}
+		}
+	}
+}
+
+div {
+	&#menu-right {
+		float: right;
+	}
+	&#menu-left {
+		float: left;
+		ul {
+			margin: 6px 0 0 0; 
+			float: left;
+			li {
+				float: left;
+				a {
+					text-decoration: none;
+					color: @wcfLinkColor;
+					font-size: 13px;
+					padding: 10px;
+					display: block;
+					text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+				}
+			}
+		}
+		li.current-tab a,
+		a:hover {
+			color: @wcfLinkHoverColor;
+		}
+		#menu-left-view-site a {
+			background: #333;
+			.borderRadius(5px);
+			padding: 6px 10px;
+			margin: 4px 10px 0 5px;
+			.boxShadowInset(-1px, -1px, rgba(255, 255, 255, .15), 0);
+		}
+	}
+	&#currentLayout {
+		.linear-gradient(#3e3e3e, #2a2a2a);
+		display: block;
+		height: 22px;
+		float: left;
+		position: relative;
+		margin: 0 12px 0 5px;
+		padding: 10px 15px 0;
+		max-width: 500px;
+		overflow: hidden;
+		white-space: nowrap;
+		.boxShadowInset(0, 0, rgba(0, 0, 0, .4), 15px);
+		.borderRadius(0 0 10px 10px);
+		
+		strong {
+			color: @wcfColor; 
+		}
+		span {
+			font-weight: normal;
+			color: @wcfColor;
+		}
+	}
+}
+
+/** Save Buttons **/
+.saveButtonContainer {
+	position: relative;
+	float: right;
+	display: block;
+	margin: 8px 10px 0 0;
+	width: 76px;
+}
+
+span.saveButton {
+	color: #fff;
+    display: block;
+    font-size: 12px;
+	padding: 0;
+	height: 26px;
+	width: 76px;
+	line-height: 27px;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
+	.borderRadius(3px);
+	cursor: pointer; 
+}
+
+/** Save Button **/
+span {
+	&#saveButton {
+		opacity: 0;
+		position: absolute;
+		display: none;
+		z-index: 2;
+		.linear-gradient(#8ac2b5, #43a58b);
+		&:active,
+		&.active {
+			.linear-gradient(#43a58b, #8ac2b5);
+		}
+	}
+	&#inactiveSaveButton {
+		.linear-gradient(#777, #444);
+		color: @wcfButtonColor;
+		cursor: default;
+		z-index: 1; 
+	}
+}
+
+/** Preview Button **/
+#previewButtonContainer, span.previewButton {
+	width: 82px;
+}
+
+span {
+	&#previewButton {
+		position: absolute;
+		display: none;
+		opacity: 0;
+		z-index: 2;
+		text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.45);
+		.linear-gradient(#DDC662, #CAB150);
+		&.preview-active,
+		&:active {
+			.linear-gradient(#CAB150, #DDC662);
+			opacity: 1 !important;
+			display: block !important;
+		}
+	}
+	&#inactivePreviewButton {
+		display: block;
+		.linear-gradient(#777, #444);
+		color: @wcfButtonColor;
+		cursor: default;
+		z-index: 1;
+	}
+}
+/** End Save Buttons **/
+			
+/** iframe **/
+iframe.content { 
+	width: 100%;
+	height: 100%;
+	padding: 0 0 270px 295px;
+	margin: 0;
+	overflow: auto;
+	position: fixed;
+	z-index: 4;
+	.border-box;
+	.transitionEditor("padding-left 500ms cubic-bezier(0.165, 0.840, 0.440, 1.000), padding-bottom 500ms cubic-bezier(0.165, 0.840, 0.440, 1.000)");
+}
+	
+div#iframeOverlay {
+	display: none;
+	position: fixed;
+	z-index: 4; 
+}
+		
+div#iframeLoadingOverlay {
+	position: fixed;
+	z-index: 4;
+	background: rgba(0, 0, 0, .6);
+	width: 100%;
+	height: 100%;
+	display: none;
+	div.cogContainer {
+		position: absolute;
+		top: 50%;
+		left: 50%; 
+		margin: -125px 0 0 120px;
+	}
+}
+body.panel-hidden div#iframeLoadingOverlay div.cogContainer { margin-top: -15px; }
+	
+/** Panel **/
+div#bottomPanel {
+	width: 100%;
+	min-width: 800px;
+	height: 220px;
+	padding: 50px 0 0;
+	position: fixed;
+	bottom: 0;
+	background: @wcfContainerBackgroundColor;
+	z-index: 7;
+	left: 0; 
+	.transitionEditor("bottom 500ms cubic-bezier(0.165, 0.840, 0.440, 1.000)");
+	
+	div.panel {
+		height: 100%;
+		width: 100%;
+		padding: 50px 0 0;
+		margin: -50px 0 0;
+		.border-box;
+		position: absolute;
+	}
+}
+/** Panel Top Resize Handle **/
+div#bottomPanelTopHandle {
+	width: 100px;
+	height: auto;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	padding: 5px;
+	margin: 0 0 0 -50px;
+	cursor: row-resize;
+	span {
+		width: 100%;
+		height: 1px;
+		display: block;
+		clear: both;
+		background: rgba(255, 255, 255, .15);
+		margin: 2px 0 0;
+		.boxShadowNative(0 1px 0 rgba(0, 0, 0, .1));
+	}
+}
+	
+/** Options **/
+li#options span {
+	width: 37px;
+	height: 37px;
+	background: none no-repeat;
+	display: block;
+	top: 6px;
+	left: 11px;
+	position: absolute;
+	float: left;
+	cursor: pointer;
+	text-indent: -9999px;
+	&.active, 
+	&:active {
+		background: none no-repeat;
+	}
+	ul {
+		display: none;
+		position: absolute;
+		left: 15px;
+		.borderRadius(5px 5px 5px 0);
+		background: #1f1f1f;
+		padding: 10px 15px;
+		.boxShadowNativeE('0 5px 10px rgba(0, 0, 0, .3), 0 -1px 1px rgba(255, 255, 255, .2)');
+		li {
+			float: left;
+			clear: left; 
+			margin: 0 0 0 0;
+			padding: 5px 0;
+			color: @wcfLinkColor;
+			font-size: @wcfBaseFontSize;
+			text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+			cursor: pointer;
+			&:hover {
+				color: @wcfLinkHoverColor;
+			}
+		}
+	}
+}			
+/** Mode Buttons **/
+#bottomPanelTabs {
+	padding: 0 !important;
+	margin: 0 !important;
+
+	> ul {
+	//background: none !important;
+	width: 100%;
+	height: 50px;
+	margin: -50px 0 0 0;
+	float: left;
+	box-shadow: 0 -5px 10px rgba(0,0,0,0.3);
+	@ulBackground: (#5c5c5c + #2e2e2e) / 2;
+	.linear-gradient(#5c5c5c, #2e2e2e);
+	display: block;
+	position: relative;
+	border: 0 !important;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	z-index: 2;
+	
+	//.boxShadowNative(0 -5px 10px rgba(0, 0, 0, .3));
+	li {
+		border: 0 !important;
+		margin: 0 -55px 0 60px;
+		float: left;
+		height: 50px;
+		&.ui-state-active {
+			a {
+				color: white !important;
+				background-color: transparent !important;
+				font-weight: normal !important;
+				margin-top: 0 !important;
+				&:before {
+					border: 0 !important;
+					border-bottom-right-radius: 0 !important;
+					width: 0 !important;
+					height: 0 !important;
+				}
+				&:after {
+					border: 0 !important;
+					width: 0 !important;
+					height: 0 !important;
+					border-bottom-left-radius: 0 !important;
+				}
+			}
+			span.close {
+				display: block;
+			}
+		}
+		a {
+			background-color: transparent !important;
+			border-top-left-radius: 0 !important;
+			border-top-right-radius: 0 !important;
+			border-bottom-left-radius: 0 !important;
+			border-bottom-right-radius: 0 !important;
+			border-width: 0 !important;
+			text-decoration: none;
+			font-size: 14px;
+			color: #8C8C8C;
+			padding: 0 10px !important;
+			display: block;
+			height: 50px;
+			line-height: 50px;
+			text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+			cursor: pointer !important;
+		}
+		span.close {
+			display: none;
+			position: absolute;
+			background: none;
+    		height: 10px;
+    		right: -4px;
+    		text-indent: -9999px;
+    		top: 25%;
+    		width: 10px;
+			cursor: pointer;
+			opacity: .6;
+			&:hover {
+				opacity: 1;
+			}
+		}
+		&:hover {
+			span.close {
+				display: block;
+			}
+			a {
+				color: white !important;
+			}	
+		}
+		&.ui-corner-top {
+			position: relative; 
+		}
+		
+	} 
+	span.modeButton {
+		float: right;
+		margin: 9px 0 0 13px;
+		color: @wcfButtonColor;
+    	display: block;
+    	font-size: @wcfBaseFontSize;
+		padding: 0 12px;
+		height: 29px;
+		width: auto;
+		line-height: @wcfBaseLineHeight;
+		text-align: center;
+    	text-decoration: none;
+    	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+ 		.borderRadius(3px);
+ 		cursor: pointer;
+ 		border-top: 1px solid #616161;
+		border-bottom: 1px solid #202020;
+		.linear-gradient(#404040, #1d1d1d);
+		&:active {
+			.linear-gradient(#1d1d1d, #404040);
+		}
+	}
+	span.modeButtonGreen {
+		text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+		border-bottom: 1px solid #444;
+		.linear-gradient(#8ac2b5, #43a58b);
+		box-shadow: -1px -1px 10px #3FAB90;
+		color: @wcfButtonColor;
+		&:active,
+		&.mode-button-depressed {
+			.linear-gradient(#43a58b, #8ac2b5);
+		}
+	}
+	#toggleInspector {
+		width: 100px;
+	}
+	li#minimize {
+		margin: 6px 8px 0 8px;
+		float: right;
+		span {
+			cursor: pointer;
+			width: 32px; 
+			height: 32px; 
+			background-color: white; 
+			text-indent: -9999px;
+			padding: 7px 0;
+		}
+	}
+	}
+}
+/** Visual Editor Panel Sub Tabs **/
+div.subTabsContentContainer {
+	overflow-x: hidden;
+	overflow-y: auto;
+	height: 100%;
+	border: 0 !important;
+}
+	
+/** Sub Tabs Content Scolling **/
+div.scrollbarpaper-container-sub-tabs-content-container {
+	right: 0;
+	top: 50px;
+} 
+nav.subTabsContainer {
+	height: 100%;
+	margin: 0 !important;
+	padding: 0 !important;
+	float: left !important;
+}
+ul.subTabs { 
+	float: left !important;
+	width: 220px !important; 
+	height: 100% !important;
+	overflow-y: auto;
+	overflow-x: hidden;
+	display: block !important;
+	border: 0 !important;
+	background-color: darken(@wcfContainerBackgroundColor, 10%) !important;
+	
+	li {
+		display: block !important;
+		&.ui-state-active {
+			a {
+				background-color: @wcfContainerBackgroundColor !important;
+				margin-top: 0 !important;
+				padding-top: 0 !important;
+				padding-bottom: 0 !important;
+			}
+		}
+		> a,
+		> span {
+			display: block !important;
+			padding: 12px;
+			cursor: pointer !important;
+		}
+		
+	}
+}		
+/** Sub Tabs Scrolling **/
+div.scrollbarpaper-container-sub-tabs { 
+	left: 205px;
+    top: 50px;
+}
+/** Visual Editor Sub Tab Notice **/
+p { 
+	&.sub-tab-notice {
+		.linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.4));
+    	border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+    	.borderRadius(5px);
+    	color: @wcfColor;
+    	margin-bottom: 20px;
+		padding: 9px 10px;
+		width: 100%;
+		font-size: @wcfBaseFontSize;
+		line-height: @wcfBaseLineHeight;
+		.border-box;
+		strong {
+			font-weight: bold;
+		}
+		em {
+			font-style: italic;
+		}
+		a {
+			color: @wcfLinkColor;
+			&:hover {
+				text-decoration: none;
+			}
+		}
+	}
+	&.panel-notice {
+		width: 97.5%;
+		margin: 15px auto;
+	}
+}		
+	
+/** Visual Editor Panel Sub Tabs Content **/
+div.subTabsContent {
+	padding: 20px !important;
+	margin: 0 !important; 
+	height: 100% !important;
+	overflow-y: auto;
+	.border-box;
+	border: 0 !important;
+	
+	dd {
+		display: block;
+		margin-top: 5px;
+		margin-bottom: 5px;
+		> div {
+			display: block;
+			label {
+				float: left;
+			}
+			> div {
+				display: inline-block;
+				input {
+					margin-left: 10px;
+					border: 0 !important;
+					width: 40px;
+					text-align: right;
+					overflow-x: hidden;
+				}
+				span.sliderUnit {
+					margin-left: 10px;
+				}
+			}
+		}
+	}
+	div.tooltipButton {
+		width: 17px;
+		height: 16px;
+		display: block;
+		background: none no-repeat;
+		opacity: .15;
+		cursor: pointer;
+		float: left;
+		margin: 4px 2px 0 2px;
+		&:hover {
+			opacity: .3;
+		}
+	}
+}
+/** Layout Selector **/
+div#layoutSelectorOffset {
+	bottom: 0;
+    display: block;
+    height: auto;
+    padding: 41px 0 304px;
+    position: fixed;
+    left: -60px;
+    top: 0;
+    width: 500px;
+ 	z-index: 6;
+ 	.transitionEditor("left 500ms cubic-bezier(0.165, 0.840, 0.440, 1.000), padding-bottom 500ms cubic-bezier(0.165, 0.840, 0.440, 1.000)");
+}
+
+div#layoutSelectorContainer {	
+	border: 0 solid rgba(0, 0, 0, .1);
+	border-width: 0 5px 0 0;
+	height: 100%;
+	position: relative; 
+	
+	span#layoutSelectorToggle {
+		-moz-transform: rotate(90deg);
+		-webkit-transform: rotate(90deg);
+		.linear-gradient(@wcfContainerBackgroundColor, darken(@wcfContainerBackgroundColor, 10%));
+    	.borderRadius(5px 5px 0 0);
+    	color: @wcfButtonColor;
+    	//background-color: @wcfButtonBackgroundColor;
+	    /** display: block; **/
+		display: block;
+	    height: 38px;
+	    right: -93px;
+	    line-height: @wcfBaseLineHeight;
+	    margin: -3px 0 0 0;
+	    position: absolute;
+	    text-align: center;
+	    top: 50%;
+	    width: 150px;
+	    z-index: 10;
+	 	cursor: pointer;
+		.boxShadowNative(4px -4px 0 rgba(0, 0, 0, .1));
+	}
+	
+	div#layoutSelector {
+		padding: 0 0 0 60px;
+		background: darken(@wcfContainerBackgroundColor, 10%);
+		height: 100%;
+		position: relative; 
+		overflow: visible !important;
+		border-top-left-radius: 0px;
+		border-top-right-radius: 0px;
+		border-bottom-left-radius: 0px;
+		border-bottom-right-radius: 0px;
+		border: 0;
+		div.scrollbarpaper-container { 
+			background: @wcfContainerBackgroundColor;
+    		right: 5px;
+    		top: 1px;
+    	}
+    	div.scrollbarpaper-drag { 
+			background: @wcfContainerBackgroundColor;
+		}
+		div.tabMenuContent {
+			margin-top: 0 !important;
+			min-height: 0 !important;
+			position: static !important;
+			z-index: auto !important;
+			border: 0 !important;
+			div.layoutSelectorContent { 
+				float: left;
+				clear: both;
+				width: 430px;
+				height: auto;
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				margin: 2px 0 5px 0;
+				overflow-y: auto;
+				overflow-x: hidden;
+				
+				li.has-children {
+					> span.layout { 
+						background: none no-repeat 16px 10px; 
+					}
+					> span.layoutOpen { 
+						background: none no-repeat 15px 13px; 
+					}
+				}
+				li.layoutItem {
+					&:not(.layoutItemTemplateUsed):not(.layoutSelected) {
+						> span.layout:hover span.edit {
+							//display: block;
+						}
+					}
+					&:not(.layoutSelected) > span.layoutTemplate:hover span.assignTemplate {
+						//display: block;
+					}
+					> span.layoutTemplate:hover span.deleteTemplate {
+						//display: block;
+					}
+					&.hasCustomizedChildren {
+						position: relative;
+						clear: both;
+						> span.layoutHasCustomizedChildren {
+							display: inline;
+						}
+					}
+					> span.layoutHasCustomizedChildren {
+						display: none;
+						font-size: 14px;
+						margin: 0;
+						font-weight: 200;
+						top: 10px;
+						left: 5px;
+						position: absolute;
+						z-index: 2;
+						cursor: help;
+					}
+					span.layout {
+						padding: 7px 15px;
+						cursor: pointer;
+						display: block;
+						border-bottom: 1px solid #292929;
+						position: relative;
+						float: left;
+						width: 100%;
+						min-height: 18px;
+						line-height: 18px;
+						clear: both;
+						//text-shadow: 1px 1px 1px #282828;
+						.border-box;
+				
+						strong { 
+							float: left;
+							color: @wcfColor; 
+							&:hover {
+								color: @wcfColor;
+							}
+						}
+						span.status {
+							color: @wcfColor;
+							float: left;
+							margin: 0 0 0 10px;
+							// Hide all statuses by default.
+							display: none;
+						}		
+						span.layoutPage {
+							padding-left: 30px;
+							span.layoutSelectorButton {
+								right: 3px;
+							}
+						}
+						span.layoutTemplate {
+							span.edit {
+								right: 3px;
+							}
+							span.assignTemplate { 
+								right: 50px;
+							}
+							span.deleteTemplate {
+								text-indent: -9999px;
+								// Hide the delete template button by default.
+								display: none;
+								cursor: pointer;
+								background: none no-repeat;
+								width: 15px;
+								height: 14px;
+								margin: 1px 0 -3px 6px;
+								opacity: .35;
+								float: left;
+								&:hover {
+									opacity: .9;
+								}
+							}
+						}
+					}
+				}
+				li.layoutItemCustomized {
+					> span.layout {
+						span.statusCustomized {
+							display: block;
+						}
+						span.edit,
+						span.revert {
+							display: none;
+						}
+						span.statusTemplate {
+							display: block;
+						}
+						&:hover {
+							span.edit,
+							span.revert {
+								display: none;
+							}
+							span.removeTemplate {
+								display: block;
+							}
+						}
+					}
+				}
+				li.layoutSelected {
+					> span.layout {
+						strong {
+							color: #eee !important;
+						}
+						span.status {
+							display: none;
+						}
+						span.statusCurrentlyEditing {
+							display: block;
+						}
+						span.layoutSelectorButton {
+							display: none;
+						}
+					}
+					&:hover {
+						span.layout-selector-button {
+							display: none;
+						}
+					}
+					&.layoutItemCustomized > span.layout span.revert {
+						display: block;
+					}
+					&.layoutItemTemplateUsed > span.layout span.removeTemplate {
+						display: block;
+					}
+					> span.layoutTemplate span.deleteTemplate {
+						display: block;
+					}
+				}
+				li.layoutItemNoEdit {
+					> span.layout {
+						strong {
+							color: @wcfColor;
+						}
+						span.layoutSelectorButton {
+							display: none !important;
+						}	
+					}
+					&.hasChildren {
+						> span.layout {
+							background-image: none;
+						}	
+						> span.layoutOpen { 
+							background-image: none; 
+						}
+					}
+				}
+				li.infoLayoutItem {
+					span.layout {
+						strong,
+						strong:hover {
+							color: @wcfColor;
+							cursor: default;
+						}
+					}
+				}
+				ul {
+					width: 415px !important;
+					margin: 0; 
+					height: 100%;
+					float: left;
+					li {
+						display: block;
+						span.status {
+							display: none;
+						}
+					}
+					ul {
+						display: none;
+						padding: 0 0 0 25px;
+					}
+				}
+			}
+		}
+	}
+}
+
+/** Style buttons and hide them **/
+span.layoutSelectorButton { 
+	display: none;
+}
+/** Hide the revert button in the manage and design modes. **/
+body.visual-editor-mode-design span.revert, 
+body.visual-editor-mode-manage span.revert {
+	display: none !important;
+}
+				
+/** Conditionals **/
+/** Hierarchial indicators **/
+div.layoutSelectorContent {
+	
+}
+div.layoutSelectorDisallowRevert span.layout span.revert {
+	display: none !important;
+}
+
+/** Template Input **/
+div#layoutSelectorTemplates {
+	bottom: 35px;
+}
+
+div#templateNameInputContainer {
+	float: left;
+	position: absolute;
+	bottom: 0;
+	left: 60px;
+	border-top: 1px solid @wcfContainerBorderColor;
+	width: 255px;
+	padding: 6px 20px;
+	background: darken(@wcfContainerBackgroundColor, 10%);
+	
+	input {
+		float: left;
+		background: @wcfInputBackgroundColor;
+		border: 1px solid @wcfInputBorderColor;
+		.borderRadius(3px);
+		padding: 4px 5px;
+		margin: 0 0 0 2px;
+		color: @wcfInputColor;
+		width: 130px;
+		&::-webkit-input-placeholder,
+		&::-moz-placeholder {
+			opacity: .5;
+		}
+	}
+	span.addTemplate {
+		display: block;
+		position: static;
+		top: auto;
+		left: auto;
+		float: left;
+		width: auto;
+		margin: 1px 0 -3px 8px;
+		text-align: center;
+	}
+}
+/** Hide the add template button in the design mode. **/
+body.visual-editor-mode-design div#template-name-input-container { 
+	display: none !important; 
+}
+/** End Template Inputs **/
+		
+nav#layoutSelectorTabs { 
+	position: absolute !important;
+	bottom: -34px;
+	z-index: 5;
+	width: 495px;
+	left: 0;
+	padding: 0 !important;
+	
+	ul { 
+		width: 435px;
+		float: left;
+		height: 34px;
+		position: static !important;
+		display: block;
+		list-style: none;
+		margin: 0;
+		padding: 0 0 0 60px;
+		border: 0 !important;
+		border-top-left-radius: 0px;
+		border-top-right-radius: 0px;
+		border-bottom-left-radius: 0px;
+		border-bottom-right-radius: 0px;
+		.linear-gradient(@wcfContainerBackgroundColor, darken(@wcfContainerBackgroundColor, 10%));
+		li {
+			&.ui-state-active {
+				margin-left: 0 !important;
+				margin-right: 0 !important;
+				a {
+					background-color: transparent !important;
+					font-weight: normal !important;
+					margin-top: 0 !important;
+					border-top-left-radius: 0 !important;
+					border-top-right-radius: 0 !important;
+					&:before {
+						border: 0 !important;
+						border-bottom-right-radius: 0 !important;
+						width: 0 !important;
+						height: 0 !important;
+					}
+					&:after {
+						border: 0 !important;
+						width: 0 !important;
+						height: 0 !important;
+						border-bottom-left-radius: 0 !important;
+					}
+				}
+			}
+			a {
+				border-top-left-radius: 0 !important;
+				border-top-right-radius: 0 !important;
+				background-color: transparent !important;
+				border-bottom-left-radius: 0 !important;
+				border-bottom-right-radius: 0 !important;
+				border-width: 0 !important;
+				text-decoration: none;
+				font-size: 14px;
+				padding: 0 10px !important;
+				display: block;
+				height: 34px;
+				line-height: 34px;
+				cursor: pointer !important;
+			}
+		}
+	}
+}
+
+
+/** Boxes **/	
+div.box { 
+	border: 5px solid @wcfContainerBorderColor;
+	position: fixed;
+	display: none;
+	.borderRadius(5px);
+	z-index: 15;
+	overflow: hidden; 
+	ul.tabs {
+		margin: -15px 20px 0 -15px;
+		padding: 0 0 30px;
+		width: 150px;
+		height: 100%;
+		background: @wcfContainerBackgroundColor;
+		display: block;
+		float: left;
+		.borderRadius(0 0 0 3px);
+		li {
+			a {
+				color: @wcfLinkColor;
+				padding: 12px;
+				font-size: @wcfBaseFontSize;
+				display: block;
+				text-decoration: none;
+				text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+			}
+			&:not(.ui-tabs-selected) a:hover {
+				color: @wcfLinkHoverColor;
+			}
+			&.ui-tabs-selected a {
+				color: @wcfLinkHoverColor;
+				background: @wcfContentBackgroundColor;
+			}
+		}
+	}
+}
+/** Titles **/
+div.box-top { 
+	.linear-gradient(#242424, #0b0b0b);
+	height: 50px;
+	width: 100%;
+	display: block;
+	.borderRadius(3px 3px 0 0);
+	position: relative;
+	z-index: 2;
+	float: left;
+	
+	> strong { 
+		font-family: @wcfBaseFontFamily;
+		font-weight: bold;
+		color: @wcfColor;
+		margin: 19px 0 0 20px;
+		float: left;
+		text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+	}
+	> span {
+		font-family: @wcfBaseFontFamily;
+		font-style: italic;
+		color: @wcfColor;
+		float: left;
+		margin: 19px 0 0 10px;
+		text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+		strong {
+			font-weight: bold;
+		} 
+	}
+	span.box-close {
+		margin: 17px 15px 0 0;
+		background: none no-repeat;
+		width: 17px;
+		height: 17px;
+		float: right;
+		display: block;
+		cursor: pointer;
+		opacity: .5; 
+		.transition(opacity, 0.15s, linear); 
+		&:hover { 
+			opacity: 1;
+		}
+	}
+}
+
+div.box-content-bg { 
+	background: @wcfContainerBackgroundColor;
+	display: block; 
+	height: 100%;
+	margin: 0;
+	position: relative;
+	z-index: 1;
+	.borderRadius(3px);
+}
+	
+div.box-content { 
+	padding: 65px 15px 15px;
+	.border-box;
+	width: 100%;
+	height: 100%;
+	iframe {
+		.borderRadius(0 0 3px 3px);
+		margin: -15px;
+	}
+}
+	
+/** Live CSS Box **/		
+textarea#liveCSS {
+	.border-box;
+	width: 100%;
+	height: 100%;
+	padding: 10px;
+	font-family: monospace;
+	border: 2px solid @wcfInputBorderColor;
+	resize: none;
+}
+
+/** Grid Wizard **/
+div#boxGridWizard { 
+	margin: -220px 0 0 -153px;
+	top: 50%;
+	left: 50%;
+	div.tabContent {
+		float: left;
+		width: 415px;
+		height: 340px;
+		position: absolute;
+		left: 170px;
+	}
+}
+
+body.layoutSelectorHidden div#boxGridWizard {
+	margin-left: -300px;
+}
+div.gridWizardButtons {
+	display: block;
+	clear: both;
+	float: left;
+	.borderRadius(5px);
+	background: @wcfContainerBackgroundColor;
+	margin: 10px 0 0;
+	width: 410px;
+	height: 39px;
+	padding: 7px 8px;
+	border-bottom: 1px solid @wcfContainerBorderColor;
+	.border-box;
+	.boxShadowNative(0 -1px 0 #1c1c1c);
+	position: absolute;
+	bottom: 2px;
+	
+	span.grid-wizard-use-empty-grid {
+		color: @wcfColor;
+		text-decoration: underline;
+		line-height: 25px;
+		display: block;
+		width: auto;
+		float: left;
+		margin: 0 0 0 3px;
+		cursor: pointer;
+		
+		&:hover {
+			text-decoration: none;
+		}
+	}
+	span.grid-wizard-button-next {
+		float: right;
+	}
+	span.grid-wizard-button-previous {
+		float: right;
+		margin: 0 5px 0 0;
+	}
+	span.grid-wizard-button-clone-page {
+		width: 80px;
+	}
+}
+
+div#box-grid-wizard {
+	select {
+		background: #222 none no-repeat 95% 50%;
+		border: 1px solid @wcfInputBorderColor;
+		.borderRadius(5px);
+		color: @wcfInputColor;
+		font-size: 11px;
+		height: 30px;
+		margin: 3px 0 0;
+		padding: 5px 30px 5px 10px;
+		width: 250px;
+		cursor: pointer;
+		.boxShadowNative(1px 1px 0 #323232);
+		&:focus {
+			outline: 0;
+		}
+	}
+	div.box-content h4 { 
+		font-size: @wcfTitleFontSize;
+		font-weight: 500;
+		color: @wcfColor;
+		text-shadow: 1px 1px 0 #222;
+		margin: 0 0 10px;
+	}
+	.grid-wizard-info {
+		.linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.4));
+		border-bottom: 2px solid @wcfContainerBorderColor;
+		.borderRadius(5px);
+		color: @wcfColor;
+		margin: 5px 0 0;
+		padding: 7px 10px;
+		width: 95%;
+		font-size: @wcfBaseFontSize;
+		line-height: @wcfBaseLineHeight;
+		float: left;
+		clear: both;
+	}
+	span.layout-preset {
+		margin: 7px 15px 15px 8px;
+		float: left;
+		background: @wcfContainerBackgroundColor;
+		padding: 5px 5px 4px;
+		.borderRadius(4px);
+		.boxShadowNative(1px 1px 1px #000);
+		opacity: .3;
+		cursor: pointer;
+		
+		width: 105px;
+		height: 105px;
+		
+		.transition(opacity, 0.075s, linear);
+		
+		&-selected,
+		&:hover {
+			opacity: .9;
+		}
+		img {
+			opacity: .8;
+			width: 105px;
+			height: 105px;
+		}
+	}
+}
+	
+/** Step 2 **/
+div#grid-wizard-presets-step-2 {
+	display: none;
+	
+	select {
+		width: 100%;
+		height: 25px;
+		.border-box;
+	}
+	h5 {
+		font-size: @wcfTitleFontSize;
+		font-weight: 400;
+		color: @wcfColor;
+		text-shadow: 1px 1px 0 #222;
+		margin: 0 0 2px 1px;
+	}
+}
+div.grid-wizard-presets-mirroring-column {
+	margin: 20px 0 0 0;
+	width: 195px;
+	float: left;
+	div {
+		margin: 0 0 15px 0;
+	}
+}
+div#grid-wizard-presets-mirroring-column-1 {
+	margin-right: 20px;
+}
+	
+/** Black Overlay **/
+div.blackOverlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	display: none;
+	z-index: 14;
+	background: @wcfContainerBackgroundColor; 
+}
+
+.ui-tooltip-tour {
+	.boxShadowNative(0 3px 10px rgba(0, 0, 0, 0.3));
+	.borderRadius(4px);
+	max-width: 350px;
+	
+	.ui-tooltip-content {
+		background: @wcfContainerBackgroundColor;
+		padding: 0 20px 50px;
+		border-color: @wcfContainerBorderColor;
+		.borderRadius(0 0 8px 8px);
+		
+		* {
+			font-size: inherit;
+		}
+		p, 
+		ul {
+			line-height: @wcfBaseLineHeight;
+			font-size: @wcfBaseFontSize;
+			margin: 0 0 13px;
+			color: @wcfColor;
+			.antialias();
+		}
+		ul li {
+			margin: 0 0 4px;
+		}
+		a {
+			color: @wcfLinkColor;
+			&:hover {
+				text-decoration: none;
+			}
+		}
+	}
+	.ui-tooltip-titlebar {
+		color: @wcfColor;
+		background: @wcfContainerBackgroundColor;
+		font-weight: normal;
+		border-color: @wcfContainerBorderColor;
+		border-bottom: none;
+		padding: 20px;
+		font-weight: 600;
+		.borderRadius(8px 8px 0 0);
+		
+		.ui-tooltip-icon { 
+			border: none;
+			right: 20px;
+			top: 29px;
+			
+			.ui-icon-close {
+				width: 15px;
+				height: 14px;
+				background: none no-repeat;
+				border: none;
+				opacity: 0.4;
+				text-indent: -9999px;
+				
+				.transition(opacity, 0.15s, linear);
+				&:hover {
+					opacity: 0.9;
+				}
+			}
+		}
+		.ui-state-hover{
+			border-color: @wcfContainerBorderColor;
+			color: @wcfColor;
+		}
+	}
+	#ui-tooltip-tour-title {
+		font-size: 15px;
+	}
+	.ui-tooltip-tip {
+		background-color: @wcfContainerBackgroundColor;
+	}
+}
+/** Tour Button **/
+div#tour-next-container {
+	width: 100%;
+	height: 43px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background: @wcfContainerBackgroundColor;
+	border-top: 1px solid @wcfContainerBorderColor;
+	.borderRadius(0 0 3px 3px);
+	.border-box;
+	padding: 7px 9px;
+	
+	p {
+		font-style: italic;
+		color: @wcfColor;
+		line-height: 25px;
+		text-align: center;
+		font-size: 11px;
+		margin: 0 10px;
+	}
+}
+span.tour-button {
+	background: @wcfButtonBackgroundColor;
+	color: @wcfButtonColor;
+	padding: 0 25px 0 15px;
+	height: 26px;
+	line-height: @wcfBaseLineHeight;
+	display: block;
+	.borderRadius(13px);
+	border-bottom: 1px solid @wcfButtonBorderColor;
+	float: right;
+	margin: 0;
+	width: auto;
+	font-weight: 500;
+	cursor: pointer;
+	position: relative;
+	
+	span.arrow {
+		display: inline-block;
+		margin: 0;
+		position: absolute;
+		top: -1px;
+		right: 12px;
+		font-size: 24px;
+		font-weight: 300;
+	}
+	&:active {
+		border-top: 1px solid @wcfButtonHoverBorderColor;
+		border-bottom: none;
+	}
+}

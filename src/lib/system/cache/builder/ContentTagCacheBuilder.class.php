@@ -47,8 +47,12 @@ class ContentTagCacheBuilder implements ICacheBuilder {
 				/* @var $content \ultimate\data\content\Content */
 				/* @var $__tags \wcf\data\tag\Tag[] */
 				$taggedContent = new TaggedContent($content);
-				$__tags = $taggedContent->tags;
-				if (!array_key_exists($tagID, array_keys($__tags))) continue;
+				$__tags = $taggedContent->__get('tags');
+				$__keys = array();
+				foreach ($__tags as $languageID => $tags) {
+					$__keys = array_merge($__keys, array_keys($tags));
+				}
+				if (!in_array($tagID, $__keys)) continue;
 				$data['contentsToTagID'][$tagID][$contentID] = $taggedContent;
 			}
 		}

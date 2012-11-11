@@ -1,6 +1,7 @@
 <?php
 namespace ultimate\data\link;
 use ultimate\data\AbstractUltimateDatabaseObject;
+use wcf\system\WCF;
 
 /**
  * Represents a link.
@@ -27,6 +28,15 @@ class Link extends AbstractUltimateDatabaseObject {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableIndexName
 	 */
 	protected static $databaseTableIndexName = 'linkID';
+	
+	/**
+	 * Returns the name of this link.
+	 * 
+	 * @return	string
+	 */
+	public function __toString() {
+		return WCF::getLanguage()->get($this->linkName);
+	}
 	
 	/**
 	 * @see \wcf\data\DatabaseObject::handleData()

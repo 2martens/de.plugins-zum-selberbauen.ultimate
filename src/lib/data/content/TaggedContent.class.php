@@ -35,8 +35,12 @@ class TaggedContent extends TaggableContent implements ITagged {
 	 * @see \wcf\data\DatabaseObjectDecorator::__get()
 	 */
 	public function __get($name) {
-		if ($name == 'tags') return $this->tags;
-		parent::__get($name);
+		$value = parent::__get($name);
+		
+		if ($value === null) {
+			if ($name == 'tags') $value = $this->tags;
+		}
+		return $value;
 	}
 	
 	/**
@@ -63,11 +67,12 @@ class TaggedContent extends TaggableContent implements ITagged {
 		$tags = array();
 		foreach ($languages as $languageID => $language) {
 			/* @var $language \wcf\data\language\Language */
-			$tags[$languageID] = TagEngine::getInstance()->getObjectTags(
+			$tmpTags = TagEngine::getInstance()->getObjectTags(
 				'de.plugins-zum-selberbauen.ultimate.contentTaggable',
 				$this->__get('contentID'),
 				$languageID
 			);
+			if (!empty($tmpTags)) $tags[$languageID] = $tmpTags;
 		}
 		return $tags;
 	}

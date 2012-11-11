@@ -43,7 +43,7 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledDatabaseObje
 	/**
 	 * Returns the content of this page.
 	 * 
-	 * @return	\ultimate\data\content\Content
+	 * @return	\ultimate\data\content\Content|null
 	 */
 	public function getContent() {
 		$sql = 'SELECT	  content.*
@@ -94,10 +94,10 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledDatabaseObje
 	 * @return	\wcf\data\user\group\UserGroup[]
 	 */
 	public function getGroups() {
-		$sql = 'SELECT	  group.*
+		$sql = 'SELECT	  groupTable.*
 		        FROM      ultimate'.ULTIMATE_N.'_user_group_to_page groupToPage
-		        LEFT JOIN wcf'.WCF_N.'_user_group group
-		        ON        (group.groupID = groupToPage.groupID)
+		        LEFT JOIN wcf'.WCF_N.'_user_group groupTable
+		        ON        (groupTable.groupID = groupToPage.groupID)
 		        WHERE     groupToPage.pageID = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->pageID));

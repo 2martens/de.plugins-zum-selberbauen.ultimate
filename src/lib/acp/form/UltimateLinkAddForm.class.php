@@ -1,10 +1,37 @@
 <?php
+/**
+ * Contains the UltimateLinkAdd form.
+ * 
+ * LICENSE:
+ * This file is part of the Ultimate CMS.
+ *
+ * The Ultimate CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * The Ultimate CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
+ * 
+ * @author		Jim Martens
+ * @copyright	2011-2012 Jim Martens
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
+ * @package		de.plugins-zum-selberbauen.ultimate
+ * @subpackage	acp.form
+ * @category	Ultimate CMS
+ */
 namespace ultimate\acp\form;
 use ultimate\data\link\LinkAction;
 use ultimate\data\link\LinkEditor;
 use ultimate\util\LinkUtil;
 use wcf\acp\form\ACPForm;
 use wcf\system\category\CategoryHandler;
+use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\Regex;
 use wcf\system\WCF;
@@ -67,7 +94,7 @@ class UltimateLinkAddForm extends ACPForm {
 	
 	/**
 	 * Contains all categories.
-	 * @var	\wcf\data\category\Category[]
+	 * @var	\wcf\data\category\Category[]|string[]
 	*/
 	public $categories = array();
 	
@@ -85,7 +112,17 @@ class UltimateLinkAddForm extends ACPForm {
 	 */
 	public function readData() {
 		$this->categories = CategoryHandler::getInstance()->getCategories('de.plugins-zum-selberbauen.ultimate.linkCategory');
-		unset($this->categories[1]);
+		// get category id
+		require(ULTIMATE_DIR.'acp/config.inc.php');		
+		unset($this->categories[$categoryID]);
+		
+		// workaround for html checkboxes
+		$categories = array();
+		foreach ($this->categories as $categoryID => $category) {
+			/* @var $category \wcf\data\category\Category */
+			$categories[$categoryID] = $category->getTitle();
+		}
+		$this->categories = $categories;
 		parent::readData();
 	}
 	
@@ -108,9 +145,9 @@ class UltimateLinkAddForm extends ACPForm {
 	 */
 	public function validate() {
 		parent::validate();
-		$this->validateName();
-		$this->validateURL();
-		$this->validateDescription();
+		$this->validateLinkName();
+		$this->validateLinkURL();
+		$this->validateLinkDescription();
 		$this->validateCategories();
 	}
 	
@@ -140,8 +177,8 @@ class UltimateLinkAddForm extends ACPForm {
 			I18nHandler::getInstance()->save('linkName', 'ultimate.link.'.$linkID.'.linkName', 'ultimate.link', PACKAGE_ID);
 			$updateEntries['linkName'] = 'ultimate.link.'.$linkID.'.linkName';
 		}
-		if (!I18nHandler::getInstance()->isPlainValue('linDescription')) {
-			I18nHandler::getInstance()->save('linkName', 'ultimate.link.'.$linkID.'.linkDescription', 'ultimate.link', PACKAGE_ID);
+		if (!I18nHandler::getInstance()->isPlainValue('linkDescription')) {
+			I18nHandler::getInstance()->save('linkDescription', 'ultimate.link.'.$linkID.'.linkDescription', 'ultimate.link', PACKAGE_ID);
 			$updateEntries['linkDescription'] = 'ultimate.link.'.$linkID.'.linkDescription';
 		}
 		if (!empty($updateEntries)) {
@@ -201,20 +238,34 @@ class UltimateLinkAddForm extends ACPForm {
 		 if (empty($this->linkURL)) {
 		 	throw new UserInputException('linkURL');
 		 }
-		 
+		 // add http scheme if no scheme exists
+		 $parsedURL = parse_url($this->linkURL);
+		 if (!isset($parsedURL['scheme'])) $this->linkURL = 'http://'.$this->linkURL;
 		 if (!LinkUtil::isValidURL($this->linkURL)) {
-		 	// try http scheme
-		 	$this->linkURL = 'http://'.$this->linkURL;
-		 	
-		 	// if it still doesn't match
-		 	if (!LinkUtil::isValidURL($this->linkURL)) {
-		 		throw new UserInputException('linkURL', 'notValid');
-		 	}
+		 	throw new UserInputException('linkURL', 'notValid');
 		 }
 		 
-		 if (!LinkUtil::isAvailableURL($this->linkURL)) {
+		 if (!LinkUtil::isAvailableURL($this->linkURL, (isset($this->linkID) ? $this->linkID : 0))) {
 		 	throw new UserInputException('linkURL', 'notUnique');
 		 }
+	}
+	
+	/**
+	 * Validates link description.
+	 *
+	 * @throws	\wcf\system\exception\UserInputException
+	 */
+	protected function validateLinkDescription() {
+		if (!I18nHandler::getInstance()->isPlainValue('linkDescription')) {
+			if (!I18nHandler::getInstance()->validateValue('linkDescription')) {
+				throw new UserInputException('linkDescription');
+			}
+		}
+		else {
+			if (empty($this->linkDescription)) {
+				throw new UserInputException('linkDescription');
+			}
+		}
 	}
 	
 	/**
@@ -230,7 +281,8 @@ class UltimateLinkAddForm extends ACPForm {
 		}
 		if (empty($this->categoryIDs)) {
 			// if no categories chosen, put link into uncategorized category
-			$this->categoryIDs[] = 1;
+			require(ULTIMATE_DIR.'acp/config.inc.php');
+			$this->categoryIDs[] = $categoryID;
 		}
 	}
 }

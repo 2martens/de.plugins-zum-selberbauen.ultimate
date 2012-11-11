@@ -112,7 +112,6 @@ class UltimateCategoryAddForm extends ACPForm {
 		$this->validateTitle();
 		$this->validateSlug();
 		$this->validateParent();
-		$this->validateDescription();
 	}
 	
 	/**
@@ -200,7 +199,7 @@ class UltimateCategoryAddForm extends ACPForm {
 			if (empty($this->categoryTitle)) {
 				throw new UserInputException('categoryTitle');
 			}
-			if (!CategoryUtil::isAvailableTitle($this->categoryTitle, $this->categoryParent)) {
+			if (!CategoryUtil::isAvailableTitle($this->categoryTitle, (isset($this->categoryID) ? $this->categoryID : 0), $this->categoryParent)) {
 				throw new UserInputException('categoryTitle', 'notUnique');
 			}
 		}
@@ -226,7 +225,7 @@ class UltimateCategoryAddForm extends ACPForm {
 		if (empty($this->categorySlug)) {
 			throw new UserInputException('categorySlug');
 		}
-		if (!CategoryUtil::isAvailableSlug($this->categorySlug, $this->categoryParent)) {
+		if (!CategoryUtil::isAvailableSlug($this->categorySlug, (isset($this->categoryID) ? $this->categoryID : 0), $this->categoryParent)) {
 			throw new UserInputException('categorySlug', 'notUnique');
 		}
 	}

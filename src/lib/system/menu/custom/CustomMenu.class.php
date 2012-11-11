@@ -1,9 +1,9 @@
 <?php
 namespace ultimate\system\menu\custom;
-use ultimate\data\menu\item\MenuItem;
 use ultimate\data\menu\Menu;
 use wcf\system\cache\CacheHandler;
 use wcf\system\event\EventHandler;
+use wcf\system\menu\ITreeMenuItem;
 use wcf\system\menu\TreeMenu;
 use wcf\system\WCF;
 
@@ -154,7 +154,7 @@ class CustomMenu extends TreeMenu {
 	 * @param	\ultimate\data\menu\item\MenuItem	$menuItem
 	 * @return	boolean
 	 */
-	protected function checkMenuItem(MenuItem $menuItem) {
+	protected function checkMenuItem(ITreeMenuItem $menuItem) {
 		// check the permission of this item for the active user
 		$hasPermission = true;
 		switch ($menuItem->__get('type')) {

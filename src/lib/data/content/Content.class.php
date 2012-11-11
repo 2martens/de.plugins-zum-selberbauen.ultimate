@@ -1,6 +1,7 @@
 <?php
 namespace ultimate\data\content;
 use ultimate\data\AbstractUltimateDatabaseObject;
+use wcf\data\user\User;
 use wcf\system\bbcode\MessageParser;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
@@ -43,10 +44,10 @@ class Content extends AbstractUltimateDatabaseObject {
 	 * @return	\wcf\data\user\group\UserGroup[]
 	 */
 	public function getGroups() {
-		$sql = 'SELECT	  group.*
+		$sql = 'SELECT	  groupTable.*
 		        FROM      ultimate'.ULTIMATE_N.'_user_group_to_content groupToContent
-		        LEFT JOIN wcf'.WCF_N.'_user_group group
-		        ON        (group.groupID = groupToContent.groupID)
+		        LEFT JOIN wcf'.WCF_N.'_user_group groupTable
+		        ON        (groupTable.groupID = groupToContent.groupID)
 		        WHERE     groupToContent.contentID = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->contentID));

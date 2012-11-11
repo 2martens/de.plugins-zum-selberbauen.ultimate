@@ -1,3 +1,4 @@
+{capture assign='pageTitle'}{lang}wcf.acp.ultimate.page.{@$action}{/lang}{/capture}
 {include file='header'}
 
 <script type="text/javascript">
@@ -36,7 +37,7 @@
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
 			<legend>{lang}wcf.acp.ultimate.page.general{/lang}</legend>
-			<dl{if $errorField == 'pageTitle'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'pageTitle'} class="formError"{/if}>
 				<dt><label for="pageTitle">{lang}wcf.acp.ultimate.page.title{/lang}</label></dt>
 				<dd>
 					<script type="text/javascript">
@@ -50,7 +51,7 @@
 					</script>
 					<input type="text" id="pageTitle" name="pageTitle" value="{$i18nPlainValues['pageTitle']}" placeholder="{lang}wcf.acp.ultimate.page.title.placeholder{/lang}" required="required" class="long" />
 					{if $errorField == 'pageTitle'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}
@@ -60,12 +61,12 @@
 					{/if}
 				</dd>
 			</dl>
-			<dl{if $errorField == 'pageSlug'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'pageSlug'} class="formError"{/if}>
 				<dt><label for="pageSlug">{lang}wcf.acp.ultimate.page.slug{/lang}</label></dt>
 				<dd>
-					<input type="text" id="pageSlug" name="pageSlug" value="{@$pageSlug}" required="required" placeholder="{lang}wcf.acp.ultimate.page.slug.placeholder{/lang}" pattern="^[a-z]+(\-{1}[a-z]+)*$" class="long" />
+					<input type="text" id="pageSlug" name="pageSlug" value="{@$pageSlug}" required="required" placeholder="{lang}wcf.acp.ultimate.page.slug.placeholder{/lang}" pattern="^[a-z]+(?:\-{literal}{{/literal}1{literal}}{/literal}[a-z]+)*(?:\/{literal}{{/literal}1{literal}}{/literal}[a-z]+(?:\-{literal}{{/literal}1{literal}}{/literal}[a-z]+)*)*$" class="long" />
 					{if $errorField == 'pageSlug'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}
@@ -75,7 +76,7 @@
 					{/if}
 				</dd>
 			</dl>
-			<dl{if $errorField == 'pageParent'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'pageParent'} class="formError"{/if}>
 				<dt><label for="pageParent">{lang}wcf.acp.ultimate.page.parent{/lang}</label></dt>
 				<dd>
 					<select name="pageParent">
@@ -83,7 +84,7 @@
 					{htmloptions options=$pages selected=$pageParent}
 					</select>
 					{if $errorField == 'pageParent'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}
@@ -93,7 +94,7 @@
 					{/if}
 				</dd>
 			</dl>
-			<dl{if $errorField == 'content'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'content'} class="formError"{/if}>
 				<dt><label for="content">{lang}wcf.acp.ultimate.page.content{/lang}</label></dt>
 				<dd>
 					<select name="content">
@@ -101,7 +102,7 @@
 						{htmloptions options=$contents selected=$contentID}
 					</select>
 					{if $errorField == 'content'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{lang}wcf.acp.ultimate.page.content.error.{@$errorType}{/lang}
 						</small>
 					{/if}
@@ -110,7 +111,7 @@
 		</fieldset>
 		<fieldset>
 			<legend>{lang}wcf.acp.ultimate.publish{/lang}</legend>
-			<dl{if $errorField == 'status'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'status'} class="formError"{/if}>
 				<dt><label for="status">{lang}wcf.acp.ultimate.status{/lang}</label></dt>
 				<dd>
 					<select id="statusSelect" name="status">
@@ -124,13 +125,13 @@
 					/* ]]> */
 					</script>
 					{if $errorField == 'status'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{lang}wcf.acp.ultimate.status.error.{@$errorType}{/lang}
 						</small>
 					{/if}
 				</dd>
 			</dl>
-			<dl{if $errorField == 'visibility'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'visibility'} class="formError"{/if}>
 				<dt><label for="visibility">{lang}wcf.acp.ultimate.visibility{/lang}</label></dt>
 				<dd>
 					<select id="selectVisibility" name="visibility">
@@ -138,12 +139,12 @@
 					<option value="protected"{if $visibility == 'protected'} selected="selected"{/if}>{lang}wcf.acp.ultimate.visibility.protected{/lang}</option>
 					<option value="private"{if $visibility == 'private'} selected="selected"{/if}>{lang}wcf.acp.ultimate.visibility.private{/lang}</option>
 					</select>
-					<dl id="groupCheckboxes" class="container containerPadding marginTop{if $visibility != 'protected'} ultimateHidden{/if}">
+					<dl id="groupCheckboxes" class="container containerPadding marginTop"{if $visibility != 'protected'} style="display: none;"{/if}>
 						<dt><label>{lang}wcf.acp.ultimate.visibility.groupIDs{/lang}</label></dt>
 						<dd>
 							{htmlcheckboxes name="groupIDs" options=$groups selected=$groupIDs}
 							{if $errorField == 'groupIDs'}
-								<small class="wcf-innerError">
+								<small class="innerError">
 									{lang}wcf.acp.ultimate.visibility.groupIDs.error.{@$errorType}{/lang}
 								</small>
 							{/if}
@@ -164,14 +165,14 @@
 					/* ]]> */
 					</script>
 					{if $errorField == 'visibility'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{lang}wcf.acp.ultimate.visibility.error.{@$errorType}{/lang}
 						</small>
 					{/if}
 					<small>{lang}wcf.acp.ultimate.page.visibility.description{/lang}</small>
 				</dd>
 			</dl>
-			<dl{if $errorField == 'publishDate'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'publishDate'} class="formError"{/if}>
 				<dt><label for="publishDate">{lang}wcf.acp.ultimate.publishDate{/lang}</label></dt>
 				<dd>
 					<input type="datetime" id="publishDateInput" name="publishDate" value="{@$publishDate}" readonly="readonly" class="medium" required="required" />
@@ -182,10 +183,7 @@
 						$.timepicker.setDefaults( $.timepicker.regional[ "{if $__wcf->getLanguage()->languageCode == 'en'}en-GB{else}{@$__wcf->getLanguage()->languageCode}{/if}" ] );
 						$.datepicker.setDefaults( $.datepicker.regional[ "{if $__wcf->getLanguage()->languageCode == 'en'}en-GB{else}{@$__wcf->getLanguage()->languageCode}{/if}" ] );
 						$('#publishDateInput').datetimepicker( {
-							showOn: 'both',
-							buttonImage: '{@$__wcf->getPath('ultimate')}icon/calendar.gif',
-							buttonImageOnly: true,
-							buttonText: '{lang}wcf.acp.ultimate.publishDate.editDate{/lang}',
+							showOn: 'focus',
 							showOtherMonths: true,
 							selectOtherMonths: true,
 							showAnim: 'fadeIn',
@@ -193,7 +191,7 @@
 						} );
 						var $dateFormat = $('#publishDateInput').datetimepicker( 'option', 'dateFormat');
 						$('#dateFormatInput').val($dateFormat);
-						
+						new ULTIMATE.Button.Replacement('publishButton', 'publishDateInput', 'publish');
 						$('form').submit(function() {
 							$('#publishDateInput').datetimepicker( 'option', 'dateFormat', 'yy-mm-dd' );
 						});
@@ -202,7 +200,7 @@
 					</script>
 					
 					{if $errorField == 'publishDate'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}

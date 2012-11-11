@@ -21,11 +21,13 @@ class PageUtil {
 	 * @api
 	 * 
 	 * @param	string	$pageTitle
-	 * @param	integer	$pageParent
+	 * @param	integer	$pageID
+	 * @param	integer	$pageParent	optional
 	 * @return	boolean	$isAvailable
 	 */
-	public static function isAvailableTitle($pageTitle, $pageParent = 0) {
+	public static function isAvailableTitle($pageTitle, $pageID, $pageParent = 0) {
 		$pageTitle = StringUtil::trim($pageTitle);
+		$pageID = intval($pageID);
 		$pageParent = intval($pageParent);
 		$isAvailable = true;
 		
@@ -39,7 +41,7 @@ class PageUtil {
 			$relevantPages = $pages[$pageParent];
 			foreach ($relevantPages as $page) {
 				/* @var $page \ultimate\data\page\Page */
-				if ($page->__get('pageTitle') != $pageTitle) continue;
+				if ($page->__get('pageID') == $pageID || $page->__get('pageTitle') != $pageTitle) continue;
 				$isAvailable = false;
 				break;
 			}
@@ -53,7 +55,7 @@ class PageUtil {
 			
 			foreach ($pages as $page) {
 				/* @var $page \ultimate\data\page\Page */
-				if ($page->__get('pageTitle') != $pageTitle) continue;
+				if ($page->__get('pageID') == $pageID || $page->__get('pageTitle') != $pageTitle) continue;
 				$isAvailable = false;
 				break;
 			}
@@ -68,11 +70,13 @@ class PageUtil {
 	 * @api
 	 * 
 	 * @param	string	$pageSlug
-	 * @param	integer	$pageParent
+	 * @param	integer	$pageID
+	 * @param	integer	$pageParent	optional
 	 * @return	boolean	$isAvailable
 	 */
-	public static function isAvailableSlug($pageSlug, $pageParent = 0) {
+	public static function isAvailableSlug($pageSlug, $pageID, $pageParent = 0) {
 		$pageSlug = StringUtil::trim($pageSlug);
+		$pageID = intval($pageID);
 		$pageParent = intval($pageParent);
 		$isAvailable = true;
 		
@@ -86,7 +90,7 @@ class PageUtil {
 			$relevantPages = $pages[$pageParent];
 			foreach ($relevantPages as $page) {
 				/* @var $page \ultimate\data\page\Page */
-				if ($page->__get('pageSlug') != $pageSlug) continue;
+				if ($page->__get('pageID') == $pageID || $page->__get('pageSlug') != $pageSlug) continue;
 				$isAvailable = false;
 				break;
 			}
@@ -100,7 +104,7 @@ class PageUtil {
 			
 			foreach ($pages as $page) {
 				/* @var $page \ultimate\data\page\Page */
-				if ($page->__get('pageSlug') != $pageSlug) continue;
+				if ($page->__get('pageID') == $pageID || $page->__get('pageSlug') != $pageSlug) continue;
 				$isAvailable = false;
 				break;
 			}

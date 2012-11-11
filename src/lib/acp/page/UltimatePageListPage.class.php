@@ -49,17 +49,17 @@ class UltimatePageListPage extends AbstractCachedListPage {
 	public $defaultSortField = ULTIMATE_SORT_PAGE_SORTFIELD;
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractCachedListPage.html#$cacheBuilderClassName
+	 * @see \wcf\page\AbstractCachedListPage::$cacheBuilderClassName
 	 */
 	public $cacheBuilderClassName = '\ultimate\system\cache\builder\PageCacheBuilder';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractCachedListPage.html#$cacheName
+	 * @see \wcf\page\AbstractCachedListPage::$cacheName
 	 */
 	public $cacheName = 'page';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractCachedListPage.html#$cacheIndex
+	 * @see \wcf\page\AbstractCachedListPage::$cacheIndex
 	 */
 	public $cacheIndex = 'pages';
 	
@@ -83,7 +83,40 @@ class UltimatePageListPage extends AbstractCachedListPage {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractCachedListPage.html#loadCache
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#validateSortField
+	 */
+	public function validateSortField() {
+		parent::validateSortField();
+		
+		if ($this->sortField == 'pageAuthor') {
+			$pages = $this->objects;
+			$newPages = array();
+			// get array with usernames
+			/* @var $page \ultimate\data\page\Page */
+			foreach ($pages as $pageID => $page) {
+				$newPages[$page->__get('author')->__get('username')] = $page;
+			}
+			// actually sort the array
+			if ($this->sortOrder == 'ASC') ksort($newPages);
+			else krsort($newPages);
+			// refill the sorted values into the original array
+			foreach ($newPages as $authorName => $page) {
+				$pages[$page->__get('pageID')] = $page;
+			}
+			// return the sorted array
+			$this->objects = $pages;
+			$this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
+			
+			// refill sort values with default values to prevent a second sort process
+			$this->tempSortField = $this->sortField;
+			$this->tempSortOrder = $this->sortOrder;
+			$this->sortField = $this->defaultSortField;
+			$this->sortOrder = $this->defaultSortOrder;
+		}
+	}
+	
+	/**
+	 * @see \wcf\page\AbstractCachedListPage::loadCache
 	 */
 	public function loadCache($path = ULTIMATE_DIR) {
 		parent::loadCache($path);
@@ -93,6 +126,10 @@ class UltimatePageListPage extends AbstractCachedListPage {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
 	 */
 	public function assignVariables() {
+		// reset sort field and order to temporarily saved values
+		if (!empty($this->tempSortField)) $this->sortField = $this->tempSortField;
+		if (!empty($this->tempSortOrder)) $this->sortOrder = $this->tempSortOrder;
+		
 		parent::assignVariables();
 		
 		WCF::getTPL()->assign(array(

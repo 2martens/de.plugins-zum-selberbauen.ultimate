@@ -47,7 +47,7 @@ class ContentClipboardAction implements IClipboardAction {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.clipboard.action.IClipboardAction.html#getTypeName
 	 */
 	public function getTypeName() {
-		return 'de.plugins-zum-selberbauen.content';
+		return 'de.plugins-zum-selberbauen.ultimate.content';
 	}
 	
 	/**

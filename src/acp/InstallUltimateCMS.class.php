@@ -25,6 +25,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\acp;
+use ultimate\data\blocktype\BlockTypeAction;
 use wcf\system\io\File;
 use wcf\system\WCF;
 
@@ -52,6 +53,7 @@ final class InstallUltimateCMS {
 	protected function install() {
 		require_once(dirname(dirname(__FILE__)).'/config.inc.php');
 		$this->createHtaccess();
+		$this->addDefaultBlockTypes();
 	}
 	
 	/**
@@ -64,6 +66,39 @@ final class InstallUltimateCMS {
 		$file = new File(ULTIMATE_DIR.'.htaccess');
 		$file->write($output);
 		$file->close();
+	}
+	
+	/**
+	 * Adds the default block types.
+	 */
+	protected function addDefaultBlockTypes() {
+		// insert default block types
+		$parameters = array(
+			'data' => array(
+				'packageID' => PACKAGE_ID,
+				'blockTypeName' => 'ultimate.blocktype.content',
+				'blockTypeClassName' => 'ultimate\system\blocktype\ContentBlockType',
+				'fixedHeight' => 0			
+			)
+		);
+		// workaround for installation
+		require_once(ULTIMATE_DIR.'lib/data/AbstractUltimateDatabaseObject.class.php');
+		require_once(ULTIMATE_DIR.'lib/data/blocktype/BlockType.class.php');
+		require_once(ULTIMATE_DIR.'lib/data/blocktype/BlockTypeAction.class.php');
+		require_once(ULTIMATE_DIR.'lib/data/blocktype/BlockTypeEditor.class.php');
+		$objectAction = new BlockTypeAction(array(), 'create', $parameters);
+		$objectAction->executeAction();
+		
+		$parameters = array(
+			'data' => array(
+				'packageID' => PACKAGE_ID,
+				'blockTypeName' => 'ultimate.blocktype.media',
+				'blockTypeClassName' => 'ultimate\system\blocktype\MedialockType',
+				'fixedHeight' => 1
+			)
+		);
+		$objectAction = new BlockTypeAction(array(), 'create', $parameters);
+		$objectAction->executeAction();
 	}
 	
 }

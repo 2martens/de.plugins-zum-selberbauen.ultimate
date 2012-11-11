@@ -1,11 +1,13 @@
 <?php
 namespace ultimate\data\content;
 use ultimate\data\layout\LayoutAction;
+use ultimate\data\page\PageAction;
 use ultimate\system\layout\LayoutHandler;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 use wcf\system\cache\CacheHandler;
 use wcf\system\clipboard\ClipboardHandler;
+use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\tagging\TagEngine;
 use wcf\system\WCF;
 
@@ -60,6 +62,25 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 			TagEngine::getInstance()->deleteObjectTags($taggedContent, $languageIDs);
 		}
 		WCF::getDB()->commitTransaction();
+		
+		// delete associated pages
+		$conditionBuilder = new PreparedStatementConditionBuilder();
+		$conditionBuilder->add('contentID IN (?)', array($objectIDs));
+		$sql = 'SELECT pageID
+		        FROM   ultimate'.ULTIMATE_N.'_content_to_page
+		        '.$conditionBuilder->__toString();
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute($conditionBuilder->getParameters());
+		$pageIDs = array();
+		while ($row = $statement->fetchArray()) {
+			$pageIDs[] = intval($row['pageID']);
+		}
+		// checks if $pageIDs is filled, if not an exception would occur
+		if (empty($pageIDs)) return parent::deleteAll($objectIDs);
+		
+		$pageAction = new PageAction($pageIDs, 'delete');
+		$pageAction->executeAction();
+		
 		return parent::deleteAll($objectIDs);
 	}
 	
@@ -208,5 +229,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 	public static function resetCache() {
 		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.content.php');
 		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.content-to-category.php');
+		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.content-tag.php');
+		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.content-to-tag.php');
 	}
 }

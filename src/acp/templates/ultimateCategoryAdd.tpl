@@ -36,7 +36,7 @@
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
 			<legend>{lang}wcf.acp.ultimate.category.general{/lang}</legend>
-			<dl{if $errorField == 'categoryTitle'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'categoryTitle'} class="formError"{/if}>
 				<dt><label for="categoryTitle">{lang}wcf.acp.ultimate.category.title{/lang}</label></dt>
 				<dd>
 					<script type="text/javascript">
@@ -50,7 +50,7 @@
 					</script>
 					<input type="text" id="categoryTitle" name="categoryTitle" value="{@$i18nPlainValues['categoryTitle']}" class="long" required="required" placeholder="{lang}wcf.acp.ultimate.category.title.placeholder{/lang}" />
 					{if $errorField == 'categoryTitle'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}
@@ -60,12 +60,12 @@
 					{/if}
 				</dd>
 			</dl>
-			<dl{if $errorField == 'categorySlug'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'categorySlug'} class="formError"{/if}>
 				<dt><label for="categorySlug">{lang}wcf.acp.ultimate.category.slug{/lang}</label></dt>
 			<dd>
-				<input type="text" id="categorySlug" name="categorySlug" value="{@$categorySlug}" class="long" required="required" pattern="^[^,\nA-Z]+$" placeholder="{lang}wcf.acp.ultimate.category.slug.placeholder{/lang}" />
+				<input type="text" id="categorySlug" name="categorySlug" value="{@$categorySlug}" class="long" required="required" pattern="^[a-z]+(?:\-{literal}{{/literal}1{literal}}{/literal}[a-z]+)*(?:\/{literal}{{/literal}1{literal}}{/literal}[a-z]+(?:\-{literal}{{/literal}1{literal}}{/literal}[a-z]+)*)*$" placeholder="{lang}wcf.acp.ultimate.category.slug.placeholder{/lang}" />
 					{if $errorField == 'categorySlug'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}
@@ -75,7 +75,7 @@
 					{/if}
 				</dd>
 			</dl>
-			<dl{if $errorField == 'categoryParent'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'categoryParent'} class="formError"{/if}>
 				<dt><label for="categoryParent">{lang}wcf.acp.ultimate.category.parent{/lang}</label></dt>
 				<dd>
 					<select name="categoryParent">
@@ -83,7 +83,7 @@
 					{htmloptions options=$categories selected=$categoryParent}
 					</select>
 					{if $errorField == 'categoryParent'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}
@@ -93,7 +93,7 @@
 					{/if}
 				</dd>
 			</dl>
-			<dl{if $errorField == 'categoryDescription'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'categoryDescription'} class="formError"{/if}>
 				<dt><label for="categoryDescription">{lang}wcf.acp.ultimate.category.description{/lang}</label></dt>
 				<dd>
 					<script type="text/javascript">
@@ -107,7 +107,7 @@
 					</script>
 					<input type="text" id="categoryDescription" name="categoryDescription" value="{@$i18nPlainValues['categoryDescription']}" class="long" placeholder="{lang}wcf.acp.ultimate.category.description.placeholder{/lang}" />
 					{if $errorField == 'categoryDescription'}
-						<small class="wcf-innerError">
+						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
 							{else}

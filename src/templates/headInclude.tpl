@@ -8,7 +8,9 @@
 	//<![CDATA[
 	var SID_ARG_2ND = '{@SID_ARG_2ND_NOT_ENCODED}';
 	var RELATIVE_WCF_DIR = '{@$__wcf->getPath()}';
+	var RELATIVE_ULTIMATE_DIR = '{@$__wcf->getPath('ultimate')}';
 	var SECURITY_TOKEN = '{@SECURITY_TOKEN}';
+	var PACKAGE_ID = {@PACKAGE_ID};
 	var LANGUAGE_ID = {@$__wcf->getLanguage()->languageID};
 	//]]>
 </script>
@@ -17,6 +19,9 @@
 <script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.tools.min.js"></script>
 <script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui.nestedSortable.js"></script>
 <script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.js"></script>
+<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.cookie.js"></script>
+<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.iframe.js"></script>
+<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/ITStylesheet.js"></script>
 <script type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.js"></script>
 <script type="text/javascript">
 	//<![CDATA[
@@ -26,17 +31,10 @@
 {event name='javascriptInclude'}
 
 <!-- Stylesheets -->
-<link rel="stylesheet/less" type="text/css" href="{@$__wcf->getPath()}style/bootstrap.less" />
+{@$__wcf->getStyleHandler()->getStylesheet()}
 <link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/3rdParty/jquery-ui.css" />
-<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/ultimateCore.css" />
-<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath('ultimate')}style/ultimate.css" />
-{event name='stylesheetInclude'}
-<script type="text/javascript">
-	//<![CDATA[
-	var less = { env: 'development' };
-	//]]>
-</script>
-<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/less.min.js"></script>
+{@$__wcf->getUltimateStyleHandler()->getStylesheet()}
+
 
 <noscript>
 	<style type="text/css">
@@ -83,19 +81,24 @@
 		});
 		
 		WCF.Icon.addObject({
-			'wcf.icon.loading': '{icon size='S'}spinner{/icon}',
-			'wcf.icon.opened': '{icon size='S'}arrowDownInverse{/icon}',
-			'wcf.icon.closed': '{icon size='S'}arrowRightInverse{/icon}',
-			'wcf.icon.arrow.left': '{icon size='S'}arrowLeft{/icon}',
-			'wcf.icon.arrow.left.circle': '{icon size='S'}circleArrowLeft{/icon}',
-			'wcf.icon.arrow.right': '{icon size='S'}arrowRight{/icon}',
-			'wcf.icon.arrow.right.circle': '{icon size='S'}circleArrowRight{/icon}',
-			'wcf.icon.arrow.down': '{icon size='S'}arrowDown{/icon}',
-			'wcf.icon.arrow.down.circle': '{icon size='S'}circleArroDown{/icon}',
-			'wcf.icon.arrow.up': '{icon size='S'}arrowUp{/icon}',
-			'wcf.icon.arrow.up.circle': '{icon size='S'}circleArrowUp{/icon}',
-			'wcf.icon.dropdown': '{icon size='S'}dropdown{/icon}',
-			'wcf.icon.edit': '{icon size='S'}edit{/icon}'
+			'wcf.icon.loading': '{icon}spinner{/icon}',
+			'wcf.icon.opened': '{icon}arrowDownInverse{/icon}',
+			'wcf.icon.closed': '{icon}arrowRightInverse{/icon}',
+			'wcf.icon.arrow.left': '{icon}arrowLeft{/icon}',
+			'wcf.icon.arrow.left.circle': '{icon}circleArrowLeft{/icon}',
+			'wcf.icon.arrow.right': '{icon}arrowRight{/icon}',
+			'wcf.icon.arrow.right.circle': '{icon}circleArrowRight{/icon}',
+			'wcf.icon.arrow.down': '{icon}arrowDown{/icon}',
+			'wcf.icon.arrow.down.circle': '{icon}circleArroDown{/icon}',
+			'wcf.icon.arrow.up': '{icon}arrowUp{/icon}',
+			'wcf.icon.arrow.up.circle': '{icon}circleArrowUp{/icon}',
+			'wcf.icon.dropdown': '{icon}dropdown{/icon}',
+			'wcf.icon.add': '{icon}add{/icon}',
+			'wcf.icon.delete': '{icon}delete{/icon}',
+			'wcf.icon.edit': '{icon}edit{/icon}',
+			'wcf.icon.remove': '{icon}remove{/icon}',
+			'wcf.global.opened': '{icon}arrowDown{/icon}',
+			'wcf.global.closed': '{icon}arrowRight{/icon}'
 			{event name='javascriptIconImport'}
 		});
 		
@@ -105,7 +108,7 @@
 		new WCF.Sitemap();
 		WCF.Dropdown.init();
 		
-		{event name='javascriptInit'}
+		{*event name='javascriptInit'*}
 
 		{if $executeCronjobs}
 			new WCF.Action.Proxy({

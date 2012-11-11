@@ -29,6 +29,7 @@ namespace ultimate\system\clipboard\action;
 use wcf\system\clipboard\action\IClipboardAction;
 use wcf\system\clipboard\ClipboardEditorItem;
 use wcf\system\exception\SystemException;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
 /**
@@ -46,7 +47,7 @@ class LinkClipboardAction implements IClipboardAction {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.clipboard.action.IClipboardAction.html#getTypeName
 	 */
 	public function getTypeName() {
-		return 'de.plugins-zum-selberbauen.link';
+		return 'de.plugins-zum-selberbauen.ultimate.link';
 	}
 	
 	/**
@@ -103,7 +104,7 @@ class LinkClipboardAction implements IClipboardAction {
 	 */
 	protected function validateDelete(array $objects) {
 		// checking permission
-		if (!WCF::getSession()->getPermission('admin.link.ultimate.canDeleteLink')) {
+		if (!WCF::getSession()->getPermission('admin.content.ultimate.canDeleteLink')) {
 			return array();
 		}
 		

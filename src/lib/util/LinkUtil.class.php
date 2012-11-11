@@ -1,7 +1,34 @@
 <?php
+/**
+ * Contains the LinkUtil class.
+ * 
+ * LICENSE:
+ * This file is part of the Ultimate CMS.
+ *
+ * The Ultimate CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * The Ultimate CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
+ * 
+ * @author		Jim Martens
+ * @copyright	2011-2012 Jim Martens
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
+ * @package		de.plugins-zum-selberbauen.ultimate
+ * @subpackage	util
+ * @category	Ultimate CMS
+ */
 namespace ultimate\util;
 use ultimate\util\thirdParty\Net\NET_IDNA2; // changed class to work with namespaces
 use wcf\system\cache\CacheHandler;
+use wcf\system\io\RemoteFile;
 use wcf\system\Regex;
 use wcf\util\StringUtil;
 
@@ -71,10 +98,8 @@ class LinkUtil {
 		
 		// The scheme
 		$pattern =	'^';
-		$patterm .= '(?:https?|ftp)\:\/\/';
+		$pattern .= '(?:https?|ftp)\://';
 		// The domain
-		$pattern .= '(?:';
-		
 		$pattern .= '(?:';
 		// Domain name or IPv4
 		$pattern .=	'(?:(?:[a-zA-Z][a-zA-Z0-9\-]+\.)+[a-zA-Z\-]+)|'.
@@ -90,9 +115,9 @@ class LinkUtil {
 		// Server port number (optional)";
 		$pattern .= '(?:\:[0-9]{1,5})?';
 		// The path (optional)
-        $pattern .= '(?:\/(?:[\w0-9+,;\$_-]\.?)+)*\/?';
+        $pattern .= '(?:/(?:[\w0-9+,;\$_-]\.?)+)*/?';
 		// GET Query (optional)
-		$pattern .= '(\?[a-z+&\$_.-][a-z0-9;:@/&%=+\$_.-]*)?';
+		$pattern .= '(?:\?[a-z+&\$_.-][a-z0-9;:@/&%=+\$_.-]*)?';
 		$pattern .= '$';
 		
 		// checks if URL is valid
@@ -101,15 +126,31 @@ class LinkUtil {
 		// prevents HTTP requests if URL is invalid anyway
 		if (!$isValid) return $isValid;
 		
-		if (ini_get('allow_url_fopen') == '0') {
+		if (ini_get('allow_url_fopen') == '0' || !function_exists('fsockopen')) {
 			// prevents exception
 			return $isValid;
 		}
 		// checks if URL is accessible
 		// Source: http://www.php.net/manual/en/function.file-exists.php#84918
-		$hdrs = get_headers($url);
-		$headerRegex = new Regex('^HTTP\\/\\d+\\.\\d+\\s+2\\d\\d\\s+.*$');
-		$isValid =  is_array($hdrs) ? (boolean) $headerRegex->match($hdrs[0]) : false;
+		try {
+			$parsedURL = parse_url($url);
+			$resource = new RemoteFile($parsedURL['host'], (isset ($parsedURL['port']) ? $parsedURL['port'] : 80));
+			$out = "HEAD / HTTP/1.1\r\n";
+			$out .= 'Host: '.$parsedURL['host']."\r\n";
+			$out .= "Connection: Close\r\n\r\n";
+			$resource->write($out);
+			
+			$headers = array();
+			while (!$resource->eof()) {
+				$headers[] = $resource->gets();
+			}
+			$resource->close();
+			$headerRegex = new Regex('^HTTP/\d+\.\d+\s+2\d\d\s+.*$');
+			$isValid =  !empty($headers) ? (boolean) $headerRegex->match(StringUtil::trim($headers[0])) : false;
+		}
+		catch (\wcf\system\exception\SystemException $e) {
+			$isValid = false;
+		}
 		return $isValid;
 	}
 	

@@ -12,7 +12,7 @@ use wcf\acp\form\AbstractCategoryEditForm;
  * @subpackage	acp.form
  * @category	Ultimate CMS
  */
-class UlimateLinkCategoryEditForm extends AbstractCategoryEditForm {
+class UltimateLinkCategoryEditForm extends AbstractCategoryEditForm {
 	/**
 	 * @see \wcf\acp\form\ACPForm::$activeMenuItem
 	 */

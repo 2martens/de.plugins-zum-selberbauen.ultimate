@@ -27,12 +27,12 @@ class LinkCategoryType extends AbstractCategoryType {
 	 * language category which contains the language variables of i18n values
 	 * @var	string
 	 */
-	protected $i18nLangVarCategory = 'wcf.acp.ultimate';
+	protected $i18nLangVarCategory = 'ultimate.link';
 	
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.category.AbstractCategoryType.html#$langVarPrefix
 	 */
-	protected $langVarPrefix = 'wcf.acp.ultimate.link';
+	protected $langVarPrefix = 'wcf.acp.ultimate.linkCategory';
 	
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.category.AbstractCategoryType.html#$permissionPrefix

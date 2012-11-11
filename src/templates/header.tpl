@@ -1,3 +1,7 @@
+<a id="top"></a>
+<!-- HEADER -->
+<header id="pageHeader" class="layoutFluid">
+	<div>
 		<!-- top menu -->
 		<nav id="topMenu" class="userPanel">
 			<div class="layoutFluid clearfix">
@@ -60,7 +64,7 @@
 				{if $__wcf->getCustomMenu()->getMenuItems($menuItem->menuItemName)|count > 0 && $__wcf->getCustomMenu()->getActiveMenuItem() == $menuItem->menuItem}
 					<ul>
 						{foreach from=$__wcf->getCustomMenu()->getMenuItems($menuItem->menuItemName) item=subMenuItem}
-							<li><a href="{$subMenuItem->getProcessor()->getLink()}"><span>{lang}{$subMenuItem->menuItemName}{/lang}</span></a>{if $subMenuItem->getProcessor()->getNotifications()} <span class="wcf-badge">{#$subMenuItem->getProcessor()->getNotifications()}</span>{/if}</li>
+							<li><a href="{$subMenuItem->getProcessor()->getLink()}"><span>{lang}{$subMenuItem->menuItemName}{/lang}</span></a>{if $subMenuItem->getProcessor()->getNotifications()} <span class="badge">{#$subMenuItem->getProcessor()->getNotifications()}</span>{/if}</li>
 						{/foreach}
 					</ul>
 				{/if}
@@ -69,9 +73,26 @@
 		
 			<ul class="navigationIcons">
 				<li id="toBottomLink"><a href="{$__wcf->getAnchor('bottom')}" title="{lang}wcf.global.scrollDown{/lang}" class="jsTooltip"><img src="{icon size='S'}circleArrowDownColored{/icon}" alt="" class="icon16" /> <span class="invisible">{lang}wcf.global.scrollDown{/lang}</span></a></li>
-				<li id="sitemap"><a title="{lang}wcf.sitemap.title{/lang}" class="jsTooltip"><img src="{icon size='S'}switchColored{/icon}" alt="" class="icon16" /> <span class="invisible">{lang}wcf.sitemap.title{/lang}</span></a></li>
+				<li id="sitemap"><a title="{lang}wcf.sitemap.title{/lang}" class="jsTooltip"><img src="{icon}switchColored{/icon}" alt="" class="icon16" /> <span class="invisible">{lang}wcf.sitemap.title{/lang}</span></a></li>
 				{event name='headerNavigation'}
 			</ul>
 		</nav>
 		<!-- /navigation -->
 		{/if}
+	</div>
+</header>
+<!-- /HEADER -->
+
+<!-- MAIN -->
+<div id="main" class="{if $visualEditor|isset && $visualEditor}clearfix{else}layoutFluid{if $sidebarOrientation|isset && $sidebar|isset} sidebarOrientation{@$sidebarOrientation|ucfirst} clearfix{/if}{/if}">
+	<div>
+		{if $sidebar|isset}
+			<aside class="sidebar">
+				{@$sidebar}
+			</aside>
+		{/if}
+			
+		<!-- CONTENT -->
+		<section id="content" class="{if $visualEditor|isset && $visualEditor}{else}content {/if}clearfix"{if $visualEditor|isset && $visualEditor}{else} style="position: relative;"{/if}>
+			
+			{if $skipBreadcrumbs|empty}{include file='breadcrumbs'}{/if}

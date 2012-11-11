@@ -1,4 +1,30 @@
 <?php
+/**
+ * Contains the CategoryUtil class.
+ * 
+ * LICENSE:
+ * This file is part of the Ultimate CMS.
+ *
+ * The Ultimate CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * The Ultimate CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
+ * 
+ * @author		Jim Martens
+ * @copyright	2011-2012 Jim Martens
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
+ * @package		de.plugins-zum-selberbauen.ultimate
+ * @subpackage	util
+ * @category	Ultimate CMS
+ */
 namespace ultimate\util;
 use wcf\system\cache\CacheHandler;
 use wcf\util\StringUtil;
@@ -43,11 +69,13 @@ class CategoryUtil {
 	 * @api
 	 * 
 	 * @param	string	$categoryTitle
-	 * @param	integer	$categoryParent
+	 * @param	integer	$categoryID
+	 * @param	integer	$categoryParent	optional
 	 * @return	boolean	$isAvailable
 	 */
-	public static function isAvailableTitle($categoryTitle, $categoryParent = 0) {
+	public static function isAvailableTitle($categoryTitle, $categoryID, $categoryParent = 0) {
 		$categoryTitle = StringUtil::trim($categoryTitle);
+		$categoryID = intval($categoryID);
 		$categoryParent = intval($categoryParent);
 		$isAvailable = true;
 		if ($categoryParent) {
@@ -58,8 +86,8 @@ class CategoryUtil {
 			);
 			
 			$relevantCategories = $categories[$categoryParent];
-			foreach ($relevantCategories as $categoryID => $category) {
-				if ($category->categoryTitle != $categoryTitle) continue;
+			foreach ($relevantCategories as $__categoryID => $category) {
+				if ($__categoryID == $categoryID || $category->__get('categoryTitle') != $categoryTitle) continue;
 				$isAvailable = false;
 				break;
 			}
@@ -70,8 +98,8 @@ class CategoryUtil {
 				'\ultimate\system\cache\builder\CategoryCacheBuilder',
 				'categories'
 			);
-			foreach ($categories as $categoryID => $category) {
-				if ($category->categoryTitle != $categoryTitle) continue;
+			foreach ($categories as $__categoryID => $category) {
+				if ($__categoryID == $categoryID || $category->__get('categoryTitle') != $categoryTitle) continue;
 				$isAvailable = false;
 				break;
 			}
@@ -86,11 +114,13 @@ class CategoryUtil {
 	 * @api
 	 * 
 	 * @param	string	$categorySlug
-	 * @param	integer	$categoryParent
+	 * @param	integer	$categoryID
+	 * @param	integer	$categoryParent	optional
 	 * @return	boolean	$isAvailable
 	 */
-	public static function isAvailableSlug($categorySlug, $categoryParent = 0) {
+	public static function isAvailableSlug($categorySlug, $categoryID, $categoryParent = 0) {
 		$categorySlug = StringUtil::trim($categorySlug);
+		$categoryID = intval($categoryID);
 		$categoryParent = intval($categoryParent);
 		$isAvailable = true;
 		if ($categoryParent) {
@@ -101,8 +131,8 @@ class CategoryUtil {
 			);
 			
 			$relevantCategories = $categories[$categoryParent];
-			foreach ($relevantCategories as $categoryID => $category) {
-				if ($category->categorySlug != $categorySlug) continue;
+			foreach ($relevantCategories as $__categoryID => $category) {
+				if ($__categoryID == $categoryID || $category->__get('categorySlug') != $categorySlug) continue;
 				$isAvailable = false;
 				break;
 			}
@@ -113,8 +143,8 @@ class CategoryUtil {
 					'\ultimate\system\cache\builder\CategoryCacheBuilder',
 					'categories'
 			);
-			foreach ($categories as $categoryID => $category) {
-				if ($category->categorySlug != $categorySlug) continue;
+			foreach ($categories as $__categoryID => $category) {
+				if ($__categoryID == $categoryID || $category->__get('categorySlug') != $categorySlug) continue;
 				$isAvailable = false;
 				break;
 			}

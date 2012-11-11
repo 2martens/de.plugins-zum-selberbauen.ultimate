@@ -1,13 +1,37 @@
 <?php
+/**
+ * Contains the UltimateContentEdit form.
+ * 
+ * LICENSE:
+ * This file is part of the Ultimate CMS.
+ *
+ * The Ultimate CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * The Ultimate CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
+ * 
+ * @author		Jim Martens
+ * @copyright	2011-2012 Jim Martens
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
+ * @package		de.plugins-zum-selberbauen.ultimate
+ * @subpackage	acp.form
+ * @category	Ultimate CMS
+ */
 namespace ultimate\acp\form;
-use wcf\data\tag\Tag;
-
-use wcf\system\tagging\TagEngine;
-
 use ultimate\acp\form\UltimateContentAddForm;
+use ultimate\data\content\CategorizedContent;
 use ultimate\data\content\Content;
 use ultimate\data\content\ContentAction;
 use ultimate\data\content\ContentEditor;
+use wcf\data\tag\Tag;
 use wcf\form\AbstractForm;
 use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
@@ -15,6 +39,7 @@ use wcf\system\bbcode\URLParser;
 use wcf\system\cache\CacheHandler;
 use wcf\system\language\I18nHandler;
 use wcf\system\menu\acp\ACPMenu;
+use wcf\system\tagging\TagEngine;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
 
@@ -49,7 +74,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 	
 	/**
 	 * Contains the Content object of this content.
-	 * @var	\ultimate\data\content\Content
+	 * @var	\ultimate\data\content\CategorizedContent
 	 */
 	public $content = null;
 	
@@ -72,7 +97,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		parent::readParameters();
 		// I18nHandler::getInstance()->disableAssignValueVariables();
 		if (isset($_REQUEST['id'])) $this->contentID = intval($_REQUEST['id']);
-		$content = new Content($this->contentID);
+		$content = new CategorizedContent(new Content($this->contentID));
 		if (!$content->__get('contentID')) {
 			throw new IllegalLinkException();
 		}
@@ -84,55 +109,62 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
-			// get languages
-			$languages = WCF::getLanguage()->getLanguages();
-			
-			/* @var $language \wcf\data\language\Language */
-			/* @var $tag \wcf\data\tag\TagCloudTag */
-			foreach ($languages as $languageID => $language) {
-				// group tags by language
-				$this->tags[$languageID] = Tag::buildString(TagEngine::getInstance()->getObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->content->__get('contentID'), $languageID));	
-			}
-			
-			// get status data
-			$this->statusID = $this->content->__get('status');
-			
-			// fill publish button with fitting language
-			$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.publish');
-			if ($this->statusID == 2) {
-				$this->statusOptions[2] = WCF::getLanguage()->get('wcf.acp.ultimate.status.scheduled');
-				$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.update');
-			} elseif ($this->statusID == 3) {
-				$this->statusOptions[3] = WCF::getLanguage()->get('wcf.acp.ultimate.status.published');
-				$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.update');
-			}
-			
-			// fill save button with fitting language
-			$saveButtonLangArray = array(
-				0 => WCF::getLanguage()->get('ultimate.button.saveAsDraft'),
-				1 => WCF::getLanguage()->get('ultimate.button.saveAsPending'),
-				2 => '',
-				3 => ''
-			);
-			$this->saveButtonLang = $saveButtonLangArray[$this->statusID];
-			
-			// get visibility data
-			$this->visibility = $this->content->__get('visibility');
-			$this->groupIDs = array_keys($this->content->__get('groups'));
-			
-			if (!empty($_POST)) {
-				// reading object fields
-				$this->subject = $this->content->__get('contentTitle');
-				$this->description = $this->content->__get('contentDescription');
-				$this->slug = $this->content->__get('contentSlug');
-				$this->text = $this->content->__get('contentText');
-				$this->lastModified = $this->content->__get('lastModified');
-				$this->categoryIDs = array_keys($this->content->getCategories());
-				I18nHandler::getInstance()->setOptions('subject', PACKAGE_ID, $this->subject, 'ultimate.content.\d+.contentTitle');
-				I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->description, 'ultimate.content.\d+.contentDescription');
-				I18nHandler::getInstance()->setOptions('text', PACKAGE_ID, $this->text, 'ultimate.content.\d+.contentText');
-			}
-			parent::readData();
+		// get languages
+		$languages = WCF::getLanguage()->getLanguages();
+		
+		/* @var $language \wcf\data\language\Language */
+		/* @var $tag \wcf\data\tag\TagCloudTag */
+		foreach ($languages as $languageID => $language) {
+			// group tags by language
+			$this->tags[$languageID] = Tag::buildString(TagEngine::getInstance()->getObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->content->__get('contentID'), $languageID));	
+		}
+		
+		// get status data
+		$this->statusID = $this->content->__get('status');
+		
+		// fill publish button with fitting language
+		$this->publishButtonLang = 'ultimate.button.publish';
+		if ($this->statusID == 2) {
+			$this->statusOptions[2] = WCF::getLanguage()->get('wcf.acp.ultimate.status.scheduled');
+			$this->publishButtonLang = 'ultimate.button.update';
+		} elseif ($this->statusID == 3) {
+			$this->statusOptions[3] = WCF::getLanguage()->get('wcf.acp.ultimate.status.published');
+			$this->publishButtonLang = 'ultimate.button.update';
+		}
+		
+		// fill save button with fitting language
+		$saveButtonLangArray = array(
+			0 => WCF::getLanguage()->get('ultimate.button.saveAsDraft'),
+			1 => WCF::getLanguage()->get('ultimate.button.saveAsPending'),
+			2 => '',
+			3 => ''
+		);
+		$this->saveButtonLang = $saveButtonLangArray[$this->statusID];
+		
+		// get visibility data
+		$this->visibility = $this->content->__get('visibility');
+		$this->groupIDs = array_keys($this->content->__get('groups'));
+		
+		// reading object fields
+		$this->subject = $this->content->__get('contentTitle');
+		$this->description = $this->content->__get('contentDescription');
+		$this->slug = $this->content->__get('contentSlug');
+		$this->text = $this->content->__get('contentText');
+		$this->lastModified = $this->content->__get('lastModified');
+		$this->categoryIDs = array_keys($this->content->__get('categories'));
+		
+		$languages = WCF::getLanguage()->getLanguages();
+		foreach ($languages as $languageID => $language) {
+			$tags = TagEngine::getInstance()->getObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->contentID, $languageID);
+			if (!empty($tags)) $this->tagsI18n[$languageID] = implode(',', $tags);
+		}
+		
+		I18nHandler::getInstance()->setOptions('subject', PACKAGE_ID, $this->subject, 'ultimate.content.\d+.contentTitle');
+		I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->description, 'ultimate.content.\d+.contentDescription');
+		I18nHandler::getInstance()->setOptions('text', PACKAGE_ID, $this->text, 'ultimate.content.\d+.contentText');
+		I18nHandler::getInstance()->setOptions('tags', PACKAGE_ID, '', 'ultimate.content.\d+.contentTags');
+		
+		parent::readData();
 	}
 	
 	/**
@@ -190,15 +222,6 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 			}
 		}
 		
-		// change status to planned or publish
-		if ($this->saveType == 'publish') {
-			if ($this->publishDateTimestamp > TIME_NOW) {
-				$this->statusID = 2; // scheduled
-			} elseif ($this->publishDateTimestamp < TIME_NOW) {
-				$this->statusID = 3; // published
-			}
-		}
-		
 		$parameters = array(
 			'data' => array(
 				'authorID' => WCF::getUser()->userID,
@@ -224,31 +247,18 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		$action->executeAction();
 		
 		// save tags
-		foreach ($this->tags as $languageID => $tags) {
-			TagEngine::getInstance()->addObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->content->__get('contentID', $tags, $languageID));
+		foreach ($this->tagsI18n as $languageID => $tags) {
+			if (empty($tags)) {
+				$this->tagsI18n[$languageID] = '';
+				continue;
+			}
+			TagEngine::getInstance()->addObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->content->__get('contentID'), $tags, $languageID);
+			$this->tagsI18n[$languageID] = implode(',', $tags);
 		}
 		$this->saved();
 		
-		$date = WCF::getLanguage()->getDynamicVariable(
-			'ultimate.date.dateFormat',
-			array(
-				'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
-			)
-		);
-		$time = WCF::getLanguage()->get('wcf.date.timeFormat');
-		$format = str_replace(
-			'%time%',
-			$time,
-			str_replace(
-				'%date%',
-				$date,
-				WCF::getLanguage()->get('ultimate.date.dateTimeFormat')
-			)
-		);
-		
 		$dateTime = DateUtil::getDateTimeByTimestamp($this->publishDateTimestamp);
-		$dateTime->setTimezone(WCF::getUser()->getTimezone());
-		$this->publishDate = $dateTime->format($format);
+		$this->formatDate($dateTime);
 		
 		WCF::getTPL()->assign('success', true);
 	}
@@ -264,7 +274,8 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		
 		WCF::getTPL()->assign(array(
 			'contentID' => $this->contentID,
-			'publishButtonLang' => $this->publishButtonLang,
+			'publishButtonLang' => WCF::getLanguage()->get($this->publishButtonLang),
+			'publishButtonLangRaw' => $this->publishButtonLang,
 			'action' => 'edit'
 		));
 		
