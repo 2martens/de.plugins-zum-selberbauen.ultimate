@@ -1,4 +1,4 @@
-<div{if !$visualEditorMode} id="block-{$blockID}" class="block block-type-content" data-width="{$width}" data-height="{$height}" data-left="{$left}" data-top="{$top}"{/if}>
+<div{if $visualEditorMode|isset && $visualEditorMode}{else} id="block-{$blockID}" class="block block-type-content" data-width="{$width}" data-height="{$height}" data-left="{$left}" data-top="{$top}"{/if}>
 	{assign var=displayedFeaturedContents value=0}
 	{foreach from=$contents key=contentID item=content}
 		{if $content->status == 3 || $visualEditorMode|isset}

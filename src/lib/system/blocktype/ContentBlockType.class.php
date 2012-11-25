@@ -426,15 +426,4 @@ class ContentBlockType extends AbstractBlockType {
 			}
 		}
 	}
-	
-	/**
-	 * @see \ultimate\system\blocktype\IBlockType::getHTML()
-	 */
-	public function getHTML() {
-		$output = parent::getHTML();
-		// TODO implement custom query
-		
-		
-		return $output;
-	}
 }
