@@ -82,9 +82,19 @@
 <div id="main" class="{if $visualEditor|isset && $visualEditor}clearfix{else}layoutFluid{if $sidebarOrientation|isset && $sidebar|isset} sidebarOrientation{@$sidebarOrientation|ucfirst} clearfix{/if}{/if}">
 	<div>
 		{if $sidebar|isset}
-			<aside class="sidebar">
+			<aside class="sidebar"{if $sidebarOrientation|isset && $sidebarOrientation == 'right' && $sidebarAllowCollapsible} data-is-open="{if $sidebarCollapsed}false{else}true{/if}" data-sidebar-name="{$sidebarName}"{/if}>
 				{@$sidebar}
 			</aside>
+			
+			{if $sidebarOrientation|isset && $sidebarOrientation == 'right' && $sidebarAllowCollapsible}
+				<script type="text/javascript">
+					//<![CDATA[
+					$(function() {
+						new WCF.Collapsible.Sidebar();
+					});
+					//]]>
+				</script>
+			{/if}
 		{/if}
 			
 		<!-- CONTENT -->
