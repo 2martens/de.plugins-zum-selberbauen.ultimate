@@ -25,12 +25,10 @@
 		{else} {* only display logo and navigation if we're not in the VisualEditor *}
 		<!-- logo -->
 		<div id="logo" class="logo">
-			<!-- clickable area -->
 			<a href="{link controller='Index'}{/link}">
-				<img src="{@$__wcf->getPath()}acp/images/wcfLogo2.svg" width="300" height="80" alt="Product-logo" title="WoltLab Community Framework 2.0 Alpha 1" />
-				{event name='headerLogo'}
+				<img src="{@$__wcf->getPath('wbb')}images/wbbLogo2.svg" alt="" style="height: 90px; width: 246px;" />
+				{*event name='headerLogo'*}
 			</a>
-			<!-- /clickable area -->
 		</div>
 		<!-- /logo -->
 		
@@ -45,30 +43,27 @@
 			</nav>
 		{else}
 			{* if no menu is attached or no items are found then the normal page menu shall be displayed *}
-			{if $__wcf->getPageMenu()->getMenuItems('header')|count > 0}
-				<nav id="mainMenu" class="mainMenu">
-					<ul>
-						{foreach from=$__wcf->getPageMenu()->getMenuItems('header') item=menuItem}
-							<li{if $__wcf->getPageMenu()->getActiveMenuItem() == $menuItem->menuItem} class="active"{/if}><a href="{$menuItem->getProcessor()->getLink()}">{lang}{$menuItem->menuItem}{/lang}{if $menuItem->getProcessor()->getNotifications()} <span class="badge {if $__wcf->getPageMenu()->getActiveMenuItem() == $menuItem->menuItem}badgeUpdate{else}badgeInverse{/if}">{#$menuItem->getProcessor()->getNotifications()}</span>{/if}</a></li>
-						{/foreach}
-					</ul>
-				</nav>
-			{/if}
+			{include file='mainMenu'}
 		{/if}
 		<!-- /main menu -->
 	
 		<!-- navigation -->
 		<nav class="navigation navigationHeader clearfix">
 			<!-- sub menu -->
-			{foreach from=$__wcf->getCustomMenu()->getMenuItems('') item=menuItem}
-				{if $__wcf->getCustomMenu()->getMenuItems($menuItem->menuItemName)|count > 0 && $__wcf->getCustomMenu()->getActiveMenuItem() == $menuItem->menuItem}
-					<ul>
-						{foreach from=$__wcf->getCustomMenu()->getMenuItems($menuItem->menuItemName) item=subMenuItem}
-							<li><a href="{$subMenuItem->getProcessor()->getLink()}"><span>{lang}{$subMenuItem->menuItemName}{/lang}</span></a>{if $subMenuItem->getProcessor()->getNotifications()} <span class="badge">{#$subMenuItem->getProcessor()->getNotifications()}</span>{/if}</li>
-						{/foreach}
-					</ul>
-				{/if}
-			{/foreach}
+			{if $__wcf->getCustomMenu()->getMenuItems('')|count > 0}
+				{foreach from=$__wcf->getCustomMenu()->getMenuItems('') item=menuItem}
+					{if $__wcf->getCustomMenu()->getMenuItems($menuItem->menuItemName)|count > 0 && $__wcf->getCustomMenu()->getActiveMenuItem() == $menuItem->menuItem}
+						<ul>
+							{foreach from=$__wcf->getCustomMenu()->getMenuItems($menuItem->menuItemName) item=subMenuItem}
+								<li><a href="{$subMenuItem->getProcessor()->getLink()}"><span>{lang}{$subMenuItem->menuItemName}{/lang}</span></a>{if $subMenuItem->getProcessor()->getNotifications()} <span class="badge">{#$subMenuItem->getProcessor()->getNotifications()}</span>{/if}</li>
+							{/foreach}
+						</ul>
+					{/if}
+				{/foreach}
+			{else}
+				{* same goes for the sub menu *}
+				{include file='mainMenuSubMenu'}
+			{/if}
 			<!-- /sub menu -->
 		
 			<ul class="navigationIcons">
