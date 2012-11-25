@@ -164,8 +164,18 @@ class CustomMenu extends TreeMenu {
 					// if you added a menu item associated with a content
 					// then the name of the menu item equals the one of the content
 					if ($content->__get('contentTitle') != $menuItem->__get('menuItemName')) continue;
+					
+					$visbility = $content->__get('visibility');
+					if ($visibility == 'public') {
+						$hasPermission = true;
+						continue;
+					} elseif ($visibility == 'private') {
+						$hasPermission = (WCF::getUser()->__get('userID') == $content->__get('authorID'));
+						continue;
+					}
+					
 					$groups = $content->__get('groups');
-					$accessibleGroups = WCF::getSession()->getUser()->getGroupIDs();
+					$accessibleGroups = WCF::getUser()->getGroupIDs();
 					foreach ($accessibleGroups as $groupID) {
 						if (!isset($groups[$groupID])) continue;
 						$hasPermission = true;
@@ -179,9 +189,18 @@ class CustomMenu extends TreeMenu {
 					// if you added a menu item associated with a page
 					// then the name of the menu item equals the one of the page
 					if ($page->__get('pageTitle') != $menuItem->__get('menuItemName')) continue;
-					// TODO If visibility is public/private there are no groups, so it shouldn't check for them.
+					
+					$visbility = $page->__get('visibility');
+					if ($visibility == 'public') {
+						$hasPermission = true;
+						continue;
+					} elseif ($visibility == 'private') {
+						$hasPermission = (WCF::getUser()->__get('userID') == $page->__get('authorID'));
+						continue;
+					}
+					
 					$groups = $page->__get('groups');
-					$accessibleGroups = WCF::getSession()->getUser()->getGroupIDs();
+					$accessibleGroups = WCF::getUser()->getGroupIDs();
 					foreach ($accessibleGroups as $groupID) {
 						if (!isset($groups[$groupID])) continue;
 						$hasPermission = true;
