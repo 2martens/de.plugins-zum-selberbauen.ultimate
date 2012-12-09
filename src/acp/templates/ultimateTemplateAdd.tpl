@@ -202,7 +202,7 @@
 			<dd>
 				<select id="selectBlocktype" name="selectBlocktype">
 					<option label="{lang}wcf.acp.ultimate.template.selectBlocktype.none{/lang}" value="0">{lang}wcf.acp.ultimate.template.selectBlocktype.none{/lang}</option>
-					{htmlOptions options=$blocktypes selected=$selectedBlocktype}
+					{htmlOptions options=$blocktypes}
 				</select>
 				{if $errorField == 'selectBlocktype'}
 					<small class="innerError">
