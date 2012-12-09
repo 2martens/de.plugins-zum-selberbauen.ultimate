@@ -236,6 +236,191 @@ ULTIMATE.Button.Replacement.prototype = {
 };
 
 /**
+ * Namespace for ULTIMATE.Block
+ * @namespace
+ */
+ULTIMATE.Block = {};
+
+/**
+ * Transfers new blocks to a template.
+ * 
+ * @param	{String}	elementID
+ * @param	{String}	containerID
+ * @param	{String}	className	the action class name
+ * @class	Adds blocks to a block list.
+ * @since	version 1.0.0
+ */
+ULTIMATE.Block.Transfer = function(elementID, containerID, className){ this.init(element, containerID, className); };
+ULTIMATE.Block.Transfer.prototype = {
+	/**
+	 * Contains the element from which the blocks should be transferred.
+	 * @type	jQuery
+	 */
+	_element: null,
+	
+	/**
+	 * Contains the element to which the blocks should be transferred.
+	 * @type	jQuery
+	 */
+	_container: null,
+	
+	/**
+	 * Contains the container ID.
+	 * @type	String
+	 */
+	_containerID: '',
+	
+	/**
+	 * Contains a notification.
+	 * @type	WCF.System.Notification
+	 */
+	_notification: null,
+	
+	/**
+	 * Contains a proxy object.
+	 * @type	WCF.Action.Proxy
+	 */
+	_proxy: null,
+		
+	/**
+	 * Initializes the BlockTransfer API.
+	 * 
+	 * @param	{String}	elementID
+	 * @param	{String}	containerID
+	 * @param	{String}	className
+	 */
+	init: function(elementID, containerID, className) {
+		this._element = $('#' + $.wcfEscapeID(elementID));
+		this._container = $('#' + $.wcfEscapeID(containerID));
+		this._containerID = $.wcfEscapeID(containerID);
+		this._className = className;
+		
+		this._proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._success, this)
+		});
+		this._element.parent('form').submit($.proxy(this._stopFormSubmit, this));
+		this._element.find('button[data-type="submit"]').click($.proxy(this._submit, this));
+		this._init();
+	},
+	
+	_init: function() {
+		$('.jsBlock').on('empty', $.proxy(this._empty, this));
+	},
+	
+	/**
+	 * Stops the form submit event.
+	 * 
+	 * @param	{jQuery.Event}	event
+	 * @return	{Boolean}
+	 */
+	_stopFormSubmit: function(event) {
+		event.preventDefault();
+		return;
+	},
+	
+	/**
+	 * Called each time a menu item is removed with empty().remove().
+	 * @param	{jQuery.Event}	event
+	 */
+	_empty: function(event) {
+		if ($('#' + this._containerID).find('.jsBlock').length <= 1) {
+			$('#' + this._containerID).find('button[data-type="submit"]').prop('disabled', true).addClass('disabled');
+		}
+	},
+	
+	/**
+	 * Saves blocks.
+	 */
+	_submit: function() {
+		var $data = {};
+		// read form data
+		var blocktype = $('#selectBlocktype').val();
+		var width = $('#width').val();
+		var height = $('#height').val();
+		var left = $('#left').val();
+		var top = $('#top').val();
+		var $parameters = $.extend(true, {
+			data: {
+				blocktype: blocktype,
+				width: width,
+				height: height,
+				left: left,
+				top: top,
+				templateID: $('input[name="id"]').val()
+			}
+		}, { });
+		
+		// reset form
+		$('#selectBlocktype').val('0');
+		$('#width').val('1');
+		$('#height').val('0');
+		$('#left').val('1');
+		$('#top').val('0');
+		
+		// build proxy data
+		$.extend(true, {
+			actionName: 'createAJAX',
+			className: this._className,
+			parameters: $parameters			
+		}, $data);
+		this._proxy.setOption('data', $data);
+		
+		// send proxy request
+		this._proxy.sendRequest();
+	},
+	
+	/**
+	 * Shows notification upon success.
+	 * 
+	 * @param	{Object}	data
+	 * @param	{String}	textStatus
+	 * @param	{jQuery}	jqXHR
+	 */
+	_success: function(data, textStatus, jqXHR) {
+		if (this._notification === null) {
+			this._notification = new WCF.System.Notification(WCF.Language.get('wcf.global.form.edit.success'));
+		}
+		try {
+			var $data = data['returnValues'];
+			
+			var $newHtml = '<li class="jsBlock" data-object-name="' + $data['blockTypeName'] 
+				+ '" data-object-id="' + $data['blockID'] + '">';
+			$newHtml += '<span><span class="buttons">';
+			if (ULTIMATE.Permission.get('admin.content.ultimate.canDeleteBlock')) {
+				$newHtml += '<img src="' + WCF.Icon.get('wcf.icon.delete') +'" alt="" title="' 
+					+ WCF.Language.get('wcf.global.button.delete') 
+					+ '" class="icon16 jsDeleteButton jsTooltip" data-object-id="' +
+					+ $data['blockID'] + '" data-confirm-message="' + WCF.Language.get('wcf.acp.ultimate.block.delete.sure') + '" />';
+			}
+			else {
+				$newHtml += '<img src="' + WCF.Icon.get('wcf.icon.delete') + '" alt="" title="' 
+					+ WCF.Language.get('wcf.global.button.delete') + '" class="icon16 disabled" />';
+			}
+			$newHtml += '</span><span class="title">' + $data['blockTypeName'] 
+				+ ' #' + $data['blockID']
+				+ '</span></span></li>';
+			
+			$('#' + this._containerID).find('> ol').append($newHtml);
+			if ($('#' + this._containerID).find('button[data-type="submit"]').prop('disabled')) {
+				$('#' + this._containerID).find('button[data-type="submit"]').prop('disabled', false).removeClass('disabled');
+			}
+			if (ULTIMATE.Permission.get('admin.content.ultimate.canDeleteBlock')) {
+				new WCF.Action.Delete('ultimate\\data\\block\\BlockAction', $('.jsBlock'));
+			}
+			this._init();
+			this._notification.show();
+		}
+		catch(e) {
+			// call child method if applicable
+			var $showError = true;
+			if ($showError !== false) {
+				$('<div class="ajaxDebugMessage"><p>' + e.message + '</p></div>').wcfDialog({ title: WCF.Language.get('wcf.global.error.title') });
+			}
+		}
+	}
+};
+
+/**
  * Global permission storage.
  * 
  * @see	WCF.Dictionary
@@ -284,6 +469,8 @@ ULTIMATE.Permission = {
 		return value;
 	}
 };
+
+
 
 /**
  * Namespace for ULTIMATE.Menu

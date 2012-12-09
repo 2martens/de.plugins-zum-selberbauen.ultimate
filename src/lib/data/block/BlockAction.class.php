@@ -54,7 +54,46 @@ class BlockAction extends AbstractDatabaseObjectAction {
 		return $nextAvailableID;
 	}
 	
+	/**
+	 * Does nothing as the getAvailableBlockID method does not require any permission.
+	 */
 	public function validateGetAvailableBlockID() {
 		// no permissions required
+	}
+	
+	/**
+	 * Creates a block and respects additional AJAX requirements.
+	 * 
+	 * @return	(integer|string)[]
+	 */
+	public function createAJAX() {
+		// serializes additionalData and query parameters
+		$parameters = $this->parameters['data'];
+		if (isset($parameters['additionalData'])) {
+			$parameters['additionalData'] = serialize($parameters['additionalData']);
+		}
+		if (isset($parameters['parameters'])) {
+			$parameters['parameters'] = serialize($parameters['parameters']);
+		}
+		$this->parameters['data'] = $parameters;
+		
+		// create the block
+		/* @var $block \ultimate\data\block\Block */
+		$block = $this->create();
+		
+		// get blocktype name
+		$cache = 'blocktype';
+		$cacheBuilderClassName = '\ultimate\system\cache\builder\BlocktypeCacheBuilder';
+		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
+		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
+		$blocktypes = CacheHandler::getInstance()->get($cacheName, 'blocktypes');
+		
+		$blocktype = $blocktypes[$block->__get('blockTypeID')];
+		
+		return array(
+			'blockID' => $block->__get('blockID'),
+			'blockTypeID' => $block->__get('blockTypeID'),
+			'blockTypeName' => $blocktype->__get('blockTypeName')
+		);
 	}
 }
