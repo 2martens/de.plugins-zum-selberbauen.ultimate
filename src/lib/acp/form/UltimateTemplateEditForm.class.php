@@ -48,9 +48,6 @@ class UltimateTemplateEditForm extends UltimateTemplateAddForm {
 	public function readParameters() {
 		parent::readParameters();
 		if (isset($_REQUEST['id'])) $this->templateID = intval($_REQUEST['id']);
-		if (!$this->templateID) {
-			throw new IllegalLinkException();
-		}
 		$template = new Template($this->templateID);
 		if (!$template->__get('templateID')) {
 			throw new IllegalLinkException();
@@ -95,5 +92,13 @@ class UltimateTemplateEditForm extends UltimateTemplateAddForm {
 		WCF::getTPL()->assign(
 			'success', true
 		);
+	}
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 */
+	public function assignVariables() {
+		parent::assignVariables();
+		WCF::getTPL()->assign('action', 'edit');
 	}
 }

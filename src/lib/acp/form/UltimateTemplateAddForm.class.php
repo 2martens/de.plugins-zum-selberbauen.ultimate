@@ -244,7 +244,8 @@ class UltimateTemplateAddForm extends ACPForm {
 			'width' => $this->width,
 			'height' => $this->height,
 			'left' => $this->left,
-			'top' => $this->top
+			'top' => $this->top,
+			'action' => 'add'
 		));
 	}
 	
