@@ -91,5 +91,9 @@ class UltimateTemplateEditForm extends UltimateTemplateAddForm {
 		$this->objectAction->executeAction();
 		
 		$this->saved();
+		
+		WCF::getTPL()->assign(
+			'success', true
+		);
 	}
 }

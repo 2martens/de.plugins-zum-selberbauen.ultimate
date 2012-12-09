@@ -30,7 +30,9 @@ use ultimate\data\template\TemplateAction;
 use wcf\acp\form\ACPForm;
 use wcf\system\cache\CacheHandler;
 use wcf\system\exception\UserInputException;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
+use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 
 /**
@@ -186,6 +188,18 @@ class UltimateTemplateAddForm extends ACPForm {
 		$this->objectAction->executeAction();
 		
 		$this->saved();
+		
+		WCF::getTPL()->assign(
+			'success', true
+		);
+		
+		$url = LinkHandler::getInstance()->getLink('UltimateTemplateEdit',
+			array(
+				'id' => $templateID
+			)
+		);
+		HeaderUtil::redirect($url);
+		exit;
 	}
 	
 	/**
