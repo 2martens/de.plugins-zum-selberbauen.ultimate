@@ -149,8 +149,6 @@ class UltimateTemplateAddForm extends ACPForm {
 		if (isset($_POST['widgetAreaSide'])) $this->widgetAreaSide = StringUtil::trim($_POST['widgetAreaSide']);
 		if (isset($_POST['selectWidgetArea'])) $this->selectedWidgetArea = intval($_POST['selectWidgetArea']);
 		if (isset($_POST['selectMenu'])) $this->selectedMenu = intval($_POST['selectMenu']);
-		// TODO: add missing block statements (object variable, readFormParameters, validate, save)
-		// TODO: create a blocktype transfer JS "class" 
 	}
 	
 	/**
