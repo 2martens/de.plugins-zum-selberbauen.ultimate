@@ -3,13 +3,12 @@
 <head>
 	<base href="{$baseHref}" />
 	<meta charset="utf-8" />
-	<title>{if $pageTitle|isset}{@$pageTitle}{else}{lang}wcf.global.pageTitle{/lang}{/if} - {lang}wcf.acp{/lang}</title>
-	{*<meta http-equiv="X-UA-Compatible" content="IE=edge" />*}
+	<title>{if $pageTitle|isset}{@$pageTitle|language} - {/if}{lang}wcf.acp{/lang}{if PACKAGE_ID} - {PAGE_TITLE|language}{/if}</title>
 	<script type="text/javascript">
 		//<![CDATA[
 		var SID_ARG_1ST = '{@SID_ARG_1ST}';
 		var SID_ARG_2ND	= '{@SID_ARG_2ND_NOT_ENCODED}';
-		var RELATIVE_WCF_DIR = '{@RELATIVE_WCF_DIR}'; // todo: still needed?
+		var RELATIVE_WCF_DIR = '{@$__wcf->getPath()}';
 		var SECURITY_TOKEN = '{@SECURITY_TOKEN}';
 		var LANGUAGE_ID = {@$__wcf->getLanguage()->languageID};
 		//]]>
@@ -23,7 +22,7 @@
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/jquery-ui-timepicker-addon-i18n.js"></script>
 	{*<script type="text/javascript" src="{@$__wcf->getPath()}js/ultimateCore.js"></script>*}
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.js"></script>
-	<script type="text/javascript" src="{@$__wcf->getPath()}acp/js/WCF.ACP.js"></script>
+	<script type="text/javascript" src="{@$__wcf->getPath()}acp/js/WCF.ACP.js?t={@TIME_NOW}"></script>
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.Message.js"></script>
 	<script type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.js"></script>
 	{* <script type="text/javascript" src="{@$__wcf->getPath('ultimate')}acp/js/ULTIMATE.ACP.js"></script> *}
@@ -40,13 +39,6 @@
 	<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/3rdParty/jquery-ui.css" />
 	{@$__wcf->getUltimateStyleHandler()->getStylesheet()}
 	
-	{*
-	{if $specialStyles|isset}
-		<!-- special styles -->
-		{@$specialStyles}
-	{/if}
-	*}
-	
 	<script type="text/javascript">
 		//<![CDATA[
 		$(function() {
@@ -60,6 +52,7 @@
 			WCF.Language.addObject({
 				'wcf.global.button.add': '{lang}wcf.global.button.add{/lang}',
 				'wcf.global.button.cancel': '{lang}wcf.global.button.cancel{/lang}',
+				'wcf.global.button.close': '{lang}wcf.global.button.close{/lang}',
 				'wcf.global.button.collapsible': '{lang}wcf.global.button.collapsible{/lang}',
 				'wcf.global.button.delete': '{lang}wcf.global.button.delete{/lang}',
 				'wcf.global.button.disable': '{lang}wcf.global.button.disable{/lang}',
@@ -94,7 +87,20 @@
 				{event name='javascriptLanguageImport'}
 			});
 			WCF.Icon.addObject({
+				'wcf.icon.add': '{@$__wcf->getPath()}icon/add.svg',
+				'wcf.icon.arrowDown': '{@$__wcf->getPath()}icon/arrowDown.svg',
+				'wcf.icon.arrowLeft': '{@$__wcf->getPath()}icon/arrowLeft.svg',
+				'wcf.icon.arrowRight': '{@$__wcf->getPath()}icon/arrowRight.svg',
+				'wcf.icon.arrowUp': '{@$__wcf->getPath()}icon/arrowUp.svg',
+				'wcf.icon.circleArrowDown': '{@$__wcf->getPath()}icon/circleArrowDown.svg',
+				'wcf.icon.circleArrowLeft': '{@$__wcf->getPath()}icon/circleArrowLeft.svg',
+				'wcf.icon.circleArrowRight': '{@$__wcf->getPath()}icon/circleArrowRight.svg',
+				'wcf.icon.circleArrowUp': '{@$__wcf->getPath()}icon/circleArrowUp.svg',
 				'wcf.icon.closed': '{@$__wcf->getPath()}icon/arrowRightInverse.svg',
+				'wcf.icon.dropdown': '{@$__wcf->getPath()}icon/dropdown.svg',
+				'wcf.icon.delete': '{@$__wcf->getPath()}icon/delete.svg',
+				'wcf.icon.edit': '{@$__wcf->getPath()}icon/edit.svg',
+				'wcf.icon.error': '{@$__wcf->getPath()}icon/errorRed.svg',
 				'wcf.icon.loading': '{@$__wcf->getPath()}icon/spinner.svg',
 				'wcf.icon.opened': '{@$__wcf->getPath()}icon/arrowDownInverse.svg'
 				{event name='javascriptIconImport'}
@@ -103,9 +109,10 @@
 			new WCF.Effect.SmoothScroll();
 			new WCF.Effect.BalloonTooltip();
 			
-			$('#sidebarContent').wcfSidebar();
-			
+			WCF.Date.Picker.init();
 			WCF.Dropdown.init();
+			
+			new WCF.ACP.Search();
 			
 			{event name='javascriptInit'}
 		});
@@ -115,118 +122,100 @@
 
 <body id="tpl{$templateName|ucfirst}">
 	<a id="top"></a>
-	<!-- HEADER -->
+	
 	<header id="pageHeader" class="layoutFluid">
 		<div>
 			{if $__wcf->user->userID}
-				<!-- top menu -->
 				<nav id="topMenu" class="userPanel">
 					<div class="layoutFluid clearfix">
 						<ul class="userPanelItems">
 							<li id="userMenu" class="dropdown">
-								<a class="dropdownToggle" data-toggle="userMenu">{event name='userAvatar'} {lang}wcf.user.userNote{/lang}</a>
+								<a class="dropdownToggle framed" data-toggle="userMenu">{event name='userAvatar'} {lang}wcf.user.userNote{/lang}</a>
 								<ul class="dropdownMenu">
 									<li><a href="../">FRONTEND</a></li>
 									<li class="dropdownDivider"></li>
-									<li><a href="{link controller='Logout'}t={@SECURITY_TOKEN}{/link}" onclick="return confirm('{lang}wcf.user.logout.sure{/lang}')">{lang}wcf.user.logout{/lang}</a></li>
+									<li><a href="{link controller='Logout'}t={@SECURITY_TOKEN}{/link}" onclick="WCF.System.Confirmation.show('{lang}wcf.user.logout.sure{/lang}', $.proxy(function (action) { if (action == 'confirm') window.location.href = $(this).attr('href'); }, this)); return false;">{lang}wcf.user.logout{/lang}</a></li>
 								</ul>
 							</li>
+							{event name='topMenu'}
 						</ul>
 						
-						<!-- search area -->
-						<aside id="search" class="searchBar">
-							<form method="post" action="{link controller='Search'}{/link}">
-								<input type="search" name="q" placeholder="{lang}wcf.global.search.enterSearchTerm{/lang}" value="" />
-							</form>
-						</aside>
-						<!-- /search area -->
+						{if $__wcf->getSession()->getPermission('admin.general.canUseAcp')}
+							<aside id="search" class="searchBar">
+								<form method="post" action="{link controller='Search'}{/link}">
+									<input type="search" name="q" placeholder="{lang}wcf.global.search.enterSearchTerm{/lang}" value="" />
+								</form>
+							</aside>
+						{/if}
 					</div>
 				</nav>
-				<!-- /top menu -->
 			{/if}
 			
-			<!-- logo -->
 			<div id="logo" class="logo">
-				<!-- clickable area -->
 				<a href="{link controller='Index'}{/link}">
-					<h1>WoltLab Community Framework 2.0 Alpha 1</h1>
-					<img src="{@$__wcf->getPath()}acp/images/wcfLogo2.svg" width="321" height="58" alt="Product-logo" title="WoltLab Community Framework 2.0 Alpha 1" />
+					<h1>{lang}wcf.acp{/lang}</h1>
+					<img src="{@$__wcf->getPath()}acp/images/wcfLogo1.svg" width="321" height="58" alt="" />
 				</a>
-				<!-- /clickable area -->
 			</div>
-			<!-- /logo -->
 			
 			{* work-around for unknown core-object during WCFSetup *}
 			{if PACKAGE_ID}
 				{hascontent}
-					<!-- main menu -->
 					<nav id="mainMenu" class="mainMenu">
 						<ul>
 							{content}
-								{foreach from=$__wcf->getACPMenu()->getMenuItems('') item=menuItem}
-									<li data-menu-item="{$menuItem->menuItem}"><a>{lang}{@$menuItem->menuItem}{/lang}</a></li>
+								{foreach from=$__wcf->getACPMenu()->getMenuItems('') item=_menuItem}
+									<li data-menu-item="{$_menuItem->menuItem}"><a>{lang}{@$_menuItem->menuItem}{/lang}</a></li>
 								{/foreach}
 							{/content}
 						</ul>
 					</nav>
-					<!-- /main menu -->
 				{/hascontent}
 			{/if}
 			
-			<!-- header navigation -->
 			<nav class="navigation navigationHeader clearfix">
 				<ul class="navigationIcons">
 					<li id="toBottomLink" class="toBottomLink"><a href="{@$__wcf->getAnchor('bottom')}" title="{lang}wcf.global.scrollDown{/lang}" class="jsTooltip"><img src="{@$__wcf->getPath()}icon/circleArrowDownColored.svg" alt="" class="icon16" /> <span class="invisible">{lang}wcf.global.scrollDown{/lang}</span></a></li>
+					{event name='navigationIcons'}
 				</ul>
 			</nav>
-			<!-- /header navigation -->
 		</div>
 	</header>
-	<!-- /HEADER -->
 	
-	<!-- MAIN -->
 	<div id="main" class="layoutFluid{if PACKAGE_ID && $__wcf->getACPMenu()->getMenuItems('')|count} sidebarOrientationLeft{/if}">
 		<div>
 			{hascontent}
-				<!-- SIDEBAR -->
-				<aside class="sidebar">
-					<!-- sidebar menu -->
-					<nav id="sidebarContent" class="sidebarContent">
-						<ul>
-							<li>
-							{content}
-								{* work-around for unknown core-object during WCFSetup *}
-								{if PACKAGE_ID}
-									{foreach from=$__wcf->getACPMenu()->getMenuItems('') item=parentMenuItem}
-										<div id="{$parentMenuItem->menuItem}-container" style="display: none;" class="menuGroup collapsibleMenus" data-parent-menu-item="{$parentMenuItem->menuItem}">
-											{foreach from=$__wcf->getACPMenu()->getMenuItems($parentMenuItem->menuItem) item=menuItem}
-												<h1 class="menuHeader" data-menu-item="{$menuItem->menuItem}">{lang}{@$menuItem->menuItem}{/lang}</h1>
-												<div class="menuGroupItems">
-													<ul id="{$menuItem->menuItem}">
-														{foreach from=$__wcf->getACPMenu()->getMenuItems($menuItem->menuItem) item=menuItemCategory}
-															{if $__wcf->getACPMenu()->getMenuItems($menuItemCategory->menuItem)|count > 0}
-																{foreach from=$__wcf->getACPMenu()->getMenuItems($menuItemCategory->menuItem) item=subMenuItem}
-																	<li id="{$subMenuItem->menuItem}" data-menu-item="{$subMenuItem->menuItem}"><a href="{$subMenuItem->getLink()}">{lang}{$subMenuItem->menuItem}{/lang}</a></li>
-																{/foreach}
-															{else}
-																<li id="{$menuItemCategory->menuItem}" data-menu-item="{$menuItemCategory->menuItem}"><a href="{$menuItemCategory->getLink()}">{lang}{$menuItemCategory->menuItem}{/lang}</a></li>
-															{/if}
-														{/foreach}
-													</ul>
-												</div>
-											{/foreach}
-										</div>
+				<aside class="sidebar collapsibleMenu">
+					{content}
+						{* work-around for unknown core-object during WCFSetup *}
+						{if PACKAGE_ID}
+							{foreach from=$__wcf->getACPMenu()->getMenuItems('') item=_parentMenuItem}
+								<div id="{$_parentMenuItem->menuItem}-container" style="display: none;" class="menuGroup collapsibleMenus" data-parent-menu-item="{$_parentMenuItem->menuItem}">
+									{foreach from=$__wcf->getACPMenu()->getMenuItems($_parentMenuItem->menuItem) item=_menuItem}
+										<fieldset>
+											<legend class="menuHeader" data-menu-item="{$_menuItem->menuItem}">{lang}{@$_menuItem->menuItem}{/lang}</legend>
+											
+											<nav class="menuGroupItems">
+												<ul id="{$_menuItem->menuItem}">
+													{foreach from=$__wcf->getACPMenu()->getMenuItems($_menuItem->menuItem) item=menuItemCategory}
+														{if $__wcf->getACPMenu()->getMenuItems($menuItemCategory->menuItem)|count > 0}
+															{foreach from=$__wcf->getACPMenu()->getMenuItems($menuItemCategory->menuItem) item=subMenuItem}
+																<li id="{$subMenuItem->menuItem}" data-menu-item="{$subMenuItem->menuItem}"><a href="{$subMenuItem->getLink()}">{lang}{$subMenuItem->menuItem}{/lang}</a></li>
+															{/foreach}
+														{else}
+															<li id="{$menuItemCategory->menuItem}" data-menu-item="{$menuItemCategory->menuItem}"><a href="{$menuItemCategory->getLink()}">{lang}{$menuItemCategory->menuItem}{/lang}</a></li>
+														{/if}
+													{/foreach}
+												</ul>
+											</nav>
+										</fieldset>
 									{/foreach}
-								{/if}
-							{/content}
-							</li>
-						</ul>
-					</nav>
-					<!-- /sidebar menu -->
+								</div>
+							{/foreach}
+						{/if}
+					{/content}
 				</aside>
-				<!-- /SIDEBAR -->
 			{/hascontent}
 			
-			<!-- CONTENT -->
 			<section id="content" class="content clearfix">
 				
