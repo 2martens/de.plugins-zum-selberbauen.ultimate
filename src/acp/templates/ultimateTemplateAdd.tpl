@@ -68,7 +68,7 @@
 			<dl{if $errorField == 'widgetAreaSide'} class="formError"{/if}>
 				<dt><label for="widgetAreaSide">{lang}wcf.acp.ultimate.template.widgetAreaSide{/lang}</label></dt>
 				<dd>
-					<select type="checkbox" id="widgetAreaSide" name="widgetAreaSide">
+					<select id="widgetAreaSide" name="widgetAreaSide">
 						<option label="{lang}wcf.acp.ultimate.template.widgetAreaSide.left{/lang}" value="left"{if $widgetAreaSide == 'left'} selected="selected"{/if}>{lang}wcf.acp.ultimate.template.widgetAreaSide.left{/lang}</option>
 						<option label="{lang}wcf.acp.ultimate.template.widgetAreaSide.right{/lang}" value="right"{if $widgetAreaSide == 'right'} selected="selected"{/if}>{lang}wcf.acp.ultimate.template.widgetAreaSide.right{/lang}</option>
 					</select>
@@ -234,9 +234,9 @@
 			</dd>
 		</dl>
 		<dl{if $errorField == 'top'} class="formError"{/if}>
-			<dt><label for="top">{lang}wcf.acp.ultimate.template.top{/lang}</label></dt>
+			<dt><label for="topDistance">{lang}wcf.acp.ultimate.template.top{/lang}</label></dt>
 			<dd>
-				<input type="number" id="top" name="top" value="{$top}" min="0" /><span class="unit">px</span>
+				<input type="number" id="topDistance" name="top" value="{$top}" min="0" /><span class="unit">px</span>
 				{if $errorField == 'top'}
 					<small class="innerError">
 						{lang}wcf.acp.ultimate.template.top.error.{@$errorType}{/lang}
