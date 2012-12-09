@@ -48,6 +48,9 @@ class UltimateTemplateEditForm extends UltimateTemplateAddForm {
 	public function readParameters() {
 		parent::readParameters();
 		if (isset($_REQUEST['id'])) $this->templateID = intval($_REQUEST['id']);
+		if (!$this->templateID) {
+			throw new IllegalLinkException();
+		}
 		$template = new Template($this->templateID);
 		if (!$template->__get('templateID')) {
 			throw new IllegalLinkException();
