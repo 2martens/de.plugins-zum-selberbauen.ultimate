@@ -128,11 +128,17 @@
 		<!-- /menus -->
 		
 		<!-- templates -->
+		<acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.template.add">
+			<link>index.php/UltimateTemplateAdd</link>
+			<parent>wcf.acp.menu.link.ultimate.appearance</parent>
+			<permissions>admin.content.ultimate.canAddTemplate</permissions>
+			<showorder>3</showorder>
+		</acpmenuitem>
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.template.list">
 			<link>index.php/UltimateTemplateList/</link>
 			<parent>wcf.acp.menu.link.ultimate.appearance</parent>
 			<permissions>admin.content.ultimate.canEditTemplate</permissions>
-			<showorder>3</showorder>
+			<showorder>4</showorder>
 		</acpmenuitem>
 		<!-- /templates -->
 		

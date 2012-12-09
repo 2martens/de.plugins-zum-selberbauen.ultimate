@@ -133,6 +133,7 @@
 		<!-- /menu items -->
 		
 		<!-- template items -->
+		<item name="wcf.acp.menu.link.ultimate.appearance.template.add"><![CDATA[Add template]]></item>
 		<item name="wcf.acp.menu.link.ultimate.appearance.template.list"><![CDATA[List templates]]></item>
 		<!-- /template items -->
 		
