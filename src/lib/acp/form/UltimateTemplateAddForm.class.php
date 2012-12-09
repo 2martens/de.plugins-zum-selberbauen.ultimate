@@ -26,12 +26,15 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\acp\form;
+use ultimate\data\template\TemplateAction;
 use wcf\acp\form\ACPForm;
 use wcf\system\cache\CacheHandler;
+use wcf\system\exception\UserInputException;
 use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
- * Insert description here.
+ * Shows the UltimateTemplateAdd form.
  * 
  * @author		Jim Martens
  * @copyright	2012 Jim Martens
@@ -169,7 +172,7 @@ class UltimateTemplateAddForm extends ACPForm {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
 	 */
 	public function save() {
-		ACPForm::save();
+		parent::save();
 		$parameters = array(
 			'data' => array(
 				'templateName' => $this->ultimateTemplateName,
@@ -201,5 +204,58 @@ class UltimateTemplateAddForm extends ACPForm {
 			'blocks' => $this->blocks,
 			'blocktypes' => $this->blocktypes
 		));
+	}
+	
+	/**
+	 * Validates the template name.
+	 *
+	 * @throws \wcf\system\exception\UserInputException	if template name is empty
+	 */
+	protected function validateTemplateName() {
+		if (empty($this->ultimateTemplateName)) {
+			throw new UserInputException('templateName');
+		}
+	}
+	
+	/**
+	 * Validates the show widget area setting.
+	 */
+	protected function validateShowWidgetArea() {
+		// does nothing
+		// if validation is necessary in future the method already exists
+	}
+	
+	/**
+	 * Validates the widget area side.
+	 *
+	 * @throws \wcf\system\exception\UserInputException	if selected widget area side is neither left nor right
+	 */
+	protected function validateWidgetAreaSide() {
+		$allowed = array('left', 'right');
+		if (!in_array(strtolower($this->widgetAreaSide), $allowed)) {
+			throw new UserInputException('widgetAreaSide', 'notValid');
+		}
+	}
+	
+	/**
+	 * Validates the selected widget area.
+	 *
+	 * @throws \wcf\system\exception\UserInputException	if selected widget area doesn't exist
+	 */
+	protected function validateSelectWidgetArea() {
+		if ($this->selectedWidgetArea && !isset($this->widgetAreas[$this->selectedWidgetArea])) {
+			throw new UserInputException('selectWidgetArea', 'notValid');
+		}
+	}
+	
+	/**
+	 * Validates the selected menu.
+	 *
+	 * @throws \wcf\system\exception\UserInputException	if selected menu doesn't exist
+	 */
+	protected function validateSelectMenu() {
+		if ($this->selectedMenu && !isset($this->menus[$this->selectedMenu])) {
+			throw new UserInputException('selectMenu', 'notValid');
+		}
 	}
 }

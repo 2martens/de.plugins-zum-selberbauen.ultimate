@@ -39,7 +39,7 @@
 			<dl{if $errorField == 'templateName'} class="formError"{/if}>
 				<dt><label for="templateName">{lang}wcf.acp.ultimate.template.name{/lang}</label></dt>
 				<dd>
-					<input type="text" id="templateName" name="templateName" value="{@$templateName}" class="long" required="required" placeholder="{lang}wcf.acp.ultimate.menu.name.placeholder{/lang}" />
+					<input type="text" id="templateName" name="templateName" value="{@$ultimateTemplateName}" class="long" required="required" placeholder="{lang}wcf.acp.ultimate.menu.name.placeholder{/lang}" />
 					{if $errorField == 'templateName'}
 						<small class="innerError">
 							{if $errorType == 'empty'}
@@ -201,7 +201,7 @@
 			<dt><label for="selectBlocktype">{lang}wcf.acp.ultimate.template.selectBlocktype{/lang}</label></dt>
 			<dd>
 				<select id="selectBlocktype" name="selectBlocktype">
-					<option label="{lang}wcf.acp.ultimate.template.selectBlocktype.none{/lang}" value="0">{lang}wcf.acp.ultimate.template.selectMenu.none{/lang}</option>
+					<option label="{lang}wcf.acp.ultimate.template.selectBlocktype.none{/lang}" value="0">{lang}wcf.acp.ultimate.template.selectBlocktype.none{/lang}</option>
 					{htmlOptions options=$blocktypes selected=$selectedBlocktype}
 				</select>
 				{if $errorField == 'selectBlocktype'}
