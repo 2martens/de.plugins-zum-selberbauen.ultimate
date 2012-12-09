@@ -86,7 +86,7 @@ class BlockAction extends AbstractDatabaseObjectAction {
 		$cacheBuilderClassName = '\ultimate\system\cache\builder\BlocktypeCacheBuilder';
 		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
 		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$blocktypes = CacheHandler::getInstance()->get($cacheName, 'blocktypes');
+		$blocktypes = CacheHandler::getInstance()->get($cacheName, 'blockTypes');
 		
 		$blocktype = $blocktypes[$block->__get('blockTypeID')];
 		
@@ -95,5 +95,12 @@ class BlockAction extends AbstractDatabaseObjectAction {
 			'blockTypeID' => $block->__get('blockTypeID'),
 			'blockTypeName' => $blocktype->__get('blockTypeName')
 		);
+	}
+	
+	/**
+	 * Validates the createAJAX method.
+	 */
+	public function validateCreateAJAX() {
+		$this->validateCreate();
 	}
 }
