@@ -93,7 +93,7 @@ final class InstallUltimateCMS {
 			'data' => array(
 				'packageID' => PACKAGE_ID,
 				'blockTypeName' => 'ultimate.blocktype.media',
-				'blockTypeClassName' => 'ultimate\system\blocktype\MedialockType',
+				'blockTypeClassName' => 'ultimate\system\blocktype\MediaBlockType',
 				'fixedHeight' => 1
 			)
 		);
