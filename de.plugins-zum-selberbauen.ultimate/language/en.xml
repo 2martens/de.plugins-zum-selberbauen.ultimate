@@ -170,72 +170,72 @@
 		<!-- /categories -->
 		
 		<!-- ultimate.general -->
-		<item name="wcf.acp.option.ultimate_general_englishLanguage"><![CDATA[Accent of English language]]></item>
-		<item name="wcf.acp.option.ultimate_general_englishLanguage.description"><![CDATA[Please select here which accent of English should be used.]]></item>
-		<item name="wcf.acp.option.ultimate_general_englishLanguage.BE"><![CDATA[British English]]></item>
-		<item name="wcf.acp.option.ultimate_general_englishLanguage.AE"><![CDATA[American English]]></item>
+		<item name="wcf.acp.option.general_englishLanguage"><![CDATA[Accent of English language]]></item>
+		<item name="wcf.acp.option.general_englishLanguage.description"><![CDATA[Please select here which accent of English should be used.]]></item>
+		<item name="wcf.acp.option.general_englishLanguage.BE"><![CDATA[British English]]></item>
+		<item name="wcf.acp.option.general_englishLanguage.AE"><![CDATA[American English]]></item>
 		<!-- /ultimate.general -->
 		
 		<!-- ultimate.general.content -->
-		<item name="wcf.acp.option.ultimate_general_content_comments_per_page"><![CDATA[Comments per page]]></item>
-		<item name="wcf.acp.option.ultimate_general_content_comments_per_page.description"><![CDATA[Please insert here how many comments should be displayed per page. This setting doesn't influence the visability of comments (that depends on settings of the specific content blocks).]]></item>
-		<item name="wcf.acp.option.ultimate_general_content_readMoreText"><![CDATA[Read more text]]></item>
-		<item name="wcf.acp.option.ultimate_general_content_readMoreText.description"><![CDATA[Please insert here the default read more text. You can change this setting for each block inside the VisualEditor individually.]]></item>
-		<item name="wcf.acp.option.ultimate_general_content_metaAboveContent"><![CDATA[Meta above content]]></item>
-		<item name="wcf.acp.option.ultimate_general_content_metaAboveContent.description"><![CDATA[Please insert here the default meta above content. You can change this setting for each block inside the VisualEditor individually.
+		<item name="wcf.acp.option.general_content_comments_per_page"><![CDATA[Comments per page]]></item>
+		<item name="wcf.acp.option.general_content_comments_per_page.description"><![CDATA[Please insert here how many comments should be displayed per page. This setting doesn't influence the visability of comments (that depends on settings of the specific content blocks).]]></item>
+		<item name="wcf.acp.option.general_content_readMoreText"><![CDATA[Read more text]]></item>
+		<item name="wcf.acp.option.general_content_readMoreText.description"><![CDATA[Please insert here the default read more text. You can change this setting for each block inside the VisualEditor individually.]]></item>
+		<item name="wcf.acp.option.general_content_metaAboveContent"><![CDATA[Meta above content]]></item>
+		<item name="wcf.acp.option.general_content_metaAboveContent.description"><![CDATA[Please insert here the default meta above content. You can change this setting for each block inside the VisualEditor individually.
 
 Available variables:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$categories</li><li>$tags</li></ul>]]></item>
-		<item name="wcf.acp.option.ultimate_general_content_metaBelowContent"><![CDATA[Meta below content]]></item>
-		<item name="wcf.acp.option.ultimate_general_content_metaBelowContent.description"><![CDATA[Please insert here the default meta below content. You can change this setting for each block inside the VisualEditor individually.
+		<item name="wcf.acp.option.general_content_metaBelowContent"><![CDATA[Meta below content]]></item>
+		<item name="wcf.acp.option.general_content_metaBelowContent.description"><![CDATA[Please insert here the default meta below content. You can change this setting for each block inside the VisualEditor individually.
 
 Available variables:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$categories</li><li>$tags</li></ul>]]></item>
 		<!-- /ultimate.general.content -->
 		
 		<!-- ultimate.grid -->
-		<item name="wcf.acp.option.ultimate_grid_columnWidth"><![CDATA[Column width]]></item>
-		<item name="wcf.acp.option.ultimate_grid_columnWidth.description"><![CDATA[Please insert here the default column width. The value can be everything from 10 to 80. The unit is pixel.]]></item>
-		<item name="wcf.acp.option.ultimate_grid_gutterWidth"><![CDATA[Gutter width]]></item>
-		<item name="wcf.acp.option.ultimate_grid_gutterWidth.description"><![CDATA[Please insert here the default gutter width. The value can be everything from 0 to 30. The unit is pixel.]]></item>
+		<item name="wcf.acp.option.grid_columnWidth"><![CDATA[Column width]]></item>
+		<item name="wcf.acp.option.grid_columnWidth.description"><![CDATA[Please insert here the default column width. The value can be everything from 10 to 80. The unit is pixel.]]></item>
+		<item name="wcf.acp.option.grid_gutterWidth"><![CDATA[Gutter width]]></item>
+		<item name="wcf.acp.option.grid_gutterWidth.description"><![CDATA[Please insert here the default gutter width. The value can be everything from 0 to 30. The unit is pixel.]]></item>
 		<!-- /ultimate.grid -->
 		
 		<!-- ultimate.sort.category -->
-		<item name="wcf.acp.option.ultimate_sort_category_sortField"><![CDATA[Sort field]]></item>
-		<item name="wcf.acp.option.ultimate_sort_category_sortField.categoryID"><![CDATA[ID]]></item>
-		<item name="wcf.acp.option.ultimate_sort_category_sortField.categoryTitle"><![CDATA[Name]]></item>
-		<item name="wcf.acp.option.ultimate_sort_category_sortField.categoryDescription"><![CDATA[Description]]></item>
-		<item name="wcf.acp.option.ultimate_sort_category_sortField.categorySlug"><![CDATA[Slug]]></item>
-		<item name="wcf.acp.option.ultimate_sort_category_sortField.categoryContents"><![CDATA[Number of contents]]></item>
-		<item name="wcf.acp.option.ultimate_sort_category_sortField.description"><![CDATA[Please insert here the sort field for the category list.]]></item>
-		<item name="wcf.acp.option.ultimate_sort_category_sortOrder"><![CDATA[Sort order]]></item>
-		<item name="wcf.acp.option.ultimate_sort_category_sortOrder.description"><![CDATA[Please insert here the sort order for the category list.]]></item>
+		<item name="wcf.acp.option.sort_category_sortField"><![CDATA[Sort field]]></item>
+		<item name="wcf.acp.option.sort_category_sortField.categoryID"><![CDATA[ID]]></item>
+		<item name="wcf.acp.option.sort_category_sortField.categoryTitle"><![CDATA[Name]]></item>
+		<item name="wcf.acp.option.sort_category_sortField.categoryDescription"><![CDATA[Description]]></item>
+		<item name="wcf.acp.option.sort_category_sortField.categorySlug"><![CDATA[Slug]]></item>
+		<item name="wcf.acp.option.sort_category_sortField.categoryContents"><![CDATA[Number of contents]]></item>
+		<item name="wcf.acp.option.sort_category_sortField.description"><![CDATA[Please insert here the sort field for the category list.]]></item>
+		<item name="wcf.acp.option.sort_category_sortOrder"><![CDATA[Sort order]]></item>
+		<item name="wcf.acp.option.sort_category_sortOrder.description"><![CDATA[Please insert here the sort order for the category list.]]></item>
 		<!-- /ultimate.sort.category -->
 		<!-- ultimate.sort.content -->
-		<item name="wcf.acp.option.ultimate_sort_content_sortField"><![CDATA[Sort field]]></item>
-		<item name="wcf.acp.option.ultimate_sort_content_sortField.contentID"><![CDATA[ID]]></item>
-		<item name="wcf.acp.option.ultimate_sort_content_sortField.contentTitle"><![CDATA[Title]]></item>
-		<item name="wcf.acp.option.ultimate_sort_content_sortField.contentAuthor"><![CDATA[Author]]></item>
-		<item name="wcf.acp.option.ultimate_sort_content_sortField.lastModified"><![CDATA[Date]]></item>
-		<item name="wcf.acp.option.ultimate_sort_content_sortField.description"><![CDATA[Please insert here the sort field for the content list.]]></item>
-		<item name="wcf.acp.option.ultimate_sort_content_sortOrder"><![CDATA[Sort order]]></item>
-		<item name="wcf.acp.option.ultimate_sort_content_sortOrder.description"><![CDATA[Please insert here the sort order for the content list.]]></item>
+		<item name="wcf.acp.option.sort_content_sortField"><![CDATA[Sort field]]></item>
+		<item name="wcf.acp.option.sort_content_sortField.contentID"><![CDATA[ID]]></item>
+		<item name="wcf.acp.option.sort_content_sortField.contentTitle"><![CDATA[Title]]></item>
+		<item name="wcf.acp.option.sort_content_sortField.contentAuthor"><![CDATA[Author]]></item>
+		<item name="wcf.acp.option.sort_content_sortField.lastModified"><![CDATA[Date]]></item>
+		<item name="wcf.acp.option.sort_content_sortField.description"><![CDATA[Please insert here the sort field for the content list.]]></item>
+		<item name="wcf.acp.option.sort_content_sortOrder"><![CDATA[Sort order]]></item>
+		<item name="wcf.acp.option.sort_content_sortOrder.description"><![CDATA[Please insert here the sort order for the content list.]]></item>
 		<!-- /ultimate.sort.content -->
 		<!-- ultimate.sort.page -->
-		<item name="wcf.acp.option.ultimate_sort_page_sortField"><![CDATA[Sort field]]></item>
-		<item name="wcf.acp.option.ultimate_sort_page_sortField.pageID"><![CDATA[ID]]></item>
-		<item name="wcf.acp.option.ultimate_sort_page_sortField.pageTitle"><![CDATA[Title]]></item>
-		<item name="wcf.acp.option.ultimate_sort_page_sortField.pageAuthor"><![CDATA[Author]]></item>
-		<item name="wcf.acp.option.ultimate_sort_page_sortField.lastModified"><![CDATA[Date]]></item>
-		<item name="wcf.acp.option.ultimate_sort_page_sortField.description"><![CDATA[Please insert here the sort field for the page list.]]></item>
-		<item name="wcf.acp.option.ultimate_sort_page_sortOrder"><![CDATA[Sort order]]></item>
-		<item name="wcf.acp.option.ultimate_sort_page_sortOrder.description"><![CDATA[Please insert here the sort order for the page list.]]></item>
+		<item name="wcf.acp.option.sort_page_sortField"><![CDATA[Sort field]]></item>
+		<item name="wcf.acp.option.sort_page_sortField.pageID"><![CDATA[ID]]></item>
+		<item name="wcf.acp.option.sort_page_sortField.pageTitle"><![CDATA[Title]]></item>
+		<item name="wcf.acp.option.sort_page_sortField.pageAuthor"><![CDATA[Author]]></item>
+		<item name="wcf.acp.option.sort_page_sortField.lastModified"><![CDATA[Date]]></item>
+		<item name="wcf.acp.option.sort_page_sortField.description"><![CDATA[Please insert here the sort field for the page list.]]></item>
+		<item name="wcf.acp.option.sort_page_sortOrder"><![CDATA[Sort order]]></item>
+		<item name="wcf.acp.option.sort_page_sortOrder.description"><![CDATA[Please insert here the sort order for the page list.]]></item>
 		<!-- /ultimate.sort.page -->
 		<!-- ultimate.sort.template -->
-		<item name="wcf.acp.option.ultimate_sort_template_sortField"><![CDATA[Sort field]]></item>
-		<item name="wcf.acp.option.ultimate_sort_template_sortField.templateID"><![CDATA[ID]]></item>
-		<item name="wcf.acp.option.ultimate_sort_template_sortField.templateName"><![CDATA[Name]]></item>
-		<item name="wcf.acp.option.ultimate_sort_template_sortField.description"><![CDATA[Please insert here the sort field for the template list.]]></item>
-		<item name="wcf.acp.option.ultimate_sort_template_sortOrder"><![CDATA[Sort order]]></item>
-		<item name="wcf.acp.option.ultimate_sort_template_sortOrder.description"><![CDATA[Please insert here the sort order for the template list.]]></item>
+		<item name="wcf.acp.option.sort_template_sortField"><![CDATA[Sort field]]></item>
+		<item name="wcf.acp.option.sort_template_sortField.templateID"><![CDATA[ID]]></item>
+		<item name="wcf.acp.option.sort_template_sortField.templateName"><![CDATA[Name]]></item>
+		<item name="wcf.acp.option.sort_template_sortField.description"><![CDATA[Please insert here the sort field for the template list.]]></item>
+		<item name="wcf.acp.option.sort_template_sortOrder"><![CDATA[Sort order]]></item>
+		<item name="wcf.acp.option.sort_template_sortOrder.description"><![CDATA[Please insert here the sort order for the template list.]]></item>
 		<!-- /ultimate.sort.template -->
 	</category>
 	

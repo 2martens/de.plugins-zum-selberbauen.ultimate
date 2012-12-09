@@ -47,7 +47,7 @@
 				<defaultvalue>1</defaultvalue>
 			</option>
 			
-			<option name="ultimate_general_englishLanguage">
+			<option name="general_englishLanguage">
 				<categoryname>ultimate.general</categoryname>
 				<optiontype>select</optiontype>
 				<defaultvalue><![CDATA[true]]></defaultvalue>
@@ -58,25 +58,25 @@ false:wcf.acp.option.ultimate_general_englishLanguage.AE]]>
 			</option>
 			
 			<!-- general/content options -->
-			<option name="ultimate_general_content_readMoreText">
+			<option name="general_content_readMoreText">
 				<categoryname>ultimate.general.content</categoryname>
 				<optiontype>textI18n</optiontype>
 				<supporti18n>1</supporti18n>
 				<requirei18n>0</requirei18n>
 			</option>
-			<option name="ultimate_general_content_metaAboveContent">
+			<option name="general_content_metaAboveContent">
 				<categoryname>ultimate.general.content</categoryname>
 				<optiontype>textareaI18n</optiontype>
 				<supporti18n>1</supporti18n>
 				<requirei18n>0</requirei18n>
 			</option>
-			<option name="ultimate_general_content_metaBelowContent">
+			<option name="general_content_metaBelowContent">
 				<categoryname>ultimate.general.content</categoryname>
 				<optiontype>textareaI18n</optiontype>
 				<supporti18n>1</supporti18n>
 				<requirei18n>0</requirei18n>
 			</option>
-			<option name="ultimate_general_content_comments_per_page">
+			<option name="general_content_comments_per_page">
 				<categoryname>ultimate.general.content</categoryname>
 				<optiontype>integer</optiontype>
 				<defaultvalue>10</defaultvalue>
@@ -84,31 +84,31 @@ false:wcf.acp.option.ultimate_general_englishLanguage.AE]]>
 			<!-- /general/content options -->
 			
 			<!-- grid options -->
-			<option name="ultimate_grid_color">
+			<option name="grid_color">
 				<categoryname>ultimate.grid</categoryname>
 				<optiontype>text</optiontype>
 				<defaultvalue>grey</defaultvalue>
 				<hidden>1</hidden>
 			</option>
-			<option name="ultimate_grid_columnWidth">
+			<option name="grid_columnWidth">
 				<categoryname>ultimate.grid</categoryname>
 				<optiontype>integer</optiontype>
 				<defaultvalue>20</defaultvalue>
 				<hidden>1</hidden>
 			</option>
-			<option name="ultimate_grid_gutterWidth">
+			<option name="grid_gutterWidth">
 				<categoryname>ultimate.grid</categoryname>
 				<optiontype>integer</optiontype>
 				<defaultvalue>20</defaultvalue>
 				<hidden>1</hidden>
 			</option>
-			<option name="ultimate_grid_wrapperTopMargin">
+			<option name="grid_wrapperTopMargin">
 				<categoryname>ultimate.grid</categoryname>
 				<optiontype>integer</optiontype>
 				<defaultvalue>30</defaultvalue>
 				<hidden>1</hidden>
 			</option>
-			<option name="ultimate_grid_wrapperBottomMargin">
+			<option name="grid_wrapperBottomMargin">
 				<categoryname>ultimate.grid</categoryname>
 				<optiontype>integer</optiontype>
 				<defaultvalue>30</defaultvalue>
@@ -117,19 +117,19 @@ false:wcf.acp.option.ultimate_general_englishLanguage.AE]]>
 			<!-- /grid options -->
 			
 			<!-- sort order/field for UltimateCategoryListPage -->
-			<option name="ultimate_sort_category_sortField">
+			<option name="sort_category_sortField">
 				<categoryname>ultimate.sort.category</categoryname>
 				<optiontype>select</optiontype>
 				<defaultvalue><![CDATA[categoryID]]></defaultvalue>
 				<selectoptions>
-					<![CDATA[categoryID:wcf.acp.option.ultimate_sort_category_sortField.categoryID
-categoryTitle:wcf.acp.option.ultimate_sort_category_sortField.categoryTitle
-categoryDescription:wcf.acp.option.ultimate_sort_category_sortField.categoryDescription
-categorySlug:wcf.acp.option.ultimate_sort_category_sortField.categorySlug
-categoryContents:wcf.acp.option.ultimate_sort_category_sortField.categoryContents]]>
+					<![CDATA[categoryID:wcf.acp.option.sort_category_sortField.categoryID
+categoryTitle:wcf.acp.option.sort_category_sortField.categoryTitle
+categoryDescription:wcf.acp.option.sort_category_sortField.categoryDescription
+categorySlug:wcf.acp.option.sort_category_sortField.categorySlug
+categoryContents:wcf.acp.option.sort_category_sortField.categoryContents]]>
 				</selectoptions>
 			</option>
-			<option name="ultimate_sort_category_sortOrder">
+			<option name="sort_category_sortOrder">
 				<categoryname>ultimate.sort.category</categoryname>
 				<optiontype>select</optiontype>
 				<defaultvalue><![CDATA[ASC]]></defaultvalue>
@@ -140,18 +140,18 @@ DESC:wcf.global.sortOrder.descending]]>
 			</option>
 			<!-- /sort order/field for UltimateCategoryListPage -->
 			<!-- sort order/field for UltimateContentListPage -->
-			<option name="ultimate_sort_content_sortField">
+			<option name="sort_content_sortField">
 				<categoryname>ultimate.sort.content</categoryname>
 				<optiontype>select</optiontype>
 				<defaultvalue><![CDATA[contentID]]></defaultvalue>
 				<selectoptions>
 					<![CDATA[contentID:wcf.acp.option.ultimate_sort_content_sortField.contentID
-contentTitle:wcf.acp.option.ultimate_sort_content_sortField.contentTitle
-contentAuthor:wcf.acp.option.ultimate_sort_content_sortField.contentAuthor
-lastModified:wcf.acp.option.ultimate_sort_content_sortField.lastModified]]>
+contentTitle:wcf.acp.option.sort_content_sortField.contentTitle
+contentAuthor:wcf.acp.option.sort_content_sortField.contentAuthor
+lastModified:wcf.acp.option.sort_content_sortField.lastModified]]>
 				</selectoptions>
 			</option>
-			<option name="ultimate_sort_content_sortOrder">
+			<option name="sort_content_sortOrder">
 				<categoryname>ultimate.sort.content</categoryname>
 				<optiontype>select</optiontype>
 				<defaultvalue><![CDATA[ASC]]></defaultvalue>
@@ -162,19 +162,19 @@ DESC:wcf.global.sortOrder.descending]]>
 			</option>
 			<!-- /sort order/field for UltimateContentListPage -->
 			<!-- sort order/field for UltimatePageListPage -->
-			<option name="ultimate_sort_page_sortField">
+			<option name="sort_page_sortField">
 				<categoryname>ultimate.sort.page</categoryname>
 				<optiontype>select</optiontype>
 				<defaultvalue><![CDATA[pageID]]></defaultvalue>
 				<selectoptions>
-					<![CDATA[pageID:wcf.acp.option.ultimate_sort_page_sortField.pageID
-pageTitle:wcf.acp.option.ultimate_sort_page_sortField.pageTitle
-pageAuthor:wcf.acp.option.ultimate_sort_page_sortField.pageAuthor
-publishDate:wcf.acp.option.ultimate_sort_page_sortField.publishDate
-lastModified:wcf.acp.option.ultimate_sort_page_sortField.lastModified]]>
+					<![CDATA[pageID:wcf.acp.option.sort_page_sortField.pageID
+pageTitle:wcf.acp.option.sort_page_sortField.pageTitle
+pageAuthor:wcf.acp.option.sort_page_sortField.pageAuthor
+publishDate:wcf.acp.option.sort_page_sortField.publishDate
+lastModified:wcf.acp.option.sort_page_sortField.lastModified]]>
 				</selectoptions>
 			</option>
-			<option name="ultimate_sort_page_sortOrder">
+			<option name="sort_page_sortOrder">
 				<categoryname>ultimate.sort.page</categoryname>
 				<optiontype>select</optiontype>
 				<defaultvalue><![CDATA[ASC]]></defaultvalue>
@@ -186,7 +186,7 @@ DESC:wcf.global.sortOrder.descending]]>
 			<!-- /sort order/field for UltimatePageListPage -->
 			
 			<!-- sort order/field for UltimateTemplateListPage -->
-			<option name="ultimate_sort_template_sortField">
+			<option name="sort_template_sortField">
 				<categoryname>ultimate.sort.template</categoryname>
 				<optiontype>select</optiontype>
 				<defaultvalue><![CDATA[templateID]]></defaultvalue>
@@ -195,7 +195,7 @@ DESC:wcf.global.sortOrder.descending]]>
 templateName:wcf.acp.option.ultimate_sort_template_sortField.templateName]]>
 				</selectoptions>
 			</option>
-			<option name="ultimate_sort_template_sortOrder">
+			<option name="sort_template_sortOrder">
 				<categoryname>ultimate.sort.template</categoryname>
 				<optiontype>select</optiontype>
 				<defaultvalue><![CDATA[ASC]]></defaultvalue>
