@@ -27,6 +27,7 @@
  */
 namespace ultimate\acp\form;
 use wcf\acp\form\ACPForm;
+use wcf\system\cache\CacheHandler;
 use wcf\system\WCF;
 
 /**
