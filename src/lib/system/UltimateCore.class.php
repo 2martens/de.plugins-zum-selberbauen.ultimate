@@ -28,24 +28,11 @@ class UltimateCore extends AbstractApplication {
 	/**
 	 * Calls all init functions of the Ultimate Core class.
 	 */
-	protected function init() {
-		$this->initTPL();
+	public function __run() {
 		$this->initRoutes();
 		$this->initStyle();
 		PageMenu::getInstance()->setActiveMenuItem('ultimate.header.menu.index');
 		WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('ultimate.header.menu.index'), LinkHandler::getInstance()->getLink('Index', array('application' => 'ultimate'))));
-	}
-	
-	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.WCF.html#initTPL
-	 */
-	protected function initTPL() {
-		if (class_exists('wcf\system\WCFACP', false)) {
-			WCF::getTPL()->addTemplatePath(PACKAGE_ID, ULTIMATE_DIR.'acp/templates/');
-		} else {
-			WCF::getTPL()->addTemplatePath(PACKAGE_ID, ULTIMATE_DIR.'templates/');
-		}
-		WCF::getTPL()->assign('__ultimate', $this);
 	}
 	
 	/**
