@@ -168,7 +168,7 @@ class LinkUtil {
 	public static function decodePunycodeDomain($punycodeDomain) {
 		$punycodeDomain = StringUtil::trim($punycodeDomain);
 		$idnaConverter = new NET_IDNA2();
-		return $idnaConverter->decode($punycodeDomain);
+		return $idnaConverter->decode($punycodeDomain, 'utf8');
 	}
 	
 	/**
@@ -185,7 +185,7 @@ class LinkUtil {
 	public static function encodePunycodeDomain($unicodeDomain) {
 		$unicodeDomain = StringUtil::trim($unicodeDomain);
 		$idnaConverter = new NET_IDNA2();
-		return $idnaConverter->encode($unicodeDomain);
+		return $idnaConverter->encode($unicodeDomain, 'utf8');
 	}
 	
 	/**
