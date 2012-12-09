@@ -184,7 +184,7 @@ class UltimateStyleCompiler extends StyleCompiler {
 		$this->compiler->setVariables($variables);
 	
 		// add mixins
-		$content .= $this->prepareFile(WCF_DIR.'style/bootstrap/mixins.less');
+		$content .= $this->prepareFile(WCF_DIR.'style/bootstrap/mixin.less');
 		$content .= $this->prepareFile(ULTIMATE_DIR.'style/bootstrap/ultimateMixins.less');
 	
 		return $content;
