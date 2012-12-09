@@ -64,8 +64,15 @@ class UltimateTemplateEditForm extends UltimateTemplateAddForm {
 		// read template data
 		$this->ultimateTemplateName = $this->template->__get('templateName');
 		$this->showWidgetArea = $this->template->__get('showWidgetArea');
-		$this->selectedMenu = $this->template->__get('menu')->__get('menuID');
-		$this->selectedWidgetArea = $this->template->__get('widgetArea')->__get('widgetAreaID');
+		$menu = $this->template->__get('menu');
+		
+		if ($menu !== null) $this->selectedMenu = $menu->__get('menuID');
+		else $this->selectedMenu = 0;
+		
+		$widgetArea = $this->template->__get('widgetArea');
+		if ($widgetArea !== null) $this->selectedWidgetArea = $widgetArea->__get('widgetAreaID');
+		else $this->selectedWidgetArea = 0;
+		
 		$this->widgetAreaSide = $this->template->__get('widgetAreaSide');
 		$this->blocks = $this->template->__get('blocks');
 	}
