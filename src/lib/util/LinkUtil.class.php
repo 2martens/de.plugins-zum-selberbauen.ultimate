@@ -26,7 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\util;
-use ultimate\util\thirdParty\Net\NET_IDNA2; // changed class to work with namespaces
+use ultimate\util\thirdParty\IDNAConvert; // changed class to work with namespaces
 use wcf\system\cache\CacheHandler;
 use wcf\system\io\RemoteFile;
 use wcf\system\Regex;
@@ -167,8 +167,8 @@ class LinkUtil {
 	 */
 	public static function decodePunycodeDomain($punycodeDomain) {
 		$punycodeDomain = StringUtil::trim($punycodeDomain);
-		$idnaConverter = new NET_IDNA2();
-		return $idnaConverter->decode($punycodeDomain, 'utf8');
+		$idnaConverter = new IDNAConvert(array('idn_version' => 2008));
+		return utf8_decode($idnaConverter->decode($punycodeDomain));
 	}
 	
 	/**
@@ -184,8 +184,8 @@ class LinkUtil {
 	 */
 	public static function encodePunycodeDomain($unicodeDomain) {
 		$unicodeDomain = StringUtil::trim($unicodeDomain);
-		$idnaConverter = new NET_IDNA2();
-		return $idnaConverter->encode($unicodeDomain, 'utf8');
+		$idnaConverter = new IDNAConvert(array('idn_version' => 2008));
+		return $idnaConverter->encode(utf8_encode($unicodeDomain));
 	}
 	
 	/**
