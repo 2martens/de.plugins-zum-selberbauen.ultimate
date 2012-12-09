@@ -60,7 +60,7 @@ final class InstallUltimateCMS {
 	 * Creates a htaccess file.
 	 */
 	protected function createHtaccess() {
-		WCF::getTPL()->addTemplatePath(PACKAGE_ID, ULTIMATE_DIR.'acp/templates/');
+		WCF::getTPL()->addApplication('ultimate', PACKAGE_ID, ULTIMATE_DIR.'acp/templates/');
 		
 		$output = WCF::getTPL()->fetch('htaccess');
 		$file = new File(ULTIMATE_DIR.'.htaccess');
