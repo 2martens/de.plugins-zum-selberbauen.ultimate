@@ -78,6 +78,14 @@ class LinkUtilTest extends \PHPUnit_Framework_TestCase
     	$url = 'http://nalhutt';
     	$isValid = LinkUtil::isValidURL($url);
     	$this->assertEquals(false, $isValid, 'The invalid link has not been detected.');
+    	
+    	$url = 'ftp://nalhutt.de';
+    	$isValid = LinkUtil::isValidURL($url);
+    	$this->assertEquals(false, $isValid, 'The non existant link has not been detected.');
+    	
+    	$url = 'ftp://ftp.funet.fi';
+    	$isValid = LinkUtil::isValidURL($url);
+    	$this->assertEquals(true, $isValid, 'The correct link was declared invalid.');
     }
 
     /**
@@ -99,7 +107,7 @@ class LinkUtilTest extends \PHPUnit_Framework_TestCase
     {
         $utf8Domain = 'eine-schöne-scheiße.de';
         $encodedURL = LinkUtil::encodePunycodeDomain($utf8Domain);
-        $this->assertEquals('xn--eine-schne-scheisse-x6b.de', $encodedURL, 'The domain has not been properly encoded.');
+        $this->assertEquals('xn--eine-schne-scheie-lob24b.de', $encodedURL, 'The domain has not been properly encoded.');
     }
 
     /**
@@ -114,7 +122,7 @@ class LinkUtilTest extends \PHPUnit_Framework_TestCase
         
         $url = 'http://schöne-zeiten-mit-de.iner.scheiße.de';
         $urlParsed = LinkUtil::parseURL($url);
-        $this->assertEquals('http://xn--schne-zeiten-mit-de-s6b.iner.scheisse.de', $urlParsed, 'The link has not been correctly parsed.');
+        $this->assertEquals('http://xn--schne-zeiten-mit-de-s6b.iner.xn--scheie-fta.de', $urlParsed, 'The link has not been correctly parsed.');
     }
 }
 ?>
