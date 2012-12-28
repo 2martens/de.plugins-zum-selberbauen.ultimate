@@ -8,9 +8,8 @@
 		<packagedescription language="de-informal"><![CDATA[Ein WCF-kompatibles CMS.]]></packagedescription>
 		
 		<isapplication>1</isapplication>
-		<isunique>0</isunique>
 		<version>1.0.0 Alpha 1</version>
-		<date>2012-09-04</date>
+		<date>2012-12-28</date>
 	</packageinformation>
 	
 	<authorinformation>
