@@ -7,8 +7,8 @@
 	});
 	/* ]]> */
 </script>
-{include file='multipleLanguageInputJavascript' elementIdentifier='linkName'}
-{include file='multipleLanguageInputJavascript' elementIdentifier='linkDescription'}
+{include file='multipleLanguageInputJavascript' elementIdentifier='linkName' forceSelection=false}
+{include file='multipleLanguageInputJavascript' elementIdentifier='linkDescription' forceSelection=false}
 <header class="boxHeadline">
 	<hgroup>
 		<h1>{lang}wcf.acp.ultimate.link.{@$action}{/lang}</h1>

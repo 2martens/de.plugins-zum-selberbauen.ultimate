@@ -1,9 +1,9 @@
 {include file='header'}
 {include file='wysiwyg'} 
 
-{include file='multipleLanguageInputJavascript' elementIdentifier='subject'}
-{include file='multipleLanguageInputJavascript' elementIdentifier='description'}
-{include file='multipleLanguageInputJavascript' elementIdentifier='text'}
+{include file='multipleLanguageInputJavascript' elementIdentifier='subject' forceSelection=false}
+{include file='multipleLanguageInputJavascript' elementIdentifier='description' forceSelection=false}
+{include file='multipleLanguageInputJavascript' elementIdentifier='text' forceSelection=false}
 <header class="boxHeadline">
 	<hgroup>
 		<h1>{lang}wcf.acp.ultimate.content.{@$action}{/lang}</h1>
