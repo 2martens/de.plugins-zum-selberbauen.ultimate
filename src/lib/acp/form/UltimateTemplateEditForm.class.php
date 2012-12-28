@@ -28,6 +28,7 @@
 namespace ultimate\acp\form;
 use ultimate\data\template\Template;
 use ultimate\data\template\TemplateAction;
+use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\WCF;
 
@@ -107,7 +108,7 @@ class UltimateTemplateEditForm extends UltimateTemplateAddForm {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
 	 */
 	public function save() {
-		parent::save();
+		AbstractForm::save();
 		$parameters = array(
 			'data' => array(
 				'templateName' => $this->ultimateTemplateName,

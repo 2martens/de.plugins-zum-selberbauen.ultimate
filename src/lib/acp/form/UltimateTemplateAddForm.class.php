@@ -209,7 +209,7 @@ class UltimateTemplateAddForm extends ACPForm {
 			'widgetAreaID' => $this->selectedWidgetArea
 		);
 		$this->objectAction = new TemplateAction(array(), 'create', $parameters);
-		$this->objectAction->executeAction();
+		$returnValues = $this->objectAction->executeAction();
 		
 		$this->saved();
 		
@@ -219,7 +219,7 @@ class UltimateTemplateAddForm extends ACPForm {
 		
 		$url = LinkHandler::getInstance()->getLink('UltimateTemplateEdit',
 			array(
-				'id' => $templateID
+				'id' => $returnValues['returnValues']->__get('templateID')
 			)
 		);
 		HeaderUtil::redirect($url);
