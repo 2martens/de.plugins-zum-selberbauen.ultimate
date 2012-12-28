@@ -132,6 +132,9 @@ class UltimateTemplateEditForm extends UltimateTemplateAddForm {
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
-		WCF::getTPL()->assign('action', 'edit');
+		WCF::getTPL()->assign(array(
+			'action' => 'edit',
+			'templateID' => $this->templateID
+		));
 	}
 }
