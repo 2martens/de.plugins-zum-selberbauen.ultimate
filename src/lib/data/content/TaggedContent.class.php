@@ -96,7 +96,7 @@ class TaggedContent extends TaggableContent implements ITagged {
 			$tmpTags = TagEngine::getInstance()->getObjectTags(
 				'de.plugins-zum-selberbauen.ultimate.contentTaggable',
 				$this->__get('contentID'),
-				$languageID
+				array($languageID)
 			);
 			if (!empty($tmpTags)) $tags[$languageID] = $tmpTags;
 		}
