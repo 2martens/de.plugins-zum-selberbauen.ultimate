@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\page;
+use ultimate\system\layout\LayoutHandler;
 use ultimate\system\template\TemplateHandler;
 use ultimate\util\PageUtil;
 use wcf\page\AbstractPage;
@@ -83,9 +84,7 @@ class PagePage extends AbstractPage {
 	 */
 	public function readParameters() {
 		parent::readParameters();
-		/* @var $routeData string[] */
-		$routeData = RouteHandler::getInstance()->getRouteData();
-		$this->pageSlugs = explode('/', StringUtil::trim($routeData['pageSlug']));
+		if (isset($_GET['pageSlug'])) $this->pageSlugs = explode('/', StringUtil::trim($_GET['pageSlug']));
 	}
 	
 	/**
