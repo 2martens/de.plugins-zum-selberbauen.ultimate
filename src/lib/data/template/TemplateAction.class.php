@@ -120,6 +120,7 @@ class TemplateAction extends AbstractDatabaseObjectAction {
 		$statement = WCF::getDB()->prepareStatement($sql);
 		WCF::getDB()->beginTransaction();
 		foreach ($this->objectIDs as $objectID) {
+			if (!$this->parameters['menuID']) continue;
 			$statement->executeUnbuffered(array(
 				$this->parameters['menuID'], 
 				$objectID
@@ -133,8 +134,9 @@ class TemplateAction extends AbstractDatabaseObjectAction {
 		$statement = WCF::getDB()->prepareStatement($sql);
 		WCF::getDB()->beginTransaction();
 		foreach ($this->objectIDs as $objectID) {
+			if (!$this->parameters['widgetAreaID']) continue;
 			$statement->executeUnbuffered(array(
-				$objectID,+
+				$objectID,
 				$this->parameters['widgetAreaID']
 			));
 		}
