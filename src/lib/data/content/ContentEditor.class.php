@@ -167,7 +167,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 		        AND      categoryID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array(
-			$this->contentID,
+			$this->__get('contentID'),
 			$categoryID
 		));
 		$row = $statement->fetchArray();
@@ -195,7 +195,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 		        AND         categoryID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array(
-			$this->object->__get('contentID'),
+			$this->__get('contentID'),
 			$categoryID
 		));
 	}
