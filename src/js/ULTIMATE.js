@@ -250,7 +250,7 @@ ULTIMATE.Block = {};
  * @class	Adds blocks to a block list.
  * @since	version 1.0.0
  */
-ULTIMATE.Block.Transfer = function(elementID, containerID, className){ this.init(element, containerID, className); };
+ULTIMATE.Block.Transfer = function(elementID, containerID, className){ this.init(elementID, containerID, className); };
 ULTIMATE.Block.Transfer.prototype = {
 	/**
 	 * Contains the element from which the blocks should be transferred.
@@ -334,18 +334,20 @@ ULTIMATE.Block.Transfer.prototype = {
 	_submit: function() {
 		var $data = {};
 		// read form data
-		var blocktype = $('#selectBlocktype').val();
+		var blockTypeID = $('#selectBlocktype').val();
 		var width = $('#width').val();
 		var height = $('#height').val();
 		var left = $('#left').val();
-		var top = $('#top').val();
+		var top = $('#topDistance').val();
 		var $parameters = $.extend(true, {
 			data: {
-				blocktype: blocktype,
-				width: width,
-				height: height,
-				left: left,
-				top: top,
+				blockTypeID: blockTypeID,
+				additionalData: {
+					width: width,
+					height: height,
+					left: left,
+					top: top
+				},
 				templateID: $('input[name="id"]').val()
 			}
 		}, { });
@@ -355,10 +357,10 @@ ULTIMATE.Block.Transfer.prototype = {
 		$('#width').val('1');
 		$('#height').val('0');
 		$('#left').val('1');
-		$('#top').val('0');
+		$('#topDistance').val('0');
 		
 		// build proxy data
-		$.extend(true, {
+		$data = $.extend(true, {
 			actionName: 'createAJAX',
 			className: this._className,
 			parameters: $parameters			
