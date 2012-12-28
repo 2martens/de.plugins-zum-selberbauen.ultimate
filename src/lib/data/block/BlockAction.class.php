@@ -116,9 +116,9 @@ class BlockAction extends AbstractDatabaseObjectAction {
 		// get blocktype name
 		$cache = 'blocktype';
 		$cacheBuilderClassName = '\ultimate\system\cache\builder\BlocktypeCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$blocktypes = CacheHandler::getInstance()->get($cacheName, 'blockTypes');
+		$file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
+		CacheHandler::getInstance()->addResource($cache, $file, $cacheBuilderClassName);
+		$blocktypes = CacheHandler::getInstance()->get($cache, 'blockTypes');
 		
 		$blocktype = $blocktypes[$block->__get('blockTypeID')];
 		
