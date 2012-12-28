@@ -102,7 +102,7 @@ class CategoryPage extends AbstractPage {
 		$this->category = $category;
 		$layout = LayoutHandler::getInstance()->getLayoutFromName($this->category->__get('categoryTitle'));
 		// get output
-		$this->output = TemplateHandler::getInstance()->getOutput('category', $layout);
+		$this->output = TemplateHandler::getInstance()->getOutput('category', $layout, $category);
 	}
 	
 	/**

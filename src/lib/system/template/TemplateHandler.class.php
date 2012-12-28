@@ -66,11 +66,12 @@ class TemplateHandler extends SingletonFactory {
 	 * @since	1.0.0
 	 * @api
 	 * 
-	 * @param	string							$requestType
-	 * @param	\ultimate\data\layout\Layout	$layout
+	 * @param	string											$requestType
+	 * @param	\ultimate\data\layout\Layout					$layout
+	 * @param	\ultimate\data\AbstractUltimateDatabaseObject	$requestObject
 	 * @return	string
 	 */
-	public function getOutput($requestType, \ultimate\data\layout\Layout $layout) {
+	public function getOutput($requestType, \ultimate\data\layout\Layout $layout, \ultimate\data\AbstractUltimateDatabaseObject $requestObject) {
 		$requestType = strtolower(StringUtil::trim($requestType));
 		$template = $this->getTemplate($layout->__get('layoutID'));
 		
@@ -103,11 +104,10 @@ class TemplateHandler extends SingletonFactory {
 		$blocks = $template->__get('blocks');
 		foreach ($blocks as $blockID => $block) {
 			/* @var $blockTypeDatabase \ultimate\data\blocktype\BlockType */
-			$blockTypeDatabase = $block->__get('blockType');
-			$blockTypeName = $blockTypeDatabase->__get('cssIdentifier');
+			$blockTypeID = $block->__get('blockTypeID');
 			/* @var $blockType \ultimate\system\blocktype\IBlockType */
-			$blockType = BlockTypeHandler::getInstance()->getBlockTypeByName($blockTypeName);
-			$blockType->init($requestType, $layout, $blockID);
+			$blockType = BlockTypeHandler::getInstance()->getBlockType($blockTypeID);
+			$blockType->init($requestType, $layout, $requestObject, $blockID);
 			$output .= $blockType->getHTML();
 		}
 		

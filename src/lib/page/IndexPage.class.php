@@ -78,7 +78,7 @@ class IndexPage extends AbstractPage {
 		$layout = LayoutHandler::getInstance()->getLayoutFromName($this->layoutName);
 		
 		// get output
-		$this->output = TemplateHandler::getInstance()->getOutput('index', $layout);
+		$this->output = TemplateHandler::getInstance()->getOutput('index', $layout, null);
 	}
 	
 	/**

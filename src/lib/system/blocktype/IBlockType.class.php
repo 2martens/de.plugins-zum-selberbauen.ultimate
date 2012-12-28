@@ -47,13 +47,14 @@ interface IBlockType {
 	 * @api
 	 * @since	1.0.0
 	 * 
-	 * @param	string							$requestType
-	 * @param	\ultimate\data\layout\Layout	$layout
-	 * @param	integer							$blockID
-	 * @param	boolean							$visualEditorMode	optional	false on default
+	 * @param	string											$requestType
+	 * @param	\ultimate\data\layout\Layout					$layout
+	 * @param	\ultimate\data\AbstractUltimateDatabaseObject	$requestObject
+	 * @param	integer											$blockID
+	 * @param	boolean											$visualEditorMode	optional	false on default
 	 * @return	void
 	 */
-	public function init($requestType, \ultimate\data\layout\Layout $layout, $blockID, $visualEditorMode = false);
+	public function init($requestType, \ultimate\data\layout\Layout $layout, \ultimate\data\AbstractUltimateDatabaseObject $requestObject, $blockID, $visualEditorMode = false);
 	
 	/**
 	 * Reads the necessary data.

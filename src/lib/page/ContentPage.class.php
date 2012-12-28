@@ -99,7 +99,7 @@ class ContentPage extends AbstractPage {
 		
 		$layout = LayoutHandler::getInstance()->getLayoutFromName($this->content->__get('contentTitle'));
 		// get output
-		$this->output = TemplateHandler::getInstance()->getOutput('content', $layout);
+		$this->output = TemplateHandler::getInstance()->getOutput('content', $layout, $content);
 	}
 	
 	/**

@@ -84,6 +84,12 @@ abstract class AbstractBlockType implements IBlockType {
 	protected $requestType = '';
 	
 	/**
+	 * Contains the request object.
+	 * @var \ultimate\data\AbstractUltimateDatabaseObject
+	 */
+	protected $requestObject = null;
+	
+	/**
 	 * Contains the layout object.
 	 * @var \ultimate\data\layout\Layout
 	 */
@@ -136,11 +142,12 @@ abstract class AbstractBlockType implements IBlockType {
 	/**
 	 * @see	\ultimate\system\blocktype\IBlockType::init()
 	 */
-	public function init($requestType, \ultimate\data\layout\Layout $layout, $blockID, $visualEditorMode = false) {
+	public function init($requestType, \ultimate\data\layout\Layout $layout, \ultimate\data\AbstractUltimateDatabaseObject $requestObject, $blockID, $visualEditorMode = false) {
 		// fire event
 		EventHandler::getInstance()->fireAction($this, 'init');
 		
 		$this->requestType = StringUtil::trim($requestType);
+		$this->requestObject = $requestObject;
 		$this->layout = $layout;
 		$this->blockID = intval($blockID);
 		$this->visualEditorMode = $visualEditorMode;
@@ -249,7 +256,8 @@ abstract class AbstractBlockType implements IBlockType {
 	 * @param	boolean	$loadCustomQuery	optional
 	 */
 	protected function loadCache($loadCustomQuery = false) {
-		if ($loadCustomQuery && !empty($this->block->__get('query'))) {
+		$query = $this->block->__get('query');
+		if ($loadCustomQuery && !empty($query)) {
 			$cacheName = 'block';
 			$cacheBuilderClassName = '\ultimate\system\cache\builder\BlockCacheBuilder';
 			$file = ULTIMATE_DIR.'cache/cache'.$cacheName.'.php';
