@@ -186,6 +186,7 @@
 		<div>
 			{hascontent}
 				<aside class="sidebar collapsibleMenu">
+					<div>
 					{content}
 						{* work-around for unknown core-object during WCFSetup *}
 						{if PACKAGE_ID}
@@ -214,6 +215,7 @@
 							{/foreach}
 						{/if}
 					{/content}
+					</div>
 				</aside>
 			{/hascontent}
 			
