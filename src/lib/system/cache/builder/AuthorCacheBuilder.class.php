@@ -54,7 +54,7 @@ class AuthorCacheBuilder implements ICacheBuilder {
 		$userList = new UserList();
 		$userList->readObjects();
 		$users = $userList->getObjects();
-		$userIDs = $userList->getObjectsIDs();
+		$userIDs = $userList->getObjectIDs();
 		
 		if (empty($users)) return $data;
 		
