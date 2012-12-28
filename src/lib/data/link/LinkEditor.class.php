@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the link data model class.
+ * Contains the link data model editor class.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.

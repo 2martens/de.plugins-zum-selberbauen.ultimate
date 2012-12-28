@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the block handler class.
+ * Contains the BlockHandler class.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
