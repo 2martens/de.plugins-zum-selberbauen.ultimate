@@ -29,6 +29,7 @@ namespace ultimate\data\block;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 use wcf\system\cache\CacheHandler;
+use wcf\system\WCF;
 
 /**
  * Provides functions to edit blocks.
