@@ -73,8 +73,8 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledDatabaseObje
 	 */
 	public function getContent() {
 		$sql = 'SELECT	  content.*
-		        FROM      ultimate'.ULTIMATE_N.'_'.$this->contentPageTable.' contentToPage
-		        LEFT JOIN ultimate'.ULTIMATE_N.'_content content
+		        FROM      ultimate'.WCF_N.'_'.$this->contentPageTable.' contentToPage
+		        LEFT JOIN ultimate'.WCF_N.'_content content
 		        ON        (content.contentID = contentToPage.contentID)
 		        WHERE     contentToPage.pageID = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
@@ -121,7 +121,7 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledDatabaseObje
 	 */
 	public function getGroups() {
 		$sql = 'SELECT	  groupTable.*
-		        FROM      ultimate'.ULTIMATE_N.'_user_group_to_page groupToPage
+		        FROM      ultimate'.WCF_N.'_user_group_to_page groupToPage
 		        LEFT JOIN wcf'.WCF_N.'_user_group groupTable
 		        ON        (groupTable.groupID = groupToPage.groupID)
 		        WHERE     groupToPage.pageID = ?';

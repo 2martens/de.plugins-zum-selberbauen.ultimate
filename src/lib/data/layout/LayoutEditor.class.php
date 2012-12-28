@@ -77,7 +77,7 @@ class LayoutEditor extends DatabaseObjectEditor implements IEditableCachedObject
 		// makes sure that a new template can be assigned
 		$this->removeTemplate();
 		
-		$sql = 'INSERT INTO ultimate'.ULTIMATE_N.'_template_to_layout
+		$sql = 'INSERT INTO ultimate'.WCF_N.'_template_to_layout
 		               (layoutID, templateID)
 		        VALUES (?, ?)';
 		$statement = WCF::getDB()->prepareStatement($sql);
@@ -90,7 +90,7 @@ class LayoutEditor extends DatabaseObjectEditor implements IEditableCachedObject
 	 * @since	1.0.0
 	 */
 	public function removeTemplate() {
-		$sql = 'DELETE FROM ultimate'.ULTIMATE_N.'_template_to_layout
+		$sql = 'DELETE FROM ultimate'.WCF_N.'_template_to_layout
 		        WHERE       layoutID = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->__get('layoutID')));

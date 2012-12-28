@@ -71,7 +71,7 @@ class Content extends AbstractUltimateDatabaseObject {
 	 */
 	public function getGroups() {
 		$sql = 'SELECT	  groupTable.*
-		        FROM      ultimate'.ULTIMATE_N.'_user_group_to_content groupToContent
+		        FROM      ultimate'.WCF_N.'_user_group_to_content groupToContent
 		        LEFT JOIN wcf'.WCF_N.'_user_group groupTable
 		        ON        (groupTable.groupID = groupToContent.groupID)
 		        WHERE     groupToContent.contentID = ?';

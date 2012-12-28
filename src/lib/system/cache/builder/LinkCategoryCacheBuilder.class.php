@@ -59,8 +59,8 @@ class LinkCategoryCacheBuilder implements ICacheBuilder {
 		$conditions->add('linkToCategory.categoryID IN (?)', array($categoryIDs));
 		
 		$sql = 'SELECT    link.*
-		        FROM      ultimate'.ULTIMATE_N.'_link_to_category linkToCategory
-		        LEFT JOIN ultimate'.ULTIMATE_N.'_link link
+		        FROM      ultimate'.WCF_N.'_link_to_category linkToCategory
+		        LEFT JOIN ultimate'.WCF_N.'_link link
 		        ON        (link.linkID = linkToCategory.linkID)
 		        '.$conditions;
 		$statement = WCF::getDB()->prepareStatement($sql);

@@ -94,8 +94,8 @@ class Template extends AbstractUltimateDatabaseObject implements ITitledDatabase
 	 */
 	protected function getBlocks() {
 		$sql = 'SELECT    block.*
-		        FROM      ultimate'.ULTIMATE_N.'_block_to_template blockToTemplate
-		        LEFT JOIN ultimate'.ULTIMATE_N.'_block block
+		        FROM      ultimate'.WCF_N.'_block_to_template blockToTemplate
+		        LEFT JOIN ultimate'.WCF_N.'_block block
 		        ON        (block.blockID = blockToTemplate.blockID)
 		        WHERE     blockToTemplate.templateID = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
@@ -114,8 +114,8 @@ class Template extends AbstractUltimateDatabaseObject implements ITitledDatabase
 	 */
 	protected function getMenu() {
 		$sql = 'SELECT    menu.*
-		        FROM      ultimate'.ULTIMATE_N.'_menu_to_template menuToTemplate
-		        LEFT JOIN ultimate'.ULTIMATE_N.'_menu menu
+		        FROM      ultimate'.WCF_N.'_menu_to_template menuToTemplate
+		        LEFT JOIN ultimate'.WCF_N.'_menu menu
 		        ON        (menu.menuID = menuToTemplate.menuID)
 		        WHERE     menuToTemplate.templateID = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
@@ -131,8 +131,8 @@ class Template extends AbstractUltimateDatabaseObject implements ITitledDatabase
 	 */
 	protected function getWidgetArea() {
 		$sql = 'SELECT    widgetArea.*
-		        FROM      ultimate'.ULTIMATE_N.'_widget_area_to_template widgetAreaToTemplate
-		        LEFT JOIN ultimate'.ULTIMATE_N.'_widget_area widgetArea
+		        FROM      ultimate'.WCF_N.'_widget_area_to_template widgetAreaToTemplate
+		        LEFT JOIN ultimate'.WCF_N.'_widget_area widgetArea
 		        ON        (widgetArea.widgetAreaID = widgetAreaToTemplate.widgetAreaID)
 		        WHERE     widgetAreaToTemplate.templateID = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);

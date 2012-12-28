@@ -95,7 +95,7 @@ class TemplateAction extends AbstractDatabaseObjectAction {
 		parent::update();
 		
 		// delete existing entries
-		$sql = 'DELETE FROM ultimate'.ULTIMATE_N.'_menu_to_template
+		$sql = 'DELETE FROM ultimate'.WCF_N.'_menu_to_template
 		        WHERE       templateID = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		WCF::getDB()->beginTransaction();
@@ -104,7 +104,7 @@ class TemplateAction extends AbstractDatabaseObjectAction {
 		}
 		WCF::getDB()->commitTransaction();
 		
-		$sql = 'DELETE FROM ultimate'.ULTIMATE_N.'_widget_area_to_template
+		$sql = 'DELETE FROM ultimate'.WCF_N.'_widget_area_to_template
 		        WHERE       templateID = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		WCF::getDB()->beginTransaction();
@@ -114,7 +114,7 @@ class TemplateAction extends AbstractDatabaseObjectAction {
 		WCF::getDB()->commitTransaction();
 		
 		// insert new entries
-		$sql = 'INSERT INTO ultimate'.ULTIMATE_N.'_menu_to_template
+		$sql = 'INSERT INTO ultimate'.WCF_N.'_menu_to_template
 		               (menuID, templateID)
 		        VALUES (?, ?)';
 		$statement = WCF::getDB()->prepareStatement($sql);
@@ -128,7 +128,7 @@ class TemplateAction extends AbstractDatabaseObjectAction {
 		}
 		WCF::getDB()->commitTransaction();
 		
-		$sql = 'INSERT INTO ultimate'.ULTIMATE_N.'_widget_area_to_template
+		$sql = 'INSERT INTO ultimate'.WCF_N.'_widget_area_to_template
 		               (templateID, widgetAreaID)
 		        VALUES (?, ?)';
 		$statement = WCF::getDB()->prepareStatement($sql);

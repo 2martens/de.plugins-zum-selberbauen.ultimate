@@ -43,6 +43,6 @@ abstract class AbstractUltimateDatabaseObject extends DatabaseObject {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IStorableObject.html#getDatabaseTableName
 	 */
 	public static function getDatabaseTableName() {
-		return 'ultimate'.ULTIMATE_N.'_'.static::$databaseTableName;
+		return 'ultimate'.WCF_N.'_'.static::$databaseTableName;
 	}
 }

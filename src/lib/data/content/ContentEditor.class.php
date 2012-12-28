@@ -93,7 +93,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 		$conditionBuilder = new PreparedStatementConditionBuilder();
 		$conditionBuilder->add('contentID IN (?)', array($objectIDs));
 		$sql = 'SELECT pageID
-		        FROM   ultimate'.ULTIMATE_N.'_content_to_page
+		        FROM   ultimate'.WCF_N.'_content_to_page
 		        '.$conditionBuilder->__toString();
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute($conditionBuilder->getParameters());
@@ -130,7 +130,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 	public function addToCategories(array $categoryIDs, $deleteOldCategories = true) {
 		// remove old categores
 		if ($deleteOldCategories) {
-			$sql = "DELETE FROM	ultimate".ULTIMATE_N."_content_to_category
+			$sql = "DELETE FROM	ultimate".WCF_N."_content_to_category
 			        WHERE       contentID = ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute(array(
@@ -140,7 +140,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 		
 		// insert new categories
 		if (!empty($categoryIDs) > 0) {
-			$sql = "INSERT INTO	ultimate".ULTIMATE_N."_content_to_category
+			$sql = "INSERT INTO	ultimate".WCF_N."_content_to_category
 			               (contentID, categoryID)
 			        VALUES (?, ?)";
 			$statement = WCF::getDB()->prepareStatement($sql);
@@ -162,7 +162,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 	 */
 	public function addToCategory($categoryID) {
 		$sql = "SELECT   COUNT(*) AS count
-		        FROM     ultimate".ULTIMATE_N."_content_to_category
+		        FROM     ultimate".WCF_N."_content_to_category
 		        WHERE    contentID  = ?
 		        AND      categoryID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
@@ -173,7 +173,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 		$row = $statement->fetchArray();
 		
 		if (!$row['count']) {
-			$sql = "INSERT INTO	ultimate".ULTIMATE_N."_content_to_category
+			$sql = "INSERT INTO	ultimate".WCF_N."_content_to_category
 			               (contentID, categoryID)
 			        VALUES (?, ?)";
 			$statement = WCF::getDB()->prepareStatement($sql);
@@ -190,7 +190,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 	 * @param	integer	$categoryID
 	 */
 	public function removeFromCategory($categoryID) {
-		$sql = "DELETE FROM	ultimate".ULTIMATE_N."_content_to_category
+		$sql = "DELETE FROM	ultimate".WCF_N."_content_to_category
 		        WHERE       contentID  = ?
 		        AND         categoryID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
@@ -206,7 +206,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 	 * @param	array	$categoryIDs
 	 */
 	public function removeFromCategories(array $categoryIDs) {
-		$sql = "DELETE FROM	ultimate".ULTIMATE_N."_content_to_category
+		$sql = "DELETE FROM	ultimate".WCF_N."_content_to_category
 		        WHERE       contentID  = ?
 		        AND         categoryID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
@@ -228,14 +228,14 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 	*/
 	public function addGroups(array $groupIDs, $deleteOldGroups = true) {
 		if ($deleteOldGroups) {
-			$sql = 'DELETE FROM ultimate'.ULTIMATE_N.'_user_group_to_content
+			$sql = 'DELETE FROM ultimate'.WCF_N.'_user_group_to_content
 			        WHERE       contentID = ?';
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute(array(
 				$this->object->__get('contentID')
 			));
 		}
-		$sql = 'INSERT INTO ultimate'.ULTIMATE_N.'_user_group_to_content
+		$sql = 'INSERT INTO ultimate'.WCF_N.'_user_group_to_content
 		               (groupID, contentID)
 		        VALUES (?, ?)';
 		$statement = WCF::getDB()->prepareStatement($sql);

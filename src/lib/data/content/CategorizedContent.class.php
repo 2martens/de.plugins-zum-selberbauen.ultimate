@@ -80,8 +80,8 @@ class CategorizedContent extends DatabaseObjectDecorator {
 	 */
 	protected function getCategories() {
 		$sql = 'SELECT    category.*
-		        FROM      ultimate'.ULTIMATE_N.'_content_to_category contentToCategory
-		        LEFT JOIN ultimate'.ULTIMATE_N.'_category category
+		        FROM      ultimate'.WCF_N.'_content_to_category contentToCategory
+		        LEFT JOIN ultimate'.WCF_N.'_category category
 		        ON        (category.categoryID = contentToCategory.categoryID)
 		        WHERE     contentToCategory.contentID = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);

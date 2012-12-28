@@ -77,7 +77,7 @@ class LinkEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	public function addToCategories(array $categoryIDs, $deleteOldCategories = true) {
 		// remove old categores
 		if ($deleteOldCategories) {
-			$sql = "DELETE FROM	ultimate".ULTIMATE_N."_link_to_category
+			$sql = "DELETE FROM	ultimate".WCF_N."_link_to_category
 			        WHERE       linkID = ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute(array(
@@ -87,7 +87,7 @@ class LinkEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		
 		// insert new categories
 		if (!empty($categoryIDs)) {
-			$sql = "INSERT INTO	ultimate".ULTIMATE_N."_link_to_category
+			$sql = "INSERT INTO	ultimate".WCF_N."_link_to_category
 			               (linkID, categoryID)
 			        VALUES (?, ?)";
 			$statement = WCF::getDB()->prepareStatement($sql);
@@ -109,7 +109,7 @@ class LinkEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 */
 	public function addToCategory($categoryID) {
 		$sql = "SELECT   COUNT(*) AS count
-		        FROM     ultimate".ULTIMATE_N."_content_to_category
+		        FROM     ultimate".WCF_N."_content_to_category
 		        WHERE    contentID  = ?
 		        AND      categoryID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
@@ -139,7 +139,7 @@ class LinkEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 * @param	array	$categoryIDs
 	 */
 	public function removeFromCategories(array $categoryIDs) {
-		$sql = "DELETE FROM	ultimate".ULTIMATE_N."_link_to_category
+		$sql = "DELETE FROM	ultimate".WCF_N."_link_to_category
 		        WHERE       linkID  = ?
 		        AND         categoryID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);

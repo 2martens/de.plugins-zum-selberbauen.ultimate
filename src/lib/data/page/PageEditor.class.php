@@ -105,14 +105,14 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 */
 	public function addGroups(array $groupIDs, $deleteOldGroups = true) {
 		if ($deleteOldGroups) {
-			$sql = 'DELETE FROM ultimate'.ULTIMATE_N.'_user_group_to_page
+			$sql = 'DELETE FROM ultimate'.WCF_N.'_user_group_to_page
 			        WHERE       pageID = ?';
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute(array(
 					$this->object->__get('pageID')
 			));
 		}
-		$sql = 'INSERT INTO ultimate'.ULTIMATE_N.'_user_group_to_page
+		$sql = 'INSERT INTO ultimate'.WCF_N.'_user_group_to_page
 		               (groupID, pageID)
 		        VALUES (?, ?)';
 		$statement = WCF::getDB()->prepareStatement($sql);
@@ -134,7 +134,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 */
 	public function addContent($contentID, $replaceOldContent = true) {
 		if ($replaceOldContent) {
-			$sql = 'UPDATE ultimate'.ULTIMATE_N.'_content_to_page
+			$sql = 'UPDATE ultimate'.WCF_N.'_content_to_page
 			        SET    contentID = ?
 			        WHERE  pageID    = ?';
 			$statement = WCF::getDB()->prepareStatement($sql);
@@ -144,7 +144,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 			));
 		}
 		else {
-			$sql = 'INSERT INTO ultimate'.ULTIMATE_N.'_content_to_page
+			$sql = 'INSERT INTO ultimate'.WCF_N.'_content_to_page
 			               (contentID, pageID)
 			        VALUES (?, ?)';
 			$statement = WCF::getDB()->prepareStatement($sql);

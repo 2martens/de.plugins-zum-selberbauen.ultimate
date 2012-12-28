@@ -81,8 +81,8 @@ class Layout extends AbstractUltimateDatabaseObject implements ITitledDatabaseOb
 	 */
 	protected function getTemplate() {
 		$sql = 'SELECT    template.*
-		        FROM      ultimate'.ULTIMATE_N.'_template_to_layout templateToLayout
-		        LEFT JOIN ultimate'.ULTIMATE_N.'_template template
+		        FROM      ultimate'.WCF_N.'_template_to_layout templateToLayout
+		        LEFT JOIN ultimate'.WCF_N.'_template template
 		        ON        (templateToLayout.templateID = template.templateID)
 		        WHERE     templateToLayout.layoutID    = ?
 		        LIMIT     1';

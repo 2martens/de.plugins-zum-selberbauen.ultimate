@@ -57,7 +57,7 @@ class MenuBlockCacheBuilder implements ICacheBuilder {
 		if (empty($menus)) return $data;
 		
 		$sql = 'SELECT menuID, blockID
-		        FROM   ultimate'.ULTIMATE_N.'_menu_to_block';
+		        FROM   ultimate'.WCF_N.'_menu_to_block';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
 		

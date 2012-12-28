@@ -67,7 +67,7 @@ class TemplateCacheBuilder implements ICacheBuilder {
 		$conditionBuilder->add('templateID IN (?)', array($templateIDs));
 		
 		$sql = 'SELECT layoutID, templateID
-		        FROM   ultimate'.ULTIMATE_N.'_template_to_layout
+		        FROM   ultimate'.WCF_N.'_template_to_layout
 		        '.$conditionBuilder->__toString();
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute($conditionBuilder->getParameters());

@@ -82,7 +82,7 @@ class CategorizedLink extends DatabaseObjectDecorator {
 	 */
 	protected function getCategories() {
 		$sql = 'SELECT categoryID
-		        FROM   ultimate'.ULTIMATE_N.'_link_to_category
+		        FROM   ultimate'.WCF_N.'_link_to_category
 		        WHERE  linkID = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->__get('linkID')));

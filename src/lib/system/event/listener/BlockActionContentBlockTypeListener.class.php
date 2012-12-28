@@ -56,7 +56,7 @@ class BlockActionContentBlockTypeListener implements IEventListener {
 		if ($sortField == ULTIMATE_SORT_CONTENT_SORTFIELD) return;
 		// create custom query
 		$sql = 'SELECT   *
-		        FROM     ultimate'.ULTIMATE_N.'_content
+		        FROM     ultimate'.WCF_N.'_content
 		        ORDER BY ? ?';
 		$parameters = array(
 			$sortField,

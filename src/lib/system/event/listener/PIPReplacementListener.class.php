@@ -96,7 +96,7 @@ class PIPReplacementListener implements IEventListener {
 	 */
 	protected function findExistingItemBlockType(\wcf\system\package\plugin\BlockTypePackageInstallationPlugin $eventObj) {
 		$sqlData['sql'] = 'SELECT   blockTypeID, packageID, blockTypeName, blockTypeClassName, fixedHeight
-		                   FROM     ultimate'.ULTIMATE_N.'_blocktype
+		                   FROM     ultimate'.WCF_N.'_blocktype
 		                   WHERE    packageID     = ?
 		                   AND      blockTypeName = ?';
 		$sqlData['parameters'] = array(
@@ -113,7 +113,7 @@ class PIPReplacementListener implements IEventListener {
 	 */
 	protected function findExistingItemWidgetType(\wcf\system\package\plugin\WidgetTypePackageInstallationPlugin $eventObj) {
 		$sqlData['sql'] = 'SELECT   widgetTypeID, packageID, widgetTypeName, widgetTypeClassName
-		                   FROM     ultimate'.ULTIMATE_N.'_widgettype
+		                   FROM     ultimate'.WCF_N.'_widgettype
 		                   WHERE    packageID     = ?
 		                   AND      widgetTypeName = ?';
 		$sqlData['parameters'] = array(
@@ -130,7 +130,7 @@ class PIPReplacementListener implements IEventListener {
 	 */
 	protected function hasUninstallBlockType(\wcf\system\package\plugin\BlockTypePackageInstallationPlugin $eventObj) {
 		$sql = 'SELECT  COUNT(*) AS count
-		        FROM    ultimate'.ULTIMATE_N.'_blocktype
+		        FROM    ultimate'.WCF_N.'_blocktype
 		        WHERE   packageID = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($eventObj->installation->getPackageID()));
@@ -145,7 +145,7 @@ class PIPReplacementListener implements IEventListener {
 	 */
 	protected function hasUninstallWidgetType(\wcf\system\package\plugin\WidgetTypePackageInstallationPlugin $eventObj) {
 		$sql = 'SELECT  COUNT(*) AS count
-		        FROM    ultimate'.ULTIMATE_N.'_widgettype
+		        FROM    ultimate'.WCF_N.'_widgettype
 		        WHERE   packageID = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($eventObj->installation->getPackageID()));
@@ -159,7 +159,7 @@ class PIPReplacementListener implements IEventListener {
 	 * @param	\wcf\system\package\plugin\BlockTypePackageInstallationPlugin	$eventObj
 	 */
 	protected function uninstallBlockType(\wcf\system\package\plugin\BlockTypePackageInstallationPlugin $eventObj) {
-		$sql = 'DELETE FROM	ultimate'.ULTIMATE_N.'_blocktype
+		$sql = 'DELETE FROM	ultimate'.WCF_N.'_blocktype
 		        WHERE       packageID = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($eventObj->installation->getPackageID()));
@@ -171,7 +171,7 @@ class PIPReplacementListener implements IEventListener {
 	 * @param	\wcf\system\package\plugin\WidgetTypePackageInstallationPlugin	$eventObj
 	 */
 	protected function uninstallWidgetType(\wcf\system\package\plugin\WidgetTypePackageInstallationPlugin $eventObj) {
-		$sql = 'DELETE FROM	ultimate'.ULTIMATE_N.'_widgettype
+		$sql = 'DELETE FROM	ultimate'.WCF_N.'_widgettype
 		        WHERE       packageID = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($eventObj->installation->getPackageID()));

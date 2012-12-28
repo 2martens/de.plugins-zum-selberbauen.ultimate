@@ -90,7 +90,7 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledDatabase
 	 */
 	protected function getChildCategories() {
 		$sql = 'SELECT *
-		        FROM   ultimate'.ULTIMATE_N.'_'.self::$databaseTableName.'
+		        FROM   ultimate'.WCF_N.'_'.self::$databaseTableName.'
 		        WHERE  categoryParent = ?';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->categoryID));
@@ -108,8 +108,8 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledDatabase
 	 */
 	protected function getContents() {
 		$sql = 'SELECT    content.*
-		        FROM      ultimate'.ULTIMATE_N.'_'.$this->contentCategoryTable.' contentToCategory
-		        LEFT JOIN ultimate'.ULTIMATE_N.'_content content
+		        FROM      ultimate'.WCF_N.'_'.$this->contentCategoryTable.' contentToCategory
+		        LEFT JOIN ultimate'.WCF_N.'_content content
 		        ON        (content.contentID = contentToCategory.contentID)
 		        WHERE     contentToCategory.categoryID = ?
 		        ORDER BY '.ULTIMATE_SORT_CONTENT_SORTFIELD.' '.ULTIMATE_SORT_CONTENT_SORTORDER;
