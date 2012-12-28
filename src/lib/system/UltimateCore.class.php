@@ -26,15 +26,14 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system;
-use wcf\system\style\StyleHandler;
-
+use ultimate\system\request\Route;
 use wcf\system\application\AbstractApplication;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\menu\page\PageMenu;
 use wcf\system\package\PackageDependencyHandler;
 use wcf\system\request\LinkHandler;
-use wcf\system\request\Route;
 use wcf\system\request\RouteHandler;
+use wcf\system\style\StyleHandler;
 use wcf\system\WCF;
 
 //defines global version
