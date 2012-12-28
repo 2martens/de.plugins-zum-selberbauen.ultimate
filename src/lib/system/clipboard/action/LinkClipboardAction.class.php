@@ -53,13 +53,12 @@ class LinkClipboardAction implements IClipboardAction {
 	/**
 	 * @param	\ultimate\data\link\Link[]	$objects
 	 * @param	string						$actionName
-	 * @param	array						$typeData
 	 * @return	\wcf\system\clipboard\ClipboardEditorItem|null
 	 * 
 	 * @throws	\wcf\system\exception\SystemException	if given action name is invalid
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.clipboard.action.IClipboardAction.html#execute
 	 */
-	public function execute(array $objects, $actionName, $typeData = array()) {
+	public function execute(array $objects, $actionName) {
 		$item = new ClipboardEditorItem();
 		
 		// handle actions
