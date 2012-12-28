@@ -26,7 +26,6 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\acp\page;
-use wcf\acp\page\IndexPage;
 
 /**
  * Extends the WCF Index page.
@@ -38,6 +37,6 @@ use wcf\acp\page\IndexPage;
  * @subpackage	acp.page
  * @category	Ultimate CMS
  */
-class IndexPage extends IndexPage {
+class IndexPage extends \wcf\acp\page\IndexPage {
 	
 }
