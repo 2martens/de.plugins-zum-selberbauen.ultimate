@@ -178,7 +178,7 @@
 		<fieldset>
 			<legend>{lang}wcf.acp.ultimate.publish{/lang}</legend>
 			<dl{if $errorField == 'status'} class="formError"{/if}>
-				<dt><label for="status">{lang}wcf.acp.ultimate.status{/lang}</label></dt>
+				<dt><label for="statusSelect">{lang}wcf.acp.ultimate.status{/lang}</label></dt>
 				<dd>
 					<select id="statusSelect" name="status">
 					{htmloptions options=$statusOptions selected=$statusID}
@@ -198,7 +198,7 @@
 				</dd>
 			</dl>
 			<dl{if $errorField == 'visibility'} class="formError"{/if}>
-				<dt><label for="visibility">{lang}wcf.acp.ultimate.visibility{/lang}</label></dt>
+				<dt><label for="selectVisibility">{lang}wcf.acp.ultimate.visibility{/lang}</label></dt>
 				<dd>
 					<select id="selectVisibility" name="visibility">
 					<option value="public"{if $visibility == 'public'} selected="selected"{/if}>{lang}wcf.acp.ultimate.visibility.public{/lang}</option>
@@ -239,7 +239,7 @@
 				</dd>
 			</dl>
 			<dl{if $errorField == 'publishDate'} class="formError"{/if}>
-				<dt><label for="publishDate">{lang}wcf.acp.ultimate.publishDate{/lang}</label></dt>
+				<dt><label for="publishDateInput">{lang}wcf.acp.ultimate.publishDate{/lang}</label></dt>
 				<dd>
 					<input type="datetime" id="publishDateInput" name="publishDate" value="{@$publishDate}" readonly="readonly" class="medium" required="required" />
 					<script type="text/javascript">
