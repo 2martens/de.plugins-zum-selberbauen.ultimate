@@ -91,6 +91,20 @@ class CategoryClipboardAction implements IClipboardAction {
 	}
 	
 	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.clipboard.action.IClipboardAction.html#getClassName
+	 */
+	public function getClassName() {
+		return '\ultimate\system\clipboard\action\CategoryClipboardAction';
+	}
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.clipboard.action.IClipboardAction.html#filterObjects
+	 */
+	public function filterObjects($objects, $typeData) {
+		return $objects;
+	}
+	
+	/**
 	 * Validates the delete action.
 	 * 
 	 * @param	\ultimate\data\category\Category[]	$objects

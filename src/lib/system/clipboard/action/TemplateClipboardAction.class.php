@@ -91,6 +91,20 @@ class TemplateClipboardAction implements IClipboardAction {
 	}
 	
 	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.clipboard.action.IClipboardAction.html#getClassName
+	 */
+	public function getClassName() {
+		return '\ultimate\system\clipboard\action\TemplateClipboardAction';
+	}
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.clipboard.action.IClipboardAction.html#filterObjects
+	 */
+	public function filterObjects($objects, $typeData) {
+		return $objects;
+	}
+	
+	/**
 	 * Validates the delete action.
 	 *
 	 * @param	\ultimate\data\template\Template[]	$objects
