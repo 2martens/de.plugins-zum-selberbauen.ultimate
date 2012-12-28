@@ -344,7 +344,7 @@ class ContentBlockType extends AbstractBlockType {
 			}
 			
 			/* @var $dateTimeObject \DateTime */
-			$dateTimeObject = $content->__get('publishDateObj');
+			$dateTimeObject = $content->__get('publishDateObject');
 			$timestamp = $content->__get('publishDate');
 			$date = DateUtil::format($dateTimeObject, 'ultimate.date.dateFormat');
 			$time = DateUtil::format($dateTimeObject, DateUtil::TIME_FORMAT);
@@ -380,10 +380,6 @@ class ContentBlockType extends AbstractBlockType {
 			'contentMetaDisplay'
 		);
 		
-		// gathering dimensions and position
-		$dimensions = explode(',', $this->block->__get('dimensions'));
-		$position = explode(',', $this->block->__get('position'));
-		
 		// assigning values
 		WCF::getTPL()->assign('pages', $this->pages);
 		WCF::getTPL()->assign('categories', $this->categories);
@@ -397,14 +393,14 @@ class ContentBlockType extends AbstractBlockType {
 			'contents' => $this->contents,
 			// comments
 			'commentObjectTypeID' => $this->objectTypeID,
-			'commentCanAdd' => $this->commentManager->canAdd(),
+			'commentCanAdd' => $this->commentManager->canAdd(WCF::getUser()->__get('userID')),
 			'commentsPerPage' => $this->commentManager->commentsPerPage(),
 			'commentLists' => $this->commentLists,
 			// dimensions and position
-			'height' => $dimensions[1],
-			'width' => $dimensions[0],
-			'top' => $position[1],
-			'left' => $position[0]
+			'height' => $this->block->__get('height'),
+			'width' => $this->block->__get('width'),
+			'top' => $this->block->__get('top'),
+			'left' => $this->block->__get('left')
 		));
 		
 		$useRequestData = false;
