@@ -382,7 +382,7 @@ class UltimateContentAddForm extends MessageForm {
 		// save tags
 		foreach ($this->tagsI18n as $languageID => $tags) {
 			if (empty($tags)) {
-				$this->tags[$languageID] = '';
+				$this->tagsI18n[$languageID] = '';
 				continue;
 			}
 			TagEngine::getInstance()->addObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $contentID, $tags, $languageID);

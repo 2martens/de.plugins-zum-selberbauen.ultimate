@@ -116,7 +116,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		/* @var $tag \wcf\data\tag\TagCloudTag */
 		foreach ($languages as $languageID => $language) {
 			// group tags by language
-			$this->tags[$languageID] = Tag::buildString(TagEngine::getInstance()->getObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->content->__get('contentID'), $languageID));	
+			$this->tagsI18n[$languageID] = Tag::buildString(TagEngine::getInstance()->getObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->content->__get('contentID'), array($languageID)));	
 		}
 		
 		// get status data
@@ -155,7 +155,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		
 		$languages = WCF::getLanguage()->getLanguages();
 		foreach ($languages as $languageID => $language) {
-			$tags = TagEngine::getInstance()->getObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->contentID, $languageID);
+			$tags = TagEngine::getInstance()->getObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->contentID, array($languageID));
 			if (!empty($tags)) $this->tagsI18n[$languageID] = implode(',', $tags);
 		}
 		
