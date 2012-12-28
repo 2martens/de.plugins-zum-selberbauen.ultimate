@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateCore class.
+ * Contains the ULTIMATECore class.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -50,7 +50,7 @@ define('ULTIMATE_VERSION', '1.0.0 Alpha 1 (Indigo)');
  * @subpackage	system
  * @category	Ultimate CMS
  */
-class UltimateCore extends AbstractApplication {
+class ULTIMATECore extends AbstractApplication {
 	/**
 	 * Calls all init functions of the Ultimate Core class.
 	 */
