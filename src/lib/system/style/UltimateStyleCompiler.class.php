@@ -121,7 +121,12 @@ class UltimateStyleCompiler extends StyleCompiler {
 		
 		$variables = array();
 		while ($row = $statement->fetchArray()) {
-			$variables[$row['variableName']] = $row['defaultValue'];
+			$value = $row['defaultValue'];
+			if (empty($value)) {
+				$value = '~""';
+			}
+			
+			$variables[$row['variableName']] = $value;
 		}
 		
 		$this->compileStylesheet(
@@ -152,17 +157,17 @@ class UltimateStyleCompiler extends StyleCompiler {
 		
 		// get style variables
 		$variables = $style->getVariables();
-		$individualCss = '';
-		if (isset($variables['individualCss'])) {
-			$individualCss = $variables['individualCss'];
-			unset($variables['individualCss']);
+		$individualLess = '';
+		if (isset($variables['individualLess'])) {
+			$individualLess = $variables['individualLess'];
+			unset($variables['individualLess']);
 		}
 		
 		$this->compileStylesheet(
 			ULTIMATE_DIR.'style/style-'.$style->styleID,
 			$files,
 			$variables,
-			$individualCss,
+			$individualLess,
 			new Callback(function($content) use ($style) {
 				return "/* stylesheet for '".$style->styleName."', generated on ".gmdate('r')." -- DO NOT EDIT */\n\n" . $content;
 			})
@@ -178,8 +183,6 @@ class UltimateStyleCompiler extends StyleCompiler {
 	protected function bootstrap(array $variables) {
 		// add reset like a boss
 		$content = '';
-		// until style system works completely, we have to use this
-		//$content .= $this->prepareFile(WCF_DIR.'style/bootstrap/variables.less');
 		// apply style variables
 		$this->compiler->setVariables($variables);
 	
