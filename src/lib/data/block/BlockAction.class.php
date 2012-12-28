@@ -95,6 +95,8 @@ class BlockAction extends AbstractDatabaseObjectAction {
 	public function createAJAX() {
 		// serializes additionalData and query parameters
 		$parameters = $this->parameters['data'];
+		$templateID = $parameters['templateID'];
+		unset($parameters['templateID']);
 		if (isset($parameters['additionalData'])) {
 			$parameters['additionalData'] = serialize($parameters['additionalData']);
 		}
@@ -106,6 +108,10 @@ class BlockAction extends AbstractDatabaseObjectAction {
 		// create the block
 		/* @var $block \ultimate\data\block\Block */
 		$block = $this->create();
+		
+		// connect block with template
+		$blockEditor = new BlockEditor($block);
+		$blockEditor->addToTemplate($templateID);
 		
 		// get blocktype name
 		$cache = 'blocktype';

@@ -47,6 +47,51 @@ class BlockEditor extends DatabaseObjectEditor implements IEditableCachedObject 
 	protected static $baseClass = '\ultimate\data\block\Block';
 	
 	/**
+	 * Adds the block to the specified template.
+	 * 
+	 * @param	integer	$templateID
+	 */
+	public function addToTemplate($templateID) {
+		$sql = "SELECT   COUNT(*) AS count
+		        FROM     ultimate".WCF_N."_block_to_template
+		        WHERE    blockID  = ?
+		        AND      templateID = ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array(
+			$this->__get('blockID'),
+			$templateID
+		));
+		$row = $statement->fetchArray();
+		
+		if (!$row['count']) {
+			$sql = "INSERT INTO	ultimate".WCF_N."_block_to_template
+			               (blockID, templateID)
+			        VALUES (?, ?)";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array(
+				$this->__get('blockID'),
+				$templateID
+			));
+		}
+	}
+	
+	/**
+	 * Removes the block from the specified template.
+	 *
+	 * @param	integer	$templateID
+	 */
+	public function removeFromTemplate($templateID) {
+		$sql = "DELETE FROM	ultimate".WCF_N."_block_to_template
+		        WHERE       blockID  = ?
+		        AND         templateID = ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array(
+			$this->__get('blockID'),
+			$template
+		));
+	}
+	
+	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableCachedObject.html#resetCache
 	 */
 	public static function resetCache() {
