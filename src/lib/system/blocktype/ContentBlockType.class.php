@@ -26,10 +26,9 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\blocktype;
-use wcf\system\comment\CommentHandler;
-
 use ultimate\data\content\Content;
 use wcf\data\user\UserList;
+use wcf\system\comment\CommentHandler;
 use wcf\system\language\I18nHandler;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
@@ -304,7 +303,7 @@ class ContentBlockType extends AbstractBlockType {
 		$objectType = CommentHandler::getInstance()->getObjectType($this->objectTypeID);
 		$this->commentManager = $objectType->getProcessor();
 		foreach ($this->contents as $contentID => $content) {
-			$this->commentList[$contentID] = CommentHandler::getInstance()->getCommentList($this->objectTypeID, $this->commentManager, $content->__get('authorID'));
+			$this->commentLists[$contentID] = CommentHandler::getInstance()->getCommentList($this->objectTypeID, $this->commentManager, $content->__get('authorID'));
 		}
 	}
 	
@@ -333,11 +332,15 @@ class ContentBlockType extends AbstractBlockType {
 			// get tag output
 			$tags = $content->__get('tags');
 			$tagOutput = '';
-			foreach ($tags as $tagID => $tag) {
-				if (!empty($tagOutput)) $tagOutput .= ', ';
-				$tagOutput .= LinkHandler::getInstance()->getLink('Tag', array(
-					'tagSlug' => $tag->__get('tagSlug')
-				), '');
+			foreach ($tags as $languageID => $_tags) {
+				$_languageID = WCF::getSession()->getLanguageID();
+				if ($languageID != $_languageID) continue;
+				foreach ($_tags as $tagID => $tag) {
+					if (!empty($tagOutput)) $tagOutput .= ', ';
+					$tagOutput .= LinkHandler::getInstance()->getLink('Tag', array(
+						'tagSlug' => $tag->__get('tagSlug')
+					), '');
+				}
 			}
 			
 			/* @var $dateTimeObject \DateTime */
