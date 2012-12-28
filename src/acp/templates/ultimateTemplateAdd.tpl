@@ -205,7 +205,7 @@
 					{htmlOptions options=$blocktypes}
 				</select>
 				{if $errorField == 'selectBlocktype'}
-					<small class="innerError">
+					<small id="selectBlocktypeError" class="innerError">
 						{lang}wcf.acp.ultimate.template.selectBlocktype.error.{@$errorType}{/lang}
 					</small>
 				{/if}
