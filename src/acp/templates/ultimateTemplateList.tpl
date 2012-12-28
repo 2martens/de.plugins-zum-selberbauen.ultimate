@@ -75,7 +75,7 @@
 							{event name='buttons'}
 						</td>
 						<td class="columnID"><p>{@$template->templateID}</p></td>
-						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditTemplate')}<a title="{lang}wcf.acp.ultimate.template.edit{/lang}" href="{link controller='UltimateTemplateEdit' id=$template->templateID}{/link}">{lang}{@$template->templateTitle}{/lang}</a>{else}{lang}{@$template->templateName}{/lang}{/if}</p></td>
+						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditTemplate')}<a title="{lang}wcf.acp.ultimate.template.edit{/lang}" href="{link controller='UltimateTemplateEdit' id=$template->templateID}{/link}">{lang}{@$template->templateName}{/lang}</a>{else}{lang}{@$template->templateName}{/lang}{/if}</p></td>
 						
 						{event name='columns'}
 					</tr>				
