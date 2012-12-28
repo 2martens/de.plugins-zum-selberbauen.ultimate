@@ -269,9 +269,9 @@
 					new WCF.Action.Delete('ultimate\\data\\block\\BlockAction', $('.jsBlock'));
 				{/if}
 				{if $__wcf->session->getPermission('admin.content.ultimate.canEditBlock')}
-					$('#blockList').find('button[data-type="submit"]').click(function(event) {
+					$('#templateBlockList').find('button[data-type="submit"]').click(function(event) {
 						event.preventDefault();
-						if ($('#blockList').find('.jsBlock').length == 0) {
+						if ($('#templateBlockList').find('.jsBlock').length == 0) {
 							event.stopImmediatePropagation();
 						} else {
 							event.stopPropagation();
