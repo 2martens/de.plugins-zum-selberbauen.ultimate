@@ -352,6 +352,15 @@ ULTIMATE.Block.Transfer.prototype = {
 			}
 		}, { });
 		
+		if (blockTypeID == '0') {
+			this._notification = new WCF.System.Notification(WCF.Language.get('wcf.global.form.error'), 'error');
+			this._element.find('dl:first').addClass('formError');
+			var $html = $('<small class="innerError">' + WCF.Language.get('wcf.acp.ultimate.template.selectBlocktype.error.notSelected') + '</small>');
+			this._element.find('dl:first > dd').add($html);
+			this._notification.show();
+			return;
+		}
+		
 		// reset form
 		$('#selectBlocktype').val('0');
 		$('#width').val('1');
