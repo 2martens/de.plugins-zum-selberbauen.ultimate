@@ -57,7 +57,7 @@ class PagePage extends AbstractPage {
 	 * @var	string[]
 	 */
 	public $neededModules = array(
-		'MODULE_ULTIMATEFRONTEND'
+		'ULTIMATE_MODULE_ULTIMATEFRONTEND'
 	);
 	
 	/**
