@@ -52,6 +52,12 @@ define('ULTIMATE_VERSION', '1.0.0 Alpha 1 (Indigo)');
  */
 class ULTIMATECore extends AbstractApplication {
 	/**
+	 * Contains the abbreviation of this application.
+	 * @var	string
+	 */
+	protected $abbreviation = 'ultimate';
+	
+	/**
 	 * Calls all init functions of the Ultimate Core class.
 	 */
 	public function __run() {
