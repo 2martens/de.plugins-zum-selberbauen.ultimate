@@ -57,7 +57,7 @@ class CategoryPage extends AbstractPage {
 	 * @var	string[]
 	 */
 	public $neededModules = array(
-		'module_ultimateFrontend'
+		'MODULE_ULTIMATEFRONTEND'
 	);
 	
 	/**
