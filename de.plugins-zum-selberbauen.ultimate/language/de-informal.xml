@@ -62,6 +62,11 @@
 		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent.description"><![CDATA[Mitglieder dieser Benutzergruppe können Inhalte löschen.]]></item>
 		<!-- /content -->
 		
+		<!-- layout -->
+		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLayouts"><![CDATA[Kann Layouts verwalten.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLayouts.description"><![CDATA[Mitglieder dieser Benutzergruppe können Layouts verwalten.]]></item>
+		<!-- /layout -->
+		
 		<!-- link -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canAddLink"><![CDATA[Kann Links hinzufügen.]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canAddLink.description"><![CDATA[Mitglieder dieser Benutzergruppe können Links hinzufügen.]]></item>
@@ -126,6 +131,10 @@
 		<!-- /core items -->
 		
 		<!-- appearance items -->
+		
+		<!-- layout items -->
+		<item name="wcf.acp.menu.link.ultimate.appearance.layoutManager"><![CDATA[Layouts verwalten]]></item>
+		<!-- /layout items -->
 		
 		<!-- menu items -->
 		<item name="wcf.acp.menu.link.ultimate.appearance.menu.add"><![CDATA[Menü hinzufügen]]></item>
@@ -318,6 +327,20 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.content.list.count"><![CDATA[{#$items} Inhalt{if $items != 1}e{/if}]]></item>
 		<!-- /content -->
 		
+		<!-- layout -->
+		<item name="wcf.acp.ultimate.layoutManager"><![CDATA[Layout-Manager]]></item>
+		<item name="wcf.acp.ultimate.layoutManager.layouts"><![CDATA[Layouts]]></item>
+		<item name="wcf.acp.ultimate.layoutManager.index"><![CDATA[Startseite]]></item>
+		<item name="wcf.acp.ultimate.layoutManager.category"><![CDATA[Kategorie]]></item>
+		<item name="wcf.acp.ultimate.layoutManager.content"><![CDATA[Inhalt]]></item>
+		<item name="wcf.acp.ultimate.layoutManager.page"><![CDATA[Seite]]></item>
+		<item name="wcf.acp.ultimate.layoutManager.selectLayout.none"><![CDATA[Kein Layout ausgewählt]]></item>
+		<item name="wcf.acp.ultimate.layoutManager.selectLayout.error.notValid"><![CDATA[Du hast ein Layout "ausgewählt", dass gar nicht zur Auswahl stand.]]></item>
+		<item name="wcf.acp.ultimate.layoutManager.selectTemplate.none"><![CDATA[Bitte ein Template auswählen:]]></item>
+		<item name="wcf.acp.ultimate.layoutManager.selectTemplate.inherit"><![CDATA[Template von übergeordneter Ebene übernehmen]]></item>
+		<item name="wcf.acp.ultimate.layoutManager.selectTemplate.error.notValid"><![CDATA[Du hast ein Template "ausgewählt", dass gar nicht zur Auswahl stand.]]></item>
+		<!-- /layout -->
+		
 		<!-- link -->
 		<item name="wcf.acp.ultimate.link.add"><![CDATA[Link hinzufügen]]></item>
 		<item name="wcf.acp.ultimate.link.edit"><![CDATA[Link bearbeiten]]></item>
@@ -499,6 +522,14 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 	<category name="ultimate.date">
 		<item name="ultimate.date.dateFormat"><![CDATA[d.m.Y]]></item>
 		<item name="ultimate.date.dateTimeFormat"><![CDATA[%date% %time%]]></item>
+	</category>
+	
+	<!-- this category is used for all layout names -->
+	<category name="ultimate.layout">
+		<item name="ultimate.layout.index"><![CDATA[Startseite]]></item>
+		<item name="ultimate.layout.category"><![CDATA[Kategorie]]></item>
+		<item name="ultimate.layout.content"><![CDATA[Inhalt]]></item>
+		<item name="ultimate.layout.page"><![CDATA[Seite]]></item>
 	</category>
 	
 	<!-- this category is used for all multilingual link fields -->

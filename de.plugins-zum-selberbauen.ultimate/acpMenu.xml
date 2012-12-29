@@ -111,19 +111,28 @@
 			<showorder>4</showorder>
 		</acpmenuitem>
 		
+		<!-- layouts -->
+		<acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.layoutManager">
+			<link>index.php/UltimateLayoutManager/</link>
+			<parent>wcf.acp.menu.link.appearance</parent>
+			<permissions>admin.content.ultimate.canManageLayouts</permissions>
+			<showorder>1</showorder>
+		</acpmenuitem>
+		<!-- /layouts -->
+		
 		<!-- menus -->
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.menu.list">
 			<link>index.php/UltimateMenuList/</link>
 			<parent>wcf.acp.menu.link.ultimate.appearance</parent>
 			<permissions>admin.content.ultimate.canEditMenu,admin.content.ultimate.canDeleteMenu</permissions>
-			<showorder>1</showorder>
+			<showorder>2</showorder>
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.menu.add">
 			<link>index.php/UltimateMenuAdd/</link>
 			<parent>wcf.acp.menu.link.ultimate.appearance</parent>
 			<permissions>admin.content.ultimate.canAddMenu</permissions>
-			<showorder>2</showorder>
+			<showorder>3</showorder>
 		</acpmenuitem>
 		<!-- /menus -->
 		
@@ -132,13 +141,13 @@
 			<link>index.php/UltimateTemplateAdd</link>
 			<parent>wcf.acp.menu.link.ultimate.appearance</parent>
 			<permissions>admin.content.ultimate.canAddTemplate</permissions>
-			<showorder>3</showorder>
+			<showorder>4</showorder>
 		</acpmenuitem>
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.template.list">
 			<link>index.php/UltimateTemplateList/</link>
 			<parent>wcf.acp.menu.link.ultimate.appearance</parent>
 			<permissions>admin.content.ultimate.canEditTemplate</permissions>
-			<showorder>4</showorder>
+			<showorder>5</showorder>
 		</acpmenuitem>
 		<!-- /templates -->
 		
