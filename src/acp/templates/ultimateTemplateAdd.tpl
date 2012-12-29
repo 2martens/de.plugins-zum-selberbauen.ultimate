@@ -169,7 +169,7 @@
 								</span>
 								
 								<span class="title">
-									{@$templateBlock->blockTypeName} #{@$templateBlock->blockID}
+									{lang}{@$templateBlock->blockType->blockTypeName}{/lang} #{@$templateBlock->blockID}
 								</span>
 							</span>
 						</li>

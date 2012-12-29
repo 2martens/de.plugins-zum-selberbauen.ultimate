@@ -28,6 +28,7 @@
 namespace ultimate\data\block;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\cache\CacheHandler;
+use wcf\system\WCF;
 
 /**
  * Executes block-related actions.
@@ -119,13 +120,13 @@ class BlockAction extends AbstractDatabaseObjectAction {
 		$file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
 		CacheHandler::getInstance()->addResource($cache, $file, $cacheBuilderClassName);
 		$blocktypes = CacheHandler::getInstance()->get($cache, 'blockTypes');
-		
+		/* @var $blocktype \ultimate\data\blocktype\Blocktype */
 		$blocktype = $blocktypes[$block->__get('blockTypeID')];
 		
 		return array(
 			'blockID' => $block->__get('blockID'),
 			'blockTypeID' => $block->__get('blockTypeID'),
-			'blockTypeName' => $blocktype->__get('blockTypeName')
+			'blockTypeName' => WCF::getLanguage()->get($blocktype->__get('blockTypeName'))
 		);
 	}
 	
