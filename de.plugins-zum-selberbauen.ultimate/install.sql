@@ -74,7 +74,9 @@ CREATE TABLE ultimate1_content_to_page (
 DROP TABLE IF EXISTS ultimate1_layout;
 CREATE TABLE ultimate1_layout (
 	layoutID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	layoutName VARCHAR(255) NOT NULL DEFAULT ''
+	objectID INT(10) NOT NULL,
+	objectType ENUM('category', 'content', 'index', 'page') NOT NULL,
+	UNIQUE KEY (objectID, objectType)
 );
 
 DROP TABLE IF EXISTS ultimate1_link;
@@ -241,10 +243,10 @@ ALTER TABLE ultimate1_widgettype ADD FOREIGN KEY (packageID) REFERENCES wcf1_pac
 INSERT INTO ultimate1_category (categoryTitle, categorySlug) VALUES ('ultimate.category.1.categoryTitle', 'uncategorized');
 
 -- default layouts
-INSERT INTO ultimate1_layout (layoutName) VALUES ('ultimate.layout.index');
-INSERT INTO ultimate1_layout (layoutName) VALUES ('ultimate.layout.category');
-INSERT INTO ultimate1_layout (layoutName) VALUES ('ultimate.layout.content');
-INSERT INTO ultimate1_layout (layoutName) VALUES ('ultimate.layout.page');
+INSERT INTO ultimate1_layout (objectID, objectType) VALUES (0, 'index');
+INSERT INTO ultimate1_layout (objectID, objectType) VALUES (0, 'category');
+INSERT INTO ultimate1_layout (objectID, objectType) VALUES (0, 'content');
+INSERT INTO ultimate1_layout (objectID, objectType) VALUES (0, 'page');
 
 -- mime types
 INSERT INTO ultimate1_media_mimetype (mimeType) VALUES 

@@ -57,7 +57,8 @@ class CategoryEditor extends DatabaseObjectEditor implements IEditableCachedObje
 		$category = parent::create($parameters);
 		$parameters = array(
 			'data' => array(
-				'layoutName' => $category->__get('categoryTitle')
+				'objectID' => $category->__get('categoryID'),
+				'objectType' => 'category'
 			)
 		);
 		$layoutAction = new LayoutAction(array(), 'create', $parameters);
@@ -92,7 +93,7 @@ class CategoryEditor extends DatabaseObjectEditor implements IEditableCachedObje
 	 */
 	public function delete() {
 		/* @var $layout \ultimate\data\layout\Layout */
-		$layout = LayoutHandler::getInstance()->getLayoutFromLayoutName($this->object->getTitle());
+		$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($this->__get('categoryID'), $this->__get('categoryTitle'));
 		$layoutAction = new LayoutAction(array($layout->__get('layoutID')), 'delete', array());
 		$layoutAction->executeAction();
 		parent::delete();

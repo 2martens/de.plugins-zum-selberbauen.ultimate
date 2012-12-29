@@ -60,7 +60,8 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 		$content = parent::create($parameters);
 		$parameters = array(
 			'data' => array(
-				'layoutName' => $content->__get('contentTitle')
+				'objectID' => $content->__get('contentID'),
+				'objectType' => 'content'
 			)
 		);
 		$layoutAction = new LayoutAction(array(), 'create', $parameters);
@@ -115,7 +116,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 	 */
 	public function delete() {
 		/* @var $layout \ultimate\data\layout\Layout */
-		$layout = LayoutHandler::getInstance()->getLayoutFromLayoutName($this->__get('contentTitle'));
+		$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($this->__get('contentID'), 'content');
 		$layoutAction = new LayoutAction(array($layout->__get('layoutID')), 'delete', array());
 		$layoutAction->executeAction();
 		parent::delete();

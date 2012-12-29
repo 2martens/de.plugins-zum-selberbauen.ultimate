@@ -57,7 +57,8 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		$page = parent::create($parameters);
 		$parameters = array(
 			'data' => array(
-				'layoutName' => $page->getTitle()
+				'objectID' => $page->__get('pageID'),
+				'objectType' => 'page'
 			)
 		);
 		$layoutAction = new LayoutAction(array(), 'create', $parameters);
@@ -91,7 +92,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 */
 	public function delete() {
 		/* @var $layout \ultimate\data\layout\Layout */
-		$layout = LayoutHandler::getInstance()->getLayoutFromLayoutName($this->object->getTitle());
+		$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($this->__get('pageID'), $this->__get('pageTitle'));
 		$layoutAction = new LayoutAction(array($layout->__get('layoutID')), 'delete', array());
 		$layoutAction->executeAction();
 		parent::delete();

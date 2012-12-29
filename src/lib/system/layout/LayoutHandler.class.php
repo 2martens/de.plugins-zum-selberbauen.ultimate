@@ -86,7 +86,7 @@ class LayoutHandler extends SingletonFactory {
 	 * Contains the read layouts with the names as key.
 	 * @var \ultimate\data\layout\Layout[]
 	 */
-	protected $layoutsToLayoutName = array();
+	protected $layoutsToObjectData = array();
 	
 	/**
 	 * Contains the read templates.
@@ -100,13 +100,15 @@ class LayoutHandler extends SingletonFactory {
 	 * @since	1.0.0
 	 * @api
 	 * 
-	 * @param	string	$layoutName
+	 * @param	integer	$objectID
+	 * @param	string	$objectType
 	 * @return	\ultimate\data\layout\Layout|NULL
 	 */
-	public function getLayoutFromName($layoutName) {
-		$layoutName = StringUtil::trim($layoutName);
-		if (isset($this->layoutsToLayoutName[$layoutName])) {
-			return $this->layoutsToLayoutName[$layoutName];
+	public function getLayoutFromObjectData($objectID, $objectType) {
+		$objectID = intval($objectID);
+		$objectType = StringUtil::trim($objectType);
+		if (isset($this->layoutsToObjectData[$objectID.','.$objectType])) {
+			return $this->layoutsToObjectData[$objectID.','.$objectType];
 		}
 		
 		return null;
@@ -134,24 +136,17 @@ class LayoutHandler extends SingletonFactory {
 	 * 
 	 * @since	1.0.0
 	 * 
-	 * @param	string	$layoutName
-	 * @param	integer	$layoutType
+	 * @param	integer	$objectID
+	 * @param	integer	$objectType
 	 * @throws	\wcf\system\exception\SystemException	on invalid layout type
 	 * @return	\ultimate\data\template\Template|NULL
 	 */
-	public function getTemplateFromLayoutName($layoutName, $layoutType) {
-		$layout = $this->getLayoutFromLayoutName($layoutName);
+	public function getTemplateFromObjectData($objectID, $objectType) {
+		$layout = $this->getLayoutFromObjectData($objectID, $objectType);
 		if ($layout !== null) {
 			$layoutID = $layout->__get('layoutID');
 			if (isset($this->templatesToLayoutID[$layoutID])) {
 				return $this->templatesToLayoutID[$layoutID];
-			}
-			else {
-				if (!isset($this->defaultLayouts[integer($layoutType)])) {
-					throw new SystemException('Invalid layout type', 0, 'You have to use a valid layout type (1, 2, 3 or 4).');
-				}
-				$layoutName = $this->defaultLayouts[integer($layoutType)];
-				return $this->getLayoutFromTemplateName($layoutName, $layoutType);
 			}
 		}
 		return null;
@@ -176,7 +171,7 @@ class LayoutHandler extends SingletonFactory {
 		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
 		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
 		$this->layouts = CacheHandler::getInstance()->get($cacheName, 'layouts');
-		$this->layoutsToLayoutName = CacheHandler::getInstance()->get($cacheName, 'layoutsToLayoutName');
+		$this->layoutsToObjectData = CacheHandler::getInstance()->get($cacheName, 'layoutsToObjectData');
 		$this->templatesToLayoutID = CacheHandler::getInstance()->get($cacheName, 'templatesToLayoutID');
 	}
 }

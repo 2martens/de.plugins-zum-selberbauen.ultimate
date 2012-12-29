@@ -102,7 +102,7 @@
 						<dt>
 							<select id="layout3-child-layout">
 								<option label="{lang}wcf.acp.ultimate.layoutManager.selectLayout.none{/lang}" value="0">{lang}wcf.acp.ultimate.layoutManager.selectLayout.none{/lang}</option>
-								{htmlOptions options=$layouts{if $errorField == 'layout2-child'} selected=$errorID{/if}}
+								{htmlOptions options=$layouts}
 							</select>
 							{if $errorField == 'layout3-child-layout'}
 								<small class="innerError">
@@ -140,7 +140,7 @@
 						<dt>
 							<select id="layout4-child-layout">
 								<option label="{lang}wcf.acp.ultimate.layoutManager.selectLayout.none{/lang}" value="0">{lang}wcf.acp.ultimate.layoutManager.selectLayout.none{/lang}</option>
-								{htmlOptions options=$layouts{if $errorField == 'layout4-child'} selected=$errorID{/if}}
+								{htmlOptions options=$layouts}
 							</select>
 							{if $errorField == 'layout4-child-layout'}
 								<small class="innerError">

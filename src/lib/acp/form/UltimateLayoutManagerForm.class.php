@@ -27,13 +27,10 @@
  */
 namespace ultimate\acp\form;
 use ultimate\data\layout\LayoutEditor;
-
-use wcf\system\exception\UserInputException;
-
-use wcf\util\ArrayUtil;
-
+use ultimate\system\layout\LayoutHandler;
 use wcf\acp\form\ACPForm;
 use wcf\system\cache\CacheHandler;
+use wcf\system\exception\UserInputException;
 
 /**
  * Shows the UltimateLayoutManager form.
@@ -73,6 +70,24 @@ class UltimateLayoutManagerForm extends ACPForm {
 	public $layouts = array();
 	
 	/**
+	 * Contains all category layouts.
+	 * @var \ultimate\data\layout\Layout[]
+	 */
+	public $categoryLayouts = array();
+	
+	/**
+	 * Contains all category layouts.
+	 * @var \ultimate\data\layout\Layout[]
+	 */
+	public $contentLayouts = array();
+	
+	/**
+	 * Contains all category layouts.
+	 * @var \ultimate\data\layout\Layout[]
+	 */
+	public $pageLayouts = array();
+	
+	/**
 	 * Contains all existing templates.
 	 * @var \ultimate\data\template\Template[]
 	 */
@@ -96,6 +111,43 @@ class UltimateLayoutManagerForm extends ACPForm {
 		$file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
 		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
 		$this->layouts = CacheHandler::getInstance()->get($cacheName, 'layouts');
+		
+		$cacheName = 'category';
+		$cacheBuilderClassName = '\ultimate\system\cache\builder\CategoryCacheBuilder';
+		$file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
+		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
+		$pages = CacheHandler::getInstance()->get($cacheName, 'category');
+		
+		/* @var $category \ultimate\data\category\Category */
+		foreach ($category as $categoryID => $category) {
+			$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($categoryID, 'category');
+			$this->categoryLayouts[$layout->__get('layoutID')] = $layout;
+		}
+		
+		$cacheName = 'content';
+		$cacheBuilderClassName = '\ultimate\system\cache\builder\CategoryCacheBuilder';
+		$file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
+		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
+		$pages = CacheHandler::getInstance()->get($cacheName, 'content');
+		
+		/* @var $content \ultimate\data\content\Content */
+		foreach ($content as $contentID => $content) {
+			$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($contentID, 'content');
+			$this->contentLayouts[$layout->__get('layoutID')] = $layout;
+		}
+		
+		$cacheName = 'page';
+		$cacheBuilderClassName = '\ultimate\system\cache\builder\PageCacheBuilder';
+		$file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
+		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
+		$pages = CacheHandler::getInstance()->get($cacheName, 'pages');
+		
+		/* @var $page \ultimate\data\page\Page */
+		foreach ($pages as $pageID => $page) {
+			$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($pageID, 'page');
+			$this->pageLayouts[$layout->__get('layoutID')] = $layout;
+		}
+		
 		
 		// read templates
 		$cacheName = 'template';
@@ -128,8 +180,26 @@ class UltimateLayoutManagerForm extends ACPForm {
 		$templateIDs = array_keys($this->templates);
 		// checks for valid template ids
 		foreach ($this->templateToLayout as $layoutID => $templateID) {
-			if (!in_array($templateID, $templateIDs)) {
+			if (in_array($templateID, $templateIDs)) continue;
+			
+			if (in_array($layoutID, array(1,2,3,4))) {
+				if ($templateID == 0) {
+					throw new UserInputException('layout'.(string) $layoutID, 'notSelected');
+				}
+				
 				throw new UserInputException('layout'.(string) $layoutID, 'notValid');
+			}
+			
+			if (isset($this->categoryLayouts[$layoutID])) {
+				throw new UserInputException('layout2-child-template', 'notValid');
+			}
+			
+			if (isset($this->contentLayouts[$layoutID])) {
+				throw new UserInputException('layout3-child-template', 'notValid');
+			}
+			
+			if (isset($this->pageLayouts[$layoutID])) {
+				throw new UserInputException('layout4-child-template', 'notValid');
 			}
 		}
 		
@@ -139,8 +209,14 @@ class UltimateLayoutManagerForm extends ACPForm {
 			$layout = $this->layouts[$layoutID];
 			/* @var $template \ultimate\data\template\Template|null */
 			$template = $layout->__get('template');
-			if (!is_null($template) && $template->__get('templateID') == $templateID) {
+			if ($template !== null && $template->__get('templateID') == $templateID) {
 				unset($this->templateToLayout[$layoutID]);
+				continue;
+			}
+			
+			if ($templateID == 0 && !in_array($layoutID, array(1,2,3,4))) {
+				unset($this->templateToLayout[$layoutID]);
+				continue;
 			}
 		}
 	}

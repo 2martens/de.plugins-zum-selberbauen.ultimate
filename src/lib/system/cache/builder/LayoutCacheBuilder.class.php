@@ -47,7 +47,7 @@ class LayoutCacheBuilder implements ICacheBuilder {
 		$data = array(
 			'layouts' => array(),
 			'layoutIDs' => array(),
-			'layoutsToLayoutName' => array(),
+			'layoutsToObjectData' => array(),
 			'templatesToLayoutID' => array()
 		);
 		
@@ -59,7 +59,7 @@ class LayoutCacheBuilder implements ICacheBuilder {
 		
 		foreach ($layouts as $layoutID => $layout) {
 			/* @var $layout \ultimate\data\layout\Layout */
-			$data['layoutsToLayoutName'][$layout->__get('layoutName')] = $layout;
+			$data['layoutsToObjectData'][$layout->__get('objectID') .','. $layout->__get('objectType')] = $layout;
 			$data['templatesToLayoutID'][$layoutID] = $layout->__get('template');
 		}
 		
