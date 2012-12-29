@@ -198,7 +198,7 @@ abstract class AbstractBlockType implements IBlockType {
 		}
 		$output = '';
 		// only fetch template if the template should be used
-		if ($this->useTemplate) $output = WCF::getTPL()->fetch($this->templateName);
+		if ($this->useTemplate) $output = WCF::getTPL()->fetch($this->templateName, 'ultimate');
 		// otherwise include template
 		else {
 			$output = "{include file='".$this->templateName."'}";
@@ -224,7 +224,7 @@ abstract class AbstractBlockType implements IBlockType {
 			$this->blockOptionsTemplateName = str_replace('Type', 'Options', lcfirst($className));
 		}
 		$output = '';
-		$output = WCF::getTPL()->fetch($this->blockOptionsTemplateName);
+		$output = WCF::getTPL()->fetch($this->blockOptionsTemplateName, 'ultimate');
 		return $output;
 	}
 	

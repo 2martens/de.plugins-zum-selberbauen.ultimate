@@ -181,7 +181,7 @@ abstract class AbstractWidgetType implements IWidgetType {
 		}
 		$output = '';
 		// only fetch template if the template should be used
-		if ($this->useTemplate) $output = WCF::getTPL()->fetch($this->templateName);
+		if ($this->useTemplate) $output = WCF::getTPL()->fetch($this->templateName, 'ultimate');
 		// otherwise include template
 		else {
 			$output = "{include file='".$this->templateName."'}";
@@ -208,7 +208,7 @@ abstract class AbstractWidgetType implements IWidgetType {
 			$this->widgetOptionsTemplateName = str_replace('Type', 'Options', lcfirst($className));
 		}
 		$output = '';
-		$output = WCF::getTPL()->fetch($this->widgetOptionsTemplateName);
+		$output = WCF::getTPL()->fetch($this->widgetOptionsTemplateName, 'ultimate');
 		return $output;
 	}
 

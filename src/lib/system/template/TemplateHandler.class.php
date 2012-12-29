@@ -117,7 +117,7 @@ class TemplateHandler extends SingletonFactory {
 			'title' => $layout->__get('layoutName')
 		));
 		
-		return WCF::getTPL()->fetch($this->templateName);
+		return WCF::getTPL()->fetch($this->templateName, 'ultimate');
 	}
 	
 	/**

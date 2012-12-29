@@ -191,7 +191,7 @@ class MediaBlockType extends AbstractBlockType {
 				WCF::getTPL()->assign($optionName, $optionValue);
 			}
 		}
-		return WCF::getTPL()->fetch('mediaBlockOptions');
+		return WCF::getTPL()->fetch('mediaBlockOptions', 'ultimate');
 	}
 	
 	/**
