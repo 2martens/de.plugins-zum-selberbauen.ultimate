@@ -79,7 +79,12 @@ class TemplateHandler extends SingletonFactory {
 		/* @var $widgetArea \ultimate\data\widget\area\WidgetArea|null */
 		if ($template !== null) $widgetArea = $template->__get('widgetArea');
 		else {
-			throw new NamedUserException(WCF::getLanguage()->get('ultimate.error.missingTemplate'));
+			throw new NamedUserException(WCF::getLanguage()->getDynamicVariable(
+				'ultimate.error.missingTemplate', 
+				array(
+					'type' => $requestType
+				)
+			));
 		}
 		if ($widgetArea !== null && $template->__get('showWidgetArea')) {
 			$sidebarOutput = '';
