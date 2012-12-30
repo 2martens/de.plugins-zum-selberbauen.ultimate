@@ -123,7 +123,7 @@ class ContentBlockType extends AbstractBlockType {
 	 * @see \ultimate\system\blocktype\IBlockType::readData()
 	 */
 	public function readData() {
-		if ($this->requestType != 'content') {
+		if ($this->requestType != 'content' || $this->requestType == 'index') {
 			$this->cacheName = 'contents-to-'.$this->requestType;
 			$this->cacheBuilderClassName = '\ultimate\system\cache\builder\Content'.
 				ucfirst($this->requestType).
@@ -143,6 +143,9 @@ class ContentBlockType extends AbstractBlockType {
 			case 'page':
 				$content = $this->objects[$this->requestObject->__get('pageID')];
 				$this->contents[$content->__get('contentID')] = $content;
+				break;
+			case 'index':
+				$this->contents = $this->objects;
 				break;
 		}
 		
