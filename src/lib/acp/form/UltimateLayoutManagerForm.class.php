@@ -26,6 +26,8 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\acp\form;
+use wcf\system\exception\NamedUserException;
+
 use ultimate\data\layout\LayoutEditor;
 use ultimate\system\layout\LayoutHandler;
 use wcf\acp\form\ACPForm;
@@ -105,6 +107,13 @@ class UltimateLayoutManagerForm extends ACPForm {
 	public function readData() {
 		parent::readData();
 		
+		// read templates
+		$cacheName = 'template';
+		$cacheBuilderClassName = '\ultimate\system\cache\builder\TemplateCacheBuilder';
+		$file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
+		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
+		$this->templates = CacheHandler::getInstance()->get($cacheName, 'templates');
+		
 		// read layouts
 		$cacheName = 'layout';
 		$cacheBuilderClassName = '\ultimate\system\cache\builder\LayoutCacheBuilder';
@@ -147,14 +156,6 @@ class UltimateLayoutManagerForm extends ACPForm {
 			$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($pageID, 'page');
 			$this->pageLayouts[$layout->__get('layoutID')] = $layout;
 		}
-		
-		
-		// read templates
-		$cacheName = 'template';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\TemplateCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->templates = CacheHandler::getInstance()->get($cacheName, 'templates');
 	}
 	
 	/**
@@ -247,7 +248,10 @@ class UltimateLayoutManagerForm extends ACPForm {
 		parent::assignVariables();
 		WCF::getTPL()->assign(array(
 			'layouts' => $this->layouts,
-			'templates' => $this->templates
+			'templates' => $this->templates,
+			'categoryLayouts' => $this->categoryLayouts,
+			'contentLayouts' => $this->contentLayouts,
+			'pageLayouts' => $this->pageLayouts
 		));
 	}
 }

@@ -524,6 +524,11 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="ultimate.date.dateTimeFormat"><![CDATA[%date% %time%]]></item>
 	</category>
 	
+	<category name="ultimate.error">
+		<item name="ultimate.error.noExistingTemplates"><![CDATA[No templates are existing.]]></item>
+		<item name="ultimate.error.missingTemplate"><![CDATA[There is no template attached to {if $type == 'category'}this category{/if}{if $type == 'content'}this content{/if}{if $type == 'page'}this page{/if}{if $type == 'index'}the main page{/if}.]]></item>
+	</category>
+	
 	<!-- this category is used for all layout names -->
 	<category name="ultimate.layout">
 		<item name="ultimate.layout.index"><![CDATA[Main page]]></item>

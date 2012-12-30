@@ -524,6 +524,11 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="ultimate.date.dateTimeFormat"><![CDATA[%date% %time%]]></item>
 	</category>
 	
+	<category name="ultimate.error">
+		<item name="ultimate.error.noExistingTemplates"><![CDATA[Es existieren keine Templates.]]></item>
+		<item name="ultimate.error.missingTemplate"><![CDATA[{if $type == 'category'}Dieser Kategorie{/if}{if $type == 'content'}Diesem Inhalt{/if}{if $type == 'page'}Dieser Seite{/if}{if $type == 'index'}Der Startseite{/if} wurde kein Template zugewiesen.]]></item>
+	</category>
+	
 	<!-- this category is used for all layout names -->
 	<category name="ultimate.layout">
 		<item name="ultimate.layout.index"><![CDATA[Startseite]]></item>
