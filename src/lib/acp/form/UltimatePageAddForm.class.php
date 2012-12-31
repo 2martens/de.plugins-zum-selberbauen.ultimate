@@ -30,7 +30,7 @@ use ultimate\data\content\ContentList;
 use ultimate\data\page\PageAction;
 use ultimate\data\page\PageEditor;
 use ultimate\util\PageUtil;
-use wcf\acp\form\ACPForm;
+use wcf\form\AbstractForm;
 use wcf\system\cache\CacheHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\exception\SystemException;
@@ -52,7 +52,7 @@ use wcf\util\StringUtil;
  * @subpackage	acp.form
  * @category	Ultimate CMS
  */
-class UltimatePageAddForm extends ACPForm {
+class UltimatePageAddForm extends AbstractForm {
 	/**
 	 * @var	string[]
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.acp.form.ACPForm.html#$activeMenuItem

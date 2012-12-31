@@ -30,7 +30,7 @@ use ultimate\data\category\CategoryList;
 use ultimate\data\category\CategoryAction;
 use ultimate\data\category\CategoryEditor;
 use ultimate\util\CategoryUtil;
-use wcf\acp\form\ACPForm;
+use wcf\form\AbstractForm;
 use wcf\system\cache\CacheHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
@@ -47,7 +47,7 @@ use wcf\util\StringUtil;
  * @subpackage	acp.form
  * @category	Ultimate CMS
  */
-class UltimateCategoryAddForm extends ACPForm {
+class UltimateCategoryAddForm extends AbstractForm {
 	/**
 	 * @var	string
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.acp.form.ACPForm.html#$activeMenuItem

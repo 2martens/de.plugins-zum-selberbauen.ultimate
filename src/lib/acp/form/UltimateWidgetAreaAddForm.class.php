@@ -28,7 +28,7 @@
 namespace ultimate\acp\form;
 use ultimate\data\widget\WidgetNodeList;
 use ultimate\data\widget\area\WidgetAreaAction;
-use wcf\acp\form\ACPForm;
+use wcf\form\AbstractForm;
 use wcf\system\cache\CacheHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\request\LinkHandler;
@@ -46,7 +46,7 @@ use wcf\util\StringUtil;
  * @subpackage	acp.form
  * @category	Ultimate CMS
  */
-class UltimateWidgetAreaAddForm extends ACPForm {
+class UltimateWidgetAreaAddForm extends AbstractForm {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
 	 */

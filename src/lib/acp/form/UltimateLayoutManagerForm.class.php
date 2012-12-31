@@ -26,11 +26,9 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\acp\form;
-use wcf\system\exception\NamedUserException;
-
 use ultimate\data\layout\LayoutEditor;
 use ultimate\system\layout\LayoutHandler;
-use wcf\acp\form\ACPForm;
+use wcf\form\AbstractForm;
 use wcf\system\cache\CacheHandler;
 use wcf\system\exception\UserInputException;
 
@@ -44,7 +42,7 @@ use wcf\system\exception\UserInputException;
  * @subpackage	acp.form
  * @category	Ultimate CMS
  */
-class UltimateLayoutManagerForm extends ACPForm {
+class UltimateLayoutManagerForm extends AbstractForm {
 	/**
 	 * @var	string
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.acp.form.ACPForm.html#$activeMenuItem

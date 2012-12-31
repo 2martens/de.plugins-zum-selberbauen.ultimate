@@ -29,7 +29,7 @@ namespace ultimate\acp\form;
 use ultimate\data\link\LinkAction;
 use ultimate\data\link\LinkEditor;
 use ultimate\util\LinkUtil;
-use wcf\acp\form\ACPForm;
+use wcf\form\AbstractForm;
 use wcf\system\category\CategoryHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
@@ -48,7 +48,7 @@ use wcf\util\StringUtil;
  * @subpackage	acp.form
  * @category	Ultimate CMS
  */
-class UltimateLinkAddForm extends ACPForm {
+class UltimateLinkAddForm extends AbstractForm {
 	/**
 	 * @var	string[]
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.acp.form.ACPForm.html#$activeMenuItem

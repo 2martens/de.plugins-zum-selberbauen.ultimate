@@ -27,7 +27,7 @@
  */
 namespace ultimate\acp\form;
 use ultimate\data\template\TemplateAction;
-use wcf\acp\form\ACPForm;
+use wcf\form\AbstractForm;
 use wcf\system\cache\CacheHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\request\LinkHandler;
@@ -45,7 +45,7 @@ use wcf\util\StringUtil;
  * @subpackage	acp.form
  * @category	Ultimate CMS
  */
-class UltimateTemplateAddForm extends ACPForm {
+class UltimateTemplateAddForm extends AbstractForm {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
 	 */
