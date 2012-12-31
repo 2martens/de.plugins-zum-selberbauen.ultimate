@@ -433,16 +433,6 @@ class UltimateContentAddForm extends MessageForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#show
-	 */
-	public function show() {
-		if (!empty($this->activeMenuItem)) {
-			ACPMenu::getInstance()->setActiveMenuItem($this->activeMenuItem);
-		}
-		parent::show();
-	}
-	
-	/**
 	 * Formats the date.
 	 * 
 	 * @param	\DateTime	$dateTime	optional
