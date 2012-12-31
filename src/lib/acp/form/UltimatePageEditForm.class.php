@@ -50,7 +50,7 @@ use wcf\util\DateUtil;
  */
 class UltimatePageEditForm extends UltimatePageAddForm {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.acp.form.ACPForm.html#$activeMenuItem
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.page';
 	

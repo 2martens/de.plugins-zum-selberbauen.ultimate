@@ -76,7 +76,7 @@ class UltimateContentAddForm extends MessageForm {
 	public $enableMultilangualism = true;
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.acp.form.ACPForm.html#$activeMenuItem
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.content.add';
 	

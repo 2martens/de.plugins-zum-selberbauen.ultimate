@@ -49,7 +49,7 @@ use wcf\system\WCF;
 class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 	/**
 	 * @var	string
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.acp.form.ACPForm.html#$activeMenuItem
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.category';
 	
