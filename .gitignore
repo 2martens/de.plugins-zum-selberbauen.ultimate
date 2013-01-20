@@ -56,6 +56,6 @@ phpdoc.xml
 # xsd files
 *types.xsd
 
-# php doc files
-phpdoc.dist.xml
-phpdoc.xml
+# Local installation
+src/cache/*.php
+src/config.inc.php
