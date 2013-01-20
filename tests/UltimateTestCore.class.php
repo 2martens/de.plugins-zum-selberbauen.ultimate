@@ -1,6 +1,6 @@
 <?php
 /**
- * Imports important files.
+ * Contains the Ultimate Test Core class.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -22,11 +22,30 @@
  * @copyright	2011-2012 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
- * @category	Ultimate CMS
  */
+namespace ultimate\tests;
 
-// include config
-require_once(dirname(__FILE__).'/config.inc.php');
-
-// include WCF
-require_once(ULTIMATE_DIR.RELATIVE_WCF_DIR.'global.php');
+/**
+ * The core class of the tests.
+ * 
+ * @author		Jim Martens
+ * @copyright	2011-2013 Jim Martens
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
+ * @package		de.plugins-zum-selberbauen.ultimate
+ */
+class UltimateTestCore {
+	/**
+	 * Called on autoload.
+	 * @param string $className
+	 */
+	public static function autoload($className) {
+		$namespaces = explode('\\', $className);
+		if (count($namespaces) > 1) {
+			$applicationPrefix = array_shift($namespaces);
+			$classPath = TEST_DIR . 'src/lib/' . implode('/', $namespaces) . '.class.php';
+			if (file_exists($classPath)) {
+				require_once($classPath);
+			}
+		}
+	}
+}

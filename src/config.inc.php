@@ -1,6 +1,7 @@
 <?php
 /**
- * Imports important files.
+ * This file is just used for testing purposes and won't be included in release versions.
+ * During the installation a config file will be created automatically.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -22,11 +23,16 @@
  * @copyright	2011-2012 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
- * @category	Ultimate CMS
  */
 
-// include config
-require_once(dirname(__FILE__).'/config.inc.php');
+// de.plugins-zum-selberbauen.ultimate (packageID 24)
+if (!defined('ULTIMATE_DIR')) define('ULTIMATE_DIR', dirname(__FILE__).'/');
+if (!defined('RELATIVE_ULTIMATE_DIR')) define('RELATIVE_ULTIMATE_DIR', '');
 
-// include WCF
-require_once(ULTIMATE_DIR.RELATIVE_WCF_DIR.'global.php');
+// general info
+if (!defined('RELATIVE_WCF_DIR')) define('RELATIVE_WCF_DIR', RELATIVE_ULTIMATE_DIR.
+	'../../../../../'.
+	'Documents/MeineWebsite/woltlab/ultimate/wcf/');
+if (!defined('PACKAGE_ID')) define('PACKAGE_ID', 24);
+if (!defined('PACKAGE_NAME')) define('PACKAGE_NAME', 'Ultimate CMS');
+if (!defined('PACKAGE_VERSION')) define('PACKAGE_VERSION', '1.0.0 Alpha 1');

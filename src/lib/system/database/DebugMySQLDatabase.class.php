@@ -1,6 +1,6 @@
 <?php
 /**
- * Imports important files.
+ * Contains the DebugMySQL Database class.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -22,11 +22,29 @@
  * @copyright	2011-2012 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
+ * @subpackage	system.database
  * @category	Ultimate CMS
  */
+namespace ultimate\system\database;
+use wcf\system\database\MySQLDatabase;
 
-// include config
-require_once(dirname(__FILE__).'/config.inc.php');
-
-// include WCF
-require_once(ULTIMATE_DIR.RELATIVE_WCF_DIR.'global.php');
+/**
+ * Extends the MySQL Database class with a possibility to retrieve the pdo object.
+ * To be used only for PHPUnit testing.
+ * 
+ * @author		Jim Martens
+ * @copyright	2013 Jim Martens
+ * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
+ * @package		de.plugins-zum-selberbauen.ultimate
+ * @subpackage	system.database
+ * @category	Ultimate CMS
+ */
+class DebugMySQLDatabase extends MySQLDatabase {
+	/**
+	 * Returns the PDO object.
+	 * @return PDO
+	 */
+	public function getPDO() {
+		return $this->pdo;
+	}
+}
