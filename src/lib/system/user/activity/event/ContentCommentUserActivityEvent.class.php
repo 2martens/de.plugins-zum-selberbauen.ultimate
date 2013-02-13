@@ -26,7 +26,9 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\user\activity\event;
-use wcf\system\cache\CacheHandler;
+use ultimate\system\cache\builder\AuthorCacheBuilder;
+use ultimate\system\cache\builder\ContentCacheBuilder;
+use wcf\system\cache\builder\CommentCacheBuilder;
 use wcf\system\user\activity\event\IUserActivityEvent;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
@@ -134,23 +136,9 @@ class ContentCommentUserActivityEvent extends SingletonFactory implements IUserA
 	 */
 	protected function init() {
 		// load cache
-		$cacheName = 'comment';
-		$cacheBuilderClassName = '\wcf\system\cache\builder\CommentCacheBuilder';
-		$file = WCF_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->comments = CacheHandler::getInstance()->get($cacheName, 'comments');
-		
-		$cacheName = 'content';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\ContentCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->contents = CacheHandler::getInstance()->get($cacheName, 'contents');
-		
-		$cacheName = 'author';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\AuthorCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->authors = CacheHandler::getInstance()->get($cacheName, 'authors');
+		$this->comments = CommentCacheBuilder::getInstance()->getData(array(), 'comments');
+		$this->contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
+		$this->authors = AuthorCacheBuilder::getInstance()->getData(array(), 'authors');
 	}
 }
 

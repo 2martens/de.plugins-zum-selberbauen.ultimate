@@ -26,10 +26,8 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\acp\action;
-use wcf\system\cache\CacheHandler;
-
+use ultimate\system\cache\builder\WidgetCacheBuilder;
 use ultimate\system\widgettype\WidgetTypeHandler;
-
 use wcf\action\AbstractSecureAction;
 use wcf\action\AJAXProxyAction;
 use wcf\system\event\EventHandler;
@@ -146,10 +144,6 @@ class WidgetAction extends AJAXProxyAction {
 	 * Loads the cache.
 	 */
 	protected function loadCache() {
-		$cacheName = 'widget';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\WidgetCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->widgets = CacheHandler::getInstance()->get($cacheName, 'widgets');
+		$this->widgets = WidgetCacheBuilder::getInstance()->getData(array(), 'widgets');
 	}
 }

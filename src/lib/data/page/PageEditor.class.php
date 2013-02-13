@@ -26,11 +26,12 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\page;
+use ultimate\system\cache\builder\ContentPageCacheBuilder;
+use ultimate\system\cache\builder\PageCacheBuilder;
 use ultimate\data\layout\LayoutAction;
 use ultimate\system\layout\LayoutHandler;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
-use wcf\system\cache\CacheHandler;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\WCF;
 
@@ -160,7 +161,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableCachedObject.html#resetCache
 	 */
 	public static function resetCache() {
-		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.page.php');
-		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.content-to-page.php');
+		PageCacheBuilder::getInstance()->reset();
+		ContentPageCacheBuilder::getInstance()->reset();
 	}
 }

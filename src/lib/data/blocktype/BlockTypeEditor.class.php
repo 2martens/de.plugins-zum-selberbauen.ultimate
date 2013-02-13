@@ -26,9 +26,9 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\blocktype;
+use ultimate\system\cache\builder\BlockTypeCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
-use wcf\system\cache\CacheHandler;
 
 /**
  * Provides functions to edit blockTypes.
@@ -50,6 +50,6 @@ class BlockTypeEditor extends DatabaseObjectEditor implements IEditableCachedObj
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableCachedObject.html#resetCache
 	 */
 	public static function resetCache() {
-		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.blocktype.php');
+		BlockTypeCacheBuilder::getInstance()->reset();
 	}
 }

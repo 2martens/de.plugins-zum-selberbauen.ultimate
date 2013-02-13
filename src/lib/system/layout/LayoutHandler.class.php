@@ -26,7 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\layout;
-use wcf\system\cache\CacheHandler;
+use ultimate\system\cache\builder\LayoutCacheBuilder;
 use wcf\system\SingletonFactory;
 use wcf\util\StringUtil;
 
@@ -166,12 +166,8 @@ class LayoutHandler extends SingletonFactory {
 	 * @since	1.0.0
 	 */
 	protected function loadCache() {
-		$cacheName = 'layout';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\LayoutCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->layouts = CacheHandler::getInstance()->get($cacheName, 'layouts');
-		$this->layoutsToObjectData = CacheHandler::getInstance()->get($cacheName, 'layoutsToObjectData');
-		$this->templatesToLayoutID = CacheHandler::getInstance()->get($cacheName, 'templatesToLayoutID');
+		$this->layouts = LayoutCacheBuilder::getInstance()->getData(array(), 'layouts');
+		$this->layoutsToObjectData = LayoutCacheBuilder::getInstance()->getData(array(), 'layoutsToObjectData');
+		$this->templatesToLayoutID = LayoutCacheBuilder::getInstance()->getData(array(), 'templatesToLayoutID');
 	}
 }

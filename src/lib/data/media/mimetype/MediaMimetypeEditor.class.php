@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\media\mimetype;
+use ultimate\system\cache\builder\MediaMimetypeCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 
@@ -49,6 +50,6 @@ class MediaMimetypeEditor extends DatabaseObjectEditor implements IEditableCache
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableCachedObject.html#resetCache
 	 */
 	public static function resetCache() {
-		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.mimetype.php');
+		MediaMimetypeCacheBuilder::getInstance()->reset();
 	}
 }

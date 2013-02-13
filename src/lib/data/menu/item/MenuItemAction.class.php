@@ -29,10 +29,12 @@ namespace ultimate\data\menu\item;
 use ultimate\data\category\Category;
 use ultimate\data\content\Content;
 use ultimate\data\page\Page;
+use ultimate\system\cache\builder\CategoryCacheBuilder;
+use ultimate\system\cache\builder\ContentCacheBuilder;
+use ultimate\system\cache\builder\PageCacheBuilder;
 use ultimate\system\menu\item\MenuItemHandler;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\ISortableAction;
-use wcf\system\cache\CacheHandler;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\SystemException;
 use wcf\system\exception\ValidateActionException;
@@ -388,22 +390,8 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 	 * @since	1.0.0
 	 */
 	protected function loadCache() {
-		$cacheName = 'category';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\CategoryCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->categories = CacheHandler::getInstance()->get($cacheName, 'categories');
-		
-		$cacheName = 'content';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\ContentCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->contents = CacheHandler::getInstance()->get($cacheName, 'contents');
-		
-		$cacheName = 'page';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\PageCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->pages = CacheHandler::getInstance()->get($cacheName, 'pages');
+		$this->categories = CategoryCacheBuilder::getInstance()->getData(array(), 'categories');
+		$this->contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
+		$this->pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
 	}
 }

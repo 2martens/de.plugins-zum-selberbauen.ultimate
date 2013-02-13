@@ -26,10 +26,10 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\page;
+use ultimate\system\cache\builder\CategoryCacheBuilder;
 use ultimate\system\template\TemplateHandler;
 use ultimate\util\CategoryUtil;
 use wcf\page\AbstractPage;
-use wcf\system\cache\CacheHandler;
 use wcf\system\request\RouteHandler;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
@@ -119,10 +119,6 @@ class CategoryPage extends AbstractPage {
 	 * Loads the cache.
 	 */
 	protected function loadCache() {
-		$cacheName = 'category';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\CategoryCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		return CacheHandler::getInstance()->get($cacheName, 'categoriesToSlug');
+		return CategoryCacheBuilder::getInstance()->getData(array(), 'categoriesToSlug');
 	}
 }

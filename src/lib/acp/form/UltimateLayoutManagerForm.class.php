@@ -27,9 +27,13 @@
  */
 namespace ultimate\acp\form;
 use ultimate\data\layout\LayoutEditor;
+use ultimate\system\cache\builder\CategoryCacheBuilder;
+use ultimate\system\cache\builder\ContentCacheBuilder;
+use ultimate\system\cache\builder\LayoutCacheBuilder;
+use ultimate\system\cache\builder\PageCacheBuilder;
+use ultimate\system\cache\builder\TemplateCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use wcf\form\AbstractForm;
-use wcf\system\cache\CacheHandler;
 use wcf\system\exception\UserInputException;
 
 /**
@@ -106,48 +110,28 @@ class UltimateLayoutManagerForm extends AbstractForm {
 		parent::readData();
 		
 		// read templates
-		$cacheName = 'template';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\TemplateCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->templates = CacheHandler::getInstance()->get($cacheName, 'templates');
+		$this->templates = TemplateCacheBuilder::getInstance()->getData(array(), 'templates');
 		
 		// read layouts
-		$cacheName = 'layout';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\LayoutCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->layouts = CacheHandler::getInstance()->get($cacheName, 'layouts');
+		$this->layouts = LayoutCacheBuilder::getInstance()->getData(array(), 'layouts');
 		
-		$cacheName = 'category';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\CategoryCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$pages = CacheHandler::getInstance()->get($cacheName, 'category');
+		$categories = CategoryCacheBuilder::getInstance()->getData(array(), 'categories');
 		
 		/* @var $category \ultimate\data\category\Category */
-		foreach ($category as $categoryID => $category) {
+		foreach ($categories as $categoryID => $category) {
 			$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($categoryID, 'category');
 			$this->categoryLayouts[$layout->__get('layoutID')] = $layout;
 		}
 		
-		$cacheName = 'content';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\CategoryCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$pages = CacheHandler::getInstance()->get($cacheName, 'content');
+		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
 		
 		/* @var $content \ultimate\data\content\Content */
-		foreach ($content as $contentID => $content) {
+		foreach ($contents as $contentID => $content) {
 			$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($contentID, 'content');
 			$this->contentLayouts[$layout->__get('layoutID')] = $layout;
 		}
 		
-		$cacheName = 'page';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\PageCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$pages = CacheHandler::getInstance()->get($cacheName, 'pages');
+		$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
 		
 		/* @var $page \ultimate\data\page\Page */
 		foreach ($pages as $pageID => $page) {

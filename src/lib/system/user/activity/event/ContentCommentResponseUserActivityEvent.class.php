@@ -26,8 +26,11 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\user\activity\event;
+use ultimate\system\cache\builder\ContentCacheBuilder;
 use wcf\data\comment\response\CommentResponseList;
-use wcf\system\cache\CacheHandler;
+use wcf\system\cache\builder\CommentCacheBuilder;
+use wcf\system\cache\builder\CommentResponseCacheBuilder;
+use wcf\system\cache\builder\UserCacheBuilder;
 use wcf\system\user\activity\event\IUserActivityEvent;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
@@ -156,31 +159,9 @@ class ContentCommentResponseUserActivityEvent extends SingletonFactory implement
 	 */
 	protected function init() {
 		// load cache
-		// TODO create a CommentCacheBuilder
-		$cacheName = 'comment';
-		$cacheBuilderClassName = '\wcf\system\cache\builder\CommentCacheBuilder';
-		$file = WCF_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->comments = CacheHandler::getInstance()->get($cacheName, 'comments');
-		
-		// TODO create a CommentResponseCacheBuilder
-		$cacheName = 'comment-response';
-		$cacheBuilderClassName = '\wcf\system\cache\builder\CommentResponseCacheBuilder';
-		$file = WCF_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->responses = CacheHandler::getInstance()->get($cacheName, 'responses');
-		
-		$cacheName = 'content';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\ContentCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->contents = CacheHandler::getInstance()->get($cacheName, 'contents');
-		
-		// TODO create a UserCacheBuilder
-		$cacheName = 'user';
-		$cacheBuilderClassName = '\wcf\system\cache\builder\UserCacheBuilder';
-		$file = WCF_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->users = CacheHandler::getInstance()->get($cacheName, 'users');
+		$this->comments = CommentCacheBuilder::getInstance()->getData(array(), 'comments');
+		$this->responses = CommentResponseCacheBuilder::getInstance()->getData(array(), 'responses');
+		$this->contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
+		$this->users = UserCacheBuilder::getInstance()->getData(array(), 'users');
 	}
 }

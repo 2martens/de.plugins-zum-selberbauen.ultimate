@@ -26,9 +26,10 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\layout;
+use ultimate\system\cache\builder\LayoutCacheBuilder;
+use ultimate\system\cache\builder\TemplateCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
-use wcf\system\cache\CacheHandler;
 use wcf\system\WCF;
 
 /**
@@ -101,7 +102,7 @@ class LayoutEditor extends DatabaseObjectEditor implements IEditableCachedObject
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableCachedObject.html#resetCache
 	 */
 	public static function resetCache() {
-		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.layout.php');
-		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.template-to-layout.php');
+		LayoutCacheBuilder::getInstance()->reset();
+		TemplateCacheBuilder::getInstance()->reset();
 	}
 }

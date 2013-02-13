@@ -26,8 +26,9 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\blocktype;
+use ultimate\system\cache\builder\BlockCacheBuilder;
+
 use ultimate\data\block\Block;
-use wcf\system\cache\CacheHandler;
 use wcf\system\event\EventHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
@@ -106,12 +107,6 @@ abstract class AbstractBlockType implements IBlockType {
 	 * @var	\ultimate\data\block\Block
 	 */
 	protected $block = null;
-	
-	/**
-	 * Contains the cache name.
-	 * @var	string
-	 */
-	protected $cacheName = '';
 	
 	/**
 	 * Contains the CacheBuilder class name.
@@ -258,18 +253,13 @@ abstract class AbstractBlockType implements IBlockType {
 	protected function loadCache($loadCustomQuery = false) {
 		$query = $this->block->__get('query');
 		if ($loadCustomQuery && !empty($query)) {
-			$cacheName = 'block';
-			$cacheBuilderClassName = '\ultimate\system\cache\builder\BlockCacheBuilder';
-			$file = ULTIMATE_DIR.'cache/cache'.$cacheName.'.php';
-			CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-			$result = CacheHandler::getInstance()->get($cacheName, 'cachedQueryToBlockID');
+			$result = BlockCacheBuilder::getInstance()->getData(array(), 'cachedQueryToBlockID');
 			$this->queryResult = $result[$this->blockID];
 		} else {
 			// prevents error
-			if (empty($this->cacheName)) return;
-			$file = ULTIMATE_DIR.'cache/cache.'.$this->cacheName.'.php';
-			CacheHandler::getInstance()->addResource($this->cacheName, $file, $this->cacheBuilderClassName);
-			$this->objects = CacheHandler::getInstance()->get($this->cacheName, $this->cacheIndex);
+			if (empty($this->cacheBuilderClassName)) return;
+			$instance = call_user_func($this->cacheBuilderClassName.'::getInstance');
+			$this->objects = $instance->getData(array(), $this->cacheIndex);
 		}
 	}
 }

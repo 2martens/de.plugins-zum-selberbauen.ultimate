@@ -26,11 +26,11 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\page;
+use ultimate\system\cache\builder\PageCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use ultimate\system\template\TemplateHandler;
 use ultimate\util\PageUtil;
 use wcf\page\AbstractPage;
-use wcf\system\cache\CacheHandler;
 use wcf\system\request\RouteHandler;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
@@ -118,10 +118,6 @@ class PagePage extends AbstractPage {
 	 * Loads the cache.
 	 */
 	protected function loadCache() {
-		$cacheName = 'page';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\PageCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		return CacheHandler::getInstance()->get($cacheName, 'pagesToSlug');
+		return PageCacheBuilder::getInstance()->getData(array(), 'pagesToSlug');
 	}
 }

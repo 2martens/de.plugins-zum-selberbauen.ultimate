@@ -26,8 +26,9 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\block;
+use ultimate\system\cache\builder\BlockCacheBuilder;
+use ultimate\system\cache\builder\BlockTypeCacheBuilder;
 use wcf\data\AbstractDatabaseObjectAction;
-use wcf\system\cache\CacheHandler;
 use wcf\system\WCF;
 
 /**
@@ -66,11 +67,7 @@ class BlockAction extends AbstractDatabaseObjectAction {
 	 */
 	public function getAvailableBlockID() {
 		// reading cache
-		$cacheName = 'block';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\BlockCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$blockIDs = CacheHandler::getInstance()->get($cacheName, 'blockIDs');
+		$blockIDs = BlockCacheBuilder::getInstance()->getData(array(), 'blockIDs');
 		// determine next available id
 		$blackList = (isset($this->parameters['data']['blockIDBlackList']) ? $this->parameters['data']['blockIDBlackList'] : array());
 		$realBlackList = array_merge($blockIDs, $blackList);
@@ -115,11 +112,7 @@ class BlockAction extends AbstractDatabaseObjectAction {
 		$blockEditor->addToTemplate($templateID);
 		
 		// get blocktype name
-		$cache = 'blocktype';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\BlocktypeCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
-		CacheHandler::getInstance()->addResource($cache, $file, $cacheBuilderClassName);
-		$blocktypes = CacheHandler::getInstance()->get($cache, 'blockTypes');
+		$blocktypes = BlockTypeCacheBuilder::getInstance()->getData(array(), 'blockTypes');
 		/* @var $blocktype \ultimate\data\blocktype\Blocktype */
 		$blocktype = $blocktypes[$block->__get('blockTypeID')];
 		

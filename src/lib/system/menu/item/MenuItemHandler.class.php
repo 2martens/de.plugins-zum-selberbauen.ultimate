@@ -27,7 +27,7 @@
  */
 namespace ultimate\system\menu\item;
 use ultimate\data\menu\item\MenuItem;
-use wcf\system\cache\CacheHandler;
+use ultimate\system\cache\builder\MenuItemCacheBuilder;
 use wcf\system\SingletonFactory;
 
 /**
@@ -101,13 +101,7 @@ class MenuItemHandler extends SingletonFactory {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.SingletonFactory.html#init
 	 */
 	protected function init() {
-		$cacheName = 'menu-item';
-		CacheHandler::getInstance()->addResource(
-			$cacheName,
-			ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php',
-			'\ultimate\system\cache\builder\MenuItemCacheBuilder'
-		);
-		$this->menuItems = CacheHandler::getInstance()->get($cacheName, 'menuItems');
+		$this->menuItems = MenuItemCacheBuilder::getInstance()->getData(array(), 'menuItems');
 	}
 	
 	/**
@@ -116,7 +110,7 @@ class MenuItemHandler extends SingletonFactory {
 	 * @internal Calls the init method.
 	 */
 	public function reloadCache() {
-		CacheHandler::getInstance()->clearResource('menu-item');
+		MenuItemCacheBuilder::getInstance()->reset();
 		
 		$this->init();
 	}

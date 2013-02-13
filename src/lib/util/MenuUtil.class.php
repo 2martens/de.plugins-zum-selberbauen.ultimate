@@ -26,7 +26,6 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\util;
-use wcf\system\cache\CacheHandler;
 use wcf\util\StringUtil;
 
 /**
@@ -56,7 +55,6 @@ class MenuUtil {
 		$isAvailable = true;
 		
 		$menus = self::loadCache(
-			'menu',
 			'\ultimate\system\cache\builder\MenuCacheBuilder',
 			'menus'
 		);
@@ -74,12 +72,13 @@ class MenuUtil {
 	/**
 	 * Loads the cache.
 	 * 
+	 * @param	string	$cacheBuilderClass
+	 * @param	string	$cacheIndex
 	 * @return	\ultimate\data\menu\Menu[]
 	 */
-	protected static function loadCache($cache, $cacheBuilderClass, $cacheIndex) {
-		$file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
-		CacheHandler::getInstance()->addResource($cache, $file, $cacheBuilderClass);
-		return CacheHandler::getInstance()->get($cache, $cacheIndex);
+	protected static function loadCache($cacheBuilderClass, $cacheIndex) {
+		$instance = call_user_func($cacheBuilderClass.'::getInstance');
+		return $instance->getData(array(), $cacheIndex);
 	}
 	
 	/**

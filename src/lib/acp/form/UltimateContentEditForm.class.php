@@ -36,7 +36,6 @@ use wcf\form\AbstractForm;
 use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
 use wcf\system\bbcode\URLParser;
-use wcf\system\cache\CacheHandler;
 use wcf\system\language\I18nHandler;
 use wcf\system\menu\acp\ACPMenu;
 use wcf\system\tagging\TagEngine;

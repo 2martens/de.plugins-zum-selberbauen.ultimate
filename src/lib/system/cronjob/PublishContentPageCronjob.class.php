@@ -28,8 +28,9 @@
 namespace ultimate\system\cronjob;
 use ultimate\data\content\ContentAction;
 use ultimate\data\page\PageAction;
+use ultimate\system\cache\builder\ContentCacheBuilder;
+use ultimate\system\cache\builder\PageCacheBuilder;
 use wcf\data\cronjob\Cronjob;
-use wcf\system\cache\CacheHandler;
 use wcf\system\cronjob\AbstractCronjob;
 
 /**
@@ -49,17 +50,9 @@ class PublishContentPageCronjob extends AbstractCronjob {
 	 */
 	public function execute(Cronjob $cronjob) {
 		// reading cache
-		$cacheName = 'content';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\ContentCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$contents = CacheHandler::getInstance()->get($cacheName, 'contents');
+		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
 		
-		$cacheName = 'page';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\PageCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$pages = CacheHandler::getInstance()->get($cacheName, 'pages');
+		$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
 		
 		// checking publish dates
 		$updateObjects = array();

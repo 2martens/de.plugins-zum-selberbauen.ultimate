@@ -28,8 +28,8 @@
 namespace ultimate\acp\form;
 use ultimate\data\widget\WidgetNodeList;
 use ultimate\data\widget\area\WidgetAreaAction;
+use ultimate\system\cache\builder\WidgetTypeCacheBuilder;
 use wcf\form\AbstractForm;
-use wcf\system\cache\CacheHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
@@ -88,11 +88,7 @@ class UltimateWidgetAreaAddForm extends AbstractForm {
 	public function readData() {
 		$this->widgetNodeList = new WidgetNodeList(0, 0, true);
 		// read widget cache
-		$cacheName = 'widget-type';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\WidgetTypeCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->widgetTypes = CacheHandler::getInstance()->get($cacheName, 'widgetTypes');
+		$this->widgetTypes = WidgetTypeCacheBuilder::getInstance()->getData(array(), 'widgetTypes');
 		
 		parent::readData();
 	}

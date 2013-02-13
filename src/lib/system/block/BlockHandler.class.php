@@ -27,7 +27,7 @@
  */
 namespace ultimate\system\block;
 use ultimate\data\block\Block;
-use wcf\system\cache\CacheHandler;
+use ultimate\system\cache\builder\BlockCacheBuilder;
 use wcf\system\SingletonFactory;
 
 /**
@@ -80,13 +80,7 @@ class BlockHandler extends SingletonFactory {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.SingletonFactory.html#init
 	 */
 	protected function init() {
-		$cacheName = 'block';
-		CacheHandler::getInstance()->addResource(
-			$cacheName,
-			ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php',
-			'\ultimate\system\cache\builder\BlockCacheBuilder'
-		);
-		$this->blocks = CacheHandler::getInstance()->get($cacheName, 'blocks');
+		$this->blocks = BlockCacheBuilder::getInstance()->getData(array(), 'blocks');
 	}
 	
 	/**
@@ -95,7 +89,7 @@ class BlockHandler extends SingletonFactory {
 	 * @internal Calls the init method.
 	 */
 	public function reloadCache() {
-		CacheHandler::getInstance()->clearResource('block');
+		BlockCacheBuilder::getInstance()->reset();
 	
 		$this->init();
 	}

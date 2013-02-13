@@ -27,7 +27,6 @@
  */
 namespace ultimate\util;
 use ultimate\util\thirdParty\IDNAConvert; // changed class to work with namespaces
-use wcf\system\cache\CacheHandler;
 use wcf\system\io\RemoteFile;
 use wcf\system\Regex;
 use wcf\util\StringUtil;
@@ -59,7 +58,6 @@ class LinkUtil {
 		$isAvailable = true;
 	
 		$links = self::loadCache(
-			'link',
 			'\ultimate\system\cache\builder\LinkCacheBuilder',
 			'links'
 		);
@@ -218,13 +216,14 @@ class LinkUtil {
 	
 	/**
 	 * Loads the cache.
-	 *
+	 * 
+	 * @param	string	$cacheBuilderClass
+	 * @param	string	$cacheIndex
 	 * @return	\ultimate\data\link\CategorizedLink[]
 	 */
-	protected static function loadCache($cache, $cacheBuilderClass, $cacheIndex) {
-		$file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
-		CacheHandler::getInstance()->addResource($cache, $file, $cacheBuilderClass);
-		return CacheHandler::getInstance()->get($cache, $cacheIndex);
+	protected static function loadCache($cacheBuilderClass, $cacheIndex) {
+		$instance = call_user_func($cacheBuilderClass.'::getInstance');
+		return $instance->getData(array(), $cacheIndex);
 	}
 	
 	/**

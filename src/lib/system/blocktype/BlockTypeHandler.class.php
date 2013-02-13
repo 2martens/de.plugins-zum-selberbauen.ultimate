@@ -26,7 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\blocktype;
-use wcf\system\cache\CacheHandler;
+use ultimate\system\cache\builder\BlockTypeCacheBuilder;
 use wcf\system\SingletonFactory;
 
 /**
@@ -143,10 +143,6 @@ class BlockTypeHandler extends SingletonFactory {
 	 * @since	1.0.0
 	 */
 	protected function loadCache() {
-		$cacheName = 'blocktype';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\BlockTypeCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->objects = CacheHandler::getInstance()->get($cacheName, 'blockTypes');
+		$this->objects = BlockTypeCacheBuilder::getInstance()->getData(array(), 'blockTypes');
 	}
 }

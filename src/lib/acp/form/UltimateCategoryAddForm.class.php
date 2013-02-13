@@ -31,7 +31,6 @@ use ultimate\data\category\CategoryAction;
 use ultimate\data\category\CategoryEditor;
 use ultimate\util\CategoryUtil;
 use wcf\form\AbstractForm;
-use wcf\system\cache\CacheHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;

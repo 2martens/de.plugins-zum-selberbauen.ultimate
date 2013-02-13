@@ -26,9 +26,10 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\link;
+use ultimate\system\cache\builder\LinkCacheBuilder;
+use ultimate\system\cache\builder\LinkCategoryCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
-use wcf\system\cache\CacheHandler;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\WCF;
 
@@ -157,7 +158,7 @@ class LinkEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableCachedObject.html#resetCache
 	 */
 	public static function resetCache() {
-		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.link.php');
-		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.link-to-category.php');
+		LinkCacheBuilder::getInstance()->reset();
+		LinkCategoryCacheBuilder::getInstance()->reset();
 	}
 }

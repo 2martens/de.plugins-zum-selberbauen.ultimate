@@ -29,7 +29,6 @@ namespace ultimate\page;
 use ultimate\system\layout\LayoutHandler;
 use ultimate\system\template\TemplateHandler;
 use wcf\page\AbstractPage;
-use wcf\system\cache\CacheHandler;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
 

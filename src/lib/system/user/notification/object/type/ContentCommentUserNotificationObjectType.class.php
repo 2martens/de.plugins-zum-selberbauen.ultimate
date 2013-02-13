@@ -26,8 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\user\notification\object\type;
-use wcf\system\cache\CacheHandler;
-
+use ultimate\system\cache\builder\ContentCacheBuilder;
 use wcf\data\comment\Comment;
 use wcf\data\object\type\AbstractObjectTypeProcessor;
 use wcf\system\user\notification\object\type\ICommentUserNotificationObjectType;
@@ -89,11 +88,7 @@ class ContentCommentUserNotificationObjectType extends AbstractObjectTypeProcess
 	 */
 	public function getOwnerID($objectID) {
 		// read cache
-		$cacheName = 'content';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\ContentCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$contents = CacheHandler::getInstance()->get($cacheName, 'contents');
+		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
 		
 		$content = $contents[$objectID];
 		

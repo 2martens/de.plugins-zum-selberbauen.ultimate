@@ -26,7 +26,6 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\util;
-use wcf\system\cache\CacheHandler;
 use wcf\util\StringUtil;
 
 /**
@@ -52,7 +51,6 @@ class CategoryUtil {
 	public static function getAvailableCategories($categoryID = 0) {
 		$categoryID = intval($categoryID);
 		$categories = self::loadCache(
-			'category',
 			'\ultimate\system\cache\builder\CategoryCacheBuilder',
 			'categories'
 		);
@@ -80,7 +78,6 @@ class CategoryUtil {
 		$isAvailable = true;
 		if ($categoryParent) {
 			$categories = self::loadCache(
-				'category',
 				'\ultimate\system\cache\builder\CategoryCacheBuilder',
 				'categoriesToParent'
 			);
@@ -94,7 +91,6 @@ class CategoryUtil {
 		}
 		else {
 			$categories = self::loadCache(
-				'category',
 				'\ultimate\system\cache\builder\CategoryCacheBuilder',
 				'categories'
 			);
@@ -125,7 +121,6 @@ class CategoryUtil {
 		$isAvailable = true;
 		if ($categoryParent) {
 			$categories = self::loadCache(
-				'category',
 				'\ultimate\system\cache\builder\CategoryCacheBuilder',
 				'categoriesToParent'
 			);
@@ -139,7 +134,6 @@ class CategoryUtil {
 		}
 		else {
 			$categories = self::loadCache(
-					'category',
 					'\ultimate\system\cache\builder\CategoryCacheBuilder',
 					'categories'
 			);
@@ -182,12 +176,13 @@ class CategoryUtil {
 	/**
 	 * Loads the cache.
 	 * 
+	 * @param	string	$cacheBuilderClass
+	 * @param	string	$cacheIndex
 	 * @return	\ultimate\data\category\Category[]
 	 */
-	protected static function loadCache($cache, $cacheBuilderClass, $cacheIndex) {
-		$file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
-		CacheHandler::getInstance()->addResource($cache, $file, $cacheBuilderClass);
-		return CacheHandler::getInstance()->get($cache, $cacheIndex);
+	protected static function loadCache($cacheBuilderClass, $cacheIndex) {
+		$instance = call_user_func($cacheBuilderClass.'::getInstance');
+		return $instance->getData(array(), $cacheIndex);
 	}
 	
 	/**

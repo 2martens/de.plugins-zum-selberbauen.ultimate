@@ -27,10 +27,10 @@
  */
 namespace ultimate\data\category;
 use ultimate\data\layout\LayoutAction;
+use ultimate\system\cache\builder\CategoryCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
-use wcf\system\cache\CacheHandler;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\WCF;
 
@@ -103,6 +103,6 @@ class CategoryEditor extends DatabaseObjectEditor implements IEditableCachedObje
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableCachedObject.html#resetCache
 	 */
 	public static function resetCache() {
-		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.category.php');
+		CategoryCacheBuilder::getInstance()->reset();
 	}
 }

@@ -27,8 +27,10 @@
  */
 namespace ultimate\acp\form;
 use ultimate\data\template\TemplateAction;
+use ultimate\system\cache\builder\BlockTypeCacheBuilder;
+use ultimate\system\cache\builder\MenuCacheBuilder;
+use ultimate\system\cache\builder\WidgetAreaCacheBuilder;
 use wcf\form\AbstractForm;
-use wcf\system\cache\CacheHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
@@ -148,23 +150,9 @@ class UltimateTemplateAddForm extends AbstractForm {
 	 */
 	public function readData() {
 		// load cache
-		$cacheName = 'menu';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\MenuCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->menus = CacheHandler::getInstance()->get($cacheName, 'menus');
-		
-		$cacheName = 'widget-area';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\WidgetAreaCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->widgetAreas = CacheHandler::getInstance()->get($cacheName, 'widgetAreas');
-		
-		$cacheName = 'blocktype';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\BlockTypeCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->blocktypes = CacheHandler::getInstance()->get($cacheName, 'blockTypes');
+		$this->menus = MenuCacheBuilder::getInstance()->getData(array(), 'menus');
+		$this->widgetAreas = WidgetAreaCacheBuilder::getInstance()->getData(array(), 'widgetAreas');
+		$this->blocktypes = BlockTypeCacheBuilder::getInstance()->getData(array(), 'blockTypes');
 		
 		parent::readData();
 	}

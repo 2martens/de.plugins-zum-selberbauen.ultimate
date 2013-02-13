@@ -28,7 +28,7 @@
 namespace ultimate\system\cache\builder;
 use wcf\data\user\UserList;
 use wcf\system\cache\builder\AbstractCacheBuilder;
-use wcf\system\cache\CacheHandler;
+use wcf\system\cache\builder\UserGroupCacheBuilder;
 
 /**
  * Caches the authors.
@@ -61,11 +61,7 @@ class AuthorCacheBuilder implements AbstractCacheBuilder {
 		$authorIDs = array();
 		
 		// reading groups
-		$cacheName = 'user-group';
-		$cacheBuilderClassName = '\wcf\system\cache\builder\UserGroupCacheBuilder';
-		$cacheIndex = 'groups';
-		CacheHandler::getInstance()->addResource($cacheName, WCF_DIR.'cache/cache.'.$cacheName.'.php', $cacheBuilderClassName);
-		$groups = CacheHandler::getInstance()->get($cacheName, $cacheIndex);
+		$groups = UserGroupCacheBuilder::getInstance()->getData(array(), 'groups');
 		
 		// permissions for being author
 		$permissions = array(

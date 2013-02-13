@@ -26,9 +26,10 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\block;
+use ultimate\system\cache\builder\BlockCacheBuilder;
+use ultimate\system\cache\builder\MenuBlockCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
-use wcf\system\cache\CacheHandler;
 use wcf\system\WCF;
 
 /**
@@ -96,7 +97,7 @@ class BlockEditor extends DatabaseObjectEditor implements IEditableCachedObject 
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableCachedObject.html#resetCache
 	 */
 	public static function resetCache() {
-		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.block.php');
-		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.menu-to-block.php');
+		BlockCacheBuilder::getInstance()->reset();
+		MenuBlockCacheBuilder::getInstance()->reset();
 	}
 }

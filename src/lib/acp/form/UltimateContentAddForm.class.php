@@ -28,13 +28,15 @@
 namespace ultimate\acp\form;
 use ultimate\data\content\ContentAction;
 use ultimate\data\content\ContentEditor;
+use ultimate\system\cache\builder\CategoryCacheBuilder;
+use ultimate\system\cache\builder\ContentTagCloudCacheBuilder;
 use ultimate\util\ContentUtil;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\tag\Tag;
 use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
 use wcf\system\bbcode\URLParser;
-use wcf\system\cache\CacheHandler;
+use wcf\system\cache\builder\UserGroupCacheBuilder;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\menu\acp\ACPMenu;
@@ -204,25 +206,13 @@ class UltimateContentAddForm extends MessageForm {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
-		$cacheName = 'category';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\CategoryCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->categories = CacheHandler::getInstance()->get($cacheName, 'categories');
+		$this->categories = CategoryCacheBuilder::getInstance()->getData(array(), 'categories');
 		unset ($this->categories[1]);
 		
-		$cacheName = 'usergroups';
-		$cacheBuilderClassName = '\wcf\system\cache\builder\UserGroupCacheBuilder';
-		$file = WCF_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->groups = CacheHandler::getInstance()->get($cacheName, 'groups');
+		$this->groups = UserGroupCacheBuilder::getInstance()->getData(array(), 'groups');
 		
 		// read tags
-		$cacheName = 'content-tag';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\ContentTagCloudCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$tags = CacheHandler::getInstance()->get($cacheName);
+		$tags = ContentTagCloudCacheBuilder::getInstance()->getData();
 		
 		$languages = WCF::getLanguage()->getLanguages();
 		
@@ -557,11 +547,7 @@ class UltimateContentAddForm extends MessageForm {
 	 */
 	protected function validateCategories() {
 		// reading cache
-		$cacheName = 'category';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\CategoryCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$categoryIDs = CacheHandler::getInstance()->get($cacheName, 'categoryIDs');
+		$categoryIDs = CategoryCacheBuilder::getInstance()->getData(array(), 'categoryIDs');
 		foreach ($this->categoryIDs as $categoryID) {
 			if (in_array($categoryID, $categoryIDs)) continue;
 			throw new UserInputException('category', 'invalidIDs');

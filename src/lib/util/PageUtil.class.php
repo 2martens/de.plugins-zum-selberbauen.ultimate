@@ -26,7 +26,6 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\util;
-use wcf\system\cache\CacheHandler;
 use wcf\util\StringUtil;
 
 /**
@@ -59,7 +58,6 @@ class PageUtil {
 		
 		if ($pageParent) {
 			$pages = self::loadCache(
-					'page',
 					'\ultimate\system\cache\builder\PageCacheBuilder',
 					'pagesToParent'
 			);
@@ -74,7 +72,6 @@ class PageUtil {
 		}
 		else {
 			$pages = self::loadCache(
-				'page',
 				'\ultimate\system\cache\builder\PageCacheBuilder',
 				'pages'
 			);
@@ -108,7 +105,6 @@ class PageUtil {
 		
 		if ($pageParent) {
 			$pages = self::loadCache(
-					'page',
 					'\ultimate\system\cache\builder\PageCacheBuilder',
 					'pagesToParent'
 			);
@@ -123,7 +119,6 @@ class PageUtil {
 		}
 		else {
 			$pages = self::loadCache(
-				'page',
 				'\ultimate\system\cache\builder\PageCacheBuilder',
 				'pages'
 			);
@@ -149,7 +144,6 @@ class PageUtil {
 	 */
 	public static function getAvailablePages($pageID = 0) {
 		$pages = self::loadCache(
-			'page',
 			'\ultimate\system\cache\builder\PageCacheBuilder',
 			'pages'
 		);
@@ -196,12 +190,10 @@ class PageUtil {
 	 */
 	public static function getAvailableContents($pageID = 0) {
 		$contents = self::loadCache(
-			'content',
 			'\ultimate\system\cache\builder\ContentCacheBuilder',
 			'contents'
 		);
 		$unavailableContentIDs = self::loadCache(
-			'content-to-page',
 			'\ultimate\system\cache\builder\ContentPageCacheBuilder',
 			'contentIDsToPageID'
 		);
@@ -217,12 +209,13 @@ class PageUtil {
 	/**
 	 * Loads the cache.
 	 * 
+	 * @param	string	$cacheBuilderClass
+	 * @param	string	$cacheIndex
 	 * @return	(\ultimate\data\content\Content|integer|\ultimate\data\page\Page)[]
 	 */
-	protected static function loadCache($cache, $cacheBuilderClass, $cacheIndex) {
-		$file = ULTIMATE_DIR.'cache/cache.'.$cache.'.php';
-		CacheHandler::getInstance()->addResource($cache, $file, $cacheBuilderClass);
-		return CacheHandler::getInstance()->get($cache, $cacheIndex);
+	protected static function loadCache($cacheBuilderClass, $cacheIndex) {
+		$instance = call_user_func($cacheBuilderClass.'::getInstance');
+		return $instance->getData(array(), $cacheIndex);
 	}
 	
 	/**

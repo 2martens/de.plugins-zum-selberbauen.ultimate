@@ -28,10 +28,12 @@
 namespace ultimate\data\content;
 use ultimate\data\layout\LayoutAction;
 use ultimate\data\page\PageAction;
+use ultimate\system\cache\builder\ContentCacheBuilder;
+use ultimate\system\cache\builder\ContentCategoryCacheBuilder;
+use ultimate\system\cache\builder\ContentTagCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
-use wcf\system\cache\CacheHandler;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\tagging\TagEngine;
@@ -254,9 +256,8 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableCachedObject.html#resetCache
 	 */
 	public static function resetCache() {
-		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.content.php');
-		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.content-to-category.php');
-		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.content-tag.php');
-		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.content-to-tag.php');
+		ContentCacheBuilder::getInstance()->reset();
+		ContentCategoryCacheBuilder::getInstance()->reset();
+		ContentTagCacheBuilder::getInstance()->reset();
 	}
 }

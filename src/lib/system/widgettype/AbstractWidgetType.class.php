@@ -27,7 +27,6 @@
  */
 namespace ultimate\system\widgettype;
 use ultimate\data\widget\Widget;
-use wcf\system\cache\CacheHandler;
 use wcf\system\event\EventHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
@@ -87,12 +86,6 @@ abstract class AbstractWidgetType implements IWidgetType {
 	 * @var \ultimate\data\widget\Widget
 	 */
 	protected $widget = null;
-	
-	/**
-	 * Contains the cache name.
-	 * @var	string
-	 */
-	protected $cacheName = '';
 	
 	/**
 	 * Contains the CacheBuilder class name.
@@ -237,9 +230,9 @@ abstract class AbstractWidgetType implements IWidgetType {
 	 */
 	protected function loadCache() {
 		// prevents error
-		if (empty($this->cacheName)) return;
+		if (empty($this->cacheBuilderClassName)) return;
 		$file = ULTIMATE_DIR.'cache/cache.'.$this->cacheName.'.php';
-		CacheHandler::getInstance()->addResource($this->cacheName, $file, $this->cacheBuilderClassName);
-		$this->objects = CacheHandler::getInstance()->get($this->cacheName, $this->cacheIndex);
+		$instance = call_user_func($this->cacheBuilderClassName.'::getInstance');
+		$this->objects = $instance->getData(array(), $this->cacheIndex);
 	}
 }

@@ -27,7 +27,7 @@
  */
 namespace ultimate\system\event\listener;
 use wcf\data\category\CategoryAction;
-use wcf\system\cache\CacheHandler;
+use wcf\system\cache\builder\ObjectTypeCacheBuilder;
 use wcf\system\category\CategoryHandler;
 use wcf\system\event\IEventListener;
 use wcf\system\io\File;
@@ -71,7 +71,7 @@ class ACPFirstTimeListener implements IEventListener {
 	 * Creates the default link category.
 	 */
 	protected function createDefaultLinkCategory() {
-		CacheHandler::getInstance()->clear(WCF_DIR.'cache/', 'cache.objectType-*.php');
+		ObjectTypeCacheBuilder::getInstance()->reset();
 		$objectType = CategoryHandler::getInstance()->getObjectTypeByName('de.plugins-zum-selberbauen.ultimate.linkCategory');
 		// until it's working, we have to do this
 		if ($objectType === null) return;

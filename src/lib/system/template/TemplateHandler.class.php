@@ -29,9 +29,9 @@ namespace ultimate\system\template;
 use ultimate\data\template\Template;
 use ultimate\data\widget\WidgetNodeList;
 use ultimate\system\blocktype\BlockTypeHandler;
+use ultimate\system\cache\builder\TemplateCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use ultimate\system\widgettype\WidgetTypeHandler;
-use wcf\system\cache\CacheHandler;
 use wcf\system\exception\NamedUserException;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
@@ -154,10 +154,6 @@ class TemplateHandler extends SingletonFactory {
 	 */
 	protected function loadCache() {
 		// templates
-		$cacheName = 'template';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\TemplateCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->templatesToLayoutID = CacheHandler::getInstance()->get($cacheName, 'templatesToLayoutID');
+		$this->templatesToLayoutID = TemplateCacheBuilder::getInstance()->getData(array(), 'templatesToLayoutID');
 	}
 }

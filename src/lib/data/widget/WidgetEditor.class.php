@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\widget;
+use ultimate\system\cache\builder\WidgetCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 
@@ -49,6 +50,6 @@ class WidgetEditor extends DatabaseObjectEditor implements IEditableCachedObject
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableCachedObject.html#resetCache
 	 */
 	public static function resetCache() {
-		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.widget.php');
+		WidgetCacheBuilder::getInstance()->reset();
 	}
 }

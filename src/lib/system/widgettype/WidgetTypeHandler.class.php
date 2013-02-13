@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\widgettype;
+use ultimate\system\cache\builder\WidgetTypeCacheBuilder;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 
@@ -141,10 +142,6 @@ class WidgetTypeHandler extends SingletonFactory {
 	 * @since	1.0.0
 	 */
 	protected function loadCache() {
-		$cacheName = 'widget-type';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\WidgetTypeCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->objects = CacheHandler::getInstance()->get($cacheName, 'widgetTypes');
+		$this->objects = WidgetTypeCacheBuilder::getInstance()->getData(array(), 'widgetTypes');
 	}
 }

@@ -26,9 +26,9 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\menu\item;
+use ultimate\system\cache\builder\MenuItemCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
-use wcf\system\cache\CacheHandler;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\WCF;
 
@@ -71,6 +71,6 @@ class MenuItemEditor extends DatabaseObjectEditor implements IEditableCachedObje
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableCachedObject.html#resetCache
 	 */
 	public static function resetCache() {
-		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.menu-item.php');
+		MenuItemCacheBuilder::getInstance()->reset();
 	}
 }

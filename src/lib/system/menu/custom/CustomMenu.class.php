@@ -27,7 +27,9 @@
  */
 namespace ultimate\system\menu\custom;
 use ultimate\data\menu\Menu;
-use wcf\system\cache\CacheHandler;
+use ultimate\system\cache\builder\ContentCacheBuilder;
+use ultimate\system\cache\builder\MenuItemCacheBuilder;
+use ultimate\system\cache\builder\PageCacheBuilder;
 use wcf\system\event\EventHandler;
 use wcf\system\menu\ITreeMenuItem;
 use wcf\system\menu\TreeMenu;
@@ -125,37 +127,13 @@ class CustomMenu extends TreeMenu {
 		parent::loadCache();
 		
 		// get menu item cache
-		$cacheName = 'menu-item';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\MenuItemCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource(
-			$cacheName,
-			$file,
-			$cacheBuilderClassName
-		);
-		$this->menuItems = CacheHandler::getInstance()->get($cacheName, 'menuItemsToParent');
+		$this->menuItems = MenuItemCacheBuilder::getInstance()->getData(array(), 'menuItemsToParent');
 		
 		// get content cache
-		$cacheName = 'content';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\ContentCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource(
-			$cacheName,
-			$file,
-			$cacheBuilderClassName
-		);
-		$this->contents = CacheHandler::getInstance()->get($cacheName, 'contents');
+		$this->contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
 		
 		// get content cache
-		$cacheName = 'page';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\PageCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource(
-			$cacheName,
-			$file,
-			$cacheBuilderClassName
-		);
-		$this->pages = CacheHandler::getInstance()->get($cacheName, 'pages');
+		$this->pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
 	}
 	
 	/**

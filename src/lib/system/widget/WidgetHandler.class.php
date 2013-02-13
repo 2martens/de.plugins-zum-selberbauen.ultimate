@@ -26,7 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\widget;
-use wcf\system\cache\CacheHandler;
+use ultimate\system\cache\builder\WidgetCacheBuilder;
 use wcf\system\SingletonFactory;
 
 /**
@@ -100,13 +100,7 @@ class WidgetHandler extends SingletonFactory {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.SingletonFactory.html#init
 	 */
 	protected function init() {
-		$cacheName = 'widget';
-		CacheHandler::getInstance()->addResource(
-		$cacheName,
-		ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php',
-			'\ultimate\system\cache\builder\WidgetCacheBuilder'
-		);
-		$this->widgets = CacheHandler::getInstance()->get($cacheName, 'widgetsShowOrder');
+		$this->widgets = WidgetCacheBuilder::getInstance()->getData(array(), 'widgetsShowOrder');
 	}
 	
 	/**
@@ -115,7 +109,7 @@ class WidgetHandler extends SingletonFactory {
 	 * @internal Calls the init method.
 	 */
 	public function reloadCache() {
-		CacheHandler::getInstance()->clearResource('widget');
+		WidgetCacheBuilder::getInstance()->reset();
 	
 		$this->init();
 	}

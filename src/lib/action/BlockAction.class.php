@@ -27,6 +27,10 @@
  */
 namespace ultimate\action;
 use ultimate\system\blocktype\BlockTypeHandler;
+use ultimate\system\cache\builder\BlockCacheBuilder;
+use ultimate\system\cache\builder\CategoryCacheBuilder;
+use ultimate\system\cache\builder\ContentCacheBuilder;
+use ultimate\system\cache\builder\PageCacheBuilder;
 use wcf\action\AbstractSecureAction;
 use wcf\action\AJAXProxyAction;
 use wcf\system\event\EventHandler;
@@ -421,28 +425,9 @@ class BlockAction extends AJAXProxyAction {
 	 */
 	protected function loadCache() {
 		// reading cache
-		$cacheName = 'block';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\BlockCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->blocks = CacheHandler::getInstance()->get($cacheName, 'blocks');
-		
-		$cacheName = 'category';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\CategoryCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->categories = CacheHandler::getInstance()->get($cacheName, 'categories');
-		
-		$cacheName = 'content';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\ContentCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->contents = CacheHandler::getInstance()->get($cacheName, 'contents');
-		
-		$cacheName = 'page';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\PageCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->pages = CacheHandler::getInstance()->get($cacheName, 'pages');
+		$this->blocks = BlockCacheBuilder::getInstance()->getData(array(), 'blocks');
+		$this->categories = CategoryCacheBuilder::getInstance()->getData(array(), 'categories');
+		$this->contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
+		$this->pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
 	}
 }

@@ -28,8 +28,8 @@
 namespace ultimate\acp\form;
 use ultimate\data\content\CategorizedContent;
 use ultimate\data\content\ContentAction;
+use ultimate\system\cache\builder\CategoryCacheBuilder;
 use wcf\acp\form\ACPForm;
-use wcf\system\cache\CacheHandler;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\SystemException;
@@ -200,11 +200,7 @@ class UltimateContentAssignToCategoryForm extends ACPForm {
 	 * Loads the cache.
 	 */
 	protected function loadCache() {
-		$cacheName = 'category';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\CategoryCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->categories = CacheHandler::getInstance()->get($cacheName, 'categories');
+		$this->categories = CategoryCacheBuilder::getInstance()->getData(array(), 'categories');
 	}
 	
 	/**

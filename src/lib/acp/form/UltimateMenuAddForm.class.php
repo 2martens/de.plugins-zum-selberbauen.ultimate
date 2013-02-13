@@ -28,9 +28,10 @@
 namespace ultimate\acp\form;
 use ultimate\data\menu\item\MenuItemNodeList;
 use ultimate\data\menu\MenuAction;
+use ultimate\system\cache\builder\CategoryCacheBuilder;
+use ultimate\system\cache\builder\PageCacheBuilder;
 use ultimate\util\MenuUtil;
 use wcf\form\AbstractForm;
-use wcf\system\cache\CacheHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\request\LinkHandler;
@@ -119,11 +120,7 @@ class UltimateMenuAddForm extends AbstractForm {
 	public function readData() {
 		$this->menuItemNodeList = new MenuItemNodeList(0, 0, true);
 		// read category cache
-		$cacheName = 'category';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\CategoryCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->categories = CacheHandler::getInstance()->get($cacheName, 'categoriesNested');
+		$this->categories = CategoryCacheBuilder::getInstance()->getData(array(), 'categoriesNested');
 		
 		// get categories which are already used in this menu
 		foreach ($this->categories as $categoryID => $categoryArray) {
@@ -135,11 +132,7 @@ class UltimateMenuAddForm extends AbstractForm {
 		}
 		
 		// read page cache
-		$cacheName = 'page';
-		$cacheBuilderClassName = '\ultimate\system\cache\builder\PageCacheBuilder';
-		$file = ULTIMATE_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->pages = CacheHandler::getInstance()->get($cacheName, 'pagesNested');
+		$this->pages = PageCacheBuilder::getInstance()->getData(array(), 'pagesNested');
 		
 		// get pages which are already used in this menu
 		foreach ($this->pages as $pageID => $pageArray) {

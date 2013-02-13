@@ -27,7 +27,6 @@
  */
 namespace ultimate\data\content;
 use wcf\data\AbstractDatabaseObjectAction;
-use wcf\system\cache\CacheHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\ValidateActionException;

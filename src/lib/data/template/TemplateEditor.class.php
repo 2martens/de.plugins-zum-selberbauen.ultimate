@@ -26,8 +26,8 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\template;
+use ultimate\system\cache\builder\TemplateCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
-use wcf\system\cache\CacheHandler;
 
 /**
  * Provides functions to edit templates.
@@ -49,6 +49,6 @@ class TemplateEditor extends DatabaseObjectEditor {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableCachedObject.html#resetCache
 	 */
 	public static function resetCache() {
-		CacheHandler::getInstance()->clear(ULTIMATE_DIR.'cache/', 'cache.template.php');
+		TemplateCacheBuilder::getInstance()->reset();
 	}
 }

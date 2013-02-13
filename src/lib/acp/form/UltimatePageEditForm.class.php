@@ -32,7 +32,7 @@ use ultimate\data\page\PageAction;
 use ultimate\data\page\PageEditor;
 use ultimate\util\PageUtil;
 use wcf\form\AbstractForm;
-use wcf\system\cache\CacheHandler;
+use wcf\system\cache\builder\UserGroupCacheBuilder;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
@@ -107,11 +107,7 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 		$this->pages = PageUtil::getAvailablePages($this->pageID);
 		
 		// reading cache
-		$cacheName = 'usergroups';
-		$cacheBuilderClassName = '\wcf\system\cache\builder\UserGroupCacheBuilder';
-		$file = WCF_DIR.'cache/cache.'.$cacheName.'.php';
-		CacheHandler::getInstance()->addResource($cacheName, $file, $cacheBuilderClassName);
-		$this->groups = CacheHandler::getInstance()->get($cacheName, 'groups');
+		$this->groups = UserGroupCacheBuilder::getInstance()->getData(array(), 'groups');
 			
 		/* @var $dateTime \DateTime */
 		$dateTime = $this->page->__get('publishDateObject');
