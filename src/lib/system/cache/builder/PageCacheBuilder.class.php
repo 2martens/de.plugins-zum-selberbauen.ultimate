@@ -27,7 +27,7 @@
  */
 namespace ultimate\system\cache\builder;
 use ultimate\data\page\PageList;
-use wcf\system\cache\builder\ICacheBuilder;
+use wcf\system\cache\builder\AbstractCacheBuilder;
 
 /**
  * Caches the pages.
@@ -39,11 +39,11 @@ use wcf\system\cache\builder\ICacheBuilder;
  * @subpackage	system.cache.builder
  * @category	Ultimate CMS
  */
-class PageCacheBuilder implements ICacheBuilder {
+class PageCacheBuilder implements AbstractCacheBuilder {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.cache.builder.ICacheBuilder.html#getData
 	 */
-	public function getData(array $cacheResource) {
+	protected function rebuild(array $parameters) {
 		$data = array(
 			'pages' => array(),
 			'pageIDs' => array(),

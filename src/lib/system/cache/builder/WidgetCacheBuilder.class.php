@@ -27,7 +27,7 @@
  */
 namespace ultimate\system\cache\builder;
 use ultimate\data\widget\WidgetList;
-use wcf\system\cache\builder\ICacheBuilder;
+use wcf\system\cache\builder\AbstractCacheBuilder;
 
 /**
  * Caches the widgets.
@@ -39,11 +39,11 @@ use wcf\system\cache\builder\ICacheBuilder;
  * @subpackage	system.cache.builder
  * @category	Ultimate CMS
  */
-class WidgetCacheBuilder implements ICacheBuilder {
+class WidgetCacheBuilder implements AbstractCacheBuilder {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.cache.builder.ICacheBuilder.html#getData
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.cache.builder.AbstractCacheBuilder.html#rebuild
 	 */
-	public function getData(array $cacheResource) {
+	protected function rebuild(array $parameters) {
 		$data = array(
 			'widgets' => array(),
 			'widgetIDs' => array()

@@ -27,7 +27,7 @@
  */
 namespace ultimate\system\cache\builder;
 use ultimate\data\media\mimetype\MediaMimetypeList;
-use wcf\system\cache\builder\ICacheBuilder;
+use wcf\system\cache\builder\AbstractCacheBuilder;
 
 /**
  * Caches the MIME types.
@@ -39,11 +39,11 @@ use wcf\system\cache\builder\ICacheBuilder;
  * @subpackage	system.cache.builder
  * @category	Ultimate CMS
  */
-class MediaMimetypeCacheBuilder implements ICacheBuilder {
+class MediaMimetypeCacheBuilder implements AbstractCacheBuilder {
 	/**
-	 * @see \wcf\system\cache\builder\ICacheBuilder::getData()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.cache.builder.AbstractCacheBuilder.html#rebuild
 	 */
-	public function getData(array $cacheResource) {
+	protected function rebuild(array $parameters) {
 		$data = array(
 			'mimeTypes' => array(),
 			'mimeTypeIDs' => array(),

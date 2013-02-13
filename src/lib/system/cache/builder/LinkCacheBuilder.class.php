@@ -28,7 +28,7 @@
 namespace ultimate\system\cache\builder;
 use ultimate\data\link\CategorizedLink;
 use ultimate\data\link\LinkList;
-use wcf\system\cache\builder\ICacheBuilder;
+use wcf\system\cache\builder\AbstractCacheBuilder;
 
 /**
  * Caches links.
@@ -40,11 +40,11 @@ use wcf\system\cache\builder\ICacheBuilder;
  * @subpackage	system.cache.builder
  * @category	Ultimate CMS
  */
-class LinkCacheBuilder implements ICacheBuilder {
+class LinkCacheBuilder implements AbstractCacheBuilder {
 	/**
-	 * @see \wcf\system\cache\builder\ICacheBuilder::getData()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.cache.builder.AbstractCacheBuilder.html#rebuild
 	 */
-	public function getData(array $cacheResource) {
+	protected function rebuild(array $parameters) {
 		$data = array(
 			'links' => array(),
 			'linkIDs' => array()

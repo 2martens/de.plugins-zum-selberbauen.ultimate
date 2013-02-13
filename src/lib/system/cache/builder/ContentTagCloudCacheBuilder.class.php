@@ -46,9 +46,9 @@ use wcf\util\ArrayUtil;
  */
 class ContentTagCloudCacheBuilder extends TagCloudCacheBuilder {
 	/**
-	 * @see \wcf\system\cache\builder\ICacheBuilder::getData()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.cache.builder.AbstractCacheBuilder.html#rebuild
 	 */
-	public function getData(array $cacheResource) {
+	protected function rebuild(array $parameters) {
 		/* @var $objectType \wcf\data\object\type\ObjectType */
 		$objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.tagging.taggableObject', 'de.plugins-zum-selberbauen.ultimate.contentTaggable');
 		$this->objectTypeIDs = array(

@@ -27,7 +27,7 @@
  */
 namespace ultimate\system\cache\builder;
 use ultimate\data\link\CategorizedLink;
-use wcf\system\cache\builder\ICacheBuilder;
+use wcf\system\cache\builder\AbstractCacheBuilder;
 use wcf\system\category\CategoryHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\WCF;
@@ -42,11 +42,11 @@ use wcf\system\WCF;
  * @subpackage	system.cache.builder
  * @category	Ultimate CMS
  */
-class LinkCategoryCacheBuilder implements ICacheBuilder {
+class LinkCategoryCacheBuilder implements AbstractCacheBuilder {
 	/**
-	 * @see \wcf\system\cache\builder\ICacheBuilder::getData()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.cache.builder.AbstractCacheBuilder.html#rebuild
 	 */
-	public function getData(array $cacheResource) {
+	protected function rebuild(array $parameters) {
 		$data = array(
 			'linksToCategoryID' => array(),
 			'linksToCategoryName' => array()

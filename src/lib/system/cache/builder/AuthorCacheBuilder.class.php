@@ -26,10 +26,9 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\cache\builder;
-use wcf\system\cache\CacheHandler;
-
 use wcf\data\user\UserList;
-use wcf\system\cache\builder\ICacheBuilder;
+use wcf\system\cache\builder\AbstractCacheBuilder;
+use wcf\system\cache\CacheHandler;
 
 /**
  * Caches the authors.
@@ -41,11 +40,11 @@ use wcf\system\cache\builder\ICacheBuilder;
  * @subpackage	system.cache.builder
  * @category	Ultimate CMS
  */
-class AuthorCacheBuilder implements ICacheBuilder {
+class AuthorCacheBuilder implements AbstractCacheBuilder {
 	/**
-	 * @see \wcf\system\cache\builder\ICacheBuilder::getData()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.cache.builder.AbstractCacheBuilder.html#rebuild
 	 */
-	public function getData(array $cacheResource) {
+	protected function rebuild(array $parameters) {
 		$data = array(
 			'authors' => array(),
 			'authorIDs' => array()
