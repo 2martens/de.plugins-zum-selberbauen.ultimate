@@ -468,10 +468,7 @@ ULTIMATE.Permission = {
 	 * @param	{String}	key
 	 * @return	{Boolean}
 	 */
-	get: function(key, parameters) {
-		// initialize parameters with an empty object
-		if (typeof parameters === 'undefined') var parameters = {};
-		
+	get: function(key) {
 		var value = this._variables.get(key);
 		
 		if (value === null) {
@@ -626,7 +623,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 		}, this));
 		$target.children('.sortableList').each($.proxy(function(index, item) {
 			$list = $(item);
-			$list.children('.jsMenuItem').each($.proxy(function(index, listItem) {
+			$list.children('.jsMenuItem').each($.proxy(function(_index, listItem) {
 				$listItem = $(listItem);
 				$listItem.detach();
 				if (usePrepend) $listItem.prependTo($parent);
@@ -926,7 +923,7 @@ ULTIMATE.Widget.Edit.prototype = {
 		
 		// initialize dialog handler
 		this._dialog.find('button[data-type="submit"]').click($.proxy(this._submit, this));
-		this._dialog.find('button[data-type="cancel"]').click($.proxy(function(event) {
+		this._dialog.find('button[data-type="cancel"]').click($.proxy(function(_event) {
 			// close dialog
 			this._dialog.wcfDialog('close');
 		}, this));
