@@ -25,7 +25,7 @@
 <div class="contentNavigation">
 	<nav>
 		<ul>
-			<li><a href="{link controller='UltimateWidgetAreaList'}{/link}" title="{lang}wcf.acp.menu.link.ultimate.appearance.widgetArea.list{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/list.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.menu.link.ultimate.appearance.widgetArea.list{/lang}</span></a></li>
+			<li><a href="{link controller='UltimateWidgetAreaList'}{/link}" title="{lang}wcf.acp.menu.link.ultimate.appearance.widgetArea.list{/lang}" class="button"><span class="icon icon24 icon-list"></span> <span>{lang}wcf.acp.menu.link.ultimate.appearance.widgetArea.list{/lang}</span></a></li>
 			
 			{event name='largeButtons'}
 		</ul>
@@ -66,22 +66,22 @@
 								<span class="buttons">
 									
 									{if $__wcf->getSession()->getPermission('admin.content.ultimate.canDeleteWidget')}
-										<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.global.button.delete{/lang}" class="icon16 jsDeleteButton jsTooltip" data-object-id="{@$widget->widgetID}" data-confirm-message="{lang}wcf.acp.ultimate.widget.sure{/lang}" />
+										<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="{@$widget->widgetID}" data-confirm-message="{lang}wcf.acp.ultimate.widget.sure{/lang}" />
 									{else}
-										<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.global.button.delete{/lang}" class="icon16 disabled" />
+										<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
 									{/if}
 									
 									{if $__wcf->getSession()->getPermission('admin.content.ultimate.canEditWidget')}
 										{* todo: toggle icons aren't clickable *}
-										<img src="{@$__wcf->getPath()}icon/{if !$widget->isDisabled}enabled{else}disabled{/if}.svg" alt="" title="{lang}wcf.global.button.{if !$widget->isDisabled}disable{else}enable{/if}{/lang}" class="icon16 jsToggleButton jsTooltip" data-object-id="{@$widget->widgetID}" />
+										<span title="{lang}wcf.global.button.{if !$widget->isDisabled}disable{else}enable{/if}{/lang}" class="icon icon16 icon-{if !$widget->isDisabled}circle-blank{else}off{/if} jsToggleButton jsTooltip" data-object-id="{@$widget->widgetID}"></span>
 									{else}
-										<img src="{@$__wcf->getPath()}icon/{if !$widget->isDisabled}enabled{else}disabled{/if}.svg" alt="" title="{lang}wcf.global.button.{if !$widget->isDisabled}enable{else}disable{/if}{/lang}" class="icon16 disabled" />
+										<span title="{lang}wcf.global.button.{if !$widget->isDisabled}enable{else}disable{/if}{/lang}" class="icon icon16 icon-{if !$widget->isDisabled}circle-blank{else}off{/if} disabled"></span>
 									{/if}
 									
 									{if $__wcf->getSession()->getPermission('admin.content.ultimate.canEditWidget')}
-										<img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.global.button.edit{/lang}" class="icon16 jsEditButton jsTooltip" data-object-id="{@$widget->widgetID}" />
+										<span title="{lang}wcf.global.button.edit{/lang}" class="icon icon16 icon-pencil jsEditButton jsTooltip" data-object-id="{@$widget->widgetID}"></span>
 									{else}
-										<img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.global.button.edit{/lang}" class="icon16 disabled" />
+										<span title="{lang}wcf.global.button.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
 									{/if}
 									
 									{event name='buttons'}

@@ -43,66 +43,6 @@ use wcf\system\WCF;
  * @category	Ultimate CMS
  */
 class UltimateStyleCompiler extends StyleCompiler {
-		
-	/**
-	 * Compiles the visualEditor stylesheets.
-	 *
-	 * @param	\wcf\data\style\Style	$style
-	 */
-	public function compileVisualEditor(\wcf\data\style\Style $style) {
-		$files = array(
-			ULTIMATE_DIR.'style/visualEditor/visualEditor.less'
-		);
-		
-		$variables = $style->getVariables();
-		$individualCss = '';
-		if (isset($variables['individualCss'])) {
-			$individualCss = $variables['individualCss'];
-			unset($variables['individualCss']);
-		}
-		
-		$this->compileStylesheet(
-			ULTIMATE_DIR.'style/visualEditor-'.$style->styleID,
-			$files,
-			$variables,
-			$individualCss,
-			new Callback(function($content) use ($style) {
-				return "/* stylesheet for '".$style->styleName."', generated on ".gmdate('r')." -- DO NOT EDIT */\n\n" . $content;
-			})
-		);
-	}
-	
-	/**
-	 * Compiles the visualEditorGrid stylesheets.
-	 *
-	 * @param	\wcf\data\style\Style	$style
-	 */
-	public function compileVisualEditorGrid(\wcf\data\style\Style $style) {
-		$files = array(
-			ULTIMATE_DIR.'style/visualEditor/grid.less',
-			ULTIMATE_DIR.'style/visualEditor/visualEditorIFrame.less',
-			ULTIMATE_DIR.'style/visualEditor/visualEditorIFrameGrid.less',
-			ULTIMATE_DIR.'style/visualEditor/gridUtil.less'
-		);
-		
-		$variables = $style->getVariables();
-		$individualCss = '';
-		if (isset($variables['individualCss'])) {
-			$individualCss = $variables['individualCss'];
-			unset($variables['individualCss']);
-		}
-	
-		$this->compileStylesheet(
-			ULTIMATE_DIR.'style/visualEditorGrid-'.$style->styleID,
-			$files,
-			$variables,
-			$individualCss,
-			new Callback(function($content) use ($style) {
-				return "/* stylesheet for '".$style->styleName."', generated on ".gmdate('r')." -- DO NOT EDIT */\n\n" . $content;
-			})
-		);
-	}
-	
 	/**
 	 * Compiles LESS stylesheets for ACP usage.
 	 */
@@ -136,6 +76,7 @@ class UltimateStyleCompiler extends StyleCompiler {
 			'',
 			new Callback(function($content) {
 				// fix relative paths
+				$content = str_replace('../font/', '../../font/', $content);
 				$content = str_replace('../icon/', '../../icon/', $content);
 				$content = str_replace('../images/', '../../images/', $content);
 	

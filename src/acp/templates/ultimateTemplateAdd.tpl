@@ -25,7 +25,7 @@
 <div class="contentNavigation">
 	<nav>
 		<ul>
-			<li><a href="{link controller='UltimateTemplateList'}{/link}" title="{lang}wcf.acp.menu.link.ultimate.appearance.template.list{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/list.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.menu.link.ultimate.appearance.template.list{/lang}</span></a></li>
+			<li><a href="{link controller='UltimateTemplateList'}{/link}" title="{lang}wcf.acp.menu.link.ultimate.appearance.template.list{/lang}" class="button"><span class="icon icon24 icon-list"></span> <span>{lang}wcf.acp.menu.link.ultimate.appearance.template.list{/lang}</span></a></li>
 			
 			{event name='largeButtons'}
 		</ul>
@@ -160,9 +160,9 @@
 								<span class="buttons">
 									
 									{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteBlock')}
-										<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.global.button.delete{/lang}" class="icon16 jsDeleteButton jsTooltip" data-object-id="{@$templateBlock->blockID}" data-confirm-message="{lang}'wcf.acp.ultimate.block.delete.sure'{/lang}" />
+										<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="{@$templateBlock->blockID}" data-confirm-message="{lang}'wcf.acp.ultimate.block.delete.sure'{/lang}"></span>
 									{else}
-										<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.global.button.delete{/lang}" class="icon16 disabled" />
+										<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
 									{/if}
 									
 									{event name='buttons'}
@@ -284,12 +284,6 @@
 					});
 					WCF.Language.addObject({
 						'wcf.acp.ultimate.template.dialog.additionalOptions': {lang}wcf.acp.ultimate.template.dialog.additionalOptions{/lang}
-					});
-					{* icon is buggy *}
-					WCF.Icon.addObject({
-						'wcf.icon.delete': '../{icon size='S'}delete{/icon}',
-						'wcf.icon.enabled': '../{icon size='S'}enabled{/icon}',
-						'wcf.icon.disabled': '../{icon size='S'}disabled{/icon}'
 					});
 					new ULTIMATE.Block.Transfer('blocktypeContainer', 'templateBlockList', 'ultimate\\data\\block\\BlockAction');
 				{/if}

@@ -46,13 +46,13 @@ class UltimateStyleHandler extends StyleHandler {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.style.StyleHandler.html#getStylesheet
 	 */
 	public function getStylesheet() {
+		$filename = '';
 		if (RequestHandler::getInstance()->isACPRequest()) {
 			// ACP
 			$filename = 'acp/style/style.css';
 			if (!file_exists(ULTIMATE_DIR.$filename)) {
 				UltimateStyleCompiler::getInstance()->compileACP();
 			}
-			return '<link rel="stylesheet" type="text/css" href="'.WCF::getPath('ultimate').$filename.'" />';
 		}
 		else {
 			// frontend
@@ -60,34 +60,7 @@ class UltimateStyleHandler extends StyleHandler {
 			if (!file_exists(ULTIMATE_DIR.$filename)) {
 				UltimateStyleCompiler::getInstance()->compile($this->getStyle()->getDecoratedObject());
 			}
-			return '<link rel="stylesheet" type="text/css" href="'.WCF::getPath('ultimate').$filename.'" />';
 		}
-		
-	}
-	
-	/**
-	 * Returns the HTML tag to include the visualEditor stylesheet.
-	 * 
-	 * @return	string
-	 */
-	public function getVisualEditorStylesheet() {
-		$filename = 'style/visualEditor-'.$this->getStyle()->styleID.'.css';
-		if (!file_exists(ULTIMATE_DIR.$filename)) {
-			UltimateStyleCompiler::getInstance()->compileVisualEditor($this->getStyle()->getDecoratedObject());
-		}
-		return '<link rel="stylesheet" type="text/css" href="'.WCF::getPath('ultimate').$filename.'" />';
-	}
-	
-	/**
-	 * Returns the HTML tag to include the visualEditor stylesheet.
-	 *
-	 * @return	string
-	 */
-	public function getVisualEditorGridStylesheet() {
-		$filename = 'style/visualEditorGrid-'.$this->getStyle()->styleID.'.css';
-		if (!file_exists(ULTIMATE_DIR.$filename)) {
-			UltimateStyleCompiler::getInstance()->compileVisualEditorGrid($this->getStyle()->getDecoratedObject());
-		}
-		return '<link rel="stylesheet" type="text/css" href="'.WCF::getPath('ultimate').$filename.'" />';
+		return '<link rel="stylesheet" type="text/css" href="'.WCF::getPath('ultimate').$filename.'?m='.filemtime(ULTIMATE_DIR.$filename).'" />';
 	}
 }

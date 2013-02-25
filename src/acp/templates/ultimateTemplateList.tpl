@@ -61,15 +61,15 @@
 						<td class="columnIcon">
 							
 						{if $__wcf->session->getPermission('admin.content.ultimate.canEditTemplate')}
-								<a href="{link controller='UltimateTemplateEdit' id=$template->templateID}{/link}"><img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.acp.ultimate.template.edit{/lang}" class="icon16 jsTooltip" /></a>
+								<a href="{link controller='UltimateTemplateEdit' id=$template->templateID}{/link}"><span title="{lang}wcf.acp.ultimate.template.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
 							{else}
-								<img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.acp.ultimate.template.edit{/lang}" class="icon16 disabled" />
+								<span title="{lang}wcf.acp.ultimate.template.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
 							{/if}
 							
 							{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteTemplate')}
-								<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.template.delete{/lang}" class="icon16 jsTooltip jsDeleteButton" data-object-id="{@$template->templateID}" data-confirm-message="{lang}wcf.acp.ultimate.template.delete.sure{/lang}" />
+								<span title="{lang}wcf.acp.ultimate.template.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton" data-object-id="{@$template->templateID}" data-confirm-message="{lang}wcf.acp.ultimate.template.delete.sure{/lang}"></span>
 							{else}
-								<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.template.delete{/lang}" class="icon16 disabled" />
+								<span title="{lang}wcf.acp.ultimate.template.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
 							{/if}
 							
 							{event name='buttons'}

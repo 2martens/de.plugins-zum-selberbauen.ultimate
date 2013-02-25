@@ -34,7 +34,7 @@
 	<nav>
 		<ul>
 			{if $__wcf->session->getPermission('admin.content.ultimate.canAddCategory')}
-				<li><a href="{link controller='UltimateCategoryAdd'}{/link}" title="{lang}wcf.acp.ultimate.category.add{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/add.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.ultimate.category.add{/lang}</span></a></li>
+				<li><a href="{link controller='UltimateCategoryAdd'}{/link}" title="{lang}wcf.acp.ultimate.category.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.category.add{/lang}</span></a></li>
 			{/if}
 			
 			{event name='largeButtons'}
@@ -74,15 +74,15 @@
 						<td class="columnIcon">
 							
 							{if $__wcf->session->getPermission('admin.content.ultimate.canEditCategory')}
-								<a href="{link controller='UltimateCategoryEdit' id=$category->categoryID}{/link}"><img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.acp.ultimate.category.edit{/lang}" class="icon16 jsTooltip" /></a>
+								<a href="{link controller='UltimateCategoryEdit' id=$category->categoryID}{/link}"><span title="{lang}wcf.acp.ultimate.category.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
 							{else}
-								<img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.acp.ultimate.category.edit{/lang}" class="icon16 disabled" />
+								<span title="{lang}wcf.acp.ultimate.category.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
 							{/if}
 							
 							{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteCategory') && $category->categoryID > 1}
-								<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.category.delete{/lang}" class="icon16 jsTooltip jsDeleteButton" data-object-id="{@$category->categoryID}" data-confirm-message="{lang}wcf.acp.ultimate.category.delete.sure{/lang}" />
+								<span title="{lang}wcf.acp.ultimate.category.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton" data-object-id="{@$category->categoryID}" data-confirm-message="{lang}wcf.acp.ultimate.category.delete.sure{/lang}"></span>
 							{else}
-								<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.category.delete{/lang}" class="icon16 disabled" />
+								<span title="{lang}wcf.acp.ultimate.category.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
 							{/if}
 							
 							{event name='buttons'}
@@ -111,7 +111,7 @@
 	<nav>
 		<ul>
 			{if $__wcf->session->getPermission('admin.content.ultimate.canAddCategory')}
-				<li><a href="{link controller='UltimateCategoryAdd'}{/link}" title="{lang}wcf.acp.ultimate.category.add{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/add.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.ultimate.category.add{/lang}</span></a></li>
+				<li><a href="{link controller='UltimateCategoryAdd'}{/link}" title="{lang}wcf.acp.ultimate.category.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.category.add{/lang}</span></a></li>
 			{/if}
 			
 			{event name='largeButtons'}

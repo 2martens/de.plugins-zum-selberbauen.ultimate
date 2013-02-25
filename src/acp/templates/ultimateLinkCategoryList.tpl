@@ -79,7 +79,7 @@
 			<ul>
 				{content}
 					{if $objectType->getProcessor()->canAddCategory()}
-						<li><a href="{link controller=$addController}{/link}" title="{$objectType->getProcessor()->getLanguageVariable('add')}" class="button"><img src="{@$__wcf->getPath()}icon/add.svg" alt="" class="icon24" /> <span>{@$objectType->getProcessor()->getLanguageVariable('add')}</span></a></li>
+						<li><a href="{link controller=$addController}{/link}" title="{$objectType->getProcessor()->getLanguageVariable('add')}" class="button"><span class="icon icon24 icon-plus"></span> <span>{@$objectType->getProcessor()->getLanguageVariable('add')}</span></a></li>
 					{/if}
 					
 					{event name='contentNavigationButtons'}
@@ -100,22 +100,21 @@
 					<span class="sortableNodeLabel">
 						<span class="buttons">
 							{if $objectType->getProcessor()->canEditCategory()}
-								<a href="{link controller=$editController id=$category->categoryID title=$category->getTitle()}{/link}"><img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.global.button.edit{/lang}" class="icon16 jsTooltip" /></a>
+								<a href="{link controller=$editController id=$category->categoryID title=$category->getTitle()}{/link}"><span title="{lang}wcf.global.button.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
 							{else}
-								<img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.global.button.edit{/lang}" class="icon16 disabled" />
+								<span title="{lang}wcf.global.button.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
 							{/if}
 
 							{if $objectType->getProcessor()->canDeleteCategory() && $category->categoryID != $defaultLinkCategoryID}
-								<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.global.button.delete{/lang}" class="icon16 jsDeleteButton jsTooltip" data-object-id="{@$category->categoryID}" data-confirm-message="{@$objectType->getProcessor()->getLanguageVariable('delete.sure')}" />
+								<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="{@$category->categoryID}" data-confirm-message="{@$objectType->getProcessor()->getLanguageVariable('delete.sure')}"></span>
 							{else}
-								<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.global.button.delete{/lang}" class="icon16 disabled" />
+								<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
 							{/if}
 
 							{if $objectType->getProcessor()->canEditCategory()}
-								{* todo: toggle icons aren't clickable *}
-								<img src="{@$__wcf->getPath()}icon/{if !$category->isDisabled}enabled{else}disabled{/if}.svg" alt="" title="{lang}wcf.global.button.{if !$category->isDisabled}disable{else}enable{/if}{/lang}" class="icon16 jsToggleButton jsTooltip" data-object-id="{@$category->categoryID}" />
+								<span title="{lang}wcf.global.button.{if !$category->isDisabled}disable{else}enable{/if}{/lang}" class="icon icon16 icon-{if !$category->isDisabled}circle-blank{else}off{/if} jsToggleButton jsTooltip" data-object-id="{@$category->categoryID}"></span>
 							{else}
-								<img src="{@$__wcf->getPath()}icon/{if !$category->isDisabled}enabled{else}disabled{/if}.svg" alt="" title="{lang}wcf.global.button.{if !$category->isDisabled}enable{else}disable{/if}{/lang}" class="icon16 disabled" />
+								<span title="{lang}wcf.global.button.{if !$category->isDisabled}enable{else}disable{/if}{/lang}" class="icon icon16 icon-{if !$category->isDisabled}circle-blank{else}off{/if} disabled"></span>
 							{/if}
 
 							{event name='buttons'}
@@ -148,7 +147,7 @@
 				<ul>
 					{content}
 						{if $objectType->getProcessor()->canAddCategory()}
-							<li><a href="{link controller=$addController}{/link}" title="{$objectType->getProcessor()->getLanguageVariable('add')}" class="button"><img src="{@$__wcf->getPath()}icon/add.svg" alt="" class="icon24" /> <span>{@$objectType->getProcessor()->getLanguageVariable('add')}</span></a></li>
+							<li><a href="{link controller=$addController}{/link}" title="{$objectType->getProcessor()->getLanguageVariable('add')}" class="button"><span class="icon icon24 icon-plus"></span> <span>{@$objectType->getProcessor()->getLanguageVariable('add')}</span></a></li>
 						{/if}
 
 						{event name='contentNavigationButtons'}

@@ -34,7 +34,7 @@
 	<nav>
 		<ul>
 			{if $__wcf->session->getPermission('admin.content.ultimate.canAddPage')}
-				<li><a href="{link controller='UltimatePageAdd'}{/link}" title="{lang}wcf.acp.ultimate.page.add{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/add.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.ultimate.page.add{/lang}</span></a></li>
+				<li><a href="{link controller='UltimatePageAdd'}{/link}" title="{lang}wcf.acp.ultimate.page.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.page.add{/lang}</span></a></li>
 			{/if}
 			
 			{event name='largeButtons'}
@@ -73,15 +73,15 @@
 						<td class="columnIcon">
 							
 							{if $__wcf->session->getPermission('admin.content.ultimate.canEditPage')}
-								<a href="{link controller='UltimatePageEdit' id=$page->pageID}{/link}"><img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.acp.ultimate.page.edit{/lang}" class="icon16 jsTooltip" /></a>
+								<a href="{link controller='UltimatePageEdit' id=$page->pageID}{/link}"><span title="{lang}wcf.acp.ultimate.page.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
 							{else}
-								<img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.acp.ultimate.page.edit{/lang}" class="icon16 disabled" />
+								<span title="{lang}wcf.acp.ultimate.page.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
 							{/if}
 							
 							{if $__wcf->session->getPermission('admin.content.ultimate.canDeletePage')}
-								<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.page.delete{/lang}" class="icon16 jsTooltip jsDeleteButton" data-object-id="{@$page->pageID}" data-confirm-message="{lang}wcf.acp.ultimate.page.delete.sure{/lang}" />
+								<span title="{lang}wcf.acp.ultimate.page.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton" data-object-id="{@$page->pageID}" data-confirm-message="{lang}wcf.acp.ultimate.page.delete.sure{/lang}"></span>
 							{else}
-								<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.page.delete{/lang}" class="icon16 disabled" />
+								<span title="{lang}wcf.acp.ultimate.page.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
 							{/if}
 							
 							{event name='buttons'}
@@ -114,7 +114,7 @@
 	<nav>
 		<ul>
 			{if $__wcf->session->getPermission('admin.content.ultimate.canAddPage')}
-				<li><a href="{link controller='UltimatePageAdd'}{/link}" title="{lang}wcf.acp.ultimate.page.add{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/add.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.ultimate.page.add{/lang}</span></a></li>
+				<li><a href="{link controller='UltimatePageAdd'}{/link}" title="{lang}wcf.acp.ultimate.page.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.page.add{/lang}</span></a></li>
 			{/if}
 			
 			{event name='largeButtons'}

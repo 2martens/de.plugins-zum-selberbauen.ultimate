@@ -34,7 +34,7 @@
 	<nav>
 		<ul>
 			{if $__wcf->session->getPermission('admin.content.ultimate.canAddContent')}
-				<li><a href="{link controller='UltimateLinkAdd'}{/link}" title="{lang}wcf.acp.ultimate.link.add{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/add.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.ultimate.link.add{/lang}</span></a></li>
+				<li><a href="{link controller='UltimateLinkAdd'}{/link}" title="{lang}wcf.acp.ultimate.link.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.link.add{/lang}</span></a></li>
 			{/if}
 			
 			{event name='contentNavigationButtons'}
@@ -72,15 +72,15 @@
 						<td class="columnIcon">
 							
 							{if $__wcf->session->getPermission('admin.content.ultimate.canEditLink')}
-								<a href="{link controller='UltimateLinkEdit' id=$link->linkID}{/link}"><img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.acp.ultimate.link.edit{/lang}" class="icon16 jsTooltip" /></a>
+								<a href="{link controller='UltimateLinkEdit' id=$link->linkID}{/link}"><span title="{lang}wcf.acp.ultimate.link.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
 							{else}
-								<img src="{@$__wcf->getPath()}icon/edit.svg" alt="" title="{lang}wcf.acp.ultimate.link.edit{/lang}" class="icon16 disabled" />
+								<span title="{lang}wcf.acp.ultimate.link.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
 							{/if}
 							
 							{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteLink')}
-								<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.link.delete{/lang}" class="icon16 jsTooltip jsDeleteButton" data-object-id="{@$link->linkID}" data-confirm-message="{lang}wcf.acp.ultimate.link.delete.sure{/lang}" />
+								<span title="{lang}wcf.acp.ultimate.link.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton" data-object-id="{@$link->linkID}" data-confirm-message="{lang}wcf.acp.ultimate.link.delete.sure{/lang}"></span>
 							{else}
-								<img src="{@$__wcf->getPath()}icon/delete.svg" alt="" title="{lang}wcf.acp.ultimate.link.delete{/lang}" class="icon16 disabled" />
+								<span title="{lang}wcf.acp.ultimate.link.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
 							{/if}
 							
 							{event name='buttons'}
@@ -111,7 +111,7 @@
 	<nav>
 		<ul>
 			{if $__wcf->session->getPermission('admin.content.ultimate.canAddLink')}
-				<li><a href="{link controller='UltimateLinkAdd'}{/link}" title="{lang}wcf.acp.ultimate.link.add{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/add.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.ultimate.link.add{/lang}</span></a></li>
+				<li><a href="{link controller='UltimateLinkAdd'}{/link}" title="{lang}wcf.acp.ultimate.link.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.link.add{/lang}</span></a></li>
 			{/if}
 			
 			{event name='contentNavigationButtons'}

@@ -26,7 +26,7 @@
 <div class="contentNavigation">
 	<nav>
 		<ul>
-			<li><a href="{link controller='UltimateLinkList'}{/link}" title="{lang}wcf.acp.menu.link.ultimate.link.list{/lang}" class="button"><img src="{@$__wcf->getPath()}icon/list.svg" alt="" class="icon24" /> <span>{lang}wcf.acp.menu.link.ultimate.link.list{/lang}</span></a></li>
+			<li><a href="{link controller='UltimateLinkList'}{/link}" title="{lang}wcf.acp.menu.link.ultimate.link.list{/lang}" class="button"><span class="icon icon24 icon-list"></span> <span>{lang}wcf.acp.menu.link.ultimate.link.list{/lang}</span></a></li>
 			
 			{event name='contentNavigationButtons'}
 		</ul>
