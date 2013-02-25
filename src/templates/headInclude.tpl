@@ -3,6 +3,7 @@
 {* removed because it's handled on a per-page level
 <meta name="description" content="{META_DESCRIPTION}" />
 <meta name="keywords" content="{META_KEYWORDS}" /> *}
+{event name='metaTags'}
 
 <script type="text/javascript">
 	//<![CDATA[
@@ -20,8 +21,6 @@
 <script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui.nestedSortable.js"></script>
 <script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.js"></script>
 <script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.cookie.js"></script>
-<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.iframe.js"></script>
-<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/ITStylesheet.js"></script>
 <script type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.js"></script>
 <script type="text/javascript">
 	//<![CDATA[
@@ -79,36 +78,17 @@
 			'wcf.sitemap.title': '{lang}wcf.sitemap.title{/lang}'
 			{event name='javascriptLanguageImport'}
 		});
-		
-		WCF.Icon.addObject({
-			'wcf.icon.loading': '{icon}spinner{/icon}',
-			'wcf.icon.opened': '{icon}arrowDownInverse{/icon}',
-			'wcf.icon.closed': '{icon}arrowRightInverse{/icon}',
-			'wcf.icon.arrow.left': '{icon}arrowLeft{/icon}',
-			'wcf.icon.arrow.left.circle': '{icon}circleArrowLeft{/icon}',
-			'wcf.icon.arrow.right': '{icon}arrowRight{/icon}',
-			'wcf.icon.arrow.right.circle': '{icon}circleArrowRight{/icon}',
-			'wcf.icon.arrow.down': '{icon}arrowDown{/icon}',
-			'wcf.icon.arrow.down.circle': '{icon}circleArroDown{/icon}',
-			'wcf.icon.arrow.up': '{icon}arrowUp{/icon}',
-			'wcf.icon.arrow.up.circle': '{icon}circleArrowUp{/icon}',
-			'wcf.icon.dropdown': '{icon}dropdown{/icon}',
-			'wcf.icon.add': '{icon}add{/icon}',
-			'wcf.icon.delete': '{icon}delete{/icon}',
-			'wcf.icon.edit': '{icon}edit{/icon}',
-			'wcf.icon.remove': '{icon}remove{/icon}',
-			'wcf.global.opened': '{icon}arrowDown{/icon}',
-			'wcf.global.closed': '{icon}arrowRight{/icon}'
-			{event name='javascriptIconImport'}
-		});
-		
+				
 		new WCF.Date.Time();
 		new WCF.Effect.SmoothScroll();
 		new WCF.Effect.BalloonTooltip();
 		new WCF.Sitemap();
+		{if $__wcf->getStyleHandler()->countStyles() > 1}new WCF.Style.Chooser();{/if}
 		WCF.Dropdown.init();
+		WCF.System.PageNavigation.init('.pageNavigation');
+		WCF.Date.Picker.init();
 		
-		{*event name='javascriptInit'*}
+		{event name='javascriptInit'}
 
 		{if $executeCronjobs}
 			new WCF.Action.Proxy({
@@ -123,6 +103,11 @@
 				}
 			});
 		{/if}
+		{if $__sessionKeepAlive|isset}
+			new WCF.System.KeepAlive({@$__sessionKeepAlive});
+		{/if}
 	});
 	//]]>
 </script>
+
+{include file='imageViewer'}

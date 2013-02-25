@@ -27,7 +27,6 @@
  */
 namespace ultimate\data\block;
 use ultimate\system\blocktype\BlockTypeHandler;
-
 use ultimate\system\cache\builder\BlockCacheBuilder;
 use ultimate\system\cache\builder\BlockTypeCacheBuilder;
 use wcf\data\AbstractDatabaseObjectAction;

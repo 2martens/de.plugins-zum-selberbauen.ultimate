@@ -224,7 +224,16 @@ class MediaBlockType extends AbstractBlockType {
 				WCF::getTPL()->assign($optionName, $optionValue);
 			}
 		}
-		$returnValues[1] = WCF::getTPL()->fetch('mediaBlockOptions', 'ultimate');
+		
+		// prevent exception while accessing template in ACP
+		try {
+			$returnValues[1] = WCF::getTPL()->fetch('mediaBlockOptions', 'ultimate');
+		}
+		catch (SystemException $se) {
+			WCF::getTPL()->addApplication('ultimate', 'templates/');
+			$returnValues[1] = WCF::getTPL()->fetch('mediaBlockOptions', 'ultimate');
+			WCF::getTPL()->addApplication('ultimate', 'acp/templates');
+		}
 		return $returnValues;
 	}
 	

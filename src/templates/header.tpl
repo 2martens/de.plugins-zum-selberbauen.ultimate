@@ -7,10 +7,7 @@
 			<div class="layoutFluid clearfix">
 				{hascontent}
 					<ul class="userPanelItems">
-						{content}
-						{event name='topMenu'}
-						{if $visualEditor|isset && $visualEditor}{include file='visualEditorTopMenu'}{/if}
-						{/content}
+						{content}{event name='topMenu'}{/content}
 					</ul>
 				{/hascontent}
 				
@@ -21,11 +18,9 @@
 		</nav>
 		<!-- /top menu -->
 		
-		{if $visualEditor|isset && $visualEditor}
-		{else} {* only display logo and navigation if we're not in the VisualEditor *}
 		<!-- logo -->
 		<div id="logo" class="logo">
-			<a href="{link controller='Index'}{/link}">
+			<a href="{link}{/link}">
 				<img src="{@$__wcf->getPath('wbb')}images/wbbLogo2.svg" alt="" style="height: 90px; width: 246px;" />
 				{*event name='headerLogo'*}
 			</a>
@@ -73,13 +68,12 @@
 			</ul>
 		</nav>
 		<!-- /navigation -->
-		{/if}
 	</div>
 </header>
 <!-- /HEADER -->
 
 <!-- MAIN -->
-<div id="main" class="{if $visualEditor|isset && $visualEditor}clearfix{else}layoutFluid{if $sidebarOrientation|isset && $sidebar|isset} sidebarOrientation{@$sidebarOrientation|ucfirst} clearfix{/if}{/if}">
+<div id="main" class="layoutFluid{if $sidebarOrientation|isset && $sidebar|isset} sidebarOrientation{@$sidebarOrientation|ucfirst} clearfix{if $sidebarOrientation == 'right' && $sidebarCollapsed} sidebarCollapsed{/if}{/if}">
 	<div>
 		{if $sidebar|isset}
 			<aside class="sidebar"{if $sidebarOrientation|isset && $sidebarOrientation == 'right' && $sidebarAllowCollapsible} data-is-open="{if $sidebarCollapsed}false{else}true{/if}" data-sidebar-name="{$sidebarName}"{/if}>
@@ -98,6 +92,6 @@
 		{/if}
 			
 		<!-- CONTENT -->
-		<section id="content" class="{if $visualEditor|isset && $visualEditor}{else}content {/if}clearfix"{if $visualEditor|isset && $visualEditor}{else} style="position: relative;"{/if}>
+		<section id="content" class="content clearfix">
 			
 			{if $skipBreadcrumbs|empty}{include file='breadcrumbs'}{/if}

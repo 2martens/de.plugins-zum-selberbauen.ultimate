@@ -26,10 +26,10 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\blocktype;
-use ultimate\system\cache\builder\BlockCacheBuilder;
-
 use ultimate\data\block\Block;
+use ultimate\system\cache\builder\BlockCacheBuilder;
 use wcf\system\event\EventHandler;
+use wcf\system\exception\SystemException;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -128,12 +128,6 @@ abstract class AbstractBlockType implements IBlockType {
 	protected $cacheIndex = '';
 	
 	/**
-	 * True if the request is in connection with the VisualEditor.
-	 * @var boolean
-	 */
-	protected $visualEditorMode = false;
-	
-	/**
 	 * Creates a new BlockType object.
 	 * 
 	 * @internal The constructor does nothing and is final, because you can't control what the constructor
@@ -144,7 +138,7 @@ abstract class AbstractBlockType implements IBlockType {
 	/**
 	 * @see	\ultimate\system\blocktype\IBlockType::init()
 	 */
-	public function init($requestType, \ultimate\data\layout\Layout $layout, \ultimate\data\AbstractUltimateDatabaseObject $requestObject, $blockID, $visualEditorMode = false) {
+	public function init($requestType, \ultimate\data\layout\Layout $layout, \ultimate\data\AbstractUltimateDatabaseObject $requestObject, $blockID) {
 		// fire event
 		EventHandler::getInstance()->fireAction($this, 'init');
 		
@@ -152,7 +146,6 @@ abstract class AbstractBlockType implements IBlockType {
 		$this->requestObject = $requestObject;
 		$this->layout = $layout;
 		$this->blockID = intval($blockID);
-		$this->visualEditorMode = $visualEditorMode;
 		$this->block = new Block($this->blockID);
 	}
 	
@@ -175,8 +168,7 @@ abstract class AbstractBlockType implements IBlockType {
 		WCF::getTPL()->assign(array(
 			'blockID' => $this->blockID,
 			'block' => $this->block,
-			'requestType' => $this->requestType,
-			'visualEditorMode' => $this->visualEditorMode
+			'requestType' => $this->requestType
 		));
 	}
 	
@@ -237,7 +229,16 @@ abstract class AbstractBlockType implements IBlockType {
 			$this->blockOptionsTemplateName = str_replace('Type', 'Options', lcfirst($className));
 		}
 		$output = '';
-		$output = WCF::getTPL()->fetch($this->blockOptionsTemplateName, 'ultimate');
+		// prevent exception while accessing templates in ACP
+		try {
+			$output = WCF::getTPL()->fetch($this->blockOptionsTemplateName, 'ultimate');
+		}
+		catch (SystemException $se) {
+			WCF::getTPL()->addApplication('ultimate', 'templates/');
+			$output = WCF::getTPL()->fetch($this->blockOptionsTemplateName, 'ultimate');
+			WCF::getTPL()->addApplication('ultimate', 'acp/templates');
+		}
+		
 		$blockOptionIDs = $this->blockOptionIDs;
 		foreach ($blockOptionIDs as $optionID) {
 			StringUtil::replace('{$blockID}', $this->blockID, $optionID);
