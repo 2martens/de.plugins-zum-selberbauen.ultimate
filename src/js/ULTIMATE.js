@@ -957,13 +957,7 @@ ULTIMATE.Widget.Edit.prototype = {
 			onClose: null,
 			onShow: null
 		};
-		// inserted because of lack of WCF.showAJAXDialog
-		if (!$.wcfIsset('widgetEditor')) {
-			$('<div id="widgetEditor"></div>').appendTo(document.body);
-		}
-		this._dialog = $('#widgetEditor');
-		this._dialog.empty();
-		this._dialog.wcfEditor(options);
+		WCF.showAJAXDialog('widgetEditor', true, options);
 	},
 	
 	/**
