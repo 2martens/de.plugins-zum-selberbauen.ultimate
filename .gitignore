@@ -60,3 +60,4 @@ phpdoc.xml
 src/cache/*.php
 src/config.inc.php
 src/php_errors.log
+src/acp/style/style*.css
