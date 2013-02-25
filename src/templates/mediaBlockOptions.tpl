@@ -1,4 +1,5 @@
 <div id="block-{$blockID}-tab" class="tabMenuContainer tabMenuContent containerPadding panel" data-store="block-{$blockID}-tab-type">
+	<form method="post" action="">
 	<nav class="tabMenu subTabsContainer">
 		<ul class="subTabs">
 			<li><a href="#block-{$blockID}-tab-type" title="{lang}ultimate.visualEditor.mediaTab.type{/lang}">{lang}ultimate.visualEditor.mediaTab.type{/lang}</a></li>
@@ -41,4 +42,8 @@
 			</dl>
 		</div>
 	</div>
+	<div class="formSubmit">
+		<input type="submit" id="blockSubmitButton" name="submitButton" value="{lang}wcf.global.submit{/lang}" accesskey="s" />
+	</div>
+	</form>
 </div>

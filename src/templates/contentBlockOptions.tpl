@@ -1,4 +1,5 @@
 <div id="block-{$blockID}-tab" class="tabMenuContainer tabMenuContent containerPadding panel" data-store="block-{$blockID}-tab-mode">
+	<form method="post" action="">
 	<nav class="tabMenu subTabsContainer">
 		<ul class="subTabs">
 			<li><a href="#block-{$blockID}-tab-mode" title="{lang}ultimate.visualEditor.contentTab.mode{/lang}">{lang}ultimate.visualEditor.contentTab.mode{/lang}</a></li>
@@ -164,6 +165,10 @@
 			</dl>
 		</div>
 	</div>
+	<div class="formSubmit">
+		<input type="submit" id="blockSubmitButton" name="submitButton" value="{lang}wcf.global.submit{/lang}" accesskey="s" />
+	</div>
+	</form>
 	<script type="text/javascript">
 	/* <![CDATA[ */
 	$(function() {

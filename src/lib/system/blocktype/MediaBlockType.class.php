@@ -123,19 +123,38 @@ class MediaBlockType extends AbstractBlockType {
 	public function readData() {
 		parent::readData();
 		// reading additional data
-		$this->mediaSource = StringUtil::trim($this->block->__get('mediaSource'));
-		if (!LinkUtil::isValidURL($this->mediaSource)) {
+		$mediaSource = $this->block->__get('mediaSource');
+		if ($mediaSource === null) {
+			$mediaSource = '';
+		}
+		$this->mediaSource = StringUtil::trim($mediaSource);
+		if (!empty($this->mediaSource) && !LinkUtil::isValidURL($this->mediaSource)) {
 			throw new SystemException('invalid media source', 0, 'The given media source is an invalid URL.');
 		}
-		$mimeType = StringUtil::trim($this->block->__get('mimeType'));
+		
+		$mimeType = $this->block->__get('mimeType');
+		if ($mimeType === null) {
+			$mimeType = 'video/mpeg';
+		}
+		$mimeType = StringUtil::trim($mimeType);
 		if (isset($this->objects[$mimeType])) {
 			$this->mediaMimeType = $this->objects[$mimeType];
 		}
+		
 		$parameters = $this->block->__get('parameters');
+		if (empty($parameters)) {
+			$parameters = '0, 0';
+		}
+		
 		$dimensions = explode(',', $parameters['dimensions']);
 		$this->mediaHeight = intval($dimensions[1]);
 		$this->mediaWidth = intval($dimensions[0]);
-		$this->mediaType = StringUtil::trim($this->block->__get('mediaType'));
+		
+		$mediaType = $this->block->__get('mediaType');
+		if ($mediaType === null) {
+			$mediaType = 'video';
+		}
+		$this->mediaType = StringUtil::trim($mediaType);
 		
 		$this->determineSourceType();
 	}
@@ -146,8 +165,16 @@ class MediaBlockType extends AbstractBlockType {
 	public function assignVariables() {
 		parent::assignVariables();
 		// gathering dimensions and position
-		$dimensions = explode(',', $this->block->__get('dimensions'));
-		$position = explode(',', $this->block->__get('position'));
+		$dimensions = $this->block->__get('dimensions');
+		if ($dimensions === null) {
+			$dimensions = '0, 0';
+		}
+		$dimensions = explode(',', $dimensions);
+		$position = $this->block->__get('position');
+		if ($position === null) {
+			$position = '0, 0';
+		}
+		$position = explode(',', $position);
 		
 		WCF::getTPL()->assign(array(
 			'mediaType' => $this->mediaType,
@@ -175,8 +202,14 @@ class MediaBlockType extends AbstractBlockType {
 	 * @see \ultimate\system\blocktype\IBlockType::getOptionsHTML()
 	 */
 	public function getOptionsHTML() {
-		parent::getOptionsHTML();
+		$returnValues = parent::getOptionsHTML();
+		$defaults = array(
+			'mediaType' => 'audio',
+			'mimeType' => 'audio/basic'
+		);
 		$options = $this->block->__get('additionalData');
+		$options = array_merge_recursive($defaults, $options);
+		
 		$optionsSelect = array(
 			'mediaType',
 			'mimeType'
@@ -191,7 +224,8 @@ class MediaBlockType extends AbstractBlockType {
 				WCF::getTPL()->assign($optionName, $optionValue);
 			}
 		}
-		return WCF::getTPL()->fetch('mediaBlockOptions', 'ultimate');
+		$returnValues[1] = WCF::getTPL()->fetch('mediaBlockOptions', 'ultimate');
+		return $returnValues;
 	}
 	
 	/**

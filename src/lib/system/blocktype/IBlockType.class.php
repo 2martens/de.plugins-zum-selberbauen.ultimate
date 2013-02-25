@@ -94,7 +94,7 @@ interface IBlockType {
 	 * @since	1.0.0
 	 * @api
 	 * 
-	 * @return	string
+	 * @return	(string[]|string)[]	The given array contains another array at pos 0 with all the available ids for the options and the actual options HTML at pos 1.
 	 */
 	public function getOptionsHTML();
 }

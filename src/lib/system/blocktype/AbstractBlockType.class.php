@@ -60,6 +60,13 @@ abstract class AbstractBlockType implements IBlockType {
 	protected $blockOptionsTemplateName = '';
 	
 	/**
+	 * Contains the block option form element ids.
+	 * 
+	 * @var	string[]
+	 */
+	protected $blockOptionIDs = array();
+	
+	/**
 	 * True if the template shall be used.
 	 * @var boolean
 	 */
@@ -207,6 +214,17 @@ abstract class AbstractBlockType implements IBlockType {
 	 * @see \ultimate\system\blocktype\IBlockType::getOptionsHTML()
 	 */
 	public function getOptionsHTML() {
+		// create blank Block if there is no block given (for example in the ACP)
+		if ($this->block === null) {
+			$this->block = new Block(0, array(
+				'blockID' => 0,
+				'blockTypeID' => 0,
+				'query' => '',
+				'parameters' => '',
+				'additionalData' => array()
+			));
+		}
+		
 		// fire event
 		EventHandler::getInstance()->fireAction($this, 'getOptionsHTML');
 		$this->readData();
@@ -220,7 +238,14 @@ abstract class AbstractBlockType implements IBlockType {
 		}
 		$output = '';
 		$output = WCF::getTPL()->fetch($this->blockOptionsTemplateName, 'ultimate');
-		return $output;
+		$blockOptionIDs = $this->blockOptionIDs;
+		foreach ($blockOptionIDs as $optionID) {
+			StringUtil::replace('{$blockID}', $this->blockID, $optionID);
+		}
+		return array(
+			$blockOptionIDs, 
+			$output
+		);
 	}
 	
 	/**

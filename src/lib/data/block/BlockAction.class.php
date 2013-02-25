@@ -26,6 +26,8 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\block;
+use ultimate\system\blocktype\BlockTypeHandler;
+
 use ultimate\system\cache\builder\BlockCacheBuilder;
 use ultimate\system\cache\builder\BlockTypeCacheBuilder;
 use wcf\data\AbstractDatabaseObjectAction;
@@ -128,5 +130,26 @@ class BlockAction extends AbstractDatabaseObjectAction {
 	 */
 	public function validateCreateAJAX() {
 		$this->validateCreate();
+	}
+	
+	/**
+	 * Returns blockType specific information.
+	 * 
+	 * @return	string
+	 */
+	public function getFormDataAJAX() {
+		$parameters = $this->parameters['data'];
+		$blockTypeID = intval($parameters['blockTypeID']);
+		$blockType = BlockTypeHandler::getInstance()->getBlockType($blockTypeID);
+		/* @var $blockType \ultimate\system\blocktype\IBlockType */
+		$optionsHTML = $blockType->getOptionsHTML();
+		return $optionsHTML;
+	}
+	
+	/**
+	 * Does nothing as the getFormDataAJAX doesn't require any permission.
+	 */
+	public function validateGetFormDataAJAX() {
+		// no permissions required
 	}
 }

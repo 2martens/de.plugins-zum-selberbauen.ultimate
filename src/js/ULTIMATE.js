@@ -281,6 +281,18 @@ ULTIMATE.Block.Transfer.prototype = {
 	 * @type	WCF.Action.Proxy
 	 */
 	_proxy: null,
+	
+	/**
+	 * Contains a list of all available block options.
+	 * @type	Array
+	 */
+	_optionList: [],
+	
+	/**
+	 * Contains a dialog object.
+	 * @type	jQuery
+	 */
+	_dialog: null,
 		
 	/**
 	 * Initializes the BlockTransfer API.
@@ -335,6 +347,45 @@ ULTIMATE.Block.Transfer.prototype = {
 		var $data = {};
 		// read form data
 		var blockTypeID = $('#selectBlocktype').val();
+				
+		if (blockTypeID == '0') {
+			this._notification = new WCF.System.Notification(WCF.Language.get('wcf.global.form.error'), 'error');
+			this._element.find('dl:first').addClass('formError');
+			var $html = '<small id="selectBlocktypeError" class="innerError">' + WCF.Language.get('wcf.acp.ultimate.template.selectBlocktype.error.notSelected') + '</small>';
+			$('#selectBlocktypeError').empty().remove();
+			this._element.find('dl:first > dd').append($html);
+			this._notification.show();
+			return;
+		}
+		this._notification = null;
+		$('#selectBlocktypeError').empty().remove();
+		
+		// select blockType specific information
+		var $formDataParameters = $.extend(true, {
+			data: {
+				blockTypeID: blockTypeID
+			}
+		}, { });
+		
+		$formData = $.extend(true, {
+			actionName: 'getFormDataAJAX',
+			className: this._className,
+			parameters: $formDataParameters
+		}, $data);
+		
+		var $proxy = new WCF.Action.Proxy({
+			success: $.proxy(this._successFormData, this)
+		});
+		$proxy.setOption('data', $formData);
+		$proxy.sendRequest();
+	},
+	
+	/**
+	 * Saves the additional block options.
+	 */
+	_submitFormData: function() {
+		// read form data
+		var blockTypeID = $('#selectBlocktype').val();		
 		var width = $('#width').val();
 		var height = $('#height').val();
 		var left = $('#left').val();
@@ -352,17 +403,12 @@ ULTIMATE.Block.Transfer.prototype = {
 			}
 		}, { });
 		
-		if (blockTypeID == '0') {
-			this._notification = new WCF.System.Notification(WCF.Language.get('wcf.global.form.error'), 'error');
-			this._element.find('dl:first').addClass('formError');
-			var $html = '<small id="selectBlocktypeError" class="innerError">' + WCF.Language.get('wcf.acp.ultimate.template.selectBlocktype.error.notSelected') + '</small>';
-			$('#selectBlocktypeError').empty().remove();
-			this._element.find('dl:first > dd').append($html);
-			this._notification.show();
-			return;
+		for (var i = 0; i < this._optionList.length; i++) {
+			var $item = this._optionList[i];
+			var optionName = $item.replace(/-\d/, '');
+			var $optionElement = $('#' + $item).val();
+			$parameters['data']['additionalData'][optionName] = $optionElement;
 		}
-		this._notification = null;
-		$('#selectBlocktypeError').empty().remove();
 		
 		// reset form
 		$('#selectBlocktype').val('0');
@@ -381,6 +427,33 @@ ULTIMATE.Block.Transfer.prototype = {
 		
 		// send proxy request
 		this._proxy.sendRequest();
+	},
+	
+	/**
+	 * Shows dialog form.
+	 * 
+	 * @param	{Object}	data
+	 * @param	{String}	textStatus
+	 * @param	{jQuery}	jqXHR
+	 */
+	_successFormData: function(data, textStatus, jqXHR) {
+		try {
+			var $data = data['returnValues'];
+			this._optionList = $data[0];
+			$('#blockForm').html($data[1]);
+			$('#blockForm').find('form').submit($.proxy(this._stopFormSubmit, this));
+			$('#blockSubmitButton').click($.proxy(this._submitFormData, this));
+			WCF.TabMenu.reload();
+			this._dialog = WCF.showDialog('blockForm', {
+				title: WCF.Language.get('wcf.acp.ultimate.template.dialog.additionalOptions')
+			});
+		}
+		catch(e) {
+			var $showError = true;
+			if ($showError !== false) {
+				$('<div class="ajaxDebugMessage"><p>' + e.message + '</p></div>').wcfDialog({ title: WCF.Language.get('wcf.global.error.title') });
+			}
+		}
 	},
 	
 	/**

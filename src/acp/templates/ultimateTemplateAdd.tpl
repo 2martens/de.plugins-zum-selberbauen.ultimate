@@ -260,6 +260,7 @@
 		</div>
 	</div>
 </form>
+<div id="blockForm" class="ultimateHidden"></div>
 
 <script type="text/javascript">
 	/* <![CDATA[ */
@@ -280,6 +281,9 @@
 					ULTIMATE.Permission.addObject({
 						'admin.content.ultimate.canEditBlock': {if $__wcf->session->getPermission('admin.content.ultimate.canEditBlock')}true{else}false{/if},
 						'admin.content.ultimate.canDeleteBlock': {if $__wcf->session->getPermission('admin.content.ultimate.canDeleteBlock')}true{else}false{/if}
+					});
+					WCF.Language.addObject({
+						'wcf.acp.ultimate.template.dialog.additionalOptions': {lang}wcf.acp.ultimate.template.dialog.additionalOptions{/lang}
 					});
 					{* icon is buggy *}
 					WCF.Icon.addObject({

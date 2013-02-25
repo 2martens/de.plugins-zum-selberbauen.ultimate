@@ -66,6 +66,31 @@ class ContentBlockType extends AbstractBlockType {
 	protected $cacheIndex = 'contents';
 	
 	/**
+	 * @see	\ultimate\system\blocktype\AbstractBlockType::$blockOptionIDs
+	 */
+	protected $blockOptionIDs = array(
+		'queryMode-{$blockID}',
+		'fetchPageContent-{$blockID}',
+		'categories-{$blockID}',
+		'categoryMode-{$blockID}',
+		'authors-{$blockID}',
+		'numberOfContents-{$blockID}',
+		'offset-{$blockID}',
+		'sortField-{$blockID}',
+		'sortOrder-{$blockID}',
+		'readMoreText-{$blockID}',
+		'showTitles-{$blockID}',
+		'contentBodyDisplay-{$blockID}',
+		'showContent-{$blockID}',
+		'commentsVisibility-{$blockID}',
+		'featuredContents-{$blockID}',
+		'showInlineEdit-{$blockID}',
+		'contentMetaDisplay-{$blockID}',
+		'metaAboveContent-{$blockID}',
+		'metaBelowContent-{$blockID}'
+	);
+	
+	/**
 	 * Contains all read authors.
 	 * @var \wcf\data\user\User[]
 	 */
