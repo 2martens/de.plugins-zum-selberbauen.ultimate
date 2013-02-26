@@ -30,6 +30,7 @@ use ultimate\data\block\Block;
 use ultimate\system\cache\builder\BlockCacheBuilder;
 use wcf\system\event\EventHandler;
 use wcf\system\exception\SystemException;
+use wcf\system\request\RequestHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -229,11 +230,8 @@ abstract class AbstractBlockType implements IBlockType {
 			$this->blockOptionsTemplateName = str_replace('Type', 'Options', lcfirst($className));
 		}
 		$output = '';
-		// prevent exception while accessing templates in ACP
-		try {
-			$output = WCF::getTPL()->fetch($this->blockOptionsTemplateName, 'ultimate');
-		}
-		catch (SystemException $se) {
+		
+		if (RequestHandler::getInstance()->isACPRequest()) {
 			WCF::getTPL()->addApplication('ultimate', 'templates/');
 			$output = WCF::getTPL()->fetch($this->blockOptionsTemplateName, 'ultimate');
 			WCF::getTPL()->addApplication('ultimate', 'acp/templates');

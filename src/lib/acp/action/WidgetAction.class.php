@@ -104,7 +104,6 @@ class WidgetAction extends AJAXProxyAction {
 	 */
 	protected function loadWidgetOptions() {
 		$widgetID = $this->parameters['widgetID'];
-		$requestObject = 
 		$this->widgetType->init($widgetID);
 		$this->response = $this->widgetType->getOptionsHTML();
 	}
