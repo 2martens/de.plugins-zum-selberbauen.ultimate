@@ -998,7 +998,7 @@ ULTIMATE.Widget.Edit.prototype = {
 		this._dialog.find('button[data-type="submit"]').click($.proxy(this._submit, this));
 		this._dialog.find('button[data-type="cancel"]').click($.proxy(function(_event) {
 			// close dialog
-			this._dialog.wcfDialog('close');
+			this._dialog.ultimateDialog('close');
 		}, this));
 	},
 	
@@ -1013,7 +1013,7 @@ ULTIMATE.Widget.Edit.prototype = {
 		var options = {
 			// dialog
 			title: WCF.Language.get('wcf.acp.ultimate.widget.edit'),
-
+			
 			// AJAX support
 			ajax: true,
 			data: {
@@ -1030,7 +1030,7 @@ ULTIMATE.Widget.Edit.prototype = {
 			onClose: null,
 			onShow: null
 		};
-		WCF.showAJAXDialog('widgetEditor', true, options);
+		this._dialog = WCF.showAJAXDialog('widgetEditor', true, options);
 	},
 	
 	/**
