@@ -56,8 +56,8 @@
 		<thead>
 			<tr>
 				<th class="columnMark"><label><input type="checkbox" class="jsClipboardMarkAll" /></label></th>
-				<th class="columnID{if $sortField == 'menuID'} active{/if}" colspan="2"><a href="{link controller='UltimateMenuList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=menuID&sortOrder={if $sortField == 'menuID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}{if $sortField == 'menuID'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
-				<th class="columnTitle{if $sortField == 'menuName'} active{/if}"><a href="{link controller='UltimateMenuList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=menuName&sortOrder={if $sortField == 'menuName' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.menu.name{/lang}{if $sortField == 'menuName'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />{/if}</a></th>
+				<th class="columnID{if $sortField == 'menuID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link controller='UltimateMenuList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=menuID&sortOrder={if $sortField == 'menuID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
+				<th class="columnTitle{if $sortField == 'menuName'} active {@$sortOrder}{/if}"><a href="{link controller='UltimateMenuList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=menuName&sortOrder={if $sortField == 'menuName' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.menu.name{/lang}</a></th>
 				
 				{event name='headColumns'}
 			</tr>

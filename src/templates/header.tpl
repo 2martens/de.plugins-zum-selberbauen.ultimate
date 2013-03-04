@@ -62,9 +62,10 @@
 			<!-- /sub menu -->
 		
 			<ul class="navigationIcons">
-				<li id="toBottomLink"><a href="{$__wcf->getAnchor('bottom')}" title="{lang}wcf.global.scrollDown{/lang}" class="jsTooltip"><img src="{icon size='S'}circleArrowDownColored{/icon}" alt="" class="icon16" /> <span class="invisible">{lang}wcf.global.scrollDown{/lang}</span></a></li>
-				<li id="sitemap"><a title="{lang}wcf.sitemap.title{/lang}" class="jsTooltip"><img src="{icon}switchColored{/icon}" alt="" class="icon16" /> <span class="invisible">{lang}wcf.sitemap.title{/lang}</span></a></li>
-				{event name='headerNavigation'}
+				<li id="toBottomLink"><a href="{$__wcf->getAnchor('bottom')}" title="{lang}wcf.global.scrollDown{/lang}" class="jsTooltip"><span class="icon icon16 icon-arrow-down"></span> <span class="invisible">{lang}wcf.global.scrollDown{/lang}</span></a></li>
+				<li id="sitemap" class="javascriptOnly"><a title="{lang}wcf.sitemap.title{/lang}" class="jsTooltip"><span class="icon icon16 icon-sitemap"></span> <span class="invisible">{lang}wcf.sitemap.title{/lang}</span></a></li>
+				{if $headerNavigation|isset}{@$headerNavigation}{/if}
+				{event name='navigationIcons'}
 			</ul>
 		</nav>
 		<!-- /navigation -->

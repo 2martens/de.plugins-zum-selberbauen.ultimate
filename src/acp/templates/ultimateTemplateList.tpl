@@ -47,8 +47,8 @@
 		<thead>
 			<tr>
 				<th class="columnMark"><label><input type="checkbox" class="jsClipboardMarkAll" /></label></th>
-				<th class="columnID{if $sortField == 'templateID'} active{/if}" colspan="2"><a href="{link controller='UltimateTemplateList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=templateID&sortOrder={if $sortField == 'templateID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}{if $sortField == 'templateID'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="{if $sortOrder == 'ASC'}{lang}wcf.global.sortOrder.ascending{/lang}{else}{lang}wcf.global.sortOrder.descending{/lang}{/if}" />{/if}</a></th>
-				<th class="columnTitle{if $sortField == 'templateName'} active{/if}"><a href="{link controller='UltimateTemplateList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=templateName&sortOrder={if $sortField == 'templateName' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.template.name{/lang}{if $sortField == 'templateName'} <img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="{if $sortOrder == 'ASC'}{lang}wcf.global.sortOrder.ascending{/lang}{else}{lang}wcf.global.sortOrder.descending{/lang}{/if}" />{/if}</a></th>
+				<th class="columnID{if $sortField == 'templateID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link controller='UltimateTemplateList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=templateID&sortOrder={if $sortField == 'templateID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
+				<th class="columnTitle{if $sortField == 'templateName'} active {@$sortOrder}{/if}"><a href="{link controller='UltimateTemplateList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=templateName&sortOrder={if $sortField == 'templateName' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.template.name{/lang}</a></th>
 				{event name='headColumns'}
 			</tr>
 		</thead>
