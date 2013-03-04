@@ -39,7 +39,7 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
  * @subpackage	system.cache.builder
  * @category	Ultimate CMS
  */
-class MediaMimetypeCacheBuilder implements AbstractCacheBuilder {
+class MediaMimetypeCacheBuilder extends AbstractCacheBuilder {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.cache.builder.AbstractCacheBuilder.html#rebuild
 	 */

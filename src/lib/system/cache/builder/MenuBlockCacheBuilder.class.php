@@ -40,7 +40,7 @@ use wcf\system\WCF;
  * @subpackage	system.cache.builder
  * @category	Ultimate CMS
  */
-class MenuBlockCacheBuilder implements AbstractCacheBuilder {
+class MenuBlockCacheBuilder extends AbstractCacheBuilder {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.cache.builder.AbstractCacheBuilder.html#rebuild
 	 */

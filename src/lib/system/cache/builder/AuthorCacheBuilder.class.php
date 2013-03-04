@@ -40,7 +40,7 @@ use wcf\system\cache\builder\UserGroupCacheBuilder;
  * @subpackage	system.cache.builder
  * @category	Ultimate CMS
  */
-class AuthorCacheBuilder implements AbstractCacheBuilder {
+class AuthorCacheBuilder extends AbstractCacheBuilder {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.cache.builder.AbstractCacheBuilder.html#rebuild
 	 */

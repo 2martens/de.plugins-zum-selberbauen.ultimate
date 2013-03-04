@@ -39,7 +39,7 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
  * @subpackage	system.cache.builder
  * @category	Ultimate CMS
  */
-class PageCacheBuilder implements AbstractCacheBuilder {
+class PageCacheBuilder extends AbstractCacheBuilder {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.cache.builder.ICacheBuilder.html#getData
 	 */

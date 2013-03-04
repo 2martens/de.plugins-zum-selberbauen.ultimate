@@ -41,7 +41,7 @@ use wcf\system\WCF;
  * @subpackage	system.cache.builder
  * @category	Ultimate CMS
  */
-class TemplateCacheBuilder implements AbstractCacheBuilder {
+class TemplateCacheBuilder extends AbstractCacheBuilder {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.cache.builder.AbstractCacheBuilder.html#rebuild
 	 */

@@ -40,7 +40,7 @@ use wcf\system\WCF;
  * @subpackage	system.cache.builder
  * @category	Ultimate CMS
  */
-class BlockCacheBuilder implements AbstractCacheBuilder {
+class BlockCacheBuilder extends AbstractCacheBuilder {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.cache.builder.AbstractCacheBuilder.html#rebuild
 	 */
