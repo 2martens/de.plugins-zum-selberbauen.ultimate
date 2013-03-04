@@ -33,6 +33,7 @@ use ultimate\system\cache\builder\TemplateCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use ultimate\system\widgettype\WidgetTypeHandler;
 use wcf\system\exception\NamedUserException;
+use wcf\system\exception\SystemException;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
@@ -71,8 +72,14 @@ class TemplateHandler extends SingletonFactory {
 	 * @param	\ultimate\data\AbstractUltimateDatabaseObject	$requestObject
 	 * @return	string
 	 */
-	public function getOutput($requestType, \ultimate\data\layout\Layout $layout, \ultimate\data\AbstractUltimateDatabaseObject $requestObject) {
+	public function getOutput($requestType, \ultimate\data\layout\Layout $layout, $requestObject) {
 		$requestType = strtolower(StringUtil::trim($requestType));
+		if ($requestType != 'index') {
+			if (!($requestObject instanceof \ultimate\data\AbstractUltimateDatabaseObject)) {
+				throw new SystemException('The given request object is not an instance of \ultimate\data\AbstractUltimateDatabaseObject.');
+			}
+		}
+		
 		$template = $this->getTemplate($layout->__get('layoutID'));
 		
 		// get sidebar content

@@ -139,13 +139,18 @@ abstract class AbstractBlockType implements IBlockType {
 	/**
 	 * @see	\ultimate\system\blocktype\IBlockType::init()
 	 */
-	public function init($requestType, \ultimate\data\layout\Layout $layout, \ultimate\data\AbstractUltimateDatabaseObject $requestObject, $blockID) {
+	public function init($requestType, \ultimate\data\layout\Layout $layout, $requestObject, $blockID) {
 		// fire event
 		EventHandler::getInstance()->fireAction($this, 'init');
 		
 		$this->requestType = StringUtil::trim($requestType);
 		$this->requestObject = $requestObject;
 		$this->layout = $layout;
+		
+		if (!($this->requestObject instanceof \ultimate\data\AbstractUltimateDatabaseObject) && $this->layout->__get('objectType') != 'index') {
+			throw new SystemException('The given request object is not an instance of \ultimate\data\AbstractUltimateDatabaseObject.');
+		}
+		
 		$this->blockID = intval($blockID);
 		$this->block = new Block($this->blockID);
 	}
