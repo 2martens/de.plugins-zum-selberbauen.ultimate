@@ -168,12 +168,6 @@
 						'admin.content.ultimate.canEditWidget': {if $__wcf->session->getPermission('admin.content.ultimate.canEditWidget')}true{else}false{/if},
 						'admin.content.ultimate.canDeleteWidget': {if $__wcf->session->getPermission('admin.content.ultimate.canDeleteWidget')}true{else}false{/if}
 					});
-					WCF.Icon.addObject({
-						'wcf.icon.edit': '{icon size='S'}edit{/icon}',
-						'wcf.icon.delete': '{icon size='S'}delete{/icon}',
-						'wcf.icon.enabled': '{icon size='S'}enabled{/icon}',
-						'wcf.icon.disabled': '{icon size='S'}disabled{/icon}'
-					});
 					new ULTIMATE.Widget.Edit($('.jsWidget'));
 					new ULTIMATE.Widget.Transfer('widgetTypeSelectContainer', 'widgetList', 'ultimate\\data\\widget\\WidgetAction', 0);
 				{/if}

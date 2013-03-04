@@ -212,16 +212,9 @@
 						'admin.content.ultimate.canDeleteMenuItem': {if $__wcf->session->getPermission('admin.content.ultimate.canDeleteMenuItem')}true{else}false{/if}
 					});
 					{* icon is buggy *}
-					WCF.Icon.addObject({
-						'wcf.icon.delete': '../{icon size='S'}delete{/icon}',
-						'wcf.icon.enabled': '../{icon size='S'}enabled{/icon}',
-						'wcf.icon.disabled': '../{icon size='S'}disabled{/icon}'
-					});
 					new ULTIMATE.Menu.Item.Transfer('categorySelectContainer', 'menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'category');
 					new ULTIMATE.Menu.Item.Transfer('pageSelectContainer', 'menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'page');
 					new ULTIMATE.Menu.Item.Transfer('customContainer', 'menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'custom');
-					
-					
 				{/if}
 			{/if}
 		});
