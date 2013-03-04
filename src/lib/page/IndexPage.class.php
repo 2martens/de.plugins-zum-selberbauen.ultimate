@@ -64,17 +64,11 @@ class IndexPage extends AbstractPage {
 	public $output = '';
 	
 	/**
-	 * Contains the layout name.
-	 * @var string
-	 */
-	protected $layoutName = 'ultimate.layout.index';
-	
-	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
 		parent::readData();
-		$layout = LayoutHandler::getInstance()->getLayoutFromName($this->layoutName);
+		$layout = LayoutHandler::getInstance()->getLayoutFromObjectData(0, 'index');
 		
 		// get output
 		$this->output = TemplateHandler::getInstance()->getOutput('index', $layout, null);
