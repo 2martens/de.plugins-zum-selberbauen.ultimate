@@ -14,14 +14,14 @@
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.content.list">
-			<controller><![CDATA[index.php/UltimateContentList/]]></controller>
+			<controller><![CDATA[ultimate\acp\page\UltimateContentList/]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.content</parent>
 			<permissions>admin.content.ultimate.canEditContent,admin.content.ultimate.canDeleteContent</permissions>
 			<showorder>1</showorder>
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.content.add">
-			<controller><![CDATA[index.php/UltimateContentAdd/]]></controller>
+			<controller><![CDATA[ultimate\acp\form\UltimateContentAdd/]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.content</parent>
 			<permissions>admin.content.ultimate.canAddContent</permissions>
 			<showorder>2</showorder>
@@ -35,14 +35,14 @@
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.category.list">
-			<controller><![CDATA[index.php/UltimateCategoryList/]]></controller>
+			<controller><![CDATA[ultimate\acp\page\UltimateCategoryList/]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.category</parent>
 			<permissions>admin.content.ultimate.canEditCategory,admin.content.ultimate.canDeleteCategory</permissions>
 			<showorder>1</showorder>
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.category.add">
-			<controller><![CDATA[index.php/UltimateCategoryAdd/]]></controller>
+			<controller><![CDATA[ultimate\acp\form\UltimateCategoryAdd/]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.category</parent>
 			<permissions>admin.content.ultimate.canAddCategory</permissions>
 			<showorder>2</showorder>
@@ -56,14 +56,14 @@
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.page.list">
-			<controller><![CDATA[index.php/UltimatePageList/]]></controller>
+			<controller><![CDATA[ultimate\acp\page\UltimatePageList/]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.page</parent>
 			<permissions>admin.content.ultimate.canEditPage,admin.content.ultimate.canDeletePage</permissions>
 			<showorder>1</showorder>
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.page.add">
-			<controller><![CDATA[index.php/UltimatePageAdd/]]></controller>
+			<controller><![CDATA[ultimate\acp\form\UltimatePageAdd/]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.page</parent>
 			<permissions>admin.content.ultimate.canAddPage</permissions>
 			<showorder>2</showorder>
@@ -77,28 +77,28 @@
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.link.list">
-			<controller><![CDATA[index.php/UltimateLinkList/]]></controller>
+			<controller><![CDATA[ultimate\acp\page\UltimateLinkList/]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.link</parent>
 			<permissions>admin.content.ultimate.canEditLink,admin.content.ultimate.canDeleteLink</permissions>
 			<showorder>1</showorder>
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.link.add">
-			<controller><![CDATA[index.php/UltimateLinkAdd/]]></controller>
+			<controller><![CDATA[ultimate\acp\form\UltimateLinkAdd/]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.link</parent>
 			<permissions>admin.content.ultimate.canAddLink</permissions>
 			<showorder>2</showorder>
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.link.category.list">
-			<controller><![CDATA[index.php/UltimateLinkCategoryList/]]></controller>
+			<controller><![CDATA[ultimate\acp\page\UltimateLinkCategoryList/]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.link</parent>
 			<permissions>admin.content.ultimate.canEditCategory,admin.content.ultimate.canDeleteCategory</permissions>
 			<showorder>3</showorder>
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.link.category.add">
-			<controller><![CDATA[index.php/UltimateLinkCategoryAdd/]]></controller>
+			<controller><![CDATA[ultimate\acp\form\UltimateLinkCategoryAdd/]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.link</parent>
 			<permissions>admin.content.ultimate.canAddCategory</permissions>
 			<showorder>4</showorder>
@@ -113,7 +113,7 @@
 		
 		<!-- layouts -->
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.layoutManager">
-			<controller><![CDATA[index.php/UltimateLayoutManager/]]></controller>
+			<controller><![CDATA[ultimate\acp\form\UltimateLayoutManager/]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.appearance</parent>
 			<permissions>admin.content.ultimate.canManageLayouts</permissions>
 			<showorder>1</showorder>
@@ -122,14 +122,14 @@
 		
 		<!-- menus -->
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.menu.list">
-			<controller><![CDATA[index.php/UltimateMenuList/]]></controller>
+			<controller><![CDATA[ultimate\acp\page\UltimateMenuList/]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.appearance</parent>
 			<permissions>admin.content.ultimate.canEditMenu,admin.content.ultimate.canDeleteMenu</permissions>
 			<showorder>2</showorder>
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.menu.add">
-			<controller><![CDATA[index.php/UltimateMenuAdd/]]></controller>
+			<controller><![CDATA[ultimate\acp\form\UltimateMenuAdd/]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.appearance</parent>
 			<permissions>admin.content.ultimate.canAddMenu</permissions>
 			<showorder>3</showorder>
@@ -138,13 +138,13 @@
 		
 		<!-- templates -->
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.template.add">
-			<controller><![CDATA[index.php/UltimateTemplateAdd]]></controller>
+			<controller><![CDATA[ultimate\acp\form\UltimateTemplateAdd]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.appearance</parent>
 			<permissions>admin.content.ultimate.canAddTemplate</permissions>
 			<showorder>4</showorder>
 		</acpmenuitem>
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.template.list">
-			<controller><![CDATA[index.php/UltimateTemplateList/]]></controller>
+			<controller><![CDATA[ultimate\acp\page\UltimateTemplateList/]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.appearance</parent>
 			<permissions>admin.content.ultimate.canEditTemplate</permissions>
 			<showorder>5</showorder>
