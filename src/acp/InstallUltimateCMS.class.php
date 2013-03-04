@@ -86,6 +86,7 @@ final class InstallUltimateCMS {
 		require_once(ULTIMATE_DIR.'lib/data/blocktype/BlockType.class.php');
 		require_once(ULTIMATE_DIR.'lib/data/blocktype/BlockTypeAction.class.php');
 		require_once(ULTIMATE_DIR.'lib/data/blocktype/BlockTypeEditor.class.php');
+		require_once(ULTIMATE_DIR.'lib/system/cache/builder/BlockTypeCacheBuilder.class.php');
 		$objectAction = new BlockTypeAction(array(), 'create', $parameters);
 		$objectAction->executeAction();
 		
