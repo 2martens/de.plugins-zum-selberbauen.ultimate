@@ -81,11 +81,6 @@ class UltimateContentListPage extends AbstractCachedListPage {
 	public $cacheBuilderClassName = '\ultimate\system\cache\builder\ContentCacheBuilder';
 	
 	/**
-	 * @see \wcf\page\AbstractCachedListPage::$cacheName
-	 */
-	public $cacheName = 'content';
-	
-	/**
 	 * @see \wcf\page\AbstractCachedListPage::$cacheIndex
 	 */
 	public $cacheIndex = 'contents';
@@ -157,7 +152,6 @@ class UltimateContentListPage extends AbstractCachedListPage {
 		elseif($this->categoryID) {
 			// if category id provided, change object variables and load the new cache
 			$this->cacheBuilderClassName = '\ultimate\system\cache\builder\ContentCategoryCacheBuilder';
-			$this->cacheName = 'content-to-category';
 			$this->cacheIndex = 'contentsToCategoryID';
 			
 			$this->loadCache();
@@ -169,7 +163,6 @@ class UltimateContentListPage extends AbstractCachedListPage {
 		elseif ($this->tagID) {
 			// if tag id provided, change object variables and load the new cache
 			$this->cacheBuilderClassName = '\ultimate\system\cache\builder\ContentTagCacheBuilder';
-			$this->cacheName = 'content-to-tag';
 			$this->cacheIndex = 'contentsToTagID';
 			
 			$this->loadCache();
