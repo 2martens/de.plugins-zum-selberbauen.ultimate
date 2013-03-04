@@ -114,7 +114,7 @@
 		<!-- layouts -->
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.layoutManager">
 			<link>index.php/UltimateLayoutManager/</link>
-			<parent>wcf.acp.menu.link.appearance</parent>
+			<parent>wcf.acp.menu.link.ultimate.appearance</parent>
 			<permissions>admin.content.ultimate.canManageLayouts</permissions>
 			<showorder>1</showorder>
 		</acpmenuitem>
