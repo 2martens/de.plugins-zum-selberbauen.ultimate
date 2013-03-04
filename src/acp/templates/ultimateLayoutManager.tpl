@@ -61,7 +61,7 @@
 							{lang}wcf.acp.ultimate.layoutManager.selectTemplate.error.{@$errorType}{/lang}
 						</small>
 					{/if}
-					<dl{if $errorField == 'layout2-child-layout' || $errorField == 'layout2-child-template} class="formError"{/if}>
+					<dl{if $errorField == 'layout2-child-layout' || $errorField == 'layout2-child-template'} class="formError"{/if}>
 						<dt>
 							<select id="layout2-child-layout">
 								<option label="{lang}wcf.acp.ultimate.layoutManager.selectLayout.none{/lang}" value="0">{lang}wcf.acp.ultimate.layoutManager.selectLayout.none{/lang}</option>
