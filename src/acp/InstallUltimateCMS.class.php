@@ -52,7 +52,7 @@ final class InstallUltimateCMS {
 	 */
 	protected function install() {
 		require_once(dirname(dirname(__FILE__)).'/config.inc.php');
-		$this->createHtaccess();
+		//$this->createHtaccess(); until further notice, deactivated
 		$this->addDefaultBlockTypes();
 	}
 	
