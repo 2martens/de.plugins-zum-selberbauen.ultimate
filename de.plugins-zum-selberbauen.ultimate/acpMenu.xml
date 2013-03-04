@@ -14,14 +14,14 @@
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.content.list">
-			<controller><![CDATA[ultimate\acp\page\UltimateContentList/]]></controller>
+			<controller><![CDATA[ultimate\acp\page\UltimateContentListPage]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.content</parent>
 			<permissions>admin.content.ultimate.canEditContent,admin.content.ultimate.canDeleteContent</permissions>
 			<showorder>1</showorder>
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.content.add">
-			<controller><![CDATA[ultimate\acp\form\UltimateContentAdd/]]></controller>
+			<controller><![CDATA[ultimate\acp\form\UltimateContentAddForm]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.content</parent>
 			<permissions>admin.content.ultimate.canAddContent</permissions>
 			<showorder>2</showorder>
@@ -35,14 +35,14 @@
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.category.list">
-			<controller><![CDATA[ultimate\acp\page\UltimateCategoryList/]]></controller>
+			<controller><![CDATA[ultimate\acp\page\UltimateCategoryListPage]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.category</parent>
 			<permissions>admin.content.ultimate.canEditCategory,admin.content.ultimate.canDeleteCategory</permissions>
 			<showorder>1</showorder>
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.category.add">
-			<controller><![CDATA[ultimate\acp\form\UltimateCategoryAdd/]]></controller>
+			<controller><![CDATA[ultimate\acp\form\UltimateCategoryAddForm]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.category</parent>
 			<permissions>admin.content.ultimate.canAddCategory</permissions>
 			<showorder>2</showorder>
@@ -56,14 +56,14 @@
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.page.list">
-			<controller><![CDATA[ultimate\acp\page\UltimatePageList/]]></controller>
+			<controller><![CDATA[ultimate\acp\page\UltimatePageListPage]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.page</parent>
 			<permissions>admin.content.ultimate.canEditPage,admin.content.ultimate.canDeletePage</permissions>
 			<showorder>1</showorder>
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.page.add">
-			<controller><![CDATA[ultimate\acp\form\UltimatePageAdd/]]></controller>
+			<controller><![CDATA[ultimate\acp\form\UltimatePageAddForm]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.page</parent>
 			<permissions>admin.content.ultimate.canAddPage</permissions>
 			<showorder>2</showorder>
@@ -77,28 +77,28 @@
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.link.list">
-			<controller><![CDATA[ultimate\acp\page\UltimateLinkList/]]></controller>
+			<controller><![CDATA[ultimate\acp\page\UltimateLinkListPage]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.link</parent>
 			<permissions>admin.content.ultimate.canEditLink,admin.content.ultimate.canDeleteLink</permissions>
 			<showorder>1</showorder>
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.link.add">
-			<controller><![CDATA[ultimate\acp\form\UltimateLinkAdd/]]></controller>
+			<controller><![CDATA[ultimate\acp\form\UltimateLinkAddForm]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.link</parent>
 			<permissions>admin.content.ultimate.canAddLink</permissions>
 			<showorder>2</showorder>
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.link.category.list">
-			<controller><![CDATA[ultimate\acp\page\UltimateLinkCategoryList/]]></controller>
+			<controller><![CDATA[ultimate\acp\page\UltimateLinkCategoryListPage]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.link</parent>
 			<permissions>admin.content.ultimate.canEditCategory,admin.content.ultimate.canDeleteCategory</permissions>
 			<showorder>3</showorder>
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.link.category.add">
-			<controller><![CDATA[ultimate\acp\form\UltimateLinkCategoryAdd/]]></controller>
+			<controller><![CDATA[ultimate\acp\form\UltimateLinkCategoryAddForm]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.link</parent>
 			<permissions>admin.content.ultimate.canAddCategory</permissions>
 			<showorder>4</showorder>
@@ -113,7 +113,7 @@
 		
 		<!-- layouts -->
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.layoutManager">
-			<controller><![CDATA[ultimate\acp\form\UltimateLayoutManager/]]></controller>
+			<controller><![CDATA[ultimate\acp\form\UltimateLayoutManagerForm]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.appearance</parent>
 			<permissions>admin.content.ultimate.canManageLayouts</permissions>
 			<showorder>1</showorder>
@@ -122,14 +122,14 @@
 		
 		<!-- menus -->
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.menu.list">
-			<controller><![CDATA[ultimate\acp\page\UltimateMenuList/]]></controller>
+			<controller><![CDATA[ultimate\acp\page\UltimateMenuListPage]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.appearance</parent>
 			<permissions>admin.content.ultimate.canEditMenu,admin.content.ultimate.canDeleteMenu</permissions>
 			<showorder>2</showorder>
 		</acpmenuitem>
 		
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.menu.add">
-			<controller><![CDATA[ultimate\acp\form\UltimateMenuAdd/]]></controller>
+			<controller><![CDATA[ultimate\acp\form\UltimateMenuAddForm]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.appearance</parent>
 			<permissions>admin.content.ultimate.canAddMenu</permissions>
 			<showorder>3</showorder>
@@ -138,13 +138,13 @@
 		
 		<!-- templates -->
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.template.add">
-			<controller><![CDATA[ultimate\acp\form\UltimateTemplateAdd]]></controller>
+			<controller><![CDATA[ultimate\acp\form\UltimateTemplateAddForm]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.appearance</parent>
 			<permissions>admin.content.ultimate.canAddTemplate</permissions>
 			<showorder>4</showorder>
 		</acpmenuitem>
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.appearance.template.list">
-			<controller><![CDATA[ultimate\acp\page\UltimateTemplateList/]]></controller>
+			<controller><![CDATA[ultimate\acp\page\UltimateTemplateListPage]]></controller>
 			<parent>wcf.acp.menu.link.ultimate.appearance</parent>
 			<permissions>admin.content.ultimate.canEditTemplate</permissions>
 			<showorder>5</showorder>
