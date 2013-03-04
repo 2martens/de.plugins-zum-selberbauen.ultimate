@@ -247,6 +247,7 @@ INSERT INTO ultimate1_layout (objectID, objectType) VALUES (0, 'index');
 INSERT INTO ultimate1_layout (objectID, objectType) VALUES (0, 'category');
 INSERT INTO ultimate1_layout (objectID, objectType) VALUES (0, 'content');
 INSERT INTO ultimate1_layout (objectID, objectType) VALUES (0, 'page');
+INSERT INTO ultimate1_layout (objectID, objectType) VALUES (1, 'category');
 
 -- mime types
 INSERT INTO ultimate1_media_mimetype (mimeType) VALUES 
