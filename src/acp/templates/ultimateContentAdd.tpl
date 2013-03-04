@@ -1,5 +1,4 @@
 {include file='header'}
-{include file='wysiwyg'} 
 
 {include file='multipleLanguageInputJavascript' elementIdentifier='subject' forceSelection=false}
 {include file='multipleLanguageInputJavascript' elementIdentifier='description' forceSelection=false}
@@ -295,3 +294,4 @@
 </form>
 
 {include file='footer'} 
+{include file='wysiwyg'}
