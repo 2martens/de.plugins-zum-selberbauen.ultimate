@@ -39,7 +39,7 @@ use wcf\system\tagging\ITaggable;
  * @subpackage	data.content
  * @category	Ultimate CMS
  */
-class TaggableContent extends CategorizedContent implements ITaggable {
+class TaggableContent extends CategorizedContent /*implements ITaggable*/ {
 	/**
 	 * @see \wcf\system\tagging\ITaggable::getObjectTypeID()
 	 */
