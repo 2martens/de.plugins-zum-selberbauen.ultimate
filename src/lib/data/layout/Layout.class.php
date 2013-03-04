@@ -27,7 +27,6 @@
  */
 namespace ultimate\data\layout;
 use ultimate\data\AbstractUltimateDatabaseObject;
-use wcf\data\ITitledObject;
 use wcf\system\WCF;
 
 /**
@@ -40,7 +39,7 @@ use wcf\system\WCF;
  * @subpackage	data.layout
  * @category	Ultimate CMS
  */
-class Layout extends AbstractUltimateDatabaseObject implements ITitledObject {
+class Layout extends AbstractUltimateDatabaseObject {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableName
 	 */
@@ -55,24 +54,6 @@ class Layout extends AbstractUltimateDatabaseObject implements ITitledObject {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableIndexName
 	 */
 	protected static $databaseTableIndexName = 'layoutID';
-	
-	/**
-	 * Returns the title of this layout.
-	 * 
-	 * @return	string
-	 */
-	public function getTitle() {
-		return $this->__toString();
-	}
-	
-	/**
-	 * Returns the title of this layout.
-	 *
-	 * @return	string
-	 */
-	public function __toString() {
-		return WCF::getLanguage()->get($this->layoutName);
-	}
 	
 	/**
 	 * Returns the assigned template.
