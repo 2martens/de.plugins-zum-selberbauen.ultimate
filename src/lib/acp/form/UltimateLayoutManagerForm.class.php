@@ -35,6 +35,7 @@ use ultimate\system\cache\builder\TemplateCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use wcf\form\AbstractForm;
 use wcf\system\exception\UserInputException;
+use wcf\system\WCF;
 
 /**
  * Shows the UltimateLayoutManager form.
