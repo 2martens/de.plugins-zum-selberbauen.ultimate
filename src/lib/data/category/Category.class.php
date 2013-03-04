@@ -28,7 +28,7 @@
 namespace ultimate\data\category;
 use ultimate\data\content\Content;
 use ultimate\data\AbstractUltimateDatabaseObject;
-use wcf\data\ITitledDatabaseObject;
+use wcf\data\ITitledObject;
 use wcf\system\WCF;
 
 /**
@@ -41,7 +41,7 @@ use wcf\system\WCF;
  * @subpackage	data.category
  * @category	Ultimate CMS
  */
-class Category extends AbstractUltimateDatabaseObject implements ITitledDatabaseObject {
+class Category extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableName
 	 */

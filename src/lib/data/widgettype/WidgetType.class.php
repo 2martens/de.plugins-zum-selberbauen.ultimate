@@ -27,7 +27,7 @@
  */
 namespace ultimate\data\widgettype;
 use ultimate\data\AbstractUltimateDatabaseObject;
-use wcf\data\ITitledDatabaseObject;
+use wcf\data\ITitledObject;
 
 /**
  * Represents a widgetType entry.
@@ -39,7 +39,7 @@ use wcf\data\ITitledDatabaseObject;
  * @subpackage	data.widgettype
  * @category	Ultimate CMS
  */
-class WidgetType extends AbstractUltimateDatabaseObject implements ITitledDatabaseObject {
+class WidgetType extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableName
 	 */
@@ -65,7 +65,7 @@ class WidgetType extends AbstractUltimateDatabaseObject implements ITitledDataba
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.ITitledDatabaseObject.html#getTitle
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.ITitledObject.html#getTitle
 	 */
 	public function getTitle() {
 		return $this->widgetTypeName;

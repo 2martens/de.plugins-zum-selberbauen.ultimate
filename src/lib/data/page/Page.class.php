@@ -30,7 +30,7 @@ use ultimate\data\content\Content;
 use ultimate\data\AbstractUltimateDatabaseObject;
 use wcf\data\user\group\UserGroup;
 use wcf\data\user\User;
-use wcf\data\ITitledDatabaseObject;
+use wcf\data\ITitledObject;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
 
@@ -44,7 +44,7 @@ use wcf\util\DateUtil;
  * @subpackage	data.page
  * @category	Ultimate CMS
  */
-class Page extends AbstractUltimateDatabaseObject implements ITitledDatabaseObject {
+class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableName
 	 */

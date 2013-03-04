@@ -27,7 +27,7 @@
  */
 namespace ultimate\data\widget\area;
 use ultimate\data\AbstractUltimateDatabaseObject;
-use wcf\data\ITitledDatabaseObject;
+use wcf\data\ITitledObject;
 
 /**
  * Represents a widget area entry.
@@ -39,7 +39,7 @@ use wcf\data\ITitledDatabaseObject;
  * @subpackage	data.widget.area
  * @category	Ultimate CMS
  */
-class WidgetArea extends AbstractUltimateDatabaseObject implements ITitledDatabaseObject {
+class WidgetArea extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableName
 	 */
