@@ -35,7 +35,7 @@ use wcf\data\tag\Tag;
 use wcf\form\AbstractForm;
 use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
-use wcf\system\bbcode\URLParser;
+use wcf\system\bbcode\PreParser;
 use wcf\system\language\I18nHandler;
 use wcf\system\menu\acp\ACPMenu;
 use wcf\system\tagging\TagEngine;
@@ -195,10 +195,10 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 			$this->text = $text;
 			I18nHandler::getInstance()->save('text', $this->text, 'ultimate.content', PACKAGE_ID);
 			// parse URLs
-			if ($this->parseURL == 1) {
+			if ($this->preParse) {
 				$textValues = I18nHandler::getInstance()->getValues('text');
 				foreach ($textValues as $languageID => $text) {
-					$textValues[$languageID] = URLParser::getInstance()->parse($text);
+					$textValues[$languageID] = PreParser::getInstance()->parse($text);
 				}
 				
 				// nasty workaround, because you can't change the values of I18nHandler before save

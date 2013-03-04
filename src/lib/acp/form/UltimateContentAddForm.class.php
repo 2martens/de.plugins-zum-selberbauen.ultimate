@@ -35,7 +35,7 @@ use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\tag\Tag;
 use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
-use wcf\system\bbcode\URLParser;
+use wcf\system\bbcode\PreParser;
 use wcf\system\cache\builder\UserGroupCacheBuilder;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
@@ -339,10 +339,10 @@ class UltimateContentAddForm extends MessageForm {
 			$updateEntries['contentText'] = 'ultimate.content.'.$contentID.'.contentText';
 			
 			// parse URLs
-			if ($this->parseURL == 1) {
+			if ($this->preParse) {
 				$textValues = I18nHandler::getInstance()->getValues('text');
 				foreach ($textValues as $languageID => $text) {
-					$textValues[$languageID] = URLParser::getInstance()->parse($text);
+					$textValues[$languageID] = PreParser::getInstance()->parse($text);
 				}
 				
 				// nasty workaround, because you can't change the values of I18nHandler before save
