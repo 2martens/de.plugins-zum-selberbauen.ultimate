@@ -31,6 +31,7 @@ use ultimate\data\page\PageAction;
 use ultimate\system\cache\builder\ContentCacheBuilder;
 use ultimate\system\cache\builder\ContentCategoryCacheBuilder;
 use ultimate\system\cache\builder\ContentTagCacheBuilder;
+use ultimate\system\cache\builder\LayoutCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
@@ -259,5 +260,6 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 		ContentCacheBuilder::getInstance()->reset();
 		ContentCategoryCacheBuilder::getInstance()->reset();
 		ContentTagCacheBuilder::getInstance()->reset();
+		LayoutCacheBuilder::getInstance()->reset();
 	}
 }

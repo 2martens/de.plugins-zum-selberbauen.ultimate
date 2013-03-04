@@ -27,6 +27,7 @@
  */
 namespace ultimate\data\page;
 use ultimate\system\cache\builder\ContentPageCacheBuilder;
+use ultimate\system\cache\builder\LayoutCacheBuilder;
 use ultimate\system\cache\builder\PageCacheBuilder;
 use ultimate\data\layout\LayoutAction;
 use ultimate\system\layout\LayoutHandler;
@@ -163,5 +164,6 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	public static function resetCache() {
 		PageCacheBuilder::getInstance()->reset();
 		ContentPageCacheBuilder::getInstance()->reset();
+		LayoutCacheBuilder::getInstance()->reset();
 	}
 }

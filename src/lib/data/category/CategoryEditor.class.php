@@ -28,6 +28,7 @@
 namespace ultimate\data\category;
 use ultimate\data\layout\LayoutAction;
 use ultimate\system\cache\builder\CategoryCacheBuilder;
+use ultimate\system\cache\builder\LayoutCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
@@ -104,5 +105,6 @@ class CategoryEditor extends DatabaseObjectEditor implements IEditableCachedObje
 	 */
 	public static function resetCache() {
 		CategoryCacheBuilder::getInstance()->reset();
+		LayoutCacheBuilder::getInstance()->reset();
 	}
 }
