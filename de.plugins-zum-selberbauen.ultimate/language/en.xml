@@ -112,6 +112,24 @@
 		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteTemplate.description"><![CDATA[Members of this usergroup can delete templates.]]></item>
 		<!-- /template -->
 		
+		<!-- widget area -->
+		<item name="wcf.acp.group.option.admin.content.ultimate.canAddWidgetArea"><![CDATA[Can add widget areas.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canAddWidgetArea.description"><![CDATA[Members of this usergroup can add widget areas.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canEditWidgetArea"><![CDATA[Can edit widget areas.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canEditWidgetArea.description"><![CDATA[Members of this usergroup can edit widget areas.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteWidgetArea"><![CDATA[Can delete widget areas.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteWidgetArea.description"><![CDATA[Members of this usergroup can delete widget areas.]]></item>
+		<!-- /widget area -->
+		
+		<!-- widget area -->
+		<item name="wcf.acp.group.option.admin.content.ultimate.canAddWidget"><![CDATA[Can add widgets.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canAddWidget.description"><![CDATA[Members of this usergroup can add widgets.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canEditWidget"><![CDATA[Can edit widgets.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canEditWidget.description"><![CDATA[Members of this usergroup can edit widgets.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteWidget"><![CDATA[Can delete widgets.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteWidget.description"><![CDATA[Members of this usergroup can delete widgets.]]></item>
+		<!-- /widget area -->
+		
 		<!-- /admin -->
 	</category>
 	
@@ -146,6 +164,11 @@
 		<item name="wcf.acp.menu.link.ultimate.appearance.template.list"><![CDATA[List templates]]></item>
 		<!-- /template items -->
 		
+		<!-- widget area items -->
+		<item name="wcf.acp.menu.link.ultimate.appearance.widgetArea.add"><![CDATA[Add widget area]]></item>
+		<item name="wcf.acp.menu.link.ultimate.appearance.widgetArea.list"><![CDATA[List widget areas]]></item>
+		<!-- /widget area items -->
+		
 		<!-- /appearance items -->
 		
 		<!-- additional items -->
@@ -176,6 +199,8 @@
 		<item name="wcf.acp.option.category.ultimate.sort.page.description"><![CDATA[]]></item>
 		<item name="wcf.acp.option.category.ultimate.sort.template"><![CDATA[Templates]]></item>
 		<item name="wcf.acp.option.category.ultimate.sort.template.description"><![CDATA[]]></item>
+		<item name="wcf.acp.option.category.ultimate.sort.widgetArea"><![CDATA[Widget areas]]></item>
+		<item name="wcf.acp.option.category.ultimate.sort.widgetArea.description"><![CDATA[]]></item>
 		<!-- /categories -->
 		
 		<!-- ultimate.general -->
@@ -246,6 +271,14 @@ Available variables:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$autho
 		<item name="wcf.acp.option.sort_template_sortOrder"><![CDATA[Sort order]]></item>
 		<item name="wcf.acp.option.sort_template_sortOrder.description"><![CDATA[Please insert here the sort order for the template list.]]></item>
 		<!-- /ultimate.sort.template -->
+		<!-- ultimate.sort.widgetArea -->
+		<item name="wcf.acp.option.sort_widgetArea_sortField"><![CDATA[Sort field]]></item>
+		<item name="wcf.acp.option.sort_widgetArea_sortField.widgetAreaID"><![CDATA[ID]]></item>
+		<item name="wcf.acp.option.sort_widgetArea_sortField.widgetAreaName"><![CDATA[Name]]></item>
+		<item name="wcf.acp.option.sort_widgetArea_sortField.description"><![CDATA[Please insert here the sort field for the widget area list.]]></item>
+		<item name="wcf.acp.option.sort_widgetArea_sortOrder"><![CDATA[Sort order]]></item>
+		<item name="wcf.acp.option.sort_widgetArea_sortOrder.description"><![CDATA[Please insert here the sort order for the widget area list.]]></item>
+		<!-- /ultimate.sort.widgetArea -->
 	</category>
 	
 	<category name="wcf.acp.ultimate">
@@ -255,7 +288,7 @@ Available variables:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$autho
 		<item name="wcf.acp.ultimate.status"><![CDATA[Status]]></item>
 		<item name="wcf.acp.ultimate.status.draft"><![CDATA[Draft]]></item>
 		<item name="wcf.acp.ultimate.status.pendingReview"><![CDATA[Pending Review]]></item>
-		<item name="wcf.acp.ultimate.status.scheduled"><![CDATA[Geplant]]></item>
+		<item name="wcf.acp.ultimate.status.scheduled"><![CDATA[Scheduled]]></item>
 		<item name="wcf.acp.ultimate.status.published"><![CDATA[Published]]></item>
 		<item name="wcf.acp.ultimate.status.error.notValid"><![CDATA[The "selected" status is invalid, because you couldn't select it.]]></item>
 		<item name="wcf.acp.ultimate.visibility"><![CDATA[Visibility]]></item>

@@ -214,6 +214,44 @@
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			
+			<option name="admin.content.ultimate.canAddWidgetArea">
+				<categoryname>admin.content.ultimate</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="admin.content.ultimate.canEditWidgetArea">
+				<categoryname>admin.content.ultimate</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="admin.content.ultimate.canDeleteWidgetArea">
+				<categoryname>admin.content.ultimate</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			
+			<option name="admin.content.ultimate.canAddWidget">
+				<categoryname>admin.content.ultimate</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="admin.content.ultimate.canEditWidget">
+				<categoryname>admin.content.ultimate</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="admin.content.ultimate.canDeleteWidget">
+				<categoryname>admin.content.ultimate</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			
 		</options>
 	</import>
 </data>

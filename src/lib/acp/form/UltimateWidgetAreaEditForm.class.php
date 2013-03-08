@@ -45,6 +45,13 @@ use wcf\system\WCF;
  */
 class UltimateWidgetAreaEditForm extends UltimateWidgetAreaAddForm {
 	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededPermissions
+	 */
+	public $neededPermissions = array(
+		'admin.content.ultimate.canEditWidgetArea'
+	);
+	
+	/**
 	 * @var	string
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$activeMenuItem
 	 */

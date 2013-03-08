@@ -38,6 +38,10 @@
 						<parent>ultimate.sort</parent>
 						<showorder>4</showorder>
 					</category>
+					<category name="ultimate.sort.widgetArea">
+						<parent>ultimate.sort</parent>
+						<showorder>5</showorder>
+					</category>
 				
 		</categories>
 		<options>
@@ -205,6 +209,27 @@ DESC:wcf.global.sortOrder.descending]]>
 				</selectoptions>
 			</option>
 			<!-- /sort order/field for UltimateTemplateListPage -->
+			
+			<!-- sort order/field for UltimateWidgetAreaListPage -->
+			<option name="ultimate_sort_widgetArea_sortField">
+				<categoryname>ultimate.sort.widgetArea</categoryname>
+				<optiontype>select</optiontype>
+				<defaultvalue><![CDATA[widgetAreaID]]></defaultvalue>
+				<selectoptions>
+					<![CDATA[widgetAreaID:wcf.acp.option.ultimate_sort_widgetArea_sortField.widgetAreaID
+widgetAreaName:wcf.acp.option.ultimate_sort_widgetArea_sortField.widgetAreaName]]>
+				</selectoptions>
+			</option>
+			<option name="ultimate_sort_widgetArea_sortOrder">
+				<categoryname>ultimate.sort.widgetArea</categoryname>
+				<optiontype>select</optiontype>
+				<defaultvalue><![CDATA[ASC]]></defaultvalue>
+				<selectoptions>
+					<![CDATA[ASC:wcf.global.sortOrder.ascending
+DESC:wcf.global.sortOrder.descending]]>
+				</selectoptions>
+			</option>
+			<!-- /sort order/field for UltimateWidgetAreaListPage -->
 		</options>
 	</import>
 </data>

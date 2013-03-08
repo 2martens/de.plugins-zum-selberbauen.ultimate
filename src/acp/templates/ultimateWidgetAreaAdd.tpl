@@ -103,7 +103,7 @@
 				{else}
 					<p>{lang}wcf.acp.ultimate.widgetArea.addWidgetAreaFirst{/lang}</p>
 				{/if}
-				{if $__wcf->session->getPermission('admin.content.ultimate.canEditWidget')}
+				{if $__wcf->session->getPermission('admin.content.ultimate.canEditWidgetArea')}
 					<div class="formSubmit">
 						<button class="button default{if $action == 'add' || $widgetNodeList|count == 0} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.global.button.save{/lang}</button>
 					</div>
@@ -165,6 +165,7 @@
 					});
 					new WCF.Sortable.List('widgetList', 'ultimate\\data\\widget\\WidgetAction', 0, { }, false);
 					ULTIMATE.Permission.addObject({
+						{* 'admin.content.ultimate.canEditWidgetArea': {if $__wcf->session->getPermission('admin.content.ultimate.canEditWidgetArea')}true{else}false{/if}, *}
 						'admin.content.ultimate.canEditWidget': {if $__wcf->session->getPermission('admin.content.ultimate.canEditWidget')}true{else}false{/if},
 						'admin.content.ultimate.canDeleteWidget': {if $__wcf->session->getPermission('admin.content.ultimate.canDeleteWidget')}true{else}false{/if}
 					});

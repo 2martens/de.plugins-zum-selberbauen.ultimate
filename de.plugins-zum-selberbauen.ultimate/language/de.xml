@@ -112,6 +112,24 @@
 		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteTemplate.description"><![CDATA[Mitglieder dieser Benutzergruppe können Templates löschen.]]></item>
 		<!-- /template -->
 		<!-- TODO: add missing language variables -->
+		
+		<!-- widget area -->
+		<item name="wcf.acp.group.option.admin.content.ultimate.canAddWidgetArea"><![CDATA[Kann Widgetbereiche hinzufügen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canAddWidgetArea.description"><![CDATA[Mitglieder dieser Benutzergruppe können Widgetbereiche hinzufügen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canEditWidgetArea"><![CDATA[Kann Widgetbereiche bearbeiten.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canEditWidgetArea.description"><![CDATA[Mitglieder dieser Benutzergruppe können Widgetbereiche bearbeiten.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteWidgetArea"><![CDATA[Kann Widgetbereiche löschen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteWidgetArea.description"><![CDATA[Mitglieder dieser Benutzergruppe können Widgetbereiche löschen.]]></item>
+		<!-- /widget area -->
+		
+		<!-- widget area -->
+		<item name="wcf.acp.group.option.admin.content.ultimate.canAddWidget"><![CDATA[Kann Widgets hinzufügen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canAddWidget.description"><![CDATA[Mitglieder dieser Benutzergruppe können Widgets hinzufügen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canEditWidget"><![CDATA[Kann Widgets bearbeiten.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canEditWidget.description"><![CDATA[Mitglieder dieser Benutzergruppe können Widgets bearbeiten.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteWidget"><![CDATA[Kann Widgets löschen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteWidget.description"><![CDATA[Mitglieder dieser Benutzergruppe können Widgets löschen.]]></item>
+		<!-- /widget area -->
 		<!-- /admin -->
 	</category>
 	
@@ -146,6 +164,11 @@
 		<item name="wcf.acp.menu.link.ultimate.appearance.template.list"><![CDATA[Templates auflisten]]></item>
 		<!-- /template items -->
 		
+		<!-- widget area items -->
+		<item name="wcf.acp.menu.link.ultimate.appearance.widgetArea.add"><![CDATA[Widgetbereich hinzufügen]]></item>
+		<item name="wcf.acp.menu.link.ultimate.appearance.widgetArea.list"><![CDATA[Widgetbereiche auflisten]]></item>
+		<!-- /widget area items -->
+		
 		<!-- /appearance items -->
 		
 		<!-- additional items -->
@@ -178,6 +201,8 @@
 		<item name="wcf.acp.option.category.ultimate.sort.page.description"><![CDATA[]]></item>
 		<item name="wcf.acp.option.category.ultimate.sort.template"><![CDATA[Templates]]></item>
 		<item name="wcf.acp.option.category.ultimate.sort.template.description"><![CDATA[]]></item>
+		<item name="wcf.acp.option.category.ultimate.sort.widgetArea"><![CDATA[Widgetbereiche]]></item>
+		<item name="wcf.acp.option.category.ultimate.sort.widgetArea.description"><![CDATA[]]></item>
 		<!-- /categories -->
 		
 		<!-- ultimate.general -->
@@ -249,6 +274,14 @@ Verfügbare Variablen:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$aut
 		<item name="wcf.acp.option.sort_template_sortOrder"><![CDATA[Sortierreihenfolge]]></item>
 		<item name="wcf.acp.option.sort_template_sortOrder.description"><![CDATA[Geben Sie hier die Sortierreihenfolge für die Templateliste an.]]></item>
 		<!-- /ultimate.sort.template -->
+		<!-- ultimate.sort.widgetArea -->
+		<item name="wcf.acp.option.sort_widgetArea_sortField"><![CDATA[Sortierfeld]]></item>
+		<item name="wcf.acp.option.sort_widgetArea_sortField.widgetAreaID"><![CDATA[ID]]></item>
+		<item name="wcf.acp.option.sort_widgetArea_sortField.widgetAreaName"><![CDATA[Name]]></item>
+		<item name="wcf.acp.option.sort_widgetArea_sortField.description"><![CDATA[Geben Sie hier an nach welchem Element sortiert werden soll.]]></item>
+		<item name="wcf.acp.option.sort_widgetArea_sortOrder"><![CDATA[Sortierreihenfolge]]></item>
+		<item name="wcf.acp.option.sort_widgetArea_sortOrder.description"><![CDATA[Geben Sie hier die Sortierreihenfolge für die Widgetbereichliste an.]]></item>
+		<!-- /ultimate.sort.widgetArea -->
 	</category>
 	
 	<category name="wcf.acp.ultimate">
