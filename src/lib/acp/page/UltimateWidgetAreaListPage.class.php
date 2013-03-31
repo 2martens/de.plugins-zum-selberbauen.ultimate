@@ -27,6 +27,7 @@
  */
 namespace ultimate\acp\page;
 use wcf\page\AbstractCachedListPage;
+use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\menu\acp\ACPMenu;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
