@@ -126,11 +126,11 @@ false:wcf.acp.option.ultimate_general_englishLanguage.AE]]>
 				<optiontype>select</optiontype>
 				<defaultvalue><![CDATA[categoryID]]></defaultvalue>
 				<selectoptions>
-					<![CDATA[categoryID:wcf.acp.option.sort_category_sortField.categoryID
-categoryTitle:wcf.acp.option.sort_category_sortField.categoryTitle
-categoryDescription:wcf.acp.option.sort_category_sortField.categoryDescription
-categorySlug:wcf.acp.option.sort_category_sortField.categorySlug
-categoryContents:wcf.acp.option.sort_category_sortField.categoryContents]]>
+					<![CDATA[categoryID:wcf.acp.option.ultimate_sort_category_sortField.categoryID
+categoryTitle:wcf.acp.option.ultimate_sort_category_sortField.categoryTitle
+categoryDescription:wcf.acp.option.ultimate_sort_category_sortField.categoryDescription
+categorySlug:wcf.acp.option.ultimate_sort_category_sortField.categorySlug
+categoryContents:wcf.acp.option.ultimate_sort_category_sortField.categoryContents]]>
 				</selectoptions>
 			</option>
 			<option name="ultimate_sort_category_sortOrder">
@@ -150,9 +150,9 @@ DESC:wcf.global.sortOrder.descending]]>
 				<defaultvalue><![CDATA[contentID]]></defaultvalue>
 				<selectoptions>
 					<![CDATA[contentID:wcf.acp.option.ultimate_sort_content_sortField.contentID
-contentTitle:wcf.acp.option.sort_content_sortField.contentTitle
-contentAuthor:wcf.acp.option.sort_content_sortField.contentAuthor
-lastModified:wcf.acp.option.sort_content_sortField.lastModified]]>
+contentTitle:wcf.acp.option.ultimate_sort_content_sortField.contentTitle
+contentAuthor:wcf.acp.option.ultimate_sort_content_sortField.contentAuthor
+lastModified:wcf.acp.option.ultimate_sort_content_sortField.lastModified]]>
 				</selectoptions>
 			</option>
 			<option name="ultimate_sort_content_sortOrder">
@@ -171,11 +171,11 @@ DESC:wcf.global.sortOrder.descending]]>
 				<optiontype>select</optiontype>
 				<defaultvalue><![CDATA[pageID]]></defaultvalue>
 				<selectoptions>
-					<![CDATA[pageID:wcf.acp.option.sort_page_sortField.pageID
-pageTitle:wcf.acp.option.sort_page_sortField.pageTitle
-pageAuthor:wcf.acp.option.sort_page_sortField.pageAuthor
-publishDate:wcf.acp.option.sort_page_sortField.publishDate
-lastModified:wcf.acp.option.sort_page_sortField.lastModified]]>
+					<![CDATA[pageID:wcf.acp.option.ultimate_sort_page_sortField.pageID
+pageTitle:wcf.acp.option.ultimate_sort_page_sortField.pageTitle
+pageAuthor:wcf.acp.option.ultimate_sort_page_sortField.pageAuthor
+publishDate:wcf.acp.option.ultimate_sort_page_sortField.publishDate
+lastModified:wcf.acp.option.ultimate_sort_page_sortField.lastModified]]>
 				</selectoptions>
 			</option>
 			<option name="ultimate_sort_page_sortOrder">
