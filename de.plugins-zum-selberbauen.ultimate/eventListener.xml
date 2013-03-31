@@ -54,10 +54,17 @@
         
         <!-- ACPFirstTime listener -->
         <eventlistener>
+            <eventclassname>wcf\acp\page\PackageListPage</eventclassname>
+            <eventname>readData</eventname>
+            <environment>admin</environment>
+            <inherit>0</inherit>
+            <listenerclassname>ultimate\system\event\listener\ACPFirstTimeListener</listenerclassname>
+        </eventlistener>
+        <eventlistener>
             <eventclassname>ultimate\acp\page\IndexPage</eventclassname>
             <eventname>readData</eventname>
             <environment>admin</environment>
-            <inherit>1</inherit>
+            <inherit>0</inherit>
             <listenerclassname>ultimate\system\event\listener\ACPFirstTimeListener</listenerclassname>
         </eventlistener>
         <!-- /ACPFirstTimeListener -->
