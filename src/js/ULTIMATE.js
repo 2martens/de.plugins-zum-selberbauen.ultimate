@@ -647,6 +647,9 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	 * 
 	 * @param	{String}	elementID
 	 * @param	{String}	menuItemListID
+	 * @param	{String}	className
+	 * @param	{Integer}	offset
+	 * @param	{String}	type
 	 */
 	init: function(elementID, menuItemListID, className, offset, type) {
 		this._element = $('#' + $.wcfEscapeID(elementID));
@@ -670,23 +673,17 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	 * Initializes the event handler.
 	 */
 	_init: function() {
-		$('.jsMenuItem').on('empty', $.proxy(this._empty, this));
+		$('.jsMenuItem').on('remove', $.proxy(this._remove, this));
 	},
 	
 	/**
-	 * Called each time a menu item is removed with empty().remove().
+	 * Called each time a menu item is removed with remove().
 	 * @param	{jQuery.Event}	event
 	 */
-	_empty: function(event) {
+	_remove: function(event) {
 		var $target = $(event.target);
-		var $parent = $target.parent();
-		var $index = $parent.index($target);
-		var $before = $parent.get($index - 1);
-		var usePrepend = false;
-		if ($before == undefined) {
-			usePrepend = true;
-		}
 		var $elementName = $target.data('objectName');
+				
 		this._element.find('input:disabled').each($.proxy(function(index, item) {
 			var $item = $(item);
 			var $itemName = $item.data('name');
@@ -694,18 +691,10 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 				$item.prop('disabled', false).removeClass('disabled');
 			}
 		}, this));
-		$target.children('.sortableList').each($.proxy(function(index, item) {
-			$list = $(item);
-			$list.children('.jsMenuItem').each($.proxy(function(_index, listItem) {
-				$listItem = $(listItem);
-				$listItem.detach();
-				if (usePrepend) $listItem.prependTo($parent);
-				else $listItem.insertAfter($before);
-			}, this));
-		}, this));
+		
 		if ($('#' + this._menuItemListID).find('.jsMenuItem').length <= 1) {
 			$('#' + this._menuItemListID).find('button[data-type="submit"]').prop('disabled', true).addClass('disabled');
-		} 
+		}
 	},
 	
 	/**
@@ -874,7 +863,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	 */
 	_success: function(data, textStatus, jqXHR) {
 		if (this._notification === null) {
-			this._notification = new WCF.System.Notification(WCF.Language.get('wcf.global.form.edit.success'));
+			this._notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success.edit'));
 		}
 		try {
 			var data = data['returnValues'];
@@ -902,7 +891,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 				}
 			}
 			if (ULTIMATE.Permission.get('admin.content.ultimate.canDeleteMenuItem')) {
-				new WCF.Action.Delete('ultimate\\data\\menu\\item\\MenuItemAction', $('.jsMenuItem'));
+				new ULTIMATE.NestedSortable.Delete('ultimate\\data\\menu\\item\\MenuItemAction', $('.jsMenuItem'));
 			}
 			if (ULTIMATE.Permission.get('admin.content.ultimate.canEditMenuItem')) {
 				new WCF.Action.Toggle('ultimate\\data\\menu\\item\\MenuItemAction', $('.jsMenuItem'), '> .buttons > .jsToggleButton');
@@ -1304,5 +1293,37 @@ ULTIMATE.Widget.Transfer.prototype = {
 		
 	}
 };
+
+/**
+ * Namespace for ULTIMATE.NestedSortable
+ * @namespace
+ */
+ULTIMATE.NestedSortable = {};
+
+/**
+ * @see	WCF.Action.Delete
+ */
+ULTIMATE.NestedSortable.Delete = WCF.Action.Delete.extend({
+	/**
+	 * @see	WCF.Action.Delete.triggerEffect()
+	 */
+	triggerEffect: function(objectIDs) {
+		for (var $index in this._containers) {
+			var $container = $('#' + this._containers[$index]);
+			if (WCF.inArray($container.find('.jsDeleteButton').data('objectID'), objectIDs)) {
+				// move child categories up
+				if ($container.has('ol').has('li')) {
+					var $list = $container.find('> ol');
+					$container.before($list.contents());
+					$list.contents().detach();
+					$container.remove();
+				}
+				else {
+					$container.wcfBlindOut('up', function() { $container.remove(); });
+				}
+			}
+		}
+	}
+});
 
 
