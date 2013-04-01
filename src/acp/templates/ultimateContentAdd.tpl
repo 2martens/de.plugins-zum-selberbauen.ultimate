@@ -241,7 +241,8 @@
 			<dl{if $errorField == 'publishDate'} class="formError"{/if}>
 				<dt><label for="publishDateInput">{lang}wcf.acp.ultimate.publishDate{/lang}</label></dt>
 				<dd>
-					<input type="datetime" id="publishDateInput" name="publishDate" value="{@$publishDate}" readonly="readonly" class="medium" required="required" />
+					<input type="hidden" id="publishDateInputHidden" name="publishDate" value="{@$publishDate}" />
+					<input type="text" id="publishDateInput" value="{@$publishDate}" readonly="readonly" class="medium jsDatePicker" required="required" />
 					<script type="text/javascript">
 					/* <![CDATA[*/
 					$(function() {
@@ -249,18 +250,21 @@
 						$.timepicker.setDefaults( $.timepicker.regional[ "{if $__wcf->getLanguage()->languageCode == 'en'}en-GB{else}{@$__wcf->getLanguage()->languageCode}{/if}" ] );
 						$.datepicker.setDefaults( $.datepicker.regional[ "{if $__wcf->getLanguage()->languageCode == 'en'}en-GB{else}{@$__wcf->getLanguage()->languageCode}{/if}" ] );
 						$('#publishDateInput').datetimepicker( {
-							showOn: 'focus',
+							altField: '#publishDateInputHidden',
+							altFormat: 'yy-mm-dd',
+							altFieldTimeOnly: false,
+							changeMonth: true,
+							changeYear: true,
+							dayNames: WCF.Language.get('__days'),
+							dayNamesMin: WCF.Language.get('__daysShort'),
+							dayNamesShort: WCF.Language.get('__daysShort'),
+							monthNames: WCF.Language.get('__months'),
+							monthNamesShort: WCF.Language.get('__monthsShort'),
 							showOtherMonths: true,
-							selectOtherMonths: true,
-							showAnim: 'fadeIn',
-							timeFormat: 'hh:mm'
+							yearRange: '1900:2038',
+							timeFormat: 'HH:mm'
 						} );
-						var $dateFormat = $('#publishDateInput').datetimepicker( 'option', 'dateFormat');
-						$('#dateFormatInput').val($dateFormat);
 						new ULTIMATE.Button.Replacement('publishButton', 'publishDateInput', 'publish');
-						$('form').submit(function() {
-							$('#publishDateInput').datetimepicker( 'option', 'dateFormat', 'yy-mm-dd' );
-						});
 					});
 					/* ]]> */
 					</script>
