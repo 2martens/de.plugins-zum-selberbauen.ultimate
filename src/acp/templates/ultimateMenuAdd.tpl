@@ -19,7 +19,7 @@
 {/if}
 
 {if $success|isset}
-	<p class="success">{lang}wcf.global.form.{@$action}.success{/lang}</p>
+	<p class="success">{lang}wcf.global.success.{@$action}{/lang}</p>
 {/if}
 
 <div class="contentNavigation">
@@ -66,7 +66,7 @@
 								<span class="buttons">
 									
 									{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteMenuItem')}
-										<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="{@$menuItem->menuItemID}" data-confirm-message="{lang}'wcf.acp.ultimate.menu.item.delete.sure'{/lang}"></span>
+										<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="{@$menuItem->menuItemID}" data-confirm-message="{lang}wcf.acp.ultimate.menu.item.delete.sure{/lang}"></span>
 									{else}
 										<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
 									{/if}
@@ -188,7 +188,7 @@
 		$(function() {
 			{if $action == 'edit'}
 				{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteMenuItem')}
-					new WCF.Action.Delete('ultimate\\data\\menu\\item\\MenuItemAction', $('.jsMenuItem'));
+					new ULTIMATE.NestedSortable.Delete('ultimate\\data\\menu\\item\\MenuItemAction', $('.jsMenuItem'));
 				{/if}
 				{if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem')}
 					new WCF.Action.Toggle('ultimate\\data\\menu\\item\\MenuItemAction', $('.jsMenuItem'), '> .buttons > .jsToggleButton');
@@ -211,7 +211,7 @@
 						'admin.content.ultimate.canEditMenuItem': {if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem')}true{else}false{/if},
 						'admin.content.ultimate.canDeleteMenuItem': {if $__wcf->session->getPermission('admin.content.ultimate.canDeleteMenuItem')}true{else}false{/if}
 					});
-					{* icon is buggy *}
+					
 					new ULTIMATE.Menu.Item.Transfer('categorySelectContainer', 'menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'category');
 					new ULTIMATE.Menu.Item.Transfer('pageSelectContainer', 'menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'page');
 					new ULTIMATE.Menu.Item.Transfer('customContainer', 'menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'custom');
