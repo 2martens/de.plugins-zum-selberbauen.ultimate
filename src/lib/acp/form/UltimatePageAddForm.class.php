@@ -211,7 +211,7 @@ class UltimatePageAddForm extends AbstractForm {
 		if (isset($_POST['visibility'])) $this->visibility = StringUtil::trim($_POST['visibility']);
 		if (isset($_POST['groupIDs'])) $this->groupIDs = ArrayUtil::toIntegerArray($_POST['groupIDs']);
 		if (isset($_POST['publishDate'])) $this->publishDate = StringUtil::trim($_POST['publishDate']);
-		if (isset($_POST['dateFormat'])) $this->dateFormat = StringUtil::trim($_POST['dateFormat']);
+		// if (isset($_POST['dateFormat'])) $this->dateFormat = StringUtil::trim($_POST['dateFormat']);
 		if (isset($_POST['save'])) $this->saveType = 'save';
 		if (isset($_POST['publish'])) $this->saveType = 'publish';
 		if (isset($_POST['startTime'])) $this->startTime = intval($_POST['startTime']);
@@ -481,7 +481,7 @@ class UltimatePageAddForm extends AbstractForm {
 		}
 		// for the very unlikely reason that the date is not in the format
 		// Y-m-d, we have to make it that way
-		$phpDateFormat = DateTimeUtil::getPHPDateFormatFromDateTimePicker($this->dateFormat);
+		/* $phpDateFormat = DateTimeUtil::getPHPDateFormatFromDateTimePicker($this->dateFormat);
 		$phpDateFormat .= ' H:i';
 		$dateTime = \DateTime::createFromFormat(
 			$phpDateFormat,
@@ -489,5 +489,6 @@ class UltimatePageAddForm extends AbstractForm {
 			WCF::getUser()->getTimezone()
 		);
 		$this->publishDateTimestamp = $dateTime->getTimestamp();
+		*/
 	}
 }
