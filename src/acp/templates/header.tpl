@@ -87,6 +87,7 @@
 				'wcf.global.confirmation.confirm': '{lang}wcf.global.confirmation.confirm{/lang}',
 				'wcf.global.confirmation.title': '{lang}wcf.global.confirmation.title{/lang}',
 				'wcf.acp.ultimate.template.selectBlocktype.error.notSelected': '{lang}wcf.acp.ultimate.template.selectBlocktype.error.notSelected{/lang}',
+				'wcf.acp.ultimate.menu.item.delete.sure': '{lang}wcf.acp.ultimate.menu.item.delete.sure{/lang}',
 				'ultimate.button.saveAsDraft': '{lang}ultimate.button.saveAsDraft{/lang}',
 				'ultimate.button.saveAsPending': '{lang}ultimate.button.saveAsPending{/lang}',
 				'ultimate.button.schedule': '{lang}ultimate.button.schedule{/lang}',
