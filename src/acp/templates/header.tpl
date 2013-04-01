@@ -3,7 +3,7 @@
 <head>
 	<base href="{$baseHref}" />
 	<meta charset="utf-8" />
-	<title>{if $pageTitle|isset}{@$pageTitle|language} - {/if}{lang}wcf.acp{/lang}{if PACKAGE_ID} - {PAGE_TITLE|language}{/if}</title>
+	<title>{if $pageTitle|isset}{@$pageTitle|language} - {/if}{lang}wcf.global.acp{/lang}{if PACKAGE_ID} - {PAGE_TITLE|language}{/if}</title>
 	<script type="text/javascript">
 		//<![CDATA[
 		var SID_ARG_1ST = '{@SID_ARG_1ST}';
@@ -11,6 +11,7 @@
 		var RELATIVE_WCF_DIR = '{@$__wcf->getPath()}';
 		var SECURITY_TOKEN = '{@SECURITY_TOKEN}';
 		var LANGUAGE_ID = {@$__wcf->getLanguage()->languageID};
+		var TIME_NOW = {@TIME_NOW};
 		//]]>
 	</script>
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.min.js"></script>
@@ -75,15 +76,16 @@
 				'wcf.date.relative.pastDays': '{capture assign=relativePastDays}{lang}wcf.date.relative.pastDays{/lang}{/capture}{@$relativePastDays|encodeJS}',
 				'wcf.date.dateFormat': '{lang}wcf.date.dateFormat{/lang}',
 				'wcf.date.dateTimeFormat': '{lang}wcf.date.dateTimeFormat{/lang}',
-				'wcf.global.thousandsSeparator': '{capture assign=thousandsSeparator}{lang}wcf.global.thousandsSeparator{/lang}{/capture}{@$thousandsSeparator|encodeJS}',
 				'wcf.global.decimalPoint': '{capture assign=decimalPoint}{lang}wcf.global.decimalPoint{/lang}{/capture}{$decimalPoint|encodeJS}',
+				'wcf.global.success': '{lang}wcf.global.success{/lang}',
+				'wcf.global.success.add': '{lang}wcf.global.success.add{/lang}',
+				'wcf.global.success.edit': '{lang}wcf.global.success.edit{/lang}',
+				'wcf.global.thousandsSeparator': '{capture assign=thousandsSeparator}{lang}wcf.global.thousandsSeparator{/lang}{/capture}{@$thousandsSeparator|encodeJS}',
 				'wcf.global.page.next': '{capture assign=pageNext}{lang}wcf.global.page.next{/lang}{/capture}{@$pageNext|encodeJS}',
 				'wcf.global.page.previous': '{capture assign=pagePrevious}{lang}wcf.global.page.previous{/lang}{/capture}{@$pagePrevious|encodeJS}',
 				'wcf.global.confirmation.cancel': '{lang}wcf.global.confirmation.cancel{/lang}',
 				'wcf.global.confirmation.confirm': '{lang}wcf.global.confirmation.confirm{/lang}',
 				'wcf.global.confirmation.title': '{lang}wcf.global.confirmation.title{/lang}',
-				'wcf.global.form.edit.success': '{lang}wcf.global.form.edit.success{/lang}',
-				'wcf.global.form.error': '{lang}wcf.global.form.error{/lang}',
 				'wcf.acp.ultimate.template.selectBlocktype.error.notSelected': '{lang}wcf.acp.ultimate.template.selectBlocktype.error.notSelected{/lang}',
 				'ultimate.button.saveAsDraft': '{lang}ultimate.button.saveAsDraft{/lang}',
 				'ultimate.button.saveAsPending': '{lang}ultimate.button.saveAsPending{/lang}',
@@ -140,7 +142,7 @@
 			
 			<div id="logo" class="logo">
 				<a href="{link controller='Index'}{/link}">
-					<h1>{lang}wcf.acp{/lang}</h1>
+					<h1>{lang}wcf.global.acp{/lang}</h1>
 					<img src="{@$__wcf->getPath()}acp/images/wcfLogo1.svg" width="321" height="58" alt="" />
 				</a>
 			</div>
