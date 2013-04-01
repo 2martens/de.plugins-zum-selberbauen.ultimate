@@ -19,7 +19,7 @@
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.tools.min.js"></script>
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui.nestedSortable.js"></script>
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui-i18n.min.js"></script>
-	<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui-timepicker-addon.min.js"></script>
+	<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui-timepicker-addon.js"></script>
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/jquery-ui-timepicker-addon-i18n.js"></script>
 	{*<script type="text/javascript" src="{@$__wcf->getPath()}js/ultimateCore.js"></script>*}
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.js"></script>
@@ -37,7 +37,6 @@
 	<!-- Stylesheets -->
 	{* work-around for unknown core-object during WCFSetup *}
 	{@$__wcf->getStyleHandler()->getStylesheet()}
-	<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/3rdParty/jquery-ui.css" />
 	{@$__wcf->getUltimateStyleHandler()->getStylesheet()}
 	
 	<script type="text/javascript">
