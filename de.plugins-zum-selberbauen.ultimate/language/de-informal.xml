@@ -429,6 +429,7 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.menu.categories.description"><![CDATA[Wähle die Kategorien aus, die du zum Menü hinzufügen möchtest.]]></item>
 		<item name="wcf.acp.ultimate.menu.pages"><![CDATA[Seiten]]></item>
 		<item name="wcf.acp.ultimate.menu.pages.description"><![CDATA[Wähle die Seiten aus, die du zum Menü hinzufügen möchtest.]]></item>
+		<item name="wcf.acp.ultimate.menu.custom"><![CDATA[Benutzerdefinierter Link]]></item>
 		<item name="wcf.acp.ultimate.menu.custom.link"><![CDATA[URL]]></item>
 		<item name="wcf.acp.ultimate.menu.custom.linkTitle"><![CDATA[Titel]]></item>
 		<item name="wcf.acp.ultimate.menu.custom.linkTitle.placeholder"><![CDATA[Menüeintrag]]></item>
@@ -480,6 +481,14 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.template.widgetAreaSide.left"><![CDATA[links]]></item>
 		<item name="wcf.acp.ultimate.template.widgetAreaSide.right"><![CDATA[rechts]]></item>
 		<item name="wcf.acp.ultimate.template.widgetAreaSide.error.notValid"><![CDATA[Die "ausgewählte" Seite stand nicht zur Auswahl.]]></item>
+		<item name="wcf.acp.ultimate.template.selectBlocktype"><![CDATA[Blocktyp auswählen]]></item>
+		<item name="wcf.acp.ultimate.template.selectBlocktype.none"><![CDATA[Keinen Blocktyp ausgewählt]]></item>
+		<item name="wcf.acp.ultimate.template.height"><![CDATA[Höhe]]></item>
+		<item name="wcf.acp.ultimate.template.width"><![CDATA[Breite]]></item>
+		<item name="wcf.acp.ultimate.template.top"><![CDATA[Oben]]></item>
+		<item name="wcf.acp.ultimate.template.left"><![CDATA[Links]]></item>
+		<item name="wcf.acp.ultimate.template.addBlock"><![CDATA[Block hinzufügen]]></item>
+		<item name="wcf.acp.ultimate.template.addToTemplate"><![CDATA[Zu Template hinzufügen]]></item>
 		<item name="wcf.acp.ultimate.template.selectWidgetArea"><![CDATA[Widgetkonfiguration auswählen]]></item>
 		<item name="wcf.acp.ultimate.template.selectWidgetArea.none"><![CDATA[Keine Widgetkonfiguration ausgewählt]]></item>
 		<item name="wcf.acp.ultimate.template.selectWidgetArea.error.notValid"><![CDATA[Die "ausgewählte" Konfiguration stand nicht nur Auswahl.]]></item>

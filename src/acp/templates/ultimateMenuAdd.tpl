@@ -115,19 +115,22 @@
 </form>
 <form method="post">
 	<div id="categorySelectContainer" class="container containerPadding marginTop shadow{if $action == 'add'} disabled{/if}">
-		<dl class="displayInline">
-			<dt><label>{lang}wcf.acp.ultimate.menu.categories{/lang}</label></dt>
-			<dd>
-				{if $action == 'add'}
-					{nestedHtmlCheckboxes options=$categories name='categoryIDs' disabled='disabled'}
-				{else}
-					{nestedHtmlCheckboxes options=$categories name='categoryIDs' disabled=$disabledCategoryIDs}
-				{/if}
-				<small>
-					{lang}wcf.acp.ultimate.menu.categories.description{/lang}
-				</small>
-			</dd>
-		</dl>
+		<fieldset>
+			<legend>{lang}wcf.acp.ultimate.menu.categories{/lang}</legend>
+			<dl>
+				{*<dt><label>{lang}wcf.acp.ultimate.menu.categories{/lang}</label></dt>*}
+				<dd>
+					{if $action == 'add'}
+						{nestedHtmlCheckboxes options=$categories name='categoryIDs' disabled='disabled'}
+					{else}
+						{nestedHtmlCheckboxes options=$categories name='categoryIDs' disabled=$disabledCategoryIDs}
+					{/if}
+					<small>
+						{lang}wcf.acp.ultimate.menu.categories.description{/lang}
+					</small>
+				</dd>
+			</dl>
+		</fieldset>
 		<div class="formSubmit">
 			<button class="button default disabled" disabled="disabled" data-type="submit">{lang}wcf.acp.ultimate.menu.addToMenu{/lang}</button>
 		</div>
@@ -135,19 +138,22 @@
 </form>
 <form method="post">
 	<div id="pageSelectContainer" class="container containerPadding marginTop shadow{if $action == 'add'} disabled{/if}">
-		<dl class="displayInline">
-			<dt><label>{lang}wcf.acp.ultimate.menu.pages{/lang}</label></dt>
-			<dd>
-				{if $action == 'add'}
-					{nestedHtmlCheckboxes options=$pages name='pageIDs' disabled='disabled'}
-				{else}
-					{nestedHtmlCheckboxes options=$pages name='pageIDs' disabled=$disabledPageIDs}
-				{/if}
-				<small>
-					{lang}wcf.acp.ultimate.menu.pages.description{/lang}
-				</small>
-			</dd>
-		</dl>
+		<fieldset>
+			<legend>{lang}wcf.acp.ultimate.menu.pages{/lang}</legend>
+			<dl>
+				{*<dt><label>{lang}wcf.acp.ultimate.menu.pages{/lang}</label></dt>*}
+				<dd>
+					{if $action == 'add'}
+						{nestedHtmlCheckboxes options=$pages name='pageIDs' disabled='disabled'}
+					{else}
+						{nestedHtmlCheckboxes options=$pages name='pageIDs' disabled=$disabledPageIDs}
+					{/if}
+					<small>
+						{lang}wcf.acp.ultimate.menu.pages.description{/lang}
+					</small>
+				</dd>
+			</dl>
+		</fieldset>
 		<div class="formSubmit">
 			<button class="button default disabled" disabled="disabled" data-type="submit">{lang}wcf.acp.ultimate.menu.addToMenu{/lang}</button>
 		</div>
@@ -155,29 +161,32 @@
 </form>
 <form method="post">	
 	<div id="customContainer" class="container containerPadding marginTop shadow{if $action == 'add'} disabled{/if}">
-		<dl class="displayInline">
-			<dt><label for="link">{lang}wcf.acp.ultimate.menu.custom.link{/lang}</label></dt>
-			<dd>
-				<input type="url" name="link" id="link" value="http://" class="medium{if $action == 'add'} disabled" disabled="disabled{/if}" />
-			</dd>
-		</dl>
-		<dl>
-			<dt><label for="title">{lang}wcf.acp.ultimate.menu.custom.linkTitle{/lang}</label></dt>
-			<dd>
-				<script type="text/javascript">
-				//<![CDATA[
-					{if $action == 'edit'}
-					$(function() {
-						var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
-						var $optionValues = { {implode from=$i18nValues['title'] key=languageID item=value}'{@$languageID}': '{$value}'{/implode} };
-						new WCF.MultipleLanguageInput('title', false, $optionValues, $availableLanguages);
-					});
-					{/if}
-				//]]>
-				</script>
-				<input type="text" id="title" name="title" value="{@$i18nPlainValues['title']}" class="medium{if $action == 'add'} disabled" disabled="disabled{/if}" placeholder="{lang}wcf.acp.ultimate.menu.custom.linkTitle.placeholder{/lang}" />
-			</dd>
-		</dl>
+		<fieldset>
+			<legend>{lang}wcf.acp.ultimate.menu.custom{/lang}</legend>
+			<dl>
+				<dt><label for="link">{lang}wcf.acp.ultimate.menu.custom.link{/lang}</label></dt>
+				<dd>
+					<input type="url" name="link" id="link" value="http://" class="medium{if $action == 'add'} disabled" disabled="disabled{/if}" />
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="title">{lang}wcf.acp.ultimate.menu.custom.linkTitle{/lang}</label></dt>
+				<dd>
+					<script type="text/javascript">
+					//<![CDATA[
+						{if $action == 'edit'}
+						$(function() {
+							var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
+							var $optionValues = { {implode from=$i18nValues['title'] key=languageID item=value}'{@$languageID}': '{$value}'{/implode} };
+							new WCF.MultipleLanguageInput('title', false, $optionValues, $availableLanguages);
+						});
+						{/if}
+					//]]>
+					</script>
+					<input type="text" id="title" name="title" value="{@$i18nPlainValues['title']}" class="medium{if $action == 'add'} disabled" disabled="disabled{/if}" placeholder="{lang}wcf.acp.ultimate.menu.custom.linkTitle.placeholder{/lang}" />
+				</dd>
+			</dl>
+		</fieldset>
 		<div class="formSubmit">
 			<button class="button default{if $action == 'add'} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.acp.ultimate.menu.addToMenu{/lang}</button>
 		</div>

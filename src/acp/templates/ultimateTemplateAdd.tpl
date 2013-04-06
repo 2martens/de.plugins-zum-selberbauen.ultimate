@@ -197,67 +197,70 @@
 </form>
 <form method="post">
 	<div id="blocktypeContainer" class="container containerPadding marginTop shadow{if $action == 'add'} disabled{/if}">
-		<dl{if $errorField == 'selectBlocktype'} class="formError"{/if}>
-			<dt><label for="selectBlocktype">{lang}wcf.acp.ultimate.template.selectBlocktype{/lang}</label></dt>
-			<dd>
-				<select id="selectBlocktype" name="selectBlocktype">
-					<option label="{lang}wcf.acp.ultimate.template.selectBlocktype.none{/lang}" value="0">{lang}wcf.acp.ultimate.template.selectBlocktype.none{/lang}</option>
-					{htmlOptions options=$blocktypes}
-				</select>
-				{if $errorField == 'selectBlocktype'}
-					<small id="selectBlocktypeError" class="innerError">
-						{lang}wcf.acp.ultimate.template.selectBlocktype.error.{@$errorType}{/lang}
-					</small>
-				{/if}
-			</dd>
-		</dl>
-		<dl{if $errorField == 'height'} class="formError"{/if}>
-			<dt><label for="height">{lang}wcf.acp.ultimate.template.height{/lang}</label></dt>
-			<dd>
-				<input type="number" id="height" name="height" value="{$height}" min="0" /><span class="unit">px</span>
-				{if $errorField == 'height'}
-					<small class="innerError">
-						{lang}wcf.acp.ultimate.template.height.error.{@$errorType}{/lang}
-					</small>
-				{/if}
-			</dd>
-		</dl>
-		<dl{if $errorField == 'width'} class="formError"{/if}>
-			<dt><label for="width">{lang}wcf.acp.ultimate.template.width{/lang}</label></dt>
-			<dd>
-				<input type="number" id="width" name="width" value="{$width}" min="1" max="24" />
-				{if $errorField == 'width'}
-					<small class="innerError">
-						{lang}wcf.acp.ultimate.template.width.error.{@$errorType}{/lang}
-					</small>
-				{/if}
-			</dd>
-		</dl>
-		<dl{if $errorField == 'top'} class="formError"{/if}>
-			<dt><label for="topDistance">{lang}wcf.acp.ultimate.template.top{/lang}</label></dt>
-			<dd>
-				<input type="number" id="topDistance" name="top" value="{$top}" min="0" /><span class="unit">px</span>
-				{if $errorField == 'top'}
-					<small class="innerError">
-						{lang}wcf.acp.ultimate.template.top.error.{@$errorType}{/lang}
-					</small>
-				{/if}
-			</dd>
-		</dl>
-		<dl{if $errorField == 'left'} class="formError"{/if}>
-			<dt><label for="left">{lang}wcf.acp.ultimate.template.left{/lang}</label></dt>
-			<dd>
-				<input type="number" id="left" name="left" value="{$left}" min="1" max="24" />
-				{if $errorField == 'left'}
-					<small class="innerError">
-						{lang}wcf.acp.ultimate.template.left.error.{@$errorType}{/lang}
-					</small>
-				{/if}
-			</dd>
-		</dl>
+		<fieldset>
+			<legend>{lang}wcf.acp.ultimate.template.addBlock{/lang}</legend>
+			<dl{if $errorField == 'selectBlocktype'} class="formError"{/if}>
+				<dt><label for="selectBlocktype">{lang}wcf.acp.ultimate.template.selectBlocktype{/lang}</label></dt>
+				<dd>
+					<select id="selectBlocktype" name="selectBlocktype">
+						<option label="{lang}wcf.acp.ultimate.template.selectBlocktype.none{/lang}" value="0">{lang}wcf.acp.ultimate.template.selectBlocktype.none{/lang}</option>
+						{htmlOptions options=$blocktypes}
+					</select>
+					{if $errorField == 'selectBlocktype'}
+						<small id="selectBlocktypeError" class="innerError">
+							{lang}wcf.acp.ultimate.template.selectBlocktype.error.{@$errorType}{/lang}
+						</small>
+					{/if}
+				</dd>
+			</dl>
+			<dl{if $errorField == 'height'} class="formError"{/if}>
+				<dt><label for="height">{lang}wcf.acp.ultimate.template.height{/lang}</label></dt>
+				<dd>
+					<input type="number" id="height" name="height" value="{$height}" min="0" /><span class="unit">px</span>
+					{if $errorField == 'height'}
+						<small class="innerError">
+							{lang}wcf.acp.ultimate.template.height.error.{@$errorType}{/lang}
+						</small>
+					{/if}
+				</dd>
+			</dl>
+			<dl{if $errorField == 'width'} class="formError"{/if}>
+				<dt><label for="width">{lang}wcf.acp.ultimate.template.width{/lang}</label></dt>
+				<dd>
+					<input type="number" id="width" name="width" value="{$width}" min="1" max="24" />
+					{if $errorField == 'width'}
+						<small class="innerError">
+							{lang}wcf.acp.ultimate.template.width.error.{@$errorType}{/lang}
+						</small>
+					{/if}
+				</dd>
+			</dl>
+			<dl{if $errorField == 'top'} class="formError"{/if}>
+				<dt><label for="topDistance">{lang}wcf.acp.ultimate.template.top{/lang}</label></dt>
+				<dd>
+					<input type="number" id="topDistance" name="top" value="{$top}" min="0" /><span class="unit">px</span>
+					{if $errorField == 'top'}
+						<small class="innerError">
+							{lang}wcf.acp.ultimate.template.top.error.{@$errorType}{/lang}
+						</small>
+					{/if}
+				</dd>
+			</dl>
+			<dl{if $errorField == 'left'} class="formError"{/if}>
+				<dt><label for="left">{lang}wcf.acp.ultimate.template.left{/lang}</label></dt>
+				<dd>
+					<input type="number" id="left" name="left" value="{$left}" min="1" max="24" />
+					{if $errorField == 'left'}
+						<small class="innerError">
+							{lang}wcf.acp.ultimate.template.left.error.{@$errorType}{/lang}
+						</small>
+					{/if}
+				</dd>
+			</dl>
+		</fieldset>
 		<div class="formSubmit">
 			<button class="button default{if $action == 'add'} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.acp.ultimate.template.addToTemplate{/lang}</button>
-		</div>
+		</div>	
 	</div>
 </form>
 <div id="blockForm" class="ultimateHidden"></div>
