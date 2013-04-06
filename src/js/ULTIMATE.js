@@ -316,7 +316,7 @@ ULTIMATE.Block.Transfer.prototype = {
 	},
 	
 	_init: function() {
-		$('.jsBlock').on('empty', $.proxy(this._empty, this));
+		$('.jsBlock').on('remove', $.proxy(this._remove, this));
 	},
 	
 	/**
@@ -331,10 +331,10 @@ ULTIMATE.Block.Transfer.prototype = {
 	},
 	
 	/**
-	 * Called each time a menu item is removed with empty().remove().
+	 * Called each time a block is removed with remove().
 	 * @param	{jQuery.Event}	event
 	 */
-	_empty: function(event) {
+	_remove: function(event) {
 		if ($('#' + this._containerID).find('.jsBlock').length <= 1) {
 			$('#' + this._containerID).find('button[data-type="submit"]').prop('disabled', true).addClass('disabled');
 		}
@@ -465,7 +465,7 @@ ULTIMATE.Block.Transfer.prototype = {
 	 */
 	_success: function(data, textStatus, jqXHR) {
 		if (this._notification === null) {
-			this._notification = new WCF.System.Notification(WCF.Language.get('wcf.global.form.edit.success'));
+			this._notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success.edit'));
 		}
 		try {
 			var $data = data['returnValues'];
@@ -1071,7 +1071,7 @@ ULTIMATE.Widget.Edit.prototype = {
 	 */
 	_successEdit: function(data, textStatus, jqXHR) {
 		if (this._notification === null) {
-			this._notification = new WCF.System.Notification(WCF.Language.get('wcf.global.form.edit.success'));
+			this._notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success.edit'));
 		}
 		this._notification.show();
 	}
@@ -1240,7 +1240,7 @@ ULTIMATE.Widget.Transfer.prototype = {
 	 */
 	_success: function(data, textStatus, jqXHR) {
 		if (this._notification === null) {
-			this._notification = new WCF.System.Notification(WCF.Language.get('wcf.global.form.edit.success'));
+			this._notification = new WCF.System.Notification(WCF.Language.get('wcf.global.success.edit'));
 		}
 		try {
 			var $data = data['returnValues'];
