@@ -18,7 +18,11 @@ ul.sortable {
 
 /** definition lists **/
 dl.displayInline {
-	display: inline !important;
+	&:not(.plain) {
+		&:before, &:after {
+			display: inline !important;
+		}
+	}
 }
 
 /** invisible **/
