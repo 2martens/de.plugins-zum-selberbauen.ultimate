@@ -115,7 +115,7 @@
 </form>
 <form method="post">
 	<div id="categorySelectContainer" class="container containerPadding marginTop shadow{if $action == 'add'} disabled{/if}">
-		<dl>
+		<dl class="displayInline">
 			<dt><label>{lang}wcf.acp.ultimate.menu.categories{/lang}</label></dt>
 			<dd>
 				{if $action == 'add'}
@@ -135,7 +135,7 @@
 </form>
 <form method="post">
 	<div id="pageSelectContainer" class="container containerPadding marginTop shadow{if $action == 'add'} disabled{/if}">
-		<dl>
+		<dl class="displayInline">
 			<dt><label>{lang}wcf.acp.ultimate.menu.pages{/lang}</label></dt>
 			<dd>
 				{if $action == 'add'}
@@ -155,7 +155,7 @@
 </form>
 <form method="post">	
 	<div id="customContainer" class="container containerPadding marginTop shadow{if $action == 'add'} disabled{/if}">
-		<dl>
+		<dl class="displayInline">
 			<dt><label for="link">{lang}wcf.acp.ultimate.menu.custom.link{/lang}</label></dt>
 			<dd>
 				<input type="url" name="link" id="link" value="http://" class="medium{if $action == 'add'} disabled" disabled="disabled{/if}" />
