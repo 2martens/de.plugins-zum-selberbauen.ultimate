@@ -466,9 +466,11 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<!-- /page -->
 		
 		<!-- template -->
+		<item name="wcf.acp.ultimate.template.blocks"><![CDATA[Blöcke]]></item>
 		<item name="wcf.acp.ultimate.template.edit"><![CDATA[Template bearbeiten]]></item>
 		<item name="wcf.acp.ultimate.template.delete"><![CDATA[Template löschen]]></item>
 		<item name="wcf.acp.ultimate.template.delete.sure"><![CDATA[Bist du sicher, dass du dieses Template löschen willst?]]></item>
+		<item name="wcf.acp.ultimate.template.addTemplateFirst"><![CDATA[Du musst erst das Template erstellen, bevor du Blöcke hinzufügen kannst.]]></item>
 		<item name="wcf.acp.ultimate.template.general"><![CDATA[Templatedaten]]></item>
 		<item name="wcf.acp.ultimate.template.name"><![CDATA[Name]]></item>
 		<item name="wcf.acp.ultimate.template.name.placeholder"><![CDATA[Beispieltemplate]]></item>
