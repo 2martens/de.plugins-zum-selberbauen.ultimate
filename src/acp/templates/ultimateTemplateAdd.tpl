@@ -259,7 +259,7 @@
 			</dl>
 		</fieldset>
 		<div class="formSubmit">
-			<button class="button default{if $action == 'add'} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.acp.ultimate.template.addToTemplate{/lang}</button>
+			<button class="button default disabled" disabled="disabled" data-type="submit">{lang}wcf.acp.ultimate.template.addToTemplate{/lang}</button>
 		</div>	
 	</div>
 </form>
@@ -281,12 +281,22 @@
 							event.stopPropagation();
 						}
 					});
+					$('#selectBlocktype').change(function(event) {
+						var $item = $('#selectBlocktype');
+						var $submitButton = $('#blocktypeContainer').find('button[data-type="submit"]');
+						if ($item.val() == 0 && !$submitButton.prop('disabled')) {
+							$submitButton.prop('disabled', true).addClass('disabled');
+						}
+						else if ($item.val() != 0 && $submitButton.prop('disabled')) {
+							$submitButton.prop('disabled', false).removeClass('disabled');
+						}
+					});
 					ULTIMATE.Permission.addObject({
 						'admin.content.ultimate.canEditBlock': {if $__wcf->session->getPermission('admin.content.ultimate.canEditBlock')}true{else}false{/if},
 						'admin.content.ultimate.canDeleteBlock': {if $__wcf->session->getPermission('admin.content.ultimate.canDeleteBlock')}true{else}false{/if}
 					});
 					WCF.Language.addObject({
-						'wcf.acp.ultimate.template.dialog.additionalOptions': {lang}wcf.acp.ultimate.template.dialog.additionalOptions{/lang}
+						'wcf.acp.ultimate.template.dialog.additionalOptions': {*lang}wcf.acp.ultimate.template.dialog.additionalOptions{/lang*}''
 					});
 					new ULTIMATE.Block.Transfer('blocktypeContainer', 'templateBlockList', 'ultimate\\data\\block\\BlockAction');
 				{/if}
