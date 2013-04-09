@@ -468,6 +468,7 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		
 		<!-- template -->
 		<item name="wcf.acp.ultimate.template.blocks"><![CDATA[Blocks]]></item>
+		<item name="wcf.acp.ultimate.template.add"><![CDATA[Add template]]></item>
 		<item name="wcf.acp.ultimate.template.edit"><![CDATA[Edit template]]></item>
 		<item name="wcf.acp.ultimate.template.delete"><![CDATA[Delete template]]></item>
 		<item name="wcf.acp.ultimate.template.delete.sure"><![CDATA[Are you sure that you want to delete this template?]]></item>
