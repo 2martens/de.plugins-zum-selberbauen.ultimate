@@ -51,11 +51,6 @@ class ContentBlockType extends AbstractBlockType {
 	protected $templateName = 'contentBlockType';
 	
 	/**
-	 * @see \ultimate\system\blocktype\AbstractBlockType::$cacheName
-	 */
-	protected $cacheName = 'content';
-	
-	/**
 	 * @see \ultimate\system\blocktype\AbstractBlockType::$cacheBuilderClassName
 	 */
 	protected $cacheBuilderClassName = '\ultimate\system\cache\builder\ContentCacheBuilder';
@@ -148,8 +143,7 @@ class ContentBlockType extends AbstractBlockType {
 	 * @see \ultimate\system\blocktype\IBlockType::readData()
 	 */
 	public function readData() {
-		if ($this->requestType != 'content' || $this->requestType == 'index') {
-			$this->cacheName = 'contents-to-'.$this->requestType;
+		if (!empty($this->requestType) && ($this->requestType != 'content' || $this->requestType == 'index')) {
 			$this->cacheBuilderClassName = '\ultimate\system\cache\builder\Content'.
 				ucfirst($this->requestType).
 				'CacheBuilder';

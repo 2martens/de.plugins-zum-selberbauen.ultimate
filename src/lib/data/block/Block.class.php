@@ -73,9 +73,29 @@ class Block extends AbstractUltimateDatabaseObject {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#handleData
 	 */
 	protected function handleData($data) {
-		$data['parameters'] = unserialize($data['parameters']);
-		$data['blockType'] = new BlockType($data['blockTypeID']);
-		$data['additionalData'] = unserialize($data['additionalData']);
+		if (!empty($data['parameters'])) {
+			$data['parameters'] = unserialize($data['parameters']);
+		} else {
+			$data['parameters'] = array();
+		}
+		
+		if ($data['blockTypeID']) {
+			$data['blockType'] = new BlockType($data['blockTypeID']);
+		} else {
+			$data['blockType'] = new BlockType(null, array(
+				'blockTypeID' => 0,
+				'packageID' => PACKAGE_ID,
+				'blockTypeName' => '',
+				'blockTypeClassName' => '',
+				'fixedHeight' => 1					
+			));
+		}
+		
+		if (!empty($data['additionalData'])) {
+			$data['additionalData'] = unserialize($data['additionalData']);
+		} else {
+			$data['additionalData'] = array();
+		}
 		parent::handleData($data);
 	}
 }

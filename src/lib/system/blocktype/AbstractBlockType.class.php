@@ -214,12 +214,12 @@ abstract class AbstractBlockType implements IBlockType {
 	public function getOptionsHTML() {
 		// create blank Block if there is no block given (for example in the ACP)
 		if ($this->block === null) {
-			$this->block = new Block(0, array(
+			$this->block = new Block(null, array(
 				'blockID' => 0,
 				'blockTypeID' => 0,
 				'query' => '',
 				'parameters' => '',
-				'additionalData' => array()
+				'additionalData' => ''
 			));
 		}
 		
@@ -287,6 +287,7 @@ abstract class AbstractBlockType implements IBlockType {
 		} else {
 			// prevents error
 			if (empty($this->cacheBuilderClassName)) return;
+			/* @var $instance \wcf\system\cache\builder\ICacheBuilder */
 			$instance = call_user_func($this->cacheBuilderClassName.'::getInstance');
 			$this->objects = $instance->getData(array(), $this->cacheIndex);
 		}
