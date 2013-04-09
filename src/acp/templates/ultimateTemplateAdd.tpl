@@ -296,7 +296,7 @@
 						'admin.content.ultimate.canDeleteBlock': {if $__wcf->session->getPermission('admin.content.ultimate.canDeleteBlock')}true{else}false{/if}
 					});
 					WCF.Language.addObject({
-						'wcf.acp.ultimate.template.dialog.additionalOptions': {*lang}wcf.acp.ultimate.template.dialog.additionalOptions{/lang*}''
+						'wcf.acp.ultimate.template.dialog.additionalOptions': '{lang}wcf.acp.ultimate.template.dialog.additionalOptions{/lang}'
 					});
 					new ULTIMATE.Block.Transfer('blocktypeContainer', 'templateBlockList', 'ultimate\\data\\block\\BlockAction');
 				{/if}
