@@ -237,14 +237,15 @@ abstract class AbstractBlockType implements IBlockType {
 		$output = '';
 		
 		if (RequestHandler::getInstance()->isACPRequest()) {
-			WCF::getTPL()->addApplication('ultimate', 'templates/');
+			WCF::getTPL()->addApplication('ultimate', ULTIMATE_DIR.'templates/');
 			$output = WCF::getTPL()->fetch($this->blockOptionsTemplateName, 'ultimate');
-			WCF::getTPL()->addApplication('ultimate', 'acp/templates');
+			WCF::getTPL()->addApplication('ultimate', ULTIMATE_DIR.'acp/templates');
 		}
 		
 		$blockOptionIDs = $this->blockOptionIDs;
-		foreach ($blockOptionIDs as $optionID) {
-			StringUtil::replace('{$blockID}', $this->blockID, $optionID);
+		
+		foreach ($blockOptionIDs as &$optionID) {
+			$optionID = StringUtil::replace('{$blockID}', $this->blockID, $optionID);
 		}
 		return array(
 			$blockOptionIDs, 

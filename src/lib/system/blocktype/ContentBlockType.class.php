@@ -64,25 +64,25 @@ class ContentBlockType extends AbstractBlockType {
 	 * @see	\ultimate\system\blocktype\AbstractBlockType::$blockOptionIDs
 	 */
 	protected $blockOptionIDs = array(
-		'queryMode-{$blockID}',
-		'fetchPageContent-{$blockID}',
-		'categories-{$blockID}',
-		'categoryMode-{$blockID}',
-		'authors-{$blockID}',
-		'numberOfContents-{$blockID}',
-		'offset-{$blockID}',
-		'sortField-{$blockID}',
-		'sortOrder-{$blockID}',
-		'readMoreText-{$blockID}',
-		'showTitles-{$blockID}',
-		'contentBodyDisplay-{$blockID}',
-		'showContent-{$blockID}',
-		'commentsVisibility-{$blockID}',
-		'featuredContents-{$blockID}',
-		'showInlineEdit-{$blockID}',
-		'contentMetaDisplay-{$blockID}',
-		'metaAboveContent-{$blockID}',
-		'metaBelowContent-{$blockID}'
+		'queryMode_{$blockID}',
+		'fetchPageContent_{$blockID}',
+		'categories_{$blockID}',
+		'categoryMode_{$blockID}',
+		'authors_{$blockID}',
+		'numberOfContents_{$blockID}',
+		'offset_{$blockID}',
+		'sortField_{$blockID}',
+		'sortOrder_{$blockID}',
+		'readMoreText_{$blockID}',
+		'showTitles_{$blockID}',
+		'contentBodyDisplay_{$blockID}',
+		'showContent_{$blockID}',
+		'commentsVisibility_{$blockID}',
+		'featuredContents_{$blockID}',
+		'showInlineEdit_{$blockID}',
+		'contentMetaDisplay_{$blockID}',
+		'metaAboveContent_{$blockID}',
+		'metaBelowContent_{$blockID}'
 	);
 	
 	/**
@@ -219,12 +219,12 @@ class ContentBlockType extends AbstractBlockType {
 		$readMoreText = $this->options['readMoreText'];
 		$metaAboveContent = $this->options['metaAboveContent'];
 		$metaBelowContent = $this->options['metaBelowContent'];
-		I18nHandler::getInstance()->register('readMoreText');
-		I18nHandler::getInstance()->register('metaAboveContent');
-		I18nHandler::getInstance()->register('metaBelowContent');
-		I18nHandler::getInstance()->setOptions('readMoreText', PACKAGE_ID, $readMoreText, ($useDefaultReadMoreText ? 'wcf.acp.option.option.\d' : 'ultimate.block.content.\d+.readMoreText'));
-		I18nHandler::getInstance()->setOptions('metaAboveContent', PACKAGE_ID, $metaAboveContent, ($useDefaultMetaAboveContent ? 'wcf.acp.option.option.\d' : 'ultimate.block.content.\d+.metaAboveContent'));
-		I18nHandler::getInstance()->setOptions('metaBelowContent', PACKAGE_ID, $metaBelowContent, ($useDefaultMetaBelowContent ? 'wcf.acp.option.option.\d' : 'ultimate.block.content.\d+.metaBelowContent'));
+		I18nHandler::getInstance()->register('readMoreText_'.$this->blockID);
+		I18nHandler::getInstance()->register('metaAboveContent_'.$this->blockID);
+		I18nHandler::getInstance()->register('metaBelowContent_'.$this->blockID);
+		I18nHandler::getInstance()->setOptions('readMoreText_'.$this->blockID, PACKAGE_ID, $readMoreText, ($useDefaultReadMoreText ? 'wcf.acp.option.option.\d' : 'ultimate.block.content.\d+.readMoreText'));
+		I18nHandler::getInstance()->setOptions('metaAboveContent_'.$this->blockID, PACKAGE_ID, $metaAboveContent, ($useDefaultMetaAboveContent ? 'wcf.acp.option.option.\d' : 'ultimate.block.content.\d+.metaAboveContent'));
+		I18nHandler::getInstance()->setOptions('metaBelowContent_'.$this->blockID, PACKAGE_ID, $metaBelowContent, ($useDefaultMetaBelowContent ? 'wcf.acp.option.option.\d' : 'ultimate.block.content.\d+.metaBelowContent'));
 		
 		// fetchPageContent
 		if ($this->options['fetchPageContent'] != 'none') {
@@ -416,7 +416,7 @@ class ContentBlockType extends AbstractBlockType {
 			// comments
 			'commentObjectTypeID' => $this->objectTypeID,
 			'commentCanAdd' => $this->commentManager->canAdd(WCF::getUser()->__get('userID')),
-			'commentsPerPage' => $this->commentManager->commentsPerPage(),
+			'commentsPerPage' => $this->commentManager->getCommentsPerPage(),
 			'commentLists' => $this->commentLists,
 			// dimensions and position
 			'height' => $this->block->__get('height'),

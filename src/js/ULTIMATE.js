@@ -405,7 +405,7 @@ ULTIMATE.Block.Transfer.prototype = {
 		
 		for (var i = 0; i < this._optionList.length; i++) {
 			var $item = this._optionList[i];
-			var optionName = $item.replace(/-\d/, '');
+			var optionName = $item.replace(/_\d/, '');
 			var $optionElement = $('#' + $item).val();
 			$parameters['data']['additionalData'][optionName] = $optionElement;
 		}
@@ -422,7 +422,7 @@ ULTIMATE.Block.Transfer.prototype = {
 			actionName: 'createAJAX',
 			className: this._className,
 			parameters: $parameters			
-		}, $data);
+		}, { });
 		this._proxy.setOption('data', $data);
 		
 		// send proxy request
@@ -443,10 +443,33 @@ ULTIMATE.Block.Transfer.prototype = {
 			$('#blockForm').html($data[1]);
 			$('#blockForm').find('form').submit($.proxy(this._stopFormSubmit, this));
 			$('#blockSubmitButton').click($.proxy(this._submitFormData, this));
-			WCF.TabMenu.reload();
-			this._dialog = WCF.showDialog('blockForm', {
+			
+			if (!$.wcfIsset('blockForm')) return;
+			this._dialog = $('#' + $.wcfEscapeID('blockForm'));
+			this._dialog.wcfDialog({
 				title: WCF.Language.get('wcf.acp.ultimate.template.dialog.additionalOptions')
 			});
+			// initializing tabs
+			this._dialog.removeClass('ultimateHidden');
+			this._dialog.wcfDialog('open');
+			
+			WCF.TabMenu.reload();
+			
+			this._dialog.find('nav.tabMenu li').each(function(index, item) {
+				$(this).removeClass('active');
+			});
+			this._dialog.find('div.tabMenuContent').each(function(index, container) {
+				$(this).hide();
+			});
+			this._dialog.find('nav.tabMenu li').click($.proxy(this._toggleTabs, this));
+			this._renderTab(this._dialog.find('nav.tabMenu li:first').data('menuItem'));
+			
+			this._dialog.wcfDialog('render');
+			this._dialog.css({
+				'min-width': '1100px',
+				'max-height': '400px'
+			});
+			
 		}
 		catch(e) {
 			var $showError = true;
@@ -454,6 +477,38 @@ ULTIMATE.Block.Transfer.prototype = {
 				$('<div class="ajaxDebugMessage"><p>' + e.message + '</p></div>').wcfDialog({ title: WCF.Language.get('wcf.global.error.title') });
 			}
 		}
+	},
+	
+	/**
+	 * Toggles the tabs.
+	 * 
+	 * @param	{jQuery}	event
+	 */
+	_toggleTabs: function(event) {
+		var $target = $(event.currentTarget);
+		
+		if ($target.hasClass('active')) {
+			return;
+		}
+		
+		this._renderTab($target.data('menuItem'));
+	},
+	
+	/**
+	 * Renders the tab content.
+	 * 
+	 * @param	{String}	menuItem
+	 */
+	_renderTab: function(menuItem) {
+		this._dialog.find('nav.tabMenu li').each(function(index, item) {
+			$(this).removeClass('active');
+		});
+		this._dialog.find('div.tabMenuContent').each(function(index, container) {
+			$(this).hide();
+		});
+		
+		this._dialog.find('li[data-menu-item="' + menuItem + '"]').addClass('active');
+		this._dialog.find('div[data-parent-menu-item="' + menuItem + '"]').show();
 	},
 	
 	/**
@@ -494,6 +549,7 @@ ULTIMATE.Block.Transfer.prototype = {
 				new WCF.Action.Delete('ultimate\\data\\block\\BlockAction', $('.jsBlock'));
 			}
 			this._init();
+			this._dialog.wcfDialog('close');
 			this._notification.show();
 		}
 		catch(e) {
