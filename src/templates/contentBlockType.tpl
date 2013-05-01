@@ -3,7 +3,7 @@
 	{foreach from=$contents key=contentID item=content}
 		{if $content->status == 3 || $visualEditorMode|isset}
 			{if $block->showContent}
-			<div id="content-{$contentID}" class="content {implode from=$content->categories item=category glue=' '}category-{$category->categorySlug}{/implode}  {implode from=$content->tags[$__wcf->getLanguage()->getLanguageID()] item=tag glue=''}tag-{$tag->getTitle()}{/implode}">
+			<div id="content-{$contentID}" class="content {implode from=$content->categories item=category glue=' '}category-{$category->categorySlug}{/implode}  {implode from=$content->tags[$__wcf->getLanguage()->__get('languageID')] item=tag glue=''}tag-{$tag->getTitle()}{/implode}">
 				<header>
 					{if $block->showTitles}
 					<h2 class="title">
