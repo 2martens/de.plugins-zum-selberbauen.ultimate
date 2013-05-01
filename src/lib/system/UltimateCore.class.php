@@ -83,7 +83,7 @@ class ULTIMATECore extends AbstractApplication {
 		
 		$contentRoute = new Route('contentRoute-'.PACKAGE_ID);
 		$contentRoute->setSchema('/{date}/{contentSlug}/', 'Content');
-		$contentRoute->setParameterOption('date', null, '2[0-9]{3}\/[0-9]{2}\/[0-9]{2}');
+		$contentRoute->setParameterOption('date', null, '2[0-9]{3}\-[0-9]{2}\-[0-9]{2}');
 		$contentRoute->setParameterOption('contentSlug', null, '[a-z]+(\-{1}[a-z]+)*');
 		RouteHandler::getInstance()->addRoute($contentRoute);
 	}
