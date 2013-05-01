@@ -97,9 +97,9 @@ class ContentPage extends AbstractPage {
 		/* @var $content \ultimate\data\content\Content */
 		$this->content = $contentsToSlug[$this->contentSlugs[0]];
 		
-		$layout = LayoutHandler::getInstance()->getLayoutFromName($this->content->__get('contentTitle'));
+		$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($this->content->__get('contentID'), 'content');
 		// get output
-		$this->output = TemplateHandler::getInstance()->getOutput('content', $layout, $content);
+		$this->output = TemplateHandler::getInstance()->getOutput('content', $layout, $this->content);
 	}
 	
 	/**
