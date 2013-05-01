@@ -34,6 +34,15 @@
 		
 		<!-- /user -->
 		
+		<!-- mod -->
+		<item name="wcf.acp.group.option.mod.ultimate.content.canModerateComment"><![CDATA[Can moderate comments]]></item>
+		<item name="wcf.acp.group.option.mod.ultimate.content.canModerateComment.description"><![CDATA[Members of this usergroup can moderate comments.]]></item>
+		<item name="wcf.acp.group.option.mod.ultimate.content.canEditComment"><![CDATA[Can edit comment]]></item>
+		<item name="wcf.acp.group.option.mod.ultimate.content.canEditComment.description"><![CDATA[Members of this usergroup can edit comments to contents.]]></item>
+		<item name="wcf.acp.group.option.mod.ultimate.content.canDeleteComment"><![CDATA[Can delete comment]]></item>
+		<item name="wcf.acp.group.option.mod.ultimate.content.canDeleteComment.description"><![CDATA[Members of this usergroup can delete comments to contents.]]></item>
+		<!-- /mod -->
+		
 		<!-- admin -->
 		<!-- block -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canAddBlock"><![CDATA[Can add blocks.]]></item>
@@ -562,6 +571,8 @@ Tom likes the warm water and the wunderful beach.]]></item>
 	<category name="ultimate.content">
 		<!-- this item is just a placeholder -->
 		<item name="ultimate.content.default"><![CDATA[Test, one, two, three and fucked up.]]></item>
+		<item name="ultimate.content.comment"><![CDATA[Content comment]]></item>
+		<item name="ultimate.content.commentResponse"><![CDATA[Content response]]></item>
 	</category>
 	
 	<category name="ultimate.date">

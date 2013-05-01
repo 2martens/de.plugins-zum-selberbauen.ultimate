@@ -34,6 +34,15 @@
 		
 		<!-- /user -->
 		
+		<!-- mod -->
+		<item name="wcf.acp.group.option.mod.ultimate.content.canModerateComment"><![CDATA[Kann Kommentare moderieren]]></item>
+		<item name="wcf.acp.group.option.mod.ultimate.content.canModerateComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kommentare moderieren.]]></item>
+		<item name="wcf.acp.group.option.mod.ultimate.content.canEditComment"><![CDATA[Kann Kommentare bearbeiten]]></item>
+		<item name="wcf.acp.group.option.mod.ultimate.content.canEditComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kommentare bearbeiten.]]></item>
+		<item name="wcf.acp.group.option.mod.ultimate.content.canDeleteComment"><![CDATA[Kann Kommentare löschen]]></item>
+		<item name="wcf.acp.group.option.mod.ultimate.content.canDeleteComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kommentare löschen.]]></item>
+		<!-- /mod -->
+		
 		<!-- admin -->
 		<!-- block -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canAddBlock"><![CDATA[Kann Blöcke hinzufügen.]]></item>
@@ -562,6 +571,8 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 	<category name="ultimate.content">
 		<!-- this item is just a placeholder -->
 		<item name="ultimate.content.default"><![CDATA[Wer das hier liest ist dumm, denn dieser Eintrag wird nicht benötigt.]]></item>
+		<item name="ultimate.content.comment"><![CDATA[Inhalt-Kommentar]]></item>
+		<item name="ultimate.content.commentResponse"><![CDATA[Inhalt-Antwort]]></item>
 	</category>
 	
 	<category name="ultimate.date">

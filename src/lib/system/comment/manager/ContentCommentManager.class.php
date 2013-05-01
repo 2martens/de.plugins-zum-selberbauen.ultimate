@@ -26,7 +26,9 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\comment\manager;
+use ultimate\system\cache\builder\ContentCacheBuilder;
 use wcf\system\comment\manager\AbstractCommentManager;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
 /**
@@ -40,12 +42,36 @@ use wcf\system\WCF;
  * @category	Ultimate CMS
  */
 class ContentCommentManager extends AbstractCommentManager {
+	
 	/**
-	 * @see	\wcf\system\comment\manager\ICommentManager::canAdd()
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.comment.manager.AbstractCommentManager.html#$permissionAdd
 	 */
-	public function canAdd($objectID) {
-		return $this->canAdd;
-	}
+	protected $permissionAdd = 'user.ultimate.content.canAddComment';
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.comment.manager.AbstractCommentManager.html#$permissionEdit
+	 */
+	protected $permissionEdit = 'user.ultimate.content.canEditComment';
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.comment.manager.AbstractCommentManager.html#$permissionDelete
+	 */
+	protected $permissionDelete = 'user.ultimate.content.canDeleteComment';
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.comment.manager.AbstractCommentManager.html#$permissionModDelete
+	 */
+	protected $permissionModDelete = 'mod.ultimate.content.canDeleteComment';
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.comment.manager.AbstractCommentManager.html#$permissionModEdit
+	 */
+	protected $permissionModEdit = 'mod.ultimate.content.canEditComment';
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.comment.manager.AbstractCommentManager.html#$permissionModDelete
+	 */
+	protected $permissionCanModerate = 'mod.ultimate.content.canModerateComment';
 	
 	/**
 	 * Initializes the permissions for this comment manager.
@@ -53,18 +79,77 @@ class ContentCommentManager extends AbstractCommentManager {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.SingletonFactory.html#init
 	 */
 	protected function init() {
-		if (WCF::getUser()->userID) {
-			if (WCF::getSession()->getPermission('user.ultimate.content.canAddComment')) {
-				$this->canAdd = true;
-			}
-			if (WCF::getSession()->getPermission('user.ultimate.content.canEditComment')) {
-				$this->canEdit = true;
-			}
-			if (WCF::getSession()->getPermission('user.ultimate.content.canDeleteComment')) {
-				$this->canDelete = true;
-			}
-		}
 		// set setting to option
 		$this->commentsPerPage = ULTIMATE_GENERAL_CONTENT_COMMENTS_PER_PAGE;
 	}
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.comment.manager.ICommentManager.html#isAccessible
+	 */
+	public function isAccessible($objectID, $validateWritePermission = false) {
+		// check object id
+		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
+		if (!isset($contents[$objectID])) {
+			return false;
+		}
+		
+		/* @var $content \ultimate\data\content\Content */
+		$content = $contents[$objectID];
+		
+		if ($content === null) {
+			return false;
+		}
+	
+		// check visibility
+		$visibility = $content->__get('visibility');
+		/* @var $user \wcf\data\user\User */
+		$user = WCF::getUser();
+		switch ($visibility) {
+			case 'protected':
+				$userGroups = $user->getGroupIDs();
+				$contentGroups = array_keys($content->__get('groups'));
+				foreach ($contentGroups as $groupID) {
+					if (isset($userGroups[$groupID])) {
+						return true;
+					}
+				}
+				return false;
+			case 'private':
+				if ($content->__get('authorID') != $user->__get('userID')) {
+					return false;
+				}
+				break;
+		}
+		
+		return true;
+	}
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.comment.manager.ICommentManager.html#getLink
+	 */
+	public function getLink($objectTypeID, $objectID) {
+		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
+		/* @var $content \ultimate\data\content\Content */
+		$content = $contents[$objectID];
+		/* @var $date \DateTime */
+		$date = $content->__get('publishDateObject');
+		return LinkHandler::getInstance()->getLink(null, array(
+			'date' => ''. $date->format('Y/m/d'),
+			'contentSlug' => $content->__get('contentSlug')
+		));
+	}
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.comment.manager.ICommentManager.html#getTitle
+	 */
+	public function getTitle($objectTypeID, $objectID, $isResponse = false) {
+		if ($isResponse) return WCF::getLanguage()->get('ultimate.content.commentResponse');
+		
+		return WCF::getLanguage()->get('ultimate.content.comment');
+	}
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.comment.manager.ICommentManager.html#updateCounter
+	 */
+	public function updateCounter($objectID, $value) { }
 }
