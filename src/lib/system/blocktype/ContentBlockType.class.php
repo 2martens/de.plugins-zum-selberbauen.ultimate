@@ -27,6 +27,7 @@
  */
 namespace ultimate\system\blocktype;
 use ultimate\data\content\Content;
+use ultimate\data\content\TaggedContent;
 use wcf\data\user\UserList;
 use wcf\system\comment\CommentHandler;
 use wcf\system\language\I18nHandler;
@@ -157,6 +158,9 @@ class ContentBlockType extends AbstractBlockType {
 				$this->contents = $this->objects[$this->requestObject->__get('categoryID')];
 				break;
 			case 'content':
+				if ($this->requestObject instanceof Content) {
+					$this->requestObject = new TaggedContent($this->requestObject);
+				}
 				$this->contents[$this->requestObject->__get('contentID')] = $this->requestObject;
 				break;
 			case 'page':
@@ -213,7 +217,7 @@ class ContentBlockType extends AbstractBlockType {
 		$useDefaultReadMoreText = (!isset($options['readMoreText']));
 		$useDefaultMetaAboveContent = (!isset($options['metaAboveContent']));
 		$useDefaultMetaBelowContent = (!isset($options['metaBelowContent']));
-		$this->options = array_merge_recursive($defaults, $options);
+		$this->options = array_replace_recursive($defaults, $options);
 		
 		// multilingual support for readMoreText
 		$readMoreText = $this->options['readMoreText'];
@@ -325,7 +329,7 @@ class ContentBlockType extends AbstractBlockType {
 		$objectType = CommentHandler::getInstance()->getObjectType($this->objectTypeID);
 		$this->commentManager = $objectType->getProcessor();
 		foreach ($this->contents as $contentID => $content) {
-			$this->commentLists[$contentID] = CommentHandler::getInstance()->getCommentList($this->objectTypeID, $this->commentManager, $content->__get('authorID'));
+			$this->commentLists[$contentID] = CommentHandler::getInstance()->getCommentList($this->commentManager, $this->objectTypeID,  $content->__get('authorID'));
 		}
 	}
 	

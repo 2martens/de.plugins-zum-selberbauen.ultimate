@@ -85,6 +85,7 @@ class TemplateHandler extends SingletonFactory {
 		// get sidebar content
 		/* @var $widgetArea \ultimate\data\widget\area\WidgetArea|null */
 		if ($template !== null) $widgetArea = $template->__get('widgetArea');
+		// TODO: If a sub-type has no own template, look at the super type.
 		else {
 			throw new NamedUserException(WCF::getLanguage()->getDynamicVariable(
 				'ultimate.error.missingTemplate', 
