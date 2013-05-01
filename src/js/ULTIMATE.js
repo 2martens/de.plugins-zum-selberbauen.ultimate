@@ -537,7 +537,7 @@ ULTIMATE.Block.Transfer.prototype = {
 				$newHtml += '<span title="' 
 					+ WCF.Language.get('wcf.global.button.delete') + '" class="icon icon16 icon-remove disabled"></span>';
 			}
-			$newHtml += '</span><span class="title">' + $data['blockTypeName'] 
+			$newHtml += '</span>\n<span class="title">' + $data['blockTypeName'] 
 				+ ' #' + $data['blockID']
 				+ '</span></span></li>';
 			
