@@ -1,10 +1,10 @@
 <a id="top"></a>
 <!-- HEADER -->
-<header id="pageHeader" class="layoutFluid">
+<header id="pageHeader" class="{if $__wcf->getStyleHandler()->getStyle()->getVariable('useFluidLayout')}layoutFluid{else}layoutFixed{/if}">
 	<div>
 		<!-- top menu -->
 		<nav id="topMenu" class="userPanel">
-			<div class="layoutFluid clearfix">
+			<div class="{if $__wcf->getStyleHandler()->getStyle()->getVariable('useFluidLayout')}layoutFluid{else}layoutFixed{/if} clearfix">
 				{hascontent}
 					<ul class="userPanelItems">
 						{content}{event name='topMenu'}{/content}
@@ -21,11 +21,15 @@
 		<!-- logo -->
 		<div id="logo" class="logo">
 			<a href="{link}{/link}">
-				<img src="{@$__wcf->getPath('wbb')}images/wbbLogo2.svg" alt="" style="height: 90px; width: 246px;" />
-				{*event name='headerLogo'*}
+				{if $__wcf->getStyleHandler()->getStyle()->getPageLogo()}
+					<img src="{$__wcf->getStyleHandler()->getStyle()->getPageLogo()}" alt="" />
+				{/if}
+				{event name='headerLogo'}
 			</a>
 		</div>
 		<!-- /logo -->
+		
+		{event name='headerContents'}
 		
 		<!-- main menu -->
 		{if $__wcf->getCustomMenu()->getMenuItems('')|count > 0}
@@ -74,14 +78,20 @@
 <!-- /HEADER -->
 
 <!-- MAIN -->
-<div id="main" class="layoutFluid{if $sidebarOrientation|isset && $sidebar|isset} sidebarOrientation{@$sidebarOrientation|ucfirst} clearfix{if $sidebarOrientation == 'right' && $sidebarCollapsed} sidebarCollapsed{/if}{/if}">
+<div id="main" class="{if $__wcf->getStyleHandler()->getStyle()->getVariable('useFluidLayout')}layoutFluid{else}layoutFixed{/if}{if $sidebarOrientation|isset && $sidebar|isset} sidebarOrientation{@$sidebarOrientation|ucfirst} clearfix{if $sidebarOrientation == 'right' && $sidebarCollapsed} sidebarCollapsed{/if}{/if}">
 	<div>
 		{if $sidebar|isset}
-			<aside class="sidebar"{if $sidebarOrientation|isset && $sidebarOrientation == 'right' && $sidebarAllowCollapsible} data-is-open="{if $sidebarCollapsed}false{else}true{/if}" data-sidebar-name="{$sidebarName}"{/if}>
-				{@$sidebar}
+			<aside class="sidebar"{if $sidebarOrientation|isset && $sidebarOrientation == 'right'} data-is-open="{if $sidebarCollapsed}false{else}true{/if}" data-sidebar-name="{$sidebarName}"{/if}>
+				<div>
+					{event name='sidebarBoxesTop'}
+					
+					{@$sidebar}
+					
+					{event name='sidebarBoxesBottom'}
+				</div>
 			</aside>
 			
-			{if $sidebarOrientation|isset && $sidebarOrientation == 'right' && $sidebarAllowCollapsible}
+			{if $sidebarOrientation|isset && $sidebarOrientation == 'right'}
 				<script type="text/javascript">
 					//<![CDATA[
 					$(function() {
@@ -94,5 +104,7 @@
 			
 		<!-- CONTENT -->
 		<section id="content" class="content clearfix">
+		
+			{event name='contents'}
 			
 			{if $skipBreadcrumbs|empty}{include file='breadcrumbs'}{/if}
