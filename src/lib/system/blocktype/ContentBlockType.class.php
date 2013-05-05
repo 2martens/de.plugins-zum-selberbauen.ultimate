@@ -28,6 +28,7 @@
 namespace ultimate\system\blocktype;
 use ultimate\data\content\Content;
 use ultimate\data\content\TaggedContent;
+use ultimate\system\request\UltimateLinkHandler;
 use wcf\data\user\UserList;
 use wcf\system\comment\CommentHandler;
 use wcf\system\language\I18nHandler;
@@ -344,6 +345,7 @@ class ContentBlockType extends AbstractBlockType {
 		$metaBelowContent = $this->options['metaBelowContent'];
 		$metaAbove = array();
 		$metaBelow = array();
+		$readMoreLink = array();
 		foreach ($this->contents as $contentID => $content) {
 			// get category output
 			$categories = $content->__get('categories');
@@ -371,8 +373,19 @@ class ContentBlockType extends AbstractBlockType {
 			
 			/* @var $dateTimeObject \DateTime */
 			$dateTimeObject = $content->__get('publishDateObject');
+			$dateLink = DateUtil::format($dateTimeObject, 'Y-m-d');
+			
+			// build readMore link
+			$readMoreLink[$contentID] = UltimateLinkHandler::getInstance()->getLink(null, array(
+				'date' => ''. $dateLink,
+				'contentSlug' => $content->__get('contentSlug')
+			));
+			
 			$timestamp = $content->__get('publishDate');
-			$date = DateUtil::format($dateTimeObject, 'ultimate.date.dateFormat');
+			$format = WCF::getLanguage()->getDynamicVariable('ultimate.date.dateFormat', array(
+				'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
+			));
+			$date = DateUtil::format($dateTimeObject, $format);
 			$time = DateUtil::format($dateTimeObject, DateUtil::TIME_FORMAT);
 			$date = '<time datetime="'.DateUtil::format($dateTimeObject, 'c').'" class="datetime" data-timestamp="'.$timestamp.'" data-date="'.$date.'" data-time="'.$time.'" data-offset="'.$dateTimeObject->getOffset().'">'.$date.'</time>';
 			
@@ -406,6 +419,7 @@ class ContentBlockType extends AbstractBlockType {
 			'contentMetaDisplay'
 		);
 		
+		
 		// assigning values
 		WCF::getTPL()->assign('pages', $this->pages);
 		WCF::getTPL()->assign('categories', $this->categories);
@@ -415,6 +429,7 @@ class ContentBlockType extends AbstractBlockType {
 			// settings
 			'metaAbove' => $metaAbove,
 			'metaBelow' => $metaBelow,
+			'readMoreLink' => $readMoreLink,
 			// contents
 			'contents' => $this->contents,
 			// comments
