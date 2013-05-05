@@ -29,7 +29,6 @@ namespace ultimate\system\template;
 use ultimate\data\template\Template;
 use ultimate\data\widget\WidgetNodeList;
 use ultimate\system\blocktype\BlockTypeHandler;
-use ultimate\system\cache\builder\MenuTemplateCacheBuilder;
 use ultimate\system\cache\builder\TemplateCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use ultimate\system\menu\custom\CustomMenu;
@@ -133,12 +132,9 @@ class TemplateHandler extends SingletonFactory {
 		}
 		
 		// build menu
-		if (isset($this->menusToTemplateID[$template->__get('templateID')])) {
-			/* @var $menu \ultimate\data\menu\Menu */
-			$menu = $this->menusToTemplateID[$template->__get('templateID')];
-			if ($menu !== null) {
-				CustomMenu::getInstance()->buildMenu($menu);
-			}
+		$menu = $template->__get('menu');
+		if ($menu !== null) {
+			CustomMenu::getInstance()->buildMenu($menu);
 		}
 		$blockIDs = array_keys($blocks);
 		
@@ -182,6 +178,5 @@ class TemplateHandler extends SingletonFactory {
 	protected function loadCache() {
 		// templates
 		$this->templatesToLayoutID = TemplateCacheBuilder::getInstance()->getData(array(), 'templatesToLayoutID');
-		$this->menusToTemplateID = MenuTemplateCacheBuilder::getInstance()->getData(array(), 'menusToTemplateID');
 	}
 }
