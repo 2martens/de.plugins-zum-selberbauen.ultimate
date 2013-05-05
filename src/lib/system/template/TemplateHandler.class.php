@@ -29,8 +29,10 @@ namespace ultimate\system\template;
 use ultimate\data\template\Template;
 use ultimate\data\widget\WidgetNodeList;
 use ultimate\system\blocktype\BlockTypeHandler;
+use ultimate\system\cache\builder\MenuTemplateCacheBuilder;
 use ultimate\system\cache\builder\TemplateCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
+use ultimate\system\menu\custom\CustomMenu;
 use ultimate\system\widgettype\WidgetTypeHandler;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\SystemException;
@@ -54,6 +56,12 @@ class TemplateHandler extends SingletonFactory {
 	 * @var \ultimate\data\template\Template[]
 	 */
 	protected $templatesToLayoutID = array();
+	
+	/**
+	 * Contains all menu to template relations.	 * 
+	 * @var	\ultimate\data\menu\Menu[]
+	 */
+	protected $menusToTemplateID = array();
 	
 	/**
 	 * Contains the template name.
@@ -124,10 +132,21 @@ class TemplateHandler extends SingletonFactory {
 			$output .= $blockType->getHTML();
 		}
 		
+		// build menu
+		if (isset($this->menusToTemplateID[$template->__get('templateID')])) {
+			/* @var $menu \ultimate\data\menu\Menu */
+			$menu = $this->menusToTemplateID[$template->__get('templateID')];
+			if ($menu !== null) {
+				CustomMenu::getInstance()->buildMenu($menu);
+			}
+		}
+		$blockIDs = array_keys($blocks);
+		
 		// assigning template variables
 		WCF::getTPL()->assign(array(
 			'customArea' => $output,
-			'title' => $layout->__get('layoutName')
+			'title' => $requestObject->__toString(),
+			'blockIDs' => $blockIDs
 		));
 		
 		return WCF::getTPL()->fetch($this->templateName, 'ultimate');
@@ -163,5 +182,6 @@ class TemplateHandler extends SingletonFactory {
 	protected function loadCache() {
 		// templates
 		$this->templatesToLayoutID = TemplateCacheBuilder::getInstance()->getData(array(), 'templatesToLayoutID');
+		$this->menusToTemplateID = MenuTemplateCacheBuilder::getInstance()->getData(array(), 'menusToTemplateID');
 	}
 }
