@@ -27,7 +27,6 @@
  */
 namespace ultimate\data\block;
 use ultimate\system\cache\builder\BlockCacheBuilder;
-use ultimate\system\cache\builder\MenuBlockCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 use wcf\system\WCF;
@@ -98,6 +97,5 @@ class BlockEditor extends DatabaseObjectEditor implements IEditableCachedObject 
 	 */
 	public static function resetCache() {
 		BlockCacheBuilder::getInstance()->reset();
-		MenuBlockCacheBuilder::getInstance()->reset();
 	}
 }
