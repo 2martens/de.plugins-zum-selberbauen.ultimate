@@ -30,7 +30,9 @@ use ultimate\data\template\Template;
 use ultimate\data\template\TemplateAction;
 use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
+use wcf\util\HeaderUtil;
 
 /**
  * Shows the UltimateTemplateEdit form.
@@ -113,7 +115,7 @@ class UltimateTemplateEditForm extends UltimateTemplateAddForm {
 			'data' => array(
 				'templateName' => $this->ultimateTemplateName,
 				'widgetAreaSide' => $this->widgetAreaSide,
-				'showWidgetArea' => $this->showWidgetArea
+				'showWidgetArea' => intval($this->showWidgetArea)
 			),
 			'menuID' => $this->selectedMenu,
 			'widgetAreaID' => $this->selectedWidgetArea
@@ -126,6 +128,14 @@ class UltimateTemplateEditForm extends UltimateTemplateAddForm {
 		WCF::getTPL()->assign(
 			'success', true
 		);
+		
+		$url = LinkHandler::getInstance()->getLink('UltimateTemplateEdit',
+			array(
+				'id' => $this->template->__get('templateID')
+			)
+		);
+		HeaderUtil::redirect($url);
+		exit;
 	}
 	
 	/**

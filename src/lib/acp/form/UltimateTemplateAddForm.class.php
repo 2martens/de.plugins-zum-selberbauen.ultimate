@@ -163,7 +163,9 @@ class UltimateTemplateAddForm extends AbstractForm {
 	public function readFormParameters() {
 		parent::readFormParameters();
 		if (isset($_POST['templateName'])) $this->ultimateTemplateName = StringUtil::trim($_POST['templateName']);
-		if (isset($_POST['showWidgetArea'])) $this->showWidgetArea = (boolean) intval($_POST['showWidgetArea']);
+		if (isset($_POST['showWidgetArea'])) $this->showWidgetArea = true;
+		else $this->showWidgetArea = false;
+		
 		if (isset($_POST['widgetAreaSide'])) $this->widgetAreaSide = StringUtil::trim($_POST['widgetAreaSide']);
 		if (isset($_POST['selectWidgetArea'])) $this->selectedWidgetArea = intval($_POST['selectWidgetArea']);
 		if (isset($_POST['selectMenu'])) $this->selectedMenu = intval($_POST['selectMenu']);
@@ -191,7 +193,7 @@ class UltimateTemplateAddForm extends AbstractForm {
 			'data' => array(
 				'templateName' => $this->ultimateTemplateName,
 				'widgetAreaSide' => $this->widgetAreaSide,
-				'showWidgetArea' => $this->showWidgetArea
+				'showWidgetArea' => intval($this->showWidgetArea)
 			),
 			'menuID' => $this->selectedMenu,
 			'widgetAreaID' => $this->selectedWidgetArea

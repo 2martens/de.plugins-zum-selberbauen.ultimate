@@ -87,7 +87,7 @@
 							$('#widgetAreaSide').addClass('disabled').prop('disabled', true);
 						}
 						$('#showWidgetArea').change(function(event) {
-							var $value = $(this).val();
+							var $value = $(this).prop('checked');
 							if ($value) {
 								$('#widgetAreaSide').removeClass('disabled').prop('disabled', false);
 							} else {
@@ -121,7 +121,7 @@
 							$('#selectWidgetArea').addClass('disabled').prop('disabled', true);
 						}
 						$('#showWidgetArea').change(function(event) {
-							var $value = $(this).val();
+							var $value = $(this).prop('checked');
 							if ($value) {
 								$('#selectWidgetArea').removeClass('disabled').prop('disabled', false);
 							} else {
