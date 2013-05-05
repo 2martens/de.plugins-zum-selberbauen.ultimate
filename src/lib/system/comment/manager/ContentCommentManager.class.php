@@ -27,8 +27,8 @@
  */
 namespace ultimate\system\comment\manager;
 use ultimate\system\cache\builder\ContentCacheBuilder;
+use ultimate\system\request\UltimateLinkHandler;
 use wcf\system\comment\manager\AbstractCommentManager;
-use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
 /**
@@ -133,8 +133,8 @@ class ContentCommentManager extends AbstractCommentManager {
 		$content = $contents[$objectID];
 		/* @var $date \DateTime */
 		$date = $content->__get('publishDateObject');
-		return LinkHandler::getInstance()->getLink(null, array(
-			'date' => ''. $date->format('Y/m/d'),
+		return UltimateLinkHandler::getInstance()->getLink(null, array(
+			'date' => ''. $date->format('Y-m-d'),
 			'contentSlug' => $content->__get('contentSlug')
 		));
 	}

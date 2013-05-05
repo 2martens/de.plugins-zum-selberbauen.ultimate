@@ -26,6 +26,9 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\user\notification\event;
+use ultimate\system\cache\builder\ContentCacheBuilder;
+use ultimate\system\request\UltimateLinkHandler;
+use wcf\system\request\LinkHandler;
 use wcf\system\user\notification\event\AbstractUserNotificationEvent;
 use wcf\system\user\notification\type\IUserNotificationType;
 use wcf\system\WCF;
@@ -88,5 +91,23 @@ class ContentCommentUserNotificationEvent extends AbstractUserNotificationEvent 
 	 */
 	public function getDescription() {
 		return '';
+	}
+	
+	/**
+	 * @see	\wcf\system\user\notification\event\IUserNotificationEvent::getLink()
+	 */
+	public function getLink() {
+		$contentID = $this->userNotificationObject->getObjectID();
+		
+		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
+		/* @var $content \ultimate\data\content\Content */
+		$content = $contents[$contentID];
+		
+		/* @var $date \DateTime */
+		$date = $content->__get('publishDateObject');
+		return UltimateLinkHandler::getInstance()->getLink(null, array(
+			'date' => ''. $date->format('Y-m-d'),
+			'contentSlug' => $content->__get('contentSlug')
+		));
 	}
 }
