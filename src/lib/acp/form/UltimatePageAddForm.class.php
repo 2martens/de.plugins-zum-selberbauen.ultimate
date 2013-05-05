@@ -203,7 +203,6 @@ class UltimatePageAddForm extends AbstractForm {
 		parent::readFormParameters();
 		
 		I18nHandler::getInstance()->readValues();
-		I18nHandler::getInstance()->enableAssignValueVariables();
 		if (I18nHandler::getInstance()->isPlainValue('pageTitle')) $this->pageTitle = StringUtil::trim(I18nHandler::getInstance()->getValue('pageTitle'));
 		if (isset($_POST['pageParent'])) $this->pageParent = intval($_POST['pageParent']);
 		if (isset($_POST['content'])) $this->contentID = intval($_POST['content']);
@@ -279,7 +278,7 @@ class UltimatePageAddForm extends AbstractForm {
 		$this->contentID = $this->pageParent = $this->statusID = $this->publishDateTimestamp = 0;
 		$this->pageTitle = $this->pageSlug = $this->publishDate = '';
 		$this->visibility = 'public';
-		I18nHandler::getInstance()->disableAssignValueVariables();
+		I18nHandler::getInstance()->reset();
 		$this->contents = $this->pages = $this->groupIDs = array();
 		$this->formatDate();
 	}

@@ -121,7 +121,6 @@ class UltimateCategoryAddForm extends AbstractForm {
 		parent::readFormParameters();
 		
 		I18nHandler::getInstance()->readValues();
-		I18nHandler::getInstance()->enableAssignValueVariables();
 		if (I18nHandler::getInstance()->isPlainValue('categoryTitle')) $this->categoryTitle = StringUtil::trim(I18nHandler::getInstance()->getValue('categoryTitle'));
 		if (I18nHandler::getInstance()->isPlainValue('categoryDescription')) $this->categoryDescription = StringUtil::trim(I18nHandler::getInstance()->getValue('categoryDescription'));
 		
@@ -189,7 +188,7 @@ class UltimateCategoryAddForm extends AbstractForm {
 		// showing empty form
 		$this->categoryParent = 0;
 		$this->categoryTitle = $this->categorySlug = $this->categoryDescription = '';
-		I18nHandler::getInstance()->disableAssignValueVariables();
+		I18nHandler::getInstance()->reset();
 		$this->categories = array();
 	}
 	

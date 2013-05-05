@@ -133,7 +133,6 @@ class UltimateLinkAddForm extends AbstractForm {
 		parent::readFormParameters();
 		
 		I18nHandler::getInstance()->readValues();
-		I18nHandler::getInstance()->enableAssignValueVariables();
 		if (I18nHandler::getInstance()->isPlainValue('linkName')) $this->linkName = StringUtil::trim($_POST['linkName']);
 		if (I18nHandler::getInstance()->isPlainValue('linkDescription')) $this->linkDescription = StringUtil::trim($_POST['linkDescription']);
 		if (isset($_POST['linkURL'])) $this->linkURL = StringUtil::trim($_POST['linkURL']);
@@ -193,7 +192,7 @@ class UltimateLinkAddForm extends AbstractForm {
 		
 		// show empty form
 		$this->linkName = $this->linkURL = $this->linkDescription = '';
-		I18nHandler::getInstance()->disableAssignValueVariables();
+		I18nHandler::getInstance()->reset();
 	}
 	
 	/**

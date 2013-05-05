@@ -387,7 +387,7 @@ class UltimateContentAddForm extends MessageForm {
 		$this->subject = $this->description = $this->slug = $this->text = $this->publishDate = '';
 		$this->publishDateTimestamp = $this->statusID = 0;
 		$this->visibility = 'public';
-		I18nHandler::getInstance()->disableAssignValueVariables();
+		I18nHandler::getInstance()->reset();
 		$this->categoryIDs = $this->groupIDs = array();
 		$this->tags = '';
 		$this->tagsI18n = array();
