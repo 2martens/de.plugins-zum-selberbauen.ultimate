@@ -42,5 +42,5 @@ class DefaultCustomMenuItemProvider extends DefaultPageMenuItemProvider {
 	/**
 	 * @see	wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
-	protected static $baseClass = '\wcf\data\menu\item\MenuItem';
+	protected static $baseClass = '\ultimate\data\menu\item\MenuItem';
 }
