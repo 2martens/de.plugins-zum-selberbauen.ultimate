@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the MenuBlockCacheBuilder class.
+ * Contains the MenuTemplateCacheBuilder class.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -31,7 +31,7 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
 use wcf\system\WCF;
 
 /**
- * Caches the menu block relation.
+ * Caches the menu template relation.
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
@@ -40,13 +40,13 @@ use wcf\system\WCF;
  * @subpackage	system.cache.builder
  * @category	Ultimate CMS
  */
-class MenuBlockCacheBuilder extends AbstractCacheBuilder {
+class MenuTemplateCacheBuilder extends AbstractCacheBuilder {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.cache.builder.AbstractCacheBuilder.html#rebuild
 	 */
 	protected function rebuild(array $parameters) {
 		$data = array(
-			'menusToBlockID' => array()
+			'menusToTemplateID' => array()
 		);
 		
 		$menuList = new MenuList();
@@ -55,13 +55,13 @@ class MenuBlockCacheBuilder extends AbstractCacheBuilder {
 		
 		if (empty($menus)) return $data;
 		
-		$sql = 'SELECT menuID, blockID
-		        FROM   ultimate'.WCF_N.'_menu_to_block';
+		$sql = 'SELECT menuID, templateID
+		        FROM   ultimate'.WCF_N.'_menu_to_template';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
 		
 		while ($row = $statement->fetchArray()) {
-			$data['menusToBlockID'][intval($row['blockID'])] = $menus[intval($row['menuID'])];
+			$data['menusToTemplateID'][intval($row['templateID'])] = $menus[intval($row['menuID'])];
 		}
 		
 		return $data;
