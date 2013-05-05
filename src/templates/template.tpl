@@ -10,6 +10,7 @@
 			<!-- custom area -->
 			<script type="text/javascript">
 			/* <![CDATA[ */
+			{* try without
 			$(function() {
 				var blockIDs = [{implode from=$blockIDs item=blockID glue=','}{$blockID}{/implode}];
 				var columns = 24;
@@ -33,7 +34,7 @@
 							var left = $block.data('left');
 							var top = $block.data('top');
 							// these values are absolute
-							$block.height(height).top(top);
+							$block.height(height).offset({literal}{{/literal}'top': top{literal}}{/literal});
 							
 							// determine width and left
 							var $width = width / columns;
@@ -41,11 +42,12 @@
 							var $left = left / columns;
 							$left *= $content.width();
 							// actually set the values
-							$block.left($left).width($width);
+							$block.offset({literal}{{/literal}'left': $left{literal}}{/literal}).width($width);
 						}
 					}
 				}
 			});
+			*}
 			/* ]]> */
 			</script>
 			{@$customArea}
