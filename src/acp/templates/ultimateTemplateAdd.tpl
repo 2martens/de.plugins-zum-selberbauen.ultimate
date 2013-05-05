@@ -178,11 +178,13 @@
 				{else}
 					<p>{lang}wcf.acp.ultimate.template.addTemplateFirst{/lang}</p>
 				{/if}
-				{if $__wcf->session->getPermission('admin.content.ultimate.canEditBlock')}
+				{* doesn't have any use
+				if $__wcf->session->getPermission('admin.content.ultimate.canEditBlock')}
 					<div class="formSubmit">
 						<button class="button default{if $action == 'add' || $blocks|count == 0} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.global.button.save{/lang}</button>
 					</div>
-				{/if}
+				{/if
+				*}
 			</div>
 		</fieldset>
 		{event name='fieldsets'}
@@ -273,6 +275,7 @@
 					new WCF.Action.Delete('ultimate\\data\\block\\BlockAction', $('.jsBlock'));
 				{/if}
 				{if $__wcf->session->getPermission('admin.content.ultimate.canEditBlock')}
+					{* doesn't have any use
 					$('#templateBlockList').find('button[data-type="submit"]').click(function(event) {
 						event.preventDefault();
 						if ($('#templateBlockList').find('.jsBlock').length == 0) {
@@ -281,6 +284,7 @@
 							event.stopPropagation();
 						}
 					});
+					*}
 					$('#selectBlocktype').change(function(event) {
 						var $item = $('#selectBlocktype');
 						var $submitButton = $('#blocktypeContainer').find('button[data-type="submit"]');
