@@ -85,6 +85,11 @@ false:wcf.acp.option.ultimate_general_englishLanguage.AE]]>
 				<optiontype>integer</optiontype>
 				<defaultvalue>10</defaultvalue>
 			</option>
+			<option name="ultimate_general_content_continueReadingLength">
+				<categoryname>ultimate.general.content</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>150</defaultvalue>
+			</option>
 			<!-- /general/content options -->
 			
 			<!-- grid options -->

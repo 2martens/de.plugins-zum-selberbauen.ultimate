@@ -234,6 +234,8 @@ Verfügbare Variablen:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$aut
 		<item name="wcf.acp.option.ultimate_general_content_metaBelowContent.description"><![CDATA[Geben Sie hier die Metaangaben ein, die standardmäßig unter dem Inhaltstext angezeigt werden sollen. Im VisualEditor können Sie für jeden Inhaltsblock diese Einstellung individuell überschreiben.
 
 Verfügbare Variablen:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$categories</li><li>$tags</li></ul>]]></item>
+		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength"><![CDATA["Weiterlesen"-Länge]]></item>
+		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength.description"><![CDATA[Geben Sie hier an, nach wie vielen Zeichen standardmäßig "Weiterlesen" erscheinen soll.]]></item>
 		<!-- /ultimate.general.content -->
 		
 		<!-- ultimate.grid -->
