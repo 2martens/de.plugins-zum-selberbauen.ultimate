@@ -79,6 +79,12 @@ class ContentPage extends AbstractPage {
 	public $output = '';
 	
 	/**
+	 * Contains the layout of this content.
+	 * @var \ultimate\data\layout\Layout
+	 */
+	public $layout = null;
+	
+	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
 	 */
 	public function readParameters() {
@@ -97,9 +103,16 @@ class ContentPage extends AbstractPage {
 		/* @var $content \ultimate\data\content\Content */
 		$this->content = $contentsToSlug[$this->contentSlugs[0]];
 		
-		$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($this->content->__get('contentID'), 'content');
+		$this->layout = LayoutHandler::getInstance()->getLayoutFromObjectData($this->content->__get('contentID'), 'content');
+	}
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 */
+	public function assignVariables() {
+		parent::assignVariables();
 		// get output
-		$this->output = TemplateHandler::getInstance()->getOutput('content', $layout, $this->content);
+		$this->output = TemplateHandler::getInstance()->getOutput('content', $this->layout, $this->content);
 	}
 	
 	/**
