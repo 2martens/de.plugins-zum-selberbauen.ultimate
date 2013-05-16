@@ -28,8 +28,8 @@
 namespace ultimate\data\menu\item;
 use ultimate\data\AbstractUltimateProcessibleDatabaseObject;
 use ultimate\system\menu\custom\DefaultCustomMenuItemProvider;
+use ultimate\system\request\UltimateLinkHandler;
 use wcf\system\menu\ITreeMenuItem;
-use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
 /**
@@ -109,8 +109,9 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 	 */
 	public function getLink() {
 		$parameters = array();
-		$parameters['abbreviation'] = 'ultimate';
-		return LinkHandler::getInstance()->getLink(null, $parameters, $this->menuItemLink);
+		$parameters['application'] = 'ultimate';
+		$parameters['isRaw'] = true;
+		return UltimateLinkHandler::getInstance()->getLink(null, $parameters, $this->menuItemLink);
 	}
 	
 	/**
