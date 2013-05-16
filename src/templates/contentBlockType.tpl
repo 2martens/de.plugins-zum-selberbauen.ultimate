@@ -1,7 +1,7 @@
 <div id="block-{$blockID}" class="block block-type-content" data-height="{$height}">
 	{assign var=displayedFeaturedContents value=0}
 	{foreach from=$contents key=contentID item=content}
-		{if $content->status == 3 || $visualEditorMode|isset}
+		{if $content->status == 3}
 			{if $block->showContent}
 			<div id="content-{$contentID}" class="container containerPadding marginTop content {implode from=$content->categories item=category glue=' '}category-{$category->categorySlug}{/implode}  {implode from=$content->tags[$__wcf->getLanguage()->__get('languageID')] item=tag glue=''}tag-{$tag->getTitle()}{/implode}">
 				<header class="boxHeadline">
