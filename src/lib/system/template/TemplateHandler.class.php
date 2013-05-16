@@ -201,6 +201,22 @@ class TemplateHandler extends SingletonFactory {
 	}
 	
 	/**
+	 * This method should be used if you just want to initiate the custom menu.
+	 * The method will initate the custom menu that is connected with the template of the IndexPage.
+	 * 
+	 * @since	1.0.0
+	 * @api
+	 */
+	public function initiateCustomMenu() {
+		$layout = LayoutHandler::getInstance()->getLayoutFromObjectData(0, 'index');
+		$template = $this->getTemplate($layout->__get('layoutID'));
+		$menu = $template->__get('menu');
+		if ($menu !== null) {
+			CustomMenu::getInstance()->buildMenu($menu);
+		}
+	}
+	
+	/**
 	 * Initializes the template handler.
 	 */
 	protected function init() {
