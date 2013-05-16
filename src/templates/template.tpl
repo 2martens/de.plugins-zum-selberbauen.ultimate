@@ -1,6 +1,6 @@
 {include file="documentHeader"}
 <head>
-	<title>{lang}{@$title}{/lang} - {lang}{PAGE_TITLE}{/lang}</title>
+	<title>{if $title|isset}{lang}{@$title}{/lang} - {/if}{lang}{PAGE_TITLE}{/lang}</title>
 	
 	{include file='headInclude'}
 </head>

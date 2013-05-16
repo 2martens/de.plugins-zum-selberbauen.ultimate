@@ -173,12 +173,15 @@ class TemplateHandler extends SingletonFactory {
 		}
 		$blockIDs = array_keys($blocks);
 		
+		
 		// assigning template variables
 		WCF::getTPL()->assign(array(
 			'customArea' => $output,
-			'title' => $requestObject->__toString(),
 			'blockIDs' => $blockIDs
 		));
+		if ($requestObject !== null) {
+			WCF::getTPL()->assign('title', $requestObject->__toString());
+		}
 		
 		return WCF::getTPL()->fetch($this->templateName, 'ultimate');
 	}
