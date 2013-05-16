@@ -6,7 +6,11 @@
 </head>
 
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
+{if $sidebarOrientation|isset}
+{include file='header' sidebarOrientation=''|concat:$sidebarOrientation sidebar=''|concat:$sidebar}
+{else}
 {include file='header'}
+{/if}
 			<!-- custom area -->
 			<script type="text/javascript">
 			/* <![CDATA[ */
