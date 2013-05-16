@@ -32,6 +32,7 @@ use wcf\system\request\IRouteController;
 use wcf\system\request\LinkHandler;
 use wcf\system\request\RequestHandler;
 use wcf\system\request\RouteHandler;
+use wcf\util\StringUtil;
 
 /**
  * Modifies the LinkHandler to fit the Ultimate CMS needs.
@@ -55,6 +56,7 @@ class UltimateLinkHandler extends LinkHandler {
 		$isACP = $originIsACP = RequestHandler::getInstance()->isACPRequest();
 		$isRaw = false;
 		$appendSession = true;
+		
 		if (isset($parameters['application'])) {
 			$abbreviation = $parameters['application'];
 			unset($parameters['application']);
