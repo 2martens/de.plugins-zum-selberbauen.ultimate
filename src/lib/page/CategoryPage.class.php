@@ -27,6 +27,7 @@
  */
 namespace ultimate\page;
 use ultimate\system\cache\builder\CategoryCacheBuilder;
+use ultimate\system\layout\LayoutHandler;
 use ultimate\system\template\TemplateHandler;
 use ultimate\util\CategoryUtil;
 use wcf\page\AbstractPage;
@@ -79,6 +80,12 @@ class CategoryPage extends AbstractPage {
 	public $output = '';
 	
 	/**
+	 * Contains the layout.
+	 * @var \ultimate\data\layout\Layout
+	 */
+	public $layout = null;
+	
+	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
 	 */
 	public function readParameters() {
@@ -94,15 +101,22 @@ class CategoryPage extends AbstractPage {
 	public function readData() {
 		parent::readData();
 		$categoriesToSlug = $this->loadCache();
-		/* @var $page \ultimate\data\category\Category */
-		$page = $categoriesToSlug[$this->categorySlugs[0]];
+		/* @var $category \ultimate\data\category\Category */
+		$category = $categoriesToSlug[$this->categorySlugs[0]];
 		if (count($this->categorySlugs) > 1) {
 			$category = CategoryUtil::getRealCategory($category, 1, $this->categorySlugs);
 		}
 		$this->category = $category;
-		$layout = LayoutHandler::getInstance()->getLayoutFromName($this->category->__get('categoryTitle'));
+		$this->layout = LayoutHandler::getInstance()->getLayoutFromObjectData($this->category->__get('categoryID'), 'category');
+	}
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 */
+	public function assignVariables() {
+		parent::assignVariables();
 		// get output
-		$this->output = TemplateHandler::getInstance()->getOutput('category', $layout, $category);
+		$this->output = TemplateHandler::getInstance()->getOutput('category', $this->layout, $this->category);
 	}
 	
 	/**
