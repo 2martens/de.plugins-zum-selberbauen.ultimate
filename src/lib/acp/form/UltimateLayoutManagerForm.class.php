@@ -121,7 +121,7 @@ class UltimateLayoutManagerForm extends AbstractForm {
 		/* @var $category \ultimate\data\category\Category */
 		foreach ($categories as $categoryID => $category) {
 			$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($categoryID, 'category');
-			$this->categoryLayouts[$layout->__get('layoutID')] = $layout;
+			$this->categoryLayouts[$layout->__get('layoutID')] = $category->__toString();
 		}
 		
 		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
@@ -129,7 +129,7 @@ class UltimateLayoutManagerForm extends AbstractForm {
 		/* @var $content \ultimate\data\content\Content */
 		foreach ($contents as $contentID => $content) {
 			$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($contentID, 'content');
-			$this->contentLayouts[$layout->__get('layoutID')] = $layout;
+			$this->contentLayouts[$layout->__get('layoutID')] = $content->__toString();
 		}
 		
 		$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
@@ -137,7 +137,7 @@ class UltimateLayoutManagerForm extends AbstractForm {
 		/* @var $page \ultimate\data\page\Page */
 		foreach ($pages as $pageID => $page) {
 			$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($pageID, 'page');
-			$this->pageLayouts[$layout->__get('layoutID')] = $layout;
+			$this->pageLayouts[$layout->__get('layoutID')] = $page->__toString();
 		}
 	}
 	
@@ -164,8 +164,9 @@ class UltimateLayoutManagerForm extends AbstractForm {
 		$templateIDs = array_keys($this->templates);
 		// checks for valid template ids
 		foreach ($this->templateToLayout as $layoutID => $templateID) {
+			// if selected template is a real template everything's fine
 			if (in_array($templateID, $templateIDs)) continue;
-			
+			// the four basic layouts need to have a template
 			if (in_array($layoutID, array(1,2,3,4))) {
 				if ($templateID == 0) {
 					throw new UserInputException('layout'.(string) $layoutID, 'notSelected');
@@ -174,15 +175,15 @@ class UltimateLayoutManagerForm extends AbstractForm {
 				throw new UserInputException('layout'.(string) $layoutID, 'notValid');
 			}
 			
-			if (isset($this->categoryLayouts[$layoutID])) {
+			if (isset($this->categoryLayouts[$layoutID]) && $templateID != 0) {
 				throw new UserInputException('layout2-child-template', 'notValid');
 			}
 			
-			if (isset($this->contentLayouts[$layoutID])) {
+			if (isset($this->contentLayouts[$layoutID]) && $templateID != 0) {
 				throw new UserInputException('layout3-child-template', 'notValid');
 			}
 			
-			if (isset($this->pageLayouts[$layoutID])) {
+			if (isset($this->pageLayouts[$layoutID]) && $templateID != 0) {
 				throw new UserInputException('layout4-child-template', 'notValid');
 			}
 		}

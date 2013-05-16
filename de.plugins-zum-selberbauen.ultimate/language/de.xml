@@ -377,6 +377,8 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		
 		<!-- layout -->
 		<item name="wcf.acp.ultimate.layoutManager"><![CDATA[Layout-Manager]]></item>
+		<item name="wcf.acp.ultimate.layoutManager.childLayout"><![CDATA[Untergeordnetes Layout]]></item>
+		<item name="wcf.acp.ultimate.layoutManager.childTemplate"><![CDATA[Template für untergeordnetes Layout]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.layouts"><![CDATA[Layouts]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.index"><![CDATA[Startseite]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.category"><![CDATA[Kategorie]]></item>
