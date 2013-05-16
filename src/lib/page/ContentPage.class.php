@@ -26,6 +26,10 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\page;
+use wcf\system\exception\IllegalLinkException;
+
+use ultimate\system\cache\builder\ContentPageCacheBuilder;
+
 use ultimate\system\cache\builder\ContentCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use ultimate\system\template\TemplateHandler;
@@ -85,6 +89,18 @@ class ContentPage extends AbstractPage {
 	public $layout = null;
 	
 	/**
+	 * Contains all contents associated with their slug.
+	 * @var \ultimate\data\content\Content[]
+	 */
+	protected $contentsToSlug = array();
+	
+	/**
+	 * Contains all contents associated with a page.
+	 * @var integer[]
+	 */
+	protected $contentIDsToPageID = array();
+	
+	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
 	 */
 	public function readParameters() {
@@ -99,9 +115,9 @@ class ContentPage extends AbstractPage {
 	 */
 	public function readData() {
 		parent::readData();
-		$contentsToSlug = $this->loadCache();
+		$this->loadCache();
 		/* @var $content \ultimate\data\content\Content */
-		$this->content = $contentsToSlug[$this->contentSlugs[0]];
+		$this->content = $this->contentsToSlug[$this->contentSlugs[0]];
 		
 		$this->layout = LayoutHandler::getInstance()->getLayoutFromObjectData($this->content->__get('contentID'), 'content');
 	}
@@ -120,6 +136,12 @@ class ContentPage extends AbstractPage {
 	 */
 	public function show() {
 		parent::show();
+		// check if the actual content is already used by a page, if so don't display it
+		if (in_array($this->content->__get('contentID'), $this->contentIDsToPageID)) {
+			throw new IllegalLinkException();
+		}
+		
+		// everything's fine
 		HeaderUtil::sendHeaders();
 		echo $this->output;
 		exit;
@@ -129,6 +151,7 @@ class ContentPage extends AbstractPage {
 	 * Loads the cache.
 	 */
 	protected function loadCache() {
-		return ContentCacheBuilder::getInstance()->getData(array(), 'contentsToSlug');
+		$this->contentsToSlug = ContentCacheBuilder::getInstance()->getData(array(), 'contentsToSlug');
+		$this->contentIDsToPageID = ContentPageCacheBuilder::getInstance()->getData(array(), 'contentIDsToPageID');
 	}
 }
