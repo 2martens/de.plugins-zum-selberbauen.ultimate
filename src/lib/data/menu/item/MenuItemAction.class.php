@@ -184,7 +184,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 							$dateTimeObj = $element->__get('publishDateObject');
 							if ($dateTimeObj->getTimestamp()) {
 								$date = $dateTimeObj->format('Y/m/d');
-								$parameters['menuItemLink'] = 'index.php/'.$date.'/'.$element->__get('contentSlug').'/';
+								$parameters['menuItemLink'] = $date.'/'.$element->__get('contentSlug').'/';
 							} else {
 								$parameters['menuItemLink'] = '';
 							}
@@ -358,7 +358,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 		if (!$implode) return $slugs;
 		
 		$slugs = array_reverse($slugs);
-		return 'index.php/category/'.implode('/', $slugs).'/';
+		return 'category/'.implode('/', $slugs).'/';
 	}
 	
 	/**
@@ -381,7 +381,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 		if (!$implode) return $slugs;
 		
 		$slugs = array_reverse($slugs);
-		return 'index.php/'.implode('/', $slugs).'/';
+		return implode('/', $slugs).'/';
 	}
 	
 	/**
