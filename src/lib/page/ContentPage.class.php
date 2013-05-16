@@ -26,14 +26,12 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\page;
-use wcf\system\exception\IllegalLinkException;
-
-use ultimate\system\cache\builder\ContentPageCacheBuilder;
-
 use ultimate\system\cache\builder\ContentCacheBuilder;
+use ultimate\system\cache\builder\ContentPageCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use ultimate\system\template\TemplateHandler;
 use wcf\page\AbstractPage;
+use wcf\system\exception\IllegalLinkException;
 use wcf\system\request\RouteHandler;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
