@@ -6,15 +6,13 @@
 </head>
 
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
-{include file='header'}		
+{include file='header'}
 			<!-- custom area -->
 			<script type="text/javascript">
 			/* <![CDATA[ */
 			{* try without
 			$(function() {
 				var blockIDs = [{implode from=$blockIDs item=blockID glue=','}{$blockID}{/implode}];
-				var columns = 24;
-				var $content = $('#content');
 				refreshBlocks();
 				
 				// if the window is resized the blocks have to be updated
@@ -29,20 +27,10 @@
 						var $blockIDStr = 'block-' + $blockID;
 						if ($.wcfIsset($blockIDStr)) {
 							var $block = $('#' + $blockIDStr);
-							var width = $block.data('width');
 							var height = $block.data('height');
-							var left = $block.data('left');
-							var top = $block.data('top');
-							// these values are absolute
-							$block.height(height).offset({literal}{{/literal}'top': top{literal}}{/literal});
 							
-							// determine width and left
-							var $width = width / columns;
-							$width *= $content.width();
-							var $left = left / columns;
-							$left *= $content.width();
-							// actually set the values
-							$block.offset({literal}{{/literal}'left': $left{literal}}{/literal}).width($width);
+							// this value is absolute
+							$block.height(height);
 						}
 					}
 				}
