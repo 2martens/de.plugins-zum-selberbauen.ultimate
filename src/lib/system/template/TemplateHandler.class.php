@@ -51,6 +51,24 @@ use wcf\util\StringUtil;
  */
 class TemplateHandler extends SingletonFactory {
 	/**
+	 * Contains the layout ID of the category layout.
+	 * @var integer
+	 */
+	const CATEGORY_LAYOUT_ID = 1;
+	
+	/**
+	 * Contains the layout ID of the content layout.
+	 * @var integer
+	 */
+	const CONTENT_LAYOUT_ID = 2;
+	
+	/**
+	 * Contains the layout ID of the page layout.
+	 * @var integer
+	 */
+	const PAGE_LAYOUT_ID = 3;
+	
+	/**
 	 * Contains all templates.
 	 * @var \ultimate\data\template\Template[]
 	 */
@@ -92,14 +110,31 @@ class TemplateHandler extends SingletonFactory {
 		// get sidebar content
 		/* @var $widgetArea \ultimate\data\widget\area\WidgetArea|null */
 		if ($template !== null) $widgetArea = $template->__get('widgetArea');
-		// TODO: If a sub-type has no own template, look at the super type.
 		else {
-			throw new NamedUserException(WCF::getLanguage()->getDynamicVariable(
-				'ultimate.error.missingTemplate', 
-				array(
-					'type' => $requestType
-				)
-			));
+			// check for super type
+			$superTemplate = null;
+			switch ($requestType) {
+				case 'category':
+					$superTemplate = $this->getTemplate(self::CATEGORY_LAYOUT_ID);
+					break;
+				case 'content':
+					$superTemplate = $this->getTemplate(self::CONTENT_LAYOUT_ID);
+					break;
+				case 'page':
+					$superTemplate = $this->getTemplate(self::PAGE_LAYOUT_ID);
+					break;
+			}
+			
+			if ($superTemplate !== null) {
+				$widgetArea = $template->__get('widgetArea');
+			} else {
+				throw new NamedUserException(WCF::getLanguage()->getDynamicVariable(
+					'ultimate.error.missingTemplate', 
+					array(
+						'type' => $requestType
+					)
+				));
+			}
 		}
 		if ($widgetArea !== null && $template->__get('showWidgetArea')) {
 			$sidebarOutput = '';
