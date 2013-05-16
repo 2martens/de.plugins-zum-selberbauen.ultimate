@@ -64,14 +64,26 @@ class IndexPage extends AbstractPage {
 	public $output = '';
 	
 	/**
+	 * Contains the layout.
+	 * @var \ultimate\data\layout\Layout
+	 */
+	public $layout = null;
+	
+	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
 		parent::readData();
-		$layout = LayoutHandler::getInstance()->getLayoutFromObjectData(0, 'index');
-		
+		$this->layout = LayoutHandler::getInstance()->getLayoutFromObjectData(0, 'index');
+	}
+	
+	/**
+	 * @see \wcf\page\AbstractPage::assignVariables()@link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 */
+	public function assignVariables() {
+		parent::assignVariables();
 		// get output
-		$this->output = TemplateHandler::getInstance()->getOutput('index', $layout, null);
+		$this->output = TemplateHandler::getInstance()->getOutput('index', $this->layout, null);
 	}
 	
 	/**
