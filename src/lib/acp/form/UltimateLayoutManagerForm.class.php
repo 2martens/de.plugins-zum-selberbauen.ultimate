@@ -108,9 +108,15 @@ class UltimateLayoutManagerForm extends AbstractForm {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
+		// read templates
+		$this->templates = TemplateCacheBuilder::getInstance()->getData(array(), 'templates');
+		
+		// read layouts
+		$this->layouts = LayoutCacheBuilder::getInstance()->getData(array(), 'layouts');
+		
 		parent::readData();
 		
-		// read templates
+		// read templates, ugly but necessary to get the newest changes
 		$this->templates = TemplateCacheBuilder::getInstance()->getData(array(), 'templates');
 		
 		// read layouts
@@ -162,6 +168,7 @@ class UltimateLayoutManagerForm extends AbstractForm {
 		parent::validate();
 		
 		$templateIDs = array_keys($this->templates);
+		
 		// checks for valid template ids
 		foreach ($this->templateToLayout as $layoutID => $templateID) {
 			// if selected template is a real template everything's fine
@@ -198,11 +205,6 @@ class UltimateLayoutManagerForm extends AbstractForm {
 				unset($this->templateToLayout[$layoutID]);
 				continue;
 			}
-			
-			if ($templateID == 0 && !in_array($layoutID, array(1,2,3,4))) {
-				unset($this->templateToLayout[$layoutID]);
-				continue;
-			}
 		}
 	}
 	
@@ -215,7 +217,12 @@ class UltimateLayoutManagerForm extends AbstractForm {
 		// assign templates
 		foreach ($this->templateToLayout as $layoutID => $templateID) {
 			$layoutEditor = new LayoutEditor($this->layouts[$layoutID]);
-			$layoutEditor->assignTemplate($templateID);
+			if ($templateID == 0) {
+				$layoutEditor->removeTemplate();
+			}
+			else {
+				$layoutEditor->assignTemplate($templateID);
+			}
 		}
 		
 		$this->saved();

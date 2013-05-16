@@ -201,7 +201,7 @@
 	</div>
 </form>
 
-<script type"text/javascript">
+<script type="text/javascript">
 	/* <![CDATA[ */
 		$(function() {
 			$('#layout1').change(function(event) {
