@@ -112,20 +112,19 @@ class TemplateHandler extends SingletonFactory {
 		if ($template !== null) $widgetArea = $template->__get('widgetArea');
 		else {
 			// check for super type
-			$superTemplate = null;
 			switch ($requestType) {
 				case 'category':
-					$superTemplate = $this->getTemplate(self::CATEGORY_LAYOUT_ID);
+					$template = $this->getTemplate(self::CATEGORY_LAYOUT_ID);
 					break;
 				case 'content':
-					$superTemplate = $this->getTemplate(self::CONTENT_LAYOUT_ID);
+					$template = $this->getTemplate(self::CONTENT_LAYOUT_ID);
 					break;
 				case 'page':
-					$superTemplate = $this->getTemplate(self::PAGE_LAYOUT_ID);
+					$template = $this->getTemplate(self::PAGE_LAYOUT_ID);
 					break;
 			}
 			
-			if ($superTemplate !== null) {
+			if ($template !== null) {
 				$widgetArea = $template->__get('widgetArea');
 			} else {
 				throw new NamedUserException(WCF::getLanguage()->getDynamicVariable(
