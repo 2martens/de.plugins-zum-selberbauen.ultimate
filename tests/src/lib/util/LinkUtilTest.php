@@ -96,7 +96,7 @@ class LinkUtilTest extends \PHPUnit_Framework_TestCase
     {
         $punycodeDomain = 'xn--aeou-ynaz2k1b.de';
         $decodedDomain = LinkUtil::decodePunycodeDomain($punycodeDomain);
-        $this->assertEquals('äaeöouüß.de', $decodedDomain, 'The domain has not been properly decoded.');
+        $this->assertEquals('Ã¤aeÃ¶ouÃ¼ÃŸ.de', $decodedDomain, 'The domain has not been properly decoded.');
     }
 
     /**
@@ -105,7 +105,7 @@ class LinkUtilTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncodePunycodeDomain()
     {
-        $utf8Domain = 'eine-schöne-scheiße.de';
+        $utf8Domain = 'eine-schÃ¶ne-scheiÃŸe.de';
         $encodedURL = LinkUtil::encodePunycodeDomain($utf8Domain);
         $this->assertEquals('xn--eine-schne-scheie-lob24b.de', $encodedURL, 'The domain has not been properly encoded.');
     }
@@ -120,9 +120,8 @@ class LinkUtilTest extends \PHPUnit_Framework_TestCase
         $urlParsed = LinkUtil::parseURL($url);
         $this->assertEquals('http://hund.com', $urlParsed, 'There was nothing to encode.');
         
-        $url = 'http://schöne-zeiten-mit-de.iner.scheiße.de';
+        $url = 'http://schÃ¶ne-zeiten-mit-de.iner.scheiÃŸe.de';
         $urlParsed = LinkUtil::parseURL($url);
         $this->assertEquals('http://xn--schne-zeiten-mit-de-s6b.iner.xn--scheie-fta.de', $urlParsed, 'The link has not been correctly parsed.');
     }
 }
-?>
