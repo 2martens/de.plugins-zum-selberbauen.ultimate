@@ -120,7 +120,7 @@ class UltimateContentAddForm extends MessageForm {
 	
 	/**
 	 * Contains the i18n tags.
-	 * @var (string|array)[]
+	 * @var string[]|array[]
 	 */
 	public $tagsI18n = array();
 	   
