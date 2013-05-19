@@ -33,7 +33,9 @@
 		<requiredpackage file="requirements/com.woltlab.wcf.conversation.tar.gz">com.woltlab.wcf.conversation</requiredpackage>
 		<requiredpackage file="requirements/com.woltlab.wcf.label.tar.gz">com.woltlab.wcf.label</requiredpackage>
 		<requiredpackage file="requirements/com.woltlab.wcf.tagging.tar.gz">com.woltlab.wcf.tagging</requiredpackage>
-		<!--<requiredpackage file="requirements/com.woltlab.wcf.visitTracker.tar">com.woltlab.wcf.visitTracker</requiredpackage>-->
+		<!-- <requiredpackage file="requirements/com.woltlab.wcf.visitTracker.tar.gz">com.woltlab.wcf.visitTracker</requiredpackage>-->
+		<requiredpackage file="requirements/com.woltlab.wcf.legalNotice.tar.gz">com.woltlab.wcf.legalNotice</requiredpackage>
+		<requiredpackage file="requirements/com.woltlab.wcf.poll.tar.gz">com.woltlab.wcf.poll</requiredpackage>
 		<requiredpackage file="requirements/de.plugins-zum-selberbauen.cachedList.tar.gz">de.plugins-zum-selberbauen.cachedList</requiredpackage>
 		<requiredpackage file="requirements/de.plugins-zum-selberbauen.messageACP.tar.gz">de.plugins-zum-selberbauen.messageACP</requiredpackage>
 		<requiredpackage file="requirements/de.plugins-zum-selberbauen.ultimateCore.tar.gz">de.plugins-zum-selberbauen.ultimateCore</requiredpackage>
