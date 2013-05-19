@@ -26,10 +26,11 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\util;
-use ultimate\util\thirdParty\IDNAConvert; // changed class to work with namespaces
 use wcf\system\io\RemoteFile;
 use wcf\system\Regex;
 use wcf\util\StringUtil;
+
+require_once(ULTIMATE_DIR.'lib/util/thirdParty/idna_convert.class.php');
 
 /**
  * Provides useful functions for links.
@@ -165,8 +166,10 @@ class LinkUtil {
 	 */
 	public static function decodePunycodeDomain($punycodeDomain) {
 		$punycodeDomain = StringUtil::trim($punycodeDomain);
-		$idnaConverter = new IDNAConvert(array('idn_version' => 2008));
-		return utf8_decode($idnaConverter->decode($punycodeDomain));
+		$idnaConverter = new \idna_convert(array(
+			'idn_version' => 2008
+		));
+		return $idnaConverter->decode($punycodeDomain);
 	}
 	
 	/**
@@ -182,8 +185,10 @@ class LinkUtil {
 	 */
 	public static function encodePunycodeDomain($unicodeDomain) {
 		$unicodeDomain = StringUtil::trim($unicodeDomain);
-		$idnaConverter = new IDNAConvert(array('idn_version' => 2008));
-		return $idnaConverter->encode(utf8_encode($unicodeDomain));
+		$idnaConverter = new \idna_convert(array(
+			'idn_version' => 2008
+		));
+		return $idnaConverter->encode($unicodeDomain);
 	}
 	
 	/**

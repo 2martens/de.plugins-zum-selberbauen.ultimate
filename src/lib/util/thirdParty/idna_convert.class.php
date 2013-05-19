@@ -1,7 +1,6 @@
 <?php
-namespace ultimate\util\thirdParty;
 // {{{ license
-//
+
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 foldmethod=marker: */
 //
 // +----------------------------------------------------------------------+
@@ -21,9 +20,8 @@ namespace ultimate\util\thirdParty;
 // | USA.                                                                 |
 // +----------------------------------------------------------------------+
 //
-//
-// }}}
 
+// }}}
 
 /**
  * Encode/decode Internationalized Domain Names.
@@ -52,10 +50,11 @@ namespace ultimate\util\thirdParty;
  * @copyright 2004-2011 phlyLabs Berlin, http://phlylabs.de
  * @version 0.8.0 2011-03-11
  */
-class IDNAConvert
+class idna_convert
 {
     // NP See below
-
+	protected static $instances = array();
+	
     // Internal settings, do not mess with them
     protected $_punycode_prefix = 'xn--';
     protected $_invalid_ucs = 0x80000000;
@@ -983,9 +982,9 @@ class IDNAConvert
      * @return idna_convert
      * @access public
      */
-    public function getInstance($params = array())
+    public static function getInstance($params = array())
     {
-        return new IDNAConvert($params);
+        return new \idna_convert($params);
     }
 
     /**
@@ -998,17 +997,13 @@ class IDNAConvert
      * @return object idna_convert
      * @access public
      */
-    public function singleton($params = array())
+    public static function singleton($params = array())
     {
-        static $instances;
-        if (!isset($instances)) {
-            $instances = array();
-        }
         $signature = serialize($params);
-        if (!isset($instances[$signature])) {
-            $instances[$signature] = IDNAConvert::getInstance($params);
+        if (!isset(self::$instances[$signature])) {
+            self::$instances[$signature] = self::getInstance($params);
         }
-        return $instances[$signature];
+        return self::$instances[$signature];
     }
 
     /**
@@ -1604,3 +1599,4 @@ class IDNAConvert
                     )
             );
 }
+?>
