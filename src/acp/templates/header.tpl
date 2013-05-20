@@ -33,7 +33,7 @@
 	<!-- Stylesheets -->
 	{* work-around for unknown core-object during WCFSetup *}
 	{@$__wcf->getStyleHandler()->getStylesheet()}
-	{@$__wcf->getUltimateStyleHandler()->getStylesheet()}
+	{*@$__wcf->getUltimateStyleHandler()->getStylesheet()*}
 	
 	<script type="text/javascript">
 		//<![CDATA[
@@ -41,7 +41,7 @@
 			{* work-around for unknown core-object during WCFSetup *}
 			{if PACKAGE_ID}
 				{assign var=activeMenuItems value=$__wcf->getACPMenu()->getActiveMenuItems()|array_reverse}
-				var $activeMenuItems = [{implode from=$activeMenuItems item=menuItem}'{$menuItem}'{/implode}];
+				var $activeMenuItems = [{implode from=$activeMenuItems item=_menuItem}'{$_menuItem}'{/implode}];
 				new WCF.ACP.Menu($activeMenuItems);
 			{/if}
 			
@@ -50,6 +50,7 @@
 				'__daysShort': [ '{lang}wcf.date.day.sun{/lang}', '{lang}wcf.date.day.mon{/lang}', '{lang}wcf.date.day.tue{/lang}', '{lang}wcf.date.day.wed{/lang}', '{lang}wcf.date.day.thu{/lang}', '{lang}wcf.date.day.fri{/lang}', '{lang}wcf.date.day.sat{/lang}' ],
 				'__months': [ '{lang}wcf.date.month.january{/lang}', '{lang}wcf.date.month.february{/lang}', '{lang}wcf.date.month.march{/lang}', '{lang}wcf.date.month.april{/lang}', '{lang}wcf.date.month.may{/lang}', '{lang}wcf.date.month.june{/lang}', '{lang}wcf.date.month.july{/lang}', '{lang}wcf.date.month.august{/lang}', '{lang}wcf.date.month.september{/lang}', '{lang}wcf.date.month.october{/lang}', '{lang}wcf.date.month.november{/lang}', '{lang}wcf.date.month.december{/lang}' ], 
 				'__monthsShort': [ '{lang}wcf.date.month.jan{/lang}', '{lang}wcf.date.month.feb{/lang}', '{lang}wcf.date.month.mar{/lang}', '{lang}wcf.date.month.apr{/lang}', '{lang}wcf.date.month.may{/lang}', '{lang}wcf.date.month.jun{/lang}', '{lang}wcf.date.month.jul{/lang}', '{lang}wcf.date.month.aug{/lang}', '{lang}wcf.date.month.sep{/lang}', '{lang}wcf.date.month.oct{/lang}', '{lang}wcf.date.month.nov{/lang}', '{lang}wcf.date.month.dec{/lang}' ],
+				'wcf.clipboard.item.unmarkAll': '{lang}wcf.clipboard.item.unmarkAll{/lang}',
 				'wcf.date.relative.now': '{lang}wcf.date.relative.now{/lang}',
 				'wcf.date.relative.minutes': '{capture assign=relativeMinutes}{lang}wcf.date.relative.minutes{/lang}{/capture}{@$relativeMinutes|encodeJS}',
 				'wcf.date.relative.hours': '{capture assign=relativeHours}{lang}wcf.date.relative.hours{/lang}{/capture}{@$relativeHours|encodeJS}',
@@ -80,6 +81,7 @@
 				'wcf.global.decimalPoint': '{capture assign=decimalPoint}{lang}wcf.global.decimalPoint{/lang}{/capture}{$decimalPoint|encodeJS}',
 				'wcf.global.error.timeout': '{lang}wcf.global.error.timeout{/lang}',
 				'wcf.global.error.title': '{lang}wcf.global.error.title{/lang}',
+				'wcf.global.form.error.empty': '{lang}wcf.global.form.error.empty{/lang}',
 				'wcf.global.loading': '{lang}wcf.global.loading{/lang}',
 				'wcf.global.page.jumpTo': '{lang}wcf.global.page.jumpTo{/lang}',
 				'wcf.global.page.jumpTo.description': '{lang}wcf.global.page.jumpTo.description{/lang}',
@@ -128,8 +130,10 @@
 							<li id="userMenu" class="dropdown">
 								<a class="dropdownToggle framed" data-toggle="userMenu">{event name='userAvatar'} {lang}wcf.user.userNote{/lang}</a>
 								<ul class="dropdownMenu">
-									<li><a href="../">FRONTEND</a></li>
-									<li class="dropdownDivider"></li>
+									{if PACKAGE_ID > 1}
+										<li><a href="{@$__wcf->getPageMenu()->getLandingPage()->getLink()}">{lang}wcf.global.toLandingPage{/lang}</a></li>
+										<li class="dropdownDivider"></li>
+									{/if}
 									<li><a href="{link controller='Logout'}t={@SECURITY_TOKEN}{/link}" onclick="WCF.System.Confirmation.show('{lang}wcf.user.logout.sure{/lang}', $.proxy(function (action) { if (action == 'confirm') window.location.href = $(this).attr('href'); }, this)); return false;">{lang}wcf.user.logout{/lang}</a></li>
 								</ul>
 							</li>
@@ -148,7 +152,7 @@
 			{/if}
 			
 			<div id="logo" class="logo">
-				<a href="{link controller='Index'}{/link}">
+				<a href="{link}{/link}">
 					<h1>{lang}wcf.global.acp{/lang}</h1>
 					{if PACKAGE_ID > 1}
 						{event name='headerLogo'}
