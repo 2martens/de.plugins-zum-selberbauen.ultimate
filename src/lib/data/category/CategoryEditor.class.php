@@ -94,7 +94,7 @@ class CategoryEditor extends DatabaseObjectEditor implements IEditableCachedObje
 	 */
 	public function delete() {
 		/* @var $layout \ultimate\data\layout\Layout */
-		$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($this->__get('categoryID'), $this->__get('categoryTitle'));
+		$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($this->__get('categoryID'), 'category');
 		$layoutAction = new LayoutAction(array($layout->__get('layoutID')), 'delete', array());
 		$layoutAction->executeAction();
 		parent::delete();

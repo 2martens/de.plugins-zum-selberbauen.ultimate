@@ -26,6 +26,8 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\category;
+use ultimate\data\layout\LayoutAction;
+use ultimate\system\layout\LayoutHandler;
 use wcf\data\AbstractDatabaseObjectAction;
 
 /**
@@ -58,4 +60,31 @@ class CategoryAction extends AbstractDatabaseObjectAction {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsUpdate
 	 */
 	protected $permissionsUpdate = array('admin.content.ultimate.canEditCategory');
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#delete
+	 */
+	public function delete() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+		
+		// get ids
+		$objectIDs = array();
+		foreach ($this->objects as $object) {
+			$objectIDs[] = $object->getObjectID();
+		}
+		
+		$layoutIDs = array();
+		foreach ($this->objects as $object) {
+			/* @var $layout \ultimate\data\layout\Layout */
+			$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($object->__get('categoryID'), 'category');
+			$layoutIDs[] = $layout->__get('layoutID');
+		}
+		$layoutAction = new LayoutAction($layoutIDs, 'delete', array());
+		$layoutAction->executeAction();
+		
+		// execute action
+		return call_user_func(array($this->className, 'deleteAll'), $objectIDs);
+	}
 }
