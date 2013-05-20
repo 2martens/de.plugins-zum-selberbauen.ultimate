@@ -27,6 +27,7 @@
  */
 namespace ultimate\data\category;
 use ultimate\data\layout\LayoutAction;
+use ultimate\data\layout\LayoutList;
 use ultimate\system\layout\LayoutHandler;
 use wcf\data\AbstractDatabaseObjectAction;
 
@@ -78,12 +79,24 @@ class CategoryAction extends AbstractDatabaseObjectAction {
 		$layoutIDs = array();
 		foreach ($this->objects as $object) {
 			/* @var $layout \ultimate\data\layout\Layout */
-			$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($object->__get('categoryID'), 'category');
+			$layout = null;
+			if (defined('TESTING_MODE') && TESTING_MODE) {
+				$layoutList = new LayoutList();
+				$layoutList->readObjects();
+				$layouts = $layoutList->getObjects();
+				foreach ($layouts as $__layout) {
+					if ($__layout->__get('objectID') == $object->__get('categoryID') && $__layout->__get('objectType') == 'category') {
+						$layout = $__layout;
+					}
+				}
+			}
+			else {
+				$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($object->__get('categoryID'), 'category');
+			}
 			$layoutIDs[] = $layout->__get('layoutID');
 		}
 		$layoutAction = new LayoutAction($layoutIDs, 'delete', array());
 		$layoutAction->executeAction();
-		
 		// execute action
 		return call_user_func(array($this->className, 'deleteAll'), $objectIDs);
 	}

@@ -26,6 +26,9 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\content;
+use ultimate\data\layout\LayoutAction;
+use ultimate\data\layout\LayoutList;
+use ultimate\system\layout\LayoutHandler;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\PermissionDeniedException;
@@ -116,5 +119,44 @@ class ContentAction extends AbstractDatabaseObjectAction {
 				$contentEditor->addGroups($groupIDs);
 			}
 		}
+	}
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#delete
+	 */
+	public function delete() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+	
+		// get ids
+		$objectIDs = array();
+		foreach ($this->objects as $object) {
+			$objectIDs[] = $object->getObjectID();
+		}
+		
+		$layoutIDs = array();
+		foreach ($this->objects as $object) {
+			/* @var $layout \ultimate\data\layout\Layout */
+			$layout = null;
+			if (defined('TESTING_MODE') && TESTING_MODE) {
+				$layoutList = new LayoutList();
+				$layoutList->readObjects();
+				$layouts = $layoutList->getObjects();
+				foreach ($layouts as $__layout) {
+					if ($__layout->__get('objectID') == $object->__get('contentID') && $__layout->__get('objectType') == 'content') {
+						$layout = $__layout;
+					}
+				}
+			}
+			else {
+				$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($object->__get('contentID'), 'content');
+			}
+			$layoutIDs[] = $layout->__get('layoutID');
+		}
+		$layoutAction = new LayoutAction($layoutIDs, 'delete', array());
+		$layoutAction->executeAction();
+		// execute action
+		return call_user_func(array($this->className, 'deleteAll'), $objectIDs);
 	}
 }
