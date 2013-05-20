@@ -78,7 +78,7 @@ class IndexPage extends AbstractPage {
 	}
 	
 	/**
-	 * @see \wcf\page\AbstractPage::assignVariables()@link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
