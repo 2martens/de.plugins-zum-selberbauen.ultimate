@@ -231,10 +231,22 @@ class ContentBlockType extends AbstractBlockType {
 		I18nHandler::getInstance()->setOptions('metaAboveContent_'.$this->blockID, PACKAGE_ID, $metaAboveContent, ($useDefaultMetaAboveContent ? 'wcf.acp.option.option.\d' : 'ultimate.block.content.\d+.metaAboveContent'));
 		I18nHandler::getInstance()->setOptions('metaBelowContent_'.$this->blockID, PACKAGE_ID, $metaBelowContent, ($useDefaultMetaBelowContent ? 'wcf.acp.option.option.\d' : 'ultimate.block.content.\d+.metaBelowContent'));
 		
+		// check if content is attached to page
+		if ($this->requestType == 'category') {
+			$remainingContents = array();
+			foreach ($this->contents as $contentID => $content) {
+				$this->cacheBuilderClassName = '\ultimate\system\cache\builder\ContentPageCacheBuilder';
+				$this->cacheIndex = 'contentIDsToPageID';
+				$this->loadCache();
+				if (!in_array($contentID, $this->objects)) {
+					$remainingContents[$contentID] = $content;
+				}
+			}
+			$this->contents = $remainingContents;
+		}
 		// fetchPageContent
 		if ($this->options['fetchPageContent'] != 'none') {
 			$pageID = $this->options['fetchPageContent'];
-			$this->cacheName = 'page';
 			$this->cacheBuilderClassName = '\ultimate\system\cache\builder\ContentPageCacheBuilder';
 			$this->cacheIndex = 'contentsToPageID';
 			$this->loadCache();
