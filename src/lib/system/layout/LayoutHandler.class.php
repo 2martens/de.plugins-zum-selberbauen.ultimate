@@ -105,8 +105,12 @@ class LayoutHandler extends SingletonFactory {
 	 * @return	\ultimate\data\layout\Layout|NULL
 	 */
 	public function getLayoutFromObjectData($objectID, $objectType) {
+		if (defined('ENABLE_DEBUG_MODE') && ENABLE_DEBUG_MODE) {
+			$this->loadCache();
+		}
 		$objectID = intval($objectID);
 		$objectType = StringUtil::trim($objectType);
+		
 		if (isset($this->layoutsToObjectData[$objectID.','.$objectType])) {
 			return $this->layoutsToObjectData[$objectID.','.$objectType];
 		}
@@ -123,6 +127,9 @@ class LayoutHandler extends SingletonFactory {
 	 * @return	\ultimate\data\layout\Layout|NULL
 	 */
 	public function getLayout($layoutID) {
+		if (defined('ENABLE_DEBUG_MODE') && ENABLE_DEBUG_MODE) {
+			$this->loadCache();
+		}
 		$layoutID = intval($layoutID);
 		if (isset($this->layouts[$layoutID])) {
 			return $this->layouts[$layoutID];
@@ -142,6 +149,9 @@ class LayoutHandler extends SingletonFactory {
 	 * @return	\ultimate\data\template\Template|NULL
 	 */
 	public function getTemplateFromObjectData($objectID, $objectType) {
+		if (defined('ENABLE_DEBUG_MODE') && ENABLE_DEBUG_MODE) {
+			$this->loadCache();
+		}
 		$layout = $this->getLayoutFromObjectData($objectID, $objectType);
 		if ($layout !== null) {
 			$layoutID = $layout->__get('layoutID');
