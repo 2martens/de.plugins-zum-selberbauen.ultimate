@@ -386,18 +386,12 @@ ULTIMATE.Block.Transfer.prototype = {
 	_submitFormData: function() {
 		// read form data
 		var blockTypeID = $('#selectBlocktype').val();		
-		var width = $('#width').val();
 		var height = $('#height').val();
-		var left = $('#left').val();
-		var top = $('#topDistance').val();
 		var $parameters = $.extend(true, {
 			data: {
 				blockTypeID: blockTypeID,
 				additionalData: {
-					width: width,
-					height: height,
-					left: left,
-					top: top
+					height: height
 				},
 				templateID: $('input[name="id"]').val()
 			}
@@ -412,10 +406,7 @@ ULTIMATE.Block.Transfer.prototype = {
 		
 		// reset form
 		$('#selectBlocktype').val('0');
-		$('#width').val('1');
 		$('#height').val('0');
-		$('#left').val('1');
-		$('#topDistance').val('0');
 		
 		// build proxy data
 		$data = $.extend(true, {
@@ -467,7 +458,8 @@ ULTIMATE.Block.Transfer.prototype = {
 			this._dialog.wcfDialog('render');
 			this._dialog.css({
 				'min-width': '1100px',
-				'max-height': '400px'
+				'max-height': '400px',
+				'overflow: scroll'
 			});
 			
 		}
