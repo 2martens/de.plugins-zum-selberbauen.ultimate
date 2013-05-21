@@ -31,7 +31,7 @@
 </div>
 
 {if $templates|count}
-<form method="post" action="{link controller='UltimateLayoutManager'}{/link}">
+<form method="post" action="{link application='ultimate' controller='UltimateLayoutManager'}{/link}">
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
 			<legend>{lang}wcf.acp.ultimate.layoutManager.layouts{/lang}</legend>
