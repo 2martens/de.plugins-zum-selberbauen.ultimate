@@ -156,7 +156,7 @@
 				<dd class="inputMultiSelect">
 					<label for="contentMetaDisplay_{$blockID}" class="jsTooltip" title="{lang}ultimate.visualEditor.contentTab.meta.contentMetaDisplay.description{/lang}">{lang}ultimate.visualEditor.contentTab.meta.contentMetaDisplay{/lang}</label>
 					
-					<select id="contentMetaDisplay_{$blockID}" name="contentMetaDisplay" data-block-id="{$blockID}" data-is-block="true" multiple="multiple">
+					<select id="contentMetaDisplay_{$blockID}" name="contentMetaDisplay[]" data-block-id="{$blockID}" data-is-block="true" multiple="multiple">
 						<option value="category"{if $contentMetaDisplaySelected['category']|isset} selected="selected"{/if}>{lang}ultimate.visualEditor.contentTab.meta.contentMetaDisplay.category{/lang}</option>
 						<option value="page"{if $contentMetaDisplaySelected['page']|isset} selected="selected"{/if}>{lang}ultimate.visualEditor.contentTab.meta.contentMetaDisplay.page{/lang}</option>
 						<option value="content"{if $contentMetaDisplaySelected['content']|isset} selected="selected"{/if}>{lang}ultimate.visualEditor.contentTab.meta.contentMetaDisplay.content{/lang}</option>
