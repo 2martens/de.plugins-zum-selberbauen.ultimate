@@ -35,7 +35,9 @@ use ultimate\system\cache\builder\TemplateCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use wcf\form\AbstractForm;
 use wcf\system\exception\UserInputException;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
+use wcf\util\HeaderUtil;
 
 /**
  * Shows the UltimateLayoutManager form.
@@ -224,12 +226,15 @@ class UltimateLayoutManagerForm extends AbstractForm {
 				$layoutEditor->assignTemplate($templateID);
 			}
 		}
+		LayoutEditor::resetCache();
 		
 		$this->saved();
 		
-		WCF::getTPL()->assign(
-			'success', true
-		);
+		$url = LinkHandler::getInstance()->getLink('UltimateLayoutManager', array(
+			'application' => 'ultimate'
+		), 'success');
+		HeaderUtil::redirect($url);
+		exit;
 	}
 	
 	/**
@@ -237,6 +242,7 @@ class UltimateLayoutManagerForm extends AbstractForm {
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
+		
 		WCF::getTPL()->assign(array(
 			'layouts' => $this->layouts,
 			'templates' => $this->templates,
@@ -244,5 +250,8 @@ class UltimateLayoutManagerForm extends AbstractForm {
 			'contentLayouts' => $this->contentLayouts,
 			'pageLayouts' => $this->pageLayouts
 		));
+		if (isset($_REQUEST['success'])) {
+			WCF::getTPL()->assign('success', true);
+		}
 	}
 }

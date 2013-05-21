@@ -389,6 +389,7 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.selectTemplate.none"><![CDATA[Please select a template:]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.selectTemplate.inherit"><![CDATA[Use template from upper level]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.selectTemplate.error.notValid"><![CDATA[You have "selected" a template which wasn't selectable.]]></item>
+		<item name="wcf.acp.ultimate.layoutManager.selectTemplate.error.notSelected"><![CDATA[You have forgotten to select a template for a layout that requires a template.]]></item>
 		<!-- /layout -->
 		
 		<!-- link -->

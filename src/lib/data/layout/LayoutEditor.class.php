@@ -69,7 +69,7 @@ class LayoutEditor extends DatabaseObjectEditor implements IEditableCachedObject
 	/**
 	 * Assigns a new template.
 	 * 
-	 * @since	1.0.0
+	 * @since		1.0.0
 	 * @internal	Calls removeTemplate.
 	 * 
 	 * @param	integer	$templateID

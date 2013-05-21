@@ -393,6 +393,7 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.selectTemplate.none"><![CDATA[Bitte ein Template auswählen:]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.selectTemplate.inherit"><![CDATA[Template von übergeordneter Ebene übernehmen]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.selectTemplate.error.notValid"><![CDATA[Sie haben ein Template "ausgewählt", dass gar nicht zur Auswahl stand.]]></item>
+		<item name="wcf.acp.ultimate.layoutManager.selectTemplate.error.notSelected"><![CDATA[Sie haben kein Template ausgewählt für ein Layout, welches ein Template benötigt.]]></item>
 		<!-- /layout -->
 		
 		<!-- link -->
