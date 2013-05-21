@@ -159,6 +159,12 @@
 							<span>
 								<span class="buttons">
 									
+									{if $__wcf->session->getPermission('admin.content.ultimate.canEditBlock')}
+										<span title="{lang}wcf.acp.ultimate.block.edit{/lang}" class="icon icon16 icon-pencil jsTooltip" data-object-id="{@$templateBlock->blockID}"></span>
+									{else}
+										<span title="{lang}wcf.acp.ultimate.block.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
+									{/if}
+									
 									{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteBlock')}
 										<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="{@$templateBlock->blockID}" data-confirm-message="{lang}'wcf.acp.ultimate.block.delete.sure'{/lang}"></span>
 									{else}
@@ -222,39 +228,6 @@
 					{if $errorField == 'height'}
 						<small class="innerError">
 							{lang}wcf.acp.ultimate.template.height.error.{@$errorType}{/lang}
-						</small>
-					{/if}
-				</dd>
-			</dl>
-			<dl{if $errorField == 'width'} class="formError"{/if}>
-				<dt><label for="width">{lang}wcf.acp.ultimate.template.width{/lang}</label></dt>
-				<dd>
-					<input type="number" id="width" name="width" value="{$width}" min="1" max="24" />
-					{if $errorField == 'width'}
-						<small class="innerError">
-							{lang}wcf.acp.ultimate.template.width.error.{@$errorType}{/lang}
-						</small>
-					{/if}
-				</dd>
-			</dl>
-			<dl{if $errorField == 'top'} class="formError"{/if}>
-				<dt><label for="topDistance">{lang}wcf.acp.ultimate.template.top{/lang}</label></dt>
-				<dd>
-					<input type="number" id="topDistance" name="top" value="{$top}" min="0" /><span class="unit">px</span>
-					{if $errorField == 'top'}
-						<small class="innerError">
-							{lang}wcf.acp.ultimate.template.top.error.{@$errorType}{/lang}
-						</small>
-					{/if}
-				</dd>
-			</dl>
-			<dl{if $errorField == 'left'} class="formError"{/if}>
-				<dt><label for="left">{lang}wcf.acp.ultimate.template.left{/lang}</label></dt>
-				<dd>
-					<input type="number" id="left" name="left" value="{$left}" min="1" max="24" />
-					{if $errorField == 'left'}
-						<small class="innerError">
-							{lang}wcf.acp.ultimate.template.left.error.{@$errorType}{/lang}
 						</small>
 					{/if}
 				</dd>
