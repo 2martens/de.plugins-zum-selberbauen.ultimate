@@ -459,7 +459,7 @@ ULTIMATE.Block.Transfer.prototype = {
 			this._dialog.css({
 				'min-width': '1100px',
 				'max-height': '400px',
-				'overflow: scroll'
+				'overflow': 'scroll'
 			});
 			
 		}
