@@ -56,13 +56,13 @@
 		<thead>
 			<tr>
 				<th class="columnMark"><label><input type="checkbox" class="jsClipboardMarkAll" /></label></th>
-				<th class="columnID{if $sortField == 'contentID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link controller='UltimateContentList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=contentID&sortOrder={if $sortField == 'contentID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
-				<th class="columnTitle{if $sortField == 'contentTitle'} active {@$sortOrder}{/if}"><a href="{link controller='UltimateContentList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=contentTitle&sortOrder={if $sortField == 'contentTitle' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.content.title{/lang}</a></th>
-				<th class="columnAuthor{if $sortField == 'contentAuthor'} active {@$sortOrder}{/if}"><a href="{link controller='UltimateContentList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=contentAuthor&sortOrder={if $sortField == 'contentAuthor' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.author{/lang}</a></th>
+				<th class="columnID{if $sortField == 'contentID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link application='ultimate' controller='UltimateContentList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=contentID&sortOrder={if $sortField == 'contentID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
+				<th class="columnTitle{if $sortField == 'contentTitle'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimateContentList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=contentTitle&sortOrder={if $sortField == 'contentTitle' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.content.title{/lang}</a></th>
+				<th class="columnAuthor{if $sortField == 'contentAuthor'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimateContentList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=contentAuthor&sortOrder={if $sortField == 'contentAuthor' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.author{/lang}</a></th>
 				<th class="columnCategories">{lang}wcf.acp.ultimate.content.categories{/lang}</th>
 				<th class="columnTags">{lang}wcf.acp.ultimate.content.tags{/lang}</th>
-				<th class="columnDate{if $sortField == 'publishDate'} active {@$sortOrder}{/if}"><a href="{link controller='UltimateContentList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=publishDate&sortOrder={if $sortField == 'publishDate' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.publishDateList{/lang}</a></th>
-				<th class="columnLastModified{if $sortField == 'lastModified'} active {@$sortOrder}{/if}"><a href="{link controller='UltimateContentList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=lastModified&sortOrder={if $sortField == 'lastModified' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.lastModified{/lang}</a></th>
+				<th class="columnDate{if $sortField == 'publishDate'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimateContentList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=publishDate&sortOrder={if $sortField == 'publishDate' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.publishDateList{/lang}</a></th>
+				<th class="columnLastModified{if $sortField == 'lastModified'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimateContentList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=lastModified&sortOrder={if $sortField == 'lastModified' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.lastModified{/lang}</a></th>
 				 
 				{event name='headColumns'}
 			</tr>
@@ -76,7 +76,7 @@
 						<td class="columnIcon">
 							
 							{if $__wcf->session->getPermission('admin.content.ultimate.canEditContent')}
-								<a href="{link controller='UltimateContentEdit' id=$content->contentID}{/link}"><span title="{lang}wcf.acp.ultimate.content.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
+								<a href="{link application='ultimate' controller='UltimateContentEdit' id=$content->contentID}{/link}"><span title="{lang}wcf.acp.ultimate.content.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.content.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
 							{/if}
@@ -90,16 +90,16 @@
 							{event name='buttons'}
 						</td>
 						<td class="columnID"><p>{@$content->contentID}</p></td>
-						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditContent')}<a title="{lang}wcf.acp.ultimate.content.edit{/lang}" href="{link controller='UltimateContentEdit' id=$content->contentID}{/link}">{lang}{@$content->contentTitle}{/lang}</a>{else}{lang}{@$content->contentTitle}{/lang}{/if}</p></td>
-						<td class="columnAuthor"><p><a href="{link controller='UltimateContentList'}author={@$content->author}{/link}">{@$content->author}</a></p></td>
+						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditContent')}<a title="{lang}wcf.acp.ultimate.content.edit{/lang}" href="{link application='ultimate' controller='UltimateContentEdit' id=$content->contentID}{/link}">{lang}{@$content->contentTitle}{/lang}</a>{else}{lang}{@$content->contentTitle}{/lang}{/if}</p></td>
+						<td class="columnAuthor"><p><a href="{link application='ultimate' controller='UltimateContentList'}author={@$content->author}{/link}">{@$content->author}</a></p></td>
 						<td class="columnCategories">
 							<p>
-								{implode from=$content->categories key=categoryID item=category}<a href="{link controller='UltimateContentList'}categoryID={@$category->categoryID}{/link}">{@$category}</a>{/implode}
+								{implode from=$content->categories key=categoryID item=category}<a href="{link application='ultimate' controller='UltimateContentList'}categoryID={@$category->categoryID}{/link}">{@$category}</a>{/implode}
 							</p>
 						</td>
 						<td class="columnTags">
 							<p>
-								{implode from=$content->tags[$__wcf->getLanguage()->languageID] key=tagID item=tag}<a href="{link controller='UltimateContentList'}tagID={@$tag->tagID}{/link}">{@$tag->getTitle()}</a>{/implode}
+								{implode from=$content->tags[$__wcf->getLanguage()->languageID] key=tagID item=tag}<a href="{link application='ultimate' controller='UltimateContentList'}tagID={@$tag->tagID}{/link}">{@$tag->getTitle()}</a>{/implode}
 							</p>
 						</td>
 						{assign var='englishAccent' value={@ULTIMATE_GENERAL_ENGLISHLANGUAGE}}

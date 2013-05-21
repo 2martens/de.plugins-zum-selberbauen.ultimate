@@ -56,11 +56,11 @@
 		<thead>
 			<tr>
 				<th class="columnMark"><label><input type="checkbox" class="jsClipboardMarkAll" /></label></th>
-				<th class="columnID{if $sortField == 'categoryID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link controller='UltimateCategoryList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=categoryID&sortOrder={if $sortField == 'categoryID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
-				<th class="columnTitle{if $sortField == 'categoryTitle'} active {@$sortOrder}{/if}"><a href="{link controller='UltimateCategoryList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=categoryTitle&sortOrder={if $sortField == 'categoryTitle' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.category.title{/lang}</a></th>
-				<th class="columnDescription{if $sortField == 'categoryDescription'} active {@$sortOrder}{/if}"><a href="{link controller='UltimateCategoryList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=categoryDescription&sortOrder={if $sortField == 'categoryDescription' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.category.description{/lang}</a></th>
-				<th class="columnSlug{if $sortField == 'categorySlug'} active {@$sortOrder}{/if}"><a href="{link controller='UltimateCategoryList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=categorySlug&sortOrder={if $sortField == 'categorySlug' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.category.slug{/lang}</a></th>
-				<th class="columnDigits columnContents{if $sortField == 'categoryContents'} active {@$sortOrder}{/if}"><a href="{link controller='UltimateCategoryList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=categoryContents&sortOrder={if $sortField == 'categoryContents' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.category.contents{/lang}</a></th>
+				<th class="columnID{if $sortField == 'categoryID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link application='ultimate' controller='UltimateCategoryList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=categoryID&sortOrder={if $sortField == 'categoryID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
+				<th class="columnTitle{if $sortField == 'categoryTitle'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimateCategoryList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=categoryTitle&sortOrder={if $sortField == 'categoryTitle' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.category.title{/lang}</a></th>
+				<th class="columnDescription{if $sortField == 'categoryDescription'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimateCategoryList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=categoryDescription&sortOrder={if $sortField == 'categoryDescription' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.category.description{/lang}</a></th>
+				<th class="columnSlug{if $sortField == 'categorySlug'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimateCategoryList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=categorySlug&sortOrder={if $sortField == 'categorySlug' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.category.slug{/lang}</a></th>
+				<th class="columnDigits columnContents{if $sortField == 'categoryContents'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimateCategoryList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=categoryContents&sortOrder={if $sortField == 'categoryContents' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.category.contents{/lang}</a></th>
 				
 				{event name='headColumns'}
 			</tr>
@@ -74,7 +74,7 @@
 						<td class="columnIcon">
 							
 							{if $__wcf->session->getPermission('admin.content.ultimate.canEditCategory')}
-								<a href="{link controller='UltimateCategoryEdit' id=$category->categoryID}{/link}"><span title="{lang}wcf.acp.ultimate.category.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
+								<a href="{link application='ultimate' controller='UltimateCategoryEdit' id=$category->categoryID}{/link}"><span title="{lang}wcf.acp.ultimate.category.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.category.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
 							{/if}
@@ -88,10 +88,10 @@
 							{event name='buttons'}
 						</td>
 						<td class="columnID"><p>{@$category->categoryID}</p></td>
-						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditCategory')}<a title="{lang}wcf.acp.ultimate.category.edit{/lang}" href="{link controller='UltimateCategoryEdit' id=$category->categoryID}{/link}">{lang}{@$category->categoryTitle}{/lang}</a>{else}{lang}{@$category->categoryTitle}{/lang}{/if}</p></td>
+						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditCategory')}<a title="{lang}wcf.acp.ultimate.category.edit{/lang}" href="{link application='ultimate' controller='UltimateCategoryEdit' id=$category->categoryID}{/link}">{lang}{@$category->categoryTitle}{/lang}</a>{else}{lang}{@$category->categoryTitle}{/lang}{/if}</p></td>
 						<td class="columnDescription"><p>{lang}{@$category->categoryDescription}{/lang}</p></td>
 						<td class="columnSlug"><p>{@$category->categorySlug}</p></td>
-						<td class="columnContents"><p><a title="{lang}wcf.acp.ultimate.category.showContents{/lang}" href="{link controller='UltimateContentList'}categoryID={@$category->categoryID}{/link}">{$category->contents|count}</a></p></td>
+						<td class="columnContents"><p><a title="{lang}wcf.acp.ultimate.category.showContents{/lang}" href="{link application='ultimate' controller='UltimateContentList'}categoryID={@$category->categoryID}{/link}">{$category->contents|count}</a></p></td>
 						
 						{event name='columns'}
 					</tr>

@@ -56,11 +56,11 @@
 		<thead>
 			<tr>
 				<th class="columnMark"><label><input type="checkbox" class="jsClipboardMarkAll" /></label></th>
-				<th class="columnID{if $sortField == 'pageID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link controller='UltimatePageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=pageID&sortOrder={if $sortField == 'pageID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
-				<th class="columnTitle{if $sortField == 'pageTitle'} active {@$sortOrder}{/if}"><a href="{link controller='UltimatePageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=pageTitle&sortOrder={if $sortField == 'pageTitle' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.page.title{/lang}</a></th>
-				<th class="columnAuthor{if $sortField == 'pageAuthor'} active {@$sortOrder}{/if}"><a href="{link controller='UltimatePageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=pageAuthor&sortOrder={if $sortField == 'pageAuthor' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.author{/lang}</a></th>
-				<th class="columnDate{if $sortField == 'publishDate'} active {@$sortOrder}{/if}"><a href="{link controller='UltimatePageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=publishDate&sortOrder={if $sortField == 'publishDate' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.publishDateList{/lang}</a></th>
-				<th class="columnLastModified{if $sortField == 'lastModified'} active {@$sortOrder}{/if}"><a href="{link controller='UltimatePageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=lastModified&sortOrder={if $sortField == 'lastModified' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.lastModified{/lang}</a></th>
+				<th class="columnID{if $sortField == 'pageID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link application='ultimate' controller='UltimatePageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=pageID&sortOrder={if $sortField == 'pageID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
+				<th class="columnTitle{if $sortField == 'pageTitle'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimatePageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=pageTitle&sortOrder={if $sortField == 'pageTitle' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.page.title{/lang}</a></th>
+				<th class="columnAuthor{if $sortField == 'pageAuthor'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimatePageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=pageAuthor&sortOrder={if $sortField == 'pageAuthor' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.author{/lang}</a></th>
+				<th class="columnDate{if $sortField == 'publishDate'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimatePageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=publishDate&sortOrder={if $sortField == 'publishDate' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.publishDateList{/lang}</a></th>
+				<th class="columnLastModified{if $sortField == 'lastModified'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimatePageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=lastModified&sortOrder={if $sortField == 'lastModified' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.lastModified{/lang}</a></th>
 				{event name='headColumns'}
 			</tr>
 		</thead>
@@ -73,7 +73,7 @@
 						<td class="columnIcon">
 							
 							{if $__wcf->session->getPermission('admin.content.ultimate.canEditPage')}
-								<a href="{link controller='UltimatePageEdit' id=$page->pageID}{/link}"><span title="{lang}wcf.acp.ultimate.page.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
+								<a href="{link application='ultimate' controller='UltimatePageEdit' id=$page->pageID}{/link}"><span title="{lang}wcf.acp.ultimate.page.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.page.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
 							{/if}
@@ -87,7 +87,7 @@
 							{event name='buttons'}
 						</td>
 						<td class="columnID"><p>{@$page->pageID}</p></td>
-						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditPage')}<a title="{lang}wcf.acp.ultimate.page.edit{/lang}" href="{link controller='UltimatePageEdit' id=$page->pageID}{/link}">{lang}{@$page->pageTitle}{/lang}</a>{else}{lang}{@$page->pageTitle}{/lang}{/if}</p></td>
+						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditPage')}<a title="{lang}wcf.acp.ultimate.page.edit{/lang}" href="{link application='ultimate' controller='UltimatePageEdit' id=$page->pageID}{/link}">{lang}{@$page->pageTitle}{/lang}</a>{else}{lang}{@$page->pageTitle}{/lang}{/if}</p></td>
 						<td class="columnAuthor"><p>{if $__wcf->session->getPermission('admin.user.canEditUser')}<a title="{lang}wcf.acp.user.edit{/lang}" href="{link controller='UserEdit' id=$page->authorID}{/link}">{@$page->author->username}</a>{else}{@$page->author->username}{/if}</p></td>
 						{assign var='englishAccent' value={@ULTIMATE_GENERAL_ENGLISHLANGUAGE}}
 						{capture assign='publishDateFormat'}{lang britishEnglish=$englishAccent}ultimate.date.dateFormat{/lang}{/capture}

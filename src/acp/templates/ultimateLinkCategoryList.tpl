@@ -100,7 +100,7 @@
 					<span class="sortableNodeLabel">
 						<span class="buttons">
 							{if $objectType->getProcessor()->canEditCategory()}
-								<a href="{link controller=$editController id=$category->categoryID title=$category->getTitle()}{/link}"><span title="{lang}wcf.global.button.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
+								<a href="{link application='ultimate' controller=$editController id=$category->categoryID title=$category->getTitle()}{/link}"><span title="{lang}wcf.global.button.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
 							{else}
 								<span title="{lang}wcf.global.button.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
 							{/if}

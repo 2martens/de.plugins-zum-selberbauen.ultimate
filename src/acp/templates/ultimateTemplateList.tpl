@@ -47,8 +47,8 @@
 		<thead>
 			<tr>
 				<th class="columnMark"><label><input type="checkbox" class="jsClipboardMarkAll" /></label></th>
-				<th class="columnID{if $sortField == 'templateID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link controller='UltimateTemplateList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=templateID&sortOrder={if $sortField == 'templateID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
-				<th class="columnTitle{if $sortField == 'templateName'} active {@$sortOrder}{/if}"><a href="{link controller='UltimateTemplateList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=templateName&sortOrder={if $sortField == 'templateName' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.template.name{/lang}</a></th>
+				<th class="columnID{if $sortField == 'templateID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link application='ultimate' controller='UltimateTemplateList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=templateID&sortOrder={if $sortField == 'templateID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
+				<th class="columnTitle{if $sortField == 'templateName'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimateTemplateList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=templateName&sortOrder={if $sortField == 'templateName' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.template.name{/lang}</a></th>
 				{event name='headColumns'}
 			</tr>
 		</thead>
@@ -61,7 +61,7 @@
 						<td class="columnIcon">
 							
 						{if $__wcf->session->getPermission('admin.content.ultimate.canEditTemplate')}
-								<a href="{link controller='UltimateTemplateEdit' id=$template->templateID}{/link}"><span title="{lang}wcf.acp.ultimate.template.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
+								<a href="{link application='ultimate' controller='UltimateTemplateEdit' id=$template->templateID}{/link}"><span title="{lang}wcf.acp.ultimate.template.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.template.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
 							{/if}
@@ -75,7 +75,7 @@
 							{event name='buttons'}
 						</td>
 						<td class="columnID"><p>{@$template->templateID}</p></td>
-						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditTemplate')}<a title="{lang}wcf.acp.ultimate.template.edit{/lang}" href="{link controller='UltimateTemplateEdit' id=$template->templateID}{/link}">{lang}{@$template->templateName}{/lang}</a>{else}{lang}{@$template->templateName}{/lang}{/if}</p></td>
+						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditTemplate')}<a title="{lang}wcf.acp.ultimate.template.edit{/lang}" href="{link application='ultimate' controller='UltimateTemplateEdit' id=$template->templateID}{/link}">{lang}{@$template->templateName}{/lang}</a>{else}{lang}{@$template->templateName}{/lang}{/if}</p></td>
 						
 						{event name='columns'}
 					</tr>				

@@ -47,8 +47,8 @@
 		<thead>
 			<tr>
 				<th class="columnMark"><label><input type="checkbox" class="jsClipboardMarkAll" /></label></th>
-				<th class="columnID{if $sortField == 'widgetAreaID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link controller='UltimateWidgetAreaList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=widgetAreaID&sortOrder={if $sortField == 'widgetAreaID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
-				<th class="columnTitle{if $sortField == 'widgetAreaName'} active {@$sortOrder}{/if}"><a href="{link controller='UltimateWidgetAreaList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=widgetAreaName&sortOrder={if $sortField == 'widgetAreaName' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.widgetArea.name{/lang}</a></th>
+				<th class="columnID{if $sortField == 'widgetAreaID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link application='ultimate' controller='UltimateWidgetAreaList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=widgetAreaID&sortOrder={if $sortField == 'widgetAreaID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
+				<th class="columnTitle{if $sortField == 'widgetAreaName'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimateWidgetAreaList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=widgetAreaName&sortOrder={if $sortField == 'widgetAreaName' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.widgetArea.name{/lang}</a></th>
 				{event name='headColumns'}
 			</tr>
 		</thead>
@@ -61,7 +61,7 @@
 						<td class="columnIcon">
 							
 						{if $__wcf->session->getPermission('admin.content.ultimate.canEditWidgetArea')}
-								<a href="{link controller='UltimateWidgetAreaEdit' id=$widgetArea->widgetAreaID}{/link}"><span title="{lang}wcf.acp.ultimate.widgetArea.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
+								<a href="{link application='ultimate' controller='UltimateWidgetAreaEdit' id=$widgetArea->widgetAreaID}{/link}"><span title="{lang}wcf.acp.ultimate.widgetArea.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.widgetArea.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
 							{/if}
@@ -75,7 +75,7 @@
 							{event name='buttons'}
 						</td>
 						<td class="columnID"><p>{@$widgetArea->widgetAreaID}</p></td>
-						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditWidgetArea')}<a title="{lang}wcf.acp.ultimate.widgetArea.edit{/lang}" href="{link controller='UltimateWidgetAreaEdit' id=$widgetArea->widgetAreaID}{/link}">{lang}{@$widgetArea->widgetAreaName}{/lang}</a>{else}{lang}{@$widgetArea->widgetAreaName}{/lang}{/if}</p></td>
+						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditWidgetArea')}<a title="{lang}wcf.acp.ultimate.widgetArea.edit{/lang}" href="{link application='ultimate' controller='UltimateWidgetAreaEdit' id=$widgetArea->widgetAreaID}{/link}">{lang}{@$widgetArea->widgetAreaName}{/lang}</a>{else}{lang}{@$widgetArea->widgetAreaName}{/lang}{/if}</p></td>
 						
 						{event name='columns'}
 					</tr>				

@@ -56,8 +56,8 @@
 		<thead>
 			<tr>
 				<th class="columnMark"><label><input type="checkbox" class="jsClipboardMarkAll" /></label></th>
-				<th class="columnID{if $sortField == 'menuID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link controller='UltimateMenuList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=menuID&sortOrder={if $sortField == 'menuID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
-				<th class="columnTitle{if $sortField == 'menuName'} active {@$sortOrder}{/if}"><a href="{link controller='UltimateMenuList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=menuName&sortOrder={if $sortField == 'menuName' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.menu.name{/lang}</a></th>
+				<th class="columnID{if $sortField == 'menuID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link application='ultimate' controller='UltimateMenuList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=menuID&sortOrder={if $sortField == 'menuID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
+				<th class="columnTitle{if $sortField == 'menuName'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimateMenuList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=menuName&sortOrder={if $sortField == 'menuName' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.menu.name{/lang}</a></th>
 				
 				{event name='headColumns'}
 			</tr>
@@ -71,7 +71,7 @@
 						<td class="columnIcon">
 							
 							{if $__wcf->session->getPermission('admin.content.ultimate.canEditMenu')}
-								<a href="{link controller='UltimateMenuEdit' id=$menu->menuID}{/link}"><span title="{lang}wcf.acp.ultimate.menu.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
+								<a href="{link application='ultimate' controller='UltimateMenuEdit' id=$menu->menuID}{/link}"><span title="{lang}wcf.acp.ultimate.menu.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.menu.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
 							{/if}
@@ -85,7 +85,7 @@
 							{event name='buttons'}
 						</td>
 						<td class="columnID"><p>{@$menu->menuID}</p></td>
-						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditMenu')}<a title="{lang}wcf.acp.ultimate.menu.edit{/lang}" href="{link controller='UltimateMenuEdit' id=$menu->menuID}{/link}">{lang}{@$menu->menuName}{/lang}</a>{else}{lang}{@$menu->menuName}{/lang}{/if}</p></td>
+						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditMenu')}<a title="{lang}wcf.acp.ultimate.menu.edit{/lang}" href="{link application='ultimate' controller='UltimateMenuEdit' id=$menu->menuID}{/link}">{lang}{@$menu->menuName}{/lang}</a>{else}{lang}{@$menu->menuName}{/lang}{/if}</p></td>
 						
 						{event name='columns'}
 					</tr>
