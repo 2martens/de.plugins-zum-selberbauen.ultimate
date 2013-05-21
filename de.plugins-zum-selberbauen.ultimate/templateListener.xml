@@ -12,5 +12,11 @@
 'ultimate.button.publish': '{lang}ultimate.button.publish{/lang}',
 'ultimate.button.update': '{lang}ultimate.button.update{/lang}']]></templatecode>
 		</templatelistener>
+		<templatelistener name="headerLogoUltimateACP">
+			<environment>admin</environment>
+			<templatename>header</templatename>
+			<eventname>headerLogo</eventname>
+			<templatecode><![CDATA[<img src="{@$__wcf->getPath()}acp/images/wcfLogo2.svg" alt="" width="300" height="58" />]]></templatecode>
+		</templatelistener>
 	</import>
 </data>
