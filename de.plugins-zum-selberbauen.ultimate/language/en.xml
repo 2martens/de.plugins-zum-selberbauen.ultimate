@@ -314,6 +314,10 @@ Available variables:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$autho
 		<item name="wcf.acp.ultimate.lastModified"><![CDATA[Last modified]]></item>
 		<!-- /general -->
 		
+		<!-- block -->
+		<item name="wcf.acp.ultimate.block.edit"><![CDATA[Edit block]]></item>
+		<!-- /block -->
+		
 		<!-- category -->
 		<item name="wcf.acp.ultimate.category.add"><![CDATA[Add category]]></item>
 		<item name="wcf.acp.ultimate.category.edit"><![CDATA[Edit category]]></item>
@@ -498,9 +502,6 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.template.selectBlocktype"><![CDATA[Select block type]]></item>
 		<item name="wcf.acp.ultimate.template.selectBlocktype.none"><![CDATA[No block type selected]]></item>
 		<item name="wcf.acp.ultimate.template.height"><![CDATA[Height]]></item>
-		<item name="wcf.acp.ultimate.template.width"><![CDATA[Width]]></item>
-		<item name="wcf.acp.ultimate.template.top"><![CDATA[Top]]></item>
-		<item name="wcf.acp.ultimate.template.left"><![CDATA[Left]]></item>
 		<item name="wcf.acp.ultimate.template.addBlock"><![CDATA[Add block]]></item>
 		<item name="wcf.acp.ultimate.template.addToTemplate"><![CDATA[Add to template]]></item>
 		<item name="wcf.acp.ultimate.template.selectWidgetArea"><![CDATA[Select widget area]]></item>
@@ -509,6 +510,7 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.template.selectMenu"><![CDATA[Select menu]]></item>
 		<item name="wcf.acp.ultimate.template.selectMenu.none"><![CDATA[No menu selected]]></item>
 		<item name="wcf.acp.ultimate.template.selectMenu.error.notValid"><![CDATA[The "selected" menu is invalid, because you couldn't select it.]]></item>
+		<item name="wcf.acp.ultimate.template.dialog.additionalOptions"><![CDATA[Additional options]]></item>
 		
 		<item name="wcf.acp.ultimate.template.list"><![CDATA[Template list]]></item>
 		<item name="wcf.acp.ultimate.template.list.all"><![CDATA[All templates]]></item>

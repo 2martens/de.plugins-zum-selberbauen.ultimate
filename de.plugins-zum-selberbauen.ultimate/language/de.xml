@@ -318,6 +318,10 @@ Verfügbare Variablen:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$aut
 		<item name="wcf.acp.ultimate.lastModified"><![CDATA[Zuletzt bearbeitet]]></item>
 		<!-- /general -->
 		
+		<!-- block -->
+		<item name="wcf.acp.ultimate.block.edit"><![CDATA[Block bearbeiten]]></item>
+		<!-- /block -->
+		
 		<!-- category -->
 		<item name="wcf.acp.ultimate.category.add"><![CDATA[Kategorie hinzufügen]]></item>
 		<item name="wcf.acp.ultimate.category.edit"><![CDATA[Kategorie bearbeiten]]></item>
@@ -503,9 +507,6 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.template.selectBlocktype"><![CDATA[Blocktyp auswählen]]></item>
 		<item name="wcf.acp.ultimate.template.selectBlocktype.none"><![CDATA[Keinen Blocktyp ausgewählt]]></item>
 		<item name="wcf.acp.ultimate.template.height"><![CDATA[Höhe]]></item>
-		<item name="wcf.acp.ultimate.template.width"><![CDATA[Breite]]></item>
-		<item name="wcf.acp.ultimate.template.top"><![CDATA[Oben]]></item>
-		<item name="wcf.acp.ultimate.template.left"><![CDATA[Links]]></item>
 		<item name="wcf.acp.ultimate.template.addBlock"><![CDATA[Block hinzufügen]]></item>
 		<item name="wcf.acp.ultimate.template.addToTemplate"><![CDATA[Zu Template hinzufügen]]></item>
 		<item name="wcf.acp.ultimate.template.selectWidgetArea"><![CDATA[Widgetkonfiguration auswählen]]></item>
@@ -514,6 +515,7 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.template.selectMenu"><![CDATA[Menü auswählen]]></item>
 		<item name="wcf.acp.ultimate.template.selectMenu.none"><![CDATA[Kein Menü ausgewählt]]></item>
 		<item name="wcf.acp.ultimate.template.selectMenu.error.notValid"><![CDATA[Das "ausgewählte" Menü stand nicht zur Auswahl.]]></item>
+		<item name="wcf.acp.ultimate.template.dialog.additionalOptions"><![CDATA[Erweiterte Optionen]]></item>
 		
 		<item name="wcf.acp.ultimate.template.list"><![CDATA[Templateliste]]></item>
 		<item name="wcf.acp.ultimate.template.list.all"><![CDATA[Alle Templates]]></item>
