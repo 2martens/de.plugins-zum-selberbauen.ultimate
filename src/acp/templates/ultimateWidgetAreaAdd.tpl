@@ -32,7 +32,7 @@
 	</nav>
 </div>
 
-<form method="post" action="{if $action == 'add'}{link controller='UltimateWidgetAreaAdd'}{/link}{else}{link controller='UltimateWidgetAreaEdit'}{/link}{/if}">
+<form method="post" action="{if $action == 'add'}{link application='ultimate' controller='UltimateWidgetAreaAdd'}{/link}{else}{link application='ultimate' controller='UltimateWidgetAreaEdit'}{/link}{/if}">
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
 			<legend>{lang}wcf.acp.ultimate.widgetArea.general{/lang}</legend>

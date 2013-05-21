@@ -28,7 +28,7 @@
 	</nav>
 </div>
 
-<form method="post" action="{if $action == 'add'}{link controller='UltimateContentAdd'}{/link}{else}{link controller='UltimateContentEdit'}{/link}{/if}">
+<form method="post" action="{if $action == 'add'}{link application='ultimate' controller='UltimateContentAdd'}{/link}{else}{link application='ultimate' controller='UltimateContentEdit'}{/link}{/if}">
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
 			<legend>{lang}wcf.acp.ultimate.content.general{/lang}</legend>

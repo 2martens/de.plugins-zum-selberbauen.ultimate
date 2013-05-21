@@ -32,7 +32,7 @@
 	</nav>
 </div>
 
-<form method="post" action="{if $action == 'add'}{link controller='UltimateMenuAdd'}{/link}{else}{link controller='UltimateMenuEdit'}{/link}{/if}">
+<form method="post" action="{if $action == 'add'}{link application='ultimate' controller='UltimateMenuAdd'}{/link}{else}{link application='ultimate' controller='UltimateMenuEdit'}{/link}{/if}">
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
 			<legend>{lang}wcf.acp.ultimate.menu.general{/lang}</legend>
