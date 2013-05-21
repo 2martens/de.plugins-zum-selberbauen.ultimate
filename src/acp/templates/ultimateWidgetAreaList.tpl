@@ -29,7 +29,7 @@
 {assign var=encodedURL value=$url|rawurlencode}
 {assign var=encodedAction value=$action|rawurlencode}
 <div class="contentNavigation">
-	{pages print=true assign=pagesLinks controller="UltimateWidgetAreaList" link="pageNo=%d&action=$encodedAction&sortField=$sortField&sortOrder=$sortOrder"}
+	{pages print=true assign=pagesLinks application='ultimate' controller="UltimateWidgetAreaList" link="pageNo=%d&action=$encodedAction&sortField=$sortField&sortOrder=$sortOrder"}
 </div>
 
 {hascontent}
@@ -37,7 +37,7 @@
 	<nav class="menu tableMenu">
 		<ul>
 			<li{if $action == ''} class="active"{/if}>
-				<a href="{link controller='UltimateWidgetAreaList'}{/link}"><span>{lang}wcf.acp.ultimate.widgetArea.list.all{/lang}</span> <span class="badge badgeInverse" title="{lang}wcf.acp.ultimate.widgetArea.list.count{/lang}">{#$items}</span></a>
+				<a href="{link application='ultimate' controller='UltimateWidgetAreaList'}{/link}"><span>{lang}wcf.acp.ultimate.widgetArea.list.all{/lang}</span> <span class="badge badgeInverse" title="{lang}wcf.acp.ultimate.widgetArea.list.count{/lang}">{#$items}</span></a>
 			</li>
 			
 			{event name='ultimateWidgetAreaListOptions'}

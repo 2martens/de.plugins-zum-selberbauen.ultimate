@@ -29,12 +29,12 @@
 {assign var=encodedURL value=$url|rawurlencode}
 {assign var=encodedAction value=$action|rawurlencode}
 <div class="contentNavigation">
-	{pages print=true assign=pagesLinks controller="UltimateContentList" link="pageNo=%d&action=$encodedAction&sortField=$sortField&sortOrder=$sortOrder"}
+	{pages print=true assign=pagesLinks application='ultimate' controller="UltimateContentList" link="pageNo=%d&action=$encodedAction&sortField=$sortField&sortOrder=$sortOrder"}
 	
 	<nav>
 		<ul>
 			{if $__wcf->session->getPermission('admin.content.ultimate.canAddContent')}
-				<li><a href="{link controller='UltimateContentAdd'}{/link}" title="{lang}wcf.acp.ultimate.content.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.content.add{/lang}</span></a></li>
+				<li><a href="{link application='ultimate' controller='UltimateContentAdd'}{/link}" title="{lang}wcf.acp.ultimate.content.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.content.add{/lang}</span></a></li>
 			{/if}
 			
 			{event name='largeButtons'}
@@ -46,7 +46,7 @@
 	<nav class="menu tableMenu">
 		<ul>
 			<li{if $action == ''} class="active"{/if}>
-				<a href="{link controller='UltimateContentList'}{/link}"><span>{lang}wcf.acp.ultimate.content.list.all{/lang}</span> <span class="badge badgeInverse" title="{lang}wcf.acp.ultimate.content.list.count{/lang}">{#$items}</span></a>
+				<a href="{link application='ultimate' controller='UltimateContentList'}{/link}"><span>{lang}wcf.acp.ultimate.content.list.all{/lang}</span> <span class="badge badgeInverse" title="{lang}wcf.acp.ultimate.content.list.count{/lang}">{#$items}</span></a>
 			</li>
 			
 			{event name='ultimateContentListOptions'}
@@ -126,7 +126,7 @@
 	<nav>
 		<ul>
 			{if $__wcf->session->getPermission('admin.content.ultimate.canAddContent')}
-				<li><a href="{link controller='UltimateContentAdd'}{/link}" title="{lang}wcf.acp.ultimate.content.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.content.add{/lang}</span></a></li>
+				<li><a href="{link application='ultimate' controller='UltimateContentAdd'}{/link}" title="{lang}wcf.acp.ultimate.content.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.content.add{/lang}</span></a></li>
 			{/if}
 			
 			{event name='largeButtons'}

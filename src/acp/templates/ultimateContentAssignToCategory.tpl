@@ -10,7 +10,7 @@
 	<p class="error">{lang}wcf.global.form.error{/lang}</p>
 {/if}
 
-<form method="post" action="{link controller='UltimateContentAssignToCategory'}{/link}">
+<form method="post" action="{link application='ultimate' controller='UltimateContentAssignToCategory'}{/link}">
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
 			<legend>{lang}wcf.acp.ultimate.content.assignToCategory.markedContents{/lang}</legend>

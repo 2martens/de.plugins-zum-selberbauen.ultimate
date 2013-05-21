@@ -29,12 +29,12 @@
 {assign var=encodedURL value=$url|rawurlencode}
 {assign var=encodedAction value=$action|rawurlencode}
 <div class="contentNavigation">
-	{pages print=true assign=pagesLinks controller='UltimateMenuList' link="pageNo=%d&action=$encodedAction&sortField=$sortField&sortOrder=$sortOrder"}
+	{pages print=true assign=pagesLinks application='ultimate' controller='UltimateMenuList' link="pageNo=%d&action=$encodedAction&sortField=$sortField&sortOrder=$sortOrder"}
 	
 	<nav>
 		<ul>
 			{if $__wcf->session->getPermission('admin.content.ultimate.canAddMenu')}
-				<li><a href="{link controller='UltimateMenuAdd'}{/link}" title="{lang}wcf.acp.ultimate.menu.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.menu.add{/lang}</span></a></li>
+				<li><a href="{link application='ultimate' controller='UltimateMenuAdd'}{/link}" title="{lang}wcf.acp.ultimate.menu.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.menu.add{/lang}</span></a></li>
 			{/if}
 			
 			{event name='largeButtons'}
@@ -46,7 +46,7 @@
 	<nav class="menu tableMenu">
 		<ul>
 			<li{if $action == ''} class="active"{/if}>
-				<a href="{link controller='UltimateMenuList'}{/link}"><span>{lang}wcf.acp.ultimate.menu.list.all{/lang}</span> <span class="badge badgeInverse" title="{lang}wcf.acp.ultimate.menu.list.count{/lang}">{#$items}</span></a>
+				<a href="{link application='ultimate' controller='UltimateMenuList'}{/link}"><span>{lang}wcf.acp.ultimate.menu.list.all{/lang}</span> <span class="badge badgeInverse" title="{lang}wcf.acp.ultimate.menu.list.count{/lang}">{#$items}</span></a>
 			</li>
 			
 			{event name='ultimateMenuListOptions'}
@@ -105,7 +105,7 @@
 	<nav>
 		<ul>
 			{if $__wcf->session->getPermission('admin.content.ultimate.canAddMenu')}
-				<li><a href="{link controller='UltimateMenuAdd'}{/link}" title="{lang}wcf.acp.ultimate.menu.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.menu.add{/lang}</span></a></li>
+				<li><a href="{link application='ultimate' controller='UltimateMenuAdd'}{/link}" title="{lang}wcf.acp.ultimate.menu.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.menu.add{/lang}</span></a></li>
 			{/if}
 			
 			{event name='largeButtons'}

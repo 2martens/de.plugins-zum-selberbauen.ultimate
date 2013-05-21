@@ -25,7 +25,7 @@
 <div class="contentNavigation">
 	<nav>
 		<ul>
-			<li><a href="{link controller='UltimateWidgetAreaList'}{/link}" title="{lang}wcf.acp.menu.link.ultimate.appearance.widgetArea.list{/lang}" class="button"><span class="icon icon24 icon-list"></span> <span>{lang}wcf.acp.menu.link.ultimate.appearance.widgetArea.list{/lang}</span></a></li>
+			<li><a href="{link application='ultimate' controller='UltimateWidgetAreaList'}{/link}" title="{lang}wcf.acp.menu.link.ultimate.appearance.widgetArea.list{/lang}" class="button"><span class="icon icon24 icon-list"></span> <span>{lang}wcf.acp.menu.link.ultimate.appearance.widgetArea.list{/lang}</span></a></li>
 			
 			{event name='largeButtons'}
 		</ul>
