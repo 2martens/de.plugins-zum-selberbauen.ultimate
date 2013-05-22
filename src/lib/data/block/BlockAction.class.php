@@ -30,6 +30,7 @@ use ultimate\system\blocktype\BlockTypeHandler;
 use ultimate\system\cache\builder\BlockCacheBuilder;
 use ultimate\system\cache\builder\BlockTypeCacheBuilder;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
 
 /**
@@ -89,13 +90,32 @@ class BlockAction extends AbstractDatabaseObjectAction {
 	/**
 	 * Creates a block and respects additional AJAX requirements.
 	 * 
-	 * @return	(integer|string)[]
+	 * @return	integer[]|string[]
 	 */
 	public function createAJAX() {
 		// serializes additionalData and query parameters
 		$parameters = $this->parameters['data'];
 		$templateID = $parameters['templateID'];
 		unset($parameters['templateID']);
+		// handle i18n values
+		$metaAboveContent_i18n = array();
+		$metaBelowContent_i18n = array();
+		$readMoreText_i18n = array();
+		if (isset($parameters['additionalData']['readMoreText_i18n'])) {
+			$readMoreText_i18n = $parameters['additionalData']['readMoreText_i18n'];
+			unset($parameters['additionalData']['readMoreText_i18n']);
+			$parameters['additionalData']['readMoreText'] = '';
+		}
+		if (isset($parameters['additionalData']['metaAboveContent_i18n'])) {
+			$metaAboveContent_i18n = $parameters['additionalData']['metaAboveContent_i18n'];
+			unset($parameters['additionalData']['metaAboveContent_i18n']);
+			$parameters['additionalData']['metaAboveContent'] = '';
+		}
+		if (isset($parameters['additionalData']['metaBelowContent_i18n'])) {
+			$metaBelowContent_i18n = $parameters['additionalData']['metaBelowContent_i18n'];
+			unset($parameters['additionalData']['metaBelowContent_i18n']);
+			$parameters['additionalData']['metaBelowContent'] = '';
+		}
 		if (isset($parameters['additionalData'])) {
 			$parameters['additionalData'] = serialize($parameters['additionalData']);
 		}
@@ -111,6 +131,47 @@ class BlockAction extends AbstractDatabaseObjectAction {
 		// connect block with template
 		$blockEditor = new BlockEditor($block);
 		$blockEditor->addToTemplate($templateID);
+		
+		// alter i18n values
+		$metaAboveContent = 'ultimate.block.content.'.$block->__get('blockID').'.metaAboveContent';
+		$metaBelowContent = 'ultimate.block.content.'.$block->__get('blockID').'.metaBelowContent';
+		$readMoreText = 'ultimate.block.content.'.$block->__get('blockID').'.readMoreText';
+		I18nHandler::getInstance()->register('metaAboveContent');
+		I18nHandler::getInstance()->register('metaBelowContent');
+		I18nHandler::getInstance()->register('readMoreText');
+		if (empty($metaAboveContent_i18n)) {
+			I18nHandler::getInstance()->remove($metaAboveContent, PACKAGE_ID);
+			$metaAboveContent = $block->__get('metaAboveContent');
+		} else {
+			I18nHandler::getInstance()->setValues('metaAboveContent', $metaAboveContent_i18n);
+			I18nHandler::getInstance()->save('metaAboveContent', $metaAboveContent, 'ultimate.block', PACKAGE_ID);
+		}
+		
+		if (empty($metaBelowContent_i18n)) {
+			I18nHandler::getInstance()->remove($metaBeloweContent, PACKAGE_ID);
+			$metaBelowContent = $block->__get('metaBelowContent');
+		} else {
+			I18nHandler::getInstance()->setValues('metaBelowContent', $metaBelowContent_i18n);
+			I18nHandler::getInstance()->save('metaBelowContent', $metaBelowContent, 'ultimate.block', PACKAGE_ID);
+		}
+		
+		if (empty($readMoreText_i18n)) {
+			I18nHandler::getInstance()->remove($readMoreText, PACKAGE_ID);
+			$readMoreText = $block->__get('readMoreText');
+		} else {
+			I18nHandler::getInstance()->setValues('readMoreText', $readMoreText_i18n);
+			I18nHandler::getInstance()->save('readMoreText', $readMoreText, 'ultimate.block', PACKAGE_ID);
+		}
+		
+		$additionalData = $block->__get('additionalData');
+		$additionalData['metaAboveContent'] = $metaAboveContent;
+		$additionalData['metaBelowContent'] = $metaBelowContent;
+		$additionalData['readMoreText'] = $readMoreText;
+		
+		$blockEditor->update(array(
+			'additionalData' => serialize($additionalData)
+		));
+		BlockEditor::resetCache();
 		
 		// get blocktype name
 		$blocktypes = BlockTypeCacheBuilder::getInstance()->getData(array(), 'blockTypes');

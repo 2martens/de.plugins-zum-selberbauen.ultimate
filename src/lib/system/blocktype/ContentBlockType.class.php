@@ -220,7 +220,7 @@ class ContentBlockType extends AbstractBlockType {
 		$useDefaultMetaBelowContent = (!isset($options['metaBelowContent']));
 		$this->options = array_replace_recursive($defaults, $options);
 		
-		// multilingual support for readMoreText
+		// multilingual support for readMoreText, metaAboveContent and metaBelowContent
 		$readMoreText = $this->options['readMoreText'];
 		$metaAboveContent = $this->options['metaAboveContent'];
 		$metaBelowContent = $this->options['metaBelowContent'];
@@ -352,9 +352,18 @@ class ContentBlockType extends AbstractBlockType {
 	public function assignVariables() {
 		parent::assignVariables();
 		
+		// dirty workaround to get the i18n values
+		I18nHandler::getInstance()->assignVariables(false);
+		
+		$i18nPlainValues = WCF::getTPL()->get('i18nPlainValues');
+		$i18nValues = WCF::getTPL()->get('i18nValues');
+		
 		// replacing variables in meta above/below content
-		$metaAboveContent = $this->options['metaAboveContent'];
-		$metaBelowContent = $this->options['metaBelowContent'];
+		$metaAboveContent = (isset($i18nPlainValues['metaAboveContent_'.$this->blockID]) ? $i18nPlainValues['metaAboveContent_'.$this->blockID] : null);
+		$metaBelowContent = (isset($i18nPlainValues['metabelowContent_'.$this->blockID]) ? $i18nPlainValues['metaBelowContent_'.$this->blockID] : null);
+		$metaAboveContent_i18n = (isset($i18nValues['metaAboveContent_'.$this->blockID]) ? $i18nValues['metaAboveContent_'.$this->blockID] : array());
+		$metaBelowContent_i18n = (isset($i18nValues['metaBelowContent_'.$this->blockID]) ? $i18nValues['metaBelowContent_'.$this->blockID] : array());
+		
 		$metaAbove = array();
 		$metaBelow = array();
 		$readMoreLink = array();
@@ -401,21 +410,47 @@ class ContentBlockType extends AbstractBlockType {
 			$time = DateUtil::format($dateTimeObject, DateUtil::TIME_FORMAT);
 			$date = '<time datetime="'.DateUtil::format($dateTimeObject, 'c').'" class="datetime" data-timestamp="'.$timestamp.'" data-date="'.$date.'" data-time="'.$time.'" data-offset="'.$dateTimeObject->getOffset().'">'.$date.'</time>';
 			
-			$__metaAboveContent = str_replace('$date', $date, $metaAboveContent);
-			$__metaAboveContent = str_replace('$time', $time, $__metaAboveContent);
-			$__metaAboveContent = str_replace('$comments', count($content->__get('comments')), $__metaAboveContent);
-			$__metaAboveContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaAboveContent);
-			$__metaAboveContent = str_replace('$categories', $categoryOutput, $__metaAboveContent);
-			$__metaAboveContent = str_replace('$tags', $tagOutput, $__metaAboveContent);
-			$metaAbove[$contentID] = $__metaAboveContent;
+			if ($metaAboveContent !== null) {
+				$__metaAboveContent = str_replace('$date', $date, $metaAboveContent);
+				$__metaAboveContent = str_replace('$time', $time, $__metaAboveContent);
+				$__metaAboveContent = str_replace('$comments', count($content->__get('comments')), $__metaAboveContent);
+				$__metaAboveContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaAboveContent);
+				$__metaAboveContent = str_replace('$categories', $categoryOutput, $__metaAboveContent);
+				$__metaAboveContent = str_replace('$tags', $tagOutput, $__metaAboveContent);
+				$metaAbove[$contentID] = $__metaAboveContent;
+			} elseif ($metaAboveContent_i18n != null) {
+				$metaAbove[$contentID] = array();
+				foreach ($metaAboveContent_i18n as $languageID => $_metaAboveContent) {
+					$__metaAboveContent = str_replace('$date', $date, $_metaAboveContent);
+					$__metaAboveContent = str_replace('$time', $time, $__metaAboveContent);
+					$__metaAboveContent = str_replace('$comments', count($content->__get('comments')), $__metaAboveContent);
+					$__metaAboveContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaAboveContent);
+					$__metaAboveContent = str_replace('$categories', $categoryOutput, $__metaAboveContent);
+					$__metaAboveContent = str_replace('$tags', $tagOutput, $__metaAboveContent);
+					$metaAbove[$contentID][$languageID] = $__metaAboveContent;
+				}
+			}
 			
-			$__metaBelowContent = str_replace('$date', $date, $metaBelowContent);
-			$__metaBelowContent = str_replace('$time', $time, $__metaBelowContent);
-			$__metaBelowContent = str_replace('$comments', count($content->__get('comments')), $__metaBelowContent);
-			$__metaBelowContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaBelowContent);
-			$__metaBelowContent = str_replace('$categories', $categoryOutput, $__metaBelowContent);
-			$__metaBelowContent = str_replace('$tags', $tagOutput, $__metaBelowContent);
-			$metaBelow[$contentID] = $__metaBelowContent;
+			if ($metaBelowContent !== null) {
+				$__metaBelowContent = str_replace('$date', $date, $metaBelowContent);
+				$__metaBelowContent = str_replace('$time', $time, $__metaBelowContent);
+				$__metaBelowContent = str_replace('$comments', count($content->__get('comments')), $__metaBelowContent);
+				$__metaBelowContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaBelowContent);
+				$__metaBelowContent = str_replace('$categories', $categoryOutput, $__metaBelowContent);
+				$__metaBelowContent = str_replace('$tags', $tagOutput, $__metaBelowContent);
+				$metaBelow[$contentID] = $__metaBelowContent;
+			} elseif ($metaBelowContent_i18n != null) {
+				$metaBelow[$contentID] = array();
+				foreach ($metaAboveContent_i18n as $languageID => $_metaBelowContent) {
+					$__metaBelowContent = str_replace('$date', $date, $_metaBelowContent);
+					$__metaBelowContent = str_replace('$time', $time, $__metaBelowContent);
+					$__metaBelowContent = str_replace('$comments', count($content->__get('comments')), $__metaBelowContent);
+					$__metaBelowContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaBelowContent);
+					$__metaBelowContent = str_replace('$categories', $categoryOutput, $__metaBelowContent);
+					$__metaBelowContent = str_replace('$tags', $tagOutput, $__metaBelowContent);
+					$metaBelow[$contentID][$languageID] = $__metaBelowContent;
+				}
+			}
 		}
 		
 		$optionsSelect = array(

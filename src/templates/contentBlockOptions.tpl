@@ -8,20 +8,20 @@
 	{include file='multipleLanguageInputJavascript' elementIdentifier=$metaBelowContentID forceSelection=false}
 	
 	<form method="post" action="">
-	<nav class="tabMenu">
-		<ul>
-			{assign var='modeTab' value='block_'|concat:$blockID|concat:'_tab_mode'}
-			{assign var='queryTab' value='block_'|concat:$blockID|concat:'_tab_query'}
-			{assign var='displayTab' value='block_'|concat:$blockID|concat:'_tab_display'}
-			{assign var='metaTab' value='block_'|concat:$blockID|concat:'_tab_meta'}
-			<li data-menu-item="block_{$blockID}_tab_mode"><a href="{$__wcf->getAnchor($modeTab)}" title="{lang}wcf.acp.ultimate.template.contentTab.mode{/lang}">{lang}wcf.acp.ultimate.template.contentTab.mode{/lang}</a></li>
-			<li data-menu-item="block_{$blockID}_tab_query"><a href="{$__wcf->getAnchor($queryTab)}" title="{lang}wcf.acp.ultimate.template.contentTab.query{/lang}">{lang}wcf.acp.ultimate.template.contentTab.query{/lang}</a></li>
-			<li data-menu-item="block_{$blockID}_tab_display"><a href="{$__wcf->getAnchor($displayTab)}" title="{lang}wcf.acp.ultimate.template.contentTab.display{/lang}">{lang}wcf.acp.ultimate.template.contentTab.display{/lang}</a></li>
-			<li data-menu-item="block_{$blockID}_tab_meta"><a href="{$__wcf->getAnchor($metaTab)}" title="{lang}wcf.acp.ultimate.template.contentTab.meta{/lang}">{lang}wcf.acp.ultimate.template.contentTab.meta{/lang}</a></li>
-		</ul>
-	</nav>
-	
-	<div id="block_{$blockID}_tab_mode" class="container tabMenuContent containerPadding" data-parent-menu-item="block_{$blockID}_tab_mode">
+		<nav class="tabMenu">
+			<ul>
+				{assign var='modeTab' value='block_'|concat:$blockID|concat:'_tab_mode'}
+				{assign var='queryTab' value='block_'|concat:$blockID|concat:'_tab_query'}
+				{assign var='displayTab' value='block_'|concat:$blockID|concat:'_tab_display'}
+				{assign var='metaTab' value='block_'|concat:$blockID|concat:'_tab_meta'}
+				<li data-menu-item="block_{$blockID}_tab_mode"><a href="{$__wcf->getAnchor($modeTab)}" title="{lang}wcf.acp.ultimate.template.contentTab.mode{/lang}">{lang}wcf.acp.ultimate.template.contentTab.mode{/lang}</a></li>
+				<li data-menu-item="block_{$blockID}_tab_query"><a href="{$__wcf->getAnchor($queryTab)}" title="{lang}wcf.acp.ultimate.template.contentTab.query{/lang}">{lang}wcf.acp.ultimate.template.contentTab.query{/lang}</a></li>
+				<li data-menu-item="block_{$blockID}_tab_display"><a href="{$__wcf->getAnchor($displayTab)}" title="{lang}wcf.acp.ultimate.template.contentTab.display{/lang}">{lang}wcf.acp.ultimate.template.contentTab.display{/lang}</a></li>
+				<li data-menu-item="block_{$blockID}_tab_meta"><a href="{$__wcf->getAnchor($metaTab)}" title="{lang}wcf.acp.ultimate.template.contentTab.meta{/lang}">{lang}wcf.acp.ultimate.template.contentTab.meta{/lang}</a></li>
+			</ul>
+		</nav>
+		
+		<div id="block_{$blockID}_tab_mode" class="container tabMenuContent containerPadding" data-parent-menu-item="block_{$blockID}_tab_mode">
 			<div class="info">
 				<p>{lang}wcf.acp.ultimate.template.contentTab.mode.info{/lang}</p>
 			</div>
@@ -172,8 +172,8 @@
 				</dd>
 			</dl>
 		</div>
-	<div class="formSubmit">
-		<input type="submit" id="blockSubmitButton" name="submitButton" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-	</div>
+		<div class="formSubmit">
+			<input type="submit" id="blockSubmitButton" name="submitButton" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
+		</div>
 	</form>
 </div>

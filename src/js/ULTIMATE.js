@@ -400,8 +400,20 @@ ULTIMATE.Block.Transfer.prototype = {
 		for (var i = 0; i < this._optionList.length; i++) {
 			var $item = this._optionList[i];
 			var optionName = $item.replace(/_\d/, '');
-			var $optionElement = $('#' + $item).val();
-			$parameters['data']['additionalData'][optionName] = $optionElement;
+			var optionFound = $('input[name="' + optionName + '"]');
+			if (optionFound.length == 1) {
+				var $optionElement = $('#' + $item).val();
+				$parameters['data']['additionalData'][optionName] = $optionElement;
+			} else if (optionFound.length == 0) {
+				var optionName_i18n = {};
+				$('input[name^="' + optionName + '_i18n"]').each($.proxy(function(index, listItem) {
+					var $listItem = $(listItem);
+					var $languageID = $listItem.attr('name').substring(optionName.length + 6);
+					$languageID = $languageID.substr(0, $languageID.length - 1);
+					optionName_i18n[$languageID] = $listItem.val();
+				}, this));
+				$parameters['data']['additionalData'][optionName + '_i18n'] = optionName_i18n;
+			}
 		}
 		
 		// reset form
@@ -433,7 +445,7 @@ ULTIMATE.Block.Transfer.prototype = {
 			this._optionList = $data[0];
 			$('#blockForm').html($data[1]);
 			$('#blockForm').find('form').submit($.proxy(this._stopFormSubmit, this));
-			$('#blockSubmitButton').click($.proxy(this._submitFormData, this));
+			
 			
 			if (!$.wcfIsset('blockForm')) return;
 			this._dialog = $('#' + $.wcfEscapeID('blockForm'));
@@ -461,6 +473,8 @@ ULTIMATE.Block.Transfer.prototype = {
 				'max-height': '400px',
 				'overflow': 'scroll'
 			});
+			
+			$('#blockForm').find('form').submit($.proxy(this._submitFormData, this));
 			
 		}
 		catch(e) {
