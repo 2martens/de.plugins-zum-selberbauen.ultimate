@@ -26,7 +26,7 @@
 	</requiredpackages>
 	
 	<optionalpackages>
-		<optionalpackage minversion="2.0.0*" file="requirements/com.woltlab.wcf.legalNotice.tar.gz">com.woltlab.wcf.legalNotice</optionalpackage>
+		<optionalpackage minversion="2.0.0*" file="optional/com.woltlab.wcf.legalNotice.tar.gz">com.woltlab.wcf.legalNotice</optionalpackage>
 	</optionalpackages>
 	
 	<instructions type="install">
