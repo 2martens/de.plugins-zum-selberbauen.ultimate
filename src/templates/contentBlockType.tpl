@@ -24,7 +24,7 @@
 					
 					{if $contentMetaDisplaySelected[$requestType]|isset || $contentMetaDisplaySelected|count == 0}
 						{hascontent}
-							<p class="meta" id="metaAbove-{$contentID}">{content}{@$metaAbove[$contentID]}{/content}</p>
+							<small class="meta" id="metaAbove-{$contentID}">{content}{@$metaAbove[$contentID]}{/content}</small>
 						{/hascontent}
 					{/if}
 				</header>
@@ -51,7 +51,7 @@
 				{if $contentMetaDisplaySelected[$requestType]|isset || $contentMetaDisplaySelected|count == 0}
 					<footer>
 						{hascontent}
-							<p class="meta" id="metaBelow-{$contentID}">{content}{@$metaBelow[$contentID]}{/content}</p>
+							<small class="meta" id="metaBelow-{$contentID}">{content}{@$metaBelow[$contentID]}{/content}</small>
 						{/hascontent}
 					</footer>
 				{/if}					
