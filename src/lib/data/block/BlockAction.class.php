@@ -51,17 +51,17 @@ class BlockAction extends AbstractDatabaseObjectAction {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsCreate
 	 */
-	protected $permissionsCreate = array('admin.content.ultimate.canAddBlock');
+	protected $permissionsCreate = array('admin.content.ultimate.canManageBlocks');
 	
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsDelete
 	*/
-	protected $permissionsDelete = array('admin.content.ultimate.canDeleteBlock');
+	protected $permissionsDelete = array('admin.content.ultimate.canManageBlocks');
 	
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsUpdate
 	*/
-	protected $permissionsUpdate = array('admin.content.ultimate.canEditBlock');
+	protected $permissionsUpdate = array('admin.content.ultimate.canManageBlocks');
 	
 	/**
 	 * Returns an available block id.

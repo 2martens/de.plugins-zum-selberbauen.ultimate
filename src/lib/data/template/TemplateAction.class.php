@@ -48,17 +48,17 @@ class TemplateAction extends AbstractDatabaseObjectAction {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsCreate
 	 */
-	protected $permissionsCreate = array('admin.content.ultimate.canAddTemplate');
+	protected $permissionsCreate = array('admin.content.ultimate.canManageTemplates');
 	
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsDelete
 	 */
-	protected $permissionsDelete = array('admin.content.ultimate.canDeleteTemplate');
+	protected $permissionsDelete = array('admin.content.ultimate.canManageTemplates');
 	
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsUpdate
 	 */
-	protected $permissionsUpdate = array('admin.content.ultimate.canEditTemplate');
+	protected $permissionsUpdate = array('admin.content.ultimate.canManageTemplates');
 	
 	/**
 	 * Creates a new template and returns a JS-friendly array.

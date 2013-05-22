@@ -33,7 +33,7 @@
 	
 	<nav>
 		<ul>
-			{if $__wcf->session->getPermission('admin.content.ultimate.canAddMenu')}
+			{if $__wcf->session->getPermission('admin.content.ultimate.canManageMenus')}
 				<li><a href="{link application='ultimate' controller='UltimateMenuAdd'}{/link}" title="{lang}wcf.acp.ultimate.menu.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.menu.add{/lang}</span></a></li>
 			{/if}
 			
@@ -70,13 +70,13 @@
 						<td class="columnMark"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$menu->menuID}" /></td>
 						<td class="columnIcon">
 							
-							{if $__wcf->session->getPermission('admin.content.ultimate.canEditMenu')}
+							{if $__wcf->session->getPermission('admin.content.ultimate.canManageMenus')}
 								<a href="{link application='ultimate' controller='UltimateMenuEdit' id=$menu->menuID}{/link}"><span title="{lang}wcf.acp.ultimate.menu.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.menu.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
 							{/if}
 							
-							{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteMenu')}
+							{if $__wcf->session->getPermission('admin.content.ultimate.canManageMenus')}
 								<span title="{lang}wcf.acp.ultimate.menu.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton" data-object-id="{@$menu->menuID}" data-confirm-message="{lang}wcf.acp.ultimate.menu.delete.sure{/lang}"></span>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.menu.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
@@ -85,7 +85,7 @@
 							{event name='buttons'}
 						</td>
 						<td class="columnID"><p>{@$menu->menuID}</p></td>
-						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditMenu')}<a title="{lang}wcf.acp.ultimate.menu.edit{/lang}" href="{link application='ultimate' controller='UltimateMenuEdit' id=$menu->menuID}{/link}">{lang}{@$menu->menuName}{/lang}</a>{else}{lang}{@$menu->menuName}{/lang}{/if}</p></td>
+						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canManageMenus')}<a title="{lang}wcf.acp.ultimate.menu.edit{/lang}" href="{link application='ultimate' controller='UltimateMenuEdit' id=$menu->menuID}{/link}">{lang}{@$menu->menuName}{/lang}</a>{else}{lang}{@$menu->menuName}{/lang}{/if}</p></td>
 						
 						{event name='columns'}
 					</tr>
@@ -104,7 +104,7 @@
 	
 	<nav>
 		<ul>
-			{if $__wcf->session->getPermission('admin.content.ultimate.canAddMenu')}
+			{if $__wcf->session->getPermission('admin.content.ultimate.canManageMenus')}
 				<li><a href="{link application='ultimate' controller='UltimateMenuAdd'}{/link}" title="{lang}wcf.acp.ultimate.menu.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.menu.add{/lang}</span></a></li>
 			{/if}
 			

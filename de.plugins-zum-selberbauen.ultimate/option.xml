@@ -14,13 +14,9 @@
 						<parent>ultimate.general</parent>
 						<showorder>1</showorder>
 					</category>
-				<category name="ultimate.grid">
-					<parent>ultimate</parent>
-					<showorder>2</showorder>
-				</category>
 				<category name="ultimate.sort">
 					<parent>ultimate</parent>
-					<showorder>3</showorder>
+					<showorder>2</showorder>
 				</category>
 					<category name="ultimate.sort.category">
 						<parent>ultimate.sort</parent>
@@ -45,12 +41,6 @@
 				
 		</categories>
 		<options>
-			<option name="ultimate_module_ultimateFrontend">
-				<categoryname>module.system</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>1</defaultvalue>
-			</option>
-			
 			<option name="ultimate_general_englishLanguage">
 				<categoryname>ultimate.general</categoryname>
 				<optiontype>select</optiontype>
@@ -91,39 +81,6 @@ false:wcf.acp.option.ultimate_general_englishLanguage.AE]]>
 				<defaultvalue>150</defaultvalue>
 			</option>
 			<!-- /general/content options -->
-			
-			<!-- grid options -->
-			<option name="ultimate_grid_color">
-				<categoryname>ultimate.grid</categoryname>
-				<optiontype>text</optiontype>
-				<defaultvalue>grey</defaultvalue>
-				<hidden>1</hidden>
-			</option>
-			<option name="ultimate_grid_columnWidth">
-				<categoryname>ultimate.grid</categoryname>
-				<optiontype>integer</optiontype>
-				<defaultvalue>20</defaultvalue>
-				<hidden>1</hidden>
-			</option>
-			<option name="ultimate_grid_gutterWidth">
-				<categoryname>ultimate.grid</categoryname>
-				<optiontype>integer</optiontype>
-				<defaultvalue>20</defaultvalue>
-				<hidden>1</hidden>
-			</option>
-			<option name="ultimate_grid_wrapperTopMargin">
-				<categoryname>ultimate.grid</categoryname>
-				<optiontype>integer</optiontype>
-				<defaultvalue>30</defaultvalue>
-				<hidden>1</hidden>
-			</option>
-			<option name="ultimate_grid_wrapperBottomMargin">
-				<categoryname>ultimate.grid</categoryname>
-				<optiontype>integer</optiontype>
-				<defaultvalue>30</defaultvalue>
-				<hidden>1</hidden>
-			</option>
-			<!-- /grid options -->
 			
 			<!-- sort order/field for UltimateCategoryListPage -->
 			<option name="ultimate_sort_category_sortField">

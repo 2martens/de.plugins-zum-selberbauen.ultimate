@@ -61,17 +61,17 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsCreate
 	 */
-	protected $permissionsCreate = array('admin.content.ultimate.canAddMenuItem');
+	protected $permissionsCreate = array('admin.content.ultimate.canManageMenuItems');
 	
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsDelete
 	*/
-	protected $permissionsDelete = array('admin.content.ultimate.canDeleteMenuItem');
+	protected $permissionsDelete = array('admin.content.ultimate.canManageMenuItems');
 	
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsUpdate
 	*/
-	protected $permissionsUpdate = array('admin.content.ultimate.canEditMenuItem');
+	protected $permissionsUpdate = array('admin.content.ultimate.canManageMenuItems');
 	
 	/**
 	 * Contains all categories.

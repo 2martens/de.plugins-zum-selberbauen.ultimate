@@ -37,7 +37,7 @@ use wcf\util\HeaderUtil;
 /**
  * Shows the UltimateTemplateEdit form.
  * 
- * This form is used to configure additional data for each template after the template itself has been created in VisualEditor.
+ * This form is used to configure additional data for each template after the template itself has been created in UltimateTemplateAddForm.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -47,13 +47,6 @@ use wcf\util\HeaderUtil;
  * @category	Ultimate CMS
  */
 class UltimateTemplateEditForm extends UltimateTemplateAddForm {
-	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededPermissions
-	 */
-	public $neededPermissions = array(
-		'admin.content.ultimate.canEditTemplate'
-	);
-	
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$activeMenuItem
 	 */

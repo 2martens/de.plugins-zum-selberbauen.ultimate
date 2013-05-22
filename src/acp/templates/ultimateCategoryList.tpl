@@ -33,7 +33,7 @@
 	
 	<nav>
 		<ul>
-			{if $__wcf->session->getPermission('admin.content.ultimate.canAddCategory')}
+			{if $__wcf->session->getPermission('admin.content.ultimate.canManageCategories')}
 				<li><a href="{link application='ultimate' controller='UltimateCategoryAdd'}{/link}" title="{lang}wcf.acp.ultimate.category.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.category.add{/lang}</span></a></li>
 			{/if}
 			
@@ -73,13 +73,13 @@
 						<td class="columnMark"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$category->categoryID}" /></td>
 						<td class="columnIcon">
 							
-							{if $__wcf->session->getPermission('admin.content.ultimate.canEditCategory')}
+							{if $__wcf->session->getPermission('admin.content.ultimate.canManageCategories')}
 								<a href="{link application='ultimate' controller='UltimateCategoryEdit' id=$category->categoryID}{/link}"><span title="{lang}wcf.acp.ultimate.category.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.category.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
 							{/if}
 							
-							{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteCategory') && $category->categoryID > 1}
+							{if $__wcf->session->getPermission('admin.content.ultimate.canManageCategories') && $category->categoryID > 1}
 								<span title="{lang}wcf.acp.ultimate.category.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton" data-object-id="{@$category->categoryID}" data-confirm-message="{lang}wcf.acp.ultimate.category.delete.sure{/lang}"></span>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.category.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
@@ -88,7 +88,7 @@
 							{event name='buttons'}
 						</td>
 						<td class="columnID"><p>{@$category->categoryID}</p></td>
-						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditCategory')}<a title="{lang}wcf.acp.ultimate.category.edit{/lang}" href="{link application='ultimate' controller='UltimateCategoryEdit' id=$category->categoryID}{/link}">{lang}{@$category->categoryTitle}{/lang}</a>{else}{lang}{@$category->categoryTitle}{/lang}{/if}</p></td>
+						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canManageCategories')}<a title="{lang}wcf.acp.ultimate.category.edit{/lang}" href="{link application='ultimate' controller='UltimateCategoryEdit' id=$category->categoryID}{/link}">{lang}{@$category->categoryTitle}{/lang}</a>{else}{lang}{@$category->categoryTitle}{/lang}{/if}</p></td>
 						<td class="columnDescription"><p>{lang}{@$category->categoryDescription}{/lang}</p></td>
 						<td class="columnSlug"><p>{@$category->categorySlug}</p></td>
 						<td class="columnContents"><p><a title="{lang}wcf.acp.ultimate.category.showContents{/lang}" href="{link application='ultimate' controller='UltimateContentList'}categoryID={@$category->categoryID}{/link}">{$category->contents|count}</a></p></td>
@@ -110,7 +110,7 @@
 		
 	<nav>
 		<ul>
-			{if $__wcf->session->getPermission('admin.content.ultimate.canAddCategory')}
+			{if $__wcf->session->getPermission('admin.content.ultimate.canManageCategoriesy')}
 				<li><a href="{link application='ultimate' controller='UltimateCategoryAdd'}{/link}" title="{lang}wcf.acp.ultimate.category.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.category.add{/lang}</span></a></li>
 			{/if}
 			

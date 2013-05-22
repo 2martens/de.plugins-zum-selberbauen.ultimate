@@ -10,6 +10,13 @@
 		<item name="wcf.acp.group.option.category.user.ultimate.content.description"><![CDATA[]]></item>
 		<!-- /user -->
 		
+		<!-- mod -->
+		<item name="wcf.acp.group.option.category.mod.ultimate"><![CDATA[Ultimate CMS]]></item>
+		<item name="wcf.acp.group.option.category.mod.ultimate.description"><![CDATA[]]></item>
+		<item name="wcf.acp.group.option.category.mod.ultimate.content"><![CDATA[Inhalt]]></item>
+		<item name="wcf.acp.group.option.category.mod.ultimate.content.description"><![CDATA[]]></item>
+		<!-- /mod -->
+		
 		<!-- admin -->
 		<item name="wcf.acp.group.option.category.admin.content.ultimate"><![CDATA[Ultimate CMS]]></item>
 		<item name="wcf.acp.group.option.category.admin.content.ultimate.description"><![CDATA[]]></item>
@@ -18,20 +25,12 @@
 		
 		<!-- options -->
 		<!-- user -->
-		<item name="wcf.acp.group.option.user.ultimate.canUseFrontend"><![CDATA[Kann Formulare im Ultimate Frontend benutzen.]]></item>
-		<item name="wcf.acp.group.option.user.ultimate.canUseFrontend.description"><![CDATA[Mitglieder dieser Benutzergruppe können Formulare im Ultimate Frontend benutzen. Diese Berechtigung führt dazu, dass etwaige im Frontend befindliche Formulare benutzt werden können. Diese Berechtigung schließt keine Kommentarfunktionen oder mit dem WCF verbundene Formulare mit ein. Das Profil kann demzufolge weiterhin bearbeitet werden.]]></item>
-		<item name="wcf.acp.group.option.user.ultimate.canUseVisualEditor"><![CDATA[Kann den VisualEditor benutzen.]]></item>
-		<item name="wcf.acp.group.option.user.ultimate.canUseVisualEditor.description"><![CDATA[Mitglieder dieser Benutzergruppe können den VisualEditor benutzen.]]></item>
-		
-		<!-- user.content -->
 		<item name="wcf.acp.group.option.user.ultimate.content.canAddComment"><![CDATA[Kann Kommentar hinzufügen]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.content.canAddComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kommentare zu Inhalten schreiben.]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.content.canEditComment"><![CDATA[Kann Kommentar bearbeiten]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.content.canEditComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Ihre eigenen Kommentare zu Inhalten bearbeiten.]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.content.canDeleteComment"><![CDATA[Kann Kommentar löschen]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.content.canDeleteComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Ihre eigenen Kommentare zu Inhalten löschen.]]></item>
-		<!-- /user.content -->
-		
 		<!-- /user -->
 		
 		<!-- mod -->
@@ -45,100 +44,68 @@
 		
 		<!-- admin -->
 		<!-- block -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddBlock"><![CDATA[Kann Blöcke hinzufügen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddBlock.description"><![CDATA[Mitglieder dieser Benutzergruppe können Blöcke hinzufügen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditBlock"><![CDATA[Kann Blöcke bearbeiten.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditBlock.description"><![CDATA[Mitglieder dieser Benutzergruppe können Blöcke bearbeiten.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteBlock"><![CDATA[Kann Blöcke löschen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteBlock.description"><![CDATA[Mitglieder dieser Benutzergruppe können Blöcke löschen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canManageBlocks"><![CDATA[Kann Blöcke verwalten]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canManageBlocks.description"><![CDATA[Mitglieder dieser Benutzergruppe können Blöcke verwalten.]]></item>
 		<!-- /block -->
 		
 		<!-- category -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddCategory"><![CDATA[Kann Kategorien hinzufügen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddCategory.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kategorien hinzufügen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditCategory"><![CDATA[Kann Kategorien bearbeiten.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditCategory.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kategorien bearbeiten.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteCategory"><![CDATA[Kann Kategorien löschen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteCategory.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kategorien löschen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canManageCategories"><![CDATA[Kann Kategorien verwalten]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canManageCategories.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kategorien verwalten.]]></item>
 		<!-- /category -->
 		
 		<!-- content -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddContent"><![CDATA[Kann Inhalte hinzufügen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canAddContent"><![CDATA[Kann Inhalte hinzufügen]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canAddContent.description"><![CDATA[Mitglieder dieser Benutzergruppe können Inhalte hinzufügen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditContent"><![CDATA[Kann Inhalte bearbeiten.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canEditContent"><![CDATA[Kann Inhalte bearbeiten]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canEditContent.description"><![CDATA[Mitglieder dieser Benutzergruppe können Inhalte bearbeiten.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent"><![CDATA[Kann Inhalte löschen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent"><![CDATA[Kann Inhalte löschen]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent.description"><![CDATA[Mitglieder dieser Benutzergruppe können Inhalte löschen.]]></item>
 		<!-- /content -->
 		
 		<!-- layout -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLayouts"><![CDATA[Kann Layouts verwalten.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLayouts"><![CDATA[Kann Layouts verwalten]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLayouts.description"><![CDATA[Mitglieder dieser Benutzergruppe können Layouts verwalten.]]></item>
 		<!-- /layout -->
 		
 		<!-- link -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddLink"><![CDATA[Kann Links hinzufügen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddLink.description"><![CDATA[Mitglieder dieser Benutzergruppe können Links hinzufügen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditLink"><![CDATA[Kann Links bearbeiten.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditLink.description"><![CDATA[Mitglieder dieser Benutzergruppe können Links bearbeiten.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteLink"><![CDATA[Kann Links löschen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteLink.description"><![CDATA[Mitglieder dieser Benutzergruppe können Links löschen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLinks"><![CDATA[Kann Links verwalten]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLink.description"><![CDATA[Mitglieder dieser Benutzergruppe können Links verwalten.]]></item>
 		<!-- /link -->
 		
 		<!-- menu -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddMenu"><![CDATA[Kann Menüs hinzufügen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddMenu.description"><![CDATA[Mitglieder dieser Benutzergruppe können Menüs hinzufügen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditMenu"><![CDATA[Kann Menüs bearbeiten.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditMenu.description"><![CDATA[Mitglieder dieser Benutzergruppe können Menüs bearbeiten.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteMenu"><![CDATA[Kann Menüs löschen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteMenu.description"><![CDATA[Mitglieder dieser Benutzergruppe können Menüs löschen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canManageMenus"><![CDATA[Kann Menüs verwalten]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canManageMenus.description"><![CDATA[Mitglieder dieser Benutzergruppe können Menüs verwalten.]]></item>
 		<!-- /menu -->
 		
 		<!-- menu item -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddMenuItem"><![CDATA[Kann Menüeinträge hinzufügen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddMenuItem.description"><![CDATA[Mitglieder dieser Benutzergruppe können Menüeinträge hinzufügen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditMenuItem"><![CDATA[Kann Menüeinträge bearbeiten.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditMenuItem.description"><![CDATA[Mitglieder dieser Benutzergruppe können Menüeinträge bearbeiten.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteMenuItem"><![CDATA[Kann Menüeinträge löschen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteMenuItem.description"><![CDATA[Mitglieder dieser Benutzergruppe können Menüeinträge löschen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canManageMenuItems"><![CDATA[Kann Menüeinträge verwalten]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canManageMenuItems.description"><![CDATA[Mitglieder dieser Benutzergruppe können Menüeinträge verwalten.]]></item>
 		<!-- /menu item -->
 		
 		<!-- page -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddPage"><![CDATA[Kann Seiten hinzufügen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canAddPage"><![CDATA[Kann Seiten hinzufügen]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canAddPage.description"><![CDATA[Mitglieder dieser Benutzergruppe können Seiten hinzufügen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditPage"><![CDATA[Kann Seiten bearbeiten.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canEditPage"><![CDATA[Kann Seiten bearbeiten]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canEditPage.description"><![CDATA[Mitglieder dieser Benutzergruppe können Seiten bearbeiten.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeletePage"><![CDATA[Kann Seiten löschen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canDeletePage"><![CDATA[Kann Seiten löschen]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canDeletePage.description"><![CDATA[Mitglieder dieser Benutzergruppe können Seiten löschen.]]></item>
 		<!-- /page -->
 		
 		<!-- template -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddTemplate"><![CDATA[Kann Templates hinzufügen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddTemplate.description"><![CDATA[Mitglieder dieser Benutzergruppe können Templates hinzufügen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditTemplate"><![CDATA[Kann Templates bearbeiten.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditTemplate.description"><![CDATA[Mitglieder dieser Benutzergruppe können Templates bearbeiten.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteTemplate"><![CDATA[Kann Templates löschen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteTemplate.description"><![CDATA[Mitglieder dieser Benutzergruppe können Templates löschen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canManageTemplates"><![CDATA[Kann Templates verwalten]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canManageTemplates.description"><![CDATA[Mitglieder dieser Benutzergruppe können Templates verwalten.]]></item>
 		<!-- /template -->
+		<!-- TODO: add missing language variables -->
 		
 		<!-- widget area -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddWidgetArea"><![CDATA[Kann Widgetbereiche hinzufügen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddWidgetArea.description"><![CDATA[Mitglieder dieser Benutzergruppe können Widgetbereiche hinzufügen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditWidgetArea"><![CDATA[Kann Widgetbereiche bearbeiten.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditWidgetArea.description"><![CDATA[Mitglieder dieser Benutzergruppe können Widgetbereiche bearbeiten.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteWidgetArea"><![CDATA[Kann Widgetbereiche löschen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteWidgetArea.description"><![CDATA[Mitglieder dieser Benutzergruppe können Widgetbereiche löschen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgetAreas"><![CDATA[Kann Widgetbereiche verwalten]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgetAreas.description"><![CDATA[Mitglieder dieser Benutzergruppe können Widgetbereiche verwalten.]]></item>
 		<!-- /widget area -->
 		
-		<!-- widget area -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddWidget"><![CDATA[Kann Widgets hinzufügen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddWidget.description"><![CDATA[Mitglieder dieser Benutzergruppe können Widgets hinzufügen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditWidget"><![CDATA[Kann Widgets bearbeiten.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditWidget.description"><![CDATA[Mitglieder dieser Benutzergruppe können Widgets bearbeiten.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteWidget"><![CDATA[Kann Widgets löschen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteWidget.description"><![CDATA[Mitglieder dieser Benutzergruppe können Widgets löschen.]]></item>
-		<!-- /widget area -->
-		
+		<!-- widget -->
+		<item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgets"><![CDATA[Kann Widgets verwalten]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgets.description"><![CDATA[Mitglieder dieser Benutzergruppe können Widgets verwalten.]]></item>
+		<!-- /widget -->
 		<!-- /admin -->
 	</category>
 	
@@ -186,11 +153,6 @@
 	</category>
 	
 	<category name="wcf.acp.option">
-		<!-- modules -->
-		<item name="wcf.acp.option.module_ultimateFrontend"><![CDATA[Ultimate Frontend aktivieren]]></item>
-		<item name="wcf.acp.option.module_ultimateFrontend.description"><![CDATA[Aktiviert die Anzeige des Frontends.]]></item>
-		<!-- /modules -->
-		
 		<!-- categories -->
 		<item name="wcf.acp.option.category.ultimate"><![CDATA[Ultimate CMS]]></item>
 		<item name="wcf.acp.option.category.ultimate.description"><![CDATA[]]></item>
@@ -223,25 +185,18 @@
 		<item name="wcf.acp.option.ultimate_general_content_comments_per_page"><![CDATA[Kommentare pro Seite]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_comments_per_page.description"><![CDATA[Bitte gib hier an, wie viele Kommentare pro Seite angezeigt werden sollen. Diese Einstellung ist unabhängig davon, ob die Kommentare überhaupt angezeigt werden (hängt von den Einstellungen im jeweiligen Inhaltsblock ab).]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_readMoreText"><![CDATA["Weiterlesen"-Text]]></item>
-		<item name="wcf.acp.option.ultimate_general_content_readMoreText.description"><![CDATA[Gib hier den Text ein, der standardmäßig hinter einem gekürzten Inhalt stehen soll. Im VisualEditor kannst du für jeden Inhaltsblock diese Einstellung individuell überschreiben.]]></item>
+		<item name="wcf.acp.option.ultimate_general_content_readMoreText.description"><![CDATA[Gib hier den Text ein, der standardmäßig hinter einem gekürzten Inhalt stehen soll. Im Template-Bearbeiten Formular kannst du für jeden Inhaltsblock diese Einstellung individuell überschreiben.]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_metaAboveContent"><![CDATA[Meta über Inhalt]]></item>
-		<item name="wcf.acp.option.ultimate_general_content_metaAboveContent.description"><![CDATA[Gib hier die Metaangaben ein, die standardmäßig über dem Inhaltstext und unter dem Inhaltstitel angezeigt werden sollen. Im VisualEditor kannst du für jeden Inhaltsblock diese Einstellung individuell überschreiben.
+		<item name="wcf.acp.option.ultimate_general_content_metaAboveContent.description"><![CDATA[Gib hier die Metaangaben ein, die standardmäßig über dem Inhaltstext und unter dem Inhaltstitel angezeigt werden sollen. Im Template-Bearbeiten Formular kannst du für jeden Inhaltsblock diese Einstellung individuell überschreiben.
 
 Verfügbare Variablen:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$categories</li><li>$tags</li></ul>]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_metaBelowContent"><![CDATA[Meta unter Inhalt]]></item>
-		<item name="wcf.acp.option.ultimate_general_content_metaBelowContent.description"><![CDATA[Gib hier die Metaangaben ein, die standardmäßig unter dem Inhaltstext angezeigt werden sollen. Im VisualEditor kannst du für jeden Inhaltsblock diese Einstellung individuell überschreiben.
+		<item name="wcf.acp.option.ultimate_general_content_metaBelowContent.description"><![CDATA[Gib hier die Metaangaben ein, die standardmäßig unter dem Inhaltstext angezeigt werden sollen. Im Template-Bearbeiten Formular kannst du für jeden Inhaltsblock diese Einstellung individuell überschreiben.
 
 Verfügbare Variablen:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$categories</li><li>$tags</li></ul>]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength"><![CDATA["Weiterlesen"-Länge]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength.description"><![CDATA[Gib hier an, nach wie vielen Zeichen standardmäßig "Weiterlesen" erscheinen soll.]]></item>
 		<!-- /ultimate.general.content -->
-		
-		<!-- ultimate.grid -->
-		<item name="wcf.acp.option.ultimate_grid_columnWidth"><![CDATA[Spaltenbreite]]></item>
-		<item name="wcf.acp.option.ultimate_grid_columnWidth.description"><![CDATA[Gib hier an, wie breit eine Spalte standardmäßig sein soll. Du kannst einen Wert zwischen 10 und 80 angeben. Der Wert hat die Einheit Pixel.]]></item>
-		<item name="wcf.acp.option.ultimate_grid_gutterWidth"><![CDATA[Zwischenraumbreite]]></item>
-		<item name="wcf.acp.option.ultimate_grid_gutterWidth.description"><![CDATA[Gib hier an, wie breit der Platz zwischen zwei Spalten standardmäßig sein soll. Du kannst einen Wert zwischen 0 und 30 angeben. Der Wert hat die Einheit Pixel.]]></item>
-		<!-- /ultimate.grid -->
 		
 		<!-- ultimate.sort.category -->
 		<item name="wcf.acp.option.ultimate_sort_category_sortField"><![CDATA[Sortierfeld]]></item>
@@ -524,6 +479,151 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.template.list.all"><![CDATA[Alle Templates]]></item>
 		<item name="wcf.acp.ultimate.template.list.count"><![CDATA[{#$items} Template{if $items != 1}s{/if}]]></item>
 		<item name="wcf.acp.ultimate.template.noContents"><![CDATA[Keine Templates gefunden.]]></item>
+		
+		<!-- block dialog -->
+		<!-- iframe -->
+		<item name="wcf.acp.ultimate.template.selectBlockType"><![CDATA[Blocktyp auswählen]]></item>
+		<!-- /iframe -->
+		
+		<!-- blocks -->
+		<item name="wcf.acp.ultimate.template.block.idTooltip"><![CDATA[Dies ist die ID des Blocks.]]></item>
+		<item name="wcf.acp.ultimate.template.block.changeBlockTypeTooltip"><![CDATA[Klicke hier, um den Blocktyp zu ändern.]]></item>
+		<item name="wcf.acp.ultimate.template.block.optionsTooltip"><![CDATA[Klicke hier, um die Optionen des Blocks anzuzeigen.]]></item>
+		<item name="wcf.acp.ultimate.template.block.delete"><![CDATA[Diesen Block löschen.]]></item>
+		<item name="wcf.acp.ultimate.template.block.delete.sure"><![CDATA[Bist du sicher, dass du diesen Block löschen willst?]]></item>
+		<item name="wcf.acp.ultimate.template.block.blockTypeUnknown"><![CDATA[Unbekannter Blocktyp]]></item>
+		<!-- /blocks -->
+		
+		<!-- bottomPanel -->
+		<item name="wcf.acp.ultimate.template.bottomPanel.minimize"><![CDATA[Panel minimieren]]></item>
+		
+		<!-- content tab -->
+		<!-- sub tabs navigation -->
+		<item name="wcf.acp.ultimate.template.contentTab.mode"><![CDATA[Modus]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.query"><![CDATA[Abfragefilter]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display"><![CDATA[Darstellung]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.meta"><![CDATA[Meta-Angaben]]></item>
+		<!-- /sub tabs navigation -->
+		
+		<!-- mode sub tab -->
+		<item name="wcf.acp.ultimate.template.contentTab.mode.info"><![CDATA[Der Inhalts-BlockType ist extrem vielseitig. Wenn du den Standardmodus wählst, dann verhält sich der Block so, wie du es erwarten würdest. Zum Beispiel wenn du den Block einem Template hinzufügst und dieses für eine Seite verwendet wird, dann sieht man den Inhalt der Seite. Wird das Template dagegen für eine Kategorie verwendet, dann werden Inhalte der Kategorie gelistet. Wenn es für einen einzelnen Inhalt verwendet wird, dann wird dieser Inhalt angezeigt. Wenn du das Verhalten des Blocks ändern möchtest, dann wähle den Abfragemodus und benutze die Abfrageeinstellungen unter Abfragefilter.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.mode.queryMode"><![CDATA[Abfragemodus]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.mode.queryMode.default"><![CDATA[Standardmodus]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.mode.queryMode.custom"><![CDATA[Abfragemodus]]></item>
+		<!-- /mode sub tab -->
+		
+		<!-- query sub tab -->
+		<item name="wcf.acp.ultimate.template.contentTab.query.info"><![CDATA[<strong>Bitte beachte:</strong> Diese Einstellungen haben keinen Effekt, solange du nicht unter dem Modus-Tab 'Abfragemodus' wählst.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.query.fetchPageContent"><![CDATA[Seiteninhalt benutzen]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.query.fetchPageContent.description"><![CDATA[Wenn du eine Seite auswählst, dann wird dieser Block den Inhalt der Seite anzeigen (unbhängig davon, ob du eine einzelne Seite, die Indexseite, eine Kategorie oder einen einzelnen Inhalt aufgerufen hast).]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.query.fetchPageContent.none"><![CDATA[Keinen Seiteninhalt benutzen]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.query.categories"><![CDATA[Kategorien]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.query.categories.description"><![CDATA[Du kannst hier eine oder mehrere Kategorie(n) auswählen. In Verbindung mit dem Kategoriemodus werden nur Inhalte aus den selektierten Kategorien angezeigt oder nur solche, die nicht in den ausgewählten Kategorien enthalten sind. Wenn keine Kategorien ausgewählt sind, dann werden die Kategorien nicht beachtet.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.query.categoryMode"><![CDATA[Kategoriemodus]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.query.categoryMode.description"><![CDATA[Wenn du 'alle Inhalte mit...' wählst, dann werden nur Inhalte aus den unter 'Kategorien' gewählten Kategorien angezeigt. Wenn du 'alle Inhalte außer...' wählst, dann werden alle Inhalte angezeigt, die nicht in den ausgewählten Kategorien sind. Wenn keine Kategorien ausgewählt wurden, dann wird diese Einstellung nicht beachtet.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.query.categoryMode.include"><![CDATA[alle Inhalte mit...]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.query.categoryMode.exclude"><![CDATA[alle Inhalte außer...]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.query.authors"><![CDATA[Autoren]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.query.authors.description"><![CDATA[Es werden nur Inhalte der ausgewählten Autoren angezeigt. Wird kein Autor ausgewählt, dann wird die Einstellung nicht beachtet.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.query.numberOfContents"><![CDATA[Anzahl an Inhalten]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.query.numberOfContents.description"><![CDATA[Gib hier an, wie viele Inhalte auf einer Sammelseite (Kategorie, Index) angezeigt werden sollen. Standardmäßig werden bis zu 10 Inhalte angezeigt.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.query.offset"><![CDATA[Versatz]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.query.offset.description"><![CDATA[Der Versatz ist eine Zahl, die angibt wie viele Inhalte übersprungen werden sollen. Ist der Versatz 1, dann wird der erste Inhalt (aus der Menge der anzuzeigenden Inhalte) übersprungen.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.query.sortField"><![CDATA[Sortierfeld]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.query.sortOrder"><![CDATA[Sortierreihenfolge]]></item>
+		<!-- /query sub tab -->
+		
+		<!-- display sub tab -->
+		<item name="wcf.acp.ultimate.template.contentTab.display.readMoreText"><![CDATA["Weiterlesen"-Text]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.readMoreText.description"><![CDATA[Wenn ein automatisch oder durch den "Weiterlesen"-BBCode gekürzter Inhalt dargestellt wird, wird dieser Text an das Ende gehängt.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.showTitles"><![CDATA[Titel anzeigen]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.showTitles.description"><![CDATA[Gibt an, ob der/die Titel des/der angezeigten Inhalte(s) dargestellt wird/werden.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay"><![CDATA[Anzeige des Inhaltskörpers]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.description"><![CDATA[Der Inhaltskörper ist der eigentliche Körper des Inhalts. Das ist das, was du beim Erstellen eines Inhalts in den Editor eingibst. Wählst du 'Standard', dann wird anhand der 'Anzahl an bevorzugten Inhalten' und der Seite, die aufgerufen wird, bestimmt, ob Inhalte komplett oder nur in Auszügen dargestellt werden.
+
+<strong>Tipp:</strong> Setze die Einstellung auf 'Inhaltskörper verstecken', um eine reine Liste von Inhalten zu erzeugen.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.default"><![CDATA[Standard]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.full"><![CDATA[vollständige Inhalte anzeigen]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.excerpt"><![CDATA[gekürzte Inhalte anzeigen]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.hide"><![CDATA[Inhaltskörper verstecken]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.showContent"><![CDATA[Inhalt anzeigen]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.showContent.description"><![CDATA[Standardmäßig werden alle Inhalte angezeigt. Jedoch gibt es einige Fälle, in denen du vielleicht den Inhalt in einem Block und die Kommentare in einem anderen anzeigen willst. Mit dieser Einstellung ist dies möglich.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility"><![CDATA[Kommentarsichtbarkeit]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility.description"><![CDATA[Standardmäßig werden Kommentare nur auf einzelnen Inhaltsseiten angezeigt. Allerdings kannst du diese Option nutzen, um die Anzeige von Kommentaren z.B. auch auf Seiten (für deren Inhalte) zu erzwingen.
+
+<strong>Tipp:</strong> In Verbindung mit der Einstellung 'Inhalt anzeigen' kannst du einzigartige Templates erstellen, in denen die Inhalte in einem Block und die Kommentare in einem anderen sind.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility.auto"><![CDATA[Automatisch]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility.show"><![CDATA[Kommentare anzeigen]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility.hide"><![CDATA[Kommentare verstecken]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.featuredContents"><![CDATA[Anzahl an bevorzugten Inhalten]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.featuredContents.description"><![CDATA[Bevorzugte Inhalte sind solche, die in voller Länge angezeigt werden, solange nicht ein "Weiterlesen"-BBCode verwendet wird. Nachdem alle bevorzugten Inhalte dargestellt sind, werden die übrigen Inhalte automatisch gekürzt.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.showInlineEdit"><![CDATA[InlineEdit anzeigen]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.showInlineEdit.description"><![CDATA[Gibt an, ob die InlineEdit-Funktionalität bei diesem Block gegeben sein soll.]]></item>
+		<!-- /display sub tab -->
+		
+		<!-- meta sub tab -->
+		<item name="wcf.acp.ultimate.template.contentTab.meta.info"><![CDATA[Die Metaangaben erscheinen sowohl über dem Inhaltstext als auch unter dem Inhaltstext. Die Standardeinstellungen lassen sich im ACP einstellen.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.meta.contentMetaDisplay"><![CDATA[Meta-Sichtbarkeit]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.meta.contentMetaDisplay.description"><![CDATA[Wähle bei welchen Seitenarten (Inhalt, Seite, Kategorie) die Metaangaben erscheinen sollen. Wird nichts ausgewählt, dann wird diese Einstellung nicht beachtet.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.meta.contentMetaDisplay.category"><![CDATA[Kategorien]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.meta.contentMetaDisplay.page"><![CDATA[Seiten]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.meta.contentMetaDisplay.content"><![CDATA[Inhalte]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.meta.metaAboveContent"><![CDATA[Meta über Inhalt]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.meta.metaAboveContent.description"><![CDATA[Verfügbare Variablen:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$categories</li><li>$tags</li></ul>]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.meta.metaBelowContent"><![CDATA[Meta unter Inhalt]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.meta.metaBelowContent.description"><![CDATA[Verfügbare Variablen:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$categories</li><li>$tags</li></ul>]]></item>
+		<!-- /meta sub tab -->
+		<!-- /content tab -->
+		
+		<!-- media tab -->
+		<!-- sub tabs navigation -->
+		<item name="wcf.acp.ultimate.template.mediaTab.type"><![CDATA[Medientyp]]></item>
+		<item name="wcf.acp.ultimate.template.mediaTab.embed"><![CDATA[Einbetten]]></item>
+		<!-- /sub tabs navigation -->
+		
+		<!-- type sub tab -->
+		<item name="wcf.acp.ultimate.template.mediaTab.type.info"><![CDATA[Ein Medienblock kann ein Video, eine Audiodatei oder ein Foto einbetten. Dazu reicht einfach die Angabe der Adressleisten-URL im 'Einbetten'-Tab. Bitte wähle hier aus, welche der drei Medienarten (Audio, Video, Foto) genutzt werden soll.]]></item>
+		<item name="wcf.acp.ultimate.template.mediaTab.type.mediaType"><![CDATA[Medientyp]]></item>
+		<item name="wcf.acp.ultimate.template.mediaTab.type.mediaType.description"><![CDATA[Bitte wähle einen der Medientypen aus. Bei Audio und Foto können nur direkte Links zu Dateien verarbeitet werden. Bei Video sind auch Hostingportale wie YouTube, Vimeo, MyVideo und einige weitere unterstützt.]]></item>
+		<item name="wcf.acp.ultimate.template.mediaTab.type.mediaType.audio"><![CDATA[Audio]]></item>
+		<item name="wcf.acp.ultimate.template.mediaTab.type.mediaType.video"><![CDATA[Video]]></item>
+		<item name="wcf.acp.ultimate.template.mediaTab.type.mediaType.photo"><![CDATA[Foto]]></item>
+		<!-- /type sub tab -->
+		
+		<!-- embed sub tab -->
+		<item name="wcf.acp.ultimate.template.mediaTab.embed.embedURL"><![CDATA[Einbett-URL]]></item>
+		<item name="wcf.acp.ultimate.template.mediaTab.embed.embedURL.description"><![CDATA[Füge hier bitte einen Link zu einer Datei (alle Medientypen) oder den Videolink aus der Adressleiste (nicht den Embed-URL) komplett mit HTTP/HTTPS ein.]]></item>
+		<item name="wcf.acp.ultimate.template.mediaTab.embed.mimeType"><![CDATA[MIME-Typ]]></item>
+		<item name="wcf.acp.ultimate.template.mediaTab.embed.mimeType.description"><![CDATA[Bitte wähle hier den MIME-Typ der verlinkten Datei bzw. des verlinkten Videos eines Hostingportals aus. Bei den meisten Videohostern ist der MIME-Typ 'application/x-shockwave-flash'. Der MIME-Typ wird benötigt, um später den Inhalt korrekt darzustellen.]]></item>
+		<!-- /embed sub tab -->
+		<!-- /media tab -->
+		
+		<!-- /bottomPanel -->
+		
+		<!-- layoutSelector -->
+		<item name="wcf.acp.ultimate.template.layoutSelector.button.edit"><![CDATA[Bearbeiten]]></item>
+		<item name="wcf.acp.ultimate.template.layoutSelector.button.addTemplate"><![CDATA[Template hinzufügen]]></item>
+		<item name="wcf.acp.ultimate.template.layoutSelector.button.copyTemplate"><![CDATA[Template kopieren]]></item>
+		<item name="wcf.acp.ultimate.template.layoutSelector.button.deleteTemplate"><![CDATA[Template löschen]]></item>
+		<item name="wcf.acp.ultimate.template.layoutSelector.button.deleteTemplate.sure"><![CDATA[Bist du sicher, dass du dieses Template löschen willst?]]></item>
+		<item name="wcf.acp.ultimate.template.layoutSelector.button.removeTemplate"><![CDATA[Template lösen]]></item>
+		<item name="wcf.acp.ultimate.template.layoutSelector.show"><![CDATA[Layout-Selektor anzeigen]]></item>
+		<item name="wcf.acp.ultimate.template.layoutSelector.hide"><![CDATA[Layout-Selektor minimieren]]></item>
+		<item name="wcf.acp.ultimate.template.layoutSelector.pages"><![CDATA[Seiten]]></item>
+		<item name="wcf.acp.ultimate.template.layoutSelector.pages.index"><![CDATA[Index]]></item>
+		<item name="wcf.acp.ultimate.template.layoutSelector.pages.single"><![CDATA[Alleinstehend]]></item>
+		<item name="wcf.acp.ultimate.template.layoutSelector.pages.single.content"><![CDATA[Inhalte]]></item>
+		<item name="wcf.acp.ultimate.template.layoutSelector.pages.single.page"><![CDATA[Seiten]]></item>
+		<item name="wcf.acp.ultimate.template.layoutSelector.pages.archive"><![CDATA[Archiv]]></item>
+		<item name="wcf.acp.ultimate.template.layoutSelector.pages.archive.category"><![CDATA[Kategorien]]></item>
+		<item name="wcf.acp.ultimate.template.layoutSelector.templates"><![CDATA[Templates]]></item>
+		<item name="wcf.acp.ultimate.template.layoutSelector.templates.templateName"><![CDATA[Templatename]]></item>
+		<item name="wcf.acp.ultimate.template.layoutSelector.templates.templateName.placeholder"><![CDATA[Templatename]]></item>
+		<item name="wcf.acp.ultimate.template.layoutSelector.templates.noTemplates"><![CDATA[Es sind keine Templates vorhanden. Füge eines hinzu.]]></item>
+		<item name="wcf.acp.ultimate.template.layoutSelector.status.currentlyEditing"><![CDATA[Wird bearbeitet]]></item>
+		<!-- /layoutSelector -->
+		<!-- /block dialog -->
+		
 		<!-- /template -->
 	</category>
 	
@@ -634,149 +734,5 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<!-- page menu -->
 		<item name="ultimate.footer.menu.index"><![CDATA[Website]]></item>
 		<!-- /page menu -->
-	</category>
-	
-	<category name="ultimate.visualEditor">
-		<!-- iframe -->
-		<item name="ultimate.visualEditor.selectBlockType"><![CDATA[Blocktyp auswählen]]></item>
-		<!-- /iframe -->
-		
-		<!-- blocks -->
-		<item name="ultimate.visualEditor.block.idTooltip"><![CDATA[Dies ist die ID des Blocks.]]></item>
-		<item name="ultimate.visualEditor.block.changeBlockTypeTooltip"><![CDATA[Klicke hier, um den Blocktyp zu ändern.]]></item>
-		<item name="ultimate.visualEditor.block.optionsTooltip"><![CDATA[Klicke hier, um die Optionen des Blocks anzuzeigen.]]></item>
-		<item name="ultimate.visualEditor.block.delete"><![CDATA[Diesen Block löschen.]]></item>
-		<item name="ultimate.visualEditor.block.delete.sure"><![CDATA[Bist du sicher, dass du diesen Block löschen willst?]]></item>
-		<item name="ultimate.visualEditor.block.blockTypeUnknown"><![CDATA[Unbekannter Blocktyp]]></item>
-		<!-- /blocks -->
-		
-		<!-- bottomPanel -->
-		<item name="ultimate.visualEditor.bottomPanel.minimize"><![CDATA[Panel minimieren]]></item>
-		
-		<!-- content tab -->
-		<!-- sub tabs navigation -->
-		<item name="ultimate.visualEditor.contentTab.mode"><![CDATA[Modus]]></item>
-		<item name="ultimate.visualEditor.contentTab.query"><![CDATA[Abfragefilter]]></item>
-		<item name="ultimate.visualEditor.contentTab.display"><![CDATA[Darstellung]]></item>
-		<item name="ultimate.visualEditor.contentTab.meta"><![CDATA[Meta-Angaben]]></item>
-		<!-- /sub tabs navigation -->
-		
-		<!-- mode sub tab -->
-		<item name="ultimate.visualEditor.contentTab.mode.info"><![CDATA[Der Inhalts-BlockType ist extrem vielseitig. Wenn du den Standardmodus wählst, dann verhält sich der Block so, wie du es erwarten würdest. Zum Beispiel wenn du den Block einem Template hinzufügst und dieses für eine Seite verwendet wird, dann sieht man den Inhalt der Seite. Wird das Template dagegen für eine Kategorie verwendet, dann werden Inhalte der Kategorie gelistet. Wenn es für einen einzelnen Inhalt verwendet wird, dann wird dieser Inhalt angezeigt. Wenn du das Verhalten des Blocks ändern möchtest, dann wähle den Abfragemodus und benutze die Abfrageeinstellungen unter Abfragefilter.]]></item>
-		<item name="ultimate.visualEditor.contentTab.mode.queryMode"><![CDATA[Abfragemodus]]></item>
-		<item name="ultimate.visualEditor.contentTab.mode.queryMode.default"><![CDATA[Standardmodus]]></item>
-		<item name="ultimate.visualEditor.contentTab.mode.queryMode.custom"><![CDATA[Abfragemodus]]></item>
-		<!-- /mode sub tab -->
-		
-		<!-- query sub tab -->
-		<item name="ultimate.visualEditor.contentTab.query.info"><![CDATA[<strong>Bitte beachte:</strong> Diese Einstellungen haben keinen Effekt, solange du nicht unter dem Modus-Tab 'Abfragemodus' wählst.]]></item>
-		<item name="ultimate.visualEditor.contentTab.query.fetchPageContent"><![CDATA[Seiteninhalt benutzen]]></item>
-		<item name="ultimate.visualEditor.contentTab.query.fetchPageContent.description"><![CDATA[Wenn du eine Seite auswählst, dann wird dieser Block den Inhalt der Seite anzeigen (unbhängig davon, ob du eine einzelne Seite, die Indexseite, eine Kategorie oder einen einzelnen Inhalt aufgerufen hast).]]></item>
-		<item name="ultimate.visualEditor.contentTab.query.fetchPageContent.none"><![CDATA[Keinen Seiteninhalt benutzen]]></item>
-		<item name="ultimate.visualEditor.contentTab.query.categories"><![CDATA[Kategorien]]></item>
-		<item name="ultimate.visualEditor.contentTab.query.categories.description"><![CDATA[Du kannst hier eine oder mehrere Kategorie(n) auswählen. In Verbindung mit dem Kategoriemodus werden nur Inhalte aus den selektierten Kategorien angezeigt oder nur solche, die nicht in den ausgewählten Kategorien enthalten sind. Wenn keine Kategorien ausgewählt sind, dann werden die Kategorien nicht beachtet.]]></item>
-		<item name="ultimate.visualEditor.contentTab.query.categoryMode"><![CDATA[Kategoriemodus]]></item>
-		<item name="ultimate.visualEditor.contentTab.query.categoryMode.description"><![CDATA[Wenn du 'alle Inhalte mit...' wählst, dann werden nur Inhalte aus den unter 'Kategorien' gewählten Kategorien angezeigt. Wenn du 'alle Inhalte außer...' wählst, dann werden alle Inhalte angezeigt, die nicht in den ausgewählten Kategorien sind. Wenn keine Kategorien ausgewählt wurden, dann wird diese Einstellung nicht beachtet.]]></item>
-		<item name="ultimate.visualEditor.contentTab.query.categoryMode.include"><![CDATA[alle Inhalte mit...]]></item>
-		<item name="ultimate.visualEditor.contentTab.query.categoryMode.exclude"><![CDATA[alle Inhalte außer...]]></item>
-		<item name="ultimate.visualEditor.contentTab.query.authors"><![CDATA[Autoren]]></item>
-		<item name="ultimate.visualEditor.contentTab.query.authors.description"><![CDATA[Es werden nur Inhalte der ausgewählten Autoren angezeigt. Wird kein Autor ausgewählt, dann wird die Einstellung nicht beachtet.]]></item>
-		<item name="ultimate.visualEditor.contentTab.query.numberOfContents"><![CDATA[Anzahl an Inhalten]]></item>
-		<item name="ultimate.visualEditor.contentTab.query.numberOfContents.description"><![CDATA[Gib hier an, wie viele Inhalte auf einer Sammelseite (Kategorie, Index) angezeigt werden sollen. Standardmäßig werden bis zu 10 Inhalte angezeigt.]]></item>
-		<item name="ultimate.visualEditor.contentTab.query.offset"><![CDATA[Versatz]]></item>
-		<item name="ultimate.visualEditor.contentTab.query.offset.description"><![CDATA[Der Versatz ist eine Zahl, die angibt wie viele Inhalte übersprungen werden sollen. Ist der Versatz 1, dann wird der erste Inhalt (aus der Menge der anzuzeigenden Inhalte) übersprungen.]]></item>
-		<item name="ultimate.visualEditor.contentTab.query.sortField"><![CDATA[Sortierfeld]]></item>
-		<item name="ultimate.visualEditor.contentTab.query.sortOrder"><![CDATA[Sortierreihenfolge]]></item>
-		<!-- /query sub tab -->
-		
-		<!-- display sub tab -->
-		<item name="ultimate.visualEditor.contentTab.display.readMoreText"><![CDATA["Weiterlesen"-Text]]></item>
-		<item name="ultimate.visualEditor.contentTab.display.readMoreText.description"><![CDATA[Wenn ein automatisch oder durch den "Weiterlesen"-BBCode gekürzter Inhalt dargestellt wird, wird dieser Text an das Ende gehängt.]]></item>
-		<item name="ultimate.visualEditor.contentTab.display.showTitles"><![CDATA[Titel anzeigen]]></item>
-		<item name="ultimate.visualEditor.contentTab.display.showTitles.description"><![CDATA[Gibt an, ob der/die Titel des/der angezeigten Inhalte(s) dargestellt wird/werden.]]></item>
-		<item name="ultimate.visualEditor.contentTab.display.contentBodyDisplay"><![CDATA[Anzeige des Inhaltskörpers]]></item>
-		<item name="ultimate.visualEditor.contentTab.display.contentBodyDisplay.description"><![CDATA[Der Inhaltskörper ist der eigentliche Körper des Inhalts. Das ist das, was du beim Erstellen eines Inhalts in den Editor eingibst. Wählst du 'Standard', dann wird anhand der 'Anzahl an bevorzugten Inhalten' und der Seite, die aufgerufen wird, bestimmt, ob Inhalte komplett oder nur in Auszügen dargestellt werden.
-
-<strong>Tipp:</strong> Setze die Einstellung auf 'Inhaltskörper verstecken', um eine reine Liste von Inhalten zu erzeugen.]]></item>
-		<item name="ultimate.visualEditor.contentTab.display.contentBodyDisplay.default"><![CDATA[Standard]]></item>
-		<item name="ultimate.visualEditor.contentTab.display.contentBodyDisplay.full"><![CDATA[vollständige Inhalte anzeigen]]></item>
-		<item name="ultimate.visualEditor.contentTab.display.contentBodyDisplay.excerpt"><![CDATA[gekürzte Inhalte anzeigen]]></item>
-		<item name="ultimate.visualEditor.contentTab.display.contentBodyDisplay.hide"><![CDATA[Inhaltskörper verstecken]]></item>
-		<item name="ultimate.visualEditor.contentTab.display.showContent"><![CDATA[Inhalt anzeigen]]></item>
-		<item name="ultimate.visualEditor.contentTab.display.showContent.description"><![CDATA[Standardmäßig werden alle Inhalte angezeigt. Jedoch gibt es einige Fälle, in denen du vielleicht den Inhalt in einem Block und die Kommentare in einem anderen anzeigen willst. Mit dieser Einstellung ist dies möglich.]]></item>
-		<item name="ultimate.visualEditor.contentTab.display.commentsVisibility"><![CDATA[Kommentarsichtbarkeit]]></item>
-		<item name="ultimate.visualEditor.contentTab.display.commentsVisibility.description"><![CDATA[Standardmäßig werden Kommentare nur auf einzelnen Inhaltsseiten angezeigt. Allerdings kannst du diese Option nutzen, um die Anzeige von Kommentaren z.B. auch auf Seiten (für deren Inhalte) zu erzwingen.
-
-<strong>Tipp:</strong> In Verbindung mit der Einstellung 'Inhalt anzeigen' kannst du einzigartige Templates erstellen, in denen die Inhalte in einem Block und die Kommentare in einem anderen sind.]]></item>
-		<item name="ultimate.visualEditor.contentTab.display.commentsVisibility.auto"><![CDATA[Automatisch]]></item>
-		<item name="ultimate.visualEditor.contentTab.display.commentsVisibility.show"><![CDATA[Kommentare anzeigen]]></item>
-		<item name="ultimate.visualEditor.contentTab.display.commentsVisibility.hide"><![CDATA[Kommentare verstecken]]></item>
-		<item name="ultimate.visualEditor.contentTab.display.featuredContents"><![CDATA[Anzahl an bevorzugten Inhalten]]></item>
-		<item name="ultimate.visualEditor.contentTab.display.featuredContents.description"><![CDATA[Bevorzugte Inhalte sind solche, die in voller Länge angezeigt werden, solange nicht ein "Weiterlesen"-BBCode verwendet wird. Nachdem alle bevorzugten Inhalte dargestellt sind, werden die übrigen Inhalte automatisch gekürzt.]]></item>
-		<item name="ultimate.visualEditor.contentTab.display.showInlineEdit"><![CDATA[InlineEdit anzeigen]]></item>
-		<item name="ultimate.visualEditor.contentTab.display.showInlineEdit.description"><![CDATA[Gibt an, ob die InlineEdit-Funktionalität bei diesem Block gegeben sein soll.]]></item>
-		<!-- /display sub tab -->
-		
-		<!-- meta sub tab -->
-		<item name="ultimate.visualEditor.contentTab.meta.info"><![CDATA[Die Metaangaben erscheinen sowohl über dem Inhaltstext als auch unter dem Inhaltstext. Die Standardeinstellungen lassen sich im ACP einstellen.]]></item>
-		<item name="ultimate.visualEditor.contentTab.meta.contentMetaDisplay"><![CDATA[Meta-Sichtbarkeit]]></item>
-		<item name="ultimate.visualEditor.contentTab.meta.contentMetaDisplay.description"><![CDATA[Wähle bei welchen Seitenarten (Inhalt, Seite, Kategorie) die Metaangaben erscheinen sollen. Wird nichts ausgewählt, dann wird diese Einstellung nicht beachtet.]]></item>
-		<item name="ultimate.visualEditor.contentTab.meta.contentMetaDisplay.category"><![CDATA[Kategorien]]></item>
-		<item name="ultimate.visualEditor.contentTab.meta.contentMetaDisplay.page"><![CDATA[Seiten]]></item>
-		<item name="ultimate.visualEditor.contentTab.meta.contentMetaDisplay.content"><![CDATA[Inhalte]]></item>
-		<item name="ultimate.visualEditor.contentTab.meta.metaAboveContent"><![CDATA[Meta über Inhalt]]></item>
-		<item name="ultimate.visualEditor.contentTab.meta.metaAboveContent.description"><![CDATA[Verfügbare Variablen:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$categories</li><li>$tags</li></ul>]]></item>
-		<item name="ultimate.visualEditor.contentTab.meta.metaBelowContent"><![CDATA[Meta unter Inhalt]]></item>
-		<item name="ultimate.visualEditor.contentTab.meta.metaBelowContent.description"><![CDATA[Verfügbare Variablen:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$categories</li><li>$tags</li></ul>]]></item>
-		<!-- /meta sub tab -->
-		<!-- /content tab -->
-		
-		<!-- media tab -->
-		<!-- sub tabs navigation -->
-		<item name="ultimate.visualEditor.mediaTab.type"><![CDATA[Medientyp]]></item>
-		<item name="ultimate.visualEditor.mediaTab.embed"><![CDATA[Einbetten]]></item>
-		<!-- /sub tabs navigation -->
-		
-		<!-- type sub tab -->
-		<item name="ultimate.visualEditor.mediaTab.type.info"><![CDATA[Ein Medienblock kann ein Video, eine Audiodatei oder ein Foto einbetten. Dazu reicht einfach die Angabe der Adressleisten-URL im 'Einbetten'-Tab. Bitte wähle hier aus, welche der drei Medienarten (Audio, Video, Foto) genutzt werden soll.]]></item>
-		<item name="ultimate.visualEditor.mediaTab.type.mediaType"><![CDATA[Medientyp]]></item>
-		<item name="ultimate.visualEditor.mediaTab.type.mediaType.description"><![CDATA[Bitte wähle einen der Medientypen aus. Bei Audio und Foto können nur direkte Links zu Dateien verarbeitet werden. Bei Video sind auch Hostingportale wie YouTube, Vimeo, MyVideo und einige weitere unterstützt.]]></item>
-		<item name="ultimate.visualEditor.mediaTab.type.mediaType.audio"><![CDATA[Audio]]></item>
-		<item name="ultimate.visualEditor.mediaTab.type.mediaType.video"><![CDATA[Video]]></item>
-		<item name="ultimate.visualEditor.mediaTab.type.mediaType.photo"><![CDATA[Foto]]></item>
-		<!-- /type sub tab -->
-		
-		<!-- embed sub tab -->
-		<item name="ultimate.visualEditor.mediaTab.embed.embedURL"><![CDATA[Einbett-URL]]></item>
-		<item name="ultimate.visualEditor.mediaTab.embed.embedURL.description"><![CDATA[Füge hier bitte einen Link zu einer Datei (alle Medientypen) oder den Videolink aus der Adressleiste (nicht den Embed-URL) komplett mit HTTP/HTTPS ein.]]></item>
-		<item name="ultimate.visualEditor.mediaTab.embed.mimeType"><![CDATA[MIME-Typ]]></item>
-		<item name="ultimate.visualEditor.mediaTab.embed.mimeType.description"><![CDATA[Bitte wähle hier den MIME-Typ der verlinkten Datei bzw. des verlinkten Videos eines Hostingportals aus. Bei den meisten Videohostern ist der MIME-Typ 'application/x-shockwave-flash'. Der MIME-Typ wird benötigt, um später den Inhalt korrekt darzustellen.]]></item>
-		<!-- /embed sub tab -->
-		<!-- /media tab -->
-		
-		<!-- /bottomPanel -->
-		
-		<!-- layoutSelector -->
-		<item name="ultimate.visualEditor.layoutSelector.button.edit"><![CDATA[Bearbeiten]]></item>
-		<item name="ultimate.visualEditor.layoutSelector.button.addTemplate"><![CDATA[Template hinzufügen]]></item>
-		<item name="ultimate.visualEditor.layoutSelector.button.copyTemplate"><![CDATA[Template kopieren]]></item>
-		<item name="ultimate.visualEditor.layoutSelector.button.deleteTemplate"><![CDATA[Template löschen]]></item>
-		<item name="ultimate.visualEditor.layoutSelector.button.deleteTemplate.sure"><![CDATA[Bist du sicher, dass du dieses Template löschen willst?]]></item>
-		<item name="ultimate.visualEditor.layoutSelector.button.removeTemplate"><![CDATA[Template lösen]]></item>
-		<item name="ultimate.visualEditor.layoutSelector.show"><![CDATA[Layout-Selektor anzeigen]]></item>
-		<item name="ultimate.visualEditor.layoutSelector.hide"><![CDATA[Layout-Selektor minimieren]]></item>
-		<item name="ultimate.visualEditor.layoutSelector.pages"><![CDATA[Seiten]]></item>
-		<item name="ultimate.visualEditor.layoutSelector.pages.index"><![CDATA[Index]]></item>
-		<item name="ultimate.visualEditor.layoutSelector.pages.single"><![CDATA[Alleinstehend]]></item>
-		<item name="ultimate.visualEditor.layoutSelector.pages.single.content"><![CDATA[Inhalte]]></item>
-		<item name="ultimate.visualEditor.layoutSelector.pages.single.page"><![CDATA[Seiten]]></item>
-		<item name="ultimate.visualEditor.layoutSelector.pages.archive"><![CDATA[Archiv]]></item>
-		<item name="ultimate.visualEditor.layoutSelector.pages.archive.category"><![CDATA[Kategorien]]></item>
-		<item name="ultimate.visualEditor.layoutSelector.templates"><![CDATA[Templates]]></item>
-		<item name="ultimate.visualEditor.layoutSelector.templates.templateName"><![CDATA[Templatename]]></item>
-		<item name="ultimate.visualEditor.layoutSelector.templates.templateName.placeholder"><![CDATA[Templatename]]></item>
-		<item name="ultimate.visualEditor.layoutSelector.templates.noTemplates"><![CDATA[Es sind keine Templates vorhanden. Füge eines hinzu.]]></item>
-		<item name="ultimate.visualEditor.layoutSelector.status.currentlyEditing"><![CDATA[Wird bearbeitet]]></item>
-		<!-- /layoutSelector -->
 	</category>
 </language>

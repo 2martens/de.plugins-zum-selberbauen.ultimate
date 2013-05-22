@@ -57,9 +57,7 @@ class CategoryPage extends AbstractPage {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededModules
 	 * @var	string[]
 	 */
-	public $neededModules = array(
-		'ULTIMATE_MODULE_ULTIMATEFRONTEND'
-	);
+	public $neededModules = array();
 	
 	/**
 	 * Contains the Category object.

@@ -50,17 +50,17 @@ class CategoryAction extends AbstractDatabaseObjectAction {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsCreate
 	 */
-	protected $permissionsCreate = array('admin.content.ultimate.canAddCategory');
+	protected $permissionsCreate = array('admin.content.ultimate.canManageCategories');
 	
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsDelete
 	 */
-	protected $permissionsDelete = array('admin.content.ultimate.canDeleteCategory');
+	protected $permissionsDelete = array('admin.content.ultimate.canManageCategories');
 	
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsUpdate
 	 */
-	protected $permissionsUpdate = array('admin.content.ultimate.canEditCategory');
+	protected $permissionsUpdate = array('admin.content.ultimate.canManageCategories');
 	
 	/**
 	 * Creates new category.

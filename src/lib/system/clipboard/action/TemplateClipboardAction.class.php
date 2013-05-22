@@ -112,7 +112,7 @@ class TemplateClipboardAction implements IClipboardAction {
 	 */
 	protected function validateDelete(array $objects) {
 		// checking permission
-		if (!WCF::getSession()->getPermission('admin.content.ultimate.canDeleteTemplate')) {
+		if (!WCF::getSession()->getPermission('admin.content.ultimate.canManageTemplates')) {
 			return array();
 		}
 		

@@ -54,24 +54,24 @@
 		</fieldset>
 		<fieldset>
 			<legend>{lang}wcf.acp.ultimate.menu.items{/lang}</legend>
-			<div id="menuItemList" class="container containerPadding marginTop shadow{if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem') && $menuItemNodeList|count > 1} sortableListContainer{/if}">
+			<div id="menuItemList" class="container containerPadding marginTop shadow{if $__wcf->session->getPermission('admin.content.ultimate.canManageMenuItems') && $menuItemNodeList|count > 1} sortableListContainer{/if}">
 				{if $action == 'edit'}
 				<ol class="sortableList" data-object-id="0">
 					{assign var=oldDepth value=0}
 					{foreach from=$menuItemNodeList item=menuItem}
 						{section name=i loop=$oldDepth-$menuItemNodeList->getDepth()}</ol></li>{/section}
 						
-						<li class="{if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem') && $menuItemNodeList|count > 1}sortableNode {/if}jsMenuItem" data-object-name="{@$menuItem->menuItemName}" data-object-id="{@$menuItem->menuItemID}"{* {if $collapsedMenuItemIDs|is_array} data-is-open="{if $collapsedMenuItemIDs[$menuItem->menuItemID]|isset}0{else}1{/if}"{/if} *}>
+						<li class="{if $__wcf->session->getPermission('admin.content.ultimate.canManageMenuItems') && $menuItemNodeList|count > 1}sortableNode {/if}jsMenuItem" data-object-name="{@$menuItem->menuItemName}" data-object-id="{@$menuItem->menuItemID}"{* {if $collapsedMenuItemIDs|is_array} data-is-open="{if $collapsedMenuItemIDs[$menuItem->menuItemID]|isset}0{else}1{/if}"{/if} *}>
 							<span class="sortableNodeLabel">
 								<span class="buttons">
 									
-									{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteMenuItem')}
+									{if $__wcf->session->getPermission('admin.content.ultimate.canManageMenuItems')}
 										<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="{@$menuItem->menuItemID}" data-confirm-message="{lang}wcf.acp.ultimate.menu.item.delete.sure{/lang}"></span>
 									{else}
 										<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
 									{/if}
 									
-									{if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem')}
+									{if $__wcf->session->getPermission('admin.content.ultimate.canManageMenuItems')}
 										<span title="{lang}wcf.global.button.{if !$menuItem->isDisabled}disable{else}enable{/if}{/lang}" class="icon icon16 icon-{if !$menuItem->isDisabled}circle-blank{else}off{/if} jsToggleButton jsTooltip" data-object-id="{@$menuItem->menuItemID}"></span>
 									{else}
 										<span title="{lang}wcf.global.button.{if !$menuItem->isDisabled}enable{else}disable{/if}{/lang}" class="icon icon16 icon-{if !$menuItem->isDisabled}circle-blank{else}off{/if} disabled"></span>
@@ -96,7 +96,7 @@
 				{else}
 					<p>{lang}wcf.acp.ultimate.menu.addMenuFirst{/lang}</p>
 				{/if}
-				{if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem')}
+				{if $__wcf->session->getPermission('admin.content.ultimate.canManageMenuItems')}
 					<div class="formSubmit">
 						<button class="button default{if $action == 'add' || $menuItemNodeList|count == 0} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.global.button.save{/lang}</button>
 					</div>
@@ -196,10 +196,10 @@
 	/* <![CDATA[ */
 		$(function() {
 			{if $action == 'edit'}
-				{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteMenuItem')}
+				{if $__wcf->session->getPermission('admin.content.ultimate.canManageMenuItems')}
 					new ULTIMATE.NestedSortable.Delete('ultimate\\data\\menu\\item\\MenuItemAction', $('.jsMenuItem'));
 				{/if}
-				{if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem')}
+				{if $__wcf->session->getPermission('admin.content.ultimate.canManageMenuItems')}
 					new WCF.Action.Toggle('ultimate\\data\\menu\\item\\MenuItemAction', $('.jsMenuItem'), '> .buttons > .jsToggleButton');
 					{if $menuItemNodeList|count > 1}
 						var sortableNodes = $('.sortableNode');
@@ -217,8 +217,7 @@
 					});
 					new WCF.Sortable.List('menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, { }, false);
 					ULTIMATE.Permission.addObject({
-						'admin.content.ultimate.canEditMenuItem': {if $__wcf->session->getPermission('admin.content.ultimate.canEditMenuItem')}true{else}false{/if},
-						'admin.content.ultimate.canDeleteMenuItem': {if $__wcf->session->getPermission('admin.content.ultimate.canDeleteMenuItem')}true{else}false{/if}
+						'admin.content.ultimate.canManageMenuItems': {if $__wcf->session->getPermission('admin.content.ultimate.canManageMenuItems')}true{else}false{/if}
 					});
 					
 					new ULTIMATE.Menu.Item.Transfer('categorySelectContainer', 'menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, 'category');

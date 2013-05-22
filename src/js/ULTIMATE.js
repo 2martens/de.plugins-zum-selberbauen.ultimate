@@ -519,7 +519,7 @@ ULTIMATE.Block.Transfer.prototype = {
 			var $newHtml = '<li class="jsBlock" data-object-name="' + $data['blockTypeName'] 
 				+ '" data-object-id="' + $data['blockID'] + '">';
 			$newHtml += '<span><span class="buttons">';
-			if (ULTIMATE.Permission.get('admin.content.ultimate.canDeleteBlock')) {
+			if (ULTIMATE.Permission.get('admin.content.ultimate.canManageBlocks')) {
 				$newHtml += '<span title="' 
 					+ WCF.Language.get('wcf.global.button.delete') 
 					+ '" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="' +
@@ -537,7 +537,7 @@ ULTIMATE.Block.Transfer.prototype = {
 			if ($('#' + this._containerID).find('button[data-type="submit"]').prop('disabled')) {
 				$('#' + this._containerID).find('button[data-type="submit"]').prop('disabled', false).removeClass('disabled');
 			}
-			if (ULTIMATE.Permission.get('admin.content.ultimate.canDeleteBlock')) {
+			if (ULTIMATE.Permission.get('admin.content.ultimate.canManageBlocks')) {
 				new WCF.Action.Delete('ultimate\\data\\block\\BlockAction', $('.jsBlock'));
 			}
 			this._init();
@@ -918,13 +918,13 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 			for (var $menuItemID in data) {
 				var $newItemHtml = '<li id="' + WCF.getRandomID() + '" class="sortableNode jsMenuItem" data-object-id="' + $menuItemID + '"  data-object-name="' + data[$menuItemID]['menuItemNameRaw'] + '">';
 				$newItemHtml += '<span class="sortableNodeLabel"><span class="buttons">';
-				if (ULTIMATE.Permission.get('admin.content.ultimate.canDeleteMenuItem')) {
+				if (ULTIMATE.Permission.get('admin.content.ultimate.canManageMenuItems')) {
 					$newItemHtml += '<span title="' + WCF.Language.get('wcf.global.button.delete') + '" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="' + $menuItemID + '" data-confirm-message="' + WCF.Language.get('wcf.acp.ultimate.menu.item.delete.sure') + '"></span>';
 				}
 				else {
 					$newItemHtml += '<span title="' + WCF.Language.get('wcf.global.button.delete') + '" class="icon icon16 icon-remove disabled"></span>';
 				}
-				if (ULTIMATE.Permission.get('admin.content.ultimate.canEditMenuItem')) {
+				if (ULTIMATE.Permission.get('admin.content.ultimate.canManageMenuItems')) {
 					$newItemHtml += '&nbsp;<span title="' + ((data[$menuItemID]['isDisabled']) ? WCF.Language.get('wcf.global.button.enable') : WCF.Language.get('wcf.global.button.disable')) + '" class="icon icon16 icon-' + ((data[$menuItemID]['isDisabled']) ? 'off' : 'circle-blank') + ' jsToggleButton jsTooltip" data-object-id="' + $menuItemID + '"></span>';
 				}
 				else {
@@ -938,10 +938,10 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 					$('#' + this._menuItemListID).find('button[data-type="submit"]').prop('disabled', false).removeClass('disabled');
 				}
 			}
-			if (ULTIMATE.Permission.get('admin.content.ultimate.canDeleteMenuItem')) {
+			if (ULTIMATE.Permission.get('admin.content.ultimate.canManageMenuItems')) {
 				new ULTIMATE.NestedSortable.Delete('ultimate\\data\\menu\\item\\MenuItemAction', $('.jsMenuItem'));
 			}
-			if (ULTIMATE.Permission.get('admin.content.ultimate.canEditMenuItem')) {
+			if (ULTIMATE.Permission.get('admin.content.ultimate.canManageMenuItems')) {
 				new WCF.Action.Toggle('ultimate\\data\\menu\\item\\MenuItemAction', $('.jsMenuItem'), '> .buttons > .jsToggleButton');
 			}
 			this._init();
@@ -1420,19 +1420,19 @@ ULTIMATE.Widget.Transfer.prototype = {
 			var $widgetID = $data['widgetID'];
 			var $newItemHtml = '<li id="' + WCF.getRandomID() + '" class="sortableNode jsMenuItem" data-object-id="' + $widgetID + '"  data-object-name="' + $data[$widgetID]['widgetNameRaw'] + '">';
 			$newItemHtml += '<span class="sortableNodeLabel"><span class="buttons">';
-			if (ULTIMATE.Permission.get('admin.content.ultimate.canDeleteWidget')) {
+			if (ULTIMATE.Permission.get('admin.content.ultimate.canManageWidgets')) {
 				$newItemHtml += '<span title="' + WCF.Language.get('wcf.global.button.delete') + '" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="' + $widgetID + '" data-confirm-message="' + WCF.Language.get('wcf.acp.ultimate.widget.delete.sure') + '"></span>';
 			}
 			else {
 				$newItemHtml += '<span title="' + WCF.Language.get('wcf.global.button.delete') + '" class="icon icon16 icon-remove disabled"></span>';
 			}
-			if (ULTIMATE.Permission.get('admin.content.ultimate.canEditWidget')) {
+			if (ULTIMATE.Permission.get('admin.content.ultimate.canManageWidgets')) {
 				$newItemHtml += '&nbsp;<span title="' + (($data[$widgetID]['isDisabled']) ? WCF.Language.get('wcf.global.button.enable') : WCF.Language.get('wcf.global.button.disable')) + '" class="icon icon16 icon-' + (($data[$widgetID]['isDisabled']) ? 'off' : 'circle-blank') + ' jsToggleButton jsTooltip" data-object-id="' + $widgetID + '"></span>';
 			}
 			else {
 				$newItemHtml += '&nbsp;<span title="' + ($data[$widgetID]['isDisabled']) ? WCF.Language.get('wcf.global.button.enable') : WCF.Language.get('wcf.global.button.disable') + '" class="icon icon16 icon-' + (($data[$widgetID]['isDisabled']) ? 'off' : 'circle-blank') + ' disabled"></span>';
 			}
-			if (ULTIMATE.Permission.get('admin.content.ultimate.canEditWidget')) {
+			if (ULTIMATE.Permission.get('admin.content.ultimate.canManageWidgets')) {
 				$newItemHtml += '&nbsp;<span title="' + WCF.Language.get('wcf.global.button.edit') + '" class="icon icon16 icon-pencil jsToggleButton jsTooltip" data-object-id="' + $widgetID + '"></span>';
 			}
 			else {
@@ -1446,10 +1446,10 @@ ULTIMATE.Widget.Transfer.prototype = {
 				$('#' + this._widgetListID).find('button[data-type="submit"]').prop('disabled', false).removeClass('disabled');
 			}
 			
-			if (ULTIMATE.Permission.get('admin.content.ultimate.canDeleteWidget')) {
+			if (ULTIMATE.Permission.get('admin.content.ultimate.canManageWidgets')) {
 				new WCF.Action.Delete('ultimate\\data\\widget\\WidgetAction', $('.jsWidget'));
 			}
-			if (ULTIMATE.Permission.get('admin.content.ultimate.canEditWidget')) {
+			if (ULTIMATE.Permission.get('admin.content.ultimate.canManageWidgets')) {
 				new WCF.Action.Toggle('ultimate\\data\\widget\\WidgetAction', $('.jsWidget'));
 				new ULTIMATE.Widget.Edit($('.jsWidget'));
 			}

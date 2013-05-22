@@ -159,13 +159,13 @@
 							<span>
 								<span class="buttons">
 									
-									{if $__wcf->session->getPermission('admin.content.ultimate.canEditBlock')}
+									{if $__wcf->session->getPermission('admin.content.ultimate.canManageBlocks')}
 										<span title="{lang}wcf.acp.ultimate.block.edit{/lang}" class="icon icon16 icon-pencil jsTooltip" data-object-id="{@$templateBlock->blockID}"></span>
 									{else}
 										<span title="{lang}wcf.acp.ultimate.block.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
 									{/if}
 									
-									{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteBlock')}
+									{if $__wcf->session->getPermission('admin.content.ultimate.canManageBlocks')}
 										<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="{@$templateBlock->blockID}" data-confirm-message="{lang}'wcf.acp.ultimate.block.delete.sure'{/lang}"></span>
 									{else}
 										<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
@@ -185,7 +185,7 @@
 					<p>{lang}wcf.acp.ultimate.template.addTemplateFirst{/lang}</p>
 				{/if}
 				{* doesn't have any use
-				if $__wcf->session->getPermission('admin.content.ultimate.canEditBlock')}
+				if $__wcf->session->getPermission('admin.content.ultimate.canManageBlocks')}
 					<div class="formSubmit">
 						<button class="button default{if $action == 'add' || $blocks|count == 0} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.global.button.save{/lang}</button>
 					</div>
@@ -244,10 +244,10 @@
 	/* <![CDATA[ */
 		$(function() {
 			{if $action == 'edit'}
-				{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteBlock')}
+				{if $__wcf->session->getPermission('admin.content.ultimate.canManageBlocks')}
 					new WCF.Action.Delete('ultimate\\data\\block\\BlockAction', $('.jsBlock'));
 				{/if}
-				{if $__wcf->session->getPermission('admin.content.ultimate.canEditBlock')}
+				{if $__wcf->session->getPermission('admin.content.ultimate.canManageBlocks')}
 					{* doesn't have any use
 					$('#templateBlockList').find('button[data-type="submit"]').click(function(event) {
 						event.preventDefault();
@@ -269,8 +269,7 @@
 						}
 					});
 					ULTIMATE.Permission.addObject({
-						'admin.content.ultimate.canEditBlock': {if $__wcf->session->getPermission('admin.content.ultimate.canEditBlock')}true{else}false{/if},
-						'admin.content.ultimate.canDeleteBlock': {if $__wcf->session->getPermission('admin.content.ultimate.canDeleteBlock')}true{else}false{/if}
+						'admin.content.ultimate.canManageBlocks': {if $__wcf->session->getPermission('admin.content.ultimate.canManageBlocks')}true{else}false{/if}
 					});
 					WCF.Language.addObject({
 						'wcf.acp.ultimate.template.dialog.additionalOptions': '{lang}wcf.acp.ultimate.template.dialog.additionalOptions{/lang}'

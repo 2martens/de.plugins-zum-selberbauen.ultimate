@@ -67,7 +67,7 @@ class UltimateMenuAddForm extends AbstractForm {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededPermissions
 	 */
 	public $neededPermissions = array(
-		'admin.content.ultimate.canAddMenu'
+		'admin.content.ultimate.canManageMenus'
 	);
 	
 	/**

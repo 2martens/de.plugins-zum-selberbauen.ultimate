@@ -57,7 +57,7 @@ class UltimateTemplateAddForm extends AbstractForm {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededPermissions
 	 */
 	public $neededPermissions = array(
-		'admin.content.ultimate.canAddTemplate'
+		'admin.content.ultimate.canManageTemplates'
 	);
 	
 	/**

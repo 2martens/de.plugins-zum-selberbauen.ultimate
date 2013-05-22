@@ -47,17 +47,17 @@ class LinkAction extends AbstractDatabaseObjectAction {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsCreate
 	 */
-	protected $permissionsCreate = array('admin.content.ultimate.canAddLink');
+	protected $permissionsCreate = array('admin.content.ultimate.canManageLinks');
 	
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsDelete
 	*/
-	protected $permissionsDelete = array('admin.content.ultimate.canDeleteLink');
+	protected $permissionsDelete = array('admin.content.ultimate.canManageLinks');
 	
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsUpdate
 	*/
-	protected $permissionsUpdate = array('admin.content.ultimate.canEditLink');
+	protected $permissionsUpdate = array('admin.content.ultimate.canManageLinks');
 	
 	/**
 	 * Creates new link.

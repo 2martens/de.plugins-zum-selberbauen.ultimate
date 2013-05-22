@@ -60,13 +60,13 @@
 						<td class="columnMark"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$template->templateID}" /></td>
 						<td class="columnIcon">
 							
-						{if $__wcf->session->getPermission('admin.content.ultimate.canEditTemplate')}
+						{if $__wcf->session->getPermission('admin.content.ultimate.canManageTemplates')}
 								<a href="{link application='ultimate' controller='UltimateTemplateEdit' id=$template->templateID}{/link}"><span title="{lang}wcf.acp.ultimate.template.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.template.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
 							{/if}
 							
-							{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteTemplate')}
+							{if $__wcf->session->getPermission('admin.content.ultimate.canManageTemplates')}
 								<span title="{lang}wcf.acp.ultimate.template.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton" data-object-id="{@$template->templateID}" data-confirm-message="{lang}wcf.acp.ultimate.template.delete.sure{/lang}"></span>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.template.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
@@ -75,7 +75,7 @@
 							{event name='buttons'}
 						</td>
 						<td class="columnID"><p>{@$template->templateID}</p></td>
-						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditTemplate')}<a title="{lang}wcf.acp.ultimate.template.edit{/lang}" href="{link application='ultimate' controller='UltimateTemplateEdit' id=$template->templateID}{/link}">{lang}{@$template->templateName}{/lang}</a>{else}{lang}{@$template->templateName}{/lang}{/if}</p></td>
+						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canManageTemplates')}<a title="{lang}wcf.acp.ultimate.template.edit{/lang}" href="{link application='ultimate' controller='UltimateTemplateEdit' id=$template->templateID}{/link}">{lang}{@$template->templateName}{/lang}</a>{else}{lang}{@$template->templateName}{/lang}{/if}</p></td>
 						
 						{event name='columns'}
 					</tr>				

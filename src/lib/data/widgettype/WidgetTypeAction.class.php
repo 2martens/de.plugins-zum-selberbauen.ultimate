@@ -43,19 +43,4 @@ class WidgetTypeAction extends AbstractDatabaseObjectAction {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$className
 	 */
 	public $className = '\ultimate\data\widgettype\WidgetTypeEditor';
-	
-	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsCreate
-	 */
-	protected $permissionsCreate = array('admin.content.ultimate.canAddWidgetType');
-	
-	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsDelete
-	*/
-	protected $permissionsDelete = array('admin.content.ultimate.canDeleteWidgetType');
-	
-	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsUpdate
-	*/
-	protected $permissionsUpdate = array('admin.content.ultimate.canEditWidgetType');
 }

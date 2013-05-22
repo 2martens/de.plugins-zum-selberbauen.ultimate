@@ -49,15 +49,15 @@ class WidgetAreaAction extends AbstractDatabaseObjectAction {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsCreate
 	 */
-	protected $permissionsCreate = array('admin.content.ultimate.canAddWidgetArea');
+	protected $permissionsCreate = array('admin.content.ultimate.canManageWidgetAreas');
 	
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsDelete
 	*/
-	protected $permissionsDelete = array('admin.content.ultimate.canDeleteWidgetArea');
+	protected $permissionsDelete = array('admin.content.ultimate.canManageWidgetAreas');
 	
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsUpdate
 	*/
-	protected $permissionsUpdate = array('admin.content.ultimate.canEditWidgetArea');
+	protected $permissionsUpdate = array('admin.content.ultimate.canManageWidgetAreas');
 }

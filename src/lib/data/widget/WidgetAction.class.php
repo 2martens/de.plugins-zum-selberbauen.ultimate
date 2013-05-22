@@ -47,15 +47,15 @@ class WidgetAction extends AbstractDatabaseObjectAction {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsCreate
 	 */
-	protected $permissionsCreate = array('admin.content.ultimate.canAddWidget');
+	protected $permissionsCreate = array('admin.content.ultimate.canManageWidgets');
 	
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsDelete
 	*/
-	protected $permissionsDelete = array('admin.content.ultimate.canDeleteWidget');
+	protected $permissionsDelete = array('admin.content.ultimate.canManageWidgets');
 	
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsUpdate
 	*/
-	protected $permissionsUpdate = array('admin.content.ultimate.canEditWidget');
+	protected $permissionsUpdate = array('admin.content.ultimate.canManageWidgets');
 }

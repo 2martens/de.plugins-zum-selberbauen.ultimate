@@ -33,7 +33,7 @@
 	
 	<nav>
 		<ul>
-			{if $__wcf->session->getPermission('admin.content.ultimate.canAddContent')}
+			{if $__wcf->session->getPermission('admin.content.ultimate.canManageLinks')}
 				<li><a href="{link application='ultimate' controller='UltimateLinkAdd'}{/link}" title="{lang}wcf.acp.ultimate.link.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.link.add{/lang}</span></a></li>
 			{/if}
 			
@@ -71,13 +71,13 @@
 						<td class="columnMark"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$link->linkID}" /></td>
 						<td class="columnIcon">
 							
-							{if $__wcf->session->getPermission('admin.content.ultimate.canEditLink')}
+							{if $__wcf->session->getPermission('admin.content.ultimate.canManageLinks')}
 								<a href="{link application='ultimate' controller='UltimateLinkEdit' id=$link->linkID}{/link}"><span title="{lang}wcf.acp.ultimate.link.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.link.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
 							{/if}
 							
-							{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteLink')}
+							{if $__wcf->session->getPermission('admin.content.ultimate.canManageLinks')}
 								<span title="{lang}wcf.acp.ultimate.link.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton" data-object-id="{@$link->linkID}" data-confirm-message="{lang}wcf.acp.ultimate.link.delete.sure{/lang}"></span>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.link.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
@@ -86,7 +86,7 @@
 							{event name='buttons'}
 						</td>
 						<td class="columnID"><p>{@$link->linkID}</p></td>
-						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditLink')}<a title="{lang}wcf.acp.ultimate.link.edit{/lang}" href="{link application='ultimate' controller='UltimateLinkEdit' id=$link->linkID}{/link}">{lang}{@$link->linkName}{/lang}</a>{else}{lang}{@$link->linkName}{/lang}{/if}</p></td>
+						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canManageLinks')}<a title="{lang}wcf.acp.ultimate.link.edit{/lang}" href="{link application='ultimate' controller='UltimateLinkEdit' id=$link->linkID}{/link}">{lang}{@$link->linkName}{/lang}</a>{else}{lang}{@$link->linkName}{/lang}{/if}</p></td>
 						<td class="columnCategories">
 							<p>
 								{implode from=$link->categories key=categoryID item=category}<a href="{link application='ultimate' controller='UltimateLinkList'}categoryID={@$category->categoryID}{/link}">{@$category->getTitle()}</a>{/implode}
@@ -110,7 +110,7 @@
  	
 	<nav>
 		<ul>
-			{if $__wcf->session->getPermission('admin.content.ultimate.canAddLink')}
+			{if $__wcf->session->getPermission('admin.content.ultimate.canManageLinks')}
 				<li><a href="{link application='ultimate' controller='UltimateLinkAdd'}{/link}" title="{lang}wcf.acp.ultimate.link.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.link.add{/lang}</span></a></li>
 			{/if}
 			

@@ -112,7 +112,7 @@ class MenuClipboardAction implements IClipboardAction {
 	 */
 	protected function validateDelete(array $objects) {
 		// checking permission
-		if (!WCF::getSession()->getPermission('admin.content.ultimate.canDeleteMenu')) {
+		if (!WCF::getSession()->getPermission('admin.content.ultimate.canManageMenus')) {
 			return array();
 		}
 	

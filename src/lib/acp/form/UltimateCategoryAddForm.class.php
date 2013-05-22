@@ -64,7 +64,7 @@ class UltimateCategoryAddForm extends AbstractForm {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededPermissions
 	 */
 	public $neededPermissions = array(
-		'admin.content.ultimate.canAddCategory'
+		'admin.content.ultimate.canManageCategories'
 	);
 	
 	/**

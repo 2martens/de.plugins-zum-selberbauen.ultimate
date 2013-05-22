@@ -60,13 +60,13 @@
 						<td class="columnMark"><input type="checkbox" class="jsClipboardItem" data-object-id="{@$widgetArea->widgetAreaID}" /></td>
 						<td class="columnIcon">
 							
-						{if $__wcf->session->getPermission('admin.content.ultimate.canEditWidgetArea')}
+						{if $__wcf->session->getPermission('admin.content.ultimate.canManageWidgetAreas')}
 								<a href="{link application='ultimate' controller='UltimateWidgetAreaEdit' id=$widgetArea->widgetAreaID}{/link}"><span title="{lang}wcf.acp.ultimate.widgetArea.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.widgetArea.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
 							{/if}
 							
-							{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteWidgetArea')}
+							{if $__wcf->session->getPermission('admin.content.ultimate.canManageWidgetAreas')}
 								<span title="{lang}wcf.acp.ultimate.widgetArea.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton" data-object-id="{@$widgetArea->widgetAreaID}" data-confirm-message="{lang}wcf.acp.ultimate.widgetArea.delete.sure{/lang}"></span>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.widgetArea.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
@@ -75,7 +75,7 @@
 							{event name='buttons'}
 						</td>
 						<td class="columnID"><p>{@$widgetArea->widgetAreaID}</p></td>
-						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditWidgetArea')}<a title="{lang}wcf.acp.ultimate.widgetArea.edit{/lang}" href="{link application='ultimate' controller='UltimateWidgetAreaEdit' id=$widgetArea->widgetAreaID}{/link}">{lang}{@$widgetArea->widgetAreaName}{/lang}</a>{else}{lang}{@$widgetArea->widgetAreaName}{/lang}{/if}</p></td>
+						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canManageWidgetAreas')}<a title="{lang}wcf.acp.ultimate.widgetArea.edit{/lang}" href="{link application='ultimate' controller='UltimateWidgetAreaEdit' id=$widgetArea->widgetAreaID}{/link}">{lang}{@$widgetArea->widgetAreaName}{/lang}</a>{else}{lang}{@$widgetArea->widgetAreaName}{/lang}{/if}</p></td>
 						
 						{event name='columns'}
 					</tr>				

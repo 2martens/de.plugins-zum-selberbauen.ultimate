@@ -54,31 +54,31 @@
 		</fieldset>
 		<fieldset>
 			<legend>{lang}wcf.acp.ultimate.widgetArea.items{/lang}</legend>
-			<div id="widgetList" class="container containerPadding marginTop shadow{if $__wcf->session->getPermission('admin.content.ultimate.canEditWidget') && $widgetNodeList|count > 1} sortableListContainer{/if}">
+			<div id="widgetList" class="container containerPadding marginTop shadow{if $__wcf->session->getPermission('admin.content.ultimate.canManageWidgets') && $widgetNodeList|count > 1} sortableListContainer{/if}">
 				{if $action == 'edit'}
 				<ol class="sortableList" data-object-id="0">
 					{assign var=oldDepth value=0}
 					{foreach from=$widgetNodeList item=widget}
 						{section name=i loop=$oldDepth-$widgetNodeList->getDepth()}</ol></li>{/section}
 						
-						<li class="{if $__wcf->session->getPermission('admin.content.ultimate.canEditWidget') && $widgetNodeList|count > 1}sortableNode {/if}jsWidget" data-object-name="{@$widget->widgetName}" data-object-id="{@$widget->widgetID}"{* {if $collapsedWidgetIDs|is_array} data-is-open="{if $collapsedWidgetIDs[$widget->widgetID]|isset}0{else}1{/if}"{/if} *}>
+						<li class="{if $__wcf->session->getPermission('admin.content.ultimate.canManageWidgets') && $widgetNodeList|count > 1}sortableNode {/if}jsWidget" data-object-name="{@$widget->widgetName}" data-object-id="{@$widget->widgetID}"{* {if $collapsedWidgetIDs|is_array} data-is-open="{if $collapsedWidgetIDs[$widget->widgetID]|isset}0{else}1{/if}"{/if} *}>
 							<span class="sortableNodeLabel">
 								<span class="buttons">
 									
-									{if $__wcf->getSession()->getPermission('admin.content.ultimate.canDeleteWidget')}
+									{if $__wcf->getSession()->getPermission('admin.content.ultimate.canManageWidgets')}
 										<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="{@$widget->widgetID}" data-confirm-message="{lang}wcf.acp.ultimate.widget.sure{/lang}" />
 									{else}
 										<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
 									{/if}
 									
-									{if $__wcf->getSession()->getPermission('admin.content.ultimate.canEditWidget')}
+									{if $__wcf->getSession()->getPermission('admin.content.ultimate.canManageWidgets')}
 										{* todo: toggle icons aren't clickable *}
 										<span title="{lang}wcf.global.button.{if !$widget->isDisabled}disable{else}enable{/if}{/lang}" class="icon icon16 icon-{if !$widget->isDisabled}circle-blank{else}off{/if} jsToggleButton jsTooltip" data-object-id="{@$widget->widgetID}"></span>
 									{else}
 										<span title="{lang}wcf.global.button.{if !$widget->isDisabled}enable{else}disable{/if}{/lang}" class="icon icon16 icon-{if !$widget->isDisabled}circle-blank{else}off{/if} disabled"></span>
 									{/if}
 									
-									{if $__wcf->getSession()->getPermission('admin.content.ultimate.canEditWidget')}
+									{if $__wcf->getSession()->getPermission('admin.content.ultimate.canManageWidgets')}
 										<span title="{lang}wcf.global.button.edit{/lang}" class="icon icon16 icon-pencil jsEditButton jsTooltip" data-object-id="{@$widget->widgetID}"></span>
 									{else}
 										<span title="{lang}wcf.global.button.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
@@ -103,7 +103,7 @@
 				{else}
 					<p>{lang}wcf.acp.ultimate.widgetArea.addWidgetAreaFirst{/lang}</p>
 				{/if}
-				{if $__wcf->session->getPermission('admin.content.ultimate.canEditWidgetArea')}
+				{if $__wcf->session->getPermission('admin.content.ultimate.canManageWidgetAreas')}
 					<div class="formSubmit">
 						<button class="button default{if $action == 'add' || $widgetNodeList|count == 0} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.global.button.save{/lang}</button>
 					</div>
@@ -144,10 +144,10 @@
 	/* <![CDATA[ */
 		$(function() {
 			{if $action == 'edit'}
-				{if $__wcf->session->getPermission('admin.content.ultimate.canDeleteWidget')}
+				{if $__wcf->session->getPermission('admin.content.ultimate.canManageWidgets')}
 					new WCF.Action.Delete('ultimate\\data\\widget\\WidgetAction', $('.jsWidget'));
 				{/if}
-				{if $__wcf->session->getPermission('admin.content.ultimate.canEditWidget')}
+				{if $__wcf->session->getPermission('admin.content.ultimate.canManageWidgets')}
 					new WCF.Action.Toggle('ultimate\\data\\widget\\WidgetAction', $('.jsWidget'));
 					{if $widgetNodeList|count > 1}
 						var sortableNodes = $('.sortableNode');
@@ -166,8 +166,7 @@
 					new WCF.Sortable.List('widgetList', 'ultimate\\data\\widget\\WidgetAction', 0, { }, false);
 					ULTIMATE.Permission.addObject({
 						{* 'admin.content.ultimate.canEditWidgetArea': {if $__wcf->session->getPermission('admin.content.ultimate.canEditWidgetArea')}true{else}false{/if}, *}
-						'admin.content.ultimate.canEditWidget': {if $__wcf->session->getPermission('admin.content.ultimate.canEditWidget')}true{else}false{/if},
-						'admin.content.ultimate.canDeleteWidget': {if $__wcf->session->getPermission('admin.content.ultimate.canDeleteWidget')}true{else}false{/if}
+						'admin.content.ultimate.canManageWidgets': {if $__wcf->session->getPermission('admin.content.ultimate.canManageWidgets')}true{else}false{/if}
 					});
 					new ULTIMATE.Widget.Edit($('.jsWidget'));
 					new ULTIMATE.Widget.Transfer('widgetTypeSelectContainer', 'widgetList', 'ultimate\\data\\widget\\WidgetAction', 0);

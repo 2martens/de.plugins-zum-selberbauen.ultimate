@@ -54,14 +54,6 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.category';
 	
 	/**
-	 * @var	string[]
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededPermissions
-	 */
-	public $neededPermissions = array(
-		'admin.content.ultimate.canEditCategory'
-	);
-	
-	/**
 	 * Contains the category id.
 	 * @var	integer
 	*/
