@@ -1,8 +1,7 @@
 <a id="top"></a>
-<!-- HEADER -->
+
 <header id="pageHeader" class="{if $__wcf->getStyleHandler()->getStyle()->getVariable('useFluidLayout')}layoutFluid{else}layoutFixed{/if}">
 	<div>
-		<!-- top menu -->
 		<nav id="topMenu" class="userPanel">
 			<div class="{if $__wcf->getStyleHandler()->getStyle()->getVariable('useFluidLayout')}layoutFluid{else}layoutFixed{/if} clearfix">
 				{hascontent}
@@ -11,14 +10,10 @@
 					</ul>
 				{/hascontent}
 				
-				<!-- search area -->
 				{event name='searchArea'}
-				<!-- /search area -->
 			</div>
 		</nav>
-		<!-- /top menu -->
 		
-		<!-- logo -->
 		<div id="logo" class="logo">
 			<a href="{link}{/link}">
 				{if $__wcf->getStyleHandler()->getStyle()->getPageLogo()}
@@ -27,7 +22,6 @@
 				{event name='headerLogo'}
 			</a>
 		</div>
-		<!-- /logo -->
 		
 		{event name='headerContents'}
 		
@@ -67,17 +61,14 @@
 		
 			<ul class="navigationIcons">
 				<li id="toBottomLink"><a href="{$__wcf->getAnchor('bottom')}" title="{lang}wcf.global.scrollDown{/lang}" class="jsTooltip"><span class="icon icon16 icon-arrow-down"></span> <span class="invisible">{lang}wcf.global.scrollDown{/lang}</span></a></li>
-				<li id="sitemap" class="javascriptOnly"><a title="{lang}wcf.sitemap.title{/lang}" class="jsTooltip"><span class="icon icon16 icon-sitemap"></span> <span class="invisible">{lang}wcf.sitemap.title{/lang}</span></a></li>
+				<li id="sitemap" class="jsOnly"><a title="{lang}wcf.page.sitemap{/lang}" class="jsTooltip"><span class="icon icon16 icon-sitemap"></span> <span class="invisible">{lang}wcf.page.sitemap{/lang}</span></a></li>
 				{if $headerNavigation|isset}{@$headerNavigation}{/if}
 				{event name='navigationIcons'}
 			</ul>
 		</nav>
-		<!-- /navigation -->
 	</div>
 </header>
-<!-- /HEADER -->
 
-<!-- MAIN -->
 <div id="main" class="{if $__wcf->getStyleHandler()->getStyle()->getVariable('useFluidLayout')}layoutFluid{else}layoutFixed{/if}{if $sidebarOrientation|isset && $sidebar|isset} sidebarOrientation{@$sidebarOrientation|ucfirst} clearfix{if $sidebarOrientation == 'right' && $sidebarCollapsed} sidebarCollapsed{/if}{/if}">
 	<div>
 		{if $sidebar|isset}
@@ -101,10 +92,10 @@
 				</script>
 			{/if}
 		{/if}
-			
-		<!-- CONTENT -->
-		<section id="content" class="content clearfix">
 		
+		<section id="content" class="content clearfix">
+			
 			{event name='contents'}
 			
 			{if $skipBreadcrumbs|empty}{include file='breadcrumbs'}{/if}
+			
