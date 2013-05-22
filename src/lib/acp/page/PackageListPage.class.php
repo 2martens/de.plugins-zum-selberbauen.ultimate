@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the Index page.
+ * Contains the PackageList page.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -37,6 +37,6 @@ namespace ultimate\acp\page;
  * @subpackage	acp.page
  * @category	Ultimate CMS
  */
-class IndexPage extends \wcf\acp\page\IndexPage {
+class PackageListPage extends \wcf\acp\page\PackageListPage {
 	
 }
