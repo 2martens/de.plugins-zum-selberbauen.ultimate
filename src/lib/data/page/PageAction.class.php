@@ -79,6 +79,12 @@ class PageAction extends AbstractDatabaseObjectAction {
 		if (!empty($groupIDs)) {
 			$pageEditor->addGroups($groupIDs, false);
 		}
+		
+		// insert meta description/keywords
+		$metaDescription = (isset($this->parameters['metaDescription'])) ? $this->parameters['metaDescription'] : '';
+		$metaKeywords = (isset($this->parameters['metaKeywords'])) ? $this->parameters['metaKeywords'] : '';
+		$pageEditor->addMetaData($metaDescription, $metaKeywords);
+		
 		return $page;
 	}
 	
@@ -97,6 +103,8 @@ class PageAction extends AbstractDatabaseObjectAction {
 		
 		$contentID = (isset($this->parameters['contentID'])) ? intval($this->parameters['contentID']) : 0;
 		$groupIDs = (isset($this->parameters['groupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['groupIDs']) : array();
+		$metaDescription = (isset($this->parameters['metaDescription'])) ? $this->parameters['metaDescription'] : '';
+		$metaKeywords = (isset($this->parameters['metaKeywords'])) ? $this->parameters['metaKeywords'] : '';
 		
 		foreach ($this->objects as $pageEditor) {
 			/* @var $pageEditor \ultimate\data\page\PageEditor */
@@ -107,6 +115,8 @@ class PageAction extends AbstractDatabaseObjectAction {
 			if (!empty($groupIDs)) {
 				$pageEditor->addGroups($groupIDs);
 			}
+			
+			$pageEditor->addMetaData($metaDescription, $metaKeywords);
 		}
 	}
 }

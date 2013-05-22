@@ -35,6 +35,7 @@ use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * Provides functions to edit pages.
@@ -85,6 +86,15 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 			$statement->executeUnbuffered(array('ultimate.page.'.$objectID.'.%'));
 		}
 		WCF::getDB()->commitTransaction();
+		
+		// delete meta data
+		$conditionBuilder = new PreparedStatementConditionBuilder();
+		$conditionBuilder->add('objectID IN (?)', array($objectIDs));
+		$conditionBuilder->add('objectType = ?', 'page');
+		$sql = 'DELETE FROM ultimate'.WCF_N.'_meta
+			    '.$conditionBuilder->__toString();
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute($conditionBuilder->getParameters());
 		
 		return parent::deleteAll($objectIDs);
 	}
@@ -156,6 +166,30 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 				$this->pageID
 			));
 		}
+	}
+	
+	/**
+	 * Adds meta data for this page.
+	 *
+	 * @param	string	$metaDescription
+	 * @param	string	$metaKeywords
+	 */
+	public function addMetaData($metaDescription, $metaKeywords) {
+		$metaDescription = StringUtil::trim($metaDescription);
+		$metaKeywords = StringUtil::trim($metaKeywords);
+		if (empty($metaDescription) && empty($metaKeywords)) {
+			return;
+		}
+		$sql = 'REPLACE INTO ultimate'.WCF_N.'_meta
+		               (objectID, objectType, metaDescription, metaKeywords)
+		        VALUES (?, ?, ?, ?)';
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array(
+			$this->object->__get('categoryID'),
+			'page',
+			$metaDescription,
+			$metaKeywords
+		));
 	}
 	
 	/**

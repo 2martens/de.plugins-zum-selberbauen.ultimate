@@ -62,8 +62,8 @@
 			</dl>
 			<dl{if $errorField == 'categorySlug'} class="formError"{/if}>
 				<dt><label for="categorySlug">{lang}wcf.acp.ultimate.category.slug{/lang}</label></dt>
-			<dd>
-				<input type="text" id="categorySlug" name="categorySlug" value="{@$categorySlug}" class="long" required="required" pattern="^[a-z]+(?:\-{literal}{{/literal}1{literal}}{/literal}[a-z]+)*(?:\/{literal}{{/literal}1{literal}}{/literal}[a-z]+(?:\-{literal}{{/literal}1{literal}}{/literal}[a-z]+)*)*$" placeholder="{lang}wcf.acp.ultimate.category.slug.placeholder{/lang}" />
+				<dd>
+					<input type="text" id="categorySlug" name="categorySlug" value="{@$categorySlug}" class="long" required="required" pattern="^[a-z]+(?:\-{literal}{{/literal}1{literal}}{/literal}[a-z]+)*(?:\/{literal}{{/literal}1{literal}}{/literal}[a-z]+(?:\-{literal}{{/literal}1{literal}}{/literal}[a-z]+)*)*$" placeholder="{lang}wcf.acp.ultimate.category.slug.placeholder{/lang}" />
 					{if $errorField == 'categorySlug'}
 						<small class="innerError">
 							{if $errorType == 'empty'}
@@ -75,6 +75,7 @@
 					{/if}
 				</dd>
 			</dl>
+			{include file='metaInput' metaDescription=$metaDescription metaKeywords=$metaKeywords errorField=$errorField errorType=$errorType}
 			<dl{if $errorField == 'categoryParent'} class="formError"{/if}>
 				<dt><label for="categoryParent">{lang}wcf.acp.ultimate.category.parent{/lang}</label></dt>
 				<dd>

@@ -149,6 +149,9 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 			$this->pageSlug = $this->page->__get('pageSlug');
 			$this->pageParent = $this->page->__get('pageParent');
 			$this->lastModified = $this->page->__get('lastModified');
+			$metaData = $this->category->__get('metaData');
+			$this->metaDescription = $metaData['metaDescription'];
+			$this->metaKeywords = $metaData['metaKeywords'];
 			
 			I18nHandler::getInstance()->setOptions('pageTitle', PACKAGE_ID, $this->pageTitle, 'ultimate.page.\d+.pageTitle');
 		}
@@ -180,7 +183,9 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 				'status' => $this->statusID,
 				'visibility' => $this->visibility
 			),
-			'contentID' => $this->contentID
+			'contentID' => $this->contentID,
+			'metaDescription' => $this->metaDescription,
+			'metaKeywords' => $this->metaKeywords
 		);
 		
 		if ($this->visibility == 'protected') {

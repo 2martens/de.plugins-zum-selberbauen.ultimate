@@ -19,7 +19,7 @@
  * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
  * 
  * @author		Jim Martens
- * @copyright	2011-2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.content
@@ -39,7 +39,7 @@ use wcf\util\ArrayUtil;
  * Executes content-related functions.
  * 
  * @author		Jim Martens
- * @copyright	2011-2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.content
@@ -69,7 +69,7 @@ class ContentAction extends AbstractDatabaseObjectAction {
 	/**
 	 * Creates new content.
 	 * 
-	 * @return	Content
+	 * @return	\ultimate\data\content\Content
 	 */
 	public function create() {
 		$content = parent::create();
@@ -84,6 +84,11 @@ class ContentAction extends AbstractDatabaseObjectAction {
 		if (!empty($groupIDs)) {
 			$contentEditor->addGroups($groupIDs);
 		}
+		
+		// insert meta description/keywords
+		$metaDescription = (isset($this->parameters['metaDescription'])) ? $this->parameters['metaDescription'] : '';
+		$metaKeywords = (isset($this->parameters['metaKeywords'])) ? $this->parameters['metaKeywords'] : '';
+		$contentEditor->addMetaData($metaDescription, $metaKeywords);
 		
 		return $content;
 	}
@@ -104,6 +109,8 @@ class ContentAction extends AbstractDatabaseObjectAction {
 		$categoryIDs = (isset($this->parameters['categories'])) ? $this->parameters['categories'] : array();
 		$removeCategories = (isset($this->parameters['removeCategories'])) ? $this->parameters['removeCategories'] : array();
 		$groupIDs = (isset($this->parameters['groupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['groupIDs']) : array();
+		$metaDescription = (isset($this->parameters['metaDescription'])) ? $this->parameters['metaDescription'] : '';
+		$metaKeywords = (isset($this->parameters['metaKeywords'])) ? $this->parameters['metaKeywords'] : '';
 		
 		foreach ($this->objects as $contentEditor) {
 			/* @var $contentEditor \ultimate\data\content\ContentEditor */
@@ -118,6 +125,8 @@ class ContentAction extends AbstractDatabaseObjectAction {
 			if (!empty($groupIDs)) {
 				$contentEditor->addGroups($groupIDs);
 			}
+			
+			$contentEditor->addMetaData($metaDescription, $metaKeywords);
 		}
 	}
 	

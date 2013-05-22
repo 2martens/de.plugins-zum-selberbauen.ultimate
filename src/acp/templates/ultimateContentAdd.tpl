@@ -35,7 +35,7 @@
 			<dl{if $errorField == 'subject'} class="formError"{/if}>
 				<dt><label for="subject">{lang}wcf.acp.ultimate.content.title{/lang}</label></dt>
 				<dd>
-					<input type="text" id="subject" name="subject" value="{@$i18nPlainValues['subject']}" class="long" required="required" placeholder="{lang}wcf.acp.ultimate.content.title.placeholder{/lang}" />
+					<input type="text" id="subject" name="subject" value="{@$i18nPlainValues['subject']}" class="long" required="required" placeholder="{lang}wcf.acp.ultimate.content.title.placeholder{/lang}" pattern=".{literal}{{/literal}4,{literal}}{/literal}" />
 					{if $errorField == 'subject'}
 						<small class="innerError">
 							{if $errorType == 'empty'}
@@ -50,7 +50,7 @@
 			<dl{if $errorField == 'description'} class="formError"{/if}>
 				<dt><label for="description">{lang}wcf.acp.ultimate.content.description{/lang}</label></dt>
 				<dd>
-					<input type="text" id="description" name="description" value="{@$i18nPlainValues['description']}" class="long" required="required" placeholder="{lang}wcf.acp.ultimate.content.description.placeholder{/lang}" />
+					<input type="text" id="description" name="description" value="{@$i18nPlainValues['description']}" class="long" required="required" placeholder="{lang}wcf.acp.ultimate.content.description.placeholder{/lang}" pattern=".{literal}{{/literal}4,{literal}}{/literal}" />
 					{if $errorField == 'description'}
 						<small class="innerError">
 							{if $errorType == 'empty'}
@@ -77,7 +77,8 @@
 					{/if}
 				</dd>
 			</dl>
-			<dl {if $errorField == 'category'} class="formError"{/if}>
+			{include file='metaInput' metaDescription=$metaDescription metaKeywords=$metaKeywords errorField=$errorField errorType=$errorType}
+			<dl{if $errorField == 'category'} class="formError"{/if}>
 				<dt><label>{lang}wcf.acp.ultimate.content.categories{/lang}</label></dt>
 				<dd>
 					{htmlCheckboxes options=$categories name=categoryIDs selected=$categoryIDs}
@@ -107,7 +108,7 @@
 			{* end WCF Tagging *}
 			
 			{*
-			<dl {if $errorField == 'tags'} class="formError"{/if}>
+			<dl{if $errorField == 'tags'} class="formError"{/if}>
 				<dt><label for="tags">{lang}wcf.acp.ultimate.content.tags{/lang}</label></dt>
 				<dd>
 					<script type="text/javascript">

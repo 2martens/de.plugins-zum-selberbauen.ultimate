@@ -33,9 +33,11 @@ use wcf\system\WCF;
 
 /**
  * Represents a category entry.
+ * It offers the following properties (without '): 'categoryID', 'categoryParent', 'categoryTitle',
+ * 'categoryDescription', 'categorySlug', 'childCategories', 'contents' and 'metaData'.
  * 
  * @author		Jim Martens
- * @copyright	2011-2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.category
@@ -131,5 +133,6 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledObject {
 		parent::handleData($data);
 		$this->data['childCategories'] = $this->getChildCategories();
 		$this->data['contents'] = $this->getContents();
+		$this->data['metaData'] = $this->getMetaData($this->categoryID, 'category');
 	}
 }

@@ -95,6 +95,18 @@ class UltimateContentAddForm extends MessageForm {
 	public $slug = '';
 	
 	/**
+	 * Contains the meta description.
+	 * @var string
+	 */
+	public $metaDescription = '';
+	
+	/**
+	 * Contains the meta keywords.
+	 * @var string
+	 */
+	public $metaKeywords = '';
+	
+	/**
 	 * Contains the chosen categories.
 	 * @var	integer[]
 	 */
@@ -251,6 +263,8 @@ class UltimateContentAddForm extends MessageForm {
 		if (I18nHandler::getInstance()->isPlainValue('subject')) $this->subject = StringUtil::trim(I18nHandler::getInstance()->getValue('subject'));
 		if (I18nHandler::getInstance()->isPlainValue('description')) $this->description = StringUtil::trim(I18nHandler::getInstance()->getValue('description'));
 		if (isset($_POST['slug'])) $this->slug = StringUtil::trim($_POST['slug']);
+		if (isset($_POST['metaDescription'])) $this->metaDescription = StringUtil::trim($_POST['metaDescription']);
+		if (isset($_POST['metaKeywords'])) $this->metaKeywords = StringUtil::trim($_POST['metaKeywords']);
 		if (isset($_POST['categoryIDs']) && is_array($_POST['categoryIDs'])) $this->categoryIDs = ArrayUtil::toIntegerArray(($_POST['categoryIDs']));
 		else $this->categoryIDs = array();
 // 		$this->tagsI18n = I18nHandler::getInstance()->getValues('tags');
@@ -273,6 +287,8 @@ class UltimateContentAddForm extends MessageForm {
 		$this->validateSubject();
 		$this->validateDescription();
 		$this->validateSlug();
+		$this->validateMetaDescription();
+		$this->validateMetaKeywords();
 		$this->validateCategories();
 		$this->validateTags();
 		try {
@@ -314,7 +330,9 @@ class UltimateContentAddForm extends MessageForm {
 				'status' => $this->statusID,
 				'visibility' => $this->visibility
 			),
-			'categories' => $this->categoryIDs
+			'categories' => $this->categoryIDs,
+			'metaDescription' => $this->metaDescription,
+			'metaKeywords' => $this->metaKeywords
 		);
 		
 		if ($this->visibility == 'protected') {
@@ -336,7 +354,7 @@ class UltimateContentAddForm extends MessageForm {
 			$updateEntries['contentDescription'] = 'ultimate.content.'.$contentID.'.contentDescription';
 		}
 		if (!I18nHandler::getInstance()->isPlainValue('text')) {
-			I18nHandler::getInstance()->save('text', 'ultimate.content.'.$contentID.'.contentText', 'ultimate.content', PACKAGE_ID);
+// 			I18nHandler::getInstance()->save('text', 'ultimate.content.'.$contentID.'.contentText', 'ultimate.content', PACKAGE_ID);
 			$updateEntries['contentText'] = 'ultimate.content.'.$contentID.'.contentText';
 			
 			// parse URLs
@@ -345,25 +363,26 @@ class UltimateContentAddForm extends MessageForm {
 				foreach ($textValues as $languageID => $text) {
 					$textValues[$languageID] = PreParser::getInstance()->parse($text);
 				}
-				
+				I18nHandler::getInstance()->setValues('text', $textValues);
 				// nasty workaround, because you can't change the values of I18nHandler before save
-				$sql = 'UPDATE wcf'.WCF_N.'_language_item
-						SET	languageItemValue = ?
-						WHERE  languageID		= ?
-						AND	languageItem	  = ?
-						AND	packageID		 = ?';
-				$statement = WCF::getDB()->prepareStatement($sql);
-				WCF::getDB()->beginTransaction();
-				foreach ($textValues as $languageID => $text) {
-					$statement->executeUnbuffered(array(
-						$text,
-						$languageID,
-						'ultimate.content.'.$contentID.'.contentText',
-						PACKAGE_ID
-					));
-				}
-				WCF::getDB()->commitTransaction();
+// 				$sql = 'UPDATE wcf'.WCF_N.'_language_item
+// 						SET	languageItemValue = ?
+// 						WHERE  languageID		= ?
+// 						AND	languageItem	  = ?
+// 						AND	packageID		 = ?';
+// 				$statement = WCF::getDB()->prepareStatement($sql);
+// 				WCF::getDB()->beginTransaction();
+// 				foreach ($textValues as $languageID => $text) {
+// 					$statement->executeUnbuffered(array(
+// 						$text,
+// 						$languageID,
+// 						'ultimate.content.'.$contentID.'.contentText',
+// 						PACKAGE_ID
+// 					));
+// 				}
+// 				WCF::getDB()->commitTransaction();
 			}
+			I18nHandler::getInstance()->save('text', 'ultimate.content.'.$contentID.'.contentText', 'ultimate.content', PACKAGE_ID);
 		}
 		if (!empty($updateEntries)) {
 			$contentEditor = new ContentEditor($returnValues['returnValues']);
@@ -385,7 +404,8 @@ class UltimateContentAddForm extends MessageForm {
 		WCF::getTPL()->assign('success', true);
 		
 		// showing empty form
-		$this->subject = $this->description = $this->slug = $this->text = $this->publishDate = '';
+		$this->subject = $this->description = $this->slug = $this->metaDescription = $this->metaKeywords = '';
+		$this->text = $this->publishDate = '';
 		$this->publishDateTimestamp = $this->statusID = 0;
 		$this->visibility = 'public';
 		I18nHandler::getInstance()->reset();
@@ -406,6 +426,8 @@ class UltimateContentAddForm extends MessageForm {
 		WCF::getTPL()->assign(array(
 			'description' => $this->description,
 			'slug' => $this->slug,
+			'metaDescription' => $this->metaDescription,
+			'metaKeywords' => $this->metaKeywords,
 			'action' => 'add',
 			'categoryIDs' => $this->categoryIDs,
 			'categories' => $this->categories,
@@ -516,6 +538,28 @@ class UltimateContentAddForm extends MessageForm {
 		}
 		if (!ContentUtil::isAvailableSlug($this->slug, (isset($this->contentID)) ? $this->contentID : 0)) {
 			throw new UserInputException('slug', 'notUnique');
+		}
+	}
+	
+	/**
+	 * Validates the meta description.
+	 * 
+	 * @throws	\wcf\system\exception\UserInputException
+	 */
+	protected function validateMetaDescription() {
+		if (strlen($this->metaDescription) > 255) {
+			throw new UserInputException('metaDescription', 'tooLong');
+		}
+	}
+	
+	/**
+	 * Validates the meta keywords.
+	 *
+	 * @throws	\wcf\system\exception\UserInputException
+	 */
+	protected function validateMetaKeywords() {
+		if (strlen($this->metaKeywords) > 255) {
+			throw new UserInputException('metaKeywords', 'tooLong');
 		}
 	}
 	

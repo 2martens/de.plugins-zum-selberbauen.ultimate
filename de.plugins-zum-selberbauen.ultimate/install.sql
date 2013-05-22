@@ -128,6 +128,16 @@ CREATE TABLE ultimate1_menu_to_template (
 	UNIQUE KEY (templateID)
 );
 
+DROP TABLE IF EXISTS ultimate1_meta;
+CREATE TABLE ultimate1_meta (
+	metaID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	objectID INT(10) NOT NULL,
+	objectType ENUM('category', 'content', 'page') NOT NULL,
+	metaDescription VARCHAR(255) NOT NULL DEFAULT '',
+	metaKeywords VARCHAR(255) NOT NULL DEFAULT '',
+	UNIQUE KEY (objectID, objectType)
+);
+
 DROP TABLE IF EXISTS ultimate1_page;
 CREATE TABLE ultimate1_page (
 	pageID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,

@@ -19,7 +19,7 @@
  * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
  * 
  * @author		Jim Martens
- * @copyright	2011-2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.category
@@ -35,7 +35,7 @@ use wcf\data\AbstractDatabaseObjectAction;
  * Executes category-related actions.
  * 
  * @author		Jim Martens
- * @copyright	2011-2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.category
@@ -61,6 +61,45 @@ class CategoryAction extends AbstractDatabaseObjectAction {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsUpdate
 	 */
 	protected $permissionsUpdate = array('admin.content.ultimate.canEditCategory');
+	
+	/**
+	 * Creates new category.
+	 *
+	 * @return	\ultimate\data\category\Category
+	 */
+	public function create() {
+		$category = parent::create();
+		$categoryEditor = new CategoryEditor($category);
+	
+		// insert meta description/keywords
+		$metaDescription = (isset($this->parameters['metaDescription'])) ? $this->parameters['metaDescription'] : '';
+		$metaKeywords = (isset($this->parameters['metaKeywords'])) ? $this->parameters['metaKeywords'] : '';
+		$categoryEditor->addMetaData($metaDescription, $metaKeywords);
+	
+		return $category;
+	}
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#update
+	 */
+	public function update() {
+		if (isset($this->parameters['data'])) {
+			parent::update();
+		}
+		else {
+			if (empty($this->objects)) {
+				$this->readObjects();
+			}
+		}
+	
+		$metaDescription = (isset($this->parameters['metaDescription'])) ? $this->parameters['metaDescription'] : '';
+		$metaKeywords = (isset($this->parameters['metaKeywords'])) ? $this->parameters['metaKeywords'] : '';
+	
+		foreach ($this->objects as $categoryEditor) {
+			/* @var $categoryEditor \ultimate\data\category\CategoryEditor */
+			$categoryEditor->addMetaData($metaDescription, $metaKeywords);
+		}
+	}
 	
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#delete

@@ -35,6 +35,7 @@ use ultimate\system\menu\custom\CustomMenu;
 use ultimate\system\widgettype\WidgetTypeHandler;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\SystemException;
+use wcf\system\MetaTagHandler;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
@@ -43,7 +44,7 @@ use wcf\util\StringUtil;
  * Handles the templates.
  * 
  * @author		Jim Martens
- * @copyright	2011-2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.template
@@ -180,6 +181,21 @@ class TemplateHandler extends SingletonFactory {
 		));
 		if ($requestObject !== null) {
 			WCF::getTPL()->assign('title', $requestObject->__toString());
+		}
+		
+		// assign custom meta values (if existing)
+		if ($requestObject !== null) {
+			$metaData = $requestObject->__get('metaData');
+			$metaDescription = $metaData['metaDescription'];
+			$metaKeywords = $metaData['metaKeywords'];
+			if (!empty($metaDescription)) {
+				MetaTagHandler::getInstance()->removeTag('description');
+				MetaTagHandler::getInstance()->addTag('description', 'description', $metaDescription);
+			}
+			if (!empty($metaKeywords)) {
+				MetaTagHandler::getInstance()->removeTag('keywords');
+				MetaTagHandler::getInstance()->addTag('keywords', 'keywords', $metaKeywords);
+			}
 		}
 		
 		return WCF::getTPL()->fetch($this->templateName, 'ultimate');

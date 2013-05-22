@@ -19,7 +19,7 @@
  * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
  * 
  * @author		Jim Martens
- * @copyright	2011-2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	acp.form
@@ -40,7 +40,7 @@ use wcf\system\WCF;
  * Shows the UltimateCategoryEdit form.
  * 
  * @author		Jim Martens
- * @copyright	2011-2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	acp.form
@@ -96,6 +96,9 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 			$this->categoryTitle = $this->category->__get('categoryTitle');
 			$this->categorySlug = $this->category->__get('categorySlug');
 			$this->categoryDescription = $this->category->__get('categoryDescription');
+			$metaData = $this->category->__get('metaData');
+			$this->metaDescription = $metaData['metaDescription'];
+			$this->metaKeywords = $metaData['metaKeywords'];
 			I18nHandler::getInstance()->setOptions('categoryTitle', PACKAGE_ID, $this->categoryTitle, 'ultimate.category.\d+.categoryTitle');
 			I18nHandler::getInstance()->setOptions('categoryDescription', PACKAGE_ID, $this->categoryDescription, 'ultimate.category.\d+.categoryDescription');
 		}
@@ -130,7 +133,9 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 				'categorySlug' => $this->categorySlug,
 				'categoryParent' => $this->categoryParent,
 				'categoryDescription' => $this->categoryDescription
-			)
+			),
+			'metaDescription' => $this->metaDescription,
+			'metaKeywords' => $this->metaKeywords
 		);
 		
 		$this->objectAction = new CategoryAction(array($this->categoryID), 'update', $parameters);

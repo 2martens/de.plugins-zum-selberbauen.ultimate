@@ -27,6 +27,7 @@
  */
 namespace ultimate\data;
 use wcf\data\DatabaseObject;
+use wcf\system\WCF;
 
 /**
  * Every Ultimate data class should extend this class.
@@ -44,5 +45,26 @@ abstract class AbstractUltimateDatabaseObject extends DatabaseObject {
 	 */
 	public static function getDatabaseTableName() {
 		return 'ultimate'.WCF_N.'_'.static::$databaseTableName;
+	}
+	
+	/**
+	 * Returns the meta data of this content.
+	 * 
+	 * @param	integer		$objectID
+	 * @param	string		$objectType	(category, content, index or page)
+	 * 
+	 * @return	string[]
+	 */
+	protected function getMetaData($objectID, $objectType) {
+		$sql = 'SELECT    metaTable.metaDescription, metaTable.metaKeywords
+		        FROM      ultimate'.WCF_N.'_meta metaTable
+		        WHERE     metaTable.objectID = ?
+		        AND       metaTable.objectType = ?';
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array($objectID, $objectType));
+	
+		$metaData = array();
+		$metaData = $statement->fetchArray();
+		return (($metaData !== false) ? $metaData: array());
 	}
 }

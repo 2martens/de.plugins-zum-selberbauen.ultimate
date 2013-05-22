@@ -19,7 +19,7 @@
  * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
  * 
  * @author		Jim Martens
- * @copyright	2011-2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	acp.form
@@ -40,7 +40,7 @@ use wcf\util\StringUtil;
  * Shows the UltimateCategoryAdd form.
  * 
  * @author		Jim Martens
- * @copyright	2011-2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	acp.form
@@ -98,6 +98,18 @@ class UltimateCategoryAddForm extends AbstractForm {
 	public $categoryDescription = '';
 	
 	/**
+	 * Contains the meta description.
+	 * @var string
+	 */
+	public $metaDescription = '';
+	
+	/**
+	 * Contains the meta keywords.
+	 * @var string
+	 */
+	public $metaKeywords = '';
+	
+	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
 	 */
 	public function readParameters() {
@@ -123,6 +135,8 @@ class UltimateCategoryAddForm extends AbstractForm {
 		I18nHandler::getInstance()->readValues();
 		if (I18nHandler::getInstance()->isPlainValue('categoryTitle')) $this->categoryTitle = StringUtil::trim(I18nHandler::getInstance()->getValue('categoryTitle'));
 		if (I18nHandler::getInstance()->isPlainValue('categoryDescription')) $this->categoryDescription = StringUtil::trim(I18nHandler::getInstance()->getValue('categoryDescription'));
+		if (isset($_POST['metaDescription'])) $this->metaDescription = StringUtil::trim($_POST['metaDescription']);
+		if (isset($_POST['metaKeywords'])) $this->metaKeywords = StringUtil::trim($_POST['metaKeywords']);
 		
 		if (isset($_POST['categoryParent'])) $this->categoryParent = intval($_POST['categoryParent']);
 		if (isset($_POST['categorySlug'])) $this->categorySlug = StringUtil::trim($_POST['categorySlug']);
@@ -135,6 +149,8 @@ class UltimateCategoryAddForm extends AbstractForm {
 		parent::validate();
 		$this->validateTitle();
 		$this->validateSlug();
+		$this->validateMetaDescription();
+		$this->validateMetaKeywords();
 		$this->validateParent();
 	}
 	
@@ -150,7 +166,9 @@ class UltimateCategoryAddForm extends AbstractForm {
 				'categorySlug' => $this->categorySlug,
 				'categoryParent' => $this->categoryParent,
 				'categoryDescription' => $this->categoryDescription
-			)
+			),
+			'metaDescription' => $this->metaDescription,
+			'metaKeywords' => $this->metaKeywords
 		);
 		
 		$this->objectAction = new CategoryAction(array(), 'create', $parameters);
@@ -187,7 +205,7 @@ class UltimateCategoryAddForm extends AbstractForm {
 		
 		// showing empty form
 		$this->categoryParent = 0;
-		$this->categoryTitle = $this->categorySlug = $this->categoryDescription = '';
+		$this->categoryTitle = $this->categorySlug = $this->categoryDescription= $this->metaDescription = $this->metaKeywords = '';
 		I18nHandler::getInstance()->reset();
 		$this->categories = array();
 	}
@@ -204,6 +222,8 @@ class UltimateCategoryAddForm extends AbstractForm {
 			'categories' => $this->categories,
 			'categoryTitle' => $this->categoryTitle,
 			'categorySlug' => $this->categorySlug,
+			'metaDescription' => $this->metaDescription,
+			'metaKeywords' => $this->metaKeywords,
 			'action' => 'add'
 		));
 	}
@@ -251,6 +271,28 @@ class UltimateCategoryAddForm extends AbstractForm {
 		}
 		if (!CategoryUtil::isAvailableSlug($this->categorySlug, (isset($this->categoryID) ? $this->categoryID : 0), $this->categoryParent)) {
 			throw new UserInputException('categorySlug', 'notUnique');
+		}
+	}
+	
+	/**
+	 * Validates the meta description.
+	 *
+	 * @throws	\wcf\system\exception\UserInputException
+	 */
+	protected function validateMetaDescription() {
+		if (strlen($this->metaDescription) > 255) {
+			throw new UserInputException('metaDescription', 'tooLong');
+		}
+	}
+	
+	/**
+	 * Validates the meta keywords.
+	 *
+	 * @throws	\wcf\system\exception\UserInputException
+	 */
+	protected function validateMetaKeywords() {
+		if (strlen($this->metaKeywords) > 255) {
+			throw new UserInputException('metaKeywords', 'tooLong');
 		}
 	}
 	

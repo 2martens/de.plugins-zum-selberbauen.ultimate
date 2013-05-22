@@ -19,7 +19,7 @@
  * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
  * 
  * @author		Jim Martens
- * @copyright	2011-2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.content
@@ -40,12 +40,13 @@ use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\tagging\TagEngine;
 use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * Provides functions to edit content.
  * 
  * @author		Jim Martens
- * @copyright	2011-2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.content
@@ -115,6 +116,15 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 		
 		$pageAction = new PageAction($pageIDs, 'delete');
 		$pageAction->executeAction();
+		
+		// delete meta data
+		$conditionBuilder = new PreparedStatementConditionBuilder();
+		$conditionBuilder->add('objectID IN (?)', array($objectIDs));
+		$conditionBuilder->add('objectType = ?', 'content');
+		$sql = 'DELETE FROM ultimate'.WCF_N.'_meta
+			    '.$conditionBuilder->__toString();
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute($conditionBuilder->getParameters());
 		
 		return parent::deleteAll($objectIDs);
 	}
@@ -227,6 +237,30 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 			));
 		}
 		WCF::getDB()->commitTransaction();
+	}
+	
+	/**
+	 * Adds meta data for this content.
+	 * 
+	 * @param	string	$metaDescription
+	 * @param	string	$metaKeywords
+	 */
+	public function addMetaData($metaDescription, $metaKeywords) {
+		$metaDescription = StringUtil::trim($metaDescription);
+		$metaKeywords = StringUtil::trim($metaKeywords);
+		if (empty($metaDescription) && empty($metaKeywords)) {
+			return;
+		}
+		$sql = 'REPLACE INTO ultimate'.WCF_N.'_meta
+		               (objectID, objectType, metaDescription, metaKeywords)
+		        VALUES (?, ?, ?, ?)';
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array(
+			$this->object->__get('contentID'),
+			'content',
+			$metaDescription,
+			$metaKeywords
+		));
 	}
 	
 	/**

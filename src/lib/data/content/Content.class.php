@@ -34,9 +34,12 @@ use wcf\util\DateUtil;
 
 /**
  * Represents a content entry.
+ * It offers the following properties (without '): 'contentID', 'contentTitle', 'contentDescription',
+ * 'contentText', 'contentSlug', 'authorID', 'author', 'enableSmilies', 'enableHtml', 'enableBBCodes',
+ * 'publishDate', 'publishDateObject', 'lastModified', 'status', 'visibility', 'groups' and 'metaData'.
  * 
  * @author		Jim Martens
- * @copyright	2011-2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.content
@@ -69,7 +72,7 @@ class Content extends AbstractUltimateDatabaseObject {
 	 * 
 	 * @return	\wcf\data\user\group\UserGroup[]
 	 */
-	public function getGroups() {
+	protected function getGroups() {
 		$sql = 'SELECT	  groupTable.*
 		        FROM      ultimate'.WCF_N.'_user_group_to_content groupToContent
 		        LEFT JOIN wcf'.WCF_N.'_user_group groupTable
@@ -80,7 +83,9 @@ class Content extends AbstractUltimateDatabaseObject {
 		
 		$groups = array();
 		while ($group = $statement->fetchObject('\wcf\data\user\group\UserGroup')) {
-			$groups[$group->groupID] = $group;
+			if ($group !== null) {
+				$groups[$group->groupID] = $group;
+			}
 		}
 		return $groups;
 	}
@@ -119,5 +124,6 @@ class Content extends AbstractUltimateDatabaseObject {
 		$data['status'] = intval($data['status']);
 		parent::handleData($data);
 		$this->data['groups'] = $this->getGroups();
+		$this->data['metaData'] = $this->getMetaData($this->contentID, 'content');
 	}
 }

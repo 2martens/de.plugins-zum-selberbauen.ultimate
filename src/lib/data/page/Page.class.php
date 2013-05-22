@@ -19,7 +19,7 @@
  * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
  * 
  * @author		Jim Martens
- * @copyright	2011-2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.page
@@ -36,9 +36,12 @@ use wcf\util\DateUtil;
 
 /**
  * Represents a page.
+ * It offers the following properties (without '): 'pageID', 'authorID', 'author', 'pageParent', 'pageTitle',
+ * 'pageSlug', 'publishDate', 'publishDateObject', 'lastModified', 'status', 'visibility', 'groups', 
+ * 'childPages' and 'metaData'.
  * 
  * @author		Jim Martens
- * @copyright	2011-2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.page
@@ -158,5 +161,6 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 		parent::handleData($data);
 		$this->data['groups'] = $this->getGroups();
 		$this->data['childPages'] = $this->getChildPages();
+		$this->data['metaData'] = $this->getMetaData($this->pageID, 'page');
 	}
 }

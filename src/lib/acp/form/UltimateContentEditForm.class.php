@@ -152,6 +152,11 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		$this->lastModified = $this->content->__get('lastModified');
 		$this->categoryIDs = array_keys($this->content->__get('categories'));
 		
+		// read meta data
+		$metaData = $this->content->__get('metaData');
+		$this->metaDescription = $metaData['metaDescription'];
+		$this->metaKeywords = $metaData['metaKeywords'];
+		
 		I18nHandler::getInstance()->setOptions('subject', PACKAGE_ID, $this->subject, 'ultimate.content.\d+.contentTitle');
 		I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->description, 'ultimate.content.\d+.contentDescription');
 		I18nHandler::getInstance()->setOptions('text', PACKAGE_ID, $this->text, 'ultimate.content.\d+.contentText');
@@ -195,7 +200,6 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 					$textValues[$languageID] = PreParser::getInstance()->parse($text);
 				}
 				I18nHandler::getInstance()->setValues('text', $textValues);
-				I18nHandler::getInstance()->save('text', $this->text, 'ultimate.content', PACKAGE_ID);
 				
 				// nasty workaround, because you can't change the values of I18nHandler before save
 // 				$sql = 'UPDATE wcf'.WCF_N.'_language_item
@@ -215,6 +219,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 // 				}
 // 				WCF::getDB()->commitTransaction();
 			}
+			I18nHandler::getInstance()->save('text', $this->text, 'ultimate.content', PACKAGE_ID);
 		}
 		
 		$parameters = array(
@@ -231,7 +236,9 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 				'status' => $this->statusID,
 				'visibility' => $this->visibility
 			),
-			'categories' => $this->categoryIDs
+			'categories' => $this->categoryIDs,
+			'metaDescription' => $this->metaDescription,
+			'metaKeywords' => $this->metaKeywords
 		);
 		
 		if ($this->visibility == 'protected') {

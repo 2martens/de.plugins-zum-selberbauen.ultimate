@@ -97,6 +97,18 @@ class UltimatePageAddForm extends AbstractForm {
 	public $pageSlug = '';
 	
 	/**
+	 * Contains the meta description.
+	 * @var string
+	 */
+	public $metaDescription = '';
+	
+	/**
+	 * Contains the meta keywords.
+	 * @var string
+	 */
+	public $metaKeywords = '';
+	
+	/**
 	 * Contains all possible parent pages.
 	 * @var	\ultimate\data\page\Page[]
 	 */
@@ -207,6 +219,8 @@ class UltimatePageAddForm extends AbstractForm {
 		if (isset($_POST['pageParent'])) $this->pageParent = intval($_POST['pageParent']);
 		if (isset($_POST['content'])) $this->contentID = intval($_POST['content']);
 		if (isset($_POST['pageSlug'])) $this->pageSlug = StringUtil::trim($_POST['pageSlug']);
+		if (isset($_POST['metaDescription'])) $this->metaDescription = StringUtil::trim($_POST['metaDescription']);
+		if (isset($_POST['metaKeywords'])) $this->metaKeywords = StringUtil::trim($_POST['metaKeywords']);
 		if (isset($_POST['visibility'])) $this->visibility = StringUtil::trim($_POST['visibility']);
 		if (isset($_POST['groupIDs'])) $this->groupIDs = ArrayUtil::toIntegerArray($_POST['groupIDs']);
 		if (isset($_POST['publishDate'])) $this->publishDate = StringUtil::trim($_POST['publishDate']);
@@ -225,6 +239,8 @@ class UltimatePageAddForm extends AbstractForm {
 		$this->validatePageParent();
 		$this->validateTitle();
 		$this->validateSlug();
+		$this->validateMetaDescription();
+		$this->validateMetaKeywords();
 		$this->validatePublishDate();
 		$this->validateStatus();
 		$this->validateVisibility();
@@ -247,7 +263,9 @@ class UltimatePageAddForm extends AbstractForm {
 				'status' => $this->statusID,
 				'visibility' => $this->visibility
 			),
-			'contentID' => $this->contentID
+			'contentID' => $this->contentID,
+			'metaDescription' => $this->metaDescription,
+			'metaKeywords' => $this->metaKeywords
 		);
 		
 		if ($this->visibility == 'protected') {
@@ -276,7 +294,7 @@ class UltimatePageAddForm extends AbstractForm {
 		
 		// showing empty form
 		$this->contentID = $this->pageParent = $this->statusID = $this->publishDateTimestamp = 0;
-		$this->pageTitle = $this->pageSlug = $this->publishDate = '';
+		$this->pageTitle = $this->pageSlug = $this->publishDate = $this->metaDescription = $this->metaKeywords = '';
 		$this->visibility = 'public';
 		I18nHandler::getInstance()->reset();
 		$this->contents = $this->pages = $this->groupIDs = array();
@@ -296,6 +314,8 @@ class UltimatePageAddForm extends AbstractForm {
 			'pages' => $this->pages,
 			'pageParent' => $this->pageParent,
 			'pageSlug' => $this->pageSlug,
+			'metaDescription' => $this->metaDescription,
+			'metaKeywords' => $this->metaKeywords,
 			'groups' => $this->groups,
 			'groupIDs' => $this->groupIDs,
 			'publishDate' => $this->publishDate,
@@ -393,6 +413,28 @@ class UltimatePageAddForm extends AbstractForm {
 	
 		if (!PageUtil::isAvailableSlug($this->pageSlug, (isset($this->pageID) ? $this->pageID : 0), $this->pageParent)) {
 			throw new UserInputException('pageSlug', 'notUnique');
+		}
+	}
+	
+	/**
+	 * Validates the meta description.
+	 *
+	 * @throws	\wcf\system\exception\UserInputException
+	 */
+	protected function validateMetaDescription() {
+		if (strlen($this->metaDescription) > 255) {
+			throw new UserInputException('metaDescription', 'tooLong');
+		}
+	}
+	
+	/**
+	 * Validates the meta keywords.
+	 *
+	 * @throws	\wcf\system\exception\UserInputException
+	 */
+	protected function validateMetaKeywords() {
+		if (strlen($this->metaKeywords) > 255) {
+			throw new UserInputException('metaKeywords', 'tooLong');
 		}
 	}
 	
