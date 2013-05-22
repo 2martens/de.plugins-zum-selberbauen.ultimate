@@ -72,4 +72,25 @@ class LinkCategoryType extends AbstractCategoryType {
 	protected $objectTypes = array(
 		'com.woltlab.wcf.clipboardItem' => 'de.plugins-zum-selberbauen.ultimate.link'
 	);
+	
+	/**
+	 * @see	wcf\system\category\ICategoryType::canAddCategory()
+	 */
+	public function canAddCategory() {
+		return WCF::getSession()->getPermission($this->permissionPrefix.'.canManageCategories');
+	}
+	
+	/**
+	 * @see	wcf\system\category\ICategoryType::canDeleteCategory()
+	 */
+	public function canDeleteCategory() {
+		return WCF::getSession()->getPermission($this->permissionPrefix.'.canManageCategories');
+	}
+	
+	/**
+	 * @see	wcf\system\category\ICategoryType::canEditCategory()
+	 */
+	public function canEditCategory() {
+		return WCF::getSession()->getPermission($this->permissionPrefix.'.canManageCategories');
+	}
 }
