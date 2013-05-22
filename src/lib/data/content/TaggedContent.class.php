@@ -32,9 +32,10 @@ use wcf\system\WCF;
 
 /**
  * Represents a tagged content.
+ * In addition to TaggableContent it offers (without ') 'tags'.
  * 
  * @author		Jim Martens
- * @copyright	2011-2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.content

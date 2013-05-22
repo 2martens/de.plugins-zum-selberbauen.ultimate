@@ -29,7 +29,7 @@ namespace ultimate\data\content;
 use wcf\data\DatabaseObjectList;
 
 /**
- * Represents a list of contents
+ * Represents a list of contents.
  * 
  * @author		Jim Martens
  * @copyright	2011-2012 Jim Martens
