@@ -19,27 +19,15 @@
 	
 	<requiredpackages>
 		<requiredpackage minversion="2.0.0*">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="2.0.0*" file="requirements/com.woltlab.wcf.attachment.tar.gz">com.woltlab.wcf.attachment</requiredpackage>
-		<requiredpackage minversion="2.0.0*" file="requirements/com.woltlab.wcf.bbcode.tar.gz">com.woltlab.wcf.bbcode</requiredpackage>
-		<requiredpackage minversion="2.0.0*" file="requirements/com.woltlab.wcf.ckeditor.tar.gz">com.woltlab.wcf.ckeditor</requiredpackage>
-		<requiredpackage minversion="2.0.0*" file="requirements/com.woltlab.wcf.recaptcha.tar">com.woltlab.wcf.recaptcha</requiredpackage>
-		<requiredpackage minversion="2.0.0*" file="requirements/com.woltlab.wcf.message.tar.gz">com.woltlab.wcf.message</requiredpackage>
-		<requiredpackage minversion="2.0.0*" file="requirements/com.woltlab.wcf.user.tar.gz">com.woltlab.wcf.user</requiredpackage>
-		<requiredpackage minversion="2.0.0*" file="requirements/com.woltlab.wcf.moderation.tar.gz">com.woltlab.wcf.moderation</requiredpackage>
-		<requiredpackage minversion="2.0.0*" file="requirements/com.woltlab.wcf.like.tar.gz">com.woltlab.wcf.like</requiredpackage>
-		<requiredpackage minversion="2.0.0*" file="requirements/com.woltlab.wcf.comment.tar.gz">com.woltlab.wcf.comment</requiredpackage>
-		<requiredpackage minversion="2.0.0*" file="requirements/com.woltlab.wcf.message.sidebar.tar">com.woltlab.wcf.message.sidebar</requiredpackage>
-		<requiredpackage minversion="2.0.0*" file="requirements/com.woltlab.wcf.search.tar.gz">com.woltlab.wcf.search</requiredpackage>
 		<requiredpackage minversion="2.0.0*" file="requirements/com.woltlab.wcf.conversation.tar.gz">com.woltlab.wcf.conversation</requiredpackage>
-		<requiredpackage minversion="2.0.0*" file="requirements/com.woltlab.wcf.label.tar.gz">com.woltlab.wcf.label</requiredpackage>
-		<requiredpackage minversion="2.0.0*" file="requirements/com.woltlab.wcf.tagging.tar.gz">com.woltlab.wcf.tagging</requiredpackage>
-		<!-- <requiredpackage file="requirements/com.woltlab.wcf.visitTracker.tar.gz">com.woltlab.wcf.visitTracker</requiredpackage>-->
-		<requiredpackage minversion="2.0.0*" file="requirements/com.woltlab.wcf.legalNotice.tar.gz">com.woltlab.wcf.legalNotice</requiredpackage>
-		<requiredpackage minversion="2.0.0*" file="requirements/com.woltlab.wcf.poll.tar.gz">com.woltlab.wcf.poll</requiredpackage>
 		<requiredpackage file="requirements/de.plugins-zum-selberbauen.cachedList.tar.gz">de.plugins-zum-selberbauen.cachedList</requiredpackage>
 		<requiredpackage file="requirements/de.plugins-zum-selberbauen.messageACP.tar.gz">de.plugins-zum-selberbauen.messageACP</requiredpackage>
 		<requiredpackage file="requirements/de.plugins-zum-selberbauen.ultimateCore.tar.gz">de.plugins-zum-selberbauen.ultimateCore</requiredpackage>
 	</requiredpackages>
+	
+	<optionalpackages>
+		<optionalpackage minversion="2.0.0*" file="requirements/com.woltlab.wcf.legalNotice.tar.gz">com.woltlab.wcf.legalNotice</optionalpackage>
+	</optionalpackages>
 	
 	<instructions type="install">
 		<!-- files -->
