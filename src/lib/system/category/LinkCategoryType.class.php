@@ -27,6 +27,7 @@
  */
 namespace ultimate\system\category;
 use wcf\system\category\AbstractCategoryType;
+use wcf\system\WCF;
 
 /**
  * Manages the link category type.
