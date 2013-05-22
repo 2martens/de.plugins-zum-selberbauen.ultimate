@@ -19,7 +19,7 @@
  * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
  * 
  * @author		Jim Martens
- * @copyright	2011-2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	acp.form
@@ -53,7 +53,7 @@ use wcf\util\StringUtil;
  * Shows the UltimateContentAdd form.
  * 
  * @author		Jim Martens
- * @copyright	2011-2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	acp.form
@@ -198,7 +198,7 @@ class UltimateContentAddForm extends MessageForm {
 		
 		I18nHandler::getInstance()->register('subject');
 		I18nHandler::getInstance()->register('description');
-		I18nHandler::getInstance()->register('tags');
+// 		I18nHandler::getInstance()->register('tags');
 		I18nHandler::getInstance()->register('text');
 	}
 	
@@ -253,7 +253,8 @@ class UltimateContentAddForm extends MessageForm {
 		if (isset($_POST['slug'])) $this->slug = StringUtil::trim($_POST['slug']);
 		if (isset($_POST['categoryIDs']) && is_array($_POST['categoryIDs'])) $this->categoryIDs = ArrayUtil::toIntegerArray(($_POST['categoryIDs']));
 		else $this->categoryIDs = array();
-		$this->tagsI18n = I18nHandler::getInstance()->getValues('tags');
+// 		$this->tagsI18n = I18nHandler::getInstance()->getValues('tags');
+		if (isset($_POST['tags']) && is_array($_POST['tags'])) $this->tagsI18n = $_POST['tags'];
 		if (I18nHandler::getInstance()->isPlainValue('text')) $this->text = MessageUtil::stripCrap(trim(I18nHandler::getInstance()->getValue('text')));
 		if (isset($_POST['status'])) $this->statusID = intval($_POST['status']);
 		if (isset($_POST['visibility'])) $this->visibility = StringUtil::trim($_POST['visibility']);

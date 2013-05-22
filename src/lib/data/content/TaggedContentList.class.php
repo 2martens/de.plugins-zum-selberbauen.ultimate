@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the taggable content data model class.
+ * Contains the tagged content data model list class.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -26,13 +26,9 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\content;
-use ultimate\system\cache\builder\ContentTagCacheBuilder;
-use wcf\data\tag\Tag;
-use wcf\system\tagging\ITaggable;
-use wcf\system\WCF;
 
 /**
- * Represents a taggable content.
+ * Represents a list of tagged contents.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -41,41 +37,9 @@ use wcf\system\WCF;
  * @subpackage	data.content
  * @category	Ultimate CMS
  */
-class TaggableContent extends CategorizedContent implements ITaggable {
+class TaggedContentList extends ContentList {
 	/**
-	 * Returns the application of the result template.
-	 * 
-	 * @return	string
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObjectList.html#$decoratorClassName
 	 */
-	public function getApplication() {
-		return 'ultimate';
-	}
-	
-	/**
-	 * Returns the template name for the result output.
-	 *
-	 * @return	string
-	 */
-	public function getTemplateName() {
-		return '';
-	}
-	
-	/**
-	 * Returns a list of tagged objects.
-	 *
-	 * @param	\wcf\data\tag\Tag	$tag
-	 * 
-	 * @return	\wcf\data\DatabaseObjectList
-	 */
-	public function getObjectList(Tag $tag) {
-		// determine the contents tagged with given tag
-		$taggedContents = ContentTagCacheBuilder::getInstance()->getData(array(), 'contentsToTagID');
-		$taggedContents = $taggedContents[$tag->__get('tagID')];
-		$contentIDs = array_keys($taggedContents);
-		$taggedContentList = new TaggedContentList();
-		// ensure that only objects tagged with the given tag are read
-		$taggedContentList->setObjectIDs($contentIDs);
-		$taggedContentList->readObjects();
-		return $taggedContentList;
-	}
+	public $decoratorClassName = '\ultimate\data\content\TaggedContent';
 }

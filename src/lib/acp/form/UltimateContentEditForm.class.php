@@ -19,7 +19,7 @@
  * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
  * 
  * @author		Jim Martens
- * @copyright	2011-2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	acp.form
@@ -46,7 +46,7 @@ use wcf\util\DateUtil;
  * Shows the UltimateContentEdit form.
  * 
  * @author		Jim Martens
- * @copyright	2011-2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	acp.form
@@ -152,16 +152,10 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		$this->lastModified = $this->content->__get('lastModified');
 		$this->categoryIDs = array_keys($this->content->__get('categories'));
 		
-		$languages = WCF::getLanguage()->getLanguages();
-		foreach ($languages as $languageID => $language) {
-			$tags = TagEngine::getInstance()->getObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->contentID, array($languageID));
-			if (!empty($tags)) $this->tagsI18n[$languageID] = implode(',', $tags);
-		}
-		
 		I18nHandler::getInstance()->setOptions('subject', PACKAGE_ID, $this->subject, 'ultimate.content.\d+.contentTitle');
 		I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->description, 'ultimate.content.\d+.contentDescription');
 		I18nHandler::getInstance()->setOptions('text', PACKAGE_ID, $this->text, 'ultimate.content.\d+.contentText');
-		I18nHandler::getInstance()->setOptions('tags', PACKAGE_ID, '', 'ultimate.content.\d+.contentTags');
+// 		I18nHandler::getInstance()->setOptions('tags', PACKAGE_ID, '', 'ultimate.content.\d+.contentTags');
 		
 		parent::readData();
 	}
@@ -193,31 +187,33 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 			I18nHandler::getInstance()->remove($text, PACKAGE_ID);
 		} else {
 			$this->text = $text;
-			I18nHandler::getInstance()->save('text', $this->text, 'ultimate.content', PACKAGE_ID);
+// 			I18nHandler::getInstance()->save('text', $this->text, 'ultimate.content', PACKAGE_ID);
 			// parse URLs
 			if ($this->preParse) {
 				$textValues = I18nHandler::getInstance()->getValues('text');
 				foreach ($textValues as $languageID => $text) {
 					$textValues[$languageID] = PreParser::getInstance()->parse($text);
 				}
+				I18nHandler::getInstance()->setValues('text', $textValues);
+				I18nHandler::getInstance()->save('text', $this->text, 'ultimate.content', PACKAGE_ID);
 				
 				// nasty workaround, because you can't change the values of I18nHandler before save
-				$sql = 'UPDATE wcf'.WCF_N.'_language_item
-						SET	languageItemValue = ?
-						WHERE  languageID		= ?
-						AND	languageItem	  = ?
-						AND	packageID		 = ?';
-				$statement = WCF::getDB()->prepareStatement($sql);
-				WCF::getDB()->beginTransaction();
-				foreach ($textValues as $languageID => $text) {
-					$statement->executeUnbuffered(array(
-						$text,
-						$languageID,
-						'ultimate.content.'.$this->contentID.'.contentText',
-						PACKAGE_ID
-					));
-				}
-				WCF::getDB()->commitTransaction();
+// 				$sql = 'UPDATE wcf'.WCF_N.'_language_item
+// 						SET	languageItemValue = ?
+// 						WHERE  languageID		= ?
+// 						AND	languageItem	  = ?
+// 						AND	packageID		 = ?';
+// 				$statement = WCF::getDB()->prepareStatement($sql);
+// 				WCF::getDB()->beginTransaction();
+// 				foreach ($textValues as $languageID => $text) {
+// 					$statement->executeUnbuffered(array(
+// 						$text,
+// 						$languageID,
+// 						'ultimate.content.'.$this->contentID.'.contentText',
+// 						PACKAGE_ID
+// 					));
+// 				}
+// 				WCF::getDB()->commitTransaction();
 			}
 		}
 		
@@ -252,7 +248,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 				continue;
 			}
 			TagEngine::getInstance()->addObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->content->__get('contentID'), $tags, $languageID);
-			$this->tagsI18n[$languageID] = implode(',', $tags);
+			$this->tagsI18n[$languageID] = Tag::buildString($tags);
 		}
 		$this->saved();
 		

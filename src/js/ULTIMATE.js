@@ -960,6 +960,131 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 };
 
 /**
+ * Namespace for ULTIMATE.Tagging
+ * @namespace
+ */
+ULTIMATE.Tagging = {};
+
+/**
+ * Handles multiple tag input fields.
+ * 
+ * @param	{String}	elementID
+ * @param	{Boolean}	forceSelection
+ * @param	{Object}	values
+ * @param	{Object}	availableLanguages
+ */
+ULTIMATE.Tagging.MultipleLanguageInput = WCF.MultipleLanguageInput.extend({
+	/**
+	 * Initializes multiple language ability for given element id.
+	 * 
+	 * @param	{Integer}		elementID
+	 * @param	{Boolean}		forceSelection
+	 * @param	{Object}		values
+	 * @param	{Object}		availableLanguages
+	 */
+	init: function(elementID, forceSelection, values, availableLanguages) {
+		this._element = $('#' + $.wcfEscapeID(elementID));
+		this._forceSelection = forceSelection;
+		this._values = values;
+		this._availableLanguages = availableLanguages;
+		
+		// default to current user language
+		this._languageID = LANGUAGE_ID;
+		if (this._element.length == 0) {
+			console.debug("[WCF.MultipleLanguageInput] element id '" + elementID + "' is unknown");
+			return;
+		}
+		$('.tagContainer').hide();
+		$('#tagContainer' + this._languageID).show();
+		
+		// build selection handler
+		var $enableOnInit = ($.getLength(this._values) > 0) ? true : false;
+		this._insertedDataAfterInit = $enableOnInit;
+		this._prepareElement($enableOnInit);
+		
+		// listen for submit event
+		this._element.parents('form').submit($.proxy(this._submit, this));
+		
+		this._didInit = true;
+	},
+	
+	/**
+	 * Changes the currently active language.
+	 * 
+	 * @param	{jQuery}	event
+	 */
+	_changeLanguage: function(event) {
+		var $button = $(event.currentTarget);
+		this._insertedDataAfterInit = true;
+		
+		// save current value
+		$('#tagContainer' + this._languageID).hide();
+		
+		// set new language
+		this._languageID = $button.data('languageID');
+		$('#tagContainer' + this._languageID).show();
+		
+		// update marking
+		this._list.children('li').removeClass('active');
+		$button.addClass('active');
+		
+		// update label
+		this._list.prev('.dropdownToggle').children('span').text(this._availableLanguages[this._languageID]);
+		
+		// close selection and set focus on input element
+		if (this._didInit) {
+			this._element.blur().focus();
+		}
+	},
+	
+	/**
+	 * Prepares language variables on before submit.
+	 */
+	_submit: function() {
+		// insert hidden form elements on before submit
+		if (!this._isEnabled) {
+			return 0xDEADBEEF;
+		}
+	}
+});
+
+/**
+ * Editable multiple language tag list.
+ * 
+ * @see	WCF.EditableItemList
+ */
+ULTIMATE.Tagging.TagList = WCF.Tagging.TagList.extend({
+	/**
+	 * language ID
+	 * @var Integer
+	 */
+	_languageID: 0,
+	
+	/**
+	 * @param	{Integer}	languageID
+	 * @see	WCF.EditableItemList.init()
+	 */
+	init: function(itemListSelector, searchInputSelector, maxLength, languageID) {
+		this._languageID = languageID;
+		this._super(itemListSelector, searchInputSelector, maxLength);
+	},
+	
+	/**
+	 * @see	WCF.EditableItemList._submit()
+	 */
+	_submit: function() {
+		this._keyDown(null);
+		
+		for (var $i = 0, $length = this._data.length; $i < $length; $i++) {
+			// deleting items leaves crappy indices
+			if (this._data[$i]) {
+				$('<input type="hidden" name="tags[' + this._languageID + '][]" value="' + this._data[$i] + '" />').appendTo(this._form);
+			}
+		};
+	}
+});
+
+/**
  * Namespace for ULTIMATE.Widget
  * @namespace
  */

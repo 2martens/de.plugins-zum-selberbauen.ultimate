@@ -88,6 +88,25 @@
 					{/if}
 				</dd>
 			</dl>
+			
+			{* WCF Tagging *}
+			<div id="tagContainerContainer">
+			{foreach from=$availableLanguages key=languageID item=languageName}
+				{include file='tagInput' tags=$availableTags[$languageID] languageID=$languageID tagInputSuffix=$languageID}
+			{/foreach}
+			</div>
+			<script type="text/javascript">
+			/* <![CDATA[ */
+				$(function() {
+					var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
+					var $optionValues = { {implode from=$tagsI18n key=languageID item=value}'{@$languageID}': "{$value}"{/implode} };
+					new ULTIMATE.Tagging.MultipleTagLanguageInput('tagContainerContainer', true, $optionValues, $availableLanguages);
+				});
+			/* ]]> */
+			</script>
+			{* end WCF Tagging *}
+			
+			{*
 			<dl {if $errorField == 'tags'} class="formError"{/if}>
 				<dt><label for="tags">{lang}wcf.acp.ultimate.content.tags{/lang}</label></dt>
 				<dd>
@@ -156,6 +175,7 @@
 					{/if}
 				</dd>
 			</dl>
+			*}
 			
 			<dl{if $errorField == 'text'} class="formError"{/if}>
 				<dt><label for="text">{lang}wcf.acp.ultimate.content.text{/lang}</label></dt>
