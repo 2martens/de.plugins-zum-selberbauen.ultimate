@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/templateListener.xsd">
 	<import>
+		<!-- frontend language -->
 		<templatelistener name="buttonLanguage">
 			<environment>user</environment>
 			<templatename>headInclude</templatename>
@@ -12,11 +13,34 @@
 'ultimate.button.publish': '{lang}ultimate.button.publish{/lang}',
 'ultimate.button.update': '{lang}ultimate.button.update{/lang}']]></templatecode>
 		</templatelistener>
+		<!-- /frontend language -->
+		
+		<!-- frontend headInclude -->
+		<templatelistener name="includeUltimateJS">
+			<environment>user</environment>
+			<templatename>headInclude</templatename>
+			<eventname>javascriptInclude</eventname>
+			<templatecode><![CDATA[<script type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.js"></script>
+]]></templatecode>
+		</templatelistener>
+		
+		<templatelistener name="includeUltimateStyle">
+			<environment>user</environment>
+			<templatename>headInclude</templatename>
+			<eventname>stylesheets</eventname>
+			<templatecode><![CDATA[<link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/3rdParty/jquery-ui.css" />
+{@$__wcf->getUltimateStyleHandler()->getStylesheet()}
+]]></templatecode>
+		</templatelistener>
+		<!-- /frontend headInclude -->
+		
+		<!-- ACP logo -->
 		<templatelistener name="headerLogoUltimateACP">
 			<environment>admin</environment>
 			<templatename>header</templatename>
 			<eventname>headerLogo</eventname>
 			<templatecode><![CDATA[<img src="{@$__wcf->getPath()}acp/images/wcfLogo2.svg" alt="" width="300" height="58" />]]></templatecode>
 		</templatelistener>
+		<!-- /ACP logo -->
 	</import>
 </data>

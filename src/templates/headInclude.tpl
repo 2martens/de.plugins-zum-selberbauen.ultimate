@@ -13,16 +13,34 @@
 	var SECURITY_TOKEN = '{@SECURITY_TOKEN}';
 	var LANGUAGE_ID = {@$__wcf->getLanguage()->languageID};
 	var TIME_NOW = {@TIME_NOW};
-	var PACKAGE_ID = {@PACKAGE_ID};
 	//]]>
 </script>
+{if JQUERY_SOURCE == 'google'}
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+{elseif JQUERY_SOURCE == 'microsoft'}
+<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.2/jquery-ui.min.js"></script>
+{else}
 <script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.min.js"></script>
 <script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui.min.js"></script>
+{/if}
+{if JQUERY_SOURCE != 'local'}
+<script type="text/javascript">
+	//<![CDATA[
+	if (!window.jQuery) {
+		document.write('<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.min.js"><\/script>');
+		document.write('<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui.min.js"><\/script>');
+	}
+	//]]>
+</script>
+{/if}
 <script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui.nestedSortable.js"></script>
 <script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery-ui.timepicker.min.js"></script>
-<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.js"></script>
-<script type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.cookie.js"></script>
+<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF{if !ENABLE_DEBUG_MODE}.min{/if}.js"></script>
+{*
 <script type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.js"></script>
+*}
 <script type="text/javascript">
 	//<![CDATA[
 	WCF.User.init({@$__wcf->user->userID}, '{@$__wcf->user->username|encodeJS}');
@@ -32,9 +50,11 @@
 
 <!-- Stylesheets -->
 {@$__wcf->getStyleHandler()->getStylesheet()}
+{*
 <link rel="stylesheet" type="text/css" href="{@$__wcf->getPath()}style/3rdParty/jquery-ui.css" />
 {@$__wcf->getUltimateStyleHandler()->getStylesheet()}
-
+*}
+{event name='stylesheets'}
 
 <noscript>
 	<style type="text/css">
@@ -56,6 +76,7 @@
 			'__daysShort': [ '{lang}wcf.date.day.sun{/lang}', '{lang}wcf.date.day.mon{/lang}', '{lang}wcf.date.day.tue{/lang}', '{lang}wcf.date.day.wed{/lang}', '{lang}wcf.date.day.thu{/lang}', '{lang}wcf.date.day.fri{/lang}', '{lang}wcf.date.day.sat{/lang}' ],
 			'__months': [ '{lang}wcf.date.month.january{/lang}', '{lang}wcf.date.month.february{/lang}', '{lang}wcf.date.month.march{/lang}', '{lang}wcf.date.month.april{/lang}', '{lang}wcf.date.month.may{/lang}', '{lang}wcf.date.month.june{/lang}', '{lang}wcf.date.month.july{/lang}', '{lang}wcf.date.month.august{/lang}', '{lang}wcf.date.month.september{/lang}', '{lang}wcf.date.month.october{/lang}', '{lang}wcf.date.month.november{/lang}', '{lang}wcf.date.month.december{/lang}' ], 
 			'__monthsShort': [ '{lang}wcf.date.month.jan{/lang}', '{lang}wcf.date.month.feb{/lang}', '{lang}wcf.date.month.mar{/lang}', '{lang}wcf.date.month.apr{/lang}', '{lang}wcf.date.month.may{/lang}', '{lang}wcf.date.month.jun{/lang}', '{lang}wcf.date.month.jul{/lang}', '{lang}wcf.date.month.aug{/lang}', '{lang}wcf.date.month.sep{/lang}', '{lang}wcf.date.month.oct{/lang}', '{lang}wcf.date.month.nov{/lang}', '{lang}wcf.date.month.dec{/lang}' ],
+			'wcf.clipboard.item.unmarkAll': '{lang}wcf.clipboard.item.unmarkAll{/lang}',
 			'wcf.date.relative.now': '{lang}wcf.date.relative.now{/lang}',
 			'wcf.date.relative.minutes': '{capture assign=relativeMinutes}{lang}wcf.date.relative.minutes{/lang}{/capture}{@$relativeMinutes|encodeJS}',
 			'wcf.date.relative.hours': '{capture assign=relativeHours}{lang}wcf.date.relative.hours{/lang}{/capture}{@$relativeHours|encodeJS}',
@@ -102,7 +123,7 @@
 			'wcf.style.changeStyle': '{lang}wcf.style.changeStyle{/lang}'
 			{event name='javascriptLanguageImport'}
 		});
-				
+		
 		if (jQuery.browser.touch) $('html').addClass('touch');
 		new WCF.Date.Time();
 		new WCF.Effect.SmoothScroll();
@@ -112,10 +133,10 @@
 		WCF.Dropdown.init();
 		WCF.System.PageNavigation.init('.pageNavigation');
 		WCF.Date.Picker.init();
-		WCF.System.JumpToAnchor.execute();
+		WCF.System.MobileNavigation.init();
 		
 		{event name='javascriptInit'}
-
+		
 		{if $executeCronjobs}
 			new WCF.Action.Proxy({
 				autoSend: true,
