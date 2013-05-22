@@ -458,6 +458,13 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.menu.noContents"><![CDATA[No menus found]]></item>
 		<!-- /menu -->
 		
+		<!-- meta -->
+		<item name="wcf.acp.ultimate.meta.description"><![CDATA[Meta description]]></item>
+		<item name="wcf.acp.ultimate.meta.description.error.tooLong"><![CDATA[The meta description has a maximum length of 255 characters.]]></item>
+		<item name="wcf.acp.ultimate.meta.keywords"><![CDATA[Meta keywords]]></item>
+		<item name="wcf.acp.ultimate.meta.keywords.error.tooLong"><![CDATA[The meta keywords have a total length of 255 characters.]]></item>
+		<!-- /meta -->
+		
 		<!-- page -->
 		<item name="wcf.acp.ultimate.page.add"><![CDATA[Add page]]></item>
 		<item name="wcf.acp.ultimate.page.edit"><![CDATA[Edit page]]></item>

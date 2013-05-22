@@ -462,6 +462,13 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.menu.noContents"><![CDATA[Keine Menüs gefunden]]></item>
 		<!-- /menu -->
 		
+		<!-- meta -->
+		<item name="wcf.acp.ultimate.meta.description"><![CDATA[Meta-Beschreibung]]></item>
+		<item name="wcf.acp.ultimate.meta.description.error.tooLong"><![CDATA[Die Meta-Beschreibung darf maximal 255 Zeichen lang sein.]]></item>
+		<item name="wcf.acp.ultimate.meta.keywords"><![CDATA[Meta-Keywords]]></item>
+		<item name="wcf.acp.ultimate.meta.keywords.error.tooLong"><![CDATA[Die Meta-Keywords dürfen insgesamt maximal 255 Zeichen lang sein.]]></item>
+		<!-- /meta -->
+		
 		<!-- page -->
 		<item name="wcf.acp.ultimate.page.add"><![CDATA[Seite hinzufügen]]></item>
 		<item name="wcf.acp.ultimate.page.edit"><![CDATA[Seite bearbeiten]]></item>
