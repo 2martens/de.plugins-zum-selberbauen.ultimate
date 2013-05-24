@@ -81,6 +81,7 @@ class WidgetNodeList extends \RecursiveIteratorIterator implements \Countable {
 			// empty node
 			$parentWidget = new Widget(null, array(
 				'widgetID' => 0,
+				'widgetTypeID' => 0,
 				'widgetAreaID' => $this->widgetAreaID,
 				'widgetName' => '',
 				'widgetParent' => '',

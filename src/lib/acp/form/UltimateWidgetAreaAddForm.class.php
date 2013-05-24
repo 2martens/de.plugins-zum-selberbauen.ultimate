@@ -86,7 +86,7 @@ class UltimateWidgetAreaAddForm extends AbstractForm {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
-		$this->widgetNodeList = new WidgetNodeList(0, 0, true);
+		$this->widgetNodeList = new WidgetNodeList(0, true);
 		// read widget cache
 		$this->widgetTypes = WidgetTypeCacheBuilder::getInstance()->getData(array(), 'widgetTypes');
 		

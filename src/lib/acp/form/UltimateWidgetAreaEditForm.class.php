@@ -84,7 +84,7 @@ class UltimateWidgetAreaEditForm extends UltimateWidgetAreaAddForm {
 	
 		// reading object fields
 		$this->widgetAreaName = $this->widgetArea->__get('widgetAreaName');
-		$this->widgetNodeList = new WidgetNodeList($this->widgetAreaID, 0, true);
+		$this->widgetNodeList = new WidgetNodeList($this->widgetAreaID, true);
 			
 		// read widget type cache
 		$this->widgetTypes = WidgetTypeCacheBuilder::getInstance()->getData(array(), 'widgetTypes');
