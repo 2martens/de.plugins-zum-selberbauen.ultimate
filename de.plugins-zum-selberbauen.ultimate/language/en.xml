@@ -625,6 +625,11 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<!-- /block dialog -->
 		
 		<!-- /template -->
+		
+		<!-- widget area -->
+		<item name="wcf.acp.ultimate.widgetArea.list"><![CDATA[]]></item>
+		<item name="wcf.acp.ultimate.widgetArea.noContents"><![CDATA[]]></item>
+		<!-- /widget area -->
 	</category>
 	
 	<category name="wcf.clipboard">

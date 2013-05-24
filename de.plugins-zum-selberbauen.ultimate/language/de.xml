@@ -628,6 +628,11 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.template.layoutSelector.status.currentlyEditing"><![CDATA[Wird bearbeitet]]></item>
 		<!-- block dialog -->
 		<!-- /template -->
+		
+		<!-- widget area -->
+		<item name="wcf.acp.ultimate.widgetArea.list"><![CDATA[]]></item>
+		<item name="wcf.acp.ultimate.widgetArea.noContents"><![CDATA[]]></item>
+		<!-- /widget area -->
 	</category>
 	
 	<category name="wcf.clipboard">
