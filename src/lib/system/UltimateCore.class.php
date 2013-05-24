@@ -36,9 +36,6 @@ use wcf\system\request\RouteHandler;
 use wcf\system\style\StyleHandler;
 use wcf\system\WCF;
 
-//defines global version
-if (!defined('ULTIMATE_VERSION')) define('ULTIMATE_VERSION', '1.0.0 Alpha 1 (Indigo)');
-
 /**
  * The core class of the Ultimate CMS.
  * 
