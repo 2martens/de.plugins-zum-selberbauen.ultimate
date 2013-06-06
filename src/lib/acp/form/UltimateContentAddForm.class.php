@@ -203,14 +203,22 @@ class UltimateContentAddForm extends MessageForm {
 	protected $startTime = 0;
 	
 	/**
+	 * True, if the form has been successfully finished.
+	 * 
+	 * @var	boolean
+	 */
+	protected $success = false;
+	
+	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
 	 */
 	public function readParameters() {
 		parent::readParameters();
+		if (isset($_REQUEST['success'])) $this->success = true;
 		
 		I18nHandler::getInstance()->register('subject');
 		I18nHandler::getInstance()->register('description');
-// 		I18nHandler::getInstance()->register('tags');
+		I18nHandler::getInstance()->register('tags');
 		I18nHandler::getInstance()->register('text');
 	}
 	
@@ -267,8 +275,8 @@ class UltimateContentAddForm extends MessageForm {
 		if (isset($_POST['metaKeywords'])) $this->metaKeywords = StringUtil::trim($_POST['metaKeywords']);
 		if (isset($_POST['categoryIDs']) && is_array($_POST['categoryIDs'])) $this->categoryIDs = ArrayUtil::toIntegerArray(($_POST['categoryIDs']));
 		else $this->categoryIDs = array();
-// 		$this->tagsI18n = I18nHandler::getInstance()->getValues('tags');
-		if (isset($_POST['tags']) && is_array($_POST['tags'])) $this->tagsI18n = $_POST['tags'];
+		$this->tagsI18n = I18nHandler::getInstance()->getValues('tags');
+// 		if (isset($_POST['tags']) && is_array($_POST['tags'])) $this->tagsI18n = $_POST['tags'];
 		if (I18nHandler::getInstance()->isPlainValue('text')) $this->text = MessageUtil::stripCrap(trim(I18nHandler::getInstance()->getValue('text')));
 		if (isset($_POST['status'])) $this->statusID = intval($_POST['status']);
 		if (isset($_POST['visibility'])) $this->visibility = StringUtil::trim($_POST['visibility']);
@@ -284,6 +292,7 @@ class UltimateContentAddForm extends MessageForm {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#validate
 	 */
 	public function validate() {
+		$this->success = false;
 		$this->validateSubject();
 		$this->validateDescription();
 		$this->validateSlug();
@@ -613,6 +622,7 @@ class UltimateContentAddForm extends MessageForm {
 		if (!I18nHandler::getInstance()->validateValue('tags', true)) {
 			throw new UserInputException('tags');
 		}
+		
 		foreach ($this->tagsI18n as $languageID => $tags) {
 			$this->tagsI18n[$languageID] = (!empty($tags) ? Tag::splitString($tags) : array());
 		}

@@ -75,7 +75,7 @@
 					{/if}
 				</dd>
 			</dl>
-			{include file='metaInput' metaDescription=$metaDescription metaKeywords=$metaKeywords errorField=$errorField errorType=$errorType}
+			{include file='metaInput' application='ultimate' metaDescription=$metaDescription metaKeywords=$metaKeywords errorField=$errorField errorType=$errorType}
 			<dl{if $errorField == 'categoryParent'} class="formError"{/if}>
 				<dt><label for="categoryParent">{lang}wcf.acp.ultimate.category.parent{/lang}</label></dt>
 				<dd>

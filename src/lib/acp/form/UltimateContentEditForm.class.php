@@ -38,9 +38,11 @@ use wcf\form\RecaptchaForm;
 use wcf\system\bbcode\PreParser;
 use wcf\system\language\I18nHandler;
 use wcf\system\menu\acp\ACPMenu;
+use wcf\system\request\LinkHandler;
 use wcf\system\tagging\TagEngine;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
+use wcf\util\HeaderUtil;
 
 /**
  * Shows the UltimateContentEdit form.
@@ -160,7 +162,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		I18nHandler::getInstance()->setOptions('subject', PACKAGE_ID, $this->subject, 'ultimate.content.\d+.contentTitle');
 		I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->description, 'ultimate.content.\d+.contentDescription');
 		I18nHandler::getInstance()->setOptions('text', PACKAGE_ID, $this->text, 'ultimate.content.\d+.contentText');
-// 		I18nHandler::getInstance()->setOptions('tags', PACKAGE_ID, '', 'ultimate.content.\d+.contentTags');
+		I18nHandler::getInstance()->setOptions('tags', PACKAGE_ID, '', 'ultimate.content.\d+.contentTags');
 		
 		parent::readData();
 	}
@@ -262,7 +264,14 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		$dateTime = DateUtil::getDateTimeByTimestamp($this->publishDateTimestamp);
 		$this->formatDate($dateTime);
 		
-		WCF::getTPL()->assign('success', true);
+		$url = LinkHandler::getInstance()->getLink('UltimateContentEdit',
+			array(
+				'id' => $this->content->__get('contentID')
+			),
+			'success=true'
+		);
+		HeaderUtil::redirect($url);
+		exit;
 	}
 	
 	/**
@@ -280,6 +289,10 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 			'publishButtonLangRaw' => $this->publishButtonLang,
 			'action' => 'edit'
 		));
+		
+		if ($this->success) {
+			WCF::getTPL()->assign('success', true);
+		}
 		
 		// hide the save button if you edit a page which is already scheduled or published
 		if (!empty($this->saveButtonLang)) {

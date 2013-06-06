@@ -77,7 +77,7 @@
 					{/if}
 				</dd>
 			</dl>
-			{include file='metaInput' metaDescription=$metaDescription metaKeywords=$metaKeywords errorField=$errorField errorType=$errorType}
+			{include file='metaInput' application='ultimate' metaDescription=$metaDescription metaKeywords=$metaKeywords errorField=$errorField errorType=$errorType}
 			<dl{if $errorField == 'category'} class="formError"{/if}>
 				<dt><label>{lang}wcf.acp.ultimate.content.categories{/lang}</label></dt>
 				<dd>
@@ -91,17 +91,24 @@
 			</dl>
 			
 			{* WCF Tagging *}
-			<div id="tagContainerContainer">
+			<!--<div id="tagContainerContainer">-->
 			{foreach from=$availableLanguages key=languageID item=languageName}
 				{include file='tagInput' tags=$availableTags[$languageID] languageID=$languageID tagInputSuffix=$languageID}
 			{/foreach}
-			</div>
+			<dl id="tagContainerReal" class="jsOnly">
+				<dd>
+					<input id="tagSearchInputReal" type="text" value="" class="long" />
+					<small>{lang}wcf.tagging.tags.description{/lang}</small>
+				</dd>
+			</dl>
+			<!--</div>-->
+			
 			<script type="text/javascript">
 			/* <![CDATA[ */
 				$(function() {
 					var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
 					var $optionValues = { {implode from=$tagsI18n key=languageID item=value}'{@$languageID}': "{$value}"{/implode} };
-					new ULTIMATE.Tagging.MultipleTagLanguageInput('tagContainerContainer', true, $optionValues, $availableLanguages);
+					new ULTIMATE.Tagging.MultipleLanguageInput('tagContainer', 'tagSearchInput', true, $optionValues, $availableLanguages);
 				});
 			/* ]]> */
 			</script>
