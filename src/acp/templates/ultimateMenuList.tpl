@@ -42,16 +42,10 @@
 	</nav>
 </div>
 {hascontent}
-<div id="menuTableContainer" class="tabularBox tabularBoxTitle marginTop shadow">
-	<nav class="menu tableMenu">
-		<ul>
-			<li{if $action == ''} class="active"{/if}>
-				<a href="{link application='ultimate' controller='UltimateMenuList'}{/link}"><span>{lang}wcf.acp.ultimate.menu.list.all{/lang}</span> <span class="badge badgeInverse" title="{lang}wcf.acp.ultimate.menu.list.count{/lang}">{#$items}</span></a>
-			</li>
-			
-			{event name='ultimateMenuListOptions'}
-		</ul>
-	</nav>
+<div id="menuTableContainer" class="tabularBox tabularBoxTitle marginTop">
+	<header>
+		<h2>{lang}wcf.acp.ultimate.menu.list{/lang} <span class="badge badgeInverse" title="{lang}wcf.acp.ultimate.menu.list.count{/lang}">{#$items}</span></h2>
+	</header>
 	<table class="table jsClipboardContainer" data-type="de.plugins-zum-selberbauen.ultimate.menu">
 		<thead>
 			<tr>

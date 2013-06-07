@@ -33,16 +33,10 @@
 </div>
 
 {hascontent}
-<div id="templateTableContainer" class="tabularBox tabularBoxTitle marginTop shadow">
-	<nav class="menu tableMenu">
-		<ul>
-			<li{if $action == ''} class="active"{/if}>
-				<a href="{link application='ultimate' controller='UltimateTemplateList'}{/link}"><span>{lang}wcf.acp.ultimate.template.list.all{/lang}</span> <span class="badge badgeInverse" title="{lang}wcf.acp.ultimate.template.list.count{/lang}">{#$items}</span></a>
-			</li>
-			
-			{event name='ultimateTemplateListOptions'}
-		</ul>
-	</nav>
+<div id="templateTableContainer" class="tabularBox tabularBoxTitle marginTop">
+	<header>
+		<h2>{lang}wcf.acp.ultimate.template.list{/lang} <span class="badge badgeInverse" title="{lang}wcf.acp.ultimate.template.list.count{/lang}">{#$items}</span></h2>
+	</header>
 	<table class="table jsClipboardContainer" data-type="de.plugins-zum-selberbauen.ultimate.template">
 		<thead>
 			<tr>

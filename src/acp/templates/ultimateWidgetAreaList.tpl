@@ -34,15 +34,9 @@
 
 {hascontent}
 <div id="widgetAreaTableContainer" class="tabularBox tabularBoxTitle marginTop shadow">
-	<nav class="menu tableMenu">
-		<ul>
-			<li{if $action == ''} class="active"{/if}>
-				<a href="{link application='ultimate' controller='UltimateWidgetAreaList'}{/link}"><span>{lang}wcf.acp.ultimate.widgetArea.list.all{/lang}</span> <span class="badge badgeInverse" title="{lang}wcf.acp.ultimate.widgetArea.list.count{/lang}">{#$items}</span></a>
-			</li>
-			
-			{event name='ultimateWidgetAreaListOptions'}
-		</ul>
-	</nav>
+	<header>
+		{lang}wcf.acp.ultimate.widgetArea.list{/lang} <span class="badge badgeInverse" title="{lang}wcf.acp.ultimate.widgetArea.list.count{/lang}">{#$items}</span></h2>
+	</header>
 	<table class="table jsClipboardContainer" data-type="de.plugins-zum-selberbauen.ultimate.widgetArea">
 		<thead>
 			<tr>
