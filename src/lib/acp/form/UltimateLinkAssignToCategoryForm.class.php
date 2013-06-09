@@ -28,7 +28,7 @@
 namespace ultimate\acp\form;
 use ultimate\data\link\CategorizedLink;
 use ultimate\data\link\LinkAction;
-use wcf\acp\form\ACPForm;
+use wcf\form\AbstractForm;
 use wcf\system\category\CategoryHandler;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\exception\IllegalLinkException;
@@ -47,7 +47,7 @@ use wcf\util\ArrayUtil;
  * @subpackage	acp.form
  * @category	Ultimate CMS
  */
-class UltimateLinkAssignToCategoryForm extends ACPForm {
+class UltimateLinkAssignToCategoryForm extends AbstractForm {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
 	 */

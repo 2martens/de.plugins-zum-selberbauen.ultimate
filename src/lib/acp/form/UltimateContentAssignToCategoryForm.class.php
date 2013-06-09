@@ -29,7 +29,7 @@ namespace ultimate\acp\form;
 use ultimate\data\content\CategorizedContent;
 use ultimate\data\content\ContentAction;
 use ultimate\system\cache\builder\CategoryCacheBuilder;
-use wcf\acp\form\ACPForm;
+use wcf\form\AbstractForm;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\SystemException;
@@ -47,7 +47,7 @@ use wcf\util\ArrayUtil;
  * @subpackage	acp.form
  * @category	Ultimate CMS
  */
-class UltimateContentAssignToCategoryForm extends ACPForm {
+class UltimateContentAssignToCategoryForm extends AbstractForm {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
 	 */
