@@ -24,7 +24,7 @@
 					
 					{if $contentMetaDisplaySelected[$requestType]|isset || $contentMetaDisplaySelected|count == 0}
 						{hascontent}
-							<small class="meta" id="metaAbove-{$contentID}">{content}{if $metaAbove[$contentID][@$__wcf->getLanguage()->languageID]|isset}{@$metaAbove[$contentID][@$__wcf->getLanguage()->languageID]}{else}{@$metaAbove[$contentID]}{/if}{/content}</small>
+							<small class="meta" id="metaAbove-{$contentID}">{content}{if $metaAbove[$contentID][$__wcf->getLanguage()->__get('languageID')]|isset}{@$metaAbove[$contentID][$__wcf->getLanguage()->__get('languageID')]}{else}{@$metaAbove[$contentID]}{/if}{/content}</small>
 						{/hascontent}
 					{/if}
 				</header>
@@ -51,7 +51,7 @@
 				{if $contentMetaDisplaySelected[$requestType]|isset || $contentMetaDisplaySelected|count == 0}
 					<footer>
 						{hascontent}
-							<small class="meta" id="metaBelow-{$contentID}">{content}{if $metaBelow[$contentID][@$__wcf->getLanguage()->languageID]|isset}{@$metaBelow[$contentID][@$__wcf->getLanguage()->languageID]}{else}{@$metaBelow[$contentID]}{/if}{/content}</small>
+							<small class="meta" id="metaBelow-{$contentID}">{content}{if $metaBelow[$contentID][$__wcf->getLanguage()->__get('languageID')]|isset}{@$metaBelow[$contentID][$__wcf->getLanguage()->__get('languageID')]}{else}{@$metaBelow[$contentID]}{/if}{/content}</small>
 						{/hascontent}
 					</footer>
 				{/if}					
