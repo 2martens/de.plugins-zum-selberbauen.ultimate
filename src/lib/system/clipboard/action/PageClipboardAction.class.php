@@ -100,7 +100,7 @@ class PageClipboardAction implements IClipboardAction {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.clipboard.action.IClipboardAction.html#filterObjects
 	 */
-	public function filterObjects($objects, $typeData) {
+	public function filterObjects(array $objects, array $typeData) {
 		return $objects;
 	}
 	
