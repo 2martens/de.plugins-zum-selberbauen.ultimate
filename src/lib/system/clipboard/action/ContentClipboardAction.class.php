@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\clipboard\action;
+use wcf\data\clipboard\action\ClipboardAction;
 use wcf\system\clipboard\action\IClipboardAction;
 use wcf\system\clipboard\ClipboardEditorItem;
 use wcf\system\exception\SystemException;
@@ -52,15 +53,15 @@ class ContentClipboardAction implements IClipboardAction {
 	
 	/**
 	 * @param	\ultimate\data\content\Content[]	$objects
-	 * @param	string								$actionName
+	 * @param	\wcf\data\clipboard\action\ClipboardAction	$action
 	 * @return	\wcf\system\clipboard\ClipboardEditorItem|null
 	 * 
 	 * @throws	\wcf\system\exception\SystemException	if given action name is invalid
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.clipboard.action.IClipboardAction.html#execute
 	 */
-	public function execute(array $objects, $actionName) {
+	public function execute(array $objects, ClipboardAction $action) {
 		$item = new ClipboardEditorItem();
-		
+		$actionName = $action->__get('actionName');
 		// handle actions
 		switch ($actionName) {
 			case 'assignContentToCategory':

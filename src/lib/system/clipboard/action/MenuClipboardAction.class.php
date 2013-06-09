@@ -51,15 +51,15 @@ class MenuClipboardAction implements IClipboardAction {
 	
 	/**
 	 * @param	\ultimate\data\menu\Menu[]	$objects
-	 * @param	string						$actionName
+	 * @param	\wcf\data\clipboard\action\ClipboardAction	$action
 	 * @return	\wcf\system\clipboard\ClipboardEditorItem|null
-	 *
+	 * 
 	 * @throws	\wcf\system\exception\SystemException	if given action name is invalid
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.clipboard.action.IClipboardAction.html#execute
 	 */
-	public function execute(array $objects, $actionName) {
+	public function execute(array $objects, ClipboardAction $action) {
 		$item = new ClipboardEditorItem();
-	
+		$actionName = $action->__get('actionName');
 		// handle actions
 		switch ($actionName) {
 			case 'deleteMenu':
