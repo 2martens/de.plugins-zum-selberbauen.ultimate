@@ -148,7 +148,7 @@ class BlockAction extends AbstractDatabaseObjectAction {
 		}
 		
 		if (empty($metaBelowContent_i18n)) {
-			I18nHandler::getInstance()->remove($metaBeloweContent, PACKAGE_ID);
+			I18nHandler::getInstance()->remove($metaBelowContent, PACKAGE_ID);
 			$metaBelowContent = $block->__get('metaBelowContent');
 		} else {
 			I18nHandler::getInstance()->setValues('metaBelowContent', $metaBelowContent_i18n);
