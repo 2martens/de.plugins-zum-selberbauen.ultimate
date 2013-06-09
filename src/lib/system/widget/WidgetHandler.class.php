@@ -100,7 +100,7 @@ class WidgetHandler extends SingletonFactory {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.SingletonFactory.html#init
 	 */
 	protected function init() {
-		$this->widgets = WidgetCacheBuilder::getInstance()->getData(array(), 'widgetsShowOrder');
+		$this->widgets = WidgetCacheBuilder::getInstance()->getData(array(), 'widgets');
 	}
 	
 	/**
