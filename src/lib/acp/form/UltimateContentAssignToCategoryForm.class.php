@@ -108,11 +108,14 @@ class UltimateContentAssignToCategoryForm extends AbstractForm {
 		
 		// get content ids
 		$contents = ClipboardHandler::getInstance()->getMarkedItems($this->typeID);
-		if (!isset($contents['de.plugins-zum-selberbauen.ultimate.content']) || empty($contents['de.plugins-zum-selberbauen.ultimate.content'])) throw new IllegalLinkException();
+		if (empty($contents))
+		{
+			throw new IllegalLinkException();
+		}
 		
 		// load contents
-		$this->contentIDs = array_keys($contents['de.plugins-zum-selberbauen.ultimate.content']);
-		$this->contents = $contents['de.plugins-zum-selberbauen.ultimate.content'];
+		$this->contentIDs = array_keys($contents);
+		$this->contents = $contents;
 		foreach ($this->contents as $contentID => $content) {
 			$this->contents[$contentID] = new CategorizedContent($content);
 		}

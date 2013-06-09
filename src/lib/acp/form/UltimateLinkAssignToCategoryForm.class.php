@@ -108,11 +108,14 @@ class UltimateLinkAssignToCategoryForm extends AbstractForm {
 		
 		// get link ids
 		$links = ClipboardHandler::getInstance()->getMarkedItems($this->typeID);
-		if (!isset($links['de.plugins-zum-selberbauen.ultimate.link']) || empty($links['de.plugins-zum-selberbauen.ultimate.link'])) throw new IllegalLinkException();
+		if (empty($links))
+		{
+			throw new IllegalLinkException();
+		}
 		
 		// load links
-		$this->linkIDs = array_keys($links['de.plugins-zum-selberbauen.ultimate.link']);
-		$this->links = $links['de.plugins-zum-selberbauen.ultimate.link'];
+		$this->linkIDs = array_keys($links);
+		$this->links = $links;
 		foreach ($this->links as $linkID => $link) {
 			$this->links[$linkID] = new CategorizedLink($link);
 		}
