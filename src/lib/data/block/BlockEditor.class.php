@@ -26,6 +26,8 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\block;
+use ultimate\system\cache\builder\TemplateCacheBuilder;
+
 use ultimate\system\cache\builder\BlockCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
@@ -97,5 +99,6 @@ class BlockEditor extends DatabaseObjectEditor implements IEditableCachedObject 
 	 */
 	public static function resetCache() {
 		BlockCacheBuilder::getInstance()->reset();
+		TemplateCacheBuilder::getInstance()->reset();
 	}
 }

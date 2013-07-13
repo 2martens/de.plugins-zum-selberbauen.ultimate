@@ -366,6 +366,8 @@ class ContentBlockType extends AbstractBlockType {
 		
 		$metaAbove = array();
 		$metaBelow = array();
+		$metaAbove_i18n = array();
+		$metaBelow_i18n = array();
 		$readMoreLink = array();
 		foreach ($this->contents as $contentID => $content) {
 			// get category output
@@ -419,7 +421,7 @@ class ContentBlockType extends AbstractBlockType {
 				$__metaAboveContent = str_replace('$tags', $tagOutput, $__metaAboveContent);
 				$metaAbove[$contentID] = $__metaAboveContent;
 			} elseif ($metaAboveContent_i18n != null) {
-				$metaAbove[$contentID] = array();
+				$metaAbove_i18n[$contentID] = array();
 				foreach ($metaAboveContent_i18n as $languageID => $_metaAboveContent) {
 					$__metaAboveContent = str_replace('$date', $date, $_metaAboveContent);
 					$__metaAboveContent = str_replace('$time', $time, $__metaAboveContent);
@@ -427,7 +429,7 @@ class ContentBlockType extends AbstractBlockType {
 					$__metaAboveContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaAboveContent);
 					$__metaAboveContent = str_replace('$categories', $categoryOutput, $__metaAboveContent);
 					$__metaAboveContent = str_replace('$tags', $tagOutput, $__metaAboveContent);
-					$metaAbove[$contentID][$languageID] = $__metaAboveContent;
+					$metaAbove_i18n[$contentID][$languageID] = $__metaAboveContent;
 				}
 			}
 			
@@ -440,15 +442,15 @@ class ContentBlockType extends AbstractBlockType {
 				$__metaBelowContent = str_replace('$tags', $tagOutput, $__metaBelowContent);
 				$metaBelow[$contentID] = $__metaBelowContent;
 			} elseif ($metaBelowContent_i18n != null) {
-				$metaBelow[$contentID] = array();
-				foreach ($metaAboveContent_i18n as $languageID => $_metaBelowContent) {
+				$metaBelow_i18n[$contentID] = array();
+				foreach ($metaBelowContent_i18n as $languageID => $_metaBelowContent) {
 					$__metaBelowContent = str_replace('$date', $date, $_metaBelowContent);
 					$__metaBelowContent = str_replace('$time', $time, $__metaBelowContent);
 					$__metaBelowContent = str_replace('$comments', count($content->__get('comments')), $__metaBelowContent);
 					$__metaBelowContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaBelowContent);
 					$__metaBelowContent = str_replace('$categories', $categoryOutput, $__metaBelowContent);
 					$__metaBelowContent = str_replace('$tags', $tagOutput, $__metaBelowContent);
-					$metaBelow[$contentID][$languageID] = $__metaBelowContent;
+					$metaBelow_i18n[$contentID][$languageID] = $__metaBelowContent;
 				}
 			}
 		}
@@ -476,6 +478,8 @@ class ContentBlockType extends AbstractBlockType {
 			// settings
 			'metaAbove' => $metaAbove,
 			'metaBelow' => $metaBelow,
+			'metaAbove_i18n' => $metaAbove_i18n,
+			'metaBelow_i18n' => $metaBelow_i18n,
 			'readMoreLink' => $readMoreLink,
 			// contents
 			'contents' => $this->contents,

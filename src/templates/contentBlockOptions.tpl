@@ -79,7 +79,7 @@
 				</dd>
 				<dd class="inputInteger">
 					<label for="numberOfContents_{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.contentTab.query.numberOfContents.description{/lang}">{lang}wcf.acp.ultimate.template.contentTab.query.numberOfContents{/lang}</label>
-					<input type="number" step="1" min="1" max="{$contents|count}" id="numberOfPosts_{$blockID}" name="numberOfContents" value="{$numberOfContents}" data-block-id="{$blockID}" data-is-block="true" />
+					<input type="number" step="1" min="1" max="{$contents|count}" id="numberOfContents_{$blockID}" name="numberOfContents" value="{$numberOfContents}" data-block-id="{$blockID}" data-is-block="true" />
 				</dd>
 				<dd class="inputInteger">
 					<label for="offset_{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.contentTab.query.offset.description{/lang}">{lang}wcf.acp.ultimate.template.contentTab.query.offset{/lang}</label>
@@ -156,7 +156,7 @@
 				<dd class="inputMultiSelect">
 					<label for="contentMetaDisplay_{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.contentTab.meta.contentMetaDisplay.description{/lang}">{lang}wcf.acp.ultimate.template.contentTab.meta.contentMetaDisplay{/lang}</label>
 					
-					<select id="contentMetaDisplay_{$blockID}" name="contentMetaDisplay[]" data-block-id="{$blockID}" data-is-block="true" multiple="multiple">
+					<select id="contentMetaDisplay_{$blockID}" name="contentMetaDisplay" data-block-id="{$blockID}" data-is-block="true" multiple="multiple">
 						<option value="category"{if $contentMetaDisplaySelected['category']|isset} selected="selected"{/if}>{lang}wcf.acp.ultimate.template.contentTab.meta.contentMetaDisplay.category{/lang}</option>
 						<option value="page"{if $contentMetaDisplaySelected['page']|isset} selected="selected"{/if}>{lang}wcf.acp.ultimate.template.contentTab.meta.contentMetaDisplay.page{/lang}</option>
 						<option value="content"{if $contentMetaDisplaySelected['content']|isset} selected="selected"{/if}>{lang}wcf.acp.ultimate.template.contentTab.meta.contentMetaDisplay.content{/lang}</option>

@@ -26,6 +26,8 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\block;
+use wcf\system\WCF;
+
 use ultimate\data\blocktype\BlockType;
 use ultimate\data\AbstractUltimateDatabaseObject;
 
@@ -54,6 +56,32 @@ class Block extends AbstractUltimateDatabaseObject {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableIndexName
 	 */
 	protected static $databaseTableIndexName = 'blockID';
+	
+	/**
+	 * Creates a new instance of the DatabaseObject class.
+	 *
+	 * @param	mixed				$id
+	 * @param	array				$row
+	 * @param	wcf\data\DatabaseObject		$object
+	 */
+	public function __construct($id, array $row = null, DatabaseObject $object = null) {
+		if ($id !== null) {
+			$sql = "SELECT	*
+				FROM	".static::getDatabaseTableName()."
+				WHERE	".static::getDatabaseTableIndexName()." = ?";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array($id));
+			$row = $statement->fetchArray();
+			
+			// enforce data type 'array'
+			if ($row === false) $row = array();
+		}
+		else if ($object !== null) {
+			$row = $object->data;
+		}
+	
+		$this->handleData($row);
+	}
 	
 	/**
 	 * @see http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#__get

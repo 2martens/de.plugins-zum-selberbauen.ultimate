@@ -101,6 +101,7 @@ class BlockAction extends AbstractDatabaseObjectAction {
 		$metaAboveContent_i18n = array();
 		$metaBelowContent_i18n = array();
 		$readMoreText_i18n = array();
+		
 		if (isset($parameters['additionalData']['readMoreText_i18n'])) {
 			$readMoreText_i18n = $parameters['additionalData']['readMoreText_i18n'];
 			unset($parameters['additionalData']['readMoreText_i18n']);
