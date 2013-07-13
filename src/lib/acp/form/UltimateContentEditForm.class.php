@@ -31,6 +31,7 @@ use ultimate\data\content\CategorizedContent;
 use ultimate\data\content\Content;
 use ultimate\data\content\ContentAction;
 use ultimate\data\content\ContentEditor;
+use ultimate\system\cache\builder\ContentTagCloudCacheBuilder;
 use wcf\data\tag\Tag;
 use wcf\form\AbstractForm;
 use wcf\form\MessageForm;
@@ -117,7 +118,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		/* @var $tag \wcf\data\tag\TagCloudTag */
 		foreach ($languages as $languageID => $language) {
 			// group tags by language
-			$this->tagsI18n[$languageID] = Tag::buildString(TagEngine::getInstance()->getObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->content->__get('contentID'), array($languageID)));	
+			$this->availableTags[$languageID] = TagEngine::getInstance()->getObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->content->__get('contentID'), array($languageID));	
 		}
 		
 		// get status data

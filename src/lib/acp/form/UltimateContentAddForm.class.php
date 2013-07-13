@@ -29,7 +29,6 @@ namespace ultimate\acp\form;
 use ultimate\data\content\ContentAction;
 use ultimate\data\content\ContentEditor;
 use ultimate\system\cache\builder\CategoryCacheBuilder;
-use ultimate\system\cache\builder\ContentTagCloudCacheBuilder;
 use ultimate\util\ContentUtil;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\tag\Tag;
@@ -231,21 +230,6 @@ class UltimateContentAddForm extends MessageForm {
 		
 		$this->groups = UserGroupCacheBuilder::getInstance()->getData(array(), 'groups');
 		
-		// read tags
-		$tags = ContentTagCloudCacheBuilder::getInstance()->getData();
-		
-		$languages = WCF::getLanguage()->getLanguages();
-		
-		/* @var $language \wcf\data\language\Language */
-		/* @var $tag \wcf\data\tag\TagCloudTag */
-		foreach ($languages as $languageID => $language) {
-			$this->availableTags[$languageID] = array();
-			foreach ($tags as $tagID => $tag) {
-				if ($tag->__get('languageID') != $languageID) continue;
-				$this->availableTags[$languageID][] = $tag;
-			}
-		}
-		
 		// fill status options
 		$this->statusOptions[0] = WCF::getLanguage()->get('wcf.acp.ultimate.status.draft');
 		$this->statusOptions[1] = WCF::getLanguage()->get('wcf.acp.ultimate.status.pendingReview');
@@ -276,13 +260,11 @@ class UltimateContentAddForm extends MessageForm {
 		if (isset($_POST['categoryIDs']) && is_array($_POST['categoryIDs'])) $this->categoryIDs = ArrayUtil::toIntegerArray(($_POST['categoryIDs']));
 		else $this->categoryIDs = array();
 		$this->tagsI18n = I18nHandler::getInstance()->getValues('tags');
-// 		if (isset($_POST['tags']) && is_array($_POST['tags'])) $this->tagsI18n = $_POST['tags'];
 		if (I18nHandler::getInstance()->isPlainValue('text')) $this->text = MessageUtil::stripCrap(trim(I18nHandler::getInstance()->getValue('text')));
 		if (isset($_POST['status'])) $this->statusID = intval($_POST['status']);
 		if (isset($_POST['visibility'])) $this->visibility = StringUtil::trim($_POST['visibility']);
 		if (isset($_POST['groupIDs'])) $this->groupIDs = ArrayUtil::toIntegerArray($_POST['groupIDs']);
 		if (isset($_POST['publishDate'])) $this->publishDate = StringUtil::trim($_POST['publishDate']);
-		//if (isset($_POST['dateFormat'])) $this->dateFormat = StringUtil::trim($_POST['dateFormat']);
 		if (isset($_POST['save'])) $this->saveType = 'save';
 		if (isset($_POST['publish'])) $this->saveType = 'publish';
 		if (isset($_POST['startTime'])) $this->startTime = intval($_POST['startTime']);
@@ -363,7 +345,6 @@ class UltimateContentAddForm extends MessageForm {
 			$updateEntries['contentDescription'] = 'ultimate.content.'.$contentID.'.contentDescription';
 		}
 		if (!I18nHandler::getInstance()->isPlainValue('text')) {
-// 			I18nHandler::getInstance()->save('text', 'ultimate.content.'.$contentID.'.contentText', 'ultimate.content', PACKAGE_ID);
 			$updateEntries['contentText'] = 'ultimate.content.'.$contentID.'.contentText';
 			
 			// parse URLs
@@ -373,23 +354,6 @@ class UltimateContentAddForm extends MessageForm {
 					$textValues[$languageID] = PreParser::getInstance()->parse($text);
 				}
 				I18nHandler::getInstance()->setValues('text', $textValues);
-				// nasty workaround, because you can't change the values of I18nHandler before save
-// 				$sql = 'UPDATE wcf'.WCF_N.'_language_item
-// 						SET	languageItemValue = ?
-// 						WHERE  languageID		= ?
-// 						AND	languageItem	  = ?
-// 						AND	packageID		 = ?';
-// 				$statement = WCF::getDB()->prepareStatement($sql);
-// 				WCF::getDB()->beginTransaction();
-// 				foreach ($textValues as $languageID => $text) {
-// 					$statement->executeUnbuffered(array(
-// 						$text,
-// 						$languageID,
-// 						'ultimate.content.'.$contentID.'.contentText',
-// 						PACKAGE_ID
-// 					));
-// 				}
-// 				WCF::getDB()->commitTransaction();
 			}
 			I18nHandler::getInstance()->save('text', 'ultimate.content.'.$contentID.'.contentText', 'ultimate.content', PACKAGE_ID);
 		}
