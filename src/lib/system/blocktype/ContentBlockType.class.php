@@ -342,7 +342,7 @@ class ContentBlockType extends AbstractBlockType {
 		$objectType = CommentHandler::getInstance()->getObjectType($this->objectTypeID);
 		$this->commentManager = $objectType->getProcessor();
 		foreach ($this->contents as $contentID => $content) {
-			$this->commentLists[$contentID] = CommentHandler::getInstance()->getCommentList($this->commentManager, $this->objectTypeID,  $content->__get('authorID'));
+			$this->commentLists[$contentID] = CommentHandler::getInstance()->getCommentList($this->commentManager, $this->objectTypeID,  $content->__get('contentID'));
 		}
 	}
 	
