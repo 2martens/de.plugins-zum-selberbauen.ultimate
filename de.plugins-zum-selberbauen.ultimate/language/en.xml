@@ -189,11 +189,11 @@
 		<item name="wcf.acp.option.ultimate_general_content_metaAboveContent"><![CDATA[Meta above content]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_metaAboveContent.description"><![CDATA[Please insert here the default meta above content. You can change this setting for each content block in the template edit form.
 
-Available variables:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$categories</li><li>$tags</li></ul>]]></item>
+Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$categories</li><li>$tags</li></ul>]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_metaBelowContent"><![CDATA[Meta below content]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_metaBelowContent.description"><![CDATA[Please insert here the default meta below content. You can change this setting for each content block in the template edit form.
 
-Available variables:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$categories</li><li>$tags</li></ul>]]></item>
+Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$categories</li><li>$tags</li></ul>]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength"><![CDATA[Read more length]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength.description"><![CDATA[Please insert here the default length after which contents should be truncated.]]></item>
 		<!-- /ultimate.general.content -->
@@ -569,9 +569,9 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.meta.contentMetaDisplay.page"><![CDATA[pages]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.meta.contentMetaDisplay.content"><![CDATA[contents]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.meta.metaAboveContent"><![CDATA[Meta above contnet]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.meta.metaAboveContent.description"><![CDATA[Available variables:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$categories</li><li>$tags</li></ul>]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.meta.metaAboveContent.description"><![CDATA[Available variables: $datetime, $date, $time, $comments, $author, $categories, $tags]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.meta.metaBelowContent"><![CDATA[Meta below content]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.meta.metaBelowContent.description"><![CDATA[Available variables:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$categories</li><li>$tags</li></ul>]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.meta.metaBelowContent.description"><![CDATA[Available variables: $datetime, $date, $time, $comments, $author, $categories, $tags]]></item>
 		<!-- /meta sub tab -->
 		<!-- /content tab -->
 		

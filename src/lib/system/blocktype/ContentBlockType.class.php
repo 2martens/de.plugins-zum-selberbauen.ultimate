@@ -410,13 +410,16 @@ class ContentBlockType extends AbstractBlockType {
 			));
 			$date = DateUtil::format($dateTimeObject, $format);
 			$time = DateUtil::format($dateTimeObject, DateUtil::TIME_FORMAT);
-			$date = '<time datetime="'.DateUtil::format($dateTimeObject, 'c').'" class="datetime" data-timestamp="'.$timestamp.'" data-date="'.$date.'" data-time="'.$time.'" data-offset="'.$dateTimeObject->getOffset().'">'.$date.'</time>';
-			$time = '<time itemprop="datePublished" datetime="'.DateUtil::format($dateTimeObject, 'c').'" class="datetime" data-timestamp="'.$timestamp.'" data-date="'.$date.'" data-time="'.$time.'" data-offset="'.$dateTimeObject->getOffset().'">'.$time.'</time>';
+			$dateAndTime = $date.' '.$time;
+			$dateString = '<time itemprop="datePublished" datetime="'.DateUtil::format($dateTimeObject, 'c').'" class="datetime" data-timestamp="'.$timestamp.'" data-date="'.$date.'" data-time="'.$time.'" data-offset="'.$dateTimeObject->getOffset().'">'.$date.'</time>';
+			$timeString = '<time itemprop="datePublished" datetime="'.DateUtil::format($dateTimeObject, 'c').'" class="datetime" data-timestamp="'.$timestamp.'" data-date="'.$date.'" data-time="'.$time.'" data-offset="'.$dateTimeObject->getOffset().'">'.$time.'</time>';
+			$dateAndTime = '<time itemprop="datePublished" datetime="'.DateUtil::format($dateTimeObject, 'c').'" class="datetime" data-timestamp="'.$timestamp.'" data-date="'.$date.'" data-time="'.$time.'" data-offset="'.$dateTimeObject->getOffset().'">'.$dateAndTime.'</time>';
 			$author = '<div itemprop="creator" itemscope itemtype="http://schema.org/Person"><span itemprop="name">'.$content->__get('author')->__get('username').'</span></div>';
 			
 			if ($metaAboveContent !== null) {
-				$__metaAboveContent = str_replace('$date', $date, $metaAboveContent);
-				$__metaAboveContent = str_replace('$time', $time, $__metaAboveContent);
+				$__metaAboveContent = str_replace('$datetime', $dateAndTime, $metaAboveContent);
+				$__metaAboveContent = str_replace('$date', $dateString, $__metaAboveContent);
+				$__metaAboveContent = str_replace('$time', $timeString, $__metaAboveContent);
 				$__metaAboveContent = str_replace('$comments', count($content->__get('comments')), $__metaAboveContent);
 				$__metaAboveContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaAboveContent);
 				$__metaAboveContent = str_replace('$categories', $categoryOutput, $__metaAboveContent);
@@ -425,8 +428,9 @@ class ContentBlockType extends AbstractBlockType {
 			} elseif ($metaAboveContent_i18n != null) {
 				$metaAbove_i18n[$contentID] = array();
 				foreach ($metaAboveContent_i18n as $languageID => $_metaAboveContent) {
-					$__metaAboveContent = str_replace('$date', $date, $_metaAboveContent);
-					$__metaAboveContent = str_replace('$time', $time, $__metaAboveContent);
+					$__metaAboveContent = str_replace('$datetime', $dateAndTime, $_metaAboveContent);
+					$__metaAboveContent = str_replace('$date', $dateString, $__metaAboveContent);
+					$__metaAboveContent = str_replace('$time', $timeString, $__metaAboveContent);
 					$__metaAboveContent = str_replace('$comments', count($content->__get('comments')), $__metaAboveContent);
 					$__metaAboveContent = str_replace('$author', $author, $__metaAboveContent);
 					$__metaAboveContent = str_replace('$categories', $categoryOutput, $__metaAboveContent);
@@ -436,8 +440,9 @@ class ContentBlockType extends AbstractBlockType {
 			}
 			
 			if ($metaBelowContent !== null) {
-				$__metaBelowContent = str_replace('$date', $date, $metaBelowContent);
-				$__metaBelowContent = str_replace('$time', $time, $__metaBelowContent);
+				$__metaBelowContent = str_replace('$datetime', $dateAndTime, $metaBelowContent);
+				$__metaBelowContent = str_replace('$date', $dateString, $__metaBelowContent);
+				$__metaBelowContent = str_replace('$time', $timeString, $__metaBelowContent);
 				$__metaBelowContent = str_replace('$comments', count($content->__get('comments')), $__metaBelowContent);
 				$__metaBelowContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaBelowContent);
 				$__metaBelowContent = str_replace('$categories', $categoryOutput, $__metaBelowContent);
@@ -446,7 +451,8 @@ class ContentBlockType extends AbstractBlockType {
 			} elseif ($metaBelowContent_i18n != null) {
 				$metaBelow_i18n[$contentID] = array();
 				foreach ($metaBelowContent_i18n as $languageID => $_metaBelowContent) {
-					$__metaBelowContent = str_replace('$date', $date, $_metaBelowContent);
+					$__metaBelowContent = str_replace('$datetime', $dateAndTime, $_metaBelowContent);
+					$__metaBelowContent = str_replace('$date', $date, $__metaBelowContent);
 					$__metaBelowContent = str_replace('$time', $time, $__metaBelowContent);
 					$__metaBelowContent = str_replace('$comments', count($content->__get('comments')), $__metaBelowContent);
 					$__metaBelowContent = str_replace('$author', $author, $__metaBelowContent);
