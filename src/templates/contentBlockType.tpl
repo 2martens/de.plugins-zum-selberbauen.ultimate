@@ -2,24 +2,18 @@
 	{assign var=displayedFeaturedContents value=0}
 	{foreach from=$contents key=contentID item=content}
 		{if $content->status == 3}
+		<div itemtype="http://schema.org/Article" itemscope="">
 			{if $block->showContent}
 			<div id="content-{$contentID}" class="container containerPadding marginTop content {implode from=$content->categories item=category glue=' '}category-{$category->categorySlug}{/implode}  {implode from=$content->tags[$__wcf->getLanguage()->__get('languageID')] item=tag glue=''}tag-{$tag->getTitle()}{/implode}">
 				<header class="boxHeadline">
 					{if $block->showTitles}
-						<hgroup>
-							<h1>
-								{if $requestType != 'content'}
-									<a href="{$readMoreLink[$contentID]}">{lang}{$content->contentTitle}{/lang}</a>
-								{else}
-									{lang}{$content->contentTitle}{/lang}	
-								{/if}
-							</h1>
-						</hgroup>
-					{/if}
-					{if $requestType == 'content'}
-						{hascontent}
-							<p class="abstract">{content}{lang}{$content->contentDescription}{/lang}{/content}</p>
-						{/hascontent}
+						<h1 itemprop="name">
+							{if $requestType != 'content'}
+								<a href="{$readMoreLink[$contentID]}" itemprop="url">{lang}{$content->contentTitle}{/lang}</a>
+							{else}
+								{lang}{$content->contentTitle}{/lang}	
+							{/if}
+						</h1>
 					{/if}
 					
 					{if $contentMetaDisplaySelected[$requestType]|isset || $contentMetaDisplaySelected|count == 0}
@@ -36,10 +30,15 @@
 							</small>
 						{/hascontent}
 					{/if}
+					{if $requestType == 'content'}
+						{hascontent}
+							<p class="abstract" itemprop="description">{content}{lang}{$content->contentDescription}{/lang}{/content}</p>
+						{/hascontent}
+					{/if}
 				</header>
 				
 				{if $block->contentBodyDisplay != 'hide'}
-				<p>
+				<p itemprop="articleBody">
 					{if ($block->contentBodyDisplay == 'default' && ($displayedFeaturedContents < $block->featuredContents || $requestType == 'content' || $requestType == 'page')) || $block->contentBodyDisplay == 'full'}
 						{counter name=displayedFeaturedContents assign=displayedFeaturedContents print=false start=0}
 						{assign var=displayedFeaturedContents value=$displayedFeaturedContents}
@@ -87,13 +86,13 @@
 				
 				{if $commentCanAdd}
 					<ul id="content-{$contentID}-comments" class="commentList containerList" data-can-add="true" data-object-id="{@$contentID}" data-object-type-id="{@$commentObjectTypeID}" data-comments="{@$commentList->countObjects()}" data-last-comment-time="{@$commentList->getMinCommentTime()}">
-						{include file='commentList'}
+						{include file='commentList' application='ultimate'}
 					</ul>
 				{else}
 					{hascontent}
 						<ul id="content-{$contentID}-comments" class="commentList containerList" data-can-add="false" data-object-id="{@$contentID}" data-object-type-id="{@$commentObjectTypeID}" data-comments="{@$commentList->countObjects()}" data-last-comment-time="{@$commentList->getMinCommentTime()}">
 							{content}
-								{include file='commentList'}
+								{include file='commentList' application='ultimate'}
 							{/content}
 						</ul>
 					{hascontentelse}
@@ -105,6 +104,7 @@
 				{/if}
 			</div>
 			{/if}
+		</div>
 		{/if}
 	{/foreach}
 </div>

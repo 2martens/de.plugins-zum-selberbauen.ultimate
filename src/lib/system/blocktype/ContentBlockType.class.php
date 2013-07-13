@@ -411,6 +411,8 @@ class ContentBlockType extends AbstractBlockType {
 			$date = DateUtil::format($dateTimeObject, $format);
 			$time = DateUtil::format($dateTimeObject, DateUtil::TIME_FORMAT);
 			$date = '<time datetime="'.DateUtil::format($dateTimeObject, 'c').'" class="datetime" data-timestamp="'.$timestamp.'" data-date="'.$date.'" data-time="'.$time.'" data-offset="'.$dateTimeObject->getOffset().'">'.$date.'</time>';
+			$time = '<time itemprop="datePublished" datetime="'.DateUtil::format($dateTimeObject, 'c').'" class="datetime" data-timestamp="'.$timestamp.'" data-date="'.$date.'" data-time="'.$time.'" data-offset="'.$dateTimeObject->getOffset().'">'.$time.'</time>';
+			$author = '<div itemprop="creator" itemscope itemtype="http://schema.org/Person"><span itemprop="name">'.$content->__get('author')->__get('username').'</span></div>';
 			
 			if ($metaAboveContent !== null) {
 				$__metaAboveContent = str_replace('$date', $date, $metaAboveContent);
@@ -426,7 +428,7 @@ class ContentBlockType extends AbstractBlockType {
 					$__metaAboveContent = str_replace('$date', $date, $_metaAboveContent);
 					$__metaAboveContent = str_replace('$time', $time, $__metaAboveContent);
 					$__metaAboveContent = str_replace('$comments', count($content->__get('comments')), $__metaAboveContent);
-					$__metaAboveContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaAboveContent);
+					$__metaAboveContent = str_replace('$author', $author, $__metaAboveContent);
 					$__metaAboveContent = str_replace('$categories', $categoryOutput, $__metaAboveContent);
 					$__metaAboveContent = str_replace('$tags', $tagOutput, $__metaAboveContent);
 					$metaAbove_i18n[$contentID][$languageID] = $__metaAboveContent;
@@ -447,7 +449,7 @@ class ContentBlockType extends AbstractBlockType {
 					$__metaBelowContent = str_replace('$date', $date, $_metaBelowContent);
 					$__metaBelowContent = str_replace('$time', $time, $__metaBelowContent);
 					$__metaBelowContent = str_replace('$comments', count($content->__get('comments')), $__metaBelowContent);
-					$__metaBelowContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaBelowContent);
+					$__metaBelowContent = str_replace('$author', $author, $__metaBelowContent);
 					$__metaBelowContent = str_replace('$categories', $categoryOutput, $__metaBelowContent);
 					$__metaBelowContent = str_replace('$tags', $tagOutput, $__metaBelowContent);
 					$metaBelow_i18n[$contentID][$languageID] = $__metaBelowContent;
