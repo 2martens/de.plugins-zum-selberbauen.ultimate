@@ -2,9 +2,8 @@
 	{assign var=displayedFeaturedContents value=0}
 	{foreach from=$contents key=contentID item=content}
 		{if $content->status == 3}
-		<div itemtype="http://schema.org/Article" itemscope="">
+		<article itemtype="http://schema.org/Article" itemscope="" class="container containerPadding marginTop">
 			{if $block->showContent}
-			<div id="content-{$contentID}" class="container containerPadding marginTop content {implode from=$content->categories item=category glue=' '}category-{$category->categorySlug}{/implode}  {implode from=$content->tags[$__wcf->getLanguage()->__get('languageID')] item=tag glue=''}tag-{$tag->getTitle()}{/implode}">
 				<header class="boxHeadline">
 					{if $block->showTitles}
 						<h1 itemprop="name">
@@ -36,47 +35,46 @@
 						{/hascontent}
 					{/if}
 				</header>
-				
 				{if $block->contentBodyDisplay != 'hide'}
-				<p itemprop="articleBody">
-					{if ($block->contentBodyDisplay == 'default' && ($displayedFeaturedContents < $block->featuredContents || $requestType == 'content' || $requestType == 'page')) || $block->contentBodyDisplay == 'full'}
-						{counter name=displayedFeaturedContents assign=displayedFeaturedContents print=false start=0}
-						{assign var=displayedFeaturedContents value=$displayedFeaturedContents}
-						{if $requestType == 'content' || $requestType == 'page'}
-							{@$content->getParsedContent()}
+					<div itemprop="articleBody" id="content-{$contentID}" class="content {implode from=$content->categories item=category glue=' '}category-{$category->categorySlug}{/implode}  {implode from=$content->tags[$__wcf->getLanguage()->__get('languageID')] item=tag glue=''}tag-{$tag->getTitle()}{/implode}">
+						{if ($block->contentBodyDisplay == 'default' && ($displayedFeaturedContents < $block->featuredContents || $requestType == 'content' || $requestType == 'page')) || $block->contentBodyDisplay == 'full'}
+							{counter name=displayedFeaturedContents assign=displayedFeaturedContents print=false start=0}
+							{assign var=displayedFeaturedContents value=$displayedFeaturedContents}
+							{if $requestType == 'content' || $requestType == 'page'}
+								{if !$content->enableHtml}<p>{/if}{@$content->getParsedContent()}{if !$content->enableHtml}</p>{/if}
+							{/if}
+							{if $requestType == 'index' || $requestType == 'category'}
+								<p>{@$content->getParsedContent()|truncateMore:0}</p>
+							{/if}
+						{else}
+							<p>{$content->getParsedContent()|truncateMore:ULTIMATE_GENERAL_CONTENT_CONTINUEREADINGLENGTH}</p>
+								
+							<a href="{$readMoreLink[$contentID]}">{lang}{$readMoreText}{/lang}&nbsp;-&gt;</a>
 						{/if}
-						{if $requestType == 'index' || $requestType == 'category'}
-							{@$content->getParsedContent()|truncateMore:0}
-						{/if}
-					{else}
-						{$content->getParsedContent()|truncateMore:ULTIMATE_GENERAL_CONTENT_CONTINUEREADINGLENGTH}
-						
-						<a href="{$readMoreLink[$contentID]}">{lang}{$readMoreText}{/lang}&nbsp;-&gt;</a>
-					{/if}
-				</p>
+					</div>
 				{/if}
 				
 				{if $contentMetaDisplaySelected[$requestType]|isset || $contentMetaDisplaySelected|count == 0}
-					<footer>
-						{hascontent}
-							<small class="meta" id="metaBelow-{$contentID}">
-							{content}
-								{if $metaBelow[$contentID]|isset && $metaBelow[$contentID] != ""}
-									{@$metaBelow[$contentID]}
-								{/if}
-								{if $metaBelow_i18n[$contentID][$__wcf->getLanguage()->__get('languageID')]|isset}
-									{@$metaBelow_i18n[$contentID][$__wcf->getLanguage()->__get('languageID')]}
-								{/if}
-							{/content}
-							</small>
-						{/hascontent}
-					</footer>
-				{/if}					
-			</div>
+					{*hascontent*}
+						<aside class="meta" id="metaBelow-{$contentID}">
+						{*content*}
+							{if $metaBelow[$contentID]|isset && $metaBelow[$contentID] != ""}
+								{@$metaBelow[$contentID]}
+							{/if}
+							{if $metaBelow_i18n[$contentID][$__wcf->getLanguage()->__get('languageID')]|isset}
+								{@$metaBelow_i18n[$contentID][$__wcf->getLanguage()->__get('languageID')]}
+							{/if}
+						{*/content*}
+						</aside>
+					{*/hascontent*}
+				{/if}
 			{/if}
 			
 			{if $block->commentsVisibility == 'show' || ($block->commentsVisibility == 'auto' && $requestType == 'content')}
-			<div class="content">
+			<section class="content comments">
+				<header class="containerHeadline">
+					<h3>{lang}ultimate.content.comments{/lang}</h3>
+				</header>
 				{assign var='commentContainerID' value='content-'|concat:$contentID|concat:'-comments'}
 				{assign var='commentList' value=$commentLists[$contentID]}
 				{if MODULE_LIKE}
@@ -102,9 +100,9 @@
 						</div>
 					{/hascontent}
 				{/if}
-			</div>
+			</section>
 			{/if}
-		</div>
+		</article>
 		{/if}
 	{/foreach}
 </div>

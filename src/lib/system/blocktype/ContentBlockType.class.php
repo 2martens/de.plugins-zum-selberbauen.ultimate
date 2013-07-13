@@ -30,6 +30,7 @@ use ultimate\data\content\Content;
 use ultimate\data\content\TaggedContent;
 use ultimate\system\request\UltimateLinkHandler;
 use wcf\data\user\UserList;
+use wcf\data\user\UserProfile;
 use wcf\system\comment\CommentHandler;
 use wcf\system\language\I18nHandler;
 use wcf\system\request\LinkHandler;
@@ -359,8 +360,8 @@ class ContentBlockType extends AbstractBlockType {
 		$i18nValues = WCF::getTPL()->get('i18nValues');
 		
 		// replacing variables in meta above/below content
-		$metaAboveContent = (isset($i18nPlainValues['metaAboveContent_'.$this->blockID]) ? $i18nPlainValues['metaAboveContent_'.$this->blockID] : null);
-		$metaBelowContent = (isset($i18nPlainValues['metabelowContent_'.$this->blockID]) ? $i18nPlainValues['metaBelowContent_'.$this->blockID] : null);
+		$metaAboveContent = (isset($i18nPlainValues['metaAboveContent_'.$this->blockID]) ? $i18nPlainValues['metaAboveContent_'.$this->blockID] : '');
+		$metaBelowContent = (isset($i18nPlainValues['metaBelowContent_'.$this->blockID]) ? $i18nPlainValues['metaBelowContent_'.$this->blockID] : '');
 		$metaAboveContent_i18n = (isset($i18nValues['metaAboveContent_'.$this->blockID]) ? $i18nValues['metaAboveContent_'.$this->blockID] : array());
 		$metaBelowContent_i18n = (isset($i18nValues['metaBelowContent_'.$this->blockID]) ? $i18nValues['metaBelowContent_'.$this->blockID] : array());
 		
@@ -414,18 +415,36 @@ class ContentBlockType extends AbstractBlockType {
 			$dateString = '<time itemprop="datePublished" datetime="'.DateUtil::format($dateTimeObject, 'c').'" class="datetime" data-timestamp="'.$timestamp.'" data-date="'.$date.'" data-time="'.$time.'" data-offset="'.$dateTimeObject->getOffset().'">'.$date.'</time>';
 			$timeString = '<time itemprop="datePublished" datetime="'.DateUtil::format($dateTimeObject, 'c').'" class="datetime" data-timestamp="'.$timestamp.'" data-date="'.$date.'" data-time="'.$time.'" data-offset="'.$dateTimeObject->getOffset().'">'.$time.'</time>';
 			$dateAndTime = '<time itemprop="datePublished" datetime="'.DateUtil::format($dateTimeObject, 'c').'" class="datetime" data-timestamp="'.$timestamp.'" data-date="'.$date.'" data-time="'.$time.'" data-offset="'.$dateTimeObject->getOffset().'">'.$dateAndTime.'</time>';
-			$author = '<div itemprop="creator" itemscope itemtype="http://schema.org/Person"><span itemprop="name">'.$content->__get('author')->__get('username').'</span></div>';
+			$authorUserProfile = new UserProfile($content->__get('author'));
+			$author = '<div itemprop="creator" itemscope itemtype="http://schema.org/Person">
+				<a href="'
+				.LinkHandler::getInstance()->getLink(
+					'wcf\page\UserPage', 
+					array(
+						'object' => $authorUserProfile
+					)
+				).
+				'" title="'.$authorUserProfile->username.'" class="framed">'
+					.$authorUserProfile->getAvatar()->getImageTag(32).
+				'</a>'.WCF::getLanguage()->getDynamicVariable(
+							'ultimate.content.authorVCard', 
+							array(
+								'author' => $content->__get('author')->__get('username')
+							)
+						).
+				'</div>';
 			
-			if ($metaAboveContent !== null) {
+			if ($metaAboveContent !== '') {
+				$metaAbove[$contentID] = '';
 				$__metaAboveContent = str_replace('$datetime', $dateAndTime, $metaAboveContent);
 				$__metaAboveContent = str_replace('$date', $dateString, $__metaAboveContent);
 				$__metaAboveContent = str_replace('$time', $timeString, $__metaAboveContent);
 				$__metaAboveContent = str_replace('$comments', count($content->__get('comments')), $__metaAboveContent);
-				$__metaAboveContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaAboveContent);
+				$__metaAboveContent = str_replace('$author', $author, $__metaAboveContent);
 				$__metaAboveContent = str_replace('$categories', $categoryOutput, $__metaAboveContent);
 				$__metaAboveContent = str_replace('$tags', $tagOutput, $__metaAboveContent);
 				$metaAbove[$contentID] = $__metaAboveContent;
-			} elseif ($metaAboveContent_i18n != null) {
+			} elseif (!empty($metaAboveContent_i18n)) {
 				$metaAbove_i18n[$contentID] = array();
 				foreach ($metaAboveContent_i18n as $languageID => $_metaAboveContent) {
 					$__metaAboveContent = str_replace('$datetime', $dateAndTime, $_metaAboveContent);
@@ -439,16 +458,17 @@ class ContentBlockType extends AbstractBlockType {
 				}
 			}
 			
-			if ($metaBelowContent !== null) {
+			if ($metaBelowContent !== '') {
+				$metaBelow[$contentID] = '';
 				$__metaBelowContent = str_replace('$datetime', $dateAndTime, $metaBelowContent);
 				$__metaBelowContent = str_replace('$date', $dateString, $__metaBelowContent);
 				$__metaBelowContent = str_replace('$time', $timeString, $__metaBelowContent);
 				$__metaBelowContent = str_replace('$comments', count($content->__get('comments')), $__metaBelowContent);
-				$__metaBelowContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaBelowContent);
+				$__metaBelowContent = str_replace('$author', $author, $__metaBelowContent);
 				$__metaBelowContent = str_replace('$categories', $categoryOutput, $__metaBelowContent);
 				$__metaBelowContent = str_replace('$tags', $tagOutput, $__metaBelowContent);
 				$metaBelow[$contentID] = $__metaBelowContent;
-			} elseif ($metaBelowContent_i18n != null) {
+			} elseif (!empty($metaBelowContent_i18n)) {
 				$metaBelow_i18n[$contentID] = array();
 				foreach ($metaBelowContent_i18n as $languageID => $_metaBelowContent) {
 					$__metaBelowContent = str_replace('$datetime', $dateAndTime, $_metaBelowContent);

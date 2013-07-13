@@ -695,6 +695,8 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="ultimate.content.default"><![CDATA[Wer das hier liest ist dumm, denn dieser Eintrag wird nicht benötigt.]]></item>
 		<item name="ultimate.content.comment"><![CDATA[Inhalt-Kommentar]]></item>
 		<item name="ultimate.content.commentResponse"><![CDATA[Inhalt-Antwort]]></item>
+		<item name="ultimate.content.comments"><![CDATA[Kommentare]]></item>
+		<item name="ultimate.content.authorVCard"><![CDATA[{$author} hat diesen Inhalt verfasst.]]></item>
 	</category>
 	
 	<category name="ultimate.date">

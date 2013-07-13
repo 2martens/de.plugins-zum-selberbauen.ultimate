@@ -692,6 +692,8 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="ultimate.content.default"><![CDATA[Test, one, two, three and fucked up.]]></item>
 		<item name="ultimate.content.comment"><![CDATA[Content comment]]></item>
 		<item name="ultimate.content.commentResponse"><![CDATA[Content response]]></item>
+		<item name="ultimate.content.comments"><![CDATA[Comments]]></item>
+		<item name="ultimate.content.authorVCard"><![CDATA[This content was writty by {$author}.]]></item>
 	</category>
 	
 	<category name="ultimate.date">
