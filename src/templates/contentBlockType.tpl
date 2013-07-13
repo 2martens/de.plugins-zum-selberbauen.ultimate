@@ -9,7 +9,7 @@
 					{if $block->showTitles}
 						<h1 itemprop="name">
 							{if $requestType != 'content'}
-								<a href="{$readMoreLink[$contentID]}" itemprop="url">{lang}{$content->contentTitle}{/lang}</a>
+								<a class="link" href="{$readMoreLink[$contentID]}" itemprop="url">{lang}{$content->contentTitle}{/lang}</a>
 							{else}
 								{lang}{$content->contentTitle}{/lang}	
 							{/if}
