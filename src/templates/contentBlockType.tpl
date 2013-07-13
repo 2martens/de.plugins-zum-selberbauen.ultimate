@@ -77,13 +77,32 @@
 			{/if}
 			
 			{if $block->commentsVisibility == 'show' || ($block->commentsVisibility == 'auto' && $requestType == 'content')}
-			<div id="content-{$contentID}-comments" class="content">
+			<div class="content">
 				{assign var='commentContainerID' value='content-'|concat:$contentID|concat:'-comments'}
+				{assign var='commentList' value=$commentLists[$contentID]}
+				{if MODULE_LIKE}
+					{assign var=likeData value=$commentList->getLikeData()}
+				{/if}
 				{include file='__commentJavaScript' commentContainerID=$commentContainerID}
-
-				<ul data-object-id="{@$contentID}" data-object-type-id="{@$commentObjectTypeID}" class="commentList containerList">
-					{include file='commentList' commentList=$commentLists[$contentID]}
-				</ul>
+				
+				{if $commentCanAdd}
+					<ul id="content-{$contentID}-comments" class="commentList containerList" data-can-add="true" data-object-id="{@$contentID}" data-object-type-id="{@$commentObjectTypeID}" data-comments="{@$commentList->countObjects()}" data-last-comment-time="{@$commentList->getMinCommentTime()}">
+						{include file='commentList'}
+					</ul>
+				{else}
+					{hascontent}
+						<ul id="content-{$contentID}-comments" class="commentList containerList" data-can-add="false" data-object-id="{@$contentID}" data-object-type-id="{@$commentObjectTypeID}" data-comments="{@$commentList->countObjects()}" data-last-comment-time="{@$commentList->getMinCommentTime()}">
+							{content}
+								{include file='commentList'}
+							{/content}
+						</ul>
+					{hascontentelse}
+						<div class="containerPadding">
+							{* TODO: own lang variable *}
+							{lang}wcf.user.profile.content.wall.noEntries{/lang}
+						</div>
+					{/hascontent}
+				{/if}
 			</div>
 			{/if}
 		{/if}
