@@ -2,14 +2,14 @@
 <head>
 	<title>{if $title|isset}{lang}{@$title}{/lang} - {/if}{lang}{PAGE_TITLE}{/lang}</title>
 	
-	{include file='headInclude'}
+	{include file='headInclude' application='ultimate'}
 </head>
 
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
 {if $sidebarOrientation|isset}
-{include file='header' sidebarOrientation=''|concat:$sidebarOrientation sidebar=''|concat:$sidebar}
+{include file='header' application='ultimate' sidebarOrientation=''|concat:$sidebarOrientation sidebar=''|concat:$sidebar}
 {else}
-{include file='header'}
+{include file='header' application='ultimate'}
 {/if}
 			<!-- custom area -->
 			<script type="text/javascript">
@@ -45,7 +45,7 @@
 			{@$customArea}
 			<!-- /custom area -->
 			
-{include file='footer'}
+{include file='footer' application='ultimate'}
 
 </body>
 </html>
