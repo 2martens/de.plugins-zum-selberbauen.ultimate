@@ -1,16 +1,19 @@
 <a id="top"></a>
 
-<header id="pageHeader" class="{if $__wcf->getStyleHandler()->getStyle()->getVariable('useFluidLayout')}layoutFluid{else}layoutFixed{/if}">
+<header id="pageHeader" class="{if $__wcf->getStyleHandler()->getStyle()->getVariable('useFluidLayout')}layoutFluid{else}layoutFixed{/if}{if $sidebarOrientation|isset && $sidebar|isset} sidebarOrientation{@$sidebarOrientation|ucfirst}{if $sidebarOrientation == 'right' && $sidebarCollapsed} sidebarCollapsed{/if}{/if}">
 	<div>
 		<nav id="topMenu" class="userPanel">
-			<div class="{if $__wcf->getStyleHandler()->getStyle()->getVariable('useFluidLayout')}layoutFluid{else}layoutFixed{/if} clearfix">
+			<div class="{if $__wcf->getStyleHandler()->getStyle()->getVariable('useFluidLayout')}layoutFluid{else}layoutFixed{/if}">
 				{hascontent}
 					<ul class="userPanelItems">
-						{content}{event name='topMenu'}{/content}
+						{content}
+							{include file='userPanel'}
+							{event name='topMenu'}
+						{/content}
 					</ul>
 				{/hascontent}
 				
-				{event name='searchArea'}
+				{include file='searchArea'}
 			</div>
 		</nav>
 		
@@ -41,7 +44,7 @@
 		<!-- /main menu -->
 	
 		<!-- navigation -->
-		<nav class="navigation navigationHeader clearfix">
+		<nav class="navigation navigationHeader">
 			<!-- sub menu -->
 			{if $__wcf->getCustomMenu()->getMenuItems('')|count > 0}
 				{foreach from=$__wcf->getCustomMenu()->getMenuItems('') item=menuItem}
@@ -69,33 +72,40 @@
 	</div>
 </header>
 
-<div id="main" class="{if $__wcf->getStyleHandler()->getStyle()->getVariable('useFluidLayout')}layoutFluid{else}layoutFixed{/if}{if $sidebarOrientation|isset && $sidebar|isset} sidebarOrientation{@$sidebarOrientation|ucfirst} clearfix{if $sidebarOrientation == 'right' && $sidebarCollapsed} sidebarCollapsed{/if}{/if}">
+<div id="main" class="{if $__wcf->getStyleHandler()->getStyle()->getVariable('useFluidLayout')}layoutFluid{else}layoutFixed{/if}{if $sidebarOrientation|isset && $sidebar|isset} sidebarOrientation{@$sidebarOrientation|ucfirst}{if $sidebarOrientation == 'right' && $sidebarCollapsed} sidebarCollapsed{/if}{/if}">
 	<div>
-		{if $sidebar|isset}
-			<aside class="sidebar"{if $sidebarOrientation|isset && $sidebarOrientation == 'right'} data-is-open="{if $sidebarCollapsed}false{else}true{/if}" data-sidebar-name="{$sidebarName}"{/if}>
-				<div>
-					{event name='sidebarBoxesTop'}
+		<div>
+			{capture assign='__sidebar'}
+				{if $sidebar|isset}
+					<aside class="sidebar"{if $sidebarOrientation|isset && $sidebarOrientation == 'right'} data-is-open="{if $sidebarCollapsed}false{else}true{/if}" data-sidebar-name="{$sidebarName}"{/if}>
+						<div>
+							{event name='sidebarBoxesTop'}
+							
+							{@$sidebar}
+							
+							{event name='sidebarBoxesBottom'}
+						</div>
+					</aside>
 					
-					{@$sidebar}
-					
-					{event name='sidebarBoxesBottom'}
-				</div>
-			</aside>
+					{if $sidebarOrientation|isset && $sidebarOrientation == 'right'}
+						<script>
+							//<![CDATA[
+							$(function() {
+								new WCF.Collapsible.Sidebar();
+							});
+							//]]>
+						</script>
+					{/if}
+				{/if}
+			{/capture}
 			
-			{if $sidebarOrientation|isset && $sidebarOrientation == 'right'}
-				<script type="text/javascript">
-					//<![CDATA[
-					$(function() {
-						new WCF.Collapsible.Sidebar();
-					});
-					//]]>
-				</script>
-			{/if}
-		{/if}
-		
-		<section id="content" class="content clearfix">
+			{if !$sidebarOrientation|isset || $sidebarOrientation == 'left'}
+				{@$__sidebar}
+			{/if} 
 			
-			{event name='contents'}
-			
-			{if $skipBreadcrumbs|empty}{include file='breadcrumbs'}{/if}
+			<section id="content" class="content">
+				
+				{event name='contents'}
+				
+				{if $skipBreadcrumbs|empty}{include file='breadcrumbs'}{/if}
 			
