@@ -58,7 +58,7 @@ class YoutubeMediaProvider extends AbstractMediaProvider {
 		return parent::getHTML($source, $height, $width);
 	}
 	
-	protected function getEmbedInformation($source) {
+	protected function getEmbedInformation($source, $maxwidth = 0, $maxheight = 0) {
 		$regex = '^http:\/\/(?:www\.youtube\.com|youtu\.be)\/(?:watch\?v=)?(\w+)([\?&]\w+=[\w\d]+(?:[\?&]\w+=[\w\d]+)*)?';
 		$regexObj = new Regex($regex);
 		if (!$regexObj->match($source, true)) {

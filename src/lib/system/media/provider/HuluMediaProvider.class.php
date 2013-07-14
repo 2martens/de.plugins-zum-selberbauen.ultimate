@@ -87,7 +87,7 @@ class HuluMediaProvider extends AbstractMediaProvider {
 		return $html;
 	}
 	
-	protected function getEmbedInformation($source, $maxwidth, $maxheight) {
+	protected function getEmbedInformation($source, $maxwidth = 0, $maxheight = 0) {
 		$regex = '^http:\/\/www\.hulu\.com\/watch\/([\d]+)';
 		$regexObj = new Regex($regex);
 		if (!$regexObj->match($source)) {

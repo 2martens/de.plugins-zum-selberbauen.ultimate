@@ -65,7 +65,7 @@ class MyVideoMediaProvider extends AbstractMediaProvider {
 		return $html;
 	}
 	
-	protected function getEmbedInformation($source) {
+	protected function getEmbedInformation($source, $maxwidth = 0, $maxheight = 0) {
 		$regex = '^http:\/\/(?:www\.myvideo\.de)\/watch\/(\d+)';
 		$regexObj = new Regex($regex);
 		if (!$regexObj->match($source)) {

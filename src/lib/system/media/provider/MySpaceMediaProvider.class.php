@@ -88,7 +88,7 @@ class MySpaceMediaProvider extends AbstractMediaProvider {
 		return $html;
 	}
 	
-	protected function getEmbedInformation($source) {
+	protected function getEmbedInformation($source, $maxwidth = 0, $maxheight = 0) {
 		$regex = '^http:\/\/(?:www\.myspace\.com)\/video\/[\w\d-]+\/[\w\d-]+\/(\d+)';
 		$regexObj = new Regex($regex);
 		if (!$regexObj->match($source)) {
