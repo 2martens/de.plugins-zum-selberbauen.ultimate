@@ -42,5 +42,5 @@ class MediaMimetypeList extends DatabaseObjectList {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObjectList.html#$className
 	 */
-	public $className = '\ultimate\data\media\mimetype\Mimetype';
+	public $className = '\ultimate\data\media\mimetype\MediaMimetype';
 }
