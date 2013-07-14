@@ -55,7 +55,7 @@ abstract class AbstractMediaProvider implements IMediaProvider {
 	 */
 	public function getHTML($source, $width, $height) {
 		// fire event
-		EventHandler::fireAction($this, 'getHTML');
+		EventHandler::getInstance()->fireAction($this, 'getHTML');
 		$html = '<iframe ';
 		$html .= ' '.$this->getAttributeHTML('src', StringUtil::trim($source));
 		$html .= ' '.$this->getAttributeHTML('width', integer($width));
@@ -69,7 +69,7 @@ abstract class AbstractMediaProvider implements IMediaProvider {
 	 */
 	public function canHandle($host) {
 		// fire event
-		EventHandler::fireAction($this, 'canHandle');
+		EventHandler::getInstance()->fireAction($this, 'canHandle');
 		$host = StringUtil::trim($host);
 		return in_array($host, $this->hosts);
 	}
