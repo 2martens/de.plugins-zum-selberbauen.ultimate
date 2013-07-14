@@ -66,13 +66,13 @@ class MyVideoMediaProvider extends AbstractMediaProvider {
 	}
 	
 	protected function getEmbedInformation($source, $maxwidth = 0, $maxheight = 0) {
-		$regex = '^http:\/\/(?:www\.myvideo\.de)\/watch\/(\d+)';
+		$regex = '^http://(?:www\.myvideo\.de)/watch/(\d+)';
 		$regexObj = new Regex($regex);
 		if (!$regexObj->match($source)) {
 			throw new SystemException('invalid source', 0, 'The given source URL is not a valid MyVideo share link.');
 		}
 		$matches = $regexObj->getMatches();
-		$videoID = $matches[1];
+		$videoID = $matches[1][0];
 	
 		$embedSource = 'https://www.myvideo.de/embed/'.$videoID;
 		return $embedSource;

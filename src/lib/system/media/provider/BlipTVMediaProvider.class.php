@@ -74,7 +74,7 @@ class BlipTVMediaProvider extends AbstractMediaProvider {
 	}
 	
 	protected function getEmbedInformation($source, $maxwidth = 0, $maxheight = 0) {
-		$regex = '^http:\/\/blip\.tv\/[\w\d-]+\/[\w\d-]+-(\d+)$';
+		$regex = '^http://blip\.tv/[\w\d-]+/[\w\d-]+-(\d+)$';
 		$regexObj = new Regex($regex);
 		if (!$regexObj->match($source)) {
 			throw new SystemException('invalid source', 0, 'The given source URL is not a valid blip.tv share link.');
@@ -106,12 +106,12 @@ class BlipTVMediaProvider extends AbstractMediaProvider {
 		$embedCode = $jsonData['html'];
 		
 		// get new video id
-		$regex = '^<iframe src="http:\/\/blip\.tv\/play\/(\w+)\.html\?p=1"';
+		$regex = '^<iframe src="http://blip\.tv/play/(\w+)\.html\?p=1"';
 		$regexObj = new Regex($regex);
 		$regexObj->match($embedCode);
 		
 		$matches = $regexObj->getMatches();
-		$videoID = $matches[1];
+		$videoID = $matches[1][0];
 		
 		$returnArray = array(
 			$videoID,

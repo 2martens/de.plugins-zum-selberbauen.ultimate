@@ -57,14 +57,14 @@ class VimeoMediaProvider extends AbstractMediaProvider {
 	}
 	
 	protected function getEmbedInformation($source, $maxwidth = 0, $maxheight = 0) {
-		$regex = '^http:\/\/(?:(?:www\.)?vimeo\.com)\/(?:channels\/[\w\d-]+\/|groups\/[\w\d-]+\/videos\/)?(\d+)';
+		$regex = '^http://(?:(?:www\.)?vimeo\.com)/(?:channels\/[\w\d-]+/|groups/[\w\d-]+/videos/)?(\d+)';
 		$regexObj = new Regex($regex);
 		if (!$regexObj->match($source)) {
 			throw new SystemException('invalid source', 0, 'The given source URL is not a valid Dailymotion share link.');
 		}
 		
 		$matches = $regexObj->getMatches();
-		$videoID = $matches[1];
+		$videoID = $matches[1][0];
 		
 		$queryParts = array(
 			'title' => '0',

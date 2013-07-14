@@ -57,14 +57,14 @@ class DailymotionMediaProvider extends AbstractMediaProvider {
 	}
 	
 	protected function getEmbedInformation($source, $maxwidth = 0, $maxheight = 0) {
-		$regex = '^http:\/\/(?:www\.dailymotion\.com)\/video\/(\w{6,})';
+		$regex = '^http://(?:www\.dailymotion\.com)/video/(\w{6,})';
 		$regexObj = new Regex($regex);
 		if (!$regexObj->match($source)) {
 			throw new SystemException('invalid source', 0, 'The given source URL is not a valid Dailymotion share link.');
 		}
 		
 		$matches = $regexObj->getMatches();
-		$videoID = $matches[1];
+		$videoID = $matches[1][0];
 		
 		$embedSource = 'http://www.dailymotion.com/embed/video/'.$videoID.'?logo=0';
 		return $embedSource;

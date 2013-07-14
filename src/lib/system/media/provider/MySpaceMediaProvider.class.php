@@ -89,14 +89,14 @@ class MySpaceMediaProvider extends AbstractMediaProvider {
 	}
 	
 	protected function getEmbedInformation($source, $maxwidth = 0, $maxheight = 0) {
-		$regex = '^http:\/\/(?:www\.myspace\.com)\/video\/[\w\d-]+\/[\w\d-]+\/(\d+)';
+		$regex = '^http://(?:www\.myspace\.com)/video/[\w\d-]+/[\w\d-]+/(\d+)';
 		$regexObj = new Regex($regex);
 		if (!$regexObj->match($source)) {
 			throw new SystemException('invalid source', 0, 'The given source URL is not a valid MySpace share link.');
 		}
 		
 		$matches = $regexOj->getMatches();
-		$videoID = $matches[0];
+		$videoID = $matches[1][0];
 		
 		$embedSource = 'http://mediaservices.myspace.com/services/media/embed.aspx/m='.$videoID.',t=1,mt=video';
 		return $embedSource;

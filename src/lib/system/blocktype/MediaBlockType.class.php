@@ -66,6 +66,17 @@ class MediaBlockType extends AbstractBlockType {
 	protected $cacheIndex = 'mimeTypesToMIME';
 	
 	/**
+	 * @see	\ultimate\system\blocktype\AbstractBlockType::$blockOptionIDs
+	 */
+	protected $blockOptionIDs = array(
+		'mediaType_{$blockID}',
+		'mediaSource_{$blockID}',
+		'mimeType_{$blockID}',
+		'mediaHeight_{$blockID}',
+		'mediaWidth_{$blockID}'
+	);
+	
+	/**
 	 * Allowed media types.
 	 * @var string[]
 	 */

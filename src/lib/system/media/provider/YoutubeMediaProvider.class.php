@@ -59,15 +59,20 @@ class YoutubeMediaProvider extends AbstractMediaProvider {
 	}
 	
 	protected function getEmbedInformation($source, $maxwidth = 0, $maxheight = 0) {
-		$regex = '^http:\/\/(?:www\.youtube\.com|youtu\.be)\/(?:watch\?v=)?(\w+)([\?&]\w+=[\w\d]+(?:[\?&]\w+=[\w\d]+)*)?';
+		// we have to let the escaping out as that is done in Regex itself, if we escape here, the result will be a wrong one
+		$regex = '^http://(?:www\.youtube\.com|youtu\.be)/(?:watch\?v=)?(\w+)((?:\?|&|&amp;)\w+=[\w\d]+(?:(?:\?|&|&amp;)\w+=[\w\d]+)*)?';
 		$regexObj = new Regex($regex);
 		if (!$regexObj->match($source, true)) {
 			throw new SystemException('invalid source', 0, 'The given source URL is not a valid Youtube share link.');
 		}
 		$matches = $regexObj->getMatches();
-		$videoID = $matches[1];
-		$query = $matches[2];
-		$queryParts = preg_split('[&\?]', $query, null, PREG_SPLIT_NO_EMPTY);
+		// under 1 we have all videoID matches in an array, as we just have one, we have to take the first element of that array
+		// under 2 we have all query matches in an array, as we just have one, we have to take the first element of that array
+		$videoID = $matches[1][0];
+		$query = $matches[2][0];
+		
+		$splitRegex = new Regex('(\?|&|&amp;)');
+		$queryParts = $splitRegex->split($query, Regex::SPLIT_NON_EMPTY_ONLY);
 		
 		// support only official share values
 		$allowedQueryParts = array(

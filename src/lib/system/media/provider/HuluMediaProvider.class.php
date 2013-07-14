@@ -88,7 +88,7 @@ class HuluMediaProvider extends AbstractMediaProvider {
 	}
 	
 	protected function getEmbedInformation($source, $maxwidth = 0, $maxheight = 0) {
-		$regex = '^http:\/\/www\.hulu\.com\/watch\/([\d]+)';
+		$regex = '^http://www\.hulu\.com/watch/([\d]+)';
 		$regexObj = new Regex($regex);
 		if (!$regexObj->match($source)) {
 			throw new SystemException('invalid source', 0, 'The given source URL is not a valid Hulu share link.');

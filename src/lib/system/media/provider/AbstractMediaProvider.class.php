@@ -58,8 +58,8 @@ abstract class AbstractMediaProvider implements IMediaProvider {
 		EventHandler::getInstance()->fireAction($this, 'getHTML');
 		$html = '<iframe ';
 		$html .= ' '.$this->getAttributeHTML('src', StringUtil::trim($source));
-		$html .= ' '.$this->getAttributeHTML('width', integer($width));
-		$html .= ' '.$this->getAttributeHTML('height', integer($height));
+		$html .= ' '.$this->getAttributeHTML('width', intval($width));
+		$html .= ' '.$this->getAttributeHTML('height', intval($height));
 		$html .= '></iframe>';
 		return $html;
 	}
