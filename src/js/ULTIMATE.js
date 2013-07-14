@@ -627,17 +627,26 @@ ULTIMATE.Block.Transfer.prototype = {
 			if (ULTIMATE.Permission
 					.get('admin.content.ultimate.canManageBlocks')) {
 				$newHtml += '<span title="'
-						+ WCF.Language.get('wcf.global.button.delete')
-						+ '" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="'
-						+ +$data['blockID']
-						+ '" data-confirm-message="'
-						+ WCF.Language
-								.get('wcf.acp.ultimate.block.delete.sure')
+						+ WCF.Language.get('wcf.acp.ultimate.block.edit')
+						+ '" class="icon icon16 icon-pencil jsTooltip" data-object-id="'
+						+ $data['blockID']
 						+ '"></span>';
+				
+				$newHtml += '\n<span title="'
+					+ WCF.Language.get('wcf.global.button.delete')
+					+ '" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="'
+					+ $data['blockID']
+					+ '" data-confirm-message="'
+					+ WCF.Language
+							.get('wcf.acp.ultimate.block.delete.sure')
+					+ '"></span>';
 			} else {
 				$newHtml += '<span title="'
-						+ WCF.Language.get('wcf.global.button.delete')
-						+ '" class="icon icon16 icon-remove disabled"></span>';
+						+ WCF.Language.get('wcf.acp.ultimate.block.edit')
+						+ '" class="icon icon16 icon-pencil disabled"></span>';
+				$newHtml += '\n<span title="'
+					+ WCF.Language.get('wcf.global.button.delete')
+					+ '" class="icon icon16 icon-remove disabled"></span>';
 			}
 			$newHtml += '</span>\n<span class="title">'
 					+ $data['blockTypeName'] + ' #' + $data['blockID']
