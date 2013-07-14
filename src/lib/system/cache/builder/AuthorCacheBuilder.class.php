@@ -81,7 +81,8 @@ class AuthorCacheBuilder extends AbstractCacheBuilder {
 			foreach ($__groups as $group) {
 				/* @var $group \wcf\data\user\group\UserGroup */
 				foreach ($permissions as $permission) {
-					$result = $group->getGroupOption($permission);
+					$result = (boolean) $group->getGroupOption($permission);
+					
 					if (!$result) continue;
 					elseif ($result === true) {
 						$isAuthor = true;
