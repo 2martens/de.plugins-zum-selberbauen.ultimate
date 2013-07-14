@@ -141,14 +141,8 @@ class MediaBlockType extends AbstractBlockType {
 			$this->mediaMimeType = $this->objects[$mimeType];
 		}
 		
-		$parameters = $this->block->__get('parameters');
-		if (empty($parameters)) {
-			$parameters = '0, 0';
-		}
-		
-		$dimensions = explode(',', $parameters['dimensions']);
-		$this->mediaHeight = intval($dimensions[1]);
-		$this->mediaWidth = intval($dimensions[0]);
+		$this->mediaHeight = intval($this->block->__get('mediaHeight'));
+		$this->mediaWidth = intval($this->block->__get('mediaWidth'));
 		
 		$mediaType = $this->block->__get('mediaType');
 		if ($mediaType === null) {
@@ -164,25 +158,12 @@ class MediaBlockType extends AbstractBlockType {
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
-		// gathering dimensions and position
-		$dimensions = $this->block->__get('dimensions');
-		if ($dimensions === null) {
-			$dimensions = '0, 0';
-		}
-		$dimensions = explode(',', $dimensions);
-		$position = $this->block->__get('position');
-		if ($position === null) {
-			$position = '0, 0';
-		}
-		$position = explode(',', $position);
+		$height = $this->block->__get('height');
 		
 		WCF::getTPL()->assign(array(
 			'mediaType' => $this->mediaType,
 			'mediaSourceType' => $this->mediaSourceType,
-			'width' => $dimensions[0],
-			'height' => $dimensions[1],
-			'left' => $position[0],
-			'top' => $position[1]
+			'height' => $height
 		));
 		
 		if ($this->mediaSourceType == 'file') {

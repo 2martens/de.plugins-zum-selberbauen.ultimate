@@ -39,6 +39,14 @@
 					{/foreach}
 					</select>
 				</dd>
+				<dd class="inputText">
+					<label for="mediaHeight-{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.mediaTab.embed.mediaHeight.description{/lang}">{lang}wcf.acp.ultimate.template.mediaTab.embed.mediaHeight{/lang}</label>
+					<input type="number" id="mediaHeight-{$blockID}" name="mediaHeight" data-block-id="{$blockID}" data-is-block="true" value="{@$mediaHeight}" />
+				</dd>
+				<dd class="inputText">
+					<label for="mediaWidth-{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.mediaTab.embed.mediaWidth.description{/lang}">{lang}wcf.acp.ultimate.template.mediaTab.embed.mediaWidth{/lang}</label>
+					<input type="number" id="mediaWidth-{$blockID}" name="mediaWidth" data-block-id="{$blockID}" data-is-block="true" value="{@$mediaWidth}" />
+				</dd>
 			</dl>
 		</div>
 	</div>

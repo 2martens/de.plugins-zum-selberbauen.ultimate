@@ -595,6 +595,10 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.template.mediaTab.embed.embedURL.description"><![CDATA[Please insert here the complete link (with HTTP/HTTPS) to the file or hosted video. Do not use the embed URLs of the video hosting sites. Just the link you see directly in your browser.]]></item>
 		<item name="wcf.acp.ultimate.template.mediaTab.embed.mimeType"><![CDATA[MIME-type]]></item>
 		<item name="wcf.acp.ultimate.template.mediaTab.embed.mimeType.description"><![CDATA[Please select here the MIME-type of the linked file or hosted video. The most video hosters use the MIME-type 'application/x-shockwave-flash'. The MIME-type is necessary to embed the file or hosted video properly.]]></item>
+		<item name="wcf.acp.ultimate.template.mediaTab.embed.mediaHeight"><![CDATA[Media height]]></item>
+		<item name="wcf.acp.ultimate.template.mediaTab.embed.mediaHeight.description"><![CDATA[Please insert here the height of the media. The embedded media will be resized to that height.]]></item>
+		<item name="wcf.acp.ultimate.template.mediaTab.embed.mediaWidth"><![CDATA[Media width]]></item>
+		<item name="wcf.acp.ultimate.template.mediaTab.embed.mediaWidth.description"><![CDATA[Please insert here the width of the media. The embedded media will be resized to that width.]]></item>
 		<!-- /embed sub tab -->
 		<!-- /media tab -->
 		

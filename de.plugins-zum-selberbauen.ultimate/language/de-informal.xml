@@ -595,6 +595,10 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.template.mediaTab.embed.embedURL.description"><![CDATA[Füge hier bitte einen Link zu einer Datei (alle Medientypen) oder den Videolink aus der Adressleiste (nicht den Embed-URL) komplett mit HTTP/HTTPS ein.]]></item>
 		<item name="wcf.acp.ultimate.template.mediaTab.embed.mimeType"><![CDATA[MIME-Typ]]></item>
 		<item name="wcf.acp.ultimate.template.mediaTab.embed.mimeType.description"><![CDATA[Bitte wähle hier den MIME-Typ der verlinkten Datei bzw. des verlinkten Videos eines Hostingportals aus. Bei den meisten Videohostern ist der MIME-Typ 'application/x-shockwave-flash'. Der MIME-Typ wird benötigt, um später den Inhalt korrekt darzustellen.]]></item>
+		<item name="wcf.acp.ultimate.template.mediaTab.embed.mediaHeight"><![CDATA[Medienhöhe]]></item>
+		<item name="wcf.acp.ultimate.template.mediaTab.embed.mediaHeight.description"><![CDATA[Gib hier bitte die Höhe des Mediums an. Das Medium wird auf entsprechend auf diese Höhe vergrößert oder verkleinert.]]></item>
+		<item name="wcf.acp.ultimate.template.mediaTab.embed.mediaWidth"><![CDATA[Medienbreite]]></item>
+		<item name="wcf.acp.ultimate.template.mediaTab.embed.mediaWidth.description"><![CDATA[Gib hier bitte die Breite des Mediums an. Das Medium wird auf entsprechend auf diese Breite vergrößert oder verkleinert.]]></item>
 		<!-- /embed sub tab -->
 		<!-- /media tab -->
 		
