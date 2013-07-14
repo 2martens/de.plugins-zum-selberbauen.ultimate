@@ -96,26 +96,36 @@ class BlockAction extends AbstractDatabaseObjectAction {
 		// serializes additionalData and query parameters
 		$parameters = $this->parameters['data'];
 		$templateID = $parameters['templateID'];
+		$blockTypeID = $parameters['blockTypeID'];
+		$blockTypes = BlockTypeCacheBuilder::getInstance()->getData(array(), 'blockTypes');
+		/* @var $blockType \ultimate\data\blocktype\BlockType */
+		$blockType = $blockTypes[$blockTypeID];
+		$blockTypeName = $blockType->__get('blockTypeName');
+		
 		unset($parameters['templateID']);
 		// handle i18n values
 		$metaAboveContent_i18n = array();
 		$metaBelowContent_i18n = array();
 		$readMoreText_i18n = array();
 		
-		if (isset($parameters['additionalData']['readMoreText_i18n'])) {
-			$readMoreText_i18n = $parameters['additionalData']['readMoreText_i18n'];
-			unset($parameters['additionalData']['readMoreText_i18n']);
-			$parameters['additionalData']['readMoreText'] = '';
-		}
-		if (isset($parameters['additionalData']['metaAboveContent_i18n'])) {
-			$metaAboveContent_i18n = $parameters['additionalData']['metaAboveContent_i18n'];
-			unset($parameters['additionalData']['metaAboveContent_i18n']);
-			$parameters['additionalData']['metaAboveContent'] = '';
-		}
-		if (isset($parameters['additionalData']['metaBelowContent_i18n'])) {
-			$metaBelowContent_i18n = $parameters['additionalData']['metaBelowContent_i18n'];
-			unset($parameters['additionalData']['metaBelowContent_i18n']);
-			$parameters['additionalData']['metaBelowContent'] = '';
+		// only relevant for content block type
+		// for later: make it variable so it is independent from specific fields and blocktypes
+		if ($blockTypeName == 'ultimate.blocktype.content') {
+			if (isset($parameters['additionalData']['readMoreText_i18n'])) {
+				$readMoreText_i18n = $parameters['additionalData']['readMoreText_i18n'];
+				unset($parameters['additionalData']['readMoreText_i18n']);
+				$parameters['additionalData']['readMoreText'] = '';
+			}
+			if (isset($parameters['additionalData']['metaAboveContent_i18n'])) {
+				$metaAboveContent_i18n = $parameters['additionalData']['metaAboveContent_i18n'];
+				unset($parameters['additionalData']['metaAboveContent_i18n']);
+				$parameters['additionalData']['metaAboveContent'] = '';
+			}
+			if (isset($parameters['additionalData']['metaBelowContent_i18n'])) {
+				$metaBelowContent_i18n = $parameters['additionalData']['metaBelowContent_i18n'];
+				unset($parameters['additionalData']['metaBelowContent_i18n']);
+				$parameters['additionalData']['metaBelowContent'] = '';
+			}
 		}
 		if (isset($parameters['additionalData'])) {
 			$parameters['additionalData'] = serialize($parameters['additionalData']);
@@ -133,56 +143,53 @@ class BlockAction extends AbstractDatabaseObjectAction {
 		$blockEditor = new BlockEditor($block);
 		$blockEditor->addToTemplate($templateID);
 		
-		// alter i18n values
-		$metaAboveContent = 'ultimate.block.content.'.$block->__get('blockID').'.metaAboveContent';
-		$metaBelowContent = 'ultimate.block.content.'.$block->__get('blockID').'.metaBelowContent';
-		$readMoreText = 'ultimate.block.content.'.$block->__get('blockID').'.readMoreText';
-		I18nHandler::getInstance()->register('metaAboveContent');
-		I18nHandler::getInstance()->register('metaBelowContent');
-		I18nHandler::getInstance()->register('readMoreText');
-		if (empty($metaAboveContent_i18n)) {
-			I18nHandler::getInstance()->remove($metaAboveContent, PACKAGE_ID);
-			$metaAboveContent = $block->__get('metaAboveContent');
-		} else {
-			I18nHandler::getInstance()->setValues('metaAboveContent', $metaAboveContent_i18n);
-			I18nHandler::getInstance()->save('metaAboveContent', $metaAboveContent, 'ultimate.block', PACKAGE_ID);
+		if ($blockTypeName == 'ultimate.blocktype.content') {
+			// alter i18n values
+			$metaAboveContent = 'ultimate.block.content.'.$block->__get('blockID').'.metaAboveContent';
+			$metaBelowContent = 'ultimate.block.content.'.$block->__get('blockID').'.metaBelowContent';
+			$readMoreText = 'ultimate.block.content.'.$block->__get('blockID').'.readMoreText';
+			I18nHandler::getInstance()->register('metaAboveContent');
+			I18nHandler::getInstance()->register('metaBelowContent');
+			I18nHandler::getInstance()->register('readMoreText');
+			if (empty($metaAboveContent_i18n)) {
+				I18nHandler::getInstance()->remove($metaAboveContent, PACKAGE_ID);
+				$metaAboveContent = $block->__get('metaAboveContent');
+			} else {
+				I18nHandler::getInstance()->setValues('metaAboveContent', $metaAboveContent_i18n);
+				I18nHandler::getInstance()->save('metaAboveContent', $metaAboveContent, 'ultimate.block', PACKAGE_ID);
+			}
+			
+			if (empty($metaBelowContent_i18n)) {
+				I18nHandler::getInstance()->remove($metaBelowContent, PACKAGE_ID);
+				$metaBelowContent = $block->__get('metaBelowContent');
+			} else {
+				I18nHandler::getInstance()->setValues('metaBelowContent', $metaBelowContent_i18n);
+				I18nHandler::getInstance()->save('metaBelowContent', $metaBelowContent, 'ultimate.block', PACKAGE_ID);
+			}
+			
+			if (empty($readMoreText_i18n)) {
+				I18nHandler::getInstance()->remove($readMoreText, PACKAGE_ID);
+				$readMoreText = $block->__get('readMoreText');
+			} else {
+				I18nHandler::getInstance()->setValues('readMoreText', $readMoreText_i18n);
+				I18nHandler::getInstance()->save('readMoreText', $readMoreText, 'ultimate.block', PACKAGE_ID);
+			}
+			
+			$additionalData = $block->__get('additionalData');
+			$additionalData['metaAboveContent'] = $metaAboveContent;
+			$additionalData['metaBelowContent'] = $metaBelowContent;
+			$additionalData['readMoreText'] = $readMoreText;
+			
+			$blockEditor->update(array(
+				'additionalData' => serialize($additionalData)
+			));
 		}
-		
-		if (empty($metaBelowContent_i18n)) {
-			I18nHandler::getInstance()->remove($metaBelowContent, PACKAGE_ID);
-			$metaBelowContent = $block->__get('metaBelowContent');
-		} else {
-			I18nHandler::getInstance()->setValues('metaBelowContent', $metaBelowContent_i18n);
-			I18nHandler::getInstance()->save('metaBelowContent', $metaBelowContent, 'ultimate.block', PACKAGE_ID);
-		}
-		
-		if (empty($readMoreText_i18n)) {
-			I18nHandler::getInstance()->remove($readMoreText, PACKAGE_ID);
-			$readMoreText = $block->__get('readMoreText');
-		} else {
-			I18nHandler::getInstance()->setValues('readMoreText', $readMoreText_i18n);
-			I18nHandler::getInstance()->save('readMoreText', $readMoreText, 'ultimate.block', PACKAGE_ID);
-		}
-		
-		$additionalData = $block->__get('additionalData');
-		$additionalData['metaAboveContent'] = $metaAboveContent;
-		$additionalData['metaBelowContent'] = $metaBelowContent;
-		$additionalData['readMoreText'] = $readMoreText;
-		
-		$blockEditor->update(array(
-			'additionalData' => serialize($additionalData)
-		));
 		BlockEditor::resetCache();
-		
-		// get blocktype name
-		$blocktypes = BlockTypeCacheBuilder::getInstance()->getData(array(), 'blockTypes');
-		/* @var $blocktype \ultimate\data\blocktype\Blocktype */
-		$blocktype = $blocktypes[$block->__get('blockTypeID')];
 		
 		return array(
 			'blockID' => $block->__get('blockID'),
 			'blockTypeID' => $block->__get('blockTypeID'),
-			'blockTypeName' => WCF::getLanguage()->get($blocktype->__get('blockTypeName'))
+			'blockTypeName' => WCF::getLanguage()->get($blockTypeName)
 		);
 	}
 	

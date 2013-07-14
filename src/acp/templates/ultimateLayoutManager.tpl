@@ -54,7 +54,7 @@
 				</dd>
 			</dl>
 			<dl{if $errorField == 'layout2'} class="formError"{/if}>
-				<dt><label for="layout2">{lang}wcf.acp.ultimate.layoutManager.category{/lang}</label></dt>
+				<dt><label for="layout2">{lang}wcf.acp.ultimate.layoutManager.content{/lang}</label></dt>
 				<dd>
 					<select id="layout2">
 						<option label="{lang}wcf.acp.ultimate.layoutManager.selectTemplate.none{/lang}" value="0">{lang}wcf.acp.ultimate.layoutManager.selectTemplate.none{/lang}</option>
@@ -77,7 +77,7 @@
 						<dd>
 							<select id="layout2-child-layout">
 								<option label="{lang}wcf.acp.ultimate.layoutManager.selectLayout.none{/lang}" value="0">{lang}wcf.acp.ultimate.layoutManager.selectLayout.none{/lang}</option>
-								{htmlOptions options=$categoryLayouts}
+								{htmlOptions options=$contentLayouts}
 							</select>
 							{if $errorField == 'layout2-child-layout'}
 								<small class="innerError">
@@ -85,7 +85,7 @@
 								</small>
 							{/if}
 							
-							<select id="layout2-child-template">
+							<select id="layout3-child-template">
 								<option label="{lang}wcf.acp.ultimate.layoutManager.selectTemplate.inherit{/lang}" value="0">{lang}wcf.acp.ultimate.layoutManager.selectTemplate.inherit{/lang}</option>
 								{htmlOptions options=$templates}
 							</select>
@@ -99,7 +99,7 @@
 				</dd>
 			</dl>
 			<dl{if $errorField == 'layout3'} class="formError"{/if}>
-				<dt><label for="layout3">{lang}wcf.acp.ultimate.layoutManager.content{/lang}</label></dt>
+				<dt><label for="layout3">{lang}wcf.acp.ultimate.layoutManager.page{/lang}</label></dt>
 				<dd>
 					<select id="layout3">
 						<option label="{lang}wcf.acp.ultimate.layoutManager.selectTemplate.none{/lang}" value="0">{lang}wcf.acp.ultimate.layoutManager.selectTemplate.none{/lang}</option>
@@ -122,7 +122,7 @@
 						<dd>
 							<select id="layout3-child-layout">
 								<option label="{lang}wcf.acp.ultimate.layoutManager.selectLayout.none{/lang}" value="0">{lang}wcf.acp.ultimate.layoutManager.selectLayout.none{/lang}</option>
-								{htmlOptions options=$contentLayouts}
+								{htmlOptions options=$pageLayouts}
 							</select>
 							{if $errorField == 'layout3-child-layout'}
 								<small class="innerError">
@@ -144,7 +144,7 @@
 				</dd>
 			</dl>
 			<dl{if $errorField == 'layout4'} class="formError"{/if}>
-				<dt><label for="layout4">{lang}wcf.acp.ultimate.layoutManager.page{/lang}</label></dt>
+				<dt><label for="layout4">{lang}wcf.acp.ultimate.layoutManager.category{/lang}</label></dt>
 				<dd>
 					<select id="layout4">
 						<option label="{lang}wcf.acp.ultimate.layoutManager.selectTemplate.none{/lang}" value="0">{lang}wcf.acp.ultimate.layoutManager.selectTemplate.none{/lang}</option>
@@ -154,7 +154,7 @@
 						{htmlOptions options=$templates}
 						{/if}
 					</select>
-					{if $errorField == 'layout4'}
+					{if $errorField == 'layout2'}
 						<small class="innerError">
 							{lang}wcf.acp.ultimate.layoutManager.selectTemplate.error.{@$errorType}{/lang}
 						</small>
@@ -167,7 +167,7 @@
 						<dd>
 							<select id="layout4-child-layout">
 								<option label="{lang}wcf.acp.ultimate.layoutManager.selectLayout.none{/lang}" value="0">{lang}wcf.acp.ultimate.layoutManager.selectLayout.none{/lang}</option>
-								{htmlOptions options=$pageLayouts}
+								{htmlOptions options=$categoryLayouts}
 							</select>
 							{if $errorField == 'layout4-child-layout'}
 								<small class="innerError">

@@ -55,7 +55,7 @@ class TemplateHandler extends SingletonFactory {
 	 * Contains the layout ID of the category layout.
 	 * @var integer
 	 */
-	const CATEGORY_LAYOUT_ID = 1;
+	const CATEGORY_LAYOUT_ID = 4;
 	
 	/**
 	 * Contains the layout ID of the content layout.
@@ -157,6 +157,7 @@ class TemplateHandler extends SingletonFactory {
 		// gathering output
 		$output = '';
 		$blocks = $template->__get('blocks');
+		
 		foreach ($blocks as $blockID => $block) {
 			/* @var $blockTypeDatabase \ultimate\data\blocktype\BlockType */
 			$blockTypeID = $block->__get('blockTypeID');
