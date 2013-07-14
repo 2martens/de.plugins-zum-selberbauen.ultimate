@@ -55,7 +55,7 @@ class YoutubeMediaProvider extends AbstractMediaProvider {
 	 */
 	public function getHTML($source, $width, $height) {
 		$source = $this->getEmbedInformation(StringUtil::trim($source));
-		return parent::getHTML($source, $height, $width);
+		return parent::getHTML($source, $width, $height);
 	}
 	
 	protected function getEmbedInformation($source, $maxwidth = 0, $maxheight = 0) {
