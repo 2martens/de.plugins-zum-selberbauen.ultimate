@@ -158,12 +158,9 @@ class MediaBlockType extends AbstractBlockType {
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
-		$height = $this->block->__get('height');
-		
 		WCF::getTPL()->assign(array(
 			'mediaType' => $this->mediaType,
-			'mediaSourceType' => $this->mediaSourceType,
-			'height' => $height
+			'mediaSourceType' => $this->mediaSourceType
 		));
 		
 		if ($this->mediaSourceType == 'file') {
@@ -177,13 +174,7 @@ class MediaBlockType extends AbstractBlockType {
 		elseif ($this->mediaSourceType == 'provider') {
 			WCF::getTPL()->assign('mediaHTML', $this->mediaHTML);
 		}
-	}
-	
-	/**
-	 * @see \ultimate\system\blocktype\IBlockType::getOptionsHTML()
-	 */
-	public function getOptionsHTML() {
-		$returnValues = parent::getOptionsHTML();
+		
 		$defaults = array(
 			'mediaType' => 'audio',
 			'mimeType' => 'audio/basic'
@@ -205,17 +196,6 @@ class MediaBlockType extends AbstractBlockType {
 				WCF::getTPL()->assign($optionName, $optionValue);
 			}
 		}
-		
-		// prevent exception while accessing template in ACP
-		try {
-			$returnValues[1] = WCF::getTPL()->fetch('mediaBlockOptions', 'ultimate');
-		}
-		catch (SystemException $se) {
-			WCF::getTPL()->addApplication('ultimate', 'templates/');
-			$returnValues[1] = WCF::getTPL()->fetch('mediaBlockOptions', 'ultimate');
-			WCF::getTPL()->addApplication('ultimate', 'acp/templates');
-		}
-		return $returnValues;
 	}
 	
 	/**
