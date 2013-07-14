@@ -55,6 +55,13 @@ class MediaMimetype extends AbstractUltimateDatabaseObject {
 	protected static $databaseTableIndexName = 'mimeTypeID';
 	
 	/**
+	 * Returns the string representation of this mimetype.
+	 */
+	public function __toString() {
+		return $this->mimeType;
+	}
+	
+	/**
 	 * @see \wcf\data\DatabaseObject::handleData()
 	 */
 	protected function handleData($data) {

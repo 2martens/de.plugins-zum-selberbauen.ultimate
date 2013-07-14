@@ -1,14 +1,15 @@
-<div id="block-{$blockID}-tab" class="tabMenuContainer tabMenuContent containerPadding panel" data-store="block-{$blockID}-tab-type">
+<div id="block-{$blockID}-tab" class="tabMenuContainer containerPadding" data-is-parent="true" data-active="block-{$blockID}-tab-type">
 	<form method="post" action="">
-	<nav class="tabMenu subTabsContainer">
-		<ul class="subTabs">
-			<li><a href="#block-{$blockID}-tab-type" title="{lang}wcf.acp.ultimate.template.mediaTab.type{/lang}">{lang}wcf.acp.ultimate.template.mediaTab.type{/lang}</a></li>
-			<li><a href="#block-{$blockID}-tab-embed" title="{lang}wcf.acp.ultimate.template.mediaTab.embed{/lang}">{lang}wcf.acp.ultimate.template.mediaTab.embed{/lang}</a></li>
-		</ul>
-	</nav>
+		<nav class="tabMenu">
+			<ul>
+				{assign var='typeTab' value='block_'|concat:$blockID|concat:'_tab_type'}
+				{assign var='embedTab' value='block_'|concat:$blockID|concat:'_tab_embed'}
+				<li data-menu-item="block_{$blockID}_tab_type"><a href="{$__wcf->getAnchor($typeTab)}" title="{lang}wcf.acp.ultimate.template.mediaTab.type{/lang}">{lang}wcf.acp.ultimate.template.mediaTab.type{/lang}</a></li>
+				<li data-menu-item="block_{$blockID}_tab_embed"><a href="{$__wcf->getAnchor($embedTab)}" title="{lang}wcf.acp.ultimate.template.mediaTab.embed{/lang}">{lang}wcf.acp.ultimate.template.mediaTab.embed{/lang}</a></li>
+			</ul>
+		</nav>
 	
-	<div class="subTabsContentContainer">
-		<div id="block-{$blockID}-tab-type" class="tabMenuContent subTabsContent containerPadding">
+		<div id="block_{$blockID}_tab_type" class="container tabMenuContent containerPadding" data-parent-menu-item="block_{$blockID}_tab_type">
 			<div class="info">
 				<p>{lang}wcf.acp.ultimate.template.mediaTab.type.info{/lang}</p>
 			</div>
@@ -24,7 +25,7 @@
 				</dd>
 			</dl>
 		</div>
-		<div id="block-{$blockID}-tab-embed" class="tabMenuContent subTabsContent containerPadding">
+		<div id="block_{$blockID}_tab_embed" class="container tabMenuContent containerPadding" data-parent-menu-item="block_{$blockID}_tab_embed">
 			<dl class="wide">
 				<dd class="inputText">
 					<label for="embedURL-{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.mediaTab.embed.embedURL.description{/lang}">{lang}wcf.acp.ultimate.template.mediaTab.embed.embedURL{/lang}</label>
@@ -34,8 +35,8 @@
 					<label for="mimeType-{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.mediaTab.embed.mimeType.description{/lang}">{lang}wcf.acp.ultimate.template.mediaTab.embed.mimeType{/lang}</label>
 					
 					<select id="mimeType-{$blockID}" data-block-id="{$blockID}" data-is-block="true" name="mimeType">
-					{foreach from=$mimetypes key=mime item=mimetype}
-						<option value="{@$mime}"{if $mimeTypeSelected == $mime} selected="selected"{/if}>{@$mime}</option>
+					{foreach from=$mimeTypes key=mime item=mimetype}
+						<option value="{@$mime}"{if $mimeTypeSelected == $mime} selected="selected"{/if}>{@$mimetype}</option>
 					{/foreach}
 					</select>
 				</dd>
@@ -49,9 +50,8 @@
 				</dd>
 			</dl>
 		</div>
-	</div>
-	<div class="formSubmit">
-		<input type="submit" id="blockSubmitButton" name="submitButton" value="{lang}wcf.global.submit{/lang}" accesskey="s" />
-	</div>
+		<div class="formSubmit">
+			<input type="submit" id="blockSubmitButton" name="submitButton" value="{lang}wcf.global.submit{/lang}" accesskey="s" />
+		</div>
 	</form>
 </div>
