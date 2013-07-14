@@ -1,4 +1,4 @@
-<div id="block-{$blockID}-tab" class="tabMenuContainer containerPadding" data-is-parent="true" data-active="block-{$blockID}-tab-type">
+<div id="block_{$blockID}_tab" class="tabMenuContainer containerPadding" data-is-parent="true" data-active="block_{$blockID}_tab_type">
 	<form method="post" action="">
 		<nav class="tabMenu">
 			<ul>
@@ -8,7 +8,7 @@
 				<li data-menu-item="block_{$blockID}_tab_embed"><a href="{$__wcf->getAnchor($embedTab)}" title="{lang}wcf.acp.ultimate.template.mediaTab.embed{/lang}">{lang}wcf.acp.ultimate.template.mediaTab.embed{/lang}</a></li>
 			</ul>
 		</nav>
-	
+		
 		<div id="block_{$blockID}_tab_type" class="container tabMenuContent containerPadding" data-parent-menu-item="block_{$blockID}_tab_type">
 			<div class="info">
 				<p>{lang}wcf.acp.ultimate.template.mediaTab.type.info{/lang}</p>
@@ -51,7 +51,7 @@
 			</dl>
 		</div>
 		<div class="formSubmit">
-			<input type="submit" id="blockSubmitButton" name="submitButton" value="{lang}wcf.global.submit{/lang}" accesskey="s" />
+			<input type="submit" id="blockSubmitButton" name="submitButton" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
 		</div>
 	</form>
 </div>
