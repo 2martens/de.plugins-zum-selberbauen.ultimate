@@ -191,7 +191,7 @@ class MediaBlockType extends AbstractBlockType {
 			'mimeType' => 'audio/basic'
 		);
 		$options = $this->block->__get('additionalData');
-		$options = array_merge_recursive($defaults, $options);
+		$options = array_replace_recursive($defaults, $options);
 		
 		$optionsSelect = array(
 			'mediaType',

@@ -29,6 +29,7 @@ namespace ultimate\data\block;
 use ultimate\system\blocktype\BlockTypeHandler;
 use ultimate\system\cache\builder\BlockCacheBuilder;
 use ultimate\system\cache\builder\BlockTypeCacheBuilder;
+use ultimate\system\layout\LayoutHandler;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
@@ -98,7 +99,6 @@ class BlockAction extends AbstractDatabaseObjectAction {
 		$templateID = $parameters['templateID'];
 		$blockTypeID = $parameters['blockTypeID'];
 		$blockTypes = BlockTypeCacheBuilder::getInstance()->getData(array(), 'blockTypes');
-		/* @var $blockType \ultimate\data\blocktype\BlockType */
 		$blockType = $blockTypes[$blockTypeID];
 		$blockTypeName = $blockType->__get('blockTypeName');
 		
@@ -136,7 +136,6 @@ class BlockAction extends AbstractDatabaseObjectAction {
 		$this->parameters['data'] = $parameters;
 		
 		// create the block
-		/* @var $block \ultimate\data\block\Block */
 		$block = $this->create();
 		
 		// connect block with template
@@ -194,10 +193,126 @@ class BlockAction extends AbstractDatabaseObjectAction {
 	}
 	
 	/**
+	 * Edits a block and respects additional AJAX requirements.
+	 *
+	 * @return	integer[]|string[]
+	 */
+	public function editAJAX() {
+		// serializes additionalData and query parameters
+		$parameters = $this->parameters['data'];
+		/* @var $blockEditor \ultimate\data\block\BlockEditor */
+		$blockEditor = $this->objects[0];
+		
+		$blockTypeData = $blockEditor->__get('blockType');
+		$blockTypeName = $blockTypeData->__get('blockTypeName');
+	
+		// handle i18n values
+		$metaAboveContent_i18n = array();
+		$metaBelowContent_i18n = array();
+		$readMoreText_i18n = array();
+		$metaAboveContent_plain = $metaBelowContent_plain = $readMoreText_plain = '';
+		
+		if (isset($parameters['additionalData']['metaAboveContent'])) {
+			$metaAboveContent_plain = $parameters['additionalData']['metaAboveContent'];
+		}
+		if (isset($parameters['additionalData']['metaBelowContent'])) {
+			$metaBelowContent_plain = $parameters['additionalData']['metaBelowContent'];
+		}
+		if (isset($parameters['additionalData']['readMoreText'])) {
+			$readMoreText_plain = $parameters['additionalData']['readMoreText'];
+		}
+		
+		// only relevant for content block type
+		// for later: make it variable so it is independent from specific fields and blocktypes
+		if ($blockTypeName == 'ultimate.blocktype.content') {
+			if (isset($parameters['additionalData']['readMoreText_i18n'])) {
+				$readMoreText_i18n = $parameters['additionalData']['readMoreText_i18n'];
+				unset($parameters['additionalData']['readMoreText_i18n']);
+				$parameters['additionalData']['readMoreText'] = '';
+			}
+			if (isset($parameters['additionalData']['metaAboveContent_i18n'])) {
+				$metaAboveContent_i18n = $parameters['additionalData']['metaAboveContent_i18n'];
+				unset($parameters['additionalData']['metaAboveContent_i18n']);
+				$parameters['additionalData']['metaAboveContent'] = '';
+			}
+			if (isset($parameters['additionalData']['metaBelowContent_i18n'])) {
+				$metaBelowContent_i18n = $parameters['additionalData']['metaBelowContent_i18n'];
+				unset($parameters['additionalData']['metaBelowContent_i18n']);
+				$parameters['additionalData']['metaBelowContent'] = '';
+			}
+		}
+		if (isset($parameters['additionalData'])) {
+			$parameters['additionalData'] = serialize($parameters['additionalData']);
+		}
+		if (isset($parameters['parameters'])) {
+			$parameters['parameters'] = serialize($parameters['parameters']);
+		}
+		$this->parameters['data'] = $parameters;
+		
+		$this->update();
+	
+		if ($blockTypeName == 'ultimate.blocktype.content') {
+			// alter i18n values
+			$metaAboveContent = 'ultimate.block.content.'.$blockEditor->__get('blockID').'.metaAboveContent';
+			$metaBelowContent = 'ultimate.block.content.'.$blockEditor->__get('blockID').'.metaBelowContent';
+			$readMoreText = 'ultimate.block.content.'.$blockEditor->__get('blockID').'.readMoreText';
+			I18nHandler::getInstance()->register('metaAboveContent');
+			I18nHandler::getInstance()->register('metaBelowContent');
+			I18nHandler::getInstance()->register('readMoreText');
+			if (empty($metaAboveContent_i18n)) {
+				I18nHandler::getInstance()->remove($metaAboveContent, PACKAGE_ID);
+				$metaAboveContent = $metaAboveContent_plain;
+			} else {
+				I18nHandler::getInstance()->setValues('metaAboveContent', $metaAboveContent_i18n);
+				I18nHandler::getInstance()->save('metaAboveContent', $metaAboveContent, 'ultimate.block', PACKAGE_ID);
+			}
+				
+			if (empty($metaBelowContent_i18n)) {
+				I18nHandler::getInstance()->remove($metaBelowContent, PACKAGE_ID);
+				$metaBelowContent = $metaBelowContent_plain;
+			} else {
+				I18nHandler::getInstance()->setValues('metaBelowContent', $metaBelowContent_i18n);
+				I18nHandler::getInstance()->save('metaBelowContent', $metaBelowContent, 'ultimate.block', PACKAGE_ID);
+			}
+				
+			if (empty($readMoreText_i18n)) {
+				I18nHandler::getInstance()->remove($readMoreText, PACKAGE_ID);
+				$readMoreText = $readMoreText_plain;
+			} else {
+				I18nHandler::getInstance()->setValues('readMoreText', $readMoreText_i18n);
+				I18nHandler::getInstance()->save('readMoreText', $readMoreText, 'ultimate.block', PACKAGE_ID);
+			}
+				
+			$additionalData = $blockEditor->__get('additionalData');
+			$additionalData['metaAboveContent'] = $metaAboveContent;
+			$additionalData['metaBelowContent'] = $metaBelowContent;
+			$additionalData['readMoreText'] = $readMoreText;
+			
+			$blockEditor->update(array(
+				'additionalData' => serialize($additionalData)
+			));
+		}
+		BlockEditor::resetCache();
+	
+		return array(
+			'blockID' => $blockEditor->__get('blockID'),
+			'blockTypeID' => $blockEditor->__get('blockTypeID'),
+			'blockTypeName' => WCF::getLanguage()->get($blockTypeName)
+		);
+	}
+	
+	/**
 	 * Validates the createAJAX method.
 	 */
 	public function validateCreateAJAX() {
 		$this->validateCreate();
+	}
+	
+	/**
+	 * Validates the editAJAX method.
+	 */
+	public function validateEditAJAX() {
+		$this->validateUpdate();
 	}
 	
 	/**
@@ -208,8 +323,28 @@ class BlockAction extends AbstractDatabaseObjectAction {
 	public function getFormDataAJAX() {
 		$parameters = $this->parameters['data'];
 		$blockTypeID = intval($parameters['blockTypeID']);
+		
 		$blockType = BlockTypeHandler::getInstance()->getBlockType($blockTypeID);
+		$optionsHTML = $blockType->getOptionsHTML();
+		return $optionsHTML;
+	}
+	
+	/**
+	 * Returns blockType specific information in the edit case.
+	 *
+	 * @return	string
+	 */
+	public function getFormDataEditAJAX() {
+		$parameters = $this->parameters['data'];
+		$blockID = intval($parameters['blockID']);
+		$blocks = BlockCacheBuilder::getInstance()->getData(array(), 'blocks');
+		
+		$block = $blocks[$blockID];
+		$blockTypeID = $block->__get('blockTypeID');
+		
 		/* @var $blockType \ultimate\system\blocktype\IBlockType */
+		$blockType = BlockTypeHandler::getInstance()->getBlockType($blockTypeID);
+		$blockType->init('index', LayoutHandler::getInstance()->getLayout(LayoutHandler::INDEX), null, $blockID);
 		$optionsHTML = $blockType->getOptionsHTML();
 		return $optionsHTML;
 	}
@@ -218,6 +353,13 @@ class BlockAction extends AbstractDatabaseObjectAction {
 	 * Does nothing as the getFormDataAJAX doesn't require any permission.
 	 */
 	public function validateGetFormDataAJAX() {
+		// no permissions required
+	}
+	
+	/**
+	 * Does nothing as the getFormDataEditAJAX doesn't require any permission.
+	 */
+	public function validateGetFormDataEditAJAX() {
 		// no permissions required
 	}
 }

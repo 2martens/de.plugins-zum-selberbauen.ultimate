@@ -334,6 +334,13 @@ ULTIMATE.Block.Transfer.prototype = {
 	 * @type jQuery
 	 */
 	_dialog : null,
+	
+	/**
+	 * Contains the edited block id.
+	 * 
+	 * @type Integer
+	 */
+	_editBlockID: 0,
 
 	/**
 	 * Initializes the BlockTransfer API.
@@ -363,6 +370,8 @@ ULTIMATE.Block.Transfer.prototype = {
 
 	_init : function() {
 		$('.jsBlock').on('remove', $.proxy(this._remove, this));
+		$('.icon-pencil').not('.disabled').on('click',
+				$.proxy(this._edit, this));
 	},
 
 	/**
@@ -388,6 +397,39 @@ ULTIMATE.Block.Transfer.prototype = {
 			$('#' + this._containerID).find('button[data-type="submit"]').prop(
 					'disabled', true).addClass('disabled');
 		}
+	},
+
+	/**
+	 * Called each time a block is edited.
+	 * 
+	 * @param {jQuery.Event}
+	 *            event
+	 */
+	_edit : function(event) {
+		var $target = $(event.currentTarget);
+		event.preventDefault();
+		
+		var $data = {};
+		var blockID = $target.data('objectID');
+		this._editedBlockID = blockID;
+		// select blockType specific information
+		var $formDataParameters = $.extend(true, {
+			data : {
+				blockID : blockID
+			}
+		}, {});
+		
+		var $formData = $.extend(true, {
+			actionName : 'getFormDataEditAJAX',
+			className : this._className,
+			parameters : $formDataParameters
+		}, $data);
+
+		var $proxy = new WCF.Action.Proxy({
+			success : $.proxy(this._successFormDataEdit, this)
+		});
+		$proxy.setOption('data', $formData);
+		$proxy.sendRequest();
 	},
 
 	/**
@@ -421,7 +463,7 @@ ULTIMATE.Block.Transfer.prototype = {
 			}
 		}, {});
 
-		$formData = $.extend(true, {
+		var $formData = $.extend(true, {
 			actionName : 'getFormDataAJAX',
 			className : this._className,
 			parameters : $formDataParameters
@@ -451,9 +493,66 @@ ULTIMATE.Block.Transfer.prototype = {
 			}
 		}, {});
 
+		$parameters = this._readBlockOptionsFormData($parameters);
+		
+		// reset form
+		$('#selectBlocktype').val('0');
+		$('#height').val('0');
+
+		// build proxy data
+		var $data = $.extend(true, {
+			actionName : 'createAJAX',
+			className : this._className,
+			parameters : $parameters
+		}, {});
+		this._proxy.setOption('data', $data);
+
+		// send proxy request
+		this._proxy.sendRequest();
+	},
+	
+	/**
+	 * Saves the additional block options after editing them.
+	 */
+	_submitFormDataEdit : function() {
+		// read form data
+		var blockID = this._editedBlockID;
+		var $parameters = $.extend(true, {
+			data : {
+				additionalData : {
+				}
+			}
+		}, {});
+
+		$parameters = this._readBlockOptionsFormData($parameters);
+		
+		// build proxy data
+		var $data = $.extend(true, {
+			actionName : 'editAJAX',
+			className : this._className,
+			parameters : $parameters,
+			objectIDs : [blockID]
+		}, {});
+		
+		var $proxy = new WCF.Action.Proxy({
+			success : $.proxy(this._successEdit, this)
+		});
+		$proxy.setOption('data', $data);
+
+		// send proxy request
+		$proxy.sendRequest();
+	},
+	
+	/**
+	 * Reads the block options form data.
+	 * 
+	 * @param {Object}
+	 *            parameters
+	 */
+	_readBlockOptionsFormData: function($parameters) {
 		for ( var i = 0; i < this._optionList.length; i++) {
 			var $item = this._optionList[i];
-			var optionName = $item.replace(/_\d/, '');
+			var optionName = $item.replace(/_\d+/, '');
 			var optionFound = $('input[name="' + optionName + '"]');
 			var isSelection = false;
 			if (optionFound.length == 0) {
@@ -483,23 +582,9 @@ ULTIMATE.Block.Transfer.prototype = {
 				$parameters['data']['additionalData'][optionName + '_i18n'] = optionName_i18n;
 			}
 		}
-
-		// reset form
-		$('#selectBlocktype').val('0');
-		$('#height').val('0');
-
-		// build proxy data
-		$data = $.extend(true, {
-			actionName : 'createAJAX',
-			className : this._className,
-			parameters : $parameters
-		}, {});
-		this._proxy.setOption('data', $data);
-
-		// send proxy request
-		this._proxy.sendRequest();
+		return $parameters;
 	},
-
+	
 	/**
 	 * Shows dialog form.
 	 * 
@@ -513,42 +598,7 @@ ULTIMATE.Block.Transfer.prototype = {
 	_successFormData : function(data, textStatus, jqXHR) {
 		try {
 			var $data = data['returnValues'];
-			this._optionList = $data[0];
-			$('#blockForm').html($data[1]);
-			$('#blockForm').find('form').submit(
-					$.proxy(this._stopFormSubmit, this));
-
-			if (!$.wcfIsset('blockForm'))
-				return;
-			this._dialog = $('#' + $.wcfEscapeID('blockForm'));
-			this._dialog
-					.wcfDialog({
-						title : WCF.Language
-								.get('wcf.acp.ultimate.template.dialog.additionalOptions')
-					});
-			// initializing tabs
-			this._dialog.removeClass('ultimateHidden');
-			this._dialog.wcfDialog('open');
-
-			WCF.TabMenu.reload();
-
-			this._dialog.find('nav.tabMenu li').each(function(index, item) {
-				$(this).removeClass('active');
-			});
-			this._dialog.find('div.tabMenuContent').each(
-					function(index, container) {
-						$(this).hide();
-					});
-			this._dialog.find('nav.tabMenu li').click(
-					$.proxy(this._toggleTabs, this));
-			this._renderTab(this._dialog.find('nav.tabMenu li:first').data(
-					'menuItem'));
-
-			this._dialog.wcfDialog('render');
-			this._dialog.css({
-				'max-height' : '400px',
-				'overflow' : 'scroll'
-			});
+			this._createOptionsDialog($data);
 
 			$('#blockForm').find('form').submit(
 					$.proxy(this._submitFormData, this));
@@ -563,6 +613,81 @@ ULTIMATE.Block.Transfer.prototype = {
 				});
 			}
 		}
+	},
+	
+	/**
+	 * Shows dialog form on edit.
+	 * 
+	 * @param {Object}
+	 *            data
+	 * @param {String}
+	 *            textStatus
+	 * @param {jQuery}
+	 *            jqXHR
+	 */
+	_successFormDataEdit : function(data, textStatus, jqXHR) {
+		try {
+			var $data = data['returnValues'];
+			this._createOptionsDialog($data);
+
+			$('#blockForm').find('form').submit(
+					$.proxy(this._submitFormDataEdit, this));
+
+		} catch (e) {
+			var $showError = true;
+			if ($showError !== false) {
+				$(
+						'<div class="ajaxDebugMessage"><p>' + e.message
+								+ '</p></div>').wcfDialog({
+					title : WCF.Language.get('wcf.global.error.title')
+				});
+			}
+		}
+	},
+	
+	/**
+	 * Initializes the block options dialog.
+	 * 
+	 * @param {Array}
+	 *            $data
+	 */
+	_createOptionsDialog: function($data) {
+		this._optionList = $data[0];
+		$('#blockForm').html($data[1]);
+		$('#blockForm').find('form').submit(
+				$.proxy(this._stopFormSubmit, this));
+
+		if (!$.wcfIsset('blockForm'))
+			return;
+		this._dialog = $('#' + $.wcfEscapeID('blockForm'));
+		this._dialog
+				.wcfDialog({
+					title : WCF.Language
+							.get('wcf.acp.ultimate.template.dialog.additionalOptions')
+				});
+		// initializing tabs
+		this._dialog.removeClass('ultimateHidden');
+		this._dialog.wcfDialog('open');
+
+		WCF.TabMenu.reload();
+
+		this._dialog.find('nav.tabMenu li').each(function(index, item) {
+			$(this).removeClass('active');
+		});
+		this._dialog.find('div.tabMenuContent').each(
+				function(index, container) {
+					$(this).hide();
+				});
+		this._dialog.find('nav.tabMenu li').click(
+				$.proxy(this._toggleTabs, this));
+		this._renderTab(this._dialog.find('nav.tabMenu li:first').data(
+				'menuItem'));
+
+		this._dialog.wcfDialog('render');
+		this._dialog.css({
+			'max-height' : '400px',
+			'overflow' : 'scroll'
+		});
 	},
 
 	/**
@@ -628,24 +753,23 @@ ULTIMATE.Block.Transfer.prototype = {
 				$newHtml += '<span title="'
 						+ WCF.Language.get('wcf.acp.ultimate.block.edit')
 						+ '" class="icon icon16 icon-pencil jsTooltip" data-object-id="'
-						+ $data['blockID']
-						+ '"></span>';
-				
+						+ $data['blockID'] + '"></span>';
+
 				$newHtml += '\n<span title="'
-					+ WCF.Language.get('wcf.global.button.delete')
-					+ '" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="'
-					+ $data['blockID']
-					+ '" data-confirm-message="'
-					+ WCF.Language
-							.get('wcf.acp.ultimate.block.delete.sure')
-					+ '"></span>';
+						+ WCF.Language.get('wcf.global.button.delete')
+						+ '" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="'
+						+ $data['blockID']
+						+ '" data-confirm-message="'
+						+ WCF.Language
+								.get('wcf.acp.ultimate.block.delete.sure')
+						+ '"></span>';
 			} else {
 				$newHtml += '<span title="'
 						+ WCF.Language.get('wcf.acp.ultimate.block.edit')
 						+ '" class="icon icon16 icon-pencil disabled"></span>';
 				$newHtml += '\n<span title="'
-					+ WCF.Language.get('wcf.global.button.delete')
-					+ '" class="icon icon16 icon-remove disabled"></span>';
+						+ WCF.Language.get('wcf.global.button.delete')
+						+ '" class="icon icon16 icon-remove disabled"></span>';
 			}
 			$newHtml += '</span>\n<span class="title">'
 					+ $data['blockTypeName'] + ' #' + $data['blockID']
@@ -663,6 +787,37 @@ ULTIMATE.Block.Transfer.prototype = {
 						$('.jsBlock'));
 			}
 			this._init();
+			this._dialog.wcfDialog('close');
+			this._notification.show();
+		} catch (e) {
+			// call child method if applicable
+			var $showError = true;
+			if ($showError !== false) {
+				$(
+						'<div class="ajaxDebugMessage"><p>' + e.message
+								+ '</p></div>').wcfDialog({
+					title : WCF.Language.get('wcf.global.error.title')
+				});
+			}
+		}
+	},
+	
+	/**
+	 * Shows notification upon edit success.
+	 * 
+	 * @param {Object}
+	 *            data
+	 * @param {String}
+	 *            textStatus
+	 * @param {jQuery}
+	 *            jqXHR
+	 */
+	_successEdit : function(data, textStatus, jqXHR) {
+		if (this._notification === null) {
+			this._notification = new WCF.System.Notification(WCF.Language
+					.get('wcf.global.success.edit'));
+		}
+		try {
 			this._dialog.wcfDialog('close');
 			this._notification.show();
 		} catch (e) {
