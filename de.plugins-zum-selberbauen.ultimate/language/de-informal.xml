@@ -662,8 +662,8 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 	</category>
 	
 	<category name="wcf.user.profile">
-		<item name="wcf.user.profile.recentActivity.contentComment"><![CDATA[Hat einen Kommentar zu <a href="{link controller='' date=$content->publishDateObj->format('Y/m/d') contentSlug=$content->contentSlug}{/link}">{$content}</a> von <a href="{link controller='User' object=$author}{/link}">{$author->username}</a> geschrieben.]]></item>
-		<item name="wcf.user.profile.recentActivity.contentCommentResponse"><![CDATA[Hat auf einen Kommentar von <a href="{link controller='User' object=$commentAuthor}{/link}">{$commentAuthor->username}</a> zu <a href="{link controller='' date=$content->publishDateObj->format('Y/m/d') contentSlug=$content->contentSlug}{/link}">{$content}</a> von <a href="{link controller='User' object=$author}{/link}">{$author->username}</a> geantwortet.]]></item>
+		<item name="wcf.user.profile.recentActivity.contentComment"><![CDATA[Hat einen Kommentar zu <a href="{link controller='' date=$content->publishDateObject->format('Y/m/d') contentSlug=$content->contentSlug}{/link}">{$content}</a> von <a href="{link controller='User' object=$author}{/link}">{$author->username}</a> geschrieben.]]></item>
+		<item name="wcf.user.profile.recentActivity.contentCommentResponse"><![CDATA[Hat auf einen Kommentar von <a href="{link controller='User' object=$commentAuthor}{/link}">{$commentAuthor->username}</a> zu <a href="{link controller='' date=$content->publishDateObject->format('Y/m/d') contentSlug=$content->contentSlug}{/link}">{$content}</a> von <a href="{link controller='User' object=$author}{/link}">{$author->username}</a> geantwortet.]]></item>
 	</category>
 	
 	<!-- this category is used for all multilingual block fields -->
