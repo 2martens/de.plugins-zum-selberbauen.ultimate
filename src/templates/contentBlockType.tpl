@@ -55,18 +55,18 @@
 				{/if}
 				
 				{if $contentMetaDisplaySelected[$requestType]|isset || $contentMetaDisplaySelected|count == 0}
-					{*hascontent*}
+					{hascontent}
 						<aside class="meta" id="metaBelow-{$contentID}">
-						{*content*}
+						{content}
 							{if $metaBelow[$contentID]|isset && $metaBelow[$contentID] != ""}
 								{@$metaBelow[$contentID]}
 							{/if}
 							{if $metaBelow_i18n[$contentID][$__wcf->getLanguage()->__get('languageID')]|isset}
 								{@$metaBelow_i18n[$contentID][$__wcf->getLanguage()->__get('languageID')]}
 							{/if}
-						{*/content*}
+						{/content}
 						</aside>
-					{*/hascontent*}
+					{/hascontent}
 				{/if}
 			{/if}
 			
