@@ -28,9 +28,8 @@
 namespace ultimate\system\user\activity\event;
 use ultimate\system\cache\builder\ContentCacheBuilder;
 use wcf\data\comment\response\CommentResponseList;
-use wcf\system\cache\builder\CommentCacheBuilder;
-use wcf\system\cache\builder\CommentResponseCacheBuilder;
-use wcf\system\cache\builder\UserCacheBuilder;
+use wcf\data\comment\CommentList;
+use wcf\data\user\UserProfileList;
 use wcf\system\user\activity\event\IUserActivityEvent;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
@@ -46,18 +45,6 @@ use wcf\system\WCF;
  * @category	Ultimate CMS
  */
 class ContentCommentResponseUserActivityEvent extends SingletonFactory implements IUserActivityEvent {
-	/**
-	 * Contains the read comments.
-	 * @var \wcf\data\comment\Comment[]
-	 */
-	protected $comments = array();
-	
-	/**
-	 * Contains the read comment responses.
-	 * @var \wcf\data\comment\response\CommentResponse[]
-	 */
-	protected $responses = array();
-	
 	/**
 	 * Contains the read contents.
 	 * @var \ultimate\data\content\Content[]
@@ -80,35 +67,31 @@ class ContentCommentResponseUserActivityEvent extends SingletonFactory implement
 			$responseIDs[] = $event->__get('objectID');
 		}
 		
-		// get responses
-		$responses = array();
-		foreach ($this->responses as $responseID => $response) {
-			/* @var $response \wcf\data\comment\response\CommentResponse */
-			if (!in_array($responseID, $responseIDs)) continue;
-			$responses[$responseID] = $response;
-		}
+		// fetch responses
+		$responseList = new CommentResponseList();
+		$responseList->getConditionBuilder()->add("comment_response.responseID IN (?)", array($responseIDs));
+		$responseList->readObjects();
+		$responses = $responseList->getObjects();
 		
-		// get comments
-		$commentIDs = array();
+		// fetch comments
+		$commentIDs = $comments = array();
 		foreach ($responses as $response) {
-			$commentIDs[] = $response->__get('commentID');
+			$commentIDs[] = $response->commentID;
 		}
-		$comments = array();
-		foreach ($this->comments as $commentID => $comment) {
-			/* @var $response \wcf\data\comment\Comment */
-			if (!in_array($commentID, $commentIDs)) continue;
-			$comments[$commentID] = $comment;
+		if (!empty($commentIDs)) {
+			$commentList = new CommentList();
+			$commentList->getConditionBuilder()->add("comment.commentID IN (?)", array($commentIDs));
+			$commentList->readObjects();
+			$comments = $commentList->getObjects();
 		}
 		
-		// get contents and users
-		$contentIDs = array();
-		$userIDs = array();
+		// fetch users
+		$userIDs = $users = $contentIDs = $contents = array();
 		foreach ($comments as $comment) {
-			$contentIDs[] = $comment->__get('objectID');
-			$userIDs[] = $comment->__get('userID');
+			$contentIDs[] = $comment->objectID;
+			$userIDs[] = $comment->userID;
 		}
 		
-		$contents = array();
 		foreach ($this->contents as $contentID => $content) {
 			/* @var $content \ultimate\data\content\Content */
 			if (!in_array($contentID, $contentIDs)) continue;
@@ -119,11 +102,11 @@ class ContentCommentResponseUserActivityEvent extends SingletonFactory implement
 			$userIDs[] = $content->__get('authorID');
 		}
 		
-		$users = array();
-		foreach ($this->users as $userID => $user) {
-			/* @var $user \wcf\data\user\User */
-			if (!in_array($userID, $userIDs)) continue;
-			$users[$authorID] = $user;
+		if (!empty($userIDs)) {
+			$userList = new UserProfileList();
+			$userList->getConditionBuilder()->add("user_table.userID IN (?)", array($userIDs));
+			$userList->readObjects();
+			$users = $userList->getObjects();
 		}
 		
 		// set message
@@ -145,7 +128,7 @@ class ContentCommentResponseUserActivityEvent extends SingletonFactory implement
 							$event->setTitle($text);
 							
 							// description
-							$event->setDescription($response->getFormattedMessage());
+							$event->setDescription($response->getExcerpt());
 							continue;
 						}
 					}
@@ -162,9 +145,6 @@ class ContentCommentResponseUserActivityEvent extends SingletonFactory implement
 	 */
 	protected function init() {
 		// load cache
-		$this->comments = CommentCacheBuilder::getInstance()->getData(array(), 'comments');
-		$this->responses = CommentResponseCacheBuilder::getInstance()->getData(array(), 'responses');
 		$this->contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
-		$this->users = UserCacheBuilder::getInstance()->getData(array(), 'users');
 	}
 }

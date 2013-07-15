@@ -28,7 +28,7 @@
 namespace ultimate\system\user\activity\event;
 use ultimate\system\cache\builder\AuthorCacheBuilder;
 use ultimate\system\cache\builder\ContentCacheBuilder;
-use wcf\system\cache\builder\CommentCacheBuilder;
+use wcf\data\comment\CommentList;
 use wcf\system\user\activity\event\IUserActivityEvent;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
@@ -44,12 +44,6 @@ use wcf\system\WCF;
  * @category	Ultimate CMS
  */
 class ContentCommentUserActivityEvent extends SingletonFactory implements IUserActivityEvent {
-	/**
-	 * Contains the read comments.
-	 * @var \wcf\data\comment\Comment[]
-	 */
-	protected $comments = array();
-	
 	/**
 	 * Contains the read contents.
 	 * @var \ultimate\data\content\Content[]
@@ -72,13 +66,11 @@ class ContentCommentUserActivityEvent extends SingletonFactory implements IUserA
 			$commentIDs[] = $event->__get('objectID');
 		}
 		
-		// get comments
-		$comments = array();
-		foreach ($this->comments as $commentID => $comment) {
-			/* @var $comment \wcf\data\comment\Comment */
-			if (!in_array($commentID, $commentIDs)) continue;
-			$comments[$commentID] = $comment;
-		}
+		// fetch comments
+		$commentList = new CommentList();
+		$commentList->getConditionBuilder()->add("comment.commentID IN (?)", array($commentIDs));
+		$commentList->readObjects();
+		$comments = $commentList->getObjects();
 		
 		// get contents
 		$contentIDs = array();
@@ -139,7 +131,6 @@ class ContentCommentUserActivityEvent extends SingletonFactory implements IUserA
 	 */
 	protected function init() {
 		// load cache
-		$this->comments = CommentCacheBuilder::getInstance()->getData(array(), 'comments');
 		$this->contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
 		$this->authors = AuthorCacheBuilder::getInstance()->getData(array(), 'authors');
 	}
