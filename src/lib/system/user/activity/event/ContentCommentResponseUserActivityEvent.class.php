@@ -76,7 +76,7 @@ class ContentCommentResponseUserActivityEvent extends SingletonFactory implement
 	public function prepare(array $events) {
 		$responseIDs = array();
 		foreach ($events as $event) {
-			/* @var $event \wcf\data\user\activity\event\UserActivityEvent */
+			/* @var $event \wcf\data\user\activity\event\ViewableUserActivityEvent */
 			$responseIDs[] = $event->__get('objectID');
 		}
 		
@@ -135,6 +135,7 @@ class ContentCommentResponseUserActivityEvent extends SingletonFactory implement
 					if (isset($contents[$comment->__get('objectID')])) {
 						$content = $contents[$comment->__get('objectID')];
 						if (isset($users[$content->__get('authorID')]) && isset($users[$comment->__get('userID')])) {
+							$event->setIsAccessible();
 							// title
 							$text = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.recentActivity.contentCommentResponse', array(
 								'commentAuthor' => $users[$comment->__get('userID')],
@@ -145,10 +146,12 @@ class ContentCommentResponseUserActivityEvent extends SingletonFactory implement
 							
 							// description
 							$event->setDescription($response->getFormattedMessage());
+							continue;
 						}
 					}
 				}
 			}
+			$event->isOrphaned();
 		}
 	}
 	

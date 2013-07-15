@@ -4,17 +4,17 @@
 		<event>
 			<name>comment</name>
 			<objecttype>de.plugins-zum-selberbauen.ultimate.content.comment.notification</objecttype>
-			<classname>ultimate\system\user\notification\event\ContentCommentUserNotificationEvent</classname>
+			<classname><![CDATA[ultimate\system\user\notification\event\ContentCommentUserNotificationEvent]]></classname>
 		</event>
 		<event>
 			<name>commentResponse</name>
 			<objecttype>de.plugins-zum-selberbauen.ultimate.content.comment.response.notification</objecttype>
-			<classname>ultimate\system\user\notification\event\ContentCommentUserNotificationEvent</classname>
+			<classname><![CDATA[ultimate\system\user\notification\event\ContentCommentResponseUserNotificationEvent]]></classname>
 		</event>
 		<event>
 			<name>commentResponseOwner</name>
-			<objecttype>de.plugins-zum-selberbauen.ultimate.content.comment.response.notificationOwner</objecttype>
-			<classname>ultimate\system\user\notification\event\ContentCommentUserNotificationEvent</classname>
+			<objecttype>de.plugins-zum-selberbauen.ultimate.content.comment.response.notification</objecttype>
+			<classname><![CDATA[ultimate\system\user\notification\event\ContentCommentResponseOwnerUserNotificationEvent]]></classname>
 		</event>
 	</import>
 </data>

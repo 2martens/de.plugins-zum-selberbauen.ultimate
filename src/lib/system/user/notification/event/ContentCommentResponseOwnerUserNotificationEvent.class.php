@@ -1,7 +1,7 @@
 <?php
 /**
- * Contains the ContentCommentUserNotificationEvent class.
- * 
+ * Contains the ContentCommentResponseUserNotificationEvent class.
+ *
  * LICENSE:
  * This file is part of the Ultimate CMS.
  *
@@ -9,15 +9,15 @@
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * The Ultimate CMS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
- * 
+ *
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
@@ -26,18 +26,15 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\user\notification\event;
-use ultimate\data\content\Content;
-
-use ultimate\system\cache\builder\ContentCacheBuilder;
-use ultimate\system\request\UltimateLinkHandler;
+use wcf\data\comment\Comment;
+use wcf\data\user\User;
 use wcf\system\request\LinkHandler;
 use wcf\system\user\notification\event\AbstractUserNotificationEvent;
-use wcf\system\user\notification\type\IUserNotificationType;
 use wcf\system\WCF;
 
 /**
- * User notification event for content comments.
- * 
+ * User notification event for content's owner for comment responses.
+ *
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
@@ -45,32 +42,47 @@ use wcf\system\WCF;
  * @subpackage	system.user.notification.event
  * @category	Ultimate CMS
  */
-class ContentCommentUserNotificationEvent extends AbstractUserNotificationEvent {
+class ContentCommentResponseOwnerUserNotificationEvent extends AbstractUserNotificationEvent {
 	/**
-	 * @see	\wcf\system\user\notification\event\IUserNotificationEvent::getMessage()
+	 * Contains the determined content for this event.
+	 *
+	 * @var \ultimate\data\content\Content
 	 */
-	public function getMessage() {
-		return $this->getLanguage()->getDynamicVariable('wcf.user.notification.content.comment.message', array(
-			'author' => $this->author
-		));
+	private $content = null;
+	
+	/**
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getTitle()
+	 */
+	public function getTitle() {
+		return $this->getLanguage()->get('wcf.user.notification.content.commentResponseOwner.title');
 	}
 	
 	/**
-	 * @see	\wcf\system\user\notification\event\IUserNotificationEvent::getTitle()
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getMessage()
 	 */
-	public function getTitle() {
-		return $this->getLanguage()->get('wcf.user.notification.content.comment.title');
+	public function getMessage() {
+		// @todo: use cache or a single query to retrieve required data
+		$comment = new Comment($this->userNotificationObject->__get('commentID'));
+		$commentAuthor = new User($comment->__get('userID'));
+		
+		return $this->getLanguage()->getDynamicVariable('wcf.user.notification.content.commentResponseOwner.message', array(
+			'author' => $this->author,
+			'commentAuthor' => $commentAuthor
+		));
 	}
 	
 	/**
 	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getEmailMessage()
 	 */
 	public function getEmailMessage($notificationType = 'instant') {
+		$comment = new Comment($this->userNotificationObject->__get('commentID'));
+		$commentAuthor = new User($comment->__get('userID'));
 		$content = $this->getContent();
 		
-		return $this->getLanguage()->getDynamicVariable('wcf.user.notification.content.comment.mail', array(
-			'comment' => $this->userNotificationObject,
+		return $this->getLanguage()->getDynamicVariable('wcf.user.notification.content.commentResponseOwner.mail', array(
+			'response' => $this->userNotificationObject,
 			'author' => $this->author,
+			'commentAuthor' => $commentAuthor,
 			'owner' => $content->__get('author'),
 			'notificationType' => $notificationType,
 			'link' => $this->getLink()
@@ -78,7 +90,7 @@ class ContentCommentUserNotificationEvent extends AbstractUserNotificationEvent 
 	}
 	
 	/**
-	 * @see	\wcf\system\user\notification\event\IUserNotificationEvent::getLink()
+	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getLink()
 	 */
 	public function getLink() {
 		$content = $this->getContent();
@@ -92,17 +104,28 @@ class ContentCommentUserNotificationEvent extends AbstractUserNotificationEvent 
 	}
 	
 	/**
-	 * Determines and returns the content for this event.
-	 * 
+	 * Determines the content and returns it.
+	 *
 	 * @return \ultimate\data\content\Content
 	 */
-	private function getContent() {
-		$contentID = $this->userNotificationObject->__get('objectID');
-		
-		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
-		/* @var $content \ultimate\data\content\Content */
-		$content = $contents[$contentID];
-		
-		return $content;
+	private function getContent()
+	{
+		if ($this->content === null) {
+			$commentID = $this->userNotificationObject->__get('commentID');
+				
+			$sql = "SELECT objectID
+			        FROM   wcf".WCF_N."_comment
+			        WHERE  commentID = ?";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array($commentID));
+			$row = $statement->fetchArray();
+				
+			$contentID = $row['objectID'];
+				
+			$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
+			/* @var $content \ultimate\data\content\Content */
+			$this->content = $contents[$contentID];
+		}
+		return $this->content;
 	}
 }

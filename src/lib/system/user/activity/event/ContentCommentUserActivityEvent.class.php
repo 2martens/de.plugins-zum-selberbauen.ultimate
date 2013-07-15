@@ -68,7 +68,7 @@ class ContentCommentUserActivityEvent extends SingletonFactory implements IUserA
 	public function prepare(array $events) {
 		$commentIDs = array();
 		foreach ($events as $event) {
-			/* @var $event \wcf\data\user\activity\event\UserActivityEvent */
+			/* @var $event \wcf\data\user\activity\event\ViewableUserActivityEvent */
 			$commentIDs[] = $event->__get('objectID');
 		}
 		
@@ -114,6 +114,7 @@ class ContentCommentUserActivityEvent extends SingletonFactory implements IUserA
 				if (isset($contents[$comment->__get('objectID')])) {
 					$content = $contents[$comment->__get('objectID')];
 					if (isset($authors[$content->__get('authorID')])) {
+						$event->setIsAccessible();
 						$author = $authors[$content->__get('authorID')];
 						$text = WCF::getLanguage()->getDynamicVariable('wcf.user.profile.recentActivity.contentComment', array(
 							'author' => $author,
@@ -122,10 +123,12 @@ class ContentCommentUserActivityEvent extends SingletonFactory implements IUserA
 						$event->setTitle($text);
 						
 						// output
-						$event->setDescription($comment->getFormattedMessage());
+						$event->setDescription($comment->getExcerpt());
+						continue;
 					}
 				}
 			}
+			$event->isOrphaned();
 		}
 	}
 	

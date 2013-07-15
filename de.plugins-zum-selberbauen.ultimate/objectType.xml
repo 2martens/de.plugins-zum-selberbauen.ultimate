@@ -5,42 +5,42 @@
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.category</name>
             <definitionname>com.woltlab.wcf.clipboardItem</definitionname>
-            <listclassname>ultimate\data\category\CategoryList</listclassname>
+            <listclassname><![CDATA[ultimate\data\category\CategoryList]]></listclassname>
         </type>
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.content</name>
             <definitionname>com.woltlab.wcf.clipboardItem</definitionname>
-            <listclassname>ultimate\data\content\ContentList</listclassname>
+            <listclassname><![CDATA[ultimate\data\content\ContentList]]></listclassname>
         </type>
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.menu</name>
             <definitionname>com.woltlab.wcf.clipboardItem</definitionname>
-            <listclassname>ultimate\data\menu\MenuList</listclassname>
+            <listclassname><![CDATA[ultimate\data\menu\MenuList]]></listclassname>
         </type>
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.menuItem</name>
             <definitionname>com.woltlab.wcf.clipboardItem</definitionname>
-            <listclassname>ultimate\data\menu\item\MenuItemList</listclassname>
+            <listclassname><![CDATA[ultimate\data\menu\item\MenuItemList]]></listclassname>
         </type>
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.page</name>
             <definitionname>com.woltlab.wcf.clipboardItem</definitionname>
-            <listclassname>ultimate\data\page\PageList</listclassname>
+            <listclassname><![CDATA[ultimate\data\page\PageList]]></listclassname>
         </type>
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.template</name>
             <definitionname>com.woltlab.wcf.clipboardItem</definitionname>
-            <listclassname>ultimate\data\template\TemplateList</listclassname>
+            <listclassname><![CDATA[ultimate\data\template\TemplateList]]></listclassname>
         </type>
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.link</name>
             <definitionname>com.woltlab.wcf.clipboardItem</definitionname>
-            <listclassname>ultimate\data\link\LinkList</listclassname>
+            <listclassname><![CDATA[ultimate\data\link\LinkList]]></listclassname>
         </type>
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.widgetArea</name>
             <definitionname>com.woltlab.wcf.clipboardItem</definitionname>
-            <listclassname>ultimate\data\widget\area\WidgetAreaList</listclassname>
+            <listclassname><![CDATA[ultimate\data\widget\area\WidgetAreaList]]></listclassname>
         </type>
         <!-- /clipboard types -->
         
@@ -48,7 +48,7 @@
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.content.comment</name>
             <definitionname>com.woltlab.wcf.comment.commentableContent</definitionname>
-            <classname>ultimate\system\comment\manager\ContentCommentManager</classname>
+            <classname><![CDATA[ultimate\system\comment\manager\ContentCommentManager]]></classname>
         </type>
         <!-- /commentable types -->
         
@@ -56,17 +56,12 @@
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.content.comment.notification</name>
             <definitionname>com.woltlab.wcf.notification.objectType</definitionname>
-            <classname>ultimate\system\user\notification\object\type\ContentCommentUserNotificationObjectType</classname>
+            <classname><![CDATA[ultimate\system\user\notification\object\type\ContentCommentUserNotificationObjectType]]></classname>
         </type>
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.content.comment.response.notification</name>
             <definitionname>com.woltlab.wcf.notification.objectType</definitionname>
-            <classname>ultimate\system\user\notification\object\type\ContentCommentUserNotificationObjectType</classname>
-        </type>
-        <type>
-            <name>de.plugins-zum-selberbauen.ultimate.content.comment.response.notificationOwner</name>
-            <definitionname>com.woltlab.wcf.notification.objectType</definitionname>
-            <classname>ultimate\system\user\notification\object\type\ContentCommentUserNotificationObjectType</classname>
+            <classname><![CDATA[ultimate\system\user\notification\object\type\ContentCommentResponseUserNotificationObjectType]]></classname>
         </type>
         <!-- /notification types -->
         
@@ -74,12 +69,12 @@
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.content.comment.recentActivityEvent</name>
             <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
-            <classname>ultimate\system\user\activity\event\ContentCommentUserActivityEvent</classname>
+            <classname><![CDATA[ultimate\system\user\activity\event\ContentCommentUserActivityEvent]]></classname>
         </type>
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.content.comment.response.recentActivityEvent</name>
             <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
-            <classname>ultimate\system\user\activity\event\ContentCommentResponseUserActivityEvent</classname>
+            <classname><![CDATA[ultimate\system\user\activity\event\ContentCommentResponseUserActivityEvent]]></classname>
         </type>
         <!-- /recent activity types -->
         
@@ -87,7 +82,7 @@
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.contentTaggable</name>
             <definitionname>com.woltlab.wcf.tagging.taggableObject</definitionname>
-            <classname>ultimate\data\content\Content</classname>
+            <classname><![CDATA[ultimate\data\content\Content]]></classname>
         </type>
         <!-- /taggable types -->
         
@@ -95,7 +90,7 @@
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.linkCategory</name>
             <definitionname>com.woltlab.wcf.category</definitionname>
-            <classname>ultimate\system\category\LinkCategoryType</classname>
+            <classname><![CDATA[ultimate\system\category\LinkCategoryType]]></classname>
         </type>
         <!-- /category types -->
     </import>

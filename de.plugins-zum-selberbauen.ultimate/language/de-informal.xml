@@ -661,9 +661,44 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.clipboard.label.template.marked"><![CDATA[{if $count == 1}Ein{else}{#$count}{/if} Template{if $count != 1}s{/if} markiert]]></item>
 	</category>
 	
+	<category name="wcf.user.notification">
+		<item name="wcf.user.notification.content.comment.mail"><![CDATA[{@$author->username} hat einen Kommentar zu deinem Inhalt verfasst:
+{if $notificationType == 'instant'}
+---------------------------------
+{@$comment->message} 
+---------------------------------
+{/if}{@$link}]]></item>
+		<item name="wcf.user.notification.content.comment.message"><![CDATA[Hat einen Kommentar über deinen Inhalt verfasst.]]></item>
+		<item name="wcf.user.notification.content.comment.title"><![CDATA[Neuer Kommentar (Inhalt)]]></item>
+		<item name="wcf.user.notification.content.commentResponse.mail"><![CDATA[{@$author->username} hat eine Antwort zu deinem Kommentar zum Inhalt von "{@$owner->username}" verfasst:
+{if $notificationType == 'instant'}
+---------------------------------
+{@$response->message} 
+---------------------------------
+{/if}{@$link}]]></item>
+		<item name="wcf.user.notification.content.commentResponse.message"><![CDATA[Hat eine Antwort zu deinem Kommentar zum Inhalt von {$owner->username} verfasst.]]></item>
+		<item name="wcf.user.notification.content.commentResponse.title"><![CDATA[Neue Antwort (Inhalt)]]></item>
+		<item name="wcf.user.notification.content.commentResponseOwner.mail"><![CDATA[{@$author->username} hat eine Antwort zum Kommentar von "{@$commentAuthor->username}" zu deinem Inhalt verfasst:
+{if $notificationType == 'instant'}
+---------------------------------
+{@$response->message} 
+---------------------------------
+{/if}{@$link}]]></item>
+		<item name="wcf.user.notification.content.commentResponseOwner.message"><![CDATA[Hat eine Antwort zum Kommentar von {$commentAuthor->username} zu deinem Inhalt verfasst.]]></item>
+		<item name="wcf.user.notification.content.commentResponseOwner.title"><![CDATA[Neue Antwort (Inhalt)]]></item>
+		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.notification.comment"><![CDATA[Neuer Kommentar zu deinem Inhalt]]></item>
+		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.response.notification.commentResponse"><![CDATA[Neue Antwort auf einen Kommentar zu deinem Inhalt]]></item>
+		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.response.notification.commentResponseOwner"><![CDATA[Neue Antwort auf einen Kommentar von dir]]></item>
+	</category>
+	
 	<category name="wcf.user.profile">
-		<item name="wcf.user.profile.recentActivity.contentComment"><![CDATA[Hat einen Kommentar zu <a href="{link controller='' date=$content->publishDateObject->format('Y/m/d') contentSlug=$content->contentSlug}{/link}">{$content}</a> von <a href="{link controller='User' object=$author}{/link}">{$author->username}</a> geschrieben.]]></item>
-		<item name="wcf.user.profile.recentActivity.contentCommentResponse"><![CDATA[Hat auf einen Kommentar von <a href="{link controller='User' object=$commentAuthor}{/link}">{$commentAuthor->username}</a> zu <a href="{link controller='' date=$content->publishDateObject->format('Y/m/d') contentSlug=$content->contentSlug}{/link}">{$content}</a> von <a href="{link controller='User' object=$author}{/link}">{$author->username}</a> geantwortet.]]></item>
+		<item name="wcf.user.profile.recentActivity.contentComment"><![CDATA[Hat einen Kommentar zu <a href="{link controller='' date=$content->publishDateObject->format('Y-m-d') contentSlug=$content->contentSlug}{/link}">{$content}</a> von <a href="{link controller='User' object=$author}{/link}">{$author->username}</a> geschrieben.]]></item>
+		<item name="wcf.user.profile.recentActivity.contentCommentResponse"><![CDATA[Hat auf einen Kommentar von <a href="{link controller='User' object=$commentAuthor}{/link}">{$commentAuthor->username}</a> zu <a href="{link controller='' date=$content->publishDateObject->format('Y-m-d') contentSlug=$content->contentSlug}{/link}">{$content}</a> von <a href="{link controller='User' object=$author}{/link}">{$author->username}</a> geantwortet.]]></item>
+	</category>
+	
+	<category name="wcf.user.recentActivity">
+		<item name="wcf.user.recentActivity.de.plugins-zum-selberbauen.ultimate.content.comment.recentActivityEvent"><![CDATA[Inhaltskommentar]]></item>
+		<item name="wcf.user.recentActivity.de.plugins-zum-selberbauen.ultimate.content.comment.response.recentActivityEvent"><![CDATA[Antwort zu Inhaltskommentar]]></item>
 	</category>
 	
 	<!-- this category is used for all multilingual block fields -->

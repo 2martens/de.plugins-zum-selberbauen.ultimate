@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the ContentCommentUserNotificationObjectType class.
+ * Contains the ContentCommentResponseUserNotificationObjectType class.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -32,8 +32,8 @@ use wcf\system\user\notification\object\type\ICommentUserNotificationObjectType;
 use wcf\system\WCF;
 
 /**
- * Represents the content comment notification object type.
- * 
+ * Represents a content comment response notification object type.
+ *
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
@@ -41,42 +41,19 @@ use wcf\system\WCF;
  * @subpackage	system.user.notification.object.type
  * @category	Ultimate CMS
  */
-class ContentCommentUserNotificationObjectType extends AbstractUserNotificationObjectType implements ICommentUserNotificationObjectType {
+class ContentCommentResponseUserNotificationObjectType extends AbstractUserNotificationObjectType {
 	/**
 	 * @see	wcf\system\user\notification\object\type\AbstractUserNotificationObjectType::$decoratorClassName
 	 */
-	protected static $decoratorClassName = 'wcf\system\user\notification\object\CommentUserNotificationObject';
+	protected static $decoratorClassName = 'wcf\system\user\notification\object\CommentResponseUserNotificationObject';
 	
 	/**
 	 * @see	wcf\system\user\notification\object\type\AbstractUserNotificationObjectType::$objectClassName
 	 */
-	protected static $objectClassName = 'wcf\data\comment\Comment';
+	protected static $objectClassName = 'wcf\data\comment\response\CommentResponse';
 	
 	/**
 	 * @see	wcf\system\user\notification\object\type\AbstractUserNotificationObjectType::$objectListClassName
 	 */
-	protected static $objectListClassName = 'wcf\data\comment\CommentList';
-	
-	/**
-	 * Returns the user id of the user who wrote the content which has been commented.<br />
-	 * 
-	 * @see	\wcf\system\user\notification\object\type\ICommentUserNotificationObjectType::getOwnerID()
-	 */
-	public function getOwnerID($commentID) {
-		$sql = "SELECT objectID
-		        FROM   wcf".WCF_N."_comment
-		        WHERE  commentID = ?";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($commentID));
-		$row = $statement->fetchArray();
-		
-		$contentID = $row['objectID'];
-		
-		// read cache
-		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
-		$content = $contents[$contentID];
-		
-		return $content->__get('authorID');
-	}
+	protected static $objectListClassName = 'wcf\data\comment\response\CommentResponseList';
 }
-
