@@ -28,12 +28,12 @@
 namespace ultimate\system\blocktype;
 use ultimate\data\content\Content;
 use ultimate\data\content\TaggedContent;
-use ultimate\system\request\UltimateLinkHandler;
 use wcf\data\user\UserList;
 use wcf\data\user\UserProfile;
 use wcf\system\comment\CommentHandler;
 use wcf\system\language\I18nHandler;
 use wcf\system\request\LinkHandler;
+use wcf\system\request\UltimateLinkHandler;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
 

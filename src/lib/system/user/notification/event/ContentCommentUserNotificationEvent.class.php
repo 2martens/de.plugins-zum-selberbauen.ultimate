@@ -27,10 +27,8 @@
  */
 namespace ultimate\system\user\notification\event;
 use ultimate\data\content\Content;
-
 use ultimate\system\cache\builder\ContentCacheBuilder;
-use ultimate\system\request\UltimateLinkHandler;
-use wcf\system\request\LinkHandler;
+use wcf\system\request\UltimateLinkHandler;
 use wcf\system\user\notification\event\AbstractUserNotificationEvent;
 use wcf\system\user\notification\type\IUserNotificationType;
 use wcf\system\WCF;

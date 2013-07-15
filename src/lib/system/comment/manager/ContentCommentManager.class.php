@@ -27,8 +27,8 @@
  */
 namespace ultimate\system\comment\manager;
 use ultimate\system\cache\builder\ContentCacheBuilder;
-use ultimate\system\request\UltimateLinkHandler;
 use wcf\system\comment\manager\AbstractCommentManager;
+use wcf\system\request\UltimateLinkHandler;
 use wcf\system\WCF;
 
 /**

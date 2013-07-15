@@ -28,7 +28,7 @@
 namespace ultimate\system\user\notification\event;
 use wcf\data\comment\Comment;
 use wcf\data\user\User;
-use wcf\system\request\LinkHandler;
+use wcf\system\request\UltimateLinkHandler;
 use wcf\system\user\notification\event\AbstractUserNotificationEvent;
 use wcf\system\WCF;
 

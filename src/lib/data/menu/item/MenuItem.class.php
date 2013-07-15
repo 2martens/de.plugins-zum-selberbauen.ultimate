@@ -28,8 +28,8 @@
 namespace ultimate\data\menu\item;
 use ultimate\data\AbstractUltimateProcessibleDatabaseObject;
 use ultimate\system\menu\custom\DefaultCustomMenuItemProvider;
-use ultimate\system\request\UltimateLinkHandler;
 use wcf\system\menu\ITreeMenuItem;
+use wcf\system\request\UltimateLinkHandler;
 use wcf\system\WCF;
 
 /**

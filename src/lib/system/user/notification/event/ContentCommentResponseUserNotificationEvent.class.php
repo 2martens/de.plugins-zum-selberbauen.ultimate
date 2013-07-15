@@ -2,7 +2,7 @@
 namespace ultimate\system\user\notification\event;
 use ultimate\system\cache\builder\ContentCacheBuilder;
 use wcf\data\user\User;
-use wcf\system\request\LinkHandler;
+use wcf\system\request\UltimateLinkHandler;
 use wcf\system\user\notification\event\AbstractUserNotificationEvent;
 
 /**
