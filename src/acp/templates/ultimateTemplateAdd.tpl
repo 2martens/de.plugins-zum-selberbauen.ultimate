@@ -103,7 +103,7 @@
 				<dt><label for="selectWidgetArea">{lang}wcf.acp.ultimate.template.selectWidgetArea{/lang}</label></dt>
 				<dd>
 					<select id="selectWidgetArea" name="selectWidgetArea">
-						<option label="{lang}wcf.acp.ultimate.template.selectWidgetArea.none{/lang}" value="0">{lang}wcf.acp.ultimate.template.selectWidgetArea.none{/lang}</option>
+						<option label="{lang}wcf.acp.ultimate.template.selectWidgetArea.default{/lang}" value="0">{lang}wcf.acp.ultimate.template.selectWidgetArea.default{/lang}</option>
 						{htmlOptions options=$widgetAreas selected=$selectedWidgetArea}
 					</select>
 					{if $errorField == 'selectWidgetArea'}
@@ -137,7 +137,7 @@
 				<dt><label for="selectMenu">{lang}wcf.acp.ultimate.template.selectMenu{/lang}</label></dt>
 				<dd>
 					<select id="selectMenu" name="selectMenu">
-						<option label="{lang}wcf.acp.ultimate.template.selectMenu.none{/lang}" value="0">{lang}wcf.acp.ultimate.template.selectMenu.none{/lang}</option>
+						<option label="{lang}wcf.acp.ultimate.template.selectMenu.default{/lang}" value="0">{lang}wcf.acp.ultimate.template.selectMenu.default{/lang}</option>
 						{htmlOptions options=$menus selected=$selectedMenu}
 					</select>
 					{if $errorField == 'selectMenu'}

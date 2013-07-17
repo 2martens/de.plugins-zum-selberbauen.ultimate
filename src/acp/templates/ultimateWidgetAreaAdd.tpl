@@ -40,7 +40,7 @@
 				<dt><label for="widgetAreaName">{lang}wcf.acp.ultimate.widgetArea.name{/lang}</label></dt>
 				<dd>
 					<input type="text" id="widgetAreaName" name="widgetAreaName" value="{$widgetAreaName}" class="long" required="required" placeholder="{lang}wcf.acp.ultimate.widgetArea.name.placeholder{/lang}" />
-					{if $errorField == 'categoryTitle'}
+					{if $errorField == 'widgetAreaName'}
 						<small class="innerError">
 							{if $errorType == 'empty'}
 								{lang}wcf.global.form.error.empty{/lang}
@@ -50,7 +50,7 @@
 						</small>
 					{/if}
 				</dd>
-			</dl>			
+			</dl>
 		</fieldset>
 		<fieldset>
 			<legend>{lang}wcf.acp.ultimate.widgetArea.items{/lang}</legend>
@@ -124,15 +124,15 @@
 <form method="post">
 	<div id="widgetTypeSelectContainer" class="container containerPadding marginTop shadow{if $action == 'add'} disabled{/if}">
 		<dl>
-			<dt><label>{lang}wcf.acp.ultimate.widgetArea.widgetTypes{/lang}</label></dt>
+			<dt><label>{lang}wcf.acp.ultimate.widgetArea.selectWidgetType{/lang}</label></dt>
 			<dd>
 				<select id="widgetTypeIDs" name="widgetTypeIDs"{if $action == 'add'} class="disabled" disabled="disabled"{/if}>
-					<option value="0" label="{lang}wcf.acp.ultimate.widgetArea.widgetTypes.none{/lang}">{lang}wcf.acp.ultimate.widgetArea.widgetTypes.none{/lang}</option>
+					<option value="0" label="{lang}wcf.acp.ultimate.widgetArea.selectWidgetType.none{/lang}">{lang}wcf.acp.ultimate.widgetArea.selectWidgetType.none{/lang}</option>
 					{htmlOptions options=$widgetTypes}
 				</select>
-				<small>
-					{lang}wcf.acp.ultimate.widgetArea.widgetTypes.description{/lang}
-				</small>
+				{*<small>
+					{lang}wcf.acp.ultimate.widgetArea.selectWidgetType.description{/lang}
+				</small>*}
 			</dd>
 		</dl>
 		<div class="formSubmit">
@@ -163,6 +163,7 @@
 							event.stopPropagation();
 						}
 					});
+					
 					new WCF.Sortable.List('widgetList', 'ultimate\\data\\widget\\WidgetAction', 0, { }, false);
 					ULTIMATE.Permission.addObject({
 						{* 'admin.content.ultimate.canEditWidgetArea': {if $__wcf->session->getPermission('admin.content.ultimate.canEditWidgetArea')}true{else}false{/if}, *}

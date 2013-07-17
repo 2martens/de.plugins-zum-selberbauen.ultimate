@@ -26,15 +26,20 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\template;
+use ultimate\data\layout\Layout;
 use ultimate\data\template\Template;
 use ultimate\data\widget\WidgetNodeList;
+use ultimate\data\AbstractUltimateDatabaseObject;
 use ultimate\system\blocktype\BlockTypeHandler;
 use ultimate\system\cache\builder\TemplateCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use ultimate\system\menu\custom\CustomMenu;
 use ultimate\system\widgettype\WidgetTypeHandler;
+use wcf\page\IPage;
+use wcf\system\dashboard\DashboardHandler;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\SystemException;
+use wcf\system\user\collapsible\content\UserCollapsibleContentHandler;
 use wcf\system\MetaTagHandler;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
@@ -93,15 +98,16 @@ class TemplateHandler extends SingletonFactory {
 	 * @since	1.0.0
 	 * @api
 	 * 
-	 * @param	string											$requestType
-	 * @param	\ultimate\data\layout\Layout					$layout
-	 * @param	\ultimate\data\AbstractUltimateDatabaseObject	$requestObject
+	 * @param	string												$requestType	(category, content, index, page)
+	 * @param	\ultimate\data\layout\Layout						$layout
+	 * @param	\ultimate\data\AbstractUltimateDatabaseObject|null	$requestObject	(null only if $requestType is index)
+	 * @param	\wcf\page\IPage										$page
 	 * @return	string
 	 */
-	public function getOutput($requestType, \ultimate\data\layout\Layout $layout, $requestObject) {
+	public function getOutput($requestType, Layout $layout, $requestObject, IPage $page) {
 		$requestType = strtolower(StringUtil::trim($requestType));
 		if ($requestType != 'index') {
-			if (!($requestObject instanceof \ultimate\data\AbstractUltimateDatabaseObject)) {
+			if (!($requestObject instanceof AbstractUltimateDatabaseObject)) {
 				throw new SystemException('The given request object is not an instance of \ultimate\data\AbstractUltimateDatabaseObject.');
 			}
 		}
@@ -109,9 +115,7 @@ class TemplateHandler extends SingletonFactory {
 		$template = $this->getTemplate($layout->__get('layoutID'));
 		
 		// get sidebar content
-		/* @var $widgetArea \ultimate\data\widget\area\WidgetArea|null */
-		if ($template !== null) $widgetArea = $template->__get('widgetArea');
-		else {
+		if ($template === null) {
 			// check for super type
 			switch ($requestType) {
 				case 'category':
@@ -125,9 +129,7 @@ class TemplateHandler extends SingletonFactory {
 					break;
 			}
 			
-			if ($template !== null) {
-				$widgetArea = $template->__get('widgetArea');
-			} else {
+			if ($template === null) {
 				throw new NamedUserException(WCF::getLanguage()->getDynamicVariable(
 					'ultimate.error.missingTemplate', 
 					array(
@@ -136,22 +138,48 @@ class TemplateHandler extends SingletonFactory {
 				));
 			}
 		}
-		if ($widgetArea !== null && $template->__get('showWidgetArea')) {
-			$sidebarOutput = '';
+		if ($template->__get('showWidgetArea')) {
+			/* @var $widgetArea \ultimate\data\widget\area\WidgetArea|null */
+			$widgetArea = $template->__get('widgetArea');
+			$useDefaultDashboardConfig = ($widgetArea === null ? true : false);
 			$sidebarOrientation = $template->__get('widgetAreaSide');
-			$widgetNodeList = new WidgetNodeList($widgetArea->__get('widgetAreaID'));
-			foreach ($widgetNodeList as $widget) {
-				$widgetTypeID = $widget->__get('widgetTypeID');
-				/* @var $widgetType \ultimate\system\widgettype\IWidgetType */
-				$widgetType = WidgetTypeHandler::getInstance()->getWidgetType($widgetTypeID);
-				$widgetType->init($widget->__get('widgetID'));
-				$sidebarOutput .= $widgetType->getHTML($requestType, $layout);
+			$sidebarCollapsed = ULTIMATE_GENERAL_TEMPLATE_COLLAPSIBLE_SIDEBARS;
+			
+			if ($sidebarCollapsed) {
+				$sidebarCollapsed = UserCollapsibleContentHandler::getInstance()->isCollapsed(
+					'com.woltlab.wcf.collapsibleSidebar', 
+					'de.plugins-zum-selberbauen.ultimate.template'
+				);
 			}
-			// assign sidebar content
+			
 			WCF::getTPL()->assign(array(
-				'sidebar' => $sidebarOutput,
-				'sidebarOrientation' => $sidebarOrientation
+				'sidebarOrientation' => $sidebarOrientation,
+				'sidebarName' => 'de.plugins-zum-selberbauen.ultimate.template',
+				'sidebarCollapsed' => $sidebarCollapsed
 			));
+			
+			// TODO: the non-standard part has to be completely redesigned
+			if ($useDefaultDashboardConfig) {
+				DashboardHandler::getInstance()->loadBoxes('de.plugins-zum-selberbauen.ultimate.template', $page);
+				WCF::getTPL()->assign(array(
+					'useDefaultSidebar' => true
+				));
+			} else {
+				$sidebarOutput = '';
+				$widgetNodeList = new WidgetNodeList($widgetArea->__get('widgetAreaID'));
+				foreach ($widgetNodeList as $widget) {
+					$widgetTypeID = $widget->__get('widgetTypeID');
+					/* @var $widgetType \ultimate\system\widgettype\IWidgetType */
+					$widgetType = WidgetTypeHandler::getInstance()->getWidgetType($widgetTypeID);
+					$widgetType->init($widget->__get('widgetID'));
+					$sidebarOutput .= $widgetType->getHTML($requestType, $layout);
+				}
+				// assign sidebar content
+				WCF::getTPL()->assign(array(
+					'__boxSidebar' => $sidebarOutput,
+					'useDefaultSidebar' => false
+				));
+			}
 		}
 		
 		// gathering output

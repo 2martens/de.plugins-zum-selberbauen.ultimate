@@ -77,7 +77,7 @@
 		<div>
 			{capture assign='__sidebar'}
 				{if $sidebar|isset}
-					<aside class="sidebar"{if $sidebarOrientation|isset && $sidebarOrientation == 'right'} data-is-open="{if $sidebarCollapsed}false{else}true{/if}" data-sidebar-name="{$sidebarName}"{/if}>
+					<aside class="sidebar"{if (!$useDefaultSidebar|isset && $sidebarOrientation|isset && $sidebarOrientation == 'right') || ($useDefaultSidebar|isset && ULTIMATE_GENERAL_TEMPLATE_COLLAPSIBLE_SIDEBARS)} data-is-open="{if $sidebarCollapsed}false{else}true{/if}" data-sidebar-name="{$sidebarName}"{/if}>
 						<div>
 							{event name='sidebarBoxesTop'}
 							
@@ -87,7 +87,7 @@
 						</div>
 					</aside>
 					
-					{if $sidebarOrientation|isset && $sidebarOrientation == 'right'}
+					{if (!$useDefaultSidebar|isset && $sidebarOrientation|isset && $sidebarOrientation == 'right') || ($useDefaultSidebar|isset && ULTIMATE_GENERAL_TEMPLATE_COLLAPSIBLE_SIDEBARS)}
 						<script>
 							//<![CDATA[
 							$(function() {

@@ -6,10 +6,15 @@
 </head>
 
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
+{if $__boxSidebar|isset && $__boxSidebar}
+	{capture assign='sidebar'}
+		{@$__boxSidebar}
+	{/capture}
+{/if}
 {if $sidebarOrientation|isset}
-{include file='header' application='ultimate' sidebarOrientation=''|concat:$sidebarOrientation sidebar=''|concat:$sidebar}
+	{include file='header' application='ultimate' sidebarOrientation=''|concat:$sidebarOrientation}
 {else}
-{include file='header' application='ultimate'}
+	{include file='header' application='ultimate' sidebarOrientation='right'}
 {/if}
 			<!-- custom area -->
 			<script type="text/javascript">

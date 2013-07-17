@@ -99,7 +99,7 @@ class PagePage extends AbstractPage {
 		$this->page = $page;
 		$layout = LayoutHandler::getInstance()->getLayoutFromName($this->page->__get('pageTitle'));
 		// get output
-		$this->output = TemplateHandler::getInstance()->getOutput('page', $layout, $page);
+		$this->output = TemplateHandler::getInstance()->getOutput('page', $layout, $page, $this);
 	}
 	
 	/**

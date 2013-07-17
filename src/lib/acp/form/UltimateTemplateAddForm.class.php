@@ -273,7 +273,7 @@ class UltimateTemplateAddForm extends AbstractForm {
 	/**
 	 * Validates the selected widget area.
 	 *
-	 * @throws \wcf\system\exception\UserInputException	if selected widget area doesn't exist
+	 * @throws \wcf\system\exception\UserInputException	if selected widget area doesn't exist and the selected widget area id is not 0
 	 */
 	protected function validateSelectWidgetArea() {
 		if ($this->selectedWidgetArea && !isset($this->widgetAreas[$this->selectedWidgetArea])) {
@@ -284,7 +284,7 @@ class UltimateTemplateAddForm extends AbstractForm {
 	/**
 	 * Validates the selected menu.
 	 *
-	 * @throws \wcf\system\exception\UserInputException	if selected menu doesn't exist
+	 * @throws \wcf\system\exception\UserInputException	if selected menu doesn't exist and the selected menu id is not 0
 	 */
 	protected function validateSelectMenu() {
 		if ($this->selectedMenu && !isset($this->menus[$this->selectedMenu])) {

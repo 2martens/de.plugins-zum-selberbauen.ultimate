@@ -52,6 +52,15 @@
         </type>
         <!-- /commentable types -->
         
+        <!-- dashboard types -->
+        <type>
+        	<name>de.plugins-zum-selberbauen.ultimate.template</name>
+        	<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
+        	<allowcontent>0</allowcontent>
+        	<allowsidebar>1</allowsidebar>
+        </type>
+        <!-- /dashboard types -->
+        
         <!-- notification types -->
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.content.comment.notification</name>

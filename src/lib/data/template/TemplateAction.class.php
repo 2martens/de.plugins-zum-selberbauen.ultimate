@@ -66,7 +66,7 @@ class TemplateAction extends AbstractDatabaseObjectAction {
 	 * @since	1.0.0
 	 * @internal	Calls create.
 	 * 
-	 * @return (int|string)[]
+	 * @return int[]|string[]
 	 */
 	public function createAJAX() {
 		/* @var $template \ultimate\data\template\Template */
@@ -89,11 +89,29 @@ class TemplateAction extends AbstractDatabaseObjectAction {
 	}
 	
 	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#create
+	 */
+	public function create() {
+		$template = parent::create();
+		$templateID = $template->__get('templateID');
+		$this->objectIDs = array($templateID);
+		$this->updateRelations();
+		return $template;
+	}
+	
+	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#update
 	 */
 	public function update() {
 		parent::update();
-		
+		$this->updateRelations();
+	}
+	
+	/**
+	 * Updates the relations (menu_to_template and widget_area_to_template) 
+	 * for all templates that have their IDs in $this->objectIDs.
+	 */
+	protected function updateRelations() {
 		// delete existing entries
 		$sql = 'DELETE FROM ultimate'.WCF_N.'_menu_to_template
 		        WHERE       templateID = ?';
@@ -122,7 +140,7 @@ class TemplateAction extends AbstractDatabaseObjectAction {
 		foreach ($this->objectIDs as $objectID) {
 			if (!$this->parameters['menuID']) continue;
 			$statement->executeUnbuffered(array(
-				$this->parameters['menuID'], 
+				$this->parameters['menuID'],
 				$objectID
 			));
 		}

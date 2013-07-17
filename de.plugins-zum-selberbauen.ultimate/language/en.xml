@@ -97,8 +97,8 @@
 		<!-- /template -->
 		
 		<!-- widget area -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgetAreas"><![CDATA[Can add widget areas]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgetAreas.description"><![CDATA[Members of this usergroup can manage widget areas.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgetAreas"><![CDATA[Can add widget configurations]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgetAreas.description"><![CDATA[Members of this usergroup can manage widget configurations.]]></item>
 		<!-- /widget area -->
 		
 		<!-- widget area -->
@@ -141,8 +141,8 @@
 		<!-- /template items -->
 		
 		<!-- widget area items -->
-		<item name="wcf.acp.menu.link.ultimate.appearance.widgetArea.add"><![CDATA[Add widget area]]></item>
-		<item name="wcf.acp.menu.link.ultimate.appearance.widgetArea.list"><![CDATA[List widget areas]]></item>
+		<item name="wcf.acp.menu.link.ultimate.appearance.widgetArea.add"><![CDATA[Add widget configuration]]></item>
+		<item name="wcf.acp.menu.link.ultimate.appearance.widgetArea.list"><![CDATA[List widget configurations]]></item>
 		<!-- /widget area items -->
 		
 		<!-- /appearance items -->
@@ -155,28 +155,20 @@
 	<category name="wcf.acp.option">
 		<!-- categories -->
 		<item name="wcf.acp.option.category.ultimate"><![CDATA[Ultimate CMS]]></item>
-		<item name="wcf.acp.option.category.ultimate.description"><![CDATA[]]></item>
 		<item name="wcf.acp.option.category.ultimate.general"><![CDATA[General]]></item>
-		<item name="wcf.acp.option.category.ultimate.general.description"><![CDATA[]]></item>
 		<item name="wcf.acp.option.category.ultimate.general.content"><![CDATA[Content]]></item>
-		<item name="wcf.acp.option.category.ultimate.general.content.description"><![CDATA[]]></item>
+		<item name="wcf.acp.option.category.ultimate.general.template"><![CDATA[Templates]]></item>
 		<item name="wcf.acp.option.category.ultimate.sort"><![CDATA[Sorting]]></item>
-		<item name="wcf.acp.option.category.ultimate.sort.description"><![CDATA[]]></item>
 		<item name="wcf.acp.option.category.ultimate.sort.category"><![CDATA[Categories]]></item>
-		<item name="wcf.acp.option.category.ultimate.sort.category.description"><![CDATA[]]></item>
 		<item name="wcf.acp.option.category.ultimate.sort.content"><![CDATA[Contents]]></item>
-		<item name="wcf.acp.option.category.ultimate.sort.content.description"><![CDATA[]]></item>
 		<item name="wcf.acp.option.category.ultimate.sort.page"><![CDATA[Pages]]></item>
-		<item name="wcf.acp.option.category.ultimate.sort.page.description"><![CDATA[]]></item>
 		<item name="wcf.acp.option.category.ultimate.sort.template"><![CDATA[Templates]]></item>
-		<item name="wcf.acp.option.category.ultimate.sort.template.description"><![CDATA[]]></item>
-		<item name="wcf.acp.option.category.ultimate.sort.widgetArea"><![CDATA[Widget areas]]></item>
-		<item name="wcf.acp.option.category.ultimate.sort.widgetArea.description"><![CDATA[]]></item>
+		<item name="wcf.acp.option.category.ultimate.sort.widgetArea"><![CDATA[Widget configurations]]></item>
 		<!-- /categories -->
 		
 		<!-- ultimate.general -->
 		<item name="wcf.acp.option.ultimate_general_englishLanguage"><![CDATA[Accent of English language]]></item>
-		<item name="wcf.acp.option.ultimate_general_englishLanguage.description"><![CDATA[Please select here which accent of English should be used.]]></item>
+		<item name="wcf.acp.option.ultimate_general_englishLanguage.description"><![CDATA[Please select here which accent of English should be used. This is mainly used to determine the date format.]]></item>
 		<item name="wcf.acp.option.ultimate_general_englishLanguage.BE"><![CDATA[British English]]></item>
 		<item name="wcf.acp.option.ultimate_general_englishLanguage.AE"><![CDATA[American English]]></item>
 		<!-- /ultimate.general -->
@@ -197,6 +189,11 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
 		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength"><![CDATA[Read more length]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength.description"><![CDATA[Please insert here the default length after which contents should be truncated.]]></item>
 		<!-- /ultimate.general.content -->
+		
+		<!-- ultimate.general.template -->
+		<item name="wcf.acp.option.ultimate_general_template_collapsible_sidebars"><![CDATA[Collapsible sidebars]]></item>
+		<item name="wcf.acp.option.ultimate_general_template_collapsible_sidebars.description"><![CDATA[If checked sidebars of templates will be collapsible (if existing). This does only apply to sidebars on the right side. Sidebars on the left side will never be collapsible.]]></item>
+		<!-- /ultimate.general.template -->
 		
 		<!-- ultimate.sort.category -->
 		<item name="wcf.acp.option.ultimate_sort_category_sortField"><![CDATA[Sort field]]></item>
@@ -241,9 +238,9 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
 		<item name="wcf.acp.option.ultimate_sort_widgetArea_sortField"><![CDATA[Sort field]]></item>
 		<item name="wcf.acp.option.ultimate_sort_widgetArea_sortField.widgetAreaID"><![CDATA[ID]]></item>
 		<item name="wcf.acp.option.ultimate_sort_widgetArea_sortField.widgetAreaName"><![CDATA[Name]]></item>
-		<item name="wcf.acp.option.ultimate_sort_widgetArea_sortField.description"><![CDATA[Please insert here the sort field for the widget area list.]]></item>
+		<item name="wcf.acp.option.ultimate_sort_widgetArea_sortField.description"><![CDATA[Please insert here the sort field for the widget configuration list.]]></item>
 		<item name="wcf.acp.option.ultimate_sort_widgetArea_sortOrder"><![CDATA[Sort order]]></item>
-		<item name="wcf.acp.option.ultimate_sort_widgetArea_sortOrder.description"><![CDATA[Please insert here the sort order for the widget area list.]]></item>
+		<item name="wcf.acp.option.ultimate_sort_widgetArea_sortOrder.description"><![CDATA[Please insert here the sort order for the widget configuration list.]]></item>
 		<!-- /ultimate.sort.widgetArea -->
 	</category>
 	
@@ -467,11 +464,11 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.template.height"><![CDATA[Height]]></item>
 		<item name="wcf.acp.ultimate.template.addBlock"><![CDATA[Add block]]></item>
 		<item name="wcf.acp.ultimate.template.addToTemplate"><![CDATA[Add to template]]></item>
-		<item name="wcf.acp.ultimate.template.selectWidgetArea"><![CDATA[Select widget area]]></item>
-		<item name="wcf.acp.ultimate.template.selectWidgetArea.none"><![CDATA[No widget area selected]]></item>
-		<item name="wcf.acp.ultimate.template.selectWidgetArea.error.notValid"><![CDATA[The "selected" widget are is invalid, because you couldn't select it.]]></item>
+		<item name="wcf.acp.ultimate.template.selectWidgetArea"><![CDATA[Select widget configuration]]></item>
+		<item name="wcf.acp.ultimate.template.selectWidgetArea.default"><![CDATA[Default dashboard configuration]]></item>
+		<item name="wcf.acp.ultimate.template.selectWidgetArea.error.notValid"><![CDATA[The "selected" widget configuration is invalid, because you couldn't select it.]]></item>
 		<item name="wcf.acp.ultimate.template.selectMenu"><![CDATA[Select menu]]></item>
-		<item name="wcf.acp.ultimate.template.selectMenu.none"><![CDATA[No menu selected]]></item>
+		<item name="wcf.acp.ultimate.template.selectMenu.default"><![CDATA[Default WCF menu]]></item>
 		<item name="wcf.acp.ultimate.template.selectMenu.error.notValid"><![CDATA[The "selected" menu is invalid, because you couldn't select it.]]></item>
 		<item name="wcf.acp.ultimate.template.dialog.additionalOptions"><![CDATA[Additional options]]></item>
 		
@@ -481,22 +478,6 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.template.noContents"><![CDATA[No templates found.]]></item>
 		
 		<!-- block dialog -->
-		<!-- iframe -->
-		<item name="wcf.acp.ultimate.template.selectBlockType"><![CDATA[Select a Block Type]]></item>
-		<!-- /iframe -->
-		
-		<!-- blocks -->
-		<item name="wcf.acp.ultimate.template.block.idTooltip"><![CDATA[This is the ID of the block.]]></item>
-		<item name="wcf.acp.ultimate.template.block.changeBlockTypeTooltip"><![CDATA[Click here to change the block type.]]></item>
-		<item name="wcf.acp.ultimate.template.block.optionsTooltip"><![CDATA[Click here to show the options of the block.]]></item>
-		<item name="wcf.acp.ultimate.template.block.delete"><![CDATA[Delete this block.]]></item>
-		<item name="wcf.acp.ultimate.template.block.delete.sure"><![CDATA[Are you sure that you want to delete this block?]]></item>
-		<item name="wcf.acp.ultimate.template.block.blockTypeUnknown"><![CDATA[Unknown block type]]></item>
-		<!-- /blocks -->
-		
-		<!-- bottomPanel -->
-		<item name="wcf.acp.ultimate.template.bottomPanel.minimize"><![CDATA[Minimize panel]]></item>
-		
 		<!-- content tab -->
 		<!-- sub tabs navigation -->
 		<item name="wcf.acp.ultimate.template.contentTab.mode"><![CDATA[Mode]]></item>
@@ -601,38 +582,28 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.template.mediaTab.embed.mediaWidth.description"><![CDATA[Please insert here the width of the media. The embedded media will be resized to that width.]]></item>
 		<!-- /embed sub tab -->
 		<!-- /media tab -->
-		
-		<!-- /bottomPanel -->
-		
-		<!-- layoutSelector -->
-		<item name="wcf.acp.ultimate.template.layoutSelector.button.edit"><![CDATA[Edit]]></item>
-		<item name="wcf.acp.ultimate.template.layoutSelector.button.addTemplate"><![CDATA[Add template]]></item>
-		<item name="wcf.acp.ultimate.template.layoutSelector.button.copyTemplate"><![CDATA[Copy template]]></item>
-		<item name="wcf.acp.ultimate.template.layoutSelector.button.deleteTemplate"><![CDATA[Delete template]]></item>
-		<item name="wcf.acp.ultimate.template.layoutSelector.button.deleteTemplate.sure"><![CDATA[Are you sure that you want to delete this template?]]></item>
-		<item name="wcf.acp.ultimate.template.layoutSelector.button.removeTemplate"><![CDATA[Template lösen]]></item>
-		<item name="wcf.acp.ultimate.template.layoutSelector.show"><![CDATA[Show Layout Selector]]></item>
-		<item name="wcf.acp.ultimate.template.layoutSelector.hide"><![CDATA[Hide Layout Selector]]></item>
-		<item name="wcf.acp.ultimate.template.layoutSelector.pages"><![CDATA[Pages]]></item>
-		<item name="wcf.acp.ultimate.template.layoutSelector.pages.index"><![CDATA[Index]]></item>
-		<item name="wcf.acp.ultimate.template.layoutSelector.pages.single"><![CDATA[Single]]></item>
-		<item name="wcf.acp.ultimate.template.layoutSelector.pages.single.content"><![CDATA[Contents]]></item>
-		<item name="wcf.acp.ultimate.template.layoutSelector.pages.single.page"><![CDATA[Pages]]></item>
-		<item name="wcf.acp.ultimate.template.layoutSelector.pages.archive"><![CDATA[Archive]]></item>
-		<item name="wcf.acp.ultimate.template.layoutSelector.pages.archive.category"><![CDATA[Categories]]></item>
-		<item name="wcf.acp.ultimate.template.layoutSelector.templates"><![CDATA[Templates]]></item>
-		<item name="wcf.acp.ultimate.template.layoutSelector.templates.templateName"><![CDATA[Template name]]></item>
-		<item name="wcf.acp.ultimate.template.layoutSelector.templates.templateName.placeholder"><![CDATA[Template name]]></item>
-		<item name="wcf.acp.ultimate.template.layoutSelector.templates.noTemplates"><![CDATA[No templates available. Add one.]]></item>
-		<item name="wcf.acp.ultimate.template.layoutSelector.status.currentlyEditing"><![CDATA[Currently editing]]></item>
-		<!-- /layoutSelector -->
-		<!-- /block dialog -->
-		
+		<!-- /block dialog -->		
 		<!-- /template -->
 		
 		<!-- widget area -->
-		<item name="wcf.acp.ultimate.widgetArea.list"><![CDATA[]]></item>
-		<item name="wcf.acp.ultimate.widgetArea.noContents"><![CDATA[]]></item>
+		<item name="wcf.acp.ultimate.widgetArea.list"><![CDATA[Widget configuration list]]></item>
+		<item name="wcf.acp.ultimate.widgetArea.list.all"><![CDATA[All widget configurations]]></item>
+		<item name="wcf.acp.ultimate.widgetArea.list.count"><![CDATA[{#$items} Widget configuration{if $items != 1}s{/if} ]]></item>
+		<item name="wcf.acp.ultimate.widgetArea.noContents"><![CDATA[No widget configurations found.]]></item>		
+		<item name="wcf.acp.ultimate.widgetArea.add"><![CDATA[Add widget configuration]]></item>
+		<item name="wcf.acp.ultimate.widgetArea.edit"><![CDATA[Edit widget configuration]]></item>
+		<item name="wcf.acp.ultimate.widgetArea.delete"><![CDATA[Delete widget configuration]]></item>
+		<item name="wcf.acp.ultimate.widgetArea.delete.sure"><![CDATA[Are you sure that you want to delete this widget configuration?]]></item>
+		<item name="wcf.acp.ultimate.widgetArea.addWidgetAreaFirst"><![CDATA[You have to create the widget area before you can add widgets.]]></item>
+		<item name="wcf.acp.ultimate.widgetArea.general"><![CDATA[Widget configuration data]]></item>
+		<item name="wcf.acp.ultimate.widgetArea.name"><![CDATA[Name]]></item>
+		<item name="wcf.acp.ultimate.widgetArea.name.placeholder"><![CDATA[Sample widget configuration]]></item>
+		<item name="wcf.acp.ultimate.widgetArea.name.error.notUnique"><![CDATA[The name already exists.]]></item>
+		<item name="wcf.acp.ultimate.widgetArea.items"><![CDATA[Widgets]]></item>
+		<item name="wcf.acp.ultimate.widgetArea.selectWidgetType"><![CDATA[Select widget type]]></item>
+		<item name="wcf.acp.ultimate.widgetArea.selectWidgetType.description"><![CDATA[]]></item>
+		<item name="wcf.acp.ultimate.widgetArea.selectWidgetType.none"><![CDATA[No widget type selected]]></item>
+		<item name="wcf.acp.ultimate.widgetArea.addToWidgetArea"><![CDATA[Add to widget configuration]]></item>
 		<!-- /widget area -->
 	</category>
 	
@@ -659,6 +630,10 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.clipboard.item.template.delete"><![CDATA[Delete template(s)]]></item>
 		<item name="wcf.clipboard.item.template.delete.confirmMessage"><![CDATA[Delete {if $count == 1}one{else}{#$count}{/if} template{if $count != 1}s{/if}?]]></item>
 		<item name="wcf.clipboard.label.template.marked"><![CDATA[{if $count == 1}One{else}{#$count}{/if} template{if $count != 1}s{/if} marked]]></item>
+	</category>
+	
+	<category name="wcf.dashboard">
+		<item name="wcf.dashboard.objectType.de.plugins-zum-selberbauen.ultimate.template"><![CDATA[Template (Ultimate CMS)]]></item>
 	</category>
 	
 	<category name="wcf.user.notification">
@@ -782,4 +757,8 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<!-- /page menu -->
 	</category>
 	
+	<!-- this category is used for all multilingual widget fields -->
+	<category name="ultimate.widget">
+		<item name="ultimate.widget.default"><![CDATA[Default widget area]]></item>
+	</category>
 </language>
