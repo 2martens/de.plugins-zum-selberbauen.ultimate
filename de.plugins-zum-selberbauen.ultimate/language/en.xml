@@ -43,6 +43,8 @@
 		<!-- /mod -->
 		
 		<!-- admin -->
+		<item name="wcf.acp.group.option.admin.content.ultimate.canConfigureOptions"><![CDATA[Can configure options]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canConfigureOptions.description"><![CDATA[Members of this usergroup can configure the Ultimate CMS options.]]></item>
 		<!-- block -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageBlocks"><![CDATA[Can manage blocks]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageBlocks.description"><![CDATA[Members of this usergroup can manage blocks.]]></item>
