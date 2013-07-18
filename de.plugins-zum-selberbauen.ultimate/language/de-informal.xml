@@ -5,21 +5,16 @@
 		<!-- categories -->
 		<!-- user -->
 		<item name="wcf.acp.group.option.category.user.ultimate"><![CDATA[Ultimate CMS]]></item>
-		<item name="wcf.acp.group.option.category.user.ultimate.description"><![CDATA[]]></item>
 		<item name="wcf.acp.group.option.category.user.ultimate.content"><![CDATA[Inhalt]]></item>
-		<item name="wcf.acp.group.option.category.user.ultimate.content.description"><![CDATA[]]></item>
 		<!-- /user -->
 		
 		<!-- mod -->
 		<item name="wcf.acp.group.option.category.mod.ultimate"><![CDATA[Ultimate CMS]]></item>
-		<item name="wcf.acp.group.option.category.mod.ultimate.description"><![CDATA[]]></item>
 		<item name="wcf.acp.group.option.category.mod.ultimate.content"><![CDATA[Inhalt]]></item>
-		<item name="wcf.acp.group.option.category.mod.ultimate.content.description"><![CDATA[]]></item>
 		<!-- /mod -->
 		
 		<!-- admin -->
 		<item name="wcf.acp.group.option.category.admin.content.ultimate"><![CDATA[Ultimate CMS]]></item>
-		<item name="wcf.acp.group.option.category.admin.content.ultimate.description"><![CDATA[]]></item>
 		<!-- /admin -->
 		<!-- /categories -->
 		
