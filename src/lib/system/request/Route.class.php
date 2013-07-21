@@ -45,7 +45,7 @@ class Route extends \wcf\system\request\Route {
 	 * @return	array
 	 */
 	protected function getParts($requestURL) {
-		$urlParts = preg_split('~(\/|\_|\.)~', $requestURL);
+		$urlParts = preg_split('~(\/|\.)~', $requestURL);
 		foreach ($urlParts as $index => $part) {
 			if (empty($part)) {
 				unset($urlParts[$index]);

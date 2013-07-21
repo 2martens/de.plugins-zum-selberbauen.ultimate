@@ -69,13 +69,13 @@ class ULTIMATECore extends AbstractApplication {
 	protected function initRoutes() {
 		$pageRoute = new Route('pageRoute-'.PACKAGE_ID);
 		$pageRoute->setSchema('/{pageSlug}/', 'Page');
-		$pageRoute->setParameterOption('pageSlug', null, '[a-z]+(?:\-{1}[a-z]+)*(?:\/{1}[a-z]+(?:\-{1}[a-z]+)*)*');
+		$pageRoute->setParameterOption('pageSlug', null, '[a-z]+(?:\-{1}[a-z]+)*(?:\_{1}[a-z]+(?:\-{1}[a-z]+)*)*');
 		RouteHandler::getInstance()->addRoute($pageRoute);
 		
 		$categoryRoute = new Route('categoryRoute-'.PACKAGE_ID);
 		$categoryRoute->setSchema('/{category}/{categorySlug}/', 'Category');
 		$categoryRoute->setParameterOption('category', 'category', 'category');
-		$categoryRoute->setParameterOption('categorySlug', null, '[a-z]+(?:\-{1}[a-z]+)*(?:\/{1}[a-z]+(?:\-{1}[a-z]+)*)*');
+		$categoryRoute->setParameterOption('categorySlug', null, '[a-z]+(?:\-{1}[a-z]+)*(?:\_{1}[a-z]+(?:\-{1}[a-z]+)*)*');
 		RouteHandler::getInstance()->addRoute($categoryRoute);
 		
 		$contentRoute = new Route('contentRoute-'.PACKAGE_ID);

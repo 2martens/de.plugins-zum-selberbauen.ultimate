@@ -94,4 +94,11 @@ class LinkCategoryType extends AbstractCategoryType {
 	public function canEditCategory() {
 		return WCF::getSession()->getPermission($this->permissionPrefix.'.canManageCategories');
 	}
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.category.ICategoryType.html#getApplication
+	 */
+	public function getApplication() {
+		return 'ultimate';
+	}
 }

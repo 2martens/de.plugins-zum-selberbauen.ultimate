@@ -90,7 +90,7 @@ class CategoryPage extends AbstractPage {
 		parent::readParameters();
 		/* @var $routeData string[] */
 		$routeData = RouteHandler::getInstance()->getRouteData();
-		$this->categorySlugs = explode('/', StringUtil::trim($routeData['categorySlug']));
+		$this->categorySlugs = explode('_', StringUtil::trim($routeData['categorySlug']));
 	}
 	
 	/**

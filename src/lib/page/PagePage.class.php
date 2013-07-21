@@ -88,7 +88,7 @@ class PagePage extends AbstractPage {
 	 */
 	public function readParameters() {
 		parent::readParameters();
-		if (isset($_GET['pageSlug'])) $this->pageSlugs = explode('/', StringUtil::trim($_GET['pageSlug']));
+		if (isset($_GET['pageSlug'])) $this->pageSlugs = explode('_', StringUtil::trim($_GET['pageSlug']));
 	}
 	
 	/**

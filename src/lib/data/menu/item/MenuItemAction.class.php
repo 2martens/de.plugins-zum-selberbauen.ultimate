@@ -358,7 +358,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 		if (!$implode) return $slugs;
 		
 		$slugs = array_reverse($slugs);
-		return 'category/'.implode('/', $slugs).'/';
+		return 'category/'.implode('_', $slugs).'/';
 	}
 	
 	/**
@@ -381,7 +381,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 		if (!$implode) return $slugs;
 		
 		$slugs = array_reverse($slugs);
-		return implode('/', $slugs).'/';
+		return implode('_', $slugs).'/';
 	}
 	
 	/**
