@@ -28,7 +28,6 @@
 namespace ultimate\system\blocktype;
 use ultimate\data\content\Content;
 use ultimate\data\content\TaggedContent;
-use wcf\data\user\UserList;
 use wcf\data\user\UserProfile;
 use wcf\system\comment\CommentHandler;
 use wcf\system\language\I18nHandler;
