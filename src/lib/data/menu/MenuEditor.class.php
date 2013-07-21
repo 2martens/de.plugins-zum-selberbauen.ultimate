@@ -26,8 +26,8 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\menu;
-use ultimate\system\cache\builder\MenuBlockCacheBuilder;
 use ultimate\system\cache\builder\MenuCacheBuilder;
+use ultimate\system\cache\builder\MenuTemplateCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 use wcf\system\clipboard\ClipboardHandler;
@@ -63,6 +63,6 @@ class MenuEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 */
 	public static function resetCache() {
 		MenuCacheBuilder::getInstance()->reset();
-		MenuBlockCacheBuilder::getInstance()->reset();
+		MenuTemplateCacheBuilder::getInstance()->reset();
 	}
 }

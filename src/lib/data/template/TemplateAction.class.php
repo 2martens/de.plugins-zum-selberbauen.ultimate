@@ -75,6 +75,7 @@ class TemplateAction extends AbstractDatabaseObjectAction {
 			'templateID' => $template->__get('templateID'),
 			'templateName' => $template->getTitle()
 		);
+		$this->action = 'create';
 		return $returnArray;
 	}
 	

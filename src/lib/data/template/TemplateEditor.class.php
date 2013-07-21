@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\template;
+use ultimate\system\cache\builder\LayoutCacheBuilder;
 use ultimate\system\cache\builder\MenuTemplateCacheBuilder;
 use ultimate\system\cache\builder\TemplateCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
@@ -52,5 +53,6 @@ class TemplateEditor extends DatabaseObjectEditor {
 	public static function resetCache() {
 		TemplateCacheBuilder::getInstance()->reset();
 		MenuTemplateCacheBuilder::getInstance()->reset();
+		LayoutCacheBuilder::getInstance()->reset();
 	}
 }
