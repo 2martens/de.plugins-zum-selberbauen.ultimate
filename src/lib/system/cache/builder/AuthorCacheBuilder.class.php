@@ -26,8 +26,8 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\cache\builder;
-use wcf\data\user\UserList;
 use wcf\system\cache\builder\AbstractCacheBuilder;
+use wcf\system\cache\builder\UserCacheBuilder;
 use wcf\system\cache\builder\UserGroupCacheBuilder;
 
 /**
@@ -54,10 +54,8 @@ class AuthorCacheBuilder extends AbstractCacheBuilder {
 			'authorIDs' => array()
 		);
 		
-		$userList = new UserList();
-		$userList->readObjects();
-		$users = $userList->getObjects();
-		$userIDs = $userList->getObjectIDs();
+		$users = UserCacheBuilder::getInstance()->getData(array(), 'users');
+		$userIDs = UserCacheBuilder::getInstance()->getData(array(), 'userIDs');
 		
 		if (empty($users)) return $data;
 		
