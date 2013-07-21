@@ -84,16 +84,16 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 	 */
 	public function readData() {
 		$this->categories = CategoryUtil::getAvailableCategories($this->categoryID);
-		if (empty($_POST)) {
-			$this->categoryTitle = $this->category->__get('categoryTitle');
-			$this->categorySlug = $this->category->__get('categorySlug');
-			$this->categoryDescription = $this->category->__get('categoryDescription');
-			$metaData = $this->category->__get('metaData');
-			$this->metaDescription = $metaData['metaDescription'];
-			$this->metaKeywords = $metaData['metaKeywords'];
-			I18nHandler::getInstance()->setOptions('categoryTitle', PACKAGE_ID, $this->categoryTitle, 'ultimate.category.\d+.categoryTitle');
-			I18nHandler::getInstance()->setOptions('categoryDescription', PACKAGE_ID, $this->categoryDescription, 'ultimate.category.\d+.categoryDescription');
-		}
+		$this->categoryTitle = $this->category->__get('categoryTitle');
+		$this->categorySlug = $this->category->__get('categorySlug');
+		$this->categoryDescription = $this->category->__get('categoryDescription');
+		$metaData = $this->category->__get('metaData');
+		$this->metaDescription = $metaData['metaDescription'];
+		$this->metaKeywords = $metaData['metaKeywords'];
+		$this->categoryParent = $this->category->__get('categoryParent');
+		I18nHandler::getInstance()->setOptions('categoryTitle', PACKAGE_ID, $this->categoryTitle, 'ultimate.category.\d+.categoryTitle');
+		I18nHandler::getInstance()->setOptions('categoryDescription', PACKAGE_ID, $this->categoryDescription, 'ultimate.category.\d+.categoryDescription');
+		
 		AbstractForm::readData();
 	}
 	

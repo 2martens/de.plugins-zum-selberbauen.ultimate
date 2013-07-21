@@ -129,6 +129,7 @@ class UltimateMenuAddForm extends AbstractForm {
 				$this->disabledCategoryIDs[] = $categoryID;
 				break;
 			}
+			$this->getNestedCategories($categoryArray[1]);
 		}
 		
 		// read page cache
@@ -141,6 +142,7 @@ class UltimateMenuAddForm extends AbstractForm {
 				$this->disabledPageIDs[] = $pageID;
 				break;
 			}
+			$this->getNestedPages($pageArray[1]);
 		}
 		
 		parent::readData();
@@ -229,4 +231,35 @@ class UltimateMenuAddForm extends AbstractForm {
 		}
 	}
 	
+	/**
+	 * Determines the nested categories.
+	 * 
+	 * @param array $categories
+	 */
+	protected function getNestedCategories(array $categories) {
+		foreach ($categories as $categoryID => $categoryArray) {
+			foreach ($this->menuItemNodeList as $menuItem) {
+				if ($categoryArray[0]->__get('categoryTitle') != $menuItem->__get('menuItemName')) continue;
+				$this->disabledCategoryIDs[] = $categoryID;
+				break;
+			}
+			$this->getNestedCategories($categoryArray[1]);
+		}
+	}
+	
+	/**
+	 * Determines the nested pages.
+	 *
+	 * @param array $pages
+	 */
+	protected function getNestedPages(array $pages) {
+		foreach ($pages as $pageID => $pageArray) {
+			foreach ($this->menuItemNodeList as $menuItem) {
+				if ($pageArray[0]->__get('pageTitle') != $menuItem->__get('menuItemName')) continue;
+				$this->disabledPageIDs[] = $pageID;
+				break;
+			}
+			$this->getNestedPages($pageArray[1]);
+		}
+	}
 }

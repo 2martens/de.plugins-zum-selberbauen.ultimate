@@ -99,6 +99,7 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
 				$this->disabledCategoryIDs[] = $categoryID;
 				break;
 			}
+			$this->getNestedCategories($categoryArray[1]);
 		}
 		
 		// read page cache
@@ -111,6 +112,7 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
 				$this->disabledPageIDs[] = $pageID;
 				break;
 			}
+			$this->getNestedPages($pageArray[1]);
 		}
 		AbstractForm::readData();
 	}
