@@ -28,6 +28,7 @@
 namespace ultimate\data\content;
 use ultimate\data\AbstractUltimateDatabaseObject;
 use wcf\data\user\User;
+use wcf\data\ITitledObject;
 use wcf\system\bbcode\MessageParser;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
@@ -45,7 +46,7 @@ use wcf\util\DateUtil;
  * @subpackage	data.content
  * @category	Ultimate CMS
  */
-class Content extends AbstractUltimateDatabaseObject {
+class Content extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableName
 	 */
@@ -88,6 +89,17 @@ class Content extends AbstractUltimateDatabaseObject {
 			}
 		}
 		return $groups;
+	}
+	
+	/**
+	 * Returns the title of this content (without language interpreting).
+	 *
+	 * To use language interpreting, use magic toString method.
+	 *
+	 * @return	string
+	 */
+	public function getTitle() {
+		return $this->contentTitle;
 	}
 	
 	/**

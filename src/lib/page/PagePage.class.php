@@ -78,6 +78,12 @@ class PagePage extends AbstractPage {
 	public $output = '';
 	
 	/**
+	 * Contains the layout of this page.
+	 * @var \ultimate\data\layout\Layout
+	 */
+	public $layout = null;
+	
+	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
 	 */
 	public function readParameters() {
@@ -97,7 +103,11 @@ class PagePage extends AbstractPage {
 			$page = PageUtil::getRealPage($page, 1, $this->pageSlugs);
 		}
 		$this->page = $page;
-		$layout = LayoutHandler::getInstance()->getLayoutFromName($this->page->__get('pageTitle'));
+		$this->layout = LayoutHandler::getInstance()->getLayoutFromName($this->page->__get('pageTitle'));
+	}
+	
+	public function assignVariables() {
+		parent::assignVariables();
 		// get output
 		$this->output = TemplateHandler::getInstance()->getOutput('page', $layout, $page, $this);
 	}

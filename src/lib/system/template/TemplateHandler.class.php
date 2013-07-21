@@ -192,6 +192,10 @@ class TemplateHandler extends SingletonFactory {
 		$menu = $template->__get('menu');
 		if ($menu !== null) {
 			CustomMenu::getInstance()->buildMenu($menu);
+			if ($requestType != 'index') {
+				$activeMenuItem = $requestObject->getTitle();
+				CustomMenu::getInstance()->setActiveMenuItem($activeMenuItem);
+			}
 		}
 		$blockIDs = array_keys($blocks);
 		

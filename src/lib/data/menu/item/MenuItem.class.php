@@ -111,7 +111,13 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 		$parameters = array();
 		$parameters['application'] = 'ultimate';
 		$parameters['isRaw'] = true;
-		return UltimateLinkHandler::getInstance()->getLink(null, $parameters, $this->menuItemLink);
+		$menuItemLink = $this->menuItemLink;
+		if (strpos($menuItemLink, 'http') === false) {
+			$menuItemLink = 'index.php/'.$menuItemLink;
+			return UltimateLinkHandler::getInstance()->getLink(null, $parameters, $menuItemLink);
+		} else {
+			return $menuItemLink;
+		}		
 	}
 	
 	/**
