@@ -95,5 +95,26 @@
             <listenerclassname>ultimate\system\event\listener\BlockActionContentBlockTypeListener</listenerclassname>
         </eventlistener>
         <!-- /block action listener -->
+        
+        <!-- cache reset listener -->
+        <eventlistener>
+        	<eventclassname>wcf\acp\form\UserAddForm</eventclassname>
+        	<eventname>saved</eventname>
+        	<inherit>0</inherit>
+        	<listenerclassname>ultimate\system\event\listener\CacheResetListener</listenerclassname>
+        </eventlistener>
+        <eventlistener>
+        	<eventclassname>wcf\acp\form\UserEditForm</eventclassname>
+        	<eventname>saved</eventname>
+        	<inherit>0</inherit>
+        	<listenerclassname>ultimate\system\event\listener\CacheResetListener</listenerclassname>
+        </eventlistener>
+        <eventlistener>
+        	<eventclassname>wcf\acp\action\AJAXProxyAction</eventclassname>
+        	<eventname>executed</eventname>
+        	<inherit>0</inherit>
+        	<listenerclassname>ultimate\system\event\listener\CacheResetListener</listenerclassname>
+        </eventlistener>
+        <!-- /cache reset listener -->
     </import>
 </data>
