@@ -26,9 +26,8 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\acp\form;
-use ultimate\data\widget\WidgetNodeList;
+use ultimate\data\widget\area\WidgetAreaAction;
 use ultimate\data\widget\area\WidgetArea;
-use ultimate\system\cache\builder\WidgetTypeCacheBuilder;
 use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\WCF;
@@ -81,14 +80,22 @@ class UltimateWidgetAreaEditForm extends UltimateWidgetAreaAddForm {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
-	
 		// reading object fields
 		$this->widgetAreaName = $this->widgetArea->__get('widgetAreaName');
-		$this->widgetNodeList = new WidgetNodeList($this->widgetAreaID, true);
-			
-		// read widget type cache
-		$this->widgetTypes = WidgetTypeCacheBuilder::getInstance()->getData(array(), 'widgetTypes');
-			
+		
+		// load settings
+		$sql = "SELECT      boxID
+		        FROM        ultimate".WCF_N."_widget_area_option
+		        WHERE       widgetAreaID = ?
+		        ORDER BY    showOrder ASC";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array(
+			$this->widgetAreaID
+		));
+		while ($row = $statement->fetchArray()) {
+			$this->enabledBoxes[] = $row['boxID'];
+		}
+		
 		AbstractForm::readData();
 	}
 	
@@ -104,8 +111,37 @@ class UltimateWidgetAreaEditForm extends UltimateWidgetAreaAddForm {
 			)
 		);
 	
-		$this->objectAction = new MenuAction(array($this->widgetAreaID), 'update', $parameters);
+		$this->objectAction = new WidgetAreaAction(array($this->widgetAreaID), 'update', $parameters);
 		$this->objectAction->executeAction();
+		
+		// remove previous settings
+		$sql = "DELETE FROM ultimate".WCF_N."_widget_area_option
+		        WHERE       widgetAreaID = ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array(
+			$this->widgetAreaID
+		));
+		
+		// insert new settings
+		if (!empty($this->enabledBoxes)) {
+			$sql = "INSERT INTO ultimate".WCF_N."_widget_area_option
+			               (widgetAreaID, boxID, showOrder)
+			        VALUES (?, ?, ?)";
+			$statement = WCF::getDB()->prepareStatement($sql);
+		
+			WCF::getDB()->beginTransaction();
+			$showOrder = 1;
+			foreach ($this->enabledBoxes as $boxID) {
+				$statement->execute(array(
+					$this->widgetAreaID,
+					$boxID,
+					$showOrder
+				));
+		
+				$showOrder++;
+			}
+			WCF::getDB()->commitTransaction();
+		}
 	
 		$this->saved();
 	

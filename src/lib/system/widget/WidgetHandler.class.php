@@ -26,11 +26,17 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\widget;
-use ultimate\system\cache\builder\WidgetCacheBuilder;
+use ultimate\data\widget\area\WidgetArea;
+use ultimate\system\cache\builder\WidgetAreaBoxCacheBuilder;
+use wcf\data\object\type\ObjectTypeCache;
+use wcf\page\IPage;
+use wcf\system\exception\SystemException;
 use wcf\system\SingletonFactory;
+use wcf\system\WCF;
+use wcf\util\ClassUtil;
 
 /**
- * Handles widgets.
+ * Handles widget boxes.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -41,76 +47,56 @@ use wcf\system\SingletonFactory;
  */
 class WidgetHandler extends SingletonFactory {
 	/**
-	 * Contains the cached widgets.
-	 * @var	\ultimate\data\widget\Widget[]
-	 */
-	protected $widgets = array();
-	
-	/**
-	 * Returns all widget objects.
-	 *
-	 * @since	1.0.0
-	 * @api
-	 *
-	 * @return	\ultimate\data\widget\Widget[]
-	*/
-	public function getWidgets() {
-		return $this->widgets;
-	}
-	
-	/**
-	 * Returns the widget object with the given widget id or null if there is no such object.
-	 *
-	 * @since	1.0.0
-	 * @api
-	 *
-	 * @param	integer	$widgetID
-	 * @return	\ultimate\data\widget\Widget|null
-	 */
-	public function getWidget($widgetID) {
-		if (isset($this->widgets[$widgetID])) {
-			return $this->widgets[$widgetID];
-		}
-	
-		return null;
-	}
-	
-	/**
-	 * Returns the child widgets of the given widget.
-	 *
-	 * @since	1.0.0
-	 * @api
-	 *
-	 * @param	\ultimate\data\widget\Widget	$widget
-	 * @return	\ultimate\data\widget\Widget[]
-	 */
-	public function getChildWidgets(\ultimate\data\widget\Widget $widget) {
-		$widgets = array();
-		
-		foreach ($this->widgets as $__widget) {
-			if ($__widget->__get('widgetParent') == $widget->__get('widgetName') /*&& $menuItem->__get('menuItemID') */ && $__widget->__get('widgetAreaID') == $widget->__get('widgetAreaID')) {
-				$widgets[$__widget->__get('widgetID')] = $__widget;
-			}
-		}
-		
-		return $widgets;
-	}
-	
-	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.SingletonFactory.html#init
 	 */
 	protected function init() {
-		$this->widgets = WidgetCacheBuilder::getInstance()->getData(array(), 'widgets');
+		$this->boxCache = WidgetAreaBoxCacheBuilder::getInstance()->getData(array(), 'boxes');
+		$this->pageCache = WidgetAreaBoxCacheBuilder::getInstance()->getData(array(), 'pages');
 	}
 	
 	/**
-	 * Reloads the widget cache.
+	 * Returns active dashboard boxes for given widget area.
 	 *
-	 * @internal Calls the init method.
+	 * @param	\ultimate\data\widget\area\WidgetArea	$widgetArea
+	 * @param	\wcf\page\IPage	$page
 	 */
-	public function reloadCache() {
-		WidgetCacheBuilder::getInstance()->reset();
+	public function loadBoxes(WidgetArea $widgetArea, IPage $page) {
+		$boxIDs = array();
+		if (isset($this->pageCache[$widgetArea->__get('widgetAreaID')]) && is_array($this->pageCache[$widgetArea->__get('widgetAreaID')])) {
+			foreach ($this->pageCache[$widgetArea->__get('widgetAreaID')] as $boxID) {
+				$boxIDs[] = $boxID;
+			}
+		}
 	
-		$this->init();
+		$contentTemplate = $sidebarTemplate = '';
+		foreach ($boxIDs as $boxID) {
+			$className = $this->boxCache[$boxID]->className;
+			if (!ClassUtil::isInstanceOf($className, 'wcf\system\dashboard\box\IDashboardBox')) {
+				throw new SystemException("'".$className."' does not implement 'wcf\system\dashboard\box\IDashboardbox'");
+			}
+				
+			$boxObject = new $className();
+			$boxObject->init($this->boxCache[$boxID], $page);
+				
+			if ($this->boxCache[$boxID]->boxType == 'content') {
+				$contentTemplate .= $boxObject->getTemplate();
+			}
+			else {
+				$sidebarTemplate .= $boxObject->getTemplate();
+			}
+		}
+	
+		WCF::getTPL()->assign(array(
+			'__boxContent' => $contentTemplate,
+			'__boxSidebar' => $sidebarTemplate
+		));
+	}
+	
+	
+	/**
+	 * Clears widget area box cache.
+	 */
+	public static function clearCache() {
+		WidgetAreaBoxCacheBuilder::getInstance()->reset();
 	}
 }

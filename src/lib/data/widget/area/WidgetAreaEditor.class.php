@@ -26,6 +26,8 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\widget\area;
+use ultimate\system\cache\builder\TemplateCacheBuilder;
+use ultimate\system\cache\builder\WidgetAreaBoxCacheBuilder;
 use ultimate\system\cache\builder\WidgetAreaCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
@@ -51,5 +53,7 @@ class WidgetAreaEditor extends DatabaseObjectEditor implements IEditableCachedOb
 	 */
 	public static function resetCache() {
 		WidgetAreaCacheBuilder::getInstance()->reset();
+		WidgetAreaBoxCacheBuilder::getInstance()->reset();
+		TemplateCacheBuilder::getInstance()->reset();
 	}
 }

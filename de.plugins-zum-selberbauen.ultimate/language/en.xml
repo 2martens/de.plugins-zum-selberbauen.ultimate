@@ -591,16 +591,11 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.widgetArea.edit"><![CDATA[Edit widget configuration]]></item>
 		<item name="wcf.acp.ultimate.widgetArea.delete"><![CDATA[Delete widget configuration]]></item>
 		<item name="wcf.acp.ultimate.widgetArea.delete.sure"><![CDATA[Are you sure that you want to delete this widget configuration?]]></item>
-		<item name="wcf.acp.ultimate.widgetArea.addWidgetAreaFirst"><![CDATA[You have to create the widget area before you can add widgets.]]></item>
 		<item name="wcf.acp.ultimate.widgetArea.general"><![CDATA[Widget configuration data]]></item>
 		<item name="wcf.acp.ultimate.widgetArea.name"><![CDATA[Name]]></item>
 		<item name="wcf.acp.ultimate.widgetArea.name.placeholder"><![CDATA[Sample widget configuration]]></item>
 		<item name="wcf.acp.ultimate.widgetArea.name.error.notUnique"><![CDATA[The name already exists.]]></item>
-		<item name="wcf.acp.ultimate.widgetArea.items"><![CDATA[Widgets]]></item>
-		<item name="wcf.acp.ultimate.widgetArea.selectWidgetType"><![CDATA[Select widget type]]></item>
-		<item name="wcf.acp.ultimate.widgetArea.selectWidgetType.description"><![CDATA[]]></item>
-		<item name="wcf.acp.ultimate.widgetArea.selectWidgetType.none"><![CDATA[No widget type selected]]></item>
-		<item name="wcf.acp.ultimate.widgetArea.addToWidgetArea"><![CDATA[Add to widget configuration]]></item>
+		<item name="wcf.acp.ultimate.widgetArea.addAreaFirst"><![CDATA[You have to create a widget configuration first.]]></item>
 		<!-- /widget area -->
 	</category>
 	

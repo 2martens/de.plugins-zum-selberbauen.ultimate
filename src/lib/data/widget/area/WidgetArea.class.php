@@ -28,6 +28,7 @@
 namespace ultimate\data\widget\area;
 use ultimate\data\AbstractUltimateDatabaseObject;
 use wcf\data\ITitledObject;
+use wcf\system\WCF;
 
 /**
  * Represents a widget area entry.

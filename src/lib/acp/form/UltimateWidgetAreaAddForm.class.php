@@ -29,7 +29,11 @@ namespace ultimate\acp\form;
 use ultimate\data\widget\WidgetNodeList;
 use ultimate\data\widget\area\WidgetAreaAction;
 use ultimate\system\cache\builder\WidgetTypeCacheBuilder;
+use wcf\acp\form\DashboardOptionForm;
+use wcf\data\dashboard\box\DashboardBoxList;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\form\AbstractForm;
+use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\UserInputException;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
@@ -46,7 +50,7 @@ use wcf\util\StringUtil;
  * @subpackage	acp.form
  * @category	Ultimate CMS
  */
-class UltimateWidgetAreaAddForm extends AbstractForm {
+class UltimateWidgetAreaAddForm extends DashboardOptionForm {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
 	 */
@@ -71,26 +75,22 @@ class UltimateWidgetAreaAddForm extends AbstractForm {
 	public $widgetAreaName = '';
 	
 	/**
-	 * Contains the WidgetNodeList.
-	 * @var	\ultimate\data\widget\WidgetNodeList
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
 	 */
-	public $widgetNodeList = null;
-	
-	/**
-	 * Contains all widget types.
-	 * @var \ultimate\data\widgettype\WidgetType[]
-	 */
-	public $widgetTypes = array();
-	
-	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
-	 */
-	public function readData() {
-		$this->widgetNodeList = new WidgetNodeList(0, true);
-		// read widget cache
-		$this->widgetTypes = WidgetTypeCacheBuilder::getInstance()->getData(array(), 'widgetTypes');
+	public function readParameters() {
+		AbstractForm::readParameters();
 		
-		parent::readData();
+		// load object type
+		$this->objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.user.dashboardContainer', 'de.plugins-zum-selberbauen.ultimate.template');
+		$this->objectTypeID = $this->objectType->__get('objectTypeID');
+		if ($this->objectType === null) {
+			throw new IllegalLinkException();
+		}
+		
+		$boxList = new DashboardBoxList();
+		$boxList->getConditionBuilder()->add("dashboard_box.boxType IN (?)", array('sidebar'));
+		$boxList->readObjects();
+		$this->boxes = $boxList->getObjects();
 	}
 	
 	/**
@@ -114,7 +114,7 @@ class UltimateWidgetAreaAddForm extends AbstractForm {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
 	 */
 	public function save() {
-		parent::save();
+		AbstractForm::save();
 	
 		$parameters = array(
 			'data' => array(
@@ -127,14 +127,34 @@ class UltimateWidgetAreaAddForm extends AbstractForm {
 	
 		$returnValues = $this->objectAction->getReturnValues();
 		$widgetAreaID = $returnValues['returnValues']->__get('widgetAreaID');
-		$updateValues = array();
-	
+		
+		// insert new settings
+		if (!empty($this->enabledBoxes)) {
+			$sql = "INSERT INTO ultimate".WCF_N."_widget_area_option
+			               (widgetAreaID, boxID, showOrder)
+			        VALUES (?, ?, ?)";
+			$statement = WCF::getDB()->prepareStatement($sql);
+				
+			WCF::getDB()->beginTransaction();
+			$showOrder = 1;
+			foreach ($this->enabledBoxes as $boxID) {
+				$statement->execute(array(
+					$widgetAreaID,
+					$boxID,
+					$showOrder
+				));
+		
+				$showOrder++;
+			}
+			WCF::getDB()->commitTransaction();
+		}
+		
 		$this->saved();
-	
+		
 		WCF::getTPL()->assign(
 			'success', true
 		);
-	
+		
 		$url = LinkHandler::getInstance()->getLink('UltimateWidgetAreaEdit',
 			array(
 				'id' => $widgetAreaID
@@ -152,8 +172,6 @@ class UltimateWidgetAreaAddForm extends AbstractForm {
 	
 		WCF::getTPL()->assign(array(
 			'widgetAreaName' => $this->widgetAreaName,
-			'widgetNodeList' => $this->widgetNodeList,
-			'widgetTypes' => $this->widgetTypes,
 			'action' => 'add'
 		));
 	}
@@ -167,8 +185,9 @@ class UltimateWidgetAreaAddForm extends AbstractForm {
 		if (empty($this->widgetAreaName)) {
 			throw new UserInputException('widgetAreaName');
 		}
-		if (!WidgetAreaUtil::isAvailableName($this->widgetAreaName)) {
-			throw new UserInputException('widgetAreaName', 'notUnique');
-		}
+		// TODO: WidgetAreaUtil
+// 		if (!WidgetAreaUtil::isAvailableName($this->widgetAreaName)) {
+// 			throw new UserInputException('widgetAreaName', 'notUnique');
+// 		}
 	}
 }

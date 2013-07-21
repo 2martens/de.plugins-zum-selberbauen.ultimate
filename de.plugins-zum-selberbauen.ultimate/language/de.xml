@@ -608,17 +608,12 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.widgetArea.add"><![CDATA[Widgetkonfiguration hinzufügen]]></item>
 		<item name="wcf.acp.ultimate.widgetArea.edit"><![CDATA[Widgetkonfiguration bearbeiten]]></item>
 		<item name="wcf.acp.ultimate.widgetArea.delete"><![CDATA[Widgetkonfiguration löschen]]></item>
-		<item name="wcf.acp.ultimate.widgetArea.delete.sure"><![CDATA[Sind Sie sich sicher, dass Sie diese Widgetkonfiguration löschen möchten?]]></item>
-		<item name="wcf.acp.ultimate.widgetArea.addWidgetAreaFirst"><![CDATA[Sie müssen erst die Widgetkonfiguration erstellen, bevor Sie Widgets hinzufügen können.]]></item>		
+		<item name="wcf.acp.ultimate.widgetArea.delete.sure"><![CDATA[Sind Sie sich sicher, dass Sie diese Widgetkonfiguration löschen möchten?]]></item>		
 		<item name="wcf.acp.ultimate.widgetArea.general"><![CDATA[Widgetkonfigurationsdaten]]></item>
 		<item name="wcf.acp.ultimate.widgetArea.name"><![CDATA[Name]]></item>
 		<item name="wcf.acp.ultimate.widgetArea.name.placeholder"><![CDATA[Beispielkonfiguration]]></item>
 		<item name="wcf.acp.ultimate.widgetArea.name.error.notUnique"><![CDATA[Der Name ist bereits vorhanden.]]></item>
-		<item name="wcf.acp.ultimate.widgetArea.items"><![CDATA[Widgets]]></item>
-		<item name="wcf.acp.ultimate.widgetArea.selectWidgetType"><![CDATA[Widgettyp auswählen]]></item>
-		<item name="wcf.acp.ultimate.widgetArea.selectWidgetType.description"><![CDATA[]]></item>
-		<item name="wcf.acp.ultimate.widgetArea.selectWidgetType.none"><![CDATA[Kein Widgettyp ausgewählt]]></item>
-		<item name="wcf.acp.ultimate.widgetArea.addToWidgetArea"><![CDATA[Zu Widgetkonfiguration hinzufügen]]></item>
+		<item name="wcf.acp.ultimate.widgetArea.addAreaFirst"><![CDATA[Sie müssen zuerst eine Widgetkonfiguration erstellen.]]></item>
 		<!-- /widget area -->
 	</category>
 	

@@ -26,6 +26,8 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\template;
+use ultimate\system\widget\WidgetHandler;
+
 use ultimate\data\layout\Layout;
 use ultimate\data\template\Template;
 use ultimate\data\widget\WidgetNodeList;
@@ -165,18 +167,9 @@ class TemplateHandler extends SingletonFactory {
 					'useDefaultSidebar' => true
 				));
 			} else {
-				$sidebarOutput = '';
-				$widgetNodeList = new WidgetNodeList($widgetArea->__get('widgetAreaID'));
-				foreach ($widgetNodeList as $widget) {
-					$widgetTypeID = $widget->__get('widgetTypeID');
-					/* @var $widgetType \ultimate\system\widgettype\IWidgetType */
-					$widgetType = WidgetTypeHandler::getInstance()->getWidgetType($widgetTypeID);
-					$widgetType->init($widget->__get('widgetID'));
-					$sidebarOutput .= $widgetType->getHTML($requestType, $layout);
-				}
+				WidgetHandler::getInstance()->loadBoxes($widgetArea, $page);
 				// assign sidebar content
 				WCF::getTPL()->assign(array(
-					'__boxSidebar' => $sidebarOutput,
 					'useDefaultSidebar' => false
 				));
 			}

@@ -183,24 +183,18 @@ CREATE TABLE ultimate1_user_group_to_page (
 	KEY (pageID)
 );
 
-DROP TABLE IF EXISTS ultimate1_widget;
-CREATE TABLE ultimate1_widget (
-	widgetID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	widgetAreaID INT(10) NOT NULL,
-	widgetTypeID INT(10) NOT NULL,
-	widgetName VARCHAR(255) NOT NULL DEFAULT '',
-	widgetParent VARCHAR(255) NOT NULL DEFAULT '',
-	showOrder INT(10) NOT NULL DEFAULT 0,
-	isDisabled TINYINT(1) NOT NULL DEFAULT 0,
-	additionalData TEXT,
-	UNIQUE KEY (widgetAreaID, widgetName),
-	KEY (widgetTypeID)
-);
-
 DROP TABLE IF EXISTS ultimate1_widget_area;
 CREATE TABLE ultimate1_widget_area (
 	widgetAreaID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	widgetAreaName VARCHAR(255) NOT NULL DEFAULT ''
+);
+
+DROP TABLE IF EXISTS ultimate1_widget_area_option;
+CREATE TABLE ultimate1_widget_area_option (
+	widgetAreaID INT(10) NOT NULL,
+	boxID INT(10) NOT NULL,
+	showOrder INT(10) NOT NULL,
+	UNIQUE KEY widgetAreaOption (widgetAreaID, boxID)
 );
 
 DROP TABLE IF EXISTS ultimate1_widget_area_to_template;
@@ -209,15 +203,6 @@ CREATE TABLE ultimate1_widget_area_to_template (
 	widgetAreaID INT(10) NOT NULL,
 	UNIQUE KEY (templateID),
 	KEY (widgetAreaID)
-);
-
-DROP TABLE IF EXISTS ultimate1_widgettype;
-CREATE TABLE ultimate1_widgettype (
-	widgetTypeID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	packageID INT(10) NOT NULL,
-	widgetTypeName VARCHAR(255) NOT NULL DEFAULT '',
-	widgetTypeClassName VARCHAR(255) NOT NULL DEFAULT '',
-	UNIQUE KEY packageID (packageID, widgetTypeName)
 );
 
 /**** foreign keys ****/
@@ -242,11 +227,9 @@ ALTER TABLE ultimate1_user_group_to_page ADD FOREIGN KEY (pageID) REFERENCES ult
 ALTER TABLE ultimate1_user_group_to_page ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_template_to_layout ADD FOREIGN KEY (layoutID) REFERENCES ultimate1_layout (layoutID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_template_to_layout ADD FOREIGN KEY (templateID) REFERENCES ultimate1_template (templateID) ON DELETE CASCADE;
-ALTER TABLE ultimate1_widget ADD FOREIGN KEY (widgetAreaID) REFERENCES ultimate1_widget_area (widgetAreaID) ON DELETE CASCADE;
-ALTER TABLE ultimate1_widget ADD FOREIGN KEY (widgetTypeID) REFERENCES ultimate1_widgettype (widgetTypeID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_widget_area_to_template ADD FOREIGN KEY (templateID) REFERENCES ultimate1_template (templateID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_widget_area_to_template ADD FOREIGN KEY (widgetAreaID) REFERENCES ultimate1_widget_area (widgetAreaID) ON DELETE CASCADE;
-ALTER TABLE ultimate1_widgettype ADD FOREIGN KEY (packageID) REFERENCES wcf1_package (packageID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_widget_area_option ADD FOREIGN KEY (widgetAreaID) REFERENCES ultimate1_widget_area (widgetAreaID) ON DELETE CASCADE;
 
 /**** default entries ****/
 -- default category
