@@ -32,6 +32,12 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
 /**
  * Caches the layouts.
  * 
+ * Provides four variables:
+ * * \ultimate\data\layout\Layout[] layouts (layoutID => layout)
+ * * integer[] layoutIDs
+ * * \ultimate\data\layout\Layout[] layoutsToObjectData ('objectID,objectType' => layout)
+ * * \ultimate\data\template\Template[] templatesToLayoutID (layoutID => template)
+ * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3

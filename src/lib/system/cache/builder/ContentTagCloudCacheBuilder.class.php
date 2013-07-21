@@ -37,6 +37,8 @@ use wcf\util\ArrayUtil;
 /**
  * Caches all content tags.
  * 
+ * Provides no variables. To retrieve the data simply call getData() without arguments.
+ * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3

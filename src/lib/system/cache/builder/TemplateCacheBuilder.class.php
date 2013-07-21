@@ -34,6 +34,11 @@ use wcf\system\WCF;
 /**
  * Caches the templates.
  * 
+ * Provides three variables:
+ * * \ultimate\data\template\Template[] templates (templateID => template)
+ * * integer[] templateIDs
+ * * \ultimate\data\template\Template[] templatesToLayoutID (layoutID => template)
+ * 
  * @author		Jim Martens
  * @copyright	2012 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3

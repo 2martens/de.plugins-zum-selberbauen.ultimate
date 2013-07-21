@@ -32,6 +32,11 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
 /**
  * Caches the MIME types.
  * 
+ * Provides three variables:
+ * * \ultimate\data\media\mimetype\MediaMimetype[] mimeTypes (mimeTypeID => mimeType)
+ * * integer[] mimeTypeIDs
+ * * \ultimate\data\media\mimetype\MediaMimetype[] mimeTypeToMIME (mimeType => mimeTypeObj) e.g. ('video/mpeg' => mimeTypeObj)
+ * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3

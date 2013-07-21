@@ -35,6 +35,10 @@ use wcf\system\WCF;
 /**
  * Caches the link to category relation.
  * 
+ * Provides two variables:
+ * * \ultimate\data\link\Link[] linksToCategoryID (categoryID => link)
+ * * \ultimate\data\link\Link[] linksToCategoryName (categoryName => link)
+ * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3

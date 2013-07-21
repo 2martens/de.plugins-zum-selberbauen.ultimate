@@ -33,6 +33,10 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
 /**
  * Caches links.
  * 
+ * Provides two variables:
+ * * \ultimate\data\link\Link[] links (linkID => link)
+ * * integer[] linkIDs
+ * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3

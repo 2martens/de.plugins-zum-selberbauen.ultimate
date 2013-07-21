@@ -32,6 +32,11 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
 /**
  * Caches the blockTypes.
  * 
+ * Provides three variables:
+ * * \ultimate\data\blocktype\BlockType[] blockTypes (blockTypeID => blockType)
+ * * integer[] blockTypeIDs
+ * * \ultimate\data\blocktype\BlockType[] blockTypesToName (blockTypeCssIdentifier => blockType)
+ * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3

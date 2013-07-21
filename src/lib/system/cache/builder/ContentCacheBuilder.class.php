@@ -34,6 +34,11 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
 /**
  * Caches the contents.
  * 
+ * Provides three variables:
+ * * \ultimate\data\content\Content[] contents (contentID => content)
+ * * integer[] contentIDs
+ * * \ultimate\data\content\Content[] contentsToSlug (contentSlug => content)
+ * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3

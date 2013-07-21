@@ -32,6 +32,10 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
 /**
  * Caches the widget areas.
  * 
+ * Provides two variables:
+ * * \ultimate\data\widget\area\WidgetArea[] widgetAreas (widgetAreaID => widgetArea)
+ * * integer[] widgetAreaIDs
+ * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3

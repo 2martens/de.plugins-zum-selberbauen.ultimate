@@ -34,6 +34,10 @@ use wcf\system\WCF;
 /**
  * Caches the widget area dashboard box options.
  * 
+ * Provides two variables:
+ * * \wcf\data\dashboard\box\DashboardBox[] boxes (boxID => box)
+ * * integer[][] pages (widgetAreaID => boxArray ( => boxID))
+ * 
  * @author		Jim Martens
  * @copyright	2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3

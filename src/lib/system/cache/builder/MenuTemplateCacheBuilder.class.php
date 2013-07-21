@@ -33,6 +33,9 @@ use wcf\system\WCF;
 /**
  * Caches the menu template relation.
  * 
+ * Provides one variables:
+ * * \ultimate\data\menu\Menu[] menusToTemplateID (templateID => menu)
+ * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3

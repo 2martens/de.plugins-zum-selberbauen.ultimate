@@ -33,6 +33,10 @@ use wcf\system\cache\builder\UserGroupCacheBuilder;
 /**
  * Caches the authors.
  * 
+ * Provides two variables:
+ * * \wcf\data\user\User[] authors (authorID => author)
+ * * integer[] authorIDs
+ * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3

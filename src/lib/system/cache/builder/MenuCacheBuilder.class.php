@@ -32,6 +32,10 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
 /**
  * Caches the menus.
  * 
+ * Provides two variables:
+ * * \ultimate\data\menu\Menu[] menus (menuID => menu)
+ * * integer[] menuIDs
+ * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3

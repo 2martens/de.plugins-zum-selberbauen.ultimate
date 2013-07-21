@@ -32,6 +32,13 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
 /**
  * Caches the categories.
  * 
+ * Provides five variables:
+ * * \ultimate\data\category\Category[] categories (categoryID => category)
+ * * integer[] categoryIDs
+ * * \ultimate\data\category\Category[][] categoriesToParent (categoryID => \ultimate\data\category\Category[] (categoryID => category))
+ * * \ultimate\data\category\Category[] categoriesToSlug (categorySlug => category)
+ * * (\ultimate\data\category\Category|array)[] categoriesNested (categoryID => array (0 => category, 1 => categoriesNested))
+ * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3

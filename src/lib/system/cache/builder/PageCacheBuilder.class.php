@@ -32,6 +32,13 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
 /**
  * Caches the pages.
  * 
+ * Provides five variables:
+ * * \ultimate\data\page\Page[] pages (pageID => page)
+ * * integer[] pageIDs
+ * * \ultimate\data\page\Page[][] pagesToParent (pageID => \ultimate\data\page\Page[] (pageID => page))
+ * * \ultimate\data\page\Page[] pagesToSlug (pageSlug => page)
+ * * (\ultimate\data\page\Page|array)[] pagesNested (pageID => array (0 => page, 1 => pagesNested))
+ * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3

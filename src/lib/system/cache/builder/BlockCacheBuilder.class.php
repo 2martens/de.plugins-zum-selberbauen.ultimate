@@ -33,6 +33,11 @@ use wcf\system\WCF;
 /**
  * Caches the blocks.
  * 
+ * Provides three variables:
+ * * \ultimate\data\block\Block[] blocks (blockID => block)
+ * * integer[] blockIDs
+ * * string[][][] cachedQueryToBlockID (blockID => cachedQuery ( => fetchedRowArray ( columnName => columnRowContent)))
+ * 
  * @author		Jim Martens
  * @copyright	2012 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3

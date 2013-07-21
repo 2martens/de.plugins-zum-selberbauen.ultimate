@@ -33,6 +33,10 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
 /**
  * Caches the contents in relation with the categories.
  * 
+ * Provides two variables:
+ * * \ultimate\data\content\TaggedContent[][] contentsToCategoryID (categoryID => contents (contentID => content))
+ * * \ultimate\data\content\TaggedContent[][] contentsToCategorytitle (categoryTitle => contents (contentID => content))
+ * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
