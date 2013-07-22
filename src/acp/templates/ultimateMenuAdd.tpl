@@ -215,7 +215,7 @@
 							event.stopPropagation();
 						}
 					});
-					new WCF.Sortable.List('menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, { }, false);
+					new WCF.Sortable.List('menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, {literal}{{/literal}maxLevels: 2{literal}}{/literal}, false);
 					ULTIMATE.Permission.addObject({
 						'admin.content.ultimate.canManageMenuItems': {if $__wcf->session->getPermission('admin.content.ultimate.canManageMenuItems')}true{else}false{/if}
 					});

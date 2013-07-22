@@ -105,7 +105,9 @@ class CustomMenu extends TreeMenu {
 	 */
 	public function getMenuItems($parentMenuItem = null) {
 		if ($parentMenuItem === null) return $this->currentMenuItems;
-		if (isset($this->currentMenuItems[$parentMenuItem])) return $this->currentMenuItems[$parentMenuItem];
+		if (isset($this->currentMenuItems[$parentMenuItem])) {
+			return $this->currentMenuItems[$parentMenuItem];
+		}
 		return null;
 	}
 	

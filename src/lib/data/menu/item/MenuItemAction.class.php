@@ -240,18 +240,12 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 	 * @since	1.0.0
 	 */
 	public function updatePosition() {
-		$showOrders = array();
-		
 		WCF::getDB()->beginTransaction();
 		foreach ($this->parameters['data']['structure'] as $parentMenuItemID => $menuItemIDs) {
-			if (!isset($showOrders[$parentMenuItemID])) {
-				$showOrders[$parentMenuItemID] = 1;
-			}
-			
-			foreach ($menuItemIDs as $menuItemID) {
+			foreach ($menuItemIDs as $showOrder => $menuItemID) {
 				$this->objects[$menuItemID]->update(array(
 					'menuItemParent' => $parentMenuItemID ? $this->objects[$parentMenuItemID]->__get('menuItemName') : '',
-					'showOrder' => $showOrders[$parentMenuItemID]++
+					'showOrder' => $showOrder + 1
 				));
 			}
 		}
