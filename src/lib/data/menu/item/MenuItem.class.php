@@ -26,12 +26,12 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\menu\item;
-use wcf\system\Regex;
-
 use ultimate\data\AbstractUltimateProcessibleDatabaseObject;
 use ultimate\system\menu\custom\DefaultCustomMenuItemProvider;
 use wcf\system\menu\ITreeMenuItem;
+use wcf\system\request\LinkHandler;
 use wcf\system\request\UltimateLinkHandler;
+use wcf\system\Regex;
 use wcf\system\WCF;
 
 /**
@@ -82,7 +82,7 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 	 * @see		\wcf\data\ProcessibleDatabaseObject::getProcessor()
 	 */
 	public function getProcessor() {
-		if (parent::getProcessor() === null) {
+		if ($this->processor === null) {
 			$this->processor = new DefaultCustomMenuItemProvider($this);
 		}
 		
@@ -202,8 +202,23 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 		$parameters['isRaw'] = true;
 		$menuItemLink = $this->menuItemLink;
 		if (strpos($menuItemLink, 'http') === false) {
-			$menuItemLink = 'index.php/'.$menuItemLink;
-			return UltimateLinkHandler::getInstance()->getLink(null, $parameters, $menuItemLink);
+			if ($this->menuItemController === null) {
+				$menuItemLink = 'index.php/'.$menuItemLink;
+				return UltimateLinkHandler::getInstance()->getLink(null, $parameters, $menuItemLink);
+			} else {
+				// external link
+				if (!$this->menuItemController) {
+					return WCF::getLanguage()->get($this->menuItemLink);
+				}
+				$this->parseController();
+				return LinkHandler::getInstance()->getLink(
+					$this->controller, 
+					array(
+						'application' => $this->application, 
+						'forceFrontend' => true
+					), 
+					WCF::getLanguage()->get($this->menuItemLink));
+			} 
 		} else {
 			return $menuItemLink;
 		}		

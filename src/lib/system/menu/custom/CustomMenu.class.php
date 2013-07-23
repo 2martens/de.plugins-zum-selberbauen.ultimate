@@ -142,9 +142,10 @@ class CustomMenu extends TreeMenu {
 	 * Reads current menu items.
 	 */
 	protected function readCurrentItems($parentMenuItem = '') {
-		if (!isset($this->menuItems[$parentMenuItem])) return;
+		if (!isset($this->menuItems[$this->menu->__get('menuID')][$parentMenuItem])) return;
+		if (!isset($this->currentMenuItems[$parentMenuItem])) $this->currentMenuItems[$parentMenuItem] = array();
 		
-		foreach ($this->menuItems[$parentMenuItem] as $menuItemID => $menuItem) {
+		foreach ($this->menuItems[$this->menu->__get('menuID')][$parentMenuItem] as $menuItemID => $menuItem) {
 			/* @var $menuItem \ultimate\data\menu\item\MenuItem */
 			if ($menuItem->__get('menuID') != $this->menu->__get('menuID')) continue;
 			$this->currentMenuItems[$parentMenuItem][$menuItemID] = $menuItem;

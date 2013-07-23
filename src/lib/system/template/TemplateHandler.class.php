@@ -195,6 +195,8 @@ class TemplateHandler extends SingletonFactory {
 			if ($requestType != 'index') {
 				$activeMenuItem = $requestObject->getTitle();
 				CustomMenu::getInstance()->setActiveMenuItem($activeMenuItem);
+			} else {
+				CustomMenu::getInstance()->setActiveMenuItem('ultimate.header.menu.index');
 			}
 		}
 		$blockIDs = array_keys($blocks);

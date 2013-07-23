@@ -63,14 +63,27 @@ class MenuItemCacheBuilder extends AbstractCacheBuilder {
 		$menuItems = $menuItemList->getObjects();
 		
 		foreach ($menuItems as $menuItemID => $menuItem) {
+			if (!isset($data['menuItems'][$menuItem->__get('menuID')])) {
+				$data['menuItems'][$menuItem->__get('menuID')] = array();
+			}
+			if (!isset($data['menuItemIDs'][$menuItem->__get('menuID')])) {
+				$data['menuItemIDs'][$menuItem->__get('menuID')] = array();
+			}
+			if (!isset($data['menuItemsToParent'][$menuItem->__get('menuID')])) {
+				$data['menuItemsToParent'][$menuItem->__get('menuID')] = array();
+			}
 			/* @var $menuItem \ultimate\data\menu\item\MenuItem */
 			$data['menuItems'][$menuItem->__get('menuID')][$menuItemID] = $menuItem;
 			$data['menuItemIDs'][$menuItem->__get('menuID')][] = $menuItemID;
 			$data['menuItemsToParent'][$menuItem->__get('menuID')][$menuItem->__get('menuItemName')] = $menuItem->__get('childItems');
 		}
 		
-		$data['menuItemsToParent'][''] = array();
 		foreach ($data['menuItems'] as $menuID => $__menuItems) {
+			if (!isset($data['menuItemsToParent'][$menuID])) {
+				$data['menuItemsToParent'][$menuID] = array();
+			}
+			$data['menuItemsToParent'][$menuID][''] = array();
+			
 			foreach ($__menuItems as $menuItemID => $menuItem) {
 				if ($menuItem->__get('menuItemParent') != '') continue;
 				$data['menuItemsToParent'][$menuID][''][$menuItemID] = $menuItem;
