@@ -103,13 +103,13 @@ class PagePage extends AbstractPage {
 			$page = PageUtil::getRealPage($page, 1, $this->pageSlugs);
 		}
 		$this->page = $page;
-		$this->layout = LayoutHandler::getInstance()->getLayoutFromName($this->page->__get('pageTitle'));
+		$this->layout = LayoutHandler::getInstance()->getLayoutFromObjectData($this->page->__get('pageID'), 'page');
 	}
 	
 	public function assignVariables() {
 		parent::assignVariables();
 		// get output
-		$this->output = TemplateHandler::getInstance()->getOutput('page', $layout, $page, $this);
+		$this->output = TemplateHandler::getInstance()->getOutput('page', $this->layout, $this->page, $this);
 	}
 	
 	/**
