@@ -22,10 +22,11 @@
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
- * @subpackage	system.clipboard
+ * @subpackage	system.clipboard.action
  * @category	Ultimate CMS
  */
-namespace ultimate\system\clipboard;
+namespace ultimate\system\clipboard\action;
+use wcf\data\clipboard\action\ClipboardAction;
 use wcf\system\clipboard\action\IClipboardAction;
 use wcf\system\clipboard\ClipboardEditorItem;
 use wcf\system\exception\SystemException;
@@ -38,7 +39,7 @@ use wcf\system\WCF;
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
- * @subpackage	system.clipboard
+ * @subpackage	system.clipboard.action
  * @category	Ultimate CMS
  */
 class MenuClipboardAction implements IClipboardAction {
