@@ -334,13 +334,13 @@ ULTIMATE.Block.Transfer.prototype = {
 	 * @type jQuery
 	 */
 	_dialog : null,
-	
+
 	/**
 	 * Contains the edited block id.
 	 * 
 	 * @type Integer
 	 */
-	_editBlockID: 0,
+	_editBlockID : 0,
 
 	/**
 	 * Initializes the BlockTransfer API.
@@ -408,7 +408,7 @@ ULTIMATE.Block.Transfer.prototype = {
 	_edit : function(event) {
 		var $target = $(event.currentTarget);
 		event.preventDefault();
-		
+
 		var $data = {};
 		var blockID = $target.data('objectID');
 		this._editedBlockID = blockID;
@@ -418,7 +418,7 @@ ULTIMATE.Block.Transfer.prototype = {
 				blockID : blockID
 			}
 		}, {});
-		
+
 		var $formData = $.extend(true, {
 			actionName : 'getFormDataEditAJAX',
 			className : this._className,
@@ -494,7 +494,7 @@ ULTIMATE.Block.Transfer.prototype = {
 		}, {});
 
 		$parameters = this._readBlockOptionsFormData($parameters);
-		
+
 		// reset form
 		$('#selectBlocktype').val('0');
 		$('#height').val('0');
@@ -510,7 +510,7 @@ ULTIMATE.Block.Transfer.prototype = {
 		// send proxy request
 		this._proxy.sendRequest();
 	},
-	
+
 	/**
 	 * Saves the additional block options after editing them.
 	 */
@@ -519,21 +519,20 @@ ULTIMATE.Block.Transfer.prototype = {
 		var blockID = this._editedBlockID;
 		var $parameters = $.extend(true, {
 			data : {
-				additionalData : {
-				}
+				additionalData : {}
 			}
 		}, {});
 
 		$parameters = this._readBlockOptionsFormData($parameters);
-		
+
 		// build proxy data
 		var $data = $.extend(true, {
 			actionName : 'editAJAX',
 			className : this._className,
 			parameters : $parameters,
-			objectIDs : [blockID]
+			objectIDs : [ blockID ]
 		}, {});
-		
+
 		var $proxy = new WCF.Action.Proxy({
 			success : $.proxy(this._successEdit, this)
 		});
@@ -542,14 +541,14 @@ ULTIMATE.Block.Transfer.prototype = {
 		// send proxy request
 		$proxy.sendRequest();
 	},
-	
+
 	/**
 	 * Reads the block options form data.
 	 * 
 	 * @param {Object}
 	 *            parameters
 	 */
-	_readBlockOptionsFormData: function($parameters) {
+	_readBlockOptionsFormData : function($parameters) {
 		for ( var i = 0; i < this._optionList.length; i++) {
 			var $item = this._optionList[i];
 			var optionName = $item.replace(/_\d+/, '');
@@ -584,7 +583,7 @@ ULTIMATE.Block.Transfer.prototype = {
 		}
 		return $parameters;
 	},
-	
+
 	/**
 	 * Shows dialog form.
 	 * 
@@ -614,7 +613,7 @@ ULTIMATE.Block.Transfer.prototype = {
 			}
 		}
 	},
-	
+
 	/**
 	 * Shows dialog form on edit.
 	 * 
@@ -644,27 +643,26 @@ ULTIMATE.Block.Transfer.prototype = {
 			}
 		}
 	},
-	
+
 	/**
 	 * Initializes the block options dialog.
 	 * 
 	 * @param {Array}
 	 *            $data
 	 */
-	_createOptionsDialog: function($data) {
+	_createOptionsDialog : function($data) {
 		this._optionList = $data[0];
 		$('#blockForm').html($data[1]);
-		$('#blockForm').find('form').submit(
-				$.proxy(this._stopFormSubmit, this));
+		$('#blockForm').find('form')
+				.submit($.proxy(this._stopFormSubmit, this));
 
 		if (!$.wcfIsset('blockForm'))
 			return;
 		this._dialog = $('#' + $.wcfEscapeID('blockForm'));
-		this._dialog
-				.wcfDialog({
-					title : WCF.Language
-							.get('wcf.acp.ultimate.template.dialog.additionalOptions')
-				});
+		this._dialog.wcfDialog({
+			title : WCF.Language
+					.get('wcf.acp.ultimate.template.dialog.additionalOptions')
+		});
 		// initializing tabs
 		this._dialog.removeClass('ultimateHidden');
 		this._dialog.wcfDialog('open');
@@ -801,7 +799,7 @@ ULTIMATE.Block.Transfer.prototype = {
 			}
 		}
 	},
-	
+
 	/**
 	 * Shows notification upon edit success.
 	 * 
@@ -1014,7 +1012,13 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 		this._proxy = new WCF.Action.Proxy({
 			success : $.proxy(this._success, this)
 		});
+
 		this._structure = {};
+		$('#' + this._menuItemListID).find('button[data-type="submit"]').click(
+				function(event) {
+					event.preventDefault();
+				});
+
 		this._element.parent('form')
 				.submit($.proxy(this._stopFormSubmit, this));
 		if (this._type != 'custom') {
@@ -1030,7 +1034,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 	 * Initializes the event handler.
 	 */
 	_init : function() {
-		$('.jsMenuItem').on('remove', $.proxy(this._remove, this));
+		$('.sortableNode').on('remove', $.proxy(this._remove, this));
 	},
 
 	/**
@@ -1245,54 +1249,61 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 		try {
 			var data = data['returnValues'];
 			for ( var $menuItemID in data) {
-				var $newItemHtml = '<li id="' + WCF.getRandomID()
-						+ '" class="sortableNode jsMenuItem" data-object-id="'
-						+ $menuItemID + '"  data-object-name="'
+				var $newItemHtml = '<li id="' + WCF.getRandomID() + '" class="';
+				$newItemHtml += 'sortableNode"';
+				$newItemHtml += ' data-object-id="' + $menuItemID
+						+ '"  data-object-name="'
 						+ data[$menuItemID]['menuItemNameRaw'] + '">';
-				$newItemHtml += '<span class="sortableNodeLabel"><span class="buttons">';
-				if (ULTIMATE.Permission
-						.get('admin.content.ultimate.canManageMenuItems')) {
-					$newItemHtml += '<span title="'
-							+ WCF.Language.get('wcf.global.button.delete')
-							+ '" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="'
-							+ $menuItemID
-							+ '" data-confirm-message="'
-							+ WCF.Language
-									.get('wcf.acp.ultimate.menu.item.delete.sure')
-							+ '"></span>';
-				} else {
-					$newItemHtml += '<span title="'
-							+ WCF.Language.get('wcf.global.button.delete')
-							+ '" class="icon icon16 icon-remove disabled"></span>';
-				}
-				if (ULTIMATE.Permission
-						.get('admin.content.ultimate.canManageMenuItems')) {
-					$newItemHtml += '&nbsp;<span title="'
-							+ ((data[$menuItemID]['isDisabled']) ? WCF.Language
+				$newItemHtml += '<span class="sortableNodeLabel">'
+						+ '<span>'
+						+ data[$menuItemID]['menuItemName']
+						+ '</span><span class="statusDisplay sortableButtonContainer">';
+				if (data[$menuItemID]['canDisable']) {
+					$newItemHtml += '<span class="icon icon16 icon-check'
+							+ (data[$menuItemID]['isDisabled'] ? '-empty' : '')
+							+ ' jsToggleButton jsTooltip pointer" '
+							+ 'title="'
+							+ (data[$menuItemID]['isDisabled'] ? WCF.Language
 									.get('wcf.global.button.enable')
 									: WCF.Language
 											.get('wcf.global.button.disable'))
-							+ '" class="icon icon16 icon-'
-							+ ((data[$menuItemID]['isDisabled']) ? 'off'
-									: 'circle-blank')
-							+ ' jsToggleButton jsTooltip" data-object-id="'
-							+ $menuItemID + '"></span>';
+							+ '" data-object-id="' + $menuItemID
+							+ '" data-disable-message="'
+							+ WCF.Language.get('wcf.global.button.disable')
+							+ '" data-enable-message="'
+							+ WCF.Language.get('wcf.global.button.enable')
+							+ '"></span>';
 				} else {
-					$newItemHtml += '&nbsp;<span title="'
-							+ (data[$menuItemID]['isDisabled']) ? WCF.Language
-							.get('wcf.global.button.enable') : WCF.Language
-							.get('wcf.global.button.disable')
-							+ '" class="icon icon16 icon-'
-							+ (data[$menuItemID]['isDisabled']) ? 'off'
-							: 'circle-blank' + ' disabled"></span>';
+					$newItemHtml += '<span class="icon icon16 icon-check'
+							+ (data[$menuItemID]['isDisabled'] ? '-empty' : '')
+							+ ' disabled" '
+							+ 'title="'
+							+ (data[$menuItemID]['isDisabled'] ? WCF.Language
+									.get('wcf.global.button.enable')
+									: WCF.Language
+											.get('wcf.global.button.disable'))
+							+ '"></span>';
 				}
-				$newItemHtml += '</span>&nbsp;<span class="title">';
-				$newItemHtml += data[$menuItemID]['menuItemName']
-						+ '</span></span><ol class="sortableList" data-object-id="'
-						+ $menuItemID + '"></ol></li>';
-
+				if (data[$menuItemID]['canDelete']) {
+					$newItemHtml += '&nbsp;<span class="icon icon16 icon-remove'
+							+ ' jsDeleteButton jsTooltip pointer" '
+							+ 'title="'
+							+ WCF.Language.get('wcf.global.button.delete')
+							+ '" data-object-id="'
+							+ $menuItemID
+							+ '" data-confirm-message="'
+							+ data[$menuItemID]['confirmMessage'] + '"></span>';
+				} else {
+					$newItemHtml += '<span class="icon icon16 icon-remove'
+							+ ' disabled" ' + 'title="'
+							+ WCF.Language.get('wcf.global.button.delete')
+							+ '"></span>';
+				}
+				$newItemHtml += '</span></span></li>';
+				var newEntry = $($newItemHtml);
 				$('#' + this._menuItemListID + '> .sortableList').append(
 						$newItemHtml);
+
 				if ($('#' + this._menuItemListID).find(
 						'button[data-type="submit"]').prop('disabled')) {
 					$('#' + this._menuItemListID).find(
@@ -1300,18 +1311,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 							false).removeClass('disabled');
 				}
 			}
-			if (ULTIMATE.Permission
-					.get('admin.content.ultimate.canManageMenuItems')) {
-				new ULTIMATE.NestedSortable.Delete(
-						'ultimate\\data\\menu\\item\\MenuItemAction',
-						$('.jsMenuItem'));
-			}
-			if (ULTIMATE.Permission
-					.get('admin.content.ultimate.canManageMenuItems')) {
-				new WCF.Action.Toggle(
-						'ultimate\\data\\menu\\item\\MenuItemAction',
-						$('.jsMenuItem'), '> .buttons > .jsToggleButton');
-			}
+
 			this._init();
 			this._notification.show();
 		}

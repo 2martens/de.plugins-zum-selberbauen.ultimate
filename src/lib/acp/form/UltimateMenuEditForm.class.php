@@ -26,10 +26,11 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\acp\form;
-use ultimate\data\menu\item\MenuItemNodeList;
+use ultimate\data\menu\item\ViewableMenuItem;
 use ultimate\data\menu\Menu;
 use ultimate\data\menu\MenuAction;
 use ultimate\system\cache\builder\CategoryCacheBuilder;
+use ultimate\system\cache\builder\MenuItemCacheBuilder;
 use ultimate\system\cache\builder\PageCacheBuilder;
 use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
@@ -85,32 +86,58 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
 	public function readData() {
 		// reading object fields
 		$this->menuName = $this->menu->__get('menuName');
-		$this->menuItemNodeList = new MenuItemNodeList($this->menuID, 0, true);
+		$menuItems = MenuItemCacheBuilder::getInstance()->getData(array(), 'menuItems');
+		$menuItems = $menuItems[$this->menuID];
+		$this->menuItems = array();
+		foreach ($menuItems as $menuItem) {
+			if ($menuItem->__get('menuItemParent')) {
+				if (isset($this->menuItems[$menuItem->__get('menuItemParent')])) {
+					$this->menuItems[$menuItem->__get('menuItemParent')]->addChild($menuItem);
+				}
+			}
+			else {
+				$this->menuItems[$menuItem->menuItemName] = new ViewableMenuItem($menuItem);
+			}
+		}
 			
 		// read category cache
 		$this->categories = CategoryCacheBuilder::getInstance()->getData(array(), 'categoriesNested');
-		
+		$this->disabledCategoryIDs = array();
 		// get categories which are already used in this menu
 		foreach ($this->categories as $categoryID => $categoryArray) {
-			foreach ($this->menuItemNodeList as $menuItem) {
+			foreach ($this->menuItems as $menuItem) {
 				/* @var $category \ultimate\data\category\Category */
 				/* @var $menuItem \ultimate\data\menu\item\MenuItemNode */
 				if ($categoryArray[0]->__get('categoryTitle') != $menuItem->__get('menuItemName')) continue;
 				$this->disabledCategoryIDs[] = $categoryID;
 				break;
+				
+				/* @var $menuItem \ultimate\data\menu\item\ViewableMenuItem */
+				foreach ($menuItem as $_menuItem) {
+					if ($categoryArray[0]->__get('categoryTitle') != $_menuItem->__get('menuItemName')) continue;
+					$this->disabledCategoryIDs[] = $categoryID;
+					break;
+				}
 			}
 			$this->getNestedCategories($categoryArray[1]);
 		}
 		
 		// read page cache
 		$this->pages = PageCacheBuilder::getInstance()->getData(array(), 'pagesNested');
-		
+		$this->disabledPageIDs = array();
 		// get pages which are already used in this menu
 		foreach ($this->pages as $pageID => $pageArray) {
-			foreach ($this->menuItemNodeList as $menuItem) {
+			foreach ($this->menuItems as $menuItem) {
 				if ($pageArray[0]->__get('pageTitle') != $menuItem->__get('menuItemName')) continue;
 				$this->disabledPageIDs[] = $pageID;
 				break;
+				
+				/* @var $menuItem \ultimate\data\menu\item\ViewableMenuItem */
+				foreach ($menuItem as $_menuItem) {
+					if ($pageArray[0]->__get('pageTitle') != $_menuItem->__get('menuItemName')) continue;
+					$this->disabledPageIDs[] = $pageID;
+					break;
+				}
 			}
 			$this->getNestedPages($pageArray[1]);
 		}

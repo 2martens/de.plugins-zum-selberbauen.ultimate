@@ -33,9 +33,11 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
  * Caches the menu items.
  * 
  * Provides three variables:
- * * \ultimate\data\menu\item\MenuItem[] menuItems (menuItemID => menuItem)
- * * integer[] menuItemIDs
- * * \ultimate\data\menu\item\MenuItem[] menuItemsToParent (menuItemName => menuItem)
+ * * \ultimate\data\menu\item\MenuItem[][] menuItems (menuID => (menuItemID => menuItem))
+ * * integer[][] menuItemIDs (menuID => ( => menuItemID))
+ * * \ultimate\data\menu\item\MenuItem[][] menuItemsToParent (menuID => (menuItemName => menuItem))
+ * 
+ * In all of these variables the menu items are sorted ASC for their parentMenuitem and the showOrder.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -56,22 +58,24 @@ class MenuItemCacheBuilder extends AbstractCacheBuilder {
 		);
 		
 		$menuItemList = new MenuItemList();
+		$menuItemList->sqlOrderBy = 'menu_item.menuItemParent ASC, menu_item.showOrder ASC';
 		$menuItemList->readObjects();
 		$menuItems = $menuItemList->getObjects();
 		
 		foreach ($menuItems as $menuItemID => $menuItem) {
 			/* @var $menuItem \ultimate\data\menu\item\MenuItem */
-			$data['menuItems'][$menuItemID] = $menuItem;
-			$data['menuItemIDs'][] = $menuItemID;
-			$data['menuItemsToParent'][$menuItem->__get('menuItemName')] = $menuItem->__get('childItems');
+			$data['menuItems'][$menuItem->__get('menuID')][$menuItemID] = $menuItem;
+			$data['menuItemIDs'][$menuItem->__get('menuID')][] = $menuItemID;
+			$data['menuItemsToParent'][$menuItem->__get('menuID')][$menuItem->__get('menuItemName')] = $menuItem->__get('childItems');
 		}
 		
 		$data['menuItemsToParent'][''] = array();
-		foreach ($data['menuItems'] as $menuItemID => $menuItem) {
-			if ($menuItem->__get('menuItemParent') != '') continue;
-			$data['menuItemsToParent'][''][$menuItemID] = $menuItem;
+		foreach ($data['menuItems'] as $menuID => $__menuItems) {
+			foreach ($__menuItems as $menuItemID => $menuItem) {
+				if ($menuItem->__get('menuItemParent') != '') continue;
+				$data['menuItemsToParent'][$menuID][''][$menuItemID] = $menuItem;
+			}
 		}
-		
 		return $data;
 	}
 }

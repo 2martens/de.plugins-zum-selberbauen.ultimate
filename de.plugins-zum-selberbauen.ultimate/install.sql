@@ -113,10 +113,15 @@ CREATE TABLE ultimate1_menu_item (
 	menuID INT(10) NOT NULL,
 	menuItemName VARCHAR(255) NOT NULL DEFAULT '',
 	menuItemParent VARCHAR(255) NOT NULL DEFAULT '',
+	menuItemController VARCHAR(255) NULL DEFAULT NULL,
 	menuItemLink VARCHAR(255) NOT NULL DEFAULT '',
 	showOrder INT(10) NOT NULL DEFAULT 0,
+	permissions TEXT NULL,
+	options TEXT NULL,
 	type ENUM('category', 'content', 'custom', 'page') NOT NULL,
 	isDisabled TINYINT(1) NOT NULL DEFAULT 0,
+	className VARCHAR(255) NOT NULL DEFAULT '',
+	isLandingPage TINYINT(1) NOT NULL DEFAULT 0,
 	UNIQUE KEY (menuID, menuItemName)
 );
 

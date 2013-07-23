@@ -48,7 +48,6 @@ class UltimateStyleCompiler extends StyleCompiler {
 	 */
 	public function compileACP() {
 		$files = array(
-			WCF_DIR.'style/ultimate/ultimateCore.less',
 			ULTIMATE_DIR.'style/general/ultimate.less'
 		);
 		
@@ -92,7 +91,6 @@ class UltimateStyleCompiler extends StyleCompiler {
 	 */
 	public function compile(\wcf\data\style\Style $style) {
 		$files = array(
-			WCF_DIR.'style/ultimate/ultimateCore.less',
 			ULTIMATE_DIR.'style/general/ultimate.less'
 		);
 		

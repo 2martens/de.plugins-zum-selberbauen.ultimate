@@ -37,7 +37,6 @@ use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\ISortableAction;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\SystemException;
-use wcf\system\exception\ValidateActionException;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
@@ -92,6 +91,12 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 	protected $pages = array();
 	
 	/**
+	 * page menu item editor
+	 * @var	\ultimate\data\menu\item\MenuItemEditor
+	 */
+	public $menuItemEditor = null;
+	
+	/**
 	 * Creates a new MenuItemAction object.
 	 * 
 	 * @param	array	$objects
@@ -105,16 +110,47 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 	}
 	
 	/**
+	 * @see wcf\data\IDatabaseObjectAction::create()
+	 */
+	public function create() {
+		// calculate show order
+		$this->parameters['data']['showOrder'] = MenuItemEditor::getShowOrder(
+			$this->parameters['data']['showOrder'], 
+			$this->parameters['data']['menuID'], 
+			$this->parameters['data']['menuItemParent']
+		);
+		
+		$menuItem = parent::create();
+		MenuItemEditor::updateLandingPage($menuItem->__get('menuID'));
+		return $menuItem;
+	}
+	
+	/**
+	 * @see	wcf\data\AbstractDatabaseObjectAction::delete()
+	 */
+	public function delete() {
+		$returnValues = parent::delete();
+		$menuItem = array_shift($this->objects);
+		MenuItemEditor::updateLandingPage($menuItem->__get('menuID'));
+		return $returnValues;
+	}
+	
+	/**
+	 * @see	wcf\data\AbstractDatabaseObjectAction::update()
+	 */
+	public function update() {
+		parent::update();
+		$menuItem = array_shift($this->objects);
+		MenuItemEditor::updateLandingPage($menuItem->__get('menuID'));
+	}
+	
+	/**
 	 * Toggles the activity status of menu items.
 	 */
 	public function toggle() {
-		foreach ($this->objects as $menuItemEditor) {
-			/* @var $menuItemEditor \ultimate\data\menu\item\MenuItemEditor */
-			/* @var $menuItem \ultimate\data\menu\item\MenuItem */
-			$menuItemEditor->update(array(
-				'isDisabled' => 1 - $menuItemEditor->__get('isDisabled')
-			));
-		}
+		$this->menuItemEditor->update(array(
+			'isDisabled' => ($this->menuItemEditor->isDisabled ? 0 : 1)
+		));
 	}
 	
 	/**
@@ -141,7 +177,11 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 			
 			$parameters['menuItemLink'] = StringUtil::trim($this->parameters['data']['structure']['link']);
 			$parameters['type'] = 'custom';
-			
+			$parameters['showOrder'] = MenuItemEditor::getShowOrder(
+				$parameters['showOrder'],
+				$parameters['menuID'],
+				$parameters['menuItemParent']
+			);
 			$menuItem = MenuItemEditor::create($parameters);
 			
 			$menuItems[$menuItem->__get('menuItemID')] = $menuItem;
@@ -183,7 +223,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 							/* @var $dateTimeObj \DateTime */
 							$dateTimeObj = $element->__get('publishDateObject');
 							if ($dateTimeObj->getTimestamp()) {
-								$date = $dateTimeObj->format('Y/m/d');
+								$date = $dateTimeObj->format('Y-m-d');
 								$parameters['menuItemLink'] = $date.'/'.$element->__get('contentSlug').'/';
 							} else {
 								$parameters['menuItemLink'] = '';
@@ -198,8 +238,13 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 							break;
 					}
 					try {
+						$parameters['showOrder'] = MenuItemEditor::getShowOrder(
+							$parameters['showOrder'],
+							$parameters['menuID'],
+							$parameters['menuItemParent']
+						);
 						$menuItem = MenuItemEditor::create($parameters);
-						$menuItems[$menuItem->__get('menuItemID')] = $menuItem;
+						$menuItems[$menuItem->__get('menuItemID')] = new ViewableMenuItem($menuItem);
 						MenuItemEditor::resetCache();
 					}
 					catch (DatabaseException $e) {
@@ -222,7 +267,15 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 				'menuItemLink' => $menuItem->__get('menuItemLink'),
 				'showOrder' => $menuItem->__get('showOrder'),
 				'type' => $menuItem->__get('type'),
-				'isDisabled' => $menuItem->__get('isDisabled')
+				'isDisabled' => $menuItem->__get('isDisabled'),
+				'canDisable' => $menuItem->canDisable(),
+				'canDelete' => $menuItem->canDelete(),
+				'confirmMessage' => WCF::getLanguage()->getDynamicVariable(
+					'wcf.acp.pageMenu.delete.sure', 
+					array(
+						'__menuItem' => $menuItem->__toString()
+					)
+				)
 			);
 		}
 		
@@ -241,8 +294,10 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 	 */
 	public function updatePosition() {
 		WCF::getDB()->beginTransaction();
+		$menuID = -1;
 		foreach ($this->parameters['data']['structure'] as $parentMenuItemID => $menuItemIDs) {
 			foreach ($menuItemIDs as $showOrder => $menuItemID) {
+				if ($menuID == -1) $menuID = $this->objects[$menuItemID]->__get('menuID');
 				$this->objects[$menuItemID]->update(array(
 					'menuItemParent' => $parentMenuItemID ? $this->objects[$parentMenuItemID]->__get('menuItemName') : '',
 					'showOrder' => $showOrder + 1
@@ -250,6 +305,9 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 			}
 		}
 		WCF::getDB()->commitTransaction();
+		
+		MenuItemEditor::updateLandingPage($menuID);
+		
 		MenuItemEditor::resetCache();
 	}
 	
@@ -270,17 +328,12 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 	 * @internal	Calls validateUpdate.
 	 */
 	public function validateToggle() {
-		$this->validateUpdate();
-	}
-	
-	/**
-	 * Validates the 'toggleContainer' action.
-	 * 
-	 * @since	1.0.0
-	 * @internal	Calls validateUpdate.
-	 */
-	public function validateToggleContainer() {
-		$this->validateUpdate();
+		$this->menuItemEditor = $this->getSingleObject();
+		if ($this->menuItemEditor->isLandingPage) {
+			throw new PermissionDeniedException();
+		}
+		
+		WCF::getSession()->checkPermissions($this->permissionsUpdate);
 	}
 	
 	/**
@@ -291,20 +344,15 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 	public function validateUpdatePosition() {
 		// validate permissions
 		if (!empty($this->permissionsUpdate)) {
-			try {
-				WCF::getSession()->checkPermissions($this->permissionsUpdate);
-			}
-			catch (PermissionDeniedException $e) {
-				throw new ValidateActionException('Insufficient permissions');
-			}
+			WCF::getSession()->checkPermissions($this->permissionsUpdate);
 		}
 		
 		// validate 'structure' parameter
 		if (!isset($this->parameters['data']['structure'])) {
-			throw new ValidateActionException("Missing 'structure' parameter");
+			throw new SystemException("Missing 'structure' parameter.");
 		}
 		if (!is_array($this->parameters['data']['structure'])) {
-			throw new ValidateActionException("'structure' parameter is no array");
+			throw new SystemException("'structure' parameter is no array.");
 		}
 		
 		// validate given menu item ids
@@ -313,7 +361,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 				// validate menu item
 				$menuItem = MenuItemHandler::getInstance()->getMenuItem($parentMenuItemID);
 				if ($menuItem === null) {
-					throw new ValidateActionException("Unknown menu item with id '".$parentMenuItemID."'");
+					throw new SystemException("Unknown menu item with id '".$parentMenuItemID."'.");
 				}
 				
 				$this->objects[$menuItem->__get('menuItemID')] = new $this->className($menuItem);
@@ -324,7 +372,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 				// validate menu item
 				$menuItem = MenuItemHandler::getInstance()->getMenuItem($menuItemID);
 				if ($menuItem === null) {
-					throw new ValidateActionException("Unknown menu item with id '".$menuItemID."'");
+					throw new SystemException("Unknown menu item with id '".$menuItemID."'.");
 				}
 				
 				$this->objects[$menuItem->__get('menuItemID')] = new $this->className($menuItem);

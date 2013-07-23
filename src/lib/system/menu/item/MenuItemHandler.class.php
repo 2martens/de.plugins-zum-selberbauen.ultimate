@@ -43,7 +43,7 @@ use wcf\system\SingletonFactory;
 class MenuItemHandler extends SingletonFactory {
 	/**
 	 * Contains the cached menu items.
-	 * @var	\ultimate\data\menu\item\MenuItem[]
+	 * @var	\ultimate\data\menu\item\MenuItem[][]
 	 */
 	protected $menuItems = array();
 
@@ -53,10 +53,12 @@ class MenuItemHandler extends SingletonFactory {
 	 * @since	1.0.0
 	 * @api
 	 * 
+	 * @param	integer	$menuID
+	 * 
 	 * @return	\ultimate\data\menu\item\MenuItem[]
 	*/
-	public function getMenuItems() {
-		return $this->menuItems;
+	public function getMenuItems($menuID) {
+		return $this->menuItems[intval($menuID)];
 	}
 	
 	/**
@@ -69,8 +71,10 @@ class MenuItemHandler extends SingletonFactory {
 	 * @return	\ultimate\data\menu\item\MenuItem|null
 	 */
 	public function getMenuItem($menuItemID) {
-		if (isset($this->menuItems[$menuItemID])) {
-			return $this->menuItems[$menuItemID];
+		foreach ($this->menuItems as $menuItems) {
+			if (isset($menuItems[$menuItemID])) {
+				return $menuItems[$menuItemID];
+			}
 		}
 		
 		return null;

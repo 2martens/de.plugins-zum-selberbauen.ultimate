@@ -49,6 +49,22 @@ class MenuItemEditor extends DatabaseObjectEditor implements IEditableCachedObje
 	protected static $baseClass = '\ultimate\data\menu\item\MenuItem';
 	
 	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableObject.html#delete
+	 */
+	public function delete() {
+		// update show order
+		$sql = 'UPDATE	ultimate'.WCF_N.'_menu_item
+		        SET     showOrder = showOrder - 1
+		        WHERE   showOrder >= ?';
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array(
+			$this->showOrder
+		));
+	
+		parent::delete();
+	}
+	
+	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableObject.html#deleteAll
 	 */
 	public static function deleteAll(array $objectIDs = array()) {
@@ -65,6 +81,96 @@ class MenuItemEditor extends DatabaseObjectEditor implements IEditableCachedObje
 		}
 		WCF::getDB()->commitTransaction();
 		return parent::deleteAll($objectIDs);
+	}
+	
+	/**
+	 * Sets first top menu item as landing page.
+	 * 
+	 * @param	integer	$menuID
+	 */
+	public static function updateLandingPage($menuID) {
+		$sql = 'UPDATE ultimate'.WCF_N.'_menu_item
+		        SET    isLandingPage = 0';
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute();
+	
+		$sql = 'UPDATE   ultimate'.WCF_N.'_menu_item
+		        SET      isLandingPage = ?,
+		                 isDisabled = ?
+		        WHERE    menuItemParent = ?
+		        AND      menuID = ?
+		        AND      menuItemController <> ?
+		        OR       menuItemController IS NULL
+		        ORDER BY showOrder ASC';
+		$statement = WCF::getDB()->prepareStatement($sql, 1);
+		$statement->execute(array(
+			1,
+			0,
+			'',
+			intval($menuID),
+			''
+		));
+	
+		self::resetCache();
+	}
+	
+	/**
+	 * Updates the position of a menu item directly.
+	 *
+	 * @param	integer		$menuItemID
+	 * @param	integer		$showOrder
+	 */
+	public static function setShowOrder($menuItemID, $showOrder = 1) {
+		// Update
+		$sql = 'UPDATE ultimate'.WCF_N.'_menu_item
+		        SET    showOrder = ?
+		        WHERE  menuItemID = ?';
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array(
+			$showOrder,
+			$menuItemID
+		));
+	}
+	
+	/**
+	 * Returns show order for a new menu item.
+	 *
+	 * @param	integer		$showOrder
+	 * @param	integer		$menuID
+	 * @param	string		$menuItemParent
+	 * @return	integer
+	 */
+	public static function getShowOrder($showOrder, $menuID, $menuItemParent = '') {
+		if ($showOrder == 0) {
+			// get next number in row
+			$sql = 'SELECT  MAX(showOrder) AS showOrder
+			        FROM    ultimate'.WCF_N.'_menu_item
+			        WHERE   menuItemParent = ?
+			        AND     menuID         = ?';
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array(
+				$menuItemParent,
+				intval($menuID)
+			));
+			$row = $statement->fetchArray();
+			if (!empty($row)) $showOrder = intval($row['showOrder']) + 1;
+			else $showOrder = 1;
+		}
+		else {
+			$sql = 'UPDATE  ultimate'.WCF_N.'_menu_item
+			        SET     showOrder = showOrder + 1
+			        WHERE   menuItemParent = ?
+			        AND     menuID         = ?
+			        AND     showOrder >= ?';
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array(
+				$menuItemParent,
+				intval($menuID),
+				$showOrder
+			));
+		}
+	
+		return $showOrder;
 	}
 	
 	/**

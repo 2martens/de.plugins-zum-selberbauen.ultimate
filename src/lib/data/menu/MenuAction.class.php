@@ -26,6 +26,8 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\menu;
+use ultimate\data\menu\item\MenuItemAction;
+use wcf\data\page\menu\item\PageMenuItemList;
 use wcf\data\AbstractDatabaseObjectAction;
 
 /**
@@ -58,4 +60,39 @@ class MenuAction extends AbstractDatabaseObjectAction {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsUpdate
 	*/
 	protected $permissionsUpdate = array('admin.content.ultimate.canManageMenus');
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#create
+	 */
+	public function create() {
+		$menu = parent::create();
+		
+		// create default menu entries
+		$menuItemList = new PageMenuItemList();
+		$menuItemList->getConditionBuilder()->add("page_menu_item.menuPosition = 'header'");
+		$menuItemList->sqlOrderBy = 'page_menu_item.showOrder ASC';
+		$menuItemList->readObjects();
+		
+		foreach ($menuItemList as $menuItem) {
+			$parameters = array(
+				'data' => array(
+					'menuID' => $menu->__get('menuID'),
+					'menuItemName' => $menuItem->__get('menuItem'),
+					'menuItemParent' => $menuItem->__get('parentMenuItem'),
+					'menuItemController' => $menuItem->__get('menuItemController'),
+					'menuItemLink' => $menuItem->__get('menuItemLink'),
+					'showOrder' => $menuItem->__get('showOrder'),
+					'permissions' => $menuItem->__get('permissions'),
+					'options' => $menuItem->__get('options'),
+					'type' => 'custom',
+					'isDisabled' => $menuItem->__get('isDisabled'),
+					'className' => $menuItem->__get('className'),
+					'isLandingPage' => $menuItem->__get('isLandingPage')
+				)
+			);
+			$menuItemAction = new MenuItemAction(array(), 'create', $parameters);
+			$menuItemAction->executeAction();
+		}
+		return $menu;
+	}
 }

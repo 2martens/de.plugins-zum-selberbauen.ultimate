@@ -26,6 +26,8 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\menu\item;
+use wcf\system\Regex;
+
 use ultimate\data\AbstractUltimateProcessibleDatabaseObject;
 use ultimate\system\menu\custom\DefaultCustomMenuItemProvider;
 use wcf\system\menu\ITreeMenuItem;
@@ -64,6 +66,18 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 	protected static $processorInterface = '\wcf\system\menu\page\IPageMenuItemProvider';
 	
 	/**
+	 * application abbreviation
+	 * @var	string
+	 */
+	protected $application = '';
+	
+	/**
+	 * menu item controller
+	 * @var	string
+	 */
+	protected $controller = null;
+	
+	/**
 	 * @return	\ultimate\system\menu\custom\DefaultCustomMenuItemProvider
 	 * @see		\wcf\data\ProcessibleDatabaseObject::getProcessor()
 	 */
@@ -81,7 +95,82 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 	 * @return	string
 	 */
 	public function __toString() {
-		return WCF::getLanguage()->get($this->menuItemName);
+		return WCF::getLanguage()->getDynamicVariable($this->menuItemName);
+	}
+	
+	/**
+	 * Returns true if current menu item may be set as landing page.
+	 *
+	 * @return	boolean
+	 */
+	public function isValidLandingPage() {
+		// item must be a top header menu item without parents
+		if ($this->parentMenuItem) {
+			return false;
+		}
+	
+		// external links are not valid
+		if (strpos($menuItemLink, 'http') !== false) {
+			return false;
+		}
+	
+		// already is landing page
+		if ($this->isLandingPage) {
+			return false;
+		}
+	
+		// disabled items cannot be a landing page
+		if ($this->isDisabled) {
+			return false;
+		}
+	
+		return true;
+	}
+	
+	/**
+	 * Returns true if this item can be deleted.
+	 *
+	 * @return	boolean
+	 */
+	public function canDelete() {
+		$deletable = true;
+		$deletable = ($this->isLandingPage ? false : true);
+		if ($deletable) {
+			$deletable = ($this->menuItemController !== null ? false : true);
+		}
+		
+		return $deletable;
+	}
+	
+	/**
+	 * Returns true if this item can be disabled.
+	 *
+	 * @return	boolean
+	 */
+	public function canDisable() {
+		return ($this->isLandingPage ? false : true);
+	}
+	
+	/**
+	 * Returns application abbreviation.
+	 *
+	 * @return	string
+	 */
+	public function getApplication() {
+		$this->parseController();
+	
+		return $this->application;
+	}
+	
+	/**
+	 * Returns controller name.
+	 *
+	 * @return	string
+	 */
+	public function getController() {
+		$this->parseController();
+	
+		return $this->controller;
 	}
 	
 	/**
@@ -118,6 +207,25 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 		} else {
 			return $menuItemLink;
 		}		
+	}
+	
+	/**
+	 * Parses controller name.
+	 */
+	protected function parseController() {
+		if ($this->controller === null) {
+			$this->controller = '';
+				
+			// resolve application and controller
+			if ($this->menuItemController) {
+				$parts = explode('\\', $this->menuItemController);
+				$this->application = array_shift($parts);
+				$menuItemController = array_pop($parts);
+	
+				// drop controller suffix
+				$this->controller = Regex::compile('(Action|Form|Page)$')->replace($menuItemController, '');
+			}
+		}
 	}
 	
 	/**

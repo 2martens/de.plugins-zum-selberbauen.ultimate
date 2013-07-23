@@ -26,7 +26,6 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\acp\form;
-use ultimate\data\menu\item\MenuItemNodeList;
 use ultimate\data\menu\MenuAction;
 use ultimate\system\cache\builder\CategoryCacheBuilder;
 use ultimate\system\cache\builder\PageCacheBuilder;
@@ -77,10 +76,10 @@ class UltimateMenuAddForm extends AbstractForm {
 	public $menuName = '';
 	
 	/**
-	 * Contains the MenuItemNodeList.
-	 * @var	\ultimate\data\menu\item\MenuItemNodeList
+	 * Contains the menu items.
+	 * @var	\ultimate\data\menu\item\ViewableMenuItem[]
 	 */
-	public $menuItemNodeList = null;
+	public $menuItems = array();
 	
 	/**
 	 * Contains all categories.
@@ -118,32 +117,11 @@ class UltimateMenuAddForm extends AbstractForm {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
-		$this->menuItemNodeList = new MenuItemNodeList(0, 0, true);
 		// read category cache
 		$this->categories = CategoryCacheBuilder::getInstance()->getData(array(), 'categoriesNested');
 		
-		// get categories which are already used in this menu
-		foreach ($this->categories as $categoryID => $categoryArray) {
-			foreach ($this->menuItemNodeList as $menuItem) {
-				if ($categoryArray[0]->__get('categoryTitle') != $menuItem->__get('menuItemName')) continue;
-				$this->disabledCategoryIDs[] = $categoryID;
-				break;
-			}
-			$this->getNestedCategories($categoryArray[1]);
-		}
-		
 		// read page cache
 		$this->pages = PageCacheBuilder::getInstance()->getData(array(), 'pagesNested');
-		
-		// get pages which are already used in this menu
-		foreach ($this->pages as $pageID => $pageArray) {
-			foreach ($this->menuItemNodeList as $menuItem) {
-				if ($pageArray[0]->__get('pageTitle') != $menuItem->__get('menuItemName')) continue;
-				$this->disabledPageIDs[] = $pageID;
-				break;
-			}
-			$this->getNestedPages($pageArray[1]);
-		}
 		
 		parent::readData();
 	}
@@ -208,7 +186,7 @@ class UltimateMenuAddForm extends AbstractForm {
 		I18nHandler::getInstance()->assignVariables();
 		WCF::getTPL()->assign(array(
 			'menuName' => $this->menuName,
-			'menuItemNodeList' => $this->menuItemNodeList,
+			'menuItems' => $this->menuItems,
 			'categories' => $this->categories,
 			'disabledCategoryIDs' => $this->disabledCategoryIDs,
 			'pages' => $this->pages,
@@ -238,10 +216,16 @@ class UltimateMenuAddForm extends AbstractForm {
 	 */
 	protected function getNestedCategories(array $categories) {
 		foreach ($categories as $categoryID => $categoryArray) {
-			foreach ($this->menuItemNodeList as $menuItem) {
+			foreach ($this->menuItems as $menuItem) {
 				if ($categoryArray[0]->__get('categoryTitle') != $menuItem->__get('menuItemName')) continue;
 				$this->disabledCategoryIDs[] = $categoryID;
 				break;
+				/* @var $menuItem \ultimate\data\menu\item\ViewableMenuItem */
+				foreach ($menuItem as $_menuItem) {
+					if ($categoryArray[0]->__get('categoryTitle') != $_menuItem->__get('menuItemName')) continue;
+					$this->disabledCategoryIDs[] = $categoryID;
+					break;
+				}
 			}
 			$this->getNestedCategories($categoryArray[1]);
 		}
@@ -254,10 +238,16 @@ class UltimateMenuAddForm extends AbstractForm {
 	 */
 	protected function getNestedPages(array $pages) {
 		foreach ($pages as $pageID => $pageArray) {
-			foreach ($this->menuItemNodeList as $menuItem) {
+			foreach ($this->menuItems as $menuItem) {
 				if ($pageArray[0]->__get('pageTitle') != $menuItem->__get('menuItemName')) continue;
 				$this->disabledPageIDs[] = $pageID;
 				break;
+				
+				foreach ($menuItem as $_menuItem) {
+					if ($pageArray[0]->__get('pageTitle') != $_menuItem->__get('menuItemName')) continue;
+					$this->disabledPageIDs[] = $pageID;
+					break;
+				}
 			}
 			$this->getNestedPages($pageArray[1]);
 		}
