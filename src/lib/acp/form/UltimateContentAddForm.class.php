@@ -118,18 +118,6 @@ class UltimateContentAddForm extends MessageForm {
 	public $categories = array();
 	
 	/**
-	 * Contains all tags.
-	 * @var \wcf\data\tag\Tag[]
-	 */
-	public $availableTags = array();
-	
-	/**
-	 * Contains all chosen tags.
-	 * @var string
-	 */
-	public $tags = '';
-	
-	/**
 	 * Contains the i18n tags.
 	 * @var string[]|array[]
 	 */
@@ -405,8 +393,6 @@ class UltimateContentAddForm extends MessageForm {
 			'categoryIDs' => $this->categoryIDs,
 			'categories' => $this->categories,
 			'languageID' => ($this->languageID ? $this->languageID : 0),
-			'availableTags' => $this->availableTags,
-			'tags' => $this->tags,
 			'tagsI18n' => $this->tagsI18n,
 			'groups' => $this->groups,
 			'groupIDs' => $this->groupIDs,

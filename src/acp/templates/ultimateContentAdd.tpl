@@ -93,7 +93,11 @@
 			{* WCF Tagging *}
 			<!--<div id="tagContainerContainer">-->
 			{foreach from=$availableLanguages key=languageID item=languageName}
-				{include file='tagInput' application='ultimate' tags=$availableTags[$languageID] languageID=$languageID tagInputSuffix=$languageID}
+				{if $action == 'add'}
+					{include file='tagInput' application='ultimate' languageID=$languageID tagInputSuffix=$languageID}
+				{else}
+					{include file='tagInput' application='ultimate' tags=$tagsI18n[$languageID] languageID=$languageID tagInputSuffix=$languageID}
+				{/if}
 			{/foreach}
 			<dl id="tagContainerReal" class="jsOnly">
 				<dd>

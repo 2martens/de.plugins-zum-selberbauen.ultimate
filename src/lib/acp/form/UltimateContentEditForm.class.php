@@ -118,7 +118,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		/* @var $tag \wcf\data\tag\TagCloudTag */
 		foreach ($languages as $languageID => $language) {
 			// group tags by language
-			$this->availableTags[$languageID] = TagEngine::getInstance()->getObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->content->__get('contentID'), array($languageID));	
+			$this->tagsI18n[$languageID] = TagEngine::getInstance()->getObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->content->__get('contentID'), array($languageID));	
 		}
 		
 		// get status data
