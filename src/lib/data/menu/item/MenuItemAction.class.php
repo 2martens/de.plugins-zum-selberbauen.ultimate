@@ -35,6 +35,7 @@ use ultimate\system\cache\builder\PageCacheBuilder;
 use ultimate\system\menu\item\MenuItemHandler;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\ISortableAction;
+use wcf\data\IToggleAction;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\SystemException;
 use wcf\system\language\I18nHandler;
@@ -51,7 +52,7 @@ use wcf\util\StringUtil;
  * @subpackage	data.menu.item
  * @category	Ultimate CMS
  */
-class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAction {
+class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAction, IToggleAction {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$className
 	 */
