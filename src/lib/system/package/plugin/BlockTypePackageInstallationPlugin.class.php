@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\package\plugin;
+use ultimate\system\cache\builder\BlockTypeCacheBuilder;
 use wcf\system\exception\SystemException;
 use wcf\system\package\plugin\AbstractXMLPackageInstallationPlugin;
 
@@ -122,9 +123,19 @@ class BlockTypePackageInstallationPlugin extends AbstractXMLPackageInstallationP
 		$statement = WCF::getDB()->prepareStatement($sql);
 		foreach ($items as $item) {
 			$statement->execute(array(
-				$item['attributes']['name'],
+				$item['elements']['blocktypename'],
 				$this->installation->getPackageID()
 			));
 		}
+	}
+	
+	/**
+	 * @see	wcf\system\package\plugin\IPackageInstallationPlugin::uninstall()
+	 */
+	public function uninstall() {
+		parent::uninstall();
+	
+		// clear cache immediately
+		BlockTypeCacheBuilder::getInstance()->reset();
 	}
 }
