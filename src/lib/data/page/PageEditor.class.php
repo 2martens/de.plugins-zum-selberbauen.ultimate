@@ -34,6 +34,7 @@ use ultimate\system\layout\LayoutHandler;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 use wcf\system\clipboard\ClipboardHandler;
+use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -90,7 +91,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		// delete meta data
 		$conditionBuilder = new PreparedStatementConditionBuilder();
 		$conditionBuilder->add('objectID IN (?)', array($objectIDs));
-		$conditionBuilder->add('objectType = ?', 'page');
+		$conditionBuilder->add('objectType = ?', array('page'));
 		$sql = 'DELETE FROM ultimate'.WCF_N.'_meta
 			    '.$conditionBuilder->__toString();
 		$statement = WCF::getDB()->prepareStatement($sql);
@@ -185,7 +186,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		        VALUES (?, ?, ?, ?)';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array(
-			$this->object->__get('categoryID'),
+			$this->object->__get('pageID'),
 			'page',
 			$metaDescription,
 			$metaKeywords
