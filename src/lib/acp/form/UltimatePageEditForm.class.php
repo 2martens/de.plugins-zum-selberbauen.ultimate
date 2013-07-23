@@ -149,7 +149,7 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 			$this->pageSlug = $this->page->__get('pageSlug');
 			$this->pageParent = $this->page->__get('pageParent');
 			$this->lastModified = $this->page->__get('lastModified');
-			$metaData = $this->category->__get('metaData');
+			$metaData = $this->page->__get('metaData');
 			$this->metaDescription = $metaData['metaDescription'];
 			$this->metaKeywords = $metaData['metaKeywords'];
 			
