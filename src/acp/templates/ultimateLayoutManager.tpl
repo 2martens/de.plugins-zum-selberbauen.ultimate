@@ -1,4 +1,5 @@
-{include file='header'}
+{capture assign='pageTitle'}{lang}wcf.acp.ultimate.layoutManager{/lang}{/capture}
+{include file='header' application='ultimate'}
 
 <script type="text/javascript">
 	/* <![CDATA[ */
@@ -9,9 +10,7 @@
 </script>
 
 <header class="boxHeadline">
-	<hgroup>
-		<h1>{lang}wcf.acp.ultimate.layoutManager{/lang}</h1>
-	</hgroup>
+	<h1>{lang}wcf.acp.ultimate.layoutManager{/lang}</h1>
 </header>
 
 {if $errorField}

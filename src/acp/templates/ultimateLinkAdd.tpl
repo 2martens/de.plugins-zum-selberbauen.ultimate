@@ -1,4 +1,5 @@
-{include file='header'}
+{capture assign='pageTitle'}{lang}wcf.acp.ultimate.link.{@$action}{/lang}{/capture}
+{include file='header' application='ultimate'}
 
 <script type="text/javascript">
 	/* <![CDATA[ */
@@ -10,9 +11,7 @@
 {include file='multipleLanguageInputJavascript' elementIdentifier='linkName' forceSelection=false}
 {include file='multipleLanguageInputJavascript' elementIdentifier='linkDescription' forceSelection=false}
 <header class="boxHeadline">
-	<hgroup>
-		<h1>{lang}wcf.acp.ultimate.link.{@$action}{/lang}</h1>
-	</hgroup>
+	<h1>{lang}wcf.acp.ultimate.link.{@$action}{/lang}</h1>
 </header>
 
 {if $errorField}

@@ -1,4 +1,5 @@
-{include file='header'}
+{capture assign='pageTitle'}{lang}wcf.acp.ultimate.content.list{/lang}{/capture}
+{include file='header' application='ultimate'}
 
 <script type="text/javascript">
 	//<![CDATA[
@@ -21,9 +22,7 @@
 </script>
 
 <header class="boxHeadline">
-	<hgroup>
-		<h1>{lang}wcf.acp.ultimate.content.list{/lang}</h1>
-	</hgroup>
+	<h1>{lang}wcf.acp.ultimate.content.list{/lang}</h1>
 </header>
 
 {assign var=encodedURL value=$url|rawurlencode}

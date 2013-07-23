@@ -1,4 +1,5 @@
-{include file='header'}
+{capture assign='pageTitle'}{@$objectType->getProcessor()->getLanguageVariable('list')}{/capture}
+{include file='header' application='ultimate'}
 
 {if $categoryNodeList|count}
 	<script type="text/javascript">
@@ -68,9 +69,7 @@
 {/if}
 
 <header class="box48 boxHeadline">
-	<hgroup>
-		<h1>{@$objectType->getProcessor()->getLanguageVariable('list')}</h1>
-	</hgroup>
+	<h1>{@$objectType->getProcessor()->getLanguageVariable('list')}</h1>
 </header>
 
 {hascontent}

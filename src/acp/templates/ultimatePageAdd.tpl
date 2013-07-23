@@ -1,5 +1,5 @@
 {capture assign='pageTitle'}{lang}wcf.acp.ultimate.page.{@$action}{/lang}{/capture}
-{include file='header'}
+{include file='header' application='ultimate'}
 
 <script type="text/javascript">
 	/* <![CDATA[ */

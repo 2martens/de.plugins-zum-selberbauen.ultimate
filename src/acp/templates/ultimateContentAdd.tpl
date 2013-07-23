@@ -1,6 +1,5 @@
 {capture assign='pageTitle'}{lang}wcf.acp.ultimate.content.{@$action}{/lang}{/capture}
-{include file='header'}
-{include file='wysiwyg'}
+{include file='header' application='ultimate'}
 
 {include file='multipleLanguageInputJavascript' elementIdentifier='subject' forceSelection=false}
 {include file='multipleLanguageInputJavascript' elementIdentifier='description' forceSelection=false}
@@ -116,77 +115,6 @@
 			/* ]]> */
 			</script>
 			{* end WCF Tagging *}
-			
-			{*
-			<dl{if $errorField == 'tags'} class="formError"{/if}>
-				<dt><label for="tags">{lang}wcf.acp.ultimate.content.tags{/lang}</label></dt>
-				<dd>
-					<script type="text/javascript">
-					/* <![CDATA[ */
-						$(function() {
-							var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
-							var $optionValues = { {implode from=$tagsI18n key=languageID item=value}'{@$languageID}': "{$value}"{/implode} };
-							new WCF.MultipleLanguageInput('tags', true, $optionValues, $availableLanguages);
-							var $availableTags = { };
-							{foreach from=$availableLanguages key=languageID item=languageName}
-								$availableTags[{$languageID}] = [ {implode from=$availableTags[$languageID] item=tag}"{@$tag->name}"{/implode} ];
-							{/foreach}
-							function split( val ) {
-								return val.split( /,\s*/ );
-							}
-							function extractLast( term ) {
-								return split( term ).pop();
-							}
-							$('#tags').bind( "keydown", function( event ) {
-								if ( event.keyCode === $.ui.keyCode.TAB &&
-									$( this ).data( "autocomplete" ).menu.active ) {
-									event.preventDefault();
-								}
-							})
-							.autocomplete({
-								minLength: 1,
-								source: function( request, response ) {
-									// delegate back to autocomplete, but extract the last term
-									var $currentLanguageID = $('#wcf3 > .dropdownMenu > .active').data('languageID');
-									var pattern = extractLast( request.term );
-									var matcher = new RegExp('^' + $.ui.autocomplete.escapeRegex(pattern), "i");
-									var $resultingOptions = $.grep( $availableTags[$currentLanguageID], function(value) {
-										return matcher.test( value.label || value.value || value );
-									});
-									response( $resultingOptions );
-								},
-								focus: function() {
-									// prevent value inserted on focus
-									return false;
-								},
-								select: function( event, ui ) {
-									var terms = split( this.value );
-									// remove the current input
-									terms.pop();
-									// add the selected item
-									terms.push( ui.item.value );
-									// add placeholder to get the comma-and-space at the end
-									terms.push( "" );
-									this.value = terms.join( ", " );
-									return false;
-								}
-							});
-						});
-					/* ]]> */
-					</script>
-					<input type="text" name="tags" id="tags" class="long" value="{@$tags}" />
-					{if $errorField == 'tags'}
-						<small class="innerError">
-							{if $errorType == 'empty'}
-								{lang}wcf.global.form.error.empty{/lang}
-							{else}
-								{lang}wcf.acp.ultimate.content.tags.error.{@$errorType}{/lang}
-							{/if}
-						</small>
-					{/if}
-				</dd>
-			</dl>
-			*}
 			
 			<dl{if $errorField == 'text'} class="formError"{/if}>
 				<dt><label for="text">{lang}wcf.acp.ultimate.content.text{/lang}</label></dt>
@@ -312,3 +240,4 @@
 </form>
 
 {include file='footer'}
+{include file='wysiwyg'}

@@ -1,4 +1,5 @@
-{include file='header' pageTitle='wcf.acp.ultimate.menu.'|concat:$action}
+{capture assign='pageTitle'}{lang}wcf.acp.ultimate.menu.{@$action}{/lang}{/capture}
+{include file='header' application='ultimate'}
 
 <script type="text/javascript">
 	/* <![CDATA[ */
@@ -21,38 +22,6 @@
 	});
 	/* ]]> */
 </script>
-{*<script type="text/javascript">
-	/* <![CDATA[ */
-		$(function() {
-			{if $action == 'edit'}
-				{if $__wcf->session->getPermission('admin.content.ultimate.canManageMenuItems')}
-					new ULTIMATE.NestedSortable.Delete('ultimate\\data\\menu\\item\\MenuItemAction', $('.jsMenuItem'));
-				{/if}
-				{if $__wcf->session->getPermission('admin.content.ultimate.canManageMenuItems')}
-					new WCF.Action.Toggle('ultimate\\data\\menu\\item\\MenuItemAction', $('.jsMenuItem'), '> .buttons > .jsToggleButton');
-					{if $menuItemNodeList|count > 1}
-						var sortableNodes = $('.sortableNode');
-						sortableNodes.each(function(index, node) {
-							$(node).wcfIdentify();
-						});
-					{/if}
-					$('#menuItemList').find('button[data-type="submit"]').click(function(event) {
-						event.preventDefault();
-						if ($('#menuItemList').find('.jsMenuItem').length == 0) {
-							event.stopImmediatePropagation();
-						} else {
-							event.stopPropagation();
-						}
-					});
-					new WCF.Sortable.List('menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, {literal}{{/literal}maxLevels: 2{literal}}{/literal}, false);
-					
-					
-					
-				{/if}
-			{/if}
-		});
-	/* ]]> */
-</script>*}
 
 <header class="boxHeadline">
 	<h1>{lang}wcf.acp.ultimate.menu.{@$action}{/lang}</h1>

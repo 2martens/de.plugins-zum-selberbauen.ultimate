@@ -1,4 +1,5 @@
-{include file='header' pageTitle='wcf.acp.ultimate.widgetArea.'|concat:$action}
+{capture assign='pageTitle'}{lang}wcf.acp.ultimate.widgetArea.{@$action}{/lang}{/capture}
+{include file='header' application='ultimate'}
 
 <script type="text/javascript">
 	/* <![CDATA[ */
