@@ -1,57 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/eventListener.xsd">
     <import>
-        <!-- PIP listener -->
-        <eventlistener>
-        	<eventclassname>wcf\system\package\plugin\BlockTypePackageInstallationPlugin</eventclassname>
-            <eventname>install</eventname>
-            <inherit>0</inherit>
-            <listenerclassname>ultimate\system\event\listener\PIPReplacementListener</listenerclassname>
-        </eventlistener>
-         <eventlistener>
-         	<eventclassname>wcf\system\package\plugin\WidgetTypePackageInstallationPlugin</eventclassname>
-            <eventname>install</eventname>
-            <inherit>0</inherit>
-            <listenerclassname>ultimate\system\event\listener\PIPReplacementListener</listenerclassname>
-        </eventlistener>
-        <eventlistener>
-            <eventclassname>wcf\system\package\plugin\BlockTypePackageInstallationPlugin</eventclassname>
-            <eventname>hasUninstall</eventname>
-            <inherit>0</inherit>
-            <listenerclassname>ultimate\system\event\listener\PIPReplacementListener</listenerclassname>
-        </eventlistener>
-         <eventlistener>
-            <eventclassname>wcf\system\package\plugin\WidgetTypePackageInstallationPlugin</eventclassname>
-            <eventname>hasUninstall</eventname>
-            <inherit>0</inherit>
-            <listenerclassname>ultimate\system\event\listener\PIPReplacementListener</listenerclassname>
-        </eventlistener>
-        <eventlistener>
-            <eventclassname>wcf\system\package\plugin\BlockTypePackageInstallationPlugin</eventclassname>
-            <eventname>uninstall</eventname>
-            <inherit>0</inherit>
-            <listenerclassname>ultimate\system\event\listener\PIPReplacementListener</listenerclassname>
-        </eventlistener>
-         <eventlistener>
-            <eventclassname>wcf\system\package\plugin\WidgetTypePackageInstallationPlugin</eventclassname>
-            <eventname>uninstall</eventname>
-            <inherit>0</inherit>
-            <listenerclassname>ultimate\system\event\listener\PIPReplacementListener</listenerclassname>
-        </eventlistener>
-        <eventlistener>
-            <eventclassname>wcf\system\package\plugin\BlockTypePackageInstallationPlugin</eventclassname>
-            <eventname>findExistingItem</eventname>
-            <inherit>0</inherit>
-            <listenerclassname>ultimate\system\event\listener\PIPReplacementListener</listenerclassname>
-        </eventlistener>
-         <eventlistener>
-            <eventclassname>wcf\system\package\plugin\WidgetTypePackageInstallationPlugin</eventclassname>
-            <eventname>findExistingItem</eventname>
-            <inherit>0</inherit>
-            <listenerclassname>ultimate\system\event\listener\PIPReplacementListener</listenerclassname>
-        </eventlistener>
-        <!-- /PIP listener -->
-        
         <!-- ACPFirstTime listener -->
         <eventlistener>
             <eventclassname>wcf\acp\page\PackageListPage</eventclassname>

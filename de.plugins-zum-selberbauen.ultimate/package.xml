@@ -42,6 +42,7 @@
 		
 		<!-- xml -->
 		<instruction type="eventListener">eventListener.xml</instruction>
+        <instruction type="packageInstallationPlugin">packageInstallationPlugin.xml</instruction>
 		<instruction type="objectType">objectType.xml</instruction>
 		<instruction type="clipboardAction">clipboardAction.xml</instruction>
 		<instruction type="coreObject">coreObject.xml</instruction>
