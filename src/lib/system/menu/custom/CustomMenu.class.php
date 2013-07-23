@@ -197,7 +197,7 @@ class CustomMenu extends TreeMenu {
 					// then the name of the menu item equals the one of the page
 					if ($page->__get('pageTitle') != $menuItem->__get('menuItemName')) continue;
 					
-					$visbility = $page->__get('visibility');
+					$visibility = $page->__get('visibility');
 					if ($visibility == 'public') {
 						$hasPermission = true;
 						continue;
