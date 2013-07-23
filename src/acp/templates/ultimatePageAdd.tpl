@@ -10,9 +10,7 @@
 </script>
 
 <header class="boxHeadline">
-	<hgroup>
-		<h1>{lang}wcf.acp.ultimate.page.{@$action}{/lang}</h1>
-	</hgroup>
+	<h1>{lang}wcf.acp.ultimate.page.{@$action}{/lang}</h1>
 </header>
 
 {if $errorField}
@@ -176,30 +174,12 @@
 			<dl{if $errorField == 'publishDate'} class="formError"{/if}>
 				<dt><label for="publishDate">{lang}wcf.acp.ultimate.publishDate{/lang}</label></dt>
 				<dd>
-					<input type="hidden" id="publishDateInputHidden" name="publishDate" value="{@$publishDate}" />
-					<input type="text" id="publishDateInput" value="{@$publishDate}" readonly="readonly" class="medium" required="required" />
+					<input type="datetime" id="publishDateInput" name="publishDate" value="{@$publishDate}" readonly="readonly" class="medium" />
 					<script type="text/javascript">
 					/* <![CDATA[*/
 					$(function() {
-						$.timepicker.setDefaults( $.timepicker.regional[ "{if $__wcf->getLanguage()->languageCode == 'en'}en-GB{else}{@$__wcf->getLanguage()->languageCode}{/if}" ] );
-						$.datepicker.setDefaults( $.datepicker.regional[ "{if $__wcf->getLanguage()->languageCode == 'en'}en-GB{else}{@$__wcf->getLanguage()->languageCode}{/if}" ] );
-						$('#publishDateInput').datetimepicker( {
-							altField: '#publishDateInputHidden',
-							altFormat: 'yy-mm-dd',
-							altFieldTimeOnly: false,
-							changeMonth: true,
-							changeYear: true,
-							dayNames: WCF.Language.get('__days'),
-							dayNamesMin: WCF.Language.get('__daysShort'),
-							dayNamesShort: WCF.Language.get('__daysShort'),
-							monthNames: WCF.Language.get('__months'),
-							monthNamesShort: WCF.Language.get('__monthsShort'),
-							showOtherMonths: true,
-							yearRange: '1900:2038',
-							timeFormat: 'HH:mm'
-						} );
+						//ULTIMATE.Date.Picker.init();
 						new ULTIMATE.Button.Replacement('publishButton', 'publishDateInput', 'publish');
-						
 					});
 					/* ]]> */
 					</script>
