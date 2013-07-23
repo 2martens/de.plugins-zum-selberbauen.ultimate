@@ -5,10 +5,10 @@
 	$(function() {
 		WCF.TabMenu.init();
 		{if $action == 'edit'}
-			new WCF.Action.Delete('ultimate\\data\\menu\\item\\MenuItemAction', '.sortableNode', '> .sortableNodeLabel .jsDeleteButton');
+			new ULTIMATE.NestedSortable.Delete('ultimate\\data\\menu\\item\\MenuItemAction', '.sortableNode', '> .sortableNodeLabel .jsDeleteButton');
 			new WCF.Action.Toggle('ultimate\\data\\menu\\item\\MenuItemAction', '.sortableNode', '> .sortableNodeLabel .jsToggleButton');
 			{if $menuItems|count > 1}
-				new WCF.Sortable.List('menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', undefined, { protectRoot: true }, false);
+				new WCF.Sortable.List('menuItemList', 'ultimate\\data\\menu\\item\\MenuItemAction', 0, { maxLevels: 2 }, false);
 			{/if}
 			ULTIMATE.Permission.addObject({
 				'admin.content.ultimate.canManageMenuItems': {if $__wcf->session->getPermission('admin.content.ultimate.canManageMenuItems')}true{else}false{/if}
