@@ -98,7 +98,6 @@ class UltimateStyleCompiler extends StyleCompiler {
 		$variables = $style->getVariables();
 		$individualLess = '';
 		if (isset($variables['individualLess'])) {
-			$individualLess = $variables['individualLess'];
 			unset($variables['individualLess']);
 		}
 		
