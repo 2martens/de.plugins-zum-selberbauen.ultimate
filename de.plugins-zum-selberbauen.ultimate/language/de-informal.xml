@@ -173,7 +173,7 @@
 		<!-- ultimate.general.content -->
 		<item name="wcf.acp.option.ultimate_general_content_comments_per_page"><![CDATA[Kommentare pro Seite]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_comments_per_page.description"><![CDATA[Bitte gib hier an, wie viele Kommentare pro Seite angezeigt werden sollen. Diese Einstellung ist unabhängig davon, ob die Kommentare überhaupt angezeigt werden (hängt von den Einstellungen im jeweiligen Inhaltsblock ab).]]></item>
-		<item name="wcf.acp.option.ultimate_general_content_readMoreText"><![CDATA["Weiterlesen"-Text]]></item>
+		<item name="wcf.acp.option.ultimate_general_content_readMoreText"><![CDATA['Weiterlesen'-Text]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_readMoreText.description"><![CDATA[Gib hier den Text ein, der standardmäßig hinter einem gekürzten Inhalt stehen soll. Im Template-Bearbeiten Formular kannst du für jeden Inhaltsblock diese Einstellung individuell überschreiben.]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_metaAboveContent"><![CDATA[Meta über Inhalt]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_metaAboveContent.description"><![CDATA[Gib hier die Metaangaben ein, die standardmäßig über dem Inhaltstext und unter dem Inhaltstitel angezeigt werden sollen. Im Template-Bearbeiten Formular kannst du für jeden Inhaltsblock diese Einstellung individuell überschreiben.
@@ -183,8 +183,8 @@ Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$com
 		<item name="wcf.acp.option.ultimate_general_content_metaBelowContent.description"><![CDATA[Gib hier die Metaangaben ein, die standardmäßig unter dem Inhaltstext angezeigt werden sollen. Im Template-Bearbeiten Formular kannst du für jeden Inhaltsblock diese Einstellung individuell überschreiben.
 
 Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$categories</li><li>$tags</li></ul>]]></item>
-		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength"><![CDATA["Weiterlesen"-Länge]]></item>
-		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength.description"><![CDATA[Gib hier an, nach wie vielen Zeichen standardmäßig "Weiterlesen" erscheinen soll.]]></item>
+		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength"><![CDATA['Weiterlesen'-Länge]]></item>
+		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength.description"><![CDATA[Gib hier an, nach wie vielen Zeichen standardmäßig 'Weiterlesen' erscheinen soll.]]></item>
 		<!-- /ultimate.general.content -->
 		
 		<!-- ultimate.general.template -->
@@ -251,14 +251,14 @@ Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$com
 		<item name="wcf.acp.ultimate.status.pendingReview"><![CDATA[Ausstehendes Review]]></item>
 		<item name="wcf.acp.ultimate.status.scheduled"><![CDATA[Geplant]]></item>
 		<item name="wcf.acp.ultimate.status.published"><![CDATA[Veröffentlicht]]></item>
-		<item name="wcf.acp.ultimate.status.error.notValid"><![CDATA[Der "ausgewählte" Status stand nicht zur Auswahl.]]></item>
+		<item name="wcf.acp.ultimate.status.error.notValid"><![CDATA[Der 'ausgewählte' Status stand nicht zur Auswahl.]]></item>
 		<item name="wcf.acp.ultimate.visibility"><![CDATA[Sichtbarkeit]]></item>
 		<item name="wcf.acp.ultimate.visibility.public"><![CDATA[Öffentlich]]></item>
 		<item name="wcf.acp.ultimate.visibility.protected"><![CDATA[Eingeschränkt]]></item>
 		<item name="wcf.acp.ultimate.visibility.private"><![CDATA[Privat]]></item>
-		<item name="wcf.acp.ultimate.visibility.groupIDs.error.notValid"><![CDATA[Mindestens eine der "ausgewählten" Gruppen stand nicht nur Auswahl.]]></item>
+		<item name="wcf.acp.ultimate.visibility.groupIDs.error.notValid"><![CDATA[Mindestens eine der 'ausgewählten' Gruppen stand nicht nur Auswahl.]]></item>
 		<item name="wcf.acp.ultimate.visibility.groupIDs.error.notSelected"><![CDATA[Mindestens eine Gruppe muss ausgewählt werden.]]></item>
-		<item name="wcf.acp.ultimate.visibility.error.notValid"><![CDATA[Die "ausgewählte" Sichtbarkeitsstufe stand nicht zur Auswahl.]]></item>
+		<item name="wcf.acp.ultimate.visibility.error.notValid"><![CDATA[Die 'ausgewählte' Sichtbarkeitsstufe stand nicht zur Auswahl.]]></item>
 		<item name="wcf.acp.ultimate.publishDate"><![CDATA[Veröffentlichungsdatum und -uhrzeit]]></item>
 		<item name="wcf.acp.ultimate.author"><![CDATA[Autor]]></item>
 		<item name="wcf.acp.ultimate.lastModified"><![CDATA[Zuletzt bearbeitet]]></item>
@@ -281,7 +281,7 @@ Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$com
 		<item name="wcf.acp.ultimate.category.slug.error.notUnique"><![CDATA[Der angegebene Name existiert bereits bei einer Kategorie auf gleichem Level.]]></item>
 		<item name="wcf.acp.ultimate.category.parent"><![CDATA[Übergeordnete Kategorie]]></item>
 		<item name="wcf.acp.ultimate.category.parent.none"><![CDATA[Keine]]></item>
-		<item name="wcf.acp.ultimate.category.parent.error.notValid"><![CDATA[Die "ausgewählte" Kategorie ist ungültig, da sie nicht zur Auswahl stand.]]></item>
+		<item name="wcf.acp.ultimate.category.parent.error.notValid"><![CDATA[Die 'ausgewählte' Kategorie ist ungültig, da sie nicht zur Auswahl stand.]]></item>
 		<item name="wcf.acp.ultimate.category.description"><![CDATA[Beschreibung (optional)]]></item>
 		<item name="wcf.acp.ultimate.category.description.placeholder"><![CDATA[]]></item>
 		<item name="wcf.acp.ultimate.category.general"><![CDATA[Allgemeine Daten]]></item>
@@ -309,7 +309,7 @@ Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$com
 		<item name="wcf.acp.ultimate.content.slug.placeholder"><![CDATA[a-nice-story]]></item>
 		<item name="wcf.acp.ultimate.content.slug.error.notUnique"><![CDATA[Der angegebene URL-kompatible Titel existiert bereits bei einem Inhalt.]]></item>
 		<item name="wcf.acp.ultimate.content.categories"><![CDATA[Kategorien]]></item>
-		<item name="wcf.acp.ultimate.content.categories.error.invalidIDs"><![CDATA[Mindestens eine der "ausgewählten" Kategorien stand nicht zur Auswahl.]]></item>
+		<item name="wcf.acp.ultimate.content.categories.error.invalidIDs"><![CDATA[Mindestens eine der 'ausgewählten' Kategorien stand nicht zur Auswahl.]]></item>
 		<item name="wcf.acp.ultimate.content.tags"><![CDATA[Tags]]></item>
 		<item name="wcf.acp.ultimate.content.message"><![CDATA[Nachricht]]></item>
 		<item name="wcf.acp.ultimate.content.text"><![CDATA[Text]]></item>
@@ -334,10 +334,10 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.content"><![CDATA[Inhalt]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.page"><![CDATA[Seite]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.selectLayout.none"><![CDATA[Kein Layout ausgewählt]]></item>
-		<item name="wcf.acp.ultimate.layoutManager.selectLayout.error.notValid"><![CDATA[Du hast ein Layout "ausgewählt", dass gar nicht zur Auswahl stand.]]></item>
+		<item name="wcf.acp.ultimate.layoutManager.selectLayout.error.notValid"><![CDATA[Du hast ein Layout 'ausgewählt', dass gar nicht zur Auswahl stand.]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.selectTemplate.none"><![CDATA[Bitte ein Template auswählen:]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.selectTemplate.inherit"><![CDATA[Template von übergeordneter Ebene übernehmen]]></item>
-		<item name="wcf.acp.ultimate.layoutManager.selectTemplate.error.notValid"><![CDATA[Du hast ein Template "ausgewählt", dass gar nicht zur Auswahl stand.]]></item>
+		<item name="wcf.acp.ultimate.layoutManager.selectTemplate.error.notValid"><![CDATA[Du hast ein Template 'ausgewählt', dass gar nicht zur Auswahl stand.]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.selectTemplate.error.notSelected"><![CDATA[Du hast kein Template ausgewählt für ein Layout, welches ein Template benötigt.]]></item>
 		<!-- /layout -->
 		
@@ -357,7 +357,7 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.link.url.error.notValid"><![CDATA[Du hast einen ungültigen Link angegeben.]]></item>
 		<item name="wcf.acp.ultimate.link.url.error.notUnique"><![CDATA[Der angegebene URL existiert bereits bei einem anderen Link.]]></item>
 		<item name="wcf.acp.ultimate.link.categories"><![CDATA[Kategorien]]></item>
-		<item name="wcf.acp.ultimate.link.categories.error.notValid"><![CDATA[Mindestens eine der "ausgewählten" Kategorien stand nicht zur Auswahl.]]></item>
+		<item name="wcf.acp.ultimate.link.categories.error.notValid"><![CDATA[Mindestens eine der 'ausgewählten' Kategorien stand nicht zur Auswahl.]]></item>
 		<item name="wcf.acp.ultimate.link.general"><![CDATA[Linkdaten]]></item>
 		<item name="wcf.acp.ultimate.link.items"><![CDATA[Linkeinträge]]></item>
 		<item name="wcf.acp.ultimate.link.list"><![CDATA[Linkliste]]></item>
@@ -374,7 +374,7 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.button.list"><![CDATA[Linkkategorieliste]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.list"><![CDATA[Linkkategorien]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.parentCategoryID"><![CDATA[Übergeordnete Kategorie]]></item>
-		<item name="wcf.acp.ultimate.linkCategory.parentCategoryID.error.invalid"><![CDATA[Die "ausgewählte" Kategorie existiert nicht.]]></item>
+		<item name="wcf.acp.ultimate.linkCategory.parentCategoryID.error.invalid"><![CDATA[Die 'ausgewählte' Kategorie existiert nicht.]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.title"><![CDATA[Name]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.isDisabled"><![CDATA[Deaktiviert]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.showOrder"><![CDATA[Position]]></item>
@@ -426,11 +426,11 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.page.slug.error.notUnique"><![CDATA[Der angegebene URL-kompatible Titel existiert bereits bei einer Seite auf gleichem Level.]]></item>
 		<item name="wcf.acp.ultimate.page.parent"><![CDATA[Übergeordnete Seite]]></item>
 		<item name="wcf.acp.ultimate.page.parent.none"><![CDATA[Keine]]></item>
-		<item name="wcf.acp.ultimate.page.parent.error.notValid"><![CDATA[Die "ausgewählte" Seite ist ungültig, da sie nicht zur Auswahl stand.]]></item>
+		<item name="wcf.acp.ultimate.page.parent.error.notValid"><![CDATA[Die 'ausgewählte' Seite ist ungültig, da sie nicht zur Auswahl stand.]]></item>
 		<item name="wcf.acp.ultimate.page.content"><![CDATA[Zugeordneter Inhalt]]></item>
 		<item name="wcf.acp.ultimate.page.content.select"><![CDATA[Bitte Inhalt auswählen]]></item>
 		<item name="wcf.acp.ultimate.page.content.error.notSelected"><![CDATA[Du musst einen Inhalt auswählen.]]></item>
-		<item name="wcf.acp.ultimate.page.content.error.notValid"><![CDATA[Der "ausgewählte" Inhalt stand nicht nur Auswahl.]]></item>
+		<item name="wcf.acp.ultimate.page.content.error.notValid"><![CDATA[Der 'ausgewählte' Inhalt stand nicht nur Auswahl.]]></item>
 		<item name="wcf.acp.ultimate.page.visibility.description"><![CDATA[Bitte gib hier die Sichtbarkeit der Seite an. Öffentlich bedeutet, dass jeder Besucher die Seite sehen kann. Eingeschränkt bedeutet, dass nur ausgewählte Gruppen deine Seite sehen können. Privat bedeutet, dass nur du die Seite sehen kannst.]]></item>
 		
 		<item name="wcf.acp.ultimate.page.general"><![CDATA[Allgemeine Daten]]></item>
@@ -455,7 +455,7 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.template.widgetAreaSide"><![CDATA[Seite des Widgetbereichs]]></item>
 		<item name="wcf.acp.ultimate.template.widgetAreaSide.left"><![CDATA[links]]></item>
 		<item name="wcf.acp.ultimate.template.widgetAreaSide.right"><![CDATA[rechts]]></item>
-		<item name="wcf.acp.ultimate.template.widgetAreaSide.error.notValid"><![CDATA[Die "ausgewählte" Seite stand nicht zur Auswahl.]]></item>
+		<item name="wcf.acp.ultimate.template.widgetAreaSide.error.notValid"><![CDATA[Die 'ausgewählte' Seite stand nicht zur Auswahl.]]></item>
 		<item name="wcf.acp.ultimate.template.selectBlocktype"><![CDATA[Blocktyp auswählen]]></item>
 		<item name="wcf.acp.ultimate.template.selectBlocktype.none"><![CDATA[Keinen Blocktyp ausgewählt]]></item>
 		<item name="wcf.acp.ultimate.template.height"><![CDATA[Höhe]]></item>
@@ -463,10 +463,10 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.template.addToTemplate"><![CDATA[Zu Template hinzufügen]]></item>
 		<item name="wcf.acp.ultimate.template.selectWidgetArea"><![CDATA[Widgetkonfiguration auswählen]]></item>
 		<item name="wcf.acp.ultimate.template.selectWidgetArea.default"><![CDATA[Standard-Dashboard Konfiguration]]></item>
-		<item name="wcf.acp.ultimate.template.selectWidgetArea.error.notValid"><![CDATA[Die "ausgewählte" Konfiguration stand nicht nur Auswahl.]]></item>
+		<item name="wcf.acp.ultimate.template.selectWidgetArea.error.notValid"><![CDATA[Die 'ausgewählte' Konfiguration stand nicht nur Auswahl.]]></item>
 		<item name="wcf.acp.ultimate.template.selectMenu"><![CDATA[Menü auswählen]]></item>
 		<item name="wcf.acp.ultimate.template.selectMenu.default"><![CDATA[Standard-WCF-Menü]]></item>
-		<item name="wcf.acp.ultimate.template.selectMenu.error.notValid"><![CDATA[Das "ausgewählte" Menü stand nicht zur Auswahl.]]></item>
+		<item name="wcf.acp.ultimate.template.selectMenu.error.notValid"><![CDATA[Das 'ausgewählte' Menü stand nicht zur Auswahl.]]></item>
 		<item name="wcf.acp.ultimate.template.dialog.additionalOptions"><![CDATA[Erweiterte Optionen]]></item>
 		
 		<item name="wcf.acp.ultimate.template.list"><![CDATA[Templateliste]]></item>
@@ -512,14 +512,16 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<!-- /query sub tab -->
 		
 		<!-- display sub tab -->
-		<item name="wcf.acp.ultimate.template.contentTab.display.readMoreText"><![CDATA["Weiterlesen"-Text]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.display.readMoreText.description"><![CDATA[Wenn ein automatisch oder durch den "Weiterlesen"-BBCode gekürzter Inhalt dargestellt wird, wird dieser Text an das Ende gehängt.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.readMoreText"><![CDATA['Weiterlesen'-Text]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.readMoreText.description"><![CDATA[Wenn ein automatisch oder durch den 'Weiterlesen'-BBCode gekürzter Inhalt dargestellt wird, 
+
+wird dieser Text an das Ende gehängt.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.showTitles"><![CDATA[Titel anzeigen]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.showTitles.description"><![CDATA[Gibt an, ob der/die Titel des/der angezeigten Inhalte(s) dargestellt wird/werden.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay"><![CDATA[Anzeige des Inhaltskörpers]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.description"><![CDATA[Der Inhaltskörper ist der eigentliche Körper des Inhalts. Das ist das, was du beim Erstellen eines Inhalts in den Editor eingibst. Wählst du 'Standard', dann wird anhand der 'Anzahl an bevorzugten Inhalten' und der Seite, die aufgerufen wird, bestimmt, ob Inhalte komplett oder nur in Auszügen dargestellt werden.
 
-<strong>Tipp:</strong> Setze die Einstellung auf 'Inhaltskörper verstecken', um eine reine Liste von Inhalten zu erzeugen.]]></item>
+Tipp: Setze die Einstellung auf 'Inhaltskörper verstecken', um eine reine Liste von Inhalten zu erzeugen.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.default"><![CDATA[Standard]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.full"><![CDATA[vollständige Inhalte anzeigen]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.excerpt"><![CDATA[gekürzte Inhalte anzeigen]]></item>
@@ -529,12 +531,14 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility"><![CDATA[Kommentarsichtbarkeit]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility.description"><![CDATA[Standardmäßig werden Kommentare nur auf einzelnen Inhaltsseiten angezeigt. Allerdings kannst du diese Option nutzen, um die Anzeige von Kommentaren z.B. auch auf Seiten (für deren Inhalte) zu erzwingen.
 
-<strong>Tipp:</strong> In Verbindung mit der Einstellung 'Inhalt anzeigen' kannst du einzigartige Templates erstellen, in denen die Inhalte in einem Block und die Kommentare in einem anderen sind.]]></item>
+Tipp: In Verbindung mit der Einstellung 'Inhalt anzeigen' kannst du einzigartige Templates erstellen, in denen die Inhalte in einem Block und die Kommentare in einem anderen sind.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility.auto"><![CDATA[Automatisch]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility.show"><![CDATA[Kommentare anzeigen]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility.hide"><![CDATA[Kommentare verstecken]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.featuredContents"><![CDATA[Anzahl an bevorzugten Inhalten]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.display.featuredContents.description"><![CDATA[Bevorzugte Inhalte sind solche, die in voller Länge angezeigt werden, solange nicht ein "Weiterlesen"-BBCode verwendet wird. Nachdem alle bevorzugten Inhalte dargestellt sind, werden die übrigen Inhalte automatisch gekürzt.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.featuredContents.description"><![CDATA[Bevorzugte Inhalte sind solche, die in voller Länge angezeigt werden, solange nicht ein 'Weiterlesen'-BBCode verwendet wird. 
+
+Nachdem alle bevorzugten Inhalte dargestellt sind, werden die übrigen Inhalte automatisch gekürzt.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.showInlineEdit"><![CDATA[InlineEdit anzeigen]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.showInlineEdit.description"><![CDATA[Gibt an, ob die InlineEdit-Funktionalität bei diesem Block gegeben sein soll.]]></item>
 		<!-- /display sub tab -->

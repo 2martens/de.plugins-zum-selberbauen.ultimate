@@ -250,14 +250,14 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
 		<item name="wcf.acp.ultimate.status.pendingReview"><![CDATA[Pending Review]]></item>
 		<item name="wcf.acp.ultimate.status.scheduled"><![CDATA[Scheduled]]></item>
 		<item name="wcf.acp.ultimate.status.published"><![CDATA[Published]]></item>
-		<item name="wcf.acp.ultimate.status.error.notValid"><![CDATA[The "selected" status is invalid, because you couldn't select it.]]></item>
+		<item name="wcf.acp.ultimate.status.error.notValid"><![CDATA[The 'selected' status is invalid, because you couldn't select it.]]></item>
 		<item name="wcf.acp.ultimate.visibility"><![CDATA[Visibility]]></item>
 		<item name="wcf.acp.ultimate.visibility.public"><![CDATA[Public]]></item>
 		<item name="wcf.acp.ultimate.visibility.protected"><![CDATA[Protected]]></item>
 		<item name="wcf.acp.ultimate.visibility.private"><![CDATA[Private]]></item>
-		<item name="wcf.acp.ultimate.visibility.groupIDs.error.notValid"><![CDATA[At least one of the "selected" groups wasn't selectable.]]></item>
+		<item name="wcf.acp.ultimate.visibility.groupIDs.error.notValid"><![CDATA[At least one of the 'selected' groups wasn't selectable.]]></item>
 		<item name="wcf.acp.ultimate.visibility.groupIDs.error.notSelected"><![CDATA[You have to select at least one group.]]></item>
-		<item name="wcf.acp.ultimate.visibility.error.notValid"><![CDATA[The "selected" visibility wasn't selectable.]]></item>
+		<item name="wcf.acp.ultimate.visibility.error.notValid"><![CDATA[The 'selected' visibility wasn't selectable.]]></item>
 		<item name="wcf.acp.ultimate.publishDate"><![CDATA[Publish date and time]]></item>
 		<item name="wcf.acp.ultimate.author"><![CDATA[Author]]></item>
 		<item name="wcf.acp.ultimate.lastModified"><![CDATA[Last modified]]></item>
@@ -280,7 +280,7 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
 		<item name="wcf.acp.ultimate.category.slug.error.notUnique"><![CDATA[A category with the specified slug already exists with this parent.]]></item>
 		<item name="wcf.acp.ultimate.category.parent"><![CDATA[Parent]]></item>
 		<item name="wcf.acp.ultimate.category.parent.none"><![CDATA[None]]></item>
-		<item name="wcf.acp.ultimate.category.parent.error.notValid"><![CDATA[The "selected" category is invalid, because you couldn't select it.]]></item>
+		<item name="wcf.acp.ultimate.category.parent.error.notValid"><![CDATA[The 'selected' category is invalid, because you couldn't select it.]]></item>
 		<item name="wcf.acp.ultimate.category.description"><![CDATA[Description (optional)]]></item>
 		<item name="wcf.acp.ultimate.category.description.placeholder"><![CDATA[]]></item>
 		<item name="wcf.acp.ultimate.category.general"><![CDATA[Category data]]></item>
@@ -308,7 +308,7 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
 		<item name="wcf.acp.ultimate.content.slug.placeholder"><![CDATA[a-nice-story]]></item>
 		<item name="wcf.acp.ultimate.content.slug.error.notUnique"><![CDATA[A content with the specified slug already exists.]]></item>
 		<item name="wcf.acp.ultimate.content.categories"><![CDATA[Categories]]></item>
-		<item name="wcf.acp.ultimate.content.categories.error.invalidIDs"><![CDATA[At least one of the "selected" categories wasn't selectable.]]></item>
+		<item name="wcf.acp.ultimate.content.categories.error.invalidIDs"><![CDATA[At least one of the 'selected' categories wasn't selectable.]]></item>
 		<item name="wcf.acp.ultimate.content.tags"><![CDATA[Tags]]></item>
 		<item name="wcf.acp.ultimate.content.message"><![CDATA[Content Message]]></item>
 		<item name="wcf.acp.ultimate.content.text"><![CDATA[Text]]></item>
@@ -334,10 +334,10 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.content"><![CDATA[Content]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.page"><![CDATA[Page]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.selectLayout.none"><![CDATA[No layout selected]]></item>
-		<item name="wcf.acp.ultimate.layoutManager.selectLayout.error.notValid"><![CDATA[You have "selected" a layout which wasn't selectable.]]></item>
+		<item name="wcf.acp.ultimate.layoutManager.selectLayout.error.notValid"><![CDATA[You have 'selected' a layout which wasn't selectable.]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.selectTemplate.none"><![CDATA[Please select a template:]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.selectTemplate.inherit"><![CDATA[Use template from upper level]]></item>
-		<item name="wcf.acp.ultimate.layoutManager.selectTemplate.error.notValid"><![CDATA[You have "selected" a template which wasn't selectable.]]></item>
+		<item name="wcf.acp.ultimate.layoutManager.selectTemplate.error.notValid"><![CDATA[You have 'selected' a template which wasn't selectable.]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.selectTemplate.error.notSelected"><![CDATA[You have forgotten to select a template for a layout that requires a template.]]></item>
 		<!-- /layout -->
 		
@@ -357,7 +357,7 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.link.url.error.notValid"><![CDATA[You have inserted an illegal URL.]]></item>
 		<item name="wcf.acp.ultimate.link.url.error.notUnique"><![CDATA[A link with the specified URL already exists.]]></item>
 		<item name="wcf.acp.ultimate.link.categories"><![CDATA[Categories]]></item>
-		<item name="wcf.acp.ultimate.link.categories.error.notValid"><![CDATA[At least one of the "selected" categories wasn't selectable.]]></item>
+		<item name="wcf.acp.ultimate.link.categories.error.notValid"><![CDATA[At least one of the 'selected' categories wasn't selectable.]]></item>
 		<item name="wcf.acp.ultimate.link.general"><![CDATA[Link data]]></item>
 		<item name="wcf.acp.ultimate.link.items"><![CDATA[Link entries]]></item>
 		<item name="wcf.acp.ultimate.link.list"><![CDATA[Link list]]></item>
@@ -374,7 +374,7 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.button.list"><![CDATA[Link category list]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.list"><![CDATA[Link categories]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.parentCategoryID"><![CDATA[Parent]]></item>
-		<item name="wcf.acp.ultimate.linkCategory.parentCategoryID.error.invalid"><![CDATA[The "selected" category doesn't exist.]]></item>
+		<item name="wcf.acp.ultimate.linkCategory.parentCategoryID.error.invalid"><![CDATA[The 'selected' category doesn't exist.]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.title"><![CDATA[Name]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.isDisabled"><![CDATA[Disabled]]></item>
 		<item name="wcf.acp.ultimate.linkCategory.showOrder"><![CDATA[ShowOrder]]></item>
@@ -426,11 +426,11 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.page.slug.error.notUnique"><![CDATA[A page with the specified slug already exists with this parent.]]></item>
 		<item name="wcf.acp.ultimate.page.parent"><![CDATA[Parent]]></item>
 		<item name="wcf.acp.ultimate.page.parent.none"><![CDATA[None]]></item>
-		<item name="wcf.acp.ultimate.page.parent.error.notValid"><![CDATA[The "selected" page is invalid, because you couldn't select it.]]></item>
+		<item name="wcf.acp.ultimate.page.parent.error.notValid"><![CDATA[The 'selected' page is invalid, because you couldn't select it.]]></item>
 		<item name="wcf.acp.ultimate.page.content"><![CDATA[Content]]></item>
 		<item name="wcf.acp.ultimate.page.content.select"><![CDATA[Please select one content]]></item>
 		<item name="wcf.acp.ultimate.page.content.error.notSelected"><![CDATA[You have to select one content.]]></item>
-		<item name="wcf.acp.ultimate.page.content.error.notValid"><![CDATA[The "selected" content wasn't selectable.]]></item>
+		<item name="wcf.acp.ultimate.page.content.error.notValid"><![CDATA[The 'selected' content wasn't selectable.]]></item>
 		<item name="wcf.acp.ultimate.page.visibility.description"><![CDATA[Please select here the visibility of the page. Public means everybody can see the page. Protected means that only selected groups can see the page. Private means that only you can see the page.]]></item>
 		
 		<item name="wcf.acp.ultimate.page.general"><![CDATA[Page data]]></item>
@@ -455,7 +455,7 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.template.widgetAreaSide"><![CDATA[Widget area side]]></item>
 		<item name="wcf.acp.ultimate.template.widgetAreaSide.left"><![CDATA[left]]></item>
 		<item name="wcf.acp.ultimate.template.widgetAreaSide.right"><![CDATA[right]]></item>
-		<item name="wcf.acp.ultimate.template.widgetAreaSide.error.notValid"><![CDATA[The "selected" side side is invalid, because you couldn't select it.]]></item>
+		<item name="wcf.acp.ultimate.template.widgetAreaSide.error.notValid"><![CDATA[The 'selected' side side is invalid, because you couldn't select it.]]></item>
 		<item name="wcf.acp.ultimate.template.selectBlocktype"><![CDATA[Select block type]]></item>
 		<item name="wcf.acp.ultimate.template.selectBlocktype.none"><![CDATA[No block type selected]]></item>
 		<item name="wcf.acp.ultimate.template.height"><![CDATA[Height]]></item>
@@ -463,10 +463,10 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.template.addToTemplate"><![CDATA[Add to template]]></item>
 		<item name="wcf.acp.ultimate.template.selectWidgetArea"><![CDATA[Select widget configuration]]></item>
 		<item name="wcf.acp.ultimate.template.selectWidgetArea.default"><![CDATA[Default dashboard configuration]]></item>
-		<item name="wcf.acp.ultimate.template.selectWidgetArea.error.notValid"><![CDATA[The "selected" widget configuration is invalid, because you couldn't select it.]]></item>
+		<item name="wcf.acp.ultimate.template.selectWidgetArea.error.notValid"><![CDATA[The 'selected' widget configuration is invalid, because you couldn't select it.]]></item>
 		<item name="wcf.acp.ultimate.template.selectMenu"><![CDATA[Select menu]]></item>
 		<item name="wcf.acp.ultimate.template.selectMenu.default"><![CDATA[Default WCF menu]]></item>
-		<item name="wcf.acp.ultimate.template.selectMenu.error.notValid"><![CDATA[The "selected" menu is invalid, because you couldn't select it.]]></item>
+		<item name="wcf.acp.ultimate.template.selectMenu.error.notValid"><![CDATA[The 'selected' menu is invalid, because you couldn't select it.]]></item>
 		<item name="wcf.acp.ultimate.template.dialog.additionalOptions"><![CDATA[Additional options]]></item>
 		
 		<item name="wcf.acp.ultimate.template.list"><![CDATA[Template list]]></item>
@@ -513,13 +513,17 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		
 		<!-- display sub tab -->
 		<item name="wcf.acp.ultimate.template.contentTab.display.readMoreText"><![CDATA[Read more text]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.display.readMoreText.description"><![CDATA[If an excerpt (either automatically or by "read more"-BBCode) is displayed this text will be appended to the end of the exerpt.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.readMoreText.description"><![CDATA[If an excerpt (either automatically or by 'read more'-BBCode) is displayed, 
+
+this text will be appended to the end of the exerpt.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.showTitles"><![CDATA[Show titles]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.display.showTitles.description"><![CDATA[If checked the titles of the contents in this block will be displayed. Otherwise the titles will be hidden.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.showTitles.description"><![CDATA[If checked the titles of the contents in this block will be displayed. 
+		
+Otherwise the titles will be hidden.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay"><![CDATA[Content body display]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.description"><![CDATA[The content body is the actual body of the content. This is what you enter into the editor while creating a new content. If set to 'Default', Ultimate CMS will determine if full contents or excerpts should be displayed based off of the 'Featured contents' setting and what page is being displayed.
 
-<strong>Tip:</strong> Set this to 'Hide content bodies' to create a simple listing of contents.]]></item>
+Tip: Set this to 'Hide content bodies' to create a simple listing of contents.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.default"><![CDATA[Default]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.full"><![CDATA[Show full content]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.excerpt"><![CDATA[Show excerpts]]></item>
@@ -529,12 +533,14 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility"><![CDATA[Comments visibility]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility.description"><![CDATA[By default comments are only displayed on single content pages. But you can change this setting to display comments for the contents of single pages.
 
-<strong>Tip:</strong> You can create unique templates in connection with the 'Show content' setting by displaying the contents in one block an the comments in another.]]></item>
+Tip: You can create unique templates in connection with the 'Show content' setting by displaying the contents in one block an the comments in another.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility.auto"><![CDATA[Automatic]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility.show"><![CDATA[Show comments]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility.hide"><![CDATA[Hide comments]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.featuredContents"><![CDATA[Featured contents]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.display.featuredContents.description"><![CDATA[Featured contents are displayed in full length unless a "read more"-BBCode is used. If all featured contents are displayed the remaining contents are automatically truncated.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.featuredContents.description"><![CDATA[Featured contents are displayed in full length unless a 'read more'-BBCode is used. 
+
+If all featured contents are displayed the remaining contents are automatically truncated.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.showInlineEdit"><![CDATA[Show InlineEdit]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.showInlineEdit.description"><![CDATA[If checked you can use the InlineEdit to change the content directly in the frontend.]]></item>
 		<!-- /display sub tab -->
