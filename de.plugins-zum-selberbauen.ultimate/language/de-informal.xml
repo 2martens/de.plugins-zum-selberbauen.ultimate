@@ -673,9 +673,7 @@ Nachdem alle bevorzugten Inhalte dargestellt sind, werden die übrigen Inhalte a
 	</category>
 	
 	<!-- this category is used for all multilingual block fields -->
-	<category name="ultimate.block">
-		<item name="ultimate.block.default"><![CDATA[Just a placeholder]]></item>
-	</category>
+	<category name="ultimate.block" />
 	
 	<!-- this category is used for all block types -->
 	<category name="ultimate.blocktype">
@@ -730,16 +728,10 @@ Nachdem alle bevorzugten Inhalte dargestellt sind, werden die übrigen Inhalte a
 	</category>
 	
 	<!-- this category is used for all multilingual menu fields -->
-	<category name="ultimate.menu">
-		<!-- this item is just a placeholder -->
-		<item name="ultimate.menu.item"><![CDATA[]]></item>
-	</category>
+	<category name="ultimate.menu" />
 	
 	<!-- this category is used for all multilingual page fields -->
-	<category name="ultimate.page">
-		<!-- this item is just a placeholder -->
-		<item name="ultimate.page.default"><![CDATA[Wer das hier liest ist dumm, denn dieser Eintrag wird nicht benötigt.]]></item>
-	</category>
+	<category name="ultimate.page" />
 	
 	<category name="ultimate.header">
 		<!-- page menu -->

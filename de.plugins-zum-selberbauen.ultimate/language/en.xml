@@ -675,9 +675,7 @@ If all featured contents are displayed the remaining contents are automatically 
 	</category>
 	
 	<!-- this category is used for all multilingual block fields -->
-	<category name="ultimate.block">
-		<item name="ultimate.block.default"><![CDATA[Just a placeholder]]></item>
-	</category>
+	<category name="ultimate.block" />
 	
 	<!-- this category is used for all block types -->
 	<category name="ultimate.blocktype">
@@ -732,16 +730,10 @@ If all featured contents are displayed the remaining contents are automatically 
 	</category>
 	
 	<!-- this category is used for all multilingual menu fields -->
-	<category name="ultimate.menu">
-		<!-- this item is just a placeholder -->
-		<item name="ultimate.menu.item"><![CDATA[Default]]></item>
-	</category>
+	<category name="ultimate.menu" />
 	
 	<!-- this category is used for all multilingual page fields -->
-	<category name="ultimate.page">
-		<!-- this item is just a placeholder -->
-		<item name="ultimate.page.default"><![CDATA[Whoever ready this is an idiot, because this entry is just a placeholder.]]></item>
-	</category>
+	<category name="ultimate.page" />
 	
 	<category name="ultimate.header">
 		<!-- page menu -->
