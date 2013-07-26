@@ -213,14 +213,13 @@ class UltimateContentAddForm extends MessageForm {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
-		$this->categories = CategoryCacheBuilder::getInstance()->getData(array(), 'categories');
-		unset ($this->categories[1]);
-		
 		$this->groups = UserGroupCacheBuilder::getInstance()->getData(array(), 'groups');
 		
 		// fill status options
 		$this->statusOptions[0] = WCF::getLanguage()->get('wcf.acp.ultimate.status.draft');
 		$this->statusOptions[1] = WCF::getLanguage()->get('wcf.acp.ultimate.status.pendingReview');
+		
+		parent::readData();
 		
 		// fill publishDate with default value (today)
 		/* @var $dateTime \DateTime */
@@ -230,7 +229,8 @@ class UltimateContentAddForm extends MessageForm {
 		}
 		$this->formatDate($dateTime);
 		
-		parent::readData();
+		$this->categories = CategoryCacheBuilder::getInstance()->getData(array(), 'categories');
+		unset ($this->categories[1]);
 	}
 	
 	/**
@@ -405,7 +405,7 @@ class UltimateContentAddForm extends MessageForm {
 	}
 	
 	/**
-	 * Formats the date.
+	 * Formats the date and saves it into object variables.
 	 * 
 	 * @param	\DateTime	$dateTime	optional
 	 */

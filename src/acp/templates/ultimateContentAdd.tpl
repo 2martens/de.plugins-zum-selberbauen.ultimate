@@ -231,10 +231,6 @@
 		<input type="submit" name="publish" id="publishButton" value="{if $publishButtonLang|isset}{@$publishButtonLang}{else}{lang}ultimate.button.publish{/lang}{/if}" accesskey="s" />
 		{@SID_INPUT_TAG}
 		<input type="hidden" name="action" value="{@$action}" />
-		<input type="hidden" name="parseURL" value="1" />
-		<input type="hidden" name="enableSmilies" value="1" />
-		<input type="hidden" name="enableHtml" value="0" />
-		<input type="hidden" name="enableBBCodes" value="1" />
 		{if $contentID|isset}<input type="hidden" name="id" value="{@$contentID}" />{/if}
 	</div>
 </form>

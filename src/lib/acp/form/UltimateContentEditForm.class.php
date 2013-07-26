@@ -111,16 +111,6 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
-		// get languages
-		$languages = WCF::getLanguage()->getLanguages();
-		
-		/* @var $language \wcf\data\language\Language */
-		/* @var $tag \wcf\data\tag\TagCloudTag */
-		foreach ($languages as $languageID => $language) {
-			// group tags by language
-			$this->tagsI18n[$languageID] = TagEngine::getInstance()->getObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->content->__get('contentID'), array($languageID));	
-		}
-		
 		// get status data
 		$this->statusID = $this->content->__get('status');
 		
@@ -142,6 +132,22 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 			3 => ''
 		);
 		$this->saveButtonLang = $saveButtonLangArray[$this->statusID];
+		
+		parent::readData();
+		
+		// get languages
+		$languages = WCF::getLanguage()->getLanguages();
+		
+		/* @var $language \wcf\data\language\Language */
+		/* @var $tag \wcf\data\tag\TagCloudTag */
+		foreach ($languages as $languageID => $language) {
+			// group tags by language
+			$this->tagsI18n[$languageID] = TagEngine::getInstance()->getObjectTags(
+				'de.plugins-zum-selberbauen.ultimate.contentTaggable', 
+				$this->content->__get('contentID'), 
+				array($languageID)
+			);
+		}
 		
 		// get visibility data
 		$this->visibility = $this->content->__get('visibility');
@@ -165,7 +171,10 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		I18nHandler::getInstance()->setOptions('text', PACKAGE_ID, $this->text, 'ultimate.content.\d+.contentText');
 		I18nHandler::getInstance()->setOptions('tags', PACKAGE_ID, '', 'ultimate.content.\d+.contentTags');
 		
-		parent::readData();
+		// read editor permissions
+		$this->enableBBCodes = $this->content->__get('enableBBCodes');
+		$this->enableHtml = $this->content->__get('enableHtml');
+		$this->enableSmilies = $this->content->__get('enableSmilies');
 	}
 	
 	/**
@@ -195,7 +204,6 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 			I18nHandler::getInstance()->remove($text, PACKAGE_ID);
 		} else {
 			$this->text = $text;
-// 			I18nHandler::getInstance()->save('text', $this->text, 'ultimate.content', PACKAGE_ID);
 			// parse URLs
 			if ($this->preParse) {
 				$textValues = I18nHandler::getInstance()->getValues('text');
@@ -203,24 +211,6 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 					$textValues[$languageID] = PreParser::getInstance()->parse($text);
 				}
 				I18nHandler::getInstance()->setValues('text', $textValues);
-				
-				// nasty workaround, because you can't change the values of I18nHandler before save
-// 				$sql = 'UPDATE wcf'.WCF_N.'_language_item
-// 						SET	languageItemValue = ?
-// 						WHERE  languageID		= ?
-// 						AND	languageItem	  = ?
-// 						AND	packageID		 = ?';
-// 				$statement = WCF::getDB()->prepareStatement($sql);
-// 				WCF::getDB()->beginTransaction();
-// 				foreach ($textValues as $languageID => $text) {
-// 					$statement->executeUnbuffered(array(
-// 						$text,
-// 						$languageID,
-// 						'ultimate.content.'.$this->contentID.'.contentText',
-// 						PACKAGE_ID
-// 					));
-// 				}
-// 				WCF::getDB()->commitTransaction();
 			}
 			I18nHandler::getInstance()->save('text', $this->text, 'ultimate.content', PACKAGE_ID);
 		}
