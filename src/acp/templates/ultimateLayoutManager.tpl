@@ -24,7 +24,7 @@
 <div class="contentNavigation">
 	<nav>
 		<ul>
-			{event name='largeButtons'}
+			{event name='contentNavigationButtons'}
 		</ul>
 	</nav>
 </div>

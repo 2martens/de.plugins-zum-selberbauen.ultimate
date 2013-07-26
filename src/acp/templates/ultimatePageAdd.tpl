@@ -26,7 +26,7 @@
 		<ul>
 			<li><a href="{link application='ultimate' controller='UltimatePageList'}{/link}" title="{lang}wcf.acp.menu.link.ultimate.page.list{/lang}" class="button"><span class="icon icon24 icon-list"></span> <span>{lang}wcf.acp.menu.link.ultimate.page.list{/lang}</span></a></li>
 			
-			{event name='largeButtons'}
+			{event name='contentNavigationButtons'}
 		</ul>
 	</nav>
 </div>
