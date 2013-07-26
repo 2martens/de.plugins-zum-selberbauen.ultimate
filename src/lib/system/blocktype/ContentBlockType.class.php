@@ -232,7 +232,7 @@ class ContentBlockType extends AbstractBlockType {
 		I18nHandler::getInstance()->setOptions('metaBelowContent_'.$this->blockID, PACKAGE_ID, $metaBelowContent, ($useDefaultMetaBelowContent ? 'wcf.acp.option.option.\d' : 'ultimate.block.content.\d+.metaBelowContent'));
 		
 		// check if content is attached to page
-		if ($this->requestType == 'category') {
+		if ($this->requestType == 'category' || $this->requestType == 'index') {
 			$remainingContents = array();
 			foreach ($this->contents as $contentID => $content) {
 				$this->cacheBuilderClassName = '\ultimate\system\cache\builder\ContentPageCacheBuilder';
