@@ -29,6 +29,16 @@
 {assign var=encodedAction value=$action|rawurlencode}
 <div class="contentNavigation">
 	{pages print=true assign=pagesLinks application='ultimate' controller="UltimateTemplateList" link="pageNo=%d&action=$encodedAction&sortField=$sortField&sortOrder=$sortOrder"}
+	
+	<nav>
+		<ul>
+			{if $__wcf->session->getPermission('admin.content.ultimate.canManageTemplates')}
+				<li><a href="{link application='ultimate' controller='UltimateTemplateAdd'}{/link}" title="{lang}wcf.acp.ultimate.template.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.template.add{/lang}</span></a></li>
+			{/if}
+			
+			{event name='contentNavigationButtons'}
+		</ul>
+	</nav>
 </div>
 
 {hascontent}
@@ -85,6 +95,16 @@
 	{@$pagesLinks}
 		
 	<div class="clipboardEditor jsClipboardEditor" data-types="[ 'de.plugins-zum-selberbauen.ultimate.template' ]"></div>
+	
+	<nav>
+		<ul>
+			{if $__wcf->session->getPermission('admin.content.ultimate.canManageTemplates')}
+				<li><a href="{link application='ultimate' controller='UltimateTemplateAdd'}{/link}" title="{lang}wcf.acp.ultimate.template.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.template.add{/lang}</span></a></li>
+			{/if}
+			
+			{event name='contentNavigationButtons'}
+		</ul>
+	</nav>
 </div>
 </div>
 

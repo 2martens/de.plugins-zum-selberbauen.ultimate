@@ -29,6 +29,16 @@
 {assign var=encodedAction value=$action|rawurlencode}
 <div class="contentNavigation">
 	{pages print=true assign=pagesLinks application='ultimate' controller="UltimateWidgetAreaList" link="pageNo=%d&action=$encodedAction&sortField=$sortField&sortOrder=$sortOrder"}
+	
+	<nav>
+		<ul>
+			{if $__wcf->session->getPermission('admin.content.ultimate.canManageWidgetAreas')}
+				<li><a href="{link application='ultimate' controller='UltimateWidgetAreaAdd'}{/link}" title="{lang}wcf.acp.ultimate.widgetArea.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.widgetArea.add{/lang}</span></a></li>
+			{/if}
+			
+			{event name='contentNavigationButtons'}
+		</ul>
+	</nav>
 </div>
 
 {hascontent}
@@ -85,6 +95,16 @@
 	{@$pagesLinks}
 		
 	<div class="clipboardEditor jsClipboardEditor" data-types="[ 'de.plugins-zum-selberbauen.ultimate.widgetArea' ]"></div>
+	
+	<nav>
+		<ul>
+			{if $__wcf->session->getPermission('admin.content.ultimate.canManageWidgetAreas')}
+				<li><a href="{link application='ultimate' controller='UltimateWidgetAreaAdd'}{/link}" title="{lang}wcf.acp.ultimate.widgetArea.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.widgetArea.add{/lang}</span></a></li>
+			{/if}
+			
+			{event name='contentNavigationButtons'}
+		</ul>
+	</nav>
 </div>
 </div>
 

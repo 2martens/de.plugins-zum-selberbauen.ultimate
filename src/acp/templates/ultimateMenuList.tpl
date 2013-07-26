@@ -36,7 +36,7 @@
 				<li><a href="{link application='ultimate' controller='UltimateMenuAdd'}{/link}" title="{lang}wcf.acp.ultimate.menu.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.menu.add{/lang}</span></a></li>
 			{/if}
 			
-			{event name='largeButtons'}
+			{event name='contentNavigationButtons'}
 		</ul>
 	</nav>
 </div>
@@ -101,7 +101,7 @@
 				<li><a href="{link application='ultimate' controller='UltimateMenuAdd'}{/link}" title="{lang}wcf.acp.ultimate.menu.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.menu.add{/lang}</span></a></li>
 			{/if}
 			
-			{event name='largeButtons'}
+			{event name='contentNavigationButtons'}
 		</ul>
 	</nav>
 </div>
