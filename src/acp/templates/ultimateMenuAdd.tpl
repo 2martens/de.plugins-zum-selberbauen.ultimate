@@ -45,6 +45,9 @@
 	</nav>
 </div>
 
+{if $action == 'add'}
+	<p class="info">{lang}wcf.acp.ultimate.menu.addMenuFirst{/lang}</p>
+{/if}
 <form method="post" action="{if $action == 'add'}{link application='ultimate' controller='UltimateMenuAdd'}{/link}{else}{link application='ultimate' controller='UltimateMenuEdit'}{/link}{/if}">
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
@@ -65,66 +68,64 @@
 				</dd>
 			</dl>
 		</fieldset>
-		<fieldset>
-			<legend>{lang}wcf.acp.ultimate.menu.items{/lang}</legend>
-			<div id="menuItemList" class="sortableListContainer">
-				{if $action == 'edit'}
-				<ol class="sortableList" data-object-id="0">
-					{foreach from=$menuItems item=menuItem}
-						<li class="sortableNode" data-object-name="{@$menuItem->menuItemName}" data-object-id="{@$menuItem->menuItemID}">
-							<span class="sortableNodeLabel">
-								<span>{lang}{$menuItem->menuItemName}{/lang}</span>
-								<span class="statusDisplay sortableButtonContainer">
-									{if $menuItem->canDisable()}
-										<span class="icon icon16 icon-check{if $menuItem->isDisabled}-empty{/if} jsToggleButton jsTooltip pointer" title="{lang}wcf.global.button.{if $menuItem->isDisabled}enable{else}disable{/if}{/lang}" data-object-id="{@$menuItem->menuItemID}" data-disable-message="{lang}wcf.global.button.disable{/lang}" data-enable-message="{lang}wcf.global.button.enable{/lang}"></span>
-									{else}
-										<span class="icon icon16 icon-check{if $menuItem->isDisabled}-empty{/if} disabled" title="{lang}wcf.global.button.{if $menuItem->isDisabled}enable{else}disable{/if}{/lang}"></span>
-									{/if}
-									{if $menuItem->canDelete()}
-										<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$menuItem->menuItemID}" data-confirm-message="{lang __menuItem=$menuItem}wcf.acp.pageMenu.delete.sure{/lang}"></span>
-									{else}
-										<span class="icon icon16 icon-remove disabled" title="{lang}wcf.global.button.delete{/lang}"></span>
-									{/if}
-									
-									{event name='menuItemButtons'}
+		{if $action == 'edit'}
+			<fieldset>
+				<legend>{lang}wcf.acp.ultimate.menu.items{/lang}</legend>
+				<div id="menuItemList" class="sortableListContainer">
+					<ol class="sortableList" data-object-id="0">
+						{foreach from=$menuItems item=menuItem}
+							<li class="sortableNode" data-object-name="{@$menuItem->menuItemName}" data-object-id="{@$menuItem->menuItemID}">
+								<span class="sortableNodeLabel">
+									<span>{lang}{$menuItem->menuItemName}{/lang}</span>
+									<span class="statusDisplay sortableButtonContainer">
+										{if $menuItem->canDisable()}
+											<span class="icon icon16 icon-check{if $menuItem->isDisabled}-empty{/if} jsToggleButton jsTooltip pointer" title="{lang}wcf.global.button.{if $menuItem->isDisabled}enable{else}disable{/if}{/lang}" data-object-id="{@$menuItem->menuItemID}" data-disable-message="{lang}wcf.global.button.disable{/lang}" data-enable-message="{lang}wcf.global.button.enable{/lang}"></span>
+										{else}
+											<span class="icon icon16 icon-check{if $menuItem->isDisabled}-empty{/if} disabled" title="{lang}wcf.global.button.{if $menuItem->isDisabled}enable{else}disable{/if}{/lang}"></span>
+										{/if}
+										{if $menuItem->canDelete()}
+											<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$menuItem->menuItemID}" data-confirm-message="{lang __menuItem=$menuItem}wcf.acp.pageMenu.delete.sure{/lang}"></span>
+										{else}
+											<span class="icon icon16 icon-remove disabled" title="{lang}wcf.global.button.delete{/lang}"></span>
+										{/if}
+										
+										{event name='menuItemButtons'}
+									</span>
 								</span>
-							</span>
-							<ol class="sortableList" data-object-id="{@$menuItem->menuItemID}">
-								{foreach from=$menuItem item=childMenuItem}
-									<li class="sortableNode sortableNoNesting" data-object-id="{@$childMenuItem->menuItemID}">
-										<span class="sortableNodeLabel">
-											<span>{lang}{$childMenuItem->menuItemName}{/lang}</span>
-											<span class="statusDisplay sortableButtonContainer">
-												{if $childMenuItem->canDisable()}
-													<span class="icon icon16 icon-check{if $childMenuItem->isDisabled}-empty{/if} jsToggleButton jsTooltip pointer" title="{lang}wcf.global.button.{if $childMenuItem->isDisabled}enable{else}disable{/if}{/lang}" data-object-id="{@$childMenuItem->menuItemID}" data-disable-message="{lang}wcf.global.button.disable{/lang}" data-enable-message="{lang}wcf.global.button.enable{/lang}"></span>
-												{else}
-													<span class="icon icon16 icon-check{if $childMenuItem->isDisabled}-empty{/if} disabled" title="{lang}wcf.global.button.{if $menuItem->isDisabled}enable{else}disable{/if}{/lang}"></span>
-												{/if}
-												{if $childMenuItem->canDelete()}
-														<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$childMenuItem->menuItemID}" data-confirm-message="{lang __menuItem=$childMenuItem}wcf.acp.pageMenu.delete.sure{/lang}"></span>
-												{else}
-													<span class="icon icon16 icon-remove disabled" title="{lang}wcf.global.button.delete{/lang}"></span>
-												{/if}
-												
-												{event name='subMenuItemButtons'}
+								<ol class="sortableList" data-object-id="{@$menuItem->menuItemID}">
+									{foreach from=$menuItem item=childMenuItem}
+										<li class="sortableNode sortableNoNesting" data-object-id="{@$childMenuItem->menuItemID}">
+											<span class="sortableNodeLabel">
+												<span>{lang}{$childMenuItem->menuItemName}{/lang}</span>
+												<span class="statusDisplay sortableButtonContainer">
+													{if $childMenuItem->canDisable()}
+														<span class="icon icon16 icon-check{if $childMenuItem->isDisabled}-empty{/if} jsToggleButton jsTooltip pointer" title="{lang}wcf.global.button.{if $childMenuItem->isDisabled}enable{else}disable{/if}{/lang}" data-object-id="{@$childMenuItem->menuItemID}" data-disable-message="{lang}wcf.global.button.disable{/lang}" data-enable-message="{lang}wcf.global.button.enable{/lang}"></span>
+													{else}
+														<span class="icon icon16 icon-check{if $childMenuItem->isDisabled}-empty{/if} disabled" title="{lang}wcf.global.button.{if $menuItem->isDisabled}enable{else}disable{/if}{/lang}"></span>
+													{/if}
+													{if $childMenuItem->canDelete()}
+															<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$childMenuItem->menuItemID}" data-confirm-message="{lang __menuItem=$childMenuItem}wcf.acp.pageMenu.delete.sure{/lang}"></span>
+													{else}
+														<span class="icon icon16 icon-remove disabled" title="{lang}wcf.global.button.delete{/lang}"></span>
+													{/if}
+													
+													{event name='subMenuItemButtons'}
+												</span>
 											</span>
-										</span>
-									</li>
-								{/foreach}
-							</ol>
-						</li>
-					{/foreach}
-				</ol>
-				{else}
-					<p>{lang}wcf.acp.ultimate.menu.addMenuFirst{/lang}</p>
-				{/if}
-				{if $__wcf->session->getPermission('admin.content.ultimate.canManageMenuItems')}
-					<div class="formSubmit">
-						<button class="{if $action == 'add' || $menuItems|count == 0} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
-					</div>
-				{/if}
-			</div>
-		</fieldset>
+										</li>
+									{/foreach}
+								</ol>
+							</li>
+						{/foreach}
+					</ol>
+					{if $__wcf->session->getPermission('admin.content.ultimate.canManageMenuItems')}
+						<div class="formSubmit">
+							<button class="{if $action == 'add' || $menuItems|count == 0} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
+						</div>
+					{/if}
+				</div>
+			</fieldset>
+		{/if}
 		{event name='fieldsets'}
 	</div>
 	<div class="formSubmit">
@@ -135,84 +136,86 @@
 		{if $menuID|isset}<input type="hidden" name="id" value="{@$menuID}" />{/if}
 	</div>
 </form>
-<form method="post">
-	<div id="categorySelectContainer" class="container containerPadding marginTop shadow{if $action == 'add'} disabled{/if}">
-		<fieldset>
-			<legend>{lang}wcf.acp.ultimate.menu.categories{/lang}</legend>
-			<dl>
-				{*<dt><label>{lang}wcf.acp.ultimate.menu.categories{/lang}</label></dt>*}
-				<dd>
-					{if $action == 'add'}
-						{nestedHtmlCheckboxes options=$categories name='categoryIDs' disabled='disabled'}
-					{else}
-						{nestedHtmlCheckboxes options=$categories name='categoryIDs' disabled=$disabledCategoryIDs}
-					{/if}
-					<small>
-						{lang}wcf.acp.ultimate.menu.categories.description{/lang}
-					</small>
-				</dd>
-			</dl>
-		</fieldset>
-		<div class="formSubmit">
-			<button class="button default disabled" disabled="disabled" data-type="submit">{lang}wcf.acp.ultimate.menu.addToMenu{/lang}</button>
-		</div>
-	</div>
-</form>
-<form method="post">
-	<div id="pageSelectContainer" class="container containerPadding marginTop shadow{if $action == 'add'} disabled{/if}">
-		<fieldset>
-			<legend>{lang}wcf.acp.ultimate.menu.pages{/lang}</legend>
-			<dl>
-				{*<dt><label>{lang}wcf.acp.ultimate.menu.pages{/lang}</label></dt>*}
-				<dd>
-					{if $action == 'add'}
-						{nestedHtmlCheckboxes options=$pages name='pageIDs' disabled='disabled'}
-					{else}
-						{nestedHtmlCheckboxes options=$pages name='pageIDs' disabled=$disabledPageIDs}
-					{/if}
-					<small>
-						{lang}wcf.acp.ultimate.menu.pages.description{/lang}
-					</small>
-				</dd>
-			</dl>
-		</fieldset>
-		<div class="formSubmit">
-			<button class="button default disabled" disabled="disabled" data-type="submit">{lang}wcf.acp.ultimate.menu.addToMenu{/lang}</button>
-		</div>
-	</div>
-</form>
-<form method="post">	
-	<div id="customContainer" class="container containerPadding marginTop shadow{if $action == 'add'} disabled{/if}">
-		<fieldset>
-			<legend>{lang}wcf.acp.ultimate.menu.custom{/lang}</legend>
-			<dl>
-				<dt><label for="link">{lang}wcf.acp.ultimate.menu.custom.link{/lang}</label></dt>
-				<dd>
-					<input type="url" name="link" id="link" value="http://" class="medium{if $action == 'add'} disabled" disabled="disabled{/if}" />
-				</dd>
-			</dl>
-			<dl>
-				<dt><label for="title">{lang}wcf.acp.ultimate.menu.custom.linkTitle{/lang}</label></dt>
-				<dd>
-					<script type="text/javascript">
-					//<![CDATA[
-						{if $action == 'edit'}
-						$(function() {
-							var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
-							var $optionValues = { {implode from=$i18nValues['title'] key=languageID item=value}'{@$languageID}': '{$value}'{/implode} };
-							new WCF.MultipleLanguageInput('title', false, $optionValues, $availableLanguages);
-						});
+{if $action == 'edit'}
+	<form method="post">
+		<div id="categorySelectContainer" class="container containerPadding marginTop shadow{if $action == 'add'} disabled{/if}">
+			<fieldset>
+				<legend>{lang}wcf.acp.ultimate.menu.categories{/lang}</legend>
+				<dl>
+					{*<dt><label>{lang}wcf.acp.ultimate.menu.categories{/lang}</label></dt>*}
+					<dd>
+						{if $action == 'add'}
+							{nestedHtmlCheckboxes options=$categories name='categoryIDs' disabled='disabled'}
+						{else}
+							{nestedHtmlCheckboxes options=$categories name='categoryIDs' disabled=$disabledCategoryIDs}
 						{/if}
-					//]]>
-					</script>
-					<input type="text" id="title" name="title" value="{@$i18nPlainValues['title']}" class="medium{if $action == 'add'} disabled" disabled="disabled{/if}" placeholder="{lang}wcf.acp.ultimate.menu.custom.linkTitle.placeholder{/lang}" />
-				</dd>
-			</dl>
-		</fieldset>
-		<div class="formSubmit">
-			<button class="button default{if $action == 'add'} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.acp.ultimate.menu.addToMenu{/lang}</button>
+						<small>
+							{lang}wcf.acp.ultimate.menu.categories.description{/lang}
+						</small>
+					</dd>
+				</dl>
+			</fieldset>
+			<div class="formSubmit">
+				<button class="button default disabled" disabled="disabled" data-type="submit">{lang}wcf.acp.ultimate.menu.addToMenu{/lang}</button>
+			</div>
 		</div>
-	</div>
-</form>
+	</form>
+	<form method="post">
+		<div id="pageSelectContainer" class="container containerPadding marginTop shadow{if $action == 'add'} disabled{/if}">
+			<fieldset>
+				<legend>{lang}wcf.acp.ultimate.menu.pages{/lang}</legend>
+				<dl>
+					{*<dt><label>{lang}wcf.acp.ultimate.menu.pages{/lang}</label></dt>*}
+					<dd>
+						{if $action == 'add'}
+							{nestedHtmlCheckboxes options=$pages name='pageIDs' disabled='disabled'}
+						{else}
+							{nestedHtmlCheckboxes options=$pages name='pageIDs' disabled=$disabledPageIDs}
+						{/if}
+						<small>
+							{lang}wcf.acp.ultimate.menu.pages.description{/lang}
+						</small>
+					</dd>
+				</dl>
+			</fieldset>
+			<div class="formSubmit">
+				<button class="button default disabled" disabled="disabled" data-type="submit">{lang}wcf.acp.ultimate.menu.addToMenu{/lang}</button>
+			</div>
+		</div>
+	</form>
+	<form method="post">	
+		<div id="customContainer" class="container containerPadding marginTop shadow{if $action == 'add'} disabled{/if}">
+			<fieldset>
+				<legend>{lang}wcf.acp.ultimate.menu.custom{/lang}</legend>
+				<dl>
+					<dt><label for="link">{lang}wcf.acp.ultimate.menu.custom.link{/lang}</label></dt>
+					<dd>
+						<input type="url" name="link" id="link" value="http://" class="medium{if $action == 'add'} disabled" disabled="disabled{/if}" />
+					</dd>
+				</dl>
+				<dl>
+					<dt><label for="title">{lang}wcf.acp.ultimate.menu.custom.linkTitle{/lang}</label></dt>
+					<dd>
+						<script type="text/javascript">
+						//<![CDATA[
+							{if $action == 'edit'}
+							$(function() {
+								var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
+								var $optionValues = { {implode from=$i18nValues['title'] key=languageID item=value}'{@$languageID}': '{$value}'{/implode} };
+								new WCF.MultipleLanguageInput('title', false, $optionValues, $availableLanguages);
+							});
+							{/if}
+						//]]>
+						</script>
+						<input type="text" id="title" name="title" value="{@$i18nPlainValues['title']}" class="medium{if $action == 'add'} disabled" disabled="disabled{/if}" placeholder="{lang}wcf.acp.ultimate.menu.custom.linkTitle.placeholder{/lang}" />
+					</dd>
+				</dl>
+			</fieldset>
+			<div class="formSubmit">
+				<button class="button default{if $action == 'add'} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.acp.ultimate.menu.addToMenu{/lang}</button>
+			</div>
+		</div>
+	</form>
+{/if}
 
 {include file='footer'}

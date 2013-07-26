@@ -31,6 +31,9 @@
 	</nav>
 </div>
 
+{if $action == 'add'}
+	<p class="info">{lang}wcf.acp.ultimate.widgetArea.addAreaFirst{/lang}</p>
+{/if}
 <form method="post" action="{if $action == 'add'}{link application='ultimate' controller='UltimateWidgetAreaAdd'}{/link}{else}{link application='ultimate' controller='UltimateWidgetAreaEdit'}{/link}{/if}">
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
@@ -64,71 +67,69 @@
 </form>
 
 {if $action == 'edit'}
-<p class="info">{lang}wcf.acp.dashboard.box.sort{/lang}</p>
-
-<div class="tabMenuContainer">
-	<nav class="tabMenu">
-		<ul>
-			{if $objectType->allowsidebar}
-				<li><a href="{@$__wcf->getAnchor('dashboard-sidebar')}">{lang}wcf.dashboard.boxType.sidebar{/lang}</a></li>
-			{/if}
-			
-			{event name='tabMenuTabs'}
-		</ul>
-	</nav>
+	<p class="info">{lang}wcf.acp.dashboard.box.sort{/lang}</p>
 	
-	{if $objectType->allowsidebar}
-		<div id="dashboard-sidebar" class="container containerPadding tabMenuContent hidden">
-			<fieldset>
-				<legend>{lang}wcf.dashboard.box.enabledBoxes{/lang}</legend>
+	<div class="tabMenuContainer">
+		<nav class="tabMenu">
+			<ul>
+				{if $objectType->allowsidebar}
+					<li><a href="{@$__wcf->getAnchor('dashboard-sidebar')}">{lang}wcf.dashboard.boxType.sidebar{/lang}</a></li>
+				{/if}
 				
-				<div class="container containerPadding sortableListContainer">
-					<ol class="sortableList simpleSortableList" data-object-id="0">
-						{foreach from=$enabledBoxes item=boxID}
-							{if $boxes[$boxID]->boxType == 'sidebar'}
-								<li class="sortableNode" data-object-id="{@$boxID}">
-									<span class="sortableNodeLabel">{lang}wcf.dashboard.box.{$boxes[$boxID]->boxName}{/lang}{if $boxes[$boxID]->packageID != 1} ({lang}{$boxes[$boxID]->getPackage()->packageName}{/lang}){/if}</span>
-								</li>
-							{/if}
-						{/foreach}
-					</ol>
-				</div>
-			</fieldset>
-			
-			<fieldset>
-				<legend>{lang}wcf.dashboard.box.availableBoxes{/lang}</legend>
+				{event name='tabMenuTabs'}
+			</ul>
+		</nav>
+		
+		{if $objectType->allowsidebar}
+			<div id="dashboard-sidebar" class="container containerPadding tabMenuContent hidden">
+				<fieldset>
+					<legend>{lang}wcf.dashboard.box.enabledBoxes{/lang}</legend>
+					
+					<div class="container containerPadding sortableListContainer">
+						<ol class="sortableList simpleSortableList" data-object-id="0">
+							{foreach from=$enabledBoxes item=boxID}
+								{if $boxes[$boxID]->boxType == 'sidebar'}
+									<li class="sortableNode" data-object-id="{@$boxID}">
+										<span class="sortableNodeLabel">{lang}wcf.dashboard.box.{$boxes[$boxID]->boxName}{/lang}{if $boxes[$boxID]->packageID != 1} ({lang}{$boxes[$boxID]->getPackage()->packageName}{/lang}){/if}</span>
+									</li>
+								{/if}
+							{/foreach}
+						</ol>
+					</div>
+				</fieldset>
 				
-				<div id="dashboard-sidebar-enabled" class="container containerPadding sortableListContainer">
-					<ol class="sortableList simpleSortableList">
-						{foreach from=$boxes item=box}
-							{if $box->boxType == 'sidebar' && !$box->boxID|in_array:$enabledBoxes}
-								<li class="sortableNode" data-object-id="{@$box->boxID}">
-									<span class="sortableNodeLabel">{lang}wcf.dashboard.box.{$box->boxName}{/lang}{if $box->packageID != 1} ({lang}{$box->getPackage()->packageName}{/lang}){/if}</span>
-								</li>
-							{/if}
-						{/foreach}
-					</ol>
+				<fieldset>
+					<legend>{lang}wcf.dashboard.box.availableBoxes{/lang}</legend>
+					
+					<div id="dashboard-sidebar-enabled" class="container containerPadding sortableListContainer">
+						<ol class="sortableList simpleSortableList">
+							{foreach from=$boxes item=box}
+								{if $box->boxType == 'sidebar' && !$box->boxID|in_array:$enabledBoxes}
+									<li class="sortableNode" data-object-id="{@$box->boxID}">
+										<span class="sortableNodeLabel">{lang}wcf.dashboard.box.{$box->boxName}{/lang}{if $box->packageID != 1} ({lang}{$box->getPackage()->packageName}{/lang}){/if}</span>
+									</li>
+								{/if}
+							{/foreach}
+						</ol>
+					</div>
+				</fieldset>
+				
+				<div class="formSubmit">
+					<button data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
 				</div>
-			</fieldset>
-			
-			<div class="formSubmit">
-				<button data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
+				
+				<script>
+					//<![CDATA[
+					$(function() {
+						new WCF.Sortable.List('dashboard-sidebar', 'ultimate\\data\\widget\\area\\WidgetAreaAction', 0, { }, true, { boxType: 'sidebar', widgetAreaID: {@$widgetAreaID} });
+					});
+					//]]>
+				</script>
 			</div>
-			
-			<script>
-				//<![CDATA[
-				$(function() {
-					new WCF.Sortable.List('dashboard-sidebar', 'ultimate\\data\\widget\\area\\WidgetAreaAction', 0, { }, true, { boxType: 'sidebar', widgetAreaID: {@$widgetAreaID} });
-				});
-				//]]>
-			</script>
-		</div>
-	{/if}
-	
-	{event name='tabMenuContents'}
-</div>
-{else}
-<p class="info">{lang}wcf.acp.ultimate.widgetArea.addAreaFirst{/lang}</p>
+		{/if}
+		
+		{event name='tabMenuContents'}
+	</div>
 {/if}
 
 {include file='footer'}
