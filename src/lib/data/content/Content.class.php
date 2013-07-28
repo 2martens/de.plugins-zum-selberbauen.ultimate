@@ -117,6 +117,7 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject {
 	 * @return	string
 	 */
 	public function getParsedContent() {
+		MessageParser::getInstance()->setOutputType('text/html');
 		return MessageParser::getInstance()->parse(WCF::getLanguage()->get($this->contentText), $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
 	}
 	
