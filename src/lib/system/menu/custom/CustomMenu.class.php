@@ -112,6 +112,26 @@ class CustomMenu extends TreeMenu {
 	}
 	
 	/**
+	 * Sets the active menu item.
+	 * This should be done before the menu.tpl template calls the function getMenu().
+	 *
+	 * This function should be used in each script which uses a template that includes the menu.tpl.
+	 *
+	 * @param	string		$menuItem	name of the active menu item
+	 */
+	public function setActiveMenuItem($menuItem) {
+		$newActiveMenuItems = array();
+		while (isset($this->menuItemList[$menuItem])) {
+			$newActiveMenuItems[] = $menuItem;
+			$menuItem = $this->menuItemList[$menuItem]->menuItemParent;
+			
+			if ($menuItem && !isset($this->menuItemList[$menuItem])) return false;
+		}
+		
+		if (!empty($newActiveMenuItems)) $this->activeMenuItems = $newActiveMenuItems;
+	}
+	
+	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.menu.TreeMenu.html#init
 	 */
 	protected function init() {
