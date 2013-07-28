@@ -160,7 +160,6 @@ class TemplateHandler extends SingletonFactory {
 				'sidebarCollapsed' => $sidebarCollapsed
 			));
 			
-			// TODO: the non-standard part has to be completely redesigned
 			if ($useDefaultDashboardConfig) {
 				DashboardHandler::getInstance()->loadBoxes('de.plugins-zum-selberbauen.ultimate.template', $page);
 				WCF::getTPL()->assign(array(
