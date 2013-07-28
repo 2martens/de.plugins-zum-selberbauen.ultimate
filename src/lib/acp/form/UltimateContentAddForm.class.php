@@ -72,14 +72,19 @@ class UltimateContentAddForm extends MessageForm {
 	);
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.MessageForm.html#$enableMultilangualism
-	*/
-	public $enableMultilangualism = true;
-	
-	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.content.add';
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.MessageForm.html#$enableMultilangualism
+	 */
+	public $enableMultilangualism = true;
+	
+	/**
+	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.MessageForm.html#$showSignatureSetting
+	 */
+	public $showSignatureSetting = 0;
 	
 	/**
 	 * Contains the description of the content.
