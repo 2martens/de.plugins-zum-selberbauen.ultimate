@@ -27,6 +27,7 @@
  */
 namespace ultimate\system\event\listener;
 use wcf\data\category\CategoryAction;
+use wcf\system\cache\builder\ApplicationCacheBuilder;
 use wcf\system\cache\builder\ObjectTypeCacheBuilder;
 use wcf\system\category\CategoryHandler;
 use wcf\system\event\IEventListener;
@@ -59,6 +60,17 @@ class ACPFirstTimeListener implements IEventListener {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.event.IEventListener.html#execute
 	 */
 	public function execute($eventObj, $className, $eventName) {
+		if ($className == 'wcf\acp\action\InstallPackageAction') {
+			if ($eventObj->data['progress'] == 100) {
+				$abbreviations = ApplicationCacheBuilder::getInstance()->getData(array(), 'abbreviation');
+				$appID = $abbreviations['ultimate'];
+				$applications = ApplicationCacheBuilder::getInstance()->getData(array(), 'application');
+				$application = $applications[$appID];
+				$eventObj->data['redirectLocation'] = $application->getPageURL() . 'acp/index.php/Index/' . SID_ARG_1ST;
+			}
+			return;
+		}
+		
 		// adds default link category
 		require(ULTIMATE_DIR.'acp/'.self::CONFIG_FILE);
 		if (!$initiatedDefaultLinkCategory) {
