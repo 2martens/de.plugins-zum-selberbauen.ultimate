@@ -284,7 +284,7 @@ ULTIMATE.Date.Picker = {
 			
 			// format default date
 			if ($inputValue) {
-				$input.removeClass('hasDatepicker').datetimepicker('setTime', new Date($inputValue));
+				$input.removeClass('hasDatepicker').datetimepicker('setDate', new Date($inputValue));
 			}
 			
 			// bug workaround: setDate creates the widget but unfortunately doesn't hide it...
