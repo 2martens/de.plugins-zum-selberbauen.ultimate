@@ -224,6 +224,9 @@ class ContentBlockType extends AbstractBlockType {
 		$useDefaultMetaAboveContent = (!isset($options['metaAboveContent']));
 		$useDefaultMetaBelowContent = (!isset($options['metaBelowContent']));
 		$this->options = array_replace_recursive($defaults, $options);
+		if (isset($options['categories'])) $this->options['categories'] = $options['categories'];
+		if (isset($options['authors'])) $this->options['authors'] = $options['authors'];
+		if (isset($options['contentMetaDisplay'])) $this->options['contentMetaDisplay'] = $options['contentMetaDisplay'];
 		
 		// multilingual support for readMoreText, metaAboveContent and metaBelowContent
 		$readMoreText = $this->options['readMoreText'];
