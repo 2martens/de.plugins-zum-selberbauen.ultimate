@@ -1315,7 +1315,7 @@ ULTIMATE.Menu.Item.Transfer.prototype = {
 					}
 				}, this));
 
-		if ($('#' + this._menuItemListID).find('.jsMenuItem').length <= 1) {
+		if ($('#' + this._menuItemListID).find('.sortableNode').length <= 1) {
 			$('#' + this._menuItemListID).find('button[data-type="submit"]')
 					.prop('disabled', true).addClass('disabled');
 		}
