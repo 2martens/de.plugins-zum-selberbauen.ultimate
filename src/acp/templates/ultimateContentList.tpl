@@ -6,7 +6,7 @@
 	$(function() {
 		var actionObjects = { };
 		actionObjects['de.plugins-zum-selberbauen.ultimate.content'] = { };
-		actionObjects['de.plugins-zum-selberbauen.ultimate.content']['delete'] = new WCF.Action.Delete('ultimate\\data\\content\\ContentAction', $('.jsContentRow'), $('#contentTableContainer .menu li:first-child .badge'));
+		actionObjects['de.plugins-zum-selberbauen.ultimate.content']['delete'] = new WCF.Action.Delete('ultimate\\data\\content\\ContentAction', '.jsContentRow');
 		
 		WCF.Clipboard.init('ultimate\\acp\\page\\UltimateContentListPage', {@$hasMarkedItems}, actionObjects);
 		
@@ -16,7 +16,7 @@
 			options.refreshPage = true;
 		{/if}
 		
-		new WCF.Table.EmptyTableHandler($('#contentTableContainer'), 'jsContentRow', options);
+		new WCF.Table.EmptyTableHandler($('#contentTableContainer'), '.jsContentRow', options);
 	});
 	//]]>
 </script>

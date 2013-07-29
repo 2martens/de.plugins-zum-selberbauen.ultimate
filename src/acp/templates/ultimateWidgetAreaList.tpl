@@ -6,7 +6,7 @@
 	$(function() {
 		var actionObjects = { };
 		actionObjects['de.plugins-zum-selberbauen.ultimate.widgetArea'] = { };
-		actionObjects['de.plugins-zum-selberbauen.ultimate.widgetArea']['delete'] = new WCF.Action.Delete('ultimate\\data\\widget\\area\\WidgetAreaAction', $('.jsWidgetAreaRow'), $('#widgetAreaTableContainer .menu li:first-child .badge'));
+		actionObjects['de.plugins-zum-selberbauen.ultimate.widgetArea']['delete'] = new WCF.Action.Delete('ultimate\\data\\widget\\area\\WidgetAreaAction', '.jsWidgetAreaRow');
 		
 		WCF.Clipboard.init('ultimate\\acp\\page\\UltimateWidgetAreaListPage', {@$hasMarkedItems}, actionObjects);
 		

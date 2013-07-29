@@ -6,7 +6,7 @@
 	$(function() {
 		var actionObjects = { };
 		actionObjects['de.plugins-zum-selberbauen.ultimate.category'] = { };
-		actionObjects['de.plugins-zum-selberbauen.ultimate.category']['delete'] = new WCF.Action.Delete('ultimate\\data\\category\\CategoryAction', $('.jsCategoryRow'), $('#categoryTableContainer .menu li:first-child .badge'));
+		actionObjects['de.plugins-zum-selberbauen.ultimate.category']['delete'] = new WCF.Action.Delete('ultimate\\data\\category\\CategoryAction', '.jsCategoryRow');
 		
 		WCF.Clipboard.init('ultimate\\acp\\page\\UltimateCategoryListPage', {@$hasMarkedItems}, actionObjects);
 		
