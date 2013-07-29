@@ -95,7 +95,8 @@
 								{implode from=$content->tags[$__wcf->getLanguage()->languageID] key=tagID item=tag}<a href="{link application='ultimate' controller='UltimateContentList'}tagID={@$tag->tagID}{/link}">{@$tag->getTitle()}</a>{/implode}
 							</p>
 						</td>
-						{assign var='englishAccent' value={@ULTIMATE_GENERAL_ENGLISHLANGUAGE}}
+						
+						{capture assign='englishAccent'}{@ULTIMATE_GENERAL_ENGLISHLANGUAGE}{/capture}
 						{capture assign='publishDateFormat'}{lang britishEnglish=$englishAccent}ultimate.date.dateFormat{/lang}{/capture}
 						{assign var='publishDateFormat' value=$publishDateFormat}
 						<td class="columnDate"><p>{if $content->publishDate > 0 && $content->publishDate <= $timeNow && $content->status == 3}{@$content->publishDate|dateExtended:$publishDateFormat}{else}{/if}</p></td>
