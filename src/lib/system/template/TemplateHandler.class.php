@@ -114,94 +114,23 @@ class TemplateHandler extends SingletonFactory {
 			}
 		}
 		
+		// get template
 		$template = $this->getTemplate($layout->__get('layoutID'));
+		$template = $this->getRealTemplate($template, $requestType);
 		
-		// get sidebar content
-		if ($template === null) {
-			// check for super type
-			switch ($requestType) {
-				case 'category':
-					$template = $this->getTemplate(self::CATEGORY_LAYOUT_ID);
-					break;
-				case 'content':
-					$template = $this->getTemplate(self::CONTENT_LAYOUT_ID);
-					break;
-				case 'page':
-					$template = $this->getTemplate(self::PAGE_LAYOUT_ID);
-					break;
-			}
-			
-			if ($template === null) {
-				throw new NamedUserException(WCF::getLanguage()->getDynamicVariable(
-					'ultimate.error.missingTemplate', 
-					array(
-						'type' => $requestType
-					)
-				));
-			}
-		}
 		if ($template->__get('showWidgetArea')) {
-			/* @var $widgetArea \ultimate\data\widget\area\WidgetArea|null */
-			$widgetArea = $template->__get('widgetArea');
-			$useDefaultDashboardConfig = ($widgetArea === null ? true : false);
-			$sidebarOrientation = $template->__get('widgetAreaSide');
-			$sidebarCollapsed = ULTIMATE_GENERAL_TEMPLATE_COLLAPSIBLE_SIDEBARS;
-			
-			if ($sidebarCollapsed) {
-				$sidebarCollapsed = UserCollapsibleContentHandler::getInstance()->isCollapsed(
-					'com.woltlab.wcf.collapsibleSidebar', 
-					'de.plugins-zum-selberbauen.ultimate.template'
-				);
-			}
-			
-			WCF::getTPL()->assign(array(
-				'sidebarOrientation' => $sidebarOrientation,
-				'sidebarName' => 'de.plugins-zum-selberbauen.ultimate.template',
-				'sidebarCollapsed' => $sidebarCollapsed
-			));
-			
-			if ($useDefaultDashboardConfig) {
-				DashboardHandler::getInstance()->loadBoxes('de.plugins-zum-selberbauen.ultimate.template', $page);
-				WCF::getTPL()->assign(array(
-					'useDefaultSidebar' => true
-				));
-			} else {
-				WidgetHandler::getInstance()->loadBoxes($widgetArea, $page);
-				// assign sidebar content
-				WCF::getTPL()->assign(array(
-					'useDefaultSidebar' => false
-				));
-			}
+			$this->initWidgetArea($template, $page);
 		}
 		
 		// gathering output
-		$output = '';
 		$blocks = $template->__get('blocks');
-		
-		foreach ($blocks as $blockID => $block) {
-			/* @var $blockTypeDatabase \ultimate\data\blocktype\BlockType */
-			$blockTypeID = $block->__get('blockTypeID');
-			/* @var $blockType \ultimate\system\blocktype\IBlockType */
-			$blockType = BlockTypeHandler::getInstance()->getBlockType($blockTypeID);
-			$blockType->init($requestType, $layout, $requestObject, $blockID);
-			$output .= $blockType->getHTML();
-		}
+		$output = $this->getGeneratedOutput($template, $layout, $requestObject, $requestType, $blocks);
 		
 		// build menu
-		$menu = $template->__get('menu');
-		if ($menu !== null) {
-			CustomMenu::getInstance()->buildMenu($menu);
-			if ($requestType != 'index') {
-				$activeMenuItem = $requestObject->getTitle();
-				CustomMenu::getInstance()->setActiveMenuItem($activeMenuItem);
-			} else {
-				CustomMenu::getInstance()->setActiveMenuItem('ultimate.header.menu.index');
-			}
-		}
-		$blockIDs = array_keys($blocks);
-		
+		$this->buildMenu($template, $requestObject, $requestType);
 		
 		// assigning template variables
+		$blockIDs = array_keys($blocks);
 		WCF::getTPL()->assign(array(
 			'customArea' => $output,
 			'blockIDs' => $blockIDs
@@ -212,17 +141,7 @@ class TemplateHandler extends SingletonFactory {
 		
 		// assign custom meta values (if existing)
 		if ($requestObject !== null) {
-			$metaData = $requestObject->__get('metaData');
-			$metaDescription = $metaData['metaDescription'];
-			$metaKeywords = $metaData['metaKeywords'];
-			if (!empty($metaDescription)) {
-				MetaTagHandler::getInstance()->removeTag('description');
-				MetaTagHandler::getInstance()->addTag('description', 'description', $metaDescription);
-			}
-			if (!empty($metaKeywords)) {
-				MetaTagHandler::getInstance()->removeTag('keywords');
-				MetaTagHandler::getInstance()->addTag('keywords', 'keywords', $metaKeywords);
-			}
+			$this->assignMetaValues($requestObject);
 		}
 		
 		return WCF::getTPL()->fetch($this->templateName, 'ultimate');
@@ -274,5 +193,143 @@ class TemplateHandler extends SingletonFactory {
 	protected function loadCache() {
 		// templates
 		$this->templatesToLayoutID = TemplateCacheBuilder::getInstance()->getData(array(), 'templatesToLayoutID');
+	}
+	
+	/**
+	 * Determines the real template.
+	 * 
+	 * @param	\ultimate\data\template\Template|null $template	the template of the layout
+	 * @param	string $requestType
+	 * @return	\ultimate\data\template\Template
+	 * 
+	 * @throws	NamedUserException if no template is found
+	 */
+	protected function getRealTemplate($template, $requestType) {
+		if ($template === null) {
+			// check for super type
+			switch ($requestType) {
+				case 'category':
+					$template = $this->getTemplate(self::CATEGORY_LAYOUT_ID);
+					break;
+				case 'content':
+					$template = $this->getTemplate(self::CONTENT_LAYOUT_ID);
+					break;
+				case 'page':
+					$template = $this->getTemplate(self::PAGE_LAYOUT_ID);
+					break;
+			}
+				
+			if ($template === null) {
+				throw new NamedUserException(WCF::getLanguage()->getDynamicVariable(
+					'ultimate.error.missingTemplate',
+					array(
+						'type' => $requestType
+					)
+				));
+			}
+		}
+		return $template;
+	}
+	
+	/**
+	 * Initializes the widget area of the given template.
+	 * 
+	 * @param \ultimate\data\template\Template	$template
+	 * @param \wcf\page\IPage					$page
+	 */
+	protected function initWidgetArea(Template $template, IPage $page) {
+		/* @var $widgetArea \ultimate\data\widget\area\WidgetArea|null */
+		$widgetArea = $template->__get('widgetArea');
+		$useDefaultDashboardConfig = ($widgetArea === null ? true : false);
+		$sidebarOrientation = $template->__get('widgetAreaSide');
+		$sidebarCollapsed = ULTIMATE_GENERAL_TEMPLATE_COLLAPSIBLE_SIDEBARS;
+			
+		if ($sidebarCollapsed) {
+			$sidebarCollapsed = UserCollapsibleContentHandler::getInstance()->isCollapsed(
+				'com.woltlab.wcf.collapsibleSidebar',
+				'de.plugins-zum-selberbauen.ultimate.template'
+			);
+		}
+			
+		WCF::getTPL()->assign(array(
+			'sidebarOrientation' => $sidebarOrientation,
+			'sidebarName' => 'de.plugins-zum-selberbauen.ultimate.template',
+			'sidebarCollapsed' => $sidebarCollapsed
+		));
+			
+		if ($useDefaultDashboardConfig) {
+			DashboardHandler::getInstance()->loadBoxes('de.plugins-zum-selberbauen.ultimate.template', $page);
+			WCF::getTPL()->assign(array(
+				'useDefaultSidebar' => true
+			));
+		} else {
+			WidgetHandler::getInstance()->loadBoxes($widgetArea, $page);
+			// assign sidebar content
+			WCF::getTPL()->assign(array(
+				'useDefaultSidebar' => false
+			));
+		}
+	}
+	
+	/**
+	 * Builds the output and returns it.
+	 * 
+	 * @param	\ultimate\data\template\Template 					$template
+	 * @param	\ultimate\data\layout\Layout 						$layout
+	 * @param	\ultimate\data\AbstractUltimateDatabaseObject|null 	$requestObject
+	 * @param	string 												$requestType
+	 * @param   \ultimate\data\block\Block[]							$blocks
+	 * @return 	string
+	 */
+	protected function getGeneratedOutput(Template $template, Layout $layout, $requestObject, $requestType, array $blocks) {
+		$output = '';
+		foreach ($blocks as $blockID => $block) {
+			/* @var $blockTypeDatabase \ultimate\data\blocktype\BlockType */
+			$blockTypeID = $block->__get('blockTypeID');
+			/* @var $blockType \ultimate\system\blocktype\IBlockType */
+			$blockType = BlockTypeHandler::getInstance()->getBlockType($blockTypeID);
+			$blockType->init($requestType, $layout, $requestObject, $blockID);
+			$output .= $blockType->getHTML();
+		}
+		return $output;
+	}
+	
+	/**
+	 * Builds the menu.
+	 * 
+	 * @param	\ultimate\data\template\Template					$template
+	 * @param	\ultimate\data\AbstractUltimateDatabaseObject|null	$requestObject
+	 * @param	string												$requestType
+	 */
+	protected function buildMenu(Template $template, $requestObject, $requestType) {
+		$menu = $template->__get('menu');
+		if ($menu !== null) {
+			CustomMenu::getInstance()->buildMenu($menu);
+			if ($requestType != 'index') {
+				$activeMenuItem = $requestObject->getTitle();
+				CustomMenu::getInstance()->setActiveMenuItem($activeMenuItem);
+			} else {
+				CustomMenu::getInstance()->setActiveMenuItem('ultimate.header.menu.index');
+			}
+		}
+	}
+	
+	/**
+	 * Assigns the meta values.
+	 * 
+	 * @param	\ultimate\data\AbstractUltimateDatabaseObject	$requestObject
+	 */
+	protected function assignMetaValues(AbstractUltimateDatabaseObject $requestObject) {
+		$metaData = $requestObject->__get('metaData');
+		$metaDescription = $metaData['metaDescription'];
+		$metaKeywords = $metaData['metaKeywords'];
+		if (!empty($metaDescription)) {
+			MetaTagHandler::getInstance()->removeTag('description');
+			MetaTagHandler::getInstance()->addTag('description', 'description', $metaDescription);
+		}
+		if (!empty($metaKeywords)) {
+			MetaTagHandler::getInstance()->removeTag('keywords');
+			MetaTagHandler::getInstance()->addTag('keywords', 'keywords', $metaKeywords);
+		}
 	}
 }
