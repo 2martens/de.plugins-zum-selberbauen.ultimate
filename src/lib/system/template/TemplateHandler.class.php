@@ -26,12 +26,11 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\template;
-use ultimate\data\IUltimateData;
-
 use ultimate\data\layout\Layout;
 use ultimate\data\template\Template;
 use ultimate\data\widget\WidgetNodeList;
 use ultimate\data\AbstractUltimateDatabaseObject;
+use ultimate\data\IUltimateData;
 use ultimate\system\blocktype\BlockTypeHandler;
 use ultimate\system\cache\builder\CategoryCacheBuilder;
 use ultimate\system\cache\builder\ContentCategoryCacheBuilder;
@@ -203,8 +202,8 @@ class TemplateHandler extends SingletonFactory {
 	/**
 	 * Determines the real template.
 	 * 
-	 * @param	\ultimate\data\template\Template|null $template	the template of the layout
-	 * @param	string $requestType
+	 * @param	\ultimate\data\template\Template|null	$template	the template of the layout
+	 * @param	string 									$requestType
 	 * @return	\ultimate\data\template\Template
 	 * 
 	 * @throws	NamedUserException if no template is found
@@ -302,9 +301,9 @@ class TemplateHandler extends SingletonFactory {
 	/**
 	 * Builds the menu (if existing).
 	 * 
-	 * @param	\ultimate\data\template\Template														$template
-	 * @param	\ultimate\data\AbstractUltimateDatabaseObject|\wcf\data\DatabaseObjectDecorator|null	$requestObject
-	 * @param	string																					$requestType
+	 * @param	\ultimate\data\template\Template	$template
+	 * @param	\ultimate\data\IUltimateData|null	$requestObject
+	 * @param	string								$requestType
 	 */
 	protected function buildMenu(Template $template, $requestObject, $requestType) {
 		$menu = $template->__get('menu');
