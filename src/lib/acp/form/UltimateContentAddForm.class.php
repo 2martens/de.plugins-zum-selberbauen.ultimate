@@ -286,7 +286,9 @@ class UltimateContentAddForm extends MessageForm {
 		}
 		catch (UserInputException $e) {
 			foreach ($this->tagsI18n as $languageID => $tags) {
-				$this->tagsI18n[$languageID] = implode(',', $tags);
+				if (is_string($tags)) {
+					$this->tagsI18n[$languageID] = Tag::splitString($tags);
+				}
 			}
 			throw $e;
 		}
