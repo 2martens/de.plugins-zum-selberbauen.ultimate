@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\menu\item;
+use ultimate\data\IUltimateData;
 use wcf\data\DatabaseObjectDecorator;
 
 /**
@@ -38,7 +39,7 @@ use wcf\data\DatabaseObjectDecorator;
  * @subpackage	data.menu.item
  * @category	Ultimate CMS
  */
-class ViewableMenuItem extends DatabaseObjectDecorator implements \Countable, \Iterator {
+class ViewableMenuItem extends DatabaseObjectDecorator implements \Countable, \Iterator, IUltimateData {
 	/**
 	 * @see	wcf\data\DatabaseObjectDecorator::$baseClass
 	 */

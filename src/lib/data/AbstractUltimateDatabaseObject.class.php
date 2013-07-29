@@ -39,7 +39,7 @@ use wcf\system\WCF;
  * @subpackage	data
  * @category	Ultimate CMS
  */
-abstract class AbstractUltimateDatabaseObject extends DatabaseObject {
+abstract class AbstractUltimateDatabaseObject extends DatabaseObject implements IUltimateData {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IStorableObject.html#getDatabaseTableName
 	 */

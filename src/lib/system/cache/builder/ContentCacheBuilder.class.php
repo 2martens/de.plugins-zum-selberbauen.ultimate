@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\cache\builder;
+use ultimate\data\content\CategorizedContent;
 use ultimate\data\content\ContentList;
 use ultimate\data\content\TaggableContent;
 use ultimate\data\content\TaggedContent;
@@ -35,9 +36,9 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
  * Caches the contents.
  * 
  * Provides three variables:
- * * \ultimate\data\content\Content[] contents (contentID => content)
+ * * \ultimate\data\content\TaggableContent[] contents (contentID => content)
  * * integer[] contentIDs
- * * \ultimate\data\content\Content[] contentsToSlug (contentSlug => content)
+ * * \ultimate\data\content\CategorizedContent[] contentsToSlug (contentSlug => content)
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -72,7 +73,7 @@ class ContentCacheBuilder extends AbstractCacheBuilder {
 			/* @var $content \ultimate\data\content\Content */
 			$data['contents'][$contentID] = new TaggableContent($content);
 			$data['contentIDs'][] = $contentID;
-			$data['contentsToSlug'][$content->__get('contentSlug')] = $content;
+			$data['contentsToSlug'][$content->__get('contentSlug')] = new CategorizedContent($content);
 			
 			$taggedContent = new TaggedContent($content);
 			$tags = $taggedContent->__get('tags');

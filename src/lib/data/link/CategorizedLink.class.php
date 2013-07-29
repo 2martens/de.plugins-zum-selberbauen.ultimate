@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\link;
+use ultimate\data\IUltimateData;
 use wcf\data\DatabaseObjectDecorator;
 use wcf\system\category\CategoryHandler;
 use wcf\system\WCF;
@@ -40,7 +41,7 @@ use wcf\system\WCF;
  * @subpackage	data.link
  * @category	Ultimate CMS
  */
-class CategorizedLink extends DatabaseObjectDecorator {
+class CategorizedLink extends DatabaseObjectDecorator implements IUltimateData {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObjectDecorator.html#$baseClass
 	 */

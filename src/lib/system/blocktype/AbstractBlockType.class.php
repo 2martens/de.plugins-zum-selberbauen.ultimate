@@ -27,6 +27,7 @@
  */
 namespace ultimate\system\blocktype;
 use ultimate\data\block\Block;
+use ultimate\data\IUltimateData;
 use ultimate\system\cache\builder\BlockCacheBuilder;
 use wcf\system\event\EventHandler;
 use wcf\system\exception\SystemException;
@@ -147,8 +148,8 @@ abstract class AbstractBlockType implements IBlockType {
 		$this->requestObject = $requestObject;
 		$this->layout = $layout;
 		
-		if (!($this->requestObject instanceof \ultimate\data\AbstractUltimateDatabaseObject) && $this->layout->__get('objectType') != 'index') {
-			throw new SystemException('The given request object is not an instance of \ultimate\data\AbstractUltimateDatabaseObject.');
+		if (!($this->requestObject instanceof IUltimateData) && $this->layout->__get('objectType') != 'index') {
+			throw new SystemException('The given request object is not an instance of \ultimate\data\IUltimateData.');
 		}
 		
 		$this->blockID = intval($blockID);

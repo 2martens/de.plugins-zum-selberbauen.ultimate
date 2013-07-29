@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the viewable template data model class.
+ * Contains the IUltimateData interface.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -19,26 +19,22 @@
  * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
  * 
  * @author		Jim Martens
- * @copyright	2011-2013 Jim Martens
+ * @copyright	2011-2012 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
- * @subpackage	data.template
+ * @subpackage	data
  * @category	Ultimate CMS
  */
-namespace ultimate\data\template;
-use ultimate\data\IUltimateData;
-use wcf\data\DatabaseObjectDecorator;
+namespace ultimate\data;
 
 /**
- * Manages the viewable output of a template.
+ * Every Ultimate data class should implement this interface. It is a marking interface only.
  * 
  * @author		Jim Martens
- * @copyright	2011-2013 Jim Martens
+ * @copyright	2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
- * @subpackage	data.template
+ * @subpackage	data
  * @category	Ultimate CMS
  */
-class ViewableTemplate extends DatabaseObjectDecorator implements IUltimateData {
-	
-}
+interface IUltimateData {}

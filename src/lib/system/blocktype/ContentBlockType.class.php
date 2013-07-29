@@ -26,8 +26,10 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\blocktype;
+use ultimate\data\content\CategorizedContent;
 use ultimate\data\content\Content;
 use ultimate\data\content\TaggedContent;
+use ultimate\data\IUltimateData;
 use wcf\data\user\UserProfile;
 use wcf\system\comment\CommentHandler;
 use wcf\system\language\I18nHandler;
@@ -159,7 +161,10 @@ class ContentBlockType extends AbstractBlockType {
 				$this->contents = $this->objects[$this->requestObject->__get('categoryID')];
 				break;
 			case 'content':
-				if ($this->requestObject instanceof Content) {
+				if ($this->requestObject instanceof IUltimateData) {
+					if ($this->requestObject instanceof CategorizedContent) {
+						$this->requestObject = $this->requestObject->getDecoratedObject();
+					}
 					$this->requestObject = new TaggedContent($this->requestObject);
 				}
 				$this->contents[$this->requestObject->__get('contentID')] = $this->requestObject;

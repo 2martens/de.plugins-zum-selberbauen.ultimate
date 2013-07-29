@@ -26,17 +26,22 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\template;
-use ultimate\system\widget\WidgetHandler;
+use ultimate\data\IUltimateData;
 
 use ultimate\data\layout\Layout;
 use ultimate\data\template\Template;
 use ultimate\data\widget\WidgetNodeList;
 use ultimate\data\AbstractUltimateDatabaseObject;
 use ultimate\system\blocktype\BlockTypeHandler;
+use ultimate\system\cache\builder\CategoryCacheBuilder;
+use ultimate\system\cache\builder\ContentCategoryCacheBuilder;
+use ultimate\system\cache\builder\PageCacheBuilder;
 use ultimate\system\cache\builder\TemplateCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use ultimate\system\menu\custom\CustomMenu;
 use ultimate\system\widgettype\WidgetTypeHandler;
+use ultimate\system\widget\WidgetHandler;
+use wcf\data\DatabaseObjectDecorator;
 use wcf\page\IPage;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\exception\NamedUserException;
@@ -100,17 +105,17 @@ class TemplateHandler extends SingletonFactory {
 	 * @since	1.0.0
 	 * @api
 	 * 
-	 * @param	string												$requestType	(category, content, index, page)
-	 * @param	\ultimate\data\layout\Layout						$layout
-	 * @param	\ultimate\data\AbstractUltimateDatabaseObject|null	$requestObject	(null only if $requestType is index)
-	 * @param	\wcf\page\IPage										$page
+	 * @param	string								$requestType	(category, content, index, page)
+	 * @param	\ultimate\data\layout\Layout		$layout
+	 * @param	\ultimate\data\IUltimateData|null	$requestObject	(null only if $requestType is index)
+	 * @param	\wcf\page\IPage						$page
 	 * @return	string
 	 */
 	public function getOutput($requestType, Layout $layout, $requestObject, IPage $page) {
 		$requestType = strtolower(StringUtil::trim($requestType));
 		if ($requestType != 'index') {
-			if (!($requestObject instanceof AbstractUltimateDatabaseObject)) {
-				throw new SystemException('The given request object is not an instance of \ultimate\data\AbstractUltimateDatabaseObject.');
+			if (!($requestObject instanceof IUltimateData)) {
+				throw new SystemException('The given request object is not an instance of \ultimate\data\IUltimateData.');
 			}
 		}
 		
@@ -274,11 +279,11 @@ class TemplateHandler extends SingletonFactory {
 	/**
 	 * Builds the output and returns it.
 	 * 
-	 * @param	\ultimate\data\template\Template 					$template
-	 * @param	\ultimate\data\layout\Layout 						$layout
-	 * @param	\ultimate\data\AbstractUltimateDatabaseObject|null 	$requestObject
-	 * @param	string 												$requestType
-	 * @param   \ultimate\data\block\Block[]							$blocks
+	 * @param	\ultimate\data\template\Template 	$template
+	 * @param	\ultimate\data\layout\Layout 		$layout
+	 * @param	\IUltimateData|null 				$requestObject
+	 * @param	string 								$requestType
+	 * @param   \ultimate\data\block\Block[]		$blocks
 	 * @return 	string
 	 */
 	protected function getGeneratedOutput(Template $template, Layout $layout, $requestObject, $requestType, array $blocks) {
@@ -295,11 +300,11 @@ class TemplateHandler extends SingletonFactory {
 	}
 	
 	/**
-	 * Builds the menu.
+	 * Builds the menu (if existing).
 	 * 
-	 * @param	\ultimate\data\template\Template					$template
-	 * @param	\ultimate\data\AbstractUltimateDatabaseObject|null	$requestObject
-	 * @param	string												$requestType
+	 * @param	\ultimate\data\template\Template														$template
+	 * @param	\ultimate\data\AbstractUltimateDatabaseObject|\wcf\data\DatabaseObjectDecorator|null	$requestObject
+	 * @param	string																					$requestType
 	 */
 	protected function buildMenu(Template $template, $requestObject, $requestType) {
 		$menu = $template->__get('menu');
@@ -308,6 +313,36 @@ class TemplateHandler extends SingletonFactory {
 			if ($requestType != 'index') {
 				$activeMenuItem = $requestObject->getTitle();
 				CustomMenu::getInstance()->setActiveMenuItem($activeMenuItem);
+				$result = CustomMenu::getInstance()->getActiveMenuItem(0);
+				if ($result === null) {
+					// determine lowest fitting menu item
+					$menuItems = CustomMenu::getInstance()->getMenuItems();
+					$activeMenuItem = 'ultimate.header.menu.index';
+					switch ($requestType) {
+						case 'category':
+							$categoryParentID = $requestObject->__get('categoryParent');
+							$categories = CategoryCacheBuilder::getInstance()->getData(array(), 'categories');
+							$activeMenuItem = $this->getActiveMenuItemCategory($categoryParentID, $categories);
+							break;
+						case 'page':
+							$pageParentID = $requestObject->__get('pageParent');
+							$pages = PageCacheBuilder::getInstance()->getData(array(), 'paghs');
+							$activeMenuItem = $this->getActiveMenuItemPage($pageParentID, $pages);
+							break;
+						case 'content':
+							$contentCategories = $requestObject->__get('categories');
+							// getting the first category that is represented in the menu as active menu item
+							// if none is available use index
+							foreach ($contentCategories as $category) {
+								if (isset($menuItems[$category->getTitle()])) {
+									$activeMenuItem = $category->getTitle();
+									break;
+								}
+							}
+							break;
+					}
+					CustomMenu::getInstance()->setActiveMenuItem($activeMenuItem);
+				}
 			} else {
 				CustomMenu::getInstance()->setActiveMenuItem('ultimate.header.menu.index');
 			}
@@ -317,9 +352,9 @@ class TemplateHandler extends SingletonFactory {
 	/**
 	 * Assigns the meta values.
 	 * 
-	 * @param	\ultimate\data\AbstractUltimateDatabaseObject	$requestObject
+	 * @param	\ultimate\data\IUltimateData	$requestObject
 	 */
-	protected function assignMetaValues(AbstractUltimateDatabaseObject $requestObject) {
+	protected function assignMetaValues(IUltimateData $requestObject) {
 		$metaData = $requestObject->__get('metaData');
 		$metaDescription = $metaData['metaDescription'];
 		$metaKeywords = $metaData['metaKeywords'];
@@ -330,6 +365,51 @@ class TemplateHandler extends SingletonFactory {
 		if (!empty($metaKeywords)) {
 			MetaTagHandler::getInstance()->removeTag('keywords');
 			MetaTagHandler::getInstance()->addTag('keywords', 'keywords', $metaKeywords);
+		}
+	}
+	
+	/**
+	 * Returns the active menu item for a category.
+	 * 
+	 * @param	integer 							$categoryParentID
+	 * @param	\ultimate\data\category\Category[]	$categories
+	 * @return	string
+	 */
+	protected function getActiveMenuItemCategory($categoryParentID, array $categories) {
+		if ($categoryParentID) {
+			$parent = $categories[$categoryParentID];
+			$parentTitle = $parent->getTitle();
+			if (isset($menuItems[$parentTitle])) {
+				$activeMenuItem = $parentTitle;
+				return $parentTitle;
+			} else {
+				$categoryParentID = $parent->__get('categoryParent');
+				return $this->getActiveMenuItemCategory($categoryParentID, $categories);
+			}
+		} else {
+			return 'ultimate.header.menu.index';
+		}
+	}
+	
+	/**
+	 * Returns the active menu item for a page.
+	 *
+	 * @param	integer 					$pageParentID
+	 * @param	\ultimate\data\page\Page[]	$pages
+	 * @return	string
+	 */
+	protected function getActiveMenuItemPage($pageParentID, array $pages) {
+		if ($pageParentID) {
+			$parent = $pages[$pageParentID];
+			$parentTitle = $parent->getTitle();
+			if (isset($menuItems[$parentTitle])) {
+				return $parentTitle;
+			} else {
+				$pageParentID = $parent->__get('pageParent');
+				return $this->getActiveMenuItemPage($pageParentID, $pages);
+			}
+		} else {
+			return 'ultimate.header.menu.index';
 		}
 	}
 }

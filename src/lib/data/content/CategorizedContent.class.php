@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\content;
+use ultimate\data\IUltimateData;
 use wcf\data\DatabaseObjectDecorator;
 use wcf\system\WCF;
 
@@ -40,7 +41,7 @@ use wcf\system\WCF;
  * @subpackage	data.content
  * @category	Ultimate CMS
  */
-class CategorizedContent extends DatabaseObjectDecorator {
+class CategorizedContent extends DatabaseObjectDecorator implements IUltimateData {
 	/**
 	 * @see \wcf\data\DatabaseObjectDecorator::$baseClass
 	 */

@@ -47,10 +47,10 @@ interface IBlockType {
 	 * @api
 	 * @since	1.0.0
 	 * 
-	 * @param	string												$requestType
-	 * @param	\ultimate\data\layout\Layout						$layout
-	 * @param	\ultimate\data\AbstractUltimateDatabaseObject|null	$requestObject	null is only allowed in connection with the index layout
-	 * @param	integer												$blockID
+	 * @param	string								$requestType
+	 * @param	\ultimate\data\layout\Layout		$layout
+	 * @param	\ultimate\data\IUltimateData|null	$requestObject	null is only allowed in connection with the index layout
+	 * @param	integer								$blockID
 	 * @return	void
 	 */
 	public function init($requestType, \ultimate\data\layout\Layout $layout, $requestObject, $blockID);
