@@ -60,7 +60,6 @@ class ULTIMATECore extends AbstractApplication {
 		$this->initRoutes();
 		$this->initStyle();
 		PageMenu::getInstance()->setActiveMenuItem('ultimate.header.menu.index');
-		WCF::getBreadcrumbs()->add(new Breadcrumb(WCF::getLanguage()->get('ultimate.header.menu.index'), LinkHandler::getInstance()->getLink('Index', array('application' => 'ultimate'))));
 	}
 	
 	/**

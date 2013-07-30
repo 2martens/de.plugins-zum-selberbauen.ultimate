@@ -42,6 +42,7 @@ use ultimate\system\widgettype\WidgetTypeHandler;
 use ultimate\system\widget\WidgetHandler;
 use wcf\data\DatabaseObjectDecorator;
 use wcf\page\IPage;
+use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\dashboard\DashboardHandler;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\SystemException;
@@ -313,37 +314,73 @@ class TemplateHandler extends SingletonFactory {
 				$activeMenuItem = $requestObject->getTitle();
 				CustomMenu::getInstance()->setActiveMenuItem($activeMenuItem);
 				$result = CustomMenu::getInstance()->getActiveMenuItem(0);
+				
+				$menuItems = CustomMenu::getInstance()->getMenuItems();
+				$parents = array();
+				$startParentID = 0;
+				switch ($requestType) {
+					case 'category':
+						$startParentID = $requestObject->__get('categoryParent');
+						$categories = CategoryCacheBuilder::getInstance()->getData(array(), 'categories');
+						$parents = $this->getParentCategories($startParentID, $categories);
+						break;
+					case 'page':
+						$startParentID = $requestObject->__get('pageParent');
+						$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
+						$parents = $this->getParentPages($startParentID, $pages);
+						break;
+					case 'content':
+						$contentCategories = $requestObject->__get('categories');
+						// getting the first category that is represented in the menu as active menu item
+						// if none is available use index
+						foreach ($contentCategories as $category) {
+							if (isset($menuItems[$category->getTitle()])) {
+								// determine breadcrumbs
+								$startParentID = $requestObject->__get('categoryParent');
+								$categories = CategoryCacheBuilder::getInstance()->getData(array(), 'categories');
+								$parents = $this->getParentCategories($startParentID, $categories);
+								break;
+							}
+						}
+						break;
+				}
+				$this->addBreadcrumbs($parents, $menuItems);
 				if ($result === null) {
 					// determine lowest fitting menu item
-					$menuItems = CustomMenu::getInstance()->getMenuItems();
-					$activeMenuItem = 'ultimate.header.menu.index';
-					switch ($requestType) {
-						case 'category':
-							$categoryParentID = $requestObject->__get('categoryParent');
-							$categories = CategoryCacheBuilder::getInstance()->getData(array(), 'categories');
-							$activeMenuItem = $this->getActiveMenuItemCategory($categoryParentID, $categories, $menuItems);
-							break;
-						case 'page':
-							$pageParentID = $requestObject->__get('pageParent');
-							$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
-							$activeMenuItem = $this->getActiveMenuItemPage($pageParentID, $pages, $menuItems);
-							break;
-						case 'content':
-							$contentCategories = $requestObject->__get('categories');
-							// getting the first category that is represented in the menu as active menu item
-							// if none is available use index
-							foreach ($contentCategories as $category) {
-								if (isset($menuItems[$category->getTitle()])) {
-									$activeMenuItem = $category->getTitle();
-									break;
-								}
-							}
-							break;
+					$activeMenuItem = $this->getActiveMenuItem($parents, $menuItems);
+					if ($requestType == 'content') {
+						$parent = $parents[$startParentID];
+						$activeMenuItem = $parent->getTitle();
 					}
+					
 					CustomMenu::getInstance()->setActiveMenuItem($activeMenuItem);
 				}
 			} else {
 				CustomMenu::getInstance()->setActiveMenuItem('ultimate.header.menu.index');
+			}
+		}
+	}
+	
+	/**
+	 * Adds the breadcrumbs.
+	 *
+	 * @param	\ultimate\data\IUltimateData[]		$parents
+	 * @param	\ultimate\data\menu\item\MenuItem[]	$menuItems
+	 */
+	protected function addBreadcrumbs(array $parents, array $menuItems) {
+		$parentsReversed = array_reverse($parents);
+		foreach ($parentsReversed as $parent) {
+			$title = $parent->getTitle();
+			if (isset($menuItems[$title])) {
+				foreach ($menuItems as $parentTitle => $subItems) {
+					foreach ($subItems as $subItem) {
+						$menuItemName = $subItem->__get('menuItemName');
+						if ($menuItemName == $title) {
+							WCF::getBreadcrumbs()->add(new Breadcrumb($parent->__toString(), $subItem->getLink()));
+							break 2;
+						}
+					}
+				}
 			}
 		}
 	}
@@ -368,49 +405,55 @@ class TemplateHandler extends SingletonFactory {
 	}
 	
 	/**
-	 * Returns the active menu item for a category.
+	 * Returns the parent categories in reverse order (closest first).
 	 * 
-	 * @param	integer 							$categoryParentID
+	 * @param	integer								$categoryParentID
 	 * @param	\ultimate\data\category\Category[]	$categories
-	 * @param	\ultimate\data\menu\item\MenuItem[]	$menuItems
-	 * @return	string
+	 * @return	\ultimate\data\category\Category[]
 	 */
-	protected function getActiveMenuItemCategory($categoryParentID, array $categories, array $menuItems) {
+	protected function getParentCategories($categoryParentID, array $categories, array $parentCategories = array()) {
 		if ($categoryParentID) {
 			$parent = $categories[$categoryParentID];
-			$parentTitle = $parent->getTitle();
-			if (isset($menuItems[$parentTitle])) {
-				$activeMenuItem = $parentTitle;
-				return $parentTitle;
-			} else {
-				$categoryParentID = $parent->__get('categoryParent');
-				return $this->getActiveMenuItemCategory($categoryParentID, $categories);
-			}
+			$parentCategories[] = $parent;
+			$categoryParentID = $parent->__get('categoryParent');
+			return $this->getParentCategories($categoryParentID, $categories, $parentCategories);
 		} else {
-			return 'ultimate.header.menu.index';
+			return $parentCategories;
 		}
 	}
 	
 	/**
-	 * Returns the active menu item for a page.
+	 * Returns the parent pages in reverse order (closest first).
 	 *
-	 * @param	integer 							$pageParentID
-	 * @param	\ultimate\data\page\Page[]			$pages
+	 * @param	integer						$pageParentID
+	 * @param	\ultimate\data\page\Page[]	$pages
+	 * @return	\ultimate\data\page\Page[]
+	 */
+	protected function getParentPages($pageParentID, array $pages, array $parentPages = array()) {
+		if ($pageParentID) {
+			$parent = $pages[$pageParentID];
+			$parentPages[] = $parent;
+			$pageParentID = $parent->__get('pageParent');
+			return $this->getParentPages($pageParentID, $pages, $parentPages);
+		} else {
+			return $parentPages;
+		}
+	}
+	
+	/**
+	 * Returns the active menu item.
+	 * 
+	 * @param	\ultimate\data\IUltimateData[]		$parents
 	 * @param	\ultimate\data\menu\item\MenuItem[]	$menuItems
 	 * @return	string
 	 */
-	protected function getActiveMenuItemPage($pageParentID, array $pages, array $menuItems) {
-		if ($pageParentID) {
-			$parent = $pages[$pageParentID];
+	protected function getActiveMenuItem(array $parents, array $menuItems) {
+		foreach ($parents as $parent) {
 			$parentTitle = $parent->getTitle();
 			if (isset($menuItems[$parentTitle])) {
 				return $parentTitle;
-			} else {
-				$pageParentID = $parent->__get('pageParent');
-				return $this->getActiveMenuItemPage($pageParentID, $pages);
 			}
-		} else {
-			return 'ultimate.header.menu.index';
 		}
+		return 'ultimate.header.menu.index';
 	}
 }
