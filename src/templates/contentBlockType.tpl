@@ -41,7 +41,7 @@
 							{counter name=displayedFeaturedContents assign=displayedFeaturedContents print=false start=0}
 							{assign var=displayedFeaturedContents value=$displayedFeaturedContents}
 							{if $requestType == 'content' || $requestType == 'page'}
-								{if !$content->enableHtml}<p>{/if}{@$content->getParsedContent()}{if !$content->enableHtml}</p>{/if}
+								{*if !$content->__get('enableHtml')}<p>{/if*}{@$content->getParsedContent()}{*if !$content->__get('enableHtml')}</p>{/if*}
 							{/if}
 							{if $requestType == 'index' || $requestType == 'category'}
 								<p>{@$content->getParsedContent()|truncateMore:0}</p>
