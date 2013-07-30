@@ -325,7 +325,7 @@ class TemplateHandler extends SingletonFactory {
 							break;
 						case 'page':
 							$pageParentID = $requestObject->__get('pageParent');
-							$pages = PageCacheBuilder::getInstance()->getData(array(), 'paghs');
+							$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
 							$activeMenuItem = $this->getActiveMenuItemPage($pageParentID, $pages);
 							break;
 						case 'content':
