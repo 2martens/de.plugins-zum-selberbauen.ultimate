@@ -321,12 +321,12 @@ class TemplateHandler extends SingletonFactory {
 						case 'category':
 							$categoryParentID = $requestObject->__get('categoryParent');
 							$categories = CategoryCacheBuilder::getInstance()->getData(array(), 'categories');
-							$activeMenuItem = $this->getActiveMenuItemCategory($categoryParentID, $categories);
+							$activeMenuItem = $this->getActiveMenuItemCategory($categoryParentID, $categories, $menuItems);
 							break;
 						case 'page':
 							$pageParentID = $requestObject->__get('pageParent');
 							$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
-							$activeMenuItem = $this->getActiveMenuItemPage($pageParentID, $pages);
+							$activeMenuItem = $this->getActiveMenuItemPage($pageParentID, $pages, $menuItems);
 							break;
 						case 'content':
 							$contentCategories = $requestObject->__get('categories');
@@ -372,9 +372,10 @@ class TemplateHandler extends SingletonFactory {
 	 * 
 	 * @param	integer 							$categoryParentID
 	 * @param	\ultimate\data\category\Category[]	$categories
+	 * @param	\ultimate\data\menu\item\MenuItem[]	$menuItems
 	 * @return	string
 	 */
-	protected function getActiveMenuItemCategory($categoryParentID, array $categories) {
+	protected function getActiveMenuItemCategory($categoryParentID, array $categories, array $menuItems) {
 		if ($categoryParentID) {
 			$parent = $categories[$categoryParentID];
 			$parentTitle = $parent->getTitle();
@@ -393,11 +394,12 @@ class TemplateHandler extends SingletonFactory {
 	/**
 	 * Returns the active menu item for a page.
 	 *
-	 * @param	integer 					$pageParentID
-	 * @param	\ultimate\data\page\Page[]	$pages
+	 * @param	integer 							$pageParentID
+	 * @param	\ultimate\data\page\Page[]			$pages
+	 * @param	\ultimate\data\menu\item\MenuItem[]	$menuItems
 	 * @return	string
 	 */
-	protected function getActiveMenuItemPage($pageParentID, array $pages) {
+	protected function getActiveMenuItemPage($pageParentID, array $pages, array $menuItems) {
 		if ($pageParentID) {
 			$parent = $pages[$pageParentID];
 			$parentTitle = $parent->getTitle();
