@@ -152,6 +152,7 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 	 */
 	protected function handleData($data) {
 		$data['pageID'] = intval($data['pageID']);
+		$data['pageParent'] = intval($data['pageParent']);
 		$data['authorID'] = intval($data['authorID']);
 		$data['author'] = new User($data['authorID']);
 		$data['publishDate'] = intval($data['publishDate']);
