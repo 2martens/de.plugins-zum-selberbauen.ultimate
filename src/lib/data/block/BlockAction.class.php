@@ -135,6 +135,9 @@ class BlockAction extends AbstractDatabaseObjectAction {
 		}
 		$this->parameters['data'] = $parameters;
 		
+		// set action to create, otherwise cache is not rebuild
+		$this->action = 'create';
+		
 		// create the block
 		$block = $this->create();
 		
@@ -249,6 +252,8 @@ class BlockAction extends AbstractDatabaseObjectAction {
 		}
 		$this->parameters['data'] = $parameters;
 		
+		// set action to update, otherwise cache is not rebuild
+		$this->action = 'update';
 		$this->update();
 	
 		if ($blockTypeName == 'ultimate.blocktype.content') {
@@ -282,7 +287,7 @@ class BlockAction extends AbstractDatabaseObjectAction {
 				I18nHandler::getInstance()->setValues('readMoreText', $readMoreText_i18n);
 				I18nHandler::getInstance()->save('readMoreText', $readMoreText, 'ultimate.block', PACKAGE_ID);
 			}
-				
+			$blockEditor = new BlockEditor(new Block($this->objectIDs[0]));
 			$additionalData = $blockEditor->__get('additionalData');
 			$additionalData['metaAboveContent'] = $metaAboveContent;
 			$additionalData['metaBelowContent'] = $metaBelowContent;
