@@ -520,8 +520,8 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.readMoreText.description"><![CDATA[Wenn ein automatisch oder durch den 'Weiterlesen'-BBCode gekürzter Inhalt dargestellt wird, 
 
 wird dieser Text an das Ende gehängt.]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.display.showTitles"><![CDATA[Titel anzeigen]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.display.showTitles.description"><![CDATA[Gibt an, ob der/die Titel des/der angezeigten Inhalte(s) dargestellt wird/werden.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.hideTitles"><![CDATA[Titel verstecken]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.hideTitles.description"><![CDATA[Gibt an, ob der/die Titel des/der angezeigten Inhalte(s) dargestellt wird/werden.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay"><![CDATA[Anzeige des Inhaltskörpers]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.description"><![CDATA[Der Inhaltskörper ist der eigentliche Körper des Inhalts. Das ist das, was du beim Erstellen eines Inhalts in den Editor eingibst. Wählst du 'Standard', dann wird anhand der 'Anzahl an bevorzugten Inhalten' und der Seite, die aufgerufen wird, bestimmt, ob Inhalte komplett oder nur in Auszügen dargestellt werden.
 
@@ -530,12 +530,12 @@ Tipp: Setze die Einstellung auf 'Inhaltskörper verstecken', um eine reine Liste
 		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.full"><![CDATA[vollständige Inhalte anzeigen]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.excerpt"><![CDATA[gekürzte Inhalte anzeigen]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.hide"><![CDATA[Inhaltskörper verstecken]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.display.showContent"><![CDATA[Inhalt anzeigen]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.display.showContent.description"><![CDATA[Standardmäßig werden alle Inhalte angezeigt. Jedoch gibt es einige Fälle, in denen du vielleicht den Inhalt in einem Block und die Kommentare in einem anderen anzeigen willst. Mit dieser Einstellung ist dies möglich.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.hideContent"><![CDATA[Inhalt verstecken]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.hideContent.description"><![CDATA[Standardmäßig werden alle Inhalte angezeigt. Jedoch gibt es einige Fälle, in denen du vielleicht den Inhalt in einem Block und die Kommentare in einem anderen anzeigen willst. Mit dieser Einstellung ist dies möglich.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility"><![CDATA[Kommentarsichtbarkeit]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility.description"><![CDATA[Standardmäßig werden Kommentare nur auf einzelnen Inhaltsseiten angezeigt. Allerdings kannst du diese Option nutzen, um die Anzeige von Kommentaren z.B. auch auf Seiten (für deren Inhalte) zu erzwingen.
 
-Tipp: In Verbindung mit der Einstellung 'Inhalt anzeigen' kannst du einzigartige Templates erstellen, in denen die Inhalte in einem Block und die Kommentare in einem anderen sind.]]></item>
+Tipp: In Verbindung mit der Einstellung 'Inhalt verstecken' kannst du einzigartige Templates erstellen, in denen die Inhalte in einem Block und die Kommentare in einem anderen sind.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility.auto"><![CDATA[Automatisch]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility.show"><![CDATA[Kommentare anzeigen]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility.hide"><![CDATA[Kommentare verstecken]]></item>
@@ -543,8 +543,10 @@ Tipp: In Verbindung mit der Einstellung 'Inhalt anzeigen' kannst du einzigartige
 		<item name="wcf.acp.ultimate.template.contentTab.display.featuredContents.description"><![CDATA[Bevorzugte Inhalte sind solche, die in voller Länge angezeigt werden, solange nicht ein 'Weiterlesen'-BBCode verwendet wird. 
 
 Nachdem alle bevorzugten Inhalte dargestellt sind, werden die übrigen Inhalte automatisch gekürzt.]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.display.showInlineEdit"><![CDATA[InlineEdit anzeigen]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.display.showInlineEdit.description"><![CDATA[Gibt an, ob die InlineEdit-Funktionalität bei diesem Block gegeben sein soll.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.hideInlineEdit"><![CDATA[InlineEdit verstecken]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.hideInlineEdit.description"><![CDATA[Gibt an, ob die InlineEdit-Funktionalität bei diesem Block gegeben sein soll.
+
+Für die InlineEdit braucht man die gleichen Rechte um Inhalte zu schreiben, zu bearbeiten und zu löschen.]]></item>
 		<!-- /display sub tab -->
 		
 		<!-- meta sub tab -->

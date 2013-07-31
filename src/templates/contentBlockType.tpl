@@ -3,9 +3,9 @@
 	{foreach from=$contents key=contentID item=content}
 		{if $content->status == 3}
 		<article itemtype="http://schema.org/Article" itemscope="" class="container containerPadding marginTop">
-			{if $block->showContent}
+			{if !$block->hideContent}
 				<header class="boxHeadline">
-					{if $block->showTitles}
+					{if !$block->hideTitles}
 						<h1 itemprop="name">
 							{if $requestType != 'content'}
 								<a class="link" href="{$readMoreLink[$contentID]}" itemprop="url">{lang}{$content->contentTitle}{/lang}</a>

@@ -112,8 +112,8 @@
 					<input type="text" id="readMoreText_{$blockID}" name="readMoreText" value="{@$i18nPlainValues[$readMoreTextID]}" data-block-id="{$blockID}" data-is-block="true" />
 				</dd>
 				<dd class="inputCheckbox">
-					<label for="showTitles_{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.contentTab.display.showTitles.description{/lang}">{lang}wcf.acp.ultimate.template.contentTab.display.showTitles{/lang}</label>
-					<input type="checkbox" id="showTitles_{$blockID}" name="showTitles" value="{$showTitles}" data-block-id="{$blockID}" data-is-block="true" />
+					<label for="hideTitles_{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.contentTab.display.hideTitles.description{/lang}">{lang}wcf.acp.ultimate.template.contentTab.display.hideTitles{/lang}</label>
+					<input type="checkbox" id="hideTitles_{$blockID}" name="hideTitles" value="{$hideTitles}" data-block-id="{$blockID}" data-is-block="true" />
 				</dd>
 				<dd class="inputSelect">
 					<label for="contentBodyDisplay_{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.description{/lang}">{lang}wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay{/lang}</label>
@@ -126,8 +126,8 @@
 					</select>
 				</dd>
 				<dd class="inputCheckbox">
-					<label for="showContent_{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.contentTab.display.showContent.description{/lang}">{lang}wcf.acp.ultimate.template.contentTab.display.showContent{/lang}</label>
-					<input type="checkbox" id="showContent_{$blockID}" name="showContent" value="{$showContent}" data-block-id="{$blockID}" data-is-block="true" />
+					<label for="hideContent_{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.contentTab.display.hideContent.description{/lang}">{lang}wcf.acp.ultimate.template.contentTab.display.hideContent{/lang}</label>
+					<input type="checkbox" id="hideContent_{$blockID}" name="hideContent" value="{$hideContent}" data-block-id="{$blockID}" data-is-block="true" />
 				</dd>
 				<dd class="inputSelect">
 					<label for="commentsVisibility_{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.contentTab.display.commentsVisibility.description{/lang}">{lang}wcf.acp.ultimate.template.contentTab.display.commentsVisibility{/lang}</label>
@@ -143,8 +143,8 @@
 					<input type="number" min="0" max="100" step="1" id="featuredContents_{$blockID}" name="featuredContents" value="{$featuredContents}" data-block-id="{$blockID}" data-is-block="true" />
 				</dd>
 				<dd class="inputCheckbox">
-					<label for="showInlineEdit_{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.contentTab.display.showInlineEdit.description{/lang}">{lang}wcf.acp.ultimate.template.contentTab.display.showInlineEdit{/lang}</label>
-					<input type="checkbox" id="showInlineEdit_{$blockID}" name="showInlineEdit" value="{$showInlineEdit}" data-block-id="{$blockID}" data-is-block="true" />
+					<label for="hideInlineEdit_{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.contentTab.display.hideInlineEdit.description{/lang}">{lang}wcf.acp.ultimate.template.contentTab.display.hideInlineEdit{/lang}</label>
+					<input type="checkbox" id="hideInlineEdit_{$blockID}" name="hideInlineEdit" value="{$hideInlineEdit}" data-block-id="{$blockID}" data-is-block="true" />
 				</dd>
 			</dl>
 		</div>

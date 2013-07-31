@@ -520,10 +520,10 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.readMoreText.description"><![CDATA[If an excerpt (either automatically or by 'read more'-BBCode) is displayed, 
 
 this text will be appended to the end of the exerpt.]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.display.showTitles"><![CDATA[Show titles]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.display.showTitles.description"><![CDATA[If checked the titles of the contents in this block will be displayed. 
+		<item name="wcf.acp.ultimate.template.contentTab.display.hideTitles"><![CDATA[Hide titles]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.hideTitles.description"><![CDATA[If checked the titles of the contents in this block will be hidden. 
 		
-Otherwise the titles will be hidden.]]></item>
+Otherwise the titles will be displayed.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay"><![CDATA[Content body display]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.description"><![CDATA[The content body is the actual body of the content. This is what you enter into the editor while creating a new content. If set to 'Default', Ultimate CMS will determine if full contents or excerpts should be displayed based off of the 'Featured contents' setting and what page is being displayed.
 
@@ -532,12 +532,12 @@ Tip: Set this to 'Hide content bodies' to create a simple listing of contents.]]
 		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.full"><![CDATA[Show full content]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.excerpt"><![CDATA[Show excerpts]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.hide"><![CDATA[Hide content body]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.display.showContent"><![CDATA[Show content]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.display.showContent.description"><![CDATA[By default all contents are displayed. However there might be a situation in which you'd like to show the content in one block and the comments in another. That is possible with this setting.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.hideContent"><![CDATA[Hide content]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.hideContent.description"><![CDATA[By default all contents are displayed. However there might be a situation in which you'd like to show the content in one block and the comments in another. That is possible with this setting.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility"><![CDATA[Comments visibility]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility.description"><![CDATA[By default comments are only displayed on single content pages. But you can change this setting to display comments for the contents of single pages.
 
-Tip: You can create unique templates in connection with the 'Show content' setting by displaying the contents in one block an the comments in another.]]></item>
+Tip: You can create unique templates in connection with the 'Hide content' setting by displaying the contents in one block an the comments in another.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility.auto"><![CDATA[Automatic]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility.show"><![CDATA[Show comments]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.commentsVisibility.hide"><![CDATA[Hide comments]]></item>
@@ -545,8 +545,10 @@ Tip: You can create unique templates in connection with the 'Show content' setti
 		<item name="wcf.acp.ultimate.template.contentTab.display.featuredContents.description"><![CDATA[Featured contents are displayed in full length unless a 'read more'-BBCode is used. 
 
 If all featured contents are displayed the remaining contents are automatically truncated.]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.display.showInlineEdit"><![CDATA[Show InlineEdit]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.display.showInlineEdit.description"><![CDATA[If checked you can use the InlineEdit to change the content directly in the frontend.]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.hideInlineEdit"><![CDATA[Hide InlineEdit]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.display.hideInlineEdit.description"><![CDATA[If checked you can't use the InlineEdit to change the content directly in the frontend.
+
+For the InlineEdit you require the same rights to write, edit or delete contents.]]></item>
 		<!-- /display sub tab -->
 		
 		<!-- meta sub tab -->
