@@ -27,6 +27,8 @@
  */
 namespace ultimate\data\content;
 use ultimate\system\cache\builder\ContentTagCacheBuilder;
+use ultimate\system\layout\LayoutHandler;
+use ultimate\system\template\TemplateHandler;
 use wcf\data\tag\Tag;
 use wcf\system\tagging\ITaggable;
 use wcf\system\WCF;
@@ -57,7 +59,7 @@ class TaggableContent extends CategorizedContent implements ITaggable {
 	 * @return	string
 	 */
 	public function getTemplateName() {
-		return '';
+		return 'searchResultContentList';
 	}
 	
 	/**
@@ -68,14 +70,6 @@ class TaggableContent extends CategorizedContent implements ITaggable {
 	 * @return	\wcf\data\DatabaseObjectList
 	 */
 	public function getObjectList(Tag $tag) {
-		// determine the contents tagged with given tag
-		$taggedContents = ContentTagCacheBuilder::getInstance()->getData(array(), 'contentsToTagID');
-		$taggedContents = $taggedContents[$tag->__get('tagID')];
-		$contentIDs = array_keys($taggedContents);
-		$taggedContentList = new TaggedContentList();
-		// ensure that only objects tagged with the given tag are read
-		$taggedContentList->setObjectIDs($contentIDs);
-		$taggedContentList->readObjects();
-		return $taggedContentList;
+		return new TaggedContentList($tag);
 	}
 }

@@ -91,7 +91,7 @@
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.content</name>
             <definitionname>com.woltlab.wcf.tagging.taggableObject</definitionname>
-            <classname><![CDATA[ultimate\data\content\TaggableContent]]></classname>
+            <classname><![CDATA[ultimate\system\tagging\TaggableContent]]></classname>
         </type>
         <!-- /taggable types -->
         

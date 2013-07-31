@@ -638,10 +638,16 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 	
 	<category name="wcf.dashboard">
 		<item name="wcf.dashboard.objectType.de.plugins-zum-selberbauen.ultimate.template"><![CDATA[Template (Ultimate CMS)]]></item>
+        <item name="wcf.dashboard.box.de.plugins-zum-selberbauen.ultimate.tagCloud"><![CDATA[Tag-Cloud]]></item>
 	</category>
     
     <category name="wcf.page">
         <item name="wcf.page.sitemap.ultimate"><![CDATA[Website]]></item>
+    </category>
+    
+    <category name="wcf.tagging">
+        <item name="wcf.tagging.objectType.de.plugins-zum-selberbauen.ultimate.content"><![CDATA[Contents]]></item>
+        <item name="wcf.tagging.taggedObjects.de.plugins-zum-selberbauen.ultimate.content"><![CDATA[Find contents tagged with “{$tag->name}”]]></item>
     </category>
 	
 	<category name="wcf.user.notification">
@@ -708,12 +714,12 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 	
 	<!-- this category is used for all multilingual content fields -->
 	<category name="ultimate.content">
-		<!-- this item is just a placeholder -->
-		<item name="ultimate.content.default"><![CDATA[Test, one, two, three and fucked up.]]></item>
 		<item name="ultimate.content.comment"><![CDATA[Content comment]]></item>
 		<item name="ultimate.content.commentResponse"><![CDATA[Content response]]></item>
 		<item name="ultimate.content.comments"><![CDATA[Comments]]></item>
 		<item name="ultimate.content.authorVCard"><![CDATA[This content was writty by {$author}.]]></item>
+        <item name="ultimate.content.contents"><![CDATA[Contents]]></item>
+        <item name="ultimate.content.contentTitle"><![CDATA[Title]]></item>
 	</category>
 	
 	<category name="ultimate.date">

@@ -35,7 +35,7 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
  * Caches the content to tag relation.
  * 
  * Provides one variables:
- * * \ultimate\data\content\Content[][] contentsToTagID (tagID => contents (contentID => content))
+ * * \ultimate\data\content\TaggedContent[][] contentsToTagID (tagID => contents (contentID => content))
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens

@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the TagCloudDashboardBox class.
+ * Contains the TaggableContent class.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -22,61 +22,27 @@
  * @copyright	2011-2012 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
- * @subpackage	system.dashboard.box
+ * @subpackage	system.tagging
  * @category	Ultimate CMS
  */
-namespace ultimate\system\dashboard\box;
-use wcf\data\dashboard\box\DashboardBox;
-use wcf\page\IPage;
-use wcf\system\dashboard\box\AbstractSidebarDashboardBox;
-use wcf\system\tagging\TagCloud;
-use wcf\system\WCF;
+namespace ultimate\system\tagging;
+use wcf\data\DatabaseObject;
 
 /**
- * Dashboard sidebar box for tag cloud of contents.
+ * This class is used for the taggable object type.
  * 
  * @author		Jim Martens
  * @copyright	2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
- * @subpackage	system.dashboard.box
+ * @subpackage	system.tagging
  * @category	Ultimate CMS
  */
-class TagCloudDashboardBox extends AbstractSidebarDashboardBox {
+class TaggableContent extends \ultimate\data\content\TaggableContent {
 	/**
-	 * tag cloud
-	 * @var \wcf\system\tagging\TypedTagCloud
+	 * Does nothing.
+	 * 
+	 * @param \wcf\data\DatabaseObject $object
 	 */
-	public $tagCloud = null;
-	
-	/**
-	 * @see	wcf\system\dashboard\box\IDashboardBox::init()
-	 */
-	public function init(DashboardBox $box, IPage $page) {
-		parent::init($box, $page);
-	
-		if (MODULE_TAGGING) {
-			$languageIDs = array();
-			$languageIDs = WCF::getUser()->getLanguageIDs();
-				
-			$this->tagCloud = new TagCloud($languageIDs);
-		}
-	
-		$this->fetched();
-	}
-	
-	/**
-	 * @see	wcf\system\dashboard\box\AbstractContentDashboardBox::render()
-	 */
-	protected function render() {
-		if ($this->tagCloud === null) {
-			return '';
-		}
-	
-		WCF::getTPL()->assign(array(
-			'tags' => $this->tagCloud->getTags()
-		));
-			
-		return WCF::getTPL()->fetch('tagCloudBox');
-	}
+	public function __construct(DatabaseObject $object) {}
 }
