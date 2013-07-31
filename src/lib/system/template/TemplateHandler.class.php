@@ -102,6 +102,12 @@ class TemplateHandler extends SingletonFactory {
 	protected $templateName = 'template';
 	
 	/**
+	 * Contains the template of this request.
+	 * @var \ultimate\data\template\Template
+	 */
+	protected $template = null;
+	
+	/**
 	 * Returns the custom output of the template associated with the given information.
 	 * 
 	 * @since	1.0.0
@@ -122,11 +128,11 @@ class TemplateHandler extends SingletonFactory {
 		
 		// get template
 		$template = $this->getTemplate($layout->__get('layoutID'));
-		$template = $this->getRealTemplate($template, $requestType);
+		$this->template = $this->getRealTemplate($template, $requestType);
 		
 		// gathering output
-		$blocks = $template->__get('blocks');
-		$output = $this->getGeneratedOutput($template, $layout, $requestObject, $requestType, $blocks);
+		$blocks = $this->template->__get('blocks');
+		$output = $this->getGeneratedOutput($this->template, $layout, $requestObject, $requestType, $blocks);
 		
 		return $output;
 	}
@@ -146,12 +152,12 @@ class TemplateHandler extends SingletonFactory {
 	public function getFullOutput($requestType, Layout $layout, $requestObject, IPage $page) {
 		$output = $this->getCustomOutputOnly($requestType, $layout, $requestObject);
 		
-		if ($template->__get('showWidgetArea')) {
-			$this->initWidgetArea($template, $page);
+		if ($this->template->__get('showWidgetArea')) {
+			$this->initWidgetArea($this->template, $page);
 		}
 		
 		// build menu
-		$this->buildMenu($template, $requestObject, $requestType);
+		$this->buildMenu($this->template, $requestObject, $requestType);
 		
 		// assigning template variables
 		$blockIDs = array_keys($blocks);
