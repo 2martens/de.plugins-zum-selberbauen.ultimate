@@ -724,7 +724,7 @@ Nachdem alle bevorzugten Inhalte dargestellt sind, werden die übrigen Inhalte a
     
     <category name="ultimate.index">
         <item name="ultimate.index.copyright"><![CDATA[<a href="http://www.plugins-zum-selberbauen.de/"{if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if}>CMS: <strong>Ultimate CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, entwickelt von <strong>Jim Martens</strong></a>]]></item>
-        <item name="ultimate.index.beta"><![CDATA[Bei der Software handelt es sich um eine Betaversion. Trotz aller vorausgehenden Tests können noch Fehler vorhanden sein. Diese bitte im <a href="http://ultimate.plugins-zum-selberbauen.de/forum">Betaforum</a> oder auf <a href="https://github.com/frmwrk123/de.plugins-zum-selberbauen.ultimate">Github</a> melden.]]></item>
+        <item name="ultimate.index.beta"><![CDATA[Ultimate CMS: Bei der Software handelt es sich um eine Betaversion. Trotz aller vorausgehenden Tests können noch Fehler vorhanden sein. Diese bitte im <a href="http://ultimate.plugins-zum-selberbauen.de/forum">Betaforum</a> oder auf <a href="https://github.com/frmwrk123/de.plugins-zum-selberbauen.ultimate">Github</a> melden.]]></item>
     </category>
 	
 	<!-- this category is used for all layout names -->
