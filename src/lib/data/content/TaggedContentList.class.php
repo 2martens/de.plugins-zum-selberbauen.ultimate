@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\content;
+use ultimate\system\cache\builder\ContentPageCacheBuilder;
 use wcf\data\tag\Tag;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\tagging\TagEngine;
@@ -55,15 +56,18 @@ class TaggedContentList extends ContentList {
 		
 		$this->getConditionBuilder()->add('tag_to_object.objectTypeID = ? AND tag_to_object.languageID = ? AND tag_to_object.tagID = ?', array(TagEngine::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.ultimate.content'), $tag->languageID, $tag->tagID));
 		$this->getConditionBuilder()->add('content.contentID = tag_to_object.objectID');
+		$contentIDs = ContentPageCacheBuilder::getInstance()->getData(array(), 'contentIDsToPageID');
+		$this->getConditionBuilder()->add('tag_to_object.objectID NOT IN(?)', array($contentIDs));
 	}
 	
 	/**
-	 * @see	wcf\data\DatabaseObjectList::countObjects()
+	 * @see	\wcf\data\DatabaseObjectList::countObjects()
 	 */
 	public function countObjects() {
 		$sql = 'SELECT COUNT(*) AS count
 		        FROM   wcf'.WCF_N.'_tag_to_object tag_to_object,
-		               ultimate'.WCF_N.'_content content
+		               ultimate'.WCF_N.'_content content,
+		               ultimate'.WCF_N.'_content_to_page content_to_page
 		        '.$this->sqlConditionJoins.'
 		        '.$this->getConditionBuilder();
 		$statement = WCF::getDB()->prepareStatement($sql);
@@ -73,13 +77,14 @@ class TaggedContentList extends ContentList {
 	}
 	
 	/**
-	 * @see	wcf\data\DatabaseObjectList::readObjectIDs()
+	 * @see	\wcf\data\DatabaseObjectList::readObjectIDs()
 	 */
 	public function readObjectIDs() {
 		$this->objectIDs = array();
 		$sql = 'SELECT tag_to_object.objectID
 		        FROM   wcf'.WCF_N.'_tag_to_object tag_to_object,
-		               ultimate'.WCF_N.'_content content
+		               ultimate'.WCF_N.'_content content,
+		               ultimate'.WCF_N.'_content_to_page content_to_page
 		        '.$this->sqlConditionJoins.'
 		        '.$this->getConditionBuilder().'
 		        '.(!empty($this->sqlOrderBy) ? 'ORDER BY '.$this->sqlOrderBy : '');
@@ -91,7 +96,7 @@ class TaggedContentList extends ContentList {
 	}
 	
 	/**
-	 * @see	wcf\data\DatabaseObjectList::readObjects()
+	 * @see	\wcf\data\DatabaseObjectList::readObjects()
 	 */
 	public function readObjects() {
 		if ($this->objectIDs === null) $this->readObjectIDs();
