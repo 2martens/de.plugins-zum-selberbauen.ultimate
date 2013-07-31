@@ -63,6 +63,12 @@
             <eventname>userNotice</eventname>
             <templatecode><![CDATA[{include file='__betaNotice' application='ultimate'}]]></templatecode>
         </templatelistener>
+        <templatelistener name="copyright">
+            <environment>admin</environment>
+            <templatename>footer</templatename>
+            <eventname>copyright</eventname>
+            <templatecode><![CDATA[{include file='__copyright' application='ultimate'}]]></templatecode>
+        </templatelistener>
         <!-- /ACP -->
 	</import>
 </data>
