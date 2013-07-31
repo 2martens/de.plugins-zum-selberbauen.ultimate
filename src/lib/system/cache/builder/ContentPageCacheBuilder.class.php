@@ -35,7 +35,7 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
  * 
  * Provides two variables:
  * * \ultimate\data\content\TaggedContent[] contentsToPageID (pageID => content)
- * * integer[] contentIDsToPageID (pageID => contentID)
+ * * integer[] contentIDToPageID (pageID => contentID)
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
