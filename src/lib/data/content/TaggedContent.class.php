@@ -95,7 +95,7 @@ class TaggedContent extends TaggableContent implements ITagged {
 		foreach ($languages as $languageID => $language) {
 			/* @var $language \wcf\data\language\Language */
 			$tmpTags = TagEngine::getInstance()->getObjectTags(
-				'de.plugins-zum-selberbauen.ultimate.contentTaggable',
+				'de.plugins-zum-selberbauen.ultimate.content',
 				$this->__get('contentID'),
 				array($languageID)
 			);

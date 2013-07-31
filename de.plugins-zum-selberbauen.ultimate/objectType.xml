@@ -89,9 +89,9 @@
         
         <!-- taggable items -->
         <type>
-            <name>de.plugins-zum-selberbauen.ultimate.contentTaggable</name>
+            <name>de.plugins-zum-selberbauen.ultimate.content</name>
             <definitionname>com.woltlab.wcf.tagging.taggableObject</definitionname>
-            <classname><![CDATA[ultimate\data\content\Content]]></classname>
+            <classname><![CDATA[ultimate\data\content\TaggableContent]]></classname>
         </type>
         <!-- /taggable types -->
         

@@ -143,7 +143,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		foreach ($languages as $languageID => $language) {
 			// group tags by language
 			$this->tagsI18n[$languageID] = TagEngine::getInstance()->getObjectTags(
-				'de.plugins-zum-selberbauen.ultimate.contentTaggable', 
+				'de.plugins-zum-selberbauen.ultimate.content', 
 				$this->content->__get('contentID'), 
 				array($languageID)
 			);
@@ -247,7 +247,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 				$this->tagsI18n[$languageID] = '';
 				continue;
 			}
-			TagEngine::getInstance()->addObjectTags('de.plugins-zum-selberbauen.ultimate.contentTaggable', $this->content->__get('contentID'), $tags, $languageID);
+			TagEngine::getInstance()->addObjectTags('de.plugins-zum-selberbauen.ultimate.content', $this->content->__get('contentID'), $tags, $languageID);
 			$this->tagsI18n[$languageID] = Tag::buildString($tags);
 		}
 		$this->saved();

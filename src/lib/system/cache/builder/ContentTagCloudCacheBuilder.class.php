@@ -52,7 +52,7 @@ class ContentTagCloudCacheBuilder extends TagCloudCacheBuilder {
 	 */
 	protected function rebuild(array $parameters) {
 		/* @var $objectType \wcf\data\object\type\ObjectType */
-		$objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.tagging.taggableObject', 'de.plugins-zum-selberbauen.ultimate.contentTaggable');
+		$objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.tagging.taggableObject', 'de.plugins-zum-selberbauen.ultimate.content');
 		$this->objectTypeIDs = array(
 		    intval($objectType->__get('objectTypeID'))
 		);
