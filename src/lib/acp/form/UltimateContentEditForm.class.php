@@ -220,6 +220,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 				'authorID' => WCF::getUser()->userID,
 				'contentTitle' => $this->subject,
 				'contentDescription' => $this->description,
+				'contentSlug' => $this->slug,
 				'contentText' => $this->text,
 				'enableBBCodes' => $this->enableBBCodes,
 				'enableHtml' => $this->enableHtml,
