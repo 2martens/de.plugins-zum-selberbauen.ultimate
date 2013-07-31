@@ -81,7 +81,7 @@ class IndexPage extends AbstractPage {
 	public function assignVariables() {
 		parent::assignVariables();
 		// get output
-		$this->output = TemplateHandler::getInstance()->getOutput('index', $this->layout, null, $this);
+		$this->output = TemplateHandler::getInstance()->getFullOutput('index', $this->layout, null, $this);
 	}
 	
 	/**

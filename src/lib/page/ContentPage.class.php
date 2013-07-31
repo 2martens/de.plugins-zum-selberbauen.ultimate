@@ -124,7 +124,7 @@ class ContentPage extends AbstractPage {
 	public function assignVariables() {
 		parent::assignVariables();
 		// get output
-		$this->output = TemplateHandler::getInstance()->getOutput('content', $this->layout, $this->content, $this);
+		$this->output = TemplateHandler::getInstance()->getFullOutput('content', $this->layout, $this->content, $this);
 	}
 	
 	/**
