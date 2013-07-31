@@ -6,7 +6,11 @@
 	<tr id="content{@$content->contentID}" class="ultimateContent jsClipboardObject" data-content-id="{@$content->contentID}" data-element-id="{@$content->contentID}">
 		<td class="columnText columnSubject">
 			<h3>
+			{if $content->page|isset}
+				<a href="{linkExtended application='ultimate' pageSlug=$content->page->pageSlug}{/linkExtended}" class="messageGroupLink" data-content-id="{@$content->contentID}">{$content->page->__toString()|wordwrap:35}</a>
+			{else}
 				<a href="{linkExtended application='ultimate' date=$content->publishDateObject->format('Y-m-d') contentSlug=$content->contentSlug}{/linkExtended}" class="messageGroupLink" data-content-id="{@$content->contentID}">{$content->__toString()|wordwrap:35}</a>
+			{/if}
 			</h3>
 			
 			<small>

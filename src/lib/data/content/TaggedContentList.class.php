@@ -27,6 +27,7 @@
  */
 namespace ultimate\data\content;
 use ultimate\system\cache\builder\ContentPageCacheBuilder;
+use ultimate\system\cache\builder\PageCacheBuilder;
 use wcf\data\tag\Tag;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\tagging\TagEngine;
@@ -56,8 +57,6 @@ class TaggedContentList extends ContentList {
 		
 		$this->getConditionBuilder()->add('tag_to_object.objectTypeID = ? AND tag_to_object.languageID = ? AND tag_to_object.tagID = ?', array(TagEngine::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.ultimate.content'), $tag->languageID, $tag->tagID));
 		$this->getConditionBuilder()->add('content.contentID = tag_to_object.objectID');
-		$contentIDs = ContentPageCacheBuilder::getInstance()->getData(array(), 'contentIDsToPageID');
-		$this->getConditionBuilder()->add('tag_to_object.objectID NOT IN(?)', array($contentIDs));
 	}
 	
 	/**
@@ -102,5 +101,12 @@ class TaggedContentList extends ContentList {
 		if ($this->objectIDs === null) $this->readObjectIDs();
 		$this->conditionBuilder = new PreparedStatementConditionBuilder();
 		parent::readObjects();
+		$pageIDs = array_flip(ContentPageCacheBuilder::getInstance()->getData(array(), 'contentIDsToPageID'));
+		$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
+		foreach ($this->objects as $objectID => &$object) {
+			if (isset($pageIDs[$objectID])) {
+				$object->page = $pages[$pageIDs[$objectID]];
+			}
+		}
 	}
 }

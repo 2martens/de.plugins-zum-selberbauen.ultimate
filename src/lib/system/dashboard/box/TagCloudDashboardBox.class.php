@@ -45,7 +45,7 @@ use wcf\system\WCF;
 class TagCloudDashboardBox extends AbstractSidebarDashboardBox {
 	/**
 	 * tag cloud
-	 * @var \wcf\system\tagging\TypedTagCloud
+	 * @var \wcf\system\tagging\TagCloud
 	 */
 	public $tagCloud = null;
 	
@@ -76,7 +76,7 @@ class TagCloudDashboardBox extends AbstractSidebarDashboardBox {
 		WCF::getTPL()->assign(array(
 			'tags' => $this->tagCloud->getTags()
 		));
-			
+		
 		return WCF::getTPL()->fetch('tagCloudBox');
 	}
 }
