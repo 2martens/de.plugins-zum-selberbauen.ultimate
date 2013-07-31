@@ -644,8 +644,8 @@ Für die InlineEdit braucht man die gleichen Rechte um Inhalte zu schreiben, zu 
     </category>
     
     <category name="wcf.tagging">
-        <item name="wcf.tagging.objectType.de.plugins-zum-selberbauen.ultimate.content"><![CDATA[Inhalte]]></item>
-        <item name="wcf.tagging.taggedObjects.de.plugins-zum-selberbauen.ultimate.content"><![CDATA[Inhalte mit dem Tag „{$tag->name}“]]></item>
+        <item name="wcf.tagging.objectType.de.plugins-zum-selberbauen.ultimate.content"><![CDATA[Artikel]]></item>
+        <item name="wcf.tagging.taggedObjects.de.plugins-zum-selberbauen.ultimate.content"><![CDATA[Artikel mit dem Tag „{$tag->name}“]]></item>
     </category>
 	
 	<category name="wcf.user.notification">
@@ -716,7 +716,7 @@ Für die InlineEdit braucht man die gleichen Rechte um Inhalte zu schreiben, zu 
 		<item name="ultimate.content.commentResponse"><![CDATA[Inhalt-Antwort]]></item>
 		<item name="ultimate.content.comments"><![CDATA[Kommentare]]></item>
 		<item name="ultimate.content.authorVCard"><![CDATA[{$author} hat diesen Inhalt verfasst.]]></item>
-        <item name="ultimate.content.contents"><![CDATA[Inhalte]]></item>
+        <item name="ultimate.content.contents"><![CDATA[Artikel]]></item>
         <item name="ultimate.content.contentTitle"><![CDATA[Titel]]></item>
 	</category>
 	

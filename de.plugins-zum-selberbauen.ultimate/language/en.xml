@@ -646,8 +646,8 @@ For the InlineEdit you require the same rights to write, edit or delete contents
     </category>
     
     <category name="wcf.tagging">
-        <item name="wcf.tagging.objectType.de.plugins-zum-selberbauen.ultimate.content"><![CDATA[Contents]]></item>
-        <item name="wcf.tagging.taggedObjects.de.plugins-zum-selberbauen.ultimate.content"><![CDATA[Find contents tagged with “{$tag->name}”]]></item>
+        <item name="wcf.tagging.objectType.de.plugins-zum-selberbauen.ultimate.content"><![CDATA[Articles]]></item>
+        <item name="wcf.tagging.taggedObjects.de.plugins-zum-selberbauen.ultimate.content"><![CDATA[Find articles tagged with “{$tag->name}”]]></item>
     </category>
 	
 	<category name="wcf.user.notification">
@@ -718,7 +718,7 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 		<item name="ultimate.content.commentResponse"><![CDATA[Content response]]></item>
 		<item name="ultimate.content.comments"><![CDATA[Comments]]></item>
 		<item name="ultimate.content.authorVCard"><![CDATA[This content was writty by {$author}.]]></item>
-        <item name="ultimate.content.contents"><![CDATA[Contents]]></item>
+        <item name="ultimate.content.contents"><![CDATA[Articles]]></item>
         <item name="ultimate.content.contentTitle"><![CDATA[Title]]></item>
 	</category>
 	
