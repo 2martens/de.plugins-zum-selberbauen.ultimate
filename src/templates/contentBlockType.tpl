@@ -7,7 +7,7 @@
 				<header class="boxHeadline">
 					{if !$block->hideTitles}
 						<h1 itemprop="name">
-							{if $requestType != 'content'}
+							{if $requestType != 'content' && $requestType != 'page'}
 								<a class="link" href="{$readMoreLink[$contentID]}" itemprop="url">{lang}{$content->contentTitle}{/lang}</a>
 							{else}
 								{lang}{$content->contentTitle}{/lang}	
