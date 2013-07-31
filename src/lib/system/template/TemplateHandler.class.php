@@ -34,6 +34,7 @@ use ultimate\data\IUltimateData;
 use ultimate\system\blocktype\BlockTypeHandler;
 use ultimate\system\cache\builder\CategoryCacheBuilder;
 use ultimate\system\cache\builder\ContentCategoryCacheBuilder;
+use ultimate\system\cache\builder\CurrentMenuCacheBuilder;
 use ultimate\system\cache\builder\PageCacheBuilder;
 use ultimate\system\cache\builder\TemplateCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
@@ -310,6 +311,8 @@ class TemplateHandler extends SingletonFactory {
 		$menu = $template->__get('menu');
 		if ($menu !== null) {
 			CustomMenu::getInstance()->buildMenu($menu);
+			// reset menu cache
+			CurrentMenuCacheBuilder::getInstance()->reset();
 			if ($requestType != 'index') {
 				$activeMenuItem = $requestObject->getTitle();
 				CustomMenu::getInstance()->setActiveMenuItem($activeMenuItem);
@@ -358,6 +361,8 @@ class TemplateHandler extends SingletonFactory {
 			} else {
 				CustomMenu::getInstance()->setActiveMenuItem('ultimate.header.menu.index');
 			}
+			// rebuild menu cache
+			CurrentMenuCacheBuilder::getInstance()->getData(array(), 'currentMenuItems');
 		}
 	}
 	

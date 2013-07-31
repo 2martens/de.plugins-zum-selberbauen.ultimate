@@ -637,6 +637,10 @@ If all featured contents are displayed the remaining contents are automatically 
 	<category name="wcf.dashboard">
 		<item name="wcf.dashboard.objectType.de.plugins-zum-selberbauen.ultimate.template"><![CDATA[Template (Ultimate CMS)]]></item>
 	</category>
+    
+    <category name="wcf.page">
+        <item name="wcf.page.sitemap.ultimate"><![CDATA[Website]]></item>
+    </category>
 	
 	<category name="wcf.user.notification">
 		<item name="wcf.user.notification.content.comment.mail"><![CDATA[{@$author->username} wrote a comment about your content:
