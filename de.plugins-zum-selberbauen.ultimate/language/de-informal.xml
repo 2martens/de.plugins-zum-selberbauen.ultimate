@@ -105,6 +105,10 @@
 		<!-- /widget -->
 		<!-- /admin -->
 	</category>
+    
+    <category name="wcf.acp.index">
+        <item name="wcf.acp.index.system.software.ultimateVersion"><![CDATA[Ultimate CMS-Version]]></item>
+    </category>
 	
 	<category name="wcf.acp.menu">
 		<!-- core items -->
@@ -713,6 +717,11 @@ Nachdem alle bevorzugten Inhalte dargestellt sind, werden die übrigen Inhalte a
 		<item name="ultimate.error.noExistingTemplates"><![CDATA[Es existieren keine Templates.]]></item>
 		<item name="ultimate.error.missingTemplate"><![CDATA[{if $type == 'category'}Dieser Kategorie{/if}{if $type == 'content'}Diesem Inhalt{/if}{if $type == 'page'}Dieser Seite{/if}{if $type == 'index'}Der Startseite{/if} wurde kein Template zugewiesen.]]></item>
 	</category>
+    
+    <category name="ultimate.index">
+        <item name="ultimate.index.copyright"><![CDATA[<a href="http://www.plugins-zum-selberbauen.de/"{if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if}>CMS: <strong>Ultimate CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, entwickelt von <strong>Jim Martens</strong></a>]]></item>
+        <item name="ultimate.index.beta"><![CDATA[Bei der Software handelt es sich um eine Betaversion. Trotz aller vorausgehenden Tests können noch Fehler vorhanden sein. Diese bitte im <a href="http://ultimate.plugins-zum-selberbauen.de/forum">Betaforum</a> oder auf <a href="https://github.com/frmwrk123/de.plugins-zum-selberbauen.ultimate">Github</a> melden.]]></item>
+    </category>
 	
 	<!-- this category is used for all layout names -->
 	<category name="ultimate.layout">

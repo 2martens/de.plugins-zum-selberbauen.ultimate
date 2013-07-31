@@ -31,6 +31,15 @@
 			<templatecode><![CDATA[{@$__wcf->getUltimateStyleHandler()->getStylesheet()}]]></templatecode>
 		</templatelistener>
 		<!-- /frontend headInclude -->
+        
+        <!-- frontend copyright -->
+        <templatelistener name="copyright">
+            <environment>user</environment>
+            <templatename>footer</templatename>
+            <eventname>copyright</eventname>
+            <templatecode><![CDATA[{include file='__copyright' application='ultimate'}]]></templatecode>
+        </templatelistener>
+        <!-- /frontend copyright -->
 		
 		<!-- ACP logo -->
 		<templatelistener name="headerLogoUltimateACP">
@@ -40,5 +49,20 @@
 			<templatecode><![CDATA[<img src="{@$__wcf->getPath()}acp/images/wcfLogo2.svg" alt="" width="300" height="58" />]]></templatecode>
 		</templatelistener>
 		<!-- /ACP logo -->
+        
+        <!-- ACP -->
+        <templatelistener name="ultimateVersion">
+            <environment>admin</environment>
+            <templatename>index</templatename>
+            <eventname>softwareVersions</eventname>
+            <templatecode><![CDATA[{include file='__ultimateVersion' application='ultimate'}]]></templatecode>
+        </templatelistener>
+        <templatelistener name="betaNotice">
+            <environment>admin</environment>
+            <templatename>index</templatename>
+            <eventname>userNotice</eventname>
+            <templatecode><![CDATA[{include file='__betaNotice' application='ultimate'}]]></templatecode>
+        </templatelistener>
+        <!-- /ACP -->
 	</import>
 </data>
