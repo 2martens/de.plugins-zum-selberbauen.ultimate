@@ -114,7 +114,7 @@ class CategoryPage extends AbstractPage {
 	public function assignVariables() {
 		parent::assignVariables();
 		// get output
-		$this->output = TemplateHandler::getInstance()->getFullOutput('category', $this->layout, $this->category, $this);
+		$this->output = TemplateHandler::getInstance()->getOutput('category', $this->layout, $this->category, $this);
 	}
 	
 	/**

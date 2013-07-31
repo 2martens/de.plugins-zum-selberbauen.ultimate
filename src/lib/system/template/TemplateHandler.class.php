@@ -108,7 +108,7 @@ class TemplateHandler extends SingletonFactory {
 	protected $template = null;
 	
 	/**
-	 * Returns the custom output of the template associated with the given information.
+	 * Returns the output of the template associated with the given information.
 	 * 
 	 * @since	1.0.0
 	 * @api
@@ -116,9 +116,10 @@ class TemplateHandler extends SingletonFactory {
 	 * @param	string								$requestType	(category, content, index, page)
 	 * @param	\ultimate\data\layout\Layout		$layout
 	 * @param	\ultimate\data\IUltimateData|null	$requestObject	(null only if $requestType is index)
+	 * @param	\wcf\page\IPage						$page
 	 * @return	string
 	 */
-	public function getCustomOutputOnly($requestType, Layout $layout, $requestObject) {
+	public function getOutput($requestType, Layout $layout, $requestObject, IPage $page) {
 		$requestType = strtolower(StringUtil::trim($requestType));
 		if ($requestType != 'index') {
 			if (!($requestObject instanceof IUltimateData)) {
@@ -133,24 +134,6 @@ class TemplateHandler extends SingletonFactory {
 		// gathering output
 		$blocks = $this->template->__get('blocks');
 		$output = $this->getGeneratedOutput($this->template, $layout, $requestObject, $requestType, $blocks);
-		
-		return $output;
-	}
-	
-	/**
-	 * Returns the full output of the template associated with the given information.
-	 * 
-	 * @since	1.0.0
-	 * @api
-	 * 
-	 * @param	string								$requestType	(category, content, index, page)
-	 * @param	\ultimate\data\layout\Layout		$layout
-	 * @param	\ultimate\data\IUltimateData|null	$requestObject	(null only if $requestType is index)
-	 * @param	\wcf\page\IPage						$page
-	 * @return	string
-	 */
-	public function getFullOutput($requestType, Layout $layout, $requestObject, IPage $page) {
-		$output = $this->getCustomOutputOnly($requestType, $layout, $requestObject);
 		
 		if ($this->template->__get('showWidgetArea')) {
 			$this->initWidgetArea($this->template, $page);

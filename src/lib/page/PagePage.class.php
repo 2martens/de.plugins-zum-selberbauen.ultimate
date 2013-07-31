@@ -109,7 +109,7 @@ class PagePage extends AbstractPage {
 	public function assignVariables() {
 		parent::assignVariables();
 		// get output
-		$this->output = TemplateHandler::getInstance()->getFullOutput('page', $this->layout, $this->page, $this);
+		$this->output = TemplateHandler::getInstance()->getOutput('page', $this->layout, $this->page, $this);
 	}
 	
 	/**
