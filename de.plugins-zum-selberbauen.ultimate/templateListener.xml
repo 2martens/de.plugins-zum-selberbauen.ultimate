@@ -30,6 +30,13 @@
 			<eventname>stylesheets</eventname>
 			<templatecode><![CDATA[{@$__wcf->getUltimateStyleHandler()->getStylesheet()}]]></templatecode>
 		</templatelistener>
+        
+        <templatelistener name="includeUltimateLogo">
+            <environment>user</environment>
+            <templatename>header</templatename>
+            <eventname>headerLogo</eventname>
+            <templatecode><![CDATA[{include file='__headerLogo' application='ultimate'}]]></templatecode>
+        </templatelistener>
 		<!-- /frontend headInclude -->
         
         <!-- frontend copyright -->
