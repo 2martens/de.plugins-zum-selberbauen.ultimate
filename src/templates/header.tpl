@@ -98,7 +98,7 @@
 					</aside>
 					
 					{if (!$useDefaultSidebar|isset || ($useDefaultSidebar|isset && ULTIMATE_GENERAL_TEMPLATE_COLLAPSIBLE_SIDEBARS)) && $sidebarOrientation|isset && $sidebarOrientation == 'right'}
-						<script>
+						<script data-relocate="true" type="text/javascript">
 							//<![CDATA[
 							$(function() {
 								new WCF.Collapsible.Sidebar();
