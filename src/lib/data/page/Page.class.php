@@ -90,7 +90,7 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**
 	 * Returns the page title without language interpreting.
 	 * 
-	 * To use language interpreting, use magic toString method.
+	 * To use language interpreting, use getLangTitle method.
 	 * 
 	 * @return	string
 	 */
@@ -141,6 +141,15 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**
 	 * Returns the title of this page.
 	 * 
+	 * @return	string
+	 */
+	public function getLangTitle() {
+		return WCF::getLanguage()->get($this->pageTitle);
+	}
+	
+	/**
+	 * Returns the title of this page.
+	 *
 	 * @return	string
 	 */
 	public function __toString() {

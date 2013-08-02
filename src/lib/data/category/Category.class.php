@@ -68,7 +68,7 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**
 	 * Returns the title of this category (without language interpreting).
 	 * 
-	 * To use language interpreting, use magic toString method.
+	 * To use language interpreting, use getLangTitle method.
 	 * 
 	 * @return	string
 	 */
@@ -79,6 +79,15 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**
 	 * Returns the title of this category.
 	 * 
+	 * @return	string
+	 */
+	public function getLangTitle() {
+		return WCF::getLanguage()->get($this->categoryTitle);
+	}
+	
+	/**
+	 * Returns the title of this category.
+	 *
 	 * @return	string
 	 */
 	public function __toString() {
