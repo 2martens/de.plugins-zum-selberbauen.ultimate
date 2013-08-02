@@ -1,10 +1,14 @@
 <script data-relocate="true" type="text/javascript">
-{if MODULE_LIKE && $__wcf->getSession()->getPermission('user.like.canViewLike')}new ULTIMATE.Content.Like({if $__wcf->getUser()->userID && $__wcf->getSession()->getPermission('user.like.canLike')}1{else}0{/if}, {@LIKE_ENABLE_DISLIKE}, {@LIKE_SHOW_SUMMARY}, {@LIKE_ALLOW_FOR_OWN_CONTENT});{/if}
-{if $__wcf->user->userID}
-	{if $__wcf->getSession()->getPermission('admin.content.ultimate.canEditContent')}
-		var $inlineEditor = new ULTIMATE.Content.InlineEditor(0);
+//<![CDATA[
+$(function() {	
+	{if MODULE_LIKE && $__wcf->getSession()->getPermission('user.like.canViewLike')}new ULTIMATE.Content.Like({if $__wcf->getUser()->userID && $__wcf->getSession()->getPermission('user.like.canLike')}1{else}0{/if}, {@LIKE_ENABLE_DISLIKE}, {@LIKE_SHOW_SUMMARY}, {@LIKE_ALLOW_FOR_OWN_CONTENT});{/if}
+	{if $__wcf->user->userID}
+		{if $__wcf->getSession()->getPermission('admin.content.ultimate.canEditContent')}
+			var $inlineEditor = new ULTIMATE.Content.InlineEditor(0);
+		{/if}
 	{/if}
-{/if}
+});
+//]]>
 </script>
 
 {if !$anchor|isset}{assign var=anchor value=$__wcf->getAnchor('top')}{/if}
