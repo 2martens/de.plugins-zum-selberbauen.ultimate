@@ -87,7 +87,7 @@
 						<td class="columnAuthor"><p><a href="{link application='ultimate' controller='UltimateContentList'}author={@$content->author}{/link}">{@$content->author}</a></p></td>
 						<td class="columnCategories">
 							<p>
-								{implode from=$content->categories key=categoryID item=category}<a href="{link application='ultimate' controller='UltimateContentList'}categoryID={@$category->categoryID}{/link}">{@$category}</a>{/implode}
+								{implode from=$content->categories key=categoryID item=category}<a href="{link application='ultimate' controller='UltimateContentList'}categoryID={@$category->categoryID}{/link}">{@$category->getLangTitle()}</a>{/implode}
 							</p>
 						</td>
 						<td class="columnTags">

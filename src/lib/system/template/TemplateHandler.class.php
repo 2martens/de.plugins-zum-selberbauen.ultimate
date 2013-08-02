@@ -149,7 +149,7 @@ class TemplateHandler extends SingletonFactory {
 			'blockIDs' => $blockIDs
 		));
 		if ($requestObject !== null) {
-			WCF::getTPL()->assign('title', $requestObject->__toString());
+			WCF::getTPL()->assign('title', $requestObject->getLangTitle());
 		}
 		
 		// assign custom meta values (if existing)
