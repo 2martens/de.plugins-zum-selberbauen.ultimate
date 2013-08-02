@@ -31,6 +31,7 @@ use ultimate\data\content\CategorizedContent;
 use ultimate\data\content\Content;
 use ultimate\data\content\ContentAction;
 use ultimate\data\content\ContentEditor;
+use ultimate\system\cache\builder\ContentCacheBuilder;
 use ultimate\system\cache\builder\ContentTagCloudCacheBuilder;
 use wcf\data\tag\Tag;
 use wcf\form\AbstractForm;
@@ -41,6 +42,7 @@ use wcf\system\language\I18nHandler;
 use wcf\system\menu\acp\ACPMenu;
 use wcf\system\request\LinkHandler;
 use wcf\system\tagging\TagEngine;
+use wcf\system\user\activity\event\UserActivityEventHandler;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
 use wcf\util\HeaderUtil;
@@ -252,6 +254,24 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 			TagEngine::getInstance()->addObjectTags('de.plugins-zum-selberbauen.ultimate.content', $this->content->__get('contentID'), $tags, $languageID);
 			$this->tagsI18n[$languageID] = Tag::buildString($tags);
 		}
+		
+		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
+		$content = $contents[$this->contentID];
+		
+		// create recent activity event if published
+		if ($this->content->__get('status') != 3 && $this->statusID == 3) {
+			$languageIDs = array_keys($this->tagsI18n);
+			foreach ($languageIDs as $languageID) {
+				UserActivityEventHandler::getInstance()->fireEvent(
+					'de.plugins-zum-selberbauen.ultimate.recentActivityEvent.content',
+					$this->contentID,
+					$languageID,
+					$content->__get('authorID'),
+					$content->__get('publishDate')
+				);
+			}
+		}
+		
 		$this->saved();
 		
 		$dateTime = DateUtil::getDateTimeByTimestamp($this->publishDateTimestamp);

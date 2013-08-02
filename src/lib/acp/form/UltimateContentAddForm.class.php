@@ -40,6 +40,7 @@ use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\menu\acp\ACPMenu;
 use wcf\system\tagging\TagEngine;
+use wcf\system\user\activity\event\UserActivityEventHandler;
 use wcf\system\Regex;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
@@ -329,6 +330,7 @@ class UltimateContentAddForm extends MessageForm {
 		$this->objectAction->executeAction();
 		
 		$returnValues = $this->objectAction->getReturnValues();
+		$content = $returnValues['returnValues'];
 		$contentID = $returnValues['returnValues']->contentID;
 		$updateEntries = array();
 		if (!I18nHandler::getInstance()->isPlainValue('subject')) {
@@ -365,6 +367,20 @@ class UltimateContentAddForm extends MessageForm {
 			}
 			TagEngine::getInstance()->addObjectTags('de.plugins-zum-selberbauen.ultimate.content', $contentID, $tags, $languageID);
 			$this->tagsI18n[$languageID] = implode(',', $tags);
+		}
+		
+		// create recent activity event if published
+		if ($content->__get('status') == 3) {
+			$languageIDs = array_keys($this->tagsI18n);
+			foreach ($languageIDs as $languageID) {
+				UserActivityEventHandler::getInstance()->fireEvent(
+					'de.plugins-zum-selberbauen.ultimate.recentActivityEvent.content',
+					$contentID,
+					$languageID,
+					$content->__get('authorID'),
+					$content->__get('publishDate')
+				);
+			}
 		}
 		
 		$this->saved();
