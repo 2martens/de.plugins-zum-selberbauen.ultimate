@@ -50,6 +50,7 @@ CREATE TABLE ultimate1_content (
 	enableBBCodes TINYINT(1) NOT NULL DEFAULT 1,
 	enableHtml TINYINT(1) NOT NULL DEFAULT 0,
 	enableSmilies TINYINT(1) NOT NULL DEFAULT 1,
+	cumulativeLikes MEDIUMINT(7) NOT NULL DEFAULT 0,
 	publishDate INT(10) NOT NULL DEFAULT 0,
 	lastModified INT(10) NOT NULL DEFAULT 0,
 	status INT(1) NOT NULL DEFAULT 0,

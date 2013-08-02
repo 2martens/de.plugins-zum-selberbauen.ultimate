@@ -102,5 +102,13 @@
             <classname><![CDATA[ultimate\system\category\LinkCategoryType]]></classname>
         </type>
         <!-- /category types -->
+        
+        <!-- Like -->
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.likeableContent</name>
+            <definitionname>com.woltlab.wcf.like.likeableObject</definitionname>
+            <classname>ultimate\data\content\LikeableContentProvider</classname>
+        </type>
+        <!-- /Like -->
     </import>
 </data>
