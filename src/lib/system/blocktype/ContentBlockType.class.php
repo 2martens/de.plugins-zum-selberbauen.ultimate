@@ -30,6 +30,7 @@ use ultimate\data\content\CategorizedContent;
 use ultimate\data\content\Content;
 use ultimate\data\content\TaggedContent;
 use ultimate\data\IUltimateData;
+use wcf\data\user\User;
 use wcf\data\user\UserProfile;
 use wcf\system\comment\CommentHandler;
 use wcf\system\language\I18nHandler;
@@ -422,13 +423,15 @@ class ContentBlockType extends AbstractBlockType {
 			$dateString = '<time itemprop="datePublished" datetime="'.DateUtil::format($dateTimeObject, 'c').'" class="datetime" data-timestamp="'.$timestamp.'" data-date="'.$date.'" data-time="'.$time.'" data-offset="'.$dateTimeObject->getOffset().'">'.$date.'</time>';
 			$timeString = '<time itemprop="datePublished" datetime="'.DateUtil::format($dateTimeObject, 'c').'" class="datetime" data-timestamp="'.$timestamp.'" data-date="'.$date.'" data-time="'.$time.'" data-offset="'.$dateTimeObject->getOffset().'">'.$time.'</time>';
 			$dateAndTime = '<time itemprop="datePublished" datetime="'.DateUtil::format($dateTimeObject, 'c').'" class="datetime" data-timestamp="'.$timestamp.'" data-date="'.$date.'" data-time="'.$time.'" data-offset="'.$dateTimeObject->getOffset().'">'.$dateAndTime.'</time>';
-			$authorUserProfile = new UserProfile($content->__get('author'));
+			$authorUserProfile = new UserProfile(new User($content->__get('authorID')));
+			
 			$author = '<div itemprop="creator" itemscope itemtype="http://schema.org/Person">
 				<a href="'
 				.LinkHandler::getInstance()->getLink(
-					'wcf\page\UserPage', 
+					'User', 
 					array(
-						'object' => $authorUserProfile
+						'object' => $authorUserProfile,
+						'application' => 'ultimate'
 					)
 				).
 				'" title="'.$authorUserProfile->username.'" class="framed">'
