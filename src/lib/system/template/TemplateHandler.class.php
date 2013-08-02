@@ -404,8 +404,10 @@ class TemplateHandler extends SingletonFactory {
 	 */
 	protected function assignMetaValues(IUltimateData $requestObject) {
 		$metaData = $requestObject->__get('metaData');
-		$metaDescription = $metaData['metaDescription'];
-		$metaKeywords = $metaData['metaKeywords'];
+		if (!empty($metaData)) {
+			$metaDescription = (isset($metaData['metaDescription']) ? $metaData['metaDescription'] : '');
+			$metaKeywords = (isset($metaData['metaKeywords']) ? $metaData['metaKeywords'] : '');
+		}
 		if (!empty($metaDescription)) {
 			MetaTagHandler::getInstance()->removeTag('description');
 			MetaTagHandler::getInstance()->addTag('description', 'description', $metaDescription);
