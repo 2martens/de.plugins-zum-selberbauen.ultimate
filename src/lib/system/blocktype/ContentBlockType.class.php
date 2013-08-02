@@ -34,6 +34,7 @@ use wcf\data\user\User;
 use wcf\data\user\UserProfile;
 use wcf\system\comment\CommentHandler;
 use wcf\system\language\I18nHandler;
+use wcf\system\like\LikeHandler;
 use wcf\system\request\LinkHandler;
 use wcf\system\request\UltimateLinkHandler;
 use wcf\system\WCF;
@@ -143,6 +144,12 @@ class ContentBlockType extends AbstractBlockType {
 	 * @var \wcf\data\comment\StructuredCommentList[]
 	 */
 	protected $commentLists = array();
+	
+	/**
+	 * Contains the like data.
+	 * @var \wcf\data\like\object\LikeObject[]
+	 */
+	protected $likeData = array();
 	
 	/**
 	 * @see \ultimate\system\blocktype\IBlockType::readData()
@@ -353,6 +360,17 @@ class ContentBlockType extends AbstractBlockType {
 		foreach ($this->contents as $contentID => $content) {
 			$this->commentLists[$contentID] = CommentHandler::getInstance()->getCommentList($this->commentManager, $this->objectTypeID,  $content->__get('contentID'));
 		}
+		
+		// fetch likes
+		if (MODULE_LIKE) {
+			$contentIDs = array();
+			foreach ($this->contents as $contentID => $content) {
+				$contentIDs[] = $contentID;
+			}
+			$objectType = LikeHandler::getInstance()->getObjectType('de.plugins-zum-selberbauen.ultimate.likeableContent');
+			LikeHandler::getInstance()->loadLikeObjects($objectType, $contentIDs);
+			$this->likeData = LikeHandler::getInstance()->getLikeObjects($objectType);
+		}
 	}
 	
 	/**
@@ -526,6 +544,8 @@ class ContentBlockType extends AbstractBlockType {
 			'commentCanAdd' => $this->commentManager->canAdd(WCF::getUser()->__get('userID')),
 			'commentsPerPage' => $this->commentManager->getCommentsPerPage(),
 			'commentLists' => $this->commentLists,
+			//like data
+			'likeData' => $this->likeData,
 			// dimensions and position
 			'height' => $this->block->__get('height')
 		));
