@@ -163,9 +163,10 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		
 		// read meta data
 		$metaData = $this->content->__get('metaData');
-		$this->metaDescription = $metaData['metaDescription'];
-		$this->metaKeywords = $metaData['metaKeywords'];
-		
+		if (!empty($metaData)) {
+			$this->metaDescription = (isset($metaData['metaDescription']) ? $metaData['metaDescription'] : '');
+			$this->metaKeywords = (isset($metaData['metaKeywords']) ? $metaData['metaKeywords'] : '');
+		}
 		I18nHandler::getInstance()->setOptions('subject', PACKAGE_ID, $this->subject, 'ultimate.content.\d+.contentTitle');
 		I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->description, 'ultimate.content.\d+.contentDescription');
 		I18nHandler::getInstance()->setOptions('text', PACKAGE_ID, $this->text, 'ultimate.content.\d+.contentText');
