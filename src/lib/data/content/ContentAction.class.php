@@ -28,11 +28,20 @@
 namespace ultimate\data\content;
 use ultimate\data\layout\LayoutAction;
 use ultimate\data\layout\LayoutList;
+use ultimate\system\cache\builder\ContentCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
+use wcf\data\smiley\SmileyCache;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\data\IMessageInlineEditorAction;
+use wcf\system\bbcode\BBCodeHandler;
+use wcf\system\bbcode\BBCodeParser;
+use wcf\system\bbcode\PreParser;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\PermissionDeniedException;
+use wcf\system\exception\UserInputException;
 use wcf\system\exception\ValidateActionException;
+use wcf\system\language\I18nHandler;
+use wcf\system\WCF;
 use wcf\util\ArrayUtil;
 
 /**
@@ -45,7 +54,7 @@ use wcf\util\ArrayUtil;
  * @subpackage	data.content
  * @category	Ultimate CMS
  */
-class ContentAction extends AbstractDatabaseObjectAction {
+class ContentAction extends AbstractDatabaseObjectAction implements IMessageInlineEditorAction {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$className
 	 */
@@ -65,6 +74,12 @@ class ContentAction extends AbstractDatabaseObjectAction {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsUpdate
 	 */
 	protected $permissionsUpdate = array('admin.content.ultimate.canEditContent');
+	
+	/**
+	 * current content object
+	 * @var	\ultimate\data\content\Content
+	 */
+	protected $content = null;
 	
 	/**
 	 * Creates new content.
@@ -167,5 +182,103 @@ class ContentAction extends AbstractDatabaseObjectAction {
 		$layoutAction->executeAction();
 		// execute action
 		return call_user_func(array($this->className, 'deleteAll'), $objectIDs);
+	}
+	
+	// adjust
+	
+	/**
+	 * @see	wcf\data\IMessageInlineEditorAction::validateBeginEdit()
+	 */
+	public function validateBeginEdit() {
+		$this->parameters['objectID'] = (isset($this->parameters['objectID'])) ? intval($this->parameters['objectID']) : 0;
+		if (!$this->parameters['objectID']) {
+			throw new UserInputException('objectID');
+		}
+		else {
+			$this->content = new Content($this->parameters['objectID']);
+			if (!$this->content->__get('contentID')) {
+				throw new UserInputException('objectID');
+			}
+			
+			WCF::getSession()->checkPermissions($this->permissionsUpdate);
+		}
+	}
+	
+	/**
+	 * @see	wcf\data\IMessageInlineEditorAction::beginEdit()
+	 */
+	public function beginEdit() {
+		BBCodeHandler::getInstance()->setAllowedBBCodes(explode(',', WCF::getSession()->getPermission('user.message.allowedBBCodes')));
+		
+		WCF::getTPL()->assign(array(
+			'defaultSmilies' => SmileyCache::getInstance()->getCategorySmilies(),
+			'permissionCanUseSmilies' => 'user.message.canUseSmilies',
+			'content' => $this->content,
+			'wysiwygSelector' => 'messageEditor'.$this->content->__get('contentID')
+		));
+		
+		return array(
+			'actionName' => 'beginEdit',
+			'template' => WCF::getTPL()->fetch('contentInlineEditor', 'ultimate')
+		);
+	}
+	
+	/**
+	 * @see	wcf\data\IMessageInlineEditorAction::validateSave()
+	 */
+	public function validateSave() {
+		if (!isset($this->parameters['data']) || !isset($this->parameters['data']['message']) || empty($this->parameters['data']['message'])) {
+			throw new UserInputException('message');
+		}
+		
+		$this->validateBeginEdit();
+		$this->validateMessage($this->parameters['data']['message']);
+	}
+	
+	/**
+	 * Validates the message.
+	 * 
+	 * @param	string	$message
+	 */
+	public function validateMessage($message) {
+		// search for disallowed bbcodes
+		$disallowedBBCodes = BBCodeParser::getInstance()->validateBBCodes($message, explode(',', WCF::getSession()->getPermission('user.message.allowedBBCodes')));
+		if (!empty($disallowedBBCodes)) {
+			throw new UserInputException('text', WCF::getLanguage()->getDynamicVariable('wcf.message.error.disallowedBBCodes', array('disallowedBBCodes' => $disallowedBBCodes)));
+		}
+	}
+	
+	/**
+	 * @see	wcf\data\IMessageInlineEditorAction::save()
+	 */
+	public function save() {
+		$contentData = array(
+			'contentText' => $this->parameters['data']['message']
+		);
+		$isI18n = intval($this->parameters['data']['isI18n']);
+				
+		// pre-parse message text
+		$contentData['contentText'] = PreParser::getInstance()->parse($contentData['contentText'], explode(',', WCF::getSession()->getPermission('user.message.allowedBBCodes')));
+		$content = $this->content;
+		if ($isI18n) {
+			I18nHandler::getInstance()->register('text');
+			I18nHandler::getInstance()->setValues('text', array(
+				WCF::getUser()->getLanguage()->getObjectID() => $contentData['contentText']
+			));
+			I18nHandler::getInstance()->save('text', 'ultimate.content.'.$this->content->__get('contentID').'.contentText', 'ultimate.content', PACKAGE_ID);
+		} else {
+			// execute update action
+			$action = new ContentAction(array($this->content), 'update', array('data' => $contentData));
+			$action->executeAction();
+			
+			// load new post
+			$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
+			$content = $contents[$this->content->__get('contentID')];
+		}
+		
+		return array(
+			'actionName' => 'save',
+			'message' => $content->getFormattedMessage()
+		);
 	}
 }

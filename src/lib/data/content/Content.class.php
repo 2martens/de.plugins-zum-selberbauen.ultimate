@@ -28,10 +28,13 @@
 namespace ultimate\data\content;
 use ultimate\data\AbstractUltimateDatabaseObject;
 use wcf\data\user\User;
+use wcf\data\IMessage;
 use wcf\data\ITitledObject;
 use wcf\system\bbcode\MessageParser;
+use wcf\system\request\UltimateLinkHandler;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
+use wcf\util\StringUtil;
 
 /**
  * Represents a content entry.
@@ -46,7 +49,7 @@ use wcf\util\DateUtil;
  * @subpackage	data.content
  * @category	Ultimate CMS
  */
-class Content extends AbstractUltimateDatabaseObject implements ITitledObject {
+class Content extends AbstractUltimateDatabaseObject implements ITitledObject, IMessage {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableName
 	 */
@@ -94,7 +97,7 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**
 	 * Returns the title of this content (without language interpreting).
 	 *
-	 * To use language interpreting, use magic toString method.
+	 * To use language interpreting, use getLangTitle method.
 	 *
 	 * @return	string
 	 */
@@ -103,22 +106,122 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject {
 	}
 	
 	/**
-	 * Returns the title of this content.
+	 * Returns the language interpreted content title.
 	 * 
-	 * @return	string
+	 * @return string
 	 */
-	public function __toString() {
+	public function getLangTitle() {
 		return WCF::getLanguage()->get($this->contentTitle);
 	}
 	
 	/**
-	 * Returns the parsed content.
+	 * Returns the formatted text of this content.
 	 * 
 	 * @return	string
 	 */
-	public function getParsedContent() {
+	public function __toString() {
+		return $this->getFormattedMessage();
+	}
+	
+	/**
+	 * @see	\wcf\data\IMessage::getMessage()
+	 */
+	public function getMessage() {
+		return WCF::getLanguage()->get($this->contentText);
+	}
+	
+	/**
+	 * Returns the formatted content.
+	 * 
+	 * @return	string
+	 */
+	public function getFormattedMessage() {
 		MessageParser::getInstance()->setOutputType('text/html');
 		return MessageParser::getInstance()->parse(WCF::getLanguage()->get($this->contentText), $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
+	}
+	
+	/**
+	 * Returns a simplified version of the formatted content.
+	 *
+	 * @return	string
+	 */
+	public function getSimplifiedFormattedMessage() {
+		MessageParser::getInstance()->setOutputType('text/simplified-html');
+		return MessageParser::getInstance()->parse(WCF::getLanguage()->get($this->contentText), $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
+	}
+	
+	/**
+	 * Returns an excerpt of this content.
+	 *
+	 * @param	integer		$maxLength
+	 * 
+	 * @return	string
+	 */
+	public function getExcerpt($maxLength = 255) {
+		return StringUtil::truncateHTML($this->getSimplifiedFormattedMessage(), $maxLength);
+	}
+	
+	/**
+	 * Checks if the current user can see this content.
+	 * 
+	 * @return boolean
+	 */
+	public function isVisible() {
+		$isVisible = false;
+		if ($this->visibility == 'public') {
+			$isVisible = true;
+		}
+		elseif ($this->visibility == 'protected') {
+			$groupIDs = WCF::getUser()->getGroupIDs();
+			$contentGroupIDs = array_keys($this->groups);
+			$result = array_intersect($groupIDs, $contentGroupIDs);
+			if (!empty($result)) {
+				$isVisible = true;
+			}
+		} else {
+			$isVisible = (WCF::getUser()->__get('userID') == $this->authorID);
+		}
+		return $isVisible;
+	}
+	
+	/**
+	 * Returns message creation timestamp.
+	 *
+	 * @return	integer
+	 */
+	public function getTime() {
+		return $this->publishDate;
+	}
+	
+	/**
+	 * Returns author's user id.
+	 *
+	 * @return	integer
+	*/
+	public function getUserID() {
+		return $this->authorID;
+	}
+	
+	/**
+	 * Returns author's username.
+	 *
+	 * @return	string
+	*/
+	public function getUsername() {
+		return $this->author->username;
+	}
+	
+	/**
+	 * Returns the link to the object.
+	 *
+	 * @return	string
+	 */
+	public function getLink() {
+		return UltimateLinkHandler::getInstance()->getLink(null, array(
+			'application' => 'ultimate',
+			'date' => $this->publishDateObject->format('Y-m-d'),
+			'contentSlug' => $this->contentSlug
+		));
 	}
 	
 	/**

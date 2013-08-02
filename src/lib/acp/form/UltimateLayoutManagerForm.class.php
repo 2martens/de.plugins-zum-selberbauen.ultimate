@@ -137,7 +137,7 @@ class UltimateLayoutManagerForm extends AbstractForm {
 		/* @var $content \ultimate\data\content\Content */
 		foreach ($contents as $contentID => $content) {
 			$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($contentID, 'content');
-			$this->contentLayouts[$layout->__get('layoutID')] = $content->__toString();
+			$this->contentLayouts[$layout->__get('layoutID')] = $content->getLangTitle();
 		}
 		
 		$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
