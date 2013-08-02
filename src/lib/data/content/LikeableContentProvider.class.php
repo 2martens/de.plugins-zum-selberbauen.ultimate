@@ -44,22 +44,22 @@ class LikeableContentProvider extends AbstractObjectTypeProvider implements ILik
 	/**
 	 * @see	\wcf\data\object\type\AbstractObjectTypeProvider::$className
 	 */
-	public $className = 'wbb\data\post\Post';
+	public $className = 'ultimate\data\content\Content';
 	
 	/**
 	 * @see	\wcf\data\object\type\AbstractObjectTypeProvider::$decoratorClassName
 	 */
-	public $decoratorClassName = 'wbb\data\post\LikeablePost';
+	public $decoratorClassName = 'ultimate\data\content\LikeableContent';
 	
 	/**
 	 * @see	\wcf\data\object\type\AbstractObjectTypeProvider::$listClassName
 	 */
-	public $listClassName = 'wbb\data\post\PostList';
+	public $listClassName = 'ultimate\data\content\ContentList';
 	
 	/**
 	 * @see	\wcf\data\like\ILikeObjectTypeProvider::checkPermissions()
 	 */
 	public function checkPermissions(ILikeObject $content) {
-		return $content->canRead();
+		return $content->isVisible();
 	}
 }

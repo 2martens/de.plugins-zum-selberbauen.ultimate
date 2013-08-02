@@ -2170,7 +2170,7 @@ ULTIMATE.Content.Like = WCF.Like.extend({
 	 * @see	WCF.Like._getObjectID()
 	 */
 	_getObjectID: function(containerID) {
-		return this._containers[containerID].data('contentID');
+		return this._containers[containerID].data('objectID');
 	},
 
 	/**
