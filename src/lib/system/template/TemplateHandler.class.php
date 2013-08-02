@@ -346,7 +346,7 @@ class TemplateHandler extends SingletonFactory {
 						foreach ($contentCategories as $category) {
 							if (isset($menuItems[$category->getTitle()])) {
 								// determine breadcrumbs
-								$startParentID = $requestObject->__get('categoryParent');
+								$startParentID = $category->__get('categoryID');
 								$categories = CategoryCacheBuilder::getInstance()->getData(array(), 'categories');
 								$parents = $this->getParentCategories($startParentID, $categories);
 								break;
@@ -426,7 +426,7 @@ class TemplateHandler extends SingletonFactory {
 	protected function getParentCategories($categoryParentID, array $categories, array $parentCategories = array()) {
 		if ($categoryParentID) {
 			$parent = $categories[$categoryParentID];
-			$parentCategories[] = $parent;
+			$parentCategories[$categoryParentID] = $parent;
 			$categoryParentID = $parent->__get('categoryParent');
 			return $this->getParentCategories($categoryParentID, $categories, $parentCategories);
 		} else {
@@ -444,7 +444,7 @@ class TemplateHandler extends SingletonFactory {
 	protected function getParentPages($pageParentID, array $pages, array $parentPages = array()) {
 		if ($pageParentID) {
 			$parent = $pages[$pageParentID];
-			$parentPages[] = $parent;
+			$parentPages[$pageParentID] = $parent;
 			$pageParentID = $parent->__get('pageParent');
 			return $this->getParentPages($pageParentID, $pages, $parentPages);
 		} else {
