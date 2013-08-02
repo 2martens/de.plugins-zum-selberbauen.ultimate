@@ -44,6 +44,13 @@
         </type>
         <!-- /clipboard types -->
         
+        <!-- Visit Tracker -->
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.content</name>
+            <definitionname>com.woltlab.wcf.visitTracker.objectType</definitionname>
+        </type>
+        <!-- /Visit Tracker -->
+        
         <!-- commentable types -->
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.content.comment</name>
@@ -75,6 +82,16 @@
         <!-- /notification types -->
         
         <!-- recent activity types -->
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.likeableContent.recentActivityEvent</name>
+            <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
+            <classname><![CDATA[ultimate\system\user\activity\event\LikeableContentUserActivityEvent]]></classname>
+        </type>
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.recentActivityEvent.content</name>
+            <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
+            <classname>ultimate\system\user\activity\event\ContentUserActivityEvent</classname>
+        </type>
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.content.comment.recentActivityEvent</name>
             <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>

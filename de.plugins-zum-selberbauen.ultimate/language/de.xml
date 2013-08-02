@@ -700,13 +700,16 @@ Für die InlineEdit braucht man die gleichen Rechte um Inhalte zu schreiben, zu 
 	</category>
 	
 	<category name="wcf.user.profile">
-		<item name="wcf.user.profile.recentActivity.contentComment"><![CDATA[Hat einen Kommentar zu <a href="{linkExtended date=$content->publishDateObject->format('Y-m-d') contentSlug=$content->contentSlug}{/linkExtended}">{$content}</a> von <a href="{link controller='User' object=$author}{/link}">{$author->username}</a> geschrieben.]]></item>
+		<item name="wcf.user.profile.recentActivity.likedContent"><![CDATA[Mag <a href="{linkExtended application='ultimate' date=$content->publishDateObject->format('Y-m-d') contentSlug=$content->contentSlug}{/linkExtended}" class="ultimateContentLink" data-content-id="{@$content->contentID}">den Inhalt von <span>{$content->author->username}</span></a>.]]></item>
+        <item name="wcf.user.profile.recentActivity.contentComment"><![CDATA[Hat einen Kommentar zu <a href="{linkExtended date=$content->publishDateObject->format('Y-m-d') contentSlug=$content->contentSlug}{/linkExtended}">{$content}</a> von <a href="{link controller='User' object=$author}{/link}">{$author->username}</a> geschrieben.]]></item>
 		<item name="wcf.user.profile.recentActivity.contentCommentResponse"><![CDATA[Hat auf einen Kommentar von <a href="{link controller='User' object=$commentAuthor}{/link}">{$commentAuthor->username}</a> zu <a href="{linkExtended date=$content->publishDateObject->format('Y-m-d') contentSlug=$content->contentSlug}{/linkExtended}">{$content}</a> von <a href="{link controller='User' object=$author}{/link}">{$author->username}</a> geantwortet.]]></item>
 	</category>
 	
 	<category name="wcf.user.recentActivity">
 		<item name="wcf.user.recentActivity.de.plugins-zum-selberbauen.ultimate.content.comment.recentActivityEvent"><![CDATA[Inhaltskommentar]]></item>
 		<item name="wcf.user.recentActivity.de.plugins-zum-selberbauen.ultimate.content.comment.response.recentActivityEvent"><![CDATA[Antwort zu Inhaltskommentar]]></item>
+        <item name="wcf.user.recentActivity.de.plugins-zum-selberbauen.ultimate.recentActivityEvent.content"><![CDATA[Inhalt]]></item>
+        <item name="wcf.user.recentActivity.de.plugins-zum-selberbauen.ultimate.likeablePost.recentActivityEvent"><![CDATA[Like (Inhalt)]]></item>
 	</category>
 	
 	<!-- this category is used for all multilingual block fields -->
