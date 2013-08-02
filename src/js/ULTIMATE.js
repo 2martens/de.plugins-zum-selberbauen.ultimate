@@ -2197,7 +2197,7 @@ ULTIMATE.Content.Like = WCF.Like.extend({
 			summary.appendTo(this._containers[containerID].find('.messageBody > .messageFooter'));
 			summary.addClass('messageFooterNote');
 		}
-		$widgetContainer.find('.likeContainer').html(badge);
+		$widgetContainer.find('.likeContainer').append(badge);
 	},
 	
 	/**

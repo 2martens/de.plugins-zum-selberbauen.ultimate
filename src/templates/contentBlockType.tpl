@@ -9,17 +9,17 @@
 
 {if !$anchor|isset}{assign var=anchor value=$__wcf->getAnchor('top')}{/if}
 <div id="block-{$blockID}" class="block block-type-content" data-height="{$height}">
-	{if $contents|count > 1}
+	{if $requestType == 'category' || $requestType == 'index'}
 		<ul class="messageList" data-type="de.plugins-zum-selberbauen.ultimate.content">
 	{/if}
 	{assign var=displayedFeaturedContents value=0}
 	{foreach from=$contents key=contentID item=content}
 		{if $content->status == 3}
-			{if $contents|count > 1}
+			{if $requestType == 'category' || $requestType == 'index'}
 				<li id="content{@$content->contentID}" class="marginTop">
 			{/if}
 			
-				<article itemtype="http://schema.org/Article" itemscope="" class="{if $contents|count > 1}ultimateContent message dividers jsClipboardObject jsMessage{else}container containerPadding marginTop{/if}" 
+				<article itemtype="http://schema.org/Article" itemscope="" class="{if $requestType == 'category' || $requestType == 'index'}ultimateContent message dividers jsClipboardObject jsMessage{else}container containerPadding marginTop{/if}" 
 				data-can-edit="{if $__wcf->getSession()->getPermission('admin.content.ultimate.canEditContent')}1{else}0{/if}"
 				data-is-i18n="{literal}<?php if (strpos($this->v['content']->contentText, 'ultimate.content.') !== false) { ?>{/literal}1{literal}<?php } else { ?>{/literal}0{literal}<?php } ?>{/literal}"
 				data-object-id="{@$contentID}"
@@ -31,14 +31,14 @@
 				data-user-id="{@$content->authorID}">
 					
 					{if !$block->hideContent}
-						{if $contents|count > 1}
+						{if $requestType == 'category' || $requestType == 'index'}
 						<div>
 							<section class="messageContent">
 							<div>
 						{/if}
 					
-						<header class="{if $contents|count > 1}messageHeader{else}boxHeadline{/if}">
-							{if $contents|count > 1}
+						<header class="{if $requestType == 'category' || $requestType == 'index'}messageHeader{else}boxHeadline{/if}">
+							{if $requestType == 'category' || $requestType == 'index'}
 								<div class="messageHeadline">
 							{/if}
 							
@@ -50,17 +50,15 @@
 											{lang}{$content->contentTitle}{/lang}	
 										{/if}
 									</h1>
-									{if $contents|count > 1}
-										<p class="likeContainer">
-										
-										</p>
-									{/if}
 								{/if}
 								
+								{if $requestType == 'category' || $requestType == 'index'}
+									<p class="likeContainer">
+								{/if}
 								{if $contentMetaDisplaySelected[$requestType]|isset || $contentMetaDisplaySelected|count == 0}
 									{hascontent}
-										{if $contents|count > 1}
-											<p id="metaAbove-{$contentID}">
+										{if $requestType == 'category' || $requestType == 'index'}
+											<span class="meta" id="metaAbove-{$contentID}">
 										{else}
 											<small class="meta" id="metaAbove-{$contentID}">
 										{/if}
@@ -74,15 +72,18 @@
 												{/if}
 											{/content}
 										
-										{if $contents|count > 1}
-											</p>
+										{if $requestType == 'category' || $requestType == 'index'}
+											</span>
 										{else}
 											</small>
 										{/if}
 									{/hascontent}
 								{/if}
+								{if $requestType == 'category' || $requestType == 'index'}
+									</p>
+								{/if}
 							
-							{if $contents|count > 1}
+							{if $requestType == 'category' || $requestType == 'index'}
 								</div>
 							{/if}
 							
@@ -93,15 +94,15 @@
 							{/if}
 						</header>
 						{if $block->contentBodyDisplay != 'hide'}
-							{if $contents|count > 1}
+							{if $requestType == 'category' || $requestType == 'index'}
 								<div class="messageBody">
-								<div>
+									<div>
 							{/if}
 								
 								<div itemprop="articleBody" id="content-{$contentID}" 
 									class="content {implode from=$content->categories item=category glue=' '}category-{$category->categorySlug}{/implode} 
 									{implode from=$content->tags[$__wcf->getLanguage()->__get('languageID')] item=tag glue=''}tag-{$tag->getTitle()}{/implode}
-									{if $contents|count > 1} messageText{/if}">
+									{if $requestType == 'category' || $requestType == 'index'} messageText{/if}">
 									
 									{if ($block->contentBodyDisplay == 'default' && ($displayedFeaturedContents < $block->featuredContents || $requestType == 'content' || $requestType == 'page')) || $block->contentBodyDisplay == 'full'}
 										{counter name=displayedFeaturedContents assign=displayedFeaturedContents print=false start=0}
@@ -119,13 +120,21 @@
 									{/if}
 								</div>
 								
-								{if $contents|count > 1}
-									<div class="messageFooter">
+								{if $requestType == 'category' || $requestType == 'index'}
+									</div>
 								{/if}
 								
+								{if $requestType == 'category' || $requestType == 'index'}
+									<div class="messageSignature">
+								{/if}
+									
 									{if $contentMetaDisplaySelected[$requestType]|isset || $contentMetaDisplaySelected|count == 0}
 										{hascontent}
-											<aside class="meta" id="metaBelow-{$contentID}">
+											{if $requestType == 'category' || $requestType == 'index'}
+												<div class="meta" id="metaBelow-{$contentID}">
+											{else}
+												<aside class="meta" id="metaBelow-{$contentID}">
+											{/if}
 											{content}
 												{if $metaBelow[$contentID]|isset && $metaBelow[$contentID] != ""}
 													{@$metaBelow[$contentID]}
@@ -134,15 +143,29 @@
 													{@$metaBelow_i18n[$contentID][$__wcf->getLanguage()->__get('languageID')]}
 												{/if}
 											{/content}
-											</aside>
+											{if $requestType == 'category' || $requestType == 'index'}
+												</div>
+											{else}
+												</aside>
+											{/if}
 										{/hascontent}
 									{/if}
-									
-								{if $contents|count > 1}	
+								
+								{if $requestType == 'category' || $requestType == 'index'}	
 									</div>
 								{/if}
 								
-								{if $contents|count > 1}	
+								{if $requestType == 'category' || $requestType == 'index'}
+									<div class="messageFooter">
+								{/if}
+								
+								{if $requestType == 'category' || $requestType == 'index'}	
+									</div>
+								{/if}
+								
+								
+								
+								{if $requestType == 'category' || $requestType == 'index'}	
 									<footer class="messageOptions">
 										<nav class="jsMobileNavigation buttonGroupNavigation">
 											<ul class="smallButtons buttonGroup">{*
@@ -153,14 +176,13 @@
 									</footer>
 								{/if}
 							
-							{if $contents|count > 1}
-								</div>
+							{if $requestType == 'category' || $requestType == 'index'}
 								</div>
 							{/if}
 						{/if}
 						
 						
-						{if $contents|count > 1}
+						{if $requestType == 'category' || $requestType == 'index'}
 							</div>
 							</section>
 						</div>
@@ -200,13 +222,13 @@
 					</section>
 					{/if}
 				</article>
-			{if $contents|count > 1}
+			{if $requestType == 'category' || $requestType == 'index'}
 				</li>
 			{/if}
 		{/if}
 	{/foreach}
 	
-	{if $contents|count > 1}
+	{if $requestType == 'category' || $requestType == 'index'}
 		</ul>
 	{/if}
 </div>
