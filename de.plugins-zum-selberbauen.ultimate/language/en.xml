@@ -695,7 +695,7 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 		<item name="wcf.user.recentActivity.de.plugins-zum-selberbauen.ultimate.content.comment.recentActivityEvent"><![CDATA[Content comment]]></item>
 		<item name="wcf.user.recentActivity.de.plugins-zum-selberbauen.ultimate.content.comment.response.recentActivityEvent"><![CDATA[Reply to content comment]]></item>
         <item name="wcf.user.recentActivity.de.plugins-zum-selberbauen.ultimate.recentActivityEvent.content"><![CDATA[Content]]></item>
-        <item name="wcf.user.recentActivity.de.plugins-zum-selberbauen.ultimate.likeablePost.recentActivityEvent"><![CDATA[Like (Content)]]></item>
+        <item name="wcf.user.recentActivity.de.plugins-zum-selberbauen.ultimate.likeableContent.recentActivityEvent"><![CDATA[Like (Content)]]></item>
 	</category>
 	
 	<!-- this category is used for all multilingual block fields -->

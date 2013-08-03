@@ -693,7 +693,7 @@ Für die InlineEdit braucht man die gleichen Rechte um Inhalte zu schreiben, zu 
 		<item name="wcf.user.recentActivity.de.plugins-zum-selberbauen.ultimate.content.comment.recentActivityEvent"><![CDATA[Inhaltskommentar]]></item>
 		<item name="wcf.user.recentActivity.de.plugins-zum-selberbauen.ultimate.content.comment.response.recentActivityEvent"><![CDATA[Antwort zu Inhaltskommentar]]></item>
         <item name="wcf.user.recentActivity.de.plugins-zum-selberbauen.ultimate.recentActivityEvent.content"><![CDATA[Inhalt]]></item>
-        <item name="wcf.user.recentActivity.de.plugins-zum-selberbauen.ultimate.likeablePost.recentActivityEvent"><![CDATA[Like (Inhalt)]]></item>
+        <item name="wcf.user.recentActivity.de.plugins-zum-selberbauen.ultimate.likeableContent.recentActivityEvent"><![CDATA[Like (Inhalt)]]></item>
 	</category>
 	
 	<!-- this category is used for all multilingual block fields -->
