@@ -27,6 +27,7 @@
  */
 namespace ultimate\system\event\listener;
 use ultimate\system\cache\builder\AuthorCacheBuilder;
+use ultimate\system\cache\builder\ContentCacheBuilder;
 use wcf\system\event\IEventListener;
 
 /**
@@ -50,6 +51,7 @@ class CacheResetListener implements IEventListener {
 			case 'wcf\acp\form\UserAddForm':
 			case 'wcf\acp\form\UserEditForm':
 				$this->resetAuthorCache();
+				$this->resetContentCache();
 				break;
 		}
 	}
@@ -59,5 +61,12 @@ class CacheResetListener implements IEventListener {
 	 */
 	protected function resetAuthorCache() {
 		AuthorCacheBuilder::getInstance()->reset();
+	}
+	
+	/**
+	 * Resets the content cache.
+	 */
+	protected function resetContentCache() {
+		ContentCacheBuilder::getInstance()->reset();
 	}
 }
