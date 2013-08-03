@@ -1,9 +1,7 @@
 <div id="block_{$blockID}_tab" class="tabMenuContainer containerPadding" data-is-parent="true" data-active="block_{$blockID}_tab_mode">
-	{assign var='readMoreTextID' value='readMoreText_'|concat:$blockID}
 	{assign var='metaAboveContentID' value='metaAboveContent_'|concat:$blockID}
 	{assign var='metaBelowContentID' value='metaBelowContent_'|concat:$blockID}
 	
-	{include file='multipleLanguageInputJavascript' elementIdentifier=$readMoreTextID forceSelection=false}
 	{include file='multipleLanguageInputJavascript' elementIdentifier=$metaAboveContentID forceSelection=false}
 	{include file='multipleLanguageInputJavascript' elementIdentifier=$metaBelowContentID forceSelection=false}
 	
@@ -127,10 +125,6 @@
 		</div>
 		<div id="block_{$blockID}_tab_display" class="container tabMenuContent containerPadding" data-parent-menu-item="block_{$blockID}_tab_display">
 			<dl class="wide">
-				<dd class="inputText">
-					<label for="readMoreText_{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.contentTab.display.readMoreText.description{/lang}">{lang}wcf.acp.ultimate.template.contentTab.display.readMoreText{/lang}</label>
-					<input type="text" id="readMoreText_{$blockID}" name="readMoreText" value="{@$i18nPlainValues[$readMoreTextID]}" data-block-id="{$blockID}" data-is-block="true" />
-				</dd>
 				<dd class="inputCheckbox">
 					<label for="hideTitles_{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.contentTab.display.hideTitles.description{/lang}">{lang}wcf.acp.ultimate.template.contentTab.display.hideTitles{/lang}</label>
 					<input type="checkbox" id="hideTitles_{$blockID}" name="hideTitles" value="{if $hideTitles}1{else}0{/if}" data-block-id="{$blockID}" data-is-block="true"{if $hideTitles} checked="checked"{/if} />

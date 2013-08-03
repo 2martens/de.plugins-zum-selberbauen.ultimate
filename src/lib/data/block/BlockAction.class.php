@@ -106,16 +106,10 @@ class BlockAction extends AbstractDatabaseObjectAction {
 		// handle i18n values, content block only right now, generalize later
 		$metaAboveContent_i18n = array();
 		$metaBelowContent_i18n = array();
-		$readMoreText_i18n = array();
 		
 		// only relevant for content block type
 		// for later: make it variable so it is independent from specific fields and blocktypes
 		if ($blockTypeName == 'ultimate.blocktype.content') {
-			if (isset($parameters['additionalData']['readMoreText_i18n'])) {
-				$readMoreText_i18n = $parameters['additionalData']['readMoreText_i18n'];
-				unset($parameters['additionalData']['readMoreText_i18n']);
-				$parameters['additionalData']['readMoreText'] = '';
-			}
 			if (isset($parameters['additionalData']['metaAboveContent_i18n'])) {
 				$metaAboveContent_i18n = $parameters['additionalData']['metaAboveContent_i18n'];
 				unset($parameters['additionalData']['metaAboveContent_i18n']);
@@ -158,10 +152,8 @@ class BlockAction extends AbstractDatabaseObjectAction {
 			// alter i18n values
 			$metaAboveContent = 'ultimate.block.content.'.$block->__get('blockID').'.metaAboveContent';
 			$metaBelowContent = 'ultimate.block.content.'.$block->__get('blockID').'.metaBelowContent';
-			$readMoreText = 'ultimate.block.content.'.$block->__get('blockID').'.readMoreText';
 			I18nHandler::getInstance()->register('metaAboveContent');
 			I18nHandler::getInstance()->register('metaBelowContent');
-			I18nHandler::getInstance()->register('readMoreText');
 			if (empty($metaAboveContent_i18n)) {
 				I18nHandler::getInstance()->remove($metaAboveContent, PACKAGE_ID);
 				$metaAboveContent = $block->__get('metaAboveContent');
@@ -178,18 +170,9 @@ class BlockAction extends AbstractDatabaseObjectAction {
 				I18nHandler::getInstance()->save('metaBelowContent', $metaBelowContent, 'ultimate.block', PACKAGE_ID);
 			}
 			
-			if (empty($readMoreText_i18n)) {
-				I18nHandler::getInstance()->remove($readMoreText, PACKAGE_ID);
-				$readMoreText = $block->__get('readMoreText');
-			} else {
-				I18nHandler::getInstance()->setValues('readMoreText', $readMoreText_i18n);
-				I18nHandler::getInstance()->save('readMoreText', $readMoreText, 'ultimate.block', PACKAGE_ID);
-			}
-			
 			$additionalData = $block->__get('additionalData');
 			$additionalData['metaAboveContent'] = $metaAboveContent;
 			$additionalData['metaBelowContent'] = $metaBelowContent;
-			$additionalData['readMoreText'] = $readMoreText;
 			
 			$blockEditor->update(array(
 				'additionalData' => serialize($additionalData)
@@ -221,8 +204,7 @@ class BlockAction extends AbstractDatabaseObjectAction {
 		// handle i18n values, just content block right now, generalize later
 		$metaAboveContent_i18n = array();
 		$metaBelowContent_i18n = array();
-		$readMoreText_i18n = array();
-		$metaAboveContent_plain = $metaBelowContent_plain = $readMoreText_plain = '';
+		$metaAboveContent_plain = $metaBelowContent_plain = '';
 		
 		if (isset($parameters['additionalData']['metaAboveContent'])) {
 			$metaAboveContent_plain = $parameters['additionalData']['metaAboveContent'];
@@ -230,18 +212,10 @@ class BlockAction extends AbstractDatabaseObjectAction {
 		if (isset($parameters['additionalData']['metaBelowContent'])) {
 			$metaBelowContent_plain = $parameters['additionalData']['metaBelowContent'];
 		}
-		if (isset($parameters['additionalData']['readMoreText'])) {
-			$readMoreText_plain = $parameters['additionalData']['readMoreText'];
-		}
 		
 		// only relevant for content block type
 		// for later: make it variable so it is independent from specific fields and blocktypes
 		if ($blockTypeName == 'ultimate.blocktype.content') {
-			if (isset($parameters['additionalData']['readMoreText_i18n'])) {
-				$readMoreText_i18n = $parameters['additionalData']['readMoreText_i18n'];
-				unset($parameters['additionalData']['readMoreText_i18n']);
-				$parameters['additionalData']['readMoreText'] = '';
-			}
 			if (isset($parameters['additionalData']['metaAboveContent_i18n'])) {
 				$metaAboveContent_i18n = $parameters['additionalData']['metaAboveContent_i18n'];
 				unset($parameters['additionalData']['metaAboveContent_i18n']);
@@ -278,10 +252,8 @@ class BlockAction extends AbstractDatabaseObjectAction {
 			// alter i18n values
 			$metaAboveContent = 'ultimate.block.content.'.$blockEditor->__get('blockID').'.metaAboveContent';
 			$metaBelowContent = 'ultimate.block.content.'.$blockEditor->__get('blockID').'.metaBelowContent';
-			$readMoreText = 'ultimate.block.content.'.$blockEditor->__get('blockID').'.readMoreText';
 			I18nHandler::getInstance()->register('metaAboveContent');
 			I18nHandler::getInstance()->register('metaBelowContent');
-			I18nHandler::getInstance()->register('readMoreText');
 			if (empty($metaAboveContent_i18n)) {
 				I18nHandler::getInstance()->remove($metaAboveContent, PACKAGE_ID);
 				$metaAboveContent = $metaAboveContent_plain;
@@ -298,18 +270,10 @@ class BlockAction extends AbstractDatabaseObjectAction {
 				I18nHandler::getInstance()->save('metaBelowContent', $metaBelowContent, 'ultimate.block', PACKAGE_ID);
 			}
 				
-			if (empty($readMoreText_i18n)) {
-				I18nHandler::getInstance()->remove($readMoreText, PACKAGE_ID);
-				$readMoreText = $readMoreText_plain;
-			} else {
-				I18nHandler::getInstance()->setValues('readMoreText', $readMoreText_i18n);
-				I18nHandler::getInstance()->save('readMoreText', $readMoreText, 'ultimate.block', PACKAGE_ID);
-			}
 			$blockEditor = new BlockEditor(new Block($this->objectIDs[0]));
 			$additionalData = $blockEditor->__get('additionalData');
 			$additionalData['metaAboveContent'] = $metaAboveContent;
 			$additionalData['metaBelowContent'] = $metaBelowContent;
-			$additionalData['readMoreText'] = $readMoreText;
 			
 			$blockEditor->update(array(
 				'additionalData' => serialize($additionalData)

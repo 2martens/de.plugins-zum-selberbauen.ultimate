@@ -71,6 +71,7 @@ class ContentBlockType extends AbstractBlockType {
 	 */
 	protected $blockOptionIDs = array(
 		'queryMode_{$blockID}',
+		// query options
 		'fetchPageContent_{$blockID}',
 		'categories_{$blockID}',
 		'categoryMode_{$blockID}',
@@ -79,13 +80,14 @@ class ContentBlockType extends AbstractBlockType {
 		'offset_{$blockID}',
 		'sortField_{$blockID}',
 		'sortOrder_{$blockID}',
-		'readMoreText_{$blockID}',
+		// display options
 		'hideTitles_{$blockID}',
 		'contentBodyDisplay_{$blockID}',
 		'hideContent_{$blockID}',
 		'commentsVisibility_{$blockID}',
 		'featuredContents_{$blockID}',
 		'hideInlineEdit_{$blockID}',
+		// meta options
 		'contentMetaDisplay_{$blockID}',
 		'metaAboveContent_{$blockID}',
 		'metaBelowContent_{$blockID}'
@@ -218,7 +220,6 @@ class ContentBlockType extends AbstractBlockType {
 			'sortField' => ULTIMATE_SORT_CONTENT_SORTFIELD,
 			'sortOrder' => ULTIMATE_SORT_CONTENT_SORTORDER,
 			// display options
-			'readMoreText' => ULTIMATE_GENERAL_CONTENT_READMORETEXT,
 			'hideTitles' => false,
 			'contentBodyDisplay' => 'default',
 			'hideContent' => false,
@@ -231,7 +232,6 @@ class ContentBlockType extends AbstractBlockType {
 			'metaBelowContent' => ULTIMATE_GENERAL_CONTENT_METABELOWCONTENT
 		);
 		$options = $this->block->__get('additionalData');
-		$useDefaultReadMoreText = (!isset($options['readMoreText']));
 		$useDefaultMetaAboveContent = (!isset($options['metaAboveContent']));
 		$useDefaultMetaBelowContent = (!isset($options['metaBelowContent']));
 		
@@ -267,14 +267,11 @@ class ContentBlockType extends AbstractBlockType {
 		if (isset($convertedOptions['authors'])) $this->options['authors'] = $convertedOptions['authors'];
 		if (isset($convertedOptions['contentMetaDisplay'])) $this->options['contentMetaDisplay'] = $convertedOptions['contentMetaDisplay'];
 		
-		// multilingual support for readMoreText, metaAboveContent and metaBelowContent
-		$readMoreText = $this->options['readMoreText'];
+		// multilingual support for metaAboveContent and metaBelowContent
 		$metaAboveContent = $this->options['metaAboveContent'];
 		$metaBelowContent = $this->options['metaBelowContent'];
-		I18nHandler::getInstance()->register('readMoreText_'.$this->blockID);
 		I18nHandler::getInstance()->register('metaAboveContent_'.$this->blockID);
 		I18nHandler::getInstance()->register('metaBelowContent_'.$this->blockID);
-		I18nHandler::getInstance()->setOptions('readMoreText_'.$this->blockID, PACKAGE_ID, $readMoreText, ($useDefaultReadMoreText ? 'wcf.acp.option.option.\d' : 'ultimate.block.content.\d+.readMoreText'));
 		I18nHandler::getInstance()->setOptions('metaAboveContent_'.$this->blockID, PACKAGE_ID, $metaAboveContent, ($useDefaultMetaAboveContent ? 'wcf.acp.option.option.\d' : 'ultimate.block.content.\d+.metaAboveContent'));
 		I18nHandler::getInstance()->setOptions('metaBelowContent_'.$this->blockID, PACKAGE_ID, $metaBelowContent, ($useDefaultMetaBelowContent ? 'wcf.acp.option.option.\d' : 'ultimate.block.content.\d+.metaBelowContent'));
 		
@@ -449,7 +446,6 @@ class ContentBlockType extends AbstractBlockType {
 		$metaBelow = array();
 		$metaAbove_i18n = array();
 		$metaBelow_i18n = array();
-		$readMoreLink = array();
 		foreach ($this->contents as $contentID => $content) {
 			// get category output
 			$categories = $content->__get('categories');
@@ -477,14 +473,6 @@ class ContentBlockType extends AbstractBlockType {
 			
 			/* @var $dateTimeObject \DateTime */
 			$dateTimeObject = $content->__get('publishDateObject');
-			$dateLink = DateUtil::format($dateTimeObject, 'Y-m-d');
-			
-			// build readMore link
-			$readMoreLink[$contentID] = UltimateLinkHandler::getInstance()->getLink(null, array(
-				'date' => ''. $dateLink,
-				'contentSlug' => $content->__get('contentSlug')
-			));
-			
 			$timestamp = $content->__get('publishDate');
 			$format = WCF::getLanguage()->getDynamicVariable('ultimate.date.dateFormat', array(
 				'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
@@ -590,7 +578,6 @@ class ContentBlockType extends AbstractBlockType {
 			'metaBelow' => $metaBelow,
 			'metaAbove_i18n' => $metaAbove_i18n,
 			'metaBelow_i18n' => $metaBelow_i18n,
-			'readMoreLink' => $readMoreLink,
 			// contents
 			'contents' => $this->contents,
 			// comments

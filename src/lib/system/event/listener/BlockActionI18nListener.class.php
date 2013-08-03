@@ -46,11 +46,9 @@ class BlockActionI18nListener implements IEventListener {
 	public function execute($eventObj, $className, $eventName) {
 		/* @var $eventObj \ultimate\action\BlockAction */
 		// content block type
-		$eventObj->i18nOptions['readMoreText'] = 'content';
 		$eventObj->i18nOptions['metaAboveContent'] = 'content';
 		$eventObj->i18nOptions['metaBelowContent'] = 'content';
 		
-		I18nHandler::getInstance()->register('readMoreText');
 		I18nHandler::getInstance()->register('metaAboveContent');
 		I18nHandler::getInstance()->register('metaBelowContent');
 	}

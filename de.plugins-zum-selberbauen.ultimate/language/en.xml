@@ -177,8 +177,6 @@
 		<!-- ultimate.general.content -->
 		<item name="wcf.acp.option.ultimate_general_content_comments_per_page"><![CDATA[Comments per page]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_comments_per_page.description"><![CDATA[Please insert here how many comments should be displayed per page. This setting doesn't influence the visability of comments (that depends on settings of the specific content blocks).]]></item>
-		<item name="wcf.acp.option.ultimate_general_content_readMoreText"><![CDATA[Read more text]]></item>
-		<item name="wcf.acp.option.ultimate_general_content_readMoreText.description"><![CDATA[Please insert here the default read more text. You can change this setting for each content block in the template edit form.]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_metaAboveContent"><![CDATA[Meta above content]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_metaAboveContent.description"><![CDATA[Please insert here the default meta above content. You can change this setting for each content block in the template edit form.
 
@@ -516,10 +514,6 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<!-- /query sub tab -->
 		
 		<!-- display sub tab -->
-		<item name="wcf.acp.ultimate.template.contentTab.display.readMoreText"><![CDATA[Read more text]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.display.readMoreText.description"><![CDATA[If an excerpt (either automatically or by 'read more'-BBCode) is displayed, 
-
-this text will be appended to the end of the exerpt.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.hideTitles"><![CDATA[Hide titles]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.hideTitles.description"><![CDATA[If checked the titles of the contents in this block will be hidden. 
 		

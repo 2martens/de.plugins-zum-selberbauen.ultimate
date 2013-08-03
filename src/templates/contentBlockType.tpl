@@ -57,9 +57,9 @@ $(function() {
 								{if !$block->hideTitles}
 									<h1 itemprop="name">
 										{if $requestType != 'content' && $requestType != 'page'}
-											<a class="link" href="{$readMoreLink[$contentID]}" itemprop="url">{lang}{$content->contentTitle}{/lang}</a>
+											<a class="link" href="{linkExtended application='ultimate' date=$content->publishDateObject->format('Y-m-d') contentSlug=$content->contentSlug}{/linkExtended}" itemprop="url">{$content->getLangTitle()}</a>
 										{else}
-											{lang}{$content->contentTitle}{/lang}	
+											{$content->getLangTitle()}
 										{/if}
 									</h1>
 								{/if}
@@ -118,7 +118,7 @@ $(function() {
 									
 									{if ($block->contentBodyDisplay == 'default' && ($displayedFeaturedContents < $block->featuredContents || $requestType == 'content' || $requestType == 'page')) || $block->contentBodyDisplay == 'full'}
 										{counter name=displayedFeaturedContents assign=displayedFeaturedContents print=false start=0}
-										{assign var=displayedFeaturedContents value=$displayedFeaturedContents}
+										{assign var=displayedFeaturedContents value=($displayedFeaturedContents + 1)}
 										{if $requestType == 'content' || $requestType == 'page'}
 											{@$content->getFormattedMessage()}
 										{/if}
@@ -126,9 +126,11 @@ $(function() {
 											<p>{@$content->getFormattedMessage()|truncateMore:0}</p>
 										{/if}
 									{else}
-										<p>{$content->getFormattedMessage()|truncateMore:ULTIMATE_GENERAL_CONTENT_CONTINUEREADINGLENGTH}</p>
-											
-										<a href="{$readMoreLink[$contentID]}">{lang}{$readMoreText}{/lang}&nbsp;-&gt;</a>
+										{if $displayedFeaturedContents == $block->featuredContents}
+											{assign var=displayedAllFeaturedContents value=true}
+											{assign var=displayedFeaturedContents value=($displayedFeaturedContents + 1)}
+										{/if}
+										<p>{@$content->getFormattedMessage()|truncateMore:ULTIMATE_GENERAL_CONTENT_CONTINUEREADINGLENGTH}</p>
 									{/if}
 								</div>
 								
@@ -175,12 +177,11 @@ $(function() {
 									</div>
 								{/if}
 								
-								
-								
 								{if $requestType == 'category' || $requestType == 'index'}	
 									<footer class="messageOptions">
 										<nav class="jsMobileNavigation buttonGroupNavigation">
 											<ul class="smallButtons buttonGroup">{*
+												*}{if $displayedAllFeaturedContents|isset && $displayedAllFeaturedContents}<li><a href="{linkExtended application='ultimate' date=$content->publishDateObject->format('Y-m-d') contentSlug=$content->contentSlug}{/linkExtended}" class="button"><span class="icon icon16 icon-arrow-right"></span> <span>{lang}wcf.global.button.readMore{/lang}</span></a></li>{/if}{*
 												*}{if $__wcf->getSession()->getPermission('admin.content.ultimate.canEditContent')}<li><a title="{lang}wcf.acp.ultimate.content.edit{/lang}" class="button jsMessageEditButton"><span class="icon icon16 icon-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}{*
 												*}<li class="toTopLink"><a href="{@$anchor}" title="{lang}wcf.global.scrollUp{/lang}" class="button jsTooltip"><span class="icon icon16 icon-arrow-up"></span> <span class="invisible">{lang}wcf.global.scrollUp{/lang}</span></a></li>{*
 											*}</ul>

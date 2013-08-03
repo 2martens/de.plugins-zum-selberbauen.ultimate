@@ -56,12 +56,6 @@ false:wcf.acp.option.ultimate_general_englishLanguage.AE]]>
 			</option>
 			
 			<!-- general/content options -->
-			<option name="ultimate_general_content_readMoreText">
-				<categoryname>ultimate.general.content</categoryname>
-				<optiontype>textI18n</optiontype>
-				<supporti18n>1</supporti18n>
-				<requirei18n>0</requirei18n>
-			</option>
 			<option name="ultimate_general_content_metaAboveContent">
 				<categoryname>ultimate.general.content</categoryname>
 				<optiontype>textareaI18n</optiontype>

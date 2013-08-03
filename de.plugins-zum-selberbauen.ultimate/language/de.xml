@@ -177,8 +177,6 @@
 		<!-- ultimate.general.content -->
 		<item name="wcf.acp.option.ultimate_general_content_comments_per_page"><![CDATA[Kommentare pro Seite]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_comments_per_page.description"><![CDATA[Bitte geben Sie hier an, wie viele Kommentare pro Seite angezeigt werden sollen. Diese Einstellung ist unabhängig davon, ob die Kommentare überhaupt angezeigt werden (hängt von den Einstellungen im jeweiligen Inhaltsblock ab).]]></item>
-		<item name="wcf.acp.option.ultimate_general_content_readMoreText"><![CDATA['Weiterlesen'-Text]]></item>
-		<item name="wcf.acp.option.ultimate_general_content_readMoreText.description"><![CDATA[Geben Sie hier den Text ein, der standardmäßig hinter einem gekürzten Inhalt stehen soll. Im Template-Bearbeiten Formular können Sie für jeden Inhaltsblock diese Einstellung individuell überschreiben.]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_metaAboveContent"><![CDATA[Meta über Inhalt]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_metaAboveContent.description"><![CDATA[Geben Sie hier die Metaangaben ein, die standardmäßig über dem Inhaltstext und unter dem Inhaltstitel angezeigt werden sollen. Im Template-Bearbeiten Formular können Sie für jeden Inhaltsblock diese Einstellung individuell überschreiben.
 
@@ -534,10 +532,6 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<!-- /query sub tab -->
 		
 		<!-- display sub tab -->
-		<item name="wcf.acp.ultimate.template.contentTab.display.readMoreText"><![CDATA['Weiterlesen'-Text]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.display.readMoreText.description"><![CDATA[Wenn ein automatisch oder durch den 'Weiterlesen'-BBCode gekürzter Inhalt dargestellt wird, 
-		
-wird dieser Text an das Ende gehängt.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.hideTitles"><![CDATA[Titel verstecken]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.hideTitles.description"><![CDATA[Gibt an, ob der/die Titel des/der angezeigten Inhalte(s) dargestellt wird/werden.]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay"><![CDATA[Anzeige des Inhaltskörpers]]></item>
