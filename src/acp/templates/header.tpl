@@ -20,7 +20,7 @@
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.js?v={@$__wcfVersion}"></script>
 	<script type="text/javascript" src="{@$__wcf->getPath()}acp/js/WCF.ACP.js?v={@$__wcfVersion}"></script>
 	<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.Message.js?v={@$__wcfVersion}"></script>
-	<script type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.js"></script>
+	<script type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.js?v={@$__wcfVersion}"></script>
 	<script type="text/javascript">
 		//<![CDATA[
 		WCF.User.init({$__wcf->user->userID}, '{@$__wcf->user->username|encodeJS}');
