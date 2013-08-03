@@ -113,7 +113,7 @@
 				</dd>
 				<dd class="inputCheckbox">
 					<label for="hideTitles_{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.contentTab.display.hideTitles.description{/lang}">{lang}wcf.acp.ultimate.template.contentTab.display.hideTitles{/lang}</label>
-					<input type="checkbox" id="hideTitles_{$blockID}" name="hideTitles" value="{$hideTitles}" data-block-id="{$blockID}" data-is-block="true" />
+					<input type="checkbox" id="hideTitles_{$blockID}" name="hideTitles" value="{if $hideTitles}1{else}0{/if}" data-block-id="{$blockID}" data-is-block="true"{if $hideTitles} checked="checked"{/if} />
 				</dd>
 				<dd class="inputSelect">
 					<label for="contentBodyDisplay_{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay.description{/lang}">{lang}wcf.acp.ultimate.template.contentTab.display.contentBodyDisplay{/lang}</label>
@@ -127,7 +127,7 @@
 				</dd>
 				<dd class="inputCheckbox">
 					<label for="hideContent_{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.contentTab.display.hideContent.description{/lang}">{lang}wcf.acp.ultimate.template.contentTab.display.hideContent{/lang}</label>
-					<input type="checkbox" id="hideContent_{$blockID}" name="hideContent" value="{$hideContent}" data-block-id="{$blockID}" data-is-block="true" />
+					<input type="checkbox" id="hideContent_{$blockID}" name="hideContent" value="{if $hideContent}1{else}0{/if}" data-block-id="{$blockID}" data-is-block="true"{if $hideContent} checked="checked"{/if} />
 				</dd>
 				<dd class="inputSelect">
 					<label for="commentsVisibility_{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.contentTab.display.commentsVisibility.description{/lang}">{lang}wcf.acp.ultimate.template.contentTab.display.commentsVisibility{/lang}</label>
@@ -144,7 +144,7 @@
 				</dd>
 				<dd class="inputCheckbox">
 					<label for="hideInlineEdit_{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.contentTab.display.hideInlineEdit.description{/lang}">{lang}wcf.acp.ultimate.template.contentTab.display.hideInlineEdit{/lang}</label>
-					<input type="checkbox" id="hideInlineEdit_{$blockID}" name="hideInlineEdit" value="{$hideInlineEdit}" data-block-id="{$blockID}" data-is-block="true" />
+					<input type="checkbox" id="hideInlineEdit_{$blockID}" name="hideInlineEdit" value="{if $hideInlineEdit}1{else}0{/if}" data-block-id="{$blockID}" data-is-block="true"{if $hideInlineEdit} checked="checked"{/if} />
 				</dd>
 			</dl>
 		</div>

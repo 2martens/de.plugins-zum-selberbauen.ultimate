@@ -857,6 +857,16 @@ ULTIMATE.Block.Transfer.prototype = {
 		try {
 			var $data = data['returnValues'];
 			this._createOptionsDialog($data);
+			
+			$('#blockForm input[type="checkbox"]').change(function(event) {
+				var $target = $(event.currentTarget);
+				var checked = $target.prop('checked');
+				if (checked) {
+					$target.val('1');
+				} else {
+					$target.val('0');
+				}
+			});
 
 			$('#blockForm').find('form').submit(
 					$.proxy(this._submitFormData, this));
@@ -887,6 +897,16 @@ ULTIMATE.Block.Transfer.prototype = {
 		try {
 			var $data = data['returnValues'];
 			this._createOptionsDialog($data);
+			
+			$('#blockForm input[type="checkbox"]').change(function(event) {
+				var $target = $(event.currentTarget);
+				var checked = $target.prop('checked');
+				if (checked) {
+					$target.val('1');
+				} else {
+					$target.val('0');
+				}
+			});
 
 			$('#blockForm').find('form').submit(
 					$.proxy(this._submitFormDataEdit, this));

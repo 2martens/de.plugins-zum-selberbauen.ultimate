@@ -231,10 +231,24 @@ class ContentBlockType extends AbstractBlockType {
 		$useDefaultReadMoreText = (!isset($options['readMoreText']));
 		$useDefaultMetaAboveContent = (!isset($options['metaAboveContent']));
 		$useDefaultMetaBelowContent = (!isset($options['metaBelowContent']));
-		$this->options = array_replace_recursive($defaults, $options);
-		if (isset($options['categories'])) $this->options['categories'] = $options['categories'];
-		if (isset($options['authors'])) $this->options['authors'] = $options['authors'];
-		if (isset($options['contentMetaDisplay'])) $this->options['contentMetaDisplay'] = $options['contentMetaDisplay'];
+		
+		// convert to real value type
+		$convertedOptions = array();
+		foreach ($options as $optionName => $optionValue) {
+			if ($optionName == 'hideTitles' || $optionName = 'hideContent' || $optionName == 'hideInlineEdit') {
+				$convertedOptions[$optionName] = (boolean) intval($optionValue);
+			} elseif ($optionName == 'numberOfContents' || $optionName == 'offset' || $optionName == 'featuredContents') {
+				$convertedOptions[$optionName] = intval($optionValue);
+			} else {
+				$convertedOptions[$optionName] = $optionValue;
+			}
+		}
+		
+		$this->options = array_replace_recursive($defaults, $convertedOptions);
+		
+		if (isset($convertedOptions['categories'])) $this->options['categories'] = $convertedOptions['categories'];
+		if (isset($convertedOptions['authors'])) $this->options['authors'] = $convertedOptions['authors'];
+		if (isset($convertedOptions['contentMetaDisplay'])) $this->options['contentMetaDisplay'] = $convertedOptions['contentMetaDisplay'];
 		
 		// multilingual support for readMoreText, metaAboveContent and metaBelowContent
 		$readMoreText = $this->options['readMoreText'];
