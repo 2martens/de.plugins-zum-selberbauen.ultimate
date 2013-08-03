@@ -93,9 +93,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 		WCF::getDB()->beginTransaction();
 		foreach ($objectIDs as $objectID) {
 			$statement->executeUnbuffered(array('ultimate.content.'.$objectID.'.%'));
-			$taggedContent = new TaggedContent(new Content($objectID));
-			$languageIDs = array_keys($taggedContent->tags);
-			TagEngine::getInstance()->deleteObjectTags($taggedContent, $languageIDs);
+			TagEngine::getInstance()->deleteObjectTags('de.plugins-zum-selberbauen.ultimate.content', $objectID);
 		}
 		WCF::getDB()->commitTransaction();
 		
