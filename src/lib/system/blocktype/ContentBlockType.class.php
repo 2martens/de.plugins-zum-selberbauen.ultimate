@@ -347,19 +347,6 @@ class ContentBlockType extends AbstractBlockType {
 			$this->contents = $allowedContents;
 		}
 		
-		// number of contents
-		$amountOfContents = count($this->contents); // get remaining amount of to be displayed contents
-		$numberOfContents = $this->options['numberOfContents'];
-		// if we don't have that much contents it would be senseless to run a loop
-		if ($numberOfContents < $amountOfContents) {
-			$remainingContents = array();
-			for ($i = $numberOfContents; $i > 0; $i--) {
-				$tmpContent = array_shift($this->contents);
-				$remainingContents[$tmpContent->__get('contentID')] = $tmpContent;
-			}
-			$this->contents = $remainingContents;
-		}
-		
 		// sort field
 		if ($this->options['sortField'] != ULTIMATE_SORT_CONTENT_SORTFIELD) {
 			$this->loadCache(true);
@@ -385,6 +372,42 @@ class ContentBlockType extends AbstractBlockType {
 				array_shift($this->contents);
 			}
 		}
+		
+		// serve the CategoryPage with needed data
+		if ($this->requestType == 'category') {
+			$page = $this->page;
+			/* @var $page \ultimate\page\CategoryPage */
+			$page->itemsPerPage = $this->options['numberOfContents'];
+			$page->items = count($this->contents);
+			$page->calculateNumberOfPages();
+			
+			// gets the contents that are actually shown on this category
+			$contents = array_values($this->contents);
+			$contentIDs = array_keys($this->contents);
+			$showContents = array();
+			$endIndex = $page->endIndex - 1;
+			for ($i = $page->startIndex - 1; $i <= $endIndex; $i++) {
+				$showContents[$contentIDs[$i]] = $contents[$i];
+			}
+			$this->contents = $showContents;
+			
+			$page->assignMultipleLinkVariables();
+		}
+		else {
+			// number of contents
+			$amountOfContents = count($this->contents); // get remaining amount of to be displayed contents
+			$numberOfContents = $this->options['numberOfContents'];
+			// if we don't have that much contents it would be senseless to run a loop
+			if ($numberOfContents < $amountOfContents) {
+				$remainingContents = array();
+				for ($i = $numberOfContents; $i > 0; $i--) {
+					$tmpContent = array_shift($this->contents);
+					$remainingContents[$tmpContent->__get('contentID')] = $tmpContent;
+				}
+				$this->contents = $remainingContents;
+			}
+		}
+		
 		
 		// comments
 		$this->objectTypeID = CommentHandler::getInstance()->getObjectTypeID($this->objectType);

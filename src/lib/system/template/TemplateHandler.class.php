@@ -133,7 +133,7 @@ class TemplateHandler extends SingletonFactory {
 		
 		// gathering output
 		$blocks = $this->template->__get('blocks');
-		$output = $this->getGeneratedOutput($this->template, $layout, $requestObject, $requestType, $blocks);
+		$output = $this->getGeneratedOutput($this->template, $layout, $requestObject, $requestType, $blocks, $page);
 		
 		if ($this->template->__get('showWidgetArea')) {
 			$this->initWidgetArea($this->template, $page);
@@ -146,10 +146,14 @@ class TemplateHandler extends SingletonFactory {
 		$blockIDs = array_keys($blocks);
 		WCF::getTPL()->assign(array(
 			'customArea' => $output,
-			'blockIDs' => $blockIDs
+			'blockIDs' => $blockIDs,
+			'requestType' => $requestType
 		));
 		if ($requestObject !== null) {
-			WCF::getTPL()->assign('title', $requestObject->getLangTitle());
+			WCF::getTPL()->assign(array(
+				'title' => $requestObject->getLangTitle(),
+				'requestObject' => $requestObject
+			));
 		}
 		
 		// assign custom meta values (if existing)
@@ -292,16 +296,17 @@ class TemplateHandler extends SingletonFactory {
 	 * @param	\IUltimateData|null 				$requestObject
 	 * @param	string 								$requestType
 	 * @param   \ultimate\data\block\Block[]		$blocks
+	 * @param	\wcf\page\IPage						$page
 	 * @return 	string
 	 */
-	protected function getGeneratedOutput(Template $template, Layout $layout, $requestObject, $requestType, array $blocks) {
+	protected function getGeneratedOutput(Template $template, Layout $layout, $requestObject, $requestType, array $blocks, IPage $page) {
 		$output = '';
 		foreach ($blocks as $blockID => $block) {
 			/* @var $blockTypeDatabase \ultimate\data\blocktype\BlockType */
 			$blockTypeID = $block->__get('blockTypeID');
 			/* @var $blockType \ultimate\system\blocktype\IBlockType */
 			$blockType = BlockTypeHandler::getInstance()->getBlockType($blockTypeID);
-			$blockType->init($requestType, $layout, $requestObject, $blockID);
+			$blockType->init($requestType, $layout, $requestObject, $blockID, $page);
 			$output .= $blockType->getHTML();
 		}
 		return $output;

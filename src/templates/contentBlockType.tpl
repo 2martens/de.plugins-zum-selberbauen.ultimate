@@ -13,8 +13,16 @@ $(function() {
 
 {if !$anchor|isset}{assign var=anchor value=$__wcf->getAnchor('top')}{/if}
 <div id="block-{$blockID}" class="block block-type-content" data-height="{$height}">
+	
+	{if $requestType == 'category'}
+		<div class="contentNavigation">
+			{pagesExtended print=true pages=$amountOfPages assign=pagesLinks application='ultimate' link="pageNo=%d" category='category' categorySlug=$requestObject->categorySlug}
+		</div>
+	{/if}
+	
 	{if $requestType == 'category' || $requestType == 'index'}
-		<ul class="messageList" data-type="de.plugins-zum-selberbauen.ultimate.content">
+		<div class="marginTop">
+			<ul class="messageList" data-type="de.plugins-zum-selberbauen.ultimate.content">
 	{/if}
 	{assign var=displayedFeaturedContents value=0}
 	{foreach from=$contents key=contentID item=content}
@@ -233,6 +241,13 @@ $(function() {
 	{/foreach}
 	
 	{if $requestType == 'category' || $requestType == 'index'}
-		</ul>
+			</ul>
+		</div>
+	{/if}
+	
+	{if $requestType == 'category'}
+		<div class="contentNavigation">
+			{@$pagesLinks}
+		</div>
 	{/if}
 </div>

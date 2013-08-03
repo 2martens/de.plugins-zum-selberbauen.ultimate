@@ -31,6 +31,8 @@ use ultimate\system\layout\LayoutHandler;
 use ultimate\system\template\TemplateHandler;
 use ultimate\util\CategoryUtil;
 use wcf\page\AbstractPage;
+use wcf\page\MultipleLinkPage;
+use wcf\system\event\EventHandler;
 use wcf\system\request\RouteHandler;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
@@ -46,7 +48,7 @@ use wcf\util\StringUtil;
  * @subpackage	page
  * @category	Ultimate CMS
  */
-class CategoryPage extends AbstractPage {
+class CategoryPage extends MultipleLinkPage {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$useTemplate
 	 * @var	boolean
@@ -97,7 +99,7 @@ class CategoryPage extends AbstractPage {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
-		parent::readData();
+		AbstractPage::readData();
 		$categoriesToSlug = $this->loadCache();
 		/* @var $category \ultimate\data\category\Category */
 		$category = $categoriesToSlug[$this->categorySlugs[0]];
@@ -112,9 +114,24 @@ class CategoryPage extends AbstractPage {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
 	 */
 	public function assignVariables() {
-		parent::assignVariables();
+		AbstractPage::assignVariables();
 		// get output
 		$this->output = TemplateHandler::getInstance()->getOutput('category', $this->layout, $this->category, $this);
+	}
+	
+	/**
+	 * Assigns the multiple link variables.
+	 */
+	public function assignMultipleLinkVariables() {
+		// assign page parameters
+		WCF::getTPL()->assign(array(
+			'pageNo' => $this->pageNo,
+			'amountOfPages' => $this->pages,
+			'items' => $this->items,
+			'itemsPerPage' => $this->itemsPerPage,
+			'startIndex' => $this->startIndex,
+			'endIndex' => $this->endIndex
+		));
 	}
 	
 	/**
@@ -125,6 +142,29 @@ class CategoryPage extends AbstractPage {
 		HeaderUtil::sendHeaders();
 		echo $this->output;
 		exit;
+	}
+	
+	/**
+	 * Calculates the number of pages and
+	 * handles the given page number parameter.
+	 */
+	public function calculateNumberOfPages() {
+		// call calculateNumberOfPages event
+		EventHandler::getInstance()->fireAction($this, 'calculateNumberOfPages');
+		
+		// calculate number of pages
+		// the items need to be inserted via content block type
+		$this->pages = intval(ceil($this->items / $this->itemsPerPage));
+		
+		// correct active page number
+		if ($this->pageNo > $this->pages) $this->pageNo = $this->pages;
+		if ($this->pageNo < 1) $this->pageNo = 1;
+		
+		// calculate start and end index
+		$this->startIndex = ($this->pageNo - 1) * $this->itemsPerPage;
+		$this->endIndex = $this->startIndex + $this->itemsPerPage;
+		$this->startIndex++;
+		if ($this->endIndex > $this->items) $this->endIndex = $this->items;
 	}
 	
 	/**

@@ -29,6 +29,7 @@ namespace ultimate\system\blocktype;
 use ultimate\data\block\Block;
 use ultimate\data\IUltimateData;
 use ultimate\system\cache\builder\BlockCacheBuilder;
+use wcf\page\IPage;
 use wcf\system\event\EventHandler;
 use wcf\system\exception\SystemException;
 use wcf\system\request\RequestHandler;
@@ -106,6 +107,12 @@ abstract class AbstractBlockType implements IBlockType {
 	protected $layout = null;
 	
 	/**
+	 * Contains the request page.
+	 * @var \wcf\page\IPage
+	 */
+	protected $page = null;
+	
+	/**
 	 * Contains the block id.
 	 * @var	integer
 	 */
@@ -140,13 +147,14 @@ abstract class AbstractBlockType implements IBlockType {
 	/**
 	 * @see	\ultimate\system\blocktype\IBlockType::init()
 	 */
-	public function init($requestType, \ultimate\data\layout\Layout $layout, $requestObject, $blockID) {
+	public function init($requestType, \ultimate\data\layout\Layout $layout, $requestObject, $blockID, $page) {
 		// fire event
 		EventHandler::getInstance()->fireAction($this, 'init');
 		
 		$this->requestType = StringUtil::trim($requestType);
 		$this->requestObject = $requestObject;
 		$this->layout = $layout;
+		$this->page = $page;
 		
 		if (!($this->requestObject instanceof IUltimateData) && $this->layout->__get('objectType') != 'index') {
 			throw new SystemException('The given request object is not an instance of \ultimate\data\IUltimateData.');
@@ -175,7 +183,8 @@ abstract class AbstractBlockType implements IBlockType {
 		WCF::getTPL()->assign(array(
 			'blockID' => $this->blockID,
 			'block' => $this->block,
-			'requestType' => $this->requestType
+			'requestType' => $this->requestType,
+			'requestObject' => $this->requestObject
 		));
 	}
 	

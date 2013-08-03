@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\blocktype;
+use wcf\page\IPage;
 
 /**
  * Interface for all BlockType classes.
@@ -51,9 +52,10 @@ interface IBlockType {
 	 * @param	\ultimate\data\layout\Layout		$layout
 	 * @param	\ultimate\data\IUltimateData|null	$requestObject	null is only allowed in connection with the index layout
 	 * @param	integer								$blockID
+	 * @param	\wcf\page\IPage|null				$page			null is only allowed in connection with getOptionsHtml
 	 * @return	void
 	 */
-	public function init($requestType, \ultimate\data\layout\Layout $layout, $requestObject, $blockID);
+	public function init($requestType, \ultimate\data\layout\Layout $layout, $requestObject, $blockID, $page);
 	
 	/**
 	 * Reads the necessary data.

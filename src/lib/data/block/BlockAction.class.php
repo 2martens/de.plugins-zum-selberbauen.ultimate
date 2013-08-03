@@ -367,7 +367,7 @@ class BlockAction extends AbstractDatabaseObjectAction {
 		
 		/* @var $blockType \ultimate\system\blocktype\IBlockType */
 		$blockType = BlockTypeHandler::getInstance()->getBlockType($blockTypeID);
-		$blockType->init('index', LayoutHandler::getInstance()->getLayout(LayoutHandler::INDEX), null, $blockID);
+		$blockType->init('index', LayoutHandler::getInstance()->getLayout(LayoutHandler::INDEX), null, $blockID, null);
 		$optionsHTML = $blockType->getOptionsHTML();
 		return $optionsHTML;
 	}
