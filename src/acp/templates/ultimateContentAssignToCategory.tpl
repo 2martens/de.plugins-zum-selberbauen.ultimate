@@ -1,9 +1,8 @@
-{include file='header'}
+{capture assign='pageTitle'}{lang}wcf.acp.ultimate.content.assignToCategory{/lang}{/capture}
+{include file='header' application='ultimate'}
 
 <header class="boxHeadline">
-	<hgroup>
-		<h1>{lang}wcf.acp.ultimate.content.assignToCategory{/lang}</h1>
-	</hgroup>
+	<h1>{lang}wcf.acp.ultimate.content.assignToCategory{/lang}</h1>
 </header>
 
 {if $errorField}
