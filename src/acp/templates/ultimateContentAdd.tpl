@@ -105,7 +105,7 @@
 			</dl>
 			<!--</div>-->
 			
-			<script type="text/javascript">
+			<script data-relocate="true" type="text/javascript">
 			/* <![CDATA[ */
 				$(function() {
 					var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
@@ -175,7 +175,7 @@
 							{/if}
 						</dd>
 					</dl>
-					<script type="text/javascript">
+					<script data-relocate="true" type="text/javascript">
 					/* <![CDATA[ */
 					$(function() {
 						$('#selectVisibility').change(function () {
@@ -201,7 +201,7 @@
 				<dt><label for="publishDateInput">{lang}wcf.acp.ultimate.publishDate{/lang}</label></dt>
 				<dd>
 					<input type="datetime" id="publishDateInput" name="publishDate" value="{@$publishDate}" readonly="readonly" class="medium" />
-					<script type="text/javascript">
+					<script data-relocate="true" type="text/javascript">
 					/* <![CDATA[*/
 					$(function() {
 						//ULTIMATE.Date.Picker.init();

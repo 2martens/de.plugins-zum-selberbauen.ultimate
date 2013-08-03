@@ -6,9 +6,9 @@
 		{*<small>{lang}wcf.tagging.tags.description{/lang}</small>*}
 	</dd>
 </dl>
-<script type="text/javascript" src="{@$__wcf->getPath()}js/WCF.Tagging{if !ENABLE_DEBUG_MODE}.min{/if}.js"></script>
-<script type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.Tagging.js"></script>
-<script type="text/javascript">
+<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath()}js/WCF.Tagging{if !ENABLE_DEBUG_MODE}.min{/if}.js"></script>
+<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.Tagging.js"></script>
+<script data-relocate="true" type="text/javascript">
 	//<![CDATA[
 	$(function() {
 		{if $languageID|isset}

@@ -1,7 +1,7 @@
 {capture assign='pageTitle'}{lang}wcf.acp.ultimate.layoutManager{/lang}{/capture}
 {include file='header' application='ultimate'}
 
-<script type="text/javascript">
+<script data-relocate="true" type="text/javascript">
 	/* <![CDATA[ */
 	$(function() {
 		WCF.TabMenu.init();
@@ -200,7 +200,7 @@
 	</div>
 </form>
 
-<script type="text/javascript">
+<script data-relocate="true" type="text/javascript">
 	/* <![CDATA[ */
 		$(function() {
 			$('#layout1').change(function(event) {

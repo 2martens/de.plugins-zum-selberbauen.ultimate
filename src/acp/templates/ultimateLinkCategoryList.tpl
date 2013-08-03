@@ -2,7 +2,7 @@
 {include file='header' application='ultimate'}
 
 {if $categoryNodeList|count}
-	<script type="text/javascript">
+	<script data-relocate="true "type="text/javascript">
 		//<![CDATA[
 		$(function() {
 			{if $collapsibleObjectTypeID && $categoryNodeList|count > 1}

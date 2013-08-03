@@ -76,7 +76,7 @@
 							{lang}wcf.acp.ultimate.template.widgetAreaSide.error.{@$errorType}{/lang}
 						</small>
 					{/if}
-					<script type="text/javascript">
+					<script data-relocate="true" type="text/javascript">
 					/* <![CDATA[ */
 					$(function() {
 						var $initialValue = $('#showWidgetArea').val();
@@ -110,7 +110,7 @@
 							{lang}wcf.acp.ultimate.template.selectWidgetArea.error.{@$errorType}{/lang}
 						</small>
 					{/if}
-					<script type="text/javascript">
+					<script data-relocate="true" type="text/javascript">
 					/* <![CDATA[ */
 					$(function() {
 						var $initialValue = $('#showWidgetArea').val();
@@ -239,7 +239,7 @@
 </form>
 <div id="blockForm" class="ultimateHidden"></div>
 
-<script type="text/javascript">
+<script data-relocate="true" type="text/javascript">
 	/* <![CDATA[ */
 		$(function() {
 			{if $action == 'edit'}

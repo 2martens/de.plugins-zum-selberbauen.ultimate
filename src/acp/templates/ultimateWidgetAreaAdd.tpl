@@ -1,7 +1,7 @@
 {capture assign='pageTitle'}{lang}wcf.acp.ultimate.widgetArea.{@$action}{/lang}{/capture}
 {include file='header' application='ultimate'}
 
-<script type="text/javascript">
+<script data-relocate="true" type="text/javascript">
 	/* <![CDATA[ */
 	$(function() {
 		WCF.TabMenu.init();
@@ -118,7 +118,7 @@
 					<button data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
 				</div>
 				
-				<script>
+				<script data-relocate="true" type="text/javascript">
 					//<![CDATA[
 					$(function() {
 						new WCF.Sortable.List('dashboard-sidebar', 'ultimate\\data\\widget\\area\\WidgetAreaAction', 0, { }, true, { boxType: 'sidebar', widgetAreaID: {@$widgetAreaID} });

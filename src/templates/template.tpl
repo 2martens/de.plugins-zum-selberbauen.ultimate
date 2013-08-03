@@ -17,7 +17,7 @@
 	{include file='header' application='ultimate' sidebarOrientation='right'}
 {/if}
 			<!-- custom area -->
-			<script type="text/javascript">
+			<script data-relocate="true" type="text/javascript">
 			/* <![CDATA[ */
 			{* try without
 			$(function() {

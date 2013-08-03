@@ -1,7 +1,7 @@
 {capture assign='pageTitle'}{lang}wcf.acp.ultimate.page.{@$action}{/lang}{/capture}
 {include file='header' application='ultimate'}
 
-<script type="text/javascript">
+<script data-relocate="true" type="text/javascript">
 	/* <![CDATA[ */
 	$(function() {
 		WCF.TabMenu.init();
@@ -38,7 +38,7 @@
 			<dl{if $errorField == 'pageTitle'} class="formError"{/if}>
 				<dt><label for="pageTitle">{lang}wcf.acp.ultimate.page.title{/lang}</label></dt>
 				<dd>
-					<script type="text/javascript">
+					<script data-relocate="true" type="text/javascript">
 					//<![CDATA[
 						$(function() {
 							var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
@@ -149,7 +149,7 @@
 							{/if}
 						</dd>
 					</dl>
-					<script type="text/javascript">
+					<script data-relocate="true" type="text/javascript">
 					/* <![CDATA[ */
 					$(function() {
 						$('#selectVisibility').change(function () {

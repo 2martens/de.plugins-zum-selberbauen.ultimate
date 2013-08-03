@@ -1,7 +1,7 @@
 {capture assign='pageTitle'}{lang}wcf.acp.ultimate.menu.{@$action}{/lang}{/capture}
 {include file='header' application='ultimate'}
 
-<script type="text/javascript">
+<script data-relocate="true" type="text/javascript">
 	/* <![CDATA[ */
 	$(function() {
 		WCF.TabMenu.init();
@@ -196,7 +196,7 @@
 				<dl>
 					<dt><label for="title">{lang}wcf.acp.ultimate.menu.custom.linkTitle{/lang}</label></dt>
 					<dd>
-						<script type="text/javascript">
+						<script data-relocate="true" type="text/javascript">
 						//<![CDATA[
 							{if $action == 'edit'}
 							$(function() {

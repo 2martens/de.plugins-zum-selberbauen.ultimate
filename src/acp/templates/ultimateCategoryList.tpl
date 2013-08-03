@@ -1,7 +1,7 @@
 {capture assign='pageTitle'}{lang}wcf.acp.ultimate.category.list{/lang}{/capture}
 {include file='header' application='ultimate'}
 
-<script type="text/javascript">
+<script data-relocate="true" type="text/javascript">
 	//<![CDATA[
 	$(function() {
 		var actionObjects = { };
