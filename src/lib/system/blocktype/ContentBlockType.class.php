@@ -347,14 +347,6 @@ class ContentBlockType extends AbstractBlockType {
 			$this->contents = $allowedContents;
 		}
 		
-		// offset
-		$offset = $this->options['offset'];
-		if ($offset) {
-			for ($offset; $offset > 0; $offset--) {
-				array_shift($this->contents);
-			}
-		}
-		
 		// number of contents
 		$amountOfContents = count($this->contents); // get remaining amount of to be displayed contents
 		$numberOfContents = $this->options['numberOfContents'];
@@ -383,6 +375,14 @@ class ContentBlockType extends AbstractBlockType {
 			// sort order
 			if ($this->options['sortOrder'] != ULTIMATE_SORT_CONTENT_SORTORDER) {
 				$this->contents = array_reverse($this->contents, true);
+			}
+		}
+		
+		// offset
+		$offset = $this->options['offset'];
+		if ($offset) {
+			for ($offset; $offset > 0; $offset--) {
+				array_shift($this->contents);
 			}
 		}
 		
