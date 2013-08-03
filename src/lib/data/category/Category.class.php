@@ -45,6 +45,12 @@ use wcf\system\WCF;
  */
 class Category extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**
+	 * Contains the category ID of the page category.
+	 * @var integer
+	 */
+	const PAGE_CATEGORY = 2;
+	
+	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableName
 	 */
 	protected static $databaseTableName = 'category';

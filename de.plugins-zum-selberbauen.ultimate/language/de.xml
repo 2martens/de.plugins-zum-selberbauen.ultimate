@@ -733,6 +733,8 @@ Für die InlineEdit braucht man die gleichen Rechte um Inhalte zu schreiben, zu 
 	<!-- this category is used for all multilingual category fields -->
 	<category name="ultimate.category">
 		<item name="ultimate.category.1.categoryTitle"><![CDATA[Nicht kategorisiert]]></item>
+        <item name="ultimate.category.2.categoryTitle"><![CDATA[Seiten]]></item>
+        <item name="ultimate.category.2.categoryDescription"><![CDATA[Alle Inhalte, die als Seiten fungieren, sollten direkt oder indirekt in dieser Kategorie sein. Alle Inhalte, die in dieser Kategorie sind, werden nicht bei dem Erstellen von den 'Letzten Aktivitäten" berücksichtigt.]]></item>
 	</category>
 	
 	<!-- this category is used for all multilingual content fields -->

@@ -240,6 +240,8 @@ ALTER TABLE ultimate1_widget_area_option ADD FOREIGN KEY (widgetAreaID) REFERENC
 /**** default entries ****/
 -- default category
 INSERT INTO ultimate1_category (categoryTitle, categorySlug) VALUES ('ultimate.category.1.categoryTitle', 'uncategorized');
+INSERT INTO ultimate1_category (categoryTitle, categoryDescription, categorySlug) 
+	VALUES ('ultimate.category.2.categoryTitle', 'ultimate.category.2.categoryDescription', 'pages');
 
 -- default layouts
 INSERT INTO ultimate1_layout (objectID, objectType) VALUES (0, 'index');

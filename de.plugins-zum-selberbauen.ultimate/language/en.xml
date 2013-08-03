@@ -718,6 +718,8 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 	<!-- this category is used for all multilingual category fields -->
 	<category name="ultimate.category">
 		<item name="ultimate.category.1.categoryTitle"><![CDATA[Uncategorized]]></item>
+        <item name="ultimate.category.2.categoryTitle"><![CDATA[Pages]]></item>
+        <item name="ultimate.category.2.categoryDescription"><![CDATA[All contents that are used by pages should be in this category, be it directly or indirectly. All contents that are in this category directly or indirectly, are not used for 'Recent Activities'.]]></item>
 	</category>
 	
 	<!-- this category is used for all multilingual content fields -->

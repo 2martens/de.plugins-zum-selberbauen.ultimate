@@ -27,6 +27,7 @@
  */
 namespace ultimate\acp\form;
 use ultimate\acp\form\UltimateContentAddForm;
+use ultimate\data\category\Category;
 use ultimate\data\content\CategorizedContent;
 use ultimate\data\content\Content;
 use ultimate\data\content\ContentAction;
@@ -259,7 +260,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		$content = $contents[$this->contentID];
 		
 		// create recent activity event if published
-		if ($this->content->__get('status') != 3 && $this->statusID == 3) {
+		if ($this->content->__get('status') != 3 && $this->statusID == 3 && in_array(Category::PAGE_CATEGORY, $this->categoryIDs)) {
 			UserActivityEventHandler::getInstance()->fireEvent(
 				'de.plugins-zum-selberbauen.ultimate.recentActivityEvent.content',
 				$this->contentID,

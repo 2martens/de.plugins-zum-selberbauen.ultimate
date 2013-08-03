@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\acp\form;
+use ultimate\data\category\Category;
 use ultimate\data\content\ContentAction;
 use ultimate\data\content\ContentEditor;
 use ultimate\system\cache\builder\CategoryCacheBuilder;
@@ -370,7 +371,7 @@ class UltimateContentAddForm extends MessageForm {
 		}
 		
 		// create recent activity event if published
-		if ($content->__get('status') == 3) {
+		if ($content->__get('status') == 3 && in_array(Category::PAGE_CATEGORY, $this->categoryIDs)) {
 			UserActivityEventHandler::getInstance()->fireEvent(
 				'de.plugins-zum-selberbauen.ultimate.recentActivityEvent.content',
 				$contentID,
