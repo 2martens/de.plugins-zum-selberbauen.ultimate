@@ -685,7 +685,8 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 	</category>
 	
 	<category name="wcf.user.profile">
-		<item name="wcf.user.profile.recentActivity.likedContent"><![CDATA[Liked <a href="{linkExtended application='ultimate' date=$content->publishDateObject->format('Y-m-d') contentSlug=$content->contentSlug}{/linkExtended}" class="ultimateContentLink" data-content-id="{@$content->contentID}">{$content->author->username}’s content</a>.]]></item>
+		<item name="wcf.user.profile.recentActivity.content"><![CDATA[Created the article <a href="{linkExtended application='ultimate' date=$content->publishDateObject->format('Y-m-d') contentSlug=$content->contentSlug}{/linkExtended}" class="ultimateContentLink" data-content-id="{@$content->contentID}">{$content->getLangTitle()}</a>.]]></item>
+        <item name="wcf.user.profile.recentActivity.likedContent"><![CDATA[Liked <a href="{linkExtended application='ultimate' date=$content->publishDateObject->format('Y-m-d') contentSlug=$content->contentSlug}{/linkExtended}" class="ultimateContentLink" data-content-id="{@$content->contentID}">{$content->author->username}’s content</a>.]]></item>
         <item name="wcf.user.profile.recentActivity.contentComment"><![CDATA[Posted a comment to <a href="{linkExtended date=$content->publishDateObject->format('Y-m-d') contentSlug=$content->contentSlug}{/linkExtended}">{$content}</a> by <a href="{link controller='User' object=$author}{/link}">{$author->username}</a>.]]></item>
 		<item name="wcf.user.profile.recentActivity.contentCommentResponse"><![CDATA[Replied to a comment by <a href="{link controller='User' object=$commentAuthor}{/link}">{$commentAuthor->username}</a> to <a href="{linkExtended date=$content->publishDateObject->format('Y-m-d') contentSlug=$content->contentSlug}{/linkExtended}">{$content}</a> b< <a href="{link controller='User' object=$author}{/link}">{$author->username}</a>.]]></item>
 	</category>
