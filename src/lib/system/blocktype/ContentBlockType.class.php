@@ -235,6 +235,18 @@ class ContentBlockType extends AbstractBlockType {
 		$useDefaultMetaAboveContent = (!isset($options['metaAboveContent']));
 		$useDefaultMetaBelowContent = (!isset($options['metaBelowContent']));
 		
+		// if the default mode has been chosen, no variations to default shall be allowed
+		if ($options['queryMode'] == 'default') {
+			$options['fetchPageContent'] = 'none';
+			$options['categories'] = array();
+			$options['categoryMode'] = 'include';
+			$options['authors'] = array();
+			$options['numberOfContents'] = 10;
+			$options['offset'] = 0;
+			$options['sortField'] = ULTIMATE_SORT_CONTENT_SORTFIELD;
+			$options['sortOrder'] = ULTIMATE_SORT_CONTENT_SORTORDER;
+		}
+		
 		// convert to real value type
 		$convertedOptions = array();
 		foreach ($options as $optionName => $optionValue) {

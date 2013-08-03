@@ -33,6 +33,26 @@
 						<option value="default"{if $queryModeSelected == 'default'} selected="selected"{/if}>{lang}wcf.acp.ultimate.template.contentTab.mode.queryMode.default{/lang}</option>
 						<option value="custom"{if $queryModeSelected == 'custom'} selected="selected"{/if}>{lang}wcf.acp.ultimate.template.contentTab.mode.queryMode.custom{/lang}</option>
 					</select>
+					<script data-relocate="true" type="text/javascript">
+					//<![CDATA[
+						$(function() {
+							$('#queryMode_{$blockID}').change(function(event) {
+								var $target = $(event.currentTarget);
+								var $value = $target.val();
+								
+								if ($value == 'default') {
+									$('#block_{$blockID}_tab_query').find('select', 'input', 'button')
+										.addClass('disabled').prop('disabled', true);
+									$('#block_{$blockID}_tab_query').find('input', 'textarea').prop('readonly', true);
+								} else {
+									$('#block_{$blockID}_tab_query').find('select', 'input', 'button')
+										.removeClass('disabled').prop('disabled', false).prop('readonly', false);
+									$('#block_{$blockID}_tab_query').find('input', 'textarea').prop('readonly', false);
+								}
+							});
+						});
+					//]]>
+					</script>
 				</dd>
 			</dl>
 		</div>
