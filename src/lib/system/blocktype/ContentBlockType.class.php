@@ -351,11 +351,6 @@ class ContentBlockType extends AbstractBlockType {
 			$this->contents = $remainingContents;
 		}
 		
-		// sort order
-		if ($this->options['sortOrder'] != ULTIMATE_SORT_CONTENT_SORTORDER) {
-			$this->contents = array_reverse($this->contents, true);
-		}
-		
 		// sort field
 		if ($this->options['sortField'] != ULTIMATE_SORT_CONTENT_SORTFIELD) {
 			$this->loadCache(true);
@@ -364,6 +359,11 @@ class ContentBlockType extends AbstractBlockType {
 				$contents[$row['contentID']] = new Content(null, null, $row);
 			}
 			$this->contents = $contents;
+		} else {
+			// sort order
+			if ($this->options['sortOrder'] != ULTIMATE_SORT_CONTENT_SORTORDER) {
+				$this->contents = array_reverse($this->contents, true);
+			}
 		}
 		
 		// comments

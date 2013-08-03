@@ -126,6 +126,15 @@ class BlockAction extends AbstractDatabaseObjectAction {
 				unset($parameters['additionalData']['metaBelowContent_i18n']);
 				$parameters['additionalData']['metaBelowContent'] = '';
 			}
+			
+			if ($parameters['additionalData']['sortField'] != ULTIMATE_SORT_CONTENT_SORTFIELD) {
+				$sql = 'SELECT *
+				        FROM   ultimate'.WCF_N.'_content
+				        ORDER BY '.WCF::getDB()->escapeString($parameters['additionalData']['sortField'])
+				        .' '.WCF::getDB()->escapeString($parameters['additionalData']['sortOrder']);
+				$parameters['query'] = $sql;
+				$parameters['parameters'] = array();
+			}
 		}
 		if (isset($parameters['additionalData'])) {
 			$parameters['additionalData'] = serialize($parameters['additionalData']);
