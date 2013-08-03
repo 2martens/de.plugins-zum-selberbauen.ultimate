@@ -358,8 +358,11 @@ class ContentBlockType extends AbstractBlockType {
 			$this->loadCache(true);
 			$contents = array();
 			foreach ($this->queryResult as $row) {
-				$contents[$row['contentID']] = new Content(null, null, $row);
+				if (isset($this->contents[$row['contentID']])) {
+					$contents[$row['contentID']] = $this->contents[$row['contentID']];
+				}
 			}
+			
 			$this->contents = $contents;
 		} else {
 			// sort order

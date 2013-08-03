@@ -254,7 +254,7 @@ class BlockAction extends AbstractDatabaseObjectAction {
 			}
 
 			if ($parameters['additionalData']['sortField'] != ULTIMATE_SORT_CONTENT_SORTFIELD) {
-				$sql = 'SELECT *
+				$sql = 'SELECT contentID
 				        FROM   ultimate'.WCF_N.'_content
 				        ORDER BY '.WCF::getDB()->escapeString($parameters['additionalData']['sortField'])
 							        .' '.WCF::getDB()->escapeString($parameters['additionalData']['sortOrder']);
