@@ -376,11 +376,8 @@ class ContentBlockType extends AbstractBlockType {
 		}
 		
 		// fetch likes
-		if (MODULE_LIKE) {
-			$contentIDs = array();
-			foreach ($this->contents as $contentID => $content) {
-				$contentIDs[] = $contentID;
-			}
+		if (MODULE_LIKE && !empty($this->contents)) {
+			$contentIDs = array_keys($this->contents);
 			$objectType = LikeHandler::getInstance()->getObjectType('de.plugins-zum-selberbauen.ultimate.likeableContent');
 			LikeHandler::getInstance()->loadLikeObjects($objectType, $contentIDs);
 			$this->likeData = LikeHandler::getInstance()->getLikeObjects($objectType);
