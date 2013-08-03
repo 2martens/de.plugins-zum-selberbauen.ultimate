@@ -116,11 +116,11 @@
 					<select id="statusSelect" name="status">
 					{htmloptions options=$statusOptions selected=$statusID}
 					</select>
-					<script type="text/javascript">
+					<script data-relocate="true" type="text/javascript">
 					/* <![CDATA[ */
-					$(function() {
-						new ULTIMATE.Button.Replacement('saveButton', 'statusSelect', 'save');
-					});
+						$(function() {
+							new ULTIMATE.ACP.Button.Replacement('saveButton', 'statusSelect', 'save');
+						});
 					/* ]]> */
 					</script>
 					{if $errorField == 'status'}
@@ -175,11 +175,11 @@
 				<dt><label for="publishDate">{lang}wcf.acp.ultimate.publishDate{/lang}</label></dt>
 				<dd>
 					<input type="datetime" id="publishDateInput" name="publishDate" value="{@$publishDate}" readonly="readonly" class="medium" />
-					<script type="text/javascript">
+					<script data-relocate="true" type="text/javascript">
 					/* <![CDATA[*/
 					$(function() {
 						//ULTIMATE.Date.Picker.init();
-						new ULTIMATE.Button.Replacement('publishButton', 'publishDateInput', 'publish');
+						new ULTIMATE.ACP.Button.Replacement('publishButton', 'publishDateInput', 'publish');
 					});
 					/* ]]> */
 					</script>
