@@ -17,36 +17,6 @@
 	{include file='header' application='ultimate' sidebarOrientation='right'}
 {/if}
 			<!-- custom area -->
-			<script data-relocate="true" type="text/javascript">
-			/* <![CDATA[ */
-			{* try without
-			$(function() {
-				var blockIDs = [{implode from=$blockIDs item=blockID glue=','}{$blockID}{/implode}];
-				refreshBlocks();
-				
-				// if the window is resized the blocks have to be updated
-				$(window).bind('resize', function(event) {
-					if ( event.target != window )
-						return;
-					refreshBlocks();
-				});
-				function refreshBlocks() {
-					for (var $key = 0; $key < blockIDs.length; $key++) {
-						var $blockID = blockIDs[$key];
-						var $blockIDStr = 'block-' + $blockID;
-						if ($.wcfIsset($blockIDStr)) {
-							var $block = $('#' + $blockIDStr);
-							var height = $block.data('height');
-							
-							// this value is absolute
-							$block.height(height);
-						}
-					}
-				}
-			});
-			*}
-			/* ]]> */
-			</script>
 			{@$customArea}
 			<!-- /custom area -->
 			
