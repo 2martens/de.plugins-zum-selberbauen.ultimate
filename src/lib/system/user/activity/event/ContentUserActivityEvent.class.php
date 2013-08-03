@@ -48,16 +48,16 @@ class ContentUserActivityEvent extends SingletonFactory implements IUserActivity
 	 * @see	\wcf\system\user\activity\event\IUserActivityEvent::prepare()
 	 */
 	public function prepare(array $events) {
-		$objectIDs = array();
+		$contentIDs = array();
 		foreach ($events as $event) {
-			$objectIDs[] = $event->objectID;
+			$contentIDs[] = $event->objectID;
 		}
 		
 		// fetch contents
 		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
 		$remainingContents = array();
 		foreach ($contents as $contentID => $content) {
-			if (in_array($contentID, $objectIDs)) {
+			if (in_array($contentID, $contentIDs)) {
 				$remainingContents[$contentID] = $content;
 			}
 		}

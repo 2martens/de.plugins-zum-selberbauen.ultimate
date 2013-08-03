@@ -57,7 +57,7 @@ class LikeableContentUserActivityEvent extends SingletonFactory implements IUser
 		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
 		$remainingContents = array();
 		foreach ($contents as $contentID => $content) {
-			if (in_array($contentID, $objectIDs)) {
+			if (in_array($contentID, $contentIDs)) {
 				$remainingContents[$contentID] = $content;
 			}
 		}
