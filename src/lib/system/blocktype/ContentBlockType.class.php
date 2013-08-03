@@ -235,13 +235,15 @@ class ContentBlockType extends AbstractBlockType {
 		// convert to real value type
 		$convertedOptions = array();
 		foreach ($options as $optionName => $optionValue) {
-			if ($optionName == 'hideTitles' || $optionName = 'hideContent' || $optionName == 'hideInlineEdit') {
+			if ($optionName == 'hideTitles' || $optionName == 'hideContent' || $optionName == 'hideInlineEdit') {
 				$convertedOptions[$optionName] = (boolean) intval($optionValue);
-			} elseif ($optionName == 'numberOfContents' || $optionName == 'offset' || $optionName == 'featuredContents') {
-				$convertedOptions[$optionName] = intval($optionValue);
-			} else {
-				$convertedOptions[$optionName] = $optionValue;
+				continue;
 			}
+			if ($optionName == 'numberOfContents' || $optionName == 'offset' || $optionName == 'featuredContents') {
+				$convertedOptions[$optionName] = intval($optionValue);
+				continue;
+			} 
+			$convertedOptions[$optionName] = $optionValue;
 		}
 		
 		$this->options = array_replace_recursive($defaults, $convertedOptions);
