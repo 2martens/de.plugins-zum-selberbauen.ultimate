@@ -57,7 +57,7 @@ class ContentUserActivityEvent extends SingletonFactory implements IUserActivity
 		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
 		$remainingContents = array();
 		foreach ($contents as $contentID => $content) {
-			if (in_array($contentID, $contentIDs)) {
+			if (in_array($contentID, $objectIDs)) {
 				$remainingContents[$contentID] = $content;
 			}
 		}
