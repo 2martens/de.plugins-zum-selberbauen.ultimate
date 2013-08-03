@@ -145,7 +145,7 @@
 					<script type="text/javascript">
 					/* <![CDATA[ */
 					$(function() {
-						new ULTIMATE.Button.Replacement('saveButton', 'statusSelect', 'save');
+						new ULTIMATE.ACP.Button.Replacement('saveButton', 'statusSelect', 'save');
 					});
 					/* ]]> */
 					</script>
@@ -205,7 +205,7 @@
 					/* <![CDATA[*/
 					$(function() {
 						//ULTIMATE.Date.Picker.init();
-						new ULTIMATE.Button.Replacement('publishButton', 'publishDateInput', 'publish');
+						new ULTIMATE.ACP.Button.Replacement('publishButton', 'publishDateInput', 'publish');
 					});
 					/* ]]> */
 					</script>
