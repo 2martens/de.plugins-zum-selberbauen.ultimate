@@ -35,6 +35,7 @@ use wcf\system\request\LinkHandler;
 use wcf\system\request\RouteHandler;
 use wcf\system\style\StyleHandler;
 use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * The core class of the Ultimate CMS.
@@ -58,7 +59,6 @@ class ULTIMATECore extends AbstractApplication {
 	 */
 	public function __run() {
 		$this->initRoutes();
-		$this->initStyle();
 		PageMenu::getInstance()->setActiveMenuItem('ultimate.header.menu.index');
 	}
 	
@@ -82,9 +82,5 @@ class ULTIMATECore extends AbstractApplication {
 		$contentRoute->setParameterOption('date', null, '2[0-9]{3}\-[0-9]{2}\-[0-9]{2}');
 		$contentRoute->setParameterOption('contentSlug', null, '[a-z]+(\-{1}[a-z]+)*');
 		RouteHandler::getInstance()->addRoute($contentRoute);
-	}
-	
-	protected function initStyle() {
-		
 	}
 }
