@@ -28,6 +28,9 @@
 namespace ultimate\system\event\listener;
 use ultimate\system\cache\builder\AuthorCacheBuilder;
 use ultimate\system\cache\builder\ContentCacheBuilder;
+use ultimate\system\cache\builder\ContentCategoryCacheBuilder;
+use ultimate\system\cache\builder\ContentPageCacheBuilder;
+use ultimate\system\cache\builder\ContentTagCacheBuilder;
 use wcf\system\event\IEventListener;
 
 /**
@@ -68,5 +71,8 @@ class CacheResetListener implements IEventListener {
 	 */
 	protected function resetContentCache() {
 		ContentCacheBuilder::getInstance()->reset();
+		ContentCategoryCacheBuilder::getInstance()->reset();
+		ContentPageCacheBuilder::getInstance()->reset();
+		ContentTagCacheBuilder::getInstance()->reset();
 	}
 }
