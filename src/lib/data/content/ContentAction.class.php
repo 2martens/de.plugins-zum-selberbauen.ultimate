@@ -184,8 +184,6 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		return call_user_func(array($this->className, 'deleteAll'), $objectIDs);
 	}
 	
-	// adjust
-	
 	/**
 	 * @see	wcf\data\IMessageInlineEditorAction::validateBeginEdit()
 	 */
