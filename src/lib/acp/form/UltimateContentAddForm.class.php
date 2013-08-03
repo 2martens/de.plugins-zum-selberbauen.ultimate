@@ -371,16 +371,13 @@ class UltimateContentAddForm extends MessageForm {
 		
 		// create recent activity event if published
 		if ($content->__get('status') == 3) {
-			$languageIDs = array_keys($this->tagsI18n);
-			foreach ($languageIDs as $languageID) {
-				UserActivityEventHandler::getInstance()->fireEvent(
-					'de.plugins-zum-selberbauen.ultimate.recentActivityEvent.content',
-					$contentID,
-					$languageID,
-					$content->__get('authorID'),
-					$content->__get('publishDate')
-				);
-			}
+			UserActivityEventHandler::getInstance()->fireEvent(
+				'de.plugins-zum-selberbauen.ultimate.recentActivityEvent.content',
+				$contentID,
+				null,
+				$content->__get('authorID'),
+				$content->__get('publishDate')
+			);
 		}
 		
 		$this->saved();
