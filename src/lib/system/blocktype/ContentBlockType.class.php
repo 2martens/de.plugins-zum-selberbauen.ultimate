@@ -208,6 +208,7 @@ class ContentBlockType extends AbstractBlockType {
 		// default values
 		$defaults = array(
 			'queryMode' => 'default',
+			// query options
 			'fetchPageContent' => 'none',
 			'categories' => array(),
 			'categoryMode' => 'include',
@@ -216,6 +217,7 @@ class ContentBlockType extends AbstractBlockType {
 			'offset' => 0,
 			'sortField' => ULTIMATE_SORT_CONTENT_SORTFIELD,
 			'sortOrder' => ULTIMATE_SORT_CONTENT_SORTORDER,
+			// display options
 			'readMoreText' => ULTIMATE_GENERAL_CONTENT_READMORETEXT,
 			'hideTitles' => false,
 			'contentBodyDisplay' => 'default',
@@ -223,6 +225,7 @@ class ContentBlockType extends AbstractBlockType {
 			'commentsVisibility' => 'auto',
 			'featuredContents' => 1,
 			'hideInlineEdit' => false,
+			// meta options
 			'contentMetaDisplay' => array(),
 			'metaAboveContent' => ULTIMATE_GENERAL_CONTENT_METAABOVECONTENT,
 			'metaBelowContent' => ULTIMATE_GENERAL_CONTENT_METABELOWCONTENT
