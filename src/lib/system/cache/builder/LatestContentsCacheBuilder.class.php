@@ -29,6 +29,7 @@ namespace ultimate\system\cache\builder;
 use ultimate\data\content\CategorizedContent;
 use ultimate\data\content\ContentList;
 use ultimate\data\content\TaggableContent;
+use ultimate\data\content\TaggedContent;
 use wcf\system\cache\builder\AbstractCacheBuilder;
 
 /**
