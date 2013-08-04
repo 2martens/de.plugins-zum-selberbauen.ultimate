@@ -243,7 +243,7 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
 		<item name="wcf.acp.option.ultimate_sort_widgetArea_sortOrder.description"><![CDATA[Please insert here the sort order for the widget configuration list.]]></item>
 		<!-- /ultimate.sort.widgetArea -->
         <!-- dashboard.sidebar.latestContents -->
-        <item name="wcf.acp.option.ultimate_latest_contents_item"><![CDATA[Number of contents]]></item>
+        <item name="wcf.acp.option.ultimate_latest_contents_items"><![CDATA[Number of contents]]></item>
         <!-- /dashboard.sidebar.latestContents -->
 	</category>
 	
