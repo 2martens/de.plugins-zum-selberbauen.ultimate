@@ -126,10 +126,6 @@ $(function() {
 											<p>{@$content->getFormattedMessage()|truncateMore:0}</p>
 										{/if}
 									{else}
-										{if $displayedFeaturedContents == $block->featuredContents}
-											{assign var=displayedAllFeaturedContents value=true}
-											{assign var=displayedFeaturedContents value=($displayedFeaturedContents + 1)}
-										{/if}
 										<p>{@$content->getFormattedMessage()|truncateMore:ULTIMATE_GENERAL_CONTENT_CONTINUEREADINGLENGTH}</p>
 									{/if}
 								</div>
@@ -181,7 +177,7 @@ $(function() {
 									<footer class="messageOptions">
 										<nav class="jsMobileNavigation buttonGroupNavigation">
 											<ul class="smallButtons buttonGroup">{*
-												*}{if $displayedAllFeaturedContents|isset && $displayedAllFeaturedContents}<li><a href="{linkExtended application='ultimate' date=$content->publishDateObject->format('Y-m-d') contentSlug=$content->contentSlug}{/linkExtended}" class="button"><span class="icon icon16 icon-arrow-right"></span> <span>{lang}wcf.global.button.readMore{/lang}</span></a></li>{/if}{*
+												*}<li><a href="{linkExtended application='ultimate' date=$content->publishDateObject->format('Y-m-d') contentSlug=$content->contentSlug}{/linkExtended}" class="button"><span class="icon icon16 icon-arrow-right"></span> <span>{lang}wcf.global.button.readMore{/lang}</span></a></li>{*
 												*}{if $__wcf->getSession()->getPermission('admin.content.ultimate.canEditContent')}<li><a title="{lang}wcf.acp.ultimate.content.edit{/lang}" class="button jsMessageEditButton"><span class="icon icon16 icon-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}{*
 												*}<li class="toTopLink"><a href="{@$anchor}" title="{lang}wcf.global.scrollUp{/lang}" class="button jsTooltip"><span class="icon icon16 icon-arrow-up"></span> <span class="invisible">{lang}wcf.global.scrollUp{/lang}</span></a></li>{*
 											*}</ul>
