@@ -61,7 +61,7 @@ ULTIMATE.Content.Like = WCF.Like.extend({
 	 * @see	WCF.Like._getContainers()
 	 */
 	_getContainers: function() {
-		return $('article.message');
+		return $('.message');
 	},
 
 	/**
