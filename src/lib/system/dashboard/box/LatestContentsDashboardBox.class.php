@@ -31,6 +31,7 @@ use wcf\data\dashboard\box\DashboardBox;
 use wcf\data\user\UserProfile;
 use wcf\page\IPage;
 use wcf\system\dashboard\box\AbstractSidebarDashboardBox;
+use wcf\system\WCF;
 
 /**
  * Dashboard sidebar box for latest contents.
