@@ -101,7 +101,7 @@ class TaggedContentList extends ContentList {
 		if ($this->objectIDs === null) $this->readObjectIDs();
 		$this->conditionBuilder = new PreparedStatementConditionBuilder();
 		parent::readObjects();
-		$pageIDs = array_flip(ContentPageCacheBuilder::getInstance()->getData(array(), 'contentIDsToPageID'));
+		$pageIDs = array_flip(ContentPageCacheBuilder::getInstance()->getData(array(), 'contentIDToPageID'));
 		$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
 		foreach ($this->objects as $objectID => &$object) {
 			if (isset($pageIDs[$objectID])) {

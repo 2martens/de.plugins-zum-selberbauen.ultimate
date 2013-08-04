@@ -195,7 +195,7 @@ class PageUtil {
 		);
 		$unavailableContentIDs = self::loadCache(
 			'\ultimate\system\cache\builder\ContentPageCacheBuilder',
-			'contentIDsToPageID'
+			'contentIDToPageID'
 		);
 		
 		foreach ($unavailableContentIDs as $key => $contentID) {

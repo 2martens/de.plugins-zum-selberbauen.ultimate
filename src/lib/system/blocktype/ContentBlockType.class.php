@@ -280,7 +280,7 @@ class ContentBlockType extends AbstractBlockType {
 			$remainingContents = array();
 			foreach ($this->contents as $contentID => $content) {
 				$this->cacheBuilderClassName = '\ultimate\system\cache\builder\ContentPageCacheBuilder';
-				$this->cacheIndex = 'contentIDsToPageID';
+				$this->cacheIndex = 'contentIDToPageID';
 				$this->loadCache();
 				if (!in_array($contentID, $this->objects)) {
 					$remainingContents[$contentID] = $content;

@@ -148,6 +148,6 @@ class ContentPage extends AbstractPage {
 	 */
 	protected function loadCache() {
 		$this->contentsToSlug = ContentCacheBuilder::getInstance()->getData(array(), 'contentsToSlug');
-		$this->contentIDsToPageID = ContentPageCacheBuilder::getInstance()->getData(array(), 'contentIDsToPageID');
+		$this->contentIDsToPageID = ContentPageCacheBuilder::getInstance()->getData(array(), 'contentIDToPageID');
 	}
 }

@@ -51,7 +51,7 @@ class ContentPageCacheBuilder extends AbstractCacheBuilder {
 	protected function rebuild(array $parameters) {
 		$data = array(
 			'contentsToPageID' => array(),
-			'contentIDsToPageID' => array()
+			'contentIDToPageID' => array()
 		);
 		
 		$pageList = new PageList();
@@ -63,7 +63,7 @@ class ContentPageCacheBuilder extends AbstractCacheBuilder {
 			$content = $page->getContent();
 			if ($content === null) continue;
 			$data['contentsToPageID'][$pageID] = new TaggedContent($content);
-			$data['contentIDsToPageID'][$pageID] = $content->__get('contentID');
+			$data['contentIDToPageID'][$pageID] = $content->__get('contentID');
 		}
 		
 		return $data;
