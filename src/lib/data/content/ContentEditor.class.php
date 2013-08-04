@@ -26,6 +26,8 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\content;
+use ultimate\system\cache\builder\LatestContentsCacheBuilder;
+
 use ultimate\data\layout\LayoutAction;
 use ultimate\data\page\PageAction;
 use ultimate\system\cache\builder\ContentCacheBuilder;
@@ -299,5 +301,6 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 		ContentTagCacheBuilder::getInstance()->reset();
 		ContentTagCloudCacheBuilder::getInstance()->reset();
 		LayoutCacheBuilder::getInstance()->reset();
+		LatestContentsCacheBuilder::getInstance()->reset();
 	}
 }

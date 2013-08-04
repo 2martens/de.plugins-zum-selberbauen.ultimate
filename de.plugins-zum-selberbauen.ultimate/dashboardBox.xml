@@ -3,7 +3,7 @@
     <import>
         <dashboardbox name="de.plugins-zum-selberbauen.ultimate.latestContents">
             <classname><![CDATA[ultimate\system\dashboard\box\LatestContentsDashboardBox]]></classname>
-            <boxtype>content</boxtype>
+            <boxtype>sidebar</boxtype>
         </dashboardbox>
         
         <dashboardbox name="de.plugins-zum-selberbauen.ultimate.tagCloud">

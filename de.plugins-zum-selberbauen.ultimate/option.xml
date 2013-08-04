@@ -42,7 +42,9 @@
 						<parent>ultimate.sort</parent>
 						<showorder>5</showorder>
 					</category>
-				
+			<category name="dashboard.sidebar.latestContents">
+                <parent>dashboard.sidebar</parent>
+            </category>	
 		</categories>
 		<options>
 			<option name="ultimate_general_englishLanguage">
@@ -199,6 +201,14 @@ DESC:wcf.global.sortOrder.descending]]>
 				</selectoptions>
 			</option>
 			<!-- /sort order/field for UltimateWidgetAreaListPage -->
+            
+            <!-- dashboard.sidebar.latestContents -->
+            <option name="ultimate_latest_contents_items">
+                <categoryname>dashboard.sidebar.latestContents</categoryname>
+                <optiontype>integer</optiontype>
+                <defaultvalue>5</defaultvalue>
+            </option>
+            <!-- /dashboard.sidebar.latestContents -->
 		</options>
 	</import>
 </data>
