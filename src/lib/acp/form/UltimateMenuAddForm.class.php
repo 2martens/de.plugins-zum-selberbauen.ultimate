@@ -217,14 +217,16 @@ class UltimateMenuAddForm extends AbstractForm {
 	protected function getNestedCategories(array $categories) {
 		foreach ($categories as $categoryID => $categoryArray) {
 			foreach ($this->menuItems as $menuItem) {
-				if ($categoryArray[0]->__get('categoryTitle') != $menuItem->__get('menuItemName')) continue;
-				$this->disabledCategoryIDs[] = $categoryID;
-				break;
-				/* @var $menuItem \ultimate\data\menu\item\ViewableMenuItem */
-				foreach ($menuItem as $_menuItem) {
-					if ($categoryArray[0]->__get('categoryTitle') != $_menuItem->__get('menuItemName')) continue;
+				if ($categoryArray[0]->getTitle() == $menuItem->__get('menuItemName')) {
 					$this->disabledCategoryIDs[] = $categoryID;
 					break;
+				}
+				
+				/* @var $menuItem \ultimate\data\menu\item\ViewableMenuItem */
+				foreach ($menuItem as $_menuItem) {
+					if ($categoryArray[0]->getTitle() != $_menuItem->__get('menuItemName')) continue;
+					$this->disabledCategoryIDs[] = $categoryID;
+					break 2;
 				}
 			}
 			$this->getNestedCategories($categoryArray[1]);
@@ -239,14 +241,15 @@ class UltimateMenuAddForm extends AbstractForm {
 	protected function getNestedPages(array $pages) {
 		foreach ($pages as $pageID => $pageArray) {
 			foreach ($this->menuItems as $menuItem) {
-				if ($pageArray[0]->__get('pageTitle') != $menuItem->__get('menuItemName')) continue;
-				$this->disabledPageIDs[] = $pageID;
-				break;
-				
-				foreach ($menuItem as $_menuItem) {
-					if ($pageArray[0]->__get('pageTitle') != $_menuItem->__get('menuItemName')) continue;
+				if ($pageArray[0]->getTitle() == $menuItem->__get('menuItemName')) {
 					$this->disabledPageIDs[] = $pageID;
 					break;
+				}
+				
+				foreach ($menuItem as $_menuItem) {
+					if ($pageArray[0]->getTitle() != $_menuItem->__get('menuItemName')) continue;
+					$this->disabledPageIDs[] = $pageID;
+					break 2;
 				}
 			}
 			$this->getNestedPages($pageArray[1]);
