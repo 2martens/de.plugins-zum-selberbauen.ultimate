@@ -5,6 +5,12 @@
 	{include file='headInclude' application='ultimate'}
 	
 	{if $requestType == 'category'}
+		{if $__wcf->getUser()->userID}
+			<link rel="alternate" type="application/rss+xml" title="{lang}wcf.global.button.rss{/lang}" href="{link application='ultimate' controller='CategoryFeed' id=$requestObject->categoryID appendSession=false}at={@$__wcf->getUser()->userID}-{@$__wcf->getUser()->accessToken}{/link}" />
+		{else}
+			<link rel="alternate" type="application/rss+xml" title="{lang}wcf.global.button.rss{/lang}" href="{link application='ultimate' controller='CategoryFeed' id=$requestObject->categoryID appendSession=false}{/link}" />
+		{/if}
+		
 		{if $pageNo < $pages}
 			<link rel="next" href="{linkExtended application='ultimate' category='category' categorySlug=$requestObject->categorySlug}pageNo={@$pageNo+1}{/linkExtended}" />
 		{/if}
@@ -12,6 +18,13 @@
 			<link rel="prev" href="{linkExtended application='ultimate' category='category' categorySlug=$requestObject->categorySlug}{if $pageNo > 2}pageNo={@$pageNo-1}{/if}{/linkExtended}" />
 		{/if}
 		<link rel="canonical" href="{linkExtended application='ultimate' category='category' categorySlug=$requestObject->categorySlug}{if $pageNo > 1}pageNo={@$pageNo}{/if}{/linkExtended}" />
+	{/if}
+	{if $requestType == 'index'}
+		{if $__wcf->getUser()->userID}
+			<link rel="alternate" type="application/rss+xml" title="{lang}wcf.global.button.rss{/lang}" href="{link application='ultimate' controller='CategoryFeed' appendSession=false}at={@$__wcf->getUser()->userID}-{@$__wcf->getUser()->accessToken}{/link}" />
+		{else}
+			<link rel="alternate" type="application/rss+xml" title="{lang}wcf.global.button.rss{/lang}" href="{link application='ultimate' controller='CategoryFeed' appendSession=false}{/link}" />
+		{/if}
 	{/if}
 </head>
 

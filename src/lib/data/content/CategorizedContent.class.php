@@ -80,7 +80,7 @@ class CategorizedContent extends DatabaseObjectDecorator implements IUltimateDat
 	 * 
 	 * @return	\ultimate\data\category\Category[]
 	 */
-	protected function getCategories() {
+	private function getCategories() {
 		$sql = 'SELECT    category.*
 		        FROM      ultimate'.WCF_N.'_content_to_category contentToCategory
 		        LEFT JOIN ultimate'.WCF_N.'_category category
