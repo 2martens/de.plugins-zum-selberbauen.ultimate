@@ -144,11 +144,7 @@
 				<dl>
 					{*<dt><label>{lang}wcf.acp.ultimate.menu.categories{/lang}</label></dt>*}
 					<dd>
-						{if $action == 'add'}
-							{nestedHtmlCheckboxes options=$categories name='categoryIDs' disabled='disabled'}
-						{else}
-							{nestedHtmlCheckboxes options=$categories name='categoryIDs' disabled=$disabledCategoryIDs}
-						{/if}
+						{nestedHtmlCheckboxes options=$categories name='categoryIDs' disabled=$disabledCategoryIDs}
 						<small>
 							{lang}wcf.acp.ultimate.menu.categories.description{/lang}
 						</small>
@@ -167,11 +163,7 @@
 				<dl>
 					{*<dt><label>{lang}wcf.acp.ultimate.menu.pages{/lang}</label></dt>*}
 					<dd>
-						{if $action == 'add'}
-							{nestedHtmlCheckboxes options=$pages name='pageIDs' disabled='disabled'}
-						{else}
-							{nestedHtmlCheckboxes options=$pages name='pageIDs' disabled=$disabledPageIDs}
-						{/if}
+						{nestedHtmlCheckboxes options=$pages name='pageIDs' disabled=$disabledPageIDs}
 						<small>
 							{lang}wcf.acp.ultimate.menu.pages.description{/lang}
 						</small>
