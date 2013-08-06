@@ -32,7 +32,6 @@
 	<!-- Stylesheets -->
 	{* work-around for unknown core-object during WCFSetup *}
 	{@$__wcf->getStyleHandler()->getStylesheet()}
-	{@$__wcf->getUltimateStyleHandler()->getStylesheet()}
 	{event name='stylesheets'}
 	
 	<script data-relocate="true" type="text/javascript">

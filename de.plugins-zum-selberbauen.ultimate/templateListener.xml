@@ -24,13 +24,6 @@
 <script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.Content.js?v={@$__wcfVersion}"></script>
 ]]></templatecode>
 		</templatelistener>
-		
-		<templatelistener name="includeUltimateStyle">
-			<environment>user</environment>
-			<templatename>headInclude</templatename>
-			<eventname>stylesheets</eventname>
-			<templatecode><![CDATA[{@$__wcf->getUltimateStyleHandler()->getStylesheet()}]]></templatecode>
-		</templatelistener>
         
         <templatelistener name="includeUltimateLogo">
             <environment>user</environment>
