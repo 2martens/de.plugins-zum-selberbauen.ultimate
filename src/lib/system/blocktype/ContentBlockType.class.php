@@ -236,7 +236,8 @@ class ContentBlockType extends AbstractBlockType {
 		$useDefaultMetaBelowContent = (!isset($options['metaBelowContent']));
 		
 		// if the default mode has been chosen, no variations to default shall be allowed
-		if ($options['queryMode'] == 'default') {
+		// test for isset is necessary as in the getOptionsHtml it might be empty if a new block is created
+		if (isset($options['queryMode']) && $options['queryMode'] == 'default') {
 			$options['fetchPageContent'] = 'none';
 			$options['categories'] = array();
 			$options['categoryMode'] = 'include';
