@@ -47,7 +47,7 @@
 			<environment>admin</environment>
 			<templatename>header</templatename>
 			<eventname>headerLogo</eventname>
-			<templatecode><![CDATA[<img src="{@$__wcf->getPath()}acp/images/wcfLogo2.svg" alt="" width="300" height="58" />]]></templatecode>
+			<templatecode><![CDATA[<img src="{@$__wcf->getPath()}images/wcfLogo2.svg" alt="" width="300" height="58" />]]></templatecode>
 		</templatelistener>
 		<!-- /ACP logo -->
         
