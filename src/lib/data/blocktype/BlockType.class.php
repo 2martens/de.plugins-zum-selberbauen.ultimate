@@ -69,7 +69,6 @@ class BlockType extends AbstractUltimateDatabaseObject {
 	 */
 	protected function handleData($data) {
 		$data['cssIdentifier'] = strtolower($data['blockTypeName']);
-		$data['fixedHeight'] = (boolean) intval($data['fixedHeight']);
 		parent::handleData($data);
 	}
 }
