@@ -168,6 +168,7 @@ class CustomMenu extends TreeMenu {
 		foreach ($this->menuItems[$this->menu->__get('menuID')][$parentMenuItem] as $menuItemID => $menuItem) {
 			/* @var $menuItem \ultimate\data\menu\item\MenuItem */
 			if ($menuItem->__get('menuID') != $this->menu->__get('menuID')) continue;
+			if ($menuItem->__get('isDisabled')) continue;
 			$this->currentMenuItems[$parentMenuItem][$menuItemID] = $menuItem;
 			
 			// check children
