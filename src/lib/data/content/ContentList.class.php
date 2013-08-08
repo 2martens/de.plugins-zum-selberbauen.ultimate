@@ -27,6 +27,7 @@
  */
 namespace ultimate\data\content;
 use wcf\data\DatabaseObjectList;
+use wcf\system\like\LikeHandler;
 
 /**
  * Represents a list of contents.
@@ -43,4 +44,16 @@ class ContentList extends DatabaseObjectList {
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObjectList.html#$className
 	 */
 	public $className = '\ultimate\data\content\Content';
+	
+	/**
+	 * Initializes a ContentList object.
+	 */
+	public function __construct() {
+		parent::__construct();
+		
+		// get like status
+		if (!empty($this->sqlSelects)) $this->sqlSelects .= ',';
+		$this->sqlSelects .= "like_object.likes, like_object.dislikes";
+		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_like_object like_object ON (like_object.objectTypeID = ".LikeHandler::getInstance()->getObjectType('de.plugins-zum-selberbauen.ultimate.likeableContent')->objectTypeID." AND like_object.objectID = content.contentID)";
+	}
 }

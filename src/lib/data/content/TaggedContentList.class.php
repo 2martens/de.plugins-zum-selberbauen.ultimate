@@ -26,8 +26,6 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\content;
-use wcf\system\like\LikeHandler;
-
 use ultimate\system\cache\builder\ContentPageCacheBuilder;
 use ultimate\system\cache\builder\PageCacheBuilder;
 use wcf\data\tag\Tag;
@@ -59,11 +57,6 @@ class TaggedContentList extends ContentList {
 		
 		$this->getConditionBuilder()->add('tag_to_object.objectTypeID = ? AND tag_to_object.languageID = ? AND tag_to_object.tagID = ?', array(TagEngine::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.ultimate.content'), $tag->languageID, $tag->tagID));
 		$this->getConditionBuilder()->add('content.contentID = tag_to_object.objectID');
-		
-		// get like status
-		if (!empty($this->sqlSelects)) $this->sqlSelects .= ',';
-		$this->sqlSelects .= "like_object.likes, like_object.dislikes";
-		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_like_object like_object ON (like_object.objectTypeID = ".LikeHandler::getInstance()->getObjectType('de.plugins-zum-selberbauen.ultimate.likeableContent')->objectTypeID." AND like_object.objectID = content.contentID)";
 	}
 	
 	/**
