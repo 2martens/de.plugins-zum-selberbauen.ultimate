@@ -48,6 +48,15 @@
 									$('#block_{$blockID}_tab_query').find('input', 'textarea').prop('readonly', false);
 								}
 							});
+							
+							var $target = $('#queryMode_{$blockID}');
+							var $value = $target.val();
+								
+							if ($value == 'default') {
+								$('#block_{$blockID}_tab_query').find('select', 'input', 'button')
+									.addClass('disabled').prop('disabled', true);
+								$('#block_{$blockID}_tab_query').find('input', 'textarea').prop('readonly', true);
+							}
 						});
 					//]]>
 					</script>
