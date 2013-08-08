@@ -1,5 +1,5 @@
 {* default values *}
-{if !$showLikeColumn|isset}{assign var='showLikeColumn' value=false}{/if}
+{if !$showLikeColumn|isset}{assign var='showLikeColumn' value=true}{/if}
 {if !$showViewColumn|isset}{assign var='showViewColumn' value=false}{/if}
 
 {foreach from=$objects item=content}

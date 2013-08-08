@@ -6,7 +6,7 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th colspan="2" class="columnTitle columnSubject">{lang}ultimate.content.contentTitle{/lang}</th>
+				<th class="columnTitle columnSubject">{lang}ultimate.content.contentTitle{/lang}</th>
 				{if MODULE_LIKE && $__wcf->getSession()->getPermission('user.like.canViewLike')}<th class="columnDigits columnLikes">{lang}wcf.like.cumulativeLikes{/lang}</th>{/if}
 				{* TODO views
 				<th class="columnDigits columnViews">{lang}ultimate.content.views{/lang}</th>*}
