@@ -1,6 +1,6 @@
 {* default values *}
 {if !$showLikeColumn|isset}{assign var='showLikeColumn' value=true}{/if}
-{if !$showViewColumn|isset}{assign var='showViewColumn' value=false}{/if}
+{if !$showViewColumn|isset}{assign var='showViewColumn' value=true}{/if}
 
 {foreach from=$objects item=content}
 	<tr id="content{@$content->contentID}" class="ultimateContent jsClipboardObject" data-content-id="{@$content->contentID}" data-element-id="{@$content->contentID}">

@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\page;
+use ultimate\data\content\ContentEditor;
 use ultimate\system\cache\builder\ContentCacheBuilder;
 use ultimate\system\cache\builder\ContentPageCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
@@ -62,7 +63,7 @@ class ContentPage extends AbstractPage {
 	
 	/**
 	 * Contains the Content object.
-	 * @var	\ultimate\data\content\Content
+	 * @var	\ultimate\data\content\CategorizedContent
 	 */
 	public $content = null;
 	
@@ -86,7 +87,7 @@ class ContentPage extends AbstractPage {
 	
 	/**
 	 * Contains all contents associated with their slug.
-	 * @var \ultimate\data\content\Content[]
+	 * @var \ultimate\data\content\CategorizedContent[]
 	 */
 	protected $contentsToSlug = array();
 	
@@ -112,8 +113,13 @@ class ContentPage extends AbstractPage {
 	public function readData() {
 		parent::readData();
 		$this->loadCache();
-		/* @var $content \ultimate\data\content\Content */
 		$this->content = $this->contentsToSlug[$this->contentSlugs[0]];
+		
+		// update view count
+		$contentEditor = new ContentEditor($this->content->getDecoratedObject());
+		$contentEditor->updateCounters(array(
+			'views' => 1
+		));
 		
 		$this->layout = LayoutHandler::getInstance()->getLayoutFromObjectData($this->content->__get('contentID'), 'content');
 	}

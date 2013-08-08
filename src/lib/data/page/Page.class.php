@@ -172,5 +172,6 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 		$this->data['groups'] = $this->getGroups();
 		$this->data['childPages'] = $this->getChildPages();
 		$this->data['metaData'] = $this->getMetaData($this->pageID, 'page');
+		$this->data['content'] = $this->getContent();
 	}
 }

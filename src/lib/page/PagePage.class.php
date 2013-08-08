@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\page;
+use ultimate\data\content\ContentEditor;
 use ultimate\system\cache\builder\PageCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use ultimate\system\template\TemplateHandler;
@@ -103,6 +104,13 @@ class PagePage extends AbstractPage {
 			$page = PageUtil::getRealPage($page, 1, $this->pageSlugs);
 		}
 		$this->page = $page;
+		
+		// update view count
+		$contentEditor = new ContentEditor($this->page->__get('content'));
+		$contentEditor->updateCounters(array(
+			'views' => 1
+		));
+		
 		$this->layout = LayoutHandler::getInstance()->getLayoutFromObjectData($this->page->__get('pageID'), 'page');
 	}
 	

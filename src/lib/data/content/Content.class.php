@@ -235,6 +235,7 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject, I
 		$data['enableHtml'] = (boolean) intval($data['enableHtml']);
 		$data['enableBBCodes'] = (boolean) intval($data['enableBBCodes']);
 		$data['cumulativeLikes'] = intval($data['cumulativeLikes']);
+		$data['views'] = intval($data['views']);
 		$data['publishDate'] = intval($data['publishDate']);
 		$data['publishDateObject'] = DateUtil::getDateTimeByTimestamp($data['publishDate']);
 		$data['lastModified'] = intval($data['lastModified']);

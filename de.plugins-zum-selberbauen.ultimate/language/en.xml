@@ -729,6 +729,7 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 		<item name="ultimate.content.authorVCard"><![CDATA[This content was writty by {$author}.]]></item>
         <item name="ultimate.content.contents"><![CDATA[Contents]]></item>
         <item name="ultimate.content.contentTitle"><![CDATA[Title]]></item>
+        <item name="ultimate.content.views"><![CDATA[Views]]></item>
 	</category>
 	
 	<category name="ultimate.date">
