@@ -26,7 +26,11 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\dashboard\box;
+use ultimate\system\blocktype\BlockTypeHandler;
+use ultimate\system\blocktype\ContentBlockType;
 use ultimate\system\cache\builder\LatestContentsCacheBuilder;
+use ultimate\system\layout\LayoutHandler;
+use ultimate\system\template\TemplateHandler;
 use wcf\data\dashboard\box\DashboardBox;
 use wcf\data\user\UserProfile;
 use wcf\page\IPage;
@@ -51,12 +55,42 @@ class LatestContentsContentDashboardBox extends AbstractContentDashboardBox {
 	public $contents = array();
 	
 	/**
+	 * Contains the block that is used for displaying the contents.
+	 * @var \ultimate\data\block\Block
+	 */
+	public $block = null;
+	
+	/**
 	 * @see	\wcf\system\dashboard\box\IDashboardBox::init()
 	 */
 	public function init(DashboardBox $box, IPage $page) {
 		parent::init($box, $page);
 		
-		$this->contents = LatestContentsCacheBuilder::getInstance()->getData(array(), 'contents');
+		// retrieve contents for dashboard box
+		$layout = LayoutHandler::getInstance()->getLayoutFromObjectData(0, 'index');
+		$template = TemplateHandler::getInstance()->getTemplate($layout->__get('layoutID'));
+		$blocks = $template->__get('blocks');
+		
+		foreach ($blocks as $blockID => $block) {
+			/* @var $blockTypeDatabase \ultimate\data\blocktype\BlockType */
+			$blockTypeID = $block->__get('blockTypeID');
+			/* @var $blockType \ultimate\system\blocktype\AbstractBlockType */
+			$blockType = BlockTypeHandler::getInstance()->getBlockType($blockTypeID);
+			if (!($blockType instanceof ContentBlockType)) {
+				continue;
+			}
+			
+			$blockType->init('index', $layout, null, $blockID, null);
+			$blockType->readData();
+			$this->contents = $blockType->__get('contents');
+			$this->block = $block;
+			break;
+		}
+		
+		if (empty($this->contents)) {
+			$this->contents = LatestContentsCacheBuilder::getInstance()->getData(array(), 'contents');
+		}
+		
 		foreach ($this->contents as $content) {
 			$content->authorProfile = new UserProfile($content->__get('author'));
 		}
@@ -71,7 +105,8 @@ class LatestContentsContentDashboardBox extends AbstractContentDashboardBox {
 		if (!count($this->contents)) return '';
 		
 		WCF::getTPL()->assign(array(
-			'contents' => $this->contents
+			'contents' => $this->contents,
+			'block' => $this->block
 		));
 		
 		return WCF::getTPL()->fetch('dashboardBoxContentLatestContents', 'ultimate');

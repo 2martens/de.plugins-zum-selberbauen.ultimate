@@ -3,6 +3,7 @@
 </header>
 
 <ul class="messageList">
+	{assign var=displayedFeaturedContents value=0}
 	{foreach from=$contents key=contentID item=content}
 		<li>
 			<article class="message messageReduced marginTop">
@@ -31,7 +32,13 @@
 							
 							<div class="messageBody">
 								<div>
-									{@$content->getFormattedMessage()}
+									{if ($block->contentBodyDisplay == 'default' && ($displayedFeaturedContents < $block->featuredContents)) || $block->contentBodyDisplay == 'full'}
+										{counter name=displayedFeaturedContents assign=displayedFeaturedContents print=false start=0}
+										{assign var=displayedFeaturedContents value=($displayedFeaturedContents + 1)}
+										<p>{@$content->getFormattedMessage()|truncateMore:0}</p>
+									{else}
+										<p>{@$content->getFormattedMessage()|truncateMore:ULTIMATE_GENERAL_CONTENT_CONTINUEREADINGLENGTH}</p>
+									{/if}
 								</div>
 								
 								<footer class="messageOptions">
