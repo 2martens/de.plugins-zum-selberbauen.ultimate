@@ -69,11 +69,11 @@ class LatestContentsDashboardBox extends AbstractSidebarDashboardBox {
 	 */
 	protected function render() {
 		if (!count($this->contents)) return '';
-	
+		
 		WCF::getTPL()->assign(array(
 			'contents' => $this->contents
 		));
-	
+		
 		return WCF::getTPL()->fetch('dashboardBoxLatestContents', 'ultimate');
 	}
 }
