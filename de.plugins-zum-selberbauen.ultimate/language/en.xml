@@ -638,6 +638,7 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 		<item name="wcf.dashboard.objectType.de.plugins-zum-selberbauen.ultimate.template"><![CDATA[Template (Ultimate CMS)]]></item>
         <item name="wcf.dashboard.box.de.plugins-zum-selberbauen.ultimate.tagCloud"><![CDATA[Tag-Cloud]]></item>
         <item name="wcf.dashboard.box.de.plugins-zum-selberbauen.ultimate.latestContents"><![CDATA[Latest contents]]></item>
+        <item name="wcf.dashboard.box.de.plugins-zum-selberbauen.ultimate.latestContentsContent"><![CDATA[Latest contents]]></item>
 	</category>
     
     <category name="wcf.like">
