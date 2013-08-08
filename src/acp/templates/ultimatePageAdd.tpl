@@ -41,8 +41,8 @@
 					<script data-relocate="true" type="text/javascript">
 					//<![CDATA[
 						$(function() {
-							var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
-							var $optionValues = { {implode from=$i18nValues['pageTitle'] key=languageID item=value}'{@$languageID}': '{$value}'{/implode} };
+							var $availableLanguages = {literal}{{/literal} {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} {literal}}{/literal};
+							var $optionValues = {literal}{{/literal} {implode from=$i18nValues['pageTitle'] key=languageID item=value}'{@$languageID}': '{$value}'{/implode} {literal}}{/literal};
 							new WCF.MultipleLanguageInput('pageTitle', false, $optionValues, $availableLanguages);
 						});
 					//]]>
