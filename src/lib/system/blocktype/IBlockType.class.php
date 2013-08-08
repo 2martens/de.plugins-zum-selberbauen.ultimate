@@ -50,9 +50,9 @@ interface IBlockType {
 	 * 
 	 * @param	string								$requestType
 	 * @param	\ultimate\data\layout\Layout		$layout
-	 * @param	\ultimate\data\IUltimateData|null	$requestObject	null is only allowed in connection with the index layout
+	 * @param	\ultimate\data\IUltimateData|null	$requestObject	null is only allowed in connection with the request type 'index'
 	 * @param	integer								$blockID
-	 * @param	\wcf\page\IPage|null				$page			null is only allowed in connection with getOptionsHtml
+	 * @param	\wcf\page\IPage|null				$page			null is only allowed in connection with getOptionsHtml or the request type 'index'
 	 * @return	void
 	 */
 	public function init($requestType, \ultimate\data\layout\Layout $layout, $requestObject, $blockID, $page);
