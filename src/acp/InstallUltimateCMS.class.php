@@ -77,11 +77,11 @@ final class InstallUltimateCMS {
 			'data' => array(
 				'packageID' => PACKAGE_ID,
 				'blockTypeName' => 'ultimate.blocktype.content',
-				'blockTypeClassName' => 'ultimate\system\blocktype\ContentBlockType',
-				'fixedHeight' => 0			
+				'blockTypeClassName' => 'ultimate\system\blocktype\ContentBlockType'
 			)
 		);
 		// workaround for installation
+		require_once(ULTIMATE_DIR.'lib/data/IUltimateData.class.php');
 		require_once(ULTIMATE_DIR.'lib/data/AbstractUltimateDatabaseObject.class.php');
 		require_once(ULTIMATE_DIR.'lib/data/blocktype/BlockType.class.php');
 		require_once(ULTIMATE_DIR.'lib/data/blocktype/BlockTypeAction.class.php');
@@ -94,8 +94,7 @@ final class InstallUltimateCMS {
 			'data' => array(
 				'packageID' => PACKAGE_ID,
 				'blockTypeName' => 'ultimate.blocktype.media',
-				'blockTypeClassName' => 'ultimate\system\blocktype\MediaBlockType',
-				'fixedHeight' => 1
+				'blockTypeClassName' => 'ultimate\system\blocktype\MediaBlockType'
 			)
 		);
 		$objectAction = new BlockTypeAction(array(), 'create', $parameters);
