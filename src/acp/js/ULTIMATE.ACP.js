@@ -1184,7 +1184,7 @@ ULTIMATE.ACP.Menu.Item.Transfer.prototype = {
 							+ WCF.Language.get('wcf.global.button.delete')
 							+ '"></span>';
 				}
-				$newItemHtml += '</span></span></li>';
+				$newItemHtml += '</span></span><ol class="sortableList" data-object-id="' + $menuItemID + '"></ol></li>';
 				var newEntry = $($newItemHtml);
 				$('#' + this._menuItemListID + '> .sortableList').append(
 						$newItemHtml);
