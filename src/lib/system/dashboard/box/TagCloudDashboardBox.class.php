@@ -27,7 +27,9 @@
  */
 namespace ultimate\system\dashboard\box;
 use wcf\data\dashboard\box\DashboardBox;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\page\IPage;
+use wcf\system\cache\builder\TagObjectCacheBuilder;
 use wcf\system\dashboard\box\AbstractSidebarDashboardBox;
 use wcf\system\tagging\TagCloud;
 use wcf\system\WCF;
@@ -50,6 +52,14 @@ class TagCloudDashboardBox extends AbstractSidebarDashboardBox {
 	public $tagCloud = null;
 	
 	/**
+	 * Contains the objectTypeID to tagID relation.
+	 * @var integer[]
+	 */
+	public $objectTypeIDToTagID = array();
+	
+	
+	
+	/**
 	 * @see	wcf\system\dashboard\box\IDashboardBox::init()
 	 */
 	public function init(DashboardBox $box, IPage $page) {
@@ -60,6 +70,7 @@ class TagCloudDashboardBox extends AbstractSidebarDashboardBox {
 			$languageIDs = WCF::getUser()->getLanguageIDs();
 				
 			$this->tagCloud = new TagCloud($languageIDs);
+			$this->objectTypeIDToTagID = TagObjectCacheBuilder::getInstance()->getData(array(), 'objectTypeIDToTagID');
 		}
 	
 		$this->fetched();
@@ -72,11 +83,19 @@ class TagCloudDashboardBox extends AbstractSidebarDashboardBox {
 		if ($this->tagCloud === null) {
 			return '';
 		}
+		
+		$tags = $this->tagCloud->getTags();
+		$objectTypeToTagID = array();
+		foreach ($tags as $tag) {
+			$objectTypeID = $this->objectTypeIDToTagID[$tag->__get('tagID')];
+			$objectTypeToTagID[$tag->__get('tagID')] = ObjectTypeCache::getInstance()->getObjectType($objectTypeID);
+		}
 	
 		WCF::getTPL()->assign(array(
-			'tags' => $this->tagCloud->getTags()
+			'tags' => $tags,
+			'objectTypes' => $objectTypeToTagID
 		));
 		
-		return WCF::getTPL()->fetch('tagCloudBox');
+		return WCF::getTPL()->fetch('tagCloudBox', 'ultimate');
 	}
 }
