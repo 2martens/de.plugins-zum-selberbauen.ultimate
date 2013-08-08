@@ -66,29 +66,6 @@ class BlockAction extends AbstractDatabaseObjectAction {
 	protected $permissionsUpdate = array('admin.content.ultimate.canManageBlocks');
 	
 	/**
-	 * Returns an available block id.
-	 */
-	public function getAvailableBlockID() {
-		// reading cache
-		$blockIDs = BlockCacheBuilder::getInstance()->getData(array(), 'blockIDs');
-		// determine next available id
-		$blackList = (isset($this->parameters['data']['blockIDBlackList']) ? $this->parameters['data']['blockIDBlackList'] : array());
-		$realBlackList = array_merge($blockIDs, $blackList);
-		if (!empty($realBlackList)) $lastID = max($realBlackList);
-		else $lastID = 0;
-		
-		$nextAvailableID = $lastID++;
-		return $nextAvailableID;
-	}
-	
-	/**
-	 * Does nothing as the getAvailableBlockID method does not require any permission.
-	 */
-	public function validateGetAvailableBlockID() {
-		// no permissions required
-	}
-	
-	/**
 	 * Creates a block and respects additional AJAX requirements.
 	 * 
 	 * @return	integer[]|string[]
