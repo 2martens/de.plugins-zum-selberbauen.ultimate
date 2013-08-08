@@ -67,7 +67,10 @@ class LatestContentsCacheBuilder extends AbstractCacheBuilder {
 		$sqlOrderBy = $sortField." ".$sortOrder;
 		$contentList->sqlOrderBy = $sqlOrderBy;
 		$contentList->getConditionBuilder()->add('content.publishDate <> ?', array(''));
-		$contentList->getConditionBuilder()->add('content.contentID NOT IN (?)', array($contentIDsToPage));
+		// check if there are contentIDsToPage at all
+		if (!empty($contentIDsToPage)) {
+			$contentList->getConditionBuilder()->add('content.contentID NOT IN (?)', array($contentIDsToPage));
+		}
 		$contentList->sqlLimit = ULTIMATE_LATEST_CONTENTS_ITEMS * 10;
 	
 		$contentList->readObjects();
