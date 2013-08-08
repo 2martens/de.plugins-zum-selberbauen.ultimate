@@ -16,7 +16,6 @@ CREATE TABLE ultimate1_blocktype (
 	packageID INT(10) NOT NULL,
 	blockTypeName VARCHAR(255) NOT NULL DEFAULT '',
 	blockTypeClassName VARCHAR(255) NOT NULL DEFAULT '',
-	fixedHeight TINYINT(1) NOT NULL DEFAULT 1,
 	UNIQUE KEY packageID (packageID, blockTypeName)
 );
 

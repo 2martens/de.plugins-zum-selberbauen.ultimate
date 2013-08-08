@@ -586,9 +586,7 @@ class ContentBlockType extends AbstractBlockType {
 			'commentsPerPage' => $this->commentManager->getCommentsPerPage(),
 			'commentLists' => $this->commentLists,
 			//like data
-			'likeData' => $this->likeData,
-			// dimensions and position
-			'height' => $this->block->__get('height')
+			'likeData' => $this->likeData
 		));
 		
 		$useRequestData = false;

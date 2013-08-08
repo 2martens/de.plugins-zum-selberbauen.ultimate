@@ -220,17 +220,6 @@
 					{/if}
 				</dd>
 			</dl>
-			<dl{if $errorField == 'height'} class="formError"{/if}>
-				<dt><label for="height">{lang}wcf.acp.ultimate.template.height{/lang}</label></dt>
-				<dd>
-					<input type="number" id="height" name="height" value="{$height}" min="0" /><span class="unit">px</span>
-					{if $errorField == 'height'}
-						<small class="innerError">
-							{lang}wcf.acp.ultimate.template.height.error.{@$errorType}{/lang}
-						</small>
-					{/if}
-				</dd>
-			</dl>
 		</fieldset>
 		<div class="formSubmit">
 			<button class="button default disabled" disabled="disabled" data-type="submit">{lang}wcf.acp.ultimate.template.addToTemplate{/lang}</button>

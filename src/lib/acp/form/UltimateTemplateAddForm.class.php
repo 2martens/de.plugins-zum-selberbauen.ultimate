@@ -122,30 +122,6 @@ class UltimateTemplateAddForm extends AbstractForm {
 	public $blocktypes = array();
 	
 	/**
-	 * Contains the height of new blocks.
-	 * @var	integer
-	 */
-	protected $height = 0;
-	
-	/**
-	 * Contains the width of new blocks.
-	 * @var	integer
-	 */
-	protected $width = 1;
-	
-	/**
-	 * Contains the relative distance from the left border for new blocks.
-	 * @var integer
-	 */
-	protected $left = 1;
-	
-	/**
-	 * Contains the amount of pixels from the top border for new blocks.
-	 * @var integer
-	 */
-	protected $top = 0;
-	
-	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
@@ -231,10 +207,6 @@ class UltimateTemplateAddForm extends AbstractForm {
 			'selectedMenu' => $this->selectedMenu,
 			'blocks' => $this->blocks,
 			'blocktypes' => $this->blocktypes,
-			'width' => $this->width,
-			'height' => $this->height,
-			'left' => $this->left,
-			'top' => $this->top,
 			'action' => 'add'
 		));
 	}

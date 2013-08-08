@@ -114,8 +114,7 @@ class Block extends AbstractUltimateDatabaseObject {
 				'blockTypeID' => 0,
 				'packageID' => PACKAGE_ID,
 				'blockTypeName' => '',
-				'blockTypeClassName' => '',
-				'fixedHeight' => 1					
+				'blockTypeClassName' => ''		
 			));
 		}
 		

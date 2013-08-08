@@ -47,7 +47,6 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
-            <xs:element name="fixedHeight" minOccurs="0" maxOccurs="1" type="pzs_boolean" />
         </xs:all>
     </xs:complexType>
 </xs:schema>

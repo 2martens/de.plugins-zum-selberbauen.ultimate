@@ -12,7 +12,7 @@ $(function() {
 </script>
 
 {if !$anchor|isset}{assign var=anchor value=$__wcf->getAnchor('top')}{/if}
-<div id="block-{$blockID}" class="block block-type-content" data-height="{$height}">
+<div id="block-{$blockID}" class="block block-type-content">
 	
 	{if $requestType == 'category'}
 		<div class="contentNavigation">
