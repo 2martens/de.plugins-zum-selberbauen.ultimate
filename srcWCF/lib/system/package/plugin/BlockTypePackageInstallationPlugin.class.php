@@ -25,10 +25,9 @@
  * @subpackage	system.package.plugin
  * @category	Ultimate CMS
  */
-namespace ultimate\system\package\plugin;
+namespace wcf\system\package\plugin;
 use ultimate\system\cache\builder\BlockTypeCacheBuilder;
 use wcf\system\exception\SystemException;
-use wcf\system\package\plugin\AbstractXMLPackageInstallationPlugin;
 
 /**
  * Provides the block type data for the event listeners.
