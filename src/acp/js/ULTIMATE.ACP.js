@@ -1185,7 +1185,7 @@ ULTIMATE.ACP.Menu.Item.Transfer.prototype = {
 							+ '" data-confirm-message="'
 							+ data[$menuItemID]['confirmMessage'] + '"></span>';
 				} else {
-					$newItemHtml += '<span class="icon icon16 icon-remove'
+					$newItemHtml += '&nbsp;<span class="icon icon16 icon-remove'
 							+ ' disabled" ' + 'title="'
 							+ WCF.Language.get('wcf.global.button.delete')
 							+ '"></span>';
