@@ -30,22 +30,7 @@
 		
 		<!-- main menu -->
 		{if $__wcf->getCustomMenu()->getMenuItems('')|count > 0}
-			<nav id="mainMenu" class="mainMenu jsMobileNavigation" data-button-label="{lang}wcf.page.mainMenu{/lang}">
-				<ul>
-					{foreach from=$__wcf->getCustomMenu()->getMenuItems('') item=menuItem}
-						<li{if $__wcf->getCustomMenu()->getActiveMenuItem() == $menuItem->menuItemName} class="active"{/if}>
-							<a href="{$menuItem->getProcessor()->getLink()}">{lang}{$menuItem->menuItemName}{/lang}{if $menuItem->getProcessor()->getNotifications()} <span class="badge badgeUpdate">{#$menuItem->getProcessor()->getNotifications()}</span>{/if}</a>
-							{if $__wcf->getCustomMenu()->getMenuItems($menuItem->menuItemName)|count > 0 && $__wcf->getCustomMenu()->getActiveMenuItem() == $menuItem->menuItemName}<ul class="invisible">{*
-								*}{foreach from=$__wcf->getCustomMenu()->getMenuItems($menuItem->menuItemName) item=subMenuItem}{*
-									*}<li{if $__wcf->getCustomMenu()->getActiveMenuItem(1) == $subMenuItem->menuItemName} class="active"{/if}><a href="{$subMenuItem->getProcessor()->getLink()}"><span>{lang}{$subMenuItem->menuItemName}{/lang}</span></a>{if $subMenuItem->getProcessor()->getNotifications()} <span class="badge badgeUpdate">{#$subMenuItem->getProcessor()->getNotifications()}</span>{/if}</li>{*
-								*}{/foreach}{*
-								*}{event name='items'}
-								</ul>
-							{/if}
-						</li>
-					{/foreach}
-				</ul>
-			</nav>
+			{include file='__customMenu' application='ultimate'}
 		{else}
 			{* if no menu is attached or no items are found then the normal page menu shall be displayed *}
 			{include file='mainMenu'}
@@ -56,16 +41,7 @@
 		<nav class="navigation navigationHeader">
 			<!-- sub menu -->
 			{if $__wcf->getCustomMenu()->getMenuItems('')|count > 0}
-				{foreach from=$__wcf->getCustomMenu()->getMenuItems('') item=menuItem}
-					{if $__wcf->getCustomMenu()->getMenuItems($menuItem->menuItemName)|count > 0 && $__wcf->getCustomMenu()->getActiveMenuItem() == $menuItem->menuItemName}
-						<ul class="navigationMenuItems">
-							{foreach from=$__wcf->getCustomMenu()->getMenuItems($menuItem->menuItemName) item=subMenuItem}
-								<li{if $__wcf->getCustomMenu()->getActiveMenuItem(1) == $subMenuItem->menuItemName} class="active"{/if}><a href="{$subMenuItem->getProcessor()->getLink()}"><span>{lang}{$subMenuItem->menuItemName}{/lang}</span></a>{if $subMenuItem->getProcessor()->getNotifications()} <span class="badge badgeUpdate">{#$subMenuItem->getProcessor()->getNotifications()}</span>{/if}</li>
-							{/foreach}
-							{event name='items'}
-						</ul>
-					{/if}
-				{/foreach}
+				{include file='__customMenuSubMenu' application='ultimate'}
 			{else}
 				{* same goes for the sub menu *}
 				{include file='mainMenuSubMenu'}
