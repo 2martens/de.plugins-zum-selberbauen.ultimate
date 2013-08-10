@@ -100,7 +100,7 @@ class CustomMenu extends TreeMenu {
 	 * 
 	 * @since	1.0.0
 	 * 
-	 * @return	(\ultimate\data\menu\item\MenuItem|array)[]|null
+	 * @return	\ultimate\data\menu\item\MenuItem[]|array[]|null
 	 * @see		\wcf\system\menu\TreeMenu::getMenuItems()
 	 */
 	public function getMenuItems($parentMenuItem = null) {
@@ -109,26 +109,6 @@ class CustomMenu extends TreeMenu {
 			return $this->currentMenuItems[$parentMenuItem];
 		}
 		return null;
-	}
-	
-	/**
-	 * Sets the active menu item.
-	 * This should be done before the menu.tpl template calls the function getMenu().
-	 *
-	 * This function should be used in each script which uses a template that includes the menu.tpl.
-	 *
-	 * @param	string		$menuItem	name of the active menu item
-	 */
-	public function setActiveMenuItem($menuItem) {
-		$newActiveMenuItems = array();
-		while (isset($this->menuItemList[$menuItem])) {
-			$newActiveMenuItems[] = $menuItem;
-			$menuItem = $this->menuItemList[$menuItem]->menuItemParent;
-			
-			if ($menuItem && !isset($this->menuItemList[$menuItem])) return false;
-		}
-		
-		if (!empty($newActiveMenuItems)) $this->activeMenuItems = $newActiveMenuItems;
 	}
 	
 	/**
