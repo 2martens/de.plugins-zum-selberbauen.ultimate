@@ -22,6 +22,7 @@
 			<eventname>javascriptInclude</eventname>
 			<templatecode><![CDATA[<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.js?v={@$__wcfVersion}"></script>
 <script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.Content.js?v={@$__wcfVersion}"></script>
+{if $customMenu|isset}{@$customMenu}{/if}
 ]]></templatecode>
 		</templatelistener>
         
@@ -32,6 +33,15 @@
             <templatecode><![CDATA[{include file='__headerLogo' application='ultimate'}]]></templatecode>
         </templatelistener>
 		<!-- /frontend headInclude -->
+        
+        <!-- frontend header -->
+        <templatelistener name="includeCustomMenuJS">
+            <environment>user</environment>
+            <templatename>header</templatename>
+            <eventname>headerContents</eventname>
+            <templatecode><![CDATA[{include file='__customMenuJS' application='ultimate'}]]></templatecode>
+        </templatelistener>
+        <!-- /frontend header -->
         
         <!-- frontend copyright -->
         <templatelistener name="copyright">

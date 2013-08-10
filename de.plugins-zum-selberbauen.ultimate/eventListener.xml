@@ -66,5 +66,14 @@
         	<listenerclassname>ultimate\system\event\listener\CacheResetListener</listenerclassname>
         </eventlistener>
         <!-- /cache reset listener -->
+        
+        <!-- custom menu listener -->
+        <eventlistener>
+            <eventclassname>wcf\page\AbstractPage</eventclassname>
+            <eventname>show</eventname>
+            <inherit>1</inherit>
+            <listenerclassname>ultimate\system\event\listener\CustomMenuListener</listenerclassname>
+        </eventlistener>
+        <!-- /custom menu listener -->
     </import>
 </data>

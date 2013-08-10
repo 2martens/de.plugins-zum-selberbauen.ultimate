@@ -194,6 +194,9 @@ class TemplateHandler extends SingletonFactory {
 		$menu = $template->__get('menu');
 		if ($menu !== null) {
 			CustomMenu::getInstance()->buildMenu($menu);
+			CurrentMenuCacheBuilder::getInstance()->reset();
+			// rebuild menu cache
+			CurrentMenuCacheBuilder::getInstance()->getData(array(), 'currentMenuItems');
 		}
 	}
 	
