@@ -80,7 +80,7 @@
 				<dd>
 					<select name="pageParent">
 					<option value="0">{lang}wcf.acp.ultimate.page.parent.none{/lang}</option>
-					{htmloptions options=$pages selected=$pageParent}
+					{ultimateHtmloptions options=$pages selected=$pageParent}
 					</select>
 					{if $errorField == 'pageParent'}
 						<small class="innerError">
@@ -98,7 +98,7 @@
 				<dd>
 					<select name="content">
 						<option value="0">{lang}wcf.acp.ultimate.page.content.select{/lang}</option>
-						{htmloptions options=$contents selected=$contentID}
+						{ultimateHtmloptions options=$contents selected=$contentID}
 					</select>
 					{if $errorField == 'content'}
 						<small class="innerError">
