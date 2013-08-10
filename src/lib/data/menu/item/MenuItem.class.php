@@ -28,6 +28,7 @@
 namespace ultimate\data\menu\item;
 use ultimate\data\AbstractUltimateProcessibleDatabaseObject;
 use ultimate\system\menu\custom\DefaultCustomMenuItemProvider;
+use wcf\system\exception\SystemException;
 use wcf\system\menu\ITreeMenuItem;
 use wcf\system\request\LinkHandler;
 use wcf\system\request\UltimateLinkHandler;
@@ -135,9 +136,6 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 	public function canDelete() {
 		$deletable = true;
 		$deletable = ($this->isLandingPage ? false : true);
-		if ($deletable) {
-			$deletable = ($this->menuItemController !== null ? false : true);
-		}
 		
 		return $deletable;
 	}
@@ -222,6 +220,7 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 		} elseif (strpos($menuItemLink, 'http') === 0) {
 			return $menuItemLink;
 		}
+		throw new SystemException('Illegal link saved.');
 	}
 	
 	/**
