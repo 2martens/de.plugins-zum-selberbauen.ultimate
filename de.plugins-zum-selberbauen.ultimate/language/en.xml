@@ -403,7 +403,9 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.menu.pages"><![CDATA[Pages]]></item>
 		<item name="wcf.acp.ultimate.menu.pages.description"><![CDATA[Please select here the pages, that you want to add to the menu.]]></item>
 		<item name="wcf.acp.ultimate.menu.custom"><![CDATA[Custom link]]></item>
-		<item name="wcf.acp.ultimate.menu.custom.link"><![CDATA[URL]]></item>
+		<item name="wcf.acp.ultimate.menu.custom.linkType"><![CDATA[Link type]]></item>
+        <item name="wcf.acp.ultimate.menu.custom.linkType.controller"><![CDATA[Controller]]></item>
+		<item name="wcf.acp.ultimate.menu.custom.linkType.url"><![CDATA[URL]]></item>
 		<item name="wcf.acp.ultimate.menu.custom.linkTitle"><![CDATA[Title]]></item>
 		<item name="wcf.acp.ultimate.menu.custom.linkTitle.placeholder"><![CDATA[Menu item]]></item>
 		<item name="wcf.acp.ultimate.menu.items"><![CDATA[Menu items]]></item>

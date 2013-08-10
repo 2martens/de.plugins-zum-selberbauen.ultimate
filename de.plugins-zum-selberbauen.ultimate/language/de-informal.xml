@@ -403,7 +403,9 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.menu.pages"><![CDATA[Seiten]]></item>
 		<item name="wcf.acp.ultimate.menu.pages.description"><![CDATA[Wähle die Seiten aus, die du zum Menü hinzufügen möchtest.]]></item>
 		<item name="wcf.acp.ultimate.menu.custom"><![CDATA[Benutzerdefinierter Link]]></item>
-		<item name="wcf.acp.ultimate.menu.custom.link"><![CDATA[URL]]></item>
+		<item name="wcf.acp.ultimate.menu.custom.linkType"><![CDATA[Linktyp]]></item>
+        <item name="wcf.acp.ultimate.menu.custom.linkType.controller"><![CDATA[Controller]]></item>
+		<item name="wcf.acp.ultimate.menu.custom.linkType.url"><![CDATA[URL]]></item>
 		<item name="wcf.acp.ultimate.menu.custom.linkTitle"><![CDATA[Titel]]></item>
 		<item name="wcf.acp.ultimate.menu.custom.linkTitle.placeholder"><![CDATA[Menüeintrag]]></item>
 		<item name="wcf.acp.ultimate.menu.items"><![CDATA[Menüeinträge]]></item>

@@ -176,7 +176,13 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 			I18nHandler::getInstance()->readValues();
 			if (I18nHandler::getInstance()->isPlainValue('title')) $parameters['menuItemName'] = StringUtil::trim(I18nHandler::getInstance()->getValue('title'));
 			
-			$parameters['menuItemLink'] = StringUtil::trim($this->parameters['data']['structure']['link']);
+			$linkType = StringUtil::trim($this->parameters['data']['structure']['linkType']);
+			if ($linkType == 'controller') {
+				$parameters['menuItemController'] = StringUtil::trim($this->parameters['data']['structure']['controller']);
+			} elseif ($linkType == 'url') {
+				$parameters['menuItemLink'] = StringUtil::trim($this->parameters['data']['structure']['url']);
+			}
+			
 			$parameters['type'] = 'custom';
 			$parameters['showOrder'] = MenuItemEditor::getShowOrder(
 				$parameters['showOrder'],

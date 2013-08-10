@@ -985,7 +985,9 @@ ULTIMATE.ACP.Menu.Item.Transfer.prototype = {
 	_submit : function() {
 		this._structure = {};
 		if (this._type == 'custom') {
-			var link = $('#link').val();
+			var linkType = $('input[name="linkType"]').val();
+			var url = $('#url').val();
+			var controller = $('#controller').val();
 			var linkTitleFound = this._element.find('input[name="title"]');
 			var linkTitle = '';
 			var $data = {};
@@ -1012,10 +1014,14 @@ ULTIMATE.ACP.Menu.Item.Transfer.prototype = {
 					title_i18n : linkTitle_i18n
 				}, $data);
 			}
-			this._structure['link'] = link;
+			this._structure['url'] = url;
+			this._structure['controller'] = controller;
+			this._structure['linkType'] = linkType;
 			this._structure['linkTitle'] = linkTitle;
 			// resets the form
-			$('#link').val('http://');
+			$('#url').val('http://');
+			$('#controller').val('');
+			$('input[name="linkType"]').val('controller');
 			$('#title').val('');
 			// send request
 			var $parameters = $.extend(true, {

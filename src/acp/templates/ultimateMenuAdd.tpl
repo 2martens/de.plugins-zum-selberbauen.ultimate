@@ -180,9 +180,43 @@
 			<fieldset>
 				<legend>{lang}wcf.acp.ultimate.menu.custom{/lang}</legend>
 				<dl>
-					<dt><label for="link">{lang}wcf.acp.ultimate.menu.custom.link{/lang}</label></dt>
+					<dt><label for="linkType">{lang}wcf.acp.ultimate.menu.custom.linkType{/lang}</label></dt>
 					<dd>
-						<input type="url" name="link" id="link" value="http://" class="medium{if $action == 'add'} disabled" disabled="disabled{/if}" />
+						<label><input type="radio" name="linkType" id="linkType" value="controller" checked="checked" />{lang}wcf.acp.ultimate.menu.custom.linkType.controller{/lang}</label>
+						<label><input type="radio" name="linkType" value="url" />{lang}wcf.acp.ultimate.menu.custom.linkType.url{/lang}</label>
+						<script data-relocate="true" type="text/javascript">
+						//<![CDATA[
+							{if $action == 'edit'}
+							$(function() {
+								$('#url').closest('dl').hide();
+								$('input[name="linkType"]').change(function(event) {
+									var $target = $(event.currentTarget);
+									var value = $target.val();
+									if (value == 'controller') {
+										$('#controller').closest('dl').show();
+										$('#url').closest('dl').hide();
+									}
+									else if (value == 'url') {
+										$('#controller').closest('dl').hide();
+										$('#url').closest('dl').show();
+									}
+								});
+							});
+							{/if}
+						//]]>
+						</script>
+					</dd>
+				</dl>
+				<dl>
+					<dt><label for="link">{lang}wcf.acp.ultimate.menu.custom.linkType.url{/lang}</label></dt>
+					<dd>
+						<input type="url" name="url" id="url" value="http://" class="medium{if $action == 'add'} disabled" disabled="disabled{/if}" />
+					</dd>
+				</dl>
+				<dl>
+					<dt><label for="controller">{lang}wcf.acp.ultimate.menu.custom.linkType.controller{/lang}</label></dt>
+					<dd>
+						<input type="text" name="controller" id="controller" value="" class="medium{if $action == 'add'} disabled" disabled="disabled{/if}" />
 					</dd>
 				</dl>
 				<dl>

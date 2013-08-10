@@ -218,10 +218,10 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 						'forceFrontend' => true
 					), 
 					WCF::getLanguage()->get($this->menuItemLink));
-			} 
-		} else {
+			}
+		} elseif (strpos($menuItemLink, 'http') === 0) {
 			return $menuItemLink;
-		}		
+		}
 	}
 	
 	/**
