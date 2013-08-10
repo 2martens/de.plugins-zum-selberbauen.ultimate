@@ -486,7 +486,7 @@ class ContentBlockType extends AbstractBlockType {
 			$dateAndTime = '<time itemprop="datePublished" datetime="'.DateUtil::format($dateTimeObject, 'c').'" class="datetime" data-timestamp="'.$timestamp.'" data-date="'.$date.'" data-time="'.$time.'" data-offset="'.$dateTimeObject->getOffset().'">'.$dateAndTime.'</time>';
 			$authorUserProfile = new UserProfile($content->__get('author'));
 			
-			$author = '<div itemprop="creator" itemscope itemtype="http://schema.org/Person">
+			$authorVCard = '<div itemprop="creator" itemscope itemtype="http://schema.org/Person">
 				<a href="'
 				.LinkHandler::getInstance()->getLink(
 					'User', 
@@ -511,7 +511,8 @@ class ContentBlockType extends AbstractBlockType {
 				$__metaAboveContent = str_replace('$date', $dateString, $__metaAboveContent);
 				$__metaAboveContent = str_replace('$time', $timeString, $__metaAboveContent);
 				$__metaAboveContent = str_replace('$comments', count($content->__get('comments')), $__metaAboveContent);
-				$__metaAboveContent = str_replace('$author', $author, $__metaAboveContent);
+				$__metaAboveContent = str_replace('$authorVCard', $authorVCard, $__metaAboveContent);
+				$__metaAboveContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaAboveContent);
 				$__metaAboveContent = str_replace('$categories', $categoryOutput, $__metaAboveContent);
 				$__metaAboveContent = str_replace('$tags', $tagOutput, $__metaAboveContent);
 				$metaAbove[$contentID] = $__metaAboveContent;
@@ -522,7 +523,8 @@ class ContentBlockType extends AbstractBlockType {
 					$__metaAboveContent = str_replace('$date', $dateString, $__metaAboveContent);
 					$__metaAboveContent = str_replace('$time', $timeString, $__metaAboveContent);
 					$__metaAboveContent = str_replace('$comments', count($content->__get('comments')), $__metaAboveContent);
-					$__metaAboveContent = str_replace('$author', $author, $__metaAboveContent);
+					$__metaAboveContent = str_replace('$authorVCard', $authorVCard, $__metaAboveContent);
+					$__metaAboveContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaAboveContent);
 					$__metaAboveContent = str_replace('$categories', $categoryOutput, $__metaAboveContent);
 					$__metaAboveContent = str_replace('$tags', $tagOutput, $__metaAboveContent);
 					$metaAbove_i18n[$contentID][$languageID] = $__metaAboveContent;
@@ -535,7 +537,8 @@ class ContentBlockType extends AbstractBlockType {
 				$__metaBelowContent = str_replace('$date', $dateString, $__metaBelowContent);
 				$__metaBelowContent = str_replace('$time', $timeString, $__metaBelowContent);
 				$__metaBelowContent = str_replace('$comments', count($content->__get('comments')), $__metaBelowContent);
-				$__metaBelowContent = str_replace('$author', $author, $__metaBelowContent);
+				$__metaBelowContent = str_replace('$authorVCard', $authorVCard, $__metaBelowContent);
+				$__metaBelowContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaBelowContent);
 				$__metaBelowContent = str_replace('$categories', $categoryOutput, $__metaBelowContent);
 				$__metaBelowContent = str_replace('$tags', $tagOutput, $__metaBelowContent);
 				$metaBelow[$contentID] = $__metaBelowContent;
@@ -546,7 +549,8 @@ class ContentBlockType extends AbstractBlockType {
 					$__metaBelowContent = str_replace('$date', $date, $__metaBelowContent);
 					$__metaBelowContent = str_replace('$time', $time, $__metaBelowContent);
 					$__metaBelowContent = str_replace('$comments', count($content->__get('comments')), $__metaBelowContent);
-					$__metaBelowContent = str_replace('$author', $author, $__metaBelowContent);
+					$__metaBelowContent = str_replace('$authorVCard', $authorVCard, $__metaBelowContent);
+					$__metaBelowContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaBelowContent);
 					$__metaBelowContent = str_replace('$categories', $categoryOutput, $__metaBelowContent);
 					$__metaBelowContent = str_replace('$tags', $tagOutput, $__metaBelowContent);
 					$metaBelow_i18n[$contentID][$languageID] = $__metaBelowContent;

@@ -181,11 +181,11 @@
 		<item name="wcf.acp.option.ultimate_general_content_metaAboveContent"><![CDATA[Meta über Inhalt]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_metaAboveContent.description"><![CDATA[Gib hier die Metaangaben ein, die standardmäßig über dem Inhaltstext und unter dem Inhaltstitel angezeigt werden sollen. Im Template-Bearbeiten Formular kannst du für jeden Inhaltsblock diese Einstellung individuell überschreiben.
 
-Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$categories</li><li>$tags</li></ul>]]></item>
+Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$authorVCard</li><li>$categories</li><li>$tags</li></ul>]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_metaBelowContent"><![CDATA[Meta unter Inhalt]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_metaBelowContent.description"><![CDATA[Gib hier die Metaangaben ein, die standardmäßig unter dem Inhaltstext angezeigt werden sollen. Im Template-Bearbeiten Formular kannst du für jeden Inhaltsblock diese Einstellung individuell überschreiben.
 
-Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$categories</li><li>$tags</li></ul>]]></item>
+Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$authorVCard</li><li>$categories</li><li>$tags</li></ul>]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength"><![CDATA['Weiterlesen'-Länge]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength.description"><![CDATA[Gib hier an, nach wie vielen Zeichen standardmäßig 'Weiterlesen' erscheinen soll.]]></item>
 		<!-- /ultimate.general.content -->
@@ -555,9 +555,9 @@ Für die InlineEdit braucht man die gleichen Rechte um Inhalte zu schreiben, zu 
 		<item name="wcf.acp.ultimate.template.contentTab.meta.contentMetaDisplay.page"><![CDATA[Seiten]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.meta.contentMetaDisplay.content"><![CDATA[Inhalte]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.meta.metaAboveContent"><![CDATA[Meta über Inhalt]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.meta.metaAboveContent.description"><![CDATA[Verfügbare Variablen:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$categories</li><li>$tags</li></ul>]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.meta.metaAboveContent.description"><![CDATA[Verfügbare Variablen: $datetime, $date, $time, $comments, $author, $authorVCard, $categories, $tags]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.meta.metaBelowContent"><![CDATA[Meta unter Inhalt]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.meta.metaBelowContent.description"><![CDATA[Verfügbare Variablen:<ul><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$categories</li><li>$tags</li></ul>]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.meta.metaBelowContent.description"><![CDATA[Verfügbare Variablen: $datetime, $date, $time, $comments, $author, $authorVCard, $categories, $tags]]></item>
 		<!-- /meta sub tab -->
 		<!-- /content tab -->
 		
