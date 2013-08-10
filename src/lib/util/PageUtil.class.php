@@ -186,7 +186,7 @@ class PageUtil {
 	 * @api
 	 * 
 	 * @param	integer	$pageID	0 by default; give page id to get all unbound contents plus the one already in use by the page
-	 * @return	\ultimate\data\content\Content[]
+	 * @return	\ultimate\data\content\TaggedContent[]
 	 */
 	public static function getAvailableContents($pageID = 0) {
 		$contents = self::loadCache(
@@ -211,7 +211,7 @@ class PageUtil {
 	 * 
 	 * @param	string	$cacheBuilderClass
 	 * @param	string	$cacheIndex
-	 * @return	(\ultimate\data\content\Content|integer|\ultimate\data\page\Page)[]
+	 * @return	\ultimate\data\content\TaggedContent[]|integer[]|\ultimate\data\page\Page[]
 	 */
 	protected static function loadCache($cacheBuilderClass, $cacheIndex) {
 		$instance = call_user_func($cacheBuilderClass.'::getInstance');
