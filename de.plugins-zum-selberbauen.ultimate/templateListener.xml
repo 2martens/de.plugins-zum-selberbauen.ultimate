@@ -70,6 +70,11 @@
             <eventname>copyright</eventname>
             <templatecode><![CDATA[{include file='__copyright' application='ultimate'}]]></templatecode>
         </templatelistener>
+        <templatelistener name="ultimateStyle">
+            <environment>admin</environment>
+            <templatename>header</templatename>
+            <templatecode><![CDATA[{@$__wcf->getUltimateStyleHandler()->getStylesheet()}]]></templatecode>
+        </templatelistener>
         <!-- /ACP -->
 	</import>
 </data>
