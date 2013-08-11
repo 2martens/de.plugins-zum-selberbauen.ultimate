@@ -61,17 +61,20 @@ use wcf\system\WCF;
  */
 class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITreeMenuItem {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableName
+	 * The database table name.
+	 * @var	string
 	 */
 	protected static $databaseTableName = 'menu_item';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableIndexIsIdentity
+	 * If true, the database table index is used as identity.
+	 * @var	boolean
 	 */
 	protected static $databaseTableIndexIsIdentity = true;
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableIndexName
+	 * The database table index name.
+	 * @var	string
 	 */
 	protected static $databaseTableIndexName = 'menuItemID';
 	
@@ -257,7 +260,7 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#handleData
+	 * Handles data.
 	 */
 	protected function handleData($data) {
 		$data['menuItemID'] = intval($data['menuItemID']);

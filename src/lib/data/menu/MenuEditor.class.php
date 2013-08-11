@@ -44,7 +44,8 @@ use wcf\system\clipboard\ClipboardHandler;
  */
 class MenuEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObjectDecorator.html#$baseClass
+	 * The base class.
+	 * @var	string
 	 */
 	protected static $baseClass = '\ultimate\data\menu\Menu';
 	
@@ -59,7 +60,7 @@ class MenuEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableCachedObject.html#resetCache
+	 * Resets the cache.
 	 */
 	public static function resetCache() {
 		MenuCacheBuilder::getInstance()->reset();

@@ -44,7 +44,8 @@ use wcf\system\WCF;
  */
 class LayoutEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObjectDecorator.html#$baseClass
+	 * The base class.
+	 * @var	string
 	 */
 	protected static $baseClass = '\ultimate\data\layout\Layout';
 	
@@ -99,7 +100,7 @@ class LayoutEditor extends DatabaseObjectEditor implements IEditableCachedObject
 	
 	/**
 	 * @since	1.0.0
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableCachedObject.html#resetCache
+	 * Resets the cache.
 	 */
 	public static function resetCache() {
 		LayoutCacheBuilder::getInstance()->reset();

@@ -45,7 +45,8 @@ use wcf\system\WCF;
  */
 class BlockEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObjectDecorator.html#$baseClass
+	 * The base class.
+	 * @var string
 	 */
 	protected static $baseClass = '\ultimate\data\block\Block';
 	
@@ -95,7 +96,7 @@ class BlockEditor extends DatabaseObjectEditor implements IEditableCachedObject 
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableCachedObject.html#resetCache
+	 * Resets the cache.
 	 */
 	public static function resetCache() {
 		BlockCacheBuilder::getInstance()->reset();

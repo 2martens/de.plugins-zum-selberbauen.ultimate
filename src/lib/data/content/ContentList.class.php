@@ -41,7 +41,8 @@ use wcf\system\like\LikeHandler;
  */
 class ContentList extends DatabaseObjectList {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObjectList.html#$className
+	 * The class name.
+	 * @var	string
 	 */
 	public $className = '\ultimate\data\content\Content';
 	

@@ -45,7 +45,8 @@ use wcf\system\WCF;
  */
 class CategorizedLink extends DatabaseObjectDecorator implements IUltimateData {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObjectDecorator.html#$baseClass
+	 * The base class.
+	 * @var	string
 	 */
 	protected static $baseClass = '\ultimate\data\link\Link';
 	

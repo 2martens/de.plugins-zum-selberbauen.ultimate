@@ -52,22 +52,26 @@ use wcf\util\ArrayUtil;
  */
 class WidgetAreaAction extends AbstractDatabaseObjectAction implements ISortableAction {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$className
+	 * The class name.
+	 * @var	string
 	 */
 	public $className = '\ultimate\data\widget\area\WidgetAreaEditor';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsCreate
+	 * Array of permissions that are required for create action.
+	 * @var	string[]
 	 */
 	protected $permissionsCreate = array('admin.content.ultimate.canManageWidgetAreas');
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsDelete
+	 * Array of permissions that are required for delete action.
+	 * @var	string[]
 	*/
 	protected $permissionsDelete = array('admin.content.ultimate.canManageWidgetAreas');
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsUpdate
+	 * Array of permissions that are required for update action.
+	 * @var	string[]
 	*/
 	protected $permissionsUpdate = array('admin.content.ultimate.canManageWidgetAreas');
 	

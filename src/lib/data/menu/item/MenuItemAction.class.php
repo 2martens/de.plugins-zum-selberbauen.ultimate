@@ -54,22 +54,26 @@ use wcf\util\StringUtil;
  */
 class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAction, IToggleAction {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$className
+	 * The class name.
+	 * @var	string
 	 */
 	public $className = '\ultimate\data\menu\item\MenuItemEditor';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsCreate
+	 * Array of permissions that are required for create action.
+	 * @var	string[]
 	 */
 	protected $permissionsCreate = array('admin.content.ultimate.canManageMenuItems');
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsDelete
+	 * Array of permissions that are required for delete action.
+	 * @var	string[]
 	*/
 	protected $permissionsDelete = array('admin.content.ultimate.canManageMenuItems');
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsUpdate
+	 * Array of permissions that are required for update action.
+	 * @var	string[]
 	*/
 	protected $permissionsUpdate = array('admin.content.ultimate.canManageMenuItems');
 	

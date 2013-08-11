@@ -62,17 +62,20 @@ use wcf\util\DateUtil;
  */
 class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableName
+	 * The database table name.
+	 * @var	string
 	 */
 	protected static $databaseTableName = 'page';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableIndexIsIdentity
+	 * If true, the database table index is used as identity.
+	 * @var	boolean
 	 */
 	protected static $databaseTableIndexIsIdentity = true;
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableIndexName
+	 * The database table index name.
+	 * @var	string
 	 */
 	protected static $databaseTableIndexName = 'pageID';
 	
@@ -170,7 +173,7 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#handleData
+	 * Handles data.
 	 */
 	protected function handleData($data) {
 		$data['pageID'] = intval($data['pageID']);

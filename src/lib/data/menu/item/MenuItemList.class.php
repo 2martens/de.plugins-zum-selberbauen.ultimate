@@ -40,7 +40,8 @@ use wcf\data\DatabaseObjectList;
  */
 class MenuItemList extends DatabaseObjectList {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObjectList.html#$className
+	 * The class name.
+	 * @var	string
 	 */
 	public $className = '\ultimate\data\menu\item\MenuItem';
 }

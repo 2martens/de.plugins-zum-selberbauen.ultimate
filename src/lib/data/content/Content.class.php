@@ -68,17 +68,20 @@ use wcf\util\StringUtil;
  */
 class Content extends AbstractUltimateDatabaseObject implements ITitledObject, IMessage {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableName
+	 * The database table name.
+	 * @var string
 	 */
 	protected static $databaseTableName = 'content';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableIndexIsIdentity
+	 * If true, the database table index is used as identity.
+	 * @var	boolean
 	 */
 	protected static $databaseTableIndexIsIdentity = true;
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableIndexName
+	 * The database table index name.
+	 * @var	string
 	 */
 	protected static $databaseTableIndexName = 'contentID';
 	
@@ -242,7 +245,7 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject, I
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#handleData
+	 * Handles data.
 	 */
 	protected function handleData($data) {
 		$data['contentID'] = intval($data['contentID']);

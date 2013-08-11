@@ -40,7 +40,8 @@ use wcf\data\object\type\AbstractObjectTypeProvider;
  */
 class ContentProvider extends AbstractObjectTypeProvider {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.object.type.AbstractObjectTypeProvider.html#$className
+	 * The class name.
+	 * @var	string
 	 */
 	public $className = '\ultimate\data\content\Content';
 	

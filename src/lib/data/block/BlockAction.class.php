@@ -46,29 +46,33 @@ use wcf\system\WCF;
  */
 class BlockAction extends AbstractDatabaseObjectAction {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$className
+	 * The class name.
+	 * @var string
 	 */
 	public $className = '\ultimate\data\block\BlockEditor';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsCreate
+	 * Array of permissions that are required for create action.
+	 * string[]
 	 */
 	protected $permissionsCreate = array('admin.content.ultimate.canManageBlocks');
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsDelete
-	*/
+	 * Array of permissions that are required for delete action.
+	 * @var string[]
+	 */
 	protected $permissionsDelete = array('admin.content.ultimate.canManageBlocks');
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$permissionsUpdate
-	*/
+	 * Array of permissions that are required for update action.
+	 * @var string[]
+	 */
 	protected $permissionsUpdate = array('admin.content.ultimate.canManageBlocks');
 	
 	/**
 	 * Creates a block and respects additional AJAX requirements.
 	 * 
-	 * @return	integer[]|string[]
+	 * @return	(integer|string)[]
 	 */
 	public function createAJAX() {
 		// serializes additionalData and query parameters
@@ -167,7 +171,7 @@ class BlockAction extends AbstractDatabaseObjectAction {
 	/**
 	 * Edits a block and respects additional AJAX requirements.
 	 *
-	 * @return	integer[]|string[]
+	 * @return	(integer|string)[]
 	 */
 	public function editAJAX() {
 		// serializes additionalData and query parameters

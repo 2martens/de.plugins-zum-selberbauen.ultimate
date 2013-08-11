@@ -49,7 +49,8 @@ use wcf\util\StringUtil;
  */
 class CategoryEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObjectDecorator.html#$baseClass
+	 * The base class.
+	 * @var	string
 	 */
 	protected static $baseClass = '\ultimate\data\category\Category';
 	
@@ -136,7 +137,7 @@ class CategoryEditor extends DatabaseObjectEditor implements IEditableCachedObje
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableCachedObject.html#resetCache
+	 * Resets the cache.
 	 */
 	public static function resetCache() {
 		CategoryCacheBuilder::getInstance()->reset();

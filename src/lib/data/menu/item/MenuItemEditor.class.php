@@ -44,7 +44,8 @@ use wcf\system\WCF;
  */
 class MenuItemEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObjectDecorator.html#$baseClass
+	 * The base class.
+	 * @var	string
 	 */
 	protected static $baseClass = '\ultimate\data\menu\item\MenuItem';
 	
@@ -174,7 +175,7 @@ class MenuItemEditor extends DatabaseObjectEditor implements IEditableCachedObje
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableCachedObject.html#resetCache
+	 * Resets the cache.
 	 */
 	public static function resetCache() {
 		MenuItemCacheBuilder::getInstance()->reset();

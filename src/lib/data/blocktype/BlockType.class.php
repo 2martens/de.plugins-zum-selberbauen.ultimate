@@ -48,17 +48,20 @@ use wcf\system\WCF;
  */
 class BlockType extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableName
+	 * The database table name.
+	 * @var string
 	 */
 	protected static $databaseTableName = 'blocktype';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableIndexIsIdentity
+	 * If true, the database table index is used as identity.
+	 * @var	boolean
 	 */
 	protected static $databaseTableIndexIsIdentity = true;
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableIndexName
+	 * The database table index name.
+	 * @var	string
 	 */
 	protected static $databaseTableIndexName = 'blockTypeID';
 	

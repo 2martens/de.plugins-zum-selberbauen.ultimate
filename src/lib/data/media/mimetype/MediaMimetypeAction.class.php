@@ -40,7 +40,8 @@ use wcf\data\AbstractDatabaseObjectAction;
  */
 class MediaMimetypeAction extends AbstractDatabaseObjectAction {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#$className
+	 * The class name.
+	 * @var	string
 	 */
 	public $className = '\ultimate\data\media\mimetype\MimetypeEditor';
 }
