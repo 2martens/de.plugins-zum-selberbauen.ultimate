@@ -233,19 +233,9 @@
 		$(function() {
 			{if $action == 'edit'}
 				{if $__wcf->session->getPermission('admin.content.ultimate.canManageBlocks')}
-					new WCF.Action.Delete('ultimate\\data\\block\\BlockAction', $('.jsBlock'));
+					new WCF.Action.Delete('ultimate\\data\\block\\BlockAction', '.jsBlock');
 				{/if}
 				{if $__wcf->session->getPermission('admin.content.ultimate.canManageBlocks')}
-					{* doesn't have any use
-					$('#templateBlockList').find('button[data-type="submit"]').click(function(event) {
-						event.preventDefault();
-						if ($('#templateBlockList').find('.jsBlock').length == 0) {
-							event.stopImmediatePropagation();
-						} else {
-							event.stopPropagation();
-						}
-					});
-					*}
 					$('#selectBlocktype').change(function(event) {
 						var $item = $('#selectBlocktype');
 						var $submitButton = $('#blocktypeContainer').find('button[data-type="submit"]');
