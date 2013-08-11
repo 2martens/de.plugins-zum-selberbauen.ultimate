@@ -588,6 +588,11 @@ Für die InlineEdit braucht man die gleichen Rechte um Inhalte zu schreiben, zu 
 		<item name="wcf.acp.ultimate.template.mediaTab.embed.mediaHeight.description"><![CDATA[Gib hier bitte die Höhe des Mediums an. Das Medium wird auf entsprechend auf diese Höhe vergrößert oder verkleinert.]]></item>
 		<item name="wcf.acp.ultimate.template.mediaTab.embed.mediaWidth"><![CDATA[Medienbreite]]></item>
 		<item name="wcf.acp.ultimate.template.mediaTab.embed.mediaWidth.description"><![CDATA[Gib hier bitte die Breite des Mediums an. Das Medium wird auf entsprechend auf diese Breite vergrößert oder verkleinert.]]></item>
+        <item name="wcf.acp.ultimate.template.mediaTab.embed.alignment"><![CDATA[Ausrichtung]]></item>
+        <item name="wcf.acp.ultimate.template.mediaTab.embed.alignment.description"><![CDATA[Bitte wähle hier die Ausrichtung des Medienblocks aus.]]></item>
+        <item name="wcf.acp.ultimate.template.mediaTab.embed.alignment.left"><![CDATA[Links]]></item>
+        <item name="wcf.acp.ultimate.template.mediaTab.embed.alignment.center"><![CDATA[Mitte]]></item>
+        <item name="wcf.acp.ultimate.template.mediaTab.embed.alignment.right"><![CDATA[Rechts]]></item>
 		<!-- /embed sub tab -->
 		<!-- /media tab -->
 		<!-- /block dialog -->		

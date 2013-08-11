@@ -1,4 +1,4 @@
-<div id="block-{$blockID}" class="block media-block-type" data-id="{$blockID}">
+<div id="block-{$blockID}" class="block media-block-type {$alignmentSelected}" data-id="{$blockID}">
 	{if $mediaType == 'video'}
 		{if $mediaSourceType == 'provider'}
 			{@$mediaHTML}

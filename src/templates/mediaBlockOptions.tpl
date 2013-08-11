@@ -48,6 +48,15 @@
 					<label for="mediaWidth_{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.mediaTab.embed.mediaWidth.description{/lang}">{lang}wcf.acp.ultimate.template.mediaTab.embed.mediaWidth{/lang}</label>
 					<input type="number" id="mediaWidth_{$blockID}" name="mediaWidth" data-block-id="{$blockID}" data-is-block="true" value="{@$mediaWidth}" />
 				</dd>
+				<dd class="inputSelect">
+					<label for="alignment_{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.mediaTab.embed.alignment.description{/lang}">{lang}wcf.acp.ultimate.template.mediaTab.embed.alignment{/lang}</label>
+					
+					<select id="alignment_{$blockID}" data-block-id="{$blockID}" data-is-block="true" name="alignment">
+						<option value="left"{if $alignmentSelected == 'left'} selected="selected"{/if}>{lang}wcf.acp.ultimate.template.mediaTab.embed.alignment.left{/lang}</option>
+						<option value="center"{if $alignmentSelected == 'center'} selected="selected"{/if}>{lang}wcf.acp.ultimate.template.mediaTab.embed.alignment.center{/lang}</option>
+						<option value="right"{if $alignmentSelected == 'right'} selected="selected"{/if}>{lang}wcf.acp.ultimate.template.mediaTab.embed.alignment.right{/lang}</option>
+					</select>
+				</dd>
 			</dl>
 		</div>
 		<div class="formSubmit">

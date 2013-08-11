@@ -73,7 +73,8 @@ class MediaBlockType extends AbstractBlockType {
 		'mediaSource_{$blockID}',
 		'mimeType_{$blockID}',
 		'mediaHeight_{$blockID}',
-		'mediaWidth_{$blockID}'
+		'mediaWidth_{$blockID}',
+		'alignment_{$blockID}'
 	);
 	
 	/**
@@ -188,14 +189,16 @@ class MediaBlockType extends AbstractBlockType {
 		
 		$defaults = array(
 			'mediaType' => 'audio',
-			'mimeType' => 'audio/basic'
+			'mimeType' => 'audio/basic',
+			'alignment' => 'left'
 		);
 		$options = $this->block->__get('additionalData');
 		$options = array_replace_recursive($defaults, $options);
 		
 		$optionsSelect = array(
 			'mediaType',
-			'mimeType'
+			'mimeType',
+			'alignment'
 		);
 		WCF::getTPL()->assign('mimeTypes', $this->objects);
 		// assigning values

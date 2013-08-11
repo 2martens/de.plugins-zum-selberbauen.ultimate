@@ -591,7 +591,12 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 		<item name="wcf.acp.ultimate.template.mediaTab.embed.mediaHeight.description"><![CDATA[Please insert here the height of the media. The embedded media will be resized to that height.]]></item>
 		<item name="wcf.acp.ultimate.template.mediaTab.embed.mediaWidth"><![CDATA[Media width]]></item>
 		<item name="wcf.acp.ultimate.template.mediaTab.embed.mediaWidth.description"><![CDATA[Please insert here the width of the media. The embedded media will be resized to that width.]]></item>
-		<!-- /embed sub tab -->
+		<item name="wcf.acp.ultimate.template.mediaTab.embed.alignment"><![CDATA[Alignment]]></item>
+        <item name="wcf.acp.ultimate.template.mediaTab.embed.alignment.description"><![CDATA[Please select here the alignment of the media block.]]></item>
+        <item name="wcf.acp.ultimate.template.mediaTab.embed.alignment.left"><![CDATA[Left]]></item>
+        <item name="wcf.acp.ultimate.template.mediaTab.embed.alignment.center"><![CDATA[Center]]></item>
+        <item name="wcf.acp.ultimate.template.mediaTab.embed.alignment.right"><![CDATA[Right]]></item>
+        <!-- /embed sub tab -->
 		<!-- /media tab -->
 		<!-- /block dialog -->		
 		<!-- /template -->
