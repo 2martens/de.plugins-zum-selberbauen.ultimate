@@ -34,7 +34,7 @@ use wcf\system\WCF;
  * Provides a sitemap for the Ultimate CMS.
  * 
  * @author		Jim Martens
- * @copyright	2013 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.sitemap

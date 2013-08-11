@@ -31,7 +31,7 @@ namespace ultimate\data;
  * Every Ultimate data class should implement this interface. It is a marking interface only.
  * 
  * @author		Jim Martens
- * @copyright	2013 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data
