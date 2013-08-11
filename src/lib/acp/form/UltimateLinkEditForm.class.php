@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateLinkEdit form.
+ * The UltimateLinkEdit form.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -45,25 +45,25 @@ use wcf\system\WCF;
  */
 class UltimateLinkEditForm extends UltimateLinkAddForm {
 	/**
-	 * @var	string[]
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$activeMenuItem
+	 * The active menu item.
+	 * @var	string
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.link';
 	
 	/**
-	 * Contains the link id.
+	 * The link id.
 	 * @var	integer
 	 */
 	public $linkID = 0;
 	
 	/**
-	 * Contains the link object.
+	 * The link object.
 	 * @var \ultimate\data\link\CategorizedLink
 	 */
 	public $link = null;
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
+	 * @see	UltimateLinkAddForm::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();

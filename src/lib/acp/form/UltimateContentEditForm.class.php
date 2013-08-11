@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateContentEdit form.
+ * The UltimateContentEdit form.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -60,43 +60,45 @@ use wcf\util\HeaderUtil;
  */
 class UltimateContentEditForm extends UltimateContentAddForm {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$activeMenuItem
+	 * The active menu item.
+	 * @var	string
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.content';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededPermissions
+	 * Array of needed permissions.
+	 * @var string[]
 	 */
 	public $neededPermissions = array(
 		'admin.content.ultimate.canEditContent'
 	);
 	
 	/**
-	 * Contains the content id.
+	 * The content id.
 	 * @var	integer
 	 */
 	public $contentID = 0;
 	
 	/**
-	 * Contains the Content object of this content.
+	 * The Content object of this content.
 	 * @var	\ultimate\data\content\CategorizedContent
 	 */
 	public $content = null;
 	
 	/**
-	 * Contains the language output for the save button.
+	 * The language output for the save button.
 	 * @var	string
 	 */
 	protected $saveButtonLang = '';
 	
 	/**
-	 * Contains the language output for the publish button.
+	 * The language output for the publish button.
 	 * @var	string
 	 */
 	protected $publishButtonLang = '';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
+	 * @see	UltimateContentAddForm::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -111,7 +113,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
+	 * @see	UltimateContentAddForm::readData()
 	 */
 	public function readData() {
 		// get status data
@@ -182,7 +184,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
+	 * @see	UltimateContentAddForm::save()
 	 */
 	public function save() {
 		RecaptchaForm::save();
@@ -286,7 +288,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * @see	UltimateContentAddForm::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -317,7 +319,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#show
+	 * @see	UltimateContentAddForm::show()
 	 */
 	public function show() {
 		if (!empty($this->activeMenuItem)) {

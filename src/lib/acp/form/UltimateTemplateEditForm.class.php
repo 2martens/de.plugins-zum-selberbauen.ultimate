@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateTemplateEdit form.
+ * The UltimateTemplateEdit form.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -48,24 +48,25 @@ use wcf\util\HeaderUtil;
  */
 class UltimateTemplateEditForm extends UltimateTemplateAddForm {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$activeMenuItem
+	 * The active menu item.
+	 * @var	string
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.appearance';
 	
 	/**
-	 * Contains the id of the edited template.
+	 * The id of the edited template.
 	 * @var integer
 	 */
 	public $templateID = 0;
 	
 	/**
-	 * Contains the object of the edited template.
+	 * The object of the edited template.
 	 * @var \ultimate\data\template\Template
 	 */
 	public $template = null;
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
+	 * @see UltimateTemplateAddForm::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -79,7 +80,7 @@ class UltimateTemplateEditForm extends UltimateTemplateAddForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
+	 * @see UltimateTemplateAddForm::readData()
 	 */
 	public function readData() {
 		parent::readData();
@@ -100,7 +101,7 @@ class UltimateTemplateEditForm extends UltimateTemplateAddForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
+	 * @see UltimateTemplateAddForm::save()
 	 */
 	public function save() {
 		AbstractForm::save();
@@ -132,7 +133,7 @@ class UltimateTemplateEditForm extends UltimateTemplateAddForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * @see UltimateTemplateAddForm::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

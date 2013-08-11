@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateContentAdd form.
+ * The UltimateContentAdd form.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -62,124 +62,129 @@ use wcf\util\StringUtil;
  */
 class UltimateContentAddForm extends MessageForm {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
+	 * The template name.
+	 * @var string
 	 */
 	public $templateName = 'ultimateContentAdd';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededPermissions
+	 * Array of needed permissions.
+	 * @var string[]
 	 */
 	public $neededPermissions = array(
 		'admin.content.ultimate.canAddContent'
 	);
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$activeMenuItem
+	 * The active menu item.
+	 * @var string
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.content.add';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.MessageForm.html#$enableMultilangualism
+	 * If true, multilingualism is enabled.
+	 * @var boolean
 	 */
 	public $enableMultilangualism = true;
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.MessageForm.html#$showSignatureSetting
+	 * If 1, the signature setting is shown.
+	 * @var	integer
 	 */
 	public $showSignatureSetting = 0;
 	
 	/**
-	 * Contains the description of the content.
+	 * The description of the content.
 	 * @var	string
 	 */
 	public $description = '';
 	
 	/**
-	 * Contains the slug of the content.
+	 * The slug of the content.
 	 * @var	string
 	 */
 	public $slug = '';
 	
 	/**
-	 * Contains the meta description.
+	 * The meta description.
 	 * @var string
 	 */
 	public $metaDescription = '';
 	
 	/**
-	 * Contains the meta keywords.
+	 * The meta keywords.
 	 * @var string
 	 */
 	public $metaKeywords = '';
 	
 	/**
-	 * Contains the chosen categories.
+	 * The chosen categories.
 	 * @var	integer[]
 	 */
 	public $categoryIDs = array();
 	
 	/**
-	 * Contains all categories.
+	 * All categories.
 	 * @var	\ultimate\data\category\Category[]
 	 */
 	public $categories = array();
 	
 	/**
-	 * Contains the i18n tags.
+	 * The i18n tags.
 	 * @var string[]|array[]
 	 */
 	public $tagsI18n = array();
 	   
 	/**
-	 * Contains the maximal length of the text.
+	 * The maximal length of the text.
 	 * @var	integer	0 means there's no limitation
 	 */
 	public $maxTextLength = 0;
 	
 	/**
-	 * Contains the visibility.
+	 * The visibility.
 	 * @var	string
 	 */
 	public $visibility = 'public';
 	
 	/**
-	 * Contains the chosen groupIDs.
+	 * The chosen groupIDs.
 	 * @var	integer[]
 	 */
 	public $groupIDs = array();
 	
 	/**
-	 * Contains all available groups.
+	 * All available groups.
 	 * @var	\wcf\data\user\group\UserGroup[]
 	*/
 	public $groups = array();
 	
 	/**
-	 * Contains the publish date.
+	 * The publish date.
 	 * @var	string
 	*/
 	public $publishDate = '';
 	
 	/**
-	 * Contains the publish date as timestamp.
+	 * The publish date as timestamp.
 	 * @var	integer
 	 */
 	public $publishDateTimestamp = TIME_NOW;
 	
 	/**
-	 * Contains all status options.
+	 * All status options.
 	 * @var	string[]
 	 */
 	public $statusOptions = array();
 	
 	/**
-	 * Contains the status id.
+	 * The status id.
 	 * @var	integer
 	*/
 	public $statusID = 0;
 	
 	/**
-	 * Contains the save type.
+	 * The save type.
 	 * @var	string
 	 */
 	public $saveType = '';
@@ -191,7 +196,7 @@ class UltimateContentAddForm extends MessageForm {
 	protected $dateFormat = 'yy-mm-dd';
 	
 	/**
-	 * Contains the timestamp from the begin of the add process.
+	 * The timestamp from the begin of the add process.
 	 * @var	integer
 	 */
 	protected $startTime = 0;
@@ -204,7 +209,7 @@ class UltimateContentAddForm extends MessageForm {
 	protected $success = false;
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
+	 * Reads parameters.
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -217,7 +222,7 @@ class UltimateContentAddForm extends MessageForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
+	 * Reads data.
 	 */
 	public function readData() {
 		$this->groups = UserGroupCacheBuilder::getInstance()->getData(array(), 'groups');
@@ -241,7 +246,7 @@ class UltimateContentAddForm extends MessageForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#readFormParameters
+	 * Reads form input.
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -266,7 +271,7 @@ class UltimateContentAddForm extends MessageForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#validate
+	 * Validates the form input.
 	 */
 	public function validate() {
 		$this->success = false;
@@ -297,7 +302,7 @@ class UltimateContentAddForm extends MessageForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
+	 * Saves the form input.
 	 */
 	public function save() {
 		if (!I18nHandler::getInstance()->isPlainValue('text')) RecaptchaForm::save();
@@ -398,7 +403,7 @@ class UltimateContentAddForm extends MessageForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * Assigns template variables.
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

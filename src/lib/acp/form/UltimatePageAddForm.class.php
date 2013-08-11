@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimatePageAdd form.
+ * The UltimatePageAdd form.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -54,116 +54,117 @@ use wcf\util\StringUtil;
  */
 class UltimatePageAddForm extends AbstractForm {
 	/**
-	 * @var	string[]
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$activeMenuItem
+	 * The active menu item.
+	 * @var	string
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.page.add';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
+	 * The template name.
+	 * @var string
 	 */
 	public $templateName = 'ultimatePageAdd';
 	
 	/**
+	 * Array of needed permissions.
 	 * @var	string[]
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededPermissions
 	 */
 	public $neededPermissions = array(
 		'admin.content.ultimate.canAddPage'
 	);
 	
 	/**
-	 * Contains the content id.
+	 * The content id.
 	 * @var	integer
 	 */
 	public $contentID = 0;
 	
 	/**
-	 * Contains all available contents.
+	 * All available contents.
 	 * @var	\ultimate\data\content\Content[]
 	 */
 	public $contents = array();
 	
 	/**
-	 * Contains the title of the page.
+	 * The title of the page.
 	 * @var	string
 	 */
 	public $pageTitle = '';
 	
 	/**
-	 * Contains the page slug.
+	 * The page slug.
 	 * @var	string
 	 */
 	public $pageSlug = '';
 	
 	/**
-	 * Contains the meta description.
+	 * The meta description.
 	 * @var string
 	 */
 	public $metaDescription = '';
 	
 	/**
-	 * Contains the meta keywords.
+	 * The meta keywords.
 	 * @var string
 	 */
 	public $metaKeywords = '';
 	
 	/**
-	 * Contains all possible parent pages.
+	 * All possible parent pages.
 	 * @var	\ultimate\data\page\Page[]
 	 */
 	public $pages = array();
 	
 	/**
-	 * Contains the parent page id.
+	 * The parent page id.
 	 * @var	integer
 	 */
 	public $pageParent = 0;
 	
 	/**
-	 * Contains the visibility.
+	 * The visibility.
 	 * @var	string
 	 */
 	public $visibility = 'public';
 	
 	/**
-	 * Contains the chosen groupIDs.
+	 * The chosen groupIDs.
 	 * @var	integer[]
 	 */
 	public $groupIDs = array();
 	
 	/**
-	 * Contains all available groups.
+	 * All available groups.
 	 * @var	\wcf\data\user\group\UserGroup[]
 	 */
 	public $groups = array();
 	
 	/**
-	 * Contains the publish date.
+	 * The publish date.
 	 * @var	string
 	 */
 	public $publishDate = '';
 	
 	/**
-	 * Contains the publish date as timestamp.
+	 * The publish date as timestamp.
 	 * @var	integer
 	 */
 	public $publishDateTimestamp = TIME_NOW;
 	
 	/**
-	 * Contains all status options.
+	 * All status options.
 	 * @var	string[]
 	 */
 	public $statusOptions = array();
 	
 	/**
-	 * Contains the status id.
+	 * The status id.
 	 * @var	integer
 	 */
 	public $statusID = 0;
 	
 	/**
-	 * Contains the save type.
+	 * The save type.
 	 * @var	string
 	 */
 	public $saveType = '';
@@ -175,13 +176,13 @@ class UltimatePageAddForm extends AbstractForm {
 	protected $dateFormat = 'yy-mm-dd';
 	
 	/**
-	 * Contains the timestamp from the begin of the add process.
+	 * The timestamp from the begin of the add process.
 	 * @var	integer
 	 */
 	protected $startTime = 0;
 	
 	/**
-	 * @see http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
+	 * Reads parameters.
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -189,7 +190,7 @@ class UltimatePageAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
+	 * Reads data.
 	 */
 	public function readData() {
 		$this->contents = PageUtil::getAvailableContents();
@@ -209,7 +210,7 @@ class UltimatePageAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#readFormParameters
+	 * Reads form input.
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -231,7 +232,7 @@ class UltimatePageAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#validate
+	 * Validates the form input.
 	 */
 	public function validate() {
 		parent::validate();
@@ -247,7 +248,7 @@ class UltimatePageAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
+	 * Saves the input.
 	 */
 	public function save() {
 		parent::save();
@@ -302,7 +303,7 @@ class UltimatePageAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * Assigns template variables.
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

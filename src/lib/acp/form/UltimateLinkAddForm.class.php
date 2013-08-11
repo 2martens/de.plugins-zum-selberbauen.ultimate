@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateLinkAdd form.
+ * The UltimateLinkAdd form.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -50,50 +50,51 @@ use wcf\util\StringUtil;
  */
 class UltimateLinkAddForm extends AbstractForm {
 	/**
-	 * @var	string[]
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$activeMenuItem
+	 * The active menu item.
+	 * @var	string
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.link.add';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
+	 * The template name.
+	 * @var string
 	 */
 	public $templateName = 'ultimateLinkAdd';
 	
 	/**
+	 * Array of needed permissions.
 	 * @var	string[]
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededPermissions
 	 */
 	public $neededPermissions = array(
 		'admin.content.ultimate.canManageLinks'
 	);
 	
 	/**
-	 * Contains the link name.
+	 * The link name.
 	 * @var string
 	 */
 	public $linkName = '';
 	
 	/**
-	 * Contains the link URL.
+	 * The link URL.
 	 * @var string
 	 */
 	public $linkURL = '';
 	
 	/**
-	 * Contains the link description.
+	 * The link description.
 	 * @var string
 	 */
 	public $linkDescription = '';
 	
 	/**
-	 * Contains the chosen categories.
+	 * The chosen categories.
 	 * @var	integer[]
 	 */
 	public $categoryIDs = array();
 	
 	/**
-	 * Contains all categories.
+	 * All categories.
 	 * @var	\wcf\data\category\Category[]|string[]
 	*/
 	public $categories = array();

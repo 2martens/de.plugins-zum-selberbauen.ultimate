@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateLinkCategoryAdd form.
+ * The UltimateLinkCategoryAdd form.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -40,12 +40,14 @@ use wcf\acp\form\AbstractCategoryAddForm;
  */
 class UltimateLinkCategoryAddForm extends AbstractCategoryAddForm {
 	/**
-	 * @see \wcf\acp\form\ACPForm::$activeMenuItem
+	 * The active menu item.
+	 * @var string
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.link.category.add';
 	
 	/**
-	 * @see \wcf\acp\form\AbstractCategoryAddForm::$objectTypeName
+	 * The name of the object type.
+	 * @var strings
 	 */
 	public $objectTypeName = 'de.plugins-zum-selberbauen.ultimate.linkCategory';
 }

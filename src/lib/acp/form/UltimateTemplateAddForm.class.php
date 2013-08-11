@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateTemplateAdd form.
+ * The UltimateTemplateAdd form.
  *
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -49,24 +49,27 @@ use wcf\util\StringUtil;
  */
 class UltimateTemplateAddForm extends AbstractForm {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
+	 * The template name.
+	 * @var	string
 	 */
 	public $templateName = 'ultimateTemplateAdd';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededPermissions
+	 * Array of needed permissions.
+	 * @var	string[]
 	 */
 	public $neededPermissions = array(
 		'admin.content.ultimate.canManageTemplates'
 	);
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$activeMenuItem
+	 * The active menu item.
+	 * @var string
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.appearance.template.add';
 	
 	/**
-	 * Contains the name of the edited template.
+	 * The name of the edited template.
 	 *
 	 * Has prefix ultimate to prevent overriding the parent's property.
 	 * @var string
@@ -80,49 +83,49 @@ class UltimateTemplateAddForm extends AbstractForm {
 	public $showWidgetArea = true;
 	
 	/**
-	 * Contains all read widget area configurations.
+	 * All read widget area configurations.
 	 * @var \ultimate\data\widget\area\WidgetArea[]
 	 */
 	public $widgetAreas = array();
 	
 	/**
-	 * Contains the id of the selected widget area.
+	 * The id of the selected widget area.
 	 * @var integer
 	*/
 	public $selectedWidgetArea = 0;
 	
 	/**
-	 * Contains the widget area side.
+	 * The widget area side.
 	 * @var string
 	 */
 	public $widgetAreaSide = 'right';
 	
 	/**
-	 * Contains all read custom menus.
+	 * All read custom menus.
 	 * @var \ultimate\data\menu\Menu[]
 	 */
 	public $menus = array();
 	
 	/**
-	 * Contains the id of the selected custom menu.
+	 * The id of the selected custom menu.
 	 * @var integer
 	*/
 	public $selectedMenu = 0;
 	
 	/**
-	 * Contains all blocks of this template.
+	 * All blocks of this template.
 	 * @var \ultimate\data\block\Block[]
 	 */
 	public $blocks = array();
 	
 	/**
-	 * Contains all block types.
+	 * All block types.
 	 * @var \ultimate\data\blocktype\Blocktype[]
 	 */
 	public $blocktypes = array();
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
+	 * Reads data.
 	 */
 	public function readData() {
 		// load cache
@@ -134,7 +137,7 @@ class UltimateTemplateAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#readFormParameters
+	 * Reads form input.
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -148,8 +151,9 @@ class UltimateTemplateAddForm extends AbstractForm {
 	}
 	
 	/**
+	 * Validates the input.
+	 * 
 	 * @throws	\wcf\system\exception\UserInputException	on wrong/malformed user input
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#validate
 	 */
 	public function validate() {
 		parent::validate();
@@ -161,7 +165,7 @@ class UltimateTemplateAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
+	 * Saves the input.
 	 */
 	public function save() {
 		parent::save();
@@ -193,7 +197,7 @@ class UltimateTemplateAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * Assigns template variables.
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimatePageEdit form.
+ * The UltimatePageEdit form.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -50,43 +50,45 @@ use wcf\util\DateUtil;
  */
 class UltimatePageEditForm extends UltimatePageAddForm {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$activeMenuItem
+	 * The active menu item.
+	 * @var string
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.page';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededPermissions
+	 * Array of needed permissions.
+	 * @var string[]
 	 */
 	public $neededPermissions = array(
 		'admin.content.ultimate.canEditPage'
 	);
 	
 	/**
-	 * Contains the page id.
+	 * The page id.
 	 * @var	integer
 	 */
 	public $pageID = 0;
 	
 	/**
-	 * Contains the Page object of this page.
+	 * The Page object of this page.
 	 * @var	\ultimate\data\page\Page
 	 */
 	public $page = null;
 	
 	/**
-	 * Contains the language output for the save button.
+	 * The language output for the save button.
 	 * @var	string
 	 */
 	protected $saveButtonLang = '';
 	
 	/**
-	 * Contains the language output for the publish button.
+	 * The language output for the publish button.
 	 * @var	string
 	 */
 	protected $publishButtonLang = '';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
+	 * @see UltimatePageAddForm::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -100,7 +102,7 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
+	 * @see UltimatePageAddForm::readData()
 	 */
 	public function readData() {
 		$this->contents = PageUtil::getAvailableContents($this->pageID);
@@ -159,7 +161,7 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
+	 * @see UltimatePageAddForm::save()
 	 */
 	public function save() {
 		AbstractForm::save();
@@ -204,7 +206,7 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * @see UltimatePageAddForm::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

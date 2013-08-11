@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateLinkCategoryEdit form.
+ * The UltimateLinkCategoryEdit form.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -40,7 +40,8 @@ use wcf\acp\form\AbstractCategoryEditForm;
  */
 class UltimateLinkCategoryEditForm extends AbstractCategoryEditForm {
 	/**
-	 * @see \wcf\acp\form\ACPForm::$activeMenuItem
+	 * The active menu item.
+	 * @var	string
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.link';
 	

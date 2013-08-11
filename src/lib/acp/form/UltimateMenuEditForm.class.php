@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateMenuEdit form.
+ * The UltimateMenuEdit form.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -48,25 +48,25 @@ use wcf\system\WCF;
  */
 class UltimateMenuEditForm extends UltimateMenuAddForm {
 	/**
+	 * The active menu item.
 	 * @var	string
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.appearance';
 	
 	/**
-	 * Contains the menu id.
+	 * The menu id.
 	 * @var	integer
 	 */
 	public $menuID = 0;
 	
 	/**
-	 * Contains the Menu object.
+	 * The Menu object.
 	 * @var	\ultimate\data\menu\Menu
 	 */
 	public $menu = null;
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
+	 * @see	UltimateMenuAddForm::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -81,7 +81,7 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
+	 * @see	UltimateMenuAddForm::readData()
 	 */
 	public function readData() {
 		// reading object fields
@@ -147,7 +147,7 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
+	 * @see	UltimateMenuAddForm::save()
 	 */
 	public function save() {
 		AbstractForm::save();
@@ -169,7 +169,7 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * @see	UltimateMenuAddForm::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateCategoryEdit form.
+ * The UltimateCategoryEdit form.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -48,25 +48,25 @@ use wcf\system\WCF;
  */
 class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 	/**
+	 * The active menu item.
 	 * @var	string
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.category';
 	
 	/**
-	 * Contains the category id.
+	 * The category id.
 	 * @var	integer
 	*/
 	public $categoryID = 0;
 	
 	/**
-	 * Contains the Category object of this category.
+	 * The Category object of this category.
 	 * @var	\ultimate\data\category\Category
 	 */
 	public $category = null;
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
+	 * @see	UltimateCategoryAddForm::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -80,7 +80,7 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
+	 * @see	UltimateCategoryAddForm::readData()
 	 */
 	public function readData() {
 		$this->categories = CategoryUtil::getAvailableCategories($this->categoryID);
@@ -98,7 +98,7 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
+	 * @see	UltimateCategoryAddForm::save()
 	 */
 	public function save() {
 		AbstractForm::save();
@@ -139,7 +139,7 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * @see	UltimateCategoryAddForm::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

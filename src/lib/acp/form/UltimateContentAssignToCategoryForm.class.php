@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateContentAssignToCategory form.
+ * The UltimateContentAssignToCategory form.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -49,19 +49,22 @@ use wcf\util\ArrayUtil;
  */
 class UltimateContentAssignToCategoryForm extends AbstractForm {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
+	 * The template name.
+	 * @var string
 	 */
 	public $templateName = 'ultimateContentAssignToCategory';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededPermissions
+	 * Array of needed permissions.
+	 * @var string[]
 	 */
 	public $neededPermissions = array(
 		'admin.content.ultimate.canEditContent'
 	);
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$activeMenuItem
+	 * The active menu item.
+	 * @var string
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.content';
 	
@@ -90,13 +93,13 @@ class UltimateContentAssignToCategoryForm extends AbstractForm {
 	public $categories = array();
 	
 	/**
-	 * Contains the clipboard item type id.
+	 * The clipboard item type id.
 	 * @var integer|null
 	 */
 	protected $typeID = null;
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
+	 * Reads parameters.
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -122,7 +125,7 @@ class UltimateContentAssignToCategoryForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
+	 * Reads data.
 	 */
 	public function readData() {
 		$this->loadCache();
@@ -148,7 +151,7 @@ class UltimateContentAssignToCategoryForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#readFormParameters
+	 * Reads form input.
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -156,7 +159,7 @@ class UltimateContentAssignToCategoryForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#validate
+	 * Validates the form input.
 	 */
 	public function validate() {
 		parent::validate();
@@ -165,7 +168,7 @@ class UltimateContentAssignToCategoryForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
+	 * Saves the form input.
 	 */
 	public function save() {
 		parent::save();
@@ -187,7 +190,7 @@ class UltimateContentAssignToCategoryForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * Assigns template variables.
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

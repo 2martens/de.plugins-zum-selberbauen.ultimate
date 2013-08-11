@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateMenuAdd form.
+ * The UltimateMenuAdd form.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -50,63 +50,63 @@ use wcf\util\StringUtil;
  */
 class UltimateMenuAddForm extends AbstractForm {
 	/**
+	 * The active menu item.
 	 * @var	string
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.appearance.menu.add';
 	
 	/**
+	 * The template name.
 	 * @var	string
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
 	 */
 	public $templateName = 'ultimateMenuAdd';
 	
 	/**
+	 * Array of needed permissions.
 	 * @var	string[]
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededPermissions
 	 */
 	public $neededPermissions = array(
 		'admin.content.ultimate.canManageMenus'
 	);
 	
 	/**
-	 * Contains the title of the category.
+	 * The title of the category.
 	 * @var	string
 	*/
 	public $menuName = '';
 	
 	/**
-	 * Contains the menu items.
+	 * The menu items.
 	 * @var	\ultimate\data\menu\item\ViewableMenuItem[]
 	 */
 	public $menuItems = array();
 	
 	/**
-	 * Contains all categories.
+	 * All categories.
 	 * @var	(\ultimate\data\category\Category|array)[]
 	 */
 	public $categories = array();
 	
 	/**
-	 * Contains all categories which already exist as menu item in this menu.
+	 * All categories which already exist as menu item in this menu.
 	 * @var	integer[]
 	 */
 	public $disabledCategoryIDs = array();
 	
 	/**
-	 * Contains all pages.
+	 * All pages.
 	 * @var	(\ultimate\data\page\Page|array)[]
 	 */
 	public $pages = array();
 	
 	/**
-	 * Contains all pages which already exist as menu item in this menu.
+	 * All pages which already exist as menu item in this menu.
 	 * @var	integer[]
 	 */
 	public $disabledPageIDs = array();
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
+	 * Reads parameters.
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -114,7 +114,7 @@ class UltimateMenuAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
+	 * Reads data.
 	 */
 	public function readData() {
 		// read category cache
@@ -127,7 +127,7 @@ class UltimateMenuAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#readFormParameters
+	 * Reads form input.
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -136,7 +136,7 @@ class UltimateMenuAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#validate
+	 * Validates the form input.
 	 */
 	public function validate() {
 		parent::validate();
@@ -144,7 +144,7 @@ class UltimateMenuAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
+	 * Saves the form input.
 	 */
 	public function save() {
 		parent::save();
@@ -178,7 +178,7 @@ class UltimateMenuAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * Assigns template variables.
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

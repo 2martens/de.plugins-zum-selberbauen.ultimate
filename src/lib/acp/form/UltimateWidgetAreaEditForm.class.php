@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateWidgetAreaEditForm class.
+ * The UltimateWidgetAreaEditForm class.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -44,25 +44,25 @@ use wcf\system\WCF;
  */
 class UltimateWidgetAreaEditForm extends UltimateWidgetAreaAddForm {
 	/**
+	 * The active menu item.
 	 * @var	string
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.appearance';
 	
 	/**
-	 * Contains the widget area id.
+	 * The widget area id.
 	 * @var	integer
 	 */
 	public $widgetAreaID = 0;
 	
 	/**
-	 * Contains the WidgetArea object.
+	 * The WidgetArea object.
 	 * @var	\ultimate\data\widget\area\WidgetArea
 	 */
 	public $widgetArea = null;
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
+	 * @see UltimateWidgetAreaAddForm::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -77,7 +77,7 @@ class UltimateWidgetAreaEditForm extends UltimateWidgetAreaAddForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
+	 * @see UltimateWidgetAreaAddForm::readData()
 	 */
 	public function readData() {
 		// reading object fields
@@ -100,7 +100,7 @@ class UltimateWidgetAreaEditForm extends UltimateWidgetAreaAddForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
+	 * @see UltimateWidgetAreaAddForm::save()
 	 */
 	public function save() {
 		AbstractForm::save();
@@ -151,7 +151,7 @@ class UltimateWidgetAreaEditForm extends UltimateWidgetAreaAddForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * @see	UltimateWidgetAreaAddForm::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

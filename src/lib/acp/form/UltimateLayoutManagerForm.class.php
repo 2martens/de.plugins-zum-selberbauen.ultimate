@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateLayoutManager form.
+ * The UltimateLayoutManager form.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -51,63 +51,63 @@ use wcf\util\HeaderUtil;
  */
 class UltimateLayoutManagerForm extends AbstractForm {
 	/**
+	 * The active menu item.
 	 * @var	string
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.appearance.layoutManager';
 	
 	/**
+	 * The template name.
 	 * @var	string
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
 	 */
 	public $templateName = 'ultimateLayoutManager';
 	
 	/**
+	 * Array of needed permissions.
 	 * @var	string[]
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededPermissions
 	 */
 	public $neededPermissions = array(
 		'admin.content.ultimate.canManageLayouts'
 	);
 	
 	/**
-	 * Contains all existing layouts.
+	 * All existing layouts.
 	 * @var \ultimate\data\layout\Layout[]
 	 */
 	public $layouts = array();
 	
 	/**
-	 * Contains all category layouts.
+	 * All category layouts.
 	 * @var \ultimate\data\layout\Layout[]
 	 */
 	public $categoryLayouts = array();
 	
 	/**
-	 * Contains all category layouts.
+	 * All category layouts.
 	 * @var \ultimate\data\layout\Layout[]
 	 */
 	public $contentLayouts = array();
 	
 	/**
-	 * Contains all category layouts.
+	 * All category layouts.
 	 * @var \ultimate\data\layout\Layout[]
 	 */
 	public $pageLayouts = array();
 	
 	/**
-	 * Contains all existing templates.
+	 * All existing templates.
 	 * @var \ultimate\data\template\Template[]
 	 */
 	public $templates = array();
 	
 	/**
-	 * Contains all template to layout relations.
+	 * All template to layout relations.
 	 * @var integer[]
 	 */
 	public $templateToLayout = array();
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
+	 * Reads data.
 	 */
 	public function readData() {
 		// read templates
@@ -150,11 +150,10 @@ class UltimateLayoutManagerForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#readFormParameters
+	 * Reads form input.
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
-		// @todo Make sure this works.
 		$layoutIDs = array_keys($this->layouts);
 		foreach ($layoutIDs as $layoutID) {
 			if (isset($_POST['layout'.(string) $layoutID])) {
@@ -164,7 +163,7 @@ class UltimateLayoutManagerForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#validate
+	 * Validates the form input.
 	 */
 	public function validate() {
 		parent::validate();
@@ -211,7 +210,7 @@ class UltimateLayoutManagerForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
+	 * Saves the form input.
 	 */
 	public function save() {
 		parent::save();
@@ -238,7 +237,7 @@ class UltimateLayoutManagerForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * Assigns template variables.
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

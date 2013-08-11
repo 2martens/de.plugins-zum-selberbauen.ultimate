@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateCategoryAdd form.
+ * The UltimateCategoryAdd form.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -48,69 +48,69 @@ use wcf\util\StringUtil;
  */
 class UltimateCategoryAddForm extends AbstractForm {
 	/**
+	 * The active menu item.
 	 * @var	string
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$activeMenuItem
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.category.add';
 	
 	/**
+	 * The template name.
 	 * @var	string
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
 	 */
 	public $templateName = 'ultimateCategoryAdd';
 	
 	/**
+	 * Array of needed permissions.
 	 * @var	string[]
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededPermissions
 	 */
 	public $neededPermissions = array(
 		'admin.content.ultimate.canManageCategories'
 	);
 	
 	/**
-	 * Contains all available categories.
+	 * All available categories.
 	 * @var	ultimate\data\category\Category[]
 	 */
 	public $categories = array();
 	
 	/**
-	 * Contains the title of the category.
+	 * The title of the category.
 	 * @var	string
 	 */
 	public $categoryTitle = '';
 	
 	/**
-	 * Contains the category slug.
+	 * The category slug.
 	 * @var	string
 	 */
 	public $categorySlug = '';
 	
 	/**
-	 * Contains the parent id of this category.
+	 * The parent id of this category.
 	 * @var	integer	if 0 this category has no parent
 	 */
 	public $categoryParent = 0;
 	
 	/**
-	 * Contains the description of this category.
+	 * The description of this category.
 	 * @var	string
 	 */
 	public $categoryDescription = '';
 	
 	/**
-	 * Contains the meta description.
+	 * The meta description.
 	 * @var string
 	 */
 	public $metaDescription = '';
 	
 	/**
-	 * Contains the meta keywords.
+	 * The meta keywords.
 	 * @var string
 	 */
 	public $metaKeywords = '';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
+	 * Reads parameters.
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -119,7 +119,7 @@ class UltimateCategoryAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
+	 * Reads data.
 	 */
 	public function readData() {
 		$this->categories = CategoryUtil::getAvailableCategories();
@@ -127,7 +127,7 @@ class UltimateCategoryAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#readFormParameters
+	 * Reads form input.
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -143,7 +143,7 @@ class UltimateCategoryAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#validate
+	 * Validates the form input.
 	 */
 	public function validate() {
 		parent::validate();
@@ -155,7 +155,7 @@ class UltimateCategoryAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
+	 * Saves the form input.
 	 */
 	public function save() {
 		parent::save();
@@ -211,7 +211,7 @@ class UltimateCategoryAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * Assigns template variables.
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

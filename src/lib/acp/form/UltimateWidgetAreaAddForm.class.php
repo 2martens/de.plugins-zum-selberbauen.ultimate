@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateWidgetAreaAdd form.
+ * The UltimateWidgetAreaAdd form.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -52,30 +52,33 @@ use wcf\util\StringUtil;
  */
 class UltimateWidgetAreaAddForm extends DashboardOptionForm {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
+	 * The template name.
+	 * @var	string
 	 */
 	public $templateName = 'ultimateWidgetAreaAdd';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededPermissions
+	 * An array of needed permissions.
+	 * @var	string[]
 	 */
 	public $neededPermissions = array(
 		'admin.content.ultimate.canManageWidgetAreas'
 	);
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$activeMenuItem
+	 * The active menu item.
+	 * @var	string
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.appearance.widgetArea.add';
 	
 	/**
-	 * Contains the widget area name.
+	 * The widget area name.
 	 * @var string
 	 */
 	public $widgetAreaName = '';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
+	 * Reads the parameters.
 	 */
 	public function readParameters() {
 		AbstractForm::readParameters();
@@ -94,7 +97,7 @@ class UltimateWidgetAreaAddForm extends DashboardOptionForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#readFormParameters
+	 * Reads the form input.
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -103,7 +106,7 @@ class UltimateWidgetAreaAddForm extends DashboardOptionForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#validate
+	 * Validates the input.
 	 */
 	public function validate() {
 		parent::validate();
@@ -111,7 +114,7 @@ class UltimateWidgetAreaAddForm extends DashboardOptionForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
+	 * Saves the input.
 	 */
 	public function save() {
 		AbstractForm::save();
@@ -165,7 +168,7 @@ class UltimateWidgetAreaAddForm extends DashboardOptionForm {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * Assigns template variables.
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
