@@ -27,6 +27,7 @@
  */
 namespace ultimate\data\menu;
 use ultimate\data\AbstractUltimateDatabaseObject;
+use wcf\data\ITitledObject;
 use wcf\system\WCF;
 
 /**
@@ -38,8 +39,11 @@ use wcf\system\WCF;
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.menu
  * @category	Ultimate CMS
+ * 
+ * @property-read	integer	$menuID
+ * @property-read	string	$menuName
  */
-class Menu extends AbstractUltimateDatabaseObject {
+class Menu extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableName
 	 */
@@ -56,12 +60,24 @@ class Menu extends AbstractUltimateDatabaseObject {
 	protected static $databaseTableIndexName = 'menuID';
 	
 	/**
-	 * Returns the name of this menu.
+	 * Returns the language interpreted name of this menu.
 	 * 
 	 * @return	string
 	 */
 	public function __toString() {
 		return WCF::getLanguage()->get($this->menuName);
+	}
+	
+	/**
+	 * Returns the raw version of the name of this menu.
+	 * 
+	 * For a language interpreted version, refer to the magic toString method.
+	 * 
+	 * @return	string
+	 * @see		\ultimate\data\menu\Menu::__toString()
+	 */
+	public function getTitle() {
+		return $this->menuName;
 	}
 	
 	/**

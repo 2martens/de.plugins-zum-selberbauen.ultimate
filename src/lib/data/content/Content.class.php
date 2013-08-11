@@ -38,9 +38,6 @@ use wcf\util\StringUtil;
 
 /**
  * Represents a content entry.
- * It offers the following properties (without '): 'contentID', 'contentTitle', 'contentDescription',
- * 'contentText', 'contentSlug', 'authorID', 'author', 'enableSmilies', 'enableHtml', 'enableBBCodes',
- * 'publishDate', 'publishDateObject', 'lastModified', 'status', 'visibility', 'groups' and 'metaData'.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -48,6 +45,26 @@ use wcf\util\StringUtil;
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.content
  * @category	Ultimate CMS
+ * 
+ * @property-read	integer								$contentID
+ * @property-read	string								$contentTitle
+ * @property-read	string								$contentDescription
+ * @property-read	string								$contentText
+ * @property-read	string								$contentSlug
+ * @property-read	integer								$authorID
+ * @property-read	\wcf\data\user\User					$author
+ * @property-read	boolean								$enableSmilies
+ * @property-read	boolean								$enableHtml
+ * @property-read	boolean								$enableBBCodes
+ * @property-read	integer								$cumulativeLikes
+ * @property-read	integer								$views
+ * @property-read	integer								$publishDate
+ * @property-read	\DateTime							$publishDateObject
+ * @property-read	integer								$lastModified
+ * @property-read	integer								$status	(0, 1, 2, 3)
+ * @property-read	string								$visibility	('public', 'protected', 'private')
+ * @property-read	\wcf\data\user\group\UserGroup[]	$groups	(groupID => group)
+ * @property-read	string[]							$metaData	('metaDescription' => metaDescription, 'metaKeywords' => metaKeywords)
  */
 class Content extends AbstractUltimateDatabaseObject implements ITitledObject, IMessage {
 	/**

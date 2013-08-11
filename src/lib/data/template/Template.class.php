@@ -40,6 +40,14 @@ use wcf\system\WCF;
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.ultimate.template
  * @category	Ultimate CMS
+ * 
+ * @property-read	integer										$templateID
+ * @property-read	string										$templateName
+ * @property-read	string										$widgetAreaSide	('left', 'right')
+ * @property-read	boolean										$showWidgetArea
+ * @property-read	\ultimate\data\block\Block[]				$blocks	(blockID => block)
+ * @property-read	\ultimate\data\menu\Menu|NULL				$menu
+ * @property-read	\ultimate\data\widget\area\WidgetArea|NULL	$widgetArea
  */
 class Template extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**

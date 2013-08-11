@@ -33,8 +33,6 @@ use wcf\system\WCF;
 
 /**
  * Represents a category entry.
- * It offers the following properties (without '): 'categoryID', 'categoryParent', 'categoryTitle',
- * 'categoryDescription', 'categorySlug', 'childCategories', 'contents' and 'metaData'.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -42,6 +40,15 @@ use wcf\system\WCF;
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.category
  * @category	Ultimate CMS
+ * 
+ * @property-read	integer								$categoryID
+ * @property-read	integer								$categoryParent
+ * @property-read	string								$categoryTitle
+ * @property-read	string								$categoryDescription
+ * @property-read	string								$categorySlug
+ * @property-read	\ultimate\data\category\Category[]	$childCategories (categoryID => category)
+ * @property-read	\ultimate\data\content\Content[]	$contents (contentID => content)
+ * @property-read	string[]							$metaData ('metaDescription' => metaDescription, 'metaKeywords' => metaKeywords)
  */
 class Category extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**

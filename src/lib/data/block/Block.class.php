@@ -40,6 +40,13 @@ use ultimate\data\AbstractUltimateDatabaseObject;
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.ultimate.block
  * @category	Ultimate CMS
+ * 
+ * @property-read	integer								$blockID
+ * @property-read	integer								$blockTypeID
+ * @property-read	\ultimate\data\blocktype\BlockType	$blockType
+ * @property-read	string								$query
+ * @property-read	array								$parameters	a numeric array of parameters (all primitive types are available for the parameters)
+ * @property-read	array								$additionalData an associative array of additional data (what keys are available depends on the blockType, the values can be anything)	
  */
 class Block extends AbstractUltimateDatabaseObject {
 	/**

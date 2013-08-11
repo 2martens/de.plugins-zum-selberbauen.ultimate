@@ -44,6 +44,20 @@ use wcf\system\WCF;
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.menu.item
  * @category	Ultimate CMS
+ * 
+ * @property-read	integer		$menuItemID
+ * @property-read	integer		$menuID
+ * @property-read	string		$menuItemName
+ * @property-read	string		$menuItemParent
+ * @property-read	string|NULL	$menuItemController
+ * @property-read	string		$menuItemLink
+ * @property-read	integer		$showOrder
+ * @property-read	string		$permissions
+ * @property-read	string		$options
+ * @property-read	string		$type ('category', 'content', 'custom', 'page')
+ * @property-read	boolean		$isDisabled
+ * @property-read	string		$className
+ * @property-read	boolean		$isLandingPage
  */
 class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITreeMenuItem {
 	/**
@@ -250,6 +264,7 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 		$data['menuID'] = intval($data['menuID']);
 		$data['showOrder'] = intval($data['showOrder']);
 		$data['isDisabled'] = (boolean) intval($data['isDisabled']);
+		$data['isLandingPage'] = (boolean) intval($data['isLandingPage']);
 		parent::handleData($data);
 		$this->data['childItems'] = $this->getChildItems();
 	}

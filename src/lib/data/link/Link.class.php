@@ -27,6 +27,7 @@
  */
 namespace ultimate\data\link;
 use ultimate\data\AbstractUltimateDatabaseObject;
+use wcf\data\ITitledObject;
 use wcf\system\WCF;
 
 /**
@@ -38,8 +39,13 @@ use wcf\system\WCF;
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.link
  * @category	Ultimate CMS
+ * 
+ * @property-read	integer	$linkID
+ * @property-read	string	$linkName
+ * @property-read	string	$linkDescription
+ * @property-read	string	$linkURL
  */
-class Link extends AbstractUltimateDatabaseObject {
+class Link extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableName
 	 */
@@ -56,12 +62,24 @@ class Link extends AbstractUltimateDatabaseObject {
 	protected static $databaseTableIndexName = 'linkID';
 	
 	/**
-	 * Returns the name of this link.
+	 * Returns the language interpreted name of this link.
 	 * 
 	 * @return	string
 	 */
 	public function __toString() {
 		return WCF::getLanguage()->get($this->linkName);
+	}
+	
+	/**
+	 * Returns the raw version of the name of this link.
+	 * 
+	 * For a language interpreted version of the name, refer to the magic toString method.
+	 * 
+	 * @return	string
+	 * @see		\ultimate\data\layout\Layout::__toString()
+	 */
+	public function getTitle() {
+		return $this->linkName;
 	}
 	
 	/**

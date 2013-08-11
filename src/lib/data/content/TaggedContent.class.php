@@ -32,7 +32,6 @@ use wcf\system\WCF;
 
 /**
  * Represents a tagged content.
- * In addition to TaggableContent it offers (without ') 'tags'.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -40,6 +39,8 @@ use wcf\system\WCF;
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.content
  * @category	Ultimate CMS
+ * 
+ * @property-read	\wcf\data\tag\Tag[][]	$tags	(languageID => (tagID => tag))
  */
 class TaggedContent extends TaggableContent implements ITagged {
 	/**

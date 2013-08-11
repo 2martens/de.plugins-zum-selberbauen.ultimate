@@ -38,6 +38,11 @@ use wcf\system\WCF;
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.layout
  * @category	Ultimate CMS
+ * 
+ * @property-read	integer									$layoutID
+ * @property-read	integer									$objectID
+ * @property-read	string									$objectType
+ * @property-read	\ultimate\data\template\Template|NULL	$template
  */
 class Layout extends AbstractUltimateDatabaseObject {
 	/**
@@ -77,6 +82,7 @@ class Layout extends AbstractUltimateDatabaseObject {
 	 */
 	protected function handleData($data) {
 		$data['layoutID'] = intval($data['layoutID']);
+		$data['objectID'] = intval($data['objectID']);
 		parent::handleData($data);
 		$this->data['template'] = $this->getTemplate();
 	}

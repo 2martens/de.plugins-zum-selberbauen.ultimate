@@ -39,6 +39,9 @@ use wcf\system\WCF;
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.widget.area
  * @category	Ultimate CMS
+ * 
+ * @property-read	integer	$widgetAreaID
+ * @property-read	string	$widgetAreaName
  */
 class WidgetArea extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**

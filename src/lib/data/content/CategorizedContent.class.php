@@ -32,7 +32,6 @@ use wcf\system\WCF;
 
 /**
  * Represents a categorized content.
- * In addition to Content it offers (without ') 'categories'.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -40,6 +39,8 @@ use wcf\system\WCF;
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.content
  * @category	Ultimate CMS
+ * 
+ * @property-read	\ultimate\data\category\Category[]	$categories (categoryID => category)
  */
 class CategorizedContent extends DatabaseObjectDecorator implements IUltimateData {
 	/**

@@ -40,6 +40,8 @@ use wcf\system\WCF;
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.link
  * @category	Ultimate CMS
+ * 
+ * @property-read	\wcf\data\category\Category[]	$categories	(categoryID => category)
  */
 class CategorizedLink extends DatabaseObjectDecorator implements IUltimateData {
 	/**

@@ -36,9 +36,6 @@ use wcf\util\DateUtil;
 
 /**
  * Represents a page.
- * It offers the following properties (without '): 'pageID', 'authorID', 'author', 'pageParent', 'pageTitle',
- * 'pageSlug', 'publishDate', 'publishDateObject', 'lastModified', 'status', 'visibility', 'groups', 
- * 'childPages' and 'metaData'.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -46,6 +43,22 @@ use wcf\util\DateUtil;
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.page
  * @category	Ultimate CMS
+ * 
+ * @property-read	integer								$pageID
+ * @property-read	integer								$authorID
+ * @property-read	\wcf\data\user\User					$author
+ * @property-read	integer								$pageParent
+ * @property-read	string								$pageTitle
+ * @property-read	string								$pageSlug
+ * @property-read	integer								$publishDate
+ * @property-read	\DateTime							$publishDateObject
+ * @property-read	integer								$lastModified
+ * @property-read	integer								$status	(0, 1, 2, 3)
+ * @property-read	string								$visibility	('public', 'protected', 'private')
+ * @property-read	\wcf\data\user\group\UserGroup[]	$groups	(groupID => group)
+ * @property-read	\ultimate\data\page\Page[]			$childPages	(pageID => page)
+ * @property-read	string[]							$metaData	('metaDescription' => metaDescription, 'metaKeywords' => metaKeywords)
+ * @property-read	\ultimate\data\content\Content		$content
  */
 class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**

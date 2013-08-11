@@ -27,6 +27,7 @@
  */
 namespace ultimate\data\blocktype;
 use ultimate\data\AbstractUltimateDatabaseObject;
+use wcf\data\ITitledObject;
 use wcf\system\WCF;
 
 /**
@@ -38,8 +39,14 @@ use wcf\system\WCF;
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.ultimate.blockType
  * @category	Ultimate CMS
+ * 
+ * @property-read	integer	$blockTypeID
+ * @property-read	integer	$packageID
+ * @property-read	string	$blockTypeName
+ * @property-read	string	$blockTypeClassName
+ * @property-read	string	$cssIdentifier
  */
-class BlockType extends AbstractUltimateDatabaseObject {
+class BlockType extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**
 	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObject.html#$databaseTableName
 	 */
@@ -56,12 +63,24 @@ class BlockType extends AbstractUltimateDatabaseObject {
 	protected static $databaseTableIndexName = 'blockTypeID';
 	
 	/**
-	 * Returns the title of this blockType.
+	 * Returns the language interpreted name of this blockType.
 	 * 
 	 * @return	string
 	 */
 	public function __toString() {
 		return WCF::getLanguage()->get($this->blockTypeName);
+	}
+	
+	/**
+	 * Returns the raw name of this block type.
+	 * 
+	 * For a language interpreted version, please refer to the magic toString method.
+	 * 
+	 * @return	string
+	 * @see		\ultimate\data\blocktype\BlockType::__toString()
+	 */
+	public function getTitle() {
+		return $this->blockTypeName;
 	}
 	
 	/**

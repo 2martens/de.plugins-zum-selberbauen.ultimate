@@ -37,6 +37,9 @@ use ultimate\data\AbstractUltimateDatabaseObject;
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.media.mimetype
  * @category	Ultimate CMS
+ * 
+ * @property-read	integer	$mimeTypeID
+ * @property-read	string	$mimeType
  */
 class MediaMimetype extends AbstractUltimateDatabaseObject {
 	/**
