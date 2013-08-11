@@ -274,6 +274,7 @@ Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$com
 		
 		<!-- block -->
 		<item name="wcf.acp.ultimate.block.edit"><![CDATA[Block bearbeiten]]></item>
+        <item name="wcf.acp.ultimate.block.delete.sure"><![CDATA[Sind Sie sicher, dass Sie diesen Block löschen wollen?]]></item>
 		<!-- /block -->
 		
 		<!-- category -->
