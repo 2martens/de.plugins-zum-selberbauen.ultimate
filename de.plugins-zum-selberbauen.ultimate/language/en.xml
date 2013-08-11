@@ -211,7 +211,8 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
 		<item name="wcf.acp.option.ultimate_sort_content_sortField.contentID"><![CDATA[ID]]></item>
 		<item name="wcf.acp.option.ultimate_sort_content_sortField.contentTitle"><![CDATA[Title]]></item>
 		<item name="wcf.acp.option.ultimate_sort_content_sortField.contentAuthor"><![CDATA[Author]]></item>
-		<item name="wcf.acp.option.ultimate_sort_content_sortField.lastModified"><![CDATA[Date]]></item>
+		<item name="wcf.acp.option.ultimate_sort_content_sortField.publishDate"><![CDATA[Publish date and time]]></item>
+        <item name="wcf.acp.option.ultimate_sort_content_sortField.lastModified"><![CDATA[Last modified]]></item>
 		<item name="wcf.acp.option.ultimate_sort_content_sortField.description"><![CDATA[Please insert here the sort field for the content list.]]></item>
 		<item name="wcf.acp.option.ultimate_sort_content_sortOrder"><![CDATA[Sort order]]></item>
 		<item name="wcf.acp.option.ultimate_sort_content_sortOrder.description"><![CDATA[Please insert here the sort order for the content list.]]></item>
@@ -221,7 +222,7 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
 		<item name="wcf.acp.option.ultimate_sort_page_sortField.pageID"><![CDATA[ID]]></item>
 		<item name="wcf.acp.option.ultimate_sort_page_sortField.pageTitle"><![CDATA[Title]]></item>
 		<item name="wcf.acp.option.ultimate_sort_page_sortField.pageAuthor"><![CDATA[Author]]></item>
-		<item name="wcf.acp.option.ultimate_sort_page_sortField.lastModified"><![CDATA[Date]]></item>
+		<item name="wcf.acp.option.ultimate_sort_page_sortField.lastModified"><![CDATA[Last modified]]></item>
 		<item name="wcf.acp.option.ultimate_sort_page_sortField.description"><![CDATA[Please insert here the sort field for the page list.]]></item>
 		<item name="wcf.acp.option.ultimate_sort_page_sortOrder"><![CDATA[Sort order]]></item>
 		<item name="wcf.acp.option.ultimate_sort_page_sortOrder.description"><![CDATA[Please insert here the sort order for the page list.]]></item>

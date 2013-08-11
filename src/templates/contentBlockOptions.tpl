@@ -119,6 +119,7 @@
 						<option value="contentID"{if $sortFieldSelected == 'contentID'} selected="selected"{/if}>{lang}wcf.global.objectID{/lang}</option>
 						<option value="contentTitle"{if $sortFieldSelected == 'contentTitle'} selected="selected"{/if}>{lang}wcf.acp.ultimate.content.title{/lang}</option>
 						<option value="contentAuthor"{if $sortFieldSelected == 'contentAuthor'} selected="selected"{/if}>{lang}wcf.acp.ultimate.author{/lang}</option>
+						<option value="publishDate"{if $sortFieldSelected == 'publishDate'} selected="selected"{/if}>{lang}wcf.acp.ultimate.publishDate{/lang}</option>
 						<option value="lastModified"{if $sortFieldSelected == 'lastModified'} selected="selected"{/if}>{lang}wcf.acp.ultimate.lastModified{/lang}</option>
 					</select>
 				</dd>

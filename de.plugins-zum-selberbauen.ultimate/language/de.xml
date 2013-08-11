@@ -211,6 +211,7 @@ Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$com
 		<item name="wcf.acp.option.ultimate_sort_content_sortField.contentID"><![CDATA[ID]]></item>
 		<item name="wcf.acp.option.ultimate_sort_content_sortField.contentTitle"><![CDATA[Titel]]></item>
 		<item name="wcf.acp.option.ultimate_sort_content_sortField.contentAuthor"><![CDATA[Autor]]></item>
+        <item name="wcf.acp.option.ultimate_sort_content_sortField.publishDate"><![CDATA[Veröffentlichungsdatum und -uhrzeit]]></item>
 		<item name="wcf.acp.option.ultimate_sort_content_sortField.lastModified"><![CDATA[Zuletzt bearbeitet]]></item>
 		<item name="wcf.acp.option.ultimate_sort_content_sortField.description"><![CDATA[Geben Sie hier an nach welchem Element sortiert werden soll.]]></item>
 		<item name="wcf.acp.option.ultimate_sort_content_sortOrder"><![CDATA[Sortierreihenfolge]]></item>

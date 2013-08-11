@@ -123,6 +123,7 @@ DESC:wcf.global.sortOrder.descending]]>
 					<![CDATA[contentID:wcf.acp.option.ultimate_sort_content_sortField.contentID
 contentTitle:wcf.acp.option.ultimate_sort_content_sortField.contentTitle
 contentAuthor:wcf.acp.option.ultimate_sort_content_sortField.contentAuthor
+publishDate:wcf.acp.option.ultimate_sort_content_sortField.publishDate
 lastModified:wcf.acp.option.ultimate_sort_content_sortField.lastModified]]>
 				</selectoptions>
 			</option>
