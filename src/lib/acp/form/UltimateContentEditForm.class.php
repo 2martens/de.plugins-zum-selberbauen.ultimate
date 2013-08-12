@@ -98,6 +98,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 	protected $publishButtonLang = '';
 	
 	/**
+	 * Reads parameters.
 	 * @see	UltimateContentAddForm::readParameters()
 	 */
 	public function readParameters() {
@@ -113,6 +114,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 	}
 	
 	/**
+	 * Reads data.
 	 * @see	UltimateContentAddForm::readData()
 	 */
 	public function readData() {
@@ -184,6 +186,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 	}
 	
 	/**
+	 * Saves the form input.
 	 * @see	UltimateContentAddForm::save()
 	 */
 	public function save() {
@@ -288,6 +291,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 	}
 	
 	/**
+	 * Assigns the template variables.
 	 * @see	UltimateContentAddForm::assignVariables()
 	 */
 	public function assignVariables() {
@@ -319,7 +323,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 	}
 	
 	/**
-	 * @see	UltimateContentAddForm::show()
+	 * Shows the form.
 	 */
 	public function show() {
 		if (!empty($this->activeMenuItem)) {

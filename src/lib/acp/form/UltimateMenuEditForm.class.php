@@ -66,6 +66,7 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
 	public $menu = null;
 	
 	/**
+	 * Reads parameters.
 	 * @see	UltimateMenuAddForm::readParameters()
 	 */
 	public function readParameters() {
@@ -81,6 +82,7 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
 	}
 	
 	/**
+	 * Reads data.
 	 * @see	UltimateMenuAddForm::readData()
 	 */
 	public function readData() {
@@ -147,6 +149,7 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
 	}
 	
 	/**
+	 * Saves the form input.
 	 * @see	UltimateMenuAddForm::save()
 	 */
 	public function save() {
@@ -169,6 +172,7 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
 	}
 	
 	/**
+	 * Assigns the template variables.
 	 * @see	UltimateMenuAddForm::assignVariables()
 	 */
 	public function assignVariables() {

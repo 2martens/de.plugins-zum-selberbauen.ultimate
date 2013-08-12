@@ -45,19 +45,23 @@ use wcf\system\io\File;
  */
 class ACPFirstTimeListener implements IEventListener {
 	/**
-	 * Contains the name of the config file.
+	 * The name of the config file.
 	 * @var	string
 	 */
 	const CONFIG_FILE = 'config.inc.php';
 	
 	/**
-	 * Contains the category id of the default link category.
+	 * The category id of the default link category.
 	 * @var integer
 	 */
 	protected $categoryID = 0;
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.event.IEventListener.html#execute
+	 * Executes this listener.
+	 * 
+	 * @param	object	$eventObj
+	 * @param	string	$className
+	 * @param	string	$eventName
 	 */
 	public function execute($eventObj, $className, $eventName) {
 		if ($className == 'wcf\acp\action\InstallPackageAction') {

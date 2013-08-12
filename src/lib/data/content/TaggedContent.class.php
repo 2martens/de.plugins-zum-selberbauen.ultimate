@@ -60,7 +60,10 @@ class TaggedContent extends TaggableContent implements ITagged {
 	}
 	
 	/**
-	 * @see \wcf\data\DatabaseObjectDecorator::__get()
+	 * Returns the value of a object data variable with the given name.
+	 * 
+	 * @param	string	$name
+	 * @return	mixed
 	 */
 	public function __get($name) {
 		$value = parent::__get($name);
@@ -72,14 +75,18 @@ class TaggedContent extends TaggableContent implements ITagged {
 	}
 	
 	/**
-	 * @see \wcf\system\tagging\ITagged::getObjectID()
+	 * Returns the content id.
+	 * 
+	 * @return	integer
 	 */
 	public function getObjectID() {
 		return $this->__get('contentID');
 	}
 	
 	/**
-	 * @see \wcf\system\tagging\ITagged::getTaggable()
+	 * Returns the taggable object.
+	 * 
+	 * @return	self
 	 */
 	public function getTaggable() {
 		return $this;

@@ -62,7 +62,7 @@ class ContentPage extends AbstractPage {
 	public $neededModules = array();
 	
 	/**
-	 * Contains the Content object.
+	 * The Content object.
 	 * @var	\ultimate\data\content\CategorizedContent
 	 */
 	public $content = null;
@@ -74,13 +74,13 @@ class ContentPage extends AbstractPage {
 	public $contentSlugs = array();
 	
 	/**
-	 * Contains the output.
+	 * The output.
 	 * @var string
 	*/
 	public $output = '';
 	
 	/**
-	 * Contains the layout of this content.
+	 * The layout of this content.
 	 * @var \ultimate\data\layout\Layout
 	 */
 	public $layout = null;

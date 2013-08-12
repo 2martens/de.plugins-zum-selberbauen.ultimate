@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateLinkList page.
+ * The UltimateLinkList page.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -44,17 +44,20 @@ use wcf\system\WCF;
  */
 class UltimateLinkListPage extends AbstractCachedListPage {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
+	 * The template name.
+	 * @var	string
 	 */
 	public $templateName = 'ultimateLinkList';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.MultipleLinkPage.html#$objectListClassName
+	 * The object list class name.
+	 * @var	string
 	 */
 	public $objectListClassName = '\ultimate\data\link\LinkList';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#$validSortFields
+	 * Array of valid sort fields.
+	 * @var	string[]
 	 */
 	public $validSortFields = array(
 		'linkID',
@@ -62,50 +65,49 @@ class UltimateLinkListPage extends AbstractCachedListPage {
 	);
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#$defaultSortField
+	 * The default sort field.
+	 * @var	string
 	 */
 	public $defaultSortField = 'linkID';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#$defaultSortOrder
+	 * The default sort order.
+	 * @var	string
 	 */
 	public $defaultSortOrder = 'ASC';
 	
 	/**
+	 * The cache builder class name.
 	 * @see \wcf\page\AbstractCachedListPage::$cacheBuilderClassName
 	 */
 	public $cacheBuilderClassName = '\ultimate\system\cache\builder\LinkCacheBuilder';
 	
 	/**
-	 * @see \wcf\page\AbstractCachedListPage::$cacheName
-	 */
-	public $cacheName = 'link';
-	
-	/**
+	 * The cache index.
 	 * @see \wcf\page\AbstractCachedListPage::$cacheIndex
 	 */
 	public $cacheIndex = 'links';
 	
 	/**
-	 * Contains the active menu item.
+	 * The active menu item.
 	 * @var	string
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.link.list';
 	
 	/**
-	 * Contains the category id.
+	 * The category id.
 	 * @var integer
 	 */
 	public $categoryID = 0;
 	
 	/**
-	 * Contains the url.
+	 * The url.
 	 * @var	string
 	 */
 	protected $url = '';
 	
 	/**
-	 * @see http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
+	 * Reads parameters.
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -113,7 +115,7 @@ class UltimateLinkListPage extends AbstractCachedListPage {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
+	 * Reads data.
 	 */
 	public function readData() {
 		parent::readData();
@@ -126,7 +128,6 @@ class UltimateLinkListPage extends AbstractCachedListPage {
 		if (!$this->categoryID) return;
 		// if category id provided, change object variables and load the new cache
 		$this->cacheBuilderClassName = '\ultimate\system\cache\builder\LinkCategoryCacheBuilder';
-		$this->cacheName = 'link-to-category';
 		$this->cacheIndex = 'linksToCategoryID';
 				
 		$this->loadCache();
@@ -142,6 +143,10 @@ class UltimateLinkListPage extends AbstractCachedListPage {
 	}
 	
 	/**
+	 * Loads the cache.
+	 * 
+	 * @param	string	$path
+	 * 
 	 * @see \wcf\page\AbstractCachedListPage::loadCache
 	 */
 	public function loadCache($path = ULTIMATE_DIR) {
@@ -149,7 +154,7 @@ class UltimateLinkListPage extends AbstractCachedListPage {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * Assigns template variables.
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -160,7 +165,7 @@ class UltimateLinkListPage extends AbstractCachedListPage {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#show
+	 * Shows the page.
 	 */
 	public function show() {
 		// set active menu item

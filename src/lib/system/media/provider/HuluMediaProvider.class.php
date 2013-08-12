@@ -16,7 +16,7 @@
  * GNU Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
+ * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -25,6 +25,7 @@
  * @subpackage	system.media.provider
  * @category	Ultimate CMS
  */
+
 namespace ultimate\system\media\provider;
 use wcf\system\exception\SystemException;
 use wcf\system\Regex;
@@ -33,6 +34,8 @@ use wcf\util\XML;
 
 /**
  * Represents Hulu as media provider.
+ * 
+ * This class handles all video links with www.hulu.com.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -43,14 +46,15 @@ use wcf\util\XML;
  */
 class HuluMediaProvider extends AbstractMediaProvider {
 	/**
-	 * @see \ultimate\system\media\provider\AbstractMediaProvider::$hosts
+	 * The accepted hosts.
+	 * @var	string[]
 	 */
 	protected $hosts = array(
 		'www.hulu.com'
 	);
 	
 	/**
-	 * @see \ultimate\system\media\provider\IMediaProvider::getHTML()
+	 * 
 	 */
 	public function getHTML($source, $width, $height) {
 		$sourceArray = explode('|', $this->getEmbedInformation(StringUtil::trim($source), integer($width), integer($height)));
@@ -87,6 +91,9 @@ class HuluMediaProvider extends AbstractMediaProvider {
 		return $html;
 	}
 	
+	/**
+	 * 
+	 */
 	protected function getEmbedInformation($source, $maxwidth = 0, $maxheight = 0) {
 		$regex = '^http://www\.hulu\.com/watch/([\d]+)';
 		$regexObj = new Regex($regex);

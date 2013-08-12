@@ -86,7 +86,9 @@ class Link extends AbstractUltimateDatabaseObject implements ITitledObject {
 	}
 	
 	/**
-	 * @see \wcf\data\DatabaseObject::handleData()
+	 * Handles data.
+	 * 
+	 * @param	array	$data
 	 */
 	protected function handleData($data) {
 		$data['linkID'] = intval($data['linkID']);

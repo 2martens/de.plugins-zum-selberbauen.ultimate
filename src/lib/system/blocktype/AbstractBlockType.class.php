@@ -51,19 +51,19 @@ use wcf\util\StringUtil;
  */
 abstract class AbstractBlockType implements IBlockType {
 	/**
-	 * Contains the template name.
+	 * The template name.
 	 * @var	string
 	 */
 	protected $templateName = '';
 	
 	/**
-	 * Contains the block options template name.
+	 * The block options template name.
 	 * @var string
 	 */
 	protected $blockOptionsTemplateName = '';
 	
 	/**
-	 * Contains the block option form element ids.
+	 * The block option form element ids.
 	 * 
 	 * @var	string[]
 	 */
@@ -76,44 +76,44 @@ abstract class AbstractBlockType implements IBlockType {
 	protected $useTemplate = true;
 	
 	/**
-	 * Contains the read rows of custom query.
+	 * The read rows of custom query.
 	 * @var	array[]
 	 */
 	protected $queryResult = array();
 	
 	/**
-	 * Contains the read objects (no custom query specified).
+	 * The read objects (no custom query specified).
 	 * @var	object[]
 	 */
 	protected $objects = array();
 	
 	/**
-	 * Contains the request type.
+	 * The request type.
 	 * The request type is one of the following values: page, content, category.
 	 * @var	string
 	 */
 	protected $requestType = '';
 	
 	/**
-	 * Contains the request object.
+	 * The request object.
 	 * @var \ultimate\data\AbstractUltimateDatabaseObject
 	 */
 	protected $requestObject = null;
 	
 	/**
-	 * Contains the layout object.
+	 * The layout object.
 	 * @var \ultimate\data\layout\Layout
 	 */
 	protected $layout = null;
 	
 	/**
-	 * Contains the request page.
+	 * The request page.
 	 * @var \wcf\page\IPage
 	 */
 	protected $page = null;
 	
 	/**
-	 * Contains the block id.
+	 * The block id.
 	 * @var	integer
 	 */
 	protected $blockID = 0;
@@ -125,27 +125,35 @@ abstract class AbstractBlockType implements IBlockType {
 	protected $block = null;
 	
 	/**
-	 * Contains the CacheBuilder class name.
+	 * The CacheBuilder class name.
 	 * @var	string
 	 */
 	protected $cacheBuilderClassName = '';
 	
 	/**
-	 * Contains the cache index.
+	 * The cache index.
 	 * @var	string
 	 */
 	protected $cacheIndex = '';
 	
 	/**
-	 * Creates a new BlockType object.
+	 * Initializes a new BlockType object.
 	 * 
-	 * @internal The constructor does nothing and is final, because you can't control what the constructor
-	 * should do. A subclass could easily overwrite this one and do some other stuff. 
+	 * {@internal The constructor does nothing and is final, because you can't control what the constructor. should do A subclass could easily overwrite this one and do some other stuff. }}
 	 */
 	public final function __construct() {}
 	
 	/**
-	 * @see	\ultimate\system\blocktype\IBlockType::init()
+	 * Initializes the blockType.
+	 * 
+	 * @param	string								$requestType
+	 * @param	\ultimate\data\layout\Layout		$layout
+	 * @param	\ultimate\data\IUltimateData|null	$requestObject	null is only allowed in connection with the request type 'index'
+	 * @param	integer								$blockID
+	 * @param	\wcf\page\IPage|null				$page			null is only allowed in connection with getOptionsHtml or the request type 'index'
+	 * @return	void
+	 * 
+	 * @see	IBlockType::init()
 	 */
 	public function init($requestType, \ultimate\data\layout\Layout $layout, $requestObject, $blockID, $page) {
 		// fire event
@@ -165,8 +173,12 @@ abstract class AbstractBlockType implements IBlockType {
 	}
 	
 	/**
-	 * @internal Calls the method loadCache().
-	 * @see	\ultimate\system\blocktype\IBlockType::readData()
+	 * Reads the necessary data.
+	 * 
+	 * Use this method to load data from cache or, if not possible otherwise, from database.
+	 * {@internal Calls the method loadCache() }}
+	 * 
+	 * @see	IBlockType::readData()
 	 */
 	public function readData() {
 	   // fire event
@@ -175,7 +187,9 @@ abstract class AbstractBlockType implements IBlockType {
 	}
 	
 	/**
-	 * @see	\ultimate\system\blocktype\IBlockType::assignVariables()
+	 * Assigns template variables.
+	 * 
+	 * @see	IBlockType::assignVariables()
 	 */
 	public function assignVariables() {
 		// fire event
@@ -189,10 +203,15 @@ abstract class AbstractBlockType implements IBlockType {
 	}
 	
 	/**
-	 * @internal If you want to do more than fetching a template, you have to override this method.<br />
+	 * Returns the HTML for this blockType.
+	 * 
+	 * If you want to do more than fetching a template, you have to override this method.<br />
 	 * Returns the fetched template if $this->useTemplate is true and otherwise a string {include file='$this->templateName'}.<br />
-	 * Calls readData and assignVariables.
-	 * @see	\ultimate\system\blocktype\IBlockType::getHTML()
+	 * {@internal Calls readData and assignVariables }}
+	 * 
+	 * @return	string
+	 * 
+	 * @see	IBlockType::getHTML()
 	 */
 	public function getHTML() {
 		// fire event
@@ -217,9 +236,14 @@ abstract class AbstractBlockType implements IBlockType {
 	}
 	
 	/**
-	 * @internal If you want to do more than fetching a template, you have to override this method.<br />
-	 * Calls readData and assignVariables.
-	 * @see \ultimate\system\blocktype\IBlockType::getOptionsHTML()
+	 * Returns the options HTML for this blockType.
+	 * 
+	 * If you want to do more than fetching a template, you have to override this method.
+	 * {@internal Calls readData and assignVariables }}
+	 * 
+	 * @return	(string|string[])[]
+	 * 
+	 * @see IBlockType::getOptionsHTML()
 	 */
 	public function getOptionsHTML() {
 		// create blank Block if there is no block given (for example in the ACP)

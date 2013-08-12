@@ -82,6 +82,8 @@ class Layout extends AbstractUltimateDatabaseObject {
 	
 	/**
 	 * Handles data.
+	 * 
+	 * @param	array	$data
 	 */
 	protected function handleData($data) {
 		$data['layoutID'] = intval($data['layoutID']);

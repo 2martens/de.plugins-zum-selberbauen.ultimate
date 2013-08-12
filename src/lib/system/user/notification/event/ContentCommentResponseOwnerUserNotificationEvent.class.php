@@ -44,7 +44,7 @@ use wcf\system\WCF;
  */
 class ContentCommentResponseOwnerUserNotificationEvent extends AbstractUserNotificationEvent {
 	/**
-	 * Contains the determined content for this event.
+	 * The determined content for this event.
 	 *
 	 * @var \ultimate\data\content\Content
 	 */

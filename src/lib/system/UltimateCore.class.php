@@ -49,7 +49,7 @@ use wcf\util\StringUtil;
  */
 class ULTIMATECore extends AbstractApplication {
 	/**
-	 * Contains the abbreviation of this application.
+	 * The abbreviation of this application.
 	 * @var	string
 	 */
 	protected $abbreviation = 'ultimate';

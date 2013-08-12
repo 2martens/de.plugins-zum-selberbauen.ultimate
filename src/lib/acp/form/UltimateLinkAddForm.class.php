@@ -100,7 +100,7 @@ class UltimateLinkAddForm extends AbstractForm {
 	public $categories = array();
 	
 	/**
-	 * @see http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
+	 * Reads parameters.
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -109,7 +109,7 @@ class UltimateLinkAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
+	 * Reads data.
 	 */
 	public function readData() {
 		$this->categories = CategoryHandler::getInstance()->getCategories('de.plugins-zum-selberbauen.ultimate.linkCategory');
@@ -128,7 +128,7 @@ class UltimateLinkAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#readFormParameters
+	 * Reads form input.
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
@@ -141,7 +141,7 @@ class UltimateLinkAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#validate
+	 * Validates the form input.
 	 */
 	public function validate() {
 		parent::validate();
@@ -152,7 +152,7 @@ class UltimateLinkAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
+	 * Saves the form input.
 	 */
 	public function save() {
 		parent::save();
@@ -197,7 +197,7 @@ class UltimateLinkAddForm extends AbstractForm {
 	}
 	
 	/**
-	 * @see http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * Assigns template variables.
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

@@ -50,8 +50,11 @@ class LayoutEditor extends DatabaseObjectEditor implements IEditableCachedObject
 	protected static $baseClass = '\ultimate\data\layout\Layout';
 	
 	/**
+	 * Deletes all corresponding objects to the given object IDs.
+	 * 
 	 * @since	1.0.0
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableObject.html#deleteAll
+	 * 
+	 * @param	integer[]	$objectIDs
 	 */
 	public static function deleteAll(array $objectIDs = array()) {
 		// delete language items
@@ -99,8 +102,9 @@ class LayoutEditor extends DatabaseObjectEditor implements IEditableCachedObject
 	}
 	
 	/**
-	 * @since	1.0.0
 	 * Resets the cache.
+	 * 
+	 * @since	1.0.0
 	 */
 	public static function resetCache() {
 		LayoutCacheBuilder::getInstance()->reset();

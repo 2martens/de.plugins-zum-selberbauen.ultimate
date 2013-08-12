@@ -45,7 +45,7 @@ use wcf\system\WCF;
  */
 class LatestContentsDashboardBox extends AbstractSidebarDashboardBox {
 	/**
-	 * Contains the latest contents.
+	 * The latest contents.
 	 * @var	\ultimate\data\content\TaggedContent[]
 	 */
 	public $contents = array();

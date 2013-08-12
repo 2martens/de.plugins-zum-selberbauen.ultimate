@@ -17,7 +17,7 @@ use wcf\system\user\notification\event\AbstractUserNotificationEvent;
  */
 class ContentCommentResponseUserNotificationEvent extends AbstractUserNotificationEvent {
 	/**
-	 * Contains the determined content for this event.
+	 * The determined content for this event.
 	 * 
 	 * @var \ultimate\data\content\Content
 	 */

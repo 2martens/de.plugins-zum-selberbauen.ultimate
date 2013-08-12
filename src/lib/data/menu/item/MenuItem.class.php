@@ -79,7 +79,8 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 	protected static $databaseTableIndexName = 'menuItemID';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.ProcessibleDatabaseObject.html#$processorInterface
+	 * The processor interface.
+	 * @var string
 	 */
 	protected static $processorInterface = '\wcf\system\menu\page\IPageMenuItemProvider';
 	
@@ -96,8 +97,9 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 	protected $controller = null;
 	
 	/**
+	 * Returns the processor.
+	 * 
 	 * @return	\ultimate\system\menu\custom\DefaultCustomMenuItemProvider
-	 * @see		\wcf\data\ProcessibleDatabaseObject::getProcessor()
 	 */
 	public function getProcessor() {
 		if ($this->processor === null) {
@@ -209,7 +211,9 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.menu.ITreeMenuItem.html#getLink
+	 * Returns the link of this menu item.
+	 * 
+	 * @return	string
 	 */
 	public function getLink() {
 		$parameters = array();
@@ -261,6 +265,8 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 	
 	/**
 	 * Handles data.
+	 * 
+	 * @param	array	$data
 	 */
 	protected function handleData($data) {
 		$data['menuItemID'] = intval($data['menuItemID']);

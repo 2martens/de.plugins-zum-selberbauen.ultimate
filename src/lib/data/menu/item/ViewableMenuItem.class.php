@@ -41,7 +41,8 @@ use wcf\data\DatabaseObjectDecorator;
  */
 class ViewableMenuItem extends DatabaseObjectDecorator implements \Countable, \Iterator, IUltimateData {
 	/**
-	 * @see	wcf\data\DatabaseObjectDecorator::$baseClass
+	 * The base class.
+	 * @var	string
 	 */
 	protected static $baseClass = 'ultimate\data\menu\item\MenuItem';
 	

@@ -84,7 +84,7 @@ class CategoryAction extends AbstractDatabaseObjectAction {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#update
+	 * Updates one or more objects.
 	 */
 	public function update() {
 		if (isset($this->parameters['data'])) {
@@ -106,7 +106,7 @@ class CategoryAction extends AbstractDatabaseObjectAction {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#delete
+	 * Deletes one or more objects.
 	 */
 	public function delete() {
 		if (empty($this->objects)) {

@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the IBlockType interface.
+ * The IBlockType interface.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -35,7 +35,7 @@ use wcf\page\IPage;
  * of implementing this interface directly, you should inherit from AbstractBlockType.
  * 
  * @author		Jim Martens
- * @copyright	2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.blocktype

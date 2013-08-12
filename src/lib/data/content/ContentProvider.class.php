@@ -46,7 +46,8 @@ class ContentProvider extends AbstractObjectTypeProvider {
 	public $className = '\ultimate\data\content\Content';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.object.type.AbstractObjectTypeProvider.html#$listClassName
+	 * The list class name.
+	 * @var string
 	 */
 	public $listClassName = '\ultimate\data\content\ContentList';
 }

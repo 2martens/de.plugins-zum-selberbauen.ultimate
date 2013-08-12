@@ -144,7 +144,9 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject, I
 	}
 	
 	/**
-	 * @see	\wcf\data\IMessage::getMessage()
+	 * Returns the language interpreted message of this content.
+	 * 
+	 * @return string
 	 */
 	public function getMessage() {
 		return WCF::getLanguage()->get($this->contentText);
@@ -246,6 +248,8 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject, I
 	
 	/**
 	 * Handles data.
+	 * 
+	 * @param	array	$data
 	 */
 	protected function handleData($data) {
 		$data['contentID'] = intval($data['contentID']);

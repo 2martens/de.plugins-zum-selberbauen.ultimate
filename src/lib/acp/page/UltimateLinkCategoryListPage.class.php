@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateLinkCategoryList page.
+ * The UltimateLinkCategoryList page.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -41,22 +41,25 @@ use wcf\system\WCF;
  */
 class UltimateLinkCategoryListPage extends AbstractCategoryListPage {
 	/**
-	 * @see \wcf\acp\form\ACPForm::$activeMenuItem
+	 * The active menu item.
+	 * @var	string
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.link.category.list';
 	
 	/**
-	 * @see \wcf\acp\form\AbstractCategoryAddForm::$objectTypeName
+	 * The object type name.
+	 * @var string
 	 */
 	public $objectTypeName = 'de.plugins-zum-selberbauen.ultimate.linkCategory';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
+	 * The template name.
+	 * @var	string
 	 */
 	public $templateName = 'ultimateLinkCategoryList';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * Assigns template variables.
 	 */
 	public function assignVariables() {
 		parent::assignVariables();

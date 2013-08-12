@@ -35,7 +35,7 @@ use wcf\system\SingletonFactory;
  * Instead of creating your own IBlockType objects, you should use this class to get them.
  * 
  * @author		Jim Martens
- * @copyright	2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.blocktype
@@ -43,13 +43,13 @@ use wcf\system\SingletonFactory;
  */
 class BlockTypeHandler extends SingletonFactory {
 	/**
-	 * Contains the read objects.
+	 * The read objects.
 	 * @var	\ultimate\data\blocktype\BlockType[]
 	 */
 	protected $objects = array();
 	
 	/**
-	 * Contains the block type objects.
+	 * The block type objects.
 	 * @var \ultimate\system\blocktype\IBlockType[]
 	 */
 	protected $blockTypes = array();

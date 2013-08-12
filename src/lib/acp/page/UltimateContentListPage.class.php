@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateContentList page.
+ * The UltimateContentList page.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -45,17 +45,20 @@ use wcf\system\WCF;
  */
 class UltimateContentListPage extends AbstractCachedListPage {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
+	 * The template name.
+	 * @var	string
 	 */
 	public $templateName = 'ultimateContentList';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.MultipleLinkPage.html#$objectListClassName
+	 * The object list class name.
+	 * @var	string
 	 */
 	public $objectListClassName = '\ultimate\data\content\ContentList';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#$validSortFields
+	 * Array of valid sort fields.
+	 * @var	string[]
 	 */
 	public $validSortFields = array(
 		'contentID',
@@ -66,38 +69,43 @@ class UltimateContentListPage extends AbstractCachedListPage {
 	);
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#$defaultSortOrder
+	 * The default sort order.
+	 * @var	string
 	 */
 	public $defaultSortOrder = ULTIMATE_SORT_CONTENT_SORTORDER;
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#$defaultSortField
+	 * The default sort field.
+	 * @var	string
 	 */
 	public $defaultSortField = ULTIMATE_SORT_CONTENT_SORTFIELD;
 	
 	/**
+	 * The cache builder class name.
 	 * @see \wcf\page\AbstractCachedListPage::$cacheBuilderClassName
 	 */
 	public $cacheBuilderClassName = '\ultimate\system\cache\builder\ContentCacheBuilder';
 	
 	/**
+	 * The cache index.
 	 * @see \wcf\page\AbstractCachedListPage::$cacheIndex
 	 */
 	public $cacheIndex = 'contents';
 	
 	/**
-	 * @see \wcf\page\AbstractCachedListPage::$objectDecoratorClass
+	 * The object decorator class name.
+	 * @var string
 	 */
 	public $objectDecoratorClass = '\ultimate\data\content\TaggedContent';
 	
 	/**
-	 * Contains the active menu item.
+	 * The active menu item.
 	 * @var	string
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.content.list';
 	
 	/**
-	 * Contains the url.
+	 * The url.
 	 * @var	string
 	 */
 	protected $url = '';
@@ -127,7 +135,7 @@ class UltimateContentListPage extends AbstractCachedListPage {
 	protected $tempSortOrder = '';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
+	 * Reads parameters.
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -139,7 +147,7 @@ class UltimateContentListPage extends AbstractCachedListPage {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
+	 * Reads data.
 	 */
 	public function readData() {
 		parent::readData();
@@ -180,8 +188,6 @@ class UltimateContentListPage extends AbstractCachedListPage {
 	 * Validates the sort field.
 	 * 
 	 * Validates the sort field and sorts the array if the sort field is contentAuthor.
-	 * 
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#validateSortField
 	 */
 	public function validateSortField() {
 		parent::validateSortField();
@@ -213,6 +219,10 @@ class UltimateContentListPage extends AbstractCachedListPage {
 	}
 	
 	/**
+	 * Loads the cache.
+	 * 
+	 * @param	string	$path
+	 * 
 	 * @see \wcf\page\AbstractCachedListPage::loadCache
 	 */
 	public function loadCache($path = ULTIMATE_DIR) {
@@ -220,7 +230,7 @@ class UltimateContentListPage extends AbstractCachedListPage {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * Assigns template variables.
 	 */
 	public function assignVariables() {
 		// reset sort field and order to temporarily saved values
@@ -237,7 +247,7 @@ class UltimateContentListPage extends AbstractCachedListPage {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#show
+	 * Shows the page.
 	 */
 	public function show() {
 		// set active menu item

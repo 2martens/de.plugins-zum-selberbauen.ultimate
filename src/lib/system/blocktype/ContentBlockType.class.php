@@ -118,19 +118,19 @@ class ContentBlockType extends AbstractBlockType {
 	protected $pages = array();
 	
 	/**
-	 * Contains the options of the block.
+	 * The options of the block.
 	 * @var mixed[]
 	 */
 	protected $options = array();
 	
 	/**
-	 * Contains the object type name for a comment.
+	 * The object type name for a comment.
 	 * @var string
 	 */
 	protected $objectType = 'de.plugins-zum-selberbauen.ultimate.content.comment';
 	
 	/**
-	 * Contains the id of the object type.
+	 * The id of the object type.
 	 * @var integer
 	 */
 	protected $objectTypeID = 0;
@@ -148,7 +148,7 @@ class ContentBlockType extends AbstractBlockType {
 	protected $commentLists = array();
 	
 	/**
-	 * Contains the like data.
+	 * The like data.
 	 * @var \wcf\data\like\object\LikeObject[]
 	 */
 	protected $likeData = array();

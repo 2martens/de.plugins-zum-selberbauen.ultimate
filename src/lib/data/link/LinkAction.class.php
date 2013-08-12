@@ -80,7 +80,7 @@ class LinkAction extends AbstractDatabaseObjectAction {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#update
+	 * Updates one or more objects.
 	 */
 	public function update() {
 		if (isset($this->parameters['data'])) {

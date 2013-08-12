@@ -56,7 +56,11 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	protected static $baseClass = '\ultimate\data\page\Page';
 	
 	/**
-	 * @see \wcf\data\IEditableObject::create()
+	 * Creates a page.
+	 * 
+	 * @param	array	$parameters
+	 * 
+	 * @return	Page
 	 */
 	public static function create(array $parameters = array()) {
 		$page = parent::create($parameters);
@@ -72,7 +76,9 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableObject.html#deleteAll
+	 * Deletes all corresponding objects to the given object IDs.
+	 * 
+	 * @param	integer[]	$objectIDs
 	 */
 	public static function deleteAll(array $objectIDs = array()) {
 		// unmark contents
@@ -102,7 +108,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	}
 	
 	/**
-	 * @see \wcf\data\IEditableObject::delete()
+	 * Deletes this object.
 	 */
 	public function delete() {
 		/* @var $layout \ultimate\data\layout\Layout */
@@ -116,7 +122,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 * Adds new groups to this page.
 	 * 
 	 * @param	array	$groupIDs
-	 * @param	boolean	$replaceOldGroups
+	 * @param	boolean	$deleteOldGroups
 	 */
 	public function addGroups(array $groupIDs, $deleteOldGroups = true) {
 		if ($deleteOldGroups) {

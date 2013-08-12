@@ -62,7 +62,7 @@ class CategoryPage extends MultipleLinkPage {
 	public $neededModules = array();
 	
 	/**
-	 * Contains the Category object.
+	 * The Category object.
 	 * @var	\ultimate\data\category\Category
 	*/
 	public $category = null;
@@ -74,13 +74,13 @@ class CategoryPage extends MultipleLinkPage {
 	public $categorySlugs = array();
 	
 	/**
-	 * Contains the output.
+	 * The output.
 	 * @var string
 	*/
 	public $output = '';
 	
 	/**
-	 * Contains the layout.
+	 * The layout.
 	 * @var \ultimate\data\layout\Layout
 	 */
 	public $layout = null;

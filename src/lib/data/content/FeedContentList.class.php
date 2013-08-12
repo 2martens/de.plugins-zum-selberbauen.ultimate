@@ -26,7 +26,6 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\content;
-
 use ultimate\system\cache\builder\ContentPageCacheBuilder;
 
 /**
@@ -41,12 +40,14 @@ use ultimate\system\cache\builder\ContentPageCacheBuilder;
  */
 class FeedContentList extends ContentList {
 	/**
-	 * @see	\wcf\data\DatabaseObjectList::$sqlOrderBy
+	 * The sql snippet that will be used at the order position.
+	 * @var string
 	 */
 	public $sqlOrderBy = 'content.publishDate DESC';
 	
 	/**
-	 * @see	\wcf\data\DatabaseObjectList::$decoratorClassName
+	 * The class name of the decorator.
+	 * @var string
 	 */
 	public $decoratorClassName = 'ultimate\data\content\FeedContent';
 	
@@ -59,7 +60,7 @@ class FeedContentList extends ContentList {
 	/**
 	 * Initializes a new FeedContentList object.
 	 *
-	 * @param	integer[]	$boardIDs
+	 * @param	integer[]	$categoryIDs
 	 */
 	public function __construct(array $categoryIDs) {
 		parent::__construct();
@@ -70,7 +71,7 @@ class FeedContentList extends ContentList {
 	}
 	
 	/**
-	 * @see \wcf\data\DatabaseObjectList::readObjects()
+	 * Reads the objects for this list.
 	 */
 	public function readObjects() {
 		if (empty($this->objectIDs)) $this->readObjectIDs();

@@ -41,19 +41,24 @@ use wcf\system\request\UltimateLinkHandler;
  */
 class LikeableContent extends AbstractLikeObject {
 	/**
-	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
+	 * The base class.
+	 * @var	string
 	 */
 	protected static $baseClass = 'ultimate\data\content\Content';
 	
 	/**
-	 * @see	\wcf\data\like\object\ILikeObject::getTitle()
+	 * Returns the language interpreted title of the content.
+	 * 
+	 * @return	string
 	 */
 	public function getTitle() {
 		return $this->__call('getLangTitle', array());
 	}
 	
 	/**
-	 * @see	\wcf\data\like\object\ILikeObject::getURL()
+	 * Returns the link to the content.
+	 * 
+	 * @return	string
 	 */
 	public function getURL() {
 		return UltimateLinkHandler::getInstance()->getLink(null, array(
@@ -64,21 +69,27 @@ class LikeableContent extends AbstractLikeObject {
 	}
 	
 	/**
-	 * @see	\wcf\data\like\object\ILikeObject::getUserID()
+	 * Returns the author id of the content.
+	 * 
+	 * @return	integer
 	 */
 	public function getUserID() {
 		return $this->__get('authorID');	
 	}
 		
 	/**
-	 * @see	\wcf\data\like\object\ILikeObject::getObjectID()
+	 * Returns the content id of the content.
+	 * 
+	 * @return	integer
 	 */
 	public function getObjectID() {
 		return $this->__get('contentID');
 	}
 	
 	/**
-	 * @see	\wcf\data\like\object\ILikeObject::updateLikeCounter()
+	 * Updates the cumulative like counter.
+	 * 
+	 * @param	integer	$cumulativeLikes
 	 */
 	public function updateLikeCounter($cumulativeLikes) {
 		// update cumulative likes

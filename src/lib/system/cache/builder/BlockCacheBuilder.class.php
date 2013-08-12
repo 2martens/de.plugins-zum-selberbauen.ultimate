@@ -39,7 +39,7 @@ use wcf\system\WCF;
  * * string[][][] cachedQueryToBlockID (blockID => cachedQuery ( => fetchedRowArray ( columnName => columnRowContent)))
  * 
  * @author		Jim Martens
- * @copyright	2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.cache.builder
@@ -47,7 +47,11 @@ use wcf\system\WCF;
  */
 class BlockCacheBuilder extends AbstractCacheBuilder {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.cache.builder.AbstractCacheBuilder.html#rebuild
+	 * Rebuilds cache.
+	 * 
+	 * @param	array	$parameters
+	 * 
+	 * @return	array
 	 */
 	protected function rebuild(array $parameters) {
 		$data = array(

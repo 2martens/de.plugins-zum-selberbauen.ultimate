@@ -46,7 +46,8 @@ class UltimateLinkCategoryEditForm extends AbstractCategoryEditForm {
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.link';
 	
 	/**
-	 * @see \wcf\acp\form\AbstractCategoryAddForm::$objectTypeName
+	 * The object type name.
+	 * @var string
 	 */
 	public $objectTypeName = 'de.plugins-zum-selberbauen.ultimate.linkCategory';
 }

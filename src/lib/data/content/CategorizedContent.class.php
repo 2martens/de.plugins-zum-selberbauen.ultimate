@@ -44,7 +44,8 @@ use wcf\system\WCF;
  */
 class CategorizedContent extends DatabaseObjectDecorator implements IUltimateData {
 	/**
-	 * @see \wcf\data\DatabaseObjectDecorator::$baseClass
+	 * The base class.
+	 * @var	string
 	 */
 	protected static $baseClass = '\ultimate\data\content\Content';
 	
@@ -65,7 +66,10 @@ class CategorizedContent extends DatabaseObjectDecorator implements IUltimateDat
 	}
 	
 	/**
-	 * @see \wcf\data\DatabaseObjectDecorator::__get()
+	 * Returns the value of a object data variable with the given name.
+	 * 
+	 * @param	string	$name
+	 * @return	mixed
 	 */
 	public function __get($name) {
 		$value = parent::__get($name);

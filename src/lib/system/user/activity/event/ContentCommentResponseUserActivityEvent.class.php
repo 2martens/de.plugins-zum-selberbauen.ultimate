@@ -46,13 +46,13 @@ use wcf\system\WCF;
  */
 class ContentCommentResponseUserActivityEvent extends SingletonFactory implements IUserActivityEvent {
 	/**
-	 * Contains the read contents.
+	 * The read contents.
 	 * @var \ultimate\data\content\Content[]
 	 */
 	protected $contents = array();
 	
 	/**
-	 * Contains the read users.
+	 * The read users.
 	 * @var \wcf\data\user\User[]
 	*/
 	protected $users = array();

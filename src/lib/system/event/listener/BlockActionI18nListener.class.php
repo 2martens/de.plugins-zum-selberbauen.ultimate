@@ -41,7 +41,11 @@ use wcf\system\language\I18nHandler;
  */
 class BlockActionI18nListener implements IEventListener {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.event.IEventListener.html#execute
+	 * Executes this listener.
+	 * 
+	 * @param	object	$eventObj
+	 * @param	string	$className
+	 * @param	string	$eventName
 	 */
 	public function execute($eventObj, $className, $eventName) {
 		/* @var $eventObj \ultimate\action\BlockAction */

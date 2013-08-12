@@ -45,7 +45,11 @@ use wcf\util\StringUtil;
  */
 class CustomMenuListener implements IEventListener {
 	/**
-	 * @see \wcf\system\event\IEventListener::execute()
+	 * Executes this listener.
+	 * 
+	 * @param	object	$eventObj
+	 * @param	string	$className
+	 * @param	string	$eventName
 	 */
 	public function execute($eventObj, $className, $eventName) {
 		if (strpos($className, 'ultimate') !== false) return;

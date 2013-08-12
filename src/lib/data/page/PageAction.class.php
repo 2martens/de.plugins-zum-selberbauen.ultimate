@@ -68,7 +68,9 @@ class PageAction extends AbstractDatabaseObjectAction {
 	protected $permissionsUpdate = array('admin.content.ultimate.canEditPage');
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#create
+	 * Creates a page.
+	 * 
+	 * @return	Page
 	 */
 	public function create() {
 		$page = parent::create();
@@ -93,7 +95,7 @@ class PageAction extends AbstractDatabaseObjectAction {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#update
+	 * Updates one or more objects.
 	 */
 	public function update() {
 		if (isset($this->parameters['data'])) {

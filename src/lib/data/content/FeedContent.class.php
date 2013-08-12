@@ -42,7 +42,9 @@ use wcf\system\request\UltimateLinkHandler;
  */
 class FeedContent extends CategorizedContent implements IFeedEntry {
 	/**
-	 * @see	\wcf\data\ILinkableObject::getLink()
+	 * Returns the link to the content.
+	 * 
+	 * @return	string
 	 */
 	public function getLink() {
 		return UltimateLinkHandler::getInstance()->getLink(null, array(
@@ -55,63 +57,83 @@ class FeedContent extends CategorizedContent implements IFeedEntry {
 	}
 	
 	/**
-	 * @see	\wcf\data\ITitledObject::getTitle()
+	 * Returns the language interpreted title of the content.
+	 * 
+	 * @return	string
 	 */
 	public function getTitle() {
 		return $this->getDecoratedObject()->getLangTitle();
 	}
 	
 	/**
-	 * @see	\wcf\data\IMessage::getFormattedMessage()
+	 * Returns the formatted message of the content.
+	 * 
+	 * @return	string
 	 */
 	public function getFormattedMessage() {
 		return $this->getDecoratedObject()->getFormattedMessage();
 	}
 	
 	/**
-	 * @see	\wcf\data\IMessage::getMessage()
+	 * Returns the plain message of the content.
+	 * 
+	 * @return	string
 	 */
 	public function getMessage() {
-		return $this->getDecoratedObject()->getMessage();;
+		return $this->getDecoratedObject()->getMessage();
 	}
 	
 	/**
-	 * @see	\wcf\data\IMessage::getExcerpt()
+	 * Returns an excerpt of the content.
+	 * 
+	 * @param	integer	$maxLength	default: 255
+	 * 
+	 * @return	string
 	 */
 	public function getExcerpt($maxLength = 255) {
-		return $this->getDecoratedObject()->getExcerpt($maxLength);;
+		return $this->getDecoratedObject()->getExcerpt($maxLength);
 	}
 	
 	/**
-	 * @see	\wcf\data\IMessage::getUserID()
+	 * Returns the author id of the content.
+	 * 
+	 * @return	integer
 	 */
 	public function getUserID() {
 		return $this->getDecoratedObject()->getUserID();
 	}
 	
 	/**
-	 * @see	\wcf\data\IMessage::getUsername()
+	 * Returns the username of the author of the content.
+	 * 
+	 * @return	string
 	 */
 	public function getUsername() {
 		return $this->getDecoratedObject()->getUsername();
 	}
 	
 	/**
-	 * @see	\wcf\data\IMessage::getTime()
+	 * Returns the publish date of the content.
+	 * 
+	 * @return	integer
 	 */
 	public function getTime() {
 		return $this->getDecoratedObject()->getTime();
 	}
 	
 	/**
-	 * @see	\wcf\data\IMessage::__toString()
+	 * Returns the formatted message of the content.
+	 * 
+	 * @return	string
 	 */
 	public function __toString() {
 		return $this->getDecoratedObject()->__toString();
 	}
 	
 	/**
-	 * @see	\wcf\data\IFeedEntry::getComments()
+	 * Returns the amount of comments for the content.
+	 * 
+	 * @return	integer
 	 */
 	public function getComments() {
 		$objectTypeID = CommentHandler::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.ultimate.content.comment');
@@ -124,14 +146,18 @@ class FeedContent extends CategorizedContent implements IFeedEntry {
 	}
 	
 	/**
-	 * @see	\wcf\data\IFeedEntry::getCategories()
+	 * Returns the categories, the content is in.
+	 * 
+	 * @return	\ultimate\data\category\Category[]	(categoryID => category)
 	 */
 	public function getCategories() {
 		return $this->categories;
 	}
 	
 	/**
-	 * @see	\wcf\data\IMessage::isVisible()
+	 * Returns if the content is visible.
+	 * 
+	 * @return	boolean	true if the content is visible
 	 */
 	public function isVisible() {
 		return $this->getDecoratedObject()->isVisible();

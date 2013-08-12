@@ -33,7 +33,7 @@ use wcf\system\WCF;
  * Executes template-related actions.
  * 
  * @author		Jim Martens
- * @copyright	2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.ultimate.template
@@ -94,7 +94,9 @@ class TemplateAction extends AbstractDatabaseObjectAction {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#create
+	 * Creates a template.
+	 * 
+	 * @return	Template
 	 */
 	public function create() {
 		$template = parent::create();
@@ -105,7 +107,7 @@ class TemplateAction extends AbstractDatabaseObjectAction {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#update
+	 * Updates one or more objects.
 	 */
 	public function update() {
 		parent::update();

@@ -43,7 +43,8 @@ use wcf\util\StringUtil;
  */
 class BlipTVMediaProvider extends AbstractMediaProvider {
 	/**
-	 * @see \ultimate\system\media\provider\AbstractMediaProvider::$hosts
+	 * The accepted hosts.
+	 * @var	string[]
 	 */
 	protected $hosts = array(
 		'blip.tv'

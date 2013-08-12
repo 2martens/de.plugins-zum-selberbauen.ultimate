@@ -88,6 +88,7 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 	protected $publishButtonLang = '';
 	
 	/**
+	 * Reads parameters.
 	 * @see UltimatePageAddForm::readParameters()
 	 */
 	public function readParameters() {
@@ -102,6 +103,7 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 	}
 	
 	/**
+	 * Reads data.
 	 * @see UltimatePageAddForm::readData()
 	 */
 	public function readData() {
@@ -161,6 +163,7 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 	}
 	
 	/**
+	 * Saves the form input.
 	 * @see UltimatePageAddForm::save()
 	 */
 	public function save() {
@@ -206,6 +209,7 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 	}
 	
 	/**
+	 * Assigns the template variables.
 	 * @see UltimatePageAddForm::assignVariables()
 	 */
 	public function assignVariables() {

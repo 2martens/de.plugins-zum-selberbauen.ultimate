@@ -55,7 +55,9 @@ class CategoryEditor extends DatabaseObjectEditor implements IEditableCachedObje
 	protected static $baseClass = '\ultimate\data\category\Category';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableObject.html#create
+	 * Creates an object with the given parameters.
+	 * 
+	 * @param	array	$parameters	
 	 */
 	public static function create(array $parameters = array()) {
 		$category = parent::create($parameters);
@@ -72,7 +74,9 @@ class CategoryEditor extends DatabaseObjectEditor implements IEditableCachedObje
 	
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableObject.html#deleteAll
+	 * Deletes all corresponding objects to the given object IDs.
+	 * 
+	 * @param	integer[]	$objectIDs
 	 */
 	public static function deleteAll(array $objectIDs = array()) {
 		// unmark contents
@@ -102,7 +106,7 @@ class CategoryEditor extends DatabaseObjectEditor implements IEditableCachedObje
 	}
 	
 	/**
-	 * @see \wcf\data\IEditableObject::delete()
+	 * Deletes this object.
 	 */
 	public function delete() {
 		/* @var $layout \ultimate\data\layout\Layout */

@@ -100,7 +100,7 @@ class WidgetAreaAction extends AbstractDatabaseObjectAction implements ISortable
 	public $widgetAreaID = 0;
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.ISortableAction.html#validateUpdatePosition
+	 * Validates prior to calling updatePosition.
 	 */
 	public function validateUpdatePosition() {
 		// validate permissions
@@ -135,7 +135,7 @@ class WidgetAreaAction extends AbstractDatabaseObjectAction implements ISortable
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.ISortableAction.html#updatePosition
+	 * Updates one or more objects.
 	 */
 	public function updatePosition() {
 		// remove previous settings

@@ -113,7 +113,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#update
+	 * Updates one or more objects.
 	 */
 	public function update() {
 		if (isset($this->parameters['data'])) {
@@ -150,7 +150,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#delete
+	 * Deletes one or more objects.
 	 */
 	public function delete() {
 		if (empty($this->objects)) {
@@ -189,7 +189,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	}
 	
 	/**
-	 * @see	wcf\data\IMessageInlineEditorAction::validateBeginEdit()
+	 * Validates prior to calling beginEdit.
 	 */
 	public function validateBeginEdit() {
 		$this->parameters['objectID'] = (isset($this->parameters['objectID'])) ? intval($this->parameters['objectID']) : 0;
@@ -207,7 +207,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	}
 	
 	/**
-	 * @see	wcf\data\IMessageInlineEditorAction::beginEdit()
+	 * Starts the edit process.
 	 */
 	public function beginEdit() {
 		BBCodeHandler::getInstance()->setAllowedBBCodes(explode(',', WCF::getSession()->getPermission('user.message.allowedBBCodes')));
@@ -226,7 +226,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	}
 	
 	/**
-	 * @see	wcf\data\IMessageInlineEditorAction::validateSave()
+	 * Validates prior to calling save.
 	 */
 	public function validateSave() {
 		if (!isset($this->parameters['data']) || !isset($this->parameters['data']['message']) || empty($this->parameters['data']['message'])) {
@@ -251,7 +251,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	}
 	
 	/**
-	 * @see	wcf\data\IMessageInlineEditorAction::save()
+	 * Saves the changes.
 	 */
 	public function save() {
 		$contentData = array(

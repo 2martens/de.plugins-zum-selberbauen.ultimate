@@ -80,7 +80,7 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 	protected static $databaseTableIndexName = 'pageID';
 	
 	/**
-	 * Contains the content to page database table name.
+	 * The content to page database table name.
 	 * @var	string
 	 */
 	protected $contentPageTable = 'content_to_page';
@@ -174,6 +174,8 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 	
 	/**
 	 * Handles data.
+	 * 
+	 * @param	array	$data
 	 */
 	protected function handleData($data) {
 		$data['pageID'] = intval($data['pageID']);

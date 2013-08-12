@@ -41,7 +41,7 @@ use wcf\util\FileUtil;
  */
 class MediaProviderHandler extends SingletonFactory {
 	/**
-	 * Contains the media provider objects.
+	 * The media provider objects.
 	 * @var \ultimate\system\media\provider\IMediaProvider[]
 	 */
 	protected $mediaProviders = array();

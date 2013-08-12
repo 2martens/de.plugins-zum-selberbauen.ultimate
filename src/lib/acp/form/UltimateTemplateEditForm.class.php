@@ -66,6 +66,7 @@ class UltimateTemplateEditForm extends UltimateTemplateAddForm {
 	public $template = null;
 	
 	/**
+	 * Reads parameters.
 	 * @see UltimateTemplateAddForm::readParameters()
 	 */
 	public function readParameters() {
@@ -80,6 +81,7 @@ class UltimateTemplateEditForm extends UltimateTemplateAddForm {
 	}
 	
 	/**
+	 * Reads data.
 	 * @see UltimateTemplateAddForm::readData()
 	 */
 	public function readData() {
@@ -101,6 +103,7 @@ class UltimateTemplateEditForm extends UltimateTemplateAddForm {
 	}
 	
 	/**
+	 * Saves the form input.
 	 * @see UltimateTemplateAddForm::save()
 	 */
 	public function save() {
@@ -133,6 +136,7 @@ class UltimateTemplateEditForm extends UltimateTemplateAddForm {
 	}
 	
 	/**
+	 * Assigns the template variables.
 	 * @see UltimateTemplateAddForm::assignVariables()
 	 */
 	public function assignVariables() {

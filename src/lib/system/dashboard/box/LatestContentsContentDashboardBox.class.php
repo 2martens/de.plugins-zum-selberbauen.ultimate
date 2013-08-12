@@ -49,13 +49,13 @@ use wcf\system\WCF;
  */
 class LatestContentsContentDashboardBox extends AbstractContentDashboardBox {
 	/**
-	 * Contains the latest contents.
+	 * The latest contents.
 	 * @var	\ultimate\data\content\TaggedContent[]
 	 */
 	public $contents = array();
 	
 	/**
-	 * Contains the block that is used for displaying the contents.
+	 * The block that is used for displaying the contents.
 	 * @var \ultimate\data\block\Block
 	 */
 	public $block = null;

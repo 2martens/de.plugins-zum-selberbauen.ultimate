@@ -66,6 +66,7 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 	public $category = null;
 	
 	/**
+	 * Reads parameters.
 	 * @see	UltimateCategoryAddForm::readParameters()
 	 */
 	public function readParameters() {
@@ -80,6 +81,7 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 	}
 	
 	/**
+	 * Reads data.
 	 * @see	UltimateCategoryAddForm::readData()
 	 */
 	public function readData() {
@@ -98,6 +100,7 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 	}
 	
 	/**
+	 * Saves the form input.
 	 * @see	UltimateCategoryAddForm::save()
 	 */
 	public function save() {
@@ -139,6 +142,7 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 	}
 	
 	/**
+	 * Assigns the template variables.
 	 * @see	UltimateCategoryAddForm::assignVariables()
 	 */
 	public function assignVariables() {

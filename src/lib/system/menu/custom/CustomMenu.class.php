@@ -47,7 +47,7 @@ use wcf\system\WCF;
  */
 class CustomMenu extends TreeMenu {
 	/**
-	 * Contains the menu.
+	 * The menu.
 	 * @var	\ultimate\data\menu\Menu
 	 */
 	protected $menu = null;
@@ -65,7 +65,7 @@ class CustomMenu extends TreeMenu {
 	protected $contents = null;
 	
 	/**
-	 * Contains the current items.
+	 * The current items.
 	 * @var	array[]
 	 */
 	protected $currentMenuItems = array();

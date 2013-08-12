@@ -115,7 +115,9 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 	}
 	
 	/**
-	 * @see wcf\data\IDatabaseObjectAction::create()
+	 * Creates a menu item.
+	 * 
+	 * @return	MenuItem
 	 */
 	public function create() {
 		// calculate show order
@@ -131,7 +133,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 	}
 	
 	/**
-	 * @see	wcf\data\AbstractDatabaseObjectAction::delete()
+	 * Deletes this object.
 	 */
 	public function delete() {
 		$returnValues = parent::delete();
@@ -141,7 +143,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 	}
 	
 	/**
-	 * @see	wcf\data\AbstractDatabaseObjectAction::update()
+	 * Updates one or more objects.
 	 */
 	public function update() {
 		parent::update();

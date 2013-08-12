@@ -63,6 +63,7 @@ class UltimateLinkEditForm extends UltimateLinkAddForm {
 	public $link = null;
 	
 	/**
+	 * Reads parameters.
 	 * @see	UltimateLinkAddForm::readParameters()
 	 */
 	public function readParameters() {
@@ -78,6 +79,7 @@ class UltimateLinkEditForm extends UltimateLinkAddForm {
 	}
 	
 	/**
+	 * Reads data.
 	 * @see http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
 	 */
 	public function readData() {
@@ -97,6 +99,7 @@ class UltimateLinkEditForm extends UltimateLinkAddForm {
 	}
 	
 	/**
+	 * Saves the form input.
 	 * @see http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.form.IForm.html#save
 	 */
 	public function save() {
@@ -138,6 +141,7 @@ class UltimateLinkEditForm extends UltimateLinkAddForm {
 	}
 	
 	/**
+	 * Assigns the template variables.
 	 * @see http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
 	 */
 	public function assignVariables() {

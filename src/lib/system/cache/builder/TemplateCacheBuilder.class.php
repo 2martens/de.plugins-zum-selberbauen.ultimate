@@ -40,7 +40,7 @@ use wcf\system\WCF;
  * * \ultimate\data\template\Template[] templatesToLayoutID (layoutID => template)
  * 
  * @author		Jim Martens
- * @copyright	2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.cache.builder
@@ -48,7 +48,11 @@ use wcf\system\WCF;
  */
 class TemplateCacheBuilder extends AbstractCacheBuilder {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.cache.builder.AbstractCacheBuilder.html#rebuild
+	 * Rebuilds cache.
+	 * 
+	 * @param	array	$parameters
+	 * 
+	 * @return	array
 	 */
 	protected function rebuild(array $parameters) {
 		$data = array(

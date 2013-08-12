@@ -45,7 +45,11 @@ use wcf\system\event\IEventListener;
  */
 class CacheResetListener implements IEventListener {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.event.IEventListener.html#execute
+	 * Executes this listener.
+	 * 
+	 * @param	object	$eventObj
+	 * @param	string	$className
+	 * @param	string	$eventName
 	 */
 	public function execute($eventObj, $className, $eventName) {
 		switch ($className) {

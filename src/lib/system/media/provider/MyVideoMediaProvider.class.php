@@ -42,7 +42,8 @@ use wcf\util\StringUtil;
  */
 class MyVideoMediaProvider extends AbstractMediaProvider {
 	/**
-	 * @see \ultimate\system\media\provider\AbstractMediaProvider::$hosts
+	 * The accepted hosts.
+	 * @var	string[]
 	 */
 	protected $hosts = array(
 		'www.myvideo.de'

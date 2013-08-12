@@ -16,7 +16,7 @@
  * GNU Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
+ * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -25,6 +25,7 @@
  * @subpackage	system.media.provider
  * @category	Ultimate CMS
  */
+
 namespace ultimate\system\media\provider;
 use wcf\system\event\EventHandler;
 use wcf\util\StringUtil;
@@ -43,15 +44,22 @@ use wcf\util\StringUtil;
  */
 abstract class AbstractMediaProvider implements IMediaProvider {
 	/**
-	 * Contains the accepted hosts.
+	 * The accepted hosts.
 	 * @var string[]
 	 */
 	protected $hosts = array();
 	
 	/**
-	 * @internal Returns basic iframe HTML. For more specific HTML you have to override this method.
+	 * Returns the HTML for this provider.
 	 * 
-	 * @see \ultimate\system\media\provider\IMediaProvider::getHTML()
+	 * Returns basic iframe HTML. For more specific HTML you have to override this method.
+	 * 
+	 * @param	string	$source
+	 * @param	integer	$width
+	 * @param	integer	$height
+	 * @return	string
+	 * 
+	 * @see IMediaProvider::getHTML()
 	 */
 	public function getHTML($source, $width, $height) {
 		// fire event
@@ -65,7 +73,12 @@ abstract class AbstractMediaProvider implements IMediaProvider {
 	}
 	
 	/**
-	 * @see \ultimate\system\media\provider\IMediaProvider::canHandle()
+	 * Returns whether this MediaProvider can handle the given URL host.
+	 * 
+	 * @param	string	$host
+	 * @return	boolean
+	 * 
+	 * @see IMediaProvider::canHandle()
 	 */
 	public function canHandle($host) {
 		// fire event
@@ -105,10 +118,9 @@ abstract class AbstractMediaProvider implements IMediaProvider {
 	 * Returns embed information.
 	 * 
 	 * This can be simply the embed URL but also an imploded array with the new videoID, width and height.
+	 * {@internal Overwrite this method if you need it. If the media provider requires allow_url_fopen (e.g. oembed usage), check it and throw an exception if it is not set. }}
 	 *
 	 * @since	1.0.0
-	 * @internal Overwrite this method if you need it. If the media provider requires allow_url_fopen (e.g. oembed usage), check it and
-	 * throw an exception if it is not set.
 	 *
 	 * @param	string	$source
 	 * @param	integer	$maxwidth	(optional) the maximum of width available

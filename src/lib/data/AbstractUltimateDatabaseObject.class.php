@@ -41,7 +41,9 @@ use wcf\system\WCF;
  */
 abstract class AbstractUltimateDatabaseObject extends DatabaseObject implements IUltimateData {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IStorableObject.html#getDatabaseTableName
+	 * Returns the database table name.
+	 * 
+	 * @return	string
 	 */
 	public static function getDatabaseTableName() {
 		return 'ultimate'.WCF_N.'_'.static::$databaseTableName;

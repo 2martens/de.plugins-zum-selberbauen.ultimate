@@ -35,7 +35,7 @@ use wcf\system\WCF;
  * Represents a template entry.
  * 
  * @author		Jim Martens
- * @copyright	2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.ultimate.template
@@ -88,6 +88,8 @@ class Template extends AbstractUltimateDatabaseObject implements ITitledObject {
 	
 	/**
 	 * Handles data.
+	 * 
+	 * @param	array	$data
 	 */
 	protected function handleData($data) {
 		$data['templateID'] = intval($data['templateID']);

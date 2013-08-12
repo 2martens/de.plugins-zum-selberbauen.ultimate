@@ -151,6 +151,8 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledObject {
 
 	/**
 	 * Handles data.
+	 * 
+	 * @param	array	$data
 	 */
 	protected function handleData($data) {
 		$data['categoryID'] = intval($data['categoryID']);

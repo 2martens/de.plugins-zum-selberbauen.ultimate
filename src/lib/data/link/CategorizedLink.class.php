@@ -67,7 +67,10 @@ class CategorizedLink extends DatabaseObjectDecorator implements IUltimateData {
 	}
 	
 	/**
-	 * @see \wcf\data\DatabaseObjectDecorator::__get()
+	 * Returns the value of a object data variable with the given name.
+	 * 
+	 * @param	string	$name
+	 * @return	mixed
 	 */
 	public function __get($name) {
 		$value = parent::__get($name);

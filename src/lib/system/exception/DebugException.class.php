@@ -41,13 +41,13 @@ use wcf\util\StringUtil;
  */
 class DebugException extends LoggedException {
 	/**
-	 * Contains the description.
+	 * The description.
 	 * @var string
 	 */
 	protected $description = '';
 	
 	/**
-	 * Contains the log id.
+	 * The log id.
 	 * @var integer
 	 */
 	protected $logID = 0;

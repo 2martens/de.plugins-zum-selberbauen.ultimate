@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the IMediaProvider interface.
+ * The IMediaProvider interface.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.

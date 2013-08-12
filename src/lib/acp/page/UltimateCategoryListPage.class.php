@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateCategoryList page.
+ * The UltimateCategoryList page.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -44,17 +44,20 @@ use wcf\system\WCF;
  */
 class UltimateCategoryListPage extends AbstractCachedListPage {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
+	 * The template name.
+	 * @var	string
 	 */
 	public $templateName = 'ultimateCategoryList';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.MultipleLinkPage.html#$objectListClassName
+	 * The object list class name.
+	 * @var	string
 	 */
 	public $objectListClassName = '\ultimate\data\category\CategoryList';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#$validSortFields
+	 * Array of valid sort fields.
+	 * @var	string[]
 	 */
 	public $validSortFields = array(
 		'categoryID',
@@ -65,44 +68,43 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
 	);
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#$defaultSortField
+	 * The default sort field.
+	 * @var	string
 	*/
 	public $defaultSortField = ULTIMATE_SORT_CATEGORY_SORTFIELD;
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#$defaultSortOrder
+	 * The default sort order.
+	 * @var	string
 	 */
 	public $defaultSortOrder = ULTIMATE_SORT_CATEGORY_SORTORDER;
 	
 	/**
+	 * The cache builder class name.
 	 * @see \wcf\page\AbstractCachedListPage::$cacheBuilderClassName
 	 */
 	public $cacheBuilderClassName = '\ultimate\system\cache\builder\CategoryCacheBuilder';
 	
 	/**
-	 * @see \wcf\page\AbstractCachedListPage::$cacheName
-	 */
-	public $cacheName = 'category';
-	
-	/**
+	 * The cache index.
 	 * @see \wcf\page\AbstractCachedListPage::$cacheIndex
 	 */
 	public $cacheIndex = 'categories';
 	
 	/**
-	 * Contains the active menu item.
+	 * The active menu item.
 	 * @var	string
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.category.list';
 
 	/**
-	 * Contains the url.
+	 * The url.
 	 * @var	string
 	*/
 	protected $url = '';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
+	 * Reads data.
 	*/
 	public function readData() {
 		parent::readData();
@@ -110,7 +112,7 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#validateSortField
+	 * Validates the sort field.
 	 */
 	public function validateSortField() {
 		parent::validateSortField();
@@ -144,6 +146,10 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
 	}
 	
 	/**
+	 * Loads the cache.
+	 * 
+	 * @param	string	$path
+	 * 
 	 * @see \wcf\page\AbstractCachedListPage::loadCache
 	 */
 	public function loadCache($path = ULTIMATE_DIR) {
@@ -151,7 +157,7 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * Assigns template variables.
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -162,7 +168,7 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#show
+	 * Shows the page.
 	 */
 	public function show() {
 		// set active menu item

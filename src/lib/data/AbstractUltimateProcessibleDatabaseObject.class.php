@@ -40,7 +40,9 @@ use wcf\data\ProcessibleDatabaseObject;
  */
 abstract class AbstractUltimateProcessibleDatabaseObject extends ProcessibleDatabaseObject {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IStorableObject.html#getDatabaseTableName
+	 * Returns the database table name.
+	 * 
+	 * @return	string
 	 */
 	public static function getDatabaseTableName() {
 		return 'ultimate'.WCF_N.'_'.static::$databaseTableName;

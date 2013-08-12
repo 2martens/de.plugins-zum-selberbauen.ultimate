@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateWidgetAreaListPage class.
+ * The UltimateWidgetAreaListPage class.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -44,17 +44,20 @@ use wcf\system\WCF;
  */
 class UltimateWidgetAreaListPage extends AbstractCachedListPage {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
+	 * The template name.
+	 * @var	string
 	 */
 	public $templateName = 'ultimateWidgetAreaList';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.MultipleLinkPage.html#$objectListClassName
+	 * The object list class name.
+	 * @var	string
 	 */
 	public $objectListClassName = '\ultimate\data\widget\area\WidgetAreaList';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#$validSortFields
+	 * Array of valid sort fields.
+	 * @var	string[]
 	 */
 	public $validSortFields = array(
 		'widgetAreaID',
@@ -62,38 +65,43 @@ class UltimateWidgetAreaListPage extends AbstractCachedListPage {
 	);
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#$defaultSortOrder
+	 * The default sort order.
+	 * @var	string
 	 */
 	public $defaultSortOrder = ULTIMATE_SORT_WIDGETAREA_SORTORDER;
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#$defaultSortField
+	 * The default sort field.
+	 * @var	string
 	 */
 	public $defaultSortField = ULTIMATE_SORT_WIDGETAREA_SORTFIELD;
 	
 	/**
+	 * The cache builder class name.
 	 * @see	\wcf\page\AbstractCachedListPage::$cacheBuilderClassName
 	 */
 	public $cacheBuilderClassName = '\ultimate\system\cache\builder\WidgetAreaCacheBuilder';
 	
 	/**
+	 * The cache index.
 	 * @see	\wcf\page\AbstractCachedListPage::$cacheIndex
 	 */
 	public $cacheIndex = 'widgetAreas';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.acp.form.ACPForm.html#$activeMenuItem
+	 * The active menu item.
+	 * @var string
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.appearance.widgetArea.list';
 	
 	/**
-	 * Contains the url.
+	 * The url.
 	 * @var	string
 	 */
 	protected $url = '';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
+	 * Reads data.
 	 */
 	public function readData() {
 		parent::readData();
@@ -101,6 +109,10 @@ class UltimateWidgetAreaListPage extends AbstractCachedListPage {
 	}
 	
 	/**
+	 * Loads the cache.
+	 * 
+	 * @param	string	$path
+	 * 
 	 * @see	\wcf\page\AbstractCachedListPage::loadCache()
 	 */
 	public function loadCache($path = ULTIMATE_DIR) {
@@ -108,7 +120,7 @@ class UltimateWidgetAreaListPage extends AbstractCachedListPage {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * Assigns template variables.
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -120,7 +132,7 @@ class UltimateWidgetAreaListPage extends AbstractCachedListPage {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#show
+	 * Shows the page.
 	 */
 	public function show() {
 		// set active menu item

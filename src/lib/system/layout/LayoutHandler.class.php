@@ -66,7 +66,7 @@ class LayoutHandler extends SingletonFactory {
 	const CATEGORY = 4;
 	
 	/**
-	 * Contains the default layouts.
+	 * The default layouts.
 	 * @var string[]
 	 */
 	protected $defaultLayouts = array(
@@ -77,19 +77,19 @@ class LayoutHandler extends SingletonFactory {
 	);
 	
 	/**
-	 * Contains the read layouts.
+	 * The read layouts.
 	 * @var \ultimate\data\layout\Layout[]
 	 */
 	protected $layouts = array();
 	
 	/**
-	 * Contains the read layouts with the names as key.
+	 * The read layouts with the names as key.
 	 * @var \ultimate\data\layout\Layout[]
 	 */
 	protected $layoutsToObjectData = array();
 	
 	/**
-	 * Contains the read templates.
+	 * The read templates.
 	 * @var \ultimate\data\template\Template[]
 	 */
 	protected $templatesToLayoutID = array();

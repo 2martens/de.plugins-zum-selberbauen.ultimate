@@ -62,7 +62,9 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 	protected static $baseClass = '\ultimate\data\content\Content';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableObject.html#create
+	 * Creates an object with the given parameters.
+	 * 
+	 * @param	array	$parameters	
 	 */
 	public static function create(array $parameters = array()) {
 		$content = parent::create($parameters);
@@ -78,7 +80,9 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableObject.html#deleteAll
+	 * Deletes all corresponding objects to the given object IDs.
+	 * 
+	 * @param	integer[]	$objectIDs
 	 */
 	public static function deleteAll(array $objectIDs = array()) {
 		if (defined('TESTING_MODE') && TESTING_MODE) {
@@ -131,7 +135,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 	}
 	
 	/**
-	 * @see \wcf\data\IEditableObject::delete()
+	 * Deletes this object.
 	 */
 	public function delete() {
 		/* @var $layout \ultimate\data\layout\Layout */
@@ -268,7 +272,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 	* Adds new groups to this page.
 	* 
 	* @param	array	$groupIDs
-	* @param	boolean	$replaceOldGroups
+	* @param	boolean	$deleteOldGroups
 	*/
 	public function addGroups(array $groupIDs, $deleteOldGroups = true) {
 		if ($deleteOldGroups) {

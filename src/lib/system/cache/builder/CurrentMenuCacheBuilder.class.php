@@ -48,7 +48,11 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
  */
 class CurrentMenuCacheBuilder extends AbstractCacheBuilder {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.cache.builder.ICacheBuilder.html#rebuild
+	 * Rebuilds cache.
+	 * 
+	 * @param	array	$parameters
+	 * 
+	 * @return	array
 	 */
 	protected function rebuild(array $parameters) {
 		$data = array(

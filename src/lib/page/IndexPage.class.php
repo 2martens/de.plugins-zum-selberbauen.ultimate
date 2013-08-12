@@ -56,13 +56,13 @@ class IndexPage extends AbstractPage {
 	public $neededModules = array();
 	
 	/**
-	 * Contains the output.
+	 * The output.
 	 * @var string
 	 */
 	public $output = '';
 	
 	/**
-	 * Contains the layout.
+	 * The layout.
 	 * @var \ultimate\data\layout\Layout
 	 */
 	public $layout = null;

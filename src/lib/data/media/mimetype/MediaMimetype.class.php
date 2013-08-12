@@ -68,7 +68,9 @@ class MediaMimetype extends AbstractUltimateDatabaseObject {
 	}
 	
 	/**
-	 * @see \wcf\data\DatabaseObject::handleData()
+	 * Handles data.
+	 * 
+	 * @param	array	$data
 	 */
 	protected function handleData($data) {
 		$data['mimeTypeID'] = intval($data['mimeTypeID']);

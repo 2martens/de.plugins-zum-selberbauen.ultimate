@@ -66,7 +66,9 @@ class MenuAction extends AbstractDatabaseObjectAction {
 	protected $permissionsUpdate = array('admin.content.ultimate.canManageMenus');
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.AbstractDatabaseObjectAction.html#create
+	 * Creates a menu.
+	 * 
+	 * @return	Menu
 	 */
 	public function create() {
 		$menu = parent::create();

@@ -50,7 +50,7 @@ class MenuItemEditor extends DatabaseObjectEditor implements IEditableCachedObje
 	protected static $baseClass = '\ultimate\data\menu\item\MenuItem';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableObject.html#delete
+	 * Deletes one or more objects.
 	 */
 	public function delete() {
 		// update show order
@@ -66,7 +66,9 @@ class MenuItemEditor extends DatabaseObjectEditor implements IEditableCachedObje
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableObject.html#deleteAll
+	 * Deletes all corresponding objects to the given object IDs.
+	 * 
+	 * @param	integer[]	$objectIDs
 	 */
 	public static function deleteAll(array $objectIDs = array()) {
 		// unmark contents

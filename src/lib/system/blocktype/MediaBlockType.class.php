@@ -88,7 +88,7 @@ class MediaBlockType extends AbstractBlockType {
 	);
 	
 	/**
-	 * Contains the media type.
+	 * The media type.
 	 * @var string
 	 */
 	protected $mediaType = '';
@@ -100,31 +100,31 @@ class MediaBlockType extends AbstractBlockType {
 	protected $mediaSource = '';
 	
 	/**
-	 * Contains the type of the media source (provider or file).
+	 * The type of the media source (provider or file).
 	 * @var string
 	 */
 	protected $mediaSourceType = '';
 	
 	/**
-	 * Contains the MIME type.
+	 * The MIME type.
 	 * @var \ultimate\data\media\mimetype\MediaMimetype	a valid MIME type
 	 */
 	protected $mediaMimeType = null;
 	
 	/**
-	 * Contains the media height in pixels.
+	 * The media height in pixels.
 	 * @var integer
 	 */
 	protected $mediaHeight = 0;
 	
 	/**
-	 * Contains the media width in pixels.
+	 * The media width in pixels.
 	 * @var integer
 	 */
 	protected $mediaWidth = 0;
 	
 	/**
-	 * Contains the media provider HTML (if any).
+	 * The media provider HTML (if any).
 	 * @var	string
 	 */
 	protected $mediaHTML = '';

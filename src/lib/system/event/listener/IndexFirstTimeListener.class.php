@@ -43,13 +43,17 @@ use wcf\system\io\File;
  */
 class IndexFirstTimeListener implements IEventListener {
 	/**
-	 * Contains the name of the config file.
+	 * The name of the config file.
 	 * @var	string
 	 */
 	const CONFIG_FILE = 'config.inc.php';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.event.IEventListener.html#execute
+	 * Executes this listener.
+	 * 
+	 * @param	object	$eventObj
+	 * @param	string	$className
+	 * @param	string	$eventName
 	 */
 	public function execute($eventObj, $className, $eventName) {
 		// adds default link category

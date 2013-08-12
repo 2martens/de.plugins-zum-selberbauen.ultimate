@@ -61,7 +61,7 @@ class PagePage extends AbstractPage {
 	public $neededModules = array();
 	
 	/**
-	 * Contains the Page object.
+	 * The Page object.
 	 * @var	\ultimate\data\page\Page
 	 */
 	public $page = null;
@@ -73,13 +73,13 @@ class PagePage extends AbstractPage {
 	public $pageSlugs = array();
 	
 	/**
-	 * Contains the output.
+	 * The output.
 	 * @var string
 	 */
 	public $output = '';
 	
 	/**
-	 * Contains the layout of this page.
+	 * The layout of this page.
 	 * @var \ultimate\data\layout\Layout
 	 */
 	public $layout = null;

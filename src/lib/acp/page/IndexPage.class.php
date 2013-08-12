@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the Index page.
+ * The Index page.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -31,7 +31,7 @@ namespace ultimate\acp\page;
  * Extends the WCF Index page.
  * 
  * @author		Jim Martens
- * @copyright	2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	acp.page

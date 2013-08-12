@@ -42,7 +42,7 @@ use wcf\system\SingletonFactory;
  */
 class MenuItemHandler extends SingletonFactory {
 	/**
-	 * Contains the cached menu items.
+	 * The cached menu items.
 	 * @var	\ultimate\data\menu\item\MenuItem[][]
 	 */
 	protected $menuItems = array();

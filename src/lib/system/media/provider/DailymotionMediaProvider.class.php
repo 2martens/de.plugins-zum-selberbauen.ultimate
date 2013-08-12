@@ -42,7 +42,8 @@ use wcf\util\StringUtil;
  */
 class DailymotionMediaProvider extends AbstractMediaProvider {
 	/**
-	 * @see \ultimate\system\media\provider\AbstractMediaProvider::$hosts
+	 * The accepted hosts.
+	 * @var	string[]
 	 */
 	protected $hosts = array(
 		'www.dailymotion.com'

@@ -44,7 +44,10 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
  */
 class FeedContentCacheBuilder extends AbstractCacheBuilder {
 	/**
-	 * @see \wcf\system\cache\builder\ICacheBuilder::rebuild()
+	 * Rebuilds cache.
+	 * 
+	 * @param	array	$parameters
+	 * @return	array
 	 */
 	protected function rebuild(array $parameters) {
 		$data = array(

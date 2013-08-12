@@ -45,12 +45,15 @@ use wcf\system\WCF;
  */
 class TaggedContentList extends ContentList {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.DatabaseObjectList.html#$decoratorClassName
+	 * The class name of the decorator.
+	 * @var string
 	 */
 	public $decoratorClassName = '\ultimate\data\content\TaggedContent';
 	
 	/**
 	 * Creates a new TaggedThreadList object.
+	 * 
+	 * @param	\wcf\data\tag\Tag	$tag
 	 */
 	public function __construct(Tag $tag) {
 		parent::__construct();
@@ -60,7 +63,9 @@ class TaggedContentList extends ContentList {
 	}
 	
 	/**
-	 * @see	\wcf\data\DatabaseObjectList::countObjects()
+	 * Returns the amount of tagged contents.
+	 * 
+	 * @return	integer
 	 */
 	public function countObjects() {
 		$sql = 'SELECT COUNT(*) AS count
@@ -76,7 +81,7 @@ class TaggedContentList extends ContentList {
 	}
 	
 	/**
-	 * @see	\wcf\data\DatabaseObjectList::readObjectIDs()
+	 * Reads the object IDs.
 	 */
 	public function readObjectIDs() {
 		$this->objectIDs = array();
@@ -95,7 +100,7 @@ class TaggedContentList extends ContentList {
 	}
 	
 	/**
-	 * @see	\wcf\data\DatabaseObjectList::readObjects()
+	 * Reads the objects.
 	 */
 	public function readObjects() {
 		if ($this->objectIDs === null) $this->readObjectIDs();

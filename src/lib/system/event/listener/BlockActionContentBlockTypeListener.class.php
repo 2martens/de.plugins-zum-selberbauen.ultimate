@@ -40,7 +40,11 @@ use wcf\system\event\IEventListener;
  */
 class BlockActionContentBlockTypeListener implements IEventListener {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.event.IEventListener.html#execute
+	 * Executes this listener.
+	 * 
+	 * @param	object	$eventObj
+	 * @param	string	$className
+	 * @param	string	$eventName
 	 */
 	public function execute($eventObj, $className, $eventName) {
 		// determine block type

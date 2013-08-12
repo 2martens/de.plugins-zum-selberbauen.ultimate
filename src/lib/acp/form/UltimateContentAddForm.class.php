@@ -134,7 +134,7 @@ class UltimateContentAddForm extends MessageForm {
 	 * @var string[]|array[]
 	 */
 	public $tagsI18n = array();
-	   
+	
 	/**
 	 * The maximal length of the text.
 	 * @var	integer	0 means there's no limitation
@@ -156,13 +156,13 @@ class UltimateContentAddForm extends MessageForm {
 	/**
 	 * All available groups.
 	 * @var	\wcf\data\user\group\UserGroup[]
-	*/
+	 */
 	public $groups = array();
 	
 	/**
 	 * The publish date.
 	 * @var	string
-	*/
+	 */
 	public $publishDate = '';
 	
 	/**
@@ -180,7 +180,7 @@ class UltimateContentAddForm extends MessageForm {
 	/**
 	 * The status id.
 	 * @var	integer
-	*/
+	 */
 	public $statusID = 0;
 	
 	/**

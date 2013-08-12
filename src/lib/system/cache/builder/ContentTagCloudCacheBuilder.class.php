@@ -48,7 +48,11 @@ use wcf\util\ArrayUtil;
  */
 class ContentTagCloudCacheBuilder extends TagCloudCacheBuilder {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.cache.builder.AbstractCacheBuilder.html#rebuild
+	 * Rebuilds cache.
+	 * 
+	 * @param	array	$parameters
+	 * 
+	 * @return	array
 	 */
 	protected function rebuild(array $parameters) {
 		/* @var $objectType \wcf\data\object\type\ObjectType */

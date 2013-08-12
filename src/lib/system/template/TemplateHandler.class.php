@@ -66,19 +66,19 @@ use wcf\util\StringUtil;
  */
 class TemplateHandler extends SingletonFactory {
 	/**
-	 * Contains the layout ID of the category layout.
+	 * The layout ID of the category layout.
 	 * @var integer
 	 */
 	const CATEGORY_LAYOUT_ID = 4;
 	
 	/**
-	 * Contains the layout ID of the content layout.
+	 * The layout ID of the content layout.
 	 * @var integer
 	 */
 	const CONTENT_LAYOUT_ID = 2;
 	
 	/**
-	 * Contains the layout ID of the page layout.
+	 * The layout ID of the page layout.
 	 * @var integer
 	 */
 	const PAGE_LAYOUT_ID = 3;
@@ -96,13 +96,13 @@ class TemplateHandler extends SingletonFactory {
 	protected $menusToTemplateID = array();
 	
 	/**
-	 * Contains the template name.
+	 * The template name.
 	 * @var string
 	 */
 	protected $templateName = 'template';
 	
 	/**
-	 * Contains the template of this request.
+	 * The template of this request.
 	 * @var \ultimate\data\template\Template
 	 */
 	protected $template = null;

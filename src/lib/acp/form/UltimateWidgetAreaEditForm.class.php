@@ -62,6 +62,7 @@ class UltimateWidgetAreaEditForm extends UltimateWidgetAreaAddForm {
 	public $widgetArea = null;
 	
 	/**
+	 * Reads parameters.
 	 * @see UltimateWidgetAreaAddForm::readParameters()
 	 */
 	public function readParameters() {
@@ -77,6 +78,7 @@ class UltimateWidgetAreaEditForm extends UltimateWidgetAreaAddForm {
 	}
 	
 	/**
+	 * Reads data.
 	 * @see UltimateWidgetAreaAddForm::readData()
 	 */
 	public function readData() {
@@ -100,6 +102,7 @@ class UltimateWidgetAreaEditForm extends UltimateWidgetAreaAddForm {
 	}
 	
 	/**
+	 * Saves the form input.
 	 * @see UltimateWidgetAreaAddForm::save()
 	 */
 	public function save() {
@@ -151,6 +154,7 @@ class UltimateWidgetAreaEditForm extends UltimateWidgetAreaAddForm {
 	}
 	
 	/**
+	 * Assigns the template variables.
 	 * @see	UltimateWidgetAreaAddForm::assignVariables()
 	 */
 	public function assignVariables() {

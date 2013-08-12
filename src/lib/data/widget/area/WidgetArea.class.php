@@ -82,6 +82,8 @@ class WidgetArea extends AbstractUltimateDatabaseObject implements ITitledObject
 	
 	/**
 	 * Handles data.
+	 * 
+	 * @param	array	$data
 	 */
 	protected function handleData($data) {
 		$data['widgetAreaID'] = intval($data['widgetAreaID']);

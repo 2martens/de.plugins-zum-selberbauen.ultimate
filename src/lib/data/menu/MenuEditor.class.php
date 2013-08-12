@@ -50,7 +50,9 @@ class MenuEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	protected static $baseClass = '\ultimate\data\menu\Menu';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.data.IEditableObject.html#deleteAll
+	 * Deletes all corresponding objects to the given object IDs.
+	 * 
+	 * @param	integer[]	$objectIDs
 	 */
 	public static function deleteAll(array $objectIDs = array()) {
 		// unmark contents

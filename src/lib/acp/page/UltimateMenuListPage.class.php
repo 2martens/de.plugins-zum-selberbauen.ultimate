@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the UltimateMenuList page.
+ * The UltimateMenuList page.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -44,17 +44,20 @@ use wcf\system\WCF;
  */
 class UltimateMenuListPage extends AbstractCachedListPage {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$templateName
+	 * The template name.
+	 * @var	string
 	 */
 	public $templateName = 'ultimateMenuList';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.MultipleLinkPage.html#$objectListClassName
+	 * The object list class name.
+	 * @var	string
 	 */
 	public $objectListClassName = '\ultimate\data\menu\MenuList';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#$validSortFields
+	 * Array of valid sort fields.
+	 * @var	string[]
 	 */
 	public $validSortFields = array(
 		'menuID',
@@ -62,44 +65,43 @@ class UltimateMenuListPage extends AbstractCachedListPage {
 	);
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#$defaultSortField
+	 * The default sort field.
+	 * @var	string
 	*/
 	public $defaultSortField = 'menuID';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.SortablePage.html#$defaultSortOrder
+	 * The default sort order.
+	 * @var	string
 	 */
 	public $defaultSortOrder = 'ASC';
 	
 	/**
+	 * The cache builder class name.
 	 * @see \wcf\page\AbstractCachedListPage::$cacheBuilderClassName
 	 */
 	public $cacheBuilderClassName = '\ultimate\system\cache\builder\MenuCacheBuilder';
 	
 	/**
-	 * @see \wcf\page\AbstractCachedListPage::$cacheName
-	 */
-	public $cacheName = 'menu';
-	
-	/**
+	 * The cache index.
 	 * @see \wcf\page\AbstractCachedListPage::$cacheIndex
 	 */
 	public $cacheIndex = 'menus';
 	
 	/**
-	 * Contains the active menu item.
+	 * The active menu item.
 	 * @var	string
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.ultimate.appearance.menu.list';
 	
 	/**
-	 * Contains the url.
+	 * The url.
 	 * @var	string
 	 */
 	protected $url = '';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
+	 * Reads data.
 	 */
 	public function readData() {
 		parent::readData();
@@ -107,6 +109,10 @@ class UltimateMenuListPage extends AbstractCachedListPage {
 	}
 	
 	/**
+	 * Loads the cache.
+	 * 
+	 * @param	string	$path
+	 * 
 	 * @see \wcf\page\AbstractCachedListPage::loadCache
 	 */
 	public function loadCache($path = ULTIMATE_DIR) {
@@ -114,7 +120,7 @@ class UltimateMenuListPage extends AbstractCachedListPage {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * Assigns template variables.
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -125,7 +131,7 @@ class UltimateMenuListPage extends AbstractCachedListPage {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#show
+	 * Shows the page.
 	 */
 	public function show() {
 		// set active menu item

@@ -45,19 +45,22 @@ use wcf\system\WCF;
  */
 class LinkClipboardAction implements IClipboardAction {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.clipboard.action.IClipboardAction.html#getTypeName
+	 * Returns type name identifier.
+	 * 
+	 * @return	string
 	 */
 	public function getTypeName() {
 		return 'de.plugins-zum-selberbauen.ultimate.link';
 	}
 	
 	/**
-	 * @param	\ultimate\data\link\Link[]	$objects
-	 * @param	\wcf\data\clipboard\action\ClipboardAction	$action
+	 * Returns editor item for the clipboard action with the given name or null if the action is not applicable to the given objects.
+	 * 
+	 * @param	\ultimate\data\link\Link[]						$objects
+	 * @param	\wcf\data\clipboard\action\ClipboardAction		$action
 	 * @return	\wcf\system\clipboard\ClipboardEditorItem|null
 	 * 
 	 * @throws	\wcf\system\exception\SystemException	if given action name is invalid
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.clipboard.action.IClipboardAction.html#execute
 	 */
 	public function execute(array $objects, ClipboardAction $action) {
 		$item = new ClipboardEditorItem();
@@ -90,21 +93,30 @@ class LinkClipboardAction implements IClipboardAction {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.clipboard.action.IClipboardAction.html#getEditorLabel
+	 * Returns label for item editor.
+	 * 
+	 * @param	array	$objects
+	 * @return	string
 	 */
 	public function getEditorLabel(array $objects) {
 		return WCF::getLanguage()->getDynamicVariable('wcf.clipboard.label.link.marked', array('count' => count($objects)));
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.clipboard.action.IClipboardAction.html#getClassName
+	 * Returns action class name.
+	 * 
+	 * @return	string
 	 */
 	public function getClassName() {
 		return '\ultimate\system\clipboard\action\LinkClipboardAction';
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.clipboard.action.IClipboardAction.html#filterObjects
+	 * Filters the given objects by the given type data and returns the filtered list.
+	 * 
+	 * @param	array	$objects
+	 * @param	array	$typeData
+	 * @return	array
 	 */
 	public function filterObjects(array $objects, array $typeData) {
 		return $objects;

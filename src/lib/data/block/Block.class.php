@@ -70,9 +70,9 @@ class Block extends AbstractUltimateDatabaseObject {
 	/**
 	 * Creates a new instance of the DatabaseObject class.
 	 *
-	 * @param	mixed				$id
-	 * @param	array				$row
-	 * @param	wcf\data\DatabaseObject		$object
+	 * @param	mixed			$id
+	 * @param	array			$row
+	 * @param	DatabaseObject	$object
 	 */
 	public function __construct($id, array $row = null, DatabaseObject $object = null) {
 		if ($id !== null) {
@@ -94,7 +94,10 @@ class Block extends AbstractUltimateDatabaseObject {
 	}
 	
 	/**
-	 * Returns the value of a object data variable with the given name..
+	 * Returns the value of a object data variable with the given name.
+	 * 
+	 * @param	string	$name
+	 * @return	mixed
 	 */
 	public function __get($name) {
 		$value = parent::__get($name);
@@ -109,6 +112,8 @@ class Block extends AbstractUltimateDatabaseObject {
 	
 	/**
 	 * Handles data.
+	 * 
+	 * @param	array	$data
 	 */
 	protected function handleData($data) {
 		if (!empty($data['parameters'])) {

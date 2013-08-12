@@ -42,22 +42,29 @@ use wcf\data\object\type\AbstractObjectTypeProvider;
  */
 class LikeableContentProvider extends AbstractObjectTypeProvider implements ILikeObjectTypeProvider {
 	/**
-	 * @see	\wcf\data\object\type\AbstractObjectTypeProvider::$className
+	 * The class name.
+	 * @var	string
 	 */
 	public $className = 'ultimate\data\content\Content';
 	
 	/**
-	 * @see	\wcf\data\object\type\AbstractObjectTypeProvider::$decoratorClassName
+	 * The class name of the decorator.
+	 * @var string
 	 */
 	public $decoratorClassName = 'ultimate\data\content\LikeableContent';
 	
 	/**
-	 * @see	\wcf\data\object\type\AbstractObjectTypeProvider::$listClassName
+	 * The class name of the list.
+	 * @var string
 	 */
 	public $listClassName = 'ultimate\data\content\ContentList';
 	
 	/**
-	 * @see	\wcf\data\like\ILikeObjectTypeProvider::checkPermissions()
+	 * Checks the permissions.
+	 * 
+	 * @param	ILikeObject	$content
+	 * 
+	 * @return	boolean	true if the user can access the given content
 	 */
 	public function checkPermissions(ILikeObject $content) {
 		return $content->isVisible();

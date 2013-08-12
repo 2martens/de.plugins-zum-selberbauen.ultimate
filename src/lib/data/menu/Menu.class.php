@@ -85,6 +85,8 @@ class Menu extends AbstractUltimateDatabaseObject implements ITitledObject {
 	
 	/**
 	 * Handles data.
+	 * 
+	 * @param	array	$data
 	 */
 	protected function handleData($data) {
 		$data['menuID'] = intval($data['menuID']);

@@ -87,7 +87,9 @@ class BlockType extends AbstractUltimateDatabaseObject implements ITitledObject 
 	}
 	
 	/**
-	 * @see \wcf\data\DatabaseObject::handleData()
+	 * Handles data.
+	 * 
+	 * @param	array	$data
 	 */
 	protected function handleData($data) {
 		$data['cssIdentifier'] = strtolower($data['blockTypeName']);
