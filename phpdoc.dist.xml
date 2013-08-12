@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdocumentor>
+    <parser>
+        <default-package-name>Default</default-package-name>
+        <encoding>utf-8</encoding>
+        <target>phpDoc</target>
+        <markers>
+            <item>TODO</item>
+            <item>FIXME</item>
+            <item>@todo</item>
+        </markers>
+        <extensions>
+            <extension>php</extension>
+        </extensions>
+        <visibility>public,protected</visibility>
+    </parser>
+    <files>
+        <directory>src</directory>
+        <directory>srcWCF</directory>
+        <ignore-hidden>on</ignore-hidden>
+        <ignore-symlinks>on</ignore-symlinks>
+        <ignore>CodeSniff/*</ignore>
+        <ignore>*style/*</ignore>
+        <ignore>*templates/*</ignore>
+        <ignore>acp/templates/*</ignore>
+        <ignore>*js/*</ignore>
+        <ignore>*acp/js/*</ignore>
+        <ignore>*lib/util/thirdParty/*</ignore>
+    </files>
+    <transformer>
+        <target>target/path/for/HTML/output</target>
+    </transformer>
+    <logging>
+        <level>warn</level>
+        <paths>
+            <default>path/to/phpdoc-{DATE}.log</default>
+            <errors>path/to/phpdoc-{DATE}.errors.log</errors>
+        </paths>
+    </logging>
+    <transformations>
+        <template name="responsive-twig"/>
+    </transformations>
+</phpdocumentor>
