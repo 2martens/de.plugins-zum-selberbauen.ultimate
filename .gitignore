@@ -50,7 +50,6 @@ nbactions.xml
 *.tar.gz
 
 # phpdoc
-phpdoc.dist.xml
 phpdoc.xml
 
 # xsd files
