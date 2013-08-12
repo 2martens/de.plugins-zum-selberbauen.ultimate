@@ -8,9 +8,9 @@ destination: E:/Users/Development/AppData/Local/eclipse-php/workspace/de.plugins
 extensions: [php]
 # Mask to exclude file or directory from processing
 exclude: 
-    - src/lib/util/3rdParty/*
+    - *lib/util/thirdParty/*
 # Don't generate documentation for classes from file or directory with this mask
-skipDocPath:
+skipDocPath: idna_convert
 # Don't generate documentation for classes with this name prefix
 skipDocPrefix:
 # Character set of source files
@@ -46,9 +46,9 @@ php: Yes
 # Generate tree view of classes, interfaces and exceptions
 tree: Yes
 # Generate documentation for deprecated classes, methods, properties and constants
-deprecated: No
+deprecated: Yes
 # Generate documentation of tasks
-todo: No
+todo: Yes
 # Generate highlighted source code files
 sourceCode: Yes
 # Add a link to download documentation as a ZIP archive
