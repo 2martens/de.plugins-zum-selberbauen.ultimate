@@ -59,7 +59,7 @@ class PublishContentPageCronjob extends AbstractCronjob {
 		// checking publish dates
 		$updateObjects = array();
 		foreach ($contents as $contentID => $content) {
-			if (!(0 < $content->publishDate < TIME_NOW && $content->status == 2)) continue;
+			if (!(0 < $content->publishDate && $content->publishDate < TIME_NOW && $content->status == 2)) continue;
 			$updateObjects[] = $content;
 		}
 		$parameters = array(
@@ -73,7 +73,7 @@ class PublishContentPageCronjob extends AbstractCronjob {
 		// pages
 		$updateObjects = array();
 		foreach ($pages as $pageID => $page) {
-			if (!(0 < $page->publishDate <= TIME_NOW && $page->status == 2)) continue;
+			if (!(0 < $page->publishDate && $page->publishDate <= TIME_NOW && $page->status == 2)) continue;
 			$updateObjects[] = $page;
 		}
 		$parameters = array(
