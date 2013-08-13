@@ -9,6 +9,8 @@ Version notes
 
 The currently available source code represents an early beta version of Ultimate CMS and should not be used in productive environments.
 
+[![Build Status](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.ultimate.png?branch=master,dev)](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.ultimate)
+
 
 Contributing
 -----------

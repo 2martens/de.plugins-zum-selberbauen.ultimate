@@ -26,3 +26,14 @@ Formatting
     - Every file MUST end with a newline character (\n)
 
 Additionally: Have a look at existing files to find out what they should look like.
+
+I am running [PHP Codesniffer](https://github.com/squizlabs/PHP_CodeSniffer) to ensure most of my formatting rules. You SHOULD test your changes before submitting them with it.
+
+1. Install PHP Codesniffer, either via PEAR or via cloning it
+2. Execute the following command in the root of your clone of Ultimate CMS:
+
+   ```sh
+    $ phpcs -p --extensions=php --standard="`path/to`/CodeSniff/PzS" .
+   ```
+3. Fix any errors
+4. Repeat it until no more errors occur
