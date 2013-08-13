@@ -2,6 +2,8 @@
 <ruleset name="PzS">
 	<description>Plugins zum Selberbauen Coding Standard</description>
 	<exclude-pattern>*/CodeSniff/*</exclude-pattern>
+	<exclude-pattern>*/thirdParty/*</exclude-pattern>
+	<exclude-pattern>*/3rdParty/*</exclude-pattern>
 	
 	<rule ref="Generic.Classes.DuplicateClassName" />
 	<rule ref="Generic.CodeAnalysis.UselessOverridingMethod" />
