@@ -19,13 +19,16 @@
         <directory>srcWCF</directory>
         <ignore-hidden>on</ignore-hidden>
         <ignore-symlinks>on</ignore-symlinks>
+        <ignore>src/acp/*</ignore>
         <ignore>CodeSniff/*</ignore>
         <ignore>*style/*</ignore>
         <ignore>*templates/*</ignore>
-        <ignore>acp/templates/*</ignore>
         <ignore>*js/*</ignore>
-        <ignore>*acp/js/*</ignore>
         <ignore>*lib/util/thirdParty/*</ignore>
+        <ignore>*.inc.php</ignore>
+        <ignore>*.test.php</ignore>
+        <ignore>*global.php</ignore>
+        <ignore>*index.php</ignore>
     </files>
     <transformer>
         <target>target/path/for/HTML/output</target>
