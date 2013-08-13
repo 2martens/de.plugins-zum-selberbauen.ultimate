@@ -16,7 +16,7 @@
  * GNU Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
+ * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -52,22 +52,26 @@ use wcf\util\DateUtil;
  */
 class ContentBlockType extends AbstractBlockType {
 	/**
-	 * @see \ultimate\system\blocktype\AbstractBlockType::$templateName
+	 * The template name.
+	 * @var	string
 	 */
 	protected $templateName = 'contentBlockType';
 	
 	/**
-	 * @see \ultimate\system\blocktype\AbstractBlockType::$cacheBuilderClassName
+	 * The CacheBuilder class name.
+	 * @var	string
 	 */
 	protected $cacheBuilderClassName = '\ultimate\system\cache\builder\ContentCacheBuilder';
 	
 	/**
-	 * @see \ultimate\system\blocktype\AbstractBlockType::$cacheIndex
+	 * The cache index.
+	 * @var	string
 	 */
 	protected $cacheIndex = 'contents';
 	
 	/**
-	 * @see	\ultimate\system\blocktype\AbstractBlockType::$blockOptionIDs
+	 * The block option form element ids.
+	 * @var	string[]
 	 */
 	protected $blockOptionIDs = array(
 		'queryMode_{$blockID}',

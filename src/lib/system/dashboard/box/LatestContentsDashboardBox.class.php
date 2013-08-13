@@ -16,7 +16,7 @@
  * GNU Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with the Ultimate CMS. If not, see {@link http://www.gnu.org/licenses/}.
+ * along with the Ultimate CMS. If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -51,7 +51,12 @@ class LatestContentsDashboardBox extends AbstractSidebarDashboardBox {
 	public $contents = array();
 	
 	/**
-	 * @see	\wcf\system\dashboard\box\IDashboardBox::init()
+	 * Initializes this box.
+	 * 
+	 * @internal
+	 * 
+	 * @param	\wcf\data\dashboard\box\DashboardBox	$box
+	 * @param	\wcf\page\IPage							$page
 	 */
 	public function init(DashboardBox $box, IPage $page) {
 		parent::init($box, $page);
@@ -65,7 +70,11 @@ class LatestContentsDashboardBox extends AbstractSidebarDashboardBox {
 	}
 	
 	/**
-	 * @see	\wcf\system\dashboard\box\AbstractContentDashboardBox::render()
+	 * Renders box view.
+	 * 
+	 * @internal
+	 * 
+	 * @return	string
 	 */
 	protected function render() {
 		if (!count($this->contents)) return '';

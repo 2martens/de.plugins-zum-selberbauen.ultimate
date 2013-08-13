@@ -16,7 +16,7 @@
  * GNU Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with the Ultimate CMS. If not, see {@link http://www.gnu.org/licenses/}.
+ * along with the Ultimate CMS. If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -50,7 +50,7 @@ class CategoryFeedPage extends AbstractFeedPage {
 	public $application = 'ultimate';
 	
 	/**
-	 * @see \wcf\page\IPage::readParameters()
+	 * Reads the given parameters.
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -71,7 +71,7 @@ class CategoryFeedPage extends AbstractFeedPage {
 	}
 	
 	/**
-	 * @see \wcf\page\IPage::readData()
+	 * Reads/Gets the data to be displayed on this page.
 	 */
 	public function readData() {
 		parent::readData();

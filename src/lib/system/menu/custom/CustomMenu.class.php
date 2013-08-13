@@ -16,7 +16,7 @@
  * GNU Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
+ * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -76,6 +76,7 @@ class CustomMenu extends TreeMenu {
 	 * You have to call this method before using getMenuItems in order to get the menu items for your menu.
 	 * 
 	 * @since	1.0.0
+	 * @api
 	 * 
 	 * @param	\ultimate\data\menu\Menu	$menu
 	 * @return	void 
@@ -99,6 +100,7 @@ class CustomMenu extends TreeMenu {
 	 * This method should be called inside a template.
 	 * 
 	 * @since	1.0.0
+	 * @api
 	 * 
 	 * @return	\ultimate\data\menu\item\MenuItem[]|array[]|null
 	 * @see		\wcf\system\menu\TreeMenu::getMenuItems()
@@ -112,7 +114,7 @@ class CustomMenu extends TreeMenu {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.menu.TreeMenu.html#init
+	 * Initializes the CustomMenu.
 	 */
 	protected function init() {
 		// get menu items from cache
@@ -123,7 +125,7 @@ class CustomMenu extends TreeMenu {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.menu.TreeMenu.html#loadCache
+	 * Loads the cache.
 	 */
 	protected function loadCache() {
 		parent::loadCache();

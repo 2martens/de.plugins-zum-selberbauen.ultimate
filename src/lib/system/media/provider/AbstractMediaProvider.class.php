@@ -25,7 +25,6 @@
  * @subpackage	system.media.provider
  * @category	Ultimate CMS
  */
-
 namespace ultimate\system\media\provider;
 use wcf\system\event\EventHandler;
 use wcf\util\StringUtil;
@@ -59,7 +58,7 @@ abstract class AbstractMediaProvider implements IMediaProvider {
 	 * @param	integer	$height
 	 * @return	string
 	 * 
-	 * @see IMediaProvider::getHTML()
+	 * @see	IMediaProvider::getHTML()
 	 */
 	public function getHTML($source, $width, $height) {
 		// fire event

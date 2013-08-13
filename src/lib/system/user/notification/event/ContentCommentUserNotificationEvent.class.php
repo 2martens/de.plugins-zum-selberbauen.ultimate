@@ -16,7 +16,7 @@
  * GNU Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
+ * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -45,7 +45,9 @@ use wcf\system\WCF;
  */
 class ContentCommentUserNotificationEvent extends AbstractUserNotificationEvent {
 	/**
-	 * @see	\wcf\system\user\notification\event\IUserNotificationEvent::getMessage()
+	 * Returns the notification event message.
+	 * 
+	 * @return	string
 	 */
 	public function getMessage() {
 		return $this->getLanguage()->getDynamicVariable('wcf.user.notification.content.comment.message', array(
@@ -54,14 +56,19 @@ class ContentCommentUserNotificationEvent extends AbstractUserNotificationEvent 
 	}
 	
 	/**
-	 * @see	\wcf\system\user\notification\event\IUserNotificationEvent::getTitle()
+	 * Returns a short title used for the notification overlay.
+	 * 
+	 * @return	string
 	 */
 	public function getTitle() {
 		return $this->getLanguage()->get('wcf.user.notification.content.comment.title');
 	}
 	
 	/**
-	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getEmailMessage()
+	 * Returns the message for this notification event.
+	 * 
+	 * @param	string	$notificationType	(optional) 'instant' by default
+	 * @return	string
 	 */
 	public function getEmailMessage($notificationType = 'instant') {
 		$content = $this->getContent();
@@ -76,7 +83,9 @@ class ContentCommentUserNotificationEvent extends AbstractUserNotificationEvent 
 	}
 	
 	/**
-	 * @see	\wcf\system\user\notification\event\IUserNotificationEvent::getLink()
+	 * Returns object link.
+	 * 
+	 * @return	string
 	 */
 	public function getLink() {
 		$content = $this->getContent();

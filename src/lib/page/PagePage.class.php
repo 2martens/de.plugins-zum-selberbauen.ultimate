@@ -16,7 +16,7 @@
  * GNU Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
+ * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -49,16 +49,10 @@ use wcf\util\StringUtil;
  */
 class PagePage extends AbstractPage {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$useTemplate
+	 * If true, the template shall be used.
 	 * @var	boolean
 	 */
 	public $useTemplate = false;
-	
-	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededModules
-	 * @var	string[]
-	 */
-	public $neededModules = array();
 	
 	/**
 	 * The Page object.
@@ -85,7 +79,7 @@ class PagePage extends AbstractPage {
 	public $layout = null;
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
+	 * Reads the given parameters.
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -93,7 +87,7 @@ class PagePage extends AbstractPage {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
+	 * Reads/Gets the data to be displayed on this page.
 	 */
 	public function readData() {
 		parent::readData();
@@ -114,6 +108,9 @@ class PagePage extends AbstractPage {
 		$this->layout = LayoutHandler::getInstance()->getLayoutFromObjectData($this->page->__get('pageID'), 'page');
 	}
 	
+	/**
+	 * Assigns variables to the template engine.
+	 */
 	public function assignVariables() {
 		parent::assignVariables();
 		// get output
@@ -121,7 +118,7 @@ class PagePage extends AbstractPage {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#show
+	 * Shows the requested page.
 	 */
 	public function show() {
 		parent::show();
@@ -132,6 +129,10 @@ class PagePage extends AbstractPage {
 	
 	/**
 	 * Loads the cache.
+	 * 
+	 * @internal
+	 * 
+	 * @return	\ultimate\data\page\Page[]
 	 */
 	protected function loadCache() {
 		return PageCacheBuilder::getInstance()->getData(array(), 'pagesToSlug');

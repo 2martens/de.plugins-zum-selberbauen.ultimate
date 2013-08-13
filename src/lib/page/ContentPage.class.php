@@ -16,7 +16,7 @@
  * GNU Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
+ * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -50,16 +50,10 @@ use wcf\util\StringUtil;
  */
 class ContentPage extends AbstractPage {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$useTemplate
+	 * If true, the template shall be used.
 	 * @var	boolean
 	 */
 	public $useTemplate = false;
-	
-	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.AbstractPage.html#$neededModules
-	 * @var	string[]
-	 */
-	public $neededModules = array();
 	
 	/**
 	 * The Content object.
@@ -98,7 +92,7 @@ class ContentPage extends AbstractPage {
 	protected $contentIDsToPageID = array();
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readParameters
+	 * Reads the given parameters.
 	 */
 	public function readParameters() {
 		parent::readParameters();
@@ -108,7 +102,7 @@ class ContentPage extends AbstractPage {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#readData
+	 * Reads/Gets the data to be displayed on this page.
 	 */
 	public function readData() {
 		parent::readData();
@@ -125,7 +119,7 @@ class ContentPage extends AbstractPage {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#assignVariables
+	 * Assigns variables to the template engine.
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -134,7 +128,7 @@ class ContentPage extends AbstractPage {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.page.IPage.html#show
+	 * Shows the requested page.
 	 */
 	public function show() {
 		parent::show();

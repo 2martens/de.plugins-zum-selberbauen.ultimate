@@ -16,7 +16,7 @@
  * GNU Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with the Ultimate CMS. If not, see {@link http://www.gnu.org/licenses/}.
+ * along with the Ultimate CMS. If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -52,7 +52,7 @@ class FeedContentList extends ContentList {
 	public $decoratorClassName = 'ultimate\data\content\FeedContent';
 	
 	/**
-	 * Contains the ids of the categories the contents should be in.
+	 * The ids of the categories the contents should be in.
 	 * @var integer[]
 	 */
 	protected $categoryIDs = array();

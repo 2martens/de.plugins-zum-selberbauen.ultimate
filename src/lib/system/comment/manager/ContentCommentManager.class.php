@@ -16,7 +16,7 @@
  * GNU Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
+ * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -42,41 +42,46 @@ use wcf\system\WCF;
  * @category	Ultimate CMS
  */
 class ContentCommentManager extends AbstractCommentManager {
-	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.comment.manager.AbstractCommentManager.html#$permissionAdd
+	 * The permission to add a comment.
+	 * @var	string
 	 */
 	protected $permissionAdd = 'user.ultimate.content.canAddComment';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.comment.manager.AbstractCommentManager.html#$permissionEdit
+	 * The permission to edit a comment.
+	 * @var string
 	 */
 	protected $permissionEdit = 'user.ultimate.content.canEditComment';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.comment.manager.AbstractCommentManager.html#$permissionDelete
+	 * The permission to delete a comment.
+	 * @var string
 	 */
 	protected $permissionDelete = 'user.ultimate.content.canDeleteComment';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.comment.manager.AbstractCommentManager.html#$permissionModDelete
+	 * The mod permission to delete a comment.
+	 * @var string 
 	 */
 	protected $permissionModDelete = 'mod.ultimate.content.canDeleteComment';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.comment.manager.AbstractCommentManager.html#$permissionModEdit
+	 * The mod permission to edit a comment.
+	 * @var string
 	 */
 	protected $permissionModEdit = 'mod.ultimate.content.canEditComment';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.comment.manager.AbstractCommentManager.html#$permissionModDelete
+	 * The permission to be able to moderate.
+	 * @var string
 	 */
 	protected $permissionCanModerate = 'mod.ultimate.content.canModerateComment';
 	
 	/**
 	 * Initializes the permissions for this comment manager.
 	 * 
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.SingletonFactory.html#init
+	 * @internal
 	 */
 	protected function init() {
 		// set setting to option
@@ -84,7 +89,14 @@ class ContentCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.comment.manager.ICommentManager.html#isAccessible
+	 * Returns true if comments and responses for given object id are accessible by current user.
+	 * 
+	 * @api
+	 * @since	1.0.0
+	 * 
+	 * @param	integer	$objectID
+	 * @param	boolean	$validateWritePermission	(optional) false by default
+	 * @return	boolean
 	 */
 	public function isAccessible($objectID, $validateWritePermission = false) {
 		// check object id
@@ -125,7 +137,14 @@ class ContentCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.comment.manager.ICommentManager.html#getLink
+	 * Returns a link to given object type id and object id.
+	 * 
+	 * @api
+	 * @since	1.0.0
+	 * 
+	 * @param	integer	$objectTypeID
+	 * @param	integer	$objectID
+	 * @return	string
 	 */
 	public function getLink($objectTypeID, $objectID) {
 		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
@@ -140,7 +159,15 @@ class ContentCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.comment.manager.ICommentManager.html#getTitle
+	 * Returns the title for a comment or response.
+	 * 
+	 * @api
+	 * @since	1.0.0
+	 * 
+	 * @param	integer	$objectTypeID
+	 * @param	integer	$objectID
+	 * @param	boolean	$isResponse	(optional) false by default
+	 * @return	string
 	 */
 	public function getTitle($objectTypeID, $objectID, $isResponse = false) {
 		if ($isResponse) return WCF::getLanguage()->get('ultimate.content.commentResponse');
@@ -149,7 +176,12 @@ class ContentCommentManager extends AbstractCommentManager {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.comment.manager.ICommentManager.html#updateCounter
+	 * Updates total count of comments (includes responses).
+	 * 
+	 * {@internal Does nothing. }}
+	 * 
+	 * @param	integer	$objectID
+	 * @param	integer	$value
 	 */
 	public function updateCounter($objectID, $value) { }
 }

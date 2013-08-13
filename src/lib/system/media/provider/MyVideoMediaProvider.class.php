@@ -16,7 +16,7 @@
  * GNU Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
+ * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -50,7 +50,9 @@ class MyVideoMediaProvider extends AbstractMediaProvider {
 	);
 	
 	/**
-	 * @see \ultimate\system\media\provider\IMediaProvider::getHTML()
+	 * Returns the HTML for this provider.
+	 * 
+	 * {@inheritdoc}
 	 */
 	public function getHTML($source, $width, $height) {
 		$source = $this->getEmbedInformation(StringUtil::trim($source));
@@ -66,6 +68,12 @@ class MyVideoMediaProvider extends AbstractMediaProvider {
 		return $html;
 	}
 	
+	
+	/**
+	 * Returns embed information.
+	 * 
+	 * {@inheritdoc}
+	 */
 	protected function getEmbedInformation($source, $maxwidth = 0, $maxheight = 0) {
 		$regex = '^http://(?:www\.myvideo\.de)/watch/(\d+)';
 		$regexObj = new Regex($regex);

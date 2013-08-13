@@ -16,7 +16,7 @@
  * GNU Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
+ * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -54,7 +54,6 @@ class MenuItemHandler extends SingletonFactory {
 	 * @api
 	 * 
 	 * @param	integer	$menuID
-	 * 
 	 * @return	\ultimate\data\menu\item\MenuItem[]
 	*/
 	public function getMenuItems($menuID) {
@@ -102,7 +101,7 @@ class MenuItemHandler extends SingletonFactory {
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.SingletonFactory.html#init
+	 * Initializes the MenuItemHandler.
 	 */
 	protected function init() {
 		$this->menuItems = MenuItemCacheBuilder::getInstance()->getData(array(), 'menuItems');
@@ -111,7 +110,7 @@ class MenuItemHandler extends SingletonFactory {
 	/**
 	 * Reloads the menuItem cache.
 	 * 
-	 * @internal Calls the init method.
+	 * {@internal Calls the init method.}}
 	 */
 	public function reloadCache() {
 		MenuItemCacheBuilder::getInstance()->reset();

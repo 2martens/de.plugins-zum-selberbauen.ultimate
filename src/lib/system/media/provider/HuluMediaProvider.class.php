@@ -54,7 +54,9 @@ class HuluMediaProvider extends AbstractMediaProvider {
 	);
 	
 	/**
+	 * Returns the HTML for this provider.
 	 * 
+	 * {@inheritdoc}
 	 */
 	public function getHTML($source, $width, $height) {
 		$sourceArray = explode('|', $this->getEmbedInformation(StringUtil::trim($source), integer($width), integer($height)));
@@ -92,7 +94,9 @@ class HuluMediaProvider extends AbstractMediaProvider {
 	}
 	
 	/**
+	 * Returns embed information.
 	 * 
+	 * {@inheritdoc}
 	 */
 	protected function getEmbedInformation($source, $maxwidth = 0, $maxheight = 0) {
 		$regex = '^http://www\.hulu\.com/watch/([\d]+)';

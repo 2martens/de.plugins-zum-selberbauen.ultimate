@@ -16,7 +16,7 @@
  * GNU Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
+ * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -52,7 +52,7 @@ use wcf\system\WCF;
  */
 class Category extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**
-	 * Contains the category ID of the page category.
+	 * The category ID of the page category.
 	 * @var integer
 	 */
 	const PAGE_CATEGORY = 2;
@@ -76,7 +76,7 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledObject {
 	protected static $databaseTableIndexName = 'categoryID';
 	
 	/**
-	 * Contains the content to category database table name.
+	 * The content to category database table name.
 	 * @var	string
 	 */
 	protected $contentCategoryTable = 'content_to_category';

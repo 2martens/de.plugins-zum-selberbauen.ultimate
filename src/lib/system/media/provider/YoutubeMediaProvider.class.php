@@ -16,7 +16,7 @@
  * GNU Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}.
+ * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -52,13 +52,21 @@ class YoutubeMediaProvider extends AbstractMediaProvider {
 	);
 	
 	/**
-	 * @see \ultimate\system\media\provider\IMediaProvider::getHTML()
+	 * Returns the HTML for this provider.
+	 * 
+	 * {@inheritdoc}
 	 */
 	public function getHTML($source, $width, $height) {
 		$source = $this->getEmbedInformation(StringUtil::trim($source));
 		return parent::getHTML($source, $width, $height);
 	}
 	
+	
+	/**
+	 * Returns embed information.
+	 * 
+	 * {@inheritdoc}
+	 */
 	protected function getEmbedInformation($source, $maxwidth = 0, $maxheight = 0) {
 		// we have to let the escaping out as that is done in Regex itself, if we escape here, the result will be a wrong one
 		$regex = '^http://(?:www\.youtube\.com|youtu\.be)/(?:watch\?v=)?(\w+)((?:\?|&|&amp;)\w+=[\w\d]+(?:(?:\?|&|&amp;)\w+=[\w\d]+)*)?';
