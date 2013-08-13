@@ -24,14 +24,18 @@ class ContentCommentResponseUserNotificationEvent extends AbstractUserNotificati
 	private $content = null;
 	
 	/**
-	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getTitle()
+	 * Returns a short title used for the notification overlay.
+	 * 
+	 * @return	string
 	 */
 	public function getTitle() {
 		return $this->getLanguage()->get('wcf.user.notification.content.commentResponse.title');
 	}
 	
 	/**
-	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getMessage()
+	 * Returns the notification event message.
+	 * 
+	 * @return	string
 	 */
 	public function getMessage() {
 		$content = $this->getContent();
@@ -44,7 +48,10 @@ class ContentCommentResponseUserNotificationEvent extends AbstractUserNotificati
 	}
 	
 	/**
-	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getEmailMessage()
+	 * Returns the message for this notification event.
+	 * 
+	 * @param	string	$notificationType	(optional) 'instant' by default
+	 * @return	string
 	 */
 	public function getEmailMessage($notificationType = 'instant') {
 		$content = $this->getContent();
@@ -59,7 +66,9 @@ class ContentCommentResponseUserNotificationEvent extends AbstractUserNotificati
 	}
 	
 	/**
-	 * @see	wcf\system\user\notification\event\IUserNotificationEvent::getLink()
+	 * Returns object link.
+	 * 
+	 * @return	string
 	 */
 	public function getLink() {
 		$content = $this->getContent();
@@ -76,8 +85,7 @@ class ContentCommentResponseUserNotificationEvent extends AbstractUserNotificati
 	 * 
 	 * @return \ultimate\data\content\Content
 	 */
-	private function getContent()
-	{
+	private function getContent() {
 		if ($this->content === null) {
 			$commentID = $this->userNotificationObject->__get('commentID');
 			

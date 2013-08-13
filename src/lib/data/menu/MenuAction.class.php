@@ -56,13 +56,13 @@ class MenuAction extends AbstractDatabaseObjectAction {
 	/**
 	 * Array of permissions that are required for delete action.
 	 * @var	string[]
-	*/
+	 */
 	protected $permissionsDelete = array('admin.content.ultimate.canManageMenus');
 	
 	/**
 	 * Array of permissions that are required for update action.
 	 * @var	string[]
-	*/
+	 */
 	protected $permissionsUpdate = array('admin.content.ultimate.canManageMenus');
 	
 	/**

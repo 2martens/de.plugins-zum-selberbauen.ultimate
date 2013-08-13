@@ -43,17 +43,20 @@ use wcf\system\WCF;
  */
 class ContentCommentResponseUserNotificationObjectType extends AbstractUserNotificationObjectType {
 	/**
-	 * @see	wcf\system\user\notification\object\type\AbstractUserNotificationObjectType::$decoratorClassName
+	 * The decorator class name.
+	 * @var string
 	 */
 	protected static $decoratorClassName = 'wcf\system\user\notification\object\CommentResponseUserNotificationObject';
 	
 	/**
-	 * @see	wcf\system\user\notification\object\type\AbstractUserNotificationObjectType::$objectClassName
+	 * The object class name.
+	 * @var string
 	 */
 	protected static $objectClassName = 'wcf\data\comment\response\CommentResponse';
 	
 	/**
-	 * @see	wcf\system\user\notification\object\type\AbstractUserNotificationObjectType::$objectListClassName
+	 * The object list class name.
+	 * @var string
 	 */
 	protected static $objectListClassName = 'wcf\data\comment\response\CommentResponseList';
 }

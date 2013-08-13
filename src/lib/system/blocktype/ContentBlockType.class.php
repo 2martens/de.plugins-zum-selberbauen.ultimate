@@ -158,7 +158,9 @@ class ContentBlockType extends AbstractBlockType {
 	protected $likeData = array();
 	
 	/**
-	 * @see \ultimate\system\blocktype\IBlockType::readData()
+	 * Reads the necessary data.
+	 * 
+	 * @see IBlockType::readData()
 	 */
 	public function readData() {
 		if (!empty($this->requestType) && $this->requestType != 'content' && $this->requestType != 'index') {
@@ -410,14 +412,13 @@ class ContentBlockType extends AbstractBlockType {
 			}
 		}
 		
-		
 		// comments
 		$this->objectTypeID = CommentHandler::getInstance()->getObjectTypeID($this->objectType);
 		/* @var $objectType \wcf\data\object\type\ObjectType */
 		$objectType = CommentHandler::getInstance()->getObjectType($this->objectTypeID);
 		$this->commentManager = $objectType->getProcessor();
 		foreach ($this->contents as $contentID => $content) {
-			$this->commentLists[$contentID] = CommentHandler::getInstance()->getCommentList($this->commentManager, $this->objectTypeID,  $content->__get('contentID'));
+			$this->commentLists[$contentID] = CommentHandler::getInstance()->getCommentList($this->commentManager, $this->objectTypeID, $content->__get('contentID'));
 		}
 		
 		// fetch likes
@@ -430,7 +431,9 @@ class ContentBlockType extends AbstractBlockType {
 	}
 	
 	/**
-	 * @see \ultimate\system\blocktype\IBlockType::assignVariables()
+	 * Assigns template variables.
+	 * 
+	 * @see IBlockType::assignVariables()
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
@@ -520,7 +523,7 @@ class ContentBlockType extends AbstractBlockType {
 				$__metaAboveContent = str_replace('$categories', $categoryOutput, $__metaAboveContent);
 				$__metaAboveContent = str_replace('$tags', $tagOutput, $__metaAboveContent);
 				$metaAbove[$contentID] = $__metaAboveContent;
-			} elseif (!empty($metaAboveContent_i18n)) {
+			} else if (!empty($metaAboveContent_i18n)) {
 				$metaAbove_i18n[$contentID] = array();
 				foreach ($metaAboveContent_i18n as $languageID => $_metaAboveContent) {
 					$__metaAboveContent = str_replace('$datetime', $dateAndTime, $_metaAboveContent);
@@ -546,7 +549,7 @@ class ContentBlockType extends AbstractBlockType {
 				$__metaBelowContent = str_replace('$categories', $categoryOutput, $__metaBelowContent);
 				$__metaBelowContent = str_replace('$tags', $tagOutput, $__metaBelowContent);
 				$metaBelow[$contentID] = $__metaBelowContent;
-			} elseif (!empty($metaBelowContent_i18n)) {
+			} else if (!empty($metaBelowContent_i18n)) {
 				$metaBelow_i18n[$contentID] = array();
 				foreach ($metaBelowContent_i18n as $languageID => $_metaBelowContent) {
 					$__metaBelowContent = str_replace('$datetime', $dateAndTime, $_metaBelowContent);
@@ -574,7 +577,6 @@ class ContentBlockType extends AbstractBlockType {
 			'commentsVisibility',
 			'contentMetaDisplay'
 		);
-		
 		
 		// assigning values
 		WCF::getTPL()->assign('pages', $this->pages);

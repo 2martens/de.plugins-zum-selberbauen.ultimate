@@ -27,6 +27,7 @@
  */
 namespace ultimate\system\blocktype;
 use ultimate\data\block\Block;
+use ultimate\data\layout\Layout;
 use ultimate\data\IUltimateData;
 use ultimate\system\cache\builder\BlockCacheBuilder;
 use wcf\page\IPage;
@@ -154,7 +155,7 @@ abstract class AbstractBlockType implements IBlockType {
 	 * 
 	 * @see	IBlockType::init()
 	 */
-	public function init($requestType, \ultimate\data\layout\Layout $layout, $requestObject, $blockID, $page) {
+	public function init($requestType, Layout $layout, $requestObject, $blockID, $page) {
 		// fire event
 		EventHandler::getInstance()->fireAction($this, 'init');
 		
@@ -180,9 +181,9 @@ abstract class AbstractBlockType implements IBlockType {
 	 * @see	IBlockType::readData()
 	 */
 	public function readData() {
-	   // fire event
-	   EventHandler::getInstance()->fireAction($this, 'readData');
-	   $this->loadCache();
+		// fire event
+		EventHandler::getInstance()->fireAction($this, 'readData');
+		$this->loadCache();
 	}
 	
 	/**

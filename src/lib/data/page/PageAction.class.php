@@ -26,11 +26,10 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\page;
-use wcf\util\ArrayUtil;
-
-use wcf\system\exception\ValidateActionException;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
+use wcf\system\exception\ValidateActionException;
+use wcf\util\ArrayUtil;
 
 /**
  * Executes page-related actions.

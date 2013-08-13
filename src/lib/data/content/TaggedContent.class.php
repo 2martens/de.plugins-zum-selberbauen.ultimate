@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\content;
+use wcf\data\DatabaseObject;
 use wcf\system\tagging\ITagged;
 use wcf\system\tagging\TagEngine;
 use wcf\system\WCF;
@@ -54,7 +55,7 @@ class TaggedContent extends TaggableContent implements ITagged {
 	 * 
 	 * @param \wcf\data\DatabaseObject $object
 	 */
-	public function __construct(\wcf\data\DatabaseObject $object) {
+	public function __construct(DatabaseObject $object) {
 		parent::__construct($object);
 		$this->tags = $this->getTags();
 	}

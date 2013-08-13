@@ -41,12 +41,14 @@ use wcf\system\WCF;
  */
 class LinkCategoryType extends AbstractCategoryType {
 	/**
-	 * @see \wcf\system\category\AbstractCategoryType::$forceDescription
+	 * If true the user has to enter a description.
+	 * @var boolean
 	 */
 	protected $forceDescription = false;
 	
 	/**
-	 * @see \wcf\system\category\AbstractCategoryType::$hasDescription
+	 * Symbolizes if categories of this type have descriptions.
+	 * @var boolean
 	 */
 	protected $hasDescription = false;
 	
@@ -57,46 +59,56 @@ class LinkCategoryType extends AbstractCategoryType {
 	protected $i18nLangVarCategory = 'ultimate.link';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.category.AbstractCategoryType.html#$langVarPrefix
+	 * prefix used for language variables in templates
+	 * @var	string
 	 */
 	protected $langVarPrefix = 'wcf.acp.ultimate.linkCategory';
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.category.AbstractCategoryType.html#$permissionPrefix
+	 * permission prefix for the add/delete/edit permissions
+	 * @var	string
 	 */
 	protected $permissionPrefix = 'admin.content.ultimate';
 	
 	/**
+	 * name of the object types associated with categories of this type (the key is the definition name and value the object type name)
 	 * @var string[]
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.category.AbstractCategoryType.html#$objectTypes
 	 */
 	protected $objectTypes = array(
 		'com.woltlab.wcf.clipboardItem' => 'de.plugins-zum-selberbauen.ultimate.link'
 	);
 	
 	/**
-	 * @see	wcf\system\category\ICategoryType::canAddCategory()
+	 * Returns true if the active user can add a category of this type.
+	 * 
+	 * @return	boolean
 	 */
 	public function canAddCategory() {
 		return WCF::getSession()->getPermission($this->permissionPrefix.'.canManageCategories');
 	}
 	
 	/**
-	 * @see	wcf\system\category\ICategoryType::canDeleteCategory()
+	 * Returns true if the active user can delete a category of this type.
+	 * 
+	 * @return	boolean
 	 */
 	public function canDeleteCategory() {
 		return WCF::getSession()->getPermission($this->permissionPrefix.'.canManageCategories');
 	}
 	
 	/**
-	 * @see	wcf\system\category\ICategoryType::canEditCategory()
+	 * Returns true if the active user can edit a category of this type.
+	 * 
+	 * @return	boolean
 	 */
 	public function canEditCategory() {
 		return WCF::getSession()->getPermission($this->permissionPrefix.'.canManageCategories');
 	}
 	
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.category.ICategoryType.html#getApplication
+	 * Returns abbreviation of the application this category type belongs to.
+	 * 
+	 * @return	string
 	 */
 	public function getApplication() {
 		return 'ultimate';

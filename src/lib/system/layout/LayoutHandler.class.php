@@ -119,6 +119,7 @@ class LayoutHandler extends SingletonFactory {
 	 * Returns the layout for the given layoutID or null if there is no such layout.
 	 * 
 	 * @since	1.0.0
+	 * @api
 	 * 
 	 * @param	integer	$layoutID
 	 * @return	\ultimate\data\layout\Layout|NULL
@@ -136,6 +137,7 @@ class LayoutHandler extends SingletonFactory {
 	 * Returns a template for the given layout name or null if there is no such layout.
 	 * 
 	 * @since	1.0.0
+	 * @api
 	 * 
 	 * @param	integer	$objectID
 	 * @param	integer	$objectType
@@ -154,8 +156,9 @@ class LayoutHandler extends SingletonFactory {
 	}
 	
 	/**
-	 * @since	1.0.0
-	 * @see \wcf\system\SingletonFactory::init()
+	 * Initializes the LayoutHandler.
+	 * 
+	 * @internal
 	 */
 	protected function init() {
 		$this->loadCache();
@@ -163,8 +166,6 @@ class LayoutHandler extends SingletonFactory {
 	
 	/**
 	 * Loads the cache.
-	 * 
-	 * @since	1.0.0
 	 */
 	protected function loadCache() {
 		$this->layouts = LayoutCacheBuilder::getInstance()->getData(array(), 'layouts');

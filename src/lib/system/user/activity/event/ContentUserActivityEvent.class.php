@@ -43,6 +43,8 @@ use wcf\system\WCF;
  */
 class ContentUserActivityEvent extends SingletonFactory implements IUserActivityEvent {
 	/**
+	 * Prepares a list of events for output.
+	 * 
 	 * @param \wcf\data\user\activity\event\ViewableUserActivityEvent[] events
 	 * 
 	 * @see	\wcf\system\user\activity\event\IUserActivityEvent::prepare()

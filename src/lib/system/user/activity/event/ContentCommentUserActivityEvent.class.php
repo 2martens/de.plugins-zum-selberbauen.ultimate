@@ -57,6 +57,10 @@ class ContentCommentUserActivityEvent extends SingletonFactory implements IUserA
 	protected $authors = array();
 	
 	/**
+	 * Prepares a list of events for output.
+	 * 
+	 * @param \wcf\data\user\activity\event\ViewableUserActivityEvent[] events
+	 * 
 	 * @see	\wcf\system\user\activity\event\IUserActivityEvent::prepare()
 	 */
 	public function prepare(array $events) {
@@ -125,9 +129,9 @@ class ContentCommentUserActivityEvent extends SingletonFactory implements IUserA
 	}
 	
 	/**
-	 * Initializes the cache.<br />
+	 * Initializes the cache.
 	 * 
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.SingletonFactory.html#init
+	 * @internal
 	 */
 	protected function init() {
 		// load cache

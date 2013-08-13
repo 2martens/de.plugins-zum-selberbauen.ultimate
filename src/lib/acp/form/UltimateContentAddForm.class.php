@@ -45,8 +45,8 @@ use wcf\system\user\activity\event\UserActivityEventHandler;
 use wcf\system\Regex;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
-use wcf\util\DateUtil;
 use wcf\util\DateTimeUtil;
+use wcf\util\DateUtil;
 use wcf\util\MessageUtil;
 use wcf\util\StringUtil;
 
@@ -616,7 +616,7 @@ class UltimateContentAddForm extends MessageForm {
 				$this->statusID = 2; // planned
 				if (!isset($this->statusOptions[2])) $this->statusOptions[2] = WCF::getLanguage()->get('wcf.acp.ultimate.status.scheduled');
 				if (isset($this->statusOptions[3])) unset($this->statusOptions[3]);
-			} elseif ($this->publishDateTimestamp < TIME_NOW) {
+			} else if ($this->publishDateTimestamp < TIME_NOW) {
 				$this->statusID = 3; // published
 				if (isset($this->statusOptions[2])) unset($this->statusOptions[2]);
 				if (!isset($this->statusOptions[3])) $this->statusOptions[3] = WCF::getLanguage()->get('wcf.acp.ultimate.status.published');

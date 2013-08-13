@@ -126,7 +126,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		if ($this->statusID == 2) {
 			$this->statusOptions[2] = WCF::getLanguage()->get('wcf.acp.ultimate.status.scheduled');
 			$this->publishButtonLang = 'ultimate.button.update';
-		} elseif ($this->statusID == 3) {
+		} else if ($this->statusID == 3) {
 			$this->statusOptions[3] = WCF::getLanguage()->get('wcf.acp.ultimate.status.published');
 			$this->publishButtonLang = 'ultimate.button.update';
 		}

@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\util;
+use ultimate\data\page\Page;
 use wcf\util\StringUtil;
 
 /**
@@ -163,7 +164,7 @@ class PageUtil {
 	 * @param	string[]				 $pageSlugs
 	 * @return	\ultimate\data\page\Page
 	 */
-	public static function getRealPage(\ultimate\data\page\Page $page, $i = 1, $pageSlugs) {
+	public static function getRealPage(Page $page, $i = 1, $pageSlugs) {
 		$childPages = $page->__get('childPages');
 		$maxI = count($pageSlugs) - 1;
 		/* @var $returnPage \ultimate\data\page\Page */

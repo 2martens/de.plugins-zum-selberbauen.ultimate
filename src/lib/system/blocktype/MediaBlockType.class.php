@@ -46,27 +46,26 @@ use wcf\util\StringUtil;
  */
 class MediaBlockType extends AbstractBlockType {
 	/**
-	 * @see \ultimate\system\blocktype\AbstractBlockType::$templateName
+	 * The template name.
+	 * @var	string
 	 */
 	protected $templateName = 'mediaBlockType';
 	
 	/**
-	 * @see \ultimate\system\blocktype\AbstractBlockType::$cacheName
-	 */
-	protected $cacheName = 'mimetype';
-	
-	/**
-	 * @see \ultimate\system\blocktype\AbstractBlockType::$cacheBuilderClassName
+	 * The CacheBuilder class name.
+	 * @var	string
 	 */
 	protected $cacheBuilderClassName = '\ultimate\system\cache\builder\MediaMimetypeCacheBuilder';
 	
 	/**
-	 * @see \ultimate\system\blocktype\AbstractBlockType::$cacheIndex
+	 * The cache index.
+	 * @var	string
 	 */
 	protected $cacheIndex = 'mimeTypesToMIME';
 	
 	/**
-	 * @see	\ultimate\system\blocktype\AbstractBlockType::$blockOptionIDs
+	 * The block option form element ids.
+	 * @var	string[]
 	 */
 	protected $blockOptionIDs = array(
 		'mediaType_{$blockID}',
@@ -183,7 +182,7 @@ class MediaBlockType extends AbstractBlockType {
 				'mediaMimeType' => $this->mediaMimeType
 			));
 		}
-		elseif ($this->mediaSourceType == 'provider') {
+		else if ($this->mediaSourceType == 'provider') {
 			WCF::getTPL()->assign('mediaHTML', $this->mediaHTML);
 		}
 		

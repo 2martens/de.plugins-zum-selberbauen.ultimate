@@ -58,7 +58,7 @@ class ContentTagCloudCacheBuilder extends TagCloudCacheBuilder {
 		/* @var $objectType \wcf\data\object\type\ObjectType */
 		$objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.tagging.taggableObject', 'de.plugins-zum-selberbauen.ultimate.content');
 		$this->objectTypeIDs = array(
-		    intval($objectType->__get('objectTypeID'))
+			intval($objectType->__get('objectTypeID'))
 		);
 		// workaround
 		$this->languageIDs = ArrayUtil::toIntegerArray(array_keys(WCF::getLanguage()->getLanguages()));

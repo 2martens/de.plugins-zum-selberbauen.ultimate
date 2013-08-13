@@ -26,14 +26,13 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\content;
-use ultimate\system\cache\builder\LatestContentsCacheBuilder;
-
 use ultimate\data\layout\LayoutAction;
 use ultimate\data\page\PageAction;
 use ultimate\system\cache\builder\ContentCacheBuilder;
 use ultimate\system\cache\builder\ContentCategoryCacheBuilder;
 use ultimate\system\cache\builder\ContentTagCacheBuilder;
 use ultimate\system\cache\builder\ContentTagCloudCacheBuilder;
+use ultimate\system\cache\builder\LatestContentsCacheBuilder;
 use ultimate\system\cache\builder\LayoutCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use wcf\data\DatabaseObjectEditor;
@@ -269,11 +268,11 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 	}
 	
 	/**
-	* Adds new groups to this page.
-	* 
-	* @param	array	$groupIDs
-	* @param	boolean	$deleteOldGroups
-	*/
+	 * Adds new groups to this page.
+	 * 
+	 * @param	array	$groupIDs
+	 * @param	boolean	$deleteOldGroups
+	 */
 	public function addGroups(array $groupIDs, $deleteOldGroups = true) {
 		if ($deleteOldGroups) {
 			$sql = 'DELETE FROM ultimate'.WCF_N.'_user_group_to_content

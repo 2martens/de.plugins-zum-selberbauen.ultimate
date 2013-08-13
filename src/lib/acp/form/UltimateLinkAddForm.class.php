@@ -96,7 +96,7 @@ class UltimateLinkAddForm extends AbstractForm {
 	/**
 	 * All categories.
 	 * @var	\wcf\data\category\Category[]|string[]
-	*/
+	 */
 	public $categories = array();
 	
 	/**
@@ -235,19 +235,19 @@ class UltimateLinkAddForm extends AbstractForm {
 	 * @throws	\wcf\system\exception\UserInputException
 	 */
 	protected function validateLinkURL() {
-		 if (empty($this->linkURL)) {
-		 	throw new UserInputException('linkURL');
-		 }
-		 // add http scheme if no scheme exists
-		 $parsedURL = parse_url($this->linkURL);
-		 if (!isset($parsedURL['scheme'])) $this->linkURL = 'http://'.$this->linkURL;
-		 if (!LinkUtil::isValidURL($this->linkURL)) {
-		 	throw new UserInputException('linkURL', 'notValid');
-		 }
-		 
-		 if (!LinkUtil::isAvailableURL($this->linkURL, (isset($this->linkID) ? $this->linkID : 0))) {
-		 	throw new UserInputException('linkURL', 'notUnique');
-		 }
+		if (empty($this->linkURL)) {
+			throw new UserInputException('linkURL');
+		}
+		// add http scheme if no scheme exists
+		$parsedURL = parse_url($this->linkURL);
+		if (!isset($parsedURL['scheme'])) $this->linkURL = 'http://'.$this->linkURL;
+		if (!LinkUtil::isValidURL($this->linkURL)) {
+			throw new UserInputException('linkURL', 'notValid');
+		}
+		
+		if (!LinkUtil::isAvailableURL($this->linkURL, (isset($this->linkID) ? $this->linkID : 0))) {
+			throw new UserInputException('linkURL', 'notUnique');
+		}
 	}
 	
 	/**

@@ -71,7 +71,7 @@ class LinkCacheBuilder extends AbstractCacheBuilder {
 		}
 		
 		$data['links'] = $links;
-		$data['linkIDs'] = (is_null($linkIDs) ? array() : $linkIDs);
+		$data['linkIDs'] = ($linkIDs === null ? array() : $linkIDs);
 		
 		return $data;
 	}

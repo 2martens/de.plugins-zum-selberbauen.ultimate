@@ -77,25 +77,25 @@ class UltimateLinkAssignToCategoryForm extends AbstractForm {
 	/**
 	 * Contains Link objects.
 	 * @var \ultimate\data\link\CategorizedLink[]
-	*/
+	 */
 	public $links = array();
 	
 	/**
 	 * Contains category ids.
 	 * @var integer[]
-	*/
+	 */
 	public $categoryIDs = array();
 	
 	/**
 	 * Contains Category objects.
 	 * @var \ultimate\data\category\Category[]
-	*/
+	 */
 	public $categories = array();
 	
 	/**
 	 * The clipboard item type id.
 	 * @var integer|null
-	*/
+	 */
 	protected $typeID = null;
 	
 	/**
@@ -111,8 +111,7 @@ class UltimateLinkAssignToCategoryForm extends AbstractForm {
 		
 		// get link ids
 		$links = ClipboardHandler::getInstance()->getMarkedItems($this->typeID);
-		if (empty($links))
-		{
+		if (empty($links)) {
 			throw new IllegalLinkException();
 		}
 		

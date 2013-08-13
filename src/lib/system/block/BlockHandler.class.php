@@ -54,7 +54,7 @@ class BlockHandler extends SingletonFactory {
 	 * @api
 	 *
 	 * @return	\ultimate\data\block\Block[]
-	*/
+	 */
 	public function getBlocks() {
 		return $this->blocks;
 	}

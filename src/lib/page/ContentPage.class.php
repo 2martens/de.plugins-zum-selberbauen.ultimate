@@ -70,7 +70,7 @@ class ContentPage extends AbstractPage {
 	/**
 	 * The output.
 	 * @var string
-	*/
+	 */
 	public $output = '';
 	
 	/**

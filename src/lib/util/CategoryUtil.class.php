@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\util;
+use ultimate\data\category\Category;
 use wcf\util\StringUtil;
 
 /**
@@ -157,7 +158,7 @@ class CategoryUtil {
 	 * @param	string[]				 			$categorySlugs
 	 * @return	\ultimate\data\category\Category
 	 */
-	public static function getRealCategory(\ultimate\data\category\Category $category, $i = 1, $categorySlugs) {
+	public static function getRealCategory(Category $category, $i = 1, $categorySlugs) {
 		$childCategories = $category->__get('childCategories');
 		$maxI = count($categorySlugs) - 1;
 		/* @var $returnCategory \ultimate\data\category\Category|null */

@@ -43,24 +43,28 @@ use wcf\system\WCF;
  */
 class ContentCommentUserNotificationObjectType extends AbstractUserNotificationObjectType implements ICommentUserNotificationObjectType {
 	/**
-	 * @see	wcf\system\user\notification\object\type\AbstractUserNotificationObjectType::$decoratorClassName
+	 * The decorator class name.
+	 * @var string
 	 */
 	protected static $decoratorClassName = 'wcf\system\user\notification\object\CommentUserNotificationObject';
 	
 	/**
-	 * @see	wcf\system\user\notification\object\type\AbstractUserNotificationObjectType::$objectClassName
+	 * The object class name.
+	 * @var string
 	 */
 	protected static $objectClassName = 'wcf\data\comment\Comment';
 	
 	/**
-	 * @see	wcf\system\user\notification\object\type\AbstractUserNotificationObjectType::$objectListClassName
+	 * The object list class name.
+	 * @var string
 	 */
 	protected static $objectListClassName = 'wcf\data\comment\CommentList';
 	
 	/**
-	 * Returns the user id of the user who wrote the content which has been commented.<br />
+	 * Returns the user id of the user who wrote the content which has been commented.
 	 * 
-	 * @see	\wcf\system\user\notification\object\type\ICommentUserNotificationObjectType::getOwnerID()
+	 * @param	integer	$commentID
+	 * @return	integer
 	 */
 	public function getOwnerID($commentID) {
 		$sql = "SELECT objectID

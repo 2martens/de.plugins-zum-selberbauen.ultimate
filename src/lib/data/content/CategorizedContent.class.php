@@ -27,6 +27,7 @@
  */
 namespace ultimate\data\content;
 use ultimate\data\IUltimateData;
+use wcf\data\DatabaseObject;
 use wcf\data\DatabaseObjectDecorator;
 use wcf\system\WCF;
 
@@ -60,7 +61,7 @@ class CategorizedContent extends DatabaseObjectDecorator implements IUltimateDat
 	 *
 	 * @param \wcf\data\DatabaseObject $object
 	 */
-	public function __construct(\wcf\data\DatabaseObject $object) {
+	public function __construct(DatabaseObject $object) {
 		parent::__construct($object);
 		$this->categories = $this->getCategories();
 	}

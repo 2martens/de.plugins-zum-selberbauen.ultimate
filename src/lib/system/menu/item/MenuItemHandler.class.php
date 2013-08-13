@@ -55,7 +55,7 @@ class MenuItemHandler extends SingletonFactory {
 	 * 
 	 * @param	integer	$menuID
 	 * @return	\ultimate\data\menu\item\MenuItem[]
-	*/
+	 */
 	public function getMenuItems($menuID) {
 		return $this->menuItems[intval($menuID)];
 	}

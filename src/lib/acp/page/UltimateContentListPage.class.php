@@ -156,8 +156,9 @@ class UltimateContentListPage extends AbstractCachedListPage {
 		$items = $this->items;
 		
 		// if no category id and no tag id specified, proceed as always
-		if (!$this->categoryID && !$this->tagID) return;
-		elseif($this->categoryID) {
+		if (!$this->categoryID && !$this->tagID) {
+			return;
+		} else if ($this->categoryID) {
 			// if category id provided, change object variables and load the new cache
 			$this->cacheBuilderClassName = '\ultimate\system\cache\builder\ContentCategoryCacheBuilder';
 			$this->cacheIndex = 'contentsToCategoryID';
@@ -168,7 +169,7 @@ class UltimateContentListPage extends AbstractCachedListPage {
 			$this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
 		}
 		// both category id and tag id are provided, the category id wins
-		elseif ($this->tagID) {
+		else if ($this->tagID) {
 			// if tag id provided, change object variables and load the new cache
 			$this->cacheBuilderClassName = '\ultimate\system\cache\builder\ContentTagCacheBuilder';
 			$this->cacheIndex = 'contentsToTagID';

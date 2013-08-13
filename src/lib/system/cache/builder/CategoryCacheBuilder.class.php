@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\cache\builder;
+use ultimate\data\category\Category;
 use ultimate\data\category\CategoryList;
 use wcf\system\cache\builder\AbstractCacheBuilder;
 
@@ -106,7 +107,7 @@ class CategoryCacheBuilder extends AbstractCacheBuilder {
 	 * @param	\ultimate\data\category\Category	$category
 	 * @return	(\ultimate\data\category\Category|array)[]
 	 */
-	protected function buildNestedCategories($categoryID, \ultimate\data\category\Category $category) {
+	protected function buildNestedCategories($categoryID, Category $category) {
 		$childCategories = array();
 		if (!empty($category->childCategories)) {
 			foreach ($category->childCategories as $__categoryID => $__category) {

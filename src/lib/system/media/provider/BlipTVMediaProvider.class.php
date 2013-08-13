@@ -56,7 +56,7 @@ class BlipTVMediaProvider extends AbstractMediaProvider {
 	 * {@inheritdoc}
 	 */
 	public function getHTML($source, $width, $height) {
-		$sourceArray = explode('|' , $this->getEmbedInformation(StringUtil::trim($source), intval($width), intval($height)));
+		$sourceArray = explode('|', $this->getEmbedInformation(StringUtil::trim($source), intval($width), intval($height)));
 		$source = $sourceArray[0];
 		$width = $sourceArray[1];
 		$height = $sourceArray[2];

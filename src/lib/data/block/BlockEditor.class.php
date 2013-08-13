@@ -26,9 +26,8 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\block;
-use ultimate\system\cache\builder\TemplateCacheBuilder;
-
 use ultimate\system\cache\builder\BlockCacheBuilder;
+use ultimate\system\cache\builder\TemplateCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 use wcf\system\WCF;

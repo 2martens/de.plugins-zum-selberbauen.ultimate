@@ -70,7 +70,7 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
 	/**
 	 * The default sort field.
 	 * @var	string
-	*/
+	 */
 	public $defaultSortField = ULTIMATE_SORT_CATEGORY_SORTFIELD;
 	
 	/**
@@ -100,12 +100,12 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
 	/**
 	 * The url.
 	 * @var	string
-	*/
+	 */
 	protected $url = '';
 	
 	/**
 	 * Reads data.
-	*/
+	 */
 	public function readData() {
 		parent::readData();
 		$this->url = LinkHandler::getInstance()->getLink('UltimateCategoryList', array(), 'action='.rawurlencode($this->action).'&pageNo='.$this->pageNo.'&sortField='.$this->sortField.'&sortOrder='.$this->sortOrder);

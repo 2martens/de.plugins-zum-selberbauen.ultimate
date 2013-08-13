@@ -193,7 +193,7 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject, I
 		if ($this->visibility == 'public') {
 			$isVisible = true;
 		}
-		elseif ($this->visibility == 'protected') {
+		else if ($this->visibility == 'protected') {
 			$groupIDs = WCF::getUser()->getGroupIDs();
 			$contentGroupIDs = array_keys($this->groups);
 			$result = array_intersect($groupIDs, $contentGroupIDs);
@@ -219,7 +219,7 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject, I
 	 * Returns author's user id.
 	 *
 	 * @return	integer
-	*/
+	 */
 	public function getUserID() {
 		return $this->authorID;
 	}
@@ -228,7 +228,7 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject, I
 	 * Returns author's username.
 	 *
 	 * @return	string
-	*/
+	 */
 	public function getUsername() {
 		return $this->author->username;
 	}

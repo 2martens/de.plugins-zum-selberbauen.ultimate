@@ -26,10 +26,9 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\block;
-use wcf\system\WCF;
-
 use ultimate\data\blocktype\BlockType;
 use ultimate\data\AbstractUltimateDatabaseObject;
+use wcf\system\WCF;
 
 /**
  * Represents a block entry.

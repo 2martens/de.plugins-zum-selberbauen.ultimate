@@ -129,7 +129,7 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 		if ($this->statusID == 2) {
 			$this->statusOptions[2] = WCF::getLanguage()->get('wcf.acp.ultimate.status.scheduled');
 			$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.update');
-		} elseif ($this->statusID == 3) {
+		} else if ($this->statusID == 3) {
 			$this->statusOptions[3] = WCF::getLanguage()->get('wcf.acp.ultimate.status.published');
 			$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.update');
 		}

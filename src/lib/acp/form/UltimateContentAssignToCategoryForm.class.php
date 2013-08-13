@@ -111,8 +111,7 @@ class UltimateContentAssignToCategoryForm extends AbstractForm {
 		
 		// get content ids
 		$contents = ClipboardHandler::getInstance()->getMarkedItems($this->typeID);
-		if (empty($contents))
-		{
+		if (empty($contents)) {
 			throw new IllegalLinkException();
 		}
 		

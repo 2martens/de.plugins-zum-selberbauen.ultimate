@@ -26,9 +26,9 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\acp\form;
-use ultimate\data\category\CategoryList;
 use ultimate\data\category\CategoryAction;
 use ultimate\data\category\CategoryEditor;
+use ultimate\data\category\CategoryList;
 use ultimate\util\CategoryUtil;
 use wcf\form\AbstractForm;
 use wcf\system\exception\UserInputException;

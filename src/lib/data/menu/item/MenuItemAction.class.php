@@ -68,13 +68,13 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 	/**
 	 * Array of permissions that are required for delete action.
 	 * @var	string[]
-	*/
+	 */
 	protected $permissionsDelete = array('admin.content.ultimate.canManageMenuItems');
 	
 	/**
 	 * Array of permissions that are required for update action.
 	 * @var	string[]
-	*/
+	 */
 	protected $permissionsUpdate = array('admin.content.ultimate.canManageMenuItems');
 	
 	/**
@@ -185,7 +185,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 			$linkType = StringUtil::trim($this->parameters['data']['structure']['linkType']);
 			if ($linkType == 'controller') {
 				$parameters['menuItemController'] = StringUtil::trim($this->parameters['data']['structure']['controller']);
-			} elseif ($linkType == 'url') {
+			} else if ($linkType == 'url') {
 				$parameters['menuItemLink'] = StringUtil::trim($this->parameters['data']['structure']['url']);
 			}
 			
@@ -402,7 +402,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 	 * @param	boolean							 $implode
 	 * @return	string[]|string
 	 */
-	protected function getCategoryLink(\ultimate\data\category\Category $category, $implode = false) {
+	protected function getCategoryLink(Category $category, $implode = false) {
 		$slugs = array();
 		$slugs[] = $category->__get('categorySlug');
 		
@@ -425,7 +425,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 	 * @param	boolean						$implode
 	 * @return	string[]|string
 	 */
-	protected function getPageLink(\ultimate\data\page\Page $page, $implode = false) {
+	protected function getPageLink(Page $page, $implode = false) {
 		$slugs = array();
 		$slugs[] = $page->__get('pageSlug');
 		

@@ -91,7 +91,7 @@ class UltimateTemplateAddForm extends AbstractForm {
 	/**
 	 * The id of the selected widget area.
 	 * @var integer
-	*/
+	 */
 	public $selectedWidgetArea = 0;
 	
 	/**
@@ -109,7 +109,7 @@ class UltimateTemplateAddForm extends AbstractForm {
 	/**
 	 * The id of the selected custom menu.
 	 * @var integer
-	*/
+	 */
 	public $selectedMenu = 0;
 	
 	/**

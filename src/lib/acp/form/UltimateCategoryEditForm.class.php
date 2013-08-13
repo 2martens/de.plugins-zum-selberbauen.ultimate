@@ -56,7 +56,7 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 	/**
 	 * The category id.
 	 * @var	integer
-	*/
+	 */
 	public $categoryID = 0;
 	
 	/**

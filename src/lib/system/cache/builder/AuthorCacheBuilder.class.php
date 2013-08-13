@@ -90,7 +90,7 @@ class AuthorCacheBuilder extends AbstractCacheBuilder {
 					$result = (boolean) $group->getGroupOption($permission);
 					
 					if (!$result) continue;
-					elseif ($result === true) {
+					else if ($result === true) {
 						$isAuthor = true;
 						break 2;
 					}

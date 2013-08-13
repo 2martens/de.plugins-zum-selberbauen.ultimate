@@ -67,7 +67,7 @@ class UltimateMenuListPage extends AbstractCachedListPage {
 	/**
 	 * The default sort field.
 	 * @var	string
-	*/
+	 */
 	public $defaultSortField = 'menuID';
 	
 	/**

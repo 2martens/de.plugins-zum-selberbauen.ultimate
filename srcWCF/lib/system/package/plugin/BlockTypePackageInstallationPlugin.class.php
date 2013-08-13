@@ -33,7 +33,7 @@ use wcf\system\exception\SystemException;
  * Provides the block type data for the event listeners.
  * 
  * @author		Jim Martens
- * @copyright	2012 Jim Martens
+ * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.package.plugin
@@ -59,7 +59,12 @@ class BlockTypePackageInstallationPlugin extends AbstractXMLPackageInstallationP
 	public $className = 'ultimate\data\blocktype\BlockTypeEditor';
 	
 	/**
-	 * @see	\wcf\system\package\plugin\AbstractXMLPackageInstallationPlugin::prepareImport()
+	 * Prepares import, use this to map xml tags and attributes to their corresponding database fields.
+	 * 
+	 * @internal
+	 * 
+	 * @param	array	$data
+	 * @return	array
 	 */
 	protected function prepareImport(array $data) {
 		$databaseData = array(
@@ -71,7 +76,11 @@ class BlockTypePackageInstallationPlugin extends AbstractXMLPackageInstallationP
 	}
 	
 	/**
-	 * @see	\wcf\system\package\plugin\AbstractXMLPackageInstallationPlugin::validateImport()
+	 * Validates given items.
+	 * 
+	 * @internal
+	 * 
+	 * @param	array	$data
 	 */
 	protected function validateImport(array $data) {
 		parent::validateImport($data);
@@ -83,7 +92,7 @@ class BlockTypePackageInstallationPlugin extends AbstractXMLPackageInstallationP
 		if (empty($namespaces)) {
 			throw new SystemException('Invalid blockTypeClassName', 0, 'The blockTypeClassName has to contain namespaces.');
 		}
-		elseif (count($namespaces) > 1) {
+		else if (count($namespaces) > 1) {
 			$applicationPrefix = array_shift($namespaces);
 			if ($applicationPrefix != 'ultimate') {
 				throw new SystemException('Invalid blockTypeClassName', 0, 'The blockTypeClassName has to contain the application prefix \'ultimate\'.');
@@ -98,7 +107,12 @@ class BlockTypePackageInstallationPlugin extends AbstractXMLPackageInstallationP
 	}
 	
 	/**
-	 * @see	\wcf\system\package\plugin\AbstractXMLPackageInstallationPlugin::findExistingItem()
+	 * Find an existing item for updating, should return sql query.
+	 * 
+	 * @internal
+	 * 
+	 * @param	array	$data
+	 * @return	string
 	 */
 	protected function findExistingItem(array $data) {
 		$sqlData['sql'] = 'SELECT   blockTypeID, packageID, blockTypeName, blockTypeClassName, fixedHeight
@@ -113,7 +127,11 @@ class BlockTypePackageInstallationPlugin extends AbstractXMLPackageInstallationP
 	}
 	
 	/**
-	 * @see	\wcf\system\package\plugin\AbstractXMLPackageInstallationPlugin::handleDelete()
+	 * Deletes the given items.
+	 * 
+	 * @internal
+	 * 
+	 * @param	array	$items
 	 */
 	protected function handleDelete(array $items) {
 		$sql = "DELETE FROM ultimate".WCF_N."_".$this->tableName."
@@ -129,11 +147,13 @@ class BlockTypePackageInstallationPlugin extends AbstractXMLPackageInstallationP
 	}
 	
 	/**
-	 * @see	wcf\system\package\plugin\IPackageInstallationPlugin::uninstall()
+	 * Executes the uninstallation of this plugin.
+	 * 
+	 * @internal
 	 */
 	public function uninstall() {
 		parent::uninstall();
-	
+		
 		// clear cache immediately
 		BlockTypeCacheBuilder::getInstance()->reset();
 	}

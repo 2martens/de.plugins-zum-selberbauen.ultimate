@@ -63,9 +63,9 @@ class PublishContentPageCronjob extends AbstractCronjob {
 			$updateObjects[] = $content;
 		}
 		$parameters = array(
-		    'data' => array(
-			    'status' => 3
-		    )
+			'data' => array(
+				'status' => 3
+			)
 		);
 		$action = new ContentAction($updateObjects, 'update', $parameters);
 		$action->executeAction();

@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\util;
+use wcf\system\exception\SystemException;
 use wcf\system\io\RemoteFile;
 use wcf\system\Regex;
 use wcf\util\StringUtil;
@@ -114,7 +115,7 @@ class LinkUtil {
 		// Server port number (optional)";
 		$pattern .= '(?:\:[0-9]{1,5})?';
 		// The path (optional)
-        $pattern .= '(?:/(?:[\w0-9+,;\$_-]\.?)+)*/?';
+		$pattern .= '(?:/(?:[\w0-9+,;\$_-]\.?)+)*/?';
 		// GET Query (optional)
 		$pattern .= '(?:\?[a-z+&\$_.-][a-z0-9;:@/&%=+\$_.-]*)?';
 		$pattern .= '$';
@@ -147,7 +148,7 @@ class LinkUtil {
 			$headerRegex = new Regex('^HTTP/\d+\.\d+\s+2\d\d\s+.*$');
 			$isValid =  !empty($headers) ? (boolean) $headerRegex->match(StringUtil::trim($headers[0])) : false;
 		}
-		catch (\wcf\system\exception\SystemException $e) {
+		catch (SystemException $e) {
 			$isValid = false;
 		}
 		return $isValid;
@@ -213,7 +214,7 @@ class LinkUtil {
 					$url = $left_seg . self::encodePunycodeDomain($hostname) . $right_seg;
 				}
 			}
-		} elseif ($hostname === false) {
+		} else if ($hostname === false) {
 			return false;
 		}
 		return $url;

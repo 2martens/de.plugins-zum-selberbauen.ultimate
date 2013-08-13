@@ -29,7 +29,6 @@
  */
 namespace ultimate\data\widget\area;
 use ultimate\system\widget\WidgetHandler;
-
 use wcf\data\dashboard\box\DashboardBoxList;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\AbstractDatabaseObjectAction;
@@ -66,13 +65,13 @@ class WidgetAreaAction extends AbstractDatabaseObjectAction implements ISortable
 	/**
 	 * Array of permissions that are required for delete action.
 	 * @var	string[]
-	*/
+	 */
 	protected $permissionsDelete = array('admin.content.ultimate.canManageWidgetAreas');
 	
 	/**
 	 * Array of permissions that are required for update action.
 	 * @var	string[]
-	*/
+	 */
 	protected $permissionsUpdate = array('admin.content.ultimate.canManageWidgetAreas');
 	
 	/**
@@ -84,13 +83,13 @@ class WidgetAreaAction extends AbstractDatabaseObjectAction implements ISortable
 	/**
 	 * box structure
 	 * @var	integer[]
-	*/
+	 */
 	public $boxStructure = array();
 	
 	/**
 	 * object type object
 	 * @var	\wcf\data\object\type\ObjectType
-	*/
+	 */
 	public $objectType = null;
 	
 	/**

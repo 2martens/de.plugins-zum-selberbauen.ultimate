@@ -72,7 +72,7 @@ class UltimateMenuAddForm extends AbstractForm {
 	/**
 	 * The title of the category.
 	 * @var	string
-	*/
+	 */
 	public $menuName = '';
 	
 	/**

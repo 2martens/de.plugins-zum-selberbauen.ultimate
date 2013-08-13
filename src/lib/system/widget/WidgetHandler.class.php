@@ -47,7 +47,9 @@ use wcf\util\ClassUtil;
  */
 class WidgetHandler extends SingletonFactory {
 	/**
-	 * @link	http://doc.codingcorner.info/WoltLab-WCFSetup/classes/wcf.system.SingletonFactory.html#init
+	 * Initializes the WidgetHandler.
+	 * 
+	 * @internal
 	 */
 	protected function init() {
 		$this->boxCache = WidgetAreaBoxCacheBuilder::getInstance()->getData(array(), 'boxes');
@@ -95,6 +97,9 @@ class WidgetHandler extends SingletonFactory {
 	
 	/**
 	 * Clears widget area box cache.
+	 * 
+	 * @api
+	 * @since	1.0.0
 	 */
 	public static function clearCache() {
 		WidgetAreaBoxCacheBuilder::getInstance()->reset();

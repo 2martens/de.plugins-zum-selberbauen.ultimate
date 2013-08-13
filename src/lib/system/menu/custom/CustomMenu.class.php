@@ -179,7 +179,7 @@ class CustomMenu extends TreeMenu {
 					if ($visibility == 'public') {
 						$hasPermission = true;
 						continue;
-					} elseif ($visibility == 'private') {
+					} else if ($visibility == 'private') {
 						$hasPermission = (WCF::getUser()->__get('userID') == $content->__get('authorID'));
 						continue;
 					}
@@ -204,7 +204,7 @@ class CustomMenu extends TreeMenu {
 					if ($visibility == 'public') {
 						$hasPermission = true;
 						continue;
-					} elseif ($visibility == 'private') {
+					} else if ($visibility == 'private') {
 						$hasPermission = (WCF::getUser()->__get('userID') == $page->__get('authorID'));
 						continue;
 					}

@@ -140,7 +140,7 @@ class FeedContent extends CategorizedContent implements IFeedEntry {
 		/* @var $objectType \wcf\data\object\type\ObjectType */
 		$objectType = CommentHandler::getInstance()->getObjectType($objectTypeID);
 		$commentManager = $objectType->getProcessor();
-		$commentList = CommentHandler::getInstance()->getCommentList($commentManager, $objectTypeID,  $this->__get('contentID'));
+		$commentList = CommentHandler::getInstance()->getCommentList($commentManager, $objectTypeID, $this->__get('contentID'));
 		/* @var $commentList \wcf\data\comment\CommentList */
 		return $commentList->countObjects();
 	}

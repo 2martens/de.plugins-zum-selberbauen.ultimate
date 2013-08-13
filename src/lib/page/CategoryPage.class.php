@@ -58,7 +58,7 @@ class CategoryPage extends MultipleLinkPage {
 	/**
 	 * The Category object.
 	 * @var	\ultimate\data\category\Category
-	*/
+	 */
 	public $category = null;
 	
 	/**
@@ -70,7 +70,7 @@ class CategoryPage extends MultipleLinkPage {
 	/**
 	 * The output.
 	 * @var string
-	*/
+	 */
 	public $output = '';
 	
 	/**

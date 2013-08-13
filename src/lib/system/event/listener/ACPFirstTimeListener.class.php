@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\event\listener;
+use wcf\data\application\ApplicationEditor;
 use wcf\data\category\CategoryAction;
 use wcf\system\cache\builder\ApplicationCacheBuilder;
 use wcf\system\cache\builder\ObjectTypeCacheBuilder;
@@ -70,6 +71,8 @@ class ACPFirstTimeListener implements IEventListener {
 				$appID = $abbreviations['ultimate'];
 				$applications = ApplicationCacheBuilder::getInstance()->getData(array(), 'application');
 				$application = $applications[$appID];
+				$editor = new ApplicationEditor($application);
+				$editor->setAsPrimary();
 				$eventObj->data['redirectLocation'] = $application->getPageURL() . 'acp/index.php/Index/' . SID_ARG_1ST;
 			}
 			return;

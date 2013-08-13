@@ -67,7 +67,7 @@ class UltimateTemplateListPage extends AbstractCachedListPage {
 	/**
 	 * The default sort order.
 	 * @var	string
-	*/
+	 */
 	public $defaultSortOrder = ULTIMATE_SORT_TEMPLATE_SORTORDER;
 	
 	/**

@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\cache\builder;
+use ultimate\data\page\Page;
 use ultimate\data\page\PageList;
 use wcf\system\cache\builder\AbstractCacheBuilder;
 
@@ -106,7 +107,7 @@ class PageCacheBuilder extends AbstractCacheBuilder {
 	 * @param	boolean					 $returnCompleteArray
 	 * @return	(\ultimate\data\page\Page|array)[]
 	 */
-	protected function buildNestedPages($pageID, \ultimate\data\page\Page $page) {
+	protected function buildNestedPages($pageID, Page $page) {
 		$childPages = array();
 		if (!empty($page->childPages)) {
 			foreach ($page->childPages as $__pageID => $__page) {

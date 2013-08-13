@@ -26,8 +26,8 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\acp\form;
-use ultimate\data\widget\area\WidgetAreaAction;
 use ultimate\data\widget\area\WidgetArea;
+use ultimate\data\widget\area\WidgetAreaAction;
 use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\WCF;

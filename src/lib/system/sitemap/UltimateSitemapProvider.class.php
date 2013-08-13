@@ -42,13 +42,15 @@ use wcf\system\WCF;
  */
 class UltimateSitemapProvider implements ISitemapProvider {
 	/**
-	 * @see	wcf\system\sitemap\ISitemapProvider::getTemplate()
+	 * Returns the parsed sitemap template.
+	 * 
+	 * @return	string
 	 */
 	public function getTemplate() {
 		$menuItems = CurrentMenuCacheBuilder::getInstance()->getData(array(), 'currentMenuItems');
 		$menuItems = $menuItems[''];
 		$remainingItems = array();
-		foreach ($menuItems as $menuItemID =>$menuItem) {
+		foreach ($menuItems as $menuItemID => $menuItem) {
 			if ($menuItem->__get('menuItemController') === null) {
 				$remainingItems[$menuItemID] = $menuItem;
 			}

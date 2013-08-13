@@ -238,7 +238,7 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 					), 
 					WCF::getLanguage()->get($this->menuItemLink));
 			}
-		} elseif (strpos($menuItemLink, 'http') === 0) {
+		} else if (strpos($menuItemLink, 'http') === 0) {
 			return $menuItemLink;
 		}
 		throw new SystemException('Illegal link saved.');

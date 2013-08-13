@@ -32,14 +32,14 @@ use ultimate\data\page\PageEditor;
 use ultimate\util\PageUtil;
 use wcf\form\AbstractForm;
 use wcf\system\cache\builder\UserGroupCacheBuilder;
-use wcf\system\exception\UserInputException;
 use wcf\system\exception\SystemException;
+use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\Regex;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
-use wcf\util\DateUtil;
 use wcf\util\DateTimeUtil;
+use wcf\util\DateUtil;
 use wcf\util\StringUtil;
 
 /**
@@ -451,7 +451,7 @@ class UltimatePageAddForm extends AbstractForm {
 				$this->statusID = 2; // planned
 				if (!isset($this->statusOptions[2])) $this->statusOptions[2] = WCF::getLanguage()->get('wcf.acp.ultimate.status.scheduled');
 				if (isset($this->statusOptions[3])) unset($this->statusOptions[3]);
-			} elseif ($this->publishDateTimestamp < TIME_NOW) {
+			} else if ($this->publishDateTimestamp < TIME_NOW) {
 				$this->statusID = 3; // published
 				if (isset($this->statusOptions[2])) unset($this->statusOptions[2]);
 				if (!isset($this->statusOptions[3])) $this->statusOptions[3] = WCF::getLanguage()->get('wcf.acp.ultimate.status.published');

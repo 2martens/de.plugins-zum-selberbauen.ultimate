@@ -27,6 +27,7 @@
  */
 namespace ultimate\data\link;
 use ultimate\data\IUltimateData;
+use wcf\data\DatabaseObject;
 use wcf\data\DatabaseObjectDecorator;
 use wcf\system\category\CategoryHandler;
 use wcf\system\WCF;
@@ -61,7 +62,7 @@ class CategorizedLink extends DatabaseObjectDecorator implements IUltimateData {
 	 * 
 	 * @param \wcf\data\DatabaseObject $object
 	 */
-	public function __construct(\wcf\data\DatabaseObject $object) {
+	public function __construct(DatabaseObject $object) {
 		parent::__construct($object);
 		$this->categories = $this->getCategories();
 	}
