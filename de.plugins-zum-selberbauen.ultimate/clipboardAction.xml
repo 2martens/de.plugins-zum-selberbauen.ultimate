@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/clipboardAction.xsd">
+	<import>
+		<!-- category actions -->
+		<action name="deleteCategory">
+			<actionclassname><![CDATA[ultimate\system\clipboard\action\CategoryClipboardAction]]></actionclassname>
+			<showorder>1</showorder>
+			<pages>
+				<page><![CDATA[ultimate\acp\page\UltimateCategoryListPage]]></page>
+			</pages>
+		</action>
+		<!-- /category actions -->
+		<!-- content actions -->
+		<action name="assignContentToCategory">
+			<actionclassname><![CDATA[ultimate\system\clipboard\action\ContentClipboardAction]]></actionclassname>
+			<showorder>1</showorder>
+			<pages>
+				<page><![CDATA[ultimate\acp\page\UltimateContentListPage]]></page>
+			</pages>
+		</action>
+		<action name="deleteContent">
+			<actionclassname><![CDATA[ultimate\system\clipboard\action\ContentClipboardAction]]></actionclassname>
+			<showorder>2</showorder>
+			<pages>
+				<page><![CDATA[ultimate\acp\page\UltimateContentListPage]]></page>
+			</pages>
+		</action>
+		<!-- /content actions -->
+		<!-- link actions -->
+		<action name="assignLinkToCategory">
+			<actionclassname><![CDATA[ultimate\system\clipboard\action\LinkClipboardAction]]></actionclassname>
+			<showorder>1</showorder>
+			<pages>
+				<page><![CDATA[ultimate\acp\page\UltimateLinkListPage]]></page>
+			</pages>
+		</action>
+		<action name="deleteLink">
+			<actionclassname><![CDATA[ultimate\system\clipboard\action\LinkClipboardAction]]></actionclassname>
+			<showorder>2</showorder>
+			<pages>
+				<page><![CDATA[ultimate\acp\page\UltimateLinkListPage]]></page>
+			</pages>
+		</action>
+		<!-- /link actions -->
+		<!-- menu actions -->
+		<action name="deleteMenu">
+			<actionclassname><![CDATA[ultimate\system\clipboard\action\MenuClipboardAction]]></actionclassname>
+			<showorder>1</showorder>
+			<pages>
+				<page><![CDATA[ultimate\acp\page\UltimateMenuListPage]]></page>
+			</pages>
+		</action>
+		<!-- /menu actins -->
+		<!-- page actions -->
+		<action name="deletePage">
+			<actionclassname><![CDATA[ultimate\system\clipboard\action\PageClipboardAction]]></actionclassname>
+			<showorder>1</showorder>
+			<pages>
+				<page><![CDATA[ultimate\acp\page\UltimatePageListPage]]></page>
+			</pages>
+		</action>
+		<!-- /page actions -->
+		<!-- template actions -->
+		<action name="deleteTemplate">
+			<actionclassname><![CDATA[ultimate\system\clipboard\action\TemplateClipboardAction]]></actionclassname>
+			<showorder>1</showorder>
+			<pages>
+				<page><![CDATA[ultimate\acp\page\UltimateTemplateListPage]]></page>
+			</pages>
+		</action>
+		<!-- /template actions -->
+	</import>
+</data>

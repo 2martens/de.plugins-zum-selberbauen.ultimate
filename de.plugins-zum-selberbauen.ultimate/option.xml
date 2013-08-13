@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/option.xsd">
+	<import>
+		<categories>
+			<category name="ultimate">
+				<showorder>2</showorder>
+				<permissions>admin.content.ultimate.canConfigureOptions</permissions>
+			</category>
+				<category name="ultimate.general">
+					<parent>ultimate</parent>
+					<showorder>1</showorder>
+				</category>
+					<category name="ultimate.general.content">
+						<parent>ultimate.general</parent>
+						<showorder>1</showorder>
+					</category>
+					<category name="ultimate.general.template">
+						<parent>ultimate.general</parent>
+						<showorder>2</showorder>
+					</category>
+				<category name="ultimate.sort">
+					<parent>ultimate</parent>
+					<showorder>2</showorder>
+				</category>
+					<category name="ultimate.sort.category">
+						<parent>ultimate.sort</parent>
+						<showorder>1</showorder>
+					</category>
+					<category name="ultimate.sort.content">
+						<parent>ultimate.sort</parent>
+						<showorder>2</showorder>
+					</category>
+					<category name="ultimate.sort.page">
+						<parent>ultimate.sort</parent>
+						<showorder>3</showorder>
+					</category>
+					<category name="ultimate.sort.template">
+						<parent>ultimate.sort</parent>
+						<showorder>4</showorder>
+					</category>
+					<category name="ultimate.sort.widgetArea">
+						<parent>ultimate.sort</parent>
+						<showorder>5</showorder>
+					</category>
+			<category name="dashboard.sidebar.latestContents">
+                <parent>dashboard.sidebar</parent>
+            </category>	
+		</categories>
+		<options>
+			<option name="ultimate_general_englishLanguage">
+				<categoryname>ultimate.general</categoryname>
+				<optiontype>select</optiontype>
+				<defaultvalue><![CDATA[true]]></defaultvalue>
+				<selectoptions>
+					<![CDATA[true:wcf.acp.option.ultimate_general_englishLanguage.BE
+false:wcf.acp.option.ultimate_general_englishLanguage.AE]]>
+				</selectoptions>
+			</option>
+			
+			<!-- general/content options -->
+			<option name="ultimate_general_content_metaAboveContent">
+				<categoryname>ultimate.general.content</categoryname>
+				<optiontype>textareaI18n</optiontype>
+				<supporti18n>1</supporti18n>
+				<requirei18n>0</requirei18n>
+			</option>
+			<option name="ultimate_general_content_metaBelowContent">
+				<categoryname>ultimate.general.content</categoryname>
+				<optiontype>textareaI18n</optiontype>
+				<supporti18n>1</supporti18n>
+				<requirei18n>0</requirei18n>
+			</option>
+			<option name="ultimate_general_content_comments_per_page">
+				<categoryname>ultimate.general.content</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>10</defaultvalue>
+			</option>
+			<option name="ultimate_general_content_continueReadingLength">
+				<categoryname>ultimate.general.content</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>150</defaultvalue>
+			</option>
+			<!-- /general/content options -->
+			
+			<!-- general/template options -->
+			<option name="ultimate_general_template_collapsible_sidebars">
+				<categoryname>ultimate.general.template</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+			</option>
+			
+			<!-- /general/template options -->
+			
+			<!-- sort order/field for UltimateCategoryListPage -->
+			<option name="ultimate_sort_category_sortField">
+				<categoryname>ultimate.sort.category</categoryname>
+				<optiontype>select</optiontype>
+				<defaultvalue><![CDATA[categoryID]]></defaultvalue>
+				<selectoptions>
+					<![CDATA[categoryID:wcf.acp.option.ultimate_sort_category_sortField.categoryID
+categoryTitle:wcf.acp.option.ultimate_sort_category_sortField.categoryTitle
+categoryDescription:wcf.acp.option.ultimate_sort_category_sortField.categoryDescription
+categorySlug:wcf.acp.option.ultimate_sort_category_sortField.categorySlug
+categoryContents:wcf.acp.option.ultimate_sort_category_sortField.categoryContents]]>
+				</selectoptions>
+			</option>
+			<option name="ultimate_sort_category_sortOrder">
+				<categoryname>ultimate.sort.category</categoryname>
+				<optiontype>select</optiontype>
+				<defaultvalue><![CDATA[ASC]]></defaultvalue>
+				<selectoptions>
+					<![CDATA[ASC:wcf.global.sortOrder.ascending
+DESC:wcf.global.sortOrder.descending]]>
+				</selectoptions>
+			</option>
+			<!-- /sort order/field for UltimateCategoryListPage -->
+			<!-- sort order/field for UltimateContentListPage -->
+			<option name="ultimate_sort_content_sortField">
+				<categoryname>ultimate.sort.content</categoryname>
+				<optiontype>select</optiontype>
+				<defaultvalue><![CDATA[contentID]]></defaultvalue>
+				<selectoptions>
+					<![CDATA[contentID:wcf.acp.option.ultimate_sort_content_sortField.contentID
+contentTitle:wcf.acp.option.ultimate_sort_content_sortField.contentTitle
+contentAuthor:wcf.acp.option.ultimate_sort_content_sortField.contentAuthor
+publishDate:wcf.acp.option.ultimate_sort_content_sortField.publishDate
+lastModified:wcf.acp.option.ultimate_sort_content_sortField.lastModified]]>
+				</selectoptions>
+			</option>
+			<option name="ultimate_sort_content_sortOrder">
+				<categoryname>ultimate.sort.content</categoryname>
+				<optiontype>select</optiontype>
+				<defaultvalue><![CDATA[ASC]]></defaultvalue>
+				<selectoptions>
+					<![CDATA[ASC:wcf.global.sortOrder.ascending
+DESC:wcf.global.sortOrder.descending]]>
+				</selectoptions>
+			</option>
+			<!-- /sort order/field for UltimateContentListPage -->
+			<!-- sort order/field for UltimatePageListPage -->
+			<option name="ultimate_sort_page_sortField">
+				<categoryname>ultimate.sort.page</categoryname>
+				<optiontype>select</optiontype>
+				<defaultvalue><![CDATA[pageID]]></defaultvalue>
+				<selectoptions>
+					<![CDATA[pageID:wcf.acp.option.ultimate_sort_page_sortField.pageID
+pageTitle:wcf.acp.option.ultimate_sort_page_sortField.pageTitle
+pageAuthor:wcf.acp.option.ultimate_sort_page_sortField.pageAuthor
+publishDate:wcf.acp.option.ultimate_sort_page_sortField.publishDate
+lastModified:wcf.acp.option.ultimate_sort_page_sortField.lastModified]]>
+				</selectoptions>
+			</option>
+			<option name="ultimate_sort_page_sortOrder">
+				<categoryname>ultimate.sort.page</categoryname>
+				<optiontype>select</optiontype>
+				<defaultvalue><![CDATA[ASC]]></defaultvalue>
+				<selectoptions>
+					<![CDATA[ASC:wcf.global.sortOrder.ascending
+DESC:wcf.global.sortOrder.descending]]>
+				</selectoptions>
+			</option>
+			<!-- /sort order/field for UltimatePageListPage -->
+			
+			<!-- sort order/field for UltimateTemplateListPage -->
+			<option name="ultimate_sort_template_sortField">
+				<categoryname>ultimate.sort.template</categoryname>
+				<optiontype>select</optiontype>
+				<defaultvalue><![CDATA[templateID]]></defaultvalue>
+				<selectoptions>
+					<![CDATA[templateID:wcf.acp.option.ultimate_sort_template_sortField.templateID
+templateName:wcf.acp.option.ultimate_sort_template_sortField.templateName]]>
+				</selectoptions>
+			</option>
+			<option name="ultimate_sort_template_sortOrder">
+				<categoryname>ultimate.sort.template</categoryname>
+				<optiontype>select</optiontype>
+				<defaultvalue><![CDATA[ASC]]></defaultvalue>
+				<selectoptions>
+					<![CDATA[ASC:wcf.global.sortOrder.ascending
+DESC:wcf.global.sortOrder.descending]]>
+				</selectoptions>
+			</option>
+			<!-- /sort order/field for UltimateTemplateListPage -->
+			
+			<!-- sort order/field for UltimateWidgetAreaListPage -->
+			<option name="ultimate_sort_widgetArea_sortField">
+				<categoryname>ultimate.sort.widgetArea</categoryname>
+				<optiontype>select</optiontype>
+				<defaultvalue><![CDATA[widgetAreaID]]></defaultvalue>
+				<selectoptions>
+					<![CDATA[widgetAreaID:wcf.acp.option.ultimate_sort_widgetArea_sortField.widgetAreaID
+widgetAreaName:wcf.acp.option.ultimate_sort_widgetArea_sortField.widgetAreaName]]>
+				</selectoptions>
+			</option>
+			<option name="ultimate_sort_widgetArea_sortOrder">
+				<categoryname>ultimate.sort.widgetArea</categoryname>
+				<optiontype>select</optiontype>
+				<defaultvalue><![CDATA[ASC]]></defaultvalue>
+				<selectoptions>
+					<![CDATA[ASC:wcf.global.sortOrder.ascending
+DESC:wcf.global.sortOrder.descending]]>
+				</selectoptions>
+			</option>
+			<!-- /sort order/field for UltimateWidgetAreaListPage -->
+            
+            <!-- dashboard.sidebar.latestContents -->
+            <option name="ultimate_latest_contents_items">
+                <categoryname>dashboard.sidebar.latestContents</categoryname>
+                <optiontype>integer</optiontype>
+                <defaultvalue>5</defaultvalue>
+            </option>
+            <!-- /dashboard.sidebar.latestContents -->
+		</options>
+	</import>
+</data>

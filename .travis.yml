@@ -1,0 +1,16 @@
+language: php
+php:
+  - 5.4
+  - 5.3
+
+before_install:
+  - pear install pear/PHP_CodeSniffer
+  - phpenv rehash
+script:
+  - find . -type f -name '*.php' |xargs -I file php -l file > /dev/null
+  - phpcs -p --extensions=php --ignore="*/thirdParty/*" --standard="`pwd`/CodeSniff/PzS" .
+ 
+branches:
+  only:
+    - master
+    - dev

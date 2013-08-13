@@ -48,3 +48,15 @@ nbactions.xml
 # Ignore packages build directly in the workspace. They can however be added manually via git add, if wanted.
 *.tar
 *.tar.gz
+
+# phpdoc
+phpdoc.xml
+
+# xsd files
+*types.xsd
+
+# Local installation
+src/cache/*.php
+src/config.inc.php
+src/php_errors.log
+src/acp/style/style*.css

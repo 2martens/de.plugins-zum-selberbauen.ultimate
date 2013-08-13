@@ -1,0 +1,58 @@
+/* 
+
+File: ultimate.less 
+Copyright 2011-2013 by Jim Martens.
+
+*/
+
+/** invisible **/
+
+.ultimateHidden {
+	display: none !important;
+}
+
+/** general lists **/
+ul.nestedList > li{
+	padding-left: 1.0em;
+	margin-left: 1.0em;
+}
+
+/** content **/
+a.link {
+    color: @wcfLinkColor !important;
+}
+
+.block > .content > p {
+    margin-top: 12px !important;
+    margin-bottom: 12px !important;
+}
+
+.abstract {
+    font-weight: 600;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    font-size: 110% !important;
+}
+
+section.comments {
+    border-top: 1px dotted @wcfContainerBorderColor;
+    margin-top: 5px;
+}
+
+.ultimateWhiteBackgroundColor {
+    background-color: rgb(255, 255, 255) !important;
+}
+
+.block {
+    &.media-block-type {
+        &.left {
+            text-align: left;
+        }
+        &.center {
+            text-align: center;
+        }
+        &.right {
+            text-align: right;
+        }
+    }
+}

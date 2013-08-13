@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/object-type.xsd">
+    <import>
+        <!-- clipboard types -->
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.category</name>
+            <definitionname>com.woltlab.wcf.clipboardItem</definitionname>
+            <listclassname><![CDATA[ultimate\data\category\CategoryList]]></listclassname>
+        </type>
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.content</name>
+            <definitionname>com.woltlab.wcf.clipboardItem</definitionname>
+            <listclassname><![CDATA[ultimate\data\content\ContentList]]></listclassname>
+        </type>
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.menu</name>
+            <definitionname>com.woltlab.wcf.clipboardItem</definitionname>
+            <listclassname><![CDATA[ultimate\data\menu\MenuList]]></listclassname>
+        </type>
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.menuItem</name>
+            <definitionname>com.woltlab.wcf.clipboardItem</definitionname>
+            <listclassname><![CDATA[ultimate\data\menu\item\MenuItemList]]></listclassname>
+        </type>
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.page</name>
+            <definitionname>com.woltlab.wcf.clipboardItem</definitionname>
+            <listclassname><![CDATA[ultimate\data\page\PageList]]></listclassname>
+        </type>
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.template</name>
+            <definitionname>com.woltlab.wcf.clipboardItem</definitionname>
+            <listclassname><![CDATA[ultimate\data\template\TemplateList]]></listclassname>
+        </type>
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.link</name>
+            <definitionname>com.woltlab.wcf.clipboardItem</definitionname>
+            <listclassname><![CDATA[ultimate\data\link\LinkList]]></listclassname>
+        </type>
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.widgetArea</name>
+            <definitionname>com.woltlab.wcf.clipboardItem</definitionname>
+            <listclassname><![CDATA[ultimate\data\widget\area\WidgetAreaList]]></listclassname>
+        </type>
+        <!-- /clipboard types -->
+        
+        <!-- Visit Tracker -->
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.content</name>
+            <definitionname>com.woltlab.wcf.visitTracker.objectType</definitionname>
+        </type>
+        <!-- /Visit Tracker -->
+        
+        <!-- commentable types -->
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.content.comment</name>
+            <definitionname>com.woltlab.wcf.comment.commentableContent</definitionname>
+            <classname><![CDATA[ultimate\system\comment\manager\ContentCommentManager]]></classname>
+        </type>
+        <!-- /commentable types -->
+        
+        <!-- dashboard types -->
+        <type>
+        	<name>de.plugins-zum-selberbauen.ultimate.template</name>
+        	<definitionname>com.woltlab.wcf.user.dashboardContainer</definitionname>
+        	<allowcontent>0</allowcontent>
+        	<allowsidebar>1</allowsidebar>
+        </type>
+        <!-- /dashboard types -->
+        
+        <!-- notification types -->
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.content.comment.notification</name>
+            <definitionname>com.woltlab.wcf.notification.objectType</definitionname>
+            <classname><![CDATA[ultimate\system\user\notification\object\type\ContentCommentUserNotificationObjectType]]></classname>
+        </type>
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.content.comment.response.notification</name>
+            <definitionname>com.woltlab.wcf.notification.objectType</definitionname>
+            <classname><![CDATA[ultimate\system\user\notification\object\type\ContentCommentResponseUserNotificationObjectType]]></classname>
+        </type>
+        <!-- /notification types -->
+        
+        <!-- recent activity types -->
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.likeableContent.recentActivityEvent</name>
+            <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
+            <classname><![CDATA[ultimate\system\user\activity\event\LikeableContentUserActivityEvent]]></classname>
+        </type>
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.recentActivityEvent.content</name>
+            <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
+            <classname>ultimate\system\user\activity\event\ContentUserActivityEvent</classname>
+        </type>
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.content.comment.recentActivityEvent</name>
+            <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
+            <classname><![CDATA[ultimate\system\user\activity\event\ContentCommentUserActivityEvent]]></classname>
+        </type>
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.content.comment.response.recentActivityEvent</name>
+            <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
+            <classname><![CDATA[ultimate\system\user\activity\event\ContentCommentResponseUserActivityEvent]]></classname>
+        </type>
+        <!-- /recent activity types -->
+        
+        <!-- taggable items -->
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.content</name>
+            <definitionname>com.woltlab.wcf.tagging.taggableObject</definitionname>
+            <classname><![CDATA[ultimate\system\tagging\TaggableContent]]></classname>
+        </type>
+        <!-- /taggable types -->
+        
+        <!-- category types -->
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.linkCategory</name>
+            <definitionname>com.woltlab.wcf.category</definitionname>
+            <classname><![CDATA[ultimate\system\category\LinkCategoryType]]></classname>
+        </type>
+        <!-- /category types -->
+        
+        <!-- Like -->
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.likeableContent</name>
+            <definitionname>com.woltlab.wcf.like.likeableObject</definitionname>
+            <classname>ultimate\data\content\LikeableContentProvider</classname>
+        </type>
+        <!-- /Like -->
+    </import>
+</data>

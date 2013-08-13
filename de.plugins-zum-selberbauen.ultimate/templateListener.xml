@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/templateListener.xsd">
+	<import>
+		<!-- frontend language -->
+		<templatelistener name="buttonLanguage">
+			<environment>user</environment>
+			<templatename>headInclude</templatename>
+			<eventname>javascriptLanguageImport</eventname>
+			<templatecode><![CDATA[,
+'ultimate.button.saveAsDraft': '{lang}ultimate.button.saveAsDraft{/lang}',
+'ultimate.button.saveAsPending': '{lang}ultimate.button.saveAsPending{/lang}',
+'ultimate.button.schedule': '{lang}ultimate.button.schedule{/lang}',
+'ultimate.button.publish': '{lang}ultimate.button.publish{/lang}',
+'ultimate.button.update': '{lang}ultimate.button.update{/lang}']]></templatecode>
+		</templatelistener>
+		<!-- /frontend language -->
+		
+		<!-- frontend headInclude -->
+		<templatelistener name="includeUltimateJS">
+			<environment>user</environment>
+			<templatename>headInclude</templatename>
+			<eventname>javascriptInclude</eventname>
+			<templatecode><![CDATA[<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.js?v={@$__wcfVersion}"></script>
+<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.Content.js?v={@$__wcfVersion}"></script>
+{if $customMenu|isset}{@$customMenu}{/if}
+]]></templatecode>
+		</templatelistener>
+        
+        <templatelistener name="includeUltimateLogo">
+            <environment>user</environment>
+            <templatename>header</templatename>
+            <eventname>headerLogo</eventname>
+            <templatecode><![CDATA[{include file='__headerLogo' application='ultimate'}]]></templatecode>
+        </templatelistener>
+		<!-- /frontend headInclude -->
+        
+        <!-- frontend header -->
+        <templatelistener name="includeCustomMenuJS">
+            <environment>user</environment>
+            <templatename>header</templatename>
+            <eventname>headerContents</eventname>
+            <templatecode><![CDATA[{include file='__customMenuJS' application='ultimate'}]]></templatecode>
+        </templatelistener>
+        <!-- /frontend header -->
+        
+        <!-- frontend copyright -->
+        <templatelistener name="copyright">
+            <environment>user</environment>
+            <templatename>footer</templatename>
+            <eventname>copyright</eventname>
+            <templatecode><![CDATA[{include file='__copyright' application='ultimate'}]]></templatecode>
+        </templatelistener>
+        <!-- /frontend copyright -->
+		
+		<!-- ACP logo -->
+		<templatelistener name="headerLogoUltimateACP">
+			<environment>admin</environment>
+			<templatename>header</templatename>
+			<eventname>headerLogo</eventname>
+			<templatecode><![CDATA[{if $__ultimate->isActiveApplication()}<img src="{@$__wcf->getPath()}images/wcfLogo2.svg" alt="" width="300" height="58" />{/if}]]></templatecode>
+		</templatelistener>
+		<!-- /ACP logo -->
+        
+        <!-- ACP -->
+        <templatelistener name="ultimateVersion">
+            <environment>admin</environment>
+            <templatename>index</templatename>
+            <eventname>softwareVersions</eventname>
+            <templatecode><![CDATA[{include file='__ultimateVersion' application='ultimate'}]]></templatecode>
+        </templatelistener>
+        <templatelistener name="betaNotice">
+            <environment>admin</environment>
+            <templatename>index</templatename>
+            <eventname>userNotice</eventname>
+            <templatecode><![CDATA[{include file='__betaNotice' application='ultimate'}]]></templatecode>
+        </templatelistener>
+        <templatelistener name="copyright">
+            <environment>admin</environment>
+            <templatename>footer</templatename>
+            <eventname>copyright</eventname>
+            <templatecode><![CDATA[{include file='__copyright' application='ultimate'}]]></templatecode>
+        </templatelistener>
+        <templatelistener name="ultimateStyle">
+            <environment>admin</environment>
+            <templatename>header</templatename>
+            <templatecode><![CDATA[{@$__wcf->getUltimateStyleHandler()->getStylesheet()}]]></templatecode>
+        </templatelistener>
+        <!-- /ACP -->
+	</import>
+</data>
