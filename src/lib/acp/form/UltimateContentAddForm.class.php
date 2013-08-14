@@ -624,6 +624,7 @@ class UltimateContentAddForm extends MessageForm {
 		} else {
 			if (isset($this->statusOptions[2])) unset($this->statusOptions[2]);
 			if (isset($this->statusOptions[3])) unset($this->statusOptions[3]);
+			$this->publishDateTimestamp = 0;
 		}
 		
 		if (!array_key_exists($this->statusID, $this->statusOptions)) {
