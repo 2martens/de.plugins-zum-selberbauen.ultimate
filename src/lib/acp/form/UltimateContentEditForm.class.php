@@ -274,6 +274,11 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 				$content->__get('authorID'),
 				$this->publishDateTimestamp
 			);
+		} else if ($this->content->__get('status') == 3 && $this->statusID != 3) {
+			UserActivityEventHandler::getInstance()->removeEvents(
+				'de.plugins-zum-selberbauen.ultimate.recentActivityEvent.content',
+				array($this->contentID)
+			);
 		}
 		
 		$this->saved();
