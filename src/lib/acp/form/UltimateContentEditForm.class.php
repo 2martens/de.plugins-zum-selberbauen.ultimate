@@ -266,7 +266,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		$content = $contents[$this->contentID];
 		
 		// create recent activity event if published
-		if ($this->content->__get('status') != 3 && $this->statusID == 3 && in_array(Category::PAGE_CATEGORY, $this->categoryIDs)) {
+		if ($this->content->__get('status') != 3 && $this->statusID == 3 && !in_array(Category::PAGE_CATEGORY, $this->categoryIDs)) {
 			UserActivityEventHandler::getInstance()->fireEvent(
 				'de.plugins-zum-selberbauen.ultimate.recentActivityEvent.content',
 				$this->contentID,

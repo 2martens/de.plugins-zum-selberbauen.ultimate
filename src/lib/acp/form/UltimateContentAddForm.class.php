@@ -376,7 +376,7 @@ class UltimateContentAddForm extends MessageForm {
 		}
 		
 		// create recent activity event if published
-		if ($content->__get('status') == 3 && in_array(Category::PAGE_CATEGORY, $this->categoryIDs)) {
+		if ($content->__get('status') == 3 && !in_array(Category::PAGE_CATEGORY, $this->categoryIDs)) {
 			UserActivityEventHandler::getInstance()->fireEvent(
 				'de.plugins-zum-selberbauen.ultimate.recentActivityEvent.content',
 				$contentID,
