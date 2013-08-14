@@ -142,7 +142,7 @@
 					<select id="statusSelect" name="status">
 					{htmloptions options=$statusOptions selected=$statusID}
 					</select>
-					<script type="text/javascript">
+					<script data-relocate="true" type="text/javascript">
 					/* <![CDATA[ */
 					$(function() {
 						new ULTIMATE.ACP.Button.Replacement('saveButton', 'statusSelect', 'save');
@@ -227,7 +227,7 @@
 	
 	<div class="formSubmit">
 		<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
-		<input type="submit"{if $disableSaveButton|isset && $disableSaveButton} class="ultimateHidden" disabled="disabled"{/if} name="save" id="saveButton" value="{if $saveButtonLang|isset}{@$saveButtonLang}{else}{lang}ultimate.button.saveAsDraft{/lang}{/if}" />
+		<input type="submit" name="save" id="saveButton" value="{if $saveButtonLang|isset}{@$saveButtonLang}{else}{lang}ultimate.button.saveAsDraft{/lang}{/if}" />
 		<input type="submit" name="publish" id="publishButton" value="{if $publishButtonLang|isset}{@$publishButtonLang}{else}{lang}ultimate.button.publish{/lang}{/if}" accesskey="s" />
 		{@SID_INPUT_TAG}
 		<input type="hidden" name="action" value="{@$action}" />

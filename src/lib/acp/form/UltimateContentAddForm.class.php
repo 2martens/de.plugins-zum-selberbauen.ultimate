@@ -376,7 +376,7 @@ class UltimateContentAddForm extends MessageForm {
 		}
 		
 		// create recent activity event if published
-		if ($content->__get('status') == 3 && in_array(Category::PAGE_CATEGORY, $this->categoryIDs)) {
+		if ($content->__get('status') == 3 && !in_array(Category::PAGE_CATEGORY, $this->categoryIDs)) {
 			UserActivityEventHandler::getInstance()->fireEvent(
 				'de.plugins-zum-selberbauen.ultimate.recentActivityEvent.content',
 				$contentID,
@@ -624,6 +624,7 @@ class UltimateContentAddForm extends MessageForm {
 		} else {
 			if (isset($this->statusOptions[2])) unset($this->statusOptions[2]);
 			if (isset($this->statusOptions[3])) unset($this->statusOptions[3]);
+			$this->publishDateTimestamp = 0;
 		}
 		
 		if (!array_key_exists($this->statusID, $this->statusOptions)) {

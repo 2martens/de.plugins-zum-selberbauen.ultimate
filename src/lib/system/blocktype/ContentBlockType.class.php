@@ -479,54 +479,45 @@ class ContentBlockType extends AbstractBlockType {
 				}
 			}
 			
-			/* @var $dateTimeObject \DateTime */
-			$dateTimeObject = $content->__get('publishDateObject');
-			$timestamp = $content->__get('publishDate');
-			$format = WCF::getLanguage()->getDynamicVariable('ultimate.date.dateFormat', array(
-				'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
-			));
-			$date = DateUtil::format($dateTimeObject, $format);
-			$time = DateUtil::format($dateTimeObject, DateUtil::TIME_FORMAT);
-			$dateAndTime = $date.' '.$time;
-			$dateString = '<time itemprop="datePublished" datetime="'.DateUtil::format($dateTimeObject, 'c').'" class="datetime" data-timestamp="'.$timestamp.'" data-date="'.$date.'" data-time="'.$time.'" data-offset="'.$dateTimeObject->getOffset().'">'.$date.'</time>';
-			$timeString = '<time itemprop="datePublished" datetime="'.DateUtil::format($dateTimeObject, 'c').'" class="datetime" data-timestamp="'.$timestamp.'" data-date="'.$date.'" data-time="'.$time.'" data-offset="'.$dateTimeObject->getOffset().'">'.$time.'</time>';
-			$dateAndTime = '<time itemprop="datePublished" datetime="'.DateUtil::format($dateTimeObject, 'c').'" class="datetime" data-timestamp="'.$timestamp.'" data-date="'.$date.'" data-time="'.$time.'" data-offset="'.$dateTimeObject->getOffset().'">'.$dateAndTime.'</time>';
-			$authorUserProfile = new UserProfile($content->__get('author'));
-			
-			$authorVCard = '<div itemprop="creator" itemscope itemtype="http://schema.org/Person">
+			// if the content is not yet planned or published, it won't be displayed anyway (so we don't need to replace all these things)
+			// in addition the publishDate is undefined (in concept) for a neither planned nor published content
+			if ($content->__get('status') >= 2) {
+				/* @var $dateTimeObject \DateTime */
+				$dateTimeObject = $content->__get('publishDateObject');
+				$timestamp = $content->__get('publishDate');
+				$format = WCF::getLanguage()->getDynamicVariable('ultimate.date.dateFormat', array(
+					'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
+				));
+				$date = DateUtil::format($dateTimeObject, $format);
+				$time = DateUtil::format($dateTimeObject, DateUtil::TIME_FORMAT);
+				$dateAndTime = $date.' '.$time;
+				$dateString = '<time itemprop="datePublished" datetime="'.DateUtil::format($dateTimeObject, 'c').'" class="datetime" data-timestamp="'.$timestamp.'" data-date="'.$date.'" data-time="'.$time.'" data-offset="'.$dateTimeObject->getOffset().'">'.$date.'</time>';
+				$timeString = '<time itemprop="datePublished" datetime="'.DateUtil::format($dateTimeObject, 'c').'" class="datetime" data-timestamp="'.$timestamp.'" data-date="'.$date.'" data-time="'.$time.'" data-offset="'.$dateTimeObject->getOffset().'">'.$time.'</time>';
+				$dateAndTime = '<time itemprop="datePublished" datetime="'.DateUtil::format($dateTimeObject, 'c').'" class="datetime" data-timestamp="'.$timestamp.'" data-date="'.$date.'" data-time="'.$time.'" data-offset="'.$dateTimeObject->getOffset().'">'.$dateAndTime.'</time>';
+				
+				$authorUserProfile = new UserProfile($content->__get('author'));
+				$authorVCard = '<div itemprop="creator" itemscope itemtype="http://schema.org/Person">
 				<a href="'
-				.LinkHandler::getInstance()->getLink(
-					'User', 
-					array(
-						'object' => $authorUserProfile,
-						'application' => 'ultimate'
-					)
-				).
-				'" title="'.$authorUserProfile->username.'" class="framed">'
-					.$authorUserProfile->getAvatar()->getImageTag(32).
-				'</a>'.WCF::getLanguage()->getDynamicVariable(
-							'ultimate.content.authorVCard', 
+					.LinkHandler::getInstance()->getLink(
+						'User',
+						array(
+							'object' => $authorUserProfile,
+							'application' => 'ultimate'
+						)
+					).
+					'" title="'.$authorUserProfile->username.'" class="framed">'
+						.$authorUserProfile->getAvatar()->getImageTag(32).
+						'</a>'.WCF::getLanguage()->getDynamicVariable(
+							'ultimate.content.authorVCard',
 							array(
 								'author' => $content->__get('author')->__get('username')
 							)
 						).
-				'</div>';
-			
-			if ($metaAboveContent !== '') {
-				$metaAbove[$contentID] = '';
-				$__metaAboveContent = str_replace('$datetime', $dateAndTime, $metaAboveContent);
-				$__metaAboveContent = str_replace('$date', $dateString, $__metaAboveContent);
-				$__metaAboveContent = str_replace('$time', $timeString, $__metaAboveContent);
-				$__metaAboveContent = str_replace('$comments', count($content->__get('comments')), $__metaAboveContent);
-				$__metaAboveContent = str_replace('$authorVCard', $authorVCard, $__metaAboveContent);
-				$__metaAboveContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaAboveContent);
-				$__metaAboveContent = str_replace('$categories', $categoryOutput, $__metaAboveContent);
-				$__metaAboveContent = str_replace('$tags', $tagOutput, $__metaAboveContent);
-				$metaAbove[$contentID] = $__metaAboveContent;
-			} else if (!empty($metaAboveContent_i18n)) {
-				$metaAbove_i18n[$contentID] = array();
-				foreach ($metaAboveContent_i18n as $languageID => $_metaAboveContent) {
-					$__metaAboveContent = str_replace('$datetime', $dateAndTime, $_metaAboveContent);
+						'</div>';
+				
+				if ($metaAboveContent !== '') {
+					$metaAbove[$contentID] = '';
+					$__metaAboveContent = str_replace('$datetime', $dateAndTime, $metaAboveContent);
 					$__metaAboveContent = str_replace('$date', $dateString, $__metaAboveContent);
 					$__metaAboveContent = str_replace('$time', $timeString, $__metaAboveContent);
 					$__metaAboveContent = str_replace('$comments', count($content->__get('comments')), $__metaAboveContent);
@@ -534,33 +525,46 @@ class ContentBlockType extends AbstractBlockType {
 					$__metaAboveContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaAboveContent);
 					$__metaAboveContent = str_replace('$categories', $categoryOutput, $__metaAboveContent);
 					$__metaAboveContent = str_replace('$tags', $tagOutput, $__metaAboveContent);
-					$metaAbove_i18n[$contentID][$languageID] = $__metaAboveContent;
+					$metaAbove[$contentID] = $__metaAboveContent;
+				} else if (!empty($metaAboveContent_i18n)) {
+					$metaAbove_i18n[$contentID] = array();
+					foreach ($metaAboveContent_i18n as $languageID => $_metaAboveContent) {
+						$__metaAboveContent = str_replace('$datetime', $dateAndTime, $_metaAboveContent);
+						$__metaAboveContent = str_replace('$date', $dateString, $__metaAboveContent);
+						$__metaAboveContent = str_replace('$time', $timeString, $__metaAboveContent);
+						$__metaAboveContent = str_replace('$comments', count($content->__get('comments')), $__metaAboveContent);
+						$__metaAboveContent = str_replace('$authorVCard', $authorVCard, $__metaAboveContent);
+						$__metaAboveContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaAboveContent);
+						$__metaAboveContent = str_replace('$categories', $categoryOutput, $__metaAboveContent);
+						$__metaAboveContent = str_replace('$tags', $tagOutput, $__metaAboveContent);
+						$metaAbove_i18n[$contentID][$languageID] = $__metaAboveContent;
+					}
 				}
-			}
-			
-			if ($metaBelowContent !== '') {
-				$metaBelow[$contentID] = '';
-				$__metaBelowContent = str_replace('$datetime', $dateAndTime, $metaBelowContent);
-				$__metaBelowContent = str_replace('$date', $dateString, $__metaBelowContent);
-				$__metaBelowContent = str_replace('$time', $timeString, $__metaBelowContent);
-				$__metaBelowContent = str_replace('$comments', count($content->__get('comments')), $__metaBelowContent);
-				$__metaBelowContent = str_replace('$authorVCard', $authorVCard, $__metaBelowContent);
-				$__metaBelowContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaBelowContent);
-				$__metaBelowContent = str_replace('$categories', $categoryOutput, $__metaBelowContent);
-				$__metaBelowContent = str_replace('$tags', $tagOutput, $__metaBelowContent);
-				$metaBelow[$contentID] = $__metaBelowContent;
-			} else if (!empty($metaBelowContent_i18n)) {
-				$metaBelow_i18n[$contentID] = array();
-				foreach ($metaBelowContent_i18n as $languageID => $_metaBelowContent) {
-					$__metaBelowContent = str_replace('$datetime', $dateAndTime, $_metaBelowContent);
-					$__metaBelowContent = str_replace('$date', $date, $__metaBelowContent);
-					$__metaBelowContent = str_replace('$time', $time, $__metaBelowContent);
+					
+				if ($metaBelowContent !== '') {
+					$metaBelow[$contentID] = '';
+					$__metaBelowContent = str_replace('$datetime', $dateAndTime, $metaBelowContent);
+					$__metaBelowContent = str_replace('$date', $dateString, $__metaBelowContent);
+					$__metaBelowContent = str_replace('$time', $timeString, $__metaBelowContent);
 					$__metaBelowContent = str_replace('$comments', count($content->__get('comments')), $__metaBelowContent);
 					$__metaBelowContent = str_replace('$authorVCard', $authorVCard, $__metaBelowContent);
 					$__metaBelowContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaBelowContent);
 					$__metaBelowContent = str_replace('$categories', $categoryOutput, $__metaBelowContent);
 					$__metaBelowContent = str_replace('$tags', $tagOutput, $__metaBelowContent);
-					$metaBelow_i18n[$contentID][$languageID] = $__metaBelowContent;
+					$metaBelow[$contentID] = $__metaBelowContent;
+				} else if (!empty($metaBelowContent_i18n)) {
+					$metaBelow_i18n[$contentID] = array();
+					foreach ($metaBelowContent_i18n as $languageID => $_metaBelowContent) {
+						$__metaBelowContent = str_replace('$datetime', $dateAndTime, $_metaBelowContent);
+						$__metaBelowContent = str_replace('$date', $date, $__metaBelowContent);
+						$__metaBelowContent = str_replace('$time', $time, $__metaBelowContent);
+						$__metaBelowContent = str_replace('$comments', count($content->__get('comments')), $__metaBelowContent);
+						$__metaBelowContent = str_replace('$authorVCard', $authorVCard, $__metaBelowContent);
+						$__metaBelowContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaBelowContent);
+						$__metaBelowContent = str_replace('$categories', $categoryOutput, $__metaBelowContent);
+						$__metaBelowContent = str_replace('$tags', $tagOutput, $__metaBelowContent);
+						$metaBelow_i18n[$contentID][$languageID] = $__metaBelowContent;
+					}
 				}
 			}
 		}
