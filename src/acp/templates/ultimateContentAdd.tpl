@@ -142,7 +142,7 @@
 					<select id="statusSelect" name="status">
 					{htmloptions options=$statusOptions selected=$statusID}
 					</select>
-					<script type="text/javascript">
+					<script data-relocate="true" type="text/javascript">
 					/* <![CDATA[ */
 					$(function() {
 						new ULTIMATE.ACP.Button.Replacement('saveButton', 'statusSelect', 'save');
