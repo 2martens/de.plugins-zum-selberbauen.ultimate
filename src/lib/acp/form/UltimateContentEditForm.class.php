@@ -272,7 +272,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 				$this->contentID,
 				null,
 				$content->__get('authorID'),
-				$content->__get('publishDate')
+				$this->publishDateTimestamp
 			);
 		}
 		
