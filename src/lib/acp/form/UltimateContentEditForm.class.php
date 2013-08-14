@@ -132,11 +132,12 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		}
 		
 		// fill save button with fitting language
+		// default to save as draft if the content is published or planned
 		$saveButtonLangArray = array(
 			0 => WCF::getLanguage()->get('ultimate.button.saveAsDraft'),
 			1 => WCF::getLanguage()->get('ultimate.button.saveAsPending'),
-			2 => '',
-			3 => ''
+			2 => WCF::getLanguage()->get('ultimate.button.saveAsDraft'),
+			3 => WCF::getLanguage()->get('ultimate.button.saveAsDraft')
 		);
 		$this->saveButtonLang = $saveButtonLangArray[$this->statusID];
 		
@@ -303,22 +304,13 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		WCF::getTPL()->assign(array(
 			'contentID' => $this->contentID,
 			'publishButtonLang' => WCF::getLanguage()->get($this->publishButtonLang),
+			'saveButtonLang' => $this->saveButtonLang,
 			'publishButtonLangRaw' => $this->publishButtonLang,
 			'action' => 'edit'
 		));
 		
 		if ($this->success) {
 			WCF::getTPL()->assign('success', true);
-		}
-		
-		// hide the save button if you edit a page which is already scheduled or published
-		if (!empty($this->saveButtonLang)) {
-			// status id == (0|1)
-			WCF::getTPL()->assign('saveButtonLang', $this->saveButtonLang);
-		}
-		else {
-			// status id == (2|3)
-			WCF::getTPL()->assign('disableSaveButton', true);
 		}
 	}
 	
