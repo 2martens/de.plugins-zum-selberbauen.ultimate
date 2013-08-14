@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Ultimate CMS" default="dist">
+	<property name="eclipse.home" location="E:/Users/Development/AppData/Local/eclipse-php" />
+	<property name="git.repos" location="E:/Users/Development/AppData/Local/Git-repos" />
+	<property name="package.dir" location="${eclipse.home}/workspace/de.plugins-zum-selberbauen.ultimate/package" />
+	<property name="git.dir" location="${git.repos}/de.plugins-zum-selberbauen.ultimate" />
+	<target name="clean" description="Deletes old tar files.">
+		<delete>
+			<fileset dir="de.plugins-zum-selberbauen.ultimate" includes="**/*.tar"/>
+			<fileset dir="de.plugins-zum-selberbauen.ultimate/requirements" includes="**/*.tar.gz" />
+			<fileset dir="de.plugins-zum-selberbauen.ultimate/optional" includes="**/*.tar.gz" />
+		</delete>
+		<delete>
+			<fileset dir="${package.dir}" includes="**/*.tar*" />
+		</delete>
+	</target>
+
+	<target name="pack" depends="clean" description="Packs the tar files.">
+		<tar destfile="de.plugins-zum-selberbauen.ultimate/templates.tar" 
+			basedir="src/templates" 
+		/>
+		<tar destfile="de.plugins-zum-selberbauen.ultimate/acptemplates.tar" 
+			basedir="src/acp/templates"
+		/>
+		<tar destfile="de.plugins-zum-selberbauen.ultimate/files.tar">
+			<tarfileset dir="src">
+				<exclude name="templates/**" />
+				<exclude name="acp/templates/**" />
+			</tarfileset>
+		</tar>
+		
+		<ant dir="${git.repos}/de.plugins-zum-selberbauen.ultimateCore" 
+		inheritAll="true" />
+		<ant dir="${git.repos}/de.plugins-zum-selberbauen.messageACP" />
+		<ant dir="${git.repos}/CachedList" />
+	</target>
+
+	<target name="dist" depends="pack" description="Generates the package archive.">
+		<tar destfile="${package.dir}/de.plugins-zum-selberbauen.ultimate.tar" 
+			 basedir="de.plugins-zum-selberbauen.ultimate"
+		/>
+		<gzip src="${package.dir}/de.plugins-zum-selberbauen.ultimate.tar"
+			  destfile="${package.dir}/de.plugins-zum-selberbauen.ultimate.tar.gz"
+		/>
+	</target>
+</project>
