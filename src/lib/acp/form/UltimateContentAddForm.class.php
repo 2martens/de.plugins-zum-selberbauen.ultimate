@@ -36,6 +36,7 @@ use wcf\data\tag\Tag;
 use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
 use wcf\system\bbcode\PreParser;
+use wcf\system\cache\builder\TagObjectCacheBuilder;
 use wcf\system\cache\builder\UserGroupCacheBuilder;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
@@ -374,6 +375,8 @@ class UltimateContentAddForm extends MessageForm {
 			TagEngine::getInstance()->addObjectTags('de.plugins-zum-selberbauen.ultimate.content', $contentID, $tags, $languageID);
 			$this->tagsI18n[$languageID] = implode(',', $tags);
 		}
+		// reset cache
+		TagObjectCacheBuilder::getInstance()->reset();
 		
 		// create recent activity event if published
 		if ($content->__get('status') == 3 && !in_array(Category::PAGE_CATEGORY, $this->categoryIDs)) {
