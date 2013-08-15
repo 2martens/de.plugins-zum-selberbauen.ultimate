@@ -39,6 +39,7 @@ use wcf\form\AbstractForm;
 use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
 use wcf\system\bbcode\PreParser;
+use wcf\system\cache\builder\TagObjectCacheBuilder;
 use wcf\system\language\I18nHandler;
 use wcf\system\menu\acp\ACPMenu;
 use wcf\system\request\LinkHandler;
@@ -261,6 +262,8 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 			TagEngine::getInstance()->addObjectTags('de.plugins-zum-selberbauen.ultimate.content', $this->content->__get('contentID'), $tags, $languageID);
 			$this->tagsI18n[$languageID] = Tag::buildString($tags);
 		}
+		// reset cache
+		TagObjectCacheBuilder::getInstance()->reset();
 		
 		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
 		$content = $contents[$this->contentID];
