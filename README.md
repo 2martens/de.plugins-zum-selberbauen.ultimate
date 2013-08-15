@@ -3,15 +3,13 @@ Ultimate CMS
 
 A WCF compatible CMS.
 
-
 Version notes
 -------------
 
 The currently available source code represents an early beta version of Ultimate CMS and should not be used in productive environments.
 
-Dev-Branch: [![Build Status](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.ultimate.png?branch=dev)](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.ultimate)
-Master-Branch: [![Build Status](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.ultimate.png?branch=master)](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.ultimate)
-
+* Dev-Branch: [![Build Status](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.ultimate.png?branch=dev)](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.ultimate)
+* Master-Branch: [![Build Status](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.ultimate.png?branch=master)](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.ultimate)
 
 Contributing
 -----------
