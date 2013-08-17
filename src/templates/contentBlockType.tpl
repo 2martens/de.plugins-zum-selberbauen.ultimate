@@ -100,7 +100,7 @@ $(function() {
 											<div>
 												
 												<div itemprop="articleBody" id="content-{$contentID}" 
-													class="content {implode from=$content->categories item=category glue=' '}category-{$category->categorySlug}{/implode} 
+													class="content htmlContent {implode from=$content->categories item=category glue=' '}category-{$category->categorySlug}{/implode} 
 													{implode from=$content->tags[$__wcf->getLanguage()->__get('languageID')] item=tag glue=''}tag-{$tag->getTitle()}{/implode}
 													{if $requestType != 'page'} messageText{/if}">
 													
