@@ -78,7 +78,7 @@
 			<dl{if $errorField == 'categoryParent'} class="formError"{/if}>
 				<dt><label for="categoryParent">{lang}wcf.acp.ultimate.category.parent{/lang}</label></dt>
 				<dd>
-					<select name="categoryParent">
+					<select id="categoryParent" name="categoryParent">
 					<option value="0">{lang}wcf.acp.ultimate.category.parent.none{/lang}</option>
 					{htmloptions options=$categories selected=$categoryParent}
 					</select>
