@@ -84,7 +84,7 @@
 								</small>
 							{/if}
 							
-							<select id="layout3-child-template">
+							<select id="layout2-child-template">
 								<option label="{lang}wcf.acp.ultimate.layoutManager.selectTemplate.inherit{/lang}" value="0">{lang}wcf.acp.ultimate.layoutManager.selectTemplate.inherit{/lang}</option>
 								{htmlOptions options=$templates}
 							</select>
