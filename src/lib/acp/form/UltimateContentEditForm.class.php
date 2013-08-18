@@ -112,6 +112,8 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		}
 		
 		$this->content = $content;
+		// set attachment object id
+		$this->attachmentObjectID = $this->contentID;
 	}
 	
 	/**
