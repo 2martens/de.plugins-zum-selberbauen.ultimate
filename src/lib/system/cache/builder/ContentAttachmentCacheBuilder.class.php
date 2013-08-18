@@ -32,8 +32,7 @@ use wcf\data\attachment\GroupedAttachmentList;
 /**
  * Caches the content attachments.
  * 
- * Provides one variable:
- * * \wcf\data\attachment\GroupedAttachmentList|null attachmentList
+ * getData returns the following \wcf\data\attachment\GroupedAttachmentList|null
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -50,9 +49,7 @@ class ContentAttachmentCacheBuilder extends AbstractCacheBuilder {
 	 * @return	array
 	 */
 	protected function rebuild(array $parameters) {
-		$data = array(
-			'attachmentList' => null
-		);
+		$data = null;
 		
 		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
 		$attachmentObjectIDs = array();
@@ -68,7 +65,7 @@ class ContentAttachmentCacheBuilder extends AbstractCacheBuilder {
 			$attachmentList->getConditionBuilder()->add('attachment.objectID IN (?)', array($attachmentObjectIDs));
 			$attachmentList->readObjects();
 			
-			$data['attachmentList'] = $attachmentList;
+			$data = $attachmentList;
 		}
 		return $data;
 	}
