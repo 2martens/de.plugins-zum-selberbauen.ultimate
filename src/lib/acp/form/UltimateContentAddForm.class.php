@@ -258,7 +258,7 @@ class UltimateContentAddForm extends MessageForm {
 		$this->categories = CategoryCacheBuilder::getInstance()->getData(array(), 'categories');
 		unset ($this->categories[1]);
 		
-		$this->attachmentList = ContentAttachmentCacheBuilder::getInstance()->getData();
+		$this->attachmentList = ContentAttachmentCacheBuilder::getInstance()->getData(array(), 'attachmentList');
 	}
 	
 	/**
