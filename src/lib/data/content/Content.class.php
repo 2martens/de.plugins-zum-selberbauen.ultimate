@@ -30,6 +30,7 @@ use ultimate\data\AbstractUltimateDatabaseObject;
 use wcf\data\user\User;
 use wcf\data\IMessage;
 use wcf\data\ITitledObject;
+use wcf\system\bbcode\AttachmentBBCode;
 use wcf\system\bbcode\MessageParser;
 use wcf\system\request\UltimateLinkHandler;
 use wcf\system\WCF;
@@ -159,6 +160,9 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject, I
 	 * @return	string
 	 */
 	public function getFormattedMessage() {
+		// assign embedded attachments
+		AttachmentBBCode::setObjectID($this->contentID);
+		
 		MessageParser::getInstance()->setOutputType('text/html');
 		return MessageParser::getInstance()->parse(WCF::getLanguage()->get($this->contentText), $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
 	}
