@@ -63,12 +63,13 @@ class ContentAttachmentCacheBuilder extends AbstractCacheBuilder {
 			}
 		}
 		
-		$attachmentList = new GroupedAttachmentList('de.plugins-zum-selberbauen.ultimate.content');
-		$attachmentList->getConditionBuilder()->add('attachment.objectID IN (?)', array($attachmentObjectIDs));
-		$attachmentList->readObjects();
-		
-		$data['attachmentList'] = $attachmentList;
-		
+		if (MODULE_ATTACHMENT && !empty($attachmentObjectIDs)) {
+			$attachmentList = new GroupedAttachmentList('de.plugins-zum-selberbauen.ultimate.content');
+			$attachmentList->getConditionBuilder()->add('attachment.objectID IN (?)', array($attachmentObjectIDs));
+			$attachmentList->readObjects();
+			
+			$data['attachmentList'] = $attachmentList;
+		}
 		return $data;
 	}
 }

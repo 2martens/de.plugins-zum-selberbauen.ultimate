@@ -28,6 +28,7 @@
 namespace ultimate\data\content;
 use ultimate\data\layout\LayoutAction;
 use ultimate\data\page\PageAction;
+use ultimate\system\cache\builder\ContentAttachmentCacheBuilder;
 use ultimate\system\cache\builder\ContentCacheBuilder;
 use ultimate\system\cache\builder\ContentCategoryCacheBuilder;
 use ultimate\system\cache\builder\ContentPageCacheBuilder;
@@ -301,6 +302,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 	 * Resets the cache.
 	 */
 	public static function resetCache() {
+		ContentAttachmentCacheBuilder::getInstance()->reset();
 		ContentCacheBuilder::getInstance()->reset();
 		ContentCategoryCacheBuilder::getInstance()->reset();
 		ContentPageCacheBuilder::getInstance()->reset();
