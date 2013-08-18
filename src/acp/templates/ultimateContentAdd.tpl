@@ -130,7 +130,7 @@
 							{/if}
 						</small>
 					{/if}
-					{include file='messageFormTabs'}
+					{include file='messageFormTabs' wysiwygContainerID='text'}
 				</dd>
 			</dl>
 		</fieldset>

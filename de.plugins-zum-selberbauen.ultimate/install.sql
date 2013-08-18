@@ -46,6 +46,7 @@ CREATE TABLE ultimate1_content (
 	contentDescription VARCHAR(255) NOT NULL DEFAULT '',
 	contentSlug VARCHAR(255) NOT NULL DEFAULT '',
 	contentText MEDIUMTEXT NOT NULL,
+	attachments SMALLINT(5) NOT NULL DEFAULT 0,	
 	enableBBCodes TINYINT(1) NOT NULL DEFAULT 1,
 	enableHtml TINYINT(1) NOT NULL DEFAULT 0,
 	enableSmilies TINYINT(1) NOT NULL DEFAULT 1,
