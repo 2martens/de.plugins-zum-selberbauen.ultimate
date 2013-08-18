@@ -91,6 +91,9 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	 * @return	\ultimate\data\content\Content
 	 */
 	public function create() {
+		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
+			$this->parameters['data']['attachments'] = count($this->parameters['attachmentHandler']);
+		}
 		$content = parent::create();
 		$contentEditor = new ContentEditor($content);
 		

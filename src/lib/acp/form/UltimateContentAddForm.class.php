@@ -50,6 +50,7 @@ use wcf\util\DateTimeUtil;
 use wcf\util\DateUtil;
 use wcf\util\MessageUtil;
 use wcf\util\StringUtil;
+use ultimate\system\cache\builder\ContentAttachmentCacheBuilder;
 
 /**
  * Shows the UltimateContentAdd form.
@@ -197,6 +198,12 @@ class UltimateContentAddForm extends MessageForm {
 	public $saveType = '';
 	
 	/**
+	 * The attachment list.
+	 * @var \wcf\data\attachment\GroupedAttachmentList
+	 */
+	public $attachmentList = null;
+	
+	/**
 	 * jQuery datepicker date format.
 	 * @var	string
 	 */
@@ -250,6 +257,8 @@ class UltimateContentAddForm extends MessageForm {
 		
 		$this->categories = CategoryCacheBuilder::getInstance()->getData(array(), 'categories');
 		unset ($this->categories[1]);
+		
+		$this->attachmentList = ContentAttachmentCacheBuilder::getInstance()->getData(array(), 'attachmentList');
 	}
 	
 	/**
@@ -332,7 +341,8 @@ class UltimateContentAddForm extends MessageForm {
 			),
 			'categories' => $this->categoryIDs,
 			'metaDescription' => $this->metaDescription,
-			'metaKeywords' => $this->metaKeywords
+			'metaKeywords' => $this->metaKeywords,
+			'attachmentHandler' => $this->attachmentHandler
 		);
 		
 		if ($this->visibility == 'protected') {
@@ -435,7 +445,8 @@ class UltimateContentAddForm extends MessageForm {
 			'statusID' => $this->statusID,
 			'visibility' => $this->visibility,
 			'startTime' => $this->startTime,
-			'publishDate' => $this->publishDate
+			'publishDate' => $this->publishDate,
+			'attachmentList' => $this->attachmentList
 		));
 	}
 	

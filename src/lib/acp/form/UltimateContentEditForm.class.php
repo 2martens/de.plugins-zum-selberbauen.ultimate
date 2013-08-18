@@ -243,7 +243,8 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 			),
 			'categories' => $this->categoryIDs,
 			'metaDescription' => $this->metaDescription,
-			'metaKeywords' => $this->metaKeywords
+			'metaKeywords' => $this->metaKeywords,
+			'attachmentHandler' => $this->attachmentHandler
 		);
 		
 		if ($this->visibility == 'protected') {
