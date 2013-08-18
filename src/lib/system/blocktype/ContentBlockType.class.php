@@ -1,5 +1,4 @@
 <?php
-use ultimate\system\cache\builder\ContentAttachmentCacheBuilder;
 /**
  * Contains the ContentBlockType class.
  * 
@@ -31,6 +30,7 @@ use ultimate\data\content\CategorizedContent;
 use ultimate\data\content\Content;
 use ultimate\data\content\TaggedContent;
 use ultimate\data\IUltimateData;
+use ultimate\system\cache\builder\ContentAttachmentCacheBuilder;
 use wcf\data\user\User;
 use wcf\data\user\UserProfile;
 use wcf\system\bbcode\AttachmentBBCode;
