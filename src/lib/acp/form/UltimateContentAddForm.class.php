@@ -30,6 +30,7 @@ use ultimate\data\category\Category;
 use ultimate\data\content\ContentAction;
 use ultimate\data\content\ContentEditor;
 use ultimate\system\cache\builder\CategoryCacheBuilder;
+use ultimate\system\cache\builder\ContentAttachmentCacheBuilder;
 use ultimate\util\ContentUtil;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\tag\Tag;
@@ -50,7 +51,6 @@ use wcf\util\DateTimeUtil;
 use wcf\util\DateUtil;
 use wcf\util\MessageUtil;
 use wcf\util\StringUtil;
-use ultimate\system\cache\builder\ContentAttachmentCacheBuilder;
 
 /**
  * Shows the UltimateContentAdd form.
