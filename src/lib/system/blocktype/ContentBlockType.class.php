@@ -34,6 +34,7 @@ use ultimate\system\cache\builder\ContentAttachmentCacheBuilder;
 use wcf\data\user\User;
 use wcf\data\user\UserProfile;
 use wcf\system\bbcode\AttachmentBBCode;
+use wcf\system\bbcode\BBCodeParser;
 use wcf\system\comment\CommentHandler;
 use wcf\system\language\I18nHandler;
 use wcf\system\like\LikeHandler;
@@ -158,12 +159,6 @@ class ContentBlockType extends AbstractBlockType {
 	 * @var \wcf\data\like\object\LikeObject[]
 	 */
 	protected $likeData = array();
-	
-	/**
-	 * IDs of all contents with attachments.
-	 * @var integer[]
-	 */
-	protected $attachmentObjectIDs = array();
 	
 	/**
 	 * The attachment list.
@@ -444,10 +439,10 @@ class ContentBlockType extends AbstractBlockType {
 		}
 		
 		// fetch attachments
-		if (MODULE_ATTACHMENT && !empty($this->attachmentObjectIDs)) {
+		if (MODULE_ATTACHMENT) {
 			$this->attachmentList = ContentAttachmentCacheBuilder::getInstance()->getData(array(), 'attachmentList');
-				
 			// set embedded attachments
+			BBCodeParser::getInstance()->setOutputType('text/html');
 			AttachmentBBCode::setAttachmentList($this->attachmentList);
 		}
 	}
