@@ -26,6 +26,8 @@
 		<item name="wcf.acp.group.option.user.ultimate.content.canEditComment.description"><![CDATA[Members of this usergroup can edit their own comments to contents.]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.content.canDeleteComment"><![CDATA[Can delete comment]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.content.canDeleteComment.description"><![CDATA[Members of this usergroup can delete their own comments to contents.]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.content.canDownloadAttachment"><![CDATA[Can download attachments]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.content.canViewAttachmentPreview"><![CDATA[Can view attachment previews]]></item>
 		<!-- /user -->
 		
 		<!-- mod -->
@@ -57,6 +59,7 @@
 		<item name="wcf.acp.group.option.admin.content.ultimate.canEditContent.description"><![CDATA[Members of this usergroup can edit contents.]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent"><![CDATA[Can delete contents]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent.description"><![CDATA[Members of this usergroup can delete contents.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canUploadAttachment"><![CDATA[Can upload attachments]]></item>
 		<!-- /content -->
 		
 		<!-- layout -->

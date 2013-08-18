@@ -25,6 +25,7 @@ $(function() {
 	
 	{assign var=displayedFeaturedContents value=0}
 	{foreach from=$contents key=contentID item=content}
+		{assign var=objectID value=$contentID}
 		{if $content->publishDateObject !== null}
 			{assign var=date value=$content->publishDateObject->format('Y-m-d')}
 		{else}
@@ -117,8 +118,9 @@ $(function() {
 														<p>{@$content->getFormattedMessage()|truncateMore:ULTIMATE_GENERAL_CONTENT_CONTINUEREADINGLENGTH}</p>
 													{/if}
 												</div>
-												
 											</div>
+											
+											{include file='attachments'}
 											
 											<div class="messageSignature">
 												

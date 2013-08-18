@@ -112,6 +112,8 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		}
 		
 		$this->content = $content;
+		// set attachment object id
+		$this->attachmentObjectID = $this->contentID;
 	}
 	
 	/**
@@ -243,7 +245,8 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 			),
 			'categories' => $this->categoryIDs,
 			'metaDescription' => $this->metaDescription,
-			'metaKeywords' => $this->metaKeywords
+			'metaKeywords' => $this->metaKeywords,
+			'attachmentHandler' => $this->attachmentHandler
 		);
 		
 		if ($this->visibility == 'protected') {

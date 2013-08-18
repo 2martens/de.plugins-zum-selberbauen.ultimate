@@ -30,6 +30,7 @@ use ultimate\data\category\Category;
 use ultimate\data\content\ContentAction;
 use ultimate\data\content\ContentEditor;
 use ultimate\system\cache\builder\CategoryCacheBuilder;
+use ultimate\system\cache\builder\ContentAttachmentCacheBuilder;
 use ultimate\util\ContentUtil;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\tag\Tag;
@@ -93,6 +94,12 @@ class UltimateContentAddForm extends MessageForm {
 	 * @var	integer
 	 */
 	public $showSignatureSetting = 0;
+	
+	/**
+	 * The object type for attachments.
+	 * @var string
+	 */
+	public $attachmentObjectType = 'de.plugins-zum-selberbauen.ultimate.content';
 	
 	/**
 	 * The description of the content.
@@ -191,6 +198,12 @@ class UltimateContentAddForm extends MessageForm {
 	public $saveType = '';
 	
 	/**
+	 * The attachment list.
+	 * @var \wcf\data\attachment\GroupedAttachmentList
+	 */
+	public $attachmentList = null;
+	
+	/**
 	 * jQuery datepicker date format.
 	 * @var	string
 	 */
@@ -244,6 +257,8 @@ class UltimateContentAddForm extends MessageForm {
 		
 		$this->categories = CategoryCacheBuilder::getInstance()->getData(array(), 'categories');
 		unset ($this->categories[1]);
+		
+		$this->attachmentList = ContentAttachmentCacheBuilder::getInstance()->getData(array(), 'attachmentList');
 	}
 	
 	/**
@@ -326,7 +341,8 @@ class UltimateContentAddForm extends MessageForm {
 			),
 			'categories' => $this->categoryIDs,
 			'metaDescription' => $this->metaDescription,
-			'metaKeywords' => $this->metaKeywords
+			'metaKeywords' => $this->metaKeywords,
+			'attachmentHandler' => $this->attachmentHandler
 		);
 		
 		if ($this->visibility == 'protected') {
@@ -429,7 +445,8 @@ class UltimateContentAddForm extends MessageForm {
 			'statusID' => $this->statusID,
 			'visibility' => $this->visibility,
 			'startTime' => $this->startTime,
-			'publishDate' => $this->publishDate
+			'publishDate' => $this->publishDate,
+			'attachmentList' => $this->attachmentList
 		));
 	}
 	

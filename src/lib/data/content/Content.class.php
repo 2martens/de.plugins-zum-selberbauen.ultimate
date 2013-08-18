@@ -30,6 +30,7 @@ use ultimate\data\AbstractUltimateDatabaseObject;
 use wcf\data\user\User;
 use wcf\data\IMessage;
 use wcf\data\ITitledObject;
+use wcf\system\bbcode\AttachmentBBCode;
 use wcf\system\bbcode\MessageParser;
 use wcf\system\request\UltimateLinkHandler;
 use wcf\system\WCF;
@@ -53,6 +54,7 @@ use wcf\util\StringUtil;
  * @property-read	string								$contentSlug
  * @property-read	integer								$authorID
  * @property-read	\wcf\data\user\User					$author
+ * @property-read	integer								$attachments
  * @property-read	boolean								$enableSmilies
  * @property-read	boolean								$enableHtml
  * @property-read	boolean								$enableBBCodes
@@ -158,6 +160,9 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject, I
 	 * @return	string
 	 */
 	public function getFormattedMessage() {
+		// assign embedded attachments
+		AttachmentBBCode::setObjectID($this->contentID);
+		
 		MessageParser::getInstance()->setOutputType('text/html');
 		return MessageParser::getInstance()->parse(WCF::getLanguage()->get($this->contentText), $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
 	}
@@ -262,6 +267,7 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject, I
 		$data['contentID'] = intval($data['contentID']);
 		$data['authorID'] = intval($data['authorID']);
 		$data['author'] = new User($data['authorID']);
+		$data['attachments'] = intval($data['attachments']);
 		$data['enableSmilies'] = (boolean) intval($data['enableSmilies']);
 		$data['enableHtml'] = (boolean) intval($data['enableHtml']);
 		$data['enableBBCodes'] = (boolean) intval($data['enableBBCodes']);

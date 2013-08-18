@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the ContentCacheBuilder class.
+ * Contains the ContentAttachmentCacheBuilder class.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -26,19 +26,14 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\cache\builder;
-use ultimate\data\content\CategorizedContent;
-use ultimate\data\content\ContentList;
-use ultimate\data\content\TaggableContent;
-use ultimate\data\content\TaggedContent;
 use wcf\system\cache\builder\AbstractCacheBuilder;
+use wcf\data\attachment\GroupedAttachmentList;
 
 /**
- * Caches the contents.
+ * Caches the content attachments.
  * 
- * Provides three variables:
- * * \ultimate\data\content\TaggableContent[] contents (contentID => content)
- * * integer[] contentIDs
- * * \ultimate\data\content\CategorizedContent[] contentsToSlug (contentSlug => content)
+ * Provides one variable:
+ * * \wcf\data\attachment\GroupedAttachmentList attachmentList
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -47,7 +42,7 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
  * @subpackage	system.cache.builder
  * @category	Ultimate CMS
  */
-class ContentCacheBuilder extends AbstractCacheBuilder {
+class ContentAttachmentCacheBuilder extends AbstractCacheBuilder {
 	/**
 	 * Rebuilds cache.
 	 * 
@@ -56,38 +51,23 @@ class ContentCacheBuilder extends AbstractCacheBuilder {
 	 */
 	protected function rebuild(array $parameters) {
 		$data = array(
-			'contents' => array(),
-			'contentIDs' => array(),
-			'contentsToSlug' => array(),
 			'attachmentList' => null
 		);
 		
-		$contentList = new ContentList();
-		// order by default
-		$sortField = ULTIMATE_SORT_CONTENT_SORTFIELD;
-		$sortOrder = ULTIMATE_SORT_CONTENT_SORTORDER;
-		$sqlOrderBy = $sortField." ".$sortOrder;
-		$contentList->sqlOrderBy = $sqlOrderBy;
-		
-		$contentList->readObjects();
-		$contents = $contentList->getObjects();
-		if (empty($contents)) return $data;
-		
+		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
 		$attachmentObjectIDs = array();
 		
 		foreach ($contents as $contentID => $content) {
-			/* @var $content \ultimate\data\content\Content */
-			$data['contents'][$contentID] = new TaggableContent($content);
-			$data['contentIDs'][] = $contentID;
-			$data['contentsToSlug'][$content->__get('contentSlug')] = new CategorizedContent($content);
-			
-			$taggedContent = new TaggedContent($content);
-			$tags = $taggedContent->__get('tags');
-			if (!empty($tags)) {
-				$data['contents'][$contentID] = $taggedContent;
+			if ($content->__get('attachments')) {
+				$attachmentObjectIDs[] = $contentID;
 			}
 		}
-		
+		$attachmentList = new GroupedAttachmentList('de.plugins-zum-selberbauen.ultimate.content');
+		if (!empty($attachmentObjectIDs)) {
+			$attachmentList->getConditionBuilder()->add('attachment.objectID IN (?)', array($attachmentObjectIDs));
+		}
+		$attachmentList->readObjects();
+		$data['attachmentList'] = $attachmentList;
 		return $data;
 	}
 }
