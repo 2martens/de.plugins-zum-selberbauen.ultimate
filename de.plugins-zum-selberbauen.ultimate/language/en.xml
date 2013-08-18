@@ -758,7 +758,7 @@ For the InlineEdit you require the same rights to write, edit or delete contents
     
     <category name="ultimate.index">
         <item name="ultimate.index.copyright"><![CDATA[<a href="http://www.plugins-zum-selberbauen.de/"{if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if}>CMS: <strong>Ultimate CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, developed by <strong>Jim Martens</strong></a>]]></item>
-        <item name="ultimate.index.beta"><![CDATA[Ultimate CMS: This is a beta version. Despite all tests there can be issues floating around. Please report them in the <a href="http://ultimate.plugins-zum-selberbauen.de/forum">beta forum</a> or on <a href="https://github.com/frmwrk123/de.plugins-zum-selberbauen.ultimate">Github</a>.]]></item>
+        <item name="ultimate.index.beta"><![CDATA[Ultimate CMS: This is a beta version. Despite all tests there can be issues floating around. Please report them in the <a href="http://beta.plugins-zum-selberbauen.de/forum">beta forum</a> or on <a href="https://github.com/frmwrk123/de.plugins-zum-selberbauen.ultimate">Github</a>.]]></item>
     </category>
 	
 	<!-- this category is used for all layout names -->
