@@ -53,6 +53,7 @@ use wcf\util\StringUtil;
  * @property-read	string								$contentSlug
  * @property-read	integer								$authorID
  * @property-read	\wcf\data\user\User					$author
+ * @property-read	integer								$attachments
  * @property-read	boolean								$enableSmilies
  * @property-read	boolean								$enableHtml
  * @property-read	boolean								$enableBBCodes
@@ -262,6 +263,7 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject, I
 		$data['contentID'] = intval($data['contentID']);
 		$data['authorID'] = intval($data['authorID']);
 		$data['author'] = new User($data['authorID']);
+		$data['attachments'] = intval($data['attachments']);
 		$data['enableSmilies'] = (boolean) intval($data['enableSmilies']);
 		$data['enableHtml'] = (boolean) intval($data['enableHtml']);
 		$data['enableBBCodes'] = (boolean) intval($data['enableBBCodes']);

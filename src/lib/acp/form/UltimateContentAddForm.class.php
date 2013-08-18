@@ -95,6 +95,12 @@ class UltimateContentAddForm extends MessageForm {
 	public $showSignatureSetting = 0;
 	
 	/**
+	 * The object type for attachments.
+	 * @var string
+	 */
+	public $attachmentObjectType = 'de.plugins-zum-selberbauen.ultimate.content';
+	
+	/**
 	 * The description of the content.
 	 * @var	string
 	 */

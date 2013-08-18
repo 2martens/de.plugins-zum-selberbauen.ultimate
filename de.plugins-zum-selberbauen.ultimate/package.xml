@@ -60,4 +60,15 @@
 		<instruction type="cronjob">cronjob.xml</instruction>        
 		<!-- /xml and rest -->
 	</instructions>
+	
+	<instructions type="update" fromversion="1.0.0 Beta 1">
+		<instruction type="file">files_update.tar</instruction>
+		<instruction type="template">templates_update.tar</instruction>
+		
+		<instruction type="sql">update.b1.sql</instruction>
+		
+		<instruction type="language">language/*.xml</instruction>
+		<instruction type="userGroupOption">userGroupOption_update.b1.xml</instruction>
+		<instruction type="objectType">objectType_update.b1.xml</instruction>
+	</instructions>
 </package>

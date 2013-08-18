@@ -117,8 +117,9 @@ $(function() {
 														<p>{@$content->getFormattedMessage()|truncateMore:ULTIMATE_GENERAL_CONTENT_CONTINUEREADINGLENGTH}</p>
 													{/if}
 												</div>
-												
 											</div>
+											
+											{include file='attachments'}
 											
 											<div class="messageSignature">
 												

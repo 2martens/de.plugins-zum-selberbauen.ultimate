@@ -26,6 +26,8 @@
 		<item name="wcf.acp.group.option.user.ultimate.content.canEditComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Ihre eigenen Kommentare zu Inhalten bearbeiten.]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.content.canDeleteComment"><![CDATA[Kann Kommentar löschen]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.content.canDeleteComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Ihre eigenen Kommentare zu Inhalten löschen.]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.content.canDownloadAttachment"><![CDATA[Kann Dateianhänge herunterladen]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.content.canViewAttachmentPreview"><![CDATA[Kann Dateianhangs-Vorschau sehen]]></item>
 		<!-- /user -->
 		
 		<!-- mod -->
@@ -57,6 +59,7 @@
 		<item name="wcf.acp.group.option.admin.content.ultimate.canEditContent.description"><![CDATA[Mitglieder dieser Benutzergruppe können Inhalte bearbeiten.]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent"><![CDATA[Kann Inhalte löschen]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent.description"><![CDATA[Mitglieder dieser Benutzergruppe können Inhalte löschen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canUploadAttachment"><![CDATA[Kann Dateianhänge hochladen]]></item>
 		<!-- /content -->
 		
 		<!-- layout -->

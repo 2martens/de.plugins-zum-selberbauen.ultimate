@@ -127,5 +127,13 @@
             <classname>ultimate\data\content\LikeableContentProvider</classname>
         </type>
         <!-- /Like -->
+        
+        <!-- Attachments -->
+		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.content</name>
+			<definitionname>com.woltlab.wcf.attachment.objectType</definitionname>
+			<classname>ultimate\system\attachment\ContentAttachmentObjectType</classname>
+		</type>
+		<!-- /Attachments -->
     </import>
 </data>
