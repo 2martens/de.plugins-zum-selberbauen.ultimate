@@ -366,7 +366,7 @@ class TemplateHandler extends SingletonFactory {
 				if ($result === null) {
 					// determine lowest fitting menu item
 					$activeMenuItem = $this->getActiveMenuItem($parents, $menuItems);
-					if ($requestType == 'content') {
+					if ($requestType == 'content' && !empty($parents)) {
 						$parent = $parents[$startParentID];
 						$activeMenuItem = $parent->getTitle();
 					}
