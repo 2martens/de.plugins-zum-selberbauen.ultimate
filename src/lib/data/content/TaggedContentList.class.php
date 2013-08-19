@@ -70,8 +70,7 @@ class TaggedContentList extends ContentList {
 	public function countObjects() {
 		$sql = 'SELECT COUNT(*) AS count
 		        FROM   wcf'.WCF_N.'_tag_to_object tag_to_object,
-		               ultimate'.WCF_N.'_content content,
-		               ultimate'.WCF_N.'_content_to_page content_to_page
+		               ultimate'.WCF_N.'_content content
 		        '.$this->sqlConditionJoins.'
 		        '.$this->getConditionBuilder();
 		$statement = WCF::getDB()->prepareStatement($sql);
@@ -87,8 +86,7 @@ class TaggedContentList extends ContentList {
 		$this->objectIDs = array();
 		$sql = 'SELECT tag_to_object.objectID
 		        FROM   wcf'.WCF_N.'_tag_to_object tag_to_object,
-		               ultimate'.WCF_N.'_content content,
-		               ultimate'.WCF_N.'_content_to_page content_to_page
+		               ultimate'.WCF_N.'_content content
 		        '.$this->sqlConditionJoins.'
 		        '.$this->getConditionBuilder().'
 		        '.(!empty($this->sqlOrderBy) ? 'ORDER BY '.$this->sqlOrderBy : '');
