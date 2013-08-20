@@ -35,11 +35,13 @@ use wcf\system\cache\builder\UserGroupCacheBuilder;
 use wcf\system\exception\SystemException;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
+use wcf\system\request\LinkHandler;
 use wcf\system\Regex;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
 use wcf\util\DateTimeUtil;
 use wcf\util\DateUtil;
+use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 
 /**
@@ -182,11 +184,18 @@ class UltimatePageAddForm extends AbstractForm {
 	protected $startTime = 0;
 	
 	/**
+	 * If true, creating a page was successfully.
+	 * @var boolean
+	 */
+	protected $success = false;
+	
+	/**
 	 * Reads parameters.
 	 */
 	public function readParameters() {
 		parent::readParameters();
 		I18nHandler::getInstance()->register('pageTitle');
+		if (isset($_REQUEST['success'])) $this->success = true;
 	}
 	
 	/**
@@ -289,17 +298,9 @@ class UltimatePageAddForm extends AbstractForm {
 		
 		$this->saved();
 		
-		WCF::getTPL()->assign(
-			'success', true
-		);
-		
-		// showing empty form
-		$this->contentID = $this->pageParent = $this->statusID = $this->publishDateTimestamp = 0;
-		$this->pageTitle = $this->pageSlug = $this->publishDate = $this->metaDescription = $this->metaKeywords = '';
-		$this->visibility = 'public';
-		I18nHandler::getInstance()->reset();
-		$this->contents = $this->pages = $this->groupIDs = array();
-		$this->formatDate();
+		$url = LinkHandler::getInstance()->getLink('UltimatePageAdd', array(), 'success=true');
+		HeaderUtil::redirect($url);
+		exit;
 	}
 	
 	/**
@@ -326,6 +327,10 @@ class UltimatePageAddForm extends AbstractForm {
 			'startTime' => $this->startTime,
 			'action' => 'add'
 		));
+		
+		if ($this->success) {
+			WCF::getTPL()->assign('success', true);
+		}
 	}
 	
 	/**
