@@ -42,6 +42,7 @@ use ultimate\system\layout\LayoutHandler;
 use ultimate\system\menu\custom\CustomMenu;
 use ultimate\system\widget\WidgetHandler;
 use ultimate\system\widgettype\WidgetTypeHandler;
+use wcf\data\user\group\UserGroup;
 use wcf\data\DatabaseObjectDecorator;
 use wcf\page\IPage;
 use wcf\system\breadcrumb\Breadcrumb;
@@ -160,6 +161,9 @@ class TemplateHandler extends SingletonFactory {
 		if ($requestObject !== null) {
 			$this->assignMetaValues($requestObject);
 		}
+		
+		// determines if spiders are allowed to index the requested site
+		$this->assignSpiderSetting($requestObject, $requestType);
 		
 		return WCF::getTPL()->fetch($this->templateName, 'ultimate');
 	}
@@ -424,6 +428,34 @@ class TemplateHandler extends SingletonFactory {
 			MetaTagHandler::getInstance()->removeTag('keywords');
 			MetaTagHandler::getInstance()->addTag('keywords', 'keywords', $metaKeywords);
 		}
+	}
+	
+	/**
+	 * Assigns the spider variable.
+	 * 
+	 * @param	\ultimate\data\IUltimateData|null	$requestObject
+	 * @param	string								$requestType
+	 */
+	protected function assignSpiderSetting($requestObject, $requestType) {
+		$allowSpidersToIndexThisPage = false;
+		// only index is allowed to give a null reference
+		// therefore we eliminate both index and category with this if clause
+		if ($requestObject === null || $requestType == 'category') {
+			$allowSpidersToIndexThisPage = true;
+		}
+		else {
+			$visibility = $requestObject->__get('visibility');
+			$allowSpidersToIndexThisPage = ($visibility == 'public');
+			// If the visibility is private nobody but the creator can view the contents.
+			// Therefore search engines shouldn't be able to index it.
+			// Of course one could speculate that a search engine only 
+			// gets access if it is publicly available but that's guessing.
+			if (!$allowSpidersToIndexThisPage && $visibility == 'protected') {
+				$groups = $requestObject->__get('groups');
+				$allowSpidersToIndexThisPage = (isset($groups[UserGroup::EVERYONE]) || isset($groups[UserGroup::GUESTS]));
+			}
+		}
+		WCF::getTPL()->assign('allowSpidersToIndexThisPage', $allowSpidersToIndexThisPage);
 	}
 	
 	/**
