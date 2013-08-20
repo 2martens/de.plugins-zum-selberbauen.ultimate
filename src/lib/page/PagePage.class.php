@@ -32,6 +32,7 @@ use ultimate\system\layout\LayoutHandler;
 use ultimate\system\template\TemplateHandler;
 use ultimate\util\PageUtil;
 use wcf\page\AbstractPage;
+use wcf\system\exception\IllegalLinkException;
 use wcf\system\request\RouteHandler;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
@@ -92,12 +93,18 @@ class PagePage extends AbstractPage {
 	public function readData() {
 		parent::readData();
 		$pagesToSlug = $this->loadCache();
-		/* @var $page \ultimate\data\page\Page */
-		$page = $pagesToSlug[$this->pageSlugs[0]];
-		if (count($this->pageSlugs) > 1) {
-			$page = PageUtil::getRealPage($page, 1, $this->pageSlugs);
+		
+		if (isset($pagesToSlug[$this->pageSlugs[0]])) {
+			/* @var $page \ultimate\data\page\Page */
+			$page = $pagesToSlug[$this->pageSlugs[0]];
+			if (count($this->pageSlugs) > 1) {
+				$page = PageUtil::getRealPage($page, 1, $this->pageSlugs);
+			}
+			$this->page = $page;
 		}
-		$this->page = $page;
+		else {
+			throw new IllegalLinkException();
+		}
 		
 		// update view count
 		$contentEditor = new ContentEditor($this->page->__get('content'));

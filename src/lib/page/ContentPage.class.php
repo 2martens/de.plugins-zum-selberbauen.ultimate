@@ -107,7 +107,12 @@ class ContentPage extends AbstractPage {
 	public function readData() {
 		parent::readData();
 		$this->loadCache();
-		$this->content = $this->contentsToSlug[$this->contentSlugs[0]];
+		if (isset($this->contentsToSlug[$this->contentSlugs[0]])) {
+			$this->content = $this->contentsToSlug[$this->contentSlugs[0]];
+		}
+		else {
+			throw new IllegalLinkException();
+		}
 		
 		// update view count
 		$contentEditor = new ContentEditor($this->content->getDecoratedObject());
