@@ -564,7 +564,7 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 		<item name="wcf.acp.ultimate.template.contentTab.meta.contentMetaDisplay.category"><![CDATA[categories]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.meta.contentMetaDisplay.page"><![CDATA[pages]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.meta.contentMetaDisplay.content"><![CDATA[contents]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.meta.metaAboveContent"><![CDATA[Meta above contnet]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.meta.metaAboveContent"><![CDATA[Meta above content]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.meta.metaAboveContent.description"><![CDATA[Available variables: $datetime, $date, $time, $comments, $author, $authorVCard, $categories, $tags]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.meta.metaBelowContent"><![CDATA[Meta below content]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.meta.metaBelowContent.description"><![CDATA[Available variables: $datetime, $date, $time, $comments, $author, $authorVCard, $categories, $tags]]></item>
