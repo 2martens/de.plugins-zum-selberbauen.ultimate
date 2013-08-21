@@ -1,0 +1,1 @@
+ALTER TABLE ultimate1_content ADD attachments SMALLINT(5) NOT NULL DEFAULT '0' AFTER contentText;
