@@ -313,8 +313,8 @@ Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$com
 		<item name="wcf.acp.ultimate.content.title"><![CDATA[Titel]]></item>
 		<item name="wcf.acp.ultimate.content.title.error.tooShort"><![CDATA[Der Titel muss mindestens 4 Zeichen lang sein.]]></item>
 		<item name="wcf.acp.ultimate.content.title.placeholder"><![CDATA[Eine schöne Geschichte]]></item>
-		<item name="wcf.acp.ultimate.content.description"><![CDATA[Beschreibung]]></item>
-		<item name="wcf.acp.ultimate.content.description.placeholder"><![CDATA[Diese Geschichte handelt von zwei Freunden, die viel Spaß miteinander haben.]]></item>
+		<item name="wcf.acp.ultimate.content.description"><![CDATA[Beschreibung (optional)]]></item>
+		<item name="wcf.acp.ultimate.content.description.placeholder"><![CDATA[]]></item>
 		<item name="wcf.acp.ultimate.content.description.error.tooShort"><![CDATA[Die Beschreibung muss mindestens 4 Zeichen lang sein.]]></item>
 		<item name="wcf.acp.ultimate.content.slug"><![CDATA[URL-kompatibler Titel]]></item>
 		<item name="wcf.acp.ultimate.content.slug.placeholder"><![CDATA[a-nice-story]]></item>
