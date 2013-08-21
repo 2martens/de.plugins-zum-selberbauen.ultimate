@@ -26,6 +26,8 @@
 		<item name="wcf.acp.group.option.user.ultimate.content.canEditComment.description"><![CDATA[Members of this usergroup can edit their own comments to contents.]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.content.canDeleteComment"><![CDATA[Can delete comment]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.content.canDeleteComment.description"><![CDATA[Members of this usergroup can delete their own comments to contents.]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.content.canDownloadAttachment"><![CDATA[Can download attachments]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.content.canViewAttachmentPreview"><![CDATA[Can view attachment previews]]></item>
 		<!-- /user -->
 		
 		<!-- mod -->
@@ -57,6 +59,7 @@
 		<item name="wcf.acp.group.option.admin.content.ultimate.canEditContent.description"><![CDATA[Members of this usergroup can edit contents.]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent"><![CDATA[Can delete contents]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent.description"><![CDATA[Members of this usergroup can delete contents.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canUploadAttachment"><![CDATA[Can upload attachments]]></item>
 		<!-- /content -->
 		
 		<!-- layout -->
@@ -310,8 +313,8 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
 		<item name="wcf.acp.ultimate.content.title"><![CDATA[Title]]></item>
 		<item name="wcf.acp.ultimate.content.title.error.tooShort"><![CDATA[The title has to be at least 4 characters long.]]></item>
 		<item name="wcf.acp.ultimate.content.title.placeholder"><![CDATA[A nice story]]></item>
-		<item name="wcf.acp.ultimate.content.description"><![CDATA[Description]]></item>
-		<item name="wcf.acp.ultimate.content.description.placeholder"><![CDATA[This story is about two friends having fun with each other.]]></item>
+		<item name="wcf.acp.ultimate.content.description"><![CDATA[Description (optional)]]></item>
+		<item name="wcf.acp.ultimate.content.description.placeholder"><![CDATA[]]></item>
 		<item name="wcf.acp.ultimate.content.description.error.tooShort"><![CDATA[The description has to be at least 4 characters long.]]></item>
 		<item name="wcf.acp.ultimate.content.slug"><![CDATA[Slug]]></item>
 		<item name="wcf.acp.ultimate.content.slug.placeholder"><![CDATA[a-nice-story]]></item>
@@ -561,7 +564,7 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 		<item name="wcf.acp.ultimate.template.contentTab.meta.contentMetaDisplay.category"><![CDATA[categories]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.meta.contentMetaDisplay.page"><![CDATA[pages]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.meta.contentMetaDisplay.content"><![CDATA[contents]]></item>
-		<item name="wcf.acp.ultimate.template.contentTab.meta.metaAboveContent"><![CDATA[Meta above contnet]]></item>
+		<item name="wcf.acp.ultimate.template.contentTab.meta.metaAboveContent"><![CDATA[Meta above content]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.meta.metaAboveContent.description"><![CDATA[Available variables: $datetime, $date, $time, $comments, $author, $authorVCard, $categories, $tags]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.meta.metaBelowContent"><![CDATA[Meta below content]]></item>
 		<item name="wcf.acp.ultimate.template.contentTab.meta.metaBelowContent.description"><![CDATA[Available variables: $datetime, $date, $time, $comments, $author, $authorVCard, $categories, $tags]]></item>
@@ -689,7 +692,9 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 {/if}{@$link}]]></item>
 		<item name="wcf.user.notification.content.commentResponseOwner.message"><![CDATA[Wrote a reply to {$commentAuthor->username}’s comment about your content.]]></item>
 		<item name="wcf.user.notification.content.commentResponseOwner.title"><![CDATA[New Reply (Content)]]></item>
+		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.notification"><![CDATA[Content comments]]></item>
 		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.notification.comment"><![CDATA[New comment about your content]]></item>
+		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.response.notification"><![CDATA[Replies to content comments]]></item>
 		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.response.notification.commentResponse"><![CDATA[New reply to a comment about your content]]></item>
 		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.response.notification.commentResponseOwner"><![CDATA[New reply to one of your comments]]></item>
 	</category>
@@ -755,7 +760,7 @@ For the InlineEdit you require the same rights to write, edit or delete contents
     
     <category name="ultimate.index">
         <item name="ultimate.index.copyright"><![CDATA[<a href="http://www.plugins-zum-selberbauen.de/"{if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if}>CMS: <strong>Ultimate CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, developed by <strong>Jim Martens</strong></a>]]></item>
-        <item name="ultimate.index.beta"><![CDATA[Ultimate CMS: This is a beta version. Despite all tests there can be issues floating around. Please report them in the <a href="http://ultimate.plugins-zum-selberbauen.de/forum">beta forum</a> or on <a href="https://github.com/frmwrk123/de.plugins-zum-selberbauen.ultimate">Github</a>.]]></item>
+        <item name="ultimate.index.beta"><![CDATA[Ultimate CMS: This is a beta version. Despite all tests there can be issues floating around. Please report them in the <a href="http://beta.plugins-zum-selberbauen.de/forum">beta forum</a> or on <a href="https://github.com/frmwrk123/de.plugins-zum-selberbauen.ultimate">Github</a>.]]></item>
     </category>
 	
 	<!-- this category is used for all layout names -->

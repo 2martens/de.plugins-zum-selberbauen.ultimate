@@ -75,5 +75,14 @@
             <listenerclassname>ultimate\system\event\listener\CustomMenuListener</listenerclassname>
         </eventlistener>
         <!-- /custom menu listener -->
+        
+        <!-- tagged page listener -->
+        <eventlistener>
+        	<eventclassname>wcf\page\TaggedPage</eventclassname>
+        	<eventname>assignVariables</eventname>
+        	<inherit>0</inherit>
+        	<listenerclassname>ultimate\system\event\listener\TaggedPageListener</listenerclassname>
+        </eventlistener>
+        <!-- /tagged page listener -->
     </import>
 </data>

@@ -26,6 +26,8 @@
 		<item name="wcf.acp.group.option.user.ultimate.content.canEditComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Ihre eigenen Kommentare zu Inhalten bearbeiten.]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.content.canDeleteComment"><![CDATA[Kann Kommentar löschen]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.content.canDeleteComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Ihre eigenen Kommentare zu Inhalten löschen.]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.content.canDownloadAttachment"><![CDATA[Kann Dateianhänge herunterladen]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.content.canViewAttachmentPreview"><![CDATA[Kann Dateianhangs-Vorschau sehen]]></item>
 		<!-- /user -->
 		
 		<!-- mod -->
@@ -57,6 +59,7 @@
 		<item name="wcf.acp.group.option.admin.content.ultimate.canEditContent.description"><![CDATA[Mitglieder dieser Benutzergruppe können Inhalte bearbeiten.]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent"><![CDATA[Kann Inhalte löschen]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent.description"><![CDATA[Mitglieder dieser Benutzergruppe können Inhalte löschen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canUploadAttachment"><![CDATA[Kann Dateianhänge hochladen]]></item>
 		<!-- /content -->
 		
 		<!-- layout -->
@@ -310,8 +313,8 @@ Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$com
 		<item name="wcf.acp.ultimate.content.title"><![CDATA[Titel]]></item>
 		<item name="wcf.acp.ultimate.content.title.error.tooShort"><![CDATA[Der Titel muss mindestens 4 Zeichen lang sein.]]></item>
 		<item name="wcf.acp.ultimate.content.title.placeholder"><![CDATA[Eine schöne Geschichte]]></item>
-		<item name="wcf.acp.ultimate.content.description"><![CDATA[Beschreibung]]></item>
-		<item name="wcf.acp.ultimate.content.description.placeholder"><![CDATA[Diese Geschichte handelt von zwei Freunden, die viel Spaß miteinander haben.]]></item>
+		<item name="wcf.acp.ultimate.content.description"><![CDATA[Beschreibung (optional)]]></item>
+		<item name="wcf.acp.ultimate.content.description.placeholder"><![CDATA[]]></item>
 		<item name="wcf.acp.ultimate.content.description.error.tooShort"><![CDATA[Die Beschreibung muss mindestens 4 Zeichen lang sein.]]></item>
 		<item name="wcf.acp.ultimate.content.slug"><![CDATA[URL-kompatibler Titel]]></item>
 		<item name="wcf.acp.ultimate.content.slug.placeholder"><![CDATA[a-nice-story]]></item>
@@ -686,7 +689,9 @@ Für die InlineEdit braucht man die gleichen Rechte um Inhalte zu schreiben, zu 
 {/if}{@$link}]]></item>
 		<item name="wcf.user.notification.content.commentResponseOwner.message"><![CDATA[Hat eine Antwort zum Kommentar von {$commentAuthor->username} zu deinem Inhalt verfasst.]]></item>
 		<item name="wcf.user.notification.content.commentResponseOwner.title"><![CDATA[Neue Antwort (Inhalt)]]></item>
-		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.notification.comment"><![CDATA[Neuer Kommentar zu deinem Inhalt]]></item>
+		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.notification"><![CDATA[Inhaltskommentare]]></item>
+		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.notification.comment"><![CDATA[Neuer Kommentar zu Ihrem Inhalt]]></item>
+		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.response.notification"><![CDATA[Antworten zu Inhaltskommentaren]]></item>
 		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.response.notification.commentResponse"><![CDATA[Neue Antwort auf einen Kommentar zu deinem Inhalt]]></item>
 		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.response.notification.commentResponseOwner"><![CDATA[Neue Antwort auf einen Kommentar von dir]]></item>
 	</category>
@@ -752,7 +757,7 @@ Für die InlineEdit braucht man die gleichen Rechte um Inhalte zu schreiben, zu 
     
     <category name="ultimate.index">
         <item name="ultimate.index.copyright"><![CDATA[<a href="http://www.plugins-zum-selberbauen.de/"{if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if}>CMS: <strong>Ultimate CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, entwickelt von <strong>Jim Martens</strong></a>]]></item>
-        <item name="ultimate.index.beta"><![CDATA[Ultimate CMS: Bei der Software handelt es sich um eine Betaversion. Trotz aller vorausgehenden Tests können noch Fehler vorhanden sein. Diese bitte im <a href="http://ultimate.plugins-zum-selberbauen.de/forum">Betaforum</a> oder auf <a href="https://github.com/frmwrk123/de.plugins-zum-selberbauen.ultimate">Github</a> melden.]]></item>
+        <item name="ultimate.index.beta"><![CDATA[Ultimate CMS: Bei der Software handelt es sich um eine Betaversion. Trotz aller vorausgehenden Tests können noch Fehler vorhanden sein. Diese bitte im <a href="http://beta.plugins-zum-selberbauen.de/forum">Betaforum</a> oder auf <a href="https://github.com/frmwrk123/de.plugins-zum-selberbauen.ultimate">Github</a> melden.]]></item>
     </category>
 	
 	<!-- this category is used for all layout names -->

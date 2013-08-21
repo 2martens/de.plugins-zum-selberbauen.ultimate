@@ -30,8 +30,11 @@ use ultimate\data\content\CategorizedContent;
 use ultimate\data\content\Content;
 use ultimate\data\content\TaggedContent;
 use ultimate\data\IUltimateData;
+use ultimate\system\cache\builder\ContentAttachmentCacheBuilder;
 use wcf\data\user\User;
 use wcf\data\user\UserProfile;
+use wcf\system\bbcode\AttachmentBBCode;
+use wcf\system\bbcode\BBCodeParser;
 use wcf\system\comment\CommentHandler;
 use wcf\system\language\I18nHandler;
 use wcf\system\like\LikeHandler;
@@ -156,6 +159,12 @@ class ContentBlockType extends AbstractBlockType {
 	 * @var \wcf\data\like\object\LikeObject[]
 	 */
 	protected $likeData = array();
+	
+	/**
+	 * The attachment list.
+	 * @var \wcf\data\attachment\GroupedAttachmentList
+	 */
+	protected $attachmentList = array();
 	
 	/**
 	 * Reads the necessary data.
@@ -428,6 +437,14 @@ class ContentBlockType extends AbstractBlockType {
 			LikeHandler::getInstance()->loadLikeObjects($objectType, $contentIDs);
 			$this->likeData = LikeHandler::getInstance()->getLikeObjects($objectType);
 		}
+		
+		// fetch attachments
+		if (MODULE_ATTACHMENT) {
+			$this->attachmentList = ContentAttachmentCacheBuilder::getInstance()->getData(array(), 'attachmentList');
+			// set embedded attachments
+			BBCodeParser::getInstance()->setOutputType('text/html');
+			AttachmentBBCode::setAttachmentList($this->attachmentList);
+		}
 	}
 	
 	/**
@@ -601,7 +618,9 @@ class ContentBlockType extends AbstractBlockType {
 			'commentsPerPage' => $this->commentManager->getCommentsPerPage(),
 			'commentLists' => $this->commentLists,
 			//like data
-			'likeData' => $this->likeData
+			'likeData' => $this->likeData,
+			//attachments
+			'attachmentList' => $this->attachmentList
 		));
 		
 		$useRequestData = false;

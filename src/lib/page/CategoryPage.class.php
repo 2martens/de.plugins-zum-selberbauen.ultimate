@@ -33,6 +33,7 @@ use ultimate\util\CategoryUtil;
 use wcf\page\AbstractPage;
 use wcf\page\MultipleLinkPage;
 use wcf\system\event\EventHandler;
+use wcf\system\exception\IllegalLinkException;
 use wcf\system\request\RouteHandler;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
@@ -95,12 +96,19 @@ class CategoryPage extends MultipleLinkPage {
 	public function readData() {
 		AbstractPage::readData();
 		$categoriesToSlug = $this->loadCache();
-		/* @var $category \ultimate\data\category\Category */
-		$category = $categoriesToSlug[$this->categorySlugs[0]];
-		if (count($this->categorySlugs) > 1) {
-			$category = CategoryUtil::getRealCategory($category, 1, $this->categorySlugs);
+		
+		if (isset($categoriesToSlug[$this->categorySlugs[0]])) {
+			/* @var $category \ultimate\data\category\Category */
+			$category = $categoriesToSlug[$this->categorySlugs[0]];
+			if (count($this->categorySlugs) > 1) {
+				$category = CategoryUtil::getRealCategory($category, 1, $this->categorySlugs);
+			}
+			$this->category = $category;
 		}
-		$this->category = $category;
+		else {
+			throw new IllegalLinkException();
+		}
+		
 		$this->layout = LayoutHandler::getInstance()->getLayoutFromObjectData($this->category->__get('categoryID'), 'category');
 	}
 	
