@@ -24,7 +24,7 @@
 				<exclude name="acp/templates/**" />
 			</tarfileset>
 		</tar>
-		<tar destfile="metadata/files.tar" 
+		<tar destfile="metadata/files_wcf.tar" 
 			basedir="srcWcf" 
 		/>
 		
