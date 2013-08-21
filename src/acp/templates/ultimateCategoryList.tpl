@@ -72,7 +72,7 @@
 								<span title="{lang}wcf.acp.ultimate.category.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
 							{/if}
 							
-							{if $__wcf->session->getPermission('admin.content.ultimate.canManageCategories') && $category->categoryID > 1}
+							{if $__wcf->session->getPermission('admin.content.ultimate.canManageCategories') && $category->categoryID > 2}
 								<span title="{lang}wcf.acp.ultimate.category.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton" data-object-id="{@$category->categoryID}" data-confirm-message="{lang}wcf.acp.ultimate.category.delete.sure{/lang}"></span>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.category.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
