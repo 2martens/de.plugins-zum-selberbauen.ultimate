@@ -24,6 +24,46 @@
 				<exclude name="acp/templates/**" />
 			</tarfileset>
 		</tar>
+		
+		<!-- beta 2 update tars -->
+		<tar destfile="de.plugins-zum-selberbauen.ultimate/templates_update.b1.tar">
+			<tarfileset dir="src/templates">
+				<include name="contentBlockType.tpl" />
+				<include name="contentInlineEditor.tpl" />
+				<include name="dashboardBoxLatestContents.tpl" />
+				<include name="footer.tpl" />
+				<include name="headInclude.tpl" />
+			</tarfileset>
+		</tar>
+		<tar destfile="de.plugins-zum-selberbauen.ultimate/acptemplates_update.b1.tar">
+			<tarfileset dir="src/acp/templates">
+				<include name="header.tpl" />
+				<include name="ultimateCategoryAdd.tpl" />
+				<include name="ultimateCategoryList.tpl" />
+				<include name="ultimateContentAdd.tpl" />
+				<include name="ultimateLayoutManager.tpl" />
+			</tarfileset>
+		</tar>
+		<tar destfile="de.plugins-zum-selberbauen.ultimate/files_update.b1.tar">
+			<tarfileset dir="src">
+				<exclude name="templates/**" />
+				<exclude name="acp/templates/**" />
+				<include name="**/UltimateCategory*Form*" />
+				<include name="**/UltimateContent*Form*" />
+				<include name="**/UltimatePageAddForm*" />
+				<include name="**/CategoryEditor*" />
+				<include name="**/data/content/Content*" />
+				<include name="**/TaggedContentList*" />
+				<include name="**/CategoryPage*" />
+				<include name="**/ContentPage*" />
+				<include name="**/PagePage*" />
+				<include name="**/ContentAttachment*" />
+				<include name="**/ContentBlockType*" />
+				<include name="**/TaggedPageListener*" />
+				<include name="**/CustomMenu*" />
+				<include name="**/TemplateHandler*" />
+			</tarfileset>
+		</tar>
 	</target>
 	
 	<target name="build" depends="pack" description="Generates the package archive.">
