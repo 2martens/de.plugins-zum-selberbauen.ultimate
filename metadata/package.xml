@@ -8,8 +8,8 @@
 		<packagedescription language="de-informal"><![CDATA[Ein WCF-kompatibles CMS.]]></packagedescription>
 		
 		<isapplication>1</isapplication>
-		<version>1.0.0 Beta 1</version>
-		<date>2013-08-08</date>
+		<version>1.0.0 Beta 2</version>
+		<date>2013-08-21</date>
 	</packageinformation>
 	
 	<authorinformation>
@@ -62,8 +62,9 @@
 	</instructions>
 	
 	<instructions type="update" fromversion="1.0.0 Beta 1">
-		<instruction type="file">files_update.tar</instruction>
-		<instruction type="template">templates_update.tar</instruction>
+		<instruction type="acpTemplate">acptemplates_update.b1.tar</instruction>
+        <instruction type="file">files_update.b1.tar</instruction>
+		<instruction type="template">templates_update.b1.tar</instruction>
 		
 		<instruction type="sql">update.b1.sql</instruction>
 		
