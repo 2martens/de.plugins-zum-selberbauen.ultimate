@@ -24,6 +24,9 @@
 				<exclude name="acp/templates/**" />
 			</tarfileset>
 		</tar>
+		<tar destfile="metadata/files.tar" 
+			basedir="srcWcf" 
+		/>
 		
 		<!-- beta 2 update tars -->
 		<tar destfile="metadata/templates_update.b1.tar">
