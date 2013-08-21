@@ -29,6 +29,7 @@ namespace ultimate\system\event\listener;
 use wcf\system\event\IEventListener;
 use wcf\system\tagging\TypedTagCloud;
 use wcf\system\WCF;
+use wcf\util\ArrayUtil;
 
 /**
  * Replaces the typed tag cloud in TaggedPage with a typed tag cloud that only contains tags of the current user language.
@@ -52,7 +53,7 @@ class TaggedPageListener implements IEventListener {
 		if ($eventObj->objectType->objectType != 'de.plugins-zum-selberbauen.ultimate.content') return;
 		
 		$languageIDs = array();
-		$languageIDs = WCF::getUser()->getLanguageIDs();
+		$languageIDs = ArrayUtil::toIntegerArray(WCF::getUser()->getLanguageIDs());
 		$tagCloud = new TypedTagCloud('de.plugins-zum-selberbauen.ultimate.content', $languageIDs);
 		$eventObj->tagCloud = $tagCloud;
 	}
