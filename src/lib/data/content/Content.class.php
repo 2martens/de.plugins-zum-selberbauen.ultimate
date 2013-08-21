@@ -30,6 +30,7 @@ use ultimate\data\AbstractUltimateDatabaseObject;
 use wcf\data\user\User;
 use wcf\data\IMessage;
 use wcf\data\ITitledObject;
+use wcf\system\bbcode\AttachmentBBCode;
 use wcf\system\bbcode\MessageParser;
 use wcf\system\request\UltimateLinkHandler;
 use wcf\system\WCF;
@@ -53,13 +54,14 @@ use wcf\util\StringUtil;
  * @property-read	string								$contentSlug
  * @property-read	integer								$authorID
  * @property-read	\wcf\data\user\User					$author
+ * @property-read	integer								$attachments
  * @property-read	boolean								$enableSmilies
  * @property-read	boolean								$enableHtml
  * @property-read	boolean								$enableBBCodes
  * @property-read	integer								$cumulativeLikes
  * @property-read	integer								$views
  * @property-read	integer								$publishDate
- * @property-read	\DateTime							$publishDateObject
+ * @property-read	\DateTime|null						$publishDateObject	null if the content is neither planned nor published
  * @property-read	integer								$lastModified
  * @property-read	integer								$status	(0, 1, 2, 3)
  * @property-read	string								$visibility	('public', 'protected', 'private')
@@ -158,6 +160,9 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject, I
 	 * @return	string
 	 */
 	public function getFormattedMessage() {
+		// assign embedded attachments
+		AttachmentBBCode::setObjectID($this->contentID);
+		
 		MessageParser::getInstance()->setOutputType('text/html');
 		return MessageParser::getInstance()->parse(WCF::getLanguage()->get($this->contentText), $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
 	}
@@ -203,13 +208,18 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject, I
 		} else {
 			$isVisible = (WCF::getUser()->__get('userID') == $this->authorID);
 		}
+		
+		if ($isVisible) {
+			$isVisible = ($this->status == 3);
+		}
+		
 		return $isVisible;
 	}
 	
 	/**
-	 * Returns message creation timestamp.
+	 * Returns content publish timestamp.
 	 *
-	 * @return	integer
+	 * @return	integer	0 if the content isn't published yet
 	 */
 	public function getTime() {
 		return $this->publishDate;
@@ -235,6 +245,8 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject, I
 	
 	/**
 	 * Returns the link to the object.
+	 * 
+	 * Works only properly if isVisible returns true. If isVisible returns false, an exception might occur.
 	 *
 	 * @return	string
 	 */
@@ -255,13 +267,14 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject, I
 		$data['contentID'] = intval($data['contentID']);
 		$data['authorID'] = intval($data['authorID']);
 		$data['author'] = new User($data['authorID']);
+		$data['attachments'] = intval($data['attachments']);
 		$data['enableSmilies'] = (boolean) intval($data['enableSmilies']);
 		$data['enableHtml'] = (boolean) intval($data['enableHtml']);
 		$data['enableBBCodes'] = (boolean) intval($data['enableBBCodes']);
 		$data['cumulativeLikes'] = intval($data['cumulativeLikes']);
 		$data['views'] = intval($data['views']);
 		$data['publishDate'] = intval($data['publishDate']);
-		$data['publishDateObject'] = DateUtil::getDateTimeByTimestamp($data['publishDate']);
+		$data['publishDateObject'] = ($data['publishDate'] ? DateUtil::getDateTimeByTimestamp($data['publishDate']) : null);
 		$data['lastModified'] = intval($data['lastModified']);
 		$data['status'] = intval($data['status']);
 		parent::handleData($data);

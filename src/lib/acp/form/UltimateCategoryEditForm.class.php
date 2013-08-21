@@ -90,8 +90,10 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 		$this->categorySlug = $this->category->__get('categorySlug');
 		$this->categoryDescription = $this->category->__get('categoryDescription');
 		$metaData = $this->category->__get('metaData');
-		$this->metaDescription = $metaData['metaDescription'];
-		$this->metaKeywords = $metaData['metaKeywords'];
+		if (!empty($metaData)) {
+			$this->metaDescription = (isset($metaData['metaDescription']) ? $metaData['metaDescription'] : '');
+			$this->metaKeywords = (isset($metaData['metaKeywords']) ? $metaData['metaKeywords'] : '');
+		}
 		$this->categoryParent = $this->category->__get('categoryParent');
 		I18nHandler::getInstance()->setOptions('categoryTitle', PACKAGE_ID, $this->categoryTitle, 'ultimate.category.\d+.categoryTitle');
 		I18nHandler::getInstance()->setOptions('categoryDescription', PACKAGE_ID, $this->categoryDescription, 'ultimate.category.\d+.categoryDescription');

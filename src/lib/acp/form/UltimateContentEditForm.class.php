@@ -39,6 +39,7 @@ use wcf\form\AbstractForm;
 use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
 use wcf\system\bbcode\PreParser;
+use wcf\system\cache\builder\TagObjectCacheBuilder;
 use wcf\system\language\I18nHandler;
 use wcf\system\menu\acp\ACPMenu;
 use wcf\system\request\LinkHandler;
@@ -111,6 +112,8 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		}
 		
 		$this->content = $content;
+		// set attachment object id
+		$this->attachmentObjectID = $this->contentID;
 	}
 	
 	/**
@@ -132,11 +135,12 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		}
 		
 		// fill save button with fitting language
+		// default to save as draft if the content is published or planned
 		$saveButtonLangArray = array(
 			0 => WCF::getLanguage()->get('ultimate.button.saveAsDraft'),
 			1 => WCF::getLanguage()->get('ultimate.button.saveAsPending'),
-			2 => '',
-			3 => ''
+			2 => WCF::getLanguage()->get('ultimate.button.saveAsDraft'),
+			3 => WCF::getLanguage()->get('ultimate.button.saveAsDraft')
 		);
 		$this->saveButtonLang = $saveButtonLangArray[$this->statusID];
 		
@@ -241,7 +245,8 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 			),
 			'categories' => $this->categoryIDs,
 			'metaDescription' => $this->metaDescription,
-			'metaKeywords' => $this->metaKeywords
+			'metaKeywords' => $this->metaKeywords,
+			'attachmentHandler' => $this->attachmentHandler
 		);
 		
 		if ($this->visibility == 'protected') {
@@ -260,18 +265,25 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 			TagEngine::getInstance()->addObjectTags('de.plugins-zum-selberbauen.ultimate.content', $this->content->__get('contentID'), $tags, $languageID);
 			$this->tagsI18n[$languageID] = Tag::buildString($tags);
 		}
+		// reset cache
+		TagObjectCacheBuilder::getInstance()->reset();
 		
 		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
 		$content = $contents[$this->contentID];
 		
 		// create recent activity event if published
-		if ($this->content->__get('status') != 3 && $this->statusID == 3 && in_array(Category::PAGE_CATEGORY, $this->categoryIDs)) {
+		if ($this->content->__get('status') != 3 && $this->statusID == 3 && !in_array(Category::PAGE_CATEGORY, $this->categoryIDs)) {
 			UserActivityEventHandler::getInstance()->fireEvent(
 				'de.plugins-zum-selberbauen.ultimate.recentActivityEvent.content',
 				$this->contentID,
 				null,
 				$content->__get('authorID'),
-				$content->__get('publishDate')
+				$this->publishDateTimestamp
+			);
+		} else if ($this->content->__get('status') == 3 && $this->statusID != 3) {
+			UserActivityEventHandler::getInstance()->removeEvents(
+				'de.plugins-zum-selberbauen.ultimate.recentActivityEvent.content',
+				array($this->contentID)
 			);
 		}
 		
@@ -303,22 +315,13 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		WCF::getTPL()->assign(array(
 			'contentID' => $this->contentID,
 			'publishButtonLang' => WCF::getLanguage()->get($this->publishButtonLang),
+			'saveButtonLang' => $this->saveButtonLang,
 			'publishButtonLangRaw' => $this->publishButtonLang,
 			'action' => 'edit'
 		));
 		
 		if ($this->success) {
 			WCF::getTPL()->assign('success', true);
-		}
-		
-		// hide the save button if you edit a page which is already scheduled or published
-		if (!empty($this->saveButtonLang)) {
-			// status id == (0|1)
-			WCF::getTPL()->assign('saveButtonLang', $this->saveButtonLang);
-		}
-		else {
-			// status id == (2|3)
-			WCF::getTPL()->assign('disableSaveButton', true);
 		}
 	}
 	

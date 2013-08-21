@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Ultimate CMS" default="build">
+	<target name="clean" description="Deletes old tar files.">
+		<delete failonerror="false">
+			<fileset dir="de.plugins-zum-selberbauen.ultimate" includes="**/*.tar"/>
+		</delete>
+		<delete failonerror="false" dir="build" />
+	</target>
+	
+	<target name="prepare" depends="clean" description="Prepares the build.">
+		<mkdir dir="build" />
+	</target>
+	
+	<target name="pack" depends="prepare" description="Packs the tar files.">
+		<tar destfile="de.plugins-zum-selberbauen.ultimate/templates.tar" 
+			basedir="src/templates" 
+		/>
+		<tar destfile="de.plugins-zum-selberbauen.ultimate/acptemplates.tar" 
+			basedir="src/acp/templates"
+		/>
+		<tar destfile="de.plugins-zum-selberbauen.ultimate/files.tar">
+			<tarfileset dir="src">
+				<exclude name="templates/**" />
+				<exclude name="acp/templates/**" />
+			</tarfileset>
+		</tar>
+		
+		<!-- beta 2 update tars -->
+		<tar destfile="de.plugins-zum-selberbauen.ultimate/templates_update.b1.tar">
+			<tarfileset dir="src/templates">
+				<include name="contentBlockType.tpl" />
+				<include name="contentInlineEditor.tpl" />
+				<include name="dashboardBoxLatestContents.tpl" />
+				<include name="footer.tpl" />
+				<include name="headInclude.tpl" />
+			</tarfileset>
+		</tar>
+		<tar destfile="de.plugins-zum-selberbauen.ultimate/acptemplates_update.b1.tar">
+			<tarfileset dir="src/acp/templates">
+				<include name="header.tpl" />
+				<include name="ultimateCategoryAdd.tpl" />
+				<include name="ultimateCategoryList.tpl" />
+				<include name="ultimateContentAdd.tpl" />
+				<include name="ultimateLayoutManager.tpl" />
+			</tarfileset>
+		</tar>
+		<tar destfile="de.plugins-zum-selberbauen.ultimate/files_update.b1.tar">
+			<tarfileset dir="src">
+				<exclude name="templates/**" />
+				<exclude name="acp/templates/**" />
+				<include name="**/UltimateCategory*Form*" />
+				<include name="**/UltimateContent*Form*" />
+				<include name="**/UltimatePageAddForm*" />
+				<include name="**/CategoryEditor*" />
+				<include name="**/data/content/Content*" />
+				<include name="**/TaggedContentList*" />
+				<include name="**/CategoryPage*" />
+				<include name="**/ContentPage*" />
+				<include name="**/PagePage*" />
+				<include name="**/ContentAttachment*" />
+				<include name="**/ContentBlockType*" />
+				<include name="**/TaggedPageListener*" />
+				<include name="**/CustomMenu*" />
+				<include name="**/TemplateHandler*" />
+			</tarfileset>
+		</tar>
+	</target>
+	
+	<target name="build" depends="pack" description="Generates the package archive.">
+		<tar destfile="build/de.plugins-zum-selberbauen.ultimate.tar" 
+			 basedir="de.plugins-zum-selberbauen.ultimate"
+		/>
+		<gzip src="build/de.plugins-zum-selberbauen.ultimate.tar"
+			  destfile="build/de.plugins-zum-selberbauen.ultimate.tar.gz"
+		/>
+	</target>
+</project>

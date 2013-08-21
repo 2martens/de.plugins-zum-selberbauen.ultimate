@@ -25,6 +25,12 @@ $(function() {
 	
 	{assign var=displayedFeaturedContents value=0}
 	{foreach from=$contents key=contentID item=content}
+		{assign var=objectID value=$contentID}
+		{if $content->publishDateObject !== null}
+			{assign var=date value=$content->publishDateObject->format('Y-m-d')}
+		{else}
+			{assign var=date value=''}
+		{/if}
 		{if $content->status == 3}
 			<li id="content{@$content->contentID}" class="marginTop">
 			
@@ -52,7 +58,7 @@ $(function() {
 											{if !$block->hideTitles}
 												<h1 itemprop="name">
 													{if $requestType != 'content' && $requestType != 'page'}
-														<a class="link" href="{linkExtended application='ultimate' date=$content->publishDateObject->format('Y-m-d') contentSlug=$content->contentSlug}{/linkExtended}" itemprop="url">{$content->getLangTitle()}</a>
+														<a class="link" href="{linkExtended application='ultimate' date=$date contentSlug=$content->contentSlug}{/linkExtended}" itemprop="url">{$content->getLangTitle()}</a>
 													{else}
 														{$content->getLangTitle()}
 													{/if}
@@ -95,9 +101,9 @@ $(function() {
 											<div>
 												
 												<div itemprop="articleBody" id="content-{$contentID}" 
-													class="content {implode from=$content->categories item=category glue=' '}category-{$category->categorySlug}{/implode} 
+													class="content htmlContent {implode from=$content->categories item=category glue=' '}category-{$category->categorySlug}{/implode} 
 													{implode from=$content->tags[$__wcf->getLanguage()->__get('languageID')] item=tag glue=''}tag-{$tag->getTitle()}{/implode}
-													{if $requestType != 'page'} messageText{/if}">
+													messageText">
 													
 													{if ($block->contentBodyDisplay == 'default' && ($displayedFeaturedContents < $block->featuredContents || $requestType == 'content' || $requestType == 'page')) || $block->contentBodyDisplay == 'full'}
 														{counter name=displayedFeaturedContents assign=displayedFeaturedContents print=false start=0}
@@ -112,8 +118,9 @@ $(function() {
 														<p>{@$content->getFormattedMessage()|truncateMore:ULTIMATE_GENERAL_CONTENT_CONTINUEREADINGLENGTH}</p>
 													{/if}
 												</div>
-												
 											</div>
+											
+											{include file='attachments'}
 											
 											<div class="messageSignature">
 												
@@ -143,7 +150,7 @@ $(function() {
 											<footer class="messageOptions">
 												<nav class="jsMobileNavigation buttonGroupNavigation">
 													<ul class="smallButtons buttonGroup">{*
-														*}{if $requestType != 'content' && $requestType != 'page'}<li><a href="{linkExtended application='ultimate' date=$content->publishDateObject->format('Y-m-d') contentSlug=$content->contentSlug}{/linkExtended}" class="button"><span class="icon icon16 icon-arrow-right"></span> <span>{lang}wcf.global.button.readMore{/lang}</span></a></li>{/if}{*
+														*}{if $requestType != 'content' && $requestType != 'page'}<li><a href="{linkExtended application='ultimate' date=$date contentSlug=$content->contentSlug}{/linkExtended}" class="button"><span class="icon icon16 icon-arrow-right"></span> <span>{lang}wcf.global.button.readMore{/lang}</span></a></li>{/if}{*
 														*}{if $__wcf->getSession()->getPermission('admin.content.ultimate.canEditContent')}<li><a title="{lang}wcf.acp.ultimate.content.edit{/lang}" class="button jsMessageEditButton"><span class="icon icon16 icon-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}{*
 														*}<li class="toTopLink"><a href="{@$anchor}" title="{lang}wcf.global.scrollUp{/lang}" class="button jsTooltip"><span class="icon icon16 icon-arrow-up"></span> <span class="invisible">{lang}wcf.global.scrollUp{/lang}</span></a></li>{*
 													*}</ul>

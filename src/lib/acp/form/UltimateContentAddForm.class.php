@@ -30,12 +30,14 @@ use ultimate\data\category\Category;
 use ultimate\data\content\ContentAction;
 use ultimate\data\content\ContentEditor;
 use ultimate\system\cache\builder\CategoryCacheBuilder;
+use ultimate\system\cache\builder\ContentAttachmentCacheBuilder;
 use ultimate\util\ContentUtil;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\tag\Tag;
 use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
 use wcf\system\bbcode\PreParser;
+use wcf\system\cache\builder\TagObjectCacheBuilder;
 use wcf\system\cache\builder\UserGroupCacheBuilder;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
@@ -92,6 +94,12 @@ class UltimateContentAddForm extends MessageForm {
 	 * @var	integer
 	 */
 	public $showSignatureSetting = 0;
+	
+	/**
+	 * The object type for attachments.
+	 * @var string
+	 */
+	public $attachmentObjectType = 'de.plugins-zum-selberbauen.ultimate.content';
 	
 	/**
 	 * The description of the content.
@@ -190,6 +198,12 @@ class UltimateContentAddForm extends MessageForm {
 	public $saveType = '';
 	
 	/**
+	 * The attachment list.
+	 * @var \wcf\data\attachment\GroupedAttachmentList
+	 */
+	public $attachmentList = null;
+	
+	/**
 	 * jQuery datepicker date format.
 	 * @var	string
 	 */
@@ -243,6 +257,8 @@ class UltimateContentAddForm extends MessageForm {
 		
 		$this->categories = CategoryCacheBuilder::getInstance()->getData(array(), 'categories');
 		unset ($this->categories[1]);
+		
+		$this->attachmentList = ContentAttachmentCacheBuilder::getInstance()->getData(array(), 'attachmentList');
 	}
 	
 	/**
@@ -325,7 +341,8 @@ class UltimateContentAddForm extends MessageForm {
 			),
 			'categories' => $this->categoryIDs,
 			'metaDescription' => $this->metaDescription,
-			'metaKeywords' => $this->metaKeywords
+			'metaKeywords' => $this->metaKeywords,
+			'attachmentHandler' => $this->attachmentHandler
 		);
 		
 		if ($this->visibility == 'protected') {
@@ -374,9 +391,11 @@ class UltimateContentAddForm extends MessageForm {
 			TagEngine::getInstance()->addObjectTags('de.plugins-zum-selberbauen.ultimate.content', $contentID, $tags, $languageID);
 			$this->tagsI18n[$languageID] = implode(',', $tags);
 		}
+		// reset cache
+		TagObjectCacheBuilder::getInstance()->reset();
 		
 		// create recent activity event if published
-		if ($content->__get('status') == 3 && in_array(Category::PAGE_CATEGORY, $this->categoryIDs)) {
+		if ($content->__get('status') == 3 && !in_array(Category::PAGE_CATEGORY, $this->categoryIDs)) {
 			UserActivityEventHandler::getInstance()->fireEvent(
 				'de.plugins-zum-selberbauen.ultimate.recentActivityEvent.content',
 				$contentID,
@@ -426,7 +445,8 @@ class UltimateContentAddForm extends MessageForm {
 			'statusID' => $this->statusID,
 			'visibility' => $this->visibility,
 			'startTime' => $this->startTime,
-			'publishDate' => $this->publishDate
+			'publishDate' => $this->publishDate,
+			'attachmentList' => $this->attachmentList
 		));
 	}
 	
@@ -491,23 +511,20 @@ class UltimateContentAddForm extends MessageForm {
 	 */
 	protected function validateDescription() {
 		if (!I18nHandler::getInstance()->isPlainValue('description')) {
-			if (!I18nHandler::getInstance()->validateValue('description')) {
-				throw new UserInputException('description');
-			}
-			$descriptionValues = I18nHandler::getInstance()->getValues('description');
-			foreach ($descriptionValues as $languageID => $description) {
-				if (strlen($description) < 4) {
-					throw new UserInputException('description', 'tooShort');
+			if (I18nHandler::getInstance()->validateValue('description')) {
+				$descriptionValues = I18nHandler::getInstance()->getValues('description');
+				foreach ($descriptionValues as $languageID => $description) {
+					if (strlen($description) < 4) {
+						throw new UserInputException('description', 'tooShort');
+					}
 				}
 			}
 		}
 		else {
-			if (empty($this->description)) {
-				throw new UserInputException('description');
-			}
-	
-			if (strlen($this->description) < 4) {
-				throw new UserInputException('description', 'tooShort');
+			if (!empty($this->description)) {
+				if (strlen($this->description) < 4) {
+					throw new UserInputException('description', 'tooShort');
+				}
 			}
 		}
 	}
@@ -624,6 +641,7 @@ class UltimateContentAddForm extends MessageForm {
 		} else {
 			if (isset($this->statusOptions[2])) unset($this->statusOptions[2]);
 			if (isset($this->statusOptions[3])) unset($this->statusOptions[3]);
+			$this->publishDateTimestamp = 0;
 		}
 		
 		if (!array_key_exists($this->statusID, $this->statusOptions)) {
