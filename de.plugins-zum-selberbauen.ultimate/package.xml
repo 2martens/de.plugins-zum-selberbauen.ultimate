@@ -70,5 +70,6 @@
 		<instruction type="language">language/*.xml</instruction>
 		<instruction type="userGroupOption">userGroupOption_update.b1.xml</instruction>
 		<instruction type="objectType">objectType_update.b1.xml</instruction>
+		<instruction type="eventListener">eventListener_update.b1.xml</instruction>
 	</instructions>
 </package>
