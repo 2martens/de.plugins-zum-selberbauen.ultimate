@@ -689,7 +689,9 @@ Für die InlineEdit braucht man die gleichen Rechte um Inhalte zu schreiben, zu 
 {/if}{@$link}]]></item>
 		<item name="wcf.user.notification.content.commentResponseOwner.message"><![CDATA[Hat eine Antwort zum Kommentar von {$commentAuthor->username} zu deinem Inhalt verfasst.]]></item>
 		<item name="wcf.user.notification.content.commentResponseOwner.title"><![CDATA[Neue Antwort (Inhalt)]]></item>
-		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.notification.comment"><![CDATA[Neuer Kommentar zu deinem Inhalt]]></item>
+		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.notification"><![CDATA[Inhaltskommentare]]></item>
+		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.notification.comment"><![CDATA[Neuer Kommentar zu Ihrem Inhalt]]></item>
+		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.response.notification"><![CDATA[Antworten zu Inhaltskommentaren]]></item>
 		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.response.notification.commentResponse"><![CDATA[Neue Antwort auf einen Kommentar zu deinem Inhalt]]></item>
 		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.response.notification.commentResponseOwner"><![CDATA[Neue Antwort auf einen Kommentar von dir]]></item>
 	</category>
