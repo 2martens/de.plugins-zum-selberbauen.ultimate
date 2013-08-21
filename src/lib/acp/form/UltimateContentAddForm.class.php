@@ -511,23 +511,20 @@ class UltimateContentAddForm extends MessageForm {
 	 */
 	protected function validateDescription() {
 		if (!I18nHandler::getInstance()->isPlainValue('description')) {
-			if (!I18nHandler::getInstance()->validateValue('description')) {
-				throw new UserInputException('description');
-			}
-			$descriptionValues = I18nHandler::getInstance()->getValues('description');
-			foreach ($descriptionValues as $languageID => $description) {
-				if (strlen($description) < 4) {
-					throw new UserInputException('description', 'tooShort');
+			if (I18nHandler::getInstance()->validateValue('description')) {
+				$descriptionValues = I18nHandler::getInstance()->getValues('description');
+				foreach ($descriptionValues as $languageID => $description) {
+					if (strlen($description) < 4) {
+						throw new UserInputException('description', 'tooShort');
+					}
 				}
 			}
 		}
 		else {
-			if (empty($this->description)) {
-				throw new UserInputException('description');
-			}
-	
-			if (strlen($this->description) < 4) {
-				throw new UserInputException('description', 'tooShort');
+			if (!empty($this->description)) {
+				if (strlen($this->description) < 4) {
+					throw new UserInputException('description', 'tooShort');
+				}
 			}
 		}
 	}
