@@ -152,6 +152,7 @@ class UltimateCategoryAddForm extends AbstractForm {
 		$this->validateMetaDescription();
 		$this->validateMetaKeywords();
 		$this->validateParent();
+		$this->validateDescription();
 	}
 	
 	/**
@@ -303,12 +304,7 @@ class UltimateCategoryAddForm extends AbstractForm {
 	 */
 	protected function validateDescription() {
 		if (!I18nHandler::getInstance()->isPlainValue('categoryDescription')) {
-			if (!I18nHandler::getInstance()->validateValue('categoryDescription')) {
-				throw new UserInputException('categoryDescription');
-			}
-		}
-		else {
-			if (empty($this->categoryDescription)) {
+			if (!I18nHandler::getInstance()->validateValue('categoryDescription', false, true)) {
 				throw new UserInputException('categoryDescription');
 			}
 		}
