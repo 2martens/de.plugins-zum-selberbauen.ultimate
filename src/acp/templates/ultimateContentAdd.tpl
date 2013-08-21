@@ -140,7 +140,7 @@
 				<dt><label for="statusSelect">{lang}wcf.acp.ultimate.status{/lang}</label></dt>
 				<dd>
 					<select id="statusSelect" name="status">
-					{htmloptions options=$statusOptions selected=$statusID}
+					{htmlOptions options=$statusOptions selected=$statusID}
 					</select>
 					<script data-relocate="true" type="text/javascript">
 					/* <![CDATA[ */
