@@ -692,7 +692,9 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 {/if}{@$link}]]></item>
 		<item name="wcf.user.notification.content.commentResponseOwner.message"><![CDATA[Wrote a reply to {$commentAuthor->username}’s comment about your content.]]></item>
 		<item name="wcf.user.notification.content.commentResponseOwner.title"><![CDATA[New Reply (Content)]]></item>
+		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.notification"><![CDATA[Content comments]]></item>
 		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.notification.comment"><![CDATA[New comment about your content]]></item>
+		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.response.notification"><![CDATA[Replies to content comments]]></item>
 		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.response.notification.commentResponse"><![CDATA[New reply to a comment about your content]]></item>
 		<item name="wcf.user.notification.de.plugins-zum-selberbauen.ultimate.content.comment.response.notification.commentResponseOwner"><![CDATA[New reply to one of your comments]]></item>
 	</category>
