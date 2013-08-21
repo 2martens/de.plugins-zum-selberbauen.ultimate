@@ -96,7 +96,7 @@ class CategoryEditor extends DatabaseObjectEditor implements IEditableCachedObje
 		// delete meta data
 		$conditionBuilder = new PreparedStatementConditionBuilder();
 		$conditionBuilder->add('objectID IN (?)', array($objectIDs));
-		$conditionBuilder->add('objectType = ?', 'content');
+		$conditionBuilder->add('objectType = ?', array('content'));
 		$sql = 'DELETE FROM ultimate'.WCF_N.'_meta
 			    '.$conditionBuilder->__toString();
 		$statement = WCF::getDB()->prepareStatement($sql);
