@@ -83,6 +83,7 @@
         <templatelistener name="ultimateStyle">
             <environment>admin</environment>
             <templatename>header</templatename>
+            <eventname>stylesheets</eventname>
             <templatecode><![CDATA[{@$__wcf->getUltimateStyleHandler()->getStylesheet()}]]></templatecode>
         </templatelistener>
         <!-- /ACP -->
