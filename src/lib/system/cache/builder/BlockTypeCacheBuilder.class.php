@@ -26,7 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\cache\builder;
-use ultimate\data\blockType\BlockTypeList;
+use ultimate\data\blocktype\BlockTypeList;
 use wcf\system\cache\builder\AbstractCacheBuilder;
 
 /**
