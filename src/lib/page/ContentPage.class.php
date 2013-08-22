@@ -141,6 +141,10 @@ class ContentPage extends AbstractPage {
 		if (in_array($this->content->__get('contentID'), $this->contentIDsToPageID)) {
 			throw new IllegalLinkException();
 		}
+		// check if the actual content is published, if not throw an exception
+		if ($this->content->__get('status') != 3) {
+			throw new IllegalLinkException();
+		}
 		
 		// everything's fine
 		HeaderUtil::sendHeaders();
