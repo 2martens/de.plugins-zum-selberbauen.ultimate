@@ -231,6 +231,7 @@ class UltimatePageAddForm extends AbstractForm {
 		if (isset($_POST['pageSlug'])) $this->pageSlug = StringUtil::trim($_POST['pageSlug']);
 		if (isset($_POST['metaDescription'])) $this->metaDescription = StringUtil::trim($_POST['metaDescription']);
 		if (isset($_POST['metaKeywords'])) $this->metaKeywords = StringUtil::trim($_POST['metaKeywords']);
+		if (isset($_POST['status'])) $this->statusID = intval($_POST['status']);
 		if (isset($_POST['visibility'])) $this->visibility = StringUtil::trim($_POST['visibility']);
 		if (isset($_POST['groupIDs'])) $this->groupIDs = ArrayUtil::toIntegerArray($_POST['groupIDs']);
 		if (isset($_POST['publishDate'])) $this->publishDate = StringUtil::trim($_POST['publishDate']);

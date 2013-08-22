@@ -112,18 +112,18 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 		
 		// reading cache
 		$this->groups = UserGroupCacheBuilder::getInstance()->getData(array(), 'groups');
-			
+		
 		/* @var $dateTime \DateTime */
 		$dateTime = $this->page->__get('publishDateObject');
 		$this->formatDate($dateTime);
-			
+		
 		// get status data
 		$this->statusID = $this->page->__get('status');
 		$this->statusOptions = array(
 			0 => WCF::getLanguage()->get('wcf.acp.ultimate.status.draft'),
 			1 => WCF::getLanguage()->get('wcf.acp.ultimate.status.pendingReview'),
 		);
-			
+		
 		// fill publish button with fitting language
 		$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.publish');
 		if ($this->statusID == 2) {
@@ -133,16 +133,17 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 			$this->statusOptions[3] = WCF::getLanguage()->get('wcf.acp.ultimate.status.published');
 			$this->publishButtonLang = WCF::getLanguage()->get('ultimate.button.update');
 		}
-			
+		
 		// fill save button with fitting language
+		// default to save as draft if the content is published or planned
 		$saveButtonLangArray = array(
 			0 => WCF::getLanguage()->get('ultimate.button.saveAsDraft'),
 			1 => WCF::getLanguage()->get('ultimate.button.saveAsPending'),
-			2 => '',
-			3 => ''
+			2 => WCF::getLanguage()->get('ultimate.button.saveAsDraft'),
+			3 => WCF::getLanguage()->get('ultimate.button.saveAsDraft')
 		);
 		$this->saveButtonLang = $saveButtonLangArray[$this->statusID];
-			
+		
 		// get visibility data
 		$this->visibility = $this->page->__get('visibility');
 		$this->groupIDs = array_keys($this->page->__get('groups'));
