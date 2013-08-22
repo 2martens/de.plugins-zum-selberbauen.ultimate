@@ -27,6 +27,7 @@
  */
 namespace ultimate\system\event\listener;
 use wcf\system\event\IEventListener;
+use wcf\system\tagging\TagCloud;
 use wcf\system\tagging\TypedTagCloud;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
@@ -54,7 +55,8 @@ class TaggedPageListener implements IEventListener {
 		
 		$languageIDs = array();
 		$languageIDs = ArrayUtil::toIntegerArray(WCF::getUser()->getLanguageIDs());
-		$tagCloud = new TypedTagCloud('de.plugins-zum-selberbauen.ultimate.content', $languageIDs);
+// 		$tagCloud = new TypedTagCloud('de.plugins-zum-selberbauen.ultimate.content', $languageIDs);
+		$tagCloud = new TagCloud($languageIDs);
 		$eventObj->tagCloud = $tagCloud;
 	}
 }
