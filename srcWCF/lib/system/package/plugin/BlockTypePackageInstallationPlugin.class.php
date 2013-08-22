@@ -28,6 +28,7 @@
 namespace wcf\system\package\plugin;
 use ultimate\system\cache\builder\BlockTypeCacheBuilder;
 use wcf\system\exception\SystemException;
+use wcf\system\WCF;
 
 /**
  * Provides the block type data for the event listeners.
