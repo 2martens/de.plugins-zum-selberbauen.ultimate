@@ -60,7 +60,8 @@ class PublishContentPageCronjob extends AbstractCronjob {
 		$updateObjects = array();
 		foreach ($contents as $contentID => $content) {
 			if (!(0 < $content->publishDate && $content->publishDate < TIME_NOW && $content->status == 2)) continue;
-			$updateObjects[] = $content;
+			/* @var $content \ultimate\data\content\TaggableContent */
+			$updateObjects[] = $content->getDecoratedObject();
 		}
 		$parameters = array(
 			'data' => array(
