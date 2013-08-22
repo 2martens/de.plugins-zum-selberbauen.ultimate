@@ -80,7 +80,7 @@
 				<dd>
 					<select id="categoryParent" name="categoryParent">
 					<option value="0">{lang}wcf.acp.ultimate.category.parent.none{/lang}</option>
-					{htmloptions options=$categories selected=$categoryParent}
+					{htmlOptions options=$categories selected=$categoryParent}
 					</select>
 					{if $errorField == 'categoryParent'}
 						<small class="innerError">
