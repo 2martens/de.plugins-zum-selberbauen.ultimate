@@ -129,6 +129,11 @@ class PagePage extends AbstractPage {
 	 */
 	public function show() {
 		parent::show();
+		// check if the actual content is published, if not throw an exception
+		if ($this->page->__get('status') != 3) {
+			throw new IllegalLinkException();
+		}
+		
 		HeaderUtil::sendHeaders();
 		echo $this->output;
 		exit;
