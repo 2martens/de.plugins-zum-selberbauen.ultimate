@@ -28,6 +28,7 @@
 namespace ultimate\system\event\listener;
 use wcf\data\category\CategoryAction;
 use wcf\system\cache\builder\ObjectTypeCacheBuilder;
+use wcf\system\category\CategoryHandler;
 use wcf\system\event\IEventListener;
 use wcf\system\io\File;
 
