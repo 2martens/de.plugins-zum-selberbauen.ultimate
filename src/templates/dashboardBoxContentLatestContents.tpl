@@ -5,6 +5,7 @@
 <ul class="messageList">
 	{assign var=displayedFeaturedContents value=0}
 	{foreach from=$contents key=contentID item=content}
+	{if $content->status == 3}
 		<li>
 			<article class="message messageReduced marginTop">
 				<div>
@@ -55,5 +56,6 @@
 				</div>
 			</article>
 		</li>
+	{/if}
 	{/foreach}
 </ul>
