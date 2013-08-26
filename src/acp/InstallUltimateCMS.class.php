@@ -62,7 +62,7 @@ final class InstallUltimateCMS {
 	 */
 	protected function addDefaultBlockTypes() {
 		// workaround for standalone installation (PACKAGE_ID is 0)
-		preg_match('packageID (\d+)', file_get_contents(dirname(dirname(__FILE__)).'/config.inc.php'), $matches);
+		preg_match('/packageID (\d+)/', file_get_contents(dirname(dirname(__FILE__)).'/config.inc.php'), $matches);
 		$packageID = $matches[1];
 		
 		// insert default block types
