@@ -67,6 +67,15 @@ class ACPFirstTimeListener implements IEventListener {
 	public function execute($eventObj, $className, $eventName) {
 		if ($className == 'wcf\acp\action\InstallPackageAction') {
 			if ($eventObj->data['progress'] == 100) {
+				// do the following only for the Ultimate CMS
+				$dispatcher = $eventObj->installation;
+				$package = $dispatcher->package;
+				$packageName = $package->package;
+				
+				if ($packageName != 'de.plugins-zum-selberbauen.ultimate') {
+					return;
+				}
+				
 				$abbreviations = ApplicationCacheBuilder::getInstance()->getData(array(), 'abbreviation');
 				$appID = $abbreviations['ultimate'];
 				$applications = ApplicationCacheBuilder::getInstance()->getData(array(), 'application');
