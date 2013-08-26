@@ -29,6 +29,7 @@ use ultimate\data\blocktype\BlockTypeAction;
 use wcf\system\cache\builder\EventListenerCacheBuilder;
 use wcf\system\event\EventHandler;
 use wcf\system\io\File;
+use wcf\system\Regex;
 
 /**
  * Is called during installation of Ultimate CMS.
@@ -53,30 +54,21 @@ final class InstallUltimateCMS {
 	 */
 	protected function install() {
 		require_once(dirname(dirname(__FILE__)).'/config.inc.php');
-		//$this->createHtaccess(); until further notice, deactivated
 		$this->addDefaultBlockTypes();
-	}
-	
-	/**
-	 * Creates a htaccess file.
-	 */
-	protected function createHtaccess() {
-		WCF::getTPL()->addApplication('ultimate', PACKAGE_ID, ULTIMATE_DIR.'acp/templates/');
-		
-		$output = WCF::getTPL()->fetch('htaccess', 'ultimate');
-		$file = new File(ULTIMATE_DIR.'.htaccess');
-		$file->write($output);
-		$file->close();
 	}
 	
 	/**
 	 * Adds the default block types.
 	 */
 	protected function addDefaultBlockTypes() {
+		// workaround for standalone installation (PACKAGE_ID is 0)
+		preg_match('packageID (\d+)', file_get_contents(dirname(dirname(__FILE__)).'/config.inc.php'), $matches);
+		$packageID = $matches[1];
+		
 		// insert default block types
 		$parameters = array(
 			'data' => array(
-				'packageID' => PACKAGE_ID,
+				'packageID' => $packageID,
 				'blockTypeName' => 'ultimate.blocktype.content',
 				'blockTypeClassName' => 'ultimate\system\blocktype\ContentBlockType'
 			)
@@ -93,7 +85,7 @@ final class InstallUltimateCMS {
 		
 		$parameters = array(
 			'data' => array(
-				'packageID' => PACKAGE_ID,
+				'packageID' => $packageID,
 				'blockTypeName' => 'ultimate.blocktype.media',
 				'blockTypeClassName' => 'ultimate\system\blocktype\MediaBlockType'
 			)
