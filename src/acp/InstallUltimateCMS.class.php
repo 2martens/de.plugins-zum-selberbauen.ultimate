@@ -29,7 +29,6 @@ use ultimate\data\blocktype\BlockTypeAction;
 use wcf\system\cache\builder\EventListenerCacheBuilder;
 use wcf\system\event\EventHandler;
 use wcf\system\io\File;
-use wcf\system\WCF;
 
 /**
  * Is called during installation of Ultimate CMS.
@@ -56,7 +55,6 @@ final class InstallUltimateCMS {
 		require_once(dirname(dirname(__FILE__)).'/config.inc.php');
 		//$this->createHtaccess(); until further notice, deactivated
 		$this->addDefaultBlockTypes();
-		$this->resetEventListener();
 	}
 	
 	/**
@@ -102,18 +100,6 @@ final class InstallUltimateCMS {
 		);
 		$objectAction = new BlockTypeAction(array(), 'create', $parameters);
 		$objectAction->executeAction();
-	}
-	
-	/**
-	 * Resets the EventListener.
-	 */
-	protected function resetEventListener() {
-		EventListenerCacheBuilder::getInstance()->reset();
-		
-		$reflectionClass = new \ReflectionClass('\wcf\system\event\EventHandler');
-		$reflectionMethod = $reflectionClass->getMethod('loadActions');
-		$reflectionMethod->setAccessible(true);
-		$reflectionMethod->invoke(EventHandler::getInstance());
 	}
 	
 }
