@@ -66,25 +66,25 @@
             <environment>admin</environment>
             <templatename>index</templatename>
             <eventname>softwareVersions</eventname>
-            <templatecode><![CDATA[{include file='__ultimateVersion' application='ultimate'}]]></templatecode>
+            <templatecode><![CDATA[{if $__ultimate|isset}{include file='__ultimateVersion' application='ultimate'}{/if}]]></templatecode>
         </templatelistener>
         <templatelistener name="betaNotice">
             <environment>admin</environment>
             <templatename>index</templatename>
             <eventname>userNotice</eventname>
-            <templatecode><![CDATA[{include file='__betaNotice' application='ultimate'}]]></templatecode>
+            <templatecode><![CDATA[{if $__ultimate|isset}{include file='__betaNotice' application='ultimate'}{/if}]]></templatecode>
         </templatelistener>
         <templatelistener name="copyright">
             <environment>admin</environment>
             <templatename>footer</templatename>
             <eventname>copyright</eventname>
-            <templatecode><![CDATA[{include file='__copyright' application='ultimate'}]]></templatecode>
+            <templatecode><![CDATA[{if $__ultimate|isset}{include file='__copyright' application='ultimate'}{/if}]]></templatecode>
         </templatelistener>
         <templatelistener name="ultimateStyle">
             <environment>admin</environment>
             <templatename>header</templatename>
             <eventname>stylesheets</eventname>
-            <templatecode><![CDATA[{if $__ultimate->isActiveApplication()}{@$__wcf->getUltimateStyleHandler()->getStylesheet()}{/if}]]></templatecode>
+            <templatecode><![CDATA[{if $__ultimate|isset && $__ultimate->isActiveApplication()}{@$__wcf->getUltimateStyleHandler()->getStylesheet()}{/if}]]></templatecode>
         </templatelistener>
         <!-- /ACP -->
 	</import>
