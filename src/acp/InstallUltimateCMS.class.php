@@ -26,8 +26,9 @@
  */
 namespace ultimate\acp;
 use ultimate\data\blocktype\BlockTypeAction;
+use wcf\system\cache\builder\EventListenerCacheBuilder;
+use wcf\system\event\EventHandler;
 use wcf\system\io\File;
-use wcf\system\WCF;
 
 /**
  * Is called during installation of Ultimate CMS.
