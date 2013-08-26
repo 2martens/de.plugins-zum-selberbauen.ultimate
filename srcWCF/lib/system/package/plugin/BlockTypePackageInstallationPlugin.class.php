@@ -60,6 +60,12 @@ class BlockTypePackageInstallationPlugin extends AbstractXMLPackageInstallationP
 	public $className = 'ultimate\data\blocktype\BlockTypeEditor';
 	
 	/**
+	 * database table name
+	 * @var string
+	 */
+	public $tableName = 'blocktype';
+	
+	/**
 	 * Prepares import, use this to map xml tags and attributes to their corresponding database fields.
 	 * 
 	 * @internal
@@ -148,12 +154,17 @@ class BlockTypePackageInstallationPlugin extends AbstractXMLPackageInstallationP
 	}
 	
 	/**
-	 * Executes the uninstallation of this plugin.
+	 * Triggered after executing all delete and/or import actions.
 	 * 
 	 * @internal
 	 */
-	public function uninstall() {
-		parent::uninstall();
+	protected function cleanup() {
+		parent::cleanup();
+		
+		// if we are in deinstalling the Ultimate CMS itself, we don't need to delete the cache.
+		if (PACKAGE_ID == 1) {
+			return;
+		}
 		
 		// clear cache immediately
 		BlockTypeCacheBuilder::getInstance()->reset();
