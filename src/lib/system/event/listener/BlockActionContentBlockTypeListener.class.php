@@ -50,7 +50,7 @@ class BlockActionContentBlockTypeListener implements IEventListener {
 		// determine block type
 		$blockType = $eventObj->parameters['blockOrigin']['blockType'];
 		// we only need content blocks
-		if (strtolower($blockType) != 'content') return; 
+		if (mb_strtolower($blockType) != 'content') return; 
 		
 		// determine sort field
 		$additionalData = unserialize($eventObj->parametersAction['data']['additionalData']);
