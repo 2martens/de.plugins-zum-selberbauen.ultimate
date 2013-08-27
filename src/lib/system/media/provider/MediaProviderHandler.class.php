@@ -74,7 +74,7 @@ class MediaProviderHandler extends SingletonFactory {
 		$dir = dir(FileUtil::unifyDirSeperator(dirname(__FILE__)));
 		while (false !== ($entry = $dir->read())) {
 			// stripping away .class.php {10}
-			$className = substr($entry, 0, strlen($entry) - 10);
+			$className = mb_substr($entry, 0, mb_strlen($entry) - 10);
 			// checking for AbstractMediaProvider, IMediaProvider, this file and the directory itself
 			if ($className == 'AbstractMediaProvider' 
 				|| $className == 'IMediaProvider' 

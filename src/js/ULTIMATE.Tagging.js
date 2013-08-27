@@ -382,7 +382,7 @@ ULTIMATE.Tagging.TagList = WCF.Tagging.TagList.extend({
 			
 			// read everything left from caret position
 			if (event && event.which === 188) {
-				$value = $value.substring(0, this._searchInput.val().length);
+				$value = $value.mb_substring(0, this._searchInput.val().length);
 			}
 			
 			if ($value === '') {

@@ -54,7 +54,7 @@ class CustomMenuListener implements IEventListener {
 	 */
 	public function execute($eventObj, $className, $eventName) {
 		// rules out all ultimate classes and all ACP requests
-		if (strpos($className, 'ultimate') !== false) return;
+		if (mb_strpos($className, 'ultimate') !== false) return;
 		if (RequestHandler::getInstance()->isACPRequest()) return;
 		
 		$activeMenuItems = PageMenu::getInstance()->getActiveMenuItems();

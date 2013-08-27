@@ -119,7 +119,7 @@ class TemplateHandler extends SingletonFactory {
 	 * @return	string
 	 */
 	public function getOutput($requestType, Layout $layout, $requestObject, IPage $page) {
-		$requestType = strtolower(StringUtil::trim($requestType));
+		$requestType = mb_strtolower(StringUtil::trim($requestType));
 		if ($requestType != 'index') {
 			if (!($requestObject instanceof IUltimateData)) {
 				throw new SystemException('The given request object is not an instance of \ultimate\data\IUltimateData.');

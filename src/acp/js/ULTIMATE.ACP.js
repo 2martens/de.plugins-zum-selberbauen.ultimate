@@ -488,9 +488,9 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
 				$('input[name^="' + $item + '_i18n"]').each(
 						$.proxy(function(index, listItem) {
 							var $listItem = $(listItem);
-							var $languageID = $listItem.attr('name').substring(
+							var $languageID = $listItem.attr('name').mb_substring(
 									$item.length + 6);
-							$languageID = $languageID.substr(0,
+							$languageID = $languageID.mb_substr(0,
 									$languageID.length - 1);
 							optionName_i18n[$languageID] = $listItem.val();
 						}, this));
@@ -1004,9 +1004,9 @@ ULTIMATE.ACP.Menu.Item.Transfer.prototype = {
 				$parent.find('input[name^="title_i18n"]').each(
 						$.proxy(function(index, listItem) {
 							var $listItem = $(listItem);
-							var $languageID = $listItem.attr('name').substring(
+							var $languageID = $listItem.attr('name').mb_substring(
 									11);
-							$languageID = $languageID.substr(0,
+							$languageID = $languageID.mb_substr(0,
 									$languageID.length - 1);
 							linkTitle_i18n[$languageID] = $listItem.val();
 						}, this));
