@@ -281,7 +281,7 @@ class UltimateCategoryAddForm extends AbstractForm {
 	 * @throws	\wcf\system\exception\UserInputException
 	 */
 	protected function validateMetaDescription() {
-		if (strlen($this->metaDescription) > 255) {
+		if (mb_strlen($this->metaDescription) > 255) {
 			throw new UserInputException('metaDescription', 'tooLong');
 		}
 	}
@@ -292,7 +292,7 @@ class UltimateCategoryAddForm extends AbstractForm {
 	 * @throws	\wcf\system\exception\UserInputException
 	 */
 	protected function validateMetaKeywords() {
-		if (strlen($this->metaKeywords) > 255) {
+		if (mb_strlen($this->metaKeywords) > 255) {
 			throw new UserInputException('metaKeywords', 'tooLong');
 		}
 	}

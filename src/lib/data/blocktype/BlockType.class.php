@@ -92,7 +92,7 @@ class BlockType extends AbstractUltimateDatabaseObject implements ITitledObject 
 	 * @param	array	$data
 	 */
 	protected function handleData($data) {
-		$data['cssIdentifier'] = strtolower($data['blockTypeName']);
+		$data['cssIdentifier'] = mb_strtolower($data['blockTypeName']);
 		parent::handleData($data);
 	}
 }

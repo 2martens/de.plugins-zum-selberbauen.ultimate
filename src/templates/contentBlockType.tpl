@@ -39,7 +39,7 @@ $(function() {
 					{if !$block->hideContent}
 						<div class="message jsMessage messageReduced{if $requestType == 'page'} ultimateWhiteBackgroundColor{/if}"
 				data-can-edit="{if $__wcf->getSession()->getPermission('admin.content.ultimate.canEditContent')}1{else}0{/if}"
-				data-is-i18n="{literal}<?php if (strpos($this->v['content']->contentText, 'ultimate.content.') !== false) { ?>{/literal}1{literal}<?php } else { ?>{/literal}0{literal}<?php } ?>{/literal}"
+				data-is-i18n="{literal}<?php if (mb_strpos($this->v['content']->contentText, 'ultimate.content.') !== false) { ?>{/literal}1{literal}<?php } else { ?>{/literal}0{literal}<?php } ?>{/literal}"
 				data-object-id="{@$contentID}"
 				data-object-type="de.plugins-zum-selberbauen.ultimate.likeableContent"{*
 				*}{if $requestType != 'page'}{*

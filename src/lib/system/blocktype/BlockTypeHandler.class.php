@@ -97,8 +97,8 @@ class BlockTypeHandler extends SingletonFactory {
 			$parts = explode('\\', $className);
 			$parts = array_reverse($parts);
 			$className = $parts[0];
-			$blockType = strtolower(str_replace('BlockType', '', $className));
-			if (strtolower($blockTypeName) == $blockType) {
+			$blockType = mb_strtolower(str_replace('BlockType', '', $className));
+			if (mb_strtolower($blockTypeName) == $blockType) {
 				return $this->getBlockType($blockTypeID);
 			}
 			continue;
@@ -118,8 +118,8 @@ class BlockTypeHandler extends SingletonFactory {
 			$parts = explode('\\', $className);
 			$parts = array_reverse($parts);
 			$className = $parts[0];
-			$blockType = strtolower(str_replace('BlockType', '', $className));
-			if (strtolower($blockTypeName) == $blockType) {
+			$blockType = mb_strtolower(str_replace('BlockType', '', $className));
+			if (mb_strtolower($blockTypeName) == $blockType) {
 				return intval($blockTypeID);
 				break;
 			}

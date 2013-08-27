@@ -490,7 +490,7 @@ class UltimateContentAddForm extends MessageForm {
 			}
 			$subjectValues = I18nHandler::getInstance()->getValues('subject');
 			foreach ($subjectValues as $languageID => $subject) {
-				if (strlen($subject) < 4) {
+				if (mb_strlen($subject) < 4) {
 					throw new UserInputException('subject', 'tooShort');
 				}
 			}
@@ -498,7 +498,7 @@ class UltimateContentAddForm extends MessageForm {
 			// checks if subject is empty; we don't have to do it twice
 			parent::validateSubject();
 	
-			if (strlen($this->subject) < 4) {
+			if (mb_strlen($this->subject) < 4) {
 				throw new UserInputException('subject', 'tooShort');
 			}
 		}
@@ -514,7 +514,7 @@ class UltimateContentAddForm extends MessageForm {
 			if (I18nHandler::getInstance()->validateValue('description')) {
 				$descriptionValues = I18nHandler::getInstance()->getValues('description');
 				foreach ($descriptionValues as $languageID => $description) {
-					if (strlen($description) < 4) {
+					if (mb_strlen($description) < 4) {
 						throw new UserInputException('description', 'tooShort');
 					}
 				}
@@ -522,7 +522,7 @@ class UltimateContentAddForm extends MessageForm {
 		}
 		else {
 			if (!empty($this->description)) {
-				if (strlen($this->description) < 4) {
+				if (mb_strlen($this->description) < 4) {
 					throw new UserInputException('description', 'tooShort');
 				}
 			}
@@ -549,7 +549,7 @@ class UltimateContentAddForm extends MessageForm {
 	 * @throws	\wcf\system\exception\UserInputException
 	 */
 	protected function validateMetaDescription() {
-		if (strlen($this->metaDescription) > 255) {
+		if (mb_strlen($this->metaDescription) > 255) {
 			throw new UserInputException('metaDescription', 'tooLong');
 		}
 	}
@@ -560,7 +560,7 @@ class UltimateContentAddForm extends MessageForm {
 	 * @throws	\wcf\system\exception\UserInputException
 	 */
 	protected function validateMetaKeywords() {
-		if (strlen($this->metaKeywords) > 255) {
+		if (mb_strlen($this->metaKeywords) > 255) {
 			throw new UserInputException('metaKeywords', 'tooLong');
 		}
 	}
@@ -577,7 +577,7 @@ class UltimateContentAddForm extends MessageForm {
 			}
 			$textValues = I18nHandler::getInstance()->getValues('description');
 			foreach ($textValues as $languageID => $text) {
-				if ($this->maxTextLength != 0 && strlen($text) > $this->maxTextLength) {
+				if ($this->maxTextLength != 0 && mb_strlen($text) > $this->maxTextLength) {
 					throw new UserInputException('text', 'tooLong');
 				}
 			}

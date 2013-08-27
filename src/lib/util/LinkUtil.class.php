@@ -206,11 +206,11 @@ class LinkUtil {
 		if (isset($hostname) && $hostname !== false && isset($hostname['host'])) {
 			$hostname = StringUtil::trim($hostname['host']);
 			if (!empty($hostname)) {
-				$res = strpos($url, $hostname);
+				$res = mb_strpos($url, $hostname);
 				if ($res !== false) {
 					// There is data to be replaced
-					$left_seg = substr($url, 0, strpos($url, $hostname));
-					$right_seg = substr($url, (strpos($url, $hostname) + strlen($hostname)));
+					$left_seg = mb_substr($url, 0, mb_strpos($url, $hostname));
+					$right_seg = mb_substr($url, (mb_strpos($url, $hostname) + mb_strlen($hostname)));
 					$url = $left_seg . self::encodePunycodeDomain($hostname) . $right_seg;
 				}
 			}
