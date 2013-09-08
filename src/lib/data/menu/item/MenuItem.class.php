@@ -130,7 +130,7 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 		}
 	
 		// external links are not valid
-		if (strpos($menuItemLink, 'http') !== false) {
+		if (mb_strpos($menuItemLink, 'http') !== false) {
 			return false;
 		}
 	
@@ -220,7 +220,7 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 		$parameters['application'] = 'ultimate';
 		$parameters['isRaw'] = true;
 		$menuItemLink = $this->menuItemLink;
-		if (strpos($menuItemLink, 'http') === false) {
+		if (mb_strpos($menuItemLink, 'http') === false) {
 			if ($this->menuItemController === null) {
 				$menuItemLink = 'index.php/'.$menuItemLink;
 				return UltimateLinkHandler::getInstance()->getLink(null, $parameters, $menuItemLink);
@@ -238,7 +238,7 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 					), 
 					WCF::getLanguage()->get($this->menuItemLink));
 			}
-		} else if (strpos($menuItemLink, 'http') === 0) {
+		} else if (mb_strpos($menuItemLink, 'http') === 0) {
 			return $menuItemLink;
 		}
 		throw new SystemException('Illegal link saved.');

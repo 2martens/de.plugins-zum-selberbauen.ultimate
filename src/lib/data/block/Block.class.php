@@ -28,6 +28,7 @@
 namespace ultimate\data\block;
 use ultimate\data\blocktype\BlockType;
 use ultimate\data\AbstractUltimateDatabaseObject;
+use wcf\data\DatabaseObject;
 use wcf\system\WCF;
 
 /**

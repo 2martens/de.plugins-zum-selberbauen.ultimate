@@ -28,6 +28,7 @@
 namespace wcf\system\package\plugin;
 use ultimate\system\cache\builder\BlockTypeCacheBuilder;
 use wcf\system\exception\SystemException;
+use wcf\system\WCF;
 
 /**
  * Provides the block type data for the event listeners.
@@ -57,6 +58,12 @@ class BlockTypePackageInstallationPlugin extends AbstractXMLPackageInstallationP
 	 * @var string
 	 */
 	public $className = 'ultimate\data\blocktype\BlockTypeEditor';
+	
+	/**
+	 * database table name
+	 * @var string
+	 */
+	public $tableName = 'blocktype';
 	
 	/**
 	 * Prepares import, use this to map xml tags and attributes to their corresponding database fields.
@@ -147,12 +154,17 @@ class BlockTypePackageInstallationPlugin extends AbstractXMLPackageInstallationP
 	}
 	
 	/**
-	 * Executes the uninstallation of this plugin.
+	 * Triggered after executing all delete and/or import actions.
 	 * 
 	 * @internal
 	 */
-	public function uninstall() {
-		parent::uninstall();
+	protected function cleanup() {
+		parent::cleanup();
+		
+		// if we are in deinstalling the Ultimate CMS itself, we don't need to delete the cache.
+		if (PACKAGE_ID == 1) {
+			return;
+		}
 		
 		// clear cache immediately
 		BlockTypeCacheBuilder::getInstance()->reset();

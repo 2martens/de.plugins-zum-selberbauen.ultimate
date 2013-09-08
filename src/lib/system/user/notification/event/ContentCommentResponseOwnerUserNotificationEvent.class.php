@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\user\notification\event;
+use ultimate\system\cache\builder\ContentCacheBuilder;
 use wcf\data\comment\Comment;
 use wcf\data\user\User;
 use wcf\system\request\UltimateLinkHandler;

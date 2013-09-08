@@ -241,7 +241,7 @@ class UltimateTemplateAddForm extends AbstractForm {
 	 */
 	protected function validateWidgetAreaSide() {
 		$allowed = array('left', 'right');
-		if (!in_array(strtolower($this->widgetAreaSide), $allowed)) {
+		if (!in_array(mb_strtolower($this->widgetAreaSide), $allowed)) {
 			throw new UserInputException('widgetAreaSide', 'notValid');
 		}
 	}

@@ -30,6 +30,7 @@ use ultimate\system\menu\custom\CustomMenu;
 use ultimate\system\template\TemplateHandler;
 use wcf\system\event\IEventListener;
 use wcf\system\menu\page\PageMenu;
+use wcf\system\request\RequestHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -52,7 +53,9 @@ class CustomMenuListener implements IEventListener {
 	 * @param	string	$eventName
 	 */
 	public function execute($eventObj, $className, $eventName) {
-		if (strpos($className, 'ultimate') !== false) return;
+		// rules out all ultimate classes and all ACP requests
+		if (mb_strpos($className, 'ultimate') !== false) return;
+		if (RequestHandler::getInstance()->isACPRequest()) return;
 		
 		$activeMenuItems = PageMenu::getInstance()->getActiveMenuItems();
 		if (empty($activeMenuItems)) return;

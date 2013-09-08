@@ -80,7 +80,7 @@
 				<dd>
 					<select name="pageParent">
 					<option value="0">{lang}wcf.acp.ultimate.page.parent.none{/lang}</option>
-					{ultimateHtmloptions options=$pages selected=$pageParent}
+					{ultimateHtmlOptions options=$pages selected=$pageParent}
 					</select>
 					{if $errorField == 'pageParent'}
 						<small class="innerError">
@@ -98,7 +98,7 @@
 				<dd>
 					<select name="content">
 						<option value="0">{lang}wcf.acp.ultimate.page.content.select{/lang}</option>
-						{ultimateHtmloptions options=$contents selected=$contentID}
+						{ultimateHtmlOptions options=$contents selected=$contentID}
 					</select>
 					{if $errorField == 'content'}
 						<small class="innerError">
@@ -114,7 +114,7 @@
 				<dt><label for="status">{lang}wcf.acp.ultimate.status{/lang}</label></dt>
 				<dd>
 					<select id="statusSelect" name="status">
-					{htmloptions options=$statusOptions selected=$statusID}
+					{htmlOptions options=$statusOptions selected=$statusID}
 					</select>
 					<script data-relocate="true" type="text/javascript">
 					/* <![CDATA[ */
@@ -141,7 +141,7 @@
 					<dl id="groupCheckboxes" class="container containerPadding marginTop"{if $visibility != 'protected'} style="display: none;"{/if}>
 						<dt><label>{lang}wcf.acp.ultimate.visibility.groupIDs{/lang}</label></dt>
 						<dd>
-							{htmlcheckboxes name="groupIDs" options=$groups selected=$groupIDs}
+							{htmlCheckboxes name="groupIDs" options=$groups selected=$groupIDs}
 							{if $errorField == 'groupIDs'}
 								<small class="innerError">
 									{lang}wcf.acp.ultimate.visibility.groupIDs.error.{@$errorType}{/lang}

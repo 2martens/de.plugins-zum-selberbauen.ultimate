@@ -4,6 +4,7 @@ use ultimate\system\cache\builder\ContentCacheBuilder;
 use wcf\data\user\User;
 use wcf\system\request\UltimateLinkHandler;
 use wcf\system\user\notification\event\AbstractUserNotificationEvent;
+use wcf\system\WCF;
 
 /**
  * User notification event for content comment responses.

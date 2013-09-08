@@ -48,7 +48,7 @@
 			<dl{if $errorField == 'description'} class="formError"{/if}>
 				<dt><label for="description">{lang}wcf.acp.ultimate.content.description{/lang}</label></dt>
 				<dd>
-					<input type="text" id="description" name="description" value="{@$i18nPlainValues['description']}" class="long" required="required" placeholder="{lang}wcf.acp.ultimate.content.description.placeholder{/lang}" pattern=".{literal}{{/literal}4,{literal}}{/literal}" />
+					<input type="text" id="description" name="description" value="{@$i18nPlainValues['description']}" class="long" placeholder="{lang}wcf.acp.ultimate.content.description.placeholder{/lang}" pattern=".{literal}{{/literal}4,{literal}}{/literal}" />
 					{if $errorField == 'description'}
 						<small class="innerError">
 							{if $errorType == 'empty'}
@@ -140,7 +140,7 @@
 				<dt><label for="statusSelect">{lang}wcf.acp.ultimate.status{/lang}</label></dt>
 				<dd>
 					<select id="statusSelect" name="status">
-					{htmloptions options=$statusOptions selected=$statusID}
+					{htmlOptions options=$statusOptions selected=$statusID}
 					</select>
 					<script data-relocate="true" type="text/javascript">
 					/* <![CDATA[ */
@@ -167,7 +167,7 @@
 					<dl id="groupCheckboxes" class="container containerPadding marginTop"{if $visibility != 'protected'} style="display: none;"{/if}>
 						<dt><label>{lang}wcf.acp.ultimate.visibility.groupIDs{/lang}</label></dt>
 						<dd>
-							{htmlcheckboxes name="groupIDs" options=$groups selected=$groupIDs}
+							{htmlCheckboxes name="groupIDs" options=$groups selected=$groupIDs}
 							{if $errorField == 'groupIDs'}
 								<small class="innerError">
 									{lang}wcf.acp.ultimate.visibility.groupIDs.error.{@$errorType}{/lang}

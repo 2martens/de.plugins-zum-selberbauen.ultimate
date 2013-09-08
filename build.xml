@@ -25,7 +25,7 @@
 			</tarfileset>
 		</tar>
 		<tar destfile="metadata/files_wcf.tar" 
-			basedir="srcWcf" 
+			basedir="srcWCF" 
 		/>
 		
 		<!-- beta 2 update tars -->
