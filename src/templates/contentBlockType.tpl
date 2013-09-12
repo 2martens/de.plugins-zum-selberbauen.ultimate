@@ -119,7 +119,7 @@ $(function() {
 													{/if}
 												</div>
 											</div>
-											
+											{assign var=objectID value=$contentID}
 											{include file='attachments'}
 											
 											<div class="messageSignature">
