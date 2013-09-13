@@ -57,4 +57,19 @@ class ContentList extends DatabaseObjectList {
 		$this->sqlSelects .= "like_object.likes, like_object.dislikes";
 		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_like_object like_object ON (like_object.objectTypeID = ".LikeHandler::getInstance()->getObjectType('de.plugins-zum-selberbauen.ultimate.likeableContent')->objectTypeID." AND like_object.objectID = content.contentID)";
 	}
+	
+	
+	/**
+	 * Reads the objects from database.
+	 */
+	public function readObjects() {
+		parent::readObjects();
+		$remainingContents = array();
+		foreach ($this->objects as $objectID => $object) {
+			if ($object->isVisible()) {
+				$remainingContents[$objectID] = $object;
+			}
+		}
+		$this->objects = $remainingContents;
+	}
 }

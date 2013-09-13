@@ -140,6 +140,11 @@ class ContentPage extends AbstractPage {
 			throw new IllegalLinkException();
 		}
 		
+		// check for visibility
+		if (!$this->content->isVisible()) {
+			throw new IllegalLinkException();
+		}
+		
 		// update view count
 		$contentEditor = new ContentEditor($this->content->getDecoratedObject());
 		$contentEditor->updateCounters(array(

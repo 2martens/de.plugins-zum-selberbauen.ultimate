@@ -128,6 +128,11 @@ class PagePage extends AbstractPage {
 			throw new IllegalLinkException();
 		}
 		
+		// check visibility
+		if (!$this->page->isVisible()) {
+			throw new IllegalLinkException();
+		}
+		
 		// update view count
 		$contentEditor = new ContentEditor($this->page->__get('content'));
 		$contentEditor->updateCounters(array(

@@ -173,6 +173,34 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 	}
 	
 	/**
+	 * Checks if the current user can see this page.
+	 *
+	 * @return boolean
+	 */
+	public function isVisible() {
+		$isVisible = false;
+		if ($this->visibility == 'public') {
+			$isVisible = true;
+		}
+		else if ($this->visibility == 'protected') {
+			$groupIDs = WCF::getUser()->getGroupIDs();
+			$pageGroupIDs = array_keys($this->groups);
+			$result = array_intersect($groupIDs, $pageGroupIDs);
+			if (!empty($result)) {
+				$isVisible = true;
+			}
+		} else {
+			$isVisible = (WCF::getUser()->__get('userID') == $this->authorID);
+		}
+	
+		if ($isVisible) {
+			$isVisible = ($this->status == 3);
+		}
+	
+		return $isVisible;
+	}
+	
+	/**
 	 * Handles data.
 	 * 
 	 * @param	array	$data
