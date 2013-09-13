@@ -111,5 +111,13 @@ class TaggedContentList extends ContentList {
 				$object->page = $pages[$pageIDs[$objectID]];
 			}
 		}
+		
+		$remainingContents = array();
+		foreach ($this->objects as $contentID => $content) {
+			if ($content->isVisible()) {
+				$remainingContents[$contentID] = $content;
+			}
+		}
+		$this->objects = $remainingContents;
 	}
 }
