@@ -60,6 +60,8 @@ class TaggedContentList extends ContentList {
 		
 		$this->getConditionBuilder()->add('tag_to_object.objectTypeID = ? AND tag_to_object.languageID = ? AND tag_to_object.tagID = ?', array(TagEngine::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.ultimate.content'), $tag->languageID, $tag->tagID));
 		$this->getConditionBuilder()->add('content.contentID = tag_to_object.objectID');
+		$this->getConditionBuilder()->add('(content.visibility = ? OR (content.visibility = ? AND content.authorID = ?) OR (content.visibility = ? AND groupToContent.groupID IN (?)))', array('public', 'private', WCF::getUser()->__get('userID'), 'protected', WCF::getUser()->getGroupIDs()));
+		$this->sqlConditionJoins .= 'LEFT JOIN ultimate1_user_group_to_content groupToContent ON (groupToContent.contentID = content.contentID)';
 	}
 	
 	/**
@@ -70,16 +72,15 @@ class TaggedContentList extends ContentList {
 	 * @return	integer
 	 */
 	public function countObjects() {
-// 		$sql = 'SELECT COUNT(*) AS count
-// 		        FROM   wcf'.WCF_N.'_tag_to_object tag_to_object,
-// 		               ultimate'.WCF_N.'_content content
-// 		        '.$this->sqlConditionJoins.'
-// 		        '.$this->getConditionBuilder();
-// 		$statement = WCF::getDB()->prepareStatement($sql);
-// 		$statement->execute($this->getConditionBuilder()->getParameters());
-// 		$row = $statement->fetchArray();
-// 		return $row['count'];
-		return count($this->objects);
+		$sql = 'SELECT COUNT(*) AS count
+		        FROM   wcf'.WCF_N.'_tag_to_object tag_to_object,
+		               ultimate'.WCF_N.'_content content
+		        '.$this->sqlConditionJoins.'
+		        '.$this->getConditionBuilder();
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute($this->getConditionBuilder()->getParameters());
+		$row = $statement->fetchArray();
+		return $row['count'];
 	}
 	
 	/**
