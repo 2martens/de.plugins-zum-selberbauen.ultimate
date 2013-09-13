@@ -360,6 +360,15 @@ class ContentBlockType extends AbstractBlockType {
 			$this->contents = $allowedContents;
 		}
 		
+		// visibility
+		$remainingContents = array();
+		foreach ($this->contents as $contentID => $content) {
+			if ($content->isVisible()) {
+				$remainingContents[$contentID] = $content;
+			}
+		}
+		$this->contents = $remainingContents;
+		
 		// sort field
 		if ($this->options['sortField'] != ULTIMATE_SORT_CONTENT_SORTFIELD) {
 			$this->loadCache(true);
