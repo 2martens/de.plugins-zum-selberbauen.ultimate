@@ -65,18 +65,21 @@ class TaggedContentList extends ContentList {
 	/**
 	 * Returns the amount of tagged contents.
 	 * 
+	 * The method readObjects has to be called first.
+	 * 
 	 * @return	integer
 	 */
 	public function countObjects() {
-		$sql = 'SELECT COUNT(*) AS count
-		        FROM   wcf'.WCF_N.'_tag_to_object tag_to_object,
-		               ultimate'.WCF_N.'_content content
-		        '.$this->sqlConditionJoins.'
-		        '.$this->getConditionBuilder();
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute($this->getConditionBuilder()->getParameters());
-		$row = $statement->fetchArray();
-		return $row['count'];
+// 		$sql = 'SELECT COUNT(*) AS count
+// 		        FROM   wcf'.WCF_N.'_tag_to_object tag_to_object,
+// 		               ultimate'.WCF_N.'_content content
+// 		        '.$this->sqlConditionJoins.'
+// 		        '.$this->getConditionBuilder();
+// 		$statement = WCF::getDB()->prepareStatement($sql);
+// 		$statement->execute($this->getConditionBuilder()->getParameters());
+// 		$row = $statement->fetchArray();
+// 		return $row['count'];
+		return count($this->objects);
 	}
 	
 	/**

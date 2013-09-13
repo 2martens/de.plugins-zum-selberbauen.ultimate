@@ -70,6 +70,8 @@ class TaggableContent extends CategorizedContent implements ITaggable {
 	 * @return	\wcf\data\DatabaseObjectList
 	 */
 	public function getObjectList(Tag $tag) {
-		return new TaggedContentList($tag);
+		$taggedContentList = new TaggedContentList($tag);
+// 		$taggedContentList->readObjects();
+		return $taggedContentList;
 	}
 }
