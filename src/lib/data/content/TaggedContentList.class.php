@@ -67,8 +67,6 @@ class TaggedContentList extends ContentList {
 	/**
 	 * Returns the amount of tagged contents.
 	 * 
-	 * The method readObjects has to be called first.
-	 * 
 	 * @return	integer
 	 */
 	public function countObjects() {
