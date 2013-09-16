@@ -169,6 +169,7 @@
 		<item name="wcf.acp.option.category.ultimate.sort.template"><![CDATA[Templates]]></item>
 		<item name="wcf.acp.option.category.ultimate.sort.widgetArea"><![CDATA[Widget configurations]]></item>
         <item name="wcf.acp.option.category.dashboard.sidebar.latestContents"><![CDATA[Latest contents]]></item>
+        <item name="wcf.acp.option.category.dashboard.content.latestContents"><![CDATA[Latest contents]]></item>
 		<!-- /categories -->
 		
 		<!-- ultimate.general -->
@@ -250,6 +251,9 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
         <!-- dashboard.sidebar.latestContents -->
         <item name="wcf.acp.option.ultimate_latest_contents_items"><![CDATA[Number of contents]]></item>
         <!-- /dashboard.sidebar.latestContents -->
+        <!-- dashboard.content.latestContents -->
+        <item name="wcf.acp.option.ultimate_latest_contents_content_items"><![CDATA[Number of contents]]></item>
+        <!-- /dashboard.content.latestContents -->
 	</category>
 	
 	<category name="wcf.acp.ultimate">

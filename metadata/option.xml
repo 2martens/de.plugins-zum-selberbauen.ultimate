@@ -45,6 +45,9 @@
 			<category name="dashboard.sidebar.latestContents">
                 <parent>dashboard.sidebar</parent>
             </category>	
+            <category name="dashboard.content.latestContents">
+            	<parent>dashboard.content</parent>
+            </category>
 		</categories>
 		<options>
 			<option name="ultimate_general_englishLanguage">
@@ -210,6 +213,15 @@ DESC:wcf.global.sortOrder.descending]]>
                 <defaultvalue>5</defaultvalue>
             </option>
             <!-- /dashboard.sidebar.latestContents -->
+            
+            <!-- dashboard.content.latestContents -->
+            <option name="ultimate_latest_contents_content_items">
+            	<categoryname>dashboard.content.latestContents</categoryname>
+            	<optiontype>integer</optiontype>
+            	<defaultvalue>10</defaultvalue>
+            </option>
+            <!-- /dashboard.content.latestContents -->
+            
 		</options>
 	</import>
 </data>
