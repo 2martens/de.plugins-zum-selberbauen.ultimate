@@ -96,6 +96,19 @@ class LatestContentsContentDashboardBox extends AbstractContentDashboardBox {
 			$this->contents = LatestContentsCacheBuilder::getInstance()->getData(array(), 'contents');
 		}
 		
+		// apply number of contents
+		$remainingContents = array();
+		$numberOfItems = ULTIMATE_LATEST_CONTENTS_CONTENT_ITEMS;
+		$i = 0;
+		foreach ($this->contents as $contentID => $content) {
+			if ($i >= $numberOfItems) {
+				break;
+			}
+			
+			$remainingContents[$contentID] = $content;
+			$i++;
+		}
+		
 		foreach ($this->contents as $content) {
 			$content->authorProfile = new UserProfile($content->__get('author'));
 		}
