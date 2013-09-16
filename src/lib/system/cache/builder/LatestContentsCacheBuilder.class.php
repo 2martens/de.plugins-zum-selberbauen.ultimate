@@ -80,7 +80,7 @@ class LatestContentsCacheBuilder extends AbstractCacheBuilder {
 		$contentList->readObjects();
 		$contents = $contentList->getObjects();
 		if (empty($contents)) return $data;
-	
+		
 		foreach ($contents as $contentID => $content) {
 			if (!$content->isVisible()) {
 				continue;
@@ -97,7 +97,7 @@ class LatestContentsCacheBuilder extends AbstractCacheBuilder {
 				$data['contents'][$contentID] = $taggedContent;
 			}
 		}
-	
+		
 		return $data;
 	}
 }
