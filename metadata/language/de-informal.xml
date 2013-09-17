@@ -659,6 +659,7 @@ Für die InlineEdit braucht man die gleichen Rechte um Inhalte zu schreiben, zu 
         <item name="wcf.dashboard.box.de.plugins-zum-selberbauen.ultimate.tagCloud"><![CDATA[Tag-Cloud]]></item>
         <item name="wcf.dashboard.box.de.plugins-zum-selberbauen.ultimate.latestContents"><![CDATA[Letzte Inhalte]]></item>
         <item name="wcf.dashboard.box.de.plugins-zum-selberbauen.ultimate.latestContentsContent"><![CDATA[Letzte Inhalte]]></item>
+        <item name="wcf.dashboard.box.de.plugins-zum-selberbauen.ultimate.links"><![CDATA[Links]]></item>
 	</category>
     
     <category name="wcf.like">
