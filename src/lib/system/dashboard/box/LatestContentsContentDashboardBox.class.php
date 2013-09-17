@@ -113,6 +113,7 @@ class LatestContentsContentDashboardBox extends AbstractContentDashboardBox {
 			$remainingContents[$contentID] = $content;
 			$i++;
 		}
+		$this->contents = $remainingContents;
 		
 		foreach ($this->contents as $content) {
 			$content->authorProfile = new UserProfile($content->__get('author'));
