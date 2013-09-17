@@ -61,7 +61,7 @@ class LinkDashboardBox extends AbstractSidebarDashboardBox {
 		parent::init($box, $page);
 		
 		$linkCategoryID = ULTIMATE_LINKS_CATEGORY;
-		if ($linkCategory) {
+		if ($linkCategoryID) {
 			$links = LinkCategoryCacheBuilder::getInstance()->getData(array(), 'linksToCategoryID');
 			$this->links = $links[$linkCategoryID];
 		}
