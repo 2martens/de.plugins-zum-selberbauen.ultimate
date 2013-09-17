@@ -35,9 +35,11 @@ use wcf\system\WCF;
 /**
  * Caches the link to category relation.
  * 
- * Provides two variables:
- * * \ultimate\data\link\Link[] linksToCategoryID (categoryID => link)
- * * \ultimate\data\link\Link[] linksToCategoryName (categoryName => link)
+ * Provides four variables:
+ * * \ultimate\data\link\Link[][]				 linksToCategoryID (categoryID => (linkID => link))
+ * * \ultimate\data\link\Link[][]				 linksToCategoryName (categoryName => (linkID => link))
+ * * integer[]									 linkCategoryIDs (=> categoryID)
+ * * \ultimate\data\link\category\LinkCategory[] linkCategories (categoryID => category)
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -57,7 +59,9 @@ class LinkCategoryCacheBuilder extends AbstractCacheBuilder {
 	protected function rebuild(array $parameters) {
 		$data = array(
 			'linksToCategoryID' => array(),
-			'linksToCategoryName' => array()
+			'linksToCategoryName' => array(),
+			'linkCategoryIDs' => array(),
+			'linkCategories' => array()
 		);
 		
 		$categories = CategoryHandler::getInstance()->getCategories('de.plugins-zum-selberbauen.ultimate.linkCategory');
@@ -88,6 +92,10 @@ class LinkCategoryCacheBuilder extends AbstractCacheBuilder {
 			if (!isset($data['linksToCategoryName'][$category->__get('title')])) {
 				$data['linksToCategoryName'][$category->__get('title')] = array();
 			}
+			
+			$data['linkCategoryIDs'][] = $categoryID;
+			$data['linkCategories'][$categoryID] = $category;
+			
 			foreach ($links as $linkID => $link) {
 				if (!in_array($categoryID, array_keys($link->__get('categories')))) continue;
 				

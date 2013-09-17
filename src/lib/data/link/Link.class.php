@@ -29,6 +29,7 @@ namespace ultimate\data\link;
 use ultimate\data\AbstractUltimateDatabaseObject;
 use wcf\data\ITitledObject;
 use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * Represents a link.
@@ -83,6 +84,15 @@ class Link extends AbstractUltimateDatabaseObject implements ITitledObject {
 	 */
 	public function getTitle() {
 		return $this->linkName;
+	}
+	
+	/**
+	 * Returns the anchor tag for this link.
+	 * 
+	 * @return string
+	 */
+	public function getAnchorTag() {
+		return StringUtil::getAnchorTag($this->linkURL, $this->__toString());
 	}
 	
 	/**

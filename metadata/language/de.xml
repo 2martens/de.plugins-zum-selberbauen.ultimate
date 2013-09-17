@@ -169,6 +169,7 @@
 		<item name="wcf.acp.option.category.ultimate.sort.template"><![CDATA[Templates]]></item>
 		<item name="wcf.acp.option.category.ultimate.sort.widgetArea"><![CDATA[Widgetkonfigurationen]]></item>
         <item name="wcf.acp.option.category.dashboard.sidebar.latestContents"><![CDATA[Letzte Inhalte]]></item>
+        <item name="wcf.acp.option.category.dashboard.sidebar.links"><![CDATA[Links]]></item>
         <item name="wcf.acp.option.category.dashboard.content.latestContents"><![CDATA[Letzte Inhalte]]></item>
 		<!-- /categories -->
 		
@@ -251,6 +252,11 @@ Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$com
         <!-- dashboard.sidebar.latestContents -->
         <item name="wcf.acp.option.ultimate_latest_contents_items"><![CDATA[Anzahl an Inhalten]]></item>
         <!-- /dashboard.sidebar.latestContents -->
+        <!-- dashboard.sidebar.links -->
+        <item name="wcf.acp.option.ultimate_links_category"><![CDATA[Linkkategorie]]></item>
+        <item name="wcf.acp.option.ultimate_links_category.description"><![CDATA[Geben Sie hier die ID der Linkkategorie an, aus der Links angezeigt werden sollen. Ist die ID 0, dann werden keine Links angezeigt.]]></item>
+        <item name="wcf.acp.option.ultimate_links_items"><![CDATA[Anzahl an Links]]></item>
+        <!-- /dashboard.sidebar.links -->
         <!-- dashboard.content.latestContents -->
         <item name="wcf.acp.option.ultimate_latest_contents_content_items"><![CDATA[Anzahl an Inhalten]]></item>
         <!-- /dashboard.content.latestContents -->
@@ -670,6 +676,7 @@ Für die InlineEdit braucht man die gleichen Rechte um Inhalte zu schreiben, zu 
         <item name="wcf.dashboard.box.de.plugins-zum-selberbauen.ultimate.tagCloud"><![CDATA[Tag-Cloud]]></item>
         <item name="wcf.dashboard.box.de.plugins-zum-selberbauen.ultimate.latestContents"><![CDATA[Letzte Inhalte]]></item>
         <item name="wcf.dashboard.box.de.plugins-zum-selberbauen.ultimate.latestContentsContent"><![CDATA[Letzte Inhalte]]></item>
+        <item name="wcf.dashboard.box.de.plugins-zum-selberbauen.ultimate.links"><![CDATA[Links]]></item>
 	</category>
     
     <category name="wcf.like">
