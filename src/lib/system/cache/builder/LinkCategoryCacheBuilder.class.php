@@ -36,8 +36,8 @@ use wcf\system\WCF;
  * Caches the link to category relation.
  * 
  * Provides two variables:
- * * \ultimate\data\link\Link[] linksToCategoryID (categoryID => link)
- * * \ultimate\data\link\Link[] linksToCategoryName (categoryName => link)
+ * * \ultimate\data\link\Link[][] linksToCategoryID (categoryID => array(linkID => link))
+ * * \ultimate\data\link\Link[][] linksToCategoryName (categoryName => array(linkID => link))
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens

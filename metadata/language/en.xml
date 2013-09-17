@@ -169,6 +169,7 @@
 		<item name="wcf.acp.option.category.ultimate.sort.template"><![CDATA[Templates]]></item>
 		<item name="wcf.acp.option.category.ultimate.sort.widgetArea"><![CDATA[Widget configurations]]></item>
         <item name="wcf.acp.option.category.dashboard.sidebar.latestContents"><![CDATA[Latest contents]]></item>
+        <item name="wcf.acp.option.category.dashboard.sidebar.links"><![CDATA[Links]]></item>
         <item name="wcf.acp.option.category.dashboard.content.latestContents"><![CDATA[Latest contents]]></item>
 		<!-- /categories -->
 		
@@ -251,6 +252,11 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
         <!-- dashboard.sidebar.latestContents -->
         <item name="wcf.acp.option.ultimate_latest_contents_items"><![CDATA[Number of contents]]></item>
         <!-- /dashboard.sidebar.latestContents -->
+        <!-- dashboard.sidebar.links -->
+        <item name="wcf.acp.option.ultimate_links_category"><![CDATA[Link category]]></item>
+        <item name="wcf.acp.option.ultimate_links_category.description"><![CDATA[Please insert here the id of the category from which links should be shown. If the id is 0 then no links are shown.]]></item>
+        <item name="wcf.acp.option.ultimate_links_items"><![CDATA[Number of links]]></item>
+        <!-- /dashboard.sidebar.links -->
         <!-- dashboard.content.latestContents -->
         <item name="wcf.acp.option.ultimate_latest_contents_content_items"><![CDATA[Number of contents]]></item>
         <!-- /dashboard.content.latestContents -->
