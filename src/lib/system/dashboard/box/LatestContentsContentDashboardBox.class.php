@@ -74,6 +74,11 @@ class LatestContentsContentDashboardBox extends AbstractContentDashboardBox {
 		// retrieve contents for dashboard box
 		$layout = LayoutHandler::getInstance()->getLayoutFromObjectData(0, 'index');
 		$template = TemplateHandler::getInstance()->getTemplate($layout->__get('layoutID'));
+		// if there is no such template, stop right here
+		if ($template === null) {
+			$this->fetched();
+			return;
+		}
 		$blocks = $template->__get('blocks');
 		
 		foreach ($blocks as $blockID => $block) {
