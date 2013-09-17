@@ -220,8 +220,7 @@ DESC:wcf.global.sortOrder.descending]]>
             <!-- dashboard.sidebar.links -->
             <option name="ultimate_links_category">
             	<categoryname>dashboard.sidebar.links</categoryname>
-            	<optiontype>integer</optiontype>
-            	<defaultvalue>0</defaultvalue>
+            	<optiontype>UltimateLinkCategorySelect</optiontype>
             </option>
             <option name="ultimate_links_items">
             	<categoryname>dashboard.sidebar.links</categoryname>
