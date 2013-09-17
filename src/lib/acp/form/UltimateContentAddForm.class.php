@@ -291,14 +291,14 @@ class UltimateContentAddForm extends MessageForm {
 	 */
 	public function validate() {
 		$this->success = false;
-		$this->validateSubject();
-		$this->validateDescription();
-		$this->validateSlug();
-		$this->validateMetaDescription();
-		$this->validateMetaKeywords();
-		$this->validateCategories();
-		$this->validateTags();
 		try {
+			$this->validateSubject();
+			$this->validateDescription();
+			$this->validateSlug();
+			$this->validateMetaDescription();
+			$this->validateMetaKeywords();
+			$this->validateCategories();
+			$this->validateTags();
 			$this->validateText();
 			// multilingualism
 			$this->validateContentLanguage();
