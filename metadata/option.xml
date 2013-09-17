@@ -45,6 +45,9 @@
 			<category name="dashboard.sidebar.latestContents">
                 <parent>dashboard.sidebar</parent>
             </category>	
+            <category name="dashboard.sidebar.links">
+            	<parent>dashboard.sidebar</parent>
+            </category>
             <category name="dashboard.content.latestContents">
             	<parent>dashboard.content</parent>
             </category>
@@ -213,6 +216,18 @@ DESC:wcf.global.sortOrder.descending]]>
                 <defaultvalue>5</defaultvalue>
             </option>
             <!-- /dashboard.sidebar.latestContents -->
+            
+            <!-- dashboard.sidebar.links -->
+            <option name="ultimate_links_category">
+            	<categoryname>dashboard.sidebar.links</categoryname>
+            	<optiontype>UltimateLinkCategorySelect</optiontype>
+            </option>
+            <option name="ultimate_links_items">
+            	<categoryname>dashboard.sidebar.links</categoryname>
+            	<optiontype>integer</optiontype>
+            	<defaultvalue>5</defaultvalue>
+            </option>
+            <!-- /dashboard.sidebar.links -->
             
             <!-- dashboard.content.latestContents -->
             <option name="ultimate_latest_contents_content_items">
