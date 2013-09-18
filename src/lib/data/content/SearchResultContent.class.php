@@ -27,6 +27,7 @@
  */
 namespace ultimate\data\content;
 use wcf\data\search\ISearchResultObject;
+use wcf\data\user\UserProfile;
 use wcf\system\search\SearchResultTextParser;
 
 /**
@@ -76,6 +77,15 @@ class SearchResultContent extends CategorizedContent implements ISearchResultObj
 	 */
 	public function getTime() {
 		return $this->getDecoratedObject()->getTime();
+	}
+	
+	/**
+	 * Returns author's user profile.
+	 * 
+	 * @return	\wcf\data\user\UserProfile
+	 */
+	public function getUserProfile() {
+		return new UserProfile($this->author);
 	}
 	
 	/**
