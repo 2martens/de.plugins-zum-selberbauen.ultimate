@@ -28,6 +28,7 @@
 namespace ultimate\data\content;
 use wcf\data\search\ISearchResultObject;
 use wcf\data\user\UserProfile;
+use wcf\system\request\UltimateLinkHandler;
 use wcf\system\search\SearchResultTextParser;
 
 /**
