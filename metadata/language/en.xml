@@ -673,6 +673,11 @@ For the InlineEdit you require the same rights to write, edit or delete contents
         <item name="wcf.page.sitemap.ultimate"><![CDATA[Website]]></item>
     </category>
     
+    <category name="wcf.search">
+		<item name="wcf.search.type.de.plugins-zum-selberbauen.ultimate.content"><![CDATA[Contents]]></item>
+		<item name="wcf.search.object.de.plugins-zum-selberbauen.ultimate.content"><![CDATA[Content]]></item>
+	</category>
+    
     <category name="wcf.tagging">
         <item name="wcf.tagging.objectType.de.plugins-zum-selberbauen.ultimate.content"><![CDATA[Contents]]></item>
         <item name="wcf.tagging.taggedObjects.de.plugins-zum-selberbauen.ultimate.content"><![CDATA[Find contents tagged with “{$tag->name}”]]></item>
