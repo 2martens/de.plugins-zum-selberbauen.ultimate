@@ -28,7 +28,7 @@
 namespace ultimate\system\cache\builder;
 use ultimate\data\content\CategorizedContent;
 use ultimate\data\content\ContentList;
-use ultimate\data\content\ContentSearchResultList;
+use ultimate\data\content\SearchResultContentList;
 use ultimate\data\content\TaggableContent;
 use ultimate\data\content\TaggedContent;
 use wcf\system\cache\builder\AbstractCacheBuilder;
@@ -65,7 +65,7 @@ class ContentCacheBuilder extends AbstractCacheBuilder {
 		);
 		
 		$contentList = new ContentList();
-		$contentSearchResultList = new ContentSearchResultList();
+		$contentSearchResultList = new SearchResultContentList();
 		// order by default
 		$sortField = ULTIMATE_SORT_CONTENT_SORTFIELD;
 		$sortOrder = ULTIMATE_SORT_CONTENT_SORTORDER;

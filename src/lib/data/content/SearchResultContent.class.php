@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the ContentSearchResult class.
+ * Contains the SearchResultContent class.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -39,7 +39,7 @@ use wcf\system\search\SearchResultTextParser;
  * @subpackage	data.content
  * @category	Ultimate CMS
  */
-class ContentSearchResult extends CategorizedContent implements ISearchResultObject {
+class SearchResultContent extends CategorizedContent implements ISearchResultObject {
 	/**
 	 * @see	\ultimate\data\content\Content::getFormattedMessage()
 	 */

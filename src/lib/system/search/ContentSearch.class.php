@@ -46,7 +46,7 @@ use wcf\system\WCF;
 class ContentSearch extends AbstractSearchableObjectType {
 	/**
 	 * Array of cached contents.
-	 * @var \ultimate\data\content\ContentSearchResult[]
+	 * @var \ultimate\data\content\SearchResultContent[]
 	 */
 	public $contentCache = array();
 	

@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the ContentSearchResultList class.
+ * Contains the SearchResultContentList class.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -37,7 +37,7 @@ namespace ultimate\data\content;
  * @subpackage	data.content
  * @category	Ultimate CMS
  */
-class ContentSearchResultList extends ContentList {
+class SearchResultContentList extends ContentList {
 	/**
 	 * The class name.
 	 * @var	string
