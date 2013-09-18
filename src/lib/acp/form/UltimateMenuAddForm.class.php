@@ -170,7 +170,8 @@ class UltimateMenuAddForm extends AbstractForm {
 		
 		$url = LinkHandler::getInstance()->getLink('UltimateMenuEdit', 
 			array(
-				'id' => $menuID
+				'id' => $menuID,
+				'application' => 'ultimate'
 			)
 		);
 		HeaderUtil::redirect($url);
