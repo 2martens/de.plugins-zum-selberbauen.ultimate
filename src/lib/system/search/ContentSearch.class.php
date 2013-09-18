@@ -126,7 +126,7 @@ class ContentSearch extends AbstractSearchableObjectType {
 	 * @return	string
 	 */
 	public function getUsernameFieldName() {
-		return 'user.username';
+		return 'wcf'.WCF_N.'_user.username';
 	}
 	
 	/**
@@ -164,7 +164,7 @@ class ContentSearch extends AbstractSearchableObjectType {
 	 * @return	string
 	 */
 	public function getJoins() {
-		return 'LEFT JOIN wcf'.WCF_N.'_user user ON (user.userID = '.$this->getTableName().'.authorID)';
+		return 'LEFT JOIN wcf'.WCF_N.'_user ON (wcf'.WCF_N.'_user.userID = '.$this->getTableName().'.authorID)';
 	}
 	
 	/**
