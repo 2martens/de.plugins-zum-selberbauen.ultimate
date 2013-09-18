@@ -135,5 +135,13 @@
 			<classname>ultimate\system\attachment\ContentAttachmentObjectType</classname>
 		</type>
 		<!-- /Attachments -->
+		
+		<!-- Search -->
+		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.content</name>
+			<definitionname>com.woltlab.wcf.searchableObjectType</definitionname>
+			<classname>ultimate\system\search\ContentSearch</classname>
+		</type>
+		<!-- /Search -->
     </import>
 </data>
