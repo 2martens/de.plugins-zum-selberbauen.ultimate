@@ -90,7 +90,7 @@ class ContentSearch extends AbstractSearchableObjectType {
 	 * @return	string
 	 */
 	public function getFormTemplateName() {
-		return 'searchContent';
+		return '';
 	}
 	
 	/**
@@ -155,7 +155,9 @@ class ContentSearch extends AbstractSearchableObjectType {
 	 * @return	\wcf\system\database\util\PreparedStatementConditionBuilder|null
 	 */
 	public function getConditions(IForm $form = null) {
-		return null;
+		$conditionBuilder = new PreparedStatementConditionBuilder();
+		$conditionBuilder->add($this->getTableName().'.status = ?', array(3));
+		return $conditionBuilder;
 	}
 	
 	/**
