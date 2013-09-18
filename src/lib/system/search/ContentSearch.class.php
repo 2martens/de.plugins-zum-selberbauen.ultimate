@@ -126,7 +126,7 @@ class ContentSearch extends AbstractSearchableObjectType {
 	 * @return	string
 	 */
 	public function getUsernameFieldName() {
-		return 'wcf'.WCF_N.'_user.username';
+		return 'user.username';
 	}
 	
 	/**
