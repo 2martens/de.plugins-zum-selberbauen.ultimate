@@ -128,9 +128,9 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 				$content->__get('contentID'), 
 				(!empty($text) ? $text : $content->__get('contentText')),
 				(!empty($title) ? $title : $content->__get('contentTitle')),
-				$content->__get('publishDate'), 
-				$content->__get('authorID'), 
-				$content->__get('author')->__get('username'),
+				$content->getTime(),
+				$content->getUserID(),
+				$content->getUsername(),
 				($isI18n ? $languageID : null)
 			);
 		}
@@ -186,9 +186,9 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 					$contentEditor->__get('contentID'),
 					(!empty($text) ? $text : $contentEditor->__get('contentText')),
 					(!empty($title) ? $title : $contentEditor->__get('contentTitle')),
-					$contentEditor->__get('publishDate'),
-					$contentEditor->__get('authorID'),
-					$contentEditor->__get('author')->__get('username'),
+					$contentEditor->getTime(),
+					$contentEditor->getUserID(),
+					$contentEditor->getUsername(),
 					($isI18n ? $languageID : null)
 				);
 			}
