@@ -28,6 +28,7 @@
 namespace ultimate\system\cache\builder;
 use ultimate\data\content\CategorizedContent;
 use ultimate\data\content\ContentList;
+use ultimate\data\content\ContentSearchResultList;
 use ultimate\data\content\TaggableContent;
 use ultimate\data\content\TaggedContent;
 use wcf\system\cache\builder\AbstractCacheBuilder;
@@ -35,10 +36,11 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
 /**
  * Caches the contents.
  * 
- * Provides three variables:
+ * Provides four variables:
  * * \ultimate\data\content\TaggableContent[] contents (contentID => content)
  * * integer[] contentIDs
  * * \ultimate\data\content\CategorizedContent[] contentsToSlug (contentSlug => content)
+ * * \ultimate\data\content\ContentSearchResult[] contentsSearchResult (contentID => contentSearchResult)
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -59,21 +61,25 @@ class ContentCacheBuilder extends AbstractCacheBuilder {
 			'contents' => array(),
 			'contentIDs' => array(),
 			'contentsToSlug' => array(),
-			'attachmentList' => null
+			'contentsSearchResult' => array()
 		);
 		
 		$contentList = new ContentList();
+		$contentSearchResultList = new ContentSearchResultList();
 		// order by default
 		$sortField = ULTIMATE_SORT_CONTENT_SORTFIELD;
 		$sortOrder = ULTIMATE_SORT_CONTENT_SORTORDER;
 		$sqlOrderBy = $sortField." ".$sortOrder;
 		$contentList->sqlOrderBy = $sqlOrderBy;
+		$contentSearchResultList->sqlOrderBy = $sqlOrderBy;
 		
 		$contentList->readObjects();
+		$contentSearchResultList->readObjects();
 		$contents = $contentList->getObjects();
+		$contentsSearchResult = $contentSearchResultList->getObjects();
 		if (empty($contents)) return $data;
 		
-		$attachmentObjectIDs = array();
+		$data['contentsSearchResult'] = $contentsSearchResult;
 		
 		foreach ($contents as $contentID => $content) {
 			/* @var $content \ultimate\data\content\Content */

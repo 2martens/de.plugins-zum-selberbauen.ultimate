@@ -46,7 +46,7 @@ use wcf\system\WCF;
 class ContentSearch extends AbstractSearchableObjectType {
 	/**
 	 * Array of cached contents.
-	 * @var \ultimate\data\content\TaggableContent[]
+	 * @var \ultimate\data\content\ContentSearchResult[]
 	 */
 	public $contentCache = array();
 	
@@ -57,7 +57,7 @@ class ContentSearch extends AbstractSearchableObjectType {
 	 * @param	mixed[]		$additionalData
 	 */
 	public function cacheObjects(array $objectIDs, array $additionalData = null) {
-		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
+		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contentsSearchResult');
 		foreach ($objectIDs as $contentID) {
 			$this->contentCache[$contentID] = $contents[$contentID];
 		}
