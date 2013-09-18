@@ -189,7 +189,8 @@ class UltimateTemplateAddForm extends AbstractForm {
 		
 		$url = LinkHandler::getInstance()->getLink('UltimateTemplateEdit',
 			array(
-				'id' => $returnValues['returnValues']->__get('templateID')
+				'id' => $returnValues['returnValues']->__get('templateID'),
+				'application' => 'ultimate'
 			)
 		);
 		HeaderUtil::redirect($url);
