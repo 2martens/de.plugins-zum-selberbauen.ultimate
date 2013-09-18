@@ -28,6 +28,7 @@
 namespace ultimate\data\content;
 use ultimate\data\AbstractUltimateDatabaseObject;
 use wcf\data\user\User;
+use wcf\data\user\UserProfile;
 use wcf\data\IMessage;
 use wcf\data\ITitledObject;
 use wcf\system\bbcode\AttachmentBBCode;
@@ -54,6 +55,7 @@ use wcf\util\StringUtil;
  * @property-read	string								$contentSlug
  * @property-read	integer								$authorID
  * @property-read	\wcf\data\user\User					$author
+ * @property-read	\wcf\data\user\UserProfile			$userProfile
  * @property-read	integer								$attachments
  * @property-read	boolean								$enableSmilies
  * @property-read	boolean								$enableHtml
@@ -244,6 +246,15 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject, I
 	}
 	
 	/**
+	 * Returns the user profile object of the author.
+	 * 
+	 * @return	\wcf\data\user\UserProfile
+	 */
+	public function getUserProfile() {
+		return $this->userProfile;
+	}
+	
+	/**
 	 * Returns the link to the object.
 	 * 
 	 * Works only properly if isVisible returns true. If isVisible returns false, an exception might occur.
@@ -267,6 +278,7 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject, I
 		$data['contentID'] = intval($data['contentID']);
 		$data['authorID'] = intval($data['authorID']);
 		$data['author'] = new User($data['authorID']);
+		$data['userProfile'] = new UserProfile($data['author']);
 		$data['attachments'] = intval($data['attachments']);
 		$data['enableSmilies'] = (boolean) intval($data['enableSmilies']);
 		$data['enableHtml'] = (boolean) intval($data['enableHtml']);
