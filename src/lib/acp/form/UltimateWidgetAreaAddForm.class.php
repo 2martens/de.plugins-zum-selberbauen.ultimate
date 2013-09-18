@@ -160,7 +160,8 @@ class UltimateWidgetAreaAddForm extends DashboardOptionForm {
 		
 		$url = LinkHandler::getInstance()->getLink('UltimateWidgetAreaEdit',
 			array(
-				'id' => $widgetAreaID
+				'id' => $widgetAreaID,
+				'application' => 'ultimate'
 			)
 		);
 		HeaderUtil::redirect($url);
