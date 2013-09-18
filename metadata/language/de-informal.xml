@@ -670,6 +670,11 @@ Für die InlineEdit braucht man die gleichen Rechte um Inhalte zu schreiben, zu 
         <item name="wcf.page.sitemap.ultimate"><![CDATA[Website]]></item>
     </category>
     
+    <category name="wcf.search">
+		<item name="wcf.search.type.de.plugins-zum-selberbauen.ultimate.content"><![CDATA[Inhalte]]></item>
+		<item name="wcf.search.object.de.plugins-zum-selberbauen.ultimate.content"><![CDATA[Inhalt]]></item>
+	</category>
+    
     <category name="wcf.tagging">
         <item name="wcf.tagging.objectType.de.plugins-zum-selberbauen.ultimate.content"><![CDATA[Inhalte]]></item>
         <item name="wcf.tagging.taggedObjects.de.plugins-zum-selberbauen.ultimate.content"><![CDATA[Inhalte mit dem Tag „{$tag->name}“]]></item>
@@ -754,6 +759,7 @@ Für die InlineEdit braucht man die gleichen Rechte um Inhalte zu schreiben, zu 
         <item name="ultimate.content.contents"><![CDATA[Inhalte]]></item>
         <item name="ultimate.content.contentTitle"><![CDATA[Titel]]></item>
         <item name="ultimate.content.views"><![CDATA[Zugriffe]]></item>
+        <item name="ultimate.content.searchContents"><![CDATA[Alle Inhalte durchsuchen]]></item>
 	</category>
 	
 	<category name="ultimate.date">

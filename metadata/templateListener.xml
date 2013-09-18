@@ -87,5 +87,13 @@
             <templatecode><![CDATA[{if $__ultimate|isset && $__ultimate->isActiveApplication()}{@$__wcf->getUltimateStyleHandler()->getStylesheet()}{/if}]]></templatecode>
         </templatelistener>
         <!-- /ACP -->
+        
+        <!-- search area -->
+        <templatelistener name="searchAreaSettings">
+        	<environment>user</environment>
+        	<templatename>searchArea</templatename>
+        	<eventname>settings</eventname>
+        	<templatecode><![CDATA[{include file='__searchAreaSettings' application='ultimate'}]]></templatecode>
+        </templatelistener>
 	</import>
 </data>
