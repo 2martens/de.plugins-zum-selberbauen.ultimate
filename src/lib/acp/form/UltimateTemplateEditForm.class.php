@@ -128,7 +128,8 @@ class UltimateTemplateEditForm extends UltimateTemplateAddForm {
 		
 		$url = LinkHandler::getInstance()->getLink('UltimateTemplateEdit',
 			array(
-				'id' => $this->template->__get('templateID')
+				'id' => $this->template->__get('templateID'),
+				'application' => 'ultimate'
 			)
 		);
 		HeaderUtil::redirect($url);
