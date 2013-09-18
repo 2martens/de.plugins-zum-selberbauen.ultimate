@@ -294,7 +294,8 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		
 		$url = LinkHandler::getInstance()->getLink('UltimateContentEdit',
 			array(
-				'id' => $this->content->__get('contentID')
+				'id' => $this->content->__get('contentID'),
+				'application' => 'ultimate'
 			),
 			'success=true'
 		);
