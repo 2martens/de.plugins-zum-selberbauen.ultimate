@@ -30,6 +30,7 @@ use ultimate\system\cache\builder\LayoutCacheBuilder;
 use ultimate\system\cache\builder\MenuTemplateCacheBuilder;
 use ultimate\system\cache\builder\TemplateCacheBuilder;
 use wcf\data\DatabaseObjectEditor;
+use wcf\data\IEditableCachedObject;
 
 /**
  * Provides functions to edit templates.
@@ -41,7 +42,7 @@ use wcf\data\DatabaseObjectEditor;
  * @subpackage	data.ultimate.template
  * @category	Ultimate CMS
  */
-class TemplateEditor extends DatabaseObjectEditor {
+class TemplateEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
 	 * The base class.
 	 * @var	string
