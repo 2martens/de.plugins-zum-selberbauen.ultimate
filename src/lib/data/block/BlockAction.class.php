@@ -31,6 +31,8 @@ use ultimate\system\cache\builder\BlockCacheBuilder;
 use ultimate\system\cache\builder\BlockTypeCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\data\ISortableAction;
+use wcf\system\exception\SystemException;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
 
@@ -44,7 +46,7 @@ use wcf\system\WCF;
  * @subpackage	data.ultimate.block
  * @category	Ultimate CMS
  */
-class BlockAction extends AbstractDatabaseObjectAction {
+class BlockAction extends AbstractDatabaseObjectAction implements ISortableAction {
 	/**
 	 * The class name.
 	 * @var string
@@ -72,6 +74,8 @@ class BlockAction extends AbstractDatabaseObjectAction {
 	/**
 	 * Creates a block and respects additional AJAX requirements.
 	 * 
+	 * @since	1.0.0
+	 * 
 	 * @return	(integer|string)[]
 	 */
 	public function createAJAX() {
@@ -82,7 +86,7 @@ class BlockAction extends AbstractDatabaseObjectAction {
 		$blockTypes = BlockTypeCacheBuilder::getInstance()->getData(array(), 'blockTypes');
 		$blockType = $blockTypes[$blockTypeID];
 		$blockTypeName = $blockType->__get('blockTypeName');
-		
+		$showOrder = 0;
 		unset($parameters['templateID']);
 		// handle i18n values, content block only right now, generalize later
 		$metaAboveContent_i18n = array();
@@ -117,6 +121,7 @@ class BlockAction extends AbstractDatabaseObjectAction {
 		if (isset($parameters['parameters'])) {
 			$parameters['parameters'] = serialize($parameters['parameters']);
 		}
+		$parameters['showOrder'] = BlockEditor::getShowOrder($showOrder, $templateID);
 		$this->parameters['data'] = $parameters;
 		
 		// set action to create, otherwise cache is not rebuild
@@ -170,6 +175,8 @@ class BlockAction extends AbstractDatabaseObjectAction {
 	
 	/**
 	 * Edits a block and respects additional AJAX requirements.
+	 * 
+	 * @since	1.0.0
 	 *
 	 * @return	(integer|string)[]
 	 */
@@ -270,28 +277,16 @@ class BlockAction extends AbstractDatabaseObjectAction {
 	}
 	
 	/**
-	 * Validates the createAJAX method.
-	 */
-	public function validateCreateAJAX() {
-		$this->validateCreate();
-	}
-	
-	/**
-	 * Validates the editAJAX method.
-	 */
-	public function validateEditAJAX() {
-		$this->validateUpdate();
-	}
-	
-	/**
 	 * Returns blockType specific information.
-	 * 
+	 *
+	 * @since	1.0.0
+	 *
 	 * @return	string
 	 */
 	public function getFormDataAJAX() {
 		$parameters = $this->parameters['data'];
 		$blockTypeID = intval($parameters['blockTypeID']);
-		
+	
 		$blockType = BlockTypeHandler::getInstance()->getBlockType($blockTypeID);
 		$optionsHTML = $blockType->getOptionsHTML();
 		return $optionsHTML;
@@ -300,16 +295,18 @@ class BlockAction extends AbstractDatabaseObjectAction {
 	/**
 	 * Returns blockType specific information in the edit case.
 	 *
+	 * @since	1.0.0
+	 *
 	 * @return	string
 	 */
 	public function getFormDataEditAJAX() {
 		$parameters = $this->parameters['data'];
 		$blockID = intval($parameters['blockID']);
 		$blocks = BlockCacheBuilder::getInstance()->getData(array(), 'blocks');
-		
+	
 		$block = $blocks[$blockID];
 		$blockTypeID = $block->__get('blockTypeID');
-		
+	
 		/* @var $blockType \ultimate\system\blocktype\IBlockType */
 		$blockType = BlockTypeHandler::getInstance()->getBlockType($blockTypeID);
 		$blockType->init('index', LayoutHandler::getInstance()->getLayout(LayoutHandler::INDEX), null, $blockID, null);
@@ -318,7 +315,45 @@ class BlockAction extends AbstractDatabaseObjectAction {
 	}
 	
 	/**
+	 * Updates the position of blocks.
+	 *
+	 * @since	1.0.0
+	 */
+	public function updatePosition() {
+		WCF::getDB()->beginTransaction();
+		foreach ($this->parameters['data']['structure'] as $parentBlockID => $blockIDs) {
+			foreach ($blockIDs as $showOrder => $blockID) {
+				$this->objects[$blockID]->update(array(
+					'showOrder' => $showOrder + 1
+				));
+			}
+		}
+		WCF::getDB()->commitTransaction();
+		BlockEditor::resetCache();
+	}
+	
+	/**
+	 * Validates the createAJAX method.
+	 * 
+	 * @since	1.0.0
+	 */
+	public function validateCreateAJAX() {
+		$this->validateCreate();
+	}
+	
+	/**
+	 * Validates the editAJAX method.
+	 * 
+	 * @since	1.0.0
+	 */
+	public function validateEditAJAX() {
+		$this->validateUpdate();
+	}
+	
+	/**
 	 * Does nothing as the getFormDataAJAX doesn't require any permission.
+	 * 
+	 * @since	1.0.0
 	 */
 	public function validateGetFormDataAJAX() {
 		// no permissions required
@@ -326,8 +361,45 @@ class BlockAction extends AbstractDatabaseObjectAction {
 	
 	/**
 	 * Does nothing as the getFormDataEditAJAX doesn't require any permission.
+	 * 
+	 * @since	1.0.0
 	 */
 	public function validateGetFormDataEditAJAX() {
 		// no permissions required
+	}
+	
+	/**
+	 * Validates the 'updatePosition' action.
+	 *
+	 * @since	1.0.0
+	 */
+	public function validateUpdatePosition() {
+		// validate permissions
+		if (!empty($this->permissionsUpdate)) {
+			WCF::getSession()->checkPermissions($this->permissionsUpdate);
+		}
+	
+		// validate 'structure' parameter
+		if (!isset($this->parameters['data']['structure'])) {
+			throw new SystemException("Missing 'structure' parameter.");
+		}
+		if (!is_array($this->parameters['data']['structure'])) {
+			throw new SystemException("'structure' parameter is no array.");
+		}
+		
+		$blocks = BlockCacheBuilder::getInstance()->getData(array(), 'blocks');
+	
+		// validate given block ids
+		foreach ($this->parameters['data']['structure'] as $parentBlockID => $blockIDs) {
+			foreach ($blockIDs as $blockID) {
+				// validate block
+				$block = (isset($blocks[$blockID]) ? $blocks[$blockID] : null);
+				if ($block === null) {
+					throw new SystemException("Unknown block with id '".$blockID."'.");
+				}
+	
+				$this->objects[$block->__get('blockID')] = new $this->className($block);
+			}
+		}
 	}
 }

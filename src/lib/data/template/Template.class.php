@@ -110,7 +110,8 @@ class Template extends AbstractUltimateDatabaseObject implements ITitledObject {
 		        FROM      ultimate'.WCF_N.'_block_to_template blockToTemplate
 		        LEFT JOIN ultimate'.WCF_N.'_block block
 		        ON        (block.blockID = blockToTemplate.blockID)
-		        WHERE     blockToTemplate.templateID = ?';
+		        WHERE     blockToTemplate.templateID = ?
+		        ORDER BY  block.showOrder ASC';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($this->templateID));
 		$blocks = array();
