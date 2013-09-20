@@ -6,6 +6,7 @@ CREATE TABLE ultimate1_block (
 	blockTypeID INT(10) NOT NULL,
 	query VARCHAR(255) NOT NULL DEFAULT '',
 	parameters VARCHAR(255) NOT NULL DEFAULT '',
+	showOrder INT(10) NOT NULL DEFAULT 0,
 	additionalData TEXT NOT NULL,
 	KEY (blockTypeID)
 );

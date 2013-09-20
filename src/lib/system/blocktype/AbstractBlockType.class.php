@@ -253,6 +253,7 @@ abstract class AbstractBlockType implements IBlockType {
 				'blockTypeID' => 0,
 				'query' => '',
 				'parameters' => '',
+				'showOrder' => 0,
 				'additionalData' => ''
 			));
 		}
@@ -279,7 +280,7 @@ abstract class AbstractBlockType implements IBlockType {
 		$blockOptionIDs = $this->blockOptionIDs;
 		
 		foreach ($blockOptionIDs as &$optionID) {
-			$optionID = StringUtil::replace('{$blockID}', $this->blockID, $optionID);
+			$optionID = str_replace('{$blockID}', $this->blockID, $optionID);
 		}
 		return array(
 			$blockOptionIDs, 
