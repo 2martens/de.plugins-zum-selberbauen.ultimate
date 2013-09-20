@@ -95,6 +95,45 @@ class BlockEditor extends DatabaseObjectEditor implements IEditableCachedObject 
 	}
 	
 	/**
+	 * Returns show order for a new block.
+	 *
+	 * @param	integer		$showOrder
+	 * @param	integer		$templateID
+	 * @return	integer
+	 */
+	public static function getShowOrder($showOrder, $templateID) {
+		if ($showOrder == 0) {
+			// get next number in row
+			$sql = 'SELECT    MAX(showOrder) AS showOrder
+			        FROM      ultimate'.WCF_N.'_block block
+			        LEFT JOIN ultimate'.WCF_N.'_block_to_template blockToTemplate
+			        ON        (block.blockID = blockToTemplate.blockID)
+			        WHERE     blockToTemplate.templateID         = ?';
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array(
+				intval($templateID)
+			));
+			$row = $statement->fetchArray();
+			if (!empty($row)) $showOrder = intval($row['showOrder']) + 1;
+			else $showOrder = 1;
+		}
+		else {
+			$sql = 'UPDATE    ultimate'.WCF_N.'_block block
+			        SET       showOrder = showOrder + 1
+			        LEFT JOIN ultimate'.WCF_N.'_block_to_template blockToTemplate
+			        ON        (block.blockID = blockToTemplate.blockID)
+			        WHERE     blockToTemplate.templateID = ?
+			        AND       block.showOrder >= ?';
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array(
+				intval($templateID),
+				$showOrder
+			));
+		}
+	
+		return $showOrder;
+	}
+	/**
 	 * Resets the cache.
 	 */
 	public static function resetCache() {

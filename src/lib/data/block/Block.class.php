@@ -46,6 +46,7 @@ use wcf\system\WCF;
  * @property-read	\ultimate\data\blocktype\BlockType	$blockType
  * @property-read	string								$query
  * @property-read	array								$parameters	a numeric array of parameters (all primitive types are available for the parameters)
+ * @property-read	integer								$showOrder
  * @property-read	array								$additionalData an associative array of additional data (what keys are available depends on the blockType, the values can be anything)	
  */
 class Block extends AbstractUltimateDatabaseObject {
@@ -138,6 +139,7 @@ class Block extends AbstractUltimateDatabaseObject {
 		} else {
 			$data['additionalData'] = array();
 		}
+		$data['showOrder'] = intval($data['showOrder']);
 		parent::handleData($data);
 	}
 }
