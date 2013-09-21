@@ -16,7 +16,7 @@
 			options.refreshPage = true;
 		{/if}
 		
-		new WCF.Table.EmptyTableHandler($('#contentTableContainer'), '.jsContentRow', options);
+		new WCF.Table.EmptyTableHandler($('#contentTableContainer'), 'jsContentRow', options);
 	});
 	//]]>
 </script>
