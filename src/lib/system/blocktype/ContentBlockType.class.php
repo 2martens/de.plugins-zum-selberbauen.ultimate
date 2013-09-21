@@ -172,6 +172,10 @@ class ContentBlockType extends AbstractBlockType {
 	 * @see IBlockType::readData()
 	 */
 	public function readData() {
+		// set cache variables
+		$this->cacheBuilderClassName = '\ultimate\system\cache\builder\ContentCacheBuilder';
+		$this->cacheIndex = 'contents';
+		
 		if (!empty($this->requestType) && $this->requestType != 'content' && $this->requestType != 'index') {
 			$this->cacheBuilderClassName = '\ultimate\system\cache\builder\Content'.
 				ucfirst($this->requestType).
