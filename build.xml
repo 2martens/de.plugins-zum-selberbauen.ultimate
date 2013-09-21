@@ -28,43 +28,60 @@
 			basedir="srcWCF" 
 		/>
 		
-		<!-- beta 2 update tars -->
-		<tar destfile="metadata/templates_update.b1.tar">
+		<!-- beta 3 update tars -->
+		<tar destfile="metadata/templates_update.b2.tar">
 			<tarfileset dir="src/templates">
 				<include name="contentBlockType.tpl" />
-				<include name="contentInlineEditor.tpl" />
-				<include name="dashboardBoxLatestContents.tpl" />
-				<include name="footer.tpl" />
-				<include name="headInclude.tpl" />
+				<include name="dashboardBoxLinks.tpl" />
+				<include name="searchContent.tpl" />
+				<include name="__searchAreaSettings.tpl" />
 			</tarfileset>
 		</tar>
-		<tar destfile="metadata/acptemplates_update.b1.tar">
+		<tar destfile="metadata/acptemplates_update.b2.tar">
 			<tarfileset dir="src/acp/templates">
-				<include name="header.tpl" />
-				<include name="ultimateCategoryAdd.tpl" />
-				<include name="ultimateCategoryList.tpl" />
+				<include name="linkCategorySelectOptionType.tpl" />
+				<include name="tagInput.tpl" />
 				<include name="ultimateContentAdd.tpl" />
-				<include name="ultimateLayoutManager.tpl" />
+				<include name="ultimateContentList.tpl" />
+				<include name="ultimateTemplateAdd.tpl" />
 			</tarfileset>
 		</tar>
-		<tar destfile="metadata/files_update.b1.tar">
+		<tar destfile="metadata/files_update.b2.tar">
 			<tarfileset dir="src">
 				<exclude name="templates/**" />
 				<exclude name="acp/templates/**" />
-				<include name="**/UltimateCategory*Form*" />
+				<include name="**/*.min.js" />
+				<include name="**/ULTIMATE.Tagging.js" />
+				<include name="**/ULTIMATE.ACP.js" />
 				<include name="**/UltimateContent*Form*" />
+				<include name="**/UltimateMenuAddForm*" />
 				<include name="**/UltimatePageAddForm*" />
-				<include name="**/CategoryEditor*" />
-				<include name="**/data/content/Content*" />
+				<include name="**/UltimateTemplate*Form*" />
+				<include name="**/UltimateWidgetAreaAddForm*" />
+				<include name="**/Block.*" />
+				<include name="**/BlockAction*" />
+				<include name="**/BlockEditor*" />
+				<include name="**/ContentAction*" />
+				<include name="**/SearchResultContent*" />
 				<include name="**/TaggedContentList*" />
-				<include name="**/CategoryPage*" />
+				<include name="**/Link.*" />
+				<include name="**/Page.*" />
+				<include name="**/Template.*" />
+				<include name="**/TemplateEditor*" />
 				<include name="**/ContentPage*" />
 				<include name="**/PagePage*" />
-				<include name="**/ContentAttachment*" />
+				<include name="**/ULTIMATECore*" />
+				<include name="**/AbstractBlockType*" />
 				<include name="**/ContentBlockType*" />
-				<include name="**/TaggedPageListener*" />
-				<include name="**/CustomMenu*" />
-				<include name="**/TemplateHandler*" />
+				<include name="**/ContentBlockType*" />
+				<include name="**/BlockCacheBuilder*" />
+				<include name="**/ContentCacheBuilder*" />
+				<include name="**/LatestContentsCacheBuilder*" />
+				<include name="**/LinkCategoryCacheBuilder*" />
+				<include name="**/LatestContents*DashboardBox*" />
+				<include name="**/LinkDashboardBox*" />
+				<include name="**/UltimateLinkCategorySelectOptionType*" />
+				<include name="**/ContentSearch*" />
 			</tarfileset>
 		</tar>
 	</target>
