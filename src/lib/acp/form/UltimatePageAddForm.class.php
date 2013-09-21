@@ -299,7 +299,7 @@ class UltimatePageAddForm extends AbstractForm {
 		
 		$this->saved();
 		
-		$url = LinkHandler::getInstance()->getLink('UltimatePageAdd', array(), 'success=true');
+		$url = LinkHandler::getInstance()->getLink('UltimatePageAdd', array('application' => 'ultimate'), 'success=true');
 		HeaderUtil::redirect($url);
 		exit;
 	}

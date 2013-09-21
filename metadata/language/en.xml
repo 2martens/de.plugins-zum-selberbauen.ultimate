@@ -169,6 +169,8 @@
 		<item name="wcf.acp.option.category.ultimate.sort.template"><![CDATA[Templates]]></item>
 		<item name="wcf.acp.option.category.ultimate.sort.widgetArea"><![CDATA[Widget configurations]]></item>
         <item name="wcf.acp.option.category.dashboard.sidebar.latestContents"><![CDATA[Latest contents]]></item>
+        <item name="wcf.acp.option.category.dashboard.sidebar.links"><![CDATA[Links]]></item>
+        <item name="wcf.acp.option.category.dashboard.content.latestContents"><![CDATA[Latest contents]]></item>
 		<!-- /categories -->
 		
 		<!-- ultimate.general -->
@@ -250,6 +252,14 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
         <!-- dashboard.sidebar.latestContents -->
         <item name="wcf.acp.option.ultimate_latest_contents_items"><![CDATA[Number of contents]]></item>
         <!-- /dashboard.sidebar.latestContents -->
+        <!-- dashboard.sidebar.links -->
+        <item name="wcf.acp.option.ultimate_links_category"><![CDATA[Link category]]></item>
+        <item name="wcf.acp.option.ultimate_links_category.description"><![CDATA[Please insert here the id of the category from which links should be shown. If the id is 0 then no links are shown.]]></item>
+        <item name="wcf.acp.option.ultimate_links_items"><![CDATA[Number of links]]></item>
+        <!-- /dashboard.sidebar.links -->
+        <!-- dashboard.content.latestContents -->
+        <item name="wcf.acp.option.ultimate_latest_contents_content_items"><![CDATA[Number of contents]]></item>
+        <!-- /dashboard.content.latestContents -->
 	</category>
 	
 	<category name="wcf.acp.ultimate">
@@ -652,6 +662,7 @@ For the InlineEdit you require the same rights to write, edit or delete contents
         <item name="wcf.dashboard.box.de.plugins-zum-selberbauen.ultimate.tagCloud"><![CDATA[Tag-Cloud]]></item>
         <item name="wcf.dashboard.box.de.plugins-zum-selberbauen.ultimate.latestContents"><![CDATA[Latest contents]]></item>
         <item name="wcf.dashboard.box.de.plugins-zum-selberbauen.ultimate.latestContentsContent"><![CDATA[Latest contents]]></item>
+        <item name="wcf.dashboard.box.de.plugins-zum-selberbauen.ultimate.links"><![CDATA[Links]]></item>
 	</category>
     
     <category name="wcf.like">
@@ -661,6 +672,11 @@ For the InlineEdit you require the same rights to write, edit or delete contents
     <category name="wcf.page">
         <item name="wcf.page.sitemap.ultimate"><![CDATA[Website]]></item>
     </category>
+    
+    <category name="wcf.search">
+		<item name="wcf.search.type.de.plugins-zum-selberbauen.ultimate.content"><![CDATA[Contents]]></item>
+		<item name="wcf.search.object.de.plugins-zum-selberbauen.ultimate.content"><![CDATA[Content]]></item>
+	</category>
     
     <category name="wcf.tagging">
         <item name="wcf.tagging.objectType.de.plugins-zum-selberbauen.ultimate.content"><![CDATA[Contents]]></item>
@@ -742,10 +758,11 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 		<item name="ultimate.content.comment"><![CDATA[Content comment]]></item>
 		<item name="ultimate.content.commentResponse"><![CDATA[Content response]]></item>
 		<item name="ultimate.content.comments"><![CDATA[Comments]]></item>
-		<item name="ultimate.content.authorVCard"><![CDATA[This content was writty by {$author}.]]></item>
+		<item name="ultimate.content.authorVCard"><![CDATA[This content was written by {$author}.]]></item>
         <item name="ultimate.content.contents"><![CDATA[Contents]]></item>
         <item name="ultimate.content.contentTitle"><![CDATA[Title]]></item>
         <item name="ultimate.content.views"><![CDATA[Views]]></item>
+        <item name="ultimate.content.searchContents"><![CDATA[Search all contents]]></item>
 	</category>
 	
 	<category name="ultimate.date">

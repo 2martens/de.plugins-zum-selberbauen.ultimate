@@ -41,6 +41,8 @@ use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
 use wcf\system\exception\ValidateActionException;
 use wcf\system\language\I18nHandler;
+use wcf\system\language\LanguageFactory;
+use wcf\system\search\SearchIndexManager;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
 
@@ -97,6 +99,9 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		$content = parent::create();
 		$contentEditor = new ContentEditor($content);
 		
+		// update attachments
+		$this->parameters['attachmentHandler']->updateObjectID($content->__get('contentID'));
+		
 		// insert categories
 		$categoryIDs = (isset($this->parameters['categories'])) ? $this->parameters['categories'] : array();
 		$contentEditor->addToCategories($categoryIDs, false);
@@ -112,6 +117,23 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		$metaKeywords = (isset($this->parameters['metaKeywords'])) ? $this->parameters['metaKeywords'] : '';
 		$contentEditor->addMetaData($metaDescription, $metaKeywords);
 		
+		// update search index
+		$languages = LanguageFactory::getInstance()->getLanguages();
+		foreach ($languages as $languageID => $language) {
+			$text = $language->get($content->__get('contentText'), true);
+			$title = $language->get($content->__get('contentTitle'), true);
+			$isI18n = (!empty($text) || !empty($title));
+			SearchIndexManager::getInstance()->add(
+				'de.plugins-zum-selberbauen.ultimate.content', 
+				$content->__get('contentID'), 
+				(!empty($text) ? $text : $content->__get('contentText')),
+				(!empty($title) ? $title : $content->__get('contentTitle')),
+				$content->getTime(),
+				$content->getUserID(),
+				$content->getUsername(),
+				($isI18n ? $languageID : null)
+			);
+		}
 		return $content;
 	}
 	
@@ -152,6 +174,24 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 			}
 			
 			$contentEditor->addMetaData($metaDescription, $metaKeywords);
+			
+			// update search index
+			$languages = LanguageFactory::getInstance()->getLanguages();
+			foreach ($languages as $languageID => $language) {
+				$text = $language->get($contentEditor->__get('contentText'), true);
+				$title = $language->get($contentEditor->__get('contentTitle'), true);
+				$isI18n = (!empty($text) || !empty($title));
+				SearchIndexManager::getInstance()->update(
+					'de.plugins-zum-selberbauen.ultimate.content',
+					$contentEditor->__get('contentID'),
+					(!empty($text) ? $text : $contentEditor->__get('contentText')),
+					(!empty($title) ? $title : $contentEditor->__get('contentTitle')),
+					$contentEditor->getTime(),
+					$contentEditor->getUserID(),
+					$contentEditor->getUsername(),
+					($isI18n ? $languageID : null)
+				);
+			}
 		}
 	}
 	
@@ -168,6 +208,9 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		foreach ($this->objects as $object) {
 			$objectIDs[] = $object->getObjectID();
 		}
+		
+		// update search index
+		SearchIndexManager::getInstance()->delete('de.plugins-zum-selberbauen.ultimate.content', $objectIDs);
 		
 		$layoutIDs = array();
 		foreach ($this->objects as $object) {

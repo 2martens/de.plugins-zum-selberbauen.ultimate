@@ -80,8 +80,12 @@ class LatestContentsCacheBuilder extends AbstractCacheBuilder {
 		$contentList->readObjects();
 		$contents = $contentList->getObjects();
 		if (empty($contents)) return $data;
-	
+		
 		foreach ($contents as $contentID => $content) {
+			if (!$content->isVisible()) {
+				continue;
+			}
+			
 			/* @var $content \ultimate\data\content\Content */
 			$data['contents'][$contentID] = new TaggableContent($content);
 			$data['contentIDs'][] = $contentID;
@@ -93,7 +97,7 @@ class LatestContentsCacheBuilder extends AbstractCacheBuilder {
 				$data['contents'][$contentID] = $taggedContent;
 			}
 		}
-	
+		
 		return $data;
 	}
 }

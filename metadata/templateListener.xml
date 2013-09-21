@@ -20,8 +20,8 @@
 			<environment>user</environment>
 			<templatename>headInclude</templatename>
 			<eventname>javascriptInclude</eventname>
-			<templatecode><![CDATA[<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.js?v={@$__wcfVersion}"></script>
-<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.Content.js?v={@$__wcfVersion}"></script>
+			<templatecode><![CDATA[<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.{if !ENABLE_DEBUG_MODE}.min{/if}js?v={@$__wcfVersion}"></script>
+<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.Content.{if !ENABLE_DEBUG_MODE}.min{/if}js?v={@$__wcfVersion}"></script>
 {if $customMenu|isset}{@$customMenu}{/if}
 ]]></templatecode>
 		</templatelistener>
@@ -87,5 +87,14 @@
             <templatecode><![CDATA[{if $__ultimate|isset && $__ultimate->isActiveApplication()}{@$__wcf->getUltimateStyleHandler()->getStylesheet()}{/if}]]></templatecode>
         </templatelistener>
         <!-- /ACP -->
+        
+        <!-- search area -->
+        <templatelistener name="searchAreaSettings">
+        	<environment>user</environment>
+        	<templatename>searchArea</templatename>
+        	<eventname>settings</eventname>
+        	<templatecode><![CDATA[{include file='__searchAreaSettings' application='ultimate'}]]></templatecode>
+        </templatelistener>
+        <!-- /search area -->
 	</import>
 </data>

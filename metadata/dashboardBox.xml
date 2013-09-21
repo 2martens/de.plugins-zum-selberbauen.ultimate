@@ -15,5 +15,10 @@
             <classname><![CDATA[ultimate\system\dashboard\box\TagCloudDashboardBox]]></classname>
             <boxtype>sidebar</boxtype>
         </dashboardbox>
+        
+        <dashboardbox name="de.plugins-zum-selberbauen.ultimate.links">
+        	<classname><![CDATA[ultimate\system\dashboard\box\LinkDashboardBox]]></classname>
+        	<boxtype>sidebar</boxtype>
+        </dashboardbox>
     </import>
 </data>

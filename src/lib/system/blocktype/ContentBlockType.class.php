@@ -172,6 +172,10 @@ class ContentBlockType extends AbstractBlockType {
 	 * @see IBlockType::readData()
 	 */
 	public function readData() {
+		// set cache variables
+		$this->cacheBuilderClassName = '\ultimate\system\cache\builder\ContentCacheBuilder';
+		$this->cacheIndex = 'contents';
+		
 		if (!empty($this->requestType) && $this->requestType != 'content' && $this->requestType != 'index') {
 			$this->cacheBuilderClassName = '\ultimate\system\cache\builder\Content'.
 				ucfirst($this->requestType).
@@ -359,6 +363,15 @@ class ContentBlockType extends AbstractBlockType {
 			}
 			$this->contents = $allowedContents;
 		}
+		
+		// visibility
+		$remainingContents = array();
+		foreach ($this->contents as $contentID => $content) {
+			if ($content->isVisible()) {
+				$remainingContents[$contentID] = $content;
+			}
+		}
+		$this->contents = $remainingContents;
 		
 		// sort field
 		if ($this->options['sortField'] != ULTIMATE_SORT_CONTENT_SORTFIELD) {

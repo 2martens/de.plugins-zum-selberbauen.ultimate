@@ -5,6 +5,9 @@
 	/* <![CDATA[ */
 	$(function() {
 		WCF.TabMenu.init();
+		{if $action == 'edit'}
+			new WCF.Sortable.List('templateBlockList', 'ultimate\\data\\block\\BlockAction', 0, { maxLevels: 1 }, false);
+		{/if}
 	});
 	/* ]]> */
 </script>
@@ -31,6 +34,9 @@
 	</nav>
 </div>
 
+{if $action == 'add'}
+	<p class="info">{lang}wcf.acp.ultimate.template.addTemplateFirst{/lang}</p>
+{/if}
 <form method="post" action="{if $action == "add"}{link application='ultimate' controller='UltimateTemplateAdd'}{/link}{else}{link application='ultimate' controller='UltimateTemplateEdit'}{/link}{/if}">
 	<div class="container containerPadding marginTop shadow">
 		<fieldset>
@@ -147,51 +153,47 @@
 				</dd>
 			</dl>
 		</fieldset>
-		<fieldset>
-			<legend>{lang}wcf.acp.ultimate.template.blocks{/lang}</legend>
-			<div id="templateBlockList" class="container containerPadding marginTop shadow">
-				{if $action == 'edit'}
-				<ol data-object-id="0">
-					{assign var=oldDepth value=0}
-					{foreach from=$blocks item=templateBlock}
-						<li class="jsBlock" data-object-name="{@$templateBlock->blockTypeName}" data-object-id="{@$templateBlock->blockID}">
-							<span>
-								<span class="buttons">
+		{if $action == 'edit'}
+			<fieldset>
+				<legend>{lang}wcf.acp.ultimate.template.blocks{/lang}</legend>
+				<div id="templateBlockList" class="container containerPadding marginTop shadow sortableListContainer">
+					<ol class="sortableList" data-object-id="0">
+						{assign var=oldDepth value=0}
+						{foreach from=$blocks item=templateBlock}
+							<li class="jsBlock sortableNode sortableNoNesting" data-object-name="{@$templateBlock->blockTypeName}" data-object-id="{@$templateBlock->blockID}">
+								<span class="sortableNodeLabel">
+									<span class="statusDisplay sortableButtonContainer">
+										
+										{if $__wcf->session->getPermission('admin.content.ultimate.canManageBlocks')}
+											<span title="{lang}wcf.acp.ultimate.block.edit{/lang}" class="icon icon16 icon-pencil jsTooltip" data-object-id="{@$templateBlock->blockID}"></span>
+										{else}
+											<span title="{lang}wcf.acp.ultimate.block.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
+										{/if}
+										
+										{if $__wcf->session->getPermission('admin.content.ultimate.canManageBlocks')}
+											<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="{@$templateBlock->blockID}" data-confirm-message="{lang}'wcf.acp.ultimate.block.delete.sure'{/lang}"></span>
+										{else}
+											<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
+										{/if}
+										
+										{event name='buttons'}
+									</span>
 									
-									{if $__wcf->session->getPermission('admin.content.ultimate.canManageBlocks')}
-										<span title="{lang}wcf.acp.ultimate.block.edit{/lang}" class="icon icon16 icon-pencil jsTooltip" data-object-id="{@$templateBlock->blockID}"></span>
-									{else}
-										<span title="{lang}wcf.acp.ultimate.block.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
-									{/if}
-									
-									{if $__wcf->session->getPermission('admin.content.ultimate.canManageBlocks')}
-										<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="{@$templateBlock->blockID}" data-confirm-message="{lang}'wcf.acp.ultimate.block.delete.sure'{/lang}"></span>
-									{else}
-										<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
-									{/if}
-									
-									{event name='buttons'}
+									<span class="title">
+										{lang}{@$templateBlock->blockType->blockTypeName}{/lang} #{@$templateBlock->blockID}
+									</span>
 								</span>
-								
-								<span class="title">
-									{lang}{@$templateBlock->blockType->blockTypeName}{/lang} #{@$templateBlock->blockID}
-								</span>
-							</span>
-						</li>
-					{/foreach}
-				</ol>
-				{else}
-					<p>{lang}wcf.acp.ultimate.template.addTemplateFirst{/lang}</p>
-				{/if}
-				{* doesn't have any use
-				if $__wcf->session->getPermission('admin.content.ultimate.canManageBlocks')}
-					<div class="formSubmit">
-						<button class="button default{if $action == 'add' || $blocks|count == 0} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.global.button.save{/lang}</button>
-					</div>
-				{/if
-				*}
-			</div>
-		</fieldset>
+							</li>
+						{/foreach}
+					</ol>
+					{if $__wcf->session->getPermission('admin.content.ultimate.canManageBlocks')}
+						<div class="formSubmit">
+							<button class="{if $action == 'add' || $blocks|count == 0} disabled" disabled="disabled{/if}" data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
+						</div>
+					{/if}
+				</div>
+			</fieldset>
+		{/if}
 		{event name='fieldsets'}
 	</div>
 	<div class="formSubmit">

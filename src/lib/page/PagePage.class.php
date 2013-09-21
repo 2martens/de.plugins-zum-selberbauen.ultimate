@@ -106,12 +106,6 @@ class PagePage extends AbstractPage {
 			throw new IllegalLinkException();
 		}
 		
-		// update view count
-		$contentEditor = new ContentEditor($this->page->__get('content'));
-		$contentEditor->updateCounters(array(
-			'views' => 1
-		));
-		
 		$this->layout = LayoutHandler::getInstance()->getLayoutFromObjectData($this->page->__get('pageID'), 'page');
 	}
 	
@@ -133,6 +127,17 @@ class PagePage extends AbstractPage {
 		if ($this->page->__get('status') != 3) {
 			throw new IllegalLinkException();
 		}
+		
+		// check visibility
+		if (!$this->page->isVisible()) {
+			throw new IllegalLinkException();
+		}
+		
+		// update view count
+		$contentEditor = new ContentEditor($this->page->__get('content'));
+		$contentEditor->updateCounters(array(
+			'views' => 1
+		));
 		
 		HeaderUtil::sendHeaders();
 		echo $this->output;

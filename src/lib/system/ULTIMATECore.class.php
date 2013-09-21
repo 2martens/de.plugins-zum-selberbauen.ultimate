@@ -31,6 +31,7 @@ use wcf\system\application\AbstractApplication;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\menu\page\PageMenu;
 use wcf\system\request\LinkHandler;
+use wcf\system\request\RequestHandler;
 use wcf\system\request\RouteHandler;
 use wcf\system\style\StyleHandler;
 use wcf\system\WCF;
@@ -59,6 +60,19 @@ class ULTIMATECore extends AbstractApplication {
 	public function __run() {
 		$this->initRoutes();
 		PageMenu::getInstance()->setActiveMenuItem('ultimate.header.menu.index');
+	}
+	
+	/**
+	 * Returns the current application based upon the called controller.
+	 * 
+	 * @return	string
+	 */
+	public function getCurrentApplication() {
+		$activeRequest = RequestHandler::getInstance()->getActiveRequest();
+		$className = $activeRequest->getClassName();
+		$parts = explode('\\', $className);
+		$abbreviation = array_shift($parts);
+		return $abbreviation;
 	}
 	
 	/**

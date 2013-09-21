@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the LatestContentsDashboardBox class.
+ * Contains the LinkDashboardBox class.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -26,15 +26,14 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\dashboard\box;
-use ultimate\system\cache\builder\LatestContentsCacheBuilder;
+use ultimate\system\cache\builder\LinkCategoryCacheBuilder;
 use wcf\data\dashboard\box\DashboardBox;
-use wcf\data\user\UserProfile;
 use wcf\page\IPage;
 use wcf\system\dashboard\box\AbstractSidebarDashboardBox;
 use wcf\system\WCF;
 
 /**
- * Dashboard sidebar box for latest contents.
+ * Dashboard sidebar box for links.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -43,12 +42,12 @@ use wcf\system\WCF;
  * @subpackage	system.dashboard.box
  * @category	Ultimate CMS
  */
-class LatestContentsDashboardBox extends AbstractSidebarDashboardBox {
+class LinkDashboardBox extends AbstractSidebarDashboardBox {
 	/**
-	 * The latest contents.
-	 * @var	\ultimate\data\content\TaggedContent[]
+	 * The links.
+	 * @var \ultimate\data\link\Link[]
 	 */
-	public $contents = array();
+	public $links = array();
 	
 	/**
 	 * Initializes this box.
@@ -61,43 +60,43 @@ class LatestContentsDashboardBox extends AbstractSidebarDashboardBox {
 	public function init(DashboardBox $box, IPage $page) {
 		parent::init($box, $page);
 		
-		$this->contents = LatestContentsCacheBuilder::getInstance()->getData(array(), 'contents');
+		$linkCategoryID = ULTIMATE_LINKS_CATEGORY;
+		if ($linkCategoryID) {
+			$links = LinkCategoryCacheBuilder::getInstance()->getData(array(), 'linksToCategoryID');
+			$this->links = $links[$linkCategoryID];
+		}
 		
-		// apply number of contents
-		$remainingContents = array();
-		$numberOfItems = ULTIMATE_LATEST_CONTENTS_ITEMS;
+		$remainingLinks = array();
+		$items = ULTIMATE_LINKS_ITEMS;
 		$i = 0;
-		foreach ($this->contents as $contentID => $content) {
-			if ($i >= $numberOfItems) {
+		foreach ($this->links as $linkID => $link) {
+			if ($i >= $items) {
 				break;
 			}
-				
-			$remainingContents[$contentID] = $content;
+			$remainingLinks[$linkID] = $link;
 			$i++;
 		}
-		$this->contents = $remainingContents;
-		
-		foreach ($this->contents as $content) {
-			$content->authorProfile = new UserProfile($content->__get('author'));
-		}
+		$this->links = $remainingLinks;
 		
 		$this->fetched();
 	}
 	
 	/**
 	 * Renders box view.
-	 * 
+	 *
 	 * @internal
-	 * 
+	 *
 	 * @return	string
 	 */
 	protected function render() {
-		if (!count($this->contents)) return '';
+		if (empty($this->links)) {
+			return '';
+		}
 		
 		WCF::getTPL()->assign(array(
-			'contents' => $this->contents
+			'links' => $this->links
 		));
 		
-		return WCF::getTPL()->fetch('dashboardBoxLatestContents', 'ultimate');
+		return WCF::getTPL()->fetch('dashboardBoxLinks', 'ultimate');
 	}
 }

@@ -61,7 +61,6 @@ class BlockCacheBuilder extends AbstractCacheBuilder {
 		);
 		
 		$blockList = new BlockList();
-		
 		$blockList->readObjects();
 		$blocks = $blockList->getObjects();
 		$blockIDs = $blockList->getObjectIDs();

@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the template data model editor class.
+ * Contains the SearchResultContentList class.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -16,45 +16,31 @@
  * GNU Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}}.
+ * along with the Ultimate CMS. If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
- * @subpackage	data.template
+ * @subpackage	data.content
  * @category	Ultimate CMS
  */
-namespace ultimate\data\template;
-use ultimate\system\cache\builder\LayoutCacheBuilder;
-use ultimate\system\cache\builder\MenuTemplateCacheBuilder;
-use ultimate\system\cache\builder\TemplateCacheBuilder;
-use wcf\data\DatabaseObjectEditor;
-use wcf\data\IEditableCachedObject;
+namespace ultimate\data\content;
 
 /**
- * Provides functions to edit templates.
+ * Represents a list of content search results.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
- * @subpackage	data.ultimate.template
+ * @subpackage	data.content
  * @category	Ultimate CMS
  */
-class TemplateEditor extends DatabaseObjectEditor implements IEditableCachedObject {
+class SearchResultContentList extends ContentList {
 	/**
-	 * The base class.
+	 * The class name.
 	 * @var	string
 	 */
-	protected static $baseClass = '\ultimate\data\template\Template';
-	
-	/**
-	 * Resets the cache.
-	 */
-	public static function resetCache() {
-		TemplateCacheBuilder::getInstance()->reset();
-		MenuTemplateCacheBuilder::getInstance()->reset();
-		LayoutCacheBuilder::getInstance()->reset();
-	}
+	public $decoratorClassName = 'ultimate\data\content\SearchResultContent';
 }

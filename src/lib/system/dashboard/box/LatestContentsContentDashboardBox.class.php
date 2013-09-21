@@ -74,6 +74,11 @@ class LatestContentsContentDashboardBox extends AbstractContentDashboardBox {
 		// retrieve contents for dashboard box
 		$layout = LayoutHandler::getInstance()->getLayoutFromObjectData(0, 'index');
 		$template = TemplateHandler::getInstance()->getTemplate($layout->__get('layoutID'));
+		// if there is no such template, stop right here
+		if ($template === null) {
+			$this->fetched();
+			return;
+		}
 		$blocks = $template->__get('blocks');
 		
 		foreach ($blocks as $blockID => $block) {
@@ -95,6 +100,20 @@ class LatestContentsContentDashboardBox extends AbstractContentDashboardBox {
 		if (empty($this->contents)) {
 			$this->contents = LatestContentsCacheBuilder::getInstance()->getData(array(), 'contents');
 		}
+		
+		// apply number of contents
+		$remainingContents = array();
+		$numberOfItems = ULTIMATE_LATEST_CONTENTS_CONTENT_ITEMS;
+		$i = 0;
+		foreach ($this->contents as $contentID => $content) {
+			if ($i >= $numberOfItems) {
+				break;
+			}
+			
+			$remainingContents[$contentID] = $content;
+			$i++;
+		}
+		$this->contents = $remainingContents;
 		
 		foreach ($this->contents as $content) {
 			$content->authorProfile = new UserProfile($content->__get('author'));
