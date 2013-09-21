@@ -95,5 +95,6 @@
         	<eventname>settings</eventname>
         	<templatecode><![CDATA[{include file='__searchAreaSettings' application='ultimate'}]]></templatecode>
         </templatelistener>
+        <!-- /search area -->
 	</import>
 </data>
