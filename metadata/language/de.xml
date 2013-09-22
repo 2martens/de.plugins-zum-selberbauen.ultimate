@@ -777,6 +777,7 @@ Für die InlineEdit braucht man die gleichen Rechte um Inhalte zu schreiben, zu 
         <item name="ultimate.content.contentTitle"><![CDATA[Titel]]></item>
         <item name="ultimate.content.views"><![CDATA[Zugriffe]]></item>
         <item name="ultimate.content.searchContents"><![CDATA[Alle Inhalte durchsuchen]]></item>
+        <item name="ultimate.content.noComments"><![CDATA[Es wurden noch keine Kommentare verfasst.]]></item>
 	</category>
 	
 	<category name="ultimate.date">
