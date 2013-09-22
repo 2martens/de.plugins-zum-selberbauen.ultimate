@@ -192,8 +192,7 @@ $(function() {
 									</ul>
 								{hascontentelse}
 									<div class="containerPadding">
-										{* TODO: own lang variable *}
-										{lang}wcf.user.profile.content.wall.noEntries{/lang}
+										{lang}ultimate.content.noComments{/lang}
 									</div>
 								{/hascontent}
 							{/if}

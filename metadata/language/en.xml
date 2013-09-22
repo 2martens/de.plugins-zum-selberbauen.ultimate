@@ -763,6 +763,7 @@ For the InlineEdit you require the same rights to write, edit or delete contents
         <item name="ultimate.content.contentTitle"><![CDATA[Title]]></item>
         <item name="ultimate.content.views"><![CDATA[Views]]></item>
         <item name="ultimate.content.searchContents"><![CDATA[Search all contents]]></item>
+        <item name="ultimate.content.noComments"><![CDATA[There are no comments yet.]]></item>
 	</category>
 	
 	<category name="ultimate.date">
