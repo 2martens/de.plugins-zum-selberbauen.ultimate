@@ -382,6 +382,9 @@ class UltimateContentAddForm extends MessageForm {
 			$contentEditor->update($updateEntries);
 		}
 		
+		$objectAction = new ContentAction(array($returnValues['returnValues']), 'addToSearchIndex');
+		$objectAction->execute();
+		
 		// save tags
 		foreach ($this->tagsI18n as $languageID => $tags) {
 			if (empty($tags)) {
