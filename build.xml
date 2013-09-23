@@ -28,6 +28,16 @@
 			basedir="srcWCF" 
 		/>
 		
+		<!--beta 6 update tar -->
+		<tar destfile="metadata/files_update.b5.tar">
+			<tarfileset dir="src">
+				<exclude name="templates/**" />
+				<exclude name="acp/templates/**" />
+				<include name="**/UltimateContent*Form*" />
+				<include name="**/ContentAction*" />
+			</tarfileset>
+		</tar>
+		
 		<!-- beta 5 update tar -->
 		<tar destfile="metadata/files_update.b4.tar">
 			<tarfileset dir="src">
@@ -37,7 +47,7 @@
 				<include name="**/TagCloudDashboardBox*" />
 				<include name="**/TaggedPageListener*" />
 				<include name="**/ContentBlockType*" />
-				<include name="**/UltimateContentAdd*" />
+				<include name="**/UltimateContent*Form*" />
 				<include name="**/ContentAction*" />
 			</tarfileset>
 		</tar>
@@ -65,7 +75,7 @@
 				<include name="**/TagCloudDashboardBox*" />
 				<include name="**/TaggedPageListener*" />
 				<include name="**/ContentBlockType*" />
-				<include name="**/UltimateContentAdd*" />
+				<include name="**/UltimateContent*Form*" />
 				<include name="**/ContentAction*" />
 			</tarfileset>
 		</tar>
