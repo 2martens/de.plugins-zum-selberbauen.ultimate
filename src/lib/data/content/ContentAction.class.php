@@ -127,26 +127,33 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	}
 	
 	/**
-	 * Adds contents to search index.
+	 * Updates search index.
 	 */
-	public function addToSearchIndex() {
+	public function updateSearchIndex() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
 		// update search index
-		foreach ($this->objects as $content) {
+		foreach ($this->objects as $contentEditor) {
 			$languages = LanguageFactory::getInstance()->getLanguages();
+			SearchIndexManager::getInstance()->delete('de.plugins-zum-selberbauen.ultimate.content', array($contentEditor->__get('contentID')));
 			foreach ($languages as $languageID => $language) {
-				$text = $language->get($content->__get('contentText'), true);
-				$title = $language->get($content->__get('contentTitle'), true);
-				$isI18n = (!empty($text) || !empty($title));
+				$text = $language->get($contentEditor->__get('contentText'));
+				$title = $language->get($contentEditor->__get('contentTitle'));
+				$isI18n = (strpos($contentEditor->__get('contentText'), 'ultimate.content') !== false || strpos($contentEditor->__get('contentTitle'), 'ultimate.content') !== false);
 				SearchIndexManager::getInstance()->add(
 					'de.plugins-zum-selberbauen.ultimate.content',
-					$content->__get('contentID'),
-					(!empty($text) ? $text : $content->__get('contentText')),
-					(!empty($title) ? $title : $content->__get('contentTitle')),
-					$content->getTime(),
-					$content->getUserID(),
-					$content->getUsername(),
+					$contentEditor->__get('contentID'),
+					(!empty($text) ? $text : $contentEditor->__get('contentText')),
+					(!empty($title) ? $title : $contentEditor->__get('contentTitle')),
+					$contentEditor->getTime(),
+					$contentEditor->getUserID(),
+					$contentEditor->getUsername(),
 					($isI18n ? $languageID : null)
 				);
+				if (!$isI18n) {
+					break;
+				}
 			}
 		}
 	}
@@ -188,24 +195,6 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 			}
 			
 			$contentEditor->addMetaData($metaDescription, $metaKeywords);
-			
-			// update search index
-			$languages = LanguageFactory::getInstance()->getLanguages();
-			foreach ($languages as $languageID => $language) {
-				$text = $language->get($contentEditor->__get('contentText'), true);
-				$title = $language->get($contentEditor->__get('contentTitle'), true);
-				$isI18n = (!empty($text) || !empty($title));
-				SearchIndexManager::getInstance()->update(
-					'de.plugins-zum-selberbauen.ultimate.content',
-					$contentEditor->__get('contentID'),
-					(!empty($text) ? $text : $contentEditor->__get('contentText')),
-					(!empty($title) ? $title : $contentEditor->__get('contentTitle')),
-					$contentEditor->getTime(),
-					$contentEditor->getUserID(),
-					$contentEditor->getUsername(),
-					($isI18n ? $languageID : null)
-				);
-			}
 		}
 	}
 	
