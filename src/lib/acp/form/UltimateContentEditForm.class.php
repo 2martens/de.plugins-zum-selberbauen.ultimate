@@ -268,6 +268,9 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		// reset cache
 		TagObjectCacheBuilder::getInstance()->reset();
 		
+		$objectAction = new ContentAction(array($this->contentID), 'updateSearchIndex');
+		$objectAction->executeAction();
+		
 		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
 		$content = $contents[$this->contentID];
 		

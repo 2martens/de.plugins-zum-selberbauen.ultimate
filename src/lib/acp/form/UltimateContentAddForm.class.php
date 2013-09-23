@@ -382,9 +382,6 @@ class UltimateContentAddForm extends MessageForm {
 			$contentEditor->update($updateEntries);
 		}
 		
-		$objectAction = new ContentAction(array($returnValues['returnValues']), 'addToSearchIndex');
-		$objectAction->executeAction();
-		
 		// save tags
 		foreach ($this->tagsI18n as $languageID => $tags) {
 			if (empty($tags)) {
@@ -396,6 +393,9 @@ class UltimateContentAddForm extends MessageForm {
 		}
 		// reset cache
 		TagObjectCacheBuilder::getInstance()->reset();
+		
+		$objectAction = new ContentAction(array($returnValues['returnValues']->__get('contentID')), 'updateSearchIndex');
+		$objectAction->executeAction();
 		
 		// create recent activity event if published
 		if ($content->__get('status') == 3 && !in_array(Category::PAGE_CATEGORY, $this->categoryIDs)) {
