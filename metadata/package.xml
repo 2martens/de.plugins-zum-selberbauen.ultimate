@@ -8,7 +8,7 @@
 		<packagedescription language="de-informal"><![CDATA[Ein WCF-kompatibles CMS.]]></packagedescription>
 		
 		<isapplication>1</isapplication>
-		<version>1.0.0 Beta 5</version>
+		<version>1.0.0 Beta 6</version>
 		<date>2013-09-23</date>
 	</packageinformation>
 	
@@ -59,6 +59,10 @@
 		<instruction type="userNotificationEvent">userNotificationEvent.xml</instruction>
 		<instruction type="cronjob">cronjob.xml</instruction>
 		<!-- /xml and rest -->
+	</instructions>
+	
+	<instructions type="update" fromversion="1.0.0 Beta 5">
+		<instruction type="file">files_update.b5.tar</instruction>
 	</instructions>
 	
 	<instructions type="update" fromversion="1.0.0 Beta 4">
