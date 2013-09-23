@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the TaggedPageListener class.
+ * Contains the TypedTagCloud class.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -22,38 +22,36 @@
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
- * @subpackage	system.event.listener
+ * @subpackage	system.tagging
  * @category	Ultimate CMS
  */
-namespace ultimate\system\event\listener;
-use ultimate\system\tagging\TypedTagCloud;
-use wcf\system\event\IEventListener;
+namespace ultimate\system\tagging;
+use wcf\data\object\type\ObjectTypeCache;
 use wcf\system\tagging\TagCloud;
 use wcf\system\WCF;
-use wcf\util\ArrayUtil;
 
 /**
- * Replaces the typed tag cloud in TaggedPage with a typed tag cloud that only contains tags of the current user language.
+ * Overwrites the original TypedTagCloud constructor.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
- * @subpackage	system.event.listener
+ * @subpackage	system.tagging
  * @category	Ultimate CMS
  */
-class TaggedPageListener implements IEventListener {
+class TypedTagCloud extends \wcf\system\tagging\TypedTagCloud {
 	/**
-	 * Executes this listener.
-	 * 
-	 * @param	object	$eventObj
-	 * @param	string	$className
-	 * @param	string	$eventName
+	 * Contructs a new TypedTagCloud object.
+	 *
+	 * @param	string	$objectType
 	 */
-	public function execute($eventObj, $className, $eventName) {
-		if ($eventObj->objectType->objectType != 'de.plugins-zum-selberbauen.ultimate.content') return;
+	public function __construct($objectType) {
+		$objectTypeObj = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.tagging.taggableObject', $objectType);
+		$this->objectTypeIDs[] = $objectTypeObj->objectTypeID;
 		
-		$tagCloud = new TypedTagCloud('de.plugins-zum-selberbauen.ultimate.content');
-		$eventObj->tagCloud = $tagCloud;
+		$languageIDs = array(WCF::getLanguage()->__get('languageID'));
+		
+		TagCloud::__construct($languageIDs);
 	}
 }
