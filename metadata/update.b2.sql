@@ -1,1 +1,0 @@
-ALTER TABLE ultimate1_block ADD showOrder INT(10) NOT NULL DEFAULT '0' AFTER parameters; 

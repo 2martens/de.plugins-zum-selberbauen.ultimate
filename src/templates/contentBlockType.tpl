@@ -179,7 +179,7 @@ $(function() {
 							
 							{include file='__commentJavaScript' commentContainerID=$commentContainerID}
 							
-							{if $commentCanAdd}
+							{if $commentCanAdd[$contentID]}
 								<ul id="content-{$contentID}-comments" class="commentList containerList" data-can-add="true" data-object-id="{@$contentID}" data-object-type-id="{@$commentObjectTypeID}" data-comments="{@$commentList->countObjects()}" data-last-comment-time="{@$commentList->getMinCommentTime()}">
 									{include file='commentList' application='ultimate'}
 								</ul>
@@ -192,8 +192,7 @@ $(function() {
 									</ul>
 								{hascontentelse}
 									<div class="containerPadding">
-										{* TODO: own lang variable *}
-										{lang}wcf.user.profile.content.wall.noEntries{/lang}
+										{lang}ultimate.content.noComments{/lang}
 									</div>
 								{/hascontent}
 							{/if}

@@ -120,16 +120,22 @@ ULTIMATE.Tagging.MultipleLanguageInput = WCF.MultipleLanguageInput.extend({
 	_elementList: null,
 	
 	/**
-	 * Contains the input element.
-	 * @var	jQuery
-	 */
-	_input: null,
-	
-	/**
 	 * Contains base for hidden input fields.
 	 * @var	String
 	 */
 	_hiddenInput: '',
+	
+	/**
+	 * The hidden container.
+	 * @var	jQuery
+	 */
+	_hiddenContainer: null,
+	
+	/**
+	 * The input container.
+	 * @var	jQuery
+	 */
+	_inputContainer: null,
 	
 	/**
 	 * Initializes multiple language ability for given element id.
@@ -148,24 +154,26 @@ ULTIMATE.Tagging.MultipleLanguageInput = WCF.MultipleLanguageInput.extend({
 		this._listList = {};
 		this._wrapperList = {};
 		this._elementList = {};
-		this._input = $('#' + $.wcfEscapeID(inputID + 'Real'));
 		this._hiddenInput = '#' + $.wcfEscapeID(inputID);
+		this._hiddenContainer = $('#tagSearchHidden');
+		this._inputContainer = $('#tagSearchWrap');
 		
 		for (var $languageID in this._availableLanguages) {
 			$element = $('#' + $.wcfEscapeID(elementID + $languageID));
 			this._elementList[$languageID] = $element;
+			$(this._hiddenInput + 'Wrap' + $languageID).detach().appendTo(this._hiddenContainer);
 		}
 		
 		// default to current user language
 		this._languageID = LANGUAGE_ID;
 		this._element = this._elementList[this._languageID];
+		$(this._hiddenInput + 'Wrap' + this._languageID).detach().appendTo(this._inputContainer);
 		if (this._element.length == 0) {
 			console.debug("[WCF.MultipleLanguageInput] element id '" + elementID + "' is unknown");
 			return;
 		}
 		$('.tagContainer').hide();
 		$('#tagContainer' + this._languageID).show();
-		$(this._hiddenInput + this._languageID).hide();
 		
 		// build selection handler
 		var $enableOnInit = ($.getLength(this._values) > 0) ? true : false;
@@ -174,8 +182,7 @@ ULTIMATE.Tagging.MultipleLanguageInput = WCF.MultipleLanguageInput.extend({
 		
 		// listen for submit event
 		this._element.parents('form').submit($.proxy(this._submit, this));
-		this._input.keyup($.proxy(this._inputChange, this));
-		this._input.keydown($.proxy(this._inputKeydown, this));
+		$(this._hiddenInput + this._languageID).keydown($.proxy(this._inputKeydown, this));
 		
 		this._didInit = true;
 	},
@@ -184,20 +191,7 @@ ULTIMATE.Tagging.MultipleLanguageInput = WCF.MultipleLanguageInput.extend({
 	 * Sets the necessary variables.
 	 */
 	_setVariables: function() {
-//		this._button = this._buttonList[this._languageID];
-//		this._list = this._listList[this._languageID];
 		this._element = this._elementList[this._languageID];
-	},
-	
-	/**
-	 * Called when input changes.
-	 * 
-	 * @param	{jQuery}	event
-	 */
-	_inputChange: function(event) {
-		var content = this._input.val();
-		console.log('inputChange: ' + content);
-		$(this._hiddenInput + this._languageID).val(content);
 	},
 	
 	/**
@@ -206,12 +200,9 @@ ULTIMATE.Tagging.MultipleLanguageInput = WCF.MultipleLanguageInput.extend({
 	 * @param	{jQuery}	event
 	 */
 	_inputKeydown: function(event) {
-		var position = this._input.getCaret();
-		$(this._hiddenInput + this._languageID).setCaret(position);
-		$(this._hiddenInput + this._languageID).trigger(event);
-		this._input.focus();
+		$(this._hiddenInput + this._languageID).focus();
 		if (event && event.which == 188) {
-			this._input.val('');
+			$(this._hiddenInput + this._languageID).val('');
 		}
 	},
 	
@@ -221,8 +212,7 @@ ULTIMATE.Tagging.MultipleLanguageInput = WCF.MultipleLanguageInput.extend({
 	 * @param	{Boolean}		enableOnInit
 	 */
 	_prepareElement: function(enableOnInit) {
-		this._input.wrap('<div class="dropdown preInput" />');
-		var $wrapper = this._input.parent();
+		var $wrapper = $('#tagSearchWrap');
 		this._button = $('<p class="button dropdownToggle"><span>' + WCF.Language.get('wcf.global.button.disabledI18n') + '</span></p>').prependTo($wrapper);
 		
 		// insert list
@@ -269,14 +259,13 @@ ULTIMATE.Tagging.MultipleLanguageInput = WCF.MultipleLanguageInput.extend({
 		
 		// save current value
 		$('#tagContainer' + this._languageID).hide();
+		$(this._hiddenInput + 'Wrap' + this._languageID).detach().appendTo(this._hiddenContainer);
 		
 		// set new language
 		this._languageID = parseInt($button.data('languageID'));
 		this._setVariables();
 		$('#tagContainer' + this._languageID).show();
-		$(this._hiddenInput + this._languageID).hide();
-		
-//		this._initDropdown(true);
+		$(this._hiddenInput + 'Wrap' + this._languageID).detach().appendTo(this._inputContainer);
 		
 		$button = this._list.children('li').filter(function() {
 		    return $(this).data('languageID') && $(this).data('languageID') == this._languageID;
@@ -291,22 +280,24 @@ ULTIMATE.Tagging.MultipleLanguageInput = WCF.MultipleLanguageInput.extend({
 		
 		// close selection and set focus on input element
 		if (this._didInit) {
-			this._input.blur().focus();
+			$(this._inputHidden + this._languageID).blur().focus();
 		}
 	},
 	
-//	/**
-//	 * Shows the language selection.
-//	 */
-//	_showSelection: function() {
-//		if (this._isEnabled) {
-//			// display status for each language
-//			this._list.children('li').each($.proxy(function(index, listItem) {
-//				var $listItem = $(listItem);
-//				var $languageID = $listItem.data('languageID');
-//			}, this));
-//		}
-//	},
+	/**
+	 * Handles dropdown actions.
+	 * 
+	 * @param	string		containerID
+	 * @param	string		action
+	 */
+	_handleAction: function(containerID, action) {
+		if (action === 'open') {
+			this._enable();
+		}
+		else {
+			this._closeSelection();
+		}
+	},
 	
 	/**
 	 * Prepares language variables on before submit.
@@ -337,7 +328,46 @@ ULTIMATE.Tagging.TagList = WCF.Tagging.TagList.extend({
 	 */
 	init: function(itemListSelector, searchInputSelector, maxLength, languageID) {
 		this._languageID = languageID;
-		this._super(itemListSelector, searchInputSelector, maxLength);
+		this._allowCustomInput = true;
+		this._maxLength = maxLength;
+		
+		this._itemList = $(itemListSelector);
+		this._searchInput = $(searchInputSelector);
+		this._data = { };
+		
+		if (!this._itemList.length || !this._searchInput.length) {
+			console.debug("[WCF.EditableItemList] Item list and/or search input do not exist, aborting.");
+			return;
+		}
+		
+		this._objectID = this._getObjectID();
+		this._objectTypeID = this._getObjectTypeID();
+		
+		// bind item listener
+		this._itemList.find('.jsEditableItem').click($.proxy(this._click, this));
+		
+		// create item list
+		if (!this._itemList.children('ul').length) {
+			$('<ul />').appendTo(this._itemList);
+		}
+		this._itemList = this._itemList.children('ul');
+		
+		// bind form submit
+		this._form = this._itemList.parents('form').submit($.proxy(this._submit, this));
+		
+		if (this._allowCustomInput) {
+			var self = this;
+			this._searchInput.keydown($.proxy(this._keyDown, this)).on('paste', function() {
+				setTimeout(function() { self._onPaste(); }, 100);
+			});
+		}
+		
+		this._data = [ ];
+		this._search = new ULTIMATE.Tagging.TagSearch(searchInputSelector, this._languageID, $.proxy(this.addItem, this));
+		this._itemList.addClass('tagList');
+		
+		// block form submit through [ENTER]
+		this._searchInput.parents('.dropdown').data('preventSubmit', true);
 	},
 	
 	/**
@@ -426,4 +456,213 @@ ULTIMATE.Tagging.TagList = WCF.Tagging.TagList.extend({
 		};
 		$('<input type="hidden" name="tags_i18n[' + this._languageID + ']" value="' + data.join(', ') + '" />').appendTo(this._form);
 	}
+});
+
+/**
+ * Multiple language tag search.
+ * 
+ * @see	WCF.Tagging.TagSearch
+ */
+ULTIMATE.Tagging.TagSearch = WCF.Tagging.TagSearch.extend({
+	/**
+	 * @see	WCF.Search.Base._className
+	 */
+	_className: 'ultimate\\data\\tag\\TagAction',
+	
+	/**
+	 * The language id.
+	 * @var	Integer
+	 */
+	_languageID: 0,
+	
+	/**
+	 * Initializes the Ultimate Tag Search.
+	 * 
+	 * @param	{String}	searchInput
+	 * @param	{Intger}	languageID
+	 * @param	{Function}	callback
+	 * @param	{Array}		excludedSearchValues
+	 * @param	{Boolean}	commaSeperated
+	 * 
+	 * @see	WCF.Search.Base.init()
+	 */
+	init: function(searchInput, languageID, callback, excludedSearchValues, commaSeperated) {
+		if (callback !== null && callback !== undefined && !$.isFunction(callback)) {
+			console.debug("[ULTIMATE.Tagging.TagSearch] The given callback is invalid, aborting.");
+			return;
+		}
+		
+		this._languageID = languageID;
+		
+		this._callback = (callback) ? callback : null;
+		this._excludedSearchValues = [];
+		if (excludedSearchValues) {
+			this._excludedSearchValues = excludedSearchValues;
+		}
+		
+		this._searchInput = $(searchInput);
+		if (!this._searchInput.length) {
+			console.debug("[ULTIMATE.Tagging.TagSearch] Selector '" + searchInput + "' for search input is invalid, aborting.");
+			return;
+		}
+		
+		this._searchInput.keydown($.proxy(this._keyDown, this)).keyup($.proxy(this._keyUp, this));
+		this._list = $('<ul class="dropdownMenu" />').insertAfter(this._searchInput);
+		
+		this._commaSeperated = (commaSeperated) ? true : false;
+		this._oldSearchString = [ ];
+		
+		this._itemCount = 0;
+		this._itemIndex = -1;
+		
+		this._proxy = new WCF.Action.Proxy({
+			showLoadingOverlay: false,
+			success: $.proxy(this._success, this),
+			autoAbortPrevious: true
+		});
+		
+		if (this._searchInput.is('input')) {
+			this._searchInput.attr('autocomplete', 'off');
+		}
+		
+		this._searchInput.blur($.proxy(this._blur, this));
+		
+		WCF.Dropdown.initDropdownFragment(this._searchInput.parent(), this._list);
+	},
+	
+	/**
+	 * Blocks execution of 'Enter' event.
+	 * 
+	 * @param	{Object}	event
+	 */
+	_keyDown: function(event) {
+		if (event.which === $.ui.keyCode.ENTER) {
+			var $dropdown = this._searchInput.parents('.dropdown');
+			
+			if ($dropdown.data('disableAutoFocus')) {
+				if (this._itemIndex !== -1) {
+					event.preventDefault();
+				}
+			}
+			else if ($dropdown.data('preventSubmit') || this._itemIndex !== -1) {
+				event.preventDefault();
+			}
+		}
+	},
+	
+	/**
+	 * Performs a search upon key up.
+	 * 
+	 * @param	object		event
+	 */
+	_keyUp: function(event) {
+		// handle arrow keys and return key
+		switch (event.which) {
+			case 37: // arrow-left
+			case 39: // arrow-right
+				return;
+			break;
+			
+			case 38: // arrow up
+				this._selectPreviousItem();
+				return;
+			break;
+			
+			case 40: // arrow down
+				this._selectNextItem();
+				return;
+			break;
+			
+			case 13: // return key
+				return this._selectElement(event);
+			break;
+		}
+		
+		var $content = this._getSearchString(event);
+		if ($content === '') {
+			this._clearList(true);
+		}
+		else if ($content.length >= this._triggerLength) {
+			var $parameters = {
+				data: {
+					excludedSearchValues: this._excludedSearchValues,
+					searchString: $content,
+					languageID: this._languageID
+				}
+			};
+			
+			this._searchInput.parents('.searchBar').addClass('loading');
+			this._proxy.setOption('data', {
+				actionName: 'getSearchResultList',
+				className: this._className,
+				interfaceName: 'wcf\\data\\ISearchAction',
+				parameters: this._getParameters($parameters)
+			});
+			this._proxy.sendRequest();
+		}
+		else {
+			// input below trigger length
+			this._clearList(false);
+		}
+	},
+	
+	/**
+	 * Evalutes search results.
+	 * 
+	 * @param	{Object}	data
+	 * @param	{String}	textStatus
+	 * @param	{jQuery}	jqXHR
+	 */
+	_success: function(data, textStatus, jqXHR) {
+		this._clearList(false);
+		this._searchInput.parents('.searchBar').removeClass('loading');
+		
+		if ($.getLength(data.returnValues)) {
+			for (var $i in data.returnValues) {
+				var $item = data.returnValues[$i];
+				this._createListItem($item);
+			}
+		}
+		else if (!this._handleEmptyResult()) {
+			return;
+		}
+		
+		WCF.CloseOverlayHandler.addCallback('WCF.Search.Base', $.proxy(function() { this._clearList(); }, this));
+		
+		var $containerID = this._searchInput.parents('.dropdown').wcfIdentify();
+		if (!WCF.Dropdown.getDropdownMenu($containerID).hasClass('dropdownOpen')) {
+			WCF.Dropdown.toggleDropdown($containerID);
+		}
+		
+		// pre-select first item
+		this._itemIndex = -1;
+		if (!WCF.Dropdown.getDropdown($containerID).data('disableAutoFocus')) {
+			this._selectNextItem();
+		}
+		
+		this._searchInput.focus();
+	},
+	
+	/**
+	 * Closes the suggestion list and clears search input on demand.
+	 * 
+	 * @param	{Boolean}	clearSearchInput
+	 */
+	_clearList: function(clearSearchInput) {
+		if (clearSearchInput && !this._commaSeperated) {
+			this._searchInput.val('');
+		}
+		
+		// close dropdown
+		WCF.Dropdown.getDropdown(this._searchInput.parents('.dropdown').wcfIdentify()).removeClass('dropdownOpen');
+		WCF.Dropdown.getDropdownMenu(this._searchInput.parents('.dropdown').wcfIdentify()).removeClass('dropdownOpen');
+		
+		this._list.end().empty();
+		
+		WCF.CloseOverlayHandler.removeCallback('WCF.Search.Base');
+		
+		// reset item navigation
+		this._itemCount = 0;
+		this._itemIndex = -1;
+	},
 });

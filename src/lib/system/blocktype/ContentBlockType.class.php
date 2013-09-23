@@ -167,6 +167,12 @@ class ContentBlockType extends AbstractBlockType {
 	protected $attachmentList = array();
 	
 	/**
+	 * Array of permissions for adding comments
+	 * @var boolean[]
+	 */
+	protected $canAddComment = array();
+	
+	/**
 	 * Reads the necessary data.
 	 * 
 	 * @see IBlockType::readData()
@@ -441,6 +447,8 @@ class ContentBlockType extends AbstractBlockType {
 		$this->commentManager = $objectType->getProcessor();
 		foreach ($this->contents as $contentID => $content) {
 			$this->commentLists[$contentID] = CommentHandler::getInstance()->getCommentList($this->commentManager, $this->objectTypeID, $content->__get('contentID'));
+			// read permissions
+			$this->canAddComment[$contentID] = $this->commentManager->canAdd($contentID);
 		}
 		
 		// fetch likes
@@ -627,7 +635,7 @@ class ContentBlockType extends AbstractBlockType {
 			'contents' => $this->contents,
 			// comments
 			'commentObjectTypeID' => $this->objectTypeID,
-			'commentCanAdd' => $this->commentManager->canAdd(WCF::getUser()->__get('userID')),
+			'commentCanAdd' => $this->canAddComment,
 			'commentsPerPage' => $this->commentManager->getCommentsPerPage(),
 			'commentLists' => $this->commentLists,
 			//like data
