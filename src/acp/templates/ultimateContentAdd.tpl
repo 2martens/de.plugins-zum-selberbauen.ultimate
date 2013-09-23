@@ -89,7 +89,6 @@
 			</dl>
 			
 			{* WCF Tagging *}
-			<!--<div id="tagContainerContainer">-->
 			{foreach from=$availableLanguages key=languageID item=languageName}
 				{if $tagsI18n[$languageID]|isset}
 					{include file='tagInput' application='ultimate' tags=$tagsI18n[$languageID] languageID=$languageID tagInputSuffix=$languageID}
@@ -97,13 +96,22 @@
 					{include file='tagInput' application='ultimate' languageID=$languageID tagInputSuffix=$languageID}
 				{/if}
 			{/foreach}
+			
 			<dl id="tagContainerReal" class="jsOnly">
 				<dd>
-					<input id="tagSearchInputReal" type="text" value="" class="long" />
+					<div id="tagSearchWrap" class="dropdown preInput">
+						{foreach from=$availableLanguages key=languageID item=languageName}
+						<span id="tagSearchInputWrap{$languageID}" class="dropdown">
+							<input id="tagSearchInput{$languageID}" class="long" name="tagSearchInput{$languageID}" type="text" value="" />
+						</span>
+						{/foreach}
+					</div>
+					<div id="tagSearchHidden" class="ultimateHidden">
+					
+					</div>
 					<small>{lang}wcf.tagging.tags.description{/lang}</small>
 				</dd>
 			</dl>
-			<!--</div>-->
 			
 			<script data-relocate="true" type="text/javascript">
 			/* <![CDATA[ */
