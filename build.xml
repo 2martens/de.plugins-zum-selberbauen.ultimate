@@ -29,7 +29,7 @@
 		/>
 		
 		<!-- beta 5 update tar -->
-		<tar destfile="metadata/files_update.b3.tar">
+		<tar destfile="metadata/files_update.b4.tar">
 			<tarfileset dir="src">
 				<exclude name="templates/**" />
 				<exclude name="acp/templates/**" />
