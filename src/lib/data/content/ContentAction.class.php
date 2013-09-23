@@ -82,6 +82,12 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	protected $permissionsUpdate = array('admin.content.ultimate.canEditContent');
 	
 	/**
+	 * disallow requests for specified methods if the origin is not the ACP
+	 * @var	string[]
+	 */
+	protected $requireACP = array('create', 'addToSearchIndex', 'delete');
+	
+	/**
 	 * current content object
 	 * @var	\ultimate\data\content\Content
 	 */
@@ -117,24 +123,32 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		$metaKeywords = (isset($this->parameters['metaKeywords'])) ? $this->parameters['metaKeywords'] : '';
 		$contentEditor->addMetaData($metaDescription, $metaKeywords);
 		
-		// update search index
-		$languages = LanguageFactory::getInstance()->getLanguages();
-		foreach ($languages as $languageID => $language) {
-			$text = $language->get($content->__get('contentText'), true);
-			$title = $language->get($content->__get('contentTitle'), true);
-			$isI18n = (!empty($text) || !empty($title));
-			SearchIndexManager::getInstance()->add(
-				'de.plugins-zum-selberbauen.ultimate.content', 
-				$content->__get('contentID'), 
-				(!empty($text) ? $text : $content->__get('contentText')),
-				(!empty($title) ? $title : $content->__get('contentTitle')),
-				$content->getTime(),
-				$content->getUserID(),
-				$content->getUsername(),
-				($isI18n ? $languageID : null)
-			);
-		}
 		return $content;
+	}
+	
+	/**
+	 * Adds contents to search index.
+	 */
+	public function addToSearchIndex() {
+		// update search index
+		foreach ($this->objects as $content) {
+			$languages = LanguageFactory::getInstance()->getLanguages();
+			foreach ($languages as $languageID => $language) {
+				$text = $language->get($content->__get('contentText'), true);
+				$title = $language->get($content->__get('contentTitle'), true);
+				$isI18n = (!empty($text) || !empty($title));
+				SearchIndexManager::getInstance()->add(
+					'de.plugins-zum-selberbauen.ultimate.content',
+					$content->__get('contentID'),
+					(!empty($text) ? $text : $content->__get('contentText')),
+					(!empty($title) ? $title : $content->__get('contentTitle')),
+					$content->getTime(),
+					$content->getUserID(),
+					$content->getUsername(),
+					($isI18n ? $languageID : null)
+				);
+			}
+		}
 	}
 	
 	/**
