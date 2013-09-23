@@ -92,6 +92,21 @@ class TagCloudDashboardBox extends AbstractSidebarDashboardBox {
 		}
 		
 		$tags = $this->tagCloud->getTags();
+		$tmpTags = $tags;
+		// remove all tags of contents that do not belong to the current language
+		$languageID = WCF::getLanguage()->__get('languageID');
+		foreach ($tmpTags as $tag) {
+			foreach ($this->tagIDsToObjectTypeID as $objectTypeID => $tagIDs) {
+				if (in_array($tag->__get('tagID'), $tagIDs)) {
+					$objectType = ObjectTypeCache::getInstance()->getObjectType($objectTypeID);
+					if ($objectType->__get('objectType') == 'de.plugins-zum-selberbauen.ultimate.content' && $languageID != $tag->__get('languageID')) {
+						unset($tags[$tag->__get('name')]);
+					}
+				}
+			}
+			
+		}
+		
 		$objectTypeToTagID = array();
 		foreach ($tags as $tag) {
 			$found = 0;
