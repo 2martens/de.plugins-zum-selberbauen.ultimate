@@ -28,6 +28,20 @@
 			basedir="srcWCF" 
 		/>
 		
+		<!-- beta 5 update tar -->
+		<tar destfile="metadata/files_update.b3.tar">
+			<tarfileset dir="src">
+				<exclude name="templates/**" />
+				<exclude name="acp/templates/**" />
+				<include name="**/TypedTagCloud*" />
+				<include name="**/TagCloudDashboardBox*" />
+				<include name="**/TaggedPageListener*" />
+				<include name="**/ContentBlockType*" />
+				<include name="**/UltimateContentAdd*" />
+				<include name="**/ContentAction*" />
+			</tarfileset>
+		</tar>
+		
 		<!-- beta 4 update tars -->
 		<tar destfile="metadata/templates_update.b3.tar">
 			<tarfileset dir="src/templates">
@@ -47,6 +61,12 @@
 				<include name="**/ULTIMATE.Tagging.*" />
 				<include name="**/TagAction*" />
 				<include name="**/ContentBlockType*" />
+				<include name="**/TypedTagCloud*" />
+				<include name="**/TagCloudDashboardBox*" />
+				<include name="**/TaggedPageListener*" />
+				<include name="**/ContentBlockType*" />
+				<include name="**/UltimateContentAdd*" />
+				<include name="**/ContentAction*" />
 			</tarfileset>
 		</tar>
 	</target>
