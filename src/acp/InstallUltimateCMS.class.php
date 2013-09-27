@@ -26,6 +26,7 @@
  */
 namespace ultimate\acp;
 use ultimate\data\blocktype\BlockTypeAction;
+use wcf\data\page\menu\item\PageMenuItemAction;
 use wcf\system\cache\builder\EventListenerCacheBuilder;
 use wcf\system\event\EventHandler;
 use wcf\system\io\File;
@@ -41,6 +42,7 @@ use wcf\system\Regex;
  * @category	Ultimate CMS
  */
 final class InstallUltimateCMS {
+	protected $packageID = 0;
 	
 	/**
 	 * Creates a new InstallUltimateCMS object.
@@ -54,21 +56,21 @@ final class InstallUltimateCMS {
 	 */
 	protected function install() {
 		require_once(dirname(dirname(__FILE__)).'/config.inc.php');
+		// workaround for standalone installation (PACKAGE_ID is 0)
+		preg_match('/packageID (\d+)/', file_get_contents(dirname(dirname(__FILE__)).'/config.inc.php'), $matches);
+		$this->packageID = $matches[1];
 		$this->addDefaultBlockTypes();
+		$this->deactivateMenuItem();
 	}
 	
 	/**
 	 * Adds the default block types.
 	 */
 	protected function addDefaultBlockTypes() {
-		// workaround for standalone installation (PACKAGE_ID is 0)
-		preg_match('/packageID (\d+)/', file_get_contents(dirname(dirname(__FILE__)).'/config.inc.php'), $matches);
-		$packageID = $matches[1];
-		
 		// insert default block types
 		$parameters = array(
 			'data' => array(
-				'packageID' => $packageID,
+				'packageID' => $this->packageID,
 				'blockTypeName' => 'ultimate.blocktype.content',
 				'blockTypeClassName' => 'ultimate\system\blocktype\ContentBlockType'
 			)
@@ -92,6 +94,22 @@ final class InstallUltimateCMS {
 		);
 		$objectAction = new BlockTypeAction(array(), 'create', $parameters);
 		$objectAction->executeAction();
+	}
+	
+	/**
+	 * Deactivates the created menu item.
+	 */
+	protected function deactivateMenuItem() {
+		$sql = 'UPDATE wcf'.WCF_N.'_page_menu_item
+		        SET    isDisabled = ?
+		        WHERE  menuItem = ?
+		        AND    packageID = ?';
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array(
+			1,
+			'ultimate.header.menu.index',
+			$this->packageID
+		));
 	}
 	
 }
