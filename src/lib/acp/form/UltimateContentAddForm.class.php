@@ -615,7 +615,7 @@ class UltimateContentAddForm extends MessageForm {
 	 * @throws \wcf\system\exception\UserInputException
 	 */
 	protected function validateTags() {
-		if (!I18nHandler::getInstance()->validateValue('tags', true)) {
+		if (!I18nHandler::getInstance()->validateValue('tags', true, true)) {
 			throw new UserInputException('tags');
 		}
 		
