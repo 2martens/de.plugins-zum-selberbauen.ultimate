@@ -108,7 +108,7 @@ class TaggedContent extends TaggableContent implements ITagged {
 				$this->__get('contentID'),
 				array($languageID)
 			);
-			if (!empty($tmpTags)) $tags[$languageID] = $tmpTags;
+			$tags[$languageID] = $tmpTags;
 		}
 		return $tags;
 	}
