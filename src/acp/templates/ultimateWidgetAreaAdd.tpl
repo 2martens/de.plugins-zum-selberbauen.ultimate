@@ -63,6 +63,7 @@
 		{@SID_INPUT_TAG}
 		<input type="hidden" name="action" value="{@$action}" />
 		{if $widgetAreaID|isset}<input type="hidden" name="id" value="{@$widgetAreaID}" />{/if}
+		{@SECURITY_TOKEN_INPUT_TAG}
 	</div>
 </form>
 

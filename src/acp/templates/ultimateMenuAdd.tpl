@@ -134,6 +134,7 @@
 		{@SID_INPUT_TAG}
 		<input type="hidden" name="action" value="{@$action}" />
 		{if $menuID|isset}<input type="hidden" name="id" value="{@$menuID}" />{/if}
+		{@SECURITY_TOKEN_INPUT_TAG}
 	</div>
 </form>
 {if $action == 'edit'}
