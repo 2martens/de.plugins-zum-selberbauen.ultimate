@@ -28,55 +28,11 @@
 			basedir="srcWCF" 
 		/>
 		
-		<!--beta 6 update tar -->
-		<tar destfile="metadata/files_update.b5.tar">
-			<tarfileset dir="src">
-				<exclude name="templates/**" />
-				<exclude name="acp/templates/**" />
-				<include name="**/UltimateContent*Form*" />
-				<include name="**/ContentAction*" />
-			</tarfileset>
-		</tar>
-		
-		<!-- beta 5 update tar -->
-		<tar destfile="metadata/files_update.b4.tar">
-			<tarfileset dir="src">
-				<exclude name="templates/**" />
-				<exclude name="acp/templates/**" />
-				<include name="**/TypedTagCloud*" />
-				<include name="**/TagCloudDashboardBox*" />
-				<include name="**/TaggedPageListener*" />
-				<include name="**/ContentBlockType*" />
-				<include name="**/UltimateContent*Form*" />
-				<include name="**/ContentAction*" />
-			</tarfileset>
-		</tar>
-		
-		<!-- beta 4 update tars -->
-		<tar destfile="metadata/templates_update.b3.tar">
-			<tarfileset dir="src/templates">
-				<include name="contentBlockType.tpl" />
-			</tarfileset>
-		</tar>
-		<tar destfile="metadata/acptemplates_update.b3.tar">
+		<!--beta 7 update tar -->
+		<tar destfile="metadata/acptemplates_update.b6.tar">
 			<tarfileset dir="src/acp/templates">
-				<include name="tagInput.tpl" />
-				<include name="ultimateContentAdd.tpl" />
-			</tarfileset>
-		</tar>
-		<tar destfile="metadata/files_update.b3.tar">
-			<tarfileset dir="src">
-				<exclude name="templates/**" />
-				<exclude name="acp/templates/**" />
-				<include name="**/ULTIMATE.Tagging.*" />
-				<include name="**/TagAction*" />
-				<include name="**/ContentBlockType*" />
-				<include name="**/TypedTagCloud*" />
-				<include name="**/TagCloudDashboardBox*" />
-				<include name="**/TaggedPageListener*" />
-				<include name="**/ContentBlockType*" />
-				<include name="**/UltimateContent*Form*" />
-				<include name="**/ContentAction*" />
+				<include name="*Add.tpl" />
+				<include name="*AssignToCategory.tpl" />
 			</tarfileset>
 		</tar>
 	</target>
