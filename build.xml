@@ -35,6 +35,16 @@
 				<include name="*AssignToCategory.tpl" />
 			</tarfileset>
 		</tar>
+		<tar destfile="metadata/files_update.b6.tar">
+			<tarfileset dir="src">
+				<exclude name="templates/**" />
+				<exclude name="acp/templates/**" />
+				<include name="acp/InstallUltimateCMS.class.php" />
+				<include name="lib/acp/form/UltimateContentAddForm.class.php" />
+				<include name="lib/data/content/ContentAction.class.php" />
+				<include name="lib/data/content/TaggedContent.class.php" />
+			</tarfileset>
+		</tar>
 	</target>
 	
 	<target name="build" depends="pack" description="Generates the package archive.">
