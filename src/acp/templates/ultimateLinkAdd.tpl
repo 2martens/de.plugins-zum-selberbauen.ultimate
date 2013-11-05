@@ -102,6 +102,7 @@
 		{@SID_INPUT_TAG}
 		<input type="hidden" name="action" value="{@$action}" />
 		{if $linkID|isset}<input type="hidden" name="id" value="{@$linkID}" />{/if}
+		{@SECURITY_TOKEN_INPUT_TAG}
 	</div>
 </form>
 
