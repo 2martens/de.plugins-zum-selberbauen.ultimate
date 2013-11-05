@@ -207,6 +207,7 @@
 		<input type="hidden" name="startTime" value="{@$startTime}" />
 		<input type="hidden" name="action" value="{@$action}" />
 		{if $pageID|isset}<input type="hidden" name="id" value="{@$pageID}" />{/if}
+		{@SECURITY_TOKEN_INPUT_TAG}
 	</div>
 </form>
 

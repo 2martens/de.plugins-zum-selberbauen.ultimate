@@ -202,6 +202,7 @@
 		{@SID_INPUT_TAG}
 		<input type="hidden" name="action" value="{@$action}" />
 		{if $templateID|isset}<input type="hidden" name="id" value="{@$templateID}" />{/if}
+		{@SECURITY_TOKEN_INPUT_TAG}
 	</div>
 </form>
 <form method="post">

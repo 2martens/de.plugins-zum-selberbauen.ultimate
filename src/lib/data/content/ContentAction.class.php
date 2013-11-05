@@ -85,7 +85,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	 * disallow requests for specified methods if the origin is not the ACP
 	 * @var	string[]
 	 */
-	protected $requireACP = array('create', 'addToSearchIndex', 'delete');
+	protected $requireACP = array('create', 'updateSearchIndex', 'delete');
 	
 	/**
 	 * current content object

@@ -197,6 +197,7 @@
 		{foreach from=$layouts key=layoutID item=layout}
 			<input type="hidden" id="layout{$layoutID}-hidden" name="layout{$layoutID}" value="{if $layout->template|isset}{$layout->template->templateID}{else}0{/if}" />
 		{/foreach}
+		{@SECURITY_TOKEN_INPUT_TAG}
 	</div>
 </form>
 
