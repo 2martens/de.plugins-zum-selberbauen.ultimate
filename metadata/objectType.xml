@@ -160,6 +160,19 @@
 			<definitionname>com.woltlab.wcf.importer</definitionname>
 			<classname><![CDATA[ultimate\system\importer\ContentCommentResponseImporter]]></classname>
 		</type>
+		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.page</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[ultimate\system\importer\PageImporter]]></classname>
+		</type>
 		<!-- /Importers -->
+		
+		<!-- Exporters -->
+		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.exporter.wordpress3x</name>
+			<definitionname>com.woltlab.wcf.exporter</definitionname>
+			<classname>ultimate\system\exporter\Wordpress3xExporter</classname>
+		</type>
+		<!-- /Exporters -->
     </import>
 </data>
