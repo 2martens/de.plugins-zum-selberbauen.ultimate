@@ -90,7 +90,7 @@
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.recentActivityEvent.content</name>
             <definitionname>com.woltlab.wcf.user.recentActivityEvent</definitionname>
-            <classname>ultimate\system\user\activity\event\ContentUserActivityEvent</classname>
+            <classname><![CDATA[ultimate\system\user\activity\event\ContentUserActivityEvent]]></classname>
         </type>
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.content.comment.recentActivityEvent</name>
@@ -124,7 +124,7 @@
         <type>
             <name>de.plugins-zum-selberbauen.ultimate.likeableContent</name>
             <definitionname>com.woltlab.wcf.like.likeableObject</definitionname>
-            <classname>ultimate\data\content\LikeableContentProvider</classname>
+            <classname><![CDATA[ultimate\data\content\LikeableContentProvider]]></classname>
         </type>
         <!-- /Like -->
         
@@ -132,7 +132,7 @@
 		<type>
 			<name>de.plugins-zum-selberbauen.ultimate.content</name>
 			<definitionname>com.woltlab.wcf.attachment.objectType</definitionname>
-			<classname>ultimate\system\attachment\ContentAttachmentObjectType</classname>
+			<classname><![CDATA[ultimate\system\attachment\ContentAttachmentObjectType]]></classname>
 		</type>
 		<!-- /Attachments -->
 		
@@ -140,8 +140,26 @@
 		<type>
 			<name>de.plugins-zum-selberbauen.ultimate.content</name>
 			<definitionname>com.woltlab.wcf.searchableObjectType</definitionname>
-			<classname>ultimate\system\search\ContentSearch</classname>
+			<classname><![CDATA[ultimate\system\search\ContentSearch]]></classname>
 		</type>
 		<!-- /Search -->
+		
+		<!-- Importers -->
+		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.content</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[ultimate\system\importer\ContentImporter]]></classname>
+		</type>
+		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.content.comment</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[ultimate\system\importer\ContentCommentImporter]]></classname>
+		</type>
+		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.content.comment.response</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[ultimate\system\importer\ContentCommentResponseImporter]]></classname>
+		</type>
+		<!-- /Importers -->
     </import>
 </data>
