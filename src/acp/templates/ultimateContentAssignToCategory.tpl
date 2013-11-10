@@ -5,9 +5,7 @@
 	<h1>{lang}wcf.acp.ultimate.content.assignToCategory{/lang}</h1>
 </header>
 
-{if $errorField}
-	<p class="error">{lang}wcf.global.form.error{/lang}</p>
-{/if}
+{include file='formError'}
 
 <form method="post" action="{link application='ultimate' controller='UltimateContentAssignToCategory'}{/link}">
 	<div class="container containerPadding marginTop shadow">

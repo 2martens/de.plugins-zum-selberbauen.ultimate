@@ -13,9 +13,7 @@
 	<h1>{lang}wcf.acp.ultimate.page.{@$action}{/lang}</h1>
 </header>
 
-{if $errorField}
-	<p class="error">{lang}wcf.global.form.error{/lang}</p>
-{/if}
+{include file='formError'}
 
 {if $success|isset}
 	<p class="success">{lang}wcf.global.success.{@$action}{/lang}</p>
