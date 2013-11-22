@@ -62,7 +62,8 @@ class ContentImporter extends AbstractImporter {
 		}
 		
 		$action = new ContentAction(array(), 'create', array(
-			'data' => $data
+			'data' => $data,
+			'categories' => $additionalData['categories']
 		));
 		$returnValues = $action->executeAction();
 		$content = $returnValues['returnValues'];

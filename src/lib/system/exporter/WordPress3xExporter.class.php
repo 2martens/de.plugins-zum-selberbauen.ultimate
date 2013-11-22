@@ -23,6 +23,12 @@ class Wordpress3xExporter extends AbstractExporter {
 	protected $categoryCache = array();
 	
 	/**
+	 * mapping from old to new IDs
+	 * @var integer[]
+	 */
+	protected $newCategoryIDs = array();
+	
+	/**
 	 * @see	\wcf\system\exporter\AbstractExporter::$methods
 	 */
 	protected $methods = array(
@@ -168,7 +174,7 @@ class Wordpress3xExporter extends AbstractExporter {
 		if (!isset($this->categoryCache[$parentID])) return;
 		
 		foreach ($this->categoryCache[$parentID] as $category) {
-			ImportHandler::getInstance()->getImporter('de.plugins-zum-selberbauen.ultimate.category')->import($category['term_id'], array(
+			$this->newCategoryIDs[$category['term_id']] = ImportHandler::getInstance()->getImporter('de.plugins-zum-selberbauen.ultimate.category')->import($category['term_id'], array(
 				'categoryTitle' => $category['name'],
 				'categoryParent' => $category['parent'],
 // 				'showOrder' => 0
@@ -243,7 +249,7 @@ class Wordpress3xExporter extends AbstractExporter {
 		$statement->execute($conditionBuilder->getParameters());
 		while ($row = $statement->fetchArray()) {
 			if (!isset($categories[$row['object_id']])) $categories[$row['object_id']] = array();
-			$categories[$row['object_id']][] = $row['term_id'];
+			$categories[$row['object_id']][] = (isset($this->newCategoryIDs[$row['term_id']]) ? $this->newCategoryIDs[$row['term_id']] : $row['term_id']);
 		}
 		
 		// get contents
@@ -260,7 +266,7 @@ class Wordpress3xExporter extends AbstractExporter {
 		while ($row = $statement->fetchArray()) {
 			$additionalData = array();
 			if (isset($tags[$row['ID']])) $additionalData['tags'] = $tags[$row['ID']];
-			if (isset($categories[$row['ID']])) $additionalData['categories'] = $categories[$row['ID']];
+			if (isset($categories[$row['ID']]) && !empty($this->newCategoryIDs)) $additionalData['categories'] = $categories[$row['ID']];
 			
 			$contentID = ImportHandler::getInstance()->getImporter('de.plugins-zum-selberbauen.ultimate.content')->import($row['ID'], array(
 				'authorID' => ($row['post_author'] ?: null),
