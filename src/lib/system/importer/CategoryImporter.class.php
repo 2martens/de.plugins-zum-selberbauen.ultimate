@@ -56,7 +56,7 @@ class CategoryImporter extends AbstractImporter {
 			$category = new Category($oldID);
 			if (!$category->categoryID) $data['categoryID'] = $oldID;
 		}
-	
+		
 		$action = new CategoryAction(array(), 'create', array(
 			'data' => $data
 		));
