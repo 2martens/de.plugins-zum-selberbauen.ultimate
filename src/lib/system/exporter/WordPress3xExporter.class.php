@@ -152,7 +152,7 @@ class Wordpress3xExporter extends AbstractExporter {
 	 * Exports categories.
 	 */
 	public function exportCategories($offset, $limit) {
-		$sql = 'SELECT    term_taxonomy.*, term.name
+		$sql = 'SELECT    term_taxonomy.*, term.name, term.slug
 		        FROM      '.$this->databasePrefix.'term_taxonomy term_taxonomy
 		        LEFT JOIN '.$this->databasePrefix.'terms term
 		        ON        (term.term_id = term_taxonomy.term_id)
@@ -177,6 +177,7 @@ class Wordpress3xExporter extends AbstractExporter {
 			$this->newCategoryIDs[$category['term_id']] = ImportHandler::getInstance()->getImporter('de.plugins-zum-selberbauen.ultimate.category')->import($category['term_id'], array(
 				'categoryTitle' => $category['name'],
 				'categoryParent' => $category['parent'],
+				'categorySlug' => $category['slug']
 // 				'showOrder' => 0
 			));
 			
