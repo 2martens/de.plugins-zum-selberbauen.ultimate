@@ -272,6 +272,15 @@ class Wordpress3xExporter extends AbstractExporter {
 			if (isset($tags[$row['ID']])) $additionalData['tags'] = $tags[$row['ID']];
 			if (isset($categories[$row['ID']])) $additionalData['categories'] = $categories[$row['ID']];
 			
+			if (empty($categories[$row['ID']]) && $row['post_type'] == 'post') {
+				// if the content is in no other category, put it into uncategorized
+				$categories[$row['ID']][] = 1;
+			}
+			else if ($row['post_type'] == 'page') {
+				// if the content is a page as well (in wordpress), put it into the pages category
+				$categories[$row['ID']][] = 2; 
+			}
+			
 			$contentID = ImportHandler::getInstance()->getImporter('de.plugins-zum-selberbauen.ultimate.content')->import($row['ID'], array(
 				'authorID' => ($row['post_author'] ? $row['post_author'] : 0),
 				'contentTitle' => $row['post_title'],
