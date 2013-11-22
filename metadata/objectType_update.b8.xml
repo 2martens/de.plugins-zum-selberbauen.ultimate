@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/object-type.xsd">
+    <import>
+        <!-- Importers -->
+		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.content</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[ultimate\system\importer\ContentImporter]]></classname>
+		</type>
+		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.content.comment</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[ultimate\system\importer\ContentCommentImporter]]></classname>
+		</type>
+		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.content.comment.response</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[ultimate\system\importer\ContentCommentResponseImporter]]></classname>
+		</type>
+		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.page</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[ultimate\system\importer\PageImporter]]></classname>
+		</type>
+		<!-- /Importers -->
+		
+		<!-- Exporters -->
+		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.exporter.wordpress3x</name>
+			<definitionname>com.woltlab.wcf.exporter</definitionname>
+			<classname>ultimate\system\exporter\Wordpress3xExporter</classname>
+		</type>
+		<!-- /Exporters -->
+    </import>
+</data>
