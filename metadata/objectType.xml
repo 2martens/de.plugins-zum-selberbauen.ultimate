@@ -146,6 +146,11 @@
 		
 		<!-- Importers -->
 		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.category</name>
+			<definitionname>com.woltlab.wcf.importer</definitionname>
+			<classname><![CDATA[ultimate\system\importer\CategoryImporter]]></classname>
+		</type>
+		<type>
 			<name>de.plugins-zum-selberbauen.ultimate.content</name>
 			<definitionname>com.woltlab.wcf.importer</definitionname>
 			<classname><![CDATA[ultimate\system\importer\ContentImporter]]></classname>
