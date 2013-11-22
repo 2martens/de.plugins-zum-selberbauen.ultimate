@@ -279,7 +279,7 @@ class Wordpress3xExporter extends AbstractExporter {
 				'contentText' => $row['post_content'],
 				'contentSlug' => ($row['post_type'] == 'page' ? $row['post_name'].'-page' : $row['post_name']),
 				'publishDate' => @strtotime($row['post_date_gmt']),
-				'lastModified' => TIME_NOW,
+				'lastModified' => @strtotime($row['post_modified_gmt']),
 				'enableSmilies' => 0,
 				'enableHtml' => 1,
 				'enableBBCodes' => 0,
@@ -295,7 +295,7 @@ class Wordpress3xExporter extends AbstractExporter {
 					'pageTitle' => $row['post_title'],
 					'pageSlug' => $row['post_name'],
 					'publishDate' => @strtotime($row['post_date_gmt']),
-					'lastModified' => TIME_NOW,
+					'lastModified' => @strtotime($row['post_modified_gmt']),
 					'status' => $this->getStatus($row['post_status']),
 					'visibility' => ($row['post_status'] == 'private' ? 'private' : 'public')
 				), $additionalData);
