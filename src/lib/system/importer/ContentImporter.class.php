@@ -55,6 +55,10 @@ class ContentImporter extends AbstractImporter {
 	public function import($oldID, array $data, array $additionalData = array()) {
 		$data['authorID'] = ImportHandler::getInstance()->getNewID('com.woltlab.wcf.user', $data['authorID']);
 		
+		if ($data['authorID'] === null || $data['authorID'] == 0) {
+			$data['authorID'] = 1;
+		}
+		
 		// check old id
 		if (is_numeric($oldID)) {
 			$content = new Content($oldID);
