@@ -33,7 +33,7 @@
 		<type>
 			<name>de.plugins-zum-selberbauen.ultimate.exporter.wordpress3x</name>
 			<definitionname>com.woltlab.wcf.exporter</definitionname>
-			<classname>ultimate\system\exporter\Wordpress3xExporter</classname>
+			<classname>ultimate\system\exporter\WordPress3xExporter</classname>
 		</type>
 		<!-- /Exporters -->
     </import>

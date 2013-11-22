@@ -15,7 +15,7 @@ use wcf\system\WCF;
  * @subpackage	system.exporter
  * @category	Ultimate CMS
  */
-class Wordpress3xExporter extends AbstractExporter {
+class WordPress3xExporter extends AbstractExporter {
 	/**
 	 * category cache
 	 * @var	array
@@ -45,9 +45,13 @@ class Wordpress3xExporter extends AbstractExporter {
 		return array(
 			'com.woltlab.wcf.user' => array(
 			),
+			'de.plugins-zum-selberbauen.ultimate.category' => array(
+				
+			),
 			'de.plugins-zum-selberbauen.ultimate.content' => array(
-				'de.plugins-zum-selberbauen.ultimate.category',
-				'de.plugins-zum-selberbauen.ultimate.content.comment'
+			),
+			'de.plugins-zum-selberbauen.ultimate.content.comment' => array(
+				
 			)
 		);
 	}
@@ -64,11 +68,16 @@ class Wordpress3xExporter extends AbstractExporter {
 		}
 		
 		// CMS
+		if (in_array('de.plugins-zum-selberbauen.ultimate.category', $this->selectedData)) {
+			$queue[] = 'de.plugins-zum-selberbauen.ultimate.category';
+		}
 		if (in_array('de.plugins-zum-selberbauen.ultimate.content', $this->selectedData)) {
-			if (in_array('de.plugins-zum-selberbauen.ultimate.category', $this->selectedData)) $queue[] = 'de.plugins-zum-selberbauen.ultimate.category';
 			$queue[] = 'de.plugins-zum-selberbauen.ultimate.content';
-			if (in_array('de.plugins-zum-selberbauen.ultimate.content.comment', $this->selectedData)) $queue[] = 'de.plugins-zum-selberbauen.ultimate.content.comment';
-// 			if (in_array('de.plugins-zum-selberbauen.ultimate.page', $this->selectedData)) $queue[] = 'de.plugins-zum-selberbauen.ultimate.page';
+			if (in_array('de.plugins-zum-selberbauen.ultimate.page', $this->selectedData)) $queue[] = 'de.plugins-zum-selberbauen.ultimate.page';
+		}
+		
+		if (in_array('de.plugins-zum-selberbauen.ultimate.content.comment', $this->selectedData)) {
+			$queue[] = 'de.plugins-zum-selberbauen.ultimate.content.comment';
 		}
 		
 		return $queue;
