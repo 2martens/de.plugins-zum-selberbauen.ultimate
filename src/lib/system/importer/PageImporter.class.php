@@ -51,7 +51,13 @@ class PageImporter extends AbstractImporter {
 	 * @see \wcf\system\importer\IImporter::import()
 	 */
 	public function import($oldID, array $data, array $additionalData = array()) {
-		if ($data['pageParent'] !== null) $data['pageParent'] = ImportHandler::getInstance()->getNewID('de.plugins-zum-selberbauen.ultimate.page', $data['pageParent']);
+		if ($data['pageParent'] !== null) {
+			$data['pageParent'] = ImportHandler::getInstance()->getNewID('de.plugins-zum-selberbauen.ultimate.page', $data['pageParent']);
+		}
+		
+		if ($data['pageParent'] === null) {
+			$data['pageParent'] = 0;
+		}
 		
 		// check old id
 		if (is_numeric($oldID)) {
