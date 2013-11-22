@@ -262,10 +262,8 @@ class Wordpress3xExporter extends AbstractExporter {
 		$conditionBuilder = new PreparedStatementConditionBuilder();
 		$conditionBuilder->add('post.ID IN (?)', array($contentIDs));
 		
-		$sql = 'SELECT	  post.*, user.user_login
+		$sql = 'SELECT	  post.*
 		        FROM      '.$this->databasePrefix.'posts post
-		        LEFT JOIN '.$this->databasePrefix.'users user
-		        ON        (user.ID = post.post_author)
 		        '.$conditionBuilder;
 		$statement = $this->database->prepareStatement($sql);
 		$statement->execute($conditionBuilder->getParameters());
@@ -275,14 +273,12 @@ class Wordpress3xExporter extends AbstractExporter {
 			if (isset($categories[$row['ID']])) $additionalData['categories'] = $categories[$row['ID']];
 			
 			$contentID = ImportHandler::getInstance()->getImporter('de.plugins-zum-selberbauen.ultimate.content')->import($row['ID'], array(
-				'authorID' => ($row['post_author'] ?: null),
-				'username' => $row['user_login'],
+				'authorID' => ($row['post_author'] ? $row['post_author'] : 0),
 				'contentTitle' => $row['post_title'],
 				'contentDescription' => $row['post_excerpt'],
 				'contentText' => $row['post_content'],
 				'contentSlug' => ($row['post_type'] == 'page' ? $row['post_name'].'-page' : $row['post_name']),
 				'publishDate' => @strtotime($row['post_date_gmt']),
-				'comments' => $row['comment_count'],
 				'enableSmilies' => 0,
 				'enableHtml' => 1,
 				'enableBBCodes' => 0,
@@ -295,11 +291,9 @@ class Wordpress3xExporter extends AbstractExporter {
 				ImportHandler::getInstance()->getImporter('de.plugins-zum-selberbauen.ultimate.page')->import($row['ID'], array(
 					'authorID' => ($row['post_author'] ?: null),
 					'pageParent' => $row['post_parent'],
-					'username' => $row['user_login'],
 					'pageTitle' => $row['post_title'],
 					'pageSlug' => $row['post_name'],
 					'publishDate' => @strtotime($row['post_date_gmt']),
-					'comments' => $row['comment_count'],
 					'status' => $this->getStatus($row['post_status']),
 					'visibility' => ($row['post_status'] == 'private' ? 'private' : 'public')
 				), $additionalData);
@@ -393,5 +387,6 @@ class Wordpress3xExporter extends AbstractExporter {
 				$statusCode = 0;
 				break;
 		}
+		return $statusCode;
 	}
 }
