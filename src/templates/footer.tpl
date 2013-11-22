@@ -23,7 +23,7 @@
 			
 			<ul class="navigationItems">
 				{if SHOW_CLOCK}
-					<li title="{lang}wcf.date.timezone.{@'/'|str_replace:'.':$__wcf->getUser()->getTimeZone()->getName()|mb_strtolower}{/lang}"><p><span class="icon icon16 icon-time"></span> <span>{@TIME_NOW|plainTime}</span></p></li>
+					<li title="{lang}wcf.date.timezone.{@'/'|str_replace:'.':$__wcf->getUser()->getTimeZone()->getName()|strtolower}{/lang}"><p><span class="icon icon16 icon-time"></span> <span>{@TIME_NOW|plainTime}</span></p></li>
 				{/if}
 				{event name='navigationItems'}
 			</ul>
@@ -33,7 +33,7 @@
 			{event name='footerContents'}
 			
 			{if ENABLE_BENCHMARK}{include file='benchmark'}{/if}
-		
+			
 			{event name='copyright'}
 		</div>
 	</div>
