@@ -157,9 +157,10 @@ class Wordpress3xExporter extends AbstractExporter {
 		        LEFT JOIN '.$this->databasePrefix.'terms term
 		        ON        (term.term_id = term_taxonomy.term_id)
 		        WHERE     term_taxonomy.taxonomy = ?
+		        AND       term.slug NOT IN(?, ?)
 		        ORDER BY  term_taxonomy.parent, term_taxonomy.term_id';
 		$statement = $this->database->prepareStatement($sql);
-		$statement->execute(array('category'));
+		$statement->execute(array('category', 'uncategorized', 'pages'));
 		while ($row = $statement->fetchArray()) {
 			$this->categoryCache[$row['parent']][] = $row;
 		}
@@ -205,7 +206,7 @@ class Wordpress3xExporter extends AbstractExporter {
 		// get content ids
 		$contentIDs = array();
 		$conditionBuilder = new PreparedStatementConditionBuilder();
-		$conditionBuilder->add('post_type IN (?)', array('page', 'post'));
+		$conditionBuilder->add('post_type IN (?)', array(array('page', 'post')));
 		$sql = 'SELECT   ID
 		        FROM     '.$this->databasePrefix.'posts
 		        '.$conditionBuilder.'
