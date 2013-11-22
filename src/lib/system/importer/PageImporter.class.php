@@ -28,6 +28,7 @@
 namespace ultimate\system\importer;
 use ultimate\data\page\Page;
 use ultimate\data\page\PageAction;
+use wcf\system\importer\AbstractImporter;
 use wcf\system\importer\ImportHandler;
 
 /**

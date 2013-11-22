@@ -28,6 +28,7 @@
 namespace ultimate\system\importer;
 use ultimate\data\content\Content;
 use ultimate\data\content\ContentAction;
+use wcf\system\importer\AbstractImporter;
 use wcf\system\importer\ImportHandler;
 use wcf\system\language\LanguageFactory;
 use wcf\system\tagging\TagEngine;
