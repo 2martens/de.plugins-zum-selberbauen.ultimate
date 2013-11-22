@@ -262,7 +262,7 @@ class Wordpress3xExporter extends AbstractExporter {
 			if (isset($tags[$row['ID']])) $additionalData['tags'] = $tags[$row['ID']];
 			if (isset($categories[$row['ID']])) $additionalData['categories'] = $categories[$row['ID']];
 			
-			ImportHandler::getInstance()->getImporter('de.plugins-zum-selberbauen.ultimate.content')->import($row['ID'], array(
+			$contentID = ImportHandler::getInstance()->getImporter('de.plugins-zum-selberbauen.ultimate.content')->import($row['ID'], array(
 				'authorID' => ($row['post_author'] ?: null),
 				'username' => $row['user_login'],
 				'contentTitle' => $row['post_title'],
@@ -278,6 +278,7 @@ class Wordpress3xExporter extends AbstractExporter {
 			), $additionalData);
 			
 			if ($row['post_type'] == 'page') {
+				$additionalData['contentID'] = $contentID;
 				ImportHandler::getInstance()->getImporter('de.plugins-zum-selberbauen.ultimate.page')->import($row['ID'], array(
 					'authorID' => ($row['post_author'] ?: null),
 					'pageParent' => $row['post_parent'],

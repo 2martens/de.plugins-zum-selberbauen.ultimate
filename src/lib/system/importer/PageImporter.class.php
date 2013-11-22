@@ -60,7 +60,8 @@ class PageImporter extends AbstractImporter {
 		}
 		
 		$action = new PageAction(array(), 'create', array(
-			'data' => $data
+			'data' => $data,
+			'contentID' => $additionalData['contentID']
 		));
 		$returnValues = $action->executeAction();
 		$newID = $returnValues['returnValues']->pageID;
