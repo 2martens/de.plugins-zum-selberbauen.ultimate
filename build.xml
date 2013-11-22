@@ -28,21 +28,19 @@
 			basedir="srcWCF" 
 		/>
 		
-		<!--beta 7 update tar -->
-		<tar destfile="metadata/acptemplates_update.b6.tar">
+		<!--beta 8 update tar -->
+		<tar destfile="metadata/acptemplates_update.b8.tar">
 			<tarfileset dir="src/acp/templates">
 				<include name="*Add.tpl" />
 				<include name="*AssignToCategory.tpl" />
 			</tarfileset>
 		</tar>
-		<tar destfile="metadata/files_update.b6.tar">
+		<tar destfile="metadata/files_update.b8.tar">
 			<tarfileset dir="src">
 				<exclude name="templates/**" />
 				<exclude name="acp/templates/**" />
-				<include name="acp/InstallUltimateCMS.class.php" />
-				<include name="lib/acp/form/UltimateContentAddForm.class.php" />
-				<include name="lib/data/content/ContentAction.class.php" />
-				<include name="lib/data/content/TaggedContent.class.php" />
+				<include name="lib/system/exporter/*" />
+				<include name="lib/system/importer/*" />
 			</tarfileset>
 		</tar>
 	</target>
