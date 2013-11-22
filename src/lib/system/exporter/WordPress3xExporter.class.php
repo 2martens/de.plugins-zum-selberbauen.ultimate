@@ -351,7 +351,7 @@ class WordPress3xExporter extends AbstractExporter {
 			if (!$row['comment_parent']) {
 				ImportHandler::getInstance()->getImporter('de.plugins-zum-selberbauen.ultimate.content.comment')->import($row['comment_ID'], array(
 					'objectID' => $row['comment_post_ID'],
-					'userID' => ($row['user_id'] ?: null),
+					'userID' => ($row['user_id'] ? $row['user_id'] : 0),
 					'username' => $row['comment_author'],
 					'message' => $row['comment_content'],
 					'time' => @strtotime($row['comment_date_gmt'])

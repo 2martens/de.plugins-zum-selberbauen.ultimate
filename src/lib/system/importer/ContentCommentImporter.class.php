@@ -58,7 +58,7 @@ class ContentCommentImporter extends AbstractCommentImporter {
 	 * @see	\wcf\system\importer\IImporter::import()
 	 */
 	public function import($oldID, array $data, array $additionalData = array()) {
-		$data['objectID'] = ImportHandler::getInstance()->getNewID('com.woltlab.wcf.user', $data['objectID']);
+		$data['objectID'] = ImportHandler::getInstance()->getNewID('de.plugins-zum-selberbauen.ultimate.content', $data['objectID']);
 		if (!$data['objectID']) return 0;
 	
 		return parent::import($oldID, $data);
