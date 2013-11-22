@@ -3,6 +3,7 @@
 	
 	<category name="wcf.acp.dataImport">
 		<item name="wcf.acp.dataImport.exporter.de.plugins-zum-selberbauen.ultimate.exporter.wordpress3x"><![CDATA[WordPress 3.7+ (Ultimate CMS)]]></item>
+		<item name="wcf.acp.dataImport.data.de.plugins-zum-selberbauen.ultimate.category"><![CDATA[Categories]]></item>
 		<item name="wcf.acp.dataImport.data.de.plugins-zum-selberbauen.ultimate.content"><![CDATA[Contents]]></item>
 		<item name="wcf.acp.dataImport.data.de.plugins-zum-selberbauen.ultimate.content.comment"><![CDATA[Content comments]]></item>
 		<item name="wcf.acp.dataImport.data.de.plugins-zum-selberbauen.ultimate.content.comment.response"><![CDATA[Replies to content comments]]></item>
