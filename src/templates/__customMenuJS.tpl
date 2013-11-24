@@ -4,6 +4,8 @@
 	$(function() {
 		$('#mainMenu').replaceWith(customMenu);
 		$('.navigation.navigationHeader > .navigationMenuItems').replaceWith(customMenuSubMenu);
+		WCF.System.FlexibleMenu.registerMenu('mainMenu');
+		WCF.System.FlexibleMenu.registerMenu($('.navigationHeader:eq(0)').wcfIdentify());
 	});
 //]]>
 </script>
