@@ -206,6 +206,10 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 	 * @param	array	$data
 	 */
 	protected function handleData($data) {
+		if (!isset($data['pageID'])) {
+			parent::handleData($data);
+			return;
+		}
 		$data['pageID'] = intval($data['pageID']);
 		$data['pageParent'] = intval($data['pageParent']);
 		$data['authorID'] = intval($data['authorID']);
