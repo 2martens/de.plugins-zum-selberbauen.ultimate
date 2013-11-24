@@ -28,21 +28,22 @@
 			basedir="srcWCF" 
 		/>
 		
-		<!--beta 8 update tar -->
-		<tar destfile="metadata/acptemplates_update.b8.tar">
+		<!--beta 9 update tar -->
+		<tar destfile="metadata/acptemplates_update.b9.tar">
 			<tarfileset dir="src/acp/templates">
 				<include name="*Add.tpl" />
 				<include name="*AssignToCategory.tpl" />
 			</tarfileset>
 		</tar>
-		<tar destfile="metadata/templates_update.b8.tar">
+		<tar destfile="metadata/templates_update.b9.tar">
 			<tarfileset dir="src/templates">
+				<include name="__customMenuJS.tpl" />
 				<include name="contentList.tpl" />
 				<include name="headInclude.tpl" />
 				<include name="footer.tpl" />
 			</tarfileset>
 		</tar>
-		<tar destfile="metadata/files_update.b8.tar">
+		<tar destfile="metadata/files_update.b9.tar">
 			<tarfileset dir="src">
 				<exclude name="templates/**" />
 				<exclude name="acp/templates/**" />
