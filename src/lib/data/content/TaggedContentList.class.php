@@ -51,7 +51,7 @@ class TaggedContentList extends ContentList {
 	public $decoratorClassName = '\ultimate\data\content\TaggedContent';
 	
 	/**
-	 * Creates a new TaggedThreadList object.
+	 * Creates a new TaggedContentList object.
 	 * 
 	 * @param	\wcf\data\tag\Tag	$tag
 	 */
