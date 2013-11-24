@@ -67,6 +67,6 @@ abstract class AbstractUltimateDatabaseObject extends DatabaseObject implements 
 	
 		$metaData = array();
 		$metaData = $statement->fetchArray();
-		return (($metaData !== false) ? $metaData: array());
+		return (($metaData !== false) ? $metaData: array('metaKeywords' => '', 'metaDescription' => ''));
 	}
 }
