@@ -65,7 +65,7 @@
 		<instruction type="file">files_update.b8.tar</instruction>
 		<instruction type="acpTemplate">acptemplates_update.b8.tar</instruction>
 		<instruction type="template">templates_update.b8.tar</instruction>
-		<instruction type="language">language/*_update.b8.xml</instruction>
+		<instruction type="language">language/*.xml</instruction>
 		<instruction type="objectType">objectType_update.b8.xml</instruction>
 	</instructions>
 </package>
