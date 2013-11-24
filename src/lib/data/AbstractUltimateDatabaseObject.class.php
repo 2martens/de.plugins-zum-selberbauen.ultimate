@@ -50,7 +50,7 @@ abstract class AbstractUltimateDatabaseObject extends DatabaseObject implements 
 	}
 	
 	/**
-	 * Returns the meta data of this content.
+	 * Returns the meta data of this object.
 	 * 
 	 * @param	integer		$objectID
 	 * @param	string		$objectType	(category, content, index or page)
