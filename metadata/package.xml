@@ -9,7 +9,7 @@
 		
 		<isapplication>1</isapplication>
 		<version>1.0.0 Beta 9</version>
-		<date>2013-11-22</date>
+		<date>2013-11-24</date>
 	</packageinformation>
 	
 	<authorinformation>
@@ -64,6 +64,7 @@
 	<instructions type="update" fromversion="1.0.0 Beta 8">
 		<instruction type="file">files_update.b8.tar</instruction>
 		<instruction type="acpTemplate">acptemplates_update.b8.tar</instruction>
+		<instruction type="template">templates_update.b8.tar</instruction>
 		<instruction type="language">language/*_update.b8.xml</instruction>
 		<instruction type="objectType">objectType_update.b8.xml</instruction>
 	</instructions>
