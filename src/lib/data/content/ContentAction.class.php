@@ -106,7 +106,9 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		$contentEditor = new ContentEditor($content);
 		
 		// update attachments
-		$this->parameters['attachmentHandler']->updateObjectID($content->__get('contentID'));
+		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
+			$this->parameters['attachmentHandler']->updateObjectID($content->__get('contentID'));
+		}
 		
 		// insert categories
 		$categoryIDs = (isset($this->parameters['categories'])) ? $this->parameters['categories'] : array();

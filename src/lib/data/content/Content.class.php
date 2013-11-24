@@ -264,6 +264,10 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject, I
 	 * @param	array	$data
 	 */
 	protected function handleData($data) {
+		if (!isset($data['contentID'])) {
+			parent::handleData($data);
+			return;
+		}
 		$data['contentID'] = intval($data['contentID']);
 		$data['authorID'] = intval($data['authorID']);
 		$data['author'] = new User($data['authorID']);

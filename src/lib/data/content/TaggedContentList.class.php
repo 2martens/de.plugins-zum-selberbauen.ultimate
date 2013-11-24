@@ -51,7 +51,13 @@ class TaggedContentList extends ContentList {
 	public $decoratorClassName = '\ultimate\data\content\TaggedContent';
 	
 	/**
-	 * Creates a new TaggedThreadList object.
+	 * sql order by statement
+	 * @var	string
+	 */
+	public $sqlOrderBy = 'content.publishDate DESC';
+	
+	/**
+	 * Creates a new TaggedContentList object.
 	 * 
 	 * @param	\wcf\data\tag\Tag	$tag
 	 */

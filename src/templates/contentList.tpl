@@ -3,6 +3,7 @@
 {if !$showViewColumn|isset}{assign var='showViewColumn' value=true}{/if}
 
 {foreach from=$objects item=content}
+{if $content->publishDate != 0}
 	<tr id="content{@$content->contentID}" class="ultimateContent jsClipboardObject" data-content-id="{@$content->contentID}" data-element-id="{@$content->contentID}">
 		<td class="columnText columnSubject">
 			<h3>
@@ -25,4 +26,5 @@
 		
 		{event name='columns'}
 	</tr>
+{/if}
 {/foreach}
