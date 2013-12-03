@@ -263,7 +263,7 @@ Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$com
         <!-- /dashboard.sidebar.latestContents -->
         <!-- dashboard.sidebar.links -->
         <item name="wcf.acp.option.ultimate_links_category"><![CDATA[Linkkategorie]]></item>
-        <item name="wcf.acp.option.ultimate_links_category.description"><![CDATA[Geben Sie hier die ID der Linkkategorie an, aus der Links angezeigt werden sollen. Ist die ID 0, dann werden keine Links angezeigt.]]></item>
+        <item name="wcf.acp.option.ultimate_links_category.description"><![CDATA[Wählen Sie hier die Linkkategorie aus, aus der Links angezeigt werden sollen. Ist keine Kategorie ausgewählt, dann werden keine Links angezeigt.]]></item>
         <item name="wcf.acp.option.ultimate_links_items"><![CDATA[Anzahl an Links]]></item>
         <!-- /dashboard.sidebar.links -->
         <!-- dashboard.content.latestContents -->
