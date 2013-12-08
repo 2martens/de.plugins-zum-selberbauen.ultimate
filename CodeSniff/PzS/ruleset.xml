@@ -32,16 +32,14 @@
 	<rule ref="Squiz.Operators.ValidLogicalOperators" />
 	<rule ref="Squiz.PHP.ForbiddenFunctions" />
 	<rule ref="Squiz.Scope.MethodScope" />
-	<rule ref="WCF.Classes.ClassFileName" />
-	<rule ref="WCF.ControlStructures.ControlSignature" />
-	<rule ref="WCF.Methods.MethodDeclaration" />
-	<rule ref="WCF.Namespaces.ClassMustBeImported" />
-	<rule ref="WCF.Namespaces.SortedUseDeclaration" />
-	<rule ref="WCF.Namespaces.UseDeclaration" />
-	<!--rule ref="WCF.PHP.DiscouragePCRE" /--> <!-- TODO: Sniff is disabled by commenting out the extends in the sniff file! -->
-	<rule ref="WCF.WhiteSpace.SuperfluousWhitespace" />
+	<rule ref="PzS.Classes.ClassFileName" />
+	<rule ref="PzS.ControlStructures.ControlSignature" />
+	<rule ref="PzS.Methods.MethodDeclaration" />
+	<rule ref="PzS.Namespaces.ClassMustBeImported" />
+	<rule ref="PzS.Namespaces.SortedUseDeclaration" />
+	<rule ref="PzS.Namespaces.UseDeclaration" />
+	<rule ref="PzS.WhiteSpace.SuperfluousWhitespace" />
 	<rule ref="Zend.Files.ClosingTag" />
-	
 	
 	<!-- Use Unix newlines -->
 	<rule ref="Generic.Files.LineEndings">
