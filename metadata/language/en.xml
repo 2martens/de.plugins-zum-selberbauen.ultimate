@@ -263,7 +263,7 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
         <!-- /dashboard.sidebar.latestContents -->
         <!-- dashboard.sidebar.links -->
         <item name="wcf.acp.option.ultimate_links_category"><![CDATA[Link category]]></item>
-        <item name="wcf.acp.option.ultimate_links_category.description"><![CDATA[Please insert here the id of the category from which links should be shown. If the id is 0 then no links are shown.]]></item>
+        <item name="wcf.acp.option.ultimate_links_category.description"><![CDATA[Please select here the category from which links should be shown. If no category is selected then no links are shown.]]></item>
         <item name="wcf.acp.option.ultimate_links_items"><![CDATA[Number of links]]></item>
         <!-- /dashboard.sidebar.links -->
         <!-- dashboard.content.latestContents -->
