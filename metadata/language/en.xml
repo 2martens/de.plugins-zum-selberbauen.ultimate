@@ -307,6 +307,7 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
 		<item name="wcf.acp.ultimate.category.title.placeholder"><![CDATA[Good contents]]></item>
 		<item name="wcf.acp.ultimate.category.title.error.notUnique"><![CDATA[A category with the specified name already exists with this parent.]]></item>
 		<item name="wcf.acp.ultimate.category.slug"><![CDATA[Slug]]></item>
+		<item name="wcf.acp.ultimate.category.slug.description"><![CDATA[The slug may contain lower-case letters and numbers. The slug can contain multiple parts, separated by a dash (-). The first part may only contain lower-case letters.]]></item>
 		<item name="wcf.acp.ultimate.category.slug.placeholder"><![CDATA[good-contents]]></item>
 		<item name="wcf.acp.ultimate.category.slug.error.notUnique"><![CDATA[A category with the specified slug already exists with this parent.]]></item>
 		<item name="wcf.acp.ultimate.category.parent"><![CDATA[Parent]]></item>
@@ -336,6 +337,7 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
 		<item name="wcf.acp.ultimate.content.description.placeholder"><![CDATA[]]></item>
 		<item name="wcf.acp.ultimate.content.description.error.tooShort"><![CDATA[The description has to be at least 4 characters long.]]></item>
 		<item name="wcf.acp.ultimate.content.slug"><![CDATA[Slug]]></item>
+		<item name="wcf.acp.ultimate.content.slug.description"><![CDATA[The slug may contain lower-case letters and numbers. The slug can contain multiple parts, separated by a dash (-). The first part may only contain lower-case letters.]]></item>
 		<item name="wcf.acp.ultimate.content.slug.placeholder"><![CDATA[a-nice-story]]></item>
 		<item name="wcf.acp.ultimate.content.slug.error.notUnique"><![CDATA[A content with the specified slug already exists.]]></item>
 		<item name="wcf.acp.ultimate.content.categories"><![CDATA[Categories]]></item>
@@ -455,6 +457,7 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.page.title.placeholder"><![CDATA[Company profile]]></item>
 		<item name="wcf.acp.ultimate.page.title.error.notUnique"><![CDATA[A page with the specified title already exists with this parent.]]></item>
 		<item name="wcf.acp.ultimate.page.slug"><![CDATA[Slug]]></item>
+		<item name="wcf.acp.ultimate.page.slug.description"><![CDATA[The slug may contain lower-case letters and numbers. The slug can contain multiple parts, separated by a dash (-). The first part may only contain lower-case letters.]]></item>
 		<item name="wcf.acp.ultimate.page.slug.placeholder"><![CDATA[company-profile]]></item>
 		<item name="wcf.acp.ultimate.page.slug.error.notUnique"><![CDATA[A page with the specified slug already exists with this parent.]]></item>
 		<item name="wcf.acp.ultimate.page.parent"><![CDATA[Parent]]></item>
