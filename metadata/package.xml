@@ -8,8 +8,8 @@
 		<packagedescription language="de-informal"><![CDATA[Ein WCF-kompatibles CMS.]]></packagedescription>
 		
 		<isapplication>1</isapplication>
-		<version>1.0.0 Beta 10</version>
-		<date>2013-11-24</date>
+		<version>1.0.0 RC 1</version>
+		<date>2013-12-12</date>
 	</packageinformation>
 	
 	<authorinformation>
@@ -18,11 +18,11 @@
 	</authorinformation>
 	
 	<requiredpackages>
-		<requiredpackage minversion="2.0.0 RC 2">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="2.0.0*" file="requirements/com.woltlab.wcf.conversation.tar.gz">com.woltlab.wcf.conversation</requiredpackage>
-		<requiredpackage minversion="1.0.0 Beta 3" file="requirements/de.plugins-zum-selberbauen.cachedList.tar.gz">de.plugins-zum-selberbauen.cachedList</requiredpackage>
-		<requiredpackage minversion="1.0.0 Beta 2" file="requirements/de.plugins-zum-selberbauen.messageACP.tar.gz">de.plugins-zum-selberbauen.messageACP</requiredpackage>
-		<requiredpackage minversion="1.0.0 Beta 3" file="requirements/de.plugins-zum-selberbauen.ultimateCore.tar.gz">de.plugins-zum-selberbauen.ultimateCore</requiredpackage>
+		<requiredpackage minversion="2.0.0 RC 5">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="2.0.0 RC 3" file="requirements/com.woltlab.wcf.conversation.tar.gz">com.woltlab.wcf.conversation</requiredpackage>
+		<requiredpackage minversion="1.0.0 RC 1" file="requirements/de.plugins-zum-selberbauen.cachedList.tar.gz">de.plugins-zum-selberbauen.cachedList</requiredpackage>
+		<requiredpackage minversion="1.0.0 RC 1" file="requirements/de.plugins-zum-selberbauen.messageACP.tar.gz">de.plugins-zum-selberbauen.messageACP</requiredpackage>
+		<requiredpackage minversion="1.0.0 RC 1" file="requirements/de.plugins-zum-selberbauen.ultimateCore.tar.gz">de.plugins-zum-selberbauen.ultimateCore</requiredpackage>
 	</requiredpackages>
 	
 	<optionalpackages>
@@ -61,15 +61,9 @@
 		<!-- /xml and rest -->
 	</instructions>
 	
-	<instructions type="update" fromversion="1.0.0 Beta 9">
-		<instruction type="template">templates_update.b9.tar</instruction>
-	</instructions>
-	
-	<instructions type="update" fromversion="1.0.0 Beta 8">
-		<instruction type="file">files_update.b9.tar</instruction>
-		<instruction type="acpTemplate">acptemplates_update.b9.tar</instruction>
-		<instruction type="template">templates_update.b9.tar</instruction>
+	<instructions type="update" fromversion="1.0.0 Beta 10">
+		<instruction type="acpTemplate">acptemplates_update.rc1.tar</instruction>
+		<instruction type="file">files_update.rc1.tar</instruction>
 		<instruction type="language">language/*.xml</instruction>
-		<instruction type="objectType">objectType_update.b8.xml</instruction>
 	</instructions>
 </package>
