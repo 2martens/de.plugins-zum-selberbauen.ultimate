@@ -40,6 +40,7 @@ use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
 use wcf\system\bbcode\PreParser;
 use wcf\system\cache\builder\TagObjectCacheBuilder;
+use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
 use wcf\system\menu\acp\ACPMenu;
 use wcf\system\request\LinkHandler;
