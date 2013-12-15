@@ -105,7 +105,7 @@ $(function() {
 													{implode from=$content->tags[$__wcf->getLanguage()->__get('languageID')] item=tag glue=''}tag-{$tag->getTitle()}{/implode}
 													messageText">
 													
-													{if ($block->contentBodyDisplay == 'default' && ($displayedFeaturedContents < $block->featuredContents || $requestType == 'content' || $requestType == 'page')) || $block->contentBodyDisplay == 'full'}
+													{if ($block->contentBodyDisplay == 'default' && (($displayedFeaturedContents < $block->featuredContents && $pageNo == 1) || $requestType == 'content' || $requestType == 'page')) || $block->contentBodyDisplay == 'full'}
 														{counter name=displayedFeaturedContents assign=displayedFeaturedContents print=false start=0}
 														{assign var=displayedFeaturedContents value=($displayedFeaturedContents + 1)}
 														{if $requestType == 'content' || $requestType == 'page'}
