@@ -9,7 +9,7 @@
 		
 		<isapplication>1</isapplication>
 		<version>1.0.0 RC 1</version>
-		<date>2013-12-12</date>
+		<date>2013-12-24</date>
 	</packageinformation>
 	
 	<authorinformation>
@@ -18,15 +18,15 @@
 	</authorinformation>
 	
 	<requiredpackages>
-		<requiredpackage minversion="2.0.0 RC 5">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="2.0.0 RC 3" file="requirements/com.woltlab.wcf.conversation.tar.gz">com.woltlab.wcf.conversation</requiredpackage>
+		<requiredpackage minversion="2.0.0">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="2.0.0" file="requirements/com.woltlab.wcf.conversation.tar.gz">com.woltlab.wcf.conversation</requiredpackage>
 		<requiredpackage minversion="1.0.0 RC 1" file="requirements/de.plugins-zum-selberbauen.cachedList.tar.gz">de.plugins-zum-selberbauen.cachedList</requiredpackage>
 		<requiredpackage minversion="1.0.0 RC 1" file="requirements/de.plugins-zum-selberbauen.messageACP.tar.gz">de.plugins-zum-selberbauen.messageACP</requiredpackage>
 		<requiredpackage minversion="1.0.0 RC 1" file="requirements/de.plugins-zum-selberbauen.ultimateCore.tar.gz">de.plugins-zum-selberbauen.ultimateCore</requiredpackage>
 	</requiredpackages>
 	
 	<optionalpackages>
-		<optionalpackage minversion="2.0.0*" file="optional/com.woltlab.wcf.legalNotice.tar.gz">com.woltlab.wcf.legalNotice</optionalpackage>
+		<optionalpackage minversion="2.0.0" file="optional/com.woltlab.wcf.legalNotice.tar.gz">com.woltlab.wcf.legalNotice</optionalpackage>
 	</optionalpackages>
 	
 	<instructions type="install">
@@ -64,6 +64,7 @@
 	<instructions type="update" fromversion="1.0.0 Beta 10">
 		<instruction type="acpTemplate">acptemplates_update.rc1.tar</instruction>
 		<instruction type="file">files_update.rc1.tar</instruction>
+		<instruction type="template">templates_update.rc1.tar</instruction>
 		<instruction type="language">language/*.xml</instruction>
 	</instructions>
 </package>

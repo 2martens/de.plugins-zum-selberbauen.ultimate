@@ -41,8 +41,16 @@
 			<tarfileset dir="src">
 				<exclude name="templates/**" />
 				<exclude name="acp/templates/**" />
-				<include name="lib/system/ULTIMATECore.class.php" />
+				<include name="lib/acp/form/UltimateContent*Form*" />
+				<include name="lib/acp/form/UltimateLinkEditForm*" />
+				<include name="lib/system/dashboard/box/TagCloudDashboardBox.class.php" />
 				<include name="lib/system/media/provider/MediaProviderHandler*" />
+				<include name="lib/system/ULTIMATECore.class.php" />
+			</tarfileset>
+		</tar>
+		<tar destfile="metadata/templates_update.rc1.tar">
+			<tarfileset dir="src/templates">
+				<include name="*contentBlockType.tpl" />
 			</tarfileset>
 		</tar>
 	</target>
