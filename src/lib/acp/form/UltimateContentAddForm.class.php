@@ -38,6 +38,8 @@ use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
 use wcf\system\bbcode\PreParser;
 use wcf\system\cache\builder\TagObjectCacheBuilder;
+use wcf\system\cache\builder\TypedTagCloudCacheBuilder;
+use wcf\system\cache\builder\UltimateTagCloudCacheBuilder;
 use wcf\system\cache\builder\UserGroupCacheBuilder;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
@@ -393,6 +395,8 @@ class UltimateContentAddForm extends MessageForm {
 		}
 		// reset cache
 		TagObjectCacheBuilder::getInstance()->reset();
+		TypedTagCloudCacheBuilder::getInstance()->reset();
+		UltimateTagCloudCacheBuilder::getInstance()->reset();
 		
 		$objectAction = new ContentAction(array($returnValues['returnValues']->__get('contentID')), 'updateSearchIndex');
 		$objectAction->executeAction();
