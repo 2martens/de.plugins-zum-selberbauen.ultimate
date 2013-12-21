@@ -40,6 +40,7 @@ use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
 use wcf\system\bbcode\PreParser;
 use wcf\system\cache\builder\TagObjectCacheBuilder;
+use wcf\system\cache\builder\TypedTagCloudCacheBuilder;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
 use wcf\system\menu\acp\ACPMenu;
@@ -268,6 +269,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 		}
 		// reset cache
 		TagObjectCacheBuilder::getInstance()->reset();
+		TypedTagCloudCacheBuilder::getInstance()->reset();
 		
 		$objectAction = new ContentAction(array($this->contentID), 'updateSearchIndex');
 		$objectAction->executeAction();
