@@ -114,4 +114,4 @@ final class InstallUltimateCMS {
 	}
 	
 }
-new InstallUltimateCMS();
+new \ultimate\acp\InstallUltimateCMS();
