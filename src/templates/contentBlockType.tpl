@@ -99,7 +99,7 @@ $(function() {
 									{if $block->contentBodyDisplay != 'hide'}
 										<div class="messageBody">
 											<div>
-												
+												{if !$pageNo|isset}{assign var=pageNo value=1}{/if}
 												<div itemprop="articleBody" id="content-{$contentID}" 
 													class="content htmlContent {implode from=$content->categories item=category glue=' '}category-{$category->categorySlug}{/implode} 
 													{implode from=$content->tags[$__wcf->getLanguage()->__get('languageID')] item=tag glue=''}tag-{$tag->getTitle()}{/implode}
