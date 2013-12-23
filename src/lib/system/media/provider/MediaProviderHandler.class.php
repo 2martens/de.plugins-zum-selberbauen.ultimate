@@ -71,7 +71,7 @@ class MediaProviderHandler extends SingletonFactory {
 	 */
 	protected function init() {
 		/* @var $dir \Directory */
-		$dir = dir(FileUtil::unifyDirSeperator(dirname(__FILE__)));
+		$dir = dir(FileUtil::unifyDirSeparator(dirname(__FILE__)));
 		while (false !== ($entry = $dir->read())) {
 			// stripping away .class.php {10}
 			$className = mb_substr($entry, 0, mb_strlen($entry) - 10);

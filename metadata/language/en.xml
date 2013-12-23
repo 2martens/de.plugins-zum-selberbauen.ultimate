@@ -263,7 +263,7 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
         <!-- /dashboard.sidebar.latestContents -->
         <!-- dashboard.sidebar.links -->
         <item name="wcf.acp.option.ultimate_links_category"><![CDATA[Link category]]></item>
-        <item name="wcf.acp.option.ultimate_links_category.description"><![CDATA[Please insert here the id of the category from which links should be shown. If the id is 0 then no links are shown.]]></item>
+        <item name="wcf.acp.option.ultimate_links_category.description"><![CDATA[Please select here the category from which links should be shown. If no category is selected then no links are shown.]]></item>
         <item name="wcf.acp.option.ultimate_links_items"><![CDATA[Number of links]]></item>
         <!-- /dashboard.sidebar.links -->
         <!-- dashboard.content.latestContents -->
@@ -307,6 +307,7 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
 		<item name="wcf.acp.ultimate.category.title.placeholder"><![CDATA[Good contents]]></item>
 		<item name="wcf.acp.ultimate.category.title.error.notUnique"><![CDATA[A category with the specified name already exists with this parent.]]></item>
 		<item name="wcf.acp.ultimate.category.slug"><![CDATA[Slug]]></item>
+		<item name="wcf.acp.ultimate.category.slug.description"><![CDATA[The slug may contain lower-case letters and numbers. The slug can contain multiple parts, separated by a dash (-). The first part may only contain lower-case letters.]]></item>
 		<item name="wcf.acp.ultimate.category.slug.placeholder"><![CDATA[good-contents]]></item>
 		<item name="wcf.acp.ultimate.category.slug.error.notUnique"><![CDATA[A category with the specified slug already exists with this parent.]]></item>
 		<item name="wcf.acp.ultimate.category.parent"><![CDATA[Parent]]></item>
@@ -336,6 +337,7 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
 		<item name="wcf.acp.ultimate.content.description.placeholder"><![CDATA[]]></item>
 		<item name="wcf.acp.ultimate.content.description.error.tooShort"><![CDATA[The description has to be at least 4 characters long.]]></item>
 		<item name="wcf.acp.ultimate.content.slug"><![CDATA[Slug]]></item>
+		<item name="wcf.acp.ultimate.content.slug.description"><![CDATA[The slug may contain lower-case letters and numbers. The slug can contain multiple parts, separated by a dash (-). The first part may only contain lower-case letters.]]></item>
 		<item name="wcf.acp.ultimate.content.slug.placeholder"><![CDATA[a-nice-story]]></item>
 		<item name="wcf.acp.ultimate.content.slug.error.notUnique"><![CDATA[A content with the specified slug already exists.]]></item>
 		<item name="wcf.acp.ultimate.content.categories"><![CDATA[Categories]]></item>
@@ -455,6 +457,7 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.page.title.placeholder"><![CDATA[Company profile]]></item>
 		<item name="wcf.acp.ultimate.page.title.error.notUnique"><![CDATA[A page with the specified title already exists with this parent.]]></item>
 		<item name="wcf.acp.ultimate.page.slug"><![CDATA[Slug]]></item>
+		<item name="wcf.acp.ultimate.page.slug.description"><![CDATA[The slug may contain lower-case letters and numbers. The slug can contain multiple parts, separated by a dash (-). The first part may only contain lower-case letters.]]></item>
 		<item name="wcf.acp.ultimate.page.slug.placeholder"><![CDATA[company-profile]]></item>
 		<item name="wcf.acp.ultimate.page.slug.error.notUnique"><![CDATA[A page with the specified slug already exists with this parent.]]></item>
 		<item name="wcf.acp.ultimate.page.parent"><![CDATA[Parent]]></item>
@@ -609,7 +612,7 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 		<item name="wcf.acp.ultimate.template.mediaTab.embed.embedURL"><![CDATA[Embed URL]]></item>
 		<item name="wcf.acp.ultimate.template.mediaTab.embed.embedURL.description"><![CDATA[Please insert here the complete link (with HTTP/HTTPS) to the file or hosted video. Do not use the embed URLs of the video hosting sites. Just the link you see directly in your browser.]]></item>
 		<item name="wcf.acp.ultimate.template.mediaTab.embed.mimeType"><![CDATA[MIME-type]]></item>
-		<item name="wcf.acp.ultimate.template.mediaTab.embed.mimeType.description"><![CDATA[Please select here the MIME-type of the linked file or hosted video. The most video hosters use the MIME-type 'application/x-shockwave-flash'. The MIME-type is necessary to embed the file or hosted video properly.]]></item>
+		<item name="wcf.acp.ultimate.template.mediaTab.embed.mimeType.description"><![CDATA[Please select here the MIME-type of the linked file. If you embed a video from a hosting portal, this setting is irrelevant. The MIME-type is necessary to embed the file.]]></item>
 		<item name="wcf.acp.ultimate.template.mediaTab.embed.mediaHeight"><![CDATA[Media height]]></item>
 		<item name="wcf.acp.ultimate.template.mediaTab.embed.mediaHeight.description"><![CDATA[Please insert here the height of the media. The embedded media will be resized to that height.]]></item>
 		<item name="wcf.acp.ultimate.template.mediaTab.embed.mediaWidth"><![CDATA[Media width]]></item>
@@ -787,7 +790,7 @@ For the InlineEdit you require the same rights to write, edit or delete contents
     
     <category name="ultimate.index">
         <item name="ultimate.index.copyright"><![CDATA[<a href="http://www.plugins-zum-selberbauen.de/"{if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if}>CMS: <strong>Ultimate CMS{if SHOW_VERSION_NUMBER} {@PACKAGE_VERSION}{/if}</strong>, developed by <strong>Jim Martens</strong></a>]]></item>
-        <item name="ultimate.index.beta"><![CDATA[Ultimate CMS: This is a beta version. Despite all tests there can be issues floating around. Please report them in the <a href="http://beta.plugins-zum-selberbauen.de/forum">beta forum</a> or on <a href="https://github.com/frmwrk123/de.plugins-zum-selberbauen.ultimate">Github</a>.]]></item>
+        <item name="ultimate.index.beta"><![CDATA[Ultimate CMS: This is a rc version. Despite all tests there can be issues floating around. Please report them in the <a href="http://beta.plugins-zum-selberbauen.de/forum">beta forum</a> or on <a href="https://github.com/frmwrk123/de.plugins-zum-selberbauen.ultimate">Github</a>.]]></item>
     </category>
 	
 	<!-- this category is used for all layout names -->

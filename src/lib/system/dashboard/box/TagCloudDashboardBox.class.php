@@ -31,7 +31,7 @@ use wcf\data\object\type\ObjectTypeCache;
 use wcf\page\IPage;
 use wcf\system\cache\builder\TagObjectCacheBuilder;
 use wcf\system\dashboard\box\AbstractSidebarDashboardBox;
-use wcf\system\tagging\TagCloud;
+use wcf\system\tagging\UltimateTagCloud;
 use wcf\system\WCF;
 
 /**
@@ -72,7 +72,7 @@ class TagCloudDashboardBox extends AbstractSidebarDashboardBox {
 			$languageIDs = array();
 			$languageIDs = WCF::getUser()->getLanguageIDs();
 				
-			$this->tagCloud = new TagCloud($languageIDs);
+			$this->tagCloud = new UltimateTagCloud($languageIDs);
 			$this->tagIDsToObjectTypeID = TagObjectCacheBuilder::getInstance()->getData(array(), 'tagIDsToObjectTypeID');
 		}
 	
@@ -95,12 +95,12 @@ class TagCloudDashboardBox extends AbstractSidebarDashboardBox {
 		$tmpTags = $tags;
 		// remove all tags of contents that do not belong to the current language
 		$languageID = WCF::getLanguage()->__get('languageID');
-		foreach ($tmpTags as $tag) {
-			foreach ($this->tagIDsToObjectTypeID as $objectTypeID => $tagIDs) {
-				if (in_array($tag->__get('tagID'), $tagIDs)) {
+		foreach ($this->tagIDsToObjectTypeID as $objectTypeID => $tagIDs) {
+			foreach ($tmpTags as $tagID => $tag) {
+				if (in_array($tagID, $tagIDs)) {
 					$objectType = ObjectTypeCache::getInstance()->getObjectType($objectTypeID);
 					if ($objectType->__get('objectType') == 'de.plugins-zum-selberbauen.ultimate.content' && $languageID != $tag->__get('languageID')) {
-						unset($tags[$tag->__get('name')]);
+						unset($tags[$tagID]);
 					}
 				}
 			}
@@ -108,18 +108,18 @@ class TagCloudDashboardBox extends AbstractSidebarDashboardBox {
 		}
 		
 		$objectTypeToTagID = array();
-		foreach ($tags as $tag) {
+		foreach ($tags as $tagID => $tag) {
 			$found = 0;
 			$latestObjectTypeID = 0;
 			foreach ($this->tagIDsToObjectTypeID as $objectTypeID => $tagIDs) {
-				if (in_array($tag->__get('tagID'), $tagIDs)) {
+				if (in_array($tagID, $tagIDs)) {
 					$found++;
 					$latestObjectTypeID = $objectTypeID;
 				}
 			}
 			
 			if ($found == 1) {
-				$objectTypeToTagID[$tag->__get('tagID')] = ObjectTypeCache::getInstance()->getObjectType($latestObjectTypeID);
+				$objectTypeToTagID[$tagID] = ObjectTypeCache::getInstance()->getObjectType($latestObjectTypeID);
 			}
 		}
 		

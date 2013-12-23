@@ -27,8 +27,6 @@
  */
 namespace ultimate\acp\form;
 use ultimate\data\widget\area\WidgetAreaAction;
-use ultimate\data\widget\WidgetNodeList;
-use ultimate\system\cache\builder\WidgetTypeCacheBuilder;
 use wcf\acp\form\DashboardOptionForm;
 use wcf\data\dashboard\box\DashboardBoxList;
 use wcf\data\object\type\ObjectTypeCache;

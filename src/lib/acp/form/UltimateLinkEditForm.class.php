@@ -30,6 +30,7 @@ use ultimate\data\link\CategorizedLink;
 use ultimate\data\link\Link;
 use ultimate\data\link\LinkAction;
 use wcf\form\AbstractForm;
+use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
 

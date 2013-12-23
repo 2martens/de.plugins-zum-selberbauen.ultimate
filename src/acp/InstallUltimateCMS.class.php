@@ -31,6 +31,7 @@ use wcf\system\cache\builder\EventListenerCacheBuilder;
 use wcf\system\event\EventHandler;
 use wcf\system\io\File;
 use wcf\system\Regex;
+use wcf\system\WCF;
 
 /**
  * Is called during installation of Ultimate CMS.
@@ -87,7 +88,7 @@ final class InstallUltimateCMS {
 		
 		$parameters = array(
 			'data' => array(
-				'packageID' => $packageID,
+				'packageID' => $this->packageID,
 				'blockTypeName' => 'ultimate.blocktype.media',
 				'blockTypeClassName' => 'ultimate\system\blocktype\MediaBlockType'
 			)
@@ -113,4 +114,4 @@ final class InstallUltimateCMS {
 	}
 	
 }
-new InstallUltimateCMS();
+new \ultimate\acp\InstallUltimateCMS();
