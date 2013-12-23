@@ -43,6 +43,7 @@
 				<exclude name="acp/templates/**" />
 				<include name="lib/acp/form/UltimateContent*Form*" />
 				<include name="lib/acp/form/UltimateLinkEditForm*" />
+				<include name="lib/acp/form/UltimateWidgetAreaAddForm*" />
 				<include name="lib/system/dashboard/box/TagCloudDashboardBox.class.php" />
 				<include name="lib/system/media/provider/MediaProviderHandler*" />
 				<include name="lib/system/ULTIMATECore.class.php" />
