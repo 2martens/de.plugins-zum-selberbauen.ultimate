@@ -28,30 +28,13 @@
 			basedir="srcWCF" 
 		/>
 		
-		<!-- rc 1 update tar -->
-		<tar destfile="metadata/acptemplates_update.rc1.tar">
-			<tarfileset dir="src/acp/templates">
-				<include name="*header.tpl" />
-				<include name="*CategoryAdd.tpl" />
-				<include name="*ContentAdd.tpl" />
-				<include name="*PageAdd.tpl" />
-			</tarfileset>
-		</tar>
-		<tar destfile="metadata/files_update.rc1.tar">
+		<!-- rc 2 update tar -->
+		<tar destfile="metadata/files_update.rc2.tar">
 			<tarfileset dir="src">
 				<exclude name="templates/**" />
 				<exclude name="acp/templates/**" />
-				<include name="lib/acp/form/UltimateContent*Form*" />
-				<include name="lib/acp/form/UltimateLinkEditForm*" />
-				<include name="lib/acp/form/UltimateWidgetAreaAddForm*" />
-				<include name="lib/system/dashboard/box/TagCloudDashboardBox.class.php" />
-				<include name="lib/system/media/provider/MediaProviderHandler*" />
-				<include name="lib/system/ULTIMATECore.class.php" />
-			</tarfileset>
-		</tar>
-		<tar destfile="metadata/templates_update.rc1.tar">
-			<tarfileset dir="src/templates">
-				<include name="*contentBlockType.tpl" />
+				<include name="lib/data/content/TaggedContentList*" />
+				<include name="lib/data/menu/item/MenuItem*" />
 			</tarfileset>
 		</tar>
 	</target>
