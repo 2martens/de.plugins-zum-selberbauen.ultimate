@@ -26,10 +26,9 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\menu\item;
-use ultimate\data\AbstractUltimateProcessibleDatabaseObject;
 use ultimate\system\menu\custom\DefaultCustomMenuItemProvider;
+use wcf\data\page\menu\item\PageMenuItem;
 use wcf\system\exception\SystemException;
-use wcf\system\menu\ITreeMenuItem;
 use wcf\system\request\LinkHandler;
 use wcf\system\request\UltimateLinkHandler;
 use wcf\system\Regex;
@@ -59,7 +58,7 @@ use wcf\system\WCF;
  * @property-read	string		$className
  * @property-read	boolean		$isLandingPage
  */
-class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITreeMenuItem {
+class MenuItem extends PageMenuItem {
 	/**
 	 * The database table name.
 	 * @var	string
@@ -97,12 +96,21 @@ class MenuItem extends AbstractUltimateProcessibleDatabaseObject implements ITre
 	protected $controller = null;
 	
 	/**
+	 * Returns the database table name.
+	 *
+	 * @return	string
+	 */
+	public static function getDatabaseTableName() {
+		return 'ultimate'.WCF_N.'_'.static::$databaseTableName;
+	}
+	
+	/**
 	 * Returns the processor.
 	 * 
 	 * @return	\ultimate\system\menu\custom\DefaultCustomMenuItemProvider
 	 */
 	public function getProcessor() {
-		if ($this->processor === null) {
+		if (parent::getProcessor() === null) {
 			$this->processor = new DefaultCustomMenuItemProvider($this);
 		}
 		
