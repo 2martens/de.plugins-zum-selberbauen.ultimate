@@ -182,6 +182,8 @@ class UltimateLinkAssignToCategoryForm extends AbstractForm {
 		
 		WCF::getTPL()->assign('message', 'wcf.clipboard.item.link.assignToCategory.success');
 		WCF::getTPL()->display('success');
+		// exiting the execution flow at this point is intended
+		// after displaying the success message, the request shall end
 		exit;
 	}
 	

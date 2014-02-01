@@ -84,6 +84,5 @@ class IndexPage extends AbstractPage {
 		parent::show();
 		HeaderUtil::sendHeaders();
 		echo $this->output;
-		exit;
 	}
 }

@@ -153,7 +153,6 @@ class ContentPage extends AbstractPage {
 		// everything's fine
 		HeaderUtil::sendHeaders();
 		echo $this->output;
-		exit;
 	}
 	
 	/**
