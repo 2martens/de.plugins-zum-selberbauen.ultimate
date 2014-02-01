@@ -107,7 +107,6 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 	 */
 	public function readParameters() {
 		parent::readParameters();
-		// I18nHandler::getInstance()->disableAssignValueVariables();
 		if (isset($_REQUEST['id'])) $this->contentID = intval($_REQUEST['id']);
 		$content = new CategorizedContent(new Content($this->contentID));
 		if (!$content->__get('contentID')) {

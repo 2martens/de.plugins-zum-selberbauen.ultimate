@@ -711,17 +711,6 @@ class UltimateContentAddForm extends MessageForm {
 			$this->publishDateTimestamp = $dateTime->format('U');
 			return;
 		}
-		// for the very unlikely reason that the date is not in the format
-		// Y-m-d, we have to make it that way
-		
-		/*$phpDateFormat = DateTimeUtil::getPHPDateFormatFromDateTimePicker($this->dateFormat);
-		$phpDateFormat .= ' H:i';
-		$dateTime = \DateTime::createFromFormat(
-			$phpDateFormat,
-			$this->publishDate,
-			WCF::getUser()->getTimezone()
-		);
-		$this->publishDateTimestamp = $dateTime->format('U');*/
 	}
 	
 }
