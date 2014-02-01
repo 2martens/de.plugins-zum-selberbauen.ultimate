@@ -28,9 +28,6 @@
 namespace ultimate\system\event\listener;
 use ultimate\system\tagging\TypedTagCloud;
 use wcf\system\event\IEventListener;
-use wcf\system\tagging\TagCloud;
-use wcf\system\WCF;
-use wcf\util\ArrayUtil;
 
 /**
  * Replaces the typed tag cloud in TaggedPage with a typed tag cloud that only contains tags of the current user language.

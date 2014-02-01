@@ -16,7 +16,7 @@
  * GNU Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}}.
+ * along with the Ultimate CMS. If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -26,11 +26,9 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\user\notification\event;
-use ultimate\data\content\Content;
 use ultimate\system\cache\builder\ContentCacheBuilder;
 use wcf\system\request\UltimateLinkHandler;
 use wcf\system\user\notification\event\AbstractUserNotificationEvent;
-use wcf\system\WCF;
 
 /**
  * User notification event for content comments.

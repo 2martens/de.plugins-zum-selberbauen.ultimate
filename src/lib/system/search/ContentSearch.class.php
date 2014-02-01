@@ -30,8 +30,6 @@ use ultimate\system\cache\builder\ContentCacheBuilder;
 use wcf\form\IForm;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\search\AbstractSearchableObjectType;
-use wcf\system\search\SearchEngine;
-use wcf\system\WCF;
 
 /**
  * An implementation of ISearchableObjectType for searching in contents.

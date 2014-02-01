@@ -28,14 +28,9 @@
 namespace ultimate\system;
 use ultimate\system\request\Route;
 use wcf\system\application\AbstractApplication;
-use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\menu\page\PageMenu;
-use wcf\system\request\LinkHandler;
 use wcf\system\request\RequestHandler;
 use wcf\system\request\RouteHandler;
-use wcf\system\style\StyleHandler;
-use wcf\system\WCF;
-use wcf\util\StringUtil;
 
 /**
  * The core class of the Ultimate CMS.

@@ -16,7 +16,7 @@
  * GNU Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}}.
+ * along with the Ultimate CMS. If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -28,7 +28,6 @@
 namespace ultimate\system\widget;
 use ultimate\data\widget\area\WidgetArea;
 use ultimate\system\cache\builder\WidgetAreaBoxCacheBuilder;
-use wcf\data\object\type\ObjectTypeCache;
 use wcf\page\IPage;
 use wcf\system\exception\SystemException;
 use wcf\system\SingletonFactory;

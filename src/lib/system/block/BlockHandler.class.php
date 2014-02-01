@@ -26,7 +26,6 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\block;
-use ultimate\data\block\Block;
 use ultimate\system\cache\builder\BlockCacheBuilder;
 use wcf\system\SingletonFactory;
 

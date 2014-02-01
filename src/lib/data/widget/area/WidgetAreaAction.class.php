@@ -33,7 +33,6 @@ use wcf\data\dashboard\box\DashboardBoxList;
 use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\ISortableAction;
-use wcf\system\dashboard\DashboardHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exception\UserInputException;
 use wcf\system\WCF;

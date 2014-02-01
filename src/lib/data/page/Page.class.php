@@ -26,9 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\page;
-use ultimate\data\content\Content;
 use ultimate\data\AbstractUltimateDatabaseObject;
-use wcf\data\user\group\UserGroup;
 use wcf\data\user\User;
 use wcf\data\ITitledObject;
 use wcf\system\WCF;

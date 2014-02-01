@@ -29,7 +29,6 @@ namespace ultimate\acp\form;
 use ultimate\acp\form\UltimateCategoryAddForm;
 use ultimate\data\category\Category;
 use ultimate\data\category\CategoryAction;
-use ultimate\data\category\CategoryEditor;
 use ultimate\util\CategoryUtil;
 use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;

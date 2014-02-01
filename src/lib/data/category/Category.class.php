@@ -26,7 +26,6 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\category;
-use ultimate\data\content\Content;
 use ultimate\data\AbstractUltimateDatabaseObject;
 use wcf\data\ITitledObject;
 use wcf\system\WCF;

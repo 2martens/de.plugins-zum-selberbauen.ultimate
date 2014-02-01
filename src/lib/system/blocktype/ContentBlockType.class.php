@@ -27,7 +27,6 @@
  */
 namespace ultimate\system\blocktype;
 use ultimate\data\content\CategorizedContent;
-use ultimate\data\content\Content;
 use ultimate\data\content\TaggedContent;
 use ultimate\data\IUltimateData;
 use ultimate\system\cache\builder\ContentAttachmentCacheBuilder;
@@ -39,7 +38,6 @@ use wcf\system\comment\CommentHandler;
 use wcf\system\language\I18nHandler;
 use wcf\system\like\LikeHandler;
 use wcf\system\request\LinkHandler;
-use wcf\system\request\UltimateLinkHandler;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
 
