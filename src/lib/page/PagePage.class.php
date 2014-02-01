@@ -139,7 +139,6 @@ class PagePage extends AbstractPage {
 		
 		HeaderUtil::sendHeaders();
 		echo $this->output;
-		exit;
 	}
 	
 	/**
