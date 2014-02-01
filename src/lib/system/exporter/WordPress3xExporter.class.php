@@ -135,12 +135,7 @@ class WordPress3xExporter extends AbstractExporter {
 			);
 			
 			// import user
-			$newUserID = ImportHandler::getInstance()->getImporter('com.woltlab.wcf.user')->import($row['ID'], $data);
-			
-			// update password hash
-			if ($newUserID) {
-				//$passwordUpdateStatement->execute(array($row['user_pass'], $newUserID));
-			}
+			ImportHandler::getInstance()->getImporter('com.woltlab.wcf.user')->import($row['ID'], $data);
 		}
 	}
 	
