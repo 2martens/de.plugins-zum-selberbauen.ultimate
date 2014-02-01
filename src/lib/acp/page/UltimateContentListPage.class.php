@@ -26,7 +26,6 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\acp\page;
-use ultimate\data\category\Category;
 use wcf\page\AbstractCachedListPage;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\menu\acp\ACPMenu;

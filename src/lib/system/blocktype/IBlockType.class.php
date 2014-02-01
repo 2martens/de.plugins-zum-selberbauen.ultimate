@@ -27,7 +27,6 @@
  */
 namespace ultimate\system\blocktype;
 use ultimate\data\layout\Layout;
-use wcf\page\IPage;
 
 /**
  * Interface for all BlockType classes.

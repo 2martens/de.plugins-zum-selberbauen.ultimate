@@ -30,7 +30,6 @@ use ultimate\data\block\Block;
 use ultimate\data\layout\Layout;
 use ultimate\data\IUltimateData;
 use ultimate\system\cache\builder\BlockCacheBuilder;
-use wcf\page\IPage;
 use wcf\system\event\EventHandler;
 use wcf\system\exception\SystemException;
 use wcf\system\request\RequestHandler;

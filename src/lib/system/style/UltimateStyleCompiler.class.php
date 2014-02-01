@@ -26,8 +26,6 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\style;
-use ultimate\system\ULTIMATECore;
-use wcf\system\application\ApplicationHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\style\StyleCompiler;
 use wcf\system\Callback;

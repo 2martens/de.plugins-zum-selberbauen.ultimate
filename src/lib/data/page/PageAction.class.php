@@ -27,8 +27,6 @@
  */
 namespace ultimate\data\page;
 use wcf\data\AbstractDatabaseObjectAction;
-use wcf\system\database\util\PreparedStatementConditionBuilder;
-use wcf\system\exception\ValidateActionException;
 use wcf\util\ArrayUtil;
 
 /**

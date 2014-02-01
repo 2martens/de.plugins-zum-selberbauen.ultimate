@@ -29,7 +29,6 @@ namespace ultimate\acp\form;
 use ultimate\acp\form\UltimatePageAddForm;
 use ultimate\data\page\Page;
 use ultimate\data\page\PageAction;
-use ultimate\data\page\PageEditor;
 use ultimate\util\PageUtil;
 use wcf\form\AbstractForm;
 use wcf\system\cache\builder\UserGroupCacheBuilder;

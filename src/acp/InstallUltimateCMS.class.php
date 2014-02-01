@@ -26,11 +26,6 @@
  */
 namespace ultimate\acp;
 use ultimate\data\blocktype\BlockTypeAction;
-use wcf\data\page\menu\item\PageMenuItemAction;
-use wcf\system\cache\builder\EventListenerCacheBuilder;
-use wcf\system\event\EventHandler;
-use wcf\system\io\File;
-use wcf\system\Regex;
 use wcf\system\WCF;
 
 /**

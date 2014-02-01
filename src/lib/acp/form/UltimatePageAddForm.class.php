@@ -26,20 +26,17 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\acp\form;
-use ultimate\data\content\ContentList;
 use ultimate\data\page\PageAction;
 use ultimate\data\page\PageEditor;
 use ultimate\util\PageUtil;
 use wcf\form\AbstractForm;
 use wcf\system\cache\builder\UserGroupCacheBuilder;
-use wcf\system\exception\SystemException;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\request\LinkHandler;
 use wcf\system\Regex;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
-use wcf\util\DateTimeUtil;
 use wcf\util\DateUtil;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;

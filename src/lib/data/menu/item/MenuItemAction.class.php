@@ -27,7 +27,6 @@
  */
 namespace ultimate\data\menu\item;
 use ultimate\data\category\Category;
-use ultimate\data\content\Content;
 use ultimate\data\page\Page;
 use ultimate\system\cache\builder\CategoryCacheBuilder;
 use ultimate\system\cache\builder\ContentCacheBuilder;
