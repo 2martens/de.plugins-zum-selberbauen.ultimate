@@ -59,7 +59,6 @@ class AuthorCacheBuilder extends AbstractCacheBuilder {
 		);
 		
 		$users = UserCacheBuilder::getInstance()->getData(array(), 'users');
-		$userIDs = UserCacheBuilder::getInstance()->getData(array(), 'userIDs');
 		
 		if (empty($users)) return $data;
 		
