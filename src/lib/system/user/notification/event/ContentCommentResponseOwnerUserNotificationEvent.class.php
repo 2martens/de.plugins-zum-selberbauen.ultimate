@@ -27,8 +27,6 @@
  */
 namespace ultimate\system\user\notification\event;
 use ultimate\system\cache\builder\ContentCacheBuilder;
-use wcf\data\comment\Comment;
-use wcf\data\user\User;
 use wcf\system\cache\builder\CommentCacheBuilder;
 use wcf\system\cache\builder\UserCacheBuilder;
 use wcf\system\request\UltimateLinkHandler;
