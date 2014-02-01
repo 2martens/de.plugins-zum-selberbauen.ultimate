@@ -113,12 +113,6 @@ class WordPress3xExporter extends AbstractExporter {
 	 * Exports users.
 	 */
 	public function exportUsers($offset, $limit) {
-		// prepare password update
-		$sql = 'UPDATE wcf'.WCF_N.'_user
-		        SET    password = ?
-		        WHERE  userID   = ?';
-		$passwordUpdateStatement = WCF::getDB()->prepareStatement($sql);
-		
 		// get users
 		$sql = 'SELECT   *
 		        FROM     '.$this->databasePrefix.'users

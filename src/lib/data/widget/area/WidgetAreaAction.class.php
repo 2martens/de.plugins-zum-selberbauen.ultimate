@@ -86,12 +86,6 @@ class WidgetAreaAction extends AbstractDatabaseObjectAction implements ISortable
 	public $boxStructure = array();
 	
 	/**
-	 * object type object
-	 * @var	\wcf\data\object\type\ObjectType
-	 */
-	public $objectType = null;
-	
-	/**
 	 * widget area id
 	 * @var integer
 	 */
@@ -108,7 +102,6 @@ class WidgetAreaAction extends AbstractDatabaseObjectAction implements ISortable
 		$this->readInteger('widgetAreaID');
 	
 		// validate object type
-		$objectType = ObjectTypeCache::getInstance()->getObjectTypeByName('com.woltlab.wcf.user.dashboardContainer', 'de.plugins-zum-selberbauen.template');
 		$this->widgetAreaID = $this->parameters['widgetAreaID'];
 		
 		// read all dashboard boxes of the relevant box type

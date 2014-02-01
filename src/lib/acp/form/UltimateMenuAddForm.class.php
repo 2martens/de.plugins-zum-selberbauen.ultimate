@@ -160,7 +160,6 @@ class UltimateMenuAddForm extends AbstractForm {
 		
 		$returnValues = $this->objectAction->getReturnValues();
 		$menuID = $returnValues['returnValues']->menuID;
-		$updateValues = array();
 		
 		$this->saved();
 		

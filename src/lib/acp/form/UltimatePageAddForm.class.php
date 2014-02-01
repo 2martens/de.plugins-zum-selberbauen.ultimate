@@ -511,7 +511,6 @@ class UltimatePageAddForm extends AbstractForm {
 		
 		$pattern = '\d{4}-\d{2}-\d{2} \d{2}:\d{2}';
 		$regex = new Regex($pattern);
-		$dateTimeNow = new \DateTime('@'.TIME_NOW, WCF::getUser()->getTimezone());
 		if ($regex->match($this->publishDate)) {
 			// the browser has implemented the input type date
 			// or (more likely) the user hasn't changed the jQuery code

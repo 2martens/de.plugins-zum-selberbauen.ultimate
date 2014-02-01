@@ -600,7 +600,6 @@ class idna_convert
     protected function _nameprep($input)
     {
         $output = array();
-        $error = false;
         //
         // Mapping
         // Walking through the input array, performing the required steps on each of
