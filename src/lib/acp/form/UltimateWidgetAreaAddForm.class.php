@@ -27,6 +27,7 @@
  */
 namespace ultimate\acp\form;
 use ultimate\data\widget\area\WidgetAreaAction;
+use ultimate\util\WidgetAreaUtil;
 use wcf\acp\form\DashboardOptionForm;
 use wcf\data\dashboard\box\DashboardBoxList;
 use wcf\data\object\type\ObjectTypeCache;
@@ -187,9 +188,9 @@ class UltimateWidgetAreaAddForm extends DashboardOptionForm {
 		if (empty($this->widgetAreaName)) {
 			throw new UserInputException('widgetAreaName');
 		}
-		// TODO: WidgetAreaUtil
-// 		if (!WidgetAreaUtil::isAvailableName($this->widgetAreaName)) {
-// 			throw new UserInputException('widgetAreaName', 'notUnique');
-// 		}
+		
+		if (!WidgetAreaUtil::isAvailableName($this->widgetAreaName)) {
+			throw new UserInputException('widgetAreaName', 'notUnique');
+		}
 	}
 }

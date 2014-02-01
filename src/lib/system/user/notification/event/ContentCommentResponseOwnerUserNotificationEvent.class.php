@@ -29,6 +29,8 @@ namespace ultimate\system\user\notification\event;
 use ultimate\system\cache\builder\ContentCacheBuilder;
 use wcf\data\comment\Comment;
 use wcf\data\user\User;
+use wcf\system\cache\builder\CommentCacheBuilder;
+use wcf\system\cache\builder\UserCacheBuilder;
 use wcf\system\request\UltimateLinkHandler;
 use wcf\system\user\notification\event\AbstractUserNotificationEvent;
 use wcf\system\WCF;
@@ -66,9 +68,10 @@ class ContentCommentResponseOwnerUserNotificationEvent extends AbstractUserNotif
 	 * @return	string
 	 */
 	public function getMessage() {
-		// @todo: use cache or a single query to retrieve required data
-		$comment = new Comment($this->userNotificationObject->__get('commentID'));
-		$commentAuthor = new User($comment->__get('userID'));
+		$comments = CommentCacheBuilder::getInstance()->get(array(), 'comments');
+		$comment = $comments[$this->userNotificationObject->__get('commentID')];
+		$users = UserCacheBuilder::getInstance()->get(array(), 'users');
+		$commentAuthor = $users[$comment->__get('userID')];
 		
 		return $this->getLanguage()->getDynamicVariable('wcf.user.notification.content.commentResponseOwner.message', array(
 			'author' => $this->author,
@@ -83,8 +86,10 @@ class ContentCommentResponseOwnerUserNotificationEvent extends AbstractUserNotif
 	 * @return	string
 	 */
 	public function getEmailMessage($notificationType = 'instant') {
-		$comment = new Comment($this->userNotificationObject->__get('commentID'));
-		$commentAuthor = new User($comment->__get('userID'));
+		$comments = CommentCacheBuilder::getInstance()->get(array(), 'comments');
+		$comment = $comments[$this->userNotificationObject->__get('commentID')];
+		$users = UserCacheBuilder::getInstance()->get(array(), 'users');
+		$commentAuthor = $users[$comment->__get('userID')];
 		$content = $this->getContent();
 		
 		return $this->getLanguage()->getDynamicVariable('wcf.user.notification.content.commentResponseOwner.mail', array(
