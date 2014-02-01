@@ -3,7 +3,6 @@ namespace ultimate\system\exporter;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exporter\AbstractExporter;
 use wcf\system\importer\ImportHandler;
-use wcf\system\WCF;
 
 /**
  * Exporter for Wordpress 3.x

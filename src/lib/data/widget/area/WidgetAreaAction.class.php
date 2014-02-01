@@ -30,7 +30,6 @@
 namespace ultimate\data\widget\area;
 use ultimate\system\widget\WidgetHandler;
 use wcf\data\dashboard\box\DashboardBoxList;
-use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\ISortableAction;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
