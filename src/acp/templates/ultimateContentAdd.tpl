@@ -142,7 +142,7 @@
 					{if $action == 'edit'}
 						{assign var=attachmentObjectID value=$contentID}
 					{/if}
-					{include file='messageFormTabs' wysiwygContainerID='text'}
+					{if ULTIMATE_GENERAL_CONTENT_USEWYSIWYG}{include file='messageFormTabs' wysiwygContainerID='text'}{/if}
 				</dd>
 			</dl>
 		</fieldset>
@@ -249,4 +249,4 @@
 </form>
 
 {include file='footer'}
-{include file='wysiwyg'}
+{if ULTIMATE_GENERAL_CONTENT_USEWYSIWYG}{include file='wysiwyg'}{/if}
