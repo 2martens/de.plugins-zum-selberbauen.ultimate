@@ -248,11 +248,14 @@ class WordPress3xExporter extends AbstractExporter {
 		$statement->execute($conditionBuilder->getParameters());
 		while ($row = $statement->fetchArray()) {
 			if (!isset($categories[$row['object_id']])) $categories[$row['object_id']] = array();
-			$categories[$row['object_id']][] = (
-				isset($this->newCategoryIDs[$row['term_id']])
-				? $this->newCategoryIDs[$row['term_id']]
-				: ImportHandler::getInstance()->getNewID('de.plugins-zum-selberbauen.ultimate.category', $row['term_id'])
-			);
+			$newID = ImportHandler::getInstance()->getNewID('de.plugins-zum-selberbauen.ultimate.category', $row['term_id']);
+			if (isset($this->newCategoryIDs[$row['term_id']]) || $newID !== null) {
+				$categories[$row['object_id']][] = (
+					isset($this->newCategoryIDs[$row['term_id']])
+					? $this->newCategoryIDs[$row['term_id']]
+					: $newID
+				);
+			}
 		}
 		
 		// get contents
