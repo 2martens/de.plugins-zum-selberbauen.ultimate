@@ -60,7 +60,7 @@
 			<dl{if $errorField == 'pageSlug'} class="formError"{/if}>
 				<dt><label for="pageSlug">{lang}wcf.acp.ultimate.page.slug{/lang}</label></dt>
 				<dd>
-					<input type="text" id="pageSlug" name="pageSlug" value="{@$pageSlug}" required="required" placeholder="{lang}wcf.acp.ultimate.page.slug.placeholder{/lang}" pattern="^[a-z]+(?:\-{literal}{{/literal}1{literal}}{/literal}[a-z0-9]+)*(?:\_{literal}{{/literal}1{literal}}{/literal}[a-z]+(?:\-{literal}{{/literal}1{literal}}{/literal}[a-z0-9]+)*)*$" class="long" />
+					<input type="text" id="pageSlug" name="pageSlug" value="{@$pageSlug}" required="required" placeholder="{lang}wcf.acp.ultimate.page.slug.placeholder{/lang}" pattern="^[a-zA-Z]+(?:\-{literal}{{/literal}1{literal}}{/literal}[a-zA-Z0-9]+)*(?:\_{literal}{{/literal}1{literal}}{/literal}[a-zA-Z]+(?:\-{literal}{{/literal}1{literal}}{/literal}[a-zA-Z0-9]+)*)*$" class="long" />
 					<small>
 						{lang}wcf.acp.ultimate.page.slug.description{/lang}
 					</small>
