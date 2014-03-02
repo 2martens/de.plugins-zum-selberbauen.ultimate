@@ -203,7 +203,7 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
 		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength"><![CDATA[Read more length]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength.description"><![CDATA[Please insert here the default length after which contents should be truncated.]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_useWYSIWYG"><![CDATA[Use WYSIWYG editor?]]></item>
-		<item name="wcf.acp.option.ultimate_general_content_useWYSIWYG.description"><![CDATA[Please check this checkbox if you want to use the WYSIWYG editor to create and edit contents.]]></item>
+		<item name="wcf.acp.option.ultimate_general_content_useWYSIWYG.description"><![CDATA[Please check this checkbox if you want to use the WYSIWYG editor to create and edit contents. If the editor is not used, some convenience functions will not work (include smileys into content by clicking on them, including attachments into content with a click).]]></item>
 		<!-- /ultimate.general.content -->
 		
 		<!-- ultimate.general.template -->
