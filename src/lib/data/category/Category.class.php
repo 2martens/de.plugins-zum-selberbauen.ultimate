@@ -154,6 +154,10 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledObject {
 	 * @param	array	$data
 	 */
 	protected function handleData($data) {
+		if (!isset($data['categoryID'])) {
+			parent::handleData($data);
+			return;
+		}
 		$data['categoryID'] = intval($data['categoryID']);
 		$data['categoryParent'] = intval($data['categoryParent']);
 		parent::handleData($data);
