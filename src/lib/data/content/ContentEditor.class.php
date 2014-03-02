@@ -164,7 +164,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 		}
 		
 		// insert new categories
-		if (!empty($categoryIDs) > 0) {
+		if (!empty($categoryIDs)) {
 			$sql = "INSERT INTO ultimate".WCF_N."_content_to_category
 			               (contentID, categoryID)
 			        VALUES (?, ?)";
