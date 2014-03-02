@@ -86,6 +86,11 @@ false:wcf.acp.option.ultimate_general_englishLanguage.AE]]>
 				<optiontype>integer</optiontype>
 				<defaultvalue>150</defaultvalue>
 			</option>
+			<option name="ultimate_general_content_useWYSIWYG">
+				<categoryname>ultimate.general.content</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
 			<!-- /general/content options -->
 			
 			<!-- general/template options -->

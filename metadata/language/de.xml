@@ -202,6 +202,8 @@ Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$com
 Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$authorVCard</li><li>$categories</li><li>$tags</li></ul>]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength"><![CDATA['Weiterlesen'-Länge]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength.description"><![CDATA[Geben Sie hier an, nach wie vielen Zeichen standardmäßig ein Inhalt abgeschnitten werden soll.]]></item>
+		<item name="wcf.acp.option.ultimate_general_content_useWYSIWYG"><![CDATA[WYSIWYG-Editor nutzen?]]></item>
+		<item name="wcf.acp.option.ultimate_general_content_useWYSIWYG.description"><![CDATA[Geben Sie hier an, ob Sie den WYSIWYG-Editor zum Erstellen und Bearbeiten von Inhalten verwenden möchten.]]></item>
 		<!-- /ultimate.general.content -->
 		
 		<!-- ultimate.general.template -->
