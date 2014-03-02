@@ -202,6 +202,8 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
 Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$authorVCard</li><li>$categories</li><li>$tags</li></ul>]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength"><![CDATA[Read more length]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength.description"><![CDATA[Please insert here the default length after which contents should be truncated.]]></item>
+		<item name="wcf.acp.option.ultimate_general_content_useWYSIWYG"><![CDATA[Use WYSIWYG editor?]]></item>
+		<item name="wcf.acp.option.ultimate_general_content_useWYSIWYG.description"><![CDATA[Please check this checkbox if you want to use the WYSIWYG editor to create and edit contents.]]></item>
 		<!-- /ultimate.general.content -->
 		
 		<!-- ultimate.general.template -->
