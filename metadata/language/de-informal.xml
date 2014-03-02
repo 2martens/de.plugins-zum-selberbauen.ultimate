@@ -309,7 +309,7 @@ Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$com
 		<item name="wcf.acp.ultimate.category.title.placeholder"><![CDATA[Gute Inhalte]]></item>
 		<item name="wcf.acp.ultimate.category.title.error.notUnique"><![CDATA[Der angegebene Name existiert bereits bei einer Kategorie auf gleichem Level.]]></item>
 		<item name="wcf.acp.ultimate.category.slug"><![CDATA[URL-kompatibler Name]]></item>
-		<item name="wcf.acp.ultimate.category.slug.description"><![CDATA[Der URL-kompatible Name darf aus Kleinbuchstaben und Ziffern bestehen. Einzelne Bestandteile werden durch Bindestriche getrennt. Der erste Bestandteil darf nur Kleinbuchstaben enthalten.]]></item>
+		<item name="wcf.acp.ultimate.category.slug.description"><![CDATA[Der URL-kompatible Name darf aus Klein- und Großbuchstaben sowie Ziffern bestehen. Einzelne Bestandteile werden durch Bindestriche getrennt. Der erste Bestandteil darf nur Klein- und Großbuchstaben enthalten.]]></item>
 		<item name="wcf.acp.ultimate.category.slug.placeholder"><![CDATA[good-contents]]></item>
 		<item name="wcf.acp.ultimate.category.slug.error.notUnique"><![CDATA[Der angegebene Name existiert bereits bei einer Kategorie auf gleichem Level.]]></item>
 		<item name="wcf.acp.ultimate.category.parent"><![CDATA[Übergeordnete Kategorie]]></item>
@@ -339,7 +339,7 @@ Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$com
 		<item name="wcf.acp.ultimate.content.description.placeholder"><![CDATA[]]></item>
 		<item name="wcf.acp.ultimate.content.description.error.tooShort"><![CDATA[Die Beschreibung muss mindestens 4 Zeichen lang sein.]]></item>
 		<item name="wcf.acp.ultimate.content.slug"><![CDATA[URL-kompatibler Titel]]></item>
-		<item name="wcf.acp.ultimate.content.slug.description"><![CDATA[Der URL-kompatible Titel darf aus Kleinbuchstaben und Ziffern bestehen. Einzelne Bestandteile werden durch Bindestriche getrennt. Der erste Bestandteil darf nur Kleinbuchstaben enthalten.]]></item>
+		<item name="wcf.acp.ultimate.content.slug.description"><![CDATA[Der URL-kompatible Titel darf aus Klein- und Großbuchstaben sowie Ziffern bestehen. Einzelne Bestandteile werden durch Bindestriche getrennt. Der erste Bestandteil darf nur Klein- und Großbuchstaben enthalten.]]></item>
 		<item name="wcf.acp.ultimate.content.slug.placeholder"><![CDATA[a-nice-story]]></item>
 		<item name="wcf.acp.ultimate.content.slug.error.notUnique"><![CDATA[Der angegebene URL-kompatible Titel existiert bereits bei einem Inhalt.]]></item>
 		<item name="wcf.acp.ultimate.content.categories"><![CDATA[Kategorien]]></item>
@@ -458,7 +458,7 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.page.title.placeholder"><![CDATA[Beispielseite mit viel Gewürz]]></item>
 		<item name="wcf.acp.ultimate.page.title.error.notUnique"><![CDATA[Der angegebene Titel existiert bereits bei einer Seite auf gleichem Level.]]></item>
 		<item name="wcf.acp.ultimate.page.slug"><![CDATA[URL-kompatibler Titel]]></item>
-		<item name="wcf.acp.ultimate.page.slug.description"><![CDATA[Der URL-kompatible Titel darf aus Kleinbuchstaben und Ziffern bestehen. Einzelne Bestandteile werden durch Bindestriche getrennt. Der erste Bestandteil darf nur Kleinbuchstaben enthalten.]]></item>
+		<item name="wcf.acp.ultimate.page.slug.description"><![CDATA[Der URL-kompatible Titel darf aus Klein- und Großbuchstaben sowie Ziffern bestehen. Einzelne Bestandteile werden durch Bindestriche getrennt. Der erste Bestandteil darf nur Klein- und Großbuchstaben enthalten.]]></item>
 		<item name="wcf.acp.ultimate.page.slug.placeholder"><![CDATA[samplepage-with-much-spice]]></item>
 		<item name="wcf.acp.ultimate.page.slug.error.notUnique"><![CDATA[Der angegebene URL-kompatible Titel existiert bereits bei einer Seite auf gleichem Level.]]></item>
 		<item name="wcf.acp.ultimate.page.parent"><![CDATA[Übergeordnete Seite]]></item>
