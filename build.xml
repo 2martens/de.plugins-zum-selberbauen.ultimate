@@ -28,13 +28,49 @@
 			basedir="srcWCF" 
 		/>
 		
-		<!-- rc 2 update tar -->
-		<tar destfile="metadata/files_update.rc2.tar">
+		<!-- rc 3 update tar -->
+		<tar destfile="metadata/files_update.rc3.tar">
 			<tarfileset dir="src">
 				<exclude name="templates/**" />
 				<exclude name="acp/templates/**" />
-				<include name="lib/data/content/TaggedContentList*" />
-				<include name="lib/data/menu/item/MenuItem*" />
+				<include name="lib/acp/form/*" />
+				<include name="lib/acp/page/UltimateContentListPage*" />
+				<include name="lib/data/category/Category.class.php" />
+				<include name="lib/data/content/ContentAction*" />
+				<include name="lib/data/content/ContentEditor*" />
+				<include name="lib/data/content/TaggableContent*" />
+				<include name="lib/data/menu/item/MenuItemAction*" />
+				<include name="lib/data/page/Page.class.php" />
+				<include name="lib/data/page/PageAction*" />
+				<include name="lib/data/template/Template.class.php" />
+				<include name="lib/data/widget/area/WidgetAreaAction*" />
+				<include name="lib/page/*" />
+				<include name="lib/system/ULTIMATECore*" />
+				<include name="lib/system/block/BlockHandler*" />
+				<include name="lib/system/blocktype/Abstract*" />
+				<include name="lib/system/blocktype/Content*" />
+				<include name="lib/system/blocktype/IBlockType*" />
+				<include name="lib/system/cache/builder/AuthorCacheBuilder*" />
+				<include name="lib/system/event/listener/IndexFirstTime*" />
+				<include name="lib/system/event/listener/TaggedPage*" />
+				<include name="lib/system/exporter/WordPress3xExporter*" />
+				<include name="lib/system/menu/custom/CustomMenu*" />
+				<include name="lib/system/search/ContentSearch*" />
+				<include name="lib/system/style/*" />
+				<include name="lib/system/template/TemplateHandler*" />
+				<include name="lib/system/user/notification/event/*" />
+				<include name="lib/system/user/notification/object/type/*" />
+				<include name="lib/system/widget/WidgetHandler*" />
+				<include name="lib/util/WidgetAreaUtil*" />
+				<include name="lib/util/thirdParty/idna_convert.class.php*" />
+			</tarfileset>
+		</tar>
+		<tar destfile="metadata/acptemplates_update.rc3.tar">
+			<tarfileset dir="src/acp/templates">
+				<include name="*header.tpl" />
+				<include name="*CategoryAdd.tpl" />
+				<include name="*ContentAdd.tpl" />
+				<include name="*PageAdd.tpl" />
 			</tarfileset>
 		</tar>
 	</target>

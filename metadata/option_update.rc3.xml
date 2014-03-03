@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/option.xsd">
+	<delete>
+		<option name="ultimate_general_englishLanguage" />
+	</delete>
+	<import>
+		<option name="ultimate_general_englishDateFormat">
+			<categoryname>ultimate.general</categoryname>
+			<optiontype>select</optiontype>
+			<defaultvalue><![CDATA[BE]]></defaultvalue>
+			<selectoptions>
+				<![CDATA[BE:wcf.acp.option.ultimate_general_englishDateFormat.BE
+AE:wcf.acp.option.ultimate_general_englishDateFormat.AE]]>
+			</selectoptions>
+		</option>
+	</import>
+</data>
