@@ -76,7 +76,7 @@ class ULTIMATECore extends AbstractApplication {
 	protected function initRoutes() {
 		$pageRoute = new Route('pageRoute-'.PACKAGE_ID);
 		$pageRoute->setSchema('/{pageSlug}/', 'Page');
-		$pageRoute->setParameterOption('pageSlug', null, '[a-zA-Z]+(?:\-{1}[a-zA-Z0-9]+)*(?:\_{1}[a-zA-Z]+(?:\-{1}[a-zA-Z0-9]+)*)*');
+		$pageRoute->setParameterOption('pageSlug', null, '[a-z]+(?:\-{1}[a-zA-Z0-9]+)*(?:\_{1}[a-zA-Z]+(?:\-{1}[a-zA-Z0-9]+)*)*');
 		RouteHandler::getInstance()->addRoute($pageRoute);
 		
 		$categoryRoute = new Route('categoryRoute-'.PACKAGE_ID);

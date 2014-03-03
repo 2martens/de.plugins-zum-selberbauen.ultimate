@@ -461,7 +461,7 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.page.title.placeholder"><![CDATA[Beispielseite mit viel Gewürz]]></item>
 		<item name="wcf.acp.ultimate.page.title.error.notUnique"><![CDATA[Der angegebene Titel existiert bereits bei einer Seite auf gleichem Level.]]></item>
 		<item name="wcf.acp.ultimate.page.slug"><![CDATA[URL-kompatibler Titel]]></item>
-		<item name="wcf.acp.ultimate.page.slug.description"><![CDATA[Der URL-kompatible Titel darf aus Klein- und Großbuchstaben sowie Ziffern bestehen. Einzelne Bestandteile werden durch Bindestriche getrennt. Der erste Bestandteil darf nur Klein- und Großbuchstaben enthalten.]]></item>
+		<item name="wcf.acp.ultimate.page.slug.description"><![CDATA[Der URL-kompatible Titel darf aus Klein- und Großbuchstaben sowie Ziffern bestehen. Einzelne Bestandteile werden durch Bindestriche getrennt. Der erste Bestandteil darf nur Kleinbuchstaben enthalten.]]></item>
 		<item name="wcf.acp.ultimate.page.slug.placeholder"><![CDATA[samplepage-with-much-spice]]></item>
 		<item name="wcf.acp.ultimate.page.slug.error.notUnique"><![CDATA[Der angegebene URL-kompatible Titel existiert bereits bei einer Seite auf gleichem Level.]]></item>
 		<item name="wcf.acp.ultimate.page.parent"><![CDATA[Übergeordnete Seite]]></item>
