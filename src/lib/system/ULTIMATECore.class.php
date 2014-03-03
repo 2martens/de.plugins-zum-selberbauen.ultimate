@@ -64,6 +64,11 @@ class ULTIMATECore extends AbstractApplication {
 	 */
 	public function getCurrentApplication() {
 		$activeRequest = RequestHandler::getInstance()->getActiveRequest();
+		if ($activeRequest === null) {
+			// in this case we have an exception, so the WCF is assumed
+			return 'wcf';
+		}
+		
 		$className = $activeRequest->getClassName();
 		$parts = explode('\\', $className);
 		$abbreviation = array_shift($parts);
