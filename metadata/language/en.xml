@@ -459,7 +459,7 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.page.title.placeholder"><![CDATA[Company profile]]></item>
 		<item name="wcf.acp.ultimate.page.title.error.notUnique"><![CDATA[A page with the specified title already exists with this parent.]]></item>
 		<item name="wcf.acp.ultimate.page.slug"><![CDATA[Slug]]></item>
-		<item name="wcf.acp.ultimate.page.slug.description"><![CDATA[The slug may contain lower-case and upper-case letters as well as numbers. The slug can contain multiple parts, separated by a dash (-). The first part may only contain lower-case and upper-case letters.]]></item>
+		<item name="wcf.acp.ultimate.page.slug.description"><![CDATA[The slug may contain lower-case and upper-case letters as well as numbers. The slug can contain multiple parts, separated by a dash (-). The first part may only contain lower-case letters.]]></item>
 		<item name="wcf.acp.ultimate.page.slug.placeholder"><![CDATA[company-profile]]></item>
 		<item name="wcf.acp.ultimate.page.slug.error.notUnique"><![CDATA[A page with the specified slug already exists with this parent.]]></item>
 		<item name="wcf.acp.ultimate.page.parent"><![CDATA[Parent]]></item>
