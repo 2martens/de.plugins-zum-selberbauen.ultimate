@@ -4,14 +4,16 @@
 		<option name="ultimate_general_englishLanguage" />
 	</delete>
 	<import>
-		<option name="ultimate_general_englishDateFormat">
-			<categoryname>ultimate.general</categoryname>
-			<optiontype>select</optiontype>
-			<defaultvalue><![CDATA[BE]]></defaultvalue>
-			<selectoptions>
-				<![CDATA[BE:wcf.acp.option.ultimate_general_englishDateFormat.BE
-AE:wcf.acp.option.ultimate_general_englishDateFormat.AE]]>
-			</selectoptions>
-		</option>
+		<options>
+			<option name="ultimate_general_englishDateFormat">
+				<categoryname>ultimate.general</categoryname>
+				<optiontype>select</optiontype>
+				<defaultvalue><![CDATA[BE]]></defaultvalue>
+				<selectoptions>
+					<![CDATA[BE:wcf.acp.option.ultimate_general_englishDateFormat.BE
+	AE:wcf.acp.option.ultimate_general_englishDateFormat.AE]]>
+				</selectoptions>
+			</option>
+		</options>
 	</import>
 </data>
