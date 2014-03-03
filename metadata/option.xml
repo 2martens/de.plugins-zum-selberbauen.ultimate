@@ -53,13 +53,13 @@
             </category>
 		</categories>
 		<options>
-			<option name="ultimate_general_englishLanguage">
+			<option name="ultimate_general_englishDateFormat">
 				<categoryname>ultimate.general</categoryname>
 				<optiontype>select</optiontype>
-				<defaultvalue><![CDATA[true]]></defaultvalue>
+				<defaultvalue><![CDATA[BE]]></defaultvalue>
 				<selectoptions>
-					<![CDATA[true:wcf.acp.option.ultimate_general_englishLanguage.BE
-false:wcf.acp.option.ultimate_general_englishLanguage.AE]]>
+					<![CDATA[BE:wcf.acp.option.ultimate_general_englishDateFormat.BE
+AE:wcf.acp.option.ultimate_general_englishDateFormat.AE]]>
 				</selectoptions>
 			</option>
 			

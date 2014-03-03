@@ -522,7 +522,7 @@ class ContentBlockType extends AbstractBlockType {
 				$dateTimeObject = $content->__get('publishDateObject');
 				$timestamp = $content->__get('publishDate');
 				$format = WCF::getLanguage()->getDynamicVariable('ultimate.date.dateFormat', array(
-					'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
+					'englishAccent' => ULTIMATE_GENERAL_ENGLISHDATEFORMAT
 				));
 				$date = DateUtil::format($dateTimeObject, $format);
 				$time = DateUtil::format($dateTimeObject, DateUtil::TIME_FORMAT);

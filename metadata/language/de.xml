@@ -183,10 +183,10 @@
 		<!-- /categories -->
 		
 		<!-- ultimate.general -->
-		<item name="wcf.acp.option.ultimate_general_englishLanguage"><![CDATA[Variante der englischen Sprache]]></item>
-		<item name="wcf.acp.option.ultimate_general_englishLanguage.description"><![CDATA[Bitte wählen Sie aus, ob britisches Englisch oder amerikanisches Englisch verwendet werden soll. Hauptsächlich wird dies zur Ermittelung des Datumsformates genutzt.]]></item>
-		<item name="wcf.acp.option.ultimate_general_englishLanguage.BE"><![CDATA[Britisches Englisch]]></item>
-		<item name="wcf.acp.option.ultimate_general_englishLanguage.AE"><![CDATA[Amerikanisches Englisch]]></item>
+		<item name="wcf.acp.option.ultimate_general_englishDateFormat"><![CDATA[Englisches Datumsformat]]></item>
+		<item name="wcf.acp.option.ultimate_general_englishDateFormat.description"><![CDATA[Bitte wählen Sie das englische Datumsformat aus.]]></item>
+		<item name="wcf.acp.option.ultimate_general_englishDateFormat.BE"><![CDATA[d/m/Y]]></item>
+		<item name="wcf.acp.option.ultimate_general_englishDateFormat.AE"><![CDATA[m/d/Y]]></item>
 		<!-- /ultimate.general -->
 		
 		<!-- ultimate.general.content -->
