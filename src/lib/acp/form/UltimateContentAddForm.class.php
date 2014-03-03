@@ -465,7 +465,7 @@ class UltimateContentAddForm extends MessageForm {
 		$date = WCF::getLanguage()->getDynamicVariable(
 			'ultimate.date.dateFormat',
 			array(
-				'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
+				'englishAccent' => ULTIMATE_GENERAL_ENGLISHDATEFORMAT
 			)
 		);
 		$time = WCF::getLanguage()->get('wcf.date.timeFormat');

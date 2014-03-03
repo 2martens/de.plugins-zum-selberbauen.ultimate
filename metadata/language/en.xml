@@ -183,10 +183,10 @@
 		<!-- /categories -->
 		
 		<!-- ultimate.general -->
-		<item name="wcf.acp.option.ultimate_general_englishLanguage"><![CDATA[Accent of English language]]></item>
-		<item name="wcf.acp.option.ultimate_general_englishLanguage.description"><![CDATA[Please select here which accent of English should be used. This is mainly used to determine the date format.]]></item>
-		<item name="wcf.acp.option.ultimate_general_englishLanguage.BE"><![CDATA[British English]]></item>
-		<item name="wcf.acp.option.ultimate_general_englishLanguage.AE"><![CDATA[American English]]></item>
+		<item name="wcf.acp.option.ultimate_general_englishDateFormat"><![CDATA[English date format]]></item>
+		<item name="wcf.acp.option.ultimate_general_englishDateFormat.description"><![CDATA[Please select here which date format should be used for the English language.]]></item>
+		<item name="wcf.acp.option.ultimate_general_englishDateFormat.BE"><![CDATA[d/m/Y]]></item>
+		<item name="wcf.acp.option.ultimate_general_englishDateFormat.AE"><![CDATA[m/d/Y]]></item>
 		<!-- /ultimate.general -->
 		
 		<!-- ultimate.general.content -->
@@ -781,7 +781,7 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 	</category>
 	
 	<category name="ultimate.date">
-		<item name="ultimate.date.dateFormat"><![CDATA[{if $britishEnglish|isset && $britishEnglish == true}d/m/Y{else}m/d/Y{/if}]]></item>
+		<item name="ultimate.date.dateFormat"><![CDATA[{if $englishAccent|isset && $englishAccent == 'BE'}d/m/Y{else}m/d/Y{/if}]]></item>
 		<item name="ultimate.date.dateTimeFormat"><![CDATA[%date% %time%]]></item>
 	</category>
 	
