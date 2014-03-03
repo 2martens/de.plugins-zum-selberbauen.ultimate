@@ -14,6 +14,11 @@
 	AE:wcf.acp.option.ultimate_general_englishDateFormat.AE]]>
 				</selectoptions>
 			</option>
+			<option name="ultimate_general_content_useWYSIWYG">
+				<categoryname>ultimate.general.content</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
 		</options>
 	</import>
 </data>
