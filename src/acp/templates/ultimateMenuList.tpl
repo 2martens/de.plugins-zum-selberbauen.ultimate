@@ -6,7 +6,7 @@
 	$(function() {
 		var actionObjects = { };
 		actionObjects['de.plugins-zum-selberbauen.ultimate.menu'] = { };
-		actionObjects['de.plugins-zum-selberbauen.ultimate.menu']['delete'] = new WCF.Action.Delete('ultimate\\data\\menu\\MenuAction', '.jsMenuRow');
+		actionObjects['de.plugins-zum-selberbauen.ultimate.menu']['delete'] = new ULTIMATE.Action.Delete('ultimate\\data\\menu\\MenuAction', '.jsMenuRow');
 		
 		WCF.Clipboard.init('ultimate\\acp\\page\\UltimateMenuListPage', {@$hasMarkedItems}, actionObjects);
 		
@@ -43,7 +43,7 @@
 {hascontent}
 <div id="menuTableContainer" class="tabularBox tabularBoxTitle marginTop">
 	<header>
-		<h2>{lang}wcf.acp.ultimate.menu.list{/lang} <span class="badge badgeInverse" title="{lang}wcf.acp.ultimate.menu.list.count{/lang}">{#$items}</span></h2>
+		<h2>{lang}wcf.acp.ultimate.menu.list{/lang} <span class="counter badge badgeInverse" title="{lang}wcf.acp.ultimate.menu.list.count{/lang}">{#$items}</span></h2>
 	</header>
 	<table class="table jsClipboardContainer" data-type="de.plugins-zum-selberbauen.ultimate.menu">
 		<thead>

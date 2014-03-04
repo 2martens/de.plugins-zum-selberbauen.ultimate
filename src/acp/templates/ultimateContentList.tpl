@@ -6,7 +6,7 @@
 	$(function() {
 		var actionObjects = { };
 		actionObjects['de.plugins-zum-selberbauen.ultimate.content'] = { };
-		actionObjects['de.plugins-zum-selberbauen.ultimate.content']['delete'] = new WCF.Action.Delete('ultimate\\data\\content\\ContentAction', '.jsContentRow');
+		actionObjects['de.plugins-zum-selberbauen.ultimate.content']['delete'] = new ULTIMATE.Action.Delete('ultimate\\data\\content\\ContentAction', '.jsContentRow');
 		
 		WCF.Clipboard.init('ultimate\\acp\\page\\UltimateContentListPage', {@$hasMarkedItems}, actionObjects);
 		
@@ -43,7 +43,7 @@
 {hascontent}
 <div id="contentTableContainer" class="tabularBox tabularBoxTitle marginTop">
 	<header>
-		<h2>{lang}wcf.acp.ultimate.content.list{/lang} <span class="badge badgeInverse" title="{lang}wcf.acp.ultimate.content.list.count{/lang}">{#$items}</span></h2>
+		<h2>{lang}wcf.acp.ultimate.content.list{/lang} <span class="counter badge badgeInverse" title="{lang}wcf.acp.ultimate.content.list.count{/lang}">{#$items}</span></h2>
 	</header>
 	<table class="table jsClipboardContainer" data-type="de.plugins-zum-selberbauen.ultimate.content">
 		<thead>
