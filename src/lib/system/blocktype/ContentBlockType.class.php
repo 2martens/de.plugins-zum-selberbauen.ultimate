@@ -563,6 +563,8 @@ class ContentBlockType extends AbstractBlockType {
 						$__metaAboveContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaAboveContent);
 						$__metaAboveContent = str_replace('$categories', $categoryOutput, $__metaAboveContent);
 						$__metaAboveContent = str_replace('$tags', $tagOutput, $__metaAboveContent);
+						// reversing encodeJS step in I18nHandler
+						$__metaAboveContent = str_replace('\n', "\n", $__metaAboveContent);
 						$metaAbove_i18n[$contentID][$languageID] = $__metaAboveContent;
 					}
 				} else if ($metaAboveContent !== '') {
@@ -589,6 +591,8 @@ class ContentBlockType extends AbstractBlockType {
 						$__metaBelowContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaBelowContent);
 						$__metaBelowContent = str_replace('$categories', $categoryOutput, $__metaBelowContent);
 						$__metaBelowContent = str_replace('$tags', $tagOutput, $__metaBelowContent);
+						// reversing encodeJS step in I18nHandler
+						$__metaBelowContent = str_replace('\n', "\n", $__metaBelowContent);
 						$metaBelow_i18n[$contentID][$languageID] = $__metaBelowContent;
 					}
 				} else if ($metaBelowContent !== '') {
