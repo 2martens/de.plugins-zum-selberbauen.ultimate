@@ -38,6 +38,7 @@ use wcf\system\comment\CommentHandler;
 use wcf\system\language\I18nHandler;
 use wcf\system\like\LikeHandler;
 use wcf\system\request\LinkHandler;
+use wcf\system\request\UltimateLinkHandler;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
 
@@ -496,9 +497,9 @@ class ContentBlockType extends AbstractBlockType {
 			$categoryOutput = '';
 			foreach ($categories as $categoryID => $category) {
 				if (!empty($categoryOutput)) $categoryOutput .= ', ';
-				$categoryOutput .= LinkHandler::getInstance()->getLink('Category', array(
+				$categoryOutput .= '<a href="'. UltimateLinkHandler::getInstance()->getLink(null, array(
 					'categorySlug' => $category->__get('categorySlug')
-				), '');
+				), '') . '">'.WCF::getLanguage()->get($category->__get('categoryTitle')).'</a>';
 			}
 			
 			// get tag output
@@ -509,9 +510,9 @@ class ContentBlockType extends AbstractBlockType {
 				if ($languageID != $_languageID) continue;
 				foreach ($_tags as $tagID => $tag) {
 					if (!empty($tagOutput)) $tagOutput .= ', ';
-					$tagOutput .= LinkHandler::getInstance()->getLink('Tag', array(
+					$tagOutput .= '<a href="'. LinkHandler::getInstance()->getLink('Tag', array(
 						'tagSlug' => $tag->__get('tagSlug')
-					), '');
+					), '') . '">'.WCF::getLanguage()->get($tag->__get('name')).'</a>';
 				}
 			}
 			
