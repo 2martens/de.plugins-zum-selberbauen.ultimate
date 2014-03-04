@@ -576,7 +576,7 @@ class ContentBlockType extends AbstractBlockType {
 						$metaAbove_i18n[$contentID][$languageID] = $__metaAboveContent;
 					}
 				}
-					
+				
 				if ($metaBelowContent !== '') {
 					$metaBelow[$contentID] = '';
 					$__metaBelowContent = str_replace('$datetime', $dateAndTime, $metaBelowContent);

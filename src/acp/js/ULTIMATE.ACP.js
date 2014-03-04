@@ -498,8 +498,8 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
 			            $.proxy(function(index, listItem) {
 				            var $listItem = $(listItem);
 				            var $languageID = $listItem.attr('name')
-				                    .mb_substring($item.length + 6);
-				            $languageID = $languageID.mb_substr(0,
+				                    .substring($item.length + 6);
+				            $languageID = $languageID.substr(0,
 				                    $languageID.length - 1);
 				            optionName_i18n[$languageID] = $listItem.val();
 			            }, this));
