@@ -551,18 +551,7 @@ class ContentBlockType extends AbstractBlockType {
 						).
 						'</div>';
 				
-				if ($metaAboveContent !== '') {
-					$metaAbove[$contentID] = '';
-					$__metaAboveContent = str_replace('$datetime', $dateAndTime, $metaAboveContent);
-					$__metaAboveContent = str_replace('$date', $dateString, $__metaAboveContent);
-					$__metaAboveContent = str_replace('$time', $timeString, $__metaAboveContent);
-					$__metaAboveContent = str_replace('$comments', count($content->__get('comments')), $__metaAboveContent);
-					$__metaAboveContent = str_replace('$authorVCard', $authorVCard, $__metaAboveContent);
-					$__metaAboveContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaAboveContent);
-					$__metaAboveContent = str_replace('$categories', $categoryOutput, $__metaAboveContent);
-					$__metaAboveContent = str_replace('$tags', $tagOutput, $__metaAboveContent);
-					$metaAbove[$contentID] = $__metaAboveContent;
-				} else if (!empty($metaAboveContent_i18n)) {
+				if (!empty($metaAboveContent_i18n)) {
 					$metaAbove_i18n[$contentID] = array();
 					foreach ($metaAboveContent_i18n as $languageID => $_metaAboveContent) {
 						$__metaAboveContent = str_replace('$datetime', $dateAndTime, $_metaAboveContent);
@@ -575,20 +564,20 @@ class ContentBlockType extends AbstractBlockType {
 						$__metaAboveContent = str_replace('$tags', $tagOutput, $__metaAboveContent);
 						$metaAbove_i18n[$contentID][$languageID] = $__metaAboveContent;
 					}
+				} else if ($metaAboveContent !== '') {
+					$metaAbove[$contentID] = '';
+					$__metaAboveContent = str_replace('$datetime', $dateAndTime, $metaAboveContent);
+					$__metaAboveContent = str_replace('$date', $dateString, $__metaAboveContent);
+					$__metaAboveContent = str_replace('$time', $timeString, $__metaAboveContent);
+					$__metaAboveContent = str_replace('$comments', count($content->__get('comments')), $__metaAboveContent);
+					$__metaAboveContent = str_replace('$authorVCard', $authorVCard, $__metaAboveContent);
+					$__metaAboveContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaAboveContent);
+					$__metaAboveContent = str_replace('$categories', $categoryOutput, $__metaAboveContent);
+					$__metaAboveContent = str_replace('$tags', $tagOutput, $__metaAboveContent);
+					$metaAbove[$contentID] = $__metaAboveContent;
 				}
-					
-				if ($metaBelowContent !== '') {
-					$metaBelow[$contentID] = '';
-					$__metaBelowContent = str_replace('$datetime', $dateAndTime, $metaBelowContent);
-					$__metaBelowContent = str_replace('$date', $dateString, $__metaBelowContent);
-					$__metaBelowContent = str_replace('$time', $timeString, $__metaBelowContent);
-					$__metaBelowContent = str_replace('$comments', count($content->__get('comments')), $__metaBelowContent);
-					$__metaBelowContent = str_replace('$authorVCard', $authorVCard, $__metaBelowContent);
-					$__metaBelowContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaBelowContent);
-					$__metaBelowContent = str_replace('$categories', $categoryOutput, $__metaBelowContent);
-					$__metaBelowContent = str_replace('$tags', $tagOutput, $__metaBelowContent);
-					$metaBelow[$contentID] = $__metaBelowContent;
-				} else if (!empty($metaBelowContent_i18n)) {
+				
+				if (!empty($metaBelowContent_i18n)) {
 					$metaBelow_i18n[$contentID] = array();
 					foreach ($metaBelowContent_i18n as $languageID => $_metaBelowContent) {
 						$__metaBelowContent = str_replace('$datetime', $dateAndTime, $_metaBelowContent);
@@ -601,6 +590,17 @@ class ContentBlockType extends AbstractBlockType {
 						$__metaBelowContent = str_replace('$tags', $tagOutput, $__metaBelowContent);
 						$metaBelow_i18n[$contentID][$languageID] = $__metaBelowContent;
 					}
+				} else if ($metaBelowContent !== '') {
+					$metaBelow[$contentID] = '';
+					$__metaBelowContent = str_replace('$datetime', $dateAndTime, $metaBelowContent);
+					$__metaBelowContent = str_replace('$date', $dateString, $__metaBelowContent);
+					$__metaBelowContent = str_replace('$time', $timeString, $__metaBelowContent);
+					$__metaBelowContent = str_replace('$comments', count($content->__get('comments')), $__metaBelowContent);
+					$__metaBelowContent = str_replace('$authorVCard', $authorVCard, $__metaBelowContent);
+					$__metaBelowContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaBelowContent);
+					$__metaBelowContent = str_replace('$categories', $categoryOutput, $__metaBelowContent);
+					$__metaBelowContent = str_replace('$tags', $tagOutput, $__metaBelowContent);
+					$metaBelow[$contentID] = $__metaBelowContent;
 				}
 			}
 		}
