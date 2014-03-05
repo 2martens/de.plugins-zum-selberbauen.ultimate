@@ -63,6 +63,7 @@
 	
 	<instructions type="update" fromversion="1.0.0 RC 2">
 		<instruction type="acpTemplate">acptemplates_update.rc3.tar</instruction>
+		<instruction type="template">templates_update.rc3.tar</instruction>
 		<instruction type="file">files_update.rc3.tar</instruction>
 		
 		<instruction type="option">option_update.rc3.xml</instruction>
