@@ -28,6 +28,8 @@
 namespace ultimate\data\template;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\system\WCF;
+use wcf\system\database\util\PreparedStatementConditionBuilder;
+use ultimate\data\block\BlockAction;
 
 /**
  * Executes template-related actions.
@@ -112,6 +114,36 @@ class TemplateAction extends AbstractDatabaseObjectAction {
 	public function update() {
 		parent::update();
 		$this->updateRelations();
+	}
+	
+	/**
+	 * Deletes a template.
+	 * 
+	 * @return	integer
+	 */
+	public function delete() {
+		// determine connected blocks
+		$affectedBlocks = array();
+		$conditionBuilder = new PreparedStatementConditionBuilder();
+		$conditionBuilder->add('templateID IN (?)', array($this->objectIDs));
+		$sql = 'SELECT blockID
+		        FROM   ultimate'.WCF_N.'_block_to_template
+		        '.$conditionBuilder;
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute($conditionBuilder->getParameters());
+		
+		while ($row = $statement->fetchArray()) {
+			$affectedBlocks[] = $row['blockID'];
+		}
+		
+		// call parent
+		$affectedCount = parent::delete();
+		
+		// remove connected blocks
+		$action = new BlockAction($affectedBlocks, 'delete');
+		$action->executeAction();
+		
+		return $affectedCount;
 	}
 	
 	/**
