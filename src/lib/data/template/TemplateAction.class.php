@@ -26,10 +26,10 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\template;
-use wcf\data\AbstractDatabaseObjectAction;
-use wcf\system\WCF;
-use wcf\system\database\util\PreparedStatementConditionBuilder;
 use ultimate\data\block\BlockAction;
+use wcf\data\AbstractDatabaseObjectAction;
+use wcf\system\database\util\PreparedStatementConditionBuilder;
+use wcf\system\WCF;
 
 /**
  * Executes template-related actions.
