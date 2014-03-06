@@ -462,13 +462,8 @@ class UltimateContentAddForm extends MessageForm {
 	protected function formatDate(\DateTime $dateTime = null) {
 		if ($dateTime === null) $dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
 		$dateTime->setTimezone(WCF::getUser()->getTimezone());
-		$date = WCF::getLanguage()->getDynamicVariable(
-			'ultimate.date.dateFormat',
-			array(
-				'englishAccent' => ULTIMATE_GENERAL_ENGLISHDATEFORMAT
-			)
-		);
-		$time = WCF::getLanguage()->get('wcf.date.timeFormat');
+		$date = 'M/d/Y';
+		$time = 'h:i a';
 		$format = str_replace(
 			'%time%',
 			$time,
