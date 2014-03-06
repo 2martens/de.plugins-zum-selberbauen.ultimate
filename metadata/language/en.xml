@@ -287,6 +287,7 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
 		<item name="wcf.acp.ultimate.visibility.public"><![CDATA[Public]]></item>
 		<item name="wcf.acp.ultimate.visibility.protected"><![CDATA[Protected]]></item>
 		<item name="wcf.acp.ultimate.visibility.private"><![CDATA[Private]]></item>
+		<item name="wcf.acp.ultimate.visibility.groupIDs"><![CDATA[Granted user groups]]></item>
 		<item name="wcf.acp.ultimate.visibility.groupIDs.error.notValid"><![CDATA[At least one of the 'selected' groups wasn't selectable.]]></item>
 		<item name="wcf.acp.ultimate.visibility.groupIDs.error.notSelected"><![CDATA[You have to select at least one group.]]></item>
 		<item name="wcf.acp.ultimate.visibility.error.notValid"><![CDATA[The 'selected' visibility wasn't selectable.]]></item>
