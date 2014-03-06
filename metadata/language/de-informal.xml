@@ -287,6 +287,7 @@ Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$com
 		<item name="wcf.acp.ultimate.visibility.public"><![CDATA[Öffentlich]]></item>
 		<item name="wcf.acp.ultimate.visibility.protected"><![CDATA[Eingeschränkt]]></item>
 		<item name="wcf.acp.ultimate.visibility.private"><![CDATA[Privat]]></item>
+		<item name="wcf.acp.ultimate.visibility.groupIDs"><![CDATA[Berechtigte Gruppen]]></item>
 		<item name="wcf.acp.ultimate.visibility.groupIDs.error.notValid"><![CDATA[Mindestens eine der 'ausgewählten' Gruppen stand nicht nur Auswahl.]]></item>
 		<item name="wcf.acp.ultimate.visibility.groupIDs.error.notSelected"><![CDATA[Mindestens eine Gruppe muss ausgewählt werden.]]></item>
 		<item name="wcf.acp.ultimate.visibility.error.notValid"><![CDATA[Die 'ausgewählte' Sichtbarkeitsstufe stand nicht zur Auswahl.]]></item>
