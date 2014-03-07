@@ -105,13 +105,13 @@
 							{/if}
 
 							{if $objectType->getProcessor()->canDeleteCategory() && $category->categoryID != $defaultLinkCategoryID}
-								<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="{@$category->categoryID}" data-confirm-message="{@$objectType->getProcessor()->getLanguageVariable('delete.sure')}"></span>
+								<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" data-object-id="{@$category->categoryID}" data-confirm-message="{@$objectType->getProcessor()->getLanguageVariable('delete.sure')}"></span>
 							{else}
 								<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
 							{/if}
 
 							{if $objectType->getProcessor()->canEditCategory()}
-								<span title="{lang}wcf.global.button.{if !$category->isDisabled}disable{else}enable{/if}{/lang}" class="icon icon16 icon-{if !$category->isDisabled}circle-blank{else}off{/if} jsToggleButton jsTooltip" data-object-id="{@$category->categoryID}"></span>
+								<span title="{lang}wcf.global.button.{if !$category->isDisabled}disable{else}enable{/if}{/lang}" class="icon icon16 icon-{if !$category->isDisabled}circle-blank{else}off{/if} jsToggleButton jsTooltip pointer" data-object-id="{@$category->categoryID}"></span>
 							{else}
 								<span title="{lang}wcf.global.button.{if !$category->isDisabled}enable{else}disable{/if}{/lang}" class="icon icon16 icon-{if !$category->isDisabled}circle-blank{else}off{/if} disabled"></span>
 							{/if}

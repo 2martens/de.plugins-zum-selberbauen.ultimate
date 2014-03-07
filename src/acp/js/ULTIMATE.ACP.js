@@ -695,12 +695,12 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
 		            .get('admin.content.ultimate.canManageBlocks')) {
 			    $newHtml += '<span title="'
 			            + WCF.Language.get('wcf.acp.ultimate.block.edit')
-			            + '" class="icon icon16 icon-pencil jsTooltip" data-object-id="'
+			            + '" class="icon icon16 icon-pencil jsTooltip pointer" data-object-id="'
 			            + $data['blockID'] + '"></span>';
 			    
 			    $newHtml += '\n<span title="'
 			            + WCF.Language.get('wcf.global.button.delete')
-			            + '" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="'
+			            + '" class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" data-object-id="'
 			            + $data['blockID']
 			            + '" data-confirm-message="'
 			            + WCF.Language

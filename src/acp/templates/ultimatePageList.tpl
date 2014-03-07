@@ -72,7 +72,7 @@
 							{/if}
 							
 							{if $__wcf->session->getPermission('admin.content.ultimate.canDeletePage')}
-								<span title="{lang}wcf.acp.ultimate.page.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton" data-object-id="{@$page->pageID}" data-confirm-message="{lang}wcf.acp.ultimate.page.delete.sure{/lang}"></span>
+								<span title="{lang}wcf.acp.ultimate.page.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton pointer" data-object-id="{@$page->pageID}" data-confirm-message="{lang}wcf.acp.ultimate.page.delete.sure{/lang}"></span>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.page.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
 							{/if}
