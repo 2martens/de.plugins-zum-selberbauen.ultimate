@@ -70,7 +70,7 @@
 							{/if}
 							
 							{if $__wcf->session->getPermission('admin.content.ultimate.canManageWidgetAreas')}
-								<span title="{lang}wcf.acp.ultimate.widgetArea.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton" data-object-id="{@$widgetArea->widgetAreaID}" data-confirm-message="{lang}wcf.acp.ultimate.widgetArea.delete.sure{/lang}"></span>
+								<span title="{lang}wcf.acp.ultimate.widgetArea.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton pointer" data-object-id="{@$widgetArea->widgetAreaID}" data-confirm-message="{lang}wcf.acp.ultimate.widgetArea.delete.sure{/lang}"></span>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.widgetArea.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
 							{/if}

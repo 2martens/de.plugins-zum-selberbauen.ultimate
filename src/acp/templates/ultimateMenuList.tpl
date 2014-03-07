@@ -70,7 +70,7 @@
 							{/if}
 							
 							{if $__wcf->session->getPermission('admin.content.ultimate.canManageMenus')}
-								<span title="{lang}wcf.acp.ultimate.menu.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton" data-object-id="{@$menu->menuID}" data-confirm-message="{lang}wcf.acp.ultimate.menu.delete.sure{/lang}"></span>
+								<span title="{lang}wcf.acp.ultimate.menu.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton pointer" data-object-id="{@$menu->menuID}" data-confirm-message="{lang}wcf.acp.ultimate.menu.delete.sure{/lang}"></span>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.menu.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
 							{/if}
