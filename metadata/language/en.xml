@@ -806,7 +806,7 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 	
 	<!-- this category is used for all multilingual link fields -->
 	<category name="ultimate.link">
-		<item name="ultimate.link.category..title.category1"><![CDATA[Uncategorized]]></item>
+		<item name="ultimate.link.category.title.category1"><![CDATA[Uncategorized]]></item>
 	</category>
 	
 	<!-- this category is used for all multilingual menu fields -->
