@@ -8,8 +8,8 @@
 		<packagedescription language="de-informal"><![CDATA[Ein WCF-kompatibles CMS.]]></packagedescription>
 		
 		<isapplication>1</isapplication>
-		<version>1.0.0 RC 2</version>
-		<date>2014-01-29</date>
+		<version>1.0.0 RC 3</version>
+		<date>2014-03-08</date>
 	</packageinformation>
 	
 	<authorinformation>
@@ -18,8 +18,8 @@
 	</authorinformation>
 	
 	<requiredpackages>
-		<requiredpackage minversion="2.0.2">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="2.0.2" file="requirements/com.woltlab.wcf.conversation.tar.gz">com.woltlab.wcf.conversation</requiredpackage>
+		<requiredpackage minversion="2.0.3">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="2.0.3" file="requirements/com.woltlab.wcf.conversation.tar.gz">com.woltlab.wcf.conversation</requiredpackage>
 		<requiredpackage minversion="1.0.0 RC 1" file="requirements/de.plugins-zum-selberbauen.cachedList.tar.gz">de.plugins-zum-selberbauen.cachedList</requiredpackage>
 		<requiredpackage minversion="1.0.0 RC 1" file="requirements/de.plugins-zum-selberbauen.messageACP.tar.gz">de.plugins-zum-selberbauen.messageACP</requiredpackage>
 		<requiredpackage minversion="1.0.0 RC 1" file="requirements/de.plugins-zum-selberbauen.ultimateCore.tar.gz">de.plugins-zum-selberbauen.ultimateCore</requiredpackage>
@@ -61,7 +61,12 @@
 		<!-- /xml and rest -->
 	</instructions>
 	
-	<instructions type="update" fromversion="1.0.0 RC 1">
-		<instruction type="file">files_update.rc2.tar</instruction>
+	<instructions type="update" fromversion="1.0.0 RC 2">
+		<instruction type="acpTemplate">acptemplates_update.rc3.tar</instruction>
+		<instruction type="template">templates_update.rc3.tar</instruction>
+		<instruction type="file">files_update.rc3.tar</instruction>
+		
+		<instruction type="option">option_update.rc3.xml</instruction>
+		<instruction type="language">language/*.xml</instruction>
 	</instructions>
 </package>
