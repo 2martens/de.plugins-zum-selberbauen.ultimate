@@ -26,14 +26,11 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\template;
-use ultimate\data\content\TaggedContentList;
 use ultimate\data\layout\Layout;
 use ultimate\data\template\Template;
-use ultimate\data\AbstractUltimateDatabaseObject;
 use ultimate\data\IUltimateData;
 use ultimate\system\blocktype\BlockTypeHandler;
 use ultimate\system\cache\builder\CategoryCacheBuilder;
-use ultimate\system\cache\builder\ContentCategoryCacheBuilder;
 use ultimate\system\cache\builder\CurrentMenuCacheBuilder;
 use ultimate\system\cache\builder\PageCacheBuilder;
 use ultimate\system\cache\builder\TemplateCacheBuilder;
@@ -41,7 +38,6 @@ use ultimate\system\layout\LayoutHandler;
 use ultimate\system\menu\custom\CustomMenu;
 use ultimate\system\widget\WidgetHandler;
 use wcf\data\user\group\UserGroup;
-use wcf\data\DatabaseObjectDecorator;
 use wcf\page\IPage;
 use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\dashboard\DashboardHandler;

@@ -163,13 +163,13 @@
 									<span class="statusDisplay sortableButtonContainer">
 										
 										{if $__wcf->session->getPermission('admin.content.ultimate.canManageBlocks')}
-											<span title="{lang}wcf.acp.ultimate.block.edit{/lang}" class="icon icon16 icon-pencil jsTooltip" data-object-id="{@$templateBlock->blockID}"></span>
+											<span title="{lang}wcf.acp.ultimate.block.edit{/lang}" class="icon icon16 icon-pencil jsTooltip pointer" data-object-id="{@$templateBlock->blockID}"></span>
 										{else}
 											<span title="{lang}wcf.acp.ultimate.block.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
 										{/if}
 										
 										{if $__wcf->session->getPermission('admin.content.ultimate.canManageBlocks')}
-											<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="{@$templateBlock->blockID}" data-confirm-message="{lang}'wcf.acp.ultimate.block.delete.sure'{/lang}"></span>
+											<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" data-object-id="{@$templateBlock->blockID}" data-confirm-message="{lang}wcf.acp.ultimate.block.delete.sure{/lang}"></span>
 										{else}
 											<span title="{lang}wcf.global.button.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
 										{/if}
@@ -252,7 +252,8 @@
 					});
 					WCF.Language.addObject({
 						'wcf.acp.ultimate.template.dialog.additionalOptions': '{lang}wcf.acp.ultimate.template.dialog.additionalOptions{/lang}',
-						'wcf.acp.ultimate.block.edit': '{lang}wcf.acp.ultimate.block.edit{/lang}'
+						'wcf.acp.ultimate.block.edit': '{lang}wcf.acp.ultimate.block.edit{/lang}',
+						'wcf.acp.ultimate.block.delete.sure': '{lang}wcf.acp.ultimate.block.delete.sure{/lang}'
 					});
 					new ULTIMATE.ACP.Block.Transfer('blocktypeContainer', 'templateBlockList', 'ultimate\\data\\block\\BlockAction');
 				{/if}

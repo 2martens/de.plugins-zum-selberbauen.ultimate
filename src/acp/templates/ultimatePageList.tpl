@@ -6,7 +6,7 @@
 	$(function() {
 		var actionObjects = { };
 		actionObjects['de.plugins-zum-selberbauen.ultimate.page'] = { };
-		actionObjects['de.plugins-zum-selberbauen.ultimate.page']['delete'] = new WCF.Action.Delete('ultimate\\data\\page\\PageAction', '.jsPageRow');
+		actionObjects['de.plugins-zum-selberbauen.ultimate.page']['delete'] = new ULTIMATE.Action.Delete('ultimate\\data\\page\\PageAction', '.jsPageRow');
 		
 		WCF.Clipboard.init('ultimate\\acp\\page\\UltimatePageListPage', {@$hasMarkedItems}, actionObjects);
 		
@@ -43,7 +43,7 @@
 {hascontent}
 <div id="pageTableContainer" class="tabularBox tabularBoxTitle marginTop">
 	<header>
-		<h2>{lang}wcf.acp.ultimate.page.list{/lang} <span class="badge badgeInverse" title="{lang}wcf.acp.ultimate.page.list.count{/lang}">{#$items}</span></h2>
+		<h2>{lang}wcf.acp.ultimate.page.list{/lang} <span class="counter badge badgeInverse" title="{lang}wcf.acp.ultimate.page.list.count{/lang}">{#$items}</span></h2>
 	</header>
 	<table class="table jsClipboardContainer" data-type="de.plugins-zum-selberbauen.ultimate.page">
 		<thead>
@@ -72,7 +72,7 @@
 							{/if}
 							
 							{if $__wcf->session->getPermission('admin.content.ultimate.canDeletePage')}
-								<span title="{lang}wcf.acp.ultimate.page.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton" data-object-id="{@$page->pageID}" data-confirm-message="{lang}wcf.acp.ultimate.page.delete.sure{/lang}"></span>
+								<span title="{lang}wcf.acp.ultimate.page.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton pointer" data-object-id="{@$page->pageID}" data-confirm-message="{lang}wcf.acp.ultimate.page.delete.sure{/lang}"></span>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.page.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
 							{/if}
@@ -82,8 +82,8 @@
 						<td class="columnID"><p>{@$page->pageID}</p></td>
 						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditPage')}<a title="{lang}wcf.acp.ultimate.page.edit{/lang}" href="{link application='ultimate' controller='UltimatePageEdit' id=$page->pageID}{/link}">{lang}{@$page->pageTitle}{/lang}</a>{else}{lang}{@$page->pageTitle}{/lang}{/if}</p></td>
 						<td class="columnAuthor"><p>{if $__wcf->session->getPermission('admin.user.canEditUser')}<a title="{lang}wcf.acp.user.edit{/lang}" href="{link controller='UserEdit' id=$page->authorID}{/link}">{@$page->author->username}</a>{else}{@$page->author->username}{/if}</p></td>
-						{capture assign='englishAccent'}{@ULTIMATE_GENERAL_ENGLISHLANGUAGE}{/capture}
-						{capture assign='publishDateFormat'}{lang britishEnglish=$englishAccent}ultimate.date.dateFormat{/lang}{/capture}
+						{capture assign='englishAccent'}{@ULTIMATE_GENERAL_ENGLISHDATEFORMAT}{/capture}
+						{capture assign='publishDateFormat'}{lang englishAccent=$englishAccent}ultimate.date.dateFormat{/lang}{/capture}
 						{assign var='publishDateFormat' value=$publishDateFormat}
 						<td class="columnDate"><p>{if $page->publishDate}{@$page->publishDate|dateExtended:$publishDateFormat}{else}{/if}</p></td>
 						<td class="columnLastModified"><p>{@$page->lastModified|time}</p></td>

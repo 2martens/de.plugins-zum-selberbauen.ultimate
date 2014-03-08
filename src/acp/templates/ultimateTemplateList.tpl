@@ -6,7 +6,7 @@
 	$(function() {
 		var actionObjects = { };
 		actionObjects['de.plugins-zum-selberbauen.ultimate.template'] = { };
-		actionObjects['de.plugins-zum-selberbauen.ultimate.template']['delete'] = new WCF.Action.Delete('ultimate\\data\\template\\TemplateAction', '.jsTemplateRow');
+		actionObjects['de.plugins-zum-selberbauen.ultimate.template']['delete'] = new ULTIMATE.Action.Delete('ultimate\\data\\template\\TemplateAction', '.jsTemplateRow');
 		
 		WCF.Clipboard.init('ultimate\\acp\\page\\UltimateTemplateListPage', {@$hasMarkedItems}, actionObjects);
 		
@@ -44,7 +44,7 @@
 {hascontent}
 <div id="templateTableContainer" class="tabularBox tabularBoxTitle marginTop">
 	<header>
-		<h2>{lang}wcf.acp.ultimate.template.list{/lang} <span class="badge badgeInverse" title="{lang}wcf.acp.ultimate.template.list.count{/lang}">{#$items}</span></h2>
+		<h2>{lang}wcf.acp.ultimate.template.list{/lang} <span class="counter badge badgeInverse" title="{lang}wcf.acp.ultimate.template.list.count{/lang}">{#$items}</span></h2>
 	</header>
 	<table class="table jsClipboardContainer" data-type="de.plugins-zum-selberbauen.ultimate.template">
 		<thead>
@@ -70,7 +70,7 @@
 							{/if}
 							
 							{if $__wcf->session->getPermission('admin.content.ultimate.canManageTemplates')}
-								<span title="{lang}wcf.acp.ultimate.template.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton" data-object-id="{@$template->templateID}" data-confirm-message="{lang}wcf.acp.ultimate.template.delete.sure{/lang}"></span>
+								<span title="{lang}wcf.acp.ultimate.template.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton pointer" data-object-id="{@$template->templateID}" data-confirm-message="{lang}wcf.acp.ultimate.template.delete.sure{/lang}"></span>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.template.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
 							{/if}

@@ -29,7 +29,6 @@ namespace ultimate\page;
 use ultimate\system\layout\LayoutHandler;
 use ultimate\system\template\TemplateHandler;
 use wcf\page\AbstractPage;
-use wcf\system\WCF;
 use wcf\util\HeaderUtil;
 
 /**
@@ -85,6 +84,5 @@ class IndexPage extends AbstractPage {
 		parent::show();
 		HeaderUtil::sendHeaders();
 		echo $this->output;
-		exit;
 	}
 }

@@ -34,6 +34,26 @@
 var ULTIMATE = {};
 
 /**
+ * Namespace for action-related functions
+ * 
+ * @namespace
+ */
+ULTIMATE.Action = {};
+
+ULTIMATE.Action.Delete = WCF.Action.Delete.extend({
+	/**
+	 * Is called if the delete effect has been triggered on the given element.
+	 * 
+	 * @param	jQuery		element
+	 */
+	_didTriggerEffect: function(element) {
+		var text = $('.counter').text();
+		var newCount = text - 1;
+		$('.counter').text(newCount);
+	},
+});
+
+/**
  * Namespace for date-related functions
  * 
  * @namespace

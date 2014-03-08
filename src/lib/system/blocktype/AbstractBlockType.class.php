@@ -30,7 +30,6 @@ use ultimate\data\block\Block;
 use ultimate\data\layout\Layout;
 use ultimate\data\IUltimateData;
 use ultimate\system\cache\builder\BlockCacheBuilder;
-use wcf\page\IPage;
 use wcf\system\event\EventHandler;
 use wcf\system\exception\SystemException;
 use wcf\system\request\RequestHandler;
@@ -269,13 +268,7 @@ abstract class AbstractBlockType implements IBlockType {
 			$className = array_pop($classParts);
 			$this->blockOptionsTemplateName = str_replace('Type', 'Options', lcfirst($className));
 		}
-		$output = '';
-		
-		if (RequestHandler::getInstance()->isACPRequest()) {
-			WCF::getTPL()->addApplication('ultimate', ULTIMATE_DIR.'templates/');
-			$output = WCF::getTPL()->fetch($this->blockOptionsTemplateName, 'ultimate');
-			WCF::getTPL()->addApplication('ultimate', ULTIMATE_DIR.'acp/templates');
-		}
+		$output = WCF::getTPL()->fetch($this->blockOptionsTemplateName, 'ultimate');
 		
 		$blockOptionIDs = $this->blockOptionIDs;
 		

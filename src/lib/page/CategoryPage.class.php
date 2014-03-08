@@ -143,7 +143,6 @@ class CategoryPage extends MultipleLinkPage {
 		parent::show();
 		HeaderUtil::sendHeaders();
 		echo $this->output;
-		exit;
 	}
 	
 	/**

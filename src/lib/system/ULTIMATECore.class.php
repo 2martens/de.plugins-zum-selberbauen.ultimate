@@ -28,14 +28,9 @@
 namespace ultimate\system;
 use ultimate\system\request\Route;
 use wcf\system\application\AbstractApplication;
-use wcf\system\breadcrumb\Breadcrumb;
 use wcf\system\menu\page\PageMenu;
-use wcf\system\request\LinkHandler;
 use wcf\system\request\RequestHandler;
 use wcf\system\request\RouteHandler;
-use wcf\system\style\StyleHandler;
-use wcf\system\WCF;
-use wcf\util\StringUtil;
 
 /**
  * The core class of the Ultimate CMS.
@@ -69,6 +64,11 @@ class ULTIMATECore extends AbstractApplication {
 	 */
 	public function getCurrentApplication() {
 		$activeRequest = RequestHandler::getInstance()->getActiveRequest();
+		if ($activeRequest === null) {
+			// in this case we have an exception, so the WCF is assumed
+			return 'wcf';
+		}
+		
 		$className = $activeRequest->getClassName();
 		$parts = explode('\\', $className);
 		$abbreviation = array_shift($parts);
@@ -81,19 +81,19 @@ class ULTIMATECore extends AbstractApplication {
 	protected function initRoutes() {
 		$pageRoute = new Route('pageRoute-'.PACKAGE_ID);
 		$pageRoute->setSchema('/{pageSlug}/', 'Page');
-		$pageRoute->setParameterOption('pageSlug', null, '[a-z]+(?:\-{1}[a-z0-9]+)*(?:\_{1}[a-z]+(?:\-{1}[a-z0-9]+)*)*');
+		$pageRoute->setParameterOption('pageSlug', null, '[a-z]+(?:\-{1}[a-zA-Z0-9]+)*(?:\_{1}[a-zA-Z]+(?:\-{1}[a-zA-Z0-9]+)*)*');
 		RouteHandler::getInstance()->addRoute($pageRoute);
 		
 		$categoryRoute = new Route('categoryRoute-'.PACKAGE_ID);
 		$categoryRoute->setSchema('/{category}/{categorySlug}/', 'Category');
 		$categoryRoute->setParameterOption('category', 'category', 'category');
-		$categoryRoute->setParameterOption('categorySlug', null, '[a-z]+(?:\-{1}[a-z0-9]+)*(?:\_{1}[a-z]+(?:\-{1}[a-z0-9]+)*)*');
+		$categoryRoute->setParameterOption('categorySlug', null, '[a-zA-Z]+(?:\-{1}[a-zA-Z0-9]+)*(?:\_{1}[a-zA-Z]+(?:\-{1}[a-zA-Z0-9]+)*)*');
 		RouteHandler::getInstance()->addRoute($categoryRoute);
 		
 		$contentRoute = new Route('contentRoute-'.PACKAGE_ID);
 		$contentRoute->setSchema('/{date}/{contentSlug}/', 'Content');
 		$contentRoute->setParameterOption('date', null, '2[0-9]{3}\-[0-9]{2}\-[0-9]{2}');
-		$contentRoute->setParameterOption('contentSlug', null, '[a-z]+(\-{1}[a-z0-9]+)*');
+		$contentRoute->setParameterOption('contentSlug', null, '[a-zA-Z]+(\-{1}[a-zA-Z0-9]+)*');
 		RouteHandler::getInstance()->addRoute($contentRoute);
 	}
 }

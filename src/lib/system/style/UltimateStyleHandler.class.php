@@ -27,7 +27,6 @@
  */
 namespace ultimate\system\style;
 use wcf\system\request\RequestHandler;
-use wcf\system\style\StyleCompiler;
 use wcf\system\style\StyleHandler;
 use wcf\system\WCF;
 

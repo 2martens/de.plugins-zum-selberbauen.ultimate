@@ -32,7 +32,6 @@ use ultimate\data\content\ContentEditor;
 use ultimate\system\cache\builder\CategoryCacheBuilder;
 use ultimate\system\cache\builder\ContentAttachmentCacheBuilder;
 use ultimate\util\ContentUtil;
-use wcf\data\object\type\ObjectTypeCache;
 use wcf\data\tag\Tag;
 use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
@@ -43,13 +42,11 @@ use wcf\system\cache\builder\UltimateTagCloudCacheBuilder;
 use wcf\system\cache\builder\UserGroupCacheBuilder;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
-use wcf\system\menu\acp\ACPMenu;
 use wcf\system\tagging\TagEngine;
 use wcf\system\user\activity\event\UserActivityEventHandler;
 use wcf\system\Regex;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
-use wcf\util\DateTimeUtil;
 use wcf\util\DateUtil;
 use wcf\util\MessageUtil;
 use wcf\util\StringUtil;
@@ -465,13 +462,8 @@ class UltimateContentAddForm extends MessageForm {
 	protected function formatDate(\DateTime $dateTime = null) {
 		if ($dateTime === null) $dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
 		$dateTime->setTimezone(WCF::getUser()->getTimezone());
-		$date = WCF::getLanguage()->getDynamicVariable(
-			'ultimate.date.dateFormat',
-			array(
-				'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
-			)
-		);
-		$time = WCF::getLanguage()->get('wcf.date.timeFormat');
+		$date = 'M/d/Y';
+		$time = 'h:i a';
 		$format = str_replace(
 			'%time%',
 			$time,
@@ -698,7 +690,6 @@ class UltimateContentAddForm extends MessageForm {
 		
 		$pattern = '\d{4}-\d{2}-\d{2} \d{2}:\d{2}';
 		$regex = new Regex($pattern);
-		$dateTimeNow = new \DateTime('@'.TIME_NOW, WCF::getUser()->getTimezone());
 		if ($regex->match($this->publishDate)) {
 			// the browser has implemented the input type date
 			// or (more likely) the user hasn't changed the jQuery code
@@ -711,17 +702,6 @@ class UltimateContentAddForm extends MessageForm {
 			$this->publishDateTimestamp = $dateTime->format('U');
 			return;
 		}
-		// for the very unlikely reason that the date is not in the format
-		// Y-m-d, we have to make it that way
-		
-		/*$phpDateFormat = DateTimeUtil::getPHPDateFormatFromDateTimePicker($this->dateFormat);
-		$phpDateFormat .= ' H:i';
-		$dateTime = \DateTime::createFromFormat(
-			$phpDateFormat,
-			$this->publishDate,
-			WCF::getUser()->getTimezone()
-		);
-		$this->publishDateTimestamp = $dateTime->format('U');*/
 	}
 	
 }

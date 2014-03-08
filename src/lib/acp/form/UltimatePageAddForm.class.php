@@ -26,20 +26,17 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\acp\form;
-use ultimate\data\content\ContentList;
 use ultimate\data\page\PageAction;
 use ultimate\data\page\PageEditor;
 use ultimate\util\PageUtil;
 use wcf\form\AbstractForm;
 use wcf\system\cache\builder\UserGroupCacheBuilder;
-use wcf\system\exception\SystemException;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\request\LinkHandler;
 use wcf\system\Regex;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
-use wcf\util\DateTimeUtil;
 use wcf\util\DateUtil;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
@@ -235,7 +232,6 @@ class UltimatePageAddForm extends AbstractForm {
 		if (isset($_POST['visibility'])) $this->visibility = StringUtil::trim($_POST['visibility']);
 		if (isset($_POST['groupIDs'])) $this->groupIDs = ArrayUtil::toIntegerArray($_POST['groupIDs']);
 		if (isset($_POST['publishDate'])) $this->publishDate = StringUtil::trim($_POST['publishDate']);
-		// if (isset($_POST['dateFormat'])) $this->dateFormat = StringUtil::trim($_POST['dateFormat']);
 		if (isset($_POST['save'])) $this->saveType = 'save';
 		if (isset($_POST['publish'])) $this->saveType = 'publish';
 		if (isset($_POST['startTime'])) $this->startTime = intval($_POST['startTime']);
@@ -301,6 +297,7 @@ class UltimatePageAddForm extends AbstractForm {
 		
 		$url = LinkHandler::getInstance()->getLink('UltimatePageAdd', array('application' => 'ultimate'), 'success=true');
 		HeaderUtil::redirect($url);
+		// after initiating the redirect, no other code should be executed as the request for the original resource has ended
 		exit;
 	}
 	
@@ -342,13 +339,8 @@ class UltimatePageAddForm extends AbstractForm {
 	protected function formatDate(\DateTime $dateTime = null) {
 		if ($dateTime === null) $dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
 		$dateTime->setTimezone(WCF::getUser()->getTimezone());
-		$date = WCF::getLanguage()->getDynamicVariable(
-			'ultimate.date.dateFormat',
-			array(
-				'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
-			)
-		);
-		$time = WCF::getLanguage()->get('wcf.date.timeFormat');
+		$date = 'M/d/Y';
+		$time = 'h:i a';
 		$format = str_replace(
 			'%time%',
 			$time,
@@ -514,7 +506,6 @@ class UltimatePageAddForm extends AbstractForm {
 		
 		$pattern = '\d{4}-\d{2}-\d{2} \d{2}:\d{2}';
 		$regex = new Regex($pattern);
-		$dateTimeNow = new \DateTime('@'.TIME_NOW, WCF::getUser()->getTimezone());
 		if ($regex->match($this->publishDate)) {
 			// the browser has implemented the input type date
 			// or (more likely) the user hasn't changed the jQuery code
@@ -527,16 +518,5 @@ class UltimatePageAddForm extends AbstractForm {
 			$this->publishDateTimestamp = $dateTime->getTimestamp();
 			return;
 		}
-		// for the very unlikely reason that the date is not in the format
-		// Y-m-d, we have to make it that way
-		/* $phpDateFormat = DateTimeUtil::getPHPDateFormatFromDateTimePicker($this->dateFormat);
-		$phpDateFormat .= ' H:i';
-		$dateTime = \DateTime::createFromFormat(
-			$phpDateFormat,
-			$this->publishDate,
-			WCF::getUser()->getTimezone()
-		);
-		$this->publishDateTimestamp = $dateTime->getTimestamp();
-		*/
 	}
 }

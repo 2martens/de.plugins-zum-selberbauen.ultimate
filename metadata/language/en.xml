@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<language languagecode="en" languagename="English" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd">
+<language languagecode="en" languagename="English" countrycode="gb" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd">
 	
 	<category name="wcf.acp.dataImport">
 		<item name="wcf.acp.dataImport.exporter.de.plugins-zum-selberbauen.ultimate.exporter.wordpress3x"><![CDATA[WordPress 3.7+ (Ultimate CMS)]]></item>
@@ -183,10 +183,10 @@
 		<!-- /categories -->
 		
 		<!-- ultimate.general -->
-		<item name="wcf.acp.option.ultimate_general_englishLanguage"><![CDATA[Accent of English language]]></item>
-		<item name="wcf.acp.option.ultimate_general_englishLanguage.description"><![CDATA[Please select here which accent of English should be used. This is mainly used to determine the date format.]]></item>
-		<item name="wcf.acp.option.ultimate_general_englishLanguage.BE"><![CDATA[British English]]></item>
-		<item name="wcf.acp.option.ultimate_general_englishLanguage.AE"><![CDATA[American English]]></item>
+		<item name="wcf.acp.option.ultimate_general_englishDateFormat"><![CDATA[English date format]]></item>
+		<item name="wcf.acp.option.ultimate_general_englishDateFormat.description"><![CDATA[Please select here which date format should be used for the English language.]]></item>
+		<item name="wcf.acp.option.ultimate_general_englishDateFormat.BE"><![CDATA[d/m/Y]]></item>
+		<item name="wcf.acp.option.ultimate_general_englishDateFormat.AE"><![CDATA[m/d/Y]]></item>
 		<!-- /ultimate.general -->
 		
 		<!-- ultimate.general.content -->
@@ -202,6 +202,8 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
 Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$authorVCard</li><li>$categories</li><li>$tags</li></ul>]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength"><![CDATA[Read more length]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength.description"><![CDATA[Please insert here the default length after which contents should be truncated.]]></item>
+		<item name="wcf.acp.option.ultimate_general_content_useWYSIWYG"><![CDATA[Use WYSIWYG editor?]]></item>
+		<item name="wcf.acp.option.ultimate_general_content_useWYSIWYG.description"><![CDATA[Please check this checkbox if you want to use the WYSIWYG editor to create and edit contents. If the editor is not used, some convenience functions will not work (include smileys into content by clicking on them, including attachments into content with a click).]]></item>
 		<!-- /ultimate.general.content -->
 		
 		<!-- ultimate.general.template -->
@@ -285,6 +287,7 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
 		<item name="wcf.acp.ultimate.visibility.public"><![CDATA[Public]]></item>
 		<item name="wcf.acp.ultimate.visibility.protected"><![CDATA[Protected]]></item>
 		<item name="wcf.acp.ultimate.visibility.private"><![CDATA[Private]]></item>
+		<item name="wcf.acp.ultimate.visibility.groupIDs"><![CDATA[Granted user groups]]></item>
 		<item name="wcf.acp.ultimate.visibility.groupIDs.error.notValid"><![CDATA[At least one of the 'selected' groups wasn't selectable.]]></item>
 		<item name="wcf.acp.ultimate.visibility.groupIDs.error.notSelected"><![CDATA[You have to select at least one group.]]></item>
 		<item name="wcf.acp.ultimate.visibility.error.notValid"><![CDATA[The 'selected' visibility wasn't selectable.]]></item>
@@ -307,7 +310,7 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
 		<item name="wcf.acp.ultimate.category.title.placeholder"><![CDATA[Good contents]]></item>
 		<item name="wcf.acp.ultimate.category.title.error.notUnique"><![CDATA[A category with the specified name already exists with this parent.]]></item>
 		<item name="wcf.acp.ultimate.category.slug"><![CDATA[Slug]]></item>
-		<item name="wcf.acp.ultimate.category.slug.description"><![CDATA[The slug may contain lower-case letters and numbers. The slug can contain multiple parts, separated by a dash (-). The first part may only contain lower-case letters.]]></item>
+		<item name="wcf.acp.ultimate.category.slug.description"><![CDATA[The slug may contain lower-case and upper-case letters as well as numbers. The slug can contain multiple parts, separated by a dash (-). The first part may only contain lower-case and upper-case letters.]]></item>
 		<item name="wcf.acp.ultimate.category.slug.placeholder"><![CDATA[good-contents]]></item>
 		<item name="wcf.acp.ultimate.category.slug.error.notUnique"><![CDATA[A category with the specified slug already exists with this parent.]]></item>
 		<item name="wcf.acp.ultimate.category.parent"><![CDATA[Parent]]></item>
@@ -337,7 +340,7 @@ Available variables:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comme
 		<item name="wcf.acp.ultimate.content.description.placeholder"><![CDATA[]]></item>
 		<item name="wcf.acp.ultimate.content.description.error.tooShort"><![CDATA[The description has to be at least 4 characters long.]]></item>
 		<item name="wcf.acp.ultimate.content.slug"><![CDATA[Slug]]></item>
-		<item name="wcf.acp.ultimate.content.slug.description"><![CDATA[The slug may contain lower-case letters and numbers. The slug can contain multiple parts, separated by a dash (-). The first part may only contain lower-case letters.]]></item>
+		<item name="wcf.acp.ultimate.content.slug.description"><![CDATA[The slug may contain lower-case and upper-case letters as well as numbers. The slug can contain multiple parts, separated by a dash (-). The first part may only contain lower-case and upper-case letters.]]></item>
 		<item name="wcf.acp.ultimate.content.slug.placeholder"><![CDATA[a-nice-story]]></item>
 		<item name="wcf.acp.ultimate.content.slug.error.notUnique"><![CDATA[A content with the specified slug already exists.]]></item>
 		<item name="wcf.acp.ultimate.content.categories"><![CDATA[Categories]]></item>
@@ -457,7 +460,7 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.page.title.placeholder"><![CDATA[Company profile]]></item>
 		<item name="wcf.acp.ultimate.page.title.error.notUnique"><![CDATA[A page with the specified title already exists with this parent.]]></item>
 		<item name="wcf.acp.ultimate.page.slug"><![CDATA[Slug]]></item>
-		<item name="wcf.acp.ultimate.page.slug.description"><![CDATA[The slug may contain lower-case letters and numbers. The slug can contain multiple parts, separated by a dash (-). The first part may only contain lower-case letters.]]></item>
+		<item name="wcf.acp.ultimate.page.slug.description"><![CDATA[The slug may contain lower-case and upper-case letters as well as numbers. The slug can contain multiple parts, separated by a dash (-). The first part may only contain lower-case letters.]]></item>
 		<item name="wcf.acp.ultimate.page.slug.placeholder"><![CDATA[company-profile]]></item>
 		<item name="wcf.acp.ultimate.page.slug.error.notUnique"><![CDATA[A page with the specified slug already exists with this parent.]]></item>
 		<item name="wcf.acp.ultimate.page.parent"><![CDATA[Parent]]></item>
@@ -779,7 +782,7 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 	</category>
 	
 	<category name="ultimate.date">
-		<item name="ultimate.date.dateFormat"><![CDATA[{if $britishEnglish|isset && $britishEnglish == true}d/m/Y{else}m/d/Y{/if}]]></item>
+		<item name="ultimate.date.dateFormat"><![CDATA[{if $englishAccent|isset && $englishAccent == 'BE'}d/m/Y{else}m/d/Y{/if}]]></item>
 		<item name="ultimate.date.dateTimeFormat"><![CDATA[%date% %time%]]></item>
 	</category>
 	
@@ -803,7 +806,7 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 	
 	<!-- this category is used for all multilingual link fields -->
 	<category name="ultimate.link">
-		<item name="ultimate.link.category..title.category1"><![CDATA[Uncategorized]]></item>
+		<item name="ultimate.link.category.title.category1"><![CDATA[Uncategorized]]></item>
 	</category>
 	
 	<!-- this category is used for all multilingual menu fields -->

@@ -26,12 +26,8 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\content;
-use ultimate\system\cache\builder\ContentTagCacheBuilder;
-use ultimate\system\layout\LayoutHandler;
-use ultimate\system\template\TemplateHandler;
 use wcf\data\tag\Tag;
 use wcf\system\tagging\ITaggable;
-use wcf\system\WCF;
 
 /**
  * Represents a taggable content.

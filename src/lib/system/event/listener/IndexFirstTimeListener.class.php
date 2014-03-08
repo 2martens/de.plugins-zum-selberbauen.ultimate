@@ -60,20 +60,23 @@ class IndexFirstTimeListener implements IEventListener {
 		// adds default link category
 		require_once(ULTIMATE_DIR.'acp/'.self::CONFIG_FILE);
 		if (!$initiatedDefaultLinkCategory) {
-			$this->createDefaultLinkCategory();
-			$this->updateConfigFile();
+			$success = $this->createDefaultLinkCategory();
+			if ($success) {
+				$this->updateConfigFile();
+			}
 		}
 	}
 	
 	/**
 	 * Creates the default link category.
+	 * 
+	 * @return	boolean	true on success, false otherwise
 	 */
 	protected function createDefaultLinkCategory() {
 		ObjectTypeCacheBuilder::getInstance()->reset();
 		$objectType = CategoryHandler::getInstance()->getObjectTypeByName('de.plugins-zum-selberbauen.ultimate.linkCategory');
-		// until it's working, we have to do this
-		if ($objectType === null) return;
-		if (!isset($objectType->objectTypeID)) exit;
+		if ($objectType === null) return false;
+		if (!isset($objectType->objectTypeID)) return false;
 		
 		$parameters = array(
 			'data' => array(
@@ -86,6 +89,8 @@ class IndexFirstTimeListener implements IEventListener {
 		);
 		$action = new CategoryAction(array(), 'create', $parameters);
 		$action->executeAction();
+		
+		return true;
 	}
 	
 	/**

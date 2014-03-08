@@ -123,6 +123,7 @@ class LinkUtil {
 		// checks if URL is valid
 		$regexURL = new Regex($pattern, Regex::CASE_INSENSITIVE);
 		$isValid = (boolean) $regexURL->match($url);
+		
 		// prevents HTTP requests if URL is invalid anyway
 		if (!$isValid) return $isValid;
 		
@@ -135,7 +136,7 @@ class LinkUtil {
 		try {
 			$parsedURL = parse_url($url);
 			$resource = new RemoteFile($parsedURL['host'], (isset ($parsedURL['port']) ? $parsedURL['port'] : 80));
-			$out = "HEAD / HTTP/1.1\r\n";
+			$out = "HEAD ".$parsedURL['path']." HTTP/1.1\r\n";
 			$out .= 'Host: '.$parsedURL['host']."\r\n";
 			$out .= "Connection: Close\r\n\r\n";
 			$resource->write($out);
@@ -145,8 +146,9 @@ class LinkUtil {
 				$headers[] = $resource->gets();
 			}
 			$resource->close();
-			$headerRegex = new Regex('^HTTP/\d+\.\d+\s+2\d\d\s+.*$');
-			$isValid =  !empty($headers) ? (boolean) $headerRegex->match(StringUtil::trim($headers[0])) : false;
+			
+			$headerRegex = new Regex('^HTTP/\d+\.\d+\s+4\d\d\s+.*$');
+			$isValid =  !empty($headers) ? (boolean) !$headerRegex->match(StringUtil::trim($headers[0])) : false;
 		}
 		catch (SystemException $e) {
 			$isValid = false;

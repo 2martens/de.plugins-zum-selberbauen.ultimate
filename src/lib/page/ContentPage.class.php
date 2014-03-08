@@ -34,7 +34,6 @@ use ultimate\system\template\TemplateHandler;
 use wcf\page\AbstractPage;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\request\RouteHandler;
-use wcf\system\WCF;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 
@@ -154,7 +153,6 @@ class ContentPage extends AbstractPage {
 		// everything's fine
 		HeaderUtil::sendHeaders();
 		echo $this->output;
-		exit;
 	}
 	
 	/**

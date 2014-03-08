@@ -27,7 +27,6 @@
  */
 namespace ultimate\system\blocktype;
 use ultimate\data\content\CategorizedContent;
-use ultimate\data\content\Content;
 use ultimate\data\content\TaggedContent;
 use ultimate\data\IUltimateData;
 use ultimate\system\cache\builder\ContentAttachmentCacheBuilder;
@@ -498,9 +497,9 @@ class ContentBlockType extends AbstractBlockType {
 			$categoryOutput = '';
 			foreach ($categories as $categoryID => $category) {
 				if (!empty($categoryOutput)) $categoryOutput .= ', ';
-				$categoryOutput .= LinkHandler::getInstance()->getLink('Category', array(
+				$categoryOutput .= '<a href="'. UltimateLinkHandler::getInstance()->getLink(null, array(
 					'categorySlug' => $category->__get('categorySlug')
-				), '');
+				), '') . '">'.WCF::getLanguage()->get($category->__get('categoryTitle')).'</a>';
 			}
 			
 			// get tag output
@@ -511,9 +510,9 @@ class ContentBlockType extends AbstractBlockType {
 				if ($languageID != $_languageID) continue;
 				foreach ($_tags as $tagID => $tag) {
 					if (!empty($tagOutput)) $tagOutput .= ', ';
-					$tagOutput .= LinkHandler::getInstance()->getLink('Tag', array(
+					$tagOutput .= '<a href="'. LinkHandler::getInstance()->getLink('Tag', array(
 						'tagSlug' => $tag->__get('tagSlug')
-					), '');
+					), '') . '">'.WCF::getLanguage()->get($tag->__get('name')).'</a>';
 				}
 			}
 			
@@ -524,7 +523,7 @@ class ContentBlockType extends AbstractBlockType {
 				$dateTimeObject = $content->__get('publishDateObject');
 				$timestamp = $content->__get('publishDate');
 				$format = WCF::getLanguage()->getDynamicVariable('ultimate.date.dateFormat', array(
-					'britishEnglish' => ULTIMATE_GENERAL_ENGLISHLANGUAGE
+					'englishAccent' => ULTIMATE_GENERAL_ENGLISHDATEFORMAT
 				));
 				$date = DateUtil::format($dateTimeObject, $format);
 				$time = DateUtil::format($dateTimeObject, DateUtil::TIME_FORMAT);
@@ -553,18 +552,7 @@ class ContentBlockType extends AbstractBlockType {
 						).
 						'</div>';
 				
-				if ($metaAboveContent !== '') {
-					$metaAbove[$contentID] = '';
-					$__metaAboveContent = str_replace('$datetime', $dateAndTime, $metaAboveContent);
-					$__metaAboveContent = str_replace('$date', $dateString, $__metaAboveContent);
-					$__metaAboveContent = str_replace('$time', $timeString, $__metaAboveContent);
-					$__metaAboveContent = str_replace('$comments', count($content->__get('comments')), $__metaAboveContent);
-					$__metaAboveContent = str_replace('$authorVCard', $authorVCard, $__metaAboveContent);
-					$__metaAboveContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaAboveContent);
-					$__metaAboveContent = str_replace('$categories', $categoryOutput, $__metaAboveContent);
-					$__metaAboveContent = str_replace('$tags', $tagOutput, $__metaAboveContent);
-					$metaAbove[$contentID] = $__metaAboveContent;
-				} else if (!empty($metaAboveContent_i18n)) {
+				if (!empty($metaAboveContent_i18n)) {
 					$metaAbove_i18n[$contentID] = array();
 					foreach ($metaAboveContent_i18n as $languageID => $_metaAboveContent) {
 						$__metaAboveContent = str_replace('$datetime', $dateAndTime, $_metaAboveContent);
@@ -575,22 +563,24 @@ class ContentBlockType extends AbstractBlockType {
 						$__metaAboveContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaAboveContent);
 						$__metaAboveContent = str_replace('$categories', $categoryOutput, $__metaAboveContent);
 						$__metaAboveContent = str_replace('$tags', $tagOutput, $__metaAboveContent);
+						// reversing encodeJS step in I18nHandler
+						$__metaAboveContent = str_replace('\n', "\n", $__metaAboveContent);
 						$metaAbove_i18n[$contentID][$languageID] = $__metaAboveContent;
 					}
+				} else if ($metaAboveContent !== '') {
+					$metaAbove[$contentID] = '';
+					$__metaAboveContent = str_replace('$datetime', $dateAndTime, $metaAboveContent);
+					$__metaAboveContent = str_replace('$date', $dateString, $__metaAboveContent);
+					$__metaAboveContent = str_replace('$time', $timeString, $__metaAboveContent);
+					$__metaAboveContent = str_replace('$comments', count($content->__get('comments')), $__metaAboveContent);
+					$__metaAboveContent = str_replace('$authorVCard', $authorVCard, $__metaAboveContent);
+					$__metaAboveContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaAboveContent);
+					$__metaAboveContent = str_replace('$categories', $categoryOutput, $__metaAboveContent);
+					$__metaAboveContent = str_replace('$tags', $tagOutput, $__metaAboveContent);
+					$metaAbove[$contentID] = $__metaAboveContent;
 				}
-					
-				if ($metaBelowContent !== '') {
-					$metaBelow[$contentID] = '';
-					$__metaBelowContent = str_replace('$datetime', $dateAndTime, $metaBelowContent);
-					$__metaBelowContent = str_replace('$date', $dateString, $__metaBelowContent);
-					$__metaBelowContent = str_replace('$time', $timeString, $__metaBelowContent);
-					$__metaBelowContent = str_replace('$comments', count($content->__get('comments')), $__metaBelowContent);
-					$__metaBelowContent = str_replace('$authorVCard', $authorVCard, $__metaBelowContent);
-					$__metaBelowContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaBelowContent);
-					$__metaBelowContent = str_replace('$categories', $categoryOutput, $__metaBelowContent);
-					$__metaBelowContent = str_replace('$tags', $tagOutput, $__metaBelowContent);
-					$metaBelow[$contentID] = $__metaBelowContent;
-				} else if (!empty($metaBelowContent_i18n)) {
+				
+				if (!empty($metaBelowContent_i18n)) {
 					$metaBelow_i18n[$contentID] = array();
 					foreach ($metaBelowContent_i18n as $languageID => $_metaBelowContent) {
 						$__metaBelowContent = str_replace('$datetime', $dateAndTime, $_metaBelowContent);
@@ -601,8 +591,21 @@ class ContentBlockType extends AbstractBlockType {
 						$__metaBelowContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaBelowContent);
 						$__metaBelowContent = str_replace('$categories', $categoryOutput, $__metaBelowContent);
 						$__metaBelowContent = str_replace('$tags', $tagOutput, $__metaBelowContent);
+						// reversing encodeJS step in I18nHandler
+						$__metaBelowContent = str_replace('\n', "\n", $__metaBelowContent);
 						$metaBelow_i18n[$contentID][$languageID] = $__metaBelowContent;
 					}
+				} else if ($metaBelowContent !== '') {
+					$metaBelow[$contentID] = '';
+					$__metaBelowContent = str_replace('$datetime', $dateAndTime, $metaBelowContent);
+					$__metaBelowContent = str_replace('$date', $dateString, $__metaBelowContent);
+					$__metaBelowContent = str_replace('$time', $timeString, $__metaBelowContent);
+					$__metaBelowContent = str_replace('$comments', count($content->__get('comments')), $__metaBelowContent);
+					$__metaBelowContent = str_replace('$authorVCard', $authorVCard, $__metaBelowContent);
+					$__metaBelowContent = str_replace('$author', $content->__get('author')->__get('username'), $__metaBelowContent);
+					$__metaBelowContent = str_replace('$categories', $categoryOutput, $__metaBelowContent);
+					$__metaBelowContent = str_replace('$tags', $tagOutput, $__metaBelowContent);
+					$metaBelow[$contentID] = $__metaBelowContent;
 				}
 			}
 		}

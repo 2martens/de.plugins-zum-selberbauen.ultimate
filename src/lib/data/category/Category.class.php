@@ -26,7 +26,6 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\category;
-use ultimate\data\content\Content;
 use ultimate\data\AbstractUltimateDatabaseObject;
 use wcf\data\ITitledObject;
 use wcf\system\WCF;
@@ -155,6 +154,10 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledObject {
 	 * @param	array	$data
 	 */
 	protected function handleData($data) {
+		if (!isset($data['categoryID'])) {
+			parent::handleData($data);
+			return;
+		}
 		$data['categoryID'] = intval($data['categoryID']);
 		$data['categoryParent'] = intval($data['categoryParent']);
 		parent::handleData($data);

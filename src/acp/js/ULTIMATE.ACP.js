@@ -498,8 +498,8 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
 			            $.proxy(function(index, listItem) {
 				            var $listItem = $(listItem);
 				            var $languageID = $listItem.attr('name')
-				                    .mb_substring($item.length + 6);
-				            $languageID = $languageID.mb_substr(0,
+				                    .substring($item.length + 6);
+				            $languageID = $languageID.substr(0,
 				                    $languageID.length - 1);
 				            optionName_i18n[$languageID] = $listItem.val();
 			            }, this));
@@ -695,12 +695,12 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
 		            .get('admin.content.ultimate.canManageBlocks')) {
 			    $newHtml += '<span title="'
 			            + WCF.Language.get('wcf.acp.ultimate.block.edit')
-			            + '" class="icon icon16 icon-pencil jsTooltip" data-object-id="'
+			            + '" class="icon icon16 icon-pencil jsTooltip pointer" data-object-id="'
 			            + $data['blockID'] + '"></span>';
 			    
 			    $newHtml += '\n<span title="'
 			            + WCF.Language.get('wcf.global.button.delete')
-			            + '" class="icon icon16 icon-remove jsDeleteButton jsTooltip" data-object-id="'
+			            + '" class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" data-object-id="'
 			            + $data['blockID']
 			            + '" data-confirm-message="'
 			            + WCF.Language

@@ -3,7 +3,6 @@ namespace ultimate\system\exporter;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\exporter\AbstractExporter;
 use wcf\system\importer\ImportHandler;
-use wcf\system\WCF;
 
 /**
  * Exporter for Wordpress 3.x
@@ -113,12 +112,6 @@ class WordPress3xExporter extends AbstractExporter {
 	 * Exports users.
 	 */
 	public function exportUsers($offset, $limit) {
-		// prepare password update
-		$sql = 'UPDATE wcf'.WCF_N.'_user
-		        SET    password = ?
-		        WHERE  userID   = ?';
-		$passwordUpdateStatement = WCF::getDB()->prepareStatement($sql);
-		
 		// get users
 		$sql = 'SELECT   *
 		        FROM     '.$this->databasePrefix.'users
@@ -135,12 +128,7 @@ class WordPress3xExporter extends AbstractExporter {
 			);
 			
 			// import user
-			$newUserID = ImportHandler::getInstance()->getImporter('com.woltlab.wcf.user')->import($row['ID'], $data);
-			
-			// update password hash
-			if ($newUserID) {
-				//$passwordUpdateStatement->execute(array($row['user_pass'], $newUserID));
-			}
+			ImportHandler::getInstance()->getImporter('com.woltlab.wcf.user')->import($row['ID'], $data);
 		}
 	}
 	
@@ -260,11 +248,14 @@ class WordPress3xExporter extends AbstractExporter {
 		$statement->execute($conditionBuilder->getParameters());
 		while ($row = $statement->fetchArray()) {
 			if (!isset($categories[$row['object_id']])) $categories[$row['object_id']] = array();
-			$categories[$row['object_id']][] = (
-				isset($this->newCategoryIDs[$row['term_id']])
-				? $this->newCategoryIDs[$row['term_id']]
-				: ImportHandler::getInstance()->getNewID('de.plugins-zum-selberbauen.ultimate.category', $row['term_id'])
-			);
+			$newID = ImportHandler::getInstance()->getNewID('de.plugins-zum-selberbauen.ultimate.category', $row['term_id']);
+			if (isset($this->newCategoryIDs[$row['term_id']]) || $newID !== null) {
+				$categories[$row['object_id']][] = (
+					isset($this->newCategoryIDs[$row['term_id']])
+					? $this->newCategoryIDs[$row['term_id']]
+					: $newID
+				);
+			}
 		}
 		
 		// get contents

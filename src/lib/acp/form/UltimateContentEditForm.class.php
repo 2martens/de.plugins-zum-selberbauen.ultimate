@@ -31,11 +31,8 @@ use ultimate\data\category\Category;
 use ultimate\data\content\CategorizedContent;
 use ultimate\data\content\Content;
 use ultimate\data\content\ContentAction;
-use ultimate\data\content\ContentEditor;
 use ultimate\system\cache\builder\ContentCacheBuilder;
-use ultimate\system\cache\builder\ContentTagCloudCacheBuilder;
 use wcf\data\tag\Tag;
-use wcf\form\AbstractForm;
 use wcf\form\MessageForm;
 use wcf\form\RecaptchaForm;
 use wcf\system\bbcode\PreParser;
@@ -107,7 +104,6 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 	 */
 	public function readParameters() {
 		parent::readParameters();
-		// I18nHandler::getInstance()->disableAssignValueVariables();
 		if (isset($_REQUEST['id'])) $this->contentID = intval($_REQUEST['id']);
 		$content = new CategorizedContent(new Content($this->contentID));
 		if (!$content->__get('contentID')) {
@@ -308,6 +304,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 			'success=true'
 		);
 		HeaderUtil::redirect($url);
+		// after initiating the redirect, no other code should be executed as the request for the original resource has ended
 		exit;
 	}
 	

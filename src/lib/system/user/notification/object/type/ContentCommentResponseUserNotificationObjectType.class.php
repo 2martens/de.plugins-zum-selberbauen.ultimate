@@ -16,7 +16,7 @@
  * GNU Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}}.
+ * along with the Ultimate CMS. If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
  * @copyright	2011-2013 Jim Martens
@@ -26,10 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\user\notification\object\type;
-use ultimate\system\cache\builder\ContentCacheBuilder;
 use wcf\system\user\notification\object\type\AbstractUserNotificationObjectType;
-use wcf\system\user\notification\object\type\ICommentUserNotificationObjectType;
-use wcf\system\WCF;
 
 /**
  * Represents a content comment response notification object type.

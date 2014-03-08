@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<language languagecode="de-informal" languagename="Deutsch" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd">
+<language languagecode="de-informal" languagename="Deutsch" countrycode="de" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd">
 	
 	<category name="wcf.acp.dataImport">
 		<item name="wcf.acp.dataImport.exporter.de.plugins-zum-selberbauen.ultimate.exporter.wordpress3x"><![CDATA[WordPress 3.7+ (Ultimate CMS)]]></item>
@@ -183,10 +183,10 @@
 		<!-- /categories -->
 		
 		<!-- ultimate.general -->
-		<item name="wcf.acp.option.ultimate_general_englishLanguage"><![CDATA[Variante der englischen Sprache]]></item>
-		<item name="wcf.acp.option.ultimate_general_englishLanguage.description"><![CDATA[Bitte wähle aus, ob britisches Englisch oder amerikanisches Englisch verwendet werden soll. Hauptsächlich wird dies zur Ermittelung des Datumsformates genutzt.]]></item>
-		<item name="wcf.acp.option.ultimate_general_englishLanguage.BE"><![CDATA[Britisches Englisch]]></item>
-		<item name="wcf.acp.option.ultimate_general_englishLanguage.AE"><![CDATA[Amerikanisches Englisch]]></item>
+		<item name="wcf.acp.option.ultimate_general_englishDateFormat"><![CDATA[Englisches Datumsformat]]></item>
+		<item name="wcf.acp.option.ultimate_general_englishDateFormat.description"><![CDATA[Bitte wähle das englische Datumsformat aus.]]></item>
+		<item name="wcf.acp.option.ultimate_general_englishDateFormat.BE"><![CDATA[d/m/Y]]></item>
+		<item name="wcf.acp.option.ultimate_general_englishDateFormat.AE"><![CDATA[m/d/Y]]></item>
 		<!-- /ultimate.general -->
 		
 		<!-- ultimate.general.content -->
@@ -202,6 +202,8 @@ Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$com
 Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$comments</li><li>$author</li><li>$authorVCard</li><li>$categories</li><li>$tags</li></ul>]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength"><![CDATA['Weiterlesen'-Länge]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_continueReadingLength.description"><![CDATA[Gib hier an, nach wie vielen Zeichen standardmäßig ein Inhalt abgeschnitten werden soll.]]></item>
+		<item name="wcf.acp.option.ultimate_general_content_useWYSIWYG"><![CDATA[WYSIWYG-Editor nutzen?]]></item>
+		<item name="wcf.acp.option.ultimate_general_content_useWYSIWYG.description"><![CDATA[Gib hier an, ob du den WYSIWYG-Editor zum Erstellen und Bearbeiten von Inhalten verwenden möchtest. Wird der Editor nicht verwendet, funktionieren einige Annehmlichkeiten nicht mehr (Smileys per Klick in Inhalt einfügen, Anhänge per Klick in Inhalt einbinden).]]></item>
 		<!-- /ultimate.general.content -->
 		
 		<!-- ultimate.general.template -->
@@ -285,6 +287,7 @@ Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$com
 		<item name="wcf.acp.ultimate.visibility.public"><![CDATA[Öffentlich]]></item>
 		<item name="wcf.acp.ultimate.visibility.protected"><![CDATA[Eingeschränkt]]></item>
 		<item name="wcf.acp.ultimate.visibility.private"><![CDATA[Privat]]></item>
+		<item name="wcf.acp.ultimate.visibility.groupIDs"><![CDATA[Berechtigte Gruppen]]></item>
 		<item name="wcf.acp.ultimate.visibility.groupIDs.error.notValid"><![CDATA[Mindestens eine der 'ausgewählten' Gruppen stand nicht nur Auswahl.]]></item>
 		<item name="wcf.acp.ultimate.visibility.groupIDs.error.notSelected"><![CDATA[Mindestens eine Gruppe muss ausgewählt werden.]]></item>
 		<item name="wcf.acp.ultimate.visibility.error.notValid"><![CDATA[Die 'ausgewählte' Sichtbarkeitsstufe stand nicht zur Auswahl.]]></item>
@@ -307,7 +310,7 @@ Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$com
 		<item name="wcf.acp.ultimate.category.title.placeholder"><![CDATA[Gute Inhalte]]></item>
 		<item name="wcf.acp.ultimate.category.title.error.notUnique"><![CDATA[Der angegebene Name existiert bereits bei einer Kategorie auf gleichem Level.]]></item>
 		<item name="wcf.acp.ultimate.category.slug"><![CDATA[URL-kompatibler Name]]></item>
-		<item name="wcf.acp.ultimate.category.slug.description"><![CDATA[Der URL-kompatible Name darf aus Kleinbuchstaben und Ziffern bestehen. Einzelne Bestandteile werden durch Bindestriche getrennt. Der erste Bestandteil darf nur Kleinbuchstaben enthalten.]]></item>
+		<item name="wcf.acp.ultimate.category.slug.description"><![CDATA[Der URL-kompatible Name darf aus Klein- und Großbuchstaben sowie Ziffern bestehen. Einzelne Bestandteile werden durch Bindestriche getrennt. Der erste Bestandteil darf nur Klein- und Großbuchstaben enthalten.]]></item>
 		<item name="wcf.acp.ultimate.category.slug.placeholder"><![CDATA[good-contents]]></item>
 		<item name="wcf.acp.ultimate.category.slug.error.notUnique"><![CDATA[Der angegebene Name existiert bereits bei einer Kategorie auf gleichem Level.]]></item>
 		<item name="wcf.acp.ultimate.category.parent"><![CDATA[Übergeordnete Kategorie]]></item>
@@ -337,7 +340,7 @@ Verfügbare Variablen:<ul><li>$datetime</li><li>$date</li><li>$time</li><li>$com
 		<item name="wcf.acp.ultimate.content.description.placeholder"><![CDATA[]]></item>
 		<item name="wcf.acp.ultimate.content.description.error.tooShort"><![CDATA[Die Beschreibung muss mindestens 4 Zeichen lang sein.]]></item>
 		<item name="wcf.acp.ultimate.content.slug"><![CDATA[URL-kompatibler Titel]]></item>
-		<item name="wcf.acp.ultimate.content.slug.description"><![CDATA[Der URL-kompatible Titel darf aus Kleinbuchstaben und Ziffern bestehen. Einzelne Bestandteile werden durch Bindestriche getrennt. Der erste Bestandteil darf nur Kleinbuchstaben enthalten.]]></item>
+		<item name="wcf.acp.ultimate.content.slug.description"><![CDATA[Der URL-kompatible Titel darf aus Klein- und Großbuchstaben sowie Ziffern bestehen. Einzelne Bestandteile werden durch Bindestriche getrennt. Der erste Bestandteil darf nur Klein- und Großbuchstaben enthalten.]]></item>
 		<item name="wcf.acp.ultimate.content.slug.placeholder"><![CDATA[a-nice-story]]></item>
 		<item name="wcf.acp.ultimate.content.slug.error.notUnique"><![CDATA[Der angegebene URL-kompatible Titel existiert bereits bei einem Inhalt.]]></item>
 		<item name="wcf.acp.ultimate.content.categories"><![CDATA[Kategorien]]></item>
@@ -456,7 +459,7 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.page.title.placeholder"><![CDATA[Beispielseite mit viel Gewürz]]></item>
 		<item name="wcf.acp.ultimate.page.title.error.notUnique"><![CDATA[Der angegebene Titel existiert bereits bei einer Seite auf gleichem Level.]]></item>
 		<item name="wcf.acp.ultimate.page.slug"><![CDATA[URL-kompatibler Titel]]></item>
-		<item name="wcf.acp.ultimate.page.slug.description"><![CDATA[Der URL-kompatible Titel darf aus Kleinbuchstaben und Ziffern bestehen. Einzelne Bestandteile werden durch Bindestriche getrennt. Der erste Bestandteil darf nur Kleinbuchstaben enthalten.]]></item>
+		<item name="wcf.acp.ultimate.page.slug.description"><![CDATA[Der URL-kompatible Titel darf aus Klein- und Großbuchstaben sowie Ziffern bestehen. Einzelne Bestandteile werden durch Bindestriche getrennt. Der erste Bestandteil darf nur Kleinbuchstaben enthalten.]]></item>
 		<item name="wcf.acp.ultimate.page.slug.placeholder"><![CDATA[samplepage-with-much-spice]]></item>
 		<item name="wcf.acp.ultimate.page.slug.error.notUnique"><![CDATA[Der angegebene URL-kompatible Titel existiert bereits bei einer Seite auf gleichem Level.]]></item>
 		<item name="wcf.acp.ultimate.page.parent"><![CDATA[Übergeordnete Seite]]></item>

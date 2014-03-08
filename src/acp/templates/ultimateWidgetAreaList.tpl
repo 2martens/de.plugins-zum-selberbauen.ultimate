@@ -6,7 +6,7 @@
 	$(function() {
 		var actionObjects = { };
 		actionObjects['de.plugins-zum-selberbauen.ultimate.widgetArea'] = { };
-		actionObjects['de.plugins-zum-selberbauen.ultimate.widgetArea']['delete'] = new WCF.Action.Delete('ultimate\\data\\widget\\area\\WidgetAreaAction', '.jsWidgetAreaRow');
+		actionObjects['de.plugins-zum-selberbauen.ultimate.widgetArea']['delete'] = new ULTIMATE.Action.Delete('ultimate\\data\\widget\\area\\WidgetAreaAction', '.jsWidgetAreaRow');
 		
 		WCF.Clipboard.init('ultimate\\acp\\page\\UltimateWidgetAreaListPage', {@$hasMarkedItems}, actionObjects);
 		
@@ -44,7 +44,7 @@
 {hascontent}
 <div id="widgetAreaTableContainer" class="tabularBox tabularBoxTitle marginTop shadow">
 	<header>
-		{lang}wcf.acp.ultimate.widgetArea.list{/lang} <span class="badge badgeInverse" title="{lang}wcf.acp.ultimate.widgetArea.list.count{/lang}">{#$items}</span></h2>
+		{lang}wcf.acp.ultimate.widgetArea.list{/lang} <span class="counter badge badgeInverse" title="{lang}wcf.acp.ultimate.widgetArea.list.count{/lang}">{#$items}</span></h2>
 	</header>
 	<table class="table jsClipboardContainer" data-type="de.plugins-zum-selberbauen.ultimate.widgetArea">
 		<thead>
@@ -70,7 +70,7 @@
 							{/if}
 							
 							{if $__wcf->session->getPermission('admin.content.ultimate.canManageWidgetAreas')}
-								<span title="{lang}wcf.acp.ultimate.widgetArea.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton" data-object-id="{@$widgetArea->widgetAreaID}" data-confirm-message="{lang}wcf.acp.ultimate.widgetArea.delete.sure{/lang}"></span>
+								<span title="{lang}wcf.acp.ultimate.widgetArea.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton pointer" data-object-id="{@$widgetArea->widgetAreaID}" data-confirm-message="{lang}wcf.acp.ultimate.widgetArea.delete.sure{/lang}"></span>
 							{else}
 								<span title="{lang}wcf.acp.ultimate.widgetArea.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
 							{/if}
