@@ -65,17 +65,18 @@
 				<include name="lib/system/user/notification/event/*" />
 				<include name="lib/system/user/notification/object/type/*" />
 				<include name="lib/system/widget/WidgetHandler*" />
+				<include name="lib/util/LinkUtil*" />
 				<include name="lib/util/WidgetAreaUtil*" />
 				<include name="lib/util/thirdParty/idna_convert.class.php*" />
 			</tarfileset>
 		</tar>
 		<tar destfile="metadata/acptemplates_update.rc3.tar">
 			<tarfileset dir="src/acp/templates">
-				<exclude name="*LinkCategoryList.tpl" />
 				<include name="*header.tpl" />
 				<include name="*CategoryAdd.tpl" />
 				<include name="*ContentAdd.tpl" />
 				<include name="*PageAdd.tpl" />
+				<include name="*TemplateAdd.tpl" />
 				<include name="*BlockOptions.tpl" />
 				<include name="*List.tpl" />
 			</tarfileset>
