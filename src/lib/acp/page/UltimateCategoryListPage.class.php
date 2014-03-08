@@ -122,12 +122,13 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
 			$newCategories = array();
 			// get array with content count
 			foreach ($categories as $categoryID => $category) {
-				$newCategories[count($category->__get('contents'))] = $category;
+				$newCategories[count($category->getContentsLazy())] = $category;
 			}
 			// actually sort the array
 			if ($this->sortOrder == 'ASC') ksort($newCategories);
 			else krsort($newCategories);
 			// refill the original array with the sorted values
+			$categories = array();
 			foreach ($newCategories as $category) {
 				$categories[$category->__get('categoryID')] = $category;
 			}
