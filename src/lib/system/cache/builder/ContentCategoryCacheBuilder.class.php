@@ -64,7 +64,7 @@ class ContentCategoryCacheBuilder extends AbstractCacheBuilder {
 		
 		foreach ($categories as $categoryID => $category) {
 			/* @var $category \ultimate\data\category\Category */
-			$contents = $category->contents;
+			$contents = $category->getContentsLazy();
 			$categorizedContents = array();
 			foreach ($contents as $contentID => $content) {
 				$categorizedContent = new TaggedContent($content);
