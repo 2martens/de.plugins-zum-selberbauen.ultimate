@@ -122,15 +122,15 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
 			$newCategories = array();
 			// get array with content count
 			foreach ($categories as $categoryID => $category) {
-				$newCategories[count($category->getContentsLazy())] = $category;
+				$newCategories[$categoryID] = count($category->getContentsLazy());
 			}
 			// actually sort the array
-			if ($this->sortOrder == 'ASC') ksort($newCategories);
-			else krsort($newCategories);
+			if ($this->sortOrder == 'ASC') asort($newCategories);
+			else arsort($newCategories);
 			// refill the original array with the sorted values
-			$categories = array();
-			foreach ($newCategories as $category) {
-				$categories[$category->__get('categoryID')] = $category;
+			$finalCategories = array();
+			foreach ($newCategories as $categoryID => $count) {
+				$finalCategories[$categoryID] = $categories[$categoryID];
 			}
 			
 			// save the sort field and order temporarily and restore them to default
@@ -141,7 +141,7 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
 			$this->sortOrder = $this->defaultSortOrder;
 			
 			// return the sorted array
-			$this->objects = $categories;
+			$this->objects = $finalCategories;
 			$this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
 		}
 	}
@@ -161,6 +161,10 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
 	 * Assigns template variables.
 	 */
 	public function assignVariables() {
+		if (isset($this->tempSortField)) {
+			$this->sortField = $this->tempSortField;
+			$this->sortOrder = $this->tempSortOrder;
+		}
 		parent::assignVariables();
 		WCF::getTPL()->assign(array(
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(),
