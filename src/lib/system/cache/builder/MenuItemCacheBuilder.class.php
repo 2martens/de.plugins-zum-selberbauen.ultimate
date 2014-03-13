@@ -79,7 +79,12 @@ class MenuItemCacheBuilder extends AbstractCacheBuilder {
 			/* @var $menuItem \ultimate\data\menu\item\MenuItem */
 			$data['menuItems'][$menuItem->__get('menuID')][$menuItemID] = $menuItem;
 			$data['menuItemIDs'][$menuItem->__get('menuID')][] = $menuItemID;
-			$data['menuItemsToParent'][$menuItem->__get('menuID')][$menuItem->__get('menuItemName')] = $menuItem->__get('childItems');
+			$data['menuItemsToParent'][$menuItem->__get('menuID')][$menuItem->__get('menuItemName')] = array();
+			foreach ($menuItems as $__menuItemID => $__menuItem) {
+				if ($__menuItem->__get('menuItemParent') == $menuItem->__get('menuItemName')) {
+					$data['menuItemsToParent'][$menuItem->__get('menuID')][$menuItem->__get('menuItemName')][$__menuItemID] = $__menuItem;
+				}
+			}
 		}
 		
 		foreach ($data['menuItems'] as $menuID => $__menuItems) {

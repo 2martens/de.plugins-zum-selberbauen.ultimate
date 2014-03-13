@@ -283,6 +283,5 @@ class MenuItem extends PageMenuItem {
 		$data['isDisabled'] = (boolean) intval($data['isDisabled']);
 		$data['isLandingPage'] = (boolean) intval($data['isLandingPage']);
 		parent::handleData($data);
-		$this->data['childItems'] = $this->getChildItems();
 	}
 }
