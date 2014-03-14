@@ -33,16 +33,13 @@
 			<tarfileset dir="src">
 				<exclude name="templates/**" />
 				<exclude name="acp/templates/**" />
-				<include name="lib/acp/page/UltimateCategoryListPage*" />
-				<include name="lib/data/category/Category.class.php" />
-				<include name="lib/data/menu/item/MenuItem.class.php" />
-				<include name="lib/system/cache/builder/ContentCategoryCacheBuilder*" />
-				<include name="lib/system/cache/builder/MenuItemCacheBuilder*" />
-				<include name="lib/system/media/provider/YoutubeMediaProvider*" />
+				<exclude name="acp/InstallUltimateCMS*" />
+				<exclude name="acp/config.inc.php" />
 			</tarfileset>
 		</tar>
 		<tar destfile="metadata/acptemplates_update.100.tar">
 			<tarfileset dir="src/acp/templates">
+				<include name="__copyright.tpl" />
 				<include name="ultimateCategoryList.tpl" />
 				<include name="*PageAdd.tpl" />
 			</tarfileset>

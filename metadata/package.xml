@@ -65,5 +65,6 @@
 		<instruction type="acpTemplate">acptemplates_update.100.tar</instruction>
 		<instruction type="template">templates_update.100.tar</instruction>
 		<instruction type="file">files_update.100.tar</instruction>
+		<instruction type="file" application="wcf">files_wcf.tar</instruction>
 	</instructions>
 </package>
