@@ -19,7 +19,7 @@
  * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
- * @copyright	2011-2013 Jim Martens
+ * @copyright	2011-2014 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.media.provider
@@ -34,7 +34,7 @@ use wcf\util\StringUtil;
  * Represents youtube as media provider.
  * 
  * @author		Jim Martens
- * @copyright	2011-2013 Jim Martens
+ * @copyright	2011-2014 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.media.provider
@@ -69,7 +69,7 @@ class YoutubeMediaProvider extends AbstractMediaProvider {
 	 */
 	protected function getEmbedInformation($source, $maxwidth = 0, $maxheight = 0) {
 		// we have to let the escaping out as that is done in Regex itself, if we escape here, the result will be a wrong one
-		$regex = '^https://(?:www\.youtube\.com|youtu\.be)/(?:watch\?v=)?([\w-]+)((?:\?|&|&amp;)\w+=[\w\d]+(?:(?:\?|&|&amp;)\w+=[\w\d]+)*)?';
+		$regex = '^https?://(?:www\.youtube\.com|youtu\.be)/(?:watch\?v=)?([\w-_]+)((?:\?|&|&amp;)\w+=[\w\d]+(?:(?:\?|&|&amp;)\w+=[\w\d]+)*)?';
 		$regexObj = new Regex($regex);
 		if (!$regexObj->match($source, true)) {
 			throw new SystemException('invalid source', 0, 'The given source URL is not a valid Youtube share link.');

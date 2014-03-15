@@ -84,7 +84,7 @@
 						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canManageCategories')}<a title="{lang}wcf.acp.ultimate.category.edit{/lang}" href="{link application='ultimate' controller='UltimateCategoryEdit' id=$category->categoryID}{/link}">{lang}{@$category->categoryTitle}{/lang}</a>{else}{lang}{@$category->categoryTitle}{/lang}{/if}</p></td>
 						<td class="columnDescription"><p>{lang}{@$category->categoryDescription}{/lang}</p></td>
 						<td class="columnSlug"><p>{@$category->categorySlug}</p></td>
-						<td class="columnContents"><p><a title="{lang}wcf.acp.ultimate.category.showContents{/lang}" href="{link application='ultimate' controller='UltimateContentList'}categoryID={@$category->categoryID}{/link}">{$category->contents|count}</a></p></td>
+						<td class="columnContents"><p><a title="{lang}wcf.acp.ultimate.category.showContents{/lang}" href="{link application='ultimate' controller='UltimateContentList'}categoryID={@$category->categoryID}{/link}">{$category->getContentsLazy()|count}</a></p></td>
 						
 						{event name='columns'}
 					</tr>

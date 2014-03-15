@@ -8,7 +8,7 @@ use wcf\system\importer\ImportHandler;
  * Exporter for Wordpress 3.x
  * 
  * @author		Marcel Werk, Jim Martens
- * @copyright	2001-2013 WoltLab GmbH, 2013 Jim Martens
+ * @copyright	2001-2014 WoltLab GmbH, 2013 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.exporter

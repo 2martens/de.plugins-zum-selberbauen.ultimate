@@ -2,7 +2,7 @@
  * Class and function collection for ULTIMATE CMS Tagging
  * 
  * @author		Jim Martens
- * @copyright	2011-2013 Jim Martens
+ * @copyright	2011-2014 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  */
 

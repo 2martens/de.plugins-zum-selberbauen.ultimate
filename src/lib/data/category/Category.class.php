@@ -19,7 +19,7 @@
  * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
- * @copyright	2011-2013 Jim Martens
+ * @copyright	2011-2014 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.category
@@ -34,7 +34,7 @@ use wcf\system\WCF;
  * Represents a category entry.
  * 
  * @author		Jim Martens
- * @copyright	2011-2013 Jim Martens
+ * @copyright	2011-2014 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.category
@@ -46,7 +46,6 @@ use wcf\system\WCF;
  * @property-read	string								$categoryDescription
  * @property-read	string								$categorySlug
  * @property-read	\ultimate\data\category\Category[]	$childCategories (categoryID => category)
- * @property-read	\ultimate\data\content\Content[]	$contents (contentID => content)
  * @property-read	string[]							$metaData ('metaDescription' => metaDescription, 'metaKeywords' => metaKeywords)
  */
 class Category extends AbstractUltimateDatabaseObject implements ITitledObject {
@@ -110,6 +109,18 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledObject {
 	}
 	
 	/**
+	 * Initializes the field contents if not yet done and returns the contents.
+	 * 
+	 * @return	\ultimate\data\content\Content[]
+	 */
+	public function getContentsLazy() {
+		if (!isset($this->data['contents'])) {
+			$this->data['contents'] = $this->getContents();
+		}
+		return $this->data['contents'];
+	}
+	
+	/**
 	 * Returns all child categories of this category.
 	 *
 	 * @return	\ultimate\data\category\Category[]
@@ -162,7 +173,6 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledObject {
 		$data['categoryParent'] = intval($data['categoryParent']);
 		parent::handleData($data);
 		$this->data['childCategories'] = $this->getChildCategories();
-		$this->data['contents'] = $this->getContents();
 		$this->data['metaData'] = $this->getMetaData($this->categoryID, 'category');
 	}
 }

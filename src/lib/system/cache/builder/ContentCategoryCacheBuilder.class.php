@@ -19,7 +19,7 @@
  * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
- * @copyright	2011-2013 Jim Martens
+ * @copyright	2011-2014 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.cache.builder
@@ -38,7 +38,7 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
  * * \ultimate\data\content\TaggedContent[][] contentsToCategorytitle (categoryTitle => contents (contentID => content))
  * 
  * @author		Jim Martens
- * @copyright	2011-2013 Jim Martens
+ * @copyright	2011-2014 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.cache.builder
@@ -64,7 +64,7 @@ class ContentCategoryCacheBuilder extends AbstractCacheBuilder {
 		
 		foreach ($categories as $categoryID => $category) {
 			/* @var $category \ultimate\data\category\Category */
-			$contents = $category->contents;
+			$contents = $category->getContentsLazy();
 			$categorizedContents = array();
 			foreach ($contents as $contentID => $content) {
 				$categorizedContent = new TaggedContent($content);

@@ -19,7 +19,7 @@
  * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
- * @copyright	2011-2013 Jim Martens
+ * @copyright	2011-2014 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	acp.page
@@ -36,7 +36,7 @@ use wcf\system\WCF;
  * Shows the UltimateCategoryList page.
  * 
  * @author		Jim Martens
- * @copyright	2011-2013 Jim Martens
+ * @copyright	2011-2014 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	acp.page
@@ -122,14 +122,15 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
 			$newCategories = array();
 			// get array with content count
 			foreach ($categories as $categoryID => $category) {
-				$newCategories[count($category->__get('contents'))] = $category;
+				$newCategories[$categoryID] = count($category->getContentsLazy());
 			}
 			// actually sort the array
-			if ($this->sortOrder == 'ASC') ksort($newCategories);
-			else krsort($newCategories);
+			if ($this->sortOrder == 'ASC') asort($newCategories);
+			else arsort($newCategories);
 			// refill the original array with the sorted values
-			foreach ($newCategories as $category) {
-				$categories[$category->__get('categoryID')] = $category;
+			$finalCategories = array();
+			foreach ($newCategories as $categoryID => $count) {
+				$finalCategories[$categoryID] = $categories[$categoryID];
 			}
 			
 			// save the sort field and order temporarily and restore them to default
@@ -140,7 +141,7 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
 			$this->sortOrder = $this->defaultSortOrder;
 			
 			// return the sorted array
-			$this->objects = $categories;
+			$this->objects = $finalCategories;
 			$this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
 		}
 	}
@@ -160,6 +161,10 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
 	 * Assigns template variables.
 	 */
 	public function assignVariables() {
+		if (isset($this->tempSortField)) {
+			$this->sortField = $this->tempSortField;
+			$this->sortOrder = $this->tempSortOrder;
+		}
 		parent::assignVariables();
 		WCF::getTPL()->assign(array(
 			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(),

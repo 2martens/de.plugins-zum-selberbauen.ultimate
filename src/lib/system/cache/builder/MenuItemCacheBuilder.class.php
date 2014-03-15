@@ -19,7 +19,7 @@
  * along with the Ultimate CMS.  If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
- * @copyright	2011-2013 Jim Martens
+ * @copyright	2011-2014 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.cache.builder
@@ -40,7 +40,7 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
  * In all of these variables the menu items are sorted ASC for their parentMenuitem and the showOrder.
  * 
  * @author		Jim Martens
- * @copyright	2011-2013 Jim Martens
+ * @copyright	2011-2014 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	system.cache.builder
@@ -79,7 +79,12 @@ class MenuItemCacheBuilder extends AbstractCacheBuilder {
 			/* @var $menuItem \ultimate\data\menu\item\MenuItem */
 			$data['menuItems'][$menuItem->__get('menuID')][$menuItemID] = $menuItem;
 			$data['menuItemIDs'][$menuItem->__get('menuID')][] = $menuItemID;
-			$data['menuItemsToParent'][$menuItem->__get('menuID')][$menuItem->__get('menuItemName')] = $menuItem->__get('childItems');
+			$data['menuItemsToParent'][$menuItem->__get('menuID')][$menuItem->__get('menuItemName')] = array();
+			foreach ($menuItems as $__menuItemID => $__menuItem) {
+				if ($__menuItem->__get('menuItemParent') == $menuItem->__get('menuItemName')) {
+					$data['menuItemsToParent'][$menuItem->__get('menuID')][$menuItem->__get('menuItemName')][$__menuItemID] = $__menuItem;
+				}
+			}
 		}
 		
 		foreach ($data['menuItems'] as $menuID => $__menuItems) {

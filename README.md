@@ -6,16 +6,17 @@ A WCF compatible CMS.
 Version notes
 -------------
 
-The currently available source code represents a release candidate version of Ultimate CMS and should not be used in productive environments.
+The currently available source code represents the 1.0.x version of Ultimate CMS and can be used in productive environments.
 
 * Dev-Branch: [![Build Status](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.ultimate.png?branch=dev)](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.ultimate)
 * Master-Branch: [![Build Status](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.ultimate.png?branch=master)](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.ultimate)
 
-Branch structure (until first stable release)
+Branch structure
 ----------------
 
-* master Contains tagged release versions.
-* dev The development happens here. Whenever a release is stable and complete, it gets merged into master. Pull requests are merged into dev and start from there. That's why dev is the default branch of the repository.
+* master Contains development of current release branch. This branch MUST always be stable. Pull requests for the active release branch start from here and are merged into this branch.
+* dev Contains development for next feature release. Pull requests for the next feature release start from here and are merged into this branch.
+* 1.0 (example) Contains tagged releases of the 1.0 release branch. Once a new feature release comes out, a new release branch is branched off of master.
 
 Contributing
 -----------
