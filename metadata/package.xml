@@ -19,9 +19,9 @@
 	
 	<requiredpackages>
 		<requiredpackage minversion="2.0.4">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="2.0.3" file="requirements/com.woltlab.wcf.conversation.tar.gz">com.woltlab.wcf.conversation</requiredpackage>
+		<requiredpackage minversion="2.0.4" file="requirements/com.woltlab.wcf.conversation.tar.gz">com.woltlab.wcf.conversation</requiredpackage>
 		<requiredpackage minversion="1.0.0" file="requirements/de.plugins-zum-selberbauen.cachedList.tar.gz">de.plugins-zum-selberbauen.cachedList</requiredpackage>
-		<requiredpackage minversion="1.0.1" file="requirements/de.plugins-zum-selberbauen.messageACP.tar.gz">de.plugins-zum-selberbauen.messageACP</requiredpackage>
+		<requiredpackage minversion="1.0.0" file="requirements/de.plugins-zum-selberbauen.messageACP.tar.gz">de.plugins-zum-selberbauen.messageACP</requiredpackage>
 		<requiredpackage minversion="1.0.0" file="requirements/de.plugins-zum-selberbauen.ultimateCore.tar.gz">de.plugins-zum-selberbauen.ultimateCore</requiredpackage>
 	</requiredpackages>
 	
