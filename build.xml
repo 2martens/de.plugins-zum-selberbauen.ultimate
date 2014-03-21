@@ -27,28 +27,6 @@
 		<tar destfile="metadata/files_wcf.tar" 
 			basedir="srcWCF" 
 		/>
-		
-		<!-- 1.0.0 update tar -->
-		<tar destfile="metadata/files_update.100.tar">
-			<tarfileset dir="src">
-				<exclude name="templates/**" />
-				<exclude name="acp/templates/**" />
-				<exclude name="acp/InstallUltimateCMS*" />
-				<exclude name="acp/config.inc.php" />
-			</tarfileset>
-		</tar>
-		<tar destfile="metadata/acptemplates_update.100.tar">
-			<tarfileset dir="src/acp/templates">
-				<include name="__copyright.tpl" />
-				<include name="ultimateCategoryList.tpl" />
-				<include name="*PageAdd.tpl" />
-			</tarfileset>
-		</tar>
-		<tar destfile="metadata/templates_update.100.tar">
-			<tarfileset dir="src/templates">
-				<include name="contentBlockType.tpl" />
-			</tarfileset>
-		</tar>
 	</target>
 	
 	<target name="build" depends="pack" description="Generates the package archive.">
