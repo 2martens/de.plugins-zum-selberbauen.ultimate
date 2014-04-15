@@ -26,7 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\content;
-use ultimate\data\AbstractUltimateDatabaseObject;
+use ultimate\data\AbstractUltimateVersionableDatabaseObject;
 use wcf\data\user\User;
 use wcf\data\IMessage;
 use wcf\data\ITitledObject;
@@ -48,6 +48,7 @@ use wcf\util\StringUtil;
  * @category	Ultimate CMS
  * 
  * @property-read	integer								$contentID
+ * @property-read	integer								$versionID
  * @property-read	string								$contentTitle
  * @property-read	string								$contentDescription
  * @property-read	string								$contentText
@@ -68,7 +69,13 @@ use wcf\util\StringUtil;
  * @property-read	\wcf\data\user\group\UserGroup[]	$groups	(groupID => group)
  * @property-read	string[]							$metaData	('metaDescription' => metaDescription, 'metaKeywords' => metaKeywords)
  */
-class Content extends AbstractUltimateDatabaseObject implements ITitledObject, IMessage {
+class Content extends AbstractUltimateVersionableDatabaseObject implements ITitledObject, IMessage {
+	/**
+	 * name of the versionable object type
+	 * @var	string
+	 */
+	public $versionableObjectTypeName = 'de.plugins-zum-selberbauen.ultimate.content';
+	
 	/**
 	 * The database table name.
 	 * @var string
@@ -92,6 +99,45 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject, I
 	 * @var	string
 	 */
 	protected $contentCategoryTable = 'content_to_category';
+	
+	/**
+	 * Creates a new instance of the DatabaseObject class.
+	 *
+	 * @param	mixed						   $id
+	 * @param	array						   $row
+	 * @param	\ultimate\data\content\Content $object
+	 */
+	public function __construct($id, array $row = null, Content $object = null) {
+		if ($id !== null) {
+			// look if there is a version fitting to this ID
+			$sql = 'SELECT version.*, content.cumulativeLikes, content.views, content.contentSlug, content.lastModified
+			        FROM   '.static::getDatabaseVersionTableName().' version,
+			               '.static::getDatabaseTableName().' content
+			        WHERE  '.static::getDatabaseVersionTableIndexName().' = ?
+			        AND    version.contentID = content.content';
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array($id));
+			$row = $statement->fetchArray();
+			
+			// if no version is found, try the content table
+			if ($row === false) {
+				$sql = 'SELECT *
+				        FROM   '.static::getDatabaseTableName().'
+				        WHERE  '.static::getDatabaseTableIndexName().' = ?';
+				$statement = WCF::getDB()->prepareStatement($sql);
+				$statement->execute(array($id));
+				$row = $statement->fetchArray();
+					
+				// enforce data type 'array'
+				if ($row === false) $row = array();
+			}
+		}
+		else if ($object !== null) {
+			$row = $object->data;
+		}
+	
+		$this->handleData($row);
+	}
 	
 	/**
 	 * Returns all user groups associated with this content.
@@ -264,10 +310,16 @@ class Content extends AbstractUltimateDatabaseObject implements ITitledObject, I
 	 * @param	array	$data
 	 */
 	protected function handleData($data) {
+		// if there is no revision yet, this would cause an issue otherwise
+		if (!isset($data['versionID'])) {
+			$data['versionID'] = 0;
+		}
+		
 		if (!isset($data['contentID'])) {
 			parent::handleData($data);
 			return;
 		}
+		
 		$data['contentID'] = intval($data['contentID']);
 		$data['authorID'] = intval($data['authorID']);
 		$data['author'] = new User($data['authorID']);

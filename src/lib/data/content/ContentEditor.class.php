@@ -39,6 +39,7 @@ use ultimate\system\cache\builder\LayoutCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
+use wcf\data\VersionableDatabaseObjectEditor;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\tagging\TagEngine;
@@ -55,7 +56,7 @@ use wcf\util\StringUtil;
  * @subpackage	data.content
  * @category	Ultimate CMS
  */
-class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObject {
+class ContentEditor extends VersionableDatabaseObjectEditor implements IEditableCachedObject {
 	/**
 	 * The base class.
 	 * @var	string
@@ -81,13 +82,74 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 	}
 	
 	/**
+	 * Creates a new version for the given content.
+	 * 
+	 * @param	array	$parameters
+	 */
+	public static function createRevision(array $parameters = array()) {
+		$keys = $values = '';
+		$statementParameters = array();
+		// these values belong to the content only and cannot be reverted (as it is possible with other values)
+		// of course they can be changed but this change is not saved, especially automatically retrieved values as views, cumulativeLikes and lastModified
+		// MUST NOT be reverted in any way
+		$forbiddenParameters = array('cumulativeLikes', 'views', 'lastModified', 'author', 'publishDateObject', 'metaData', 'contentSlug');
+		$groups = array();
+		
+		foreach ($parameters as $key => $value) {
+			if (in_array($key, $forbiddenParameters)) {
+				continue;
+			}
+			elseif ($key == 'groups') {
+				$groups = $value;
+				continue;
+			}
+			
+			if (!empty($keys)) {
+				$keys .= ',';
+				$values .= ',';
+			}
+				
+			$keys .= $key;
+			$values .= '?';
+			$statementParameters[] = $value;
+		}
+		
+		// save object
+		$sql = "INSERT INTO	".static::getDatabaseVersionTableName()." (".$keys.")
+				VALUES (".$values.")";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute($statementParameters);
+	
+		// return new object
+		$newVersionID = WCF::getDB()->getInsertID(static::getDatabaseVersionTableName(), static::getDatabaseVersionTableIndexName());
+		
+		// handle groups
+		$values = '';
+		$statementParameters = array();
+		foreach ($groups as $groupID => $group) {
+			if (!empty($values)) {
+				$values .= ',';
+			}
+			$values .= '(?, ?)';
+		}
+		
+		$sql = 'INSERT INTO ultimate'.WCF_N.'_user_group_to_content_version
+		               (groupID, versionID)
+		        VALUES ('.$values.')';
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute($statementParameters);
+	
+		return new static::$baseClass($newVersionID);
+	}
+	
+	/**
 	 * Deletes all corresponding objects to the given object IDs.
 	 * 
-	 * @param	integer[]	$objectIDs
+	 * @param	integer[]	$objectIDs	contentIDs
 	 */
 	public static function deleteAll(array $objectIDs = array()) {
 		if (defined('TESTING_MODE') && TESTING_MODE) {
-			return parent::deleteAll($objectIDs);
+			return DatabaseObjectEditor::deleteAll($objectIDs);
 		}
 		
 		// unmark contents
@@ -118,7 +180,7 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 			$pageIDs[] = intval($row['pageID']);
 		}
 		// checks if $pageIDs is filled, if not an exception would occur
-		if (empty($pageIDs)) return parent::deleteAll($objectIDs);
+		if (empty($pageIDs)) return DatabaseObjectEditor::deleteAll($objectIDs);
 		
 		$pageAction = new PageAction($pageIDs, 'delete');
 		$pageAction->executeAction();
@@ -132,7 +194,25 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute($conditionBuilder->getParameters());
 		
-		return parent::deleteAll($objectIDs);
+		return DatabaseObjectEditor::deleteAll($objectIDs);
+	}
+	
+	/**
+	 * Deletes revisions.
+	 * 
+	 * @param	array	$objectIDs	versionIDs
+	 */
+	public static function deleteRevisions(array $objectIDs = array()) {
+		// delete versions
+		$sql = "DELETE FROM	".static::getDatabaseVersionTableName()."
+				WHERE ".static::getDatabaseTableIndexName()." = ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+	
+		WCF::getDB()->beginTransaction();
+		foreach ($objectIDs as $objectID) {
+			$statement->execute(array($objectID));
+		}
+		WCF::getDB()->commitTransaction();
 	}
 	
 	/**
@@ -144,6 +224,13 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 		$layoutAction = new LayoutAction(array($layout->__get('layoutID')), 'delete', array());
 		$layoutAction->executeAction();
 		parent::delete();
+	}
+	
+	/**
+	 * Deletes current revision.
+	 */
+	public function deleteRevision() {
+		static::deleteRevisions(array($this->__get(static::getDatabaseVersionTableIndexName())));
 	}
 	
 	/**

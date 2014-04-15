@@ -74,6 +74,25 @@ CREATE TABLE ultimate1_content_to_page (
 	pageID INT(10) NOT NULL UNIQUE KEY
 );
 
+DROP TABLE IF EXISTS ultimate1_content_version;
+CREATE TABLE ultimate1_content_version (
+	versionID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	contentID INT(10) NOT NULL,
+	authorID INT(10) NOT NULL,
+	contentTitle VARCHAR(255) NOT NULL DEFAULT '',
+	contentDescription VARCHAR(255) NOT NULL DEFAULT '',
+	contentSlug VARCHAR(255) NOT NULL DEFAULT '',
+	contentText MEDIUMTEXT NOT NULL,
+	attachments SMALLINT(5) NOT NULL DEFAULT 0,	
+	enableBBCodes TINYINT(1) NOT NULL DEFAULT 1,
+	enableHtml TINYINT(1) NOT NULL DEFAULT 0,
+	enableSmilies TINYINT(1) NOT NULL DEFAULT 1,
+	publishDate INT(10) NOT NULL DEFAULT 0,
+	status INT(1) NOT NULL DEFAULT 0,
+	visibility ENUM('public', 'protected', 'private') NOT NULL DEFAULT 'public',
+	KEY (authorID)
+);
+
 DROP TABLE IF EXISTS ultimate1_layout;
 CREATE TABLE ultimate1_layout (
 	layoutID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -183,12 +202,28 @@ CREATE TABLE ultimate1_user_group_to_content (
 	KEY (contentID)
 );
 
+DROP TABLE IF EXISTS ultimate1_user_group_to_content_version;
+CREATE TABLE ultimate1_user_group_to_content (
+	groupID INT(10) NOT NULL,
+	contentVersionID INT(10) NOT NULL,
+	KEY (groupID),
+	KEY (contentVersionID)
+);
+
 DROP TABLE IF EXISTS ultimate1_user_group_to_page;
 CREATE TABLE ultimate1_user_group_to_page (
 	groupID INT(10) NOT NULL,
 	pageID INT(10) NOT NULL,
 	KEY (groupID),
 	KEY (pageID)
+);
+
+DROP TABLE IF EXISTS ultimate1_user_group_to_page_version;
+CREATE TABLE ultimate1_user_group_to_page (
+	groupID INT(10) NOT NULL,
+	pageVersionID INT(10) NOT NULL,
+	KEY (groupID),
+	KEY (pageVersionID)
 );
 
 DROP TABLE IF EXISTS ultimate1_widget_area;
@@ -219,6 +254,7 @@ ALTER TABLE ultimate1_block_to_template ADD FOREIGN KEY (blockID) REFERENCES ult
 ALTER TABLE ultimate1_block_to_template ADD FOREIGN KEY (templateID) REFERENCES ultimate1_template (templateID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_blocktype ADD FOREIGN KEY (packageID) REFERENCES wcf1_package (packageID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_content ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_content_version ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_content_to_category ADD FOREIGN KEY (contentID) REFERENCES ultimate1_content (contentID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_content_to_category ADD FOREIGN KEY (categoryID) REFERENCES ultimate1_category (categoryID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_content_to_page ADD FOREIGN KEY (contentID) REFERENCES ultimate1_content (contentID) ON DELETE CASCADE;
@@ -229,10 +265,15 @@ ALTER TABLE ultimate1_menu_item ADD FOREIGN KEY (menuID) REFERENCES ultimate1_me
 ALTER TABLE ultimate1_menu_to_template ADD FOREIGN KEY (menuID) REFERENCES ultimate1_menu (menuID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_menu_to_template ADD FOREIGN KEY (templateID) REFERENCES ultimate1_template (templateID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_page ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_page_version ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_user_group_to_content ADD FOREIGN KEY (contentID) REFERENCES ultimate1_content (contentID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_user_group_to_content_version ADD FOREIGN KEY (contentVersionID) REFERENCES ultimate1_content_version (versionID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_user_group_to_content ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_user_group_to_content_version ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_user_group_to_page ADD FOREIGN KEY (pageID) REFERENCES ultimate1_page (pageID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_user_group_to_page_version ADD FOREIGN KEY (pageVersionID) REFERENCES ultimate1_page_version (versionID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_user_group_to_page ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_user_group_to_page_version ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_template_to_layout ADD FOREIGN KEY (layoutID) REFERENCES ultimate1_layout (layoutID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_template_to_layout ADD FOREIGN KEY (templateID) REFERENCES ultimate1_template (templateID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_widget_area_to_template ADD FOREIGN KEY (templateID) REFERENCES ultimate1_template (templateID) ON DELETE CASCADE;

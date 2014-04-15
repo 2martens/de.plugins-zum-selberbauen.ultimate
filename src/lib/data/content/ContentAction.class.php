@@ -31,8 +31,8 @@ use ultimate\data\layout\LayoutList;
 use ultimate\system\cache\builder\ContentCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use wcf\data\smiley\SmileyCache;
-use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IMessageInlineEditorAction;
+use wcf\data\VersionableDatabaseObjectAction;
 use wcf\system\bbcode\BBCodeHandler;
 use wcf\system\bbcode\BBCodeParser;
 use wcf\system\bbcode\PreParser;
@@ -42,6 +42,7 @@ use wcf\system\language\LanguageFactory;
 use wcf\system\search\SearchIndexManager;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
+use wcf\system\version\VersionHandler;
 
 /**
  * Executes content-related functions.
@@ -53,7 +54,7 @@ use wcf\util\ArrayUtil;
  * @subpackage	data.content
  * @category	Ultimate CMS
  */
-class ContentAction extends AbstractDatabaseObjectAction implements IMessageInlineEditorAction {
+class ContentAction extends VersionableDatabaseObjectAction implements IMessageInlineEditorAction {
 	/**
 	 * The class name.
 	 * @var	string
@@ -165,6 +166,13 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 			if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
 				$this->parameters['data']['attachments'] = count($this->parameters['attachmentHandler']);
 			}
+			
+			if (isset($this->parameters['counters'])) {
+				foreach ($this->objects as $object) {
+					$object->updateCounters($this->parameters['counters']);
+				}
+			}
+			
 			parent::update();
 		}
 		else {
@@ -237,6 +245,52 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		$layoutAction->executeAction();
 		// execute action
 		return call_user_func(array($this->className, 'deleteAll'), $objectIDs);
+	}
+	
+	/**
+	 * Restores a revision.
+	 */
+	public function restoreRevision() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+		$tmpObjects = $this->objects;
+		// currently we only support restoring one version
+		foreach ($tmpObjects as $objectID => $object) {
+			// TODO: make own VersionHandler and CacheBuilder that uses the correct paradigma
+			
+			$objectType = VersionHandler::getInstance()->getObjectTypeByName($object->versionableObjectTypeName);
+			$restoreObject = VersionHandler::getInstance()->getVersionByID($objectType->objectTypeID, $this->parameters['restoreObjectID']);
+			
+			$this->parameters['data'] = $restoreObject->getData();
+			// read additional info
+			$sql = 'SELECT content.cumulativeLikes, content.views, content.lastModified
+			        FROM   ultimate'.WCF_N.'_content content
+			        WHERE  content.contentID = ?';
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array($this->parameters['data']['contentID']));
+			
+			$row = $statement->fetchArray();
+			foreach ($row as $key => $value) {
+				$this->parameters['data'][$key] = $value;
+			}
+			
+			// read group information
+			$sql = 'SELECT groupID
+			        FROM   ultimate'.WCF_N.'_user_group_to_content_version
+			        WHERE  versionID = ?';
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array($this->parameters['restoreObjectID']));
+			
+			$this->parameters['groupIDs'] = array();
+			while ($row = $statement->fetchArray()) {
+				$this->parameters['groupIDs'][] = $row['groupID'];
+			}
+			
+			// allows restoring the revision for every object
+			$this->objects = $tmpObjects[$objectID];
+			$this->update();
+		}
 	}
 	
 	/**

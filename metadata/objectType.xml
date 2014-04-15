@@ -179,5 +179,13 @@
 			<classname>ultimate\system\exporter\WordPress3xExporter</classname>
 		</type>
 		<!-- /Exporters -->
+		
+		<!-- Versionable Types -->
+		<type>
+			<name>de.plugins-zum-selberbauen.ultimate.content</name>
+			<definitionname>com.woltlab.wcf.versionableObject</definitionname>
+			<classname><![CDATA[ultimate\data\content\Content]]></classname>
+		</type>
+		<!-- /Versionable Types -->
     </import>
 </data>
