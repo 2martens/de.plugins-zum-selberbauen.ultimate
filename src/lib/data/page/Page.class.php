@@ -26,7 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\page;
-use ultimate\data\AbstractUltimateDatabaseObject;
+use ultimate\data\AbstractUltimateVersionableDatabaseObject;
 use wcf\data\user\User;
 use wcf\data\ITitledObject;
 use wcf\system\WCF;
@@ -58,7 +58,7 @@ use wcf\util\DateUtil;
  * @property-read	string[]							$metaData	('metaDescription' => metaDescription, 'metaKeywords' => metaKeywords)
  * @property-read	\ultimate\data\content\Content		$content
  */
-class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
+class Page extends AbstractUltimateVersionableDatabaseObject implements ITitledObject {
 	/**
 	 * The database table name.
 	 * @var	string
@@ -82,6 +82,45 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 	 * @var	string
 	 */
 	protected $contentPageTable = 'content_to_page';
+	
+	/**
+	 * Creates a new instance of the Page class.
+	 *
+	 * @param	mixed					 $id
+	 * @param	array					 $row
+	 * @param	\ultimate\data\page\Page $object
+	 */
+	public function __construct($id, array $row = null, Page $object = null) {
+		if ($id !== null) {
+			// look if there is a version fitting to this ID
+			$sql = 'SELECT version.*, page.pageSlug, page.lastModified
+			        FROM   '.static::getDatabaseVersionTableName().' version,
+			               '.static::getDatabaseTableName().' page
+			        WHERE  '.static::getDatabaseVersionTableIndexName().' = ?
+			        AND    version.pageID = page.pageID';
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array($id));
+			$row = $statement->fetchArray();
+				
+			// if no version is found, try the content table
+			if ($row === false) {
+				$sql = 'SELECT *
+				        FROM   '.static::getDatabaseTableName().'
+				        WHERE  '.static::getDatabaseTableIndexName().' = ?';
+				$statement = WCF::getDB()->prepareStatement($sql);
+				$statement->execute(array($id));
+				$row = $statement->fetchArray();
+					
+				// enforce data type 'array'
+				if ($row === false) $row = array();
+			}
+		}
+		else if ($object !== null) {
+			$row = $object->data;
+		}
+	
+		$this->handleData($row);
+	}
 	
 	/**
 	 * Returns the content of this page.
@@ -204,10 +243,16 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 	 * @param	array	$data
 	 */
 	protected function handleData($data) {
+		// if there is no revision yet, this would cause an issue otherwise
+		if (!isset($data['versionID'])) {
+			$data['versionID'] = 0;
+		}
+		
 		if (!isset($data['pageID'])) {
 			parent::handleData($data);
 			return;
 		}
+		
 		$data['pageID'] = intval($data['pageID']);
 		$data['pageParent'] = intval($data['pageParent']);
 		$data['authorID'] = intval($data['authorID']);

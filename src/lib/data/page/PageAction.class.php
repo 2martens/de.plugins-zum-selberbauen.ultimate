@@ -26,8 +26,10 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\page;
-use wcf\data\AbstractDatabaseObjectAction;
+use ultimate\system\version\VersionHandler;
+use wcf\data\VersionableDatabaseObjectAction;
 use wcf\util\ArrayUtil;
+
 
 /**
  * Executes page-related actions.
@@ -39,7 +41,7 @@ use wcf\util\ArrayUtil;
  * @subpackage	data.page
  * @category	Ultimate CMS
  */
-class PageAction extends AbstractDatabaseObjectAction {
+class PageAction extends VersionableDatabaseObjectAction {
 	/**
 	 * The class name.
 	 * @var	string
@@ -96,6 +98,12 @@ class PageAction extends AbstractDatabaseObjectAction {
 	 */
 	public function update() {
 		if (isset($this->parameters['data'])) {
+			if (isset($this->parameters['counters'])) {
+				foreach ($this->objects as $object) {
+					$object->updateCounters($this->parameters['counters']);
+				}
+			}
+			
 			parent::update();
 		}
 		else {
@@ -120,6 +128,30 @@ class PageAction extends AbstractDatabaseObjectAction {
 			}
 			
 			$pageEditor->addMetaData($metaDescription, $metaKeywords);
+		}
+	}
+	
+	/**
+	 * Restores a revision.
+	 */
+	public function restoreRevision() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+		$tmpObjects = $this->objects;
+		// currently we only support restoring one version
+		foreach ($tmpObjects as $objectID => $object) {
+			$objectType = VersionHandler::getInstance()->getObjectTypeByName($object->versionableObjectTypeName);
+			$restoreObject = VersionHandler::getInstance()->getVersionByID($objectType->objectTypeID, $this->parameters['restoreObjectID'], $this->parameters['restoreVersionID']);
+				
+			$this->parameters['data'] = $restoreObject->getData();
+				
+			// read group information
+			$this->parameters['groupIDs'] = array_keys($this->parameters['data']['groups']);
+				
+			// allows restoring the revision for every object
+			$this->objects = $tmpObjects[$objectID];
+			$this->update();
 		}
 	}
 }

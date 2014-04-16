@@ -30,6 +30,7 @@ use ultimate\data\layout\LayoutAction;
 use ultimate\data\layout\LayoutList;
 use ultimate\system\cache\builder\ContentCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
+use ultimate\system\version\VersionHandler;
 use wcf\data\smiley\SmileyCache;
 use wcf\data\IMessageInlineEditorAction;
 use wcf\data\VersionableDatabaseObjectAction;
@@ -42,7 +43,6 @@ use wcf\system\language\LanguageFactory;
 use wcf\system\search\SearchIndexManager;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
-use wcf\system\version\VersionHandler;
 
 /**
  * Executes content-related functions.
@@ -257,35 +257,13 @@ class ContentAction extends VersionableDatabaseObjectAction implements IMessageI
 		$tmpObjects = $this->objects;
 		// currently we only support restoring one version
 		foreach ($tmpObjects as $objectID => $object) {
-			// TODO: make own VersionHandler and CacheBuilder that uses the correct paradigma
-			
 			$objectType = VersionHandler::getInstance()->getObjectTypeByName($object->versionableObjectTypeName);
-			$restoreObject = VersionHandler::getInstance()->getVersionByID($objectType->objectTypeID, $this->parameters['restoreObjectID']);
+			$restoreObject = VersionHandler::getInstance()->getVersionByID($objectType->objectTypeID, $this->parameters['restoreObjectID'], $this->parameters['restoreVersionID']);
 			
 			$this->parameters['data'] = $restoreObject->getData();
-			// read additional info
-			$sql = 'SELECT content.cumulativeLikes, content.views, content.lastModified
-			        FROM   ultimate'.WCF_N.'_content content
-			        WHERE  content.contentID = ?';
-			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array($this->parameters['data']['contentID']));
-			
-			$row = $statement->fetchArray();
-			foreach ($row as $key => $value) {
-				$this->parameters['data'][$key] = $value;
-			}
 			
 			// read group information
-			$sql = 'SELECT groupID
-			        FROM   ultimate'.WCF_N.'_user_group_to_content_version
-			        WHERE  versionID = ?';
-			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array($this->parameters['restoreObjectID']));
-			
-			$this->parameters['groupIDs'] = array();
-			while ($row = $statement->fetchArray()) {
-				$this->parameters['groupIDs'][] = $row['groupID'];
-			}
+			$this->parameters['groupIDs'] = array_keys($this->parameters['data']['groups']);
 			
 			// allows restoring the revision for every object
 			$this->objects = $tmpObjects[$objectID];

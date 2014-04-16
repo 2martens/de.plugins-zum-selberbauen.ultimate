@@ -101,7 +101,7 @@ class Content extends AbstractUltimateVersionableDatabaseObject implements ITitl
 	protected $contentCategoryTable = 'content_to_category';
 	
 	/**
-	 * Creates a new instance of the DatabaseObject class.
+	 * Creates a new instance of the Content class.
 	 *
 	 * @param	mixed						   $id
 	 * @param	array						   $row
@@ -114,7 +114,7 @@ class Content extends AbstractUltimateVersionableDatabaseObject implements ITitl
 			        FROM   '.static::getDatabaseVersionTableName().' version,
 			               '.static::getDatabaseTableName().' content
 			        WHERE  '.static::getDatabaseVersionTableIndexName().' = ?
-			        AND    version.contentID = content.content';
+			        AND    version.contentID = content.contentID';
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute(array($id));
 			$row = $statement->fetchArray();

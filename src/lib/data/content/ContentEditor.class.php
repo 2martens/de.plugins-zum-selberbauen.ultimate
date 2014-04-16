@@ -37,6 +37,7 @@ use ultimate\system\cache\builder\ContentTagCloudCacheBuilder;
 use ultimate\system\cache\builder\LatestContentsCacheBuilder;
 use ultimate\system\cache\builder\LayoutCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
+use ultimate\system\version\VersionHandler;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 use wcf\data\VersionableDatabaseObjectEditor;
@@ -397,5 +398,6 @@ class ContentEditor extends VersionableDatabaseObjectEditor implements IEditable
 		ContentTagCloudCacheBuilder::getInstance()->reset();
 		LayoutCacheBuilder::getInstance()->reset();
 		LatestContentsCacheBuilder::getInstance()->reset();
+		VersionHandler::getInstance()->reloadCache();
 	}
 }
