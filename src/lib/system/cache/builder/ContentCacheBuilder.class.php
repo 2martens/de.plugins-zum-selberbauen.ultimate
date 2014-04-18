@@ -69,7 +69,7 @@ class ContentCacheBuilder extends AbstractCacheBuilder {
 		// order by default
 		$sortField = ULTIMATE_SORT_CONTENT_SORTFIELD;
 		$sortOrder = ULTIMATE_SORT_CONTENT_SORTORDER;
-		$sqlOrderBy = $sortField." ".$sortOrder;
+		$sqlOrderBy = $sortField.' '.$sortOrder;
 		$contentList->sqlOrderBy = $sqlOrderBy;
 		$contentSearchResultList->sqlOrderBy = $sqlOrderBy;
 		

@@ -30,10 +30,10 @@ use ultimate\data\layout\LayoutAction;
 use ultimate\data\layout\LayoutList;
 use ultimate\system\cache\builder\ContentCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
-use ultimate\system\version\VersionHandler;
 use wcf\data\smiley\SmileyCache;
+use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IMessageInlineEditorAction;
-use wcf\data\VersionableDatabaseObjectAction;
+use wcf\data\IVersionableDatabaseObjectAction;
 use wcf\system\bbcode\BBCodeHandler;
 use wcf\system\bbcode\BBCodeParser;
 use wcf\system\bbcode\PreParser;
@@ -54,7 +54,7 @@ use wcf\util\ArrayUtil;
  * @subpackage	data.content
  * @category	Ultimate CMS
  */
-class ContentAction extends VersionableDatabaseObjectAction implements IMessageInlineEditorAction {
+class ContentAction extends AbstractDatabaseObjectAction implements IMessageInlineEditorAction, IVersionableDatabaseObjectAction {
 	/**
 	 * The class name.
 	 * @var	string
@@ -65,13 +65,19 @@ class ContentAction extends VersionableDatabaseObjectAction implements IMessageI
 	 * Array of permissions that are required for create action.
 	 * @var	string[]
 	 */
-	protected $permissionsCreate = array('admin.content.ultimate.canAddContent');
+	protected $permissionsCreate = array(
+		'admin.content.ultimate.canAddContent',		
+		'admin.content.ultimate.canAddContentVersion'
+	);
 	
 	/**
 	 * Array of permissions that are required for delete action.
 	 * @var	string[]
 	 */
-	protected $permissionsDelete = array('admin.content.ultimate.canDeleteContent');
+	protected $permissionsDelete = array(
+		'admin.content.ultimate.canDeleteContent', 
+		'admin.content.ultimate.canDeleteContentVersion'
+	);
 	
 	/**
 	 * Array of permissions that are required for update action.
@@ -100,8 +106,30 @@ class ContentAction extends VersionableDatabaseObjectAction implements IMessageI
 		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
 			$this->parameters['data']['attachments'] = count($this->parameters['attachmentHandler']);
 		}
+		
+		// separating core content data from version data
+		$contentParameters = array(
+			'contentID', 
+			'contentSlug', 
+			'authorID', 
+			'cumulativeLikes', 
+			'views', 
+			'lastModified'
+		);
+		
+		$versionData = array();
+		$tmpData = $this->parameters['data'];
+		foreach ($tmpData as $key => $value) {
+			if (in_array($key, $contentParameters)) continue;
+			$versionData[$key] = $value;
+			unset($this->parameters['data'][$key]);
+		}
+		
 		$content = parent::create();
 		$contentEditor = new ContentEditor($content);
+		// create version
+		$versionData['contentID'] = $content->__get('contentID');
+		$version = $contentEditor->createVersion($versionData);
 		
 		// update attachments
 		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
@@ -115,7 +143,7 @@ class ContentAction extends VersionableDatabaseObjectAction implements IMessageI
 		// connect with userGroups
 		$groupIDs = (isset($this->parameters['groupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['groupIDs']) : array();
 		if (!empty($groupIDs)) {
-			$contentEditor->addGroups($groupIDs);
+			$contentEditor->addGroups($version->__get('versionID'), $groupIDs);
 		}
 		
 		// insert meta description/keywords
@@ -124,6 +152,81 @@ class ContentAction extends VersionableDatabaseObjectAction implements IMessageI
 		$contentEditor->addMetaData($metaDescription, $metaKeywords);
 		
 		return $content;
+	}
+	
+	/**
+	 * @see \wcf\data\IVersionableDatabaseObjectAction::createVersion()
+	 */
+	public function createVersion() {
+		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
+			$this->parameters['data']['attachments'] = count($this->parameters['attachmentHandler']);
+		}
+		
+		// separating core content data from version data
+		$contentParameters = array(
+			'contentID',
+			'contentSlug',
+			'authorID',
+			'cumulativeLikes',
+			'views',
+			'lastModified'
+		);
+		
+		$versionData = array();
+		$tmpData = $this->parameters['data'];
+		foreach ($tmpData as $key => $value) {
+			if (in_array($key, $contentParameters)) continue;
+			$versionData[$key] = $value;
+			unset($this->parameters['data'][$key]);
+		}
+		
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+		
+		// update object
+		$versions = array();
+		if (isset($this->parameters['data'])) {
+			foreach ($this->objects as $object) {
+				$object->update($this->parameters['data']);
+				if (isset($this->parameters['counters'])) {
+					$object->updateCounters($this->parameters['counters']);
+				}
+				// create new version
+				$versionData['contentID'] = $object->__get('contentID');
+				$versions[$object->getObjectID()] = $object->createVersion($versionData);
+			}
+		}
+		
+		$categoryIDs = (isset($this->parameters['categories'])) ? $this->parameters['categories'] : array();
+		$removeCategories = (isset($this->parameters['removeCategories'])) ? $this->parameters['removeCategories'] : array();
+		$groupIDs = (isset($this->parameters['groupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['groupIDs']) : array();
+		$metaDescription = (isset($this->parameters['metaDescription'])) ? $this->parameters['metaDescription'] : '';
+		$metaKeywords = (isset($this->parameters['metaKeywords'])) ? $this->parameters['metaKeywords'] : '';
+		
+		foreach ($this->objects as $contentEditor) {
+			/* @var $contentEditor \ultimate\data\content\ContentEditor */
+			if (!empty($categoryIDs)) {
+				$contentEditor->addToCategories($categoryIDs);
+			}
+			
+			if (!empty($removeCategories)) {
+				$contentEditor->removeFromCategories($removeCategories);
+			}
+			
+			if (!empty($groupIDs)) {
+				$contentEditor->addGroups($versions[$contentEditor->getObjectID()]->__get('versionID'), $groupIDs);
+			}
+			
+			$contentEditor->addMetaData($metaDescription, $metaKeywords);
+		}
+	}
+	
+	/**
+	 * @see \wcf\data\IVersionableDatabaseObjectAction::validateCreateVersion()
+	 */
+	public function validateCreateVersion() {
+		WCF::getSession()->checkPermissions(array('admin.content.ultimate.canAddContentVersion'));
 	}
 	
 	/**
@@ -162,22 +265,44 @@ class ContentAction extends VersionableDatabaseObjectAction implements IMessageI
 	 * Updates one or more objects.
 	 */
 	public function update() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+		
+		$versions = array();
 		if (isset($this->parameters['data'])) {
 			if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
 				$this->parameters['data']['attachments'] = count($this->parameters['attachmentHandler']);
 			}
 			
-			if (isset($this->parameters['counters'])) {
-				foreach ($this->objects as $object) {
-					$object->updateCounters($this->parameters['counters']);
-				}
+			// separating core content data from version data
+			$contentParameters = array(
+				'contentID',
+				'contentSlug',
+				'authorID',
+				'cumulativeLikes',
+				'views',
+				'lastModified'
+			);
+			
+			$versionData = array();
+			$tmpData = $this->parameters['data'];
+			foreach ($tmpData as $key => $value) {
+				if (in_array($key, $contentParameters)) continue;
+				$versionData[$key] = $value;
+				unset($this->parameters['data'][$key]);
 			}
 			
-			parent::update();
+			foreach ($this->objects as $object) {
+				$object->update($this->parameters['data']);
+				$versions[$objectID] = $object->getCurrentVersion();
+				$object->updateVersion($versions[$object->getObjectID()]->__get('versionID'), $versionData);
+			}
 		}
-		else {
-			if (empty($this->objects)) {
-				$this->readObjects();
+		
+		if (isset($this->parameters['counters'])) {
+			foreach ($this->objects as $object) {
+				$object->updateCounters($this->parameters['counters']);
 			}
 		}
 		
@@ -198,7 +323,7 @@ class ContentAction extends VersionableDatabaseObjectAction implements IMessageI
 			}
 			
 			if (!empty($groupIDs)) {
-				$contentEditor->addGroups($groupIDs);
+				$contentEditor->addGroups($versions[$contentEditor->getObjectID()], $groupIDs);
 			}
 			
 			$contentEditor->addMetaData($metaDescription, $metaKeywords);
@@ -248,27 +373,26 @@ class ContentAction extends VersionableDatabaseObjectAction implements IMessageI
 	}
 	
 	/**
-	 * Restores a revision.
+	 * @see \wcf\data\IVersionableDatabaseObjectAction::deleteVersion()
 	 */
-	public function restoreRevision() {
+	public function deleteVersion() {
 		if (empty($this->objects)) {
 			$this->readObjects();
 		}
-		$tmpObjects = $this->objects;
-		// currently we only support restoring one version
-		foreach ($tmpObjects as $objectID => $object) {
-			$objectType = VersionHandler::getInstance()->getObjectTypeByName($object->versionableObjectTypeName);
-			$restoreObject = VersionHandler::getInstance()->getVersionByID($objectType->objectTypeID, $this->parameters['restoreObjectID'], $this->parameters['restoreVersionID']);
-			
-			$this->parameters['data'] = $restoreObject->getData();
-			
-			// read group information
-			$this->parameters['groupIDs'] = array_keys($this->parameters['data']['groups']);
-			
-			// allows restoring the revision for every object
-			$this->objects = $tmpObjects[$objectID];
-			$this->update();
+		
+		// get ids
+		$objectIDs = array();
+		foreach ($this->objects as $object) {
+			/* @var $object \ultimate\data\content\ContentEditor */
+			$object->deleteVersion($this->parameters['versionID']);
 		}
+	}
+	
+	/**
+	 * @see \wcf\data\IVersionableDatabaseObjectAction::validateDeleteVersion()
+	 */
+	public function validateDeleteVersion() {
+		WCF::getSession()->checkPermissions(array('admin.content.ultimate.canDeleteContentVersion'));
 	}
 	
 	/**

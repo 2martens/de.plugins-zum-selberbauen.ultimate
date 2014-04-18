@@ -54,18 +54,7 @@ class ContentAttachmentCacheBuilder extends AbstractCacheBuilder {
 			'attachmentList' => null
 		);
 		
-		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
-		$attachmentObjectIDs = array();
-		
-		foreach ($contents as $contentID => $content) {
-			if ($content->__get('attachments')) {
-				$attachmentObjectIDs[] = $contentID;
-			}
-		}
 		$attachmentList = new GroupedAttachmentList('de.plugins-zum-selberbauen.ultimate.content');
-		if (!empty($attachmentObjectIDs)) {
-			$attachmentList->getConditionBuilder()->add('attachment.objectID IN (?)', array($attachmentObjectIDs));
-		}
 		$attachmentList->readObjects();
 		$data['attachmentList'] = $attachmentList;
 		return $data;

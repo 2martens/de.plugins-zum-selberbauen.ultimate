@@ -66,16 +66,10 @@ use wcf\util\StringUtil;
  * @property-read	integer								$lastModified
  * @property-read	integer								$status	(0, 1, 2, 3)
  * @property-read	string								$visibility	('public', 'protected', 'private')
- * @property-read	\wcf\data\user\group\UserGroup[]	$groups	(groupID => group)
  * @property-read	string[]							$metaData	('metaDescription' => metaDescription, 'metaKeywords' => metaKeywords)
+  * @property-read	\wcf\data\user\group\UserGroup[]	$groups
  */
 class Content extends AbstractUltimateVersionableDatabaseObject implements ITitledObject, IMessage {
-	/**
-	 * name of the versionable object type
-	 * @var	string
-	 */
-	public $versionableObjectTypeName = 'de.plugins-zum-selberbauen.ultimate.content';
-	
 	/**
 	 * The database table name.
 	 * @var string
@@ -95,72 +89,22 @@ class Content extends AbstractUltimateVersionableDatabaseObject implements ITitl
 	protected static $databaseTableIndexName = 'contentID';
 	
 	/**
+	 * The class name of the corresponding version class (FQCN).
+	 * @var string
+	 */
+	protected static $versionClassName = '\ultimate\data\content\version\ContentVersion';
+	
+	/**
 	 * The content to category database table name.
 	 * @var	string
 	 */
 	protected $contentCategoryTable = 'content_to_category';
 	
 	/**
-	 * Creates a new instance of the Content class.
-	 *
-	 * @param	mixed						   $id
-	 * @param	array						   $row
-	 * @param	\ultimate\data\content\Content $object
+	 * True, if the current content is visible for the current user.
+	 * @var boolean
 	 */
-	public function __construct($id, array $row = null, Content $object = null) {
-		if ($id !== null) {
-			// look if there is a version fitting to this ID
-			$sql = 'SELECT version.*, content.cumulativeLikes, content.views, content.contentSlug, content.lastModified
-			        FROM   '.static::getDatabaseVersionTableName().' version,
-			               '.static::getDatabaseTableName().' content
-			        WHERE  '.static::getDatabaseVersionTableIndexName().' = ?
-			        AND    version.contentID = content.contentID';
-			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array($id));
-			$row = $statement->fetchArray();
-			
-			// if no version is found, try the content table
-			if ($row === false) {
-				$sql = 'SELECT *
-				        FROM   '.static::getDatabaseTableName().'
-				        WHERE  '.static::getDatabaseTableIndexName().' = ?';
-				$statement = WCF::getDB()->prepareStatement($sql);
-				$statement->execute(array($id));
-				$row = $statement->fetchArray();
-					
-				// enforce data type 'array'
-				if ($row === false) $row = array();
-			}
-		}
-		else if ($object !== null) {
-			$row = $object->data;
-		}
-	
-		$this->handleData($row);
-	}
-	
-	/**
-	 * Returns all user groups associated with this content.
-	 * 
-	 * @return	\wcf\data\user\group\UserGroup[]
-	 */
-	protected function getGroups() {
-		$sql = 'SELECT	  groupTable.*
-		        FROM      ultimate'.WCF_N.'_user_group_to_content groupToContent
-		        LEFT JOIN wcf'.WCF_N.'_user_group groupTable
-		        ON        (groupTable.groupID = groupToContent.groupID)
-		        WHERE     groupToContent.contentID = ?';
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($this->contentID));
-		
-		$groups = array();
-		while ($group = $statement->fetchObject('\wcf\data\user\group\UserGroup')) {
-			if ($group !== null) {
-				$groups[$group->groupID] = $group;
-			}
-		}
-		return $groups;
-	}
+	private $isVisible = null;
 	
 	/**
 	 * Returns the title of this content (without language interpreting).
@@ -183,83 +127,24 @@ class Content extends AbstractUltimateVersionableDatabaseObject implements ITitl
 	}
 	
 	/**
-	 * Returns the formatted text of this content.
-	 * 
-	 * @return	string
-	 */
-	public function __toString() {
-		return $this->getFormattedMessage();
-	}
-	
-	/**
-	 * Returns the language interpreted message of this content.
-	 * 
-	 * @return string
-	 */
-	public function getMessage() {
-		return WCF::getLanguage()->get($this->contentText);
-	}
-	
-	/**
-	 * Returns the formatted content.
-	 * 
-	 * @return	string
-	 */
-	public function getFormattedMessage() {
-		// assign embedded attachments
-		AttachmentBBCode::setObjectID($this->contentID);
-		
-		MessageParser::getInstance()->setOutputType('text/html');
-		return MessageParser::getInstance()->parse(WCF::getLanguage()->get($this->contentText), $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
-	}
-	
-	/**
-	 * Returns a simplified version of the formatted content.
-	 *
-	 * @return	string
-	 */
-	public function getSimplifiedFormattedMessage() {
-		MessageParser::getInstance()->setOutputType('text/simplified-html');
-		return MessageParser::getInstance()->parse(WCF::getLanguage()->get($this->contentText), $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
-	}
-	
-	/**
-	 * Returns an excerpt of this content.
-	 *
-	 * @param	integer		$maxLength
-	 * 
-	 * @return	string
-	 */
-	public function getExcerpt($maxLength = 255) {
-		return StringUtil::truncateHTML($this->getSimplifiedFormattedMessage(), $maxLength);
-	}
-	
-	/**
 	 * Checks if the current user can see this content.
 	 * 
 	 * @return boolean
 	 */
 	public function isVisible() {
-		$isVisible = false;
-		if ($this->visibility == 'public') {
-			$isVisible = true;
-		}
-		else if ($this->visibility == 'protected') {
-			$groupIDs = WCF::getUser()->getGroupIDs();
-			$contentGroupIDs = array_keys($this->groups);
-			$result = array_intersect($groupIDs, $contentGroupIDs);
-			if (!empty($result)) {
-				$isVisible = true;
+		if ($this->isVisible === null) {
+			$isVisible = false;
+			
+			$versions = $this->getVersions();
+			foreach ($versions as $version) {
+				/* @var $version \wcf\data\IVersion */
+				$isVisible = $version->isVisible();
+				if ($isVisible) break;
 			}
-		} else {
-			$isVisible = (WCF::getUser()->__get('userID') == $this->authorID);
+			$this->isVisible = $isVisible;
 		}
 		
-		if ($isVisible) {
-			$isVisible = ($this->status == 3);
-		}
-		
-		return $isVisible;
+		return $this->isVisible;
 	}
 	
 	/**
@@ -305,16 +190,63 @@ class Content extends AbstractUltimateVersionableDatabaseObject implements ITitl
 	}
 	
 	/**
+	 * Returns the formatted text of this content.
+	 *
+	 * @return	string
+	 */
+	public function __toString() {
+		return $this->getFormattedMessage();
+	}
+	
+	/**
+	 * Returns the language interpreted message of this content.
+	 *
+	 * @return string
+	 */
+	public function getMessage() {
+		return WCF::getLanguage()->get($this->contentText);
+	}
+	
+	/**
+	 * Returns the formatted content.
+	 *
+	 * @return	string
+	 */
+	public function getFormattedMessage() {
+		// assign embedded attachments
+		AttachmentBBCode::setObjectID($this->contentID);
+	
+		MessageParser::getInstance()->setOutputType('text/html');
+		return MessageParser::getInstance()->parse(WCF::getLanguage()->get($this->contentText), $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
+	}
+	
+	/**
+	 * Returns an excerpt of this content.
+	 *
+	 * @param	integer		$maxLength
+	 *
+	 * @return	string
+	 */
+	public function getExcerpt($maxLength = 255) {
+		return StringUtil::truncateHTML($this->getSimplifiedFormattedMessage(), $maxLength);
+	}
+	
+	/**
+	 * Returns a simplified version of the formatted content.
+	 *
+	 * @return	string
+	 */
+	public function getSimplifiedFormattedMessage() {
+		MessageParser::getInstance()->setOutputType('text/simplified-html');
+		return MessageParser::getInstance()->parse(WCF::getLanguage()->get($this->contentText), $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
+	}
+	
+	/**
 	 * Handles data.
 	 * 
 	 * @param	array	$data
 	 */
 	protected function handleData($data) {
-		// if there is no revision yet, this would cause an issue otherwise
-		if (!isset($data['versionID'])) {
-			$data['versionID'] = 0;
-		}
-		
 		if (!isset($data['contentID'])) {
 			parent::handleData($data);
 			return;
@@ -323,18 +255,10 @@ class Content extends AbstractUltimateVersionableDatabaseObject implements ITitl
 		$data['contentID'] = intval($data['contentID']);
 		$data['authorID'] = intval($data['authorID']);
 		$data['author'] = new User($data['authorID']);
-		$data['attachments'] = intval($data['attachments']);
-		$data['enableSmilies'] = (boolean) intval($data['enableSmilies']);
-		$data['enableHtml'] = (boolean) intval($data['enableHtml']);
-		$data['enableBBCodes'] = (boolean) intval($data['enableBBCodes']);
 		$data['cumulativeLikes'] = intval($data['cumulativeLikes']);
 		$data['views'] = intval($data['views']);
-		$data['publishDate'] = intval($data['publishDate']);
-		$data['publishDateObject'] = ($data['publishDate'] ? DateUtil::getDateTimeByTimestamp($data['publishDate']) : null);
 		$data['lastModified'] = intval($data['lastModified']);
-		$data['status'] = intval($data['status']);
 		parent::handleData($data);
-		$this->data['groups'] = $this->getGroups();
 		$this->data['metaData'] = $this->getMetaData($this->contentID, 'content');
 	}
 }

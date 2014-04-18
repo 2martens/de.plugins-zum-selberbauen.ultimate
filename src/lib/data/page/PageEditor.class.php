@@ -31,10 +31,8 @@ use ultimate\system\cache\builder\ContentPageCacheBuilder;
 use ultimate\system\cache\builder\LayoutCacheBuilder;
 use ultimate\system\cache\builder\PageCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
-use ultimate\system\version\VersionHandler;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
-use wcf\data\VersionableDatabaseObjectEditor;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\WCF;
@@ -51,7 +49,7 @@ use wcf\util\StringUtil;
  * @subpackage	data.page
  * @category	Ultimate CMS
  */
-class PageEditor extends VersionableDatabaseObjectEditor implements IEditableCachedObject {
+class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	/**
 	 * The base class.
 	 * @var	string
@@ -76,67 +74,6 @@ class PageEditor extends VersionableDatabaseObjectEditor implements IEditableCac
 		$layoutAction = new LayoutAction(array(), 'create', $parameters);
 		$layoutAction->executeAction();
 		return $page;
-	}
-	
-	/**
-	 * Creates a new version for the given page.
-	 *
-	 * @param	array	$parameters
-	 */
-	public static function createRevision(array $parameters = array()) {
-		$keys = $values = '';
-		$statementParameters = array();
-		// these values belong to the page only and cannot be reverted (as it is possible with other values)
-		// of course they can be changed but this change is not saved, especially automatically retrieved values as lastModified
-		// MUST NOT be reverted in any way
-		$forbiddenParameters = array('lastModified', 'author', 'publishDateObject', 'metaData', 'pageSlug', 'childPages', 'content');
-		$groups = array();
-	
-		foreach ($parameters as $key => $value) {
-			if (in_array($key, $forbiddenParameters)) {
-				continue;
-			}
-			elseif ($key == 'groups') {
-				$groups = $value;
-				continue;
-			}
-				
-			if (!empty($keys)) {
-				$keys .= ',';
-				$values .= ',';
-			}
-	
-			$keys .= $key;
-			$values .= '?';
-			$statementParameters[] = $value;
-		}
-	
-		// save object
-		$sql = "INSERT INTO	".static::getDatabaseVersionTableName()." (".$keys.")
-				VALUES (".$values.")";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute($statementParameters);
-	
-		// return new object
-		$newVersionID = WCF::getDB()->getInsertID(static::getDatabaseVersionTableName(), static::getDatabaseVersionTableIndexName());
-	
-		// handle groups
-		$values = '';
-		$statementParameters = array();
-		foreach ($groups as $groupID => $group) {
-			if (!empty($values)) {
-				$values .= ',';
-			}
-			$values .= '(?, ?)';
-		}
-	
-		$sql = 'INSERT INTO ultimate'.WCF_N.'_user_group_to_page_version
-		               (groupID, versionID)
-		        VALUES ('.$values.')';
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute($statementParameters);
-	
-		return new static::$baseClass($newVersionID);
 	}
 	
 	/**
@@ -168,25 +105,7 @@ class PageEditor extends VersionableDatabaseObjectEditor implements IEditableCac
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute($conditionBuilder->getParameters());
 		
-		return DatabaseObjectEditor::deleteAll($objectIDs);
-	}
-	
-	/**
-	 * Deletes revisions.
-	 *
-	 * @param	array	$objectIDs	versionIDs
-	 */
-	public static function deleteRevisions(array $objectIDs = array()) {
-		// delete versions
-		$sql = "DELETE FROM	".static::getDatabaseVersionTableName()."
-				WHERE ".static::getDatabaseTableIndexName()." = ?";
-		$statement = WCF::getDB()->prepareStatement($sql);
-	
-		WCF::getDB()->beginTransaction();
-		foreach ($objectIDs as $objectID) {
-			$statement->execute(array($objectID));
-		}
-		WCF::getDB()->commitTransaction();
+		return parent::deleteAll($objectIDs);
 	}
 	
 	/**
@@ -198,13 +117,6 @@ class PageEditor extends VersionableDatabaseObjectEditor implements IEditableCac
 		$layoutAction = new LayoutAction(array($layout->__get('layoutID')), 'delete', array());
 		$layoutAction->executeAction();
 		parent::delete();
-	}
-	
-	/**
-	 * Deletes current revision.
-	 */
-	public function deleteRevision() {
-		static::deleteRevisions(array($this->__get(static::getDatabaseVersionTableIndexName())));
 	}
 	
 	/**
@@ -296,6 +208,5 @@ class PageEditor extends VersionableDatabaseObjectEditor implements IEditableCac
 		PageCacheBuilder::getInstance()->reset();
 		ContentPageCacheBuilder::getInstance()->reset();
 		LayoutCacheBuilder::getInstance()->reset();
-		VersionHandler::getInstance()->reloadCache();
 	}
 }

@@ -26,7 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data;
-use wcf\data\VersionableDatabaseObject;
+use wcf\data\AbstractVersionableDatabaseObject;
 use wcf\system\WCF;
 
 /**
@@ -39,7 +39,7 @@ use wcf\system\WCF;
  * @subpackage	data
  * @category	Ultimate CMS
  */
-abstract class AbstractUltimateVersionableDatabaseObject extends VersionableDatabaseObject implements IUltimateData {
+abstract class AbstractUltimateVersionableDatabaseObject extends AbstractVersionableDatabaseObject implements IUltimateData {
 	/**
 	 * Returns the database table name.
 	 * 

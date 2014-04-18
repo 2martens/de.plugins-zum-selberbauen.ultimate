@@ -37,10 +37,10 @@ use ultimate\system\cache\builder\ContentTagCloudCacheBuilder;
 use ultimate\system\cache\builder\LatestContentsCacheBuilder;
 use ultimate\system\cache\builder\LayoutCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
-use ultimate\system\version\VersionHandler;
+use wcf\data\AbstractVersionableDatabaseObjectEditor;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
-use wcf\data\VersionableDatabaseObjectEditor;
+use wcf\system\attachment\AttachmentHandler;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\tagging\TagEngine;
@@ -57,7 +57,7 @@ use wcf\util\StringUtil;
  * @subpackage	data.content
  * @category	Ultimate CMS
  */
-class ContentEditor extends VersionableDatabaseObjectEditor implements IEditableCachedObject {
+class ContentEditor extends AbstractVersionableDatabaseObjectEditor implements IEditableCachedObject {
 	/**
 	 * The base class.
 	 * @var	string
@@ -83,67 +83,6 @@ class ContentEditor extends VersionableDatabaseObjectEditor implements IEditable
 	}
 	
 	/**
-	 * Creates a new version for the given content.
-	 * 
-	 * @param	array	$parameters
-	 */
-	public static function createRevision(array $parameters = array()) {
-		$keys = $values = '';
-		$statementParameters = array();
-		// these values belong to the content only and cannot be reverted (as it is possible with other values)
-		// of course they can be changed but this change is not saved, especially automatically retrieved values as views, cumulativeLikes and lastModified
-		// MUST NOT be reverted in any way
-		$forbiddenParameters = array('cumulativeLikes', 'views', 'lastModified', 'author', 'publishDateObject', 'metaData', 'contentSlug');
-		$groups = array();
-		
-		foreach ($parameters as $key => $value) {
-			if (in_array($key, $forbiddenParameters)) {
-				continue;
-			}
-			elseif ($key == 'groups') {
-				$groups = $value;
-				continue;
-			}
-			
-			if (!empty($keys)) {
-				$keys .= ',';
-				$values .= ',';
-			}
-				
-			$keys .= $key;
-			$values .= '?';
-			$statementParameters[] = $value;
-		}
-		
-		// save object
-		$sql = "INSERT INTO	".static::getDatabaseVersionTableName()." (".$keys.")
-				VALUES (".$values.")";
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute($statementParameters);
-	
-		// return new object
-		$newVersionID = WCF::getDB()->getInsertID(static::getDatabaseVersionTableName(), static::getDatabaseVersionTableIndexName());
-		
-		// handle groups
-		$values = '';
-		$statementParameters = array();
-		foreach ($groups as $groupID => $group) {
-			if (!empty($values)) {
-				$values .= ',';
-			}
-			$values .= '(?, ?)';
-		}
-		
-		$sql = 'INSERT INTO ultimate'.WCF_N.'_user_group_to_content_version
-		               (groupID, versionID)
-		        VALUES ('.$values.')';
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute($statementParameters);
-	
-		return new static::$baseClass($newVersionID);
-	}
-	
-	/**
 	 * Deletes all corresponding objects to the given object IDs.
 	 * 
 	 * @param	integer[]	$objectIDs	contentIDs
@@ -155,6 +94,9 @@ class ContentEditor extends VersionableDatabaseObjectEditor implements IEditable
 		
 		// unmark contents
 		ClipboardHandler::getInstance()->unmark($objectIDs, ClipboardHandler::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.ultimate.content'));
+		
+		// delete attachments
+		AttachmentHandler::removeAttachments('de.plugins-zum-selberbauen.ultimate.content', $objectIDs);
 		
 		// delete language items
 		$sql = 'DELETE FROM wcf'.WCF_N.'_language_item
@@ -199,24 +141,6 @@ class ContentEditor extends VersionableDatabaseObjectEditor implements IEditable
 	}
 	
 	/**
-	 * Deletes revisions.
-	 * 
-	 * @param	array	$objectIDs	versionIDs
-	 */
-	public static function deleteRevisions(array $objectIDs = array()) {
-		// delete versions
-		$sql = "DELETE FROM	".static::getDatabaseVersionTableName()."
-				WHERE ".static::getDatabaseTableIndexName()." = ?";
-		$statement = WCF::getDB()->prepareStatement($sql);
-	
-		WCF::getDB()->beginTransaction();
-		foreach ($objectIDs as $objectID) {
-			$statement->execute(array($objectID));
-		}
-		WCF::getDB()->commitTransaction();
-	}
-	
-	/**
 	 * Deletes this object.
 	 */
 	public function delete() {
@@ -225,13 +149,6 @@ class ContentEditor extends VersionableDatabaseObjectEditor implements IEditable
 		$layoutAction = new LayoutAction(array($layout->__get('layoutID')), 'delete', array());
 		$layoutAction->executeAction();
 		parent::delete();
-	}
-	
-	/**
-	 * Deletes current revision.
-	 */
-	public function deleteRevision() {
-		static::deleteRevisions(array($this->__get(static::getDatabaseVersionTableIndexName())));
 	}
 	
 	/**
@@ -358,29 +275,33 @@ class ContentEditor extends VersionableDatabaseObjectEditor implements IEditable
 	}
 	
 	/**
-	 * Adds new groups to this page.
+	 * Adds new groups to the given content version.
 	 * 
+	 * @param	integer	$versionID
 	 * @param	array	$groupIDs
 	 * @param	boolean	$deleteOldGroups
 	 */
-	public function addGroups(array $groupIDs, $deleteOldGroups = true) {
+	public function addGroups($versionID, array $groupIDs, $deleteOldGroups = true) {
 		if ($deleteOldGroups) {
-			$sql = 'DELETE FROM ultimate'.WCF_N.'_user_group_to_content
-			        WHERE       contentID = ?';
+			$sql = 'DELETE FROM ultimate'.WCF_N.'_user_group_to_content_version
+			        WHERE       contentID = ?
+			        AND         versionID = ?';
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute(array(
-				$this->object->__get('contentID')
+				$this->object->__get('contentID'),
+				$versionID
 			));
 		}
-		$sql = 'INSERT INTO ultimate'.WCF_N.'_user_group_to_content
-		               (groupID, contentID)
-		        VALUES (?, ?)';
+		$sql = 'INSERT INTO ultimate'.WCF_N.'_user_group_to_content_version
+		               (groupID, contentID, versionID)
+		        VALUES (?, ?, ?)';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		WCF::getDB()->beginTransaction();
 		foreach ($groupIDs as $groupID) {
 			$statement->executeUnbuffered(array(
 				$groupID,
-				$this->object->__get('contentID')
+				$this->object->__get('contentID'),
+				$versionID
 			));
 		}
 		WCF::getDB()->commitTransaction();
@@ -398,6 +319,5 @@ class ContentEditor extends VersionableDatabaseObjectEditor implements IEditable
 		ContentTagCloudCacheBuilder::getInstance()->reset();
 		LayoutCacheBuilder::getInstance()->reset();
 		LatestContentsCacheBuilder::getInstance()->reset();
-		VersionHandler::getInstance()->reloadCache();
 	}
 }

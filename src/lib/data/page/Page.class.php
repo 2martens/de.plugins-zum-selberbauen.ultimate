@@ -26,7 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\page;
-use ultimate\data\AbstractUltimateVersionableDatabaseObject;
+use ultimate\data\AbstractUltimateDatabaseObject;
 use wcf\data\user\User;
 use wcf\data\ITitledObject;
 use wcf\system\WCF;
@@ -53,12 +53,12 @@ use wcf\util\DateUtil;
  * @property-read	integer								$lastModified
  * @property-read	integer								$status	(0, 1, 2, 3)
  * @property-read	string								$visibility	('public', 'protected', 'private')
- * @property-read	\wcf\data\user\group\UserGroup[]	$groups	(groupID => group)
- * @property-read	\ultimate\data\page\Page[]			$childPages	(pageID => page)
  * @property-read	string[]							$metaData	('metaDescription' => metaDescription, 'metaKeywords' => metaKeywords)
  * @property-read	\ultimate\data\content\Content		$content
+ * @property-read	\ultimate\data\page\Page[]			$childPages
+ * @property-read	\wcf\data\user\group\UserGroup[]	$groups
  */
-class Page extends AbstractUltimateVersionableDatabaseObject implements ITitledObject {
+class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**
 	 * The database table name.
 	 * @var	string
@@ -84,60 +84,23 @@ class Page extends AbstractUltimateVersionableDatabaseObject implements ITitledO
 	protected $contentPageTable = 'content_to_page';
 	
 	/**
-	 * Creates a new instance of the Page class.
-	 *
-	 * @param	mixed					 $id
-	 * @param	array					 $row
-	 * @param	\ultimate\data\page\Page $object
-	 */
-	public function __construct($id, array $row = null, Page $object = null) {
-		if ($id !== null) {
-			// look if there is a version fitting to this ID
-			$sql = 'SELECT version.*, page.pageSlug, page.lastModified
-			        FROM   '.static::getDatabaseVersionTableName().' version,
-			               '.static::getDatabaseTableName().' page
-			        WHERE  '.static::getDatabaseVersionTableIndexName().' = ?
-			        AND    version.pageID = page.pageID';
-			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array($id));
-			$row = $statement->fetchArray();
-				
-			// if no version is found, try the content table
-			if ($row === false) {
-				$sql = 'SELECT *
-				        FROM   '.static::getDatabaseTableName().'
-				        WHERE  '.static::getDatabaseTableIndexName().' = ?';
-				$statement = WCF::getDB()->prepareStatement($sql);
-				$statement->execute(array($id));
-				$row = $statement->fetchArray();
-					
-				// enforce data type 'array'
-				if ($row === false) $row = array();
-			}
-		}
-		else if ($object !== null) {
-			$row = $object->data;
-		}
-	
-		$this->handleData($row);
-	}
-	
-	/**
 	 * Returns the content of this page.
 	 * 
 	 * @return	\ultimate\data\content\Content|null
 	 */
 	public function getContent() {
-		$sql = 'SELECT	  content.*
-		        FROM      ultimate'.WCF_N.'_'.$this->contentPageTable.' contentToPage
-		        LEFT JOIN ultimate'.WCF_N.'_content content
-		        ON        (content.contentID = contentToPage.contentID)
-		        WHERE     contentToPage.pageID = ?';
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($this->pageID));
-		
-		$content = $statement->fetchObject('\ultimate\data\content\Content');
-		return $content;
+		if (!isset($this->content)) {
+			$sql = 'SELECT	  content.*
+			        FROM      ultimate'.WCF_N.'_'.$this->contentPageTable.' contentToPage
+			        LEFT JOIN ultimate'.WCF_N.'_content content
+			        ON        (content.contentID = contentToPage.contentID)
+			        WHERE     contentToPage.pageID = ?';
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array($this->pageID));
+			
+			$this->data['content'] = $statement->fetchObject('\ultimate\data\content\Content');
+		}
+		return $this->content;
 	}
 	
 	/**
@@ -157,17 +120,20 @@ class Page extends AbstractUltimateVersionableDatabaseObject implements ITitledO
 	 * @return	\ultimate\data\page\Page[]
 	 */
 	public function getChildPages() {
-		$sql = 'SELECT	*
-		        FROM    '.self::getDatabaseTableName().'
-		        WHERE   pageParent = ?';
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($this->pageID));
-		
-		$childPages = array();
-		while ($page = $statement->fetchObject(get_class($this))) {
-			$childPages[$page->pageID] = $page;
+		if (!isset($this->childPages)) {
+			$sql = 'SELECT	*
+			        FROM    '.self::getDatabaseTableName().'
+			        WHERE   pageParent = ?';
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array($this->pageID));
+			
+			$childPages = array();
+			while ($page = $statement->fetchObject(get_class($this))) {
+				$childPages[$page->pageID] = $page;
+			}
+			$this->data['childPages'] = $childPages;
 		}
-		return $childPages;
+		return $this->childPages;
 	}
 	
 	/**
@@ -176,19 +142,22 @@ class Page extends AbstractUltimateVersionableDatabaseObject implements ITitledO
 	 * @return	\wcf\data\user\group\UserGroup[]
 	 */
 	public function getGroups() {
-		$sql = 'SELECT	  groupTable.*
-		        FROM      ultimate'.WCF_N.'_user_group_to_page groupToPage
-		        LEFT JOIN wcf'.WCF_N.'_user_group groupTable
-		        ON        (groupTable.groupID = groupToPage.groupID)
-		        WHERE     groupToPage.pageID = ?';
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($this->pageID));
-		
-		$groups = array();
-		while ($group = $statement->fetchObject('\wcf\data\user\group\UserGroup')) {
-			$groups[$group->__get('groupID')] = $group;
+		if (!isset($this->groups)) {
+			$sql = 'SELECT	  groupTable.*
+			        FROM      ultimate'.WCF_N.'_user_group_to_page groupToPage
+			        LEFT JOIN wcf'.WCF_N.'_user_group groupTable
+			        ON        (groupTable.groupID = groupToPage.groupID)
+			        WHERE     groupToPage.pageID = ?';
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array($this->pageID));
+			
+			$groups = array();
+			while ($group = $statement->fetchObject('\wcf\data\user\group\UserGroup')) {
+				$groups[$group->__get('groupID')] = $group;
+			}
+			$this->data['groups'] = $groups;
 		}
-		return $groups;
+		return $this->groups;
 	}
 	
 	/**
@@ -238,16 +207,33 @@ class Page extends AbstractUltimateVersionableDatabaseObject implements ITitledO
 	}
 	
 	/**
+	 * @see \wcf\data\DatabaseObject::__get()
+	 */
+	public function __get($name) {
+		$result = parent::__get($name);
+		if ($result === null && in_array($name, array('content', 'childPages', 'groups'))) {
+			switch ($name) {
+				case 'content':
+					$result = $this->getContent();
+					break;
+				case 'childPages':
+					$result = $this->getChildPages();
+					break;
+				case 'groups':
+					$result = $this->getGroups();
+					break;
+			}
+		}
+		
+		return $result;
+	}
+	
+	/**
 	 * Handles data.
 	 * 
 	 * @param	array	$data
 	 */
 	protected function handleData($data) {
-		// if there is no revision yet, this would cause an issue otherwise
-		if (!isset($data['versionID'])) {
-			$data['versionID'] = 0;
-		}
-		
 		if (!isset($data['pageID'])) {
 			parent::handleData($data);
 			return;
@@ -262,9 +248,6 @@ class Page extends AbstractUltimateVersionableDatabaseObject implements ITitledO
 		$data['lastModified'] = intval($data['lastModified']);
 		$data['status'] = intval($data['status']);
 		parent::handleData($data);
-		$this->data['groups'] = $this->getGroups();
-		$this->data['childPages'] = $this->getChildPages();
 		$this->data['metaData'] = $this->getMetaData($this->pageID, 'page');
-		$this->data['content'] = $this->getContent();
 	}
 }
