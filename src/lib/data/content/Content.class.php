@@ -112,6 +112,9 @@ class Content extends AbstractUltimateVersionableDatabaseObject implements ITitl
 	 */
 	private $isVisible = null;
 	
+	// TODO Language system compatible with versions
+	// TODO usage of custom language system instead of WCF system
+	
 	/**
 	 * Returns the title of this content (without language interpreting).
 	 *

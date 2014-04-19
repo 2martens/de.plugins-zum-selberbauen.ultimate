@@ -49,6 +49,17 @@ CREATE TABLE ultimate1_content (
 	KEY (authorID)
 );
 
+DROP TABLE IF EXISTS ultimate1_content_language;
+CREATE TABLE ultimate1_content_language (
+	languageEntryID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	contentID INT(10) NOT NULL,
+	languageID INT(10) NOT NULL,
+	contentTitle VARCHAR(255) NOT NULL DEFAULT '',
+	contentDescription VARCHAR(255) NOT NULL DEFAULT '',
+	contentText MEDIUMTEXT NOT NULL,
+	UNIQUE KEY (contentID, languageID)
+);
+
 DROP TABLE IF EXISTS ultimate1_content_to_category;
 CREATE TABLE ultimate1_content_to_category (
 	contentID INT(10) NOT NULL,
