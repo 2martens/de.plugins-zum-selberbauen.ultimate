@@ -65,9 +65,10 @@ CREATE TABLE ultimate1_content_to_page (
 
 DROP TABLE IF EXISTS ultimate1_content_version;
 CREATE TABLE ultimate1_content_version (
-	versionID INT(10) NOT NULL,
+	versionID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	contentID INT(10) NOT NULL,
 	authorID INT(10) NOT NULL,
+	versionNumber INT(10) NOT NULL DEFAULT 0,
 	contentTitle VARCHAR(255) NOT NULL DEFAULT '',
 	contentDescription VARCHAR(255) NOT NULL DEFAULT '',
 	contentText MEDIUMTEXT NOT NULL,
@@ -78,7 +79,7 @@ CREATE TABLE ultimate1_content_version (
 	publishDate INT(10) NOT NULL DEFAULT 0,
 	status INT(1) NOT NULL DEFAULT 0,
 	visibility ENUM('public', 'protected', 'private') NOT NULL DEFAULT 'public',
-	PRIMARY KEY versionID (versionID, contentID),
+	UNIQUE KEY (contentID, versionNumber),
 	KEY (authorID)
 );
 
@@ -186,11 +187,9 @@ CREATE TABLE ultimate1_template_to_layout (
 DROP TABLE IF EXISTS ultimate1_user_group_to_content_version;
 CREATE TABLE ultimate1_user_group_to_content (
 	groupID INT(10) NOT NULL,
-	contentID INT(10) NOT NULL,
 	versionID INT(10) NOT NULL,
-	PRIMARY KEY (groupID, contentID, versionID),
-	KEY (groupID),
-	KEY versionID (contentID, versionID)
+	PRIMARY KEY (groupID, versionID),
+	KEY (groupID)
 );
 
 DROP TABLE IF EXISTS ultimate1_user_group_to_page;
@@ -241,7 +240,7 @@ ALTER TABLE ultimate1_menu_item ADD FOREIGN KEY (menuID) REFERENCES ultimate1_me
 ALTER TABLE ultimate1_menu_to_template ADD FOREIGN KEY (menuID) REFERENCES ultimate1_menu (menuID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_menu_to_template ADD FOREIGN KEY (templateID) REFERENCES ultimate1_template (templateID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_page ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
-ALTER TABLE ultimate1_user_group_to_content_version ADD FOREIGN KEY (contentID, versionID) REFERENCES ultimate1_content_version (contentID, versionID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_user_group_to_content_version ADD FOREIGN KEY (versionID) REFERENCES ultimate1_content_version (versionID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_user_group_to_content_version ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_user_group_to_page ADD FOREIGN KEY (pageID) REFERENCES ultimate1_page (pageID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_user_group_to_page ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE CASCADE;

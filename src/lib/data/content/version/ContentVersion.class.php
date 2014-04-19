@@ -116,10 +116,9 @@ class ContentVersion extends AbstractVersion {
 			        FROM      ultimate'.WCF_N.'_user_group_to_content_version groupToContentVersion
 			        LEFT JOIN wcf'.WCF_N.'_user_group groupTable
 			        ON        (groupTable.groupID = groupToContentVersion.groupID)
-			        WHERE     groupToContentVersion.contentID = ?
-			        AND       groupToContentVersion.versionID = ?';
+			        WHERE     groupToContentVersion.versionID = ?';
 			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array($this->contentID, $this->versionID));
+			$statement->execute(array($this->versionID));
 		
 			$groups = array();
 			while ($group = $statement->fetchObject('\wcf\data\user\group\UserGroup')) {

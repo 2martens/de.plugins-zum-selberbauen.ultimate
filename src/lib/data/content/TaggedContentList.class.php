@@ -70,7 +70,7 @@ class TaggedContentList extends ContentList {
 		$this->getConditionBuilder()->add('contentVersion.status = ?', array(3)); // fixes #219
 		$this->sqlJoins .= ' LEFT JOIN ultimate'.WCF_N.'_content_version contentVersion ON (contentVersion.contentID = content.contentID)';
 		$this->sqlConditionJoins .= ' LEFT JOIN ultimate'.WCF_N.'_content_version contentVersion ON (contentVersion.contentID = content.contentID)';
-		$this->sqlConditionJoins .= ' LEFT JOIN ultimate'.WCF_N.'_user_group_to_content_version groupToVersion ON ((contentVersion.contentID = groupToVersion.contentID) AND (contentVersion.versionID = groupToVersion.versionID))';
+		$this->sqlConditionJoins .= ' LEFT JOIN ultimate'.WCF_N.'_user_group_to_content_version groupToVersion ON (contentVersion.versionID = groupToVersion.versionID)';
 	}
 	
 	/**

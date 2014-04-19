@@ -284,23 +284,20 @@ class ContentEditor extends AbstractVersionableDatabaseObjectEditor implements I
 	public function addGroups($versionID, array $groupIDs, $deleteOldGroups = true) {
 		if ($deleteOldGroups) {
 			$sql = 'DELETE FROM ultimate'.WCF_N.'_user_group_to_content_version
-			        WHERE       contentID = ?
-			        AND         versionID = ?';
+			        WHERE       versionID = ?';
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute(array(
-				$this->object->__get('contentID'),
 				$versionID
 			));
 		}
 		$sql = 'INSERT INTO ultimate'.WCF_N.'_user_group_to_content_version
-		               (groupID, contentID, versionID)
+		               (groupID, versionID)
 		        VALUES (?, ?, ?)';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		WCF::getDB()->beginTransaction();
 		foreach ($groupIDs as $groupID) {
 			$statement->executeUnbuffered(array(
 				$groupID,
-				$this->object->__get('contentID'),
 				$versionID
 			));
 		}
