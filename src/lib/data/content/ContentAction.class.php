@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\content;
+use ultimate\data\content\language\ContentLanguageEntryEditor;
 use ultimate\data\layout\LayoutAction;
 use ultimate\data\layout\LayoutList;
 use ultimate\system\cache\builder\ContentCacheBuilder;
@@ -117,11 +118,23 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 			'lastModified'
 		);
 		
+		$languageEntryParameters = array(
+			'contentTitle',
+			'contentDescription',
+			'contentText'
+		);
+		
 		$versionData = array();
+		$languageData = array();
 		$tmpData = $this->parameters['data'];
 		foreach ($tmpData as $key => $value) {
 			if (in_array($key, $contentParameters)) continue;
-			$versionData[$key] = $value;
+			if (in_array($key, $languageEntryParameters)) {
+				$languageData[$key] = $value;
+			}
+			else {
+				$versionData[$key] = $value;
+			}
 			unset($this->parameters['data'][$key]);
 		}
 		
@@ -130,6 +143,17 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		// create version
 		$versionData['contentID'] = $content->__get('contentID');
 		$version = $contentEditor->createVersion($versionData);
+		// create language entries
+		$preparedLanguageData = array();
+		foreach ($languageData as $key => $value) {
+			foreach ($value as $languageID => $__value) {
+				if (!isset($preparedLanguageData[$languageID])) {
+					$preparedLanguageData[$languageID] = array();
+				}
+				$preparedLanguageData[$languageID][$key] = $__value;
+			}
+		}
+		ContentLanguageEntryEditor::createEntries($version->__get('versionID'), $preparedLanguageData);
 		
 		// update attachments
 		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
@@ -172,12 +196,35 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 			'lastModified'
 		);
 		
+		$languageEntryParameters = array(
+			'contentTitle',
+			'contentDescription',
+			'contentText'
+		);
+		
 		$versionData = array();
+		$languageData = array();
 		$tmpData = $this->parameters['data'];
 		foreach ($tmpData as $key => $value) {
 			if (in_array($key, $contentParameters)) continue;
-			$versionData[$key] = $value;
+			if (in_array($key, $languageEntryParameters)) {
+				$languageData[$key] = $value;
+			}
+			else {
+				$versionData[$key] = $value;
+			}
 			unset($this->parameters['data'][$key]);
+		}
+		
+		// prepare language data
+		$preparedLanguageData = array();
+		foreach ($languageData as $key => $value) {
+			foreach ($value as $languageID => $__value) {
+				if (!isset($preparedLanguageData[$languageID])) {
+					$preparedLanguageData[$languageID] = array();
+				}
+				$preparedLanguageData[$languageID][$key] = $__value;
+			}
 		}
 		
 		if (empty($this->objects)) {
@@ -195,6 +242,9 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 				// create new version
 				$versionData['contentID'] = $object->__get('contentID');
 				$versions[$object->getObjectID()] = $object->createVersion($versionData);
+				
+				// create language entries
+				ContentLanguageEntryEditor::createEntries($object->getObjectID(), $preparedLanguageData);
 			}
 		}
 		
@@ -285,18 +335,42 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 				'lastModified'
 			);
 			
+			$languageEntryParameters = array(
+				'contentTitle',
+				'contentDescription',
+				'contentText'
+			);
+			
 			$versionData = array();
+			$languageData = array();
 			$tmpData = $this->parameters['data'];
 			foreach ($tmpData as $key => $value) {
 				if (in_array($key, $contentParameters)) continue;
-				$versionData[$key] = $value;
+				if (in_array($key, $languageEntryParameters)) {
+					$languageData[$key] = $value;
+				}
+				else {
+					$versionData[$key] = $value;
+				}
 				unset($this->parameters['data'][$key]);
+			}
+			
+			// prepare language data
+			$preparedLanguageData = array();
+			foreach ($languageData as $key => $value) {
+				foreach ($value as $languageID => $__value) {
+					if (!isset($preparedLanguageData[$languageID])) {
+						$preparedLanguageData[$languageID] = array();
+					}
+					$preparedLanguageData[$languageID][$key] = $__value;
+				}
 			}
 			
 			foreach ($this->objects as $object) {
 				$object->update($this->parameters['data']);
 				$versions[$objectID] = $object->getCurrentVersion();
 				$object->updateVersion($versions[$object->getObjectID()]->__get('versionID'), $versionData);
+				ContentLanguageEntryEditor::updateEntries($versions[$object->getObjectID()]->__get('versionID'), $preparedLanguageData);
 			}
 		}
 		
