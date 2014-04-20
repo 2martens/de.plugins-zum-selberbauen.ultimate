@@ -44,4 +44,10 @@ class ContentLanguageEntryEditor extends AbstractLanguageEntryEditor {
 	 * @var	string
 	 */
 	protected static $baseClass = '\ultimate\data\content\language\ContentLanguageEntry';
+	
+	/**
+	 * Name of cache class (FQCN).
+	 * @var string
+	 */
+	protected static $cacheClass = '\ultimate\data\content\language\ContentLanguageEntryCache';
 }
