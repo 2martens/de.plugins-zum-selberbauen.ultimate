@@ -83,7 +83,7 @@
 							{event name='buttons'}
 						</td>
 						<td class="columnID"><p>{@$content->contentID}</p></td>
-						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditContent')}<a title="{lang}wcf.acp.ultimate.content.edit{/lang}" href="{link application='ultimate' controller='UltimateContentEdit' id=$content->contentID}{/link}">{lang}{@$content->contentTitle}{/lang}</a>{else}{lang}{@$content->contentTitle}{/lang}{/if}</p></td>
+						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditContent')}<a title="{lang}wcf.acp.ultimate.content.edit{/lang}" href="{link application='ultimate' controller='UltimateContentEdit' id=$content->contentID}{/link}">{@$content->contentTitle}</a>{else}{@$content->contentTitle}{/if}</p></td>
 						<td class="columnAuthor"><p><a href="{link application='ultimate' controller='UltimateContentList'}author={@$content->author}{/link}">{@$content->author}</a></p></td>
 						<td class="columnCategories">
 							<p>

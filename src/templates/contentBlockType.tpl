@@ -92,7 +92,7 @@ $(function() {
 										
 										{if $requestType == 'content'}
 											{hascontent}
-												<p class="abstract" itemprop="description">{content}{lang}{$content->contentDescription}{/lang}{/content}</p>
+												<p class="abstract" itemprop="description">{content}{$content->contentDescription}{/content}</p>
 											{/hascontent}
 										{/if}
 									</header>
