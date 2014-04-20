@@ -27,6 +27,7 @@
  */
 namespace ultimate\acp\form;
 use ultimate\data\category\Category;
+use ultimate\data\content\language\ContentLanguageEntryCache;
 use ultimate\data\content\ContentAction;
 use ultimate\data\content\ContentEditor;
 use ultimate\system\cache\builder\CategoryCacheBuilder;
@@ -323,13 +324,41 @@ class UltimateContentAddForm extends MessageForm {
 		if (!I18nHandler::getInstance()->isPlainValue('text')) RecaptchaForm::save();
 		else parent::save();
 		
+		// retrieve I18n values
+		$contentTitle = array();
+		if (I18nHandler::getInstance()->isPlainValue('subject')) {
+			$contentTitle[ContentLanguageEntryCache::NEUTRAL_LANGUAGE] = $this->subject;
+		}
+		else {
+			$contentTitle = I18nHandler::getInstance()->getValues('subject');
+		}
+		$contentDescription = array();
+		if (I18nHandler::getInstance()->isPlainValue('description')) {
+			$contentDescription[ContentLanguageEntryCache::NEUTRAL_LANGUAGE] = $this->description;
+		}
+		else {
+			$contentDescription = I18nHandler::getInstance()->getValues('description');
+		}
+		$contentText = array();
+		if (I18nHandler::getInstance()->isPlainValue('text')) {
+			$contentText[ContentLanguageEntryCache::NEUTRAL_LANGUAGE] = $this->text;
+		}
+		else {
+			$contentText = I18nHandler::getInstance()->getValues('text');
+			if ($this->preParse) {
+				foreach ($contentText as $languageID => $text) {
+					$contentText[$languageID] = PreParser::getInstance()->parse($text);
+				}
+			}
+		}
+		
 		$parameters = array(
 			'data' => array(
 				'authorID' => WCF::getUser()->userID,
-				'contentTitle' => $this->subject,
-				'contentDescription' => $this->description,
+				'contentTitle' => $contentTitle,
+				'contentDescription' => $contentDescription,
 				'contentSlug' => $this->slug,
-				'contentText' => $this->text,
+				'contentText' => $contentText,
 				'enableBBCodes' => $this->enableBBCodes,
 				'enableHtml' => $this->enableHtml,
 				'enableSmilies' => $this->enableSmilies,
@@ -341,7 +370,7 @@ class UltimateContentAddForm extends MessageForm {
 			'categories' => $this->categoryIDs,
 			'metaDescription' => $this->metaDescription,
 			'metaKeywords' => $this->metaKeywords,
-			'attachmentHandler' => $this->attachmentHandler
+			'attachmentHandler' => $this->attachmentHandler,
 		);
 		
 		if ($this->visibility == 'protected') {
@@ -354,32 +383,6 @@ class UltimateContentAddForm extends MessageForm {
 		$returnValues = $this->objectAction->getReturnValues();
 		$content = $returnValues['returnValues'];
 		$contentID = $returnValues['returnValues']->contentID;
-		$updateEntries = array();
-		if (!I18nHandler::getInstance()->isPlainValue('subject')) {
-			I18nHandler::getInstance()->save('subject', 'ultimate.content.'.$contentID.'.contentTitle', 'ultimate.content', PACKAGE_ID);
-			$updateEntries['contentTitle'] = 'ultimate.content.'.$contentID.'.contentTitle';
-		}
-		if (!I18nHandler::getInstance()->isPlainValue('description')) {
-			I18nHandler::getInstance()->save('description', 'ultimate.content.'.$contentID.'.contentDescription', 'ultimate.content', PACKAGE_ID);
-			$updateEntries['contentDescription'] = 'ultimate.content.'.$contentID.'.contentDescription';
-		}
-		if (!I18nHandler::getInstance()->isPlainValue('text')) {
-			$updateEntries['contentText'] = 'ultimate.content.'.$contentID.'.contentText';
-			
-			// parse URLs
-			if ($this->preParse) {
-				$textValues = I18nHandler::getInstance()->getValues('text');
-				foreach ($textValues as $languageID => $text) {
-					$textValues[$languageID] = PreParser::getInstance()->parse($text);
-				}
-				I18nHandler::getInstance()->setValues('text', $textValues);
-			}
-			I18nHandler::getInstance()->save('text', 'ultimate.content.'.$contentID.'.contentText', 'ultimate.content', PACKAGE_ID);
-		}
-		if (!empty($updateEntries)) {
-			$contentEditor = new ContentEditor($returnValues['returnValues']);
-			$contentEditor->update($updateEntries);
-		}
 		
 		// save tags
 		foreach ($this->tagsI18n as $languageID => $tags) {
@@ -574,7 +577,7 @@ class UltimateContentAddForm extends MessageForm {
 			if (!I18nHandler::getInstance()->validateValue('text')) {
 				throw new UserInputException('text');
 			}
-			$textValues = I18nHandler::getInstance()->getValues('description');
+			$textValues = I18nHandler::getInstance()->getValues('text');
 			foreach ($textValues as $languageID => $text) {
 				if ($this->maxTextLength != 0 && mb_strlen($text) > $this->maxTextLength) {
 					throw new UserInputException('text', 'tooLong');
