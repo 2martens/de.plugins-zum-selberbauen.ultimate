@@ -49,7 +49,7 @@ class ContentLanguageEntry extends AbstractLanguageEntry {
 	 * Name of the object id.
 	 * @var string
 	 */
-	protected static $objectIDName = 'contentID';
+	protected static $objectIDName = 'contentVersionID';
 	
 	/**
 	 * Handles data.
@@ -62,7 +62,7 @@ class ContentLanguageEntry extends AbstractLanguageEntry {
 			return;
 		}
 		
-		$data['contentID'] = intval($data['contentID']);
+		$data['contentVersionID'] = intval($data['contentVersionID']);
 		$data['languageID'] = intval($data['languageID']);
 		parent::handleData($data);
 	}

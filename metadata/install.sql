@@ -52,12 +52,12 @@ CREATE TABLE ultimate1_content (
 DROP TABLE IF EXISTS ultimate1_content_language;
 CREATE TABLE ultimate1_content_language (
 	languageEntryID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	contentID INT(10) NOT NULL,
-	languageID INT(10) NOT NULL,
+	contentVersionID INT(10) NOT NULL,
+	languageID INT(10) NULL,
 	contentTitle VARCHAR(255) NOT NULL DEFAULT '',
 	contentDescription VARCHAR(255) NOT NULL DEFAULT '',
 	contentText MEDIUMTEXT NOT NULL,
-	UNIQUE KEY (contentID, languageID)
+	UNIQUE KEY (contentVersionID, languageID)
 );
 
 DROP TABLE IF EXISTS ultimate1_content_to_category;
@@ -196,7 +196,7 @@ CREATE TABLE ultimate1_template_to_layout (
 );
 
 DROP TABLE IF EXISTS ultimate1_user_group_to_content_version;
-CREATE TABLE ultimate1_user_group_to_content (
+CREATE TABLE ultimate1_user_group_to_content_version (
 	groupID INT(10) NOT NULL,
 	versionID INT(10) NOT NULL,
 	PRIMARY KEY (groupID, versionID),
@@ -241,6 +241,8 @@ ALTER TABLE ultimate1_blocktype ADD FOREIGN KEY (packageID) REFERENCES wcf1_pack
 ALTER TABLE ultimate1_content ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_content_version ADD FOREIGN KEY (contentID) REFERENCES ultimate1_content (contentID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_content_version ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_content_language ADD FOREIGN KEY (contentVersionID) REFERENCES ultimate1_content_version (versionID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_content_language ADD FOREIGN KEY (languageID) REFERENCES wcf1_language (languageID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_content_to_category ADD FOREIGN KEY (contentID) REFERENCES ultimate1_content (contentID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_content_to_category ADD FOREIGN KEY (categoryID) REFERENCES ultimate1_category (categoryID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_content_to_page ADD FOREIGN KEY (contentID) REFERENCES ultimate1_content (contentID) ON DELETE CASCADE;
