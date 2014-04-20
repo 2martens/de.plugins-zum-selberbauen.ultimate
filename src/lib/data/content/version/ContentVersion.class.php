@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\content\version;
+use ultimate\data\content\language\ContentLanguageEntryCache;
 use wcf\data\user\User;
 use wcf\data\AbstractVersion;
 use wcf\system\WCF;
@@ -138,6 +139,9 @@ class ContentVersion extends AbstractVersion {
 		$result = parent::__get($name);
 		if ($result === null && $name == 'groups') {
 			$result = $this->getGroups();
+		}
+		else if ($result === null) {
+			$result = ContentLanguageEntryCache::getInstance()->get($this->versionID, $name);
 		}
 	
 		return $result;
