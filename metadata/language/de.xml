@@ -71,6 +71,13 @@
 		<item name="wcf.acp.group.option.admin.content.ultimate.canUploadAttachment"><![CDATA[Kann Dateianhänge hochladen]]></item>
 		<!-- /content -->
 		
+		<!-- content version -->
+		<item name="wcf.acp.group.option.admin.content.ultimate.canAddContentVersion"><![CDATA[Kann neue Inhaltsversion erstellen]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canAddContentVersion.description"><![CDATA[Mitglieder dieser Benutzergruppe können neue Inhaltsversionen erstellen.]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContentVersion"><![CDATA[Kann Inhaltsversion löschen]]></item>
+		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContentVersion.description"><![CDATA[Mitglieder dieser Benutzergruppe können Inhaltsversionen löschen.]]></item>
+		<!-- /content version -->
+		
 		<!-- layout -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLayouts"><![CDATA[Kann Layouts verwalten]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLayouts.description"><![CDATA[Mitglieder dieser Benutzergruppe können Layouts verwalten.]]></item>
