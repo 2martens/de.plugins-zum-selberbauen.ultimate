@@ -99,7 +99,6 @@ class CategoryAction extends AbstractDatabaseObjectAction {
 		
 		$category = parent::create();
 		CategoryLanguageEntryEditor::createEntries($category->__get('categoryID'), $preparedLanguageData);
-		CategoryLanguageEntryEditor::resetCache();
 		$categoryEditor = new CategoryEditor($category);
 	
 		// insert meta description/keywords

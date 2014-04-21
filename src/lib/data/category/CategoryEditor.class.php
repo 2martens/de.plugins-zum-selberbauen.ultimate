@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\category;
+use ultimate\data\category\language\CategoryLanguageEntryCache;
 use ultimate\data\layout\LayoutAction;
 use ultimate\system\cache\builder\CategoryCacheBuilder;
 use ultimate\system\cache\builder\LayoutCacheBuilder;
@@ -134,6 +135,7 @@ class CategoryEditor extends DatabaseObjectEditor implements IEditableCachedObje
 	 */
 	public static function resetCache() {
 		CategoryCacheBuilder::getInstance()->reset();
+		CategoryLanguageEntryCache::getInstance()->reloadCache();
 		LayoutCacheBuilder::getInstance()->reset();
 	}
 }
