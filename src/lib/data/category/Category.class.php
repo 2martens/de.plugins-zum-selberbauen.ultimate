@@ -29,6 +29,7 @@ namespace ultimate\data\category;
 use ultimate\data\AbstractUltimateDatabaseObject;
 use wcf\data\ITitledObject;
 use wcf\system\WCF;
+use ultimate\data\category\language\CategoryLanguageEntryCache;
 
 /**
  * Represents a category entry.
@@ -118,6 +119,21 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledObject {
 			$this->data['contents'] = $this->getContents();
 		}
 		return $this->data['contents'];
+	}
+	
+	/**
+	 * Returns the value of a object data variable with the given name or null if there is no such value.
+	 * 
+	 * @param	string		$name
+	 * @return	mixed|null
+	 */
+	public function __get($name) {
+		$value = parent::__get($name);
+		if ($value === null) {
+			$value = CategoryLanguageEntryCache::getInstance()->get($this->categoryID, $name);
+		}
+		
+		return $value;
 	}
 	
 	/**

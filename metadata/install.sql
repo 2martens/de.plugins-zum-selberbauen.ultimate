@@ -32,11 +32,18 @@ DROP TABLE IF EXISTS ultimate1_category;
 CREATE TABLE ultimate1_category (
 	categoryID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	categoryParent INT(10) NOT NULL DEFAULT 0,
+	categorySlug VARCHAR(255) NOT NULL DEFAULT '',
+	UNIQUE KEY categorySlug (categoryParent, categorySlug)
+);
+
+DROP TABLE IF EXISTS ultimate1_category_language;
+CREATE TABLE ultimate1_category (
+	languageEntryID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	categoryID INT(10) NOT NULL,
+	languageID INT(10) NULL,
 	categoryTitle VARCHAR(255) NOT NULL DEFAULT '',
 	categoryDescription VARCHAR(255) NOT NULL DEFAULT '',
-	categorySlug VARCHAR(255) NOT NULL DEFAULT '',
-	UNIQUE KEY categoryTitle (categoryParent, categoryTitle),
-	UNIQUE KEY categorySlug (categoryParent, categorySlug)
+	UNIQUE KEY (categoryID, languageID)
 );
 
 DROP TABLE IF EXISTS ultimate1_content;
@@ -238,6 +245,8 @@ ALTER TABLE ultimate1_block ADD FOREIGN KEY (blockTypeID) REFERENCES ultimate1_b
 ALTER TABLE ultimate1_block_to_template ADD FOREIGN KEY (blockID) REFERENCES ultimate1_block (blockID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_block_to_template ADD FOREIGN KEY (templateID) REFERENCES ultimate1_template (templateID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_blocktype ADD FOREIGN KEY (packageID) REFERENCES wcf1_package (packageID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_category_language ADD FOREIGN KEY (categoryID) REFERENCES ultimate1_category (categoryID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_category_language ADD FOREIGN KEY (languageID) REFERENCES wcf1_language (languageID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_content ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_content_version ADD FOREIGN KEY (contentID) REFERENCES ultimate1_content (contentID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_content_version ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
@@ -265,9 +274,8 @@ ALTER TABLE ultimate1_widget_area_option ADD FOREIGN KEY (widgetAreaID) REFERENC
 
 /**** default entries ****/
 -- default category
-INSERT INTO ultimate1_category (categoryTitle, categorySlug) VALUES ('ultimate.category.1.categoryTitle', 'uncategorized');
-INSERT INTO ultimate1_category (categoryTitle, categoryDescription, categorySlug) 
-	VALUES ('ultimate.category.2.categoryTitle', 'ultimate.category.2.categoryDescription', 'pages');
+INSERT INTO ultimate1_category (categorySlug) VALUES ('uncategorized');
+INSERT INTO ultimate1_category (categorySlug) VALUES ('pages');
 
 -- default layouts
 INSERT INTO ultimate1_layout (objectID, objectType) VALUES (0, 'index');
