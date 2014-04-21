@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\content;
+use ultimate\data\content\language\ContentLanguageEntryCache;
 use ultimate\data\content\language\ContentLanguageEntryEditor;
 use ultimate\data\layout\LayoutAction;
 use ultimate\data\layout\LayoutList;
@@ -296,15 +297,18 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		foreach ($this->objects as $contentEditor) {
 			$languages = LanguageFactory::getInstance()->getLanguages();
 			SearchIndexManager::getInstance()->delete('de.plugins-zum-selberbauen.ultimate.content', array($contentEditor->__get('contentID')));
+			$textValues = ContentLanguageEntryCache::getInstance()->getValues($contentEditor->__get('contentID'), 'contentText');
+			$titleValues = ContentLanguageEntryCache::getInstance()->getValues($contentEditor->__get('contentID'), 'contentTitle');
 			foreach ($languages as $languageID => $language) {
-				$text = $language->get($contentEditor->__get('contentText'));
-				$title = $language->get($contentEditor->__get('contentTitle'));
-				$isI18n = (strpos($contentEditor->__get('contentText'), 'ultimate.content') !== false || strpos($contentEditor->__get('contentTitle'), 'ultimate.content') !== false);
+				$text = $textValues[$languageID];
+				$title = $titleValues[$languageID];
+				$isI18n = (!ContentLanguageEntryCache::getInstance()->isNeutralValue($contentEditor->__get('contentID'), 'contentText') 
+					|| !ContentLanguageEntryCache::getInstance()->isNeutralValue($contentEditor->__get('contentID'), 'contentTitle'));
 				SearchIndexManager::getInstance()->add(
 					'de.plugins-zum-selberbauen.ultimate.content',
 					$contentEditor->__get('contentID'),
-					(!empty($text) ? $text : $contentEditor->__get('contentText')),
-					(!empty($title) ? $title : $contentEditor->__get('contentTitle')),
+					$text,
+					$title,
 					$contentEditor->getTime(),
 					$contentEditor->getUserID(),
 					$contentEditor->getUsername(),
