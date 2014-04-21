@@ -297,13 +297,13 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		foreach ($this->objects as $contentEditor) {
 			$languages = LanguageFactory::getInstance()->getLanguages();
 			SearchIndexManager::getInstance()->delete('de.plugins-zum-selberbauen.ultimate.content', array($contentEditor->__get('contentID')));
-			$textValues = ContentLanguageEntryCache::getInstance()->getValues($contentEditor->__get('contentID'), 'contentText');
-			$titleValues = ContentLanguageEntryCache::getInstance()->getValues($contentEditor->__get('contentID'), 'contentTitle');
+			$textValues = ContentLanguageEntryCache::getInstance()->getValues($contentEditor->__get('versionID'), 'contentText');
+			$titleValues = ContentLanguageEntryCache::getInstance()->getValues($contentEditor->__get('versionID'), 'contentTitle');
 			foreach ($languages as $languageID => $language) {
 				$text = $textValues[$languageID];
 				$title = $titleValues[$languageID];
-				$isI18n = (!ContentLanguageEntryCache::getInstance()->isNeutralValue($contentEditor->__get('contentID'), 'contentText') 
-					|| !ContentLanguageEntryCache::getInstance()->isNeutralValue($contentEditor->__get('contentID'), 'contentTitle'));
+				$isI18n = (!ContentLanguageEntryCache::getInstance()->isNeutralValue($contentEditor->__get('versionID'), 'contentText') 
+					|| !ContentLanguageEntryCache::getInstance()->isNeutralValue($contentEditor->__get('versionID'), 'contentTitle'));
 				SearchIndexManager::getInstance()->add(
 					'de.plugins-zum-selberbauen.ultimate.content',
 					$contentEditor->__get('contentID'),
@@ -554,20 +554,19 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		$contentData['contentText'] = PreParser::getInstance()->parse($contentData['contentText'], explode(',', WCF::getSession()->getPermission('user.message.allowedBBCodes')));
 		$content = $this->content;
 		if ($isI18n) {
-			I18nHandler::getInstance()->register('text');
-			I18nHandler::getInstance()->setValues('text', array(
-				WCF::getUser()->getLanguage()->getObjectID() => $contentData['contentText']
-			));
-			I18nHandler::getInstance()->save('text', 'ultimate.content.'.$this->content->__get('contentID').'.contentText', 'ultimate.content', PACKAGE_ID);
+			$contentData = array(
+				WCF::getUser()->getLanguage()->getObjectID() => array(
+					'contentText' => $contentData['contentText']
+				)
+			);
 		} else {
-			// execute update action
-			$action = new ContentAction(array($this->content), 'update', array('data' => $contentData));
-			$action->executeAction();
-			
-			// load new post
-			$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
-			$content = $contents[$this->content->__get('contentID')];
+			$contentData = array(
+				ContentLanguageEntryCache::NEUTRAL_LANGUAGE => array(
+					'contentText' => $contentData['contentText']
+				)
+			);
 		}
+		ContentLanguageEntryEditor::updateEntries($this->content->__get('versionID'), $contentData);
 		
 		return array(
 			'actionName' => 'save',
