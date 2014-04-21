@@ -27,6 +27,7 @@
  */
 namespace ultimate\data\page;
 use ultimate\data\layout\LayoutAction;
+use ultimate\data\page\language\PageLanguageEntryCache;
 use ultimate\system\cache\builder\ContentPageCacheBuilder;
 use ultimate\system\cache\builder\LayoutCacheBuilder;
 use ultimate\system\cache\builder\PageCacheBuilder;
@@ -37,7 +38,6 @@ use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
-
 
 /**
  * Provides functions to edit pages.
@@ -80,21 +80,11 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 * Deletes all corresponding objects to the given object IDs.
 	 * 
 	 * @param	integer[]	$objectIDs
+	 * @return  integer
 	 */
 	public static function deleteAll(array $objectIDs = array()) {
 		// unmark contents
 		ClipboardHandler::getInstance()->unmark($objectIDs, ClipboardHandler::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.ultimate.page'));
-		
-		// delete language items
-		$sql = 'DELETE FROM wcf'.WCF_N.'_language_item
-		        WHERE       languageItem = ?';
-		$statement = WCF::getDB()->prepareStatement($sql);
-		
-		WCF::getDB()->beginTransaction();
-		foreach ($objectIDs as $objectID) {
-			$statement->executeUnbuffered(array('ultimate.page.'.$objectID.'.%'));
-		}
-		WCF::getDB()->commitTransaction();
 		
 		// delete meta data
 		$conditionBuilder = new PreparedStatementConditionBuilder();
@@ -206,6 +196,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 */
 	public static function resetCache() {
 		PageCacheBuilder::getInstance()->reset();
+		PageLanguageEntryCache::getInstance()->reloadCache();
 		ContentPageCacheBuilder::getInstance()->reset();
 		LayoutCacheBuilder::getInstance()->reset();
 	}

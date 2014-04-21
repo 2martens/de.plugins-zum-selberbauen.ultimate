@@ -37,7 +37,7 @@ CREATE TABLE ultimate1_category (
 );
 
 DROP TABLE IF EXISTS ultimate1_category_language;
-CREATE TABLE ultimate1_category (
+CREATE TABLE ultimate1_category_language (
 	languageEntryID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	categoryID INT(10) NOT NULL,
 	languageID INT(10) NULL,
@@ -187,6 +187,15 @@ CREATE TABLE ultimate1_page (
 	KEY (authorID)
 );
 
+DROP TABLE IF EXISTS ultimate1_page_language;
+CREATE TABLE ultimate1_page_language (
+	languageEntryID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	pageID INT(10) NOT NULL,
+	languageID INT(10) NULL,
+	pageTitle VARCHAR(255) NOT NULL DEFAULT '',
+	UNIQUE KEY (pageID, languageID)
+);
+
 DROP TABLE IF EXISTS ultimate1_template;
 CREATE TABLE ultimate1_template (
 	templateID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -264,6 +273,8 @@ ALTER TABLE ultimate1_menu_to_template ADD FOREIGN KEY (templateID) REFERENCES u
 ALTER TABLE ultimate1_page ADD FOREIGN KEY (authorID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_user_group_to_content_version ADD FOREIGN KEY (versionID) REFERENCES ultimate1_content_version (versionID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_user_group_to_content_version ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_page_language ADD FOREIGN KEY (pageID) REFERENCES ultimate1_page (pageID) ON DELETE CASCADE;
+ALTER TABLE ultimate1_page_language ADD FOREIGN KEY (languageID) REFERENCES wcf1_language (languageID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_user_group_to_page ADD FOREIGN KEY (pageID) REFERENCES ultimate1_page (pageID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_user_group_to_page ADD FOREIGN KEY (groupID) REFERENCES wcf1_user_group (groupID) ON DELETE CASCADE;
 ALTER TABLE ultimate1_template_to_layout ADD FOREIGN KEY (layoutID) REFERENCES ultimate1_layout (layoutID) ON DELETE CASCADE;

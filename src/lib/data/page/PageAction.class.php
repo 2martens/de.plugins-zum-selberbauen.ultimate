@@ -26,9 +26,9 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\page;
+use ultimate\data\page\language\PageLanguageEntryEditor;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\util\ArrayUtil;
-
 
 /**
  * Executes page-related actions.
@@ -71,7 +71,31 @@ class PageAction extends AbstractDatabaseObjectAction {
 	 * @return	Page
 	 */
 	public function create() {
+		$languageEntryParameters = array(
+			'pageTitle'
+		);
+		
+		$languageData = array();
+		$tmpData = $this->parameters['data'];
+		foreach ($tmpData as $key => $value) {
+			if (!in_array($key, $languageEntryParameters)) continue;
+				
+			$languageData[$key] = $value;
+			unset($this->parameters['data'][$key]);
+		}
+		
+		$preparedLanguageData = array();
+		foreach ($languageData as $key => $value) {
+			foreach ($value as $languageID => $__value) {
+				if (!isset($preparedLanguageData[$languageID])) {
+					$preparedLanguageData[$languageID] = array();
+				}
+				$preparedLanguageData[$languageID][$key] = $__value;
+			}
+		}
+		
 		$page = parent::create();
+		PageLanguageEntryEditor::createEntries($page->__get('pageID'), $preparedLanguageData);
 		$pageEditor = new PageEditor($page);
 		
 		// connect with content
@@ -97,7 +121,34 @@ class PageAction extends AbstractDatabaseObjectAction {
 	 */
 	public function update() {
 		if (isset($this->parameters['data'])) {
+			$languageEntryParameters = array(
+				'pageTitle'
+			);
+				
+			$languageData = array();
+			$tmpData = $this->parameters['data'];
+			foreach ($tmpData as $key => $value) {
+				if (!in_array($key, $languageEntryParameters)) continue;
+					
+				$languageData[$key] = $value;
+				unset($this->parameters['data'][$key]);
+			}
+				
+			$preparedLanguageData = array();
+			foreach ($languageData as $key => $value) {
+				foreach ($value as $languageID => $__value) {
+					if (!isset($preparedLanguageData[$languageID])) {
+						$preparedLanguageData[$languageID] = array();
+					}
+					$preparedLanguageData[$languageID][$key] = $__value;
+				}
+			}
+			
 			parent::update();
+			
+			foreach ($this->objects as $object) {
+				PageLanguageEntryEditor::updateEntries($object->__get('pageID'), $preparedLanguageData);
+			}
 		}
 		else {
 			if (empty($this->objects)) {
