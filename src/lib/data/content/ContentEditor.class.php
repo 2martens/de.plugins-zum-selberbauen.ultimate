@@ -68,7 +68,8 @@ class ContentEditor extends AbstractVersionableDatabaseObjectEditor implements I
 	/**
 	 * Creates an object with the given parameters.
 	 * 
-	 * @param	array	$parameters	
+	 * @param	array	$parameters
+	 * @return  \ultimate\data\content\Content
 	 */
 	public static function create(array $parameters = array()) {
 		$content = parent::create($parameters);
@@ -87,6 +88,7 @@ class ContentEditor extends AbstractVersionableDatabaseObjectEditor implements I
 	 * Deletes all corresponding objects to the given object IDs.
 	 * 
 	 * @param	integer[]	$objectIDs	contentIDs
+	 * @return  integer
 	 */
 	public static function deleteAll(array $objectIDs = array()) {
 		if (defined('TESTING_MODE') && TESTING_MODE) {
@@ -95,7 +97,7 @@ class ContentEditor extends AbstractVersionableDatabaseObjectEditor implements I
 		
 		// unmark contents
 		ClipboardHandler::getInstance()->unmark($objectIDs, ClipboardHandler::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.ultimate.content'));
-		
+
 		// delete attachments
 		AttachmentHandler::removeAttachments('de.plugins-zum-selberbauen.ultimate.content', $objectIDs);
 		
