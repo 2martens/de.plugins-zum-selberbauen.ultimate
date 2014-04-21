@@ -29,7 +29,7 @@ namespace ultimate\data\content\language;
 use wcf\data\AbstractLanguageEntryEditor;
 
 /**
- * Insert description here.
+ * Editor for content language entries.
  * 
  * @author		Jim Martens
  * @copyright	2011-2014 Jim Martens
