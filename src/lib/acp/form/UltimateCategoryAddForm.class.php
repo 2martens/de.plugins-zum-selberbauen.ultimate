@@ -163,14 +163,14 @@ class UltimateCategoryAddForm extends AbstractForm {
 		
 		// retrieve I18n values
 		$categoryTitle = array();
-		if (I18nHandler::getInstance()->isPlainValue('subject')) {
+		if (I18nHandler::getInstance()->isPlainValue('categoryTitle')) {
 			$categoryTitle[CategoryLanguageEntryCache::NEUTRAL_LANGUAGE] = $this->categoryTitle;
 		}
 		else {
-			$contentTitle = I18nHandler::getInstance()->getValues('categoryTitle');
+			$categoryTitle = I18nHandler::getInstance()->getValues('categoryTitle');
 		}
 		$categoryDescription = array();
-		if (I18nHandler::getInstance()->isPlainValue('description')) {
+		if (I18nHandler::getInstance()->isPlainValue('categoryDescription')) {
 			$categoryDescription[CategoryLanguageEntryCache::NEUTRAL_LANGUAGE] = $this->categoryDescription;
 		}
 		else {
