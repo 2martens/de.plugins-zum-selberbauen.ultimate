@@ -93,6 +93,12 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	protected $requireACP = array('create', 'updateSearchIndex', 'delete');
 	
 	/**
+	 * Resets cache if any of the listed actions is invoked
+	 * @var	string[]
+	 */
+	protected $resetCache = array('create', 'createVersion', 'delete', 'deleteVersion', 'toggle', 'update', 'updatePosition');
+	
+	/**
 	 * current content object
 	 * @var	\ultimate\data\content\Content
 	 */
