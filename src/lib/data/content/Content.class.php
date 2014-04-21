@@ -95,6 +95,12 @@ class Content extends AbstractUltimateVersionableDatabaseObject implements ITitl
 	protected static $versionClassName = '\ultimate\data\content\version\ContentVersion';
 	
 	/**
+	 * Name of the version cache class (FQCN).
+	 * @var string
+	 */
+	protected static $versionCacheClass = '\ultimate\data\content\version\ContentVersionCache';
+	
+	/**
 	 * The content to category database table name.
 	 * @var	string
 	 */
