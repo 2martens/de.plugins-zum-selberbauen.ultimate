@@ -101,8 +101,11 @@ ULTIMATE.EditSuite.SidebarMenu = Class.extend({
 	 * @param {Array} activeMenuItems
 	 */
 	_renderSidebar : function(activeMenuItems) {
-		this._sidebarNavigation.find('legend').removeClass('active');
 		this._sidebarNavigation.find('li').removeClass('active');
+		this._sidebarNavigation.find('legend').removeClass('active');
+		this._sidebarNavigation.find('nav ul').each(function() {
+			$(this).hide();
+		});
 		// reset visible and active items
 		for (var $i = 0, $size = activeMenuItems.length; $i < $size; $i++) {
 			var $item = activeMenuItems[$i];
@@ -185,10 +188,8 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 			var href = $target.attr('href');
 			href = href.replace(/^.*\/\/[^\/]+/, '')
 			var stateObject = {
-				oldController: this._pageContainer.find('#pageContent').data('controller'),
-				oldRequestType: this._pageContainer.find('#pageContent').data('requestType'),
-				newController: $target.data('controller'),
-				newRequestType: $target.data('requestType')
+				controller: $target.data('controller'),
+				requestType: $target.data('requestType')
 			};
 			history.pushState(stateObject, '', href);
 			// fire request
@@ -200,22 +201,19 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 			}
 		}, this));
 		$(window).on('popstate', $.proxy(function(event) {
+			var controller = null;
+			var requestType = null;
+			
 			if (event.originalEvent.state == null) {
-				return;
+				controller = this._pageContainer.data('initialController');
+				requestType = this._pageContainer.data('initialRequestType');
+			}
+			else if (event.originalEvent.state.controller != null) {
+				controller = event.originalEvent.state.controller;
+				requestType = event.originalEvent.state.requestType;
 			}
 			
-			var controller = '';
-			var requestType = '';
-			if (event.originalEvent.state.direction == 'back' && event.originalEvent.state.oldController != null) {
-				controller = event.originalEvent.state.oldController;
-				requestType = event.originalEvent.state.oldRequestType;
-			}
-			if (event.originalEvent.state.direction == 'forward' && event.originalEvent.state.newController != null) {
-				controller = event.originalEvent.state.newController;
-				requestType = event.originalEvent.state.newRequestType;
-			}
-			
-			if (controller) {
+			if (controller != null) {
 				// load the content
 				if (this._cachedData[controller] != null) {
 					this._replaceHTML(controller);

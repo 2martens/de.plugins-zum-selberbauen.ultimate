@@ -82,7 +82,9 @@ class ContentAddForm extends AbstractForm implements IEditSuitePage {
 		parent::assignVariables();
 		WCF::getTPL()->assign(array(
 			'activeMenuItems' => $this->activeMenuItems,
-			'pageContent' => WCF::getTPL()->fetch('__editSuite.ContentAddForm', 'ultimate')
+			'pageContent' => WCF::getTPL()->fetch('__editSuite.ContentAddForm', 'ultimate'),
+			'initialController' => 'ContentAddForm',
+			'initialRequestType' => 'form'
 		));
 	}
 	

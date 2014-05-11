@@ -129,7 +129,9 @@ class ContentListPage extends AbstractCachedListPage implements IEditSuitePage {
 		parent::assignVariables();
 		WCF::getTPL()->assign(array(
 			'activeMenuItems' => $this->activeMenuItems,
-			'pageContent' => WCF::getTPL()->fetch('__editSuite.ContentListPage', 'ultimate')
+			'pageContent' => WCF::getTPL()->fetch('__editSuite.ContentListPage', 'ultimate'),
+			'initialController' => 'ContentListPage',
+			'initialRequestType' => 'page'
 		));
 	}
 	

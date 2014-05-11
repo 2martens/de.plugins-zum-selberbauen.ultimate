@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\form;
+use ultimate\page\IEditSuitePage;
 use wcf\form\AbstractForm;
 use wcf\system\WCF;
 
@@ -46,7 +47,7 @@ use wcf\system\WCF;
  * @subpackage	form
  * @category	Ultimate CMS
  */
-class EditSuiteForm extends AbstractForm {
+class EditSuiteForm extends AbstractForm implements IEditSuitePage {
 	/**
 	 * name of the template for the called page
 	 * @var	string
@@ -78,13 +79,38 @@ class EditSuiteForm extends AbstractForm {
 	public $neededPermissions = array();
 	
 	/**
+	 * A list of active EditSuite menu items.
+	 * @var string[]
+	 */
+	protected $activeMenuItems = array();
+	
+	/**
+	 * @see \ultimate\page\IEditSuitePage::getActiveMenuItems()
+	*/
+	public function getActiveMenuItems() {
+		return $this->activeMenuItems;
+	}
+	
+	/**
 	 * Assigns variables to the template engine.
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
 		WCF::getTPL()->assign(array(
-			'activeMenuItems' => array(),
-			'pageContent' => WCF::getTPL()->fetch('__editSuite.Main', 'ultimate')
+			'activeMenuItems' => $this->activeMenuItems,
+			'pageContent' => WCF::getTPL()->fetch('__editSuite.Main', 'ultimate'),
+			'initialController' => 'EditSuiteForm',
+			'initialRequestType' => 'form'
 		));
+	}
+	
+	/**
+	 * Shows the requested page.
+	 */
+	public function show() {
+		parent::show();
+		if (!$this->useTemplate) {
+			WCF::getTPL()->display($this->templateName, 'ultimate', false);
+		}
 	}
 }

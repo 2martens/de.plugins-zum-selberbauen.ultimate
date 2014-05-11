@@ -39,7 +39,7 @@
 
 	<!-- form/page content -->
 	{include file='userNotice'}
-	<div id="pageContentContainer">
+	<div id="pageContentContainer" data-initial-controller="{$initialController}" data-initial-request-type="{$initialRequestType}">
 		{@$pageContent}
 	</div>
 	<!-- /form/page content -->
