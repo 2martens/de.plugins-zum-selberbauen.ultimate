@@ -785,6 +785,13 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 		<item name="ultimate.date.dateTimeFormat"><![CDATA[%date% %time%]]></item>
 	</category>
 	
+	<category name="ultimate.edit">
+		<item name="ultimate.edit.suite"><![CDATA[Edit-Suite]]></item>
+		<item name="ultimate.edit.contents"><![CDATA[Contents]]></item>
+		<item name="ultimate.edit.listContents"><![CDATA[List contents]]></item>
+		<item name="ultimate.edit.addContent"><![CDATA[Add content]]></item>
+	</category>
+	
 	<category name="ultimate.error">
 		<item name="ultimate.error.noExistingTemplates"><![CDATA[No templates are existing.]]></item>
 		<item name="ultimate.error.missingTemplate"><![CDATA[There is no template attached to {if $type == 'category'}this category{/if}{if $type == 'content'}this content{/if}{if $type == 'page'}this page{/if}{if $type == 'index'}the main page{/if}.]]></item>

@@ -95,5 +95,11 @@ class ULTIMATECore extends AbstractApplication {
 		$contentRoute->setParameterOption('date', null, '2[0-9]{3}\-[0-9]{2}\-[0-9]{2}');
 		$contentRoute->setParameterOption('contentSlug', null, '[a-zA-Z]+(\-{1}[a-zA-Z0-9]+)*');
 		RouteHandler::getInstance()->addRoute($contentRoute);
+		
+		$editSuiteRoute = new Route('editSuiteRoute-'.PACKAGE_ID);
+		$editSuiteRoute->setSchema('/{parent}/{controller}/', null);
+		$editSuiteRoute->setParameterOption('parent');
+		$editSuiteRoute->setParameterOption('controller');
+		RouteHandler::getInstance()->addRoute($editSuiteRoute);
 	}
 }

@@ -63,7 +63,7 @@
 		<div>
 			{capture assign='__sidebar'}
 				{if $sidebar|isset}
-					<aside class="sidebar"{if (!$useDefaultSidebar|isset || ($useDefaultSidebar|isset && ULTIMATE_GENERAL_TEMPLATE_COLLAPSIBLE_SIDEBARS)) && $sidebarOrientation|isset && $sidebarOrientation == 'right'} data-is-open="{if $sidebarCollapsed}false{else}true{/if}" data-sidebar-name="{$sidebarName}"{/if}>
+					<aside class="sidebar{if $collapsibleMenu|isset} collapsibleMenu{/if}"{if (!$useDefaultSidebar|isset || ($useDefaultSidebar|isset && ULTIMATE_GENERAL_TEMPLATE_COLLAPSIBLE_SIDEBARS)) && $sidebarOrientation|isset && $sidebarOrientation == 'right'} data-is-open="{if $sidebarCollapsed}false{else}true{/if}" data-sidebar-name="{$sidebarName}"{/if}>
 						<div>
 							{event name='sidebarBoxesTop'}
 							

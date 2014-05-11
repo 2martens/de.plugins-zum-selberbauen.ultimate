@@ -798,6 +798,13 @@ Für die InlineEdit braucht man die gleichen Rechte um Inhalte zu schreiben, zu 
 		<item name="ultimate.date.dateTimeFormat"><![CDATA[%date% %time%]]></item>
 	</category>
 	
+	<category name="ultimate.edit">
+		<item name="ultimate.edit.suite"><![CDATA[Edit-Suite]]></item>
+		<item name="ultimate.edit.contents"><![CDATA[Inhalte]]></item>
+		<item name="ultimate.edit.listContents"><![CDATA[Inhalte auflisten]]></item>
+		<item name="ultimate.edit.addContent"><![CDATA[Inhalt hinzufügen]]></item>
+	</category>
+	
 	<category name="ultimate.error">
 		<item name="ultimate.error.noExistingTemplates"><![CDATA[Es existieren keine Templates.]]></item>
 		<item name="ultimate.error.missingTemplate"><![CDATA[{if $type == 'category'}Dieser Kategorie{/if}{if $type == 'content'}Diesem Inhalt{/if}{if $type == 'page'}Dieser Seite{/if}{if $type == 'index'}Der Startseite{/if} wurde kein Template zugewiesen.]]></item>
