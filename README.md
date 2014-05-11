@@ -6,7 +6,7 @@ A WCF compatible CMS.
 Version notes
 -------------
 
-The currently available source code represents the 1.0.x version of Ultimate CMS and can be used in productive environments.
+The source code in this branch represents the development for the next feature version 1.1 and should not be used in productive environments.
 
 * Dev-Branch: [![Build Status](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.ultimate.png?branch=dev)](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.ultimate)
 * Master-Branch: [![Build Status](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.ultimate.png?branch=master)](https://travis-ci.org/frmwrk123/de.plugins-zum-selberbauen.ultimate)
