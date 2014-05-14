@@ -97,9 +97,10 @@ class ULTIMATECore extends AbstractApplication {
 		RouteHandler::getInstance()->addRoute($contentRoute);
 		
 		$editSuiteRoute = new Route('editSuiteRoute-'.PACKAGE_ID);
-		$editSuiteRoute->setSchema('/{parent}/{controller}/', null);
+		$editSuiteRoute->setSchema('/{parent}/{controller}/{id}/', null);
 		$editSuiteRoute->setParameterOption('parent');
 		$editSuiteRoute->setParameterOption('controller');
+		$editSuiteRoute->setParameterOption('id', null, '\d+', true);
 		RouteHandler::getInstance()->addRoute($editSuiteRoute);
 	}
 }

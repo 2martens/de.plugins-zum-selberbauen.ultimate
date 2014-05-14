@@ -80,6 +80,7 @@ class AJAXEditSuiteAction extends AJAXInvokeAction {
 	public function readParameters() {
 		AbstractSecureAction::readParameters();
 		
+		if (isset($_POST['actionName'])) $this->actionName = StringUtil::trim($_POST['actionName']);
 		if (isset($_POST['controller'])) $this->controller = StringUtil::trim($_POST['controller']);
 		if (isset($_POST['requestType'])) $this->requestType = StringUtil::trim($_POST['requestType']);
 	}
@@ -92,6 +93,28 @@ class AJAXEditSuiteAction extends AJAXInvokeAction {
 		
 		/* @var $controllerObj \ultimate\page\IEditSuitePage */
 		$controllerObj = new $classNameFQCN();
+		$this->{$this->actionName}($controllerObj);
+	}
+	
+	/**
+	 * Performs a JS only request.
+	 * 
+	 * @param	\ultimate\page\IEditSuitePage	$controllerObj
+	 */
+	protected function jsOnly($controllerObj) {
+		$this->response = array(
+			'controller' => $this->controller,
+			'requestType' => $this->requestType,
+			'js' => $controllerObj->getJavascript()
+		);
+	}
+	
+	/**
+	 * Performs a full HTML request.
+	 * 
+	 * @param	\ultimate\page\IEditSuitePage	$controllerObj
+	 */
+	protected function fullHTML($controllerObj) {
 		$tmpPost = $_POST;
 		$_POST = array();
 		
@@ -106,6 +129,7 @@ class AJAXEditSuiteAction extends AJAXInvokeAction {
 			'controller' => $this->controller,
 			'requestType' => $this->requestType,
 			'html' => $output,
+			'js' => $controllerObj->getJavascript(),
 			'activeMenuItems' => $controllerObj->getActiveMenuItems()
 		);
 	}

@@ -125,9 +125,62 @@ ULTIMATE.EditSuite.SidebarMenu = Class.extend({
 });
 
 /**
+ * Dictionary for Javascript code that has to be executed
+ * after accessing a controller.
+ * 
+ * @see WCF.Dictionary
+ * @since version 1.1.0
+ */
+ULTIMATE.EditSuite.AJAXJavascript = {
+	/**
+	 * Contains the javascript codes.
+	 * 
+	 * @type WCF.Dictionary
+	 */
+	_javascript : {},
+	
+	/**
+	 * @param {String}
+	 *            key
+	 * @param {String}
+	 *            value
+	 * @see WCF.Dictionary.add()
+	 */
+	add : function(key, value) {
+		this._variables.add(key, value);
+	},
+
+	/**
+	 * @see WCF.Dictionary.addObject()
+	 */
+	addObject : function(object) {
+		this._variables.addObject(object);
+	},
+
+	/**
+	 * Retrieves a variable.
+	 * 
+	 * @param {String}
+	 *            key
+	 * @return {String}
+	 */
+	get : function(key) {
+		var value = this._variables.get(key);
+
+		if (value === null) {
+			// return key again
+			return key;
+		}
+
+		return value;
+	}
+};
+
+/**
  * Handles EditSuite AJAX loading.
  * 
  * @param {String} pageContainer
+ * @param {String} pageJSContainer
  * @param {ULTIMATE.EditSuite.SidebarMenu} menuSidebar
  */
 ULTIMATE.EditSuite.AJAXLoading = Class.extend({
@@ -139,11 +192,25 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	_pageContainer : null,
 	
 	/**
+	 * Contains the page JS container.
+	 * 
+	 * @type jQuery
+	 */
+	_pageJSContainer : null,
+	
+	/**
 	 * Contains a proxy object.
 	 * 
 	 * @type WCF.Action.Proxy
 	 */
     _proxy : null,
+    
+    /**
+	 * Contains a proxy object for jSAJAX requests.
+	 * 
+	 * @type WCF.Action.Proxy
+	 */
+    _jsAJAXProxy : null,
     
     /**
      * Contains the cached HTML.
@@ -162,14 +229,21 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	 * Initializes EditSuite AJAXLoading.
 	 * 
 	 * @param {String} pageContainer
+	 * @param {String} pageJSContainer
 	 * @param {ULTIMATE.EditSuite.SidebarMenu} menuSidebar
 	 */
-	init : function(pageContainer, sidebarMenu) {
+	init : function(pageContainer, pageJSContainer, sidebarMenu) {
 		this._pageContainer = $('#' + $.wcfEscapeID(pageContainer));
+		this._pageJSContainer = $('#' + $.wcfEscapeID(pageJSContainer));
 		this._proxy = new WCF.Action.Proxy({
 		    success : $.proxy(this._success, this),
 		    url: 'index.php/AJAXEditSuite/?t=' + SECURITY_TOKEN + SID_ARG_2ND
 	    });
+		
+		this._jsAJAXProxy = new WCF.Action.Proxy({
+			success : $.proxy(this._successJSAJAX, this),
+		    url: 'index.php/AJAXEditSuite/?t=' + SECURITY_TOKEN + SID_ARG_2ND
+		});
 		this._sidebarMenu = sidebarMenu;
 		this._initSidebarLinks();
 		this._initCache();
@@ -194,10 +268,15 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 			history.pushState(stateObject, '', href);
 			// fire request
 			if (this._cachedData[$target.data('controller')] != null) {
-				this._replaceHTML($target.data('controller'));
+				if (this._cachedData[$target.data('controller')]['jsAJAXOnly']) {
+					this._fireRequest($target.data('controller'), $target.data('requestType'), 'jsOnly');
+				}
+				else {
+					this._replaceHTML($target.data('controller'));
+				}
 			}
 			else {
-				this._fireRequest($target.data('controller'), $target.data('requestType'));
+				this._fireRequest($target.data('controller'), $target.data('requestType'), 'fullHTML');
 			}
 		}, this));
 		$(window).on('popstate', $.proxy(function(event) {
@@ -216,10 +295,15 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 			if (controller != null) {
 				// load the content
 				if (this._cachedData[controller] != null) {
-					this._replaceHTML(controller);
+					if (this._cachedData[controller]['jsAJAXOnly']) {
+						this._fireRequest(controller, requestType, 'jsOnly');
+					}
+					else {
+						this._replaceHTML(controller);
+					}
 				}
 				else {
-					this._fireRequest(controller, requestType);
+					this._fireRequest(controller, requestType, 'fullHTML');
 				}
 			}
 		}, this));
@@ -235,7 +319,9 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 			html : '<div id="pageContent" data-controller="' + controller + '" data-request-type="' + requestType + '">'
 				+ $('#pageContent').html()
 				+ '</div>',
-			activeMenuItems : this._sidebarMenu.getActiveMenuItems()
+			activeMenuItems : this._sidebarMenu.getActiveMenuItems(),
+			js : $('#pageJS').html(),
+			jsAJAXOnly : $('#pageJS').data('ajaxOnly')
 		};
 	},
 	
@@ -244,18 +330,26 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	 * 
 	 * @param {String} controller
 	 * @param {String} requestType
+	 * @param {String} actionName
 	 */
-	_fireRequest : function(controller, requestType) {
+	_fireRequest : function(controller, requestType, actionName) {
 		 // build proxy data
 	    var $data = $.extend(true, {
 	        controller: controller,
-	        requestType: requestType
+	        requestType: requestType,
+	        actionName: actionName
 	    }, {});
 	    
-	    this._proxy.setOption('data', $data);
-	    
-	    // send proxy request
-	    this._proxy.sendRequest();
+	    if (actionName == 'jsOnly') {
+	    	this._jsAJAXProxy.setOption('data', $data);
+	    	// send proxy request
+		    this._jsAJAXProxy.sendRequest();
+	    }
+	    else {
+	    	this._proxy.setOption('data', $data);
+	    	// send proxy request
+		    this._proxy.sendRequest();
+	    }
 	},
 	
 	/**
@@ -270,11 +364,30 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	 */
 	_success : function(data, textStatus, jqXHR) {
 		var $html = $(data.html);
+		var $js = $(data.js);
 		this._cachedData[data.controller] = {};
 		this._cachedData[data.controller]['activeMenuItems'] = data.activeMenuItems;
 		this._cachedData[data.controller]['html'] = '<div id="pageContent" data-controller="' + data.controller + '" data-request-type="' + data.requestType + '">'
 		+ $html.find('#pageContent').html()
 		+ '</div>';
+		this._cachedData[data.controller]['js'] = $js.html();
+		this._cachedData[data.controller]['jsAJAXOnly'] = $js.data('ajaxOnly');
+		this._replaceHTML(data.controller);
+	},
+	
+	/**
+	 * Displays HTML content.
+	 * 
+	 * @param {Object}
+	 *            data
+	 * @param {String}
+	 *            textStatus
+	 * @param {jQuery}
+	 *            jqXHR
+	 */
+	_successJSAJAX : function(data, textStatus, jqXHR) {
+		var $js = $(data.js);
+		this._cachedData[data.controller]['js'] = $js.html();
 		this._replaceHTML(data.controller);
 	},
 	
@@ -285,6 +398,10 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	 */
 	_replaceHTML : function(controller) {
 		this._pageContainer.html(this._cachedData[controller]['html']);
+		this._pageJSContainer.html(this._cachedData[controller]['js']);
 		this._sidebarMenu.updateActiveItems(this._cachedData[controller]['activeMenuItems']);
+		if (typeof(initPage) === 'function') {
+			initPage();
+		}
 	}
 });

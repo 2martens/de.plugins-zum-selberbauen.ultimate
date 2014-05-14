@@ -13,7 +13,10 @@
 		$(function() {
 			var $activeMenuItems = [{implode from=$activeMenuItems item=_menuItem}'{$_menuItem}'{/implode}];
 			var $sidebarMenu = new ULTIMATE.EditSuite.SidebarMenu($activeMenuItems);
-			new ULTIMATE.EditSuite.AJAXLoading('pageContentContainer', $sidebarMenu);
+			new ULTIMATE.EditSuite.AJAXLoading('pageContentContainer', 'pageJSContainer', $sidebarMenu);
+			if (typeof(initPage) === 'function') {
+				initPage();
+			}
 		});
 	//]]>
 </script>
@@ -39,6 +42,9 @@
 
 	<!-- form/page content -->
 	{include file='userNotice'}
+	<div id="pageJSContainer">
+		{@$pageJS}
+	</div>
 	<div id="pageContentContainer" data-initial-controller="{$initialController}" data-initial-request-type="{$initialRequestType}">
 		{@$pageContent}
 	</div>

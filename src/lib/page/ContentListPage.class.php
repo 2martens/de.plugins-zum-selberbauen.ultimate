@@ -27,6 +27,8 @@
  */
 namespace ultimate\page;
 use wcf\page\AbstractCachedListPage;
+use wcf\system\clipboard\ClipboardHandler;
+use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 
 /**
@@ -107,6 +109,36 @@ class ContentListPage extends AbstractCachedListPage implements IEditSuitePage {
 	public $objectDecoratorClass = '\ultimate\data\content\TaggedContent';
 	
 	/**
+	 * The url.
+	 * @var	string
+	 */
+	protected $url = '';
+	
+	/**
+	 * If given only contents associated with this category are loaded.
+	 * @var	integer
+	 */
+	protected $categoryID = 0;
+	
+	/**
+	 * If given only contents associated with this tag are loaded.
+	 * @var	integer
+	 */
+	protected $tagID = 0;
+	
+	/**
+	 * Contains a temporarily saved sort field.
+	 * @var string
+	 */
+	protected $tempSortField = '';
+	
+	/**
+	 * Contains a temporarily saved sort order.
+	 * @var string
+	 */
+	protected $tempSortOrder = '';
+	
+	/**
 	 * A list of active EditSuite menu items.
 	 * @var string[]
 	 */
@@ -116,6 +148,102 @@ class ContentListPage extends AbstractCachedListPage implements IEditSuitePage {
 	);
 	
 	/**
+	 * Reads parameters.
+	 */
+	public function readParameters() {
+		parent::readParameters();
+	
+		// these two are exclusive to each other
+		// don't use both at the same time
+		if (isset($_REQUEST['categoryID'])) $this->categoryID = intval($_REQUEST['categoryID']);
+		if (isset($_REQUEST['tagID'])) $this->tagID = intval($_REQUEST['tagID']);
+	}
+	
+	/**
+	 * Reads data.
+	 */
+	public function readData() {
+		parent::readData();
+		$this->url = LinkHandler::getInstance()->getLink('ContentList', array(), 'action='.rawurlencode($this->action).'&pageNo='.$this->pageNo.'&sortField='.$this->sortField.'&sortOrder='.$this->sortOrder);
+		// save the items count
+		$items = $this->items;
+	
+		// if no category id and no tag id specified, proceed as always
+		if (!$this->categoryID && !$this->tagID) {
+			return;
+		} else if ($this->categoryID) {
+			// if category id provided, change object variables and load the new cache
+			$this->cacheBuilderClassName = '\ultimate\system\cache\builder\ContentCategoryCacheBuilder';
+			$this->cacheIndex = 'contentsToCategoryID';
+				
+			$this->loadCache();
+			$this->objects = $this->objects[$this->categoryID];
+			$this->calculateNumberOfPages();
+			$this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
+		}
+		// both category id and tag id are provided, the category id wins
+		else if ($this->tagID) {
+			// if tag id provided, change object variables and load the new cache
+			$this->cacheBuilderClassName = '\ultimate\system\cache\builder\ContentTagCacheBuilder';
+			$this->cacheIndex = 'contentsToTagID';
+				
+			$this->loadCache();
+			$this->objects = $this->objects[$this->tagID];
+			$this->calculateNumberOfPages();
+			$this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
+		}
+		else return; // shouldn't be called anyway
+	
+		// restore old items count
+		$this->items = $items;
+	}
+	
+	/**
+	 * Validates the sort field.
+	 *
+	 * Validates the sort field and sorts the array if the sort field is contentAuthor.
+	 */
+	public function validateSortField() {
+		parent::validateSortField();
+		if ($this->sortField == 'contentAuthor') {
+			$contents = $this->objects;
+			$newContents = array();
+			// get array with usernames
+			/* @var $content \ultimate\data\content\Content */
+			foreach ($contents as $contentID => $content) {
+				$newContents[$content->__get('author')->__get('username')] = $content;
+			}
+			// actually sort the array
+			if ($this->sortOrder == 'ASC') ksort($newContents);
+			else krsort($newContents);
+			// refill the sorted values into the original array
+			foreach ($newContents as $authorName => $content) {
+				$contents[$content->__get('contentID')] = $content;
+			}
+			// return the sorted array
+			$this->objects = $contents;
+			$this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
+				
+			// refill sort values with default values to prevent a second sort process
+			$this->tempSortField = $this->sortField;
+			$this->tempSortOrder = $this->sortOrder;
+			$this->sortField = $this->defaultSortField;
+			$this->sortOrder = $this->defaultSortOrder;
+		}
+	}
+	
+	/**
+	 * Loads the cache.
+	 *
+	 * @param	string	$path
+	 *
+	 * @see \wcf\page\AbstractCachedListPage::loadCache
+	 */
+	public function loadCache($path = ULTIMATE_DIR) {
+		parent::loadCache($path);
+	}
+	
+	/**
 	 * @see \ultimate\page\IEditSuitePage::getActiveMenuItems()
 	 */
 	public function getActiveMenuItems() {
@@ -123,13 +251,42 @@ class ContentListPage extends AbstractCachedListPage implements IEditSuitePage {
 	}
 	
 	/**
+	 * @see \ultimate\page\IEditSuitePage::getJavascript()
+	 */
+	public function getJavascript() {
+		$this->readData();
+		if (!empty($this->tempSortField)) $this->sortField = $this->tempSortField;
+		if (!empty($this->tempSortOrder)) $this->sortOrder = $this->tempSortOrder;
+		
+		parent::assignVariables();
+		
+		WCF::getTPL()->assign(array(
+			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems()
+		));
+		$result = WCF::getTPL()->fetch('__editSuiteJS.ContentListPage', 'ultimate');
+		return $result;
+	}
+	
+	/**
 	 * @see \wcf\page\AbstractCachedListPage::assignVariables()
 	 */
 	public function assignVariables() {
+		// reset sort field and order to temporarily saved values
+		if (!empty($this->tempSortField)) $this->sortField = $this->tempSortField;
+		if (!empty($this->tempSortOrder)) $this->sortOrder = $this->tempSortOrder;
+		
 		parent::assignVariables();
+		
+		WCF::getTPL()->assign(array(
+			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(),
+			'url' => $this->url,
+			'timeNow' => TIME_NOW
+		));
+		
 		WCF::getTPL()->assign(array(
 			'activeMenuItems' => $this->activeMenuItems,
 			'pageContent' => WCF::getTPL()->fetch('__editSuite.ContentListPage', 'ultimate'),
+			'pageJS' => WCF::getTPL()->fetch('__editSuiteJS.ContentListPage', 'ultimate'),
 			'initialController' => 'ContentListPage',
 			'initialRequestType' => 'page'
 		));

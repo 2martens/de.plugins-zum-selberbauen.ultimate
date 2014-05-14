@@ -44,4 +44,11 @@ interface IEditSuitePage {
 	 * @return	string[]
 	 */
 	public function getActiveMenuItems();
+	
+	/**
+	 * Returns the fetched javascript template.
+	 * 
+	 * @return	string
+	 */
+	public function getJavascript();
 }

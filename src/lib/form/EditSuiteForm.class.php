@@ -92,6 +92,13 @@ class EditSuiteForm extends AbstractForm implements IEditSuitePage {
 	}
 	
 	/**
+	 * @see \ultimate\page\IEditSuitePage::getJavascript()
+	 */
+	public function getJavascript() {
+		return WCF::getTPL()->fetch('__editSuiteJS.Main', 'ultimate');
+	}
+	
+	/**
 	 * Assigns variables to the template engine.
 	 */
 	public function assignVariables() {
@@ -99,6 +106,7 @@ class EditSuiteForm extends AbstractForm implements IEditSuitePage {
 		WCF::getTPL()->assign(array(
 			'activeMenuItems' => $this->activeMenuItems,
 			'pageContent' => WCF::getTPL()->fetch('__editSuite.Main', 'ultimate'),
+			'pageJS' => WCF::getTPL()->fetch('__editSuiteJS.Main', 'ultimate'),
 			'initialController' => 'EditSuiteForm',
 			'initialRequestType' => 'form'
 		));

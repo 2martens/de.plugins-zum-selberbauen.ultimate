@@ -16,6 +16,7 @@
 			<showorder>1</showorder>
 			<pages>
 				<page><![CDATA[ultimate\acp\page\UltimateContentListPage]]></page>
+				<page><![CDATA[ultimate\page\ContentListPage]]></page>
 			</pages>
 		</action>
 		<action name="deleteContent">
@@ -23,6 +24,7 @@
 			<showorder>2</showorder>
 			<pages>
 				<page><![CDATA[ultimate\acp\page\UltimateContentListPage]]></page>
+				<page><![CDATA[ultimate\page\ContentListPage]]></page>
 			</pages>
 		</action>
 		<!-- /content actions -->
