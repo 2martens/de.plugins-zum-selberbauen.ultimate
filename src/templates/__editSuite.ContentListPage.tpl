@@ -1,4 +1,29 @@
-<div id="pageContent" data-controller="ContentListPage" data-request-type="page">
+<div id="pageContent" data-controller="ContentListPage" data-request-type="page" data-ajax-only="true">
+	<script data-relocate="true" type="text/javascript">
+		//<![CDATA[
+		$(function() {
+			var actionObjects = { };
+			actionObjects['de.plugins-zum-selberbauen.ultimate.content'] = { };
+			actionObjects['de.plugins-zum-selberbauen.ultimate.content']['delete'] = new ULTIMATE.Action.Delete('ultimate\\data\\content\\ContentAction', '.jsContentRow');
+			
+			WCF.Clipboard.init('ultimate\\page\\ContentListPage', {@$hasMarkedItems}, actionObjects);
+			
+			var options = { };
+			options.emptyMessage = '{lang}wcf.acp.ultimate.content.noContents{/lang}';
+			{if $pages > 1}
+				options.refreshPage = true;
+				{if $pages == $pageNo}
+					options.updatePageNumber = -1;
+				{/if}
+			{else}
+				options.emptyMessage = '{lang}wcf.acp.ultimate.content.noContents{/lang}';
+			{/if}
+			
+			new WCF.Table.EmptyTableHandler($('#contentTableContainer'), 'jsContentRow', options);
+		});
+		//]]>
+	</script>
+	
 	<header class="boxHeadline">
 		<h1>{lang}wcf.acp.ultimate.content.list{/lang}</h1>
 	</header>

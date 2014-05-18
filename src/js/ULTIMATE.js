@@ -51,6 +51,22 @@ ULTIMATE.Action.Delete = WCF.Action.Delete.extend({
 		var newCount = text - 1;
 		$('.counter').text(newCount);
 	},
+	
+	/**
+	 * Initializes available element containers.
+	 */
+	_initElements: function() {
+		var self = this;
+		$(this._containerSelector).each(function(index, container) {
+			var $container = $(container);
+			var $containerID = $container.wcfIdentify();
+			
+			$container.find(self._buttonSelector).click($.proxy(self._click, self));
+			if (!WCF.inArray($containerID, self._containers)) {
+				self._containers.push($containerID);
+			}
+		});
+	},
 });
 
 /**

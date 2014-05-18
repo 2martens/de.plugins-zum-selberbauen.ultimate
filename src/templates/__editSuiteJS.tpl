@@ -7,5 +7,7 @@
 {else}
 	<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath()}js/3rdParty/jquery.mobile-1.4.2{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
 {/if*}
+<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath()}js/WCF.Tagging{if !ENABLE_DEBUG_MODE}.min{/if}.js"></script>
 <script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
 <script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.EditSuite{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
+<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.Tagging{if !ENABLE_DEBUG_MODE}.min{/if}.js"></script>

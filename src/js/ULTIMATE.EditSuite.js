@@ -271,6 +271,9 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 				if (this._cachedData[$target.data('controller')]['jsAJAXOnly']) {
 					this._fireRequest($target.data('controller'), $target.data('requestType'), 'jsOnly');
 				}
+				else if (this._cachedData[$target.data('controller')]['ajaxOnly']) {
+					this._fireRequest($target.data('controller'), $target.data('requestType'), 'fullHTML');
+				}
 				else {
 					this._replaceHTML($target.data('controller'));
 				}
@@ -298,6 +301,9 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 					if (this._cachedData[controller]['jsAJAXOnly']) {
 						this._fireRequest(controller, requestType, 'jsOnly');
 					}
+					else if (this._cachedData[controller]['ajaxOnly']) {
+						this._fireRequest(controller, requestType, 'fullHTML');
+					}
 					else {
 						this._replaceHTML(controller);
 					}
@@ -321,7 +327,8 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 				+ '</div>',
 			activeMenuItems : this._sidebarMenu.getActiveMenuItems(),
 			js : $('#pageJS').html(),
-			jsAJAXOnly : $('#pageJS').data('ajaxOnly')
+			jsAJAXOnly : $('#pageJS').data('ajaxOnly'),
+			ajaxOnly : $('#pageContent').data('ajaxOnly')
 		};
 	},
 	
@@ -372,6 +379,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 		+ '</div>';
 		this._cachedData[data.controller]['js'] = $js.html();
 		this._cachedData[data.controller]['jsAJAXOnly'] = $js.data('ajaxOnly');
+		this._cachedData[data.controller]['ajaxOnly'] = $html.find('#pageContent').data('ajaxOnly');
 		this._replaceHTML(data.controller);
 	},
 	
@@ -397,11 +405,20 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	 * @param {String} controller
 	 */
 	_replaceHTML : function(controller) {
+		var script = $(this._cachedData[controller]['js']);
+		var scriptContent = script.html();
+		eval(scriptContent);
+		var rawFunctionName = 'init' + controller;
+		eval(rawFunctionName + '()');
+		
 		this._pageContainer.html(this._cachedData[controller]['html']);
-		this._pageJSContainer.html(this._cachedData[controller]['js']);
+//		this._pageJSContainer.html(this._cachedData[controller]['js']);
 		this._sidebarMenu.updateActiveItems(this._cachedData[controller]['activeMenuItems']);
-		if (typeof(initPage) === 'function') {
-			initPage();
-		}
+		
+		var script = $(this._cachedData[controller]['js']);
+		var scriptContent = script.html();
+		eval(scriptContent);
+		var rawFunctionName = 'postInit' + controller;
+		eval(rawFunctionName + '()');
 	}
 });
