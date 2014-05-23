@@ -127,6 +127,12 @@ class ContentListPage extends AbstractCachedListPage implements IEditSuitePage {
 	protected $tagID = 0;
 	
 	/**
+	 * If given only contents written by this author are loaded.
+	 * @var integer
+	 */
+	protected $authorID = 0;
+	
+	/**
 	 * Contains a temporarily saved sort field.
 	 * @var string
 	 */
@@ -157,6 +163,7 @@ class ContentListPage extends AbstractCachedListPage implements IEditSuitePage {
 		// don't use both at the same time
 		if (isset($_REQUEST['categoryID'])) $this->categoryID = intval($_REQUEST['categoryID']);
 		if (isset($_REQUEST['tagID'])) $this->tagID = intval($_REQUEST['tagID']);
+		if (isset($_REQUEST['authorID'])) $this->authorID = intval($_REQUEST['authorID']);
 	}
 	
 	/**
@@ -168,10 +175,15 @@ class ContentListPage extends AbstractCachedListPage implements IEditSuitePage {
 		// save the items count
 		$items = $this->items;
 	
-		// if no category id and no tag id specified, proceed as always
-		if (!$this->categoryID && !$this->tagID) {
+		// if no category id, no tag id and no author id specified, proceed as always
+		if (!$this->categoryID && !$this->tagID && !$this->authorID) {
 			return;
-		} else if ($this->categoryID) {
+		}
+		else if ($this->authorID) {
+			// TODO ContentAuthorCache
+			return;
+		}
+		else if ($this->categoryID) {
 			// if category id provided, change object variables and load the new cache
 			$this->cacheBuilderClassName = '\ultimate\system\cache\builder\ContentCategoryCacheBuilder';
 			$this->cacheIndex = 'contentsToCategoryID';
@@ -181,7 +193,7 @@ class ContentListPage extends AbstractCachedListPage implements IEditSuitePage {
 			$this->calculateNumberOfPages();
 			$this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
 		}
-		// both category id and tag id are provided, the category id wins
+		// if both category id and tag id are provided, the category id wins
 		else if ($this->tagID) {
 			// if tag id provided, change object variables and load the new cache
 			$this->cacheBuilderClassName = '\ultimate\system\cache\builder\ContentTagCacheBuilder';

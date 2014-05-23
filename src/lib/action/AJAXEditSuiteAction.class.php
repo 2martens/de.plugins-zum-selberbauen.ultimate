@@ -75,6 +75,12 @@ class AJAXEditSuiteAction extends AJAXInvokeAction {
 	public $requestType = '';
 	
 	/**
+	 * The query data.
+	 * @var (string|int)[]
+	 */
+	public $queryData = array();
+	
+	/**
 	 * Reads the given parameters.
 	 */
 	public function readParameters() {
@@ -83,6 +89,12 @@ class AJAXEditSuiteAction extends AJAXInvokeAction {
 		if (isset($_POST['actionName'])) $this->actionName = StringUtil::trim($_POST['actionName']);
 		if (isset($_POST['controller'])) $this->controller = StringUtil::trim($_POST['controller']);
 		if (isset($_POST['requestType'])) $this->requestType = StringUtil::trim($_POST['requestType']);
+		if (isset($_POST['queryData'])) $this->queryData = $_POST['queryData'];
+		
+		// saving the query data into the superglobal $_GET variable
+		foreach ($this->queryData as $key => $value) {
+			$_REQUEST[$key] = $value;
+		}
 	}
 	
 	/**

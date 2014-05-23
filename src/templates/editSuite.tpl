@@ -14,9 +14,6 @@
 			var $activeMenuItems = [{implode from=$activeMenuItems item=_menuItem}'{$_menuItem}'{/implode}];
 			var $sidebarMenu = new ULTIMATE.EditSuite.SidebarMenu($activeMenuItems);
 			new ULTIMATE.EditSuite.AJAXLoading('pageContentContainer', 'pageJSContainer', $sidebarMenu);
-			if (typeof(initPage) === 'function') {
-				//initPage();
-			}
 		});
 	//]]>
 </script>

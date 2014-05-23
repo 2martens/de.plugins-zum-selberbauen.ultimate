@@ -125,19 +125,19 @@ ULTIMATE.EditSuite.SidebarMenu = Class.extend({
 });
 
 /**
- * Dictionary for Javascript code that has to be executed
- * after accessing a controller.
+ * Dictionary for identifiers of anchors, that should be handled
+ * via AJAX.
  * 
  * @see WCF.Dictionary
  * @since version 1.1.0
  */
-ULTIMATE.EditSuite.AJAXJavascript = {
+ULTIMATE.EditSuite.AJAXIdentifiers = {
 	/**
-	 * Contains the javascript codes.
+	 * Contains the identifiers.
 	 * 
 	 * @type WCF.Dictionary
 	 */
-	_javascript : {},
+	_identifiers : new WCF.Dictionary(),
 	
 	/**
 	 * @param {String}
@@ -147,25 +147,25 @@ ULTIMATE.EditSuite.AJAXJavascript = {
 	 * @see WCF.Dictionary.add()
 	 */
 	add : function(key, value) {
-		this._variables.add(key, value);
+		this._identifiers.add(key, value);
 	},
 
 	/**
 	 * @see WCF.Dictionary.addObject()
 	 */
 	addObject : function(object) {
-		this._variables.addObject(object);
+		this._identifiers.addObject(object);
 	},
 
 	/**
-	 * Retrieves a variable.
+	 * Retrieves an identifier.
 	 * 
 	 * @param {String}
 	 *            key
 	 * @return {String}
 	 */
 	get : function(key) {
-		var value = this._variables.get(key);
+		var value = this._identifiers.get(key);
 
 		if (value === null) {
 			// return key again
@@ -245,74 +245,90 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 		    url: 'index.php/AJAXEditSuite/?t=' + SECURITY_TOKEN + SID_ARG_2ND
 		});
 		this._sidebarMenu = sidebarMenu;
-		this._initSidebarLinks();
+		this._initLinks();
 		this._initCache();
 	},
 	
 	/**
-	 * Initializes the sidebar links.
+	 * Initializes the links.
 	 */
-	_initSidebarLinks : function() {
-		$('nav.menuGroupItems a').on('click', $.proxy(function(event) {
-			var $target= $(event.currentTarget);
-			// Prevent the usual navigation behavior
-			event.preventDefault();
-			
-			// change address bar
-			var href = $target.attr('href');
-			href = href.replace(/^.*\/\/[^\/]+/, '')
-			var stateObject = {
-				controller: $target.data('controller'),
-				requestType: $target.data('requestType')
-			};
-			history.pushState(stateObject, '', href);
-			// fire request
-			if (this._cachedData[$target.data('controller')] != null) {
-				if (this._cachedData[$target.data('controller')]['jsAJAXOnly']) {
-					this._fireRequest($target.data('controller'), $target.data('requestType'), 'jsOnly');
+	_initLinks : function() {
+		$('nav.menuGroupItems a').on('click', $.proxy(this._eventClick, this));
+		$('#pageContentContainer').on('click', '#pageContent a', $.proxy(this._eventClick, this));
+		$(window).on('popstate', $.proxy(this._eventPopstate, this));
+	},
+	
+	/**
+	 * Event method for anchor clicks.
+	 * 
+	 * @param {jQuery} event
+	 */
+	_eventClick : function(event) {
+		var $target= $(event.currentTarget);
+		// Prevent the usual navigation behavior
+		event.preventDefault();
+		
+		// change address bar
+		var href = $target.attr('href');
+		href = href.replace(/^.*\/\/[^\/]+/, '')
+		var stateObject = {
+			controller: $target.data('controller'),
+			requestType: $target.data('requestType')
+		};
+		history.pushState(stateObject, '', href);
+		
+		// fire request
+		if (this._cachedData[$target.data('controller')] != null) {
+			if (this._cachedData[$target.data('controller')]['jsAJAXOnly']) {
+				this._fireRequest($target.data('controller'), $target.data('requestType'), href, 'jsOnly');
+			}
+			else if (this._cachedData[$target.data('controller')]['ajaxOnly']) {
+				this._fireRequest($target.data('controller'), $target.data('requestType'), href, 'fullHTML');
+			}
+			else {
+				this._replaceHTML($target.data('controller'));
+			}
+		}
+		else {
+			this._fireRequest($target.data('controller'), $target.data('requestType'), href, 'fullHTML');
+		}
+	},
+	
+	/**
+	 * Event method for popstate event.
+	 * 
+	 * @param {jQuery} event
+	 */
+	_eventPopstate : function(event) {
+		var controller = null;
+		var requestType = null;
+		
+		if (event.originalEvent.state == null) {
+			controller = this._pageContainer.data('initialController');
+			requestType = this._pageContainer.data('initialRequestType');
+		}
+		else if (event.originalEvent.state.controller != null) {
+			controller = event.originalEvent.state.controller;
+			requestType = event.originalEvent.state.requestType;
+		}
+		
+		if (controller != null) {
+			// load the content
+			if (this._cachedData[controller] != null) {
+				if (this._cachedData[controller]['jsAJAXOnly']) {
+					this._fireRequest(controller, requestType, 'jsOnly');
 				}
-				else if (this._cachedData[$target.data('controller')]['ajaxOnly']) {
-					this._fireRequest($target.data('controller'), $target.data('requestType'), 'fullHTML');
+				else if (this._cachedData[controller]['ajaxOnly']) {
+					this._fireRequest(controller, requestType, 'fullHTML');
 				}
 				else {
-					this._replaceHTML($target.data('controller'));
+					this._replaceHTML(controller);
 				}
 			}
 			else {
-				this._fireRequest($target.data('controller'), $target.data('requestType'), 'fullHTML');
+				this._fireRequest(controller, requestType, 'fullHTML');
 			}
-		}, this));
-		$(window).on('popstate', $.proxy(function(event) {
-			var controller = null;
-			var requestType = null;
-			
-			if (event.originalEvent.state == null) {
-				controller = this._pageContainer.data('initialController');
-				requestType = this._pageContainer.data('initialRequestType');
-			}
-			else if (event.originalEvent.state.controller != null) {
-				controller = event.originalEvent.state.controller;
-				requestType = event.originalEvent.state.requestType;
-			}
-			
-			if (controller != null) {
-				// load the content
-				if (this._cachedData[controller] != null) {
-					if (this._cachedData[controller]['jsAJAXOnly']) {
-						this._fireRequest(controller, requestType, 'jsOnly');
-					}
-					else if (this._cachedData[controller]['ajaxOnly']) {
-						this._fireRequest(controller, requestType, 'fullHTML');
-					}
-					else {
-						this._replaceHTML(controller);
-					}
-				}
-				else {
-					this._fireRequest(controller, requestType, 'fullHTML');
-				}
-			}
-		}, this));
+		}
 	},
 	
 	/**
@@ -337,14 +353,20 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	 * 
 	 * @param {String} controller
 	 * @param {String} requestType
+	 * @param {String} url
 	 * @param {String} actionName
 	 */
-	_fireRequest : function(controller, requestType, actionName) {
-		 // build proxy data
+	_fireRequest : function(controller, requestType, url, actionName) {
+		// get query data
+		var queryData = url.substr(url.indexOf('?') + 1).split('&');
+		var queryDataObject = $.getQueryData(queryData);
+		
+		// build proxy data
 	    var $data = $.extend(true, {
 	        controller: controller,
 	        requestType: requestType,
-	        actionName: actionName
+	        actionName: actionName,
+	        queryData: queryDataObject
 	    }, {});
 	    
 	    if (actionName == 'jsOnly') {
