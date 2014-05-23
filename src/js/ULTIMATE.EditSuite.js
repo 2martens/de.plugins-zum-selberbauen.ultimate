@@ -250,7 +250,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	},
 	
 	/**
-	 * Initializes the sidebar links with help of jQuery.mobile
+	 * Initializes the sidebar links.
 	 */
 	_initSidebarLinks : function() {
 		$('nav.menuGroupItems a').on('click', $.proxy(function(event) {
