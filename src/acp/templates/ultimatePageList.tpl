@@ -52,8 +52,8 @@
 				<th class="columnID{if $sortField == 'pageID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link application='ultimate' controller='UltimatePageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=pageID&sortOrder={if $sortField == 'pageID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
 				<th class="columnTitle{if $sortField == 'pageTitle'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimatePageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=pageTitle&sortOrder={if $sortField == 'pageTitle' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.page.title{/lang}</a></th>
 				<th class="columnAuthor{if $sortField == 'pageAuthor'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimatePageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=pageAuthor&sortOrder={if $sortField == 'pageAuthor' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.author{/lang}</a></th>
-				<th class="columnDate{if $sortField == 'publishDate'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimatePageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=publishDate&sortOrder={if $sortField == 'publishDate' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.publishDateList{/lang}</a></th>
-				<th class="columnLastModified{if $sortField == 'lastModified'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimatePageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=lastModified&sortOrder={if $sortField == 'lastModified' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.lastModified{/lang}</a></th>
+				<th class="columnDate dateColumn{if $sortField == 'publishDate'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimatePageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=publishDate&sortOrder={if $sortField == 'publishDate' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.publishDateList{/lang}</a></th>
+				<th class="columnLastModified dateColumn{if $sortField == 'lastModified'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimatePageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=lastModified&sortOrder={if $sortField == 'lastModified' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.lastModified{/lang}</a></th>
 				{event name='headColumns'}
 			</tr>
 		</thead>
@@ -82,11 +82,8 @@
 						<td class="columnID"><p>{@$page->pageID}</p></td>
 						<td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditPage')}<a title="{lang}wcf.acp.ultimate.page.edit{/lang}" href="{link application='ultimate' controller='UltimatePageEdit' id=$page->pageID}{/link}">{lang}{@$page->pageTitle}{/lang}</a>{else}{lang}{@$page->pageTitle}{/lang}{/if}</p></td>
 						<td class="columnAuthor"><p>{if $__wcf->session->getPermission('admin.user.canEditUser')}<a title="{lang}wcf.acp.user.edit{/lang}" href="{link controller='UserEdit' id=$page->authorID}{/link}">{@$page->author->username}</a>{else}{@$page->author->username}{/if}</p></td>
-						{capture assign='englishAccent'}{@ULTIMATE_GENERAL_ENGLISHDATEFORMAT}{/capture}
-						{capture assign='publishDateFormat'}{lang englishAccent=$englishAccent}ultimate.date.dateFormat{/lang}{/capture}
-						{assign var='publishDateFormat' value=$publishDateFormat}
-						<td class="columnDate"><p>{if $page->publishDate}{@$page->publishDate|dateExtended:$publishDateFormat}{else}{/if}</p></td>
-						<td class="columnLastModified"><p>{@$page->lastModified|time}</p></td>
+						<td class="columnDate dateColumn"><p>{if $page->publishDate}{@$page->publishDate|time}{/if}</p></td>
+						<td class="columnLastModified dateColumn"><p>{@$page->lastModified|time}</p></td>
 						
 						{event name='columns'}
 					</tr>				
