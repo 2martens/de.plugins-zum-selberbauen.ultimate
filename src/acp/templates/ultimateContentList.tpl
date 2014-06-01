@@ -54,8 +54,8 @@
 				<th class="columnAuthor{if $sortField == 'contentAuthor'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimateContentList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=contentAuthor&sortOrder={if $sortField == 'contentAuthor' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.author{/lang}</a></th>
 				<th class="columnCategories">{lang}wcf.acp.ultimate.content.categories{/lang}</th>
 				<th class="columnTags">{lang}wcf.acp.ultimate.content.tags{/lang}</th>
-				<th class="columnDate{if $sortField == 'publishDate'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimateContentList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=publishDate&sortOrder={if $sortField == 'publishDate' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.publishDateList{/lang}</a></th>
-				<th class="columnLastModified{if $sortField == 'lastModified'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimateContentList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=lastModified&sortOrder={if $sortField == 'lastModified' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.lastModified{/lang}</a></th>
+				<th class="columnDate dateColumn{if $sortField == 'publishDate'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimateContentList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=publishDate&sortOrder={if $sortField == 'publishDate' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.publishDateList{/lang}</a></th>
+				<th class="columnLastModified dateColumn{if $sortField == 'lastModified'} active {@$sortOrder}{/if}"><a href="{link application='ultimate' controller='UltimateContentList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=lastModified&sortOrder={if $sortField == 'lastModified' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.lastModified{/lang}</a></th>
 				 
 				{event name='headColumns'}
 			</tr>
@@ -96,11 +96,8 @@
 							</p>
 						</td>
 						
-						{capture assign='englishAccent'}{@ULTIMATE_GENERAL_ENGLISHDATEFORMAT}{/capture}
-						{capture assign='publishDateFormat'}{lang englishAccent=$englishAccent}ultimate.date.dateFormat{/lang}{/capture}
-						{assign var='publishDateFormat' value=$publishDateFormat}
-						<td class="columnDate"><p>{if $content->publishDate > 0 && $content->publishDate <= $timeNow && $content->status == 3}{@$content->publishDate|dateExtended:$publishDateFormat}{else}{/if}</p></td>
-						<td class="columnLastModified"><p>{@$content->lastModified|time}</p></td>
+						<td class="columnDate dateColumn"><p>{if $content->publishDate > 0 && $content->publishDate <= $timeNow && $content->status == 3}{@$content->publishDate|time}{else}{/if}</p></td>
+						<td class="columnLastModified dateColumn"><p>{@$content->lastModified|time}</p></td>
 						
 						{event name='columns'}
 					</tr>
