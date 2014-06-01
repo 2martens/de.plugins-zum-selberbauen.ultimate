@@ -106,11 +106,11 @@
 				</dd>
 				<dd class="inputInteger">
 					<label for="numberOfContents_{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.contentTab.query.numberOfContents.description{/lang}">{lang}wcf.acp.ultimate.template.contentTab.query.numberOfContents{/lang}</label>
-					<input type="number" step="1" min="1" max="{$contents|count}" id="numberOfContents_{$blockID}" name="numberOfContents" value="{$numberOfContents}" data-block-id="{$blockID}" data-is-block="true" />
+					<input type="number" step="1" min="1" id="numberOfContents_{$blockID}" name="numberOfContents" value="{$numberOfContents}" data-block-id="{$blockID}" data-is-block="true" />
 				</dd>
 				<dd class="inputInteger">
 					<label for="offset_{$blockID}" class="jsTooltip" title="{lang}wcf.acp.ultimate.template.contentTab.query.offset.description{/lang}">{lang}wcf.acp.ultimate.template.contentTab.query.offset{/lang}</label>
-					<input type="number" step="1" min="0" max="{$contents|count - 1}" id="offset_{$blockID}" name="offset" value="{$offset}" data-block-id="{$blockID}" data-is-block="true" />
+					<input type="number" step="1" min="0" id="offset_{$blockID}" name="offset" value="{$offset}" data-block-id="{$blockID}" data-is-block="true" />
 				</dd>
 				<dd class="inputSelect">
 					<label for="sortField_{$blockID}">{lang}wcf.acp.ultimate.template.contentTab.query.sortField{/lang}</label>
