@@ -359,7 +359,7 @@ class ContentBlockType extends AbstractBlockType {
 			$authors = $this->options['authors'];
 			$authorsOut = array();
 			foreach ($authors as $authorID) {
-				$authorOut[$authorID] = $this->authors[$authorID];
+				$authorsOut[$authorID] = $this->authors[$authorID];
 			}
 			$allowedContents = array();
 			foreach ($this->contents as $contentID => $content) {
@@ -495,7 +495,7 @@ class ContentBlockType extends AbstractBlockType {
 			// get category output
 			$categories = $content->__get('categories');
 			$categoryOutput = '';
-			foreach ($categories as $categoryID => $category) {
+			foreach ($categories as $category) {
 				if (!empty($categoryOutput)) $categoryOutput .= ', ';
 				$categoryOutput .= '<a href="'. UltimateLinkHandler::getInstance()->getLink(null, array(
 					'categorySlug' => $category->__get('categorySlug')
@@ -508,7 +508,7 @@ class ContentBlockType extends AbstractBlockType {
 			foreach ($tags as $languageID => $_tags) {
 				$_languageID = WCF::getSession()->getLanguageID();
 				if ($languageID != $_languageID) continue;
-				foreach ($_tags as $tagID => $tag) {
+				foreach ($_tags as $tag) {
 					if (!empty($tagOutput)) $tagOutput .= ', ';
 					$tagOutput .= '<a href="'. LinkHandler::getInstance()->getLink('Tag', array(
 						'tagSlug' => $tag->__get('tagSlug')
