@@ -359,7 +359,7 @@ class ContentBlockType extends AbstractBlockType {
 			$authors = $this->options['authors'];
 			$authorsOut = array();
 			foreach ($authors as $authorID) {
-				$authorOut[$authorID] = $this->authors[$authorID];
+				$authorsOut[$authorID] = $this->authors[$authorID];
 			}
 			$allowedContents = array();
 			foreach ($this->contents as $contentID => $content) {
