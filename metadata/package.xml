@@ -8,8 +8,8 @@
 		<packagedescription language="de-informal"><![CDATA[Ein WCF-kompatibles CMS.]]></packagedescription>
 		
 		<isapplication>1</isapplication>
-		<version>1.0.1</version>
-		<date>2014-03-22</date>
+		<version>1.0.2</version>
+		<date>2014-06-01</date>
 	</packageinformation>
 	
 	<authorinformation>
@@ -18,15 +18,15 @@
 	</authorinformation>
 	
 	<requiredpackages>
-		<requiredpackage minversion="2.0.4">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="2.0.4" file="requirements/com.woltlab.wcf.conversation.tar.gz">com.woltlab.wcf.conversation</requiredpackage>
+		<requiredpackage minversion="2.0.5">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="2.0.5" file="requirements/com.woltlab.wcf.conversation.tar.gz">com.woltlab.wcf.conversation</requiredpackage>
 		<requiredpackage minversion="1.0.0" file="requirements/de.plugins-zum-selberbauen.cachedList.tar.gz">de.plugins-zum-selberbauen.cachedList</requiredpackage>
 		<requiredpackage minversion="1.0.0" file="requirements/de.plugins-zum-selberbauen.messageACP.tar.gz">de.plugins-zum-selberbauen.messageACP</requiredpackage>
-		<requiredpackage minversion="1.0.0" file="requirements/de.plugins-zum-selberbauen.ultimateCore.tar.gz">de.plugins-zum-selberbauen.ultimateCore</requiredpackage>
+		<requiredpackage minversion="1.0.1" file="requirements/de.plugins-zum-selberbauen.ultimateCore.tar.gz">de.plugins-zum-selberbauen.ultimateCore</requiredpackage>
 	</requiredpackages>
 	
 	<optionalpackages>
-		<optionalpackage minversion="2.0.0" file="optional/com.woltlab.wcf.legalNotice.tar.gz">com.woltlab.wcf.legalNotice</optionalpackage>
+		<optionalpackage minversion="2.0.1" file="optional/com.woltlab.wcf.legalNotice.tar.gz">com.woltlab.wcf.legalNotice</optionalpackage>
 	</optionalpackages>
 	
 	<instructions type="install">
@@ -61,7 +61,8 @@
 		<!-- /xml and rest -->
 	</instructions>
 	
-	<instructions type="update" fromversion="1.0.0">
-		<instruction type="templateListener">templateListener_update.100.xml</instruction>
+	<instructions type="update" fromversion="1.0.1">
+		<instruction type="acpTemplate">acptemplates_update.102.tar</instruction>
+		<instruction type="file">files_update.102.tar</instruction>
 	</instructions>
 </package>
