@@ -93,7 +93,7 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 	 * If true, multilingualism is enabled.
 	 * @var boolean
 	 */
-	public $enableMultilangualism = true;
+	public $enableMultilingualism = true;
 	
 	/**
 	 * If 1, the signature setting is shown.
@@ -451,7 +451,6 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 		$this->visibility = 'public';
 		I18nHandler::getInstance()->reset();
 		$this->categoryIDs = $this->groupIDs = array();
-		$this->tags = '';
 		$this->tagsI18n = array();
 		$this->formatDate();
 	}
