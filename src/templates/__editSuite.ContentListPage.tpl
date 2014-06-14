@@ -98,11 +98,8 @@
 							</p>
 						</td>
 						
-						{capture assign='englishAccent'}{@ULTIMATE_GENERAL_ENGLISHDATEFORMAT}{/capture}
-						{capture assign='publishDateFormat'}{lang englishAccent=$englishAccent}ultimate.date.dateFormat{/lang}{/capture}
-						{assign var='publishDateFormat' value=$publishDateFormat}
-						<td class="columnDate"><p>{if $content->publishDate > 0 && $content->publishDate <= $timeNow && $content->status == 3}{@$content->publishDate|dateExtended:$publishDateFormat}{else}{/if}</p></td>
-						<td class="columnLastModified"><p>{@$content->lastModified|time}</p></td>
+						<td class="columnDate dateColumn"><p>{if $content->publishDate > 0 && $content->publishDate <= $timeNow && $content->status == 3}{@$content->publishDate|time}{else}{/if}</p></td>
+						<td class="columnLastModified dateColumn"><p>{@$content->lastModified|time}</p></td>
 						
 						{event name='columns'}
 					</tr>
