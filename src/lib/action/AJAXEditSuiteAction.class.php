@@ -59,7 +59,7 @@ class AJAXEditSuiteAction extends AJAXInvokeAction {
 	/**
 	 * needed permissions to execute this action
 	 * @var	string[]
-	*/
+	 */
 	public $neededPermissions = array();
 	
 	/**
@@ -124,7 +124,8 @@ class AJAXEditSuiteAction extends AJAXInvokeAction {
 	/**
 	 * Performs a full HTML request.
 	 * 
-	 * @param	\ultimate\page\IEditSuitePage	$controllerObj
+	 * @param	\ultimate\page\IEditSuitePage	$controllerObj object from class that implements the given interface and
+	 *                                                         inherits from \wcf\page\AbstractPage
 	 */
 	protected function fullHTML($controllerObj) {
 		$tmpPost = $_POST;
