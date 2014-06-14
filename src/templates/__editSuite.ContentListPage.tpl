@@ -6,7 +6,7 @@
 			actionObjects['de.plugins-zum-selberbauen.ultimate.content'] = { };
 			actionObjects['de.plugins-zum-selberbauen.ultimate.content']['delete'] = new ULTIMATE.Action.Delete('ultimate\\data\\content\\ContentAction', '.jsContentRow');
 			
-			WCF.Clipboard.init('ultimate\\page\\ContentListPage', {@$hasMarkedItems}, actionObjects);
+			ULTIMATE.EditSuite.Clipboard.init('ultimate\\page\\ContentListPage', {@$hasMarkedItems}, actionObjects);
 			
 			var options = { };
 			options.emptyMessage = '{lang}wcf.acp.ultimate.content.noContents{/lang}';
