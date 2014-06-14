@@ -258,7 +258,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	/**
 	 * Event method for anchor clicks.
 	 * 
-	 * @param {jQuery} event
+	 * @param {Event} event
 	 */
 	_eventClick : function(event) {
 		var $target= $(event.currentTarget);
@@ -294,7 +294,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	/**
 	 * Event method for popstate event.
 	 * 
-	 * @param {jQuery} event
+	 * @param {jQuery.Event} event
 	 */
 	_eventPopstate : function(event) {
 		var controller = null;
