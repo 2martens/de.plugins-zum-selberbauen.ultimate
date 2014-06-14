@@ -468,64 +468,68 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 ULTIMATE.EditSuite.Clipboard = {
     /**
      * action proxy object
-     * @var	WCF.Action.Proxy
+     * @type WCF.Action.Proxy
      */
     _actionProxy : null,
 
     /**
      * action objects
-     * @var	object
+     * @type Object
      */
     _actionObjects : {},
 
     /**
      * list of clipboard containers
-     * @var	jQuery
+     * @type jQuery
      */
     _containers : null,
 
     /**
      * container meta data
-     * @var	object
+     * @type Object
      */
     _containerData : { },
 
     /**
      * user has marked items
-     * @var	boolean
+     * @type Boolean
      */
     _hasMarkedItems : false,
 
     /**
      * list of ids of marked objects grouped by object type
-     * @var	object
+     * @type Object
      */
     _markedObjectIDs : { },
 
     /**
      * current page
-     * @var	string
+     * @type String
      */
     _page : '',
 
     /**
      * current page's object id
-     * @var	integer
+     * @type Number
      */
     _pageObjectID : 0,
 
     /**
      * proxy object
-     * @var	WCF.Action.Proxy
+     * @type WCF.Action.Proxy
      */
     _proxy : null,
 
     /**
      * list of elements already tracked for clipboard actions
-     * @var	object
+     * @type Object
      */
     _trackedElements : { },
-    
+
+    /**
+     * counter for markAll calls
+     * @type Number
+     */
     _markAllCalls : 0,
 
     /**
@@ -847,7 +851,7 @@ ULTIMATE.EditSuite.Clipboard = {
             objectIDs : objectIDs,
             pageClassName : this._page,
             pageObjectID : this._pageObjectID,
-            type : type
+           type : type
         });
         this._proxy.sendRequest();
     },
@@ -919,7 +923,7 @@ ULTIMATE.EditSuite.Clipboard = {
                 $('<li><span>' + WCF.Language.get('wcf.clipboard.item.unmarkAll') + '</span></li>').appendTo($itemList).click($.proxy(function() {
                     this._proxy.setOption('data', {
                         action : 'unmarkAll',
-                        type : $typeName
+                       type : $typeName
                     });
                     this._proxy.setOption('success', $.proxy(function(data, textStatus, jqXHR) {
                         this._containers.each($.proxy(function(index, container) {
@@ -942,6 +946,7 @@ ULTIMATE.EditSuite.Clipboard = {
                 WCF.Dropdown.initDropdown($label.children('.dropdownToggle'), false);
             }
         }
+        // reset call count to 0
         this._markAllCalls = 0;
     },
 
