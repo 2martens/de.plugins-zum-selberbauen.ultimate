@@ -48,7 +48,7 @@ ULTIMATE.Content.InlineEditor = WCF.Message.InlineEditor.extend({
 		this._proxy.sendRequest();
 		
 		this._hideEditor();
-	},
+	}
 });
 
 /**
@@ -101,9 +101,9 @@ ULTIMATE.Content.Like = WCF.Like.extend({
 	/**
 	 * Sets button active state.
 	 * 
-	 * @param 	jquery		likeButton
-	 * @param 	jquery		dislikeButton
-	 * @param	integer		likeStatus
+	 * @param {jQuery} likeButton
+	 * @param {jQuery} dislikeButton
+	 * @param {Number} likeStatus
 	 */
 	_setActiveState: function(likeButton, dislikeButton, likeStatus) {
 		likeButton = likeButton.find('.button').removeClass('active');
