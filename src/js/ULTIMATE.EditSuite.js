@@ -18,6 +18,7 @@ ULTIMATE.EditSuite = {};
  * Copied mainly from WCF.ACP.Menu
  * 
  * @param {Array} activeMenuItems
+ * @constructor
  */
 ULTIMATE.EditSuite.SidebarMenu = Class.extend({
 	/**
@@ -179,12 +180,14 @@ ULTIMATE.EditSuite.AJAXIdentifiers = {
  * @param {String} pageContainer
  * @param {String} pageJSContainer
  * @param {ULTIMATE.EditSuite.SidebarMenu} menuSidebar
+ * @constructor
  */
 ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	/**
 	 * Contains the page container.
 	 * 
 	 * @type jQuery
+     * @private
 	 */
 	_pageContainer : null,
 	
@@ -192,6 +195,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	 * Contains the page JS container.
 	 * 
 	 * @type jQuery
+     * @private
 	 */
 	_pageJSContainer : null,
 	
@@ -199,6 +203,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	 * Contains a proxy object.
 	 * 
 	 * @type WCF.Action.Proxy
+     * @private
 	 */
     _proxy : null,
     
@@ -206,6 +211,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	 * Contains a proxy object for jSAJAX requests.
 	 * 
 	 * @type WCF.Action.Proxy
+     * @private
 	 */
     _jsAJAXProxy : null,
     
@@ -213,12 +219,14 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
      * Contains the cached HTML.
      * 
      * @type Object
+     * @private
      */
     _cachedData : {},
     
     /**
      * Contains the sidebar menu.
      * @type ULTIMATE.EditSuite.SidebarMenu
+     * @private
      */
     _sidebarMenu : null,
 	
@@ -228,6 +236,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	 * @param {String} pageContainer
 	 * @param {String} pageJSContainer
 	 * @param {ULTIMATE.EditSuite.SidebarMenu} sidebarMenu
+     * @public
 	 */
 	init : function(pageContainer, pageJSContainer, sidebarMenu) {
 		this._pageContainer = $('#' + $.wcfEscapeID(pageContainer));
@@ -248,6 +257,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	
 	/**
 	 * Initializes the links.
+     * @private
 	 */
 	_initLinks : function() {
 		$('nav.menuGroupItems a').on('click', $.proxy(this._eventClick, this));
@@ -259,6 +269,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	 * Event method for anchor clicks.
 	 * 
 	 * @param {Event} event
+     * @private
 	 */
 	_eventClick : function(event) {
 		var $target= $(event.currentTarget);
@@ -295,6 +306,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	 * Event method for popstate event.
 	 * 
 	 * @param {jQuery.Event} event
+     * @private
 	 */
 	_eventPopstate : function(event) {
 		var controller = null;
@@ -330,6 +342,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	
 	/**
 	 * Initiates the cache.
+     * @private
 	 */
 	_initCache : function() {
 		var controller = this._pageContainer.find('#pageContent').data('controller');
@@ -354,6 +367,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	 * @param {String} requestType
 	 * @param {String} url
 	 * @param {String} actionName
+     * @private
 	 */
 	_fireRequest : function(controller, requestType, url, actionName) {
 		// get query data
@@ -386,6 +400,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	 * @param {Object} data
 	 * @param {String} textStatus
 	 * @param {jQuery} jqXHR
+     * @private
 	 */
 	_success : function(data, textStatus, jqXHR) {
 		var $html = $(data.html);
@@ -407,6 +422,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	 * @param {Object} data
 	 * @param {String} textStatus
 	 * @param {jQuery} jqXHR
+     * @private
 	 */
 	_successJSAJAX : function(data, textStatus, jqXHR) {
 		var $js = $(data.js);
@@ -418,6 +434,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	 * Replaces the HTML.
 	 * 
 	 * @param {String} controller
+     * @private
 	 */
 	_replaceHTML : function(controller) {
 		var script = $(this._cachedData[controller]['js']);
