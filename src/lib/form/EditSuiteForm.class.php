@@ -75,7 +75,7 @@ class EditSuiteForm extends AbstractForm implements IEditSuitePage {
 	/**
 	 * needed permissions to view this page
 	 * @var	string[]
-	*/
+	 */
 	public $neededPermissions = array();
 	
 	/**
@@ -86,7 +86,7 @@ class EditSuiteForm extends AbstractForm implements IEditSuitePage {
 	
 	/**
 	 * @see \ultimate\page\IEditSuitePage::getActiveMenuItems()
-	*/
+	 */
 	public function getActiveMenuItems() {
 		return $this->activeMenuItems;
 	}

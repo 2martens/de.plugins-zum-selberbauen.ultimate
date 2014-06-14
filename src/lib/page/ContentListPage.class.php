@@ -81,7 +81,7 @@ class ContentListPage extends AbstractCachedListPage implements IEditSuitePage {
 	/**
 	 * The default sort order.
 	 * @var	string
-	*/
+	 */
 	public $defaultSortOrder = ULTIMATE_SORT_CONTENT_SORTORDER;
 	
 	/**
@@ -222,14 +222,14 @@ class ContentListPage extends AbstractCachedListPage implements IEditSuitePage {
 			$newContents = array();
 			// get array with usernames
 			/* @var $content \ultimate\data\content\Content */
-			foreach ($contents as $contentID => $content) {
+			foreach ($contents as $content) {
 				$newContents[$content->__get('author')->__get('username')] = $content;
 			}
 			// actually sort the array
 			if ($this->sortOrder == 'ASC') ksort($newContents);
 			else krsort($newContents);
 			// refill the sorted values into the original array
-			foreach ($newContents as $authorName => $content) {
+			foreach ($newContents as $content) {
 				$contents[$content->__get('contentID')] = $content;
 			}
 			// return the sorted array

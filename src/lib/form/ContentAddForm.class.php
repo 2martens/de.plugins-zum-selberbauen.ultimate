@@ -239,7 +239,7 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 	
 	/**
 	 * @see \ultimate\page\IEditSuitePage::getActiveMenuItems()
-	*/
+	 */
 	public function getActiveMenuItems() {
 		return $this->activeMenuItems;
 	}
@@ -382,6 +382,7 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 		$this->objectAction->executeAction();
 		
 		$returnValues = $this->objectAction->getReturnValues();
+		/* @var \ultimate\data\content\Content $content */
 		$content = $returnValues['returnValues'];
 		$contentID = $returnValues['returnValues']->contentID;
 		$updateEntries = array();
@@ -407,7 +408,7 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 			I18nHandler::getInstance()->save('text', 'ultimate.content.'.$contentID.'.contentText', 'ultimate.content', PACKAGE_ID);
 		}
 		if (!empty($updateEntries)) {
-			$contentEditor = new ContentEditor($returnValues['returnValues']);
+			$contentEditor = new ContentEditor($content);
 			$contentEditor->update($updateEntries);
 		}
 		
@@ -425,7 +426,7 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 		TypedTagCloudCacheBuilder::getInstance()->reset();
 		UltimateTagCloudCacheBuilder::getInstance()->reset();
 		
-		$objectAction = new ContentAction(array($returnValues['returnValues']->__get('contentID')), 'updateSearchIndex');
+		$objectAction = new ContentAction(array($contentID), 'updateSearchIndex');
 		$objectAction->executeAction();
 		
 		// create recent activity event if published
