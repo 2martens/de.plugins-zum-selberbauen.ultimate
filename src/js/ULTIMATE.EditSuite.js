@@ -140,10 +140,8 @@ ULTIMATE.EditSuite.AJAXIdentifiers = {
 	_identifiers : new WCF.Dictionary(),
 	
 	/**
-	 * @param {String}
-	 *            key
-	 * @param {String}
-	 *            value
+	 * @param {String} key
+	 * @param {String} value
 	 * @see WCF.Dictionary.add()
 	 */
 	add : function(key, value) {
@@ -160,8 +158,7 @@ ULTIMATE.EditSuite.AJAXIdentifiers = {
 	/**
 	 * Retrieves an identifier.
 	 * 
-	 * @param {String}
-	 *            key
+	 * @param {String} key
 	 * @return {String}
 	 */
 	get : function(key) {
@@ -230,7 +227,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	 * 
 	 * @param {String} pageContainer
 	 * @param {String} pageJSContainer
-	 * @param {ULTIMATE.EditSuite.SidebarMenu} menuSidebar
+	 * @param {ULTIMATE.EditSuite.SidebarMenu} sidebarMenu
 	 */
 	init : function(pageContainer, pageJSContainer, sidebarMenu) {
 		this._pageContainer = $('#' + $.wcfEscapeID(pageContainer));
@@ -270,7 +267,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 		
 		// change address bar
 		var href = $target.attr('href');
-		href = href.replace(/^.*\/\/[^\/]+/, '')
+		href = href.replace(/^.*\/\/[^\/]+/, '');
 		var stateObject = {
 			controller: $target.data('controller'),
 			requestType: $target.data('requestType')
@@ -337,14 +334,16 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	_initCache : function() {
 		var controller = this._pageContainer.find('#pageContent').data('controller');
 		var requestType = this._pageContainer.find('#pageContent').data('requestType');
+        var $pageContent = $('#pageContent');
+        var $pageJS = $('#pageJS');
 		this._cachedData[controller] = {
 			html : '<div id="pageContent" data-controller="' + controller + '" data-request-type="' + requestType + '">'
-				+ $('#pageContent').html()
+				+ $pageContent.html()
 				+ '</div>',
 			activeMenuItems : this._sidebarMenu.getActiveMenuItems(),
-			js : $('#pageJS').html(),
-			jsAJAXOnly : $('#pageJS').data('ajaxOnly'),
-			ajaxOnly : $('#pageContent').data('ajaxOnly')
+			js : $pageJS.html(),
+			jsAJAXOnly : $pageJS.data('ajaxOnly'),
+			ajaxOnly : $pageContent.data('ajaxOnly')
 		};
 	},
 	
@@ -384,12 +383,9 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	/**
 	 * Displays HTML content.
 	 * 
-	 * @param {Object}
-	 *            data
-	 * @param {String}
-	 *            textStatus
-	 * @param {jQuery}
-	 *            jqXHR
+	 * @param {Object} data
+	 * @param {String} textStatus
+	 * @param {jQuery} jqXHR
 	 */
 	_success : function(data, textStatus, jqXHR) {
 		var $html = $(data.html);
@@ -408,12 +404,9 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	/**
 	 * Displays HTML content.
 	 * 
-	 * @param {Object}
-	 *            data
-	 * @param {String}
-	 *            textStatus
-	 * @param {jQuery}
-	 *            jqXHR
+	 * @param {Object} data
+	 * @param {String} textStatus
+	 * @param {jQuery} jqXHR
 	 */
 	_successJSAJAX : function(data, textStatus, jqXHR) {
 		var $js = $(data.js);
@@ -437,10 +430,10 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 //		this._pageJSContainer.html(this._cachedData[controller]['js']);
 		this._sidebarMenu.updateActiveItems(this._cachedData[controller]['activeMenuItems']);
 		
-		var script = $(this._cachedData[controller]['js']);
-		var scriptContent = script.html();
+		script = $(this._cachedData[controller]['js']);
+		scriptContent = script.html();
 		eval(scriptContent);
-		var rawFunctionName = 'postInit' + controller;
+		rawFunctionName = 'postInit' + controller;
 		eval(rawFunctionName + '()');
 	}
 });
