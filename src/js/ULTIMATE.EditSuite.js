@@ -261,7 +261,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	 */
 	_initLinks : function() {
 		$('nav.menuGroupItems a').on('click', $.proxy(this._eventClick, this));
-		$('#pageContentContainer').on('click', '#pageContent a', $.proxy(this._eventClick, this));
+		$('#pageContentContainer').on('click', '#pageContent a[data-controller]', $.proxy(this._eventClick, this));
 		$(window).on('popstate', $.proxy(this._eventPopstate, this));
 	},
 	
