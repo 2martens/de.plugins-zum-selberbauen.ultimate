@@ -37,7 +37,32 @@
 		<item name="wcf.acp.group.option.user.ultimate.content.canDeleteComment.description"><![CDATA[Members of this usergroup can delete their own comments to contents.]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.content.canDownloadAttachment"><![CDATA[Can download attachments]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.content.canViewAttachmentPreview"><![CDATA[Can view attachment previews]]></item>
-		<!-- /user -->
+        <item name="wcf.acp.group.option.user.ultimate.content.canUploadAttachment"><![CDATA[Can upload attachments]]></item>
+
+        <!-- content -->
+        <item name="wcf.acp.group.option.user.ultimate.content.canSeeContent"><![CDATA[Can see contents]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canEditContent"><![CDATA[Can edit contents]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canEditContentStatus"><![CDATA[Can edit the status of contents]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canDeleteContent"><![CDATA[Can delete contents]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canSaveAsDraft"><![CDATA[Can save contents as draft]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canSaveAsPendingReview"><![CDATA[Can save contents as pending review]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canPublish"><![CDATA[Can publish contents]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canPublish.description"><![CDATA[Members of this usergroup can publish contents or plan the publishing.]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canEditMetadata"><![CDATA[Can edit metadata of contents]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canEditMetadata.description"><![CDATA[Members of this usergroup an select categories and tags and can insert the meta keywords and meta description.]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canDepublish"><![CDATA[Can depublish contents]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canAddContentVersion"><![CDATA[Can add new content version]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canDeleteContentVersion"><![CDATA[Can delete unpublished content versions]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canRepublishContentVersion"><![CDATA[Can republish an old version]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canEditContentSpecificRights"><![CDATA[Can assign content-specific rights]]></item>
+        <!-- /content -->
+
+        <!-- page -->
+        <item name="wcf.acp.group.option.admin.content.ultimate.canSeePage"><![CDATA[Can see pages]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canEditPage"><![CDATA[Can edit pages]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canDeletePage"><![CDATA[Can delete pages]]></item>
+        <!-- /page -->
+        <!-- /user -->
 		
 		<!-- mod -->
 		<item name="wcf.acp.group.option.mod.ultimate.content.canModerateComment"><![CDATA[Can moderate comments]]></item>
@@ -60,24 +85,7 @@
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageCategories"><![CDATA[Can manage categories]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageCategories.description"><![CDATA[Members of this usergroup can manage categories.]]></item>
 		<!-- /category -->
-		
-		<!-- content -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddContent"><![CDATA[Can add contents]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddContent.description"><![CDATA[Members of this usergroup can add contents.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditContent"><![CDATA[Can edit contents]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditContent.description"><![CDATA[Members of this usergroup can edit contents.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent"><![CDATA[Can delete contents]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent.description"><![CDATA[Members of this usergroup can delete contents.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canUploadAttachment"><![CDATA[Can upload attachments]]></item>
-		<!-- /content -->
-		
-		<!-- content version -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddContentVersion"><![CDATA[Can add new content versions]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddContentVersion.description"><![CDATA[Members of this usergroup can add new content versions.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContentVersion"><![CDATA[Can delete content version]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContentVersion.description"><![CDATA[Members of this usergroup can delete content versions.]]></item>
-		<!-- /content version -->
-		
+        
 		<!-- layout -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLayouts"><![CDATA[Can manage layouts]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLayouts.description"><![CDATA[Members of this usergroup can manage layouts.]]></item>
@@ -97,15 +105,6 @@
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageMenuItems"><![CDATA[Can manage menu items]]></item>
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageMenuItems.description"><![CDATA[Members of this usergroup can manage menu items.]]></item>
 		<!-- /menu item -->
-		
-		<!-- page -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddPage"><![CDATA[Can add pages]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddPage.description"><![CDATA[Members of this usergroup can add pages.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditPage"><![CDATA[Can edit pages]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditPage.description"><![CDATA[Members of this usergroup can edit pages.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeletePage"><![CDATA[Can delete pages]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeletePage.description"><![CDATA[Members of this usergroup can delete pages.]]></item>
-		<!-- /page -->
 		
 		<!-- template -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageTemplates"><![CDATA[Can add templates]]></item>

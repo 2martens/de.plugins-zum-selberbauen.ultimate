@@ -51,6 +51,112 @@
 				<defaultvalue>1</defaultvalue>
 				<options>module_attachment</options>
 			</option>
+            <option name="user.ultimate.content.canUploadAttachment">
+                <categoryname>user.ultimate.content</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+                <options>module_attachment</options>
+            </option>
+
+            <!-- content -->
+            <option name="user.ultimate.content.canSeeContent">
+                <categoryname>user.ultimate.content</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>1</defaultvalue>
+            </option>
+            <option name="user.ultimate.content.canEditContent">
+                <categoryname>user.ultimate.content</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+            <option name="user.ultimate.content.canDeleteContent">
+                <categoryname>user.ultimate.content</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+            <option name="user.ultimate.content.canEditContentStatus">
+                <categoryname>user.ultimate.content</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+            <option name="user.ultimate.content.canSaveAsDraft">
+                <categoryname>user.ultimate.content</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+            <option name="user.ultimate.content.canSaveAsPendingReview">
+                <categoryname>user.ultimate.content</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+            <option name="user.ultimate.content.canPublish">
+                <categoryname>user.ultimate.content</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+            <option name="user.ultimate.content.canEditMetadata">
+                <categoryname>user.ultimate.content</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+            <option name="user.ultimate.content.canDepublish">
+                <categoryname>user.ultimate.content</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+            <option name="user.ultimate.content.canAddContentVersion">
+                <categoryname>user.ultimate.content</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+            <option name="user.ultimate.content.canDeleteContentVersion">
+                <categoryname>user.ultimate.content</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+            <option name="user.ultimate.content.canRepublishOldVersion">
+                <categoryname>user.ultimate.content</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+            <option name="user.ultimate.content.canEditContentSpecificRights">
+                <categoryname>user.ultimate.content</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+
+            <option name="user.ultimate.content.canSeePage">
+                <categoryname>user.ultimate.content</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+            <option name="user.ultimate.content.canEditPage">
+                <categoryname>user.ultimate.content</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+            <option name="user.ultimate.content.canDeletePage">
+                <categoryname>user.ultimate.content</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+            
 			<!-- /user options -->
 			
 			<!-- mod options -->
@@ -58,18 +164,21 @@
 				<categoryname>mod.ultimate.content</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
+                <moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			<option name="mod.ultimate.content.canEditComment">
 				<categoryname>mod.ultimate.content</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
+                <moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			<option name="mod.ultimate.content.canDeleteComment">
 				<categoryname>mod.ultimate.content</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
+                <moddefaultvalue>1</moddefaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
 			<!-- /mod options -->
@@ -95,46 +204,7 @@
 				<defaultvalue>0</defaultvalue>
 				<admindefaultvalue>1</admindefaultvalue>
 			</option>
-			
-			<option name="admin.content.ultimate.canAddContent">
-				<categoryname>admin.content.ultimate</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
-			</option>
-			<option name="admin.content.ultimate.canEditContent">
-				<categoryname>admin.content.ultimate</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
-			</option>
-			<option name="admin.content.ultimate.canDeleteContent">
-				<categoryname>admin.content.ultimate</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
-			</option>
-			<option name="admin.content.ultimate.canUploadAttachment">
-				<categoryname>admin.content.ultimate</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
-				<options>module_attachment</options>
-			</option>
-			
-			<option name="admin.content.ultimate.canAddContentVersion">
-				<categoryname>admin.content.ultimate</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
-			</option>
-			<option name="admin.content.ultimate.canDeleteContentVersion">
-				<categoryname>admin.content.ultimate</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
-			</option>
-			
+            
 			<option name="admin.content.ultimate.canManageLayouts">
 				<categoryname>admin.content.ultimate</categoryname>
 				<optiontype>boolean</optiontype>
@@ -157,25 +227,6 @@
 			</option>
 			
 			<option name="admin.content.ultimate.canManageMenuItems">
-				<categoryname>admin.content.ultimate</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
-			</option>
-			
-			<option name="admin.content.ultimate.canAddPage">
-				<categoryname>admin.content.ultimate</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
-			</option>
-			<option name="admin.content.ultimate.canEditPage">
-				<categoryname>admin.content.ultimate</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
-			</option>
-			<option name="admin.content.ultimate.canDeletePage">
 				<categoryname>admin.content.ultimate</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
