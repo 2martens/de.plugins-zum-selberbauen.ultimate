@@ -164,24 +164,6 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 	public $maxTextLength = 0;
 	
 	/**
-	 * The visibility.
-	 * @var	string
-	 */
-	public $visibility = 'public';
-	
-	/**
-	 * The chosen groupIDs.
-	 * @var	integer[]
-	 */
-	public $groupIDs = array();
-	
-	/**
-	 * All available groups.
-	 * @var	\wcf\data\user\group\UserGroup[]
-	 */
-	public $groups = array();
-	
-	/**
 	 * The publish date.
 	 * @var	string
 	 */
@@ -317,8 +299,6 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 		$this->tagsI18n = I18nHandler::getInstance()->getValues('tags');
 		if (I18nHandler::getInstance()->isPlainValue('text')) $this->text = MessageUtil::stripCrap(trim(I18nHandler::getInstance()->getValue('text')));
 		if (isset($_POST['status'])) $this->statusID = intval($_POST['status']);
-		if (isset($_POST['visibility'])) $this->visibility = StringUtil::trim($_POST['visibility']);
-		if (isset($_POST['groupIDs'])) $this->groupIDs = ArrayUtil::toIntegerArray($_POST['groupIDs']);
 		if (isset($_POST['publishDate'])) $this->publishDate = StringUtil::trim($_POST['publishDate']);
 		if (isset($_POST['save'])) $this->saveType = 'save';
 		if (isset($_POST['publish'])) $this->saveType = 'publish';
@@ -343,7 +323,6 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 			$this->validateContentLanguage();
 			$this->validatePublishDate();
 			$this->validateStatus();
-			$this->validateVisibility();
 			AbstractCaptchaForm::validate();
 		}
 		catch (UserInputException $e) {
@@ -375,18 +354,13 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 				'enableSmilies' => $this->enableSmilies,
 				'publishDate' => $this->publishDateTimestamp,
 				'lastModified' => TIME_NOW,
-				'status' => $this->statusID,
-				'visibility' => $this->visibility
+				'status' => $this->statusID
 			),
 			'categories' => $this->categoryIDs,
 			'metaDescription' => $this->metaDescription,
 			'metaKeywords' => $this->metaKeywords,
 			'attachmentHandler' => $this->attachmentHandler
 		);
-		
-		if ($this->visibility == 'protected') {
-			$parameters['groupIDs'] = $this->groupIDs;
-		}
 		
 		$this->objectAction = new ContentAction(array(), 'create', $parameters);
 		$this->objectAction->executeAction();
@@ -464,7 +438,6 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 		$this->subject = $this->description = $this->slug = $this->metaDescription = $this->metaKeywords = '';
 		$this->text = $this->publishDate = '';
 		$this->publishDateTimestamp = $this->statusID = 0;
-		$this->visibility = 'public';
 		I18nHandler::getInstance()->reset();
 		$this->categoryIDs = $this->groupIDs = array();
 		$this->tagsI18n = array();
@@ -493,11 +466,8 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 			'categories' => $this->categories,
 			'languageID' => ($this->languageID ? $this->languageID : 0),
 			'tagsI18n' => $this->tagsI18n,
-			'groups' => $this->groups,
-			'groupIDs' => $this->groupIDs,
 			'statusOptions' => $this->statusOptions,
 			'statusID' => $this->statusID,
-			'visibility' => $this->visibility,
 			'startTime' => $this->startTime,
 			'publishDate' => $this->publishDate,
 			'attachmentList' => $this->attachmentList,
@@ -715,35 +685,6 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 		
 		if (!array_key_exists($this->statusID, $this->statusOptions)) {
 			throw new UserInputException('status', 'notValid');
-		}
-	}
-	
-	/**
-	 * Validates visibility.
-	 * 
-	 * @throws	\wcf\system\exception\UserInputException
-	 */
-	protected function validateVisibility() {
-		$allowedValues = array(
-			'public',
-			'protected',
-			'private'
-		);
-		if (!in_array($this->visibility, $allowedValues)) {
-			throw new UserInputException('visibility', 'notValid');
-		}
-		
-		// validate groupIDs, only important for protected
-		if ($this->visibility != 'protected') return;
-		
-		if (empty($this->groupIDs)) {
-			throw new UserInputException('groupIDs', 'notSelected');
-		}
-		
-		foreach ($this->groupIDs as $groupID) {
-			if (array_key_exists($groupID, $this->groups)) continue;
-			throw new UserInputException('groupIDs', 'notValid');
-			break;
 		}
 	}
 	

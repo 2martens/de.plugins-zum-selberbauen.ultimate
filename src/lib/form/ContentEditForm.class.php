@@ -153,10 +153,6 @@ class ContentEditForm extends ContentAddForm {
 			);
 		}
 		
-		// get visibility data
-		$this->visibility = $this->content->__get('visibility');
-		$this->groupIDs = array_keys($this->content->__get('groups'));
-		
 		// reading object fields
 		$this->subject = $this->content->__get('contentTitle');
 		$this->description = $this->content->__get('contentDescription');
@@ -233,8 +229,7 @@ class ContentEditForm extends ContentAddForm {
 				'enableSmilies' => $this->enableSmilies,
 				'publishDate' => $this->publishDateTimestamp,
 				'lastModified' => TIME_NOW,
-				'status' => $this->statusID,
-				'visibility' => $this->visibility
+				'status' => $this->statusID
 			),
 			'categories' => $this->categoryIDs,
 			'metaDescription' => $this->metaDescription,
