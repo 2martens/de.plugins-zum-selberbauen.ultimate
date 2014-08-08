@@ -194,13 +194,13 @@
 						<select id="statusSelect" name="status">
 						{htmlOptions options=$statusOptions selected=$statusID}
 						</select>
-						{*<script data-relocate="true" type="text/javascript">
+						<script data-relocate="true" type="text/javascript">
 						/* <![CDATA[ */
 						$(function() {
-							new ULTIMATE.ACP.Button.Replacement('saveButton', 'statusSelect', 'save');
+							new ULTIMATE.EditSuite.Button.Replacement('saveButton', 'statusSelect', 'save');
 						});
 						/* ]]> */
-						</script>*}
+						</script>
 						{if $errorField == 'status'}
 							<small class="innerError">
 								{lang}wcf.acp.ultimate.status.error.{@$errorType}{/lang}
@@ -208,48 +208,6 @@
 						{/if}
 					</dd>
 				</dl>
-				<dl{if $errorField == 'visibility'} class="formError"{/if}>
-					<dt><label for="selectVisibility">{lang}wcf.acp.ultimate.visibility{/lang}</label></dt>
-					<dd>
-						<select id="selectVisibility" name="visibility">
-						<option value="public"{if $visibility == 'public'} selected="selected"{/if}>{lang}wcf.acp.ultimate.visibility.public{/lang}</option>
-						<option value="protected"{if $visibility == 'protected'} selected="selected"{/if}>{lang}wcf.acp.ultimate.visibility.protected{/lang}</option>
-						<option value="private"{if $visibility == 'private'} selected="selected"{/if}>{lang}wcf.acp.ultimate.visibility.private{/lang}</option>
-						</select>
-						<dl id="groupCheckboxes" class="container containerPadding marginTop"{if $visibility != 'protected'} style="display: none;"{/if}>
-							<dt><label>{lang}wcf.acp.ultimate.visibility.groupIDs{/lang}</label></dt>
-							<dd>
-								{htmlCheckboxes name="groupIDs" options=$groups selected=$groupIDs}
-								{if $errorField == 'groupIDs'}
-									<small class="innerError">
-										{lang}wcf.acp.ultimate.visibility.groupIDs.error.{@$errorType}{/lang}
-									</small>
-								{/if}
-							</dd>
-						</dl>
-						{*<script type="text/javascript">
-						/* <![CDATA[ */
-						$(function() {
-							$('#selectVisibility').change(function () {
-								var selectedIndex = $('#selectVisibility option:selected').attr('value');
-								if (selectedIndex == 'protected') {
-									$('#groupCheckboxes').fadeIn(1000, 'swing');
-								} else {
-									$('#groupCheckboxes').fadeOut(1000, 'swing');
-								}
-							});
-						});
-						/* ]]> */
-						</script>*}
-						{if $errorField == 'visibility'}
-							<small class="innerError">
-								{lang}wcf.acp.ultimate.visibility.error.{@$errorType}{/lang}
-							</small>
-						{/if}
-						<small>{lang}wcf.acp.ultimate.content.visibility.description{/lang}</small>
-					</dd>
-				</dl>
-				
 			</fieldset>
 			{event name='fieldsets'}
 		</div>

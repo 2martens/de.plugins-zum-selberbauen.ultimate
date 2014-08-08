@@ -1067,3 +1067,164 @@ ULTIMATE.EditSuite.Clipboard = {
         this._actionProxy.sendRequest();
     }
 };
+
+/**
+ * Namespace for ULTIMATE.ACP.Button
+ *
+ * @namespace
+ */
+ULTIMATE.EditSuite.Button = {};
+
+/**
+ * Handles button replacements.
+ *
+ * @param {String} buttonID
+ * @param {String} checkElementID
+ * @param {String} action
+ * @constructor
+ * @since version 1.0.0
+ */
+ULTIMATE.EditSuite.Button.Replacement = function(buttonID, checkElementID, action) {
+    this.init(buttonID, checkElementID, action);
+};
+ULTIMATE.EditSuite.Button.Replacement.prototype = {
+    /**
+     * target input[type=submit] element
+     *
+     * @type jQuery
+     */
+    _button : null,
+
+    /**
+     * the button value
+     *
+     * @type String
+     */
+    _buttonValue : '',
+
+    /**
+     * element to check for changes
+     *
+     * @type jQuery
+     */
+    _checkElement : null,
+
+    /**
+     * the initial date
+     *
+     * @type Date
+     */
+    _initialValueDateTime : null,
+
+    /**
+     * the last date
+     *
+     * @type Date
+     */
+    _lastValueDateTime : null,
+
+    /**
+     * the initial status id
+     *
+     * @type Number
+     */
+    _initialStatusID : 0,
+
+    /**
+     * action parameter
+     *
+     * @type String
+     */
+    _action : '',
+
+    /**
+     * Contains the language variables for the save action.
+     *
+     * @type Object
+     */
+    _saveMap : {
+        0 : 'ultimate.button.saveAsDraft',
+        1 : 'ultimate.button.saveAsPending'
+    },
+
+    /**
+     * Contains the language variables for the publish action.
+     *
+     * @type Object
+     */
+    _publishMap : {
+        0 : 'ultimate.button.publish',
+        1 : 'ultimate.button.schedule',
+        2 : 'ultimate.button.update'
+    },
+
+    /**
+     * Initializes the ButtonReplacement API.
+     *
+     * @param {String} buttonID
+     * @param {String} checkElementID
+     * @param {String} action
+     */
+    init : function(buttonID, checkElementID, action) {
+        this._button = $('#' + $.wcfEscapeID(buttonID));
+        this._buttonValue = this._button.val();
+        this._checkElement = $('#' + $.wcfEscapeID(checkElementID));
+        this._action = action;
+
+        if (this._action == 'save') {
+            this._initialStatusID = this._checkElement.val();
+        } else if (this._action == 'publish') {
+            var $dateObj = this._checkElement.datetimepicker('getDate');
+            this._initialValueDateTime = $dateObj;
+            this._lastValueDateTime = $dateObj;
+        }
+
+        this._checkElement.change($.proxy(this._change, this));
+        this._change();
+    },
+
+    /**
+     * Changes button label.
+     */
+    _change : function() {
+        if (this._action == 'save') {
+            var $currentValue = this._checkElement.val();
+            var $languageOutput = WCF.Language
+                .get(this._saveMap[$currentValue]);
+            if ($currentValue >= 2) {
+                this._button.attr('disabled', 'disabled')
+                    .prop('disabled', true);
+                this._button.addClass('ultimateHidden');
+            } else if ($currentValue == 0 || $currentValue == 1) {
+                this._button.removeClass('ultimateHidden');
+                this._button.removeAttr('disabled').prop('disabled', false);
+                this._button.val($languageOutput);
+            }
+        } else if (this._action == 'publish') {
+            var $dateObj = this._checkElement.datetimepicker('getDate');
+            var $dateNow = new Date();
+
+            var $updateButton = WCF.Language.get(this._publishMap[2]);
+            var $isUpdateSzenario = ($updateButton == this._buttonValue);
+
+            if ($dateObj > $dateNow) {
+                if ($isUpdateSzenario && (this._lastValueDateTime > $dateNow)) {
+                    return;
+                }
+                if ($isUpdateSzenario && this._initialValueDateTime > $dateNow)
+                    this._button.val($updateButton);
+                else
+                    this._button.val(WCF.Language.get(this._publishMap[1]));
+            } else {
+                if ($isUpdateSzenario && (this._lastValueDateTime < $dateNow)) {
+                    return;
+                }
+                if ($isUpdateSzenario && this._initialValueDateTime < $dateNow)
+                    this._button.val($updateButton);
+                else
+                    this._button.val(WCF.Language.get(this._publishMap[0]));
+            }
+            this._lastValueDateTime = $dateObj;
+        }
+    }
+};
