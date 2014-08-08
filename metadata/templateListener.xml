@@ -4,7 +4,7 @@
 		<!-- frontend language -->
 		<templatelistener name="buttonLanguage">
 			<environment>user</environment>
-			<templatename>headInclude</templatename>
+			<templatename>headIncludeJavaScript</templatename>
 			<eventname>javascriptLanguageImport</eventname>
 			<templatecode><![CDATA[,
 'ultimate.button.saveAsDraft': '{lang}ultimate.button.saveAsDraft{/lang}',
@@ -18,7 +18,7 @@
 		<!-- frontend headInclude -->
 		<templatelistener name="includeUltimateJS">
 			<environment>user</environment>
-			<templatename>headInclude</templatename>
+			<templatename>headIncludeJavaScript</templatename>
 			<eventname>javascriptInclude</eventname>
 			<templatecode><![CDATA[<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
 <script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.Content{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
@@ -28,9 +28,10 @@
 		
 		<templatelistener name="includeEditSuiteJS">
 			<environment>user</environment>
-			<templatename>headInclude</templatename>
+			<templatename>headIncludeJavaScript</templatename>
 			<eventname>javascriptInclude</eventname>
-			<templatecode><![CDATA[<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.EditSuite{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
+			<templatecode><![CDATA[<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.ACL{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
+<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.EditSuite{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
 ]]></templatecode>
 		</templatelistener>
         

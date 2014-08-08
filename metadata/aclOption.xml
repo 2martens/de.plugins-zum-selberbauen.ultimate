@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/aclOption.xsd">
+    <import>
+        <categories>
+            <!-- user -->
+            <category name="user.content">
+                <objecttype>de.plugins-zum-selberbauen.ultimate.content</objecttype>
+            </category>
+            <!-- user -->
+        </categories>
+
+        <options>
+            <!-- user.content -->
+            <option name="canSeeContent">
+                <categoryname>user.content</categoryname>
+                <objecttype>de.plugins-zum-selberbauen.ultimate.content</objecttype>
+            </option>
+            <option name="canEditContent">
+                <categoryname>user.content</categoryname>
+                <objecttype>de.plugins-zum-selberbauen.ultimate.content</objecttype>
+            </option>
+            <option name="canEditContentStatus">
+                <categoryname>user.content</categoryname>
+                <objecttype>de.plugins-zum-selberbauen.ultimate.content</objecttype>
+            </option>
+            <!-- /user.content -->
+        </options>
+    </import>
+</data>

@@ -36,6 +36,7 @@ use ultimate\util\ContentUtil;
 use wcf\data\tag\Tag;
 use wcf\form\AbstractCaptchaForm;
 use wcf\form\MessageForm;
+use wcf\system\acl\ACLHandler;
 use wcf\system\bbcode\PreParser;
 use wcf\system\cache\builder\TagObjectCacheBuilder;
 use wcf\system\cache\builder\TypedTagCloudCacheBuilder;
@@ -46,6 +47,7 @@ use wcf\system\language\I18nHandler;
 use wcf\system\tagging\TagEngine;
 use wcf\system\user\activity\event\UserActivityEventHandler;
 use wcf\system\Regex;
+use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
 use wcf\util\DateUtil;
@@ -106,6 +108,12 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 	 * @var string
 	 */
 	public $attachmentObjectType = 'de.plugins-zum-selberbauen.ultimate.content';
+
+	/**
+	 * The object type id.
+	 * @var	integer
+	 */
+	public $objectTypeID = 0;
 	
 	/**
 	 * The description of the content.
@@ -262,6 +270,8 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 		I18nHandler::getInstance()->register('description');
 		I18nHandler::getInstance()->register('tags');
 		I18nHandler::getInstance()->register('text');
+
+		$this->objectTypeID = ACLHandler::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.ultimate.content');
 	}
 	
 	/**
@@ -421,6 +431,12 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 			TagEngine::getInstance()->addObjectTags('de.plugins-zum-selberbauen.ultimate.content', $contentID, $tags, $languageID);
 			$this->tagsI18n[$languageID] = implode(',', $tags);
 		}
+
+		// save ACL
+		ACLHandler::getInstance()->save($returnValues['returnValues']->contentID, $this->objectTypeID);
+		UserStorageHandler::getInstance()->resetAll('ultimateContentPermissions');
+		$this->saved();
+		
 		// reset cache
 		TagObjectCacheBuilder::getInstance()->reset();
 		TypedTagCloudCacheBuilder::getInstance()->reset();
@@ -453,6 +469,8 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 		$this->categoryIDs = $this->groupIDs = array();
 		$this->tagsI18n = array();
 		$this->formatDate();
+
+		ACLHandler::getInstance()->disableAssignVariables();
 	}
 	
 	/**
@@ -462,7 +480,8 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 		parent::assignVariables();
 		I18nHandler::getInstance()->assignVariables();
 		ksort($this->statusOptions);
-		
+
+		ACLHandler::getInstance()->assignVariables($this->objectTypeID);
 		WCF::getTPL()->assign(array(
 			// actual form variables
 			'description' => $this->description,
@@ -481,7 +500,8 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 			'visibility' => $this->visibility,
 			'startTime' => $this->startTime,
 			'publishDate' => $this->publishDate,
-			'attachmentList' => $this->attachmentList
+			'attachmentList' => $this->attachmentList,
+			'objectTypeID' => $this->objectTypeID
 		));
 		
 		WCF::getTPL()->assign(array(

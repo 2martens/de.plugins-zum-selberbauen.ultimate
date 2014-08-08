@@ -179,5 +179,12 @@
 			<classname>ultimate\system\exporter\WordPress3xExporter</classname>
 		</type>
 		<!-- /Exporters -->
+
+        <!-- ACL -->
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.content</name>
+            <definitionname>com.woltlab.wcf.acl</definitionname>
+        </type>
+        <!-- /ACL -->
     </import>
 </data>

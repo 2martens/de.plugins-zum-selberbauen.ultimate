@@ -1,8 +1,15 @@
 <div id="pageContent" data-controller="ContentAddForm" data-request-type="form" data-ajax-only="true">
+    {include file='aclPermissions'}
 	{include file='multipleLanguageInputJavascript' elementIdentifier='subject' forceSelection=false}
 	{include file='multipleLanguageInputJavascript' elementIdentifier='description' forceSelection=false}
 	{include file='multipleLanguageInputJavascript' elementIdentifier='text' forceSelection=false}
 	{include file='wysiwyg'}
+    <script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.ACL{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
+    {if $contentID|isset}
+        {include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.*' objectID=$contentID aclListClassName='ULTIMATE.ACL.List'}
+    {else}
+        {include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.*' aclListClassName='ULTIMATE.ACL.List'}
+    {/if}
 	<header class="boxHeadline">
 		<h1>{lang}wcf.acp.ultimate.content.{@$action}{/lang}</h1>
 	</header>
@@ -41,7 +48,25 @@
 							</small>
 						{/if}
 					</dd>
-				</dl>
+                </dl>
+                <dl{if $errorField == 'slug'} class="formError"{/if}>
+                    <dt><label for="slug">{lang}wcf.acp.ultimate.content.slug{/lang}</label></dt>
+                    <dd>
+                        <input type="text" id="slug" name="slug" value="{@$slug}" class="long" required="required" pattern="^[a-zA-Z]+(?:\-{literal}{{/literal}1{literal}}{/literal}[a-zA-Z0-9]+)*$" placeholder="{lang}wcf.acp.ultimate.content.slug.placeholder{/lang}" />
+                        <small>
+                            {lang}wcf.acp.ultimate.content.slug.description{/lang}
+                        </small>
+                        {if $errorField == 'slug'}
+                            <small class="innerError">
+                                {if $errorType == 'empty'}
+                                    {lang}wcf.global.form.error.empty{/lang}
+                                {else}
+                                    {lang}wcf.acp.ultimate.content.slug.error.{@$errorType}{/lang}
+                                {/if}
+                            </small>
+                        {/if}
+                    </dd>
+                </dl>
 				<dl{if $errorField == 'description'} class="formError"{/if}>
 					<dt><label for="description">{lang}wcf.acp.ultimate.content.description{/lang}</label></dt>
 					<dd>
@@ -52,24 +77,6 @@
 									{lang}wcf.global.form.error.empty{/lang}
 								{else}
 									{lang}wcf.acp.ultimate.content.description.error.{@$errorType}{/lang}
-								{/if}
-							</small>
-						{/if}
-					</dd>
-				</dl>
-				<dl{if $errorField == 'slug'} class="formError"{/if}>
-					<dt><label for="slug">{lang}wcf.acp.ultimate.content.slug{/lang}</label></dt>
-					<dd>
-						<input type="text" id="slug" name="slug" value="{@$slug}" class="long" required="required" pattern="^[a-zA-Z]+(?:\-{literal}{{/literal}1{literal}}{/literal}[a-zA-Z0-9]+)*$" placeholder="{lang}wcf.acp.ultimate.content.slug.placeholder{/lang}" />
-						<small>
-							{lang}wcf.acp.ultimate.content.slug.description{/lang}
-						</small>
-						{if $errorField == 'slug'}
-							<small class="innerError">
-								{if $errorType == 'empty'}
-									{lang}wcf.global.form.error.empty{/lang}
-								{else}
-									{lang}wcf.acp.ultimate.content.slug.error.{@$errorType}{/lang}
 								{/if}
 							</small>
 						{/if}
@@ -124,7 +131,9 @@
 					});
 				/* ]]> */
 				</script>
-				
+            </fieldset>
+            <fieldset>
+				<legend>{lang}wcf.acp.ultimate.content.wysiwyg{/lang}</legend>
 				<dl{if $errorField == 'text'} class="formError"{/if}>
 					<dt><label for="text">{lang}wcf.acp.ultimate.content.text{/lang}</label></dt>
 					<dd>
@@ -147,8 +156,39 @@
 				</dl>
 			</fieldset>
 			<fieldset>
-				<legend>{lang}wcf.acp.ultimate.publish{/lang}</legend>
-				<dl{if $errorField == 'status'} class="formError"{/if}>
+				<legend>{lang}wcf.acp.ultimate.publishing{/lang}</legend>
+                <dl{if $errorField == 'publishDate'} class="formError"{/if}>
+                    <dt><label for="publishDateInput">{lang}wcf.acp.ultimate.publishDate{/lang}</label></dt>
+                    <dd>
+                        <input type="datetime" id="publishDateInput" name="publishDate" value="{@$publishDate}" readonly="readonly" class="medium" />
+                        {*<script data-relocate="true" type="text/javascript">
+                        /* <![CDATA[*/
+                        $(function() {
+                            //ULTIMATE.Date.Picker.init();
+                            new ULTIMATE.ACP.Button.Replacement('publishButton', 'publishDateInput', 'publish');
+                        });
+                        /* ]]> */
+                        </script>*}
+
+                        {if $errorField == 'publishDate'}
+                            <small class="innerError">
+                                {if $errorType == 'empty'}
+                                    {lang}wcf.global.form.error.empty{/lang}
+                                {else}
+                                    {lang}wcf.acp.ultimate.publishDate.error.{@$errorType}{/lang}
+                                {/if}
+                            </small>
+                        {/if}
+                    </dd>
+                </dl>
+                <dl id="userPermissionsContainer">
+                    <dt><label for="accessMatrix">{lang}wcf.acl.permissions{/lang}</label></dt>
+                    <dd>
+                        {* access control list *}
+                    </dd>
+                </dl>
+                
+                <dl{if $errorField == 'status'} class="formError"{/if}>
 					<dt><label for="statusSelect">{lang}wcf.acp.ultimate.status{/lang}</label></dt>
 					<dd>
 						<select id="statusSelect" name="status">
@@ -209,30 +249,7 @@
 						<small>{lang}wcf.acp.ultimate.content.visibility.description{/lang}</small>
 					</dd>
 				</dl>
-				<dl{if $errorField == 'publishDate'} class="formError"{/if}>
-					<dt><label for="publishDateInput">{lang}wcf.acp.ultimate.publishDate{/lang}</label></dt>
-					<dd>
-						<input type="datetime" id="publishDateInput" name="publishDate" value="{@$publishDate}" readonly="readonly" class="medium" />
-						{*<script data-relocate="true" type="text/javascript">
-						/* <![CDATA[*/
-						$(function() {
-							//ULTIMATE.Date.Picker.init();
-							new ULTIMATE.ACP.Button.Replacement('publishButton', 'publishDateInput', 'publish');
-						});
-						/* ]]> */
-						</script>*}
-						
-						{if $errorField == 'publishDate'}
-							<small class="innerError">
-								{if $errorType == 'empty'}
-									{lang}wcf.global.form.error.empty{/lang}
-								{else}
-									{lang}wcf.acp.ultimate.publishDate.error.{@$errorType}{/lang}
-								{/if}
-							</small>
-						{/if}
-					</dd>
-				</dl>
+				
 			</fieldset>
 			{event name='fieldsets'}
 		</div>
