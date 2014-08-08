@@ -35,7 +35,7 @@ use ultimate\system\cache\builder\ContentAttachmentCacheBuilder;
 use ultimate\util\ContentUtil;
 use wcf\data\tag\Tag;
 use wcf\form\MessageForm;
-use wcf\form\RecaptchaForm;
+use wcf\form\AbstractCaptchaForm;
 use wcf\system\bbcode\PreParser;
 use wcf\system\cache\builder\TagObjectCacheBuilder;
 use wcf\system\cache\builder\TypedTagCloudCacheBuilder;
@@ -334,7 +334,7 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 			$this->validatePublishDate();
 			$this->validateStatus();
 			$this->validateVisibility();
-			RecaptchaForm::validate();
+			AbstractCaptchaForm::validate();
 		}
 		catch (UserInputException $e) {
 			foreach ($this->tagsI18n as $languageID => $tags) {
