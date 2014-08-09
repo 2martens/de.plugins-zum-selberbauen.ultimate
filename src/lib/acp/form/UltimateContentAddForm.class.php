@@ -29,13 +29,12 @@ namespace ultimate\acp\form;
 use ultimate\data\category\Category;
 use ultimate\data\content\language\ContentLanguageEntryCache;
 use ultimate\data\content\ContentAction;
-use ultimate\data\content\ContentEditor;
 use ultimate\system\cache\builder\CategoryCacheBuilder;
 use ultimate\system\cache\builder\ContentAttachmentCacheBuilder;
 use ultimate\util\ContentUtil;
 use wcf\data\tag\Tag;
+use wcf\form\AbstractCaptchaForm;
 use wcf\form\MessageForm;
-use wcf\form\RecaptchaForm;
 use wcf\system\bbcode\PreParser;
 use wcf\system\cache\builder\TagObjectCacheBuilder;
 use wcf\system\cache\builder\TypedTagCloudCacheBuilder;
@@ -87,7 +86,7 @@ class UltimateContentAddForm extends MessageForm {
 	 * If true, multilingualism is enabled.
 	 * @var boolean
 	 */
-	public $enableMultilangualism = true;
+	public $enableMultilingualism = true;
 	
 	/**
 	 * If 1, the signature setting is shown.
@@ -305,7 +304,7 @@ class UltimateContentAddForm extends MessageForm {
 			$this->validatePublishDate();
 			$this->validateStatus();
 			$this->validateVisibility();
-			RecaptchaForm::validate();
+			AbstractCaptchaForm::validate();
 		}
 		catch (UserInputException $e) {
 			foreach ($this->tagsI18n as $languageID => $tags) {

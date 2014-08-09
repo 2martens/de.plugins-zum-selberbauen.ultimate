@@ -33,8 +33,8 @@ use ultimate\data\content\Content;
 use ultimate\data\content\ContentAction;
 use ultimate\system\cache\builder\ContentCacheBuilder;
 use wcf\data\tag\Tag;
+use wcf\form\AbstractCaptchaForm;
 use wcf\form\MessageForm;
-use wcf\form\RecaptchaForm;
 use wcf\system\bbcode\PreParser;
 use wcf\system\cache\builder\TagObjectCacheBuilder;
 use wcf\system\cache\builder\TypedTagCloudCacheBuilder;
@@ -214,7 +214,7 @@ class UltimateContentEditForm extends UltimateContentAddForm {
 	 * @see	UltimateContentAddForm::save()
 	 */
 	public function save() {
-		RecaptchaForm::save();
+		AbstractCaptchaForm::save();
 		
 		// retrieve I18n values
 		$contentTitle = array();
