@@ -68,8 +68,8 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	 * @var	string[]
 	 */
 	protected $permissionsCreate = array(
-		'admin.content.ultimate.canAddContent',		
-		'admin.content.ultimate.canAddContentVersion'
+		'user.ultimate.content.canEditContent',		
+		'user.ultimate.content.canAddContentVersion'
 	);
 	
 	/**
@@ -77,21 +77,21 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	 * @var	string[]
 	 */
 	protected $permissionsDelete = array(
-		'admin.content.ultimate.canDeleteContent', 
-		'admin.content.ultimate.canDeleteContentVersion'
+		'user.ultimate.content.canDeleteContent', 
+		'user.ultimate.content.canDeleteContentVersion'
 	);
 	
 	/**
 	 * Array of permissions that are required for update action.
 	 * @var	string[]
 	 */
-	protected $permissionsUpdate = array('admin.content.ultimate.canEditContent');
+	protected $permissionsUpdate = array('user.ultimate.content.canEditContent');
 	
 	/**
 	 * disallow requests for specified methods if the origin is not the ACP
 	 * @var	string[]
 	 */
-	protected $requireACP = array('create', 'updateSearchIndex', 'delete');
+	protected $requireACP = array();
 	
 	/**
 	 * Resets cache if any of the listed actions is invoked
@@ -376,7 +376,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 				}
 			}
 			
-			foreach ($this->objects as $object) {
+			foreach ($this->objects as $objectID => $object) {
 				$object->update($this->parameters['data']);
 				$versions[$objectID] = $object->getCurrentVersion();
 				$object->updateVersion($versions[$object->getObjectID()]->__get('versionID'), $versionData);
@@ -434,20 +434,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		$layoutIDs = array();
 		foreach ($this->objects as $object) {
 			/* @var $layout \ultimate\data\layout\Layout */
-			$layout = null;
-			if (defined('TESTING_MODE') && TESTING_MODE) {
-				$layoutList = new LayoutList();
-				$layoutList->readObjects();
-				$layouts = $layoutList->getObjects();
-				foreach ($layouts as $__layout) {
-					if ($__layout->__get('objectID') == $object->__get('contentID') && $__layout->__get('objectType') == 'content') {
-						$layout = $__layout;
-					}
-				}
-			}
-			else {
-				$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($object->__get('contentID'), 'content');
-			}
+			$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($object->__get('contentID'), 'content');
 			$layoutIDs[] = $layout->__get('layoutID');
 		}
 		$layoutAction = new LayoutAction($layoutIDs, 'delete', array());
@@ -532,6 +519,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	 * Validates the message.
 	 * 
 	 * @param	string	$message
+	 * @throws \wcf\system\exception\UserInputException
 	 */
 	public function validateMessage($message) {
 		// search for disallowed bbcodes
