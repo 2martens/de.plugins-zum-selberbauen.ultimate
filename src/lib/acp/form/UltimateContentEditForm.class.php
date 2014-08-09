@@ -26,8 +26,8 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\acp\form;
-use ultimate\acp\form\UltimateContentAddForm;
 use ultimate\data\category\Category;
+use ultimate\data\content\language\ContentLanguageEntryCache;
 use ultimate\data\content\CategorizedContent;
 use ultimate\data\content\Content;
 use ultimate\data\content\ContentAction;
@@ -48,7 +48,6 @@ use wcf\system\user\activity\event\UserActivityEventHandler;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
 use wcf\util\HeaderUtil;
-use ultimate\data\content\language\ContentLanguageEntryCache;
 
 /**
  * Shows the UltimateContentEdit form.

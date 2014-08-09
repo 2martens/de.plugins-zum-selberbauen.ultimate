@@ -39,7 +39,7 @@ use wcf\system\WCF;
  * @subpackage	system.cache.builder
  * @category	Ultimate CMS
  */
-class CategoryLanguageEntryCacheBuilder extends AbstractLanguageEntryCacheBuilder {
+class PageLanguageEntryCacheBuilder extends AbstractLanguageEntryCacheBuilder {
 	/**
 	 * Name of the languageEntry class (FQCN).
 	 * @var string

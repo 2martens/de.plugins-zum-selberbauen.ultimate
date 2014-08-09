@@ -26,10 +26,10 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\category;
+use ultimate\data\category\language\CategoryLanguageEntryCache;
 use ultimate\data\AbstractUltimateDatabaseObject;
 use wcf\data\ITitledObject;
 use wcf\system\WCF;
-use ultimate\data\category\language\CategoryLanguageEntryCache;
 
 /**
  * Represents a category entry.

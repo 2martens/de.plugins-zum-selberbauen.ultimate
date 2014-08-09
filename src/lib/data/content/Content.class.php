@@ -67,7 +67,7 @@ use wcf\util\StringUtil;
  * @property-read	integer								$status	(0, 1, 2, 3)
  * @property-read	string								$visibility	('public', 'protected', 'private')
  * @property-read	string[]							$metaData	('metaDescription' => metaDescription, 'metaKeywords' => metaKeywords)
-  * @property-read	\wcf\data\user\group\UserGroup[]	$groups
+ * @property-read	\wcf\data\user\group\UserGroup[]	$groups
  */
 class Content extends AbstractUltimateVersionableDatabaseObject implements ITitledObject, IMessage {
 	/**
