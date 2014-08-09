@@ -27,6 +27,7 @@
  */
 namespace ultimate\form;
 use ultimate\data\category\Category;
+use ultimate\data\content\language\ContentLanguageEntryCache;
 use ultimate\data\content\CategorizedContent;
 use ultimate\data\content\Content;
 use ultimate\data\content\ContentAction;
@@ -34,6 +35,7 @@ use ultimate\system\cache\builder\ContentCacheBuilder;
 use wcf\data\tag\Tag;
 use wcf\form\AbstractCaptchaForm;
 use wcf\form\MessageForm;
+use wcf\system\acl\ACLHandler;
 use wcf\system\bbcode\PreParser;
 use wcf\system\cache\builder\TagObjectCacheBuilder;
 use wcf\system\cache\builder\TypedTagCloudCacheBuilder;
@@ -45,6 +47,7 @@ use wcf\system\request\LinkHandler;
 use wcf\system\request\UltimateLinkHandler;
 use wcf\system\tagging\TagEngine;
 use wcf\system\user\activity\event\UserActivityEventHandler;
+use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
 use wcf\util\HeaderUtil;
@@ -65,7 +68,7 @@ class ContentEditForm extends ContentAddForm {
 	 * @var string[]
 	 */
 	public $neededPermissions = array(
-		'admin.content.ultimate.canEditContent'
+		'user.ultimate.content.canEditContent'
 	);
 	
 	/**
@@ -161,16 +164,37 @@ class ContentEditForm extends ContentAddForm {
 		$this->lastModified = $this->content->__get('lastModified');
 		$this->categoryIDs = array_keys($this->content->__get('categories'));
 		
+		// prepare I18nHandler
+		if (!ContentLanguageEntryCache::getInstance()->isNeutralValue($this->content->__get('versionID'), 'contentTitle')) {
+			$contentTitle = ContentLanguageEntryCache::getInstance()->getValues($this->content->__get('versionID'), 'contentTitle');
+			I18nHandler::getInstance()->setValues('subject', $contentTitle);
+		}
+		else {
+			I18nHandler::getInstance()->setValue('subject', $this->subject);
+		}
+
+		if (!ContentLanguageEntryCache::getInstance()->isNeutralValue($this->content->__get('versionID'), 'contentDescription')) {
+			$contentDescription = ContentLanguageEntryCache::getInstance()->getValues($this->content->__get('versionID'), 'contentDescription');
+			I18nHandler::getInstance()->setValues('description', $contentDescription);
+		}
+		else {
+			I18nHandler::getInstance()->setValue('description', $this->description);
+		}
+
+		if (!ContentLanguageEntryCache::getInstance()->isNeutralValue($this->content->__get('versionID'), 'contentText')) {
+			$contentText = ContentLanguageEntryCache::getInstance()->getValues($this->content->__get('versionID'), 'contentText');
+			I18nHandler::getInstance()->setValues('text', $contentText);
+		}
+		else {
+			I18nHandler::getInstance()->setValue('text', $this->text);
+		}
+		
 		// read meta data
 		$metaData = $this->content->__get('metaData');
 		if (!empty($metaData)) {
 			$this->metaDescription = (isset($metaData['metaDescription']) ? $metaData['metaDescription'] : '');
 			$this->metaKeywords = (isset($metaData['metaKeywords']) ? $metaData['metaKeywords'] : '');
 		}
-		I18nHandler::getInstance()->setOptions('subject', PACKAGE_ID, $this->subject, 'ultimate.content.\d+.contentTitle');
-		I18nHandler::getInstance()->setOptions('description', PACKAGE_ID, $this->description, 'ultimate.content.\d+.contentDescription');
-		I18nHandler::getInstance()->setOptions('text', PACKAGE_ID, $this->text, 'ultimate.content.\d+.contentText');
-		I18nHandler::getInstance()->setOptions('tags', PACKAGE_ID, '', 'ultimate.content.\d+.contentTags');
 		
 		// read editor permissions
 		$this->enableBBCodes = $this->content->__get('enableBBCodes');
@@ -185,45 +209,42 @@ class ContentEditForm extends ContentAddForm {
 	public function save() {
 		AbstractCaptchaForm::save();
 		
-		$this->subject = 'ultimate.content.'.$this->contentID.'.contentTitle';
+		// retrieve I18n values
+		$contentTitle = array();
+		// for the time being the existing entries will be removed, if an array entry with id 0 is provided
 		if (I18nHandler::getInstance()->isPlainValue('subject')) {
-			I18nHandler::getInstance()->remove($this->subject, PACKAGE_ID);
-			$this->subject = I18nHandler::getInstance()->getValue('subject');
-		} else {
-			I18nHandler::getInstance()->save('subject', $this->subject, 'ultimate.content', PACKAGE_ID);
+			$contentTitle[ContentLanguageEntryCache::NEUTRAL_LANGUAGE] = $this->subject;
 		}
-		
-		$this->description = 'ultimate.content.'.$this->contentID.'.contentDescription';
+		else {
+			$contentTitle = I18nHandler::getInstance()->getValues('subject');
+		}
+		$contentDescription = array();
 		if (I18nHandler::getInstance()->isPlainValue('description')) {
-			I18nHandler::getInstance()->remove($this->description, PACKAGE_ID);
-			$this->description = I18nHandler::getInstance()->getValue('description');
-		} else {
-			I18nHandler::getInstance()->save('description', $this->description, 'ultimate.content', PACKAGE_ID);
+			$contentDescription[ContentLanguageEntryCache::NEUTRAL_LANGUAGE] = $this->description;
 		}
-		
-		$text = 'ultimate.content.'.$this->contentID.'.contentText';
+		else {
+			$contentDescription = I18nHandler::getInstance()->getValues('description');
+		}
+		$contentText = array();
 		if (I18nHandler::getInstance()->isPlainValue('text')) {
-			I18nHandler::getInstance()->remove($text, PACKAGE_ID);
-		} else {
-			$this->text = $text;
-			// parse URLs
+			$contentText[ContentLanguageEntryCache::NEUTRAL_LANGUAGE] = $this->text;
+		}
+		else {
+			$contentText = I18nHandler::getInstance()->getValues('text');
 			if ($this->preParse) {
-				$textValues = I18nHandler::getInstance()->getValues('text');
-				foreach ($textValues as $languageID => $text) {
-					$textValues[$languageID] = PreParser::getInstance()->parse($text);
+				foreach ($contentText as $languageID => $text) {
+					$contentText[$languageID] = PreParser::getInstance()->parse($text);
 				}
-				I18nHandler::getInstance()->setValues('text', $textValues);
 			}
-			I18nHandler::getInstance()->save('text', $this->text, 'ultimate.content', PACKAGE_ID);
 		}
 		
 		$parameters = array(
 			'data' => array(
 				'authorID' => WCF::getUser()->userID,
-				'contentTitle' => $this->subject,
-				'contentDescription' => $this->description,
+				'contentTitle' => $contentTitle,
+				'contentDescription' => $contentDescription,
 				'contentSlug' => $this->slug,
-				'contentText' => $this->text,
+				'contentText' => $contentText,
 				'enableBBCodes' => $this->enableBBCodes,
 				'enableHtml' => $this->enableHtml,
 				'enableSmilies' => $this->enableSmilies,
@@ -237,10 +258,6 @@ class ContentEditForm extends ContentAddForm {
 			'attachmentHandler' => $this->attachmentHandler
 		);
 		
-		if ($this->visibility == 'protected') {
-			$parameters['groupIDs'] = $this->groupIDs;
-		}
-		
 		$action = new ContentAction(array($this->contentID), 'update', $parameters);
 		$action->executeAction();
 		
@@ -253,6 +270,11 @@ class ContentEditForm extends ContentAddForm {
 			TagEngine::getInstance()->addObjectTags('de.plugins-zum-selberbauen.ultimate.content', $this->content->__get('contentID'), $tags, $languageID);
 			$this->tagsI18n[$languageID] = Tag::buildString($tags);
 		}
+
+		// save ACL
+		ACLHandler::getInstance()->save($this->contentID, $this->objectTypeID);
+		UserStorageHandler::getInstance()->resetAll('ultimateContentPermissions');
+
 		// reset cache
 		TagObjectCacheBuilder::getInstance()->reset();
 		TypedTagCloudCacheBuilder::getInstance()->reset();

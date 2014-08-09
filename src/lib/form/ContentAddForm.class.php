@@ -27,8 +27,8 @@
  */
 namespace ultimate\form;
 use ultimate\data\category\Category;
+use ultimate\data\content\language\ContentLanguageEntryCache;
 use ultimate\data\content\ContentAction;
-use ultimate\data\content\ContentEditor;
 use ultimate\page\IEditSuitePage;
 use ultimate\system\cache\builder\CategoryCacheBuilder;
 use ultimate\system\cache\builder\ContentAttachmentCacheBuilder;
@@ -46,8 +46,8 @@ use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\tagging\TagEngine;
 use wcf\system\user\activity\event\UserActivityEventHandler;
-use wcf\system\Regex;
 use wcf\system\user\storage\UserStorageHandler;
+use wcf\system\Regex;
 use wcf\system\WCF;
 use wcf\util\ArrayUtil;
 use wcf\util\DateUtil;
@@ -88,7 +88,7 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 	 * @var string[]
 	 */
 	public $neededPermissions = array(
-		'admin.content.ultimate.canAddContent'
+		'user.ultimate.content.canEditContent'
 	);
 	
 	/**
@@ -339,16 +339,44 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 	 * Saves the form input.
 	 */
 	public function save() {
-		if (!I18nHandler::getInstance()->isPlainValue('text')) RecaptchaForm::save();
+		if (!I18nHandler::getInstance()->isPlainValue('text')) AbstractCaptchaForm::save();
 		else parent::save();
+
+		// retrieve I18n values
+		$contentTitle = array();
+		if (I18nHandler::getInstance()->isPlainValue('subject')) {
+			$contentTitle[ContentLanguageEntryCache::NEUTRAL_LANGUAGE] = $this->subject;
+		}
+		else {
+			$contentTitle = I18nHandler::getInstance()->getValues('subject');
+		}
+		$contentDescription = array();
+		if (I18nHandler::getInstance()->isPlainValue('description')) {
+			$contentDescription[ContentLanguageEntryCache::NEUTRAL_LANGUAGE] = $this->description;
+		}
+		else {
+			$contentDescription = I18nHandler::getInstance()->getValues('description');
+		}
+		$contentText = array();
+		if (I18nHandler::getInstance()->isPlainValue('text')) {
+			$contentText[ContentLanguageEntryCache::NEUTRAL_LANGUAGE] = $this->text;
+		}
+		else {
+			$contentText = I18nHandler::getInstance()->getValues('text');
+			if ($this->preParse) {
+				foreach ($contentText as $languageID => $text) {
+					$contentText[$languageID] = PreParser::getInstance()->parse($text);
+				}
+			}
+		}
 		
 		$parameters = array(
 			'data' => array(
 				'authorID' => WCF::getUser()->userID,
-				'contentTitle' => $this->subject,
-				'contentDescription' => $this->description,
+				'contentTitle' => $contentTitle,
+				'contentDescription' => $contentDescription,
 				'contentSlug' => $this->slug,
-				'contentText' => $this->text,
+				'contentText' => $contentText,
 				'enableBBCodes' => $this->enableBBCodes,
 				'enableHtml' => $this->enableHtml,
 				'enableSmilies' => $this->enableSmilies,
@@ -369,32 +397,6 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 		/* @var \ultimate\data\content\Content $content */
 		$content = $returnValues['returnValues'];
 		$contentID = $returnValues['returnValues']->contentID;
-		$updateEntries = array();
-		if (!I18nHandler::getInstance()->isPlainValue('subject')) {
-			I18nHandler::getInstance()->save('subject', 'ultimate.content.'.$contentID.'.contentTitle', 'ultimate.content', PACKAGE_ID);
-			$updateEntries['contentTitle'] = 'ultimate.content.'.$contentID.'.contentTitle';
-		}
-		if (!I18nHandler::getInstance()->isPlainValue('description')) {
-			I18nHandler::getInstance()->save('description', 'ultimate.content.'.$contentID.'.contentDescription', 'ultimate.content', PACKAGE_ID);
-			$updateEntries['contentDescription'] = 'ultimate.content.'.$contentID.'.contentDescription';
-		}
-		if (!I18nHandler::getInstance()->isPlainValue('text')) {
-			$updateEntries['contentText'] = 'ultimate.content.'.$contentID.'.contentText';
-			
-			// parse URLs
-			if ($this->preParse) {
-				$textValues = I18nHandler::getInstance()->getValues('text');
-				foreach ($textValues as $languageID => $text) {
-					$textValues[$languageID] = PreParser::getInstance()->parse($text);
-				}
-				I18nHandler::getInstance()->setValues('text', $textValues);
-			}
-			I18nHandler::getInstance()->save('text', 'ultimate.content.'.$contentID.'.contentText', 'ultimate.content', PACKAGE_ID);
-		}
-		if (!empty($updateEntries)) {
-			$contentEditor = new ContentEditor($content);
-			$contentEditor->update($updateEntries);
-		}
 		
 		// save tags
 		foreach ($this->tagsI18n as $languageID => $tags) {
@@ -409,7 +411,6 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 		// save ACL
 		ACLHandler::getInstance()->save($returnValues['returnValues']->contentID, $this->objectTypeID);
 		UserStorageHandler::getInstance()->resetAll('ultimateContentPermissions');
-		$this->saved();
 		
 		// reset cache
 		TagObjectCacheBuilder::getInstance()->reset();
@@ -442,7 +443,7 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 		$this->categoryIDs = $this->groupIDs = array();
 		$this->tagsI18n = array();
 		$this->formatDate();
-
+		
 		ACLHandler::getInstance()->disableAssignVariables();
 	}
 	
@@ -501,7 +502,7 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 	protected function formatDate(\DateTime $dateTime = null) {
 		if ($dateTime === null) $dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
 		$dateTime->setTimezone(WCF::getUser()->getTimezone());
-		$date = 'M/d/Y';
+		//$date = 'M/d/Y';
 		$date = WCF::getLanguage()->get('wcf.date.dateFormat');
 		$time = 'h:i a';
 		$format = str_replace(
@@ -615,7 +616,7 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 				throw new UserInputException('text');
 			}
 			$textValues = I18nHandler::getInstance()->getValues('description');
-			foreach ($textValues as $languageID => $text) {
+			foreach ($textValues as $text) {
 				if ($this->maxTextLength != 0 && mb_strlen($text) > $this->maxTextLength) {
 					throw new UserInputException('text', 'tooLong');
 				}
