@@ -1,14 +1,18 @@
 <div id="pageContent" data-controller="ContentAddForm" data-request-type="form" data-ajax-only="true">
-    {include file='aclPermissions'}
+    {if $__wcf->session->getPermission('user.ultimate.content.canEditContentSpecificRights')}
+        {include file='aclPermissions'}
+    {/if}
 	{include file='multipleLanguageInputJavascript' elementIdentifier='subject' forceSelection=false}
 	{include file='multipleLanguageInputJavascript' elementIdentifier='description' forceSelection=false}
 	{include file='multipleLanguageInputJavascript' elementIdentifier='text' forceSelection=false}
 	{include file='wysiwyg'}
     <script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.ACL{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
-    {if $contentID|isset}
-        {include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.*' objectID=$contentID aclListClassName='ULTIMATE.ACL.List'}
-    {else}
-        {include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.*' aclListClassName='ULTIMATE.ACL.List'}
+    {if $__wcf->session->getPermission('user.ultimate.content.canEditContentSpecificRights')}
+        {if $contentID|isset}
+            {include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.*' objectID=$contentID aclListClassName='ULTIMATE.ACL.List'}
+        {else}
+            {include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.*' aclListClassName='ULTIMATE.ACL.List'}
+        {/if}
     {/if}
 	<header class="boxHeadline">
 		<h1>{lang}wcf.acp.ultimate.content.{@$action}{/lang}</h1>
@@ -82,62 +86,64 @@
 						{/if}
 					</dd>
 				</dl>
-				{include file='metaInput' application='ultimate' metaDescription=$metaDescription metaKeywords=$metaKeywords errorField=$errorField errorType=$errorType}
-				<dl{if $errorField == 'category'} class="formError"{/if}>
-					<dt><label>{lang}wcf.acp.ultimate.content.categories{/lang}</label></dt>
-					<dd>
-						{htmlCheckboxes options=$categories name=categoryIDs selected=$categoryIDs}
-						{if $errorField == 'category'}
-							<small class="innerError">
-								{lang}wcf.acp.ultimate.content.categories.error.{@$errorType}{/lang}
-							</small>
-						{/if}
-					</dd>
-				</dl>
-				
-				{* WCF Tagging *}
-				{foreach from=$availableLanguages key=languageID item=languageName}
-					{if $tagsI18n[$languageID]|isset}
-						{include file='tagInput' application='ultimate' tags=$tagsI18n[$languageID] languageID=$languageID tagInputSuffix=$languageID}
-					{else}
-						{include file='tagInput' application='ultimate' languageID=$languageID tagInputSuffix=$languageID}
-					{/if}
-				{/foreach}
-				
-				<dl id="tagContainerReal" class="jsOnly">
-					<dd>
-						<div id="tagSearchWrap" class="dropdown preInput">
-							{foreach from=$availableLanguages key=languageID item=languageName}
-							<span id="tagSearchInputWrap{$languageID}" class="dropdown">
-								<input id="tagSearchInput{$languageID}" class="long" name="tagSearchInput{$languageID}" type="text" value="" />
-							</span>
-							{/foreach}
-						</div>
-						<div id="tagSearchHidden" class="ultimateHidden">
-						
-						</div>
-						<small>{lang}wcf.tagging.tags.description{/lang}</small>
-					</dd>
-				</dl>
-				
-				{* end WCF Tagging *}
-				
-				<script data-relocate="true" type="text/javascript">
-				/* <![CDATA[ */
-					$(function() {
-						var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
-						var $optionValues = { {implode from=$tagsI18n key=languageID item=value}'{@$languageID}': "{$value}"{/implode} };
-						new ULTIMATE.Tagging.MultipleLanguageInput('tagContainer', 'tagSearchInput', true, $optionValues, $availableLanguages);
-					});
-				/* ]]> */
-				</script>
+                {if $__wcf->session->getPermission('user.ultimate.content.canEditMetadata')}
+                    {include file='metaInput' application='ultimate' metaDescription=$metaDescription metaKeywords=$metaKeywords errorField=$errorField errorType=$errorType}
+                    <dl{if $errorField == 'category'} class="formError"{/if}>
+                        <dt><label>{lang}wcf.acp.ultimate.content.categories{/lang}</label></dt>
+                        <dd>
+                            {htmlCheckboxes options=$categories name=categoryIDs selected=$categoryIDs}
+                            {if $errorField == 'category'}
+                                <small class="innerError">
+                                    {lang}wcf.acp.ultimate.content.categories.error.{@$errorType}{/lang}
+                                </small>
+                            {/if}
+                        </dd>
+                    </dl>
+                    
+                    {* WCF Tagging *}
+                    {foreach from=$availableLanguages key=languageID item=languageName}
+                        {if $tagsI18n[$languageID]|isset}
+                            {include file='tagInput' application='ultimate' tags=$tagsI18n[$languageID] languageID=$languageID tagInputSuffix=$languageID}
+                        {else}
+                            {include file='tagInput' application='ultimate' languageID=$languageID tagInputSuffix=$languageID}
+                        {/if}
+                    {/foreach}
+                    
+                    <dl id="tagContainerReal" class="jsOnly">
+                        <dd>
+                            <div id="tagSearchWrap" class="dropdown preInput">
+                                {foreach from=$availableLanguages key=languageID item=languageName}
+                                <span id="tagSearchInputWrap{$languageID}" class="dropdown">
+                                    <label for="tagSearchInput{$languageID}"><input id="tagSearchInput{$languageID}" class="long" name="tagSearchInput{$languageID}" type="text" value="" /></label>
+                                </span>
+                                {/foreach}
+                            </div>
+                            <div id="tagSearchHidden" class="ultimateHidden">
+                            
+                            </div>
+                            <small>{lang}wcf.tagging.tags.description{/lang}</small>
+                        </dd>
+                    </dl>
+                    
+                    {* end WCF Tagging *}
+                    
+                    <script data-relocate="true" type="text/javascript">
+                    /* <![CDATA[ */
+                    var $availableLanguages = { {implode from=$availableLanguages key=languageID item=languageName}{@$languageID}: '{$languageName}'{/implode} };
+                    var $optionValues = { {implode from=$tagsI18n key=languageID item=value}'{@$languageID}': "{$value}"{/implode} };
+                    $(function() {
+                        new ULTIMATE.Tagging.MultipleLanguageInput('tagContainer', 'tagSearchInput', true, $optionValues, $availableLanguages);
+                    });
+                    /* ]]> */
+                    </script>
+                {/if}
             </fieldset>
             <fieldset>
 				<legend>{lang}wcf.acp.ultimate.content.wysiwyg{/lang}</legend>
 				<dl{if $errorField == 'text'} class="formError"{/if}>
 					<dt><label for="text">{lang}wcf.acp.ultimate.content.text{/lang}</label></dt>
 					<dd>
-						<textarea id="text" name="text" rows="15" cols="40" class="long" {* placeholder="{lang}wcf.acp.ultimate.content.text.placeholder{/lang}"*} >{@$i18nPlainValues['text']}</textarea>
+						<textarea id="text" name="text" rows="15" cols="40" class="long" >{@$i18nPlainValues['text']}</textarea>
 						
 						{if $errorField == 'text'}
 							<small class="innerError">
@@ -155,20 +161,23 @@
 					</dd>
 				</dl>
 			</fieldset>
+            {if $__wcf->session->getPermission('user.ultimate.content.canPublish') ||
+                $__wcf->session->getPermission('user.ultimate.content.canSaveAsDraft') || 
+                $__wcf->session->getPermission('user.ultimate.content.canSaveAsPendingReview')}
 			<fieldset>
 				<legend>{lang}wcf.acp.ultimate.publishing{/lang}</legend>
+                {if $__wcf->session->getPermission('user.ultimate.content.canPublish')}
                 <dl{if $errorField == 'publishDate'} class="formError"{/if}>
                     <dt><label for="publishDateInput">{lang}wcf.acp.ultimate.publishDate{/lang}</label></dt>
                     <dd>
                         <input type="datetime" id="publishDateInput" name="publishDate" value="{@$publishDate}" readonly="readonly" class="medium" />
-                        {*<script data-relocate="true" type="text/javascript">
+                        <script data-relocate="true" type="text/javascript">
                         /* <![CDATA[*/
                         $(function() {
-                            //ULTIMATE.Date.Picker.init();
-                            new ULTIMATE.ACP.Button.Replacement('publishButton', 'publishDateInput', 'publish');
+                            new ULTIMATE.EditSuite.Button.Replacement('publishButton', 'publishDateInput', 'publish');
                         });
                         /* ]]> */
-                        </script>*}
+                        </script>
 
                         {if $errorField == 'publishDate'}
                             <small class="innerError">
@@ -181,45 +190,61 @@
                         {/if}
                     </dd>
                 </dl>
+                {/if}
+                {if $__wcf->session->getPermission('user.ultimate.content.canEditContentSpecificRights')}
                 <dl id="userPermissionsContainer">
                     <dt><label for="accessMatrix">{lang}wcf.acl.permissions{/lang}</label></dt>
                     <dd>
                         {* access control list *}
                     </dd>
                 </dl>
-                
-                <dl{if $errorField == 'status'} class="formError"{/if}>
-					<dt><label for="statusSelect">{lang}wcf.acp.ultimate.status{/lang}</label></dt>
-					<dd>
-						<select id="statusSelect" name="status">
-						{htmlOptions options=$statusOptions selected=$statusID}
-						</select>
-						<script data-relocate="true" type="text/javascript">
-						/* <![CDATA[ */
-						$(function() {
-							new ULTIMATE.EditSuite.Button.Replacement('saveButton', 'statusSelect', 'save');
-						});
-						/* ]]> */
-						</script>
-						{if $errorField == 'status'}
-							<small class="innerError">
-								{lang}wcf.acp.ultimate.status.error.{@$errorType}{/lang}
-							</small>
-						{/if}
-					</dd>
-				</dl>
+                {/if}
+
+                {if $__wcf->session->getPermission('user.ultimate.content.canEditStatus') &&
+                    ($__wcf->session->getPermission('user.ultimate.content.canSaveAsDraft') || 
+                     $__wcf->session->getPermission('user.ultimate.content.canSaveAsPendingReview'))}
+                    <dl{if $errorField == 'status'} class="formError"{/if}>
+                        <dt><label for="statusSelect">{lang}wcf.acp.ultimate.status{/lang}</label></dt>
+                        <dd>
+                            <select id="statusSelect" name="status">
+                            {htmlOptions options=$statusOptions selected=$statusID}
+                            </select>
+                            <script data-relocate="true" type="text/javascript">
+                            /* <![CDATA[ */
+                            $(function() {
+                                new ULTIMATE.EditSuite.Button.Replacement('saveButton', 'statusSelect', 'save');
+                            });
+                            /* ]]> */
+                            </script>
+                            {if $errorField == 'status'}
+                                <small class="innerError">
+                                    {lang}wcf.acp.ultimate.status.error.{@$errorType}{/lang}
+                                </small>
+                            {/if}
+                        </dd>
+                    </dl>
+                {/if}
 			</fieldset>
+            {/if}
 			{event name='fieldsets'}
 		</div>
-		
-		<div class="formSubmit">
-			<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
-			<input type="submit" name="save" id="saveButton" value="{if $saveButtonLang|isset}{@$saveButtonLang}{else}{lang}ultimate.button.saveAsDraft{/lang}{/if}" />
-			<input type="submit" name="publish" id="publishButton" value="{if $publishButtonLang|isset}{@$publishButtonLang}{else}{lang}ultimate.button.publish{/lang}{/if}" accesskey="s" />
-			{@SID_INPUT_TAG}
-			<input type="hidden" name="action" value="{@$action}" />
-			{if $contentID|isset}<input type="hidden" name="id" value="{@$contentID}" />{/if}
-			{@SECURITY_TOKEN_INPUT_TAG}
-		</div>
+
+        {if $__wcf->session->getPermission('user.ultimate.content.canPublish') ||
+            $__wcf->session->getPermission('user.ultimate.content.canSaveAsDraft') ||
+            $__wcf->session->getPermission('user.ultimate.content.canSaveAsPendingReview')}
+            <div class="formSubmit">
+                <input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
+                {if $__wcf->session->getPermission('user.ultimate.content.canSaveAsDraft') || $__wcf->session->getPermission('user.ultimate.content.canSaveAsPendingReview')}
+                    <input type="submit" name="save" id="saveButton" value="{if $saveButtonLang|isset}{@$saveButtonLang}{else}{lang}ultimate.button.saveAsDraft{/lang}{/if}" />
+                {/if}
+                {if $__wcf->session->getPermission('user.ultimate.content.canPublish')}
+                    <input type="submit" name="publish" id="publishButton" value="{if $publishButtonLang|isset}{@$publishButtonLang}{else}{lang}ultimate.button.publish{/lang}{/if}" accesskey="s" />
+                {/if}
+                {@SID_INPUT_TAG}
+                <input type="hidden" name="action" value="{@$action}" />
+                {if $contentID|isset}<input type="hidden" name="id" value="{@$contentID}" />{/if}
+                {@SECURITY_TOKEN_INPUT_TAG}
+		    </div>
+        {/if}
 	</form>
 </div>
