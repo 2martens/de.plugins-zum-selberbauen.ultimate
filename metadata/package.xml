@@ -37,11 +37,11 @@
 		<!-- /other -->
 		
 		<!-- xml and rest -->
-        <instruction type="aclOption">aclOption.xml</instruction>
-		<instruction type="pageMenu">pageMenu.xml</instruction>
+        <instruction type="pageMenu">pageMenu.xml</instruction>
 		<instruction type="templateListener">templateListener.xml</instruction>
 		<instruction type="objectType">objectType.xml</instruction>
-		<instruction type="option">option.xml</instruction>
+        <instruction type="aclOption">aclOption.xml</instruction>
+        <instruction type="option">option.xml</instruction>
 		<instruction type="userGroupOption">userGroupOption.xml</instruction>
 		<instruction type="language">language/*.xml</instruction>
 		<instruction type="eventListener">eventListener.xml</instruction>
