@@ -30,7 +30,7 @@ use wcf\system\SingletonFactory;
 use wcf\system\WCF;
 
 /**
- * Handles individual permissions for boards.
+ * Handles individual permissions for contents.
  *
  * @author	    Jim Martens
  * @copyright	2011-2014 Jim Martens
@@ -56,13 +56,13 @@ class ContentPermissionHandler extends SingletonFactory {
 	/**
 	 * Returns the content permission with the given name for the content with the given id.
 	 *
-	 * @param	integer		$boardID
-	 * @param	string		$permission
+	 * @param	integer	$contentID
+	 * @param	string	$permission
 	 * @return	boolean
 	 */
-	public function getPermission($boardID, $permission) {
-		if (isset($this->contentPermissions[$boardID][$permission])) return $this->contentPermissions[$boardID][$permission];
+	public function getPermission($contentID, $permission) {
+		if (isset($this->contentPermissions[$contentID][$permission])) return $this->contentPermissions[$contentID][$permission];
 
-		return WCF::getSession()->getPermission('user.board.'.$permission);
+		return WCF::getSession()->getPermission('user.ultimate.content.'.$permission);
 	}
 }

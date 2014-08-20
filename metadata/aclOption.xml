@@ -3,7 +3,7 @@
     <import>
         <categories>
             <!-- user -->
-            <category name="user.content">
+            <category name="user.ultimate.content">
                 <objecttype>de.plugins-zum-selberbauen.ultimate.content</objecttype>
             </category>
             <!-- user -->
@@ -12,15 +12,15 @@
         <options>
             <!-- user.content -->
             <option name="canSeeContent">
-                <categoryname>user.content</categoryname>
+                <categoryname>user.ultimate.content</categoryname>
                 <objecttype>de.plugins-zum-selberbauen.ultimate.content</objecttype>
             </option>
             <option name="canEditContent">
-                <categoryname>user.content</categoryname>
+                <categoryname>user.ultimate.content</categoryname>
                 <objecttype>de.plugins-zum-selberbauen.ultimate.content</objecttype>
             </option>
             <option name="canEditContentStatus">
-                <categoryname>user.content</categoryname>
+                <categoryname>user.ultimate.content</categoryname>
                 <objecttype>de.plugins-zum-selberbauen.ultimate.content</objecttype>
             </option>
             <!-- /user.content -->

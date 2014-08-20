@@ -9,9 +9,9 @@
     <script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.ACL{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
     {if $__wcf->session->getPermission('user.ultimate.content.canEditContentSpecificRights')}
         {if $contentID|isset}
-            {include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.*' objectID=$contentID aclListClassName='ULTIMATE.ACL.List'}
+            {include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.ultimate.content' objectID=$contentID aclListClassName='ULTIMATE.ACL.List'}
         {else}
-            {include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.*' aclListClassName='ULTIMATE.ACL.List'}
+            {include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.ultimate.content' aclListClassName='ULTIMATE.ACL.List'}
         {/if}
     {/if}
 	<header class="boxHeadline">

@@ -62,7 +62,7 @@ class ContentPermissionCache extends SingletonFactory {
 
 		// get user permissions
 		if ($user->userID) {
-			// get data from storage
+			// load storage
 			UserStorageHandler::getInstance()->loadStorage(array($user->userID));
 
 			// get ids
