@@ -29,7 +29,6 @@ namespace ultimate\data\content\version;
 use ultimate\data\content\language\ContentLanguageEntryCache;
 use wcf\data\user\User;
 use wcf\data\AbstractVersion;
-use wcf\system\WCF;
 use wcf\util\DateUtil;
 
 /**
@@ -56,8 +55,6 @@ use wcf\util\DateUtil;
  * @property-read	integer								$publishDate
  * @property-read	\DateTime|null						$publishDateObject	null if the content is neither planned nor published
  * @property-read	integer								$status	(0, 1, 2, 3)
- * @property-read	string								$visibility	('public', 'protected', 'private')
- * @property-read	\wcf\data\user\group\UserGroup[]	$groups
  */
 class ContentVersion extends AbstractVersion {
 	/**
@@ -85,51 +82,7 @@ class ContentVersion extends AbstractVersion {
 	 * @return	boolean
 	 */
 	public function isVisible() {
-		$isVisible = false;
-		if ($this->visibility == 'public') {
-			$isVisible = true;
-		}
-		else if ($this->visibility == 'protected') {
-			$groupIDs = WCF::getUser()->getGroupIDs();
-			$contentGroupIDs = array_keys($this->getGroups());
-			$result = array_intersect($groupIDs, $contentGroupIDs);
-			if (!empty($result)) {
-				$isVisible = true;
-			}
-		} else {
-			$isVisible = (WCF::getUser()->__get('userID') == $this->authorID);
-		}
-		
-		if ($isVisible) {
-			$isVisible = $this->isReleased();
-		}
-	}
-	
-	/**
-	 * Returns all user groups associated with this content version.
-	 * 
-	 * @return	\wcf\user\group\UserGroup[]
-	 */
-	public function getGroups() {
-		// lazy loading
-		if (!isset($this->groups)) {
-			$sql = 'SELECT	  groupTable.*
-			        FROM      ultimate'.WCF_N.'_user_group_to_content_version groupToContentVersion
-			        LEFT JOIN wcf'.WCF_N.'_user_group groupTable
-			        ON        (groupTable.groupID = groupToContentVersion.groupID)
-			        WHERE     groupToContentVersion.versionID = ?';
-			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array($this->versionID));
-		
-			$groups = array();
-			while ($group = $statement->fetchObject('\wcf\data\user\group\UserGroup')) {
-				if ($group !== null) {
-					$groups[$group->groupID] = $group;
-				}
-			}
-			$this->data['groups'] = $groups;
-		}
-		return $this->groups;
+		return $this->isReleased();
 	}
 	
 	/**
@@ -137,10 +90,7 @@ class ContentVersion extends AbstractVersion {
 	 */
 	public function __get($name) {
 		$result = parent::__get($name);
-		if ($result === null && $name == 'groups') {
-			$result = $this->getGroups();
-		}
-		else if ($result === null) {
+		if ($result === null) {
 			$result = ContentLanguageEntryCache::getInstance()->get($this->versionID, $name);
 		}
 	

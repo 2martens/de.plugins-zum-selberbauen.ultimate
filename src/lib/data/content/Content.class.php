@@ -27,6 +27,7 @@
  */
 namespace ultimate\data\content;
 use ultimate\data\AbstractUltimateVersionableDatabaseObject;
+use ultimate\system\content\ContentPermissionHandler;
 use wcf\data\user\User;
 use wcf\data\IMessage;
 use wcf\data\ITitledObject;
@@ -151,6 +152,10 @@ class Content extends AbstractUltimateVersionableDatabaseObject implements ITitl
 				if ($isVisible) break;
 			}
 			$this->isVisible = $isVisible;
+		}
+		
+		if ($this->isVisible) {
+			$this->isVisible = ContentPermissionHandler::getInstance()->getPermission($this->contentID, 'canSeeContent');
 		}
 		
 		return $this->isVisible;

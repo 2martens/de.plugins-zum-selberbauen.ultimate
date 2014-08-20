@@ -31,7 +31,7 @@ $(function() {
 		{else}
 			{assign var=date value=''}
 		{/if}
-		{if $content->status == 3}
+		{*if $content->status == 3*}
 			<li id="content{@$content->contentID}" class="marginTop">
 			
 				<article itemtype="http://schema.org/Article" itemscope="itemscope" class="ultimateContent{if $requestType == 'page'} ultimateWhiteBackgroundColor{/if} dividers">
@@ -41,12 +41,12 @@ $(function() {
 				data-can-edit="{if $__wcf->getSession()->getPermission('admin.content.ultimate.canEditContent')}1{else}0{/if}"
 				data-is-i18n="{literal}<?php if (mb_strpos($this->v['content']->contentText, 'ultimate.content.') !== false) { ?>{/literal}1{literal}<?php } else { ?>{/literal}0{literal}<?php } ?>{/literal}"
 				data-object-id="{@$contentID}"
-				data-object-type="de.plugins-zum-selberbauen.ultimate.likeableContent"{*
+				data-object-type="de.plugins-zum-selberbauen.ultimate.likeableContent" {*
 				*}{if $requestType != 'page'}{*
 				*}data-like-liked="{if $likeData[$contentID]|isset}{@$likeData[$contentID]->liked}{/if}" 
 				data-like-likes="{if $likeData[$contentID]|isset}{@$likeData[$contentID]->likes}{else}0{/if}" 
 				data-like-dislikes="{if $likeData[$contentID]|isset}{@$likeData[$contentID]->dislikes}{else}0{/if}" 
-				data-like-users='{if $likeData[$contentID]|isset}{ {implode from=$likeData[$contentID]->getUsers() item=likeUser}"{@$likeUser->userID}": { "username": "{$likeUser->username|encodeJSON}" }{/implode} }{else}{ }{/if}'{*
+				data-like-users='{if $likeData[$contentID]|isset}{ {implode from=$likeData[$contentID]->getUsers() item=likeUser}"{@$likeUser->userID}": { "username": "{$likeUser->username|encodeJSON}" }{/implode} }{else}{ }{/if}' {*
 				*}{/if}{*
 				*}data-user-id="{@$content->authorID}">
 							
@@ -200,7 +200,7 @@ $(function() {
 					{/if}
 				</article>
 			</li>
-		{/if}
+		{*/if*}
 	{/foreach}
 	
 		</ul>
