@@ -260,8 +260,6 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 	 * Reads data.
 	 */
 	public function readData() {
-		$this->groups = UserGroupCacheBuilder::getInstance()->getData(array(), 'groups');
-		
 		// fill status options
 		$this->statusOptions[0] = WCF::getLanguage()->get('wcf.acp.ultimate.status.draft');
 		$this->statusOptions[1] = WCF::getLanguage()->get('wcf.acp.ultimate.status.pendingReview');
