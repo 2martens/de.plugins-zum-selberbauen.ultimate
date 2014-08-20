@@ -26,7 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\content\language;
-use wcf\data\AbstractLanguageEntry;
+use ultimate\data\AbstractUltimateLanguageEntry;
 
 /**
  * Represents a content language entry.
@@ -38,7 +38,7 @@ use wcf\data\AbstractLanguageEntry;
  * @subpackage	data.content.language
  * @category	Ultimate CMS
  */
-class ContentLanguageEntry extends AbstractLanguageEntry {
+class ContentLanguageEntry extends AbstractUltimateLanguageEntry {
 	/**
 	 * The database table name.
 	 * @var string
