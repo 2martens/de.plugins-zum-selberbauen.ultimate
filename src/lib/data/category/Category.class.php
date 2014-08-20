@@ -130,7 +130,7 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledObject {
 	public function __get($name) {
 		$value = parent::__get($name);
 		if ($value === null) {
-			$value = CategoryLanguageEntryCache::getInstance()->get($this->categoryID, $name);
+			$value = CategoryLanguageEntryCache::getInstance()->getValue($this->categoryID, $name);
 		}
 		
 		return $value;
