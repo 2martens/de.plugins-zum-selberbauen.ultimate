@@ -35,7 +35,7 @@
 		
 		<nav>
 			<ul>
-				{if $__wcf->session->getPermission('admin.content.ultimate.canAddContent')}
+				{if $__wcf->session->getPermission('user.ultimate.content.canEditContent')}
 					<li><a data-controller="ContentAddForm" data-request-type="form" href="{linkExtended controller='ContentAdd' application='ultimate' parent='EditSuite'}{/linkExtended}" title="{lang}wcf.acp.ultimate.content.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.content.add{/lang}</span></a></li>
 				{/if}
 				
@@ -111,7 +111,7 @@
 			
 		<nav>
 			<ul>
-				{if $__wcf->session->getPermission('admin.content.ultimate.canAddContent')}
+				{if $__wcf->session->getPermission('user.ultimate.content.canEditContent')}
 					<li><a data-controller="ContentAddForm" data-request-type="form" href="{linkExtended controller='ContentAdd' application='ultimate' parent='EditSuite'}{/linkExtended}" title="{lang}wcf.acp.ultimate.content.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.content.add{/lang}</span></a></li>
 				{/if}
 				
