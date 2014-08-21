@@ -63,7 +63,7 @@ ULTIMATE.Action.Delete = WCF.Action.Delete.extend({
 	/**
 	 * Is called if the delete effect has been triggered on the given element.
 	 * 
-	 * @param	jQuery		element
+	 * @param	{jQuery}		element
 	 */
 	_didTriggerEffect: function(element) {
 		var text = $('.counter').text();
@@ -361,8 +361,7 @@ ULTIMATE.JSON = {
 	/**
 	 * Encodes a given variable.
 	 * 
-	 * @param {Object}
-	 *            variable
+	 * @param {Object} variable
 	 * @return {String}
 	 */
 	encode : function(variable) {
@@ -426,10 +425,8 @@ ULTIMATE.Permission = {
 	_variables : new WCF.Dictionary(),
 
 	/**
-	 * @param {String}
-	 *            key
-	 * @param {Boolean}
-	 *            value
+	 * @param {String} key
+	 * @param {Boolean} value
 	 * @see WCF.Dictionary.add()
 	 */
 	add : function(key, value) {
@@ -446,8 +443,7 @@ ULTIMATE.Permission = {
 	/**
 	 * Retrieves a variable.
 	 * 
-	 * @param {String}
-	 *            key
+	 * @param {String} key
 	 * @return {Boolean}
 	 */
 	get : function(key) {
