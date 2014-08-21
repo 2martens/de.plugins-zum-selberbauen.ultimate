@@ -2,10 +2,11 @@
     {if $__wcf->session->getPermission('user.ultimate.content.canEditContentSpecificRights')}
         {include file='aclPermissions'}
     {/if}
+    {include file='wysiwyg'}
 	{include file='multipleLanguageInputJavascript' elementIdentifier='subject' forceSelection=false}
 	{include file='multipleLanguageInputJavascript' elementIdentifier='description' forceSelection=false}
-	{include file='multipleLanguageInputJavascript' elementIdentifier='text' forceSelection=false}
-	{include file='wysiwyg'}
+	{include application='ultimate' file='multipleLanguageWYSIWYGJavascript' elementIdentifier='text' forceSelection=false}
+	
     <script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.ACL{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
     {if $__wcf->session->getPermission('user.ultimate.content.canEditContentSpecificRights')}
         {if $contentID|isset}

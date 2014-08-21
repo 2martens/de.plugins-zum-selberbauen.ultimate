@@ -408,7 +408,209 @@ ULTIMATE.JSON = {
 	}
 };
 
+/**
+ * Handles multiple language WYSIWYG textareas.
+ *
+ * @param	{String}	elementID
+ * @param	{Boolean}	forceSelection
+ * @param	{Object}	values
+ * @param	{Object}	availableLanguages
+ */
+ULTIMATE.MultipleLanguageWYSIWYG = WCF.MultipleLanguageInput.extend({
+    /**
+     * target textarea element
+     * @var	jQuery
+     */
+    _element: null,
 
+    /**
+     * target wysiwyg box
+     * @var jQuery
+     */
+    _box: null,
+    
+    /**
+     * Initializes multiple language ability for given element id.
+     *
+     * @param {String}	elementID
+     * @param {Boolean}	forceSelection
+     * @param {Object}	values
+     * @param {Object}	availableLanguages
+     */
+    init: function(elementID, forceSelection, values, availableLanguages) {
+        this._button = null;
+        this._element = $('#' + $.wcfEscapeID(elementID));
+        this._box = this._element.parents('.redactor_box');
+        this._forceSelection = forceSelection;
+        this._values = values;
+        this._availableLanguages = availableLanguages;
+
+        // unescape values
+        if ($.getLength(this._values)) {
+            for (var $key in this._values) {
+                this._values[$key] = WCF.String.unescapeHTML(this._values[$key]);
+            }
+        }
+
+        // default to current user language
+        this._languageID = LANGUAGE_ID;
+        if (this._element.length == 0) {
+            console.debug("[WCF.MultipleLanguageInput] element id '" + elementID + "' is unknown");
+            return;
+        }
+
+        // build selection handler
+        var $enableOnInit = ($.getLength(this._values) > 0);
+        this._insertedDataAfterInit = $enableOnInit;
+        this._prepareElement($enableOnInit);
+
+        // listen for submit event
+        this._element.parents('form').submit($.proxy(this._submit, this));
+
+        this._didInit = true;
+    },
+
+    /**
+     * Builds language handler.
+     *
+     * @param {Boolean} enableOnInit
+     */
+    _prepareElement: function(enableOnInit) {
+        this._box.wrap('<div class="dropdown preInput" />');
+        var $wrapper = this._box.parent();
+        this._button = $('<p class="button dropdownToggle"><span>' + WCF.Language.get('wcf.global.button.disabledI18n') + '</span></p>').prependTo($wrapper);
+
+        // insert list
+        this._list = $('<ul class="dropdownMenu"></ul>').insertAfter(this._button);
+
+        // add a special class if next item is a textarea
+        this._button.addClass('dropdownCaptionTextarea');
+
+        // insert available languages
+        for (var $languageID in this._availableLanguages) {
+            $('<li><span>' + this._availableLanguages[$languageID] + '</span></li>').data('languageID', $languageID).click($.proxy(this._changeLanguage, this)).appendTo(this._list);
+        }
+
+        // disable language input
+        if (!this._forceSelection) {
+            $('<li class="dropdownDivider" />').appendTo(this._list);
+            $('<li><span>' + WCF.Language.get('wcf.global.button.disabledI18n') + '</span></li>').click($.proxy(this._disable, this)).appendTo(this._list);
+        }
+
+        WCF.Dropdown.initDropdown(this._button, enableOnInit);
+
+        if (enableOnInit || this._forceSelection) {
+            this._isEnabled = true;
+
+            // pre-select current language
+            this._list.children('li').each($.proxy(function(index, listItem) {
+                var $listItem = $(listItem);
+                if ($listItem.data('languageID') == this._languageID) {
+                    $listItem.trigger('click');
+                }
+            }, this));
+        }
+
+        WCF.Dropdown.registerCallback($wrapper.wcfIdentify(), $.proxy(this._handleAction, this));
+    },
+    
+    /**
+     * Changes the currently active language.
+     *
+     * @param {Object} event
+     */
+    _changeLanguage: function(event) {
+        var $button = $(event.currentTarget);
+        this._insertedDataAfterInit = true;
+
+        // save current value
+        if (this._didInit) {
+            this._values[this._languageID] = this._element.redactor('getText');
+        }
+
+        // set new language
+        this._languageID = $button.data('languageID');
+        this._element.redactor('reset');
+        if (this._values[this._languageID]) {
+            this._element.redactor('insertText', this._values[this._languageID]);
+        }
+
+        // update marking
+        this._list.children('li').removeClass('active');
+        $button.addClass('active');
+
+        // update label
+        this._button.children('span').addClass('active').text(this._availableLanguages[this._languageID]);
+
+        // close selection and set focus on input element
+        if (this._didInit) {
+            this._element.blur().focus();
+        }
+    },
+
+    /**
+     * Disables language selection for current element.
+     *
+     * @param {Object} event
+     */
+    _disable: function(event) {
+        if (event === undefined && this._insertedDataAfterInit) {
+            event = null;
+        }
+
+        if (this._forceSelection || !this._list || event === null) {
+            return;
+        }
+
+        // remove active marking
+        this._button.children('span').removeClass('active').text(WCF.Language.get('wcf.global.button.disabledI18n'));
+
+        // update element value
+        this._element.redactor('reset');
+        if (this._values[LANGUAGE_ID]) {
+            this._element.redactor('insertText', this._values[LANGUAGE_ID]);
+        }
+
+        if (event) {
+            this._list.children('li').removeClass('active');
+            $(event.currentTarget).addClass('active');
+        }
+
+        this._element.blur().focus();
+        this._insertedDataAfterInit = false;
+        this._isEnabled = false;
+        this._values = { };
+    },
+
+    /**
+     * Prepares language variables on before submit.
+     */
+    _submit: function() {
+        // insert hidden form elements on before submit
+        if (!this._isEnabled) {
+            return 0xDEADBEEF;
+        }
+
+        // fetch active value
+        if (this._languageID) {
+            this._values[this._languageID] = this._element.redactor('getText');
+        }
+
+        var $form = $(this._element.parents('form')[0]);
+        var $elementID = this._element.wcfIdentify();
+
+        for (var $languageID in this._availableLanguages) {
+            if (this._values[$languageID] === undefined) {
+                this._values[$languageID] = '';
+            }
+
+            $('<input type="hidden" name="' + $elementID + '_i18n[' + $languageID + ']" value="' + WCF.String.escapeHTML(this._values[$languageID]) + '" />').appendTo($form);
+        }
+
+        // remove name attribute to prevent conflict with i18n values
+        this._element.removeAttr('name');
+    }
+});
 
 /**
  * Global permission storage.
