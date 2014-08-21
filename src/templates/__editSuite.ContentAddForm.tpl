@@ -27,7 +27,7 @@
 	<div class="contentNavigation">
 		<nav>
 			<ul>
-				<li><a data-controller="ContentListPage" data-request-type="page" href="{linkExtended application='ultimate' parent='EditSuite' controller='ContentList'}{/linkExtended}" title="{lang}wcf.acp.menu.link.ultimate.content.list{/lang}" class="button"><span class="icon icon24 icon-list"></span> <span>{lang}wcf.acp.menu.link.ultimate.content.list{/lang}</span></a></li>
+				<li><a data-controller="ContentListPage" data-request-type="page" href="{linkExtended application='ultimate' parent='EditSuite' controller='ContentList'}{/linkExtended}" title="{lang}wcf.acp.menu.link.ultimate.content.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.ultimate.content.list{/lang}</span></a></li>
 				
 				{event name='contentNavigationButtons'}
 			</ul>
