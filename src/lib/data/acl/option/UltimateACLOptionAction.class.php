@@ -44,4 +44,3 @@ class UltimateACLOptionAction extends ACLOptionAction {
 	 */
 	protected $requireACP = array();
 }
- 
