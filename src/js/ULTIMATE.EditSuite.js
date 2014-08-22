@@ -373,6 +373,15 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 		// get query data
 		var queryData = url.substr(url.indexOf('?') + 1).split('&');
 		var queryDataObject = $.getQueryData(queryData);
+        var urlWithoutQuery = (url.indexOf('?') != -1 ? url.substr(0, url.indexOf('?')) : url);
+        var idRegex = /\/(\d+)\/$/;
+        var id = idRegex.exec(urlWithoutQuery);
+        if (id !== null) {
+            id = id[1];
+        }
+        if (id) {
+            queryDataObject['id'] = id;
+        }
 		
 		// build proxy data
 	    var $data = $.extend(true, {

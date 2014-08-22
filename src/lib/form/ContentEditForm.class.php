@@ -345,9 +345,9 @@ class ContentEditForm extends ContentAddForm {
 	 * Shows the form.
 	 */
 	public function show() {
-		if (!empty($this->activeMenuItem)) {
-			ACPMenu::getInstance()->setActiveMenuItem($this->activeMenuItem);
-		}
 		MessageForm::show();
+		if (!$this->useTemplate) {
+			WCF::getTPL()->display($this->templateName, 'ultimate', false);
+		}
 	}
 }
