@@ -327,8 +327,7 @@ class ContentEditForm extends ContentAddForm {
 	public function assignVariables() {
 		parent::assignVariables();
 		
-		$useRequestData = (!empty($_POST)) ? true : false;
-		I18nHandler::getInstance()->assignVariables($useRequestData);
+		I18nHandler::getInstance()->assignVariables();
 		
 		WCF::getTPL()->assign(array(
 			'contentID' => $this->contentID,
