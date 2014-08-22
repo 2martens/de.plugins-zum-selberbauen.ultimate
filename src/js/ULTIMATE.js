@@ -428,6 +428,12 @@ ULTIMATE.MultipleLanguageWYSIWYG = WCF.MultipleLanguageInput.extend({
      * @var jQuery
      */
     _box: null,
+
+    /**
+     * Checks if disable has been called.
+     * @var Boolean
+     */
+    _disableCalled: false,
     
     /**
      * Initializes multiple language ability for given element id.
@@ -440,7 +446,7 @@ ULTIMATE.MultipleLanguageWYSIWYG = WCF.MultipleLanguageInput.extend({
     init: function(elementID, forceSelection, values, availableLanguages) {
         this._button = null;
         this._element = $('#' + $.wcfEscapeID(elementID));
-        this._box = this._element.parents('.redactor_box');
+        this._box = this._element.redactor('getBox');
         this._forceSelection = forceSelection;
         this._values = values;
         this._availableLanguages = availableLanguages;
@@ -522,6 +528,9 @@ ULTIMATE.MultipleLanguageWYSIWYG = WCF.MultipleLanguageInput.extend({
     _changeLanguage: function(event) {
         var $button = $(event.currentTarget);
         this._insertedDataAfterInit = true;
+        if (this._disableCalled) {
+            this._disableCalled = false;
+        }
 
         // save current value
         if (this._didInit) {
@@ -530,9 +539,11 @@ ULTIMATE.MultipleLanguageWYSIWYG = WCF.MultipleLanguageInput.extend({
 
         // set new language
         this._languageID = $button.data('languageID');
-        this._element.redactor('reset');
         if (this._values[this._languageID]) {
-            this._element.redactor('insertText', this._values[this._languageID]);
+            this._element.redactor('setText', this._values[this._languageID]);
+        }
+        else {
+            this._element.redactor('reset');
         }
 
         // update marking
@@ -544,7 +555,7 @@ ULTIMATE.MultipleLanguageWYSIWYG = WCF.MultipleLanguageInput.extend({
 
         // close selection and set focus on input element
         if (this._didInit) {
-            this._element.blur().focus();
+            this._element.blur().redactor('focus');
         }
     },
 
@@ -558,25 +569,29 @@ ULTIMATE.MultipleLanguageWYSIWYG = WCF.MultipleLanguageInput.extend({
             event = null;
         }
 
-        if (this._forceSelection || !this._list || event === null) {
+        if (this._forceSelection || !this._list || event === null || this._disableCalled) {
             return;
         }
-
+        
+        this._disableCalled = true;
         // remove active marking
         this._button.children('span').removeClass('active').text(WCF.Language.get('wcf.global.button.disabledI18n'));
 
-        // update element value
-        this._element.redactor('reset');
-        if (this._values[LANGUAGE_ID]) {
-            this._element.redactor('insertText', this._values[LANGUAGE_ID]);
+       // update element value
+        if (this._values[window.LANGUAGE_ID]) {
+            this._element.redactor('setText', this._values[window.LANGUAGE_ID]);
         }
+        else {
+            this._element.redactor('reset');
+        }
+        this._languageID = window.LANGUAGE_ID;
 
         if (event) {
             this._list.children('li').removeClass('active');
             $(event.currentTarget).addClass('active');
         }
 
-        this._element.blur().focus();
+        this._element.blur().redactor('focus');
         this._insertedDataAfterInit = false;
         this._isEnabled = false;
         this._values = { };
