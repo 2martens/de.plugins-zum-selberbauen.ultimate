@@ -254,7 +254,6 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		
 		$categoryIDs = (isset($this->parameters['categories'])) ? $this->parameters['categories'] : array();
 		$removeCategories = (isset($this->parameters['removeCategories'])) ? $this->parameters['removeCategories'] : array();
-		$groupIDs = (isset($this->parameters['groupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['groupIDs']) : array();
 		$metaDescription = (isset($this->parameters['metaDescription'])) ? $this->parameters['metaDescription'] : '';
 		$metaKeywords = (isset($this->parameters['metaKeywords'])) ? $this->parameters['metaKeywords'] : '';
 		
@@ -266,10 +265,6 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 			
 			if (!empty($removeCategories)) {
 				$contentEditor->removeFromCategories($removeCategories);
-			}
-			
-			if (!empty($groupIDs)) {
-				$contentEditor->addGroups($versions[$contentEditor->getObjectID()]->__get('versionID'), $groupIDs);
 			}
 			
 			$contentEditor->addMetaData($metaDescription, $metaKeywords);
