@@ -91,7 +91,7 @@ class ContentVersion extends AbstractVersion {
 	public function __get($name) {
 		$result = parent::__get($name);
 		if ($result === null) {
-			$result = ContentLanguageEntryCache::getInstance()->get($this->versionID, $name);
+			$result = ContentLanguageEntryCache::getInstance()->getValue($this->versionID, $name);
 		}
 	
 		return $result;
