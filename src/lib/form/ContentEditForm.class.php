@@ -68,6 +68,8 @@ class ContentEditForm extends ContentAddForm {
 		'user.ultimate.content.canEditContent'
 	);
 	
+	public $action = 'edit';
+	
 	/**
 	 * The content id.
 	 * @var	integer
@@ -322,16 +324,14 @@ class ContentEditForm extends ContentAddForm {
 	 * @see	UltimateContentAddForm::assignVariables()
 	 */
 	public function assignVariables() {
-		parent::assignVariables();
-		
 		I18nHandler::getInstance()->assignVariables();
 		
 		WCF::getTPL()->assign(array(
 			'contentID' => $this->contentID,
+			'attachmentObjectID' => $this->contentID,
 			'publishButtonLang' => WCF::getLanguage()->get($this->publishButtonLang),
 			'saveButtonLang' => $this->saveButtonLang,
-			'publishButtonLangRaw' => $this->publishButtonLang,
-			'action' => 'edit'
+			'publishButtonLangRaw' => $this->publishButtonLang
 		));
 
 		WCF::getTPL()->assign(array(
@@ -341,5 +341,7 @@ class ContentEditForm extends ContentAddForm {
 		if ($this->success) {
 			WCF::getTPL()->assign('success', true);
 		}
+
+		parent::assignVariables();
 	}
 }

@@ -155,9 +155,6 @@
 								{/if}
 							</small>
 						{/if}
-						{if $action == 'edit'}
-							{assign var=attachmentObjectID value=$contentID}
-						{/if}
 						{include file='messageFormTabs' wysiwygContainerID='text'}
 					</dd>
 				</dl>

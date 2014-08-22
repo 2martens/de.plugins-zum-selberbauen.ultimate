@@ -368,11 +368,11 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 				}
 			}
 			
-			foreach ($this->objects as $objectID => $object) {
+			foreach ($this->objects as $object) {
 				$object->update($this->parameters['data']);
-				$versions[$objectID] = $object->getCurrentVersion();
-				$object->updateVersion($versions[$object->getObjectID()]->__get('versionID'), $versionData);
-				ContentLanguageEntryEditor::updateEntries($versions[$object->getObjectID()]->__get('versionID'), $preparedLanguageData);
+				$versionID = $object->getCurrentVersion()->__get('versionID');
+				$object->updateVersion($versionID, $versionData);
+				ContentLanguageEntryEditor::updateEntries($versionID, $preparedLanguageData);
 			}
 		}
 		

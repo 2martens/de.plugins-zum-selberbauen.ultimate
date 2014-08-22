@@ -71,6 +71,8 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 	 */
 	public $templateName = 'editSuite';
 	
+	public $action = 'add';
+	
 	/**
 	 * indicates if you need to be logged in to access this page
 	 * @var	boolean
@@ -460,7 +462,6 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 			'slug' => $this->slug,
 			'metaDescription' => $this->metaDescription,
 			'metaKeywords' => $this->metaKeywords,
-			'action' => 'add',
 			'categoryIDs' => $this->categoryIDs,
 			'categories' => $this->categories,
 			'languageID' => ($this->languageID ? $this->languageID : 0),
