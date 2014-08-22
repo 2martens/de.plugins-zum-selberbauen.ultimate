@@ -43,7 +43,6 @@ use wcf\system\cache\builder\UltimateTagCloudCacheBuilder;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
 use wcf\system\menu\acp\ACPMenu;
-use wcf\system\request\LinkHandler;
 use wcf\system\request\UltimateLinkHandler;
 use wcf\system\tagging\TagEngine;
 use wcf\system\user\activity\event\UserActivityEventHandler;
