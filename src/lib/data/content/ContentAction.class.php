@@ -145,6 +145,9 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 			unset($this->parameters['data'][$key]);
 		}
 		
+		// authorID is part of versionData as well
+		$versionData['authorID'] = $this->parameters['data']['authorID'];
+		
 		$content = parent::create();
 		$contentEditor = new ContentEditor($content);
 		// create version
