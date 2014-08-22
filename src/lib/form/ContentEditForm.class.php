@@ -34,7 +34,6 @@ use ultimate\data\content\ContentAction;
 use ultimate\system\cache\builder\ContentCacheBuilder;
 use wcf\data\tag\Tag;
 use wcf\form\AbstractCaptchaForm;
-use wcf\form\MessageForm;
 use wcf\system\acl\ACLHandler;
 use wcf\system\bbcode\PreParser;
 use wcf\system\cache\builder\TagObjectCacheBuilder;
@@ -42,7 +41,6 @@ use wcf\system\cache\builder\TypedTagCloudCacheBuilder;
 use wcf\system\cache\builder\UltimateTagCloudCacheBuilder;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
-use wcf\system\menu\acp\ACPMenu;
 use wcf\system\request\UltimateLinkHandler;
 use wcf\system\tagging\TagEngine;
 use wcf\system\user\activity\event\UserActivityEventHandler;
@@ -335,19 +333,13 @@ class ContentEditForm extends ContentAddForm {
 			'publishButtonLangRaw' => $this->publishButtonLang,
 			'action' => 'edit'
 		));
+
+		WCF::getTPL()->assign(array(
+			'initialController' => 'ContentEditForm',
+		));
 		
 		if ($this->success) {
 			WCF::getTPL()->assign('success', true);
-		}
-	}
-	
-	/**
-	 * Shows the form.
-	 */
-	public function show() {
-		MessageForm::show();
-		if (!$this->useTemplate) {
-			WCF::getTPL()->display($this->templateName, 'ultimate', false);
 		}
 	}
 }
