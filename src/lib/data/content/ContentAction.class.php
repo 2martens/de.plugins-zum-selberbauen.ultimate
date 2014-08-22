@@ -171,12 +171,6 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		$categoryIDs = (isset($this->parameters['categories'])) ? $this->parameters['categories'] : array();
 		$contentEditor->addToCategories($categoryIDs, false);
 		
-		// connect with userGroups
-		$groupIDs = (isset($this->parameters['groupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['groupIDs']) : array();
-		if (!empty($groupIDs)) {
-			$contentEditor->addGroups($version->__get('versionID'), $groupIDs);
-		}
-		
 		// insert meta description/keywords
 		$metaDescription = (isset($this->parameters['metaDescription'])) ? $this->parameters['metaDescription'] : '';
 		$metaKeywords = (isset($this->parameters['metaKeywords'])) ? $this->parameters['metaKeywords'] : '';
