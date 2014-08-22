@@ -27,6 +27,7 @@
  */
 namespace ultimate\data\content;
 use ultimate\data\content\language\ContentLanguageEntryCache;
+use ultimate\data\content\version\ContentVersionCache;
 use ultimate\data\layout\LayoutAction;
 use ultimate\data\page\PageAction;
 use ultimate\system\cache\builder\ContentAttachmentCacheBuilder;
@@ -318,6 +319,7 @@ class ContentEditor extends AbstractVersionableDatabaseObjectEditor implements I
 		ContentPageCacheBuilder::getInstance()->reset();
 		ContentTagCacheBuilder::getInstance()->reset();
 		ContentTagCloudCacheBuilder::getInstance()->reset();
+		ContentVersionCache::getInstance()->reloadCache();
 		LayoutCacheBuilder::getInstance()->reset();
 		LatestContentsCacheBuilder::getInstance()->reset();
 	}
