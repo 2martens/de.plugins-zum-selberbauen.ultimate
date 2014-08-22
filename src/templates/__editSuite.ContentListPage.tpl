@@ -74,13 +74,13 @@
                             <td class="columnMark jsOnly"><label><input type="checkbox" class="jsClipboardItem" data-object-id="{@$content->contentID}" /></label></td>
                             <td class="columnIcon">
                                 
-                                {if $__wcf->session->getPermission('admin.content.ultimate.canEditContent')}
+                                {if $__wcf->session->getPermission('user.ultimate.content.canEditContent')}
                                     <a data-controller="ContentEditForm" data-request-type="form" href="{linkExtended controller='ContentEdit' application='ultimate' parent='EditSuite' id=$content->contentID}{/linkExtended}"><span title="{lang}wcf.acp.ultimate.content.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
                                 {else}
                                     <span title="{lang}wcf.acp.ultimate.content.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
                                 {/if}
                                 
-                                {if $__wcf->session->getPermission('admin.content.ultimate.canDeleteContent')}
+                                {if $__wcf->session->getPermission('user.ultimate.content.canDeleteContent')}
                                     <span title="{lang}wcf.acp.ultimate.content.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton pointer" data-object-id="{@$content->contentID}" data-confirm-message="{lang}wcf.acp.ultimate.content.delete.sure{/lang}"></span>
                                 {else}
                                     <span title="{lang}wcf.acp.ultimate.content.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
@@ -89,7 +89,7 @@
                                 {event name='buttons'}
                             </td>
                             <td class="columnID"><p>{@$content->contentID}</p></td>
-                            <td class="columnTitle"><p>{if $__wcf->session->getPermission('admin.content.ultimate.canEditContent')}<a title="{lang}wcf.acp.ultimate.content.edit{/lang}" data-controller="ContentEditForm" data-request-type="form"  href="{linkExtended controller='ContentEdit' application='ultimate' parent='EditSuite' id=$content->contentID}{/linkExtended}">{lang}{@$content->contentTitle}{/lang}</a>{else}{lang}{@$content->contentTitle}{/lang}{/if}</p></td>
+                            <td class="columnTitle"><p>{if $__wcf->session->getPermission('user.ultimate.content.canEditContent')}<a title="{lang}wcf.acp.ultimate.content.edit{/lang}" data-controller="ContentEditForm" data-request-type="form"  href="{linkExtended controller='ContentEdit' application='ultimate' parent='EditSuite' id=$content->contentID}{/linkExtended}">{lang}{@$content->contentTitle}{/lang}</a>{else}{lang}{@$content->contentTitle}{/lang}{/if}</p></td>
                             <td class="columnAuthor"><p><a data-controller="ContentListPage" data-request-type="page" href="{linkExtended controller='ContentList' application='ultimate' parent='EditSuite'}authorID={@$content->authorID}{/linkExtended}">{@$content->author}</a></p></td>
                             <td class="columnCategories">
                                 <p>
