@@ -501,17 +501,9 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 		if ($dateTime === null) $dateTime = DateUtil::getDateTimeByTimestamp(TIME_NOW);
 		$dateTime->setTimezone(WCF::getUser()->getTimezone());
 		//$date = 'M/d/Y';
-		$date = WCF::getLanguage()->get('wcf.date.dateFormat');
-		$time = 'h:i a';
-		$format = str_replace(
-			'%time%',
-			$time,
-			str_replace(
-				'%date%',
-				$date,
-				WCF::getLanguage()->get('ultimate.date.dateTimeFormat')
-			)
-		);
+		$date = 'Y-m-d';
+		$time = 'H:i:s';
+		$format = $date.' '.$time;
 		$this->publishDate = $dateTime->format($format);
 		$this->publishDateTimestamp = $dateTime->getTimestamp();
 	}
