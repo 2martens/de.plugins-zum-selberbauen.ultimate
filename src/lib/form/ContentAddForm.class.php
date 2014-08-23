@@ -479,7 +479,8 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 			'pageContent' => WCF::getTPL()->fetch('__editSuite.ContentAddForm', 'ultimate'),
 			'pageJS' => WCF::getTPL()->fetch('__editSuiteJS.ContentAddForm', 'ultimate'),
 			'initialController' => 'ContentAddForm',
-			'initialRequestType' => 'form'
+			'initialRequestType' => 'form',
+		    'initialURL' => '/EditSuite/ContentAdd/'
 		));
 	}
 	

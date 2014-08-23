@@ -42,7 +42,7 @@
 	<div id="pageJSContainer">
 		{@$pageJS}
 	</div>
-	<div id="pageContentContainer" data-initial-controller="{$initialController}" data-initial-request-type="{$initialRequestType}">
+	<div id="pageContentContainer" data-initial-controller="{$initialController}" data-initial-request-type="{$initialRequestType}" data-initial-url="{$initialURL}">
 		{@$pageContent}
 	</div>
 	<!-- /form/page content -->

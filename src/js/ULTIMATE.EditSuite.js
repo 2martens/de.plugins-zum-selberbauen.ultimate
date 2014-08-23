@@ -281,7 +281,8 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 		href = href.replace(/^.*\/\/[^\/]+/, '');
 		var stateObject = {
 			controller : $target.data('controller'),
-			requestType : $target.data('requestType')
+			requestType : $target.data('requestType'),
+            url: href
 		};
 		history.pushState(stateObject, '', href);
 		
@@ -311,31 +312,34 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	_eventPopstate : function(event) {
 		var controller = null;
 		var requestType = null;
+        var url = '';
 		
 		if (event.originalEvent.state == null) {
 			controller = this._pageContainer.data('initialController');
 			requestType = this._pageContainer.data('initialRequestType');
+            url = this._pageContainer.data('initialUrl');
 		}
 		else if (event.originalEvent.state.controller != null) {
 			controller = event.originalEvent.state.controller;
 			requestType = event.originalEvent.state.requestType;
+            url = event.originalEvent.state.url;
 		}
 		
 		if (controller != null) {
 			// load the content
 			if (this._cachedData[controller] != null) {
 				if (this._cachedData[controller]['jsAJAXOnly']) {
-					this._fireRequest(controller, requestType, 'jsOnly');
+					this._fireRequest(controller, requestType, url, 'jsOnly');
 				}
 				else if (this._cachedData[controller]['ajaxOnly']) {
-					this._fireRequest(controller, requestType, 'fullHTML');
+					this._fireRequest(controller, requestType, url, 'fullHTML');
 				}
 				else {
 					this._replaceHTML(controller);
 				}
 			}
 			else {
-				this._fireRequest(controller, requestType, 'fullHTML');
+				this._fireRequest(controller, requestType, url, 'fullHTML');
 			}
 		}
 	},

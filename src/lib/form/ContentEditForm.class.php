@@ -336,6 +336,7 @@ class ContentEditForm extends ContentAddForm {
 
 		WCF::getTPL()->assign(array(
 			'initialController' => 'ContentEditForm',
+		    'initialURL' => '/EditSuite/ContentEdit/'.$this->contentID.'/'
 		));
 		
 		if ($this->success) {
