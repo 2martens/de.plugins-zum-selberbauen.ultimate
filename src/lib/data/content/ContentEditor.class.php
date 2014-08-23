@@ -104,6 +104,15 @@ class ContentEditor extends AbstractVersionableDatabaseObjectEditor implements I
 			ContentLanguageEntryEditor::deleteEntries($objectID);
 			TagEngine::getInstance()->deleteObjectTags('de.plugins-zum-selberbauen.ultimate.content', $objectID);
 		}
+
+		// delete meta data
+		$conditionBuilder = new PreparedStatementConditionBuilder();
+		$conditionBuilder->add('objectID IN (?)', array($objectIDs));
+		$conditionBuilder->add('objectType = ?', array('content'));
+		$sql = 'DELETE FROM ultimate'.WCF_N.'_meta
+			    '.$conditionBuilder->__toString();
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute($conditionBuilder->getParameters());
 		
 		// delete associated pages
 		$conditionBuilder = new PreparedStatementConditionBuilder();
@@ -122,15 +131,6 @@ class ContentEditor extends AbstractVersionableDatabaseObjectEditor implements I
 		
 		$pageAction = new PageAction($pageIDs, 'delete');
 		$pageAction->executeAction();
-		
-		// delete meta data
-		$conditionBuilder = new PreparedStatementConditionBuilder();
-		$conditionBuilder->add('objectID IN (?)', array($objectIDs));
-		$conditionBuilder->add('objectType = ?', array('content'));
-		$sql = 'DELETE FROM ultimate'.WCF_N.'_meta
-			    '.$conditionBuilder->__toString();
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute($conditionBuilder->getParameters());
 		
 		return DatabaseObjectEditor::deleteAll($objectIDs);
 	}
@@ -297,6 +297,13 @@ class ContentEditor extends AbstractVersionableDatabaseObjectEditor implements I
 			));
 		}
 		WCF::getDB()->commitTransaction();
+	}
+
+	/**
+	 * @see	\wcf\data\IStorableObject::getDatabaseTableName()
+	 */
+	public static function getDatabaseTableName() {
+		return call_user_func(array(static::$baseClass, 'getDatabaseTableName'));
 	}
 	
 	/**
