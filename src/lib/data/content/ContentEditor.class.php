@@ -92,10 +92,6 @@ class ContentEditor extends AbstractVersionableDatabaseObjectEditor implements I
 	 * @return  integer
 	 */
 	public static function deleteAll(array $objectIDs = array()) {
-		if (defined('TESTING_MODE') && TESTING_MODE) {
-			return DatabaseObjectEditor::deleteAll($objectIDs);
-		}
-		
 		// unmark contents
 		ClipboardHandler::getInstance()->unmark($objectIDs, ClipboardHandler::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.ultimate.content'));
 
