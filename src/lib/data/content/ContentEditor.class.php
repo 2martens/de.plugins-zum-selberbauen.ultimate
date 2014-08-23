@@ -127,12 +127,12 @@ class ContentEditor extends AbstractVersionableDatabaseObjectEditor implements I
 			$pageIDs[] = intval($row['pageID']);
 		}
 		// checks if $pageIDs is filled, if not an exception would occur
-		if (empty($pageIDs)) return DatabaseObjectEditor::deleteAll($objectIDs);
+		if (empty($pageIDs)) return parent::deleteAll($objectIDs);
 		
 		$pageAction = new PageAction($pageIDs, 'delete');
 		$pageAction->executeAction();
 		
-		return DatabaseObjectEditor::deleteAll($objectIDs);
+		return parent::deleteAll($objectIDs);
 	}
 	
 	/**
