@@ -66,5 +66,6 @@ class ContentLanguageEntryCacheBuilder extends AbstractLanguageEntryCacheBuilder
 			}
 			$languageEntries[$row['contentVersionID']][($row['languageID'] === null ? 0 : $row['languageID'])] = $entry;
 		}
+		return $languageEntries;
 	}
 }

@@ -27,6 +27,7 @@
  */
 namespace ultimate\data\content;
 use ultimate\data\content\language\ContentLanguageEntryCache;
+use ultimate\data\content\language\ContentLanguageEntryEditor;
 use ultimate\data\content\version\ContentVersionCache;
 use ultimate\data\layout\LayoutAction;
 use ultimate\data\page\PageAction;
@@ -98,17 +99,11 @@ class ContentEditor extends AbstractVersionableDatabaseObjectEditor implements I
 		// delete attachments
 		AttachmentHandler::removeAttachments('de.plugins-zum-selberbauen.ultimate.content', $objectIDs);
 		
-		// delete language items
-		$sql = 'DELETE FROM wcf'.WCF_N.'_language_item
-		        WHERE       languageItem = ?';
-		$statement = WCF::getDB()->prepareStatement($sql);
-		
-		WCF::getDB()->beginTransaction();
+		// delete language items and tags
 		foreach ($objectIDs as $objectID) {
-			$statement->executeUnbuffered(array('ultimate.content.'.$objectID.'.%'));
+			ContentLanguageEntryEditor::deleteEntries($objectID);
 			TagEngine::getInstance()->deleteObjectTags('de.plugins-zum-selberbauen.ultimate.content', $objectID);
 		}
-		WCF::getDB()->commitTransaction();
 		
 		// delete associated pages
 		$conditionBuilder = new PreparedStatementConditionBuilder();

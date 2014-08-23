@@ -29,8 +29,6 @@ namespace ultimate\data\content;
 use ultimate\data\content\language\ContentLanguageEntryCache;
 use ultimate\data\content\language\ContentLanguageEntryEditor;
 use ultimate\data\layout\LayoutAction;
-use ultimate\data\layout\LayoutList;
-use ultimate\system\cache\builder\ContentCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use wcf\data\smiley\SmileyCache;
 use wcf\data\AbstractDatabaseObjectAction;
@@ -40,7 +38,6 @@ use wcf\system\bbcode\BBCodeHandler;
 use wcf\system\bbcode\BBCodeParser;
 use wcf\system\bbcode\PreParser;
 use wcf\system\exception\UserInputException;
-use wcf\system\language\I18nHandler;
 use wcf\system\language\LanguageFactory;
 use wcf\system\search\SearchIndexManager;
 use wcf\system\WCF;
@@ -419,6 +416,9 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		foreach ($this->objects as $object) {
 			$objectIDs[] = $object->getObjectID();
 		}
+
+		// execute action
+		$affectedRows = call_user_func(array($this->className, 'deleteAll'), $objectIDs);
 		
 		// update search index
 		SearchIndexManager::getInstance()->delete('de.plugins-zum-selberbauen.ultimate.content', $objectIDs);
@@ -431,8 +431,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		}
 		$layoutAction = new LayoutAction($layoutIDs, 'delete', array());
 		$layoutAction->executeAction();
-		// execute action
-		return call_user_func(array($this->className, 'deleteAll'), $objectIDs);
+		return $affectedRows;
 	}
 	
 	/**
