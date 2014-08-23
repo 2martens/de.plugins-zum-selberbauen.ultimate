@@ -62,9 +62,9 @@ CREATE TABLE ultimate1_content_language (
 	languageEntryID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	contentVersionID INT(10) NOT NULL,
 	languageID INT(10) NULL,
-	contentTitle VARCHAR(255) NOT NULL DEFAULT '',
-	contentDescription VARCHAR(255) NOT NULL DEFAULT '',
-	contentText MEDIUMTEXT NOT NULL,
+	contentTitle VARCHAR(255) NULL,
+  contentDescription VARCHAR(255) NULL,
+	contentText MEDIUMTEXT NULL,
 	UNIQUE KEY (contentVersionID, languageID)
 );
 
