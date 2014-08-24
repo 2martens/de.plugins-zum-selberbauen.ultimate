@@ -198,7 +198,7 @@
                 </dl>
                 {/if}
 
-                {if $__wcf->session->getPermission('user.ultimate.content.canEditStatus') && ($__wcf->session->getPermission('user.ultimate.content.canSaveAsDraft') || $__wcf->session->getPermission('user.ultimate.content.canSaveAsPendingReview'))}
+                {if $__wcf->session->getPermission('user.ultimate.content.canEditContentStatus') && ($__wcf->session->getPermission('user.ultimate.content.canSaveAsDraft') || $__wcf->session->getPermission('user.ultimate.content.canSaveAsPendingReview'))}
                     <dl{if $errorField == 'status'} class="formError"{/if}>
                         <dt><label for="statusSelect">{lang}wcf.acp.ultimate.status{/lang}</label></dt>
                         <dd>
