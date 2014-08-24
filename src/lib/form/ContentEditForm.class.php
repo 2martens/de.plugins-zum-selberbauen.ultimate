@@ -355,7 +355,7 @@ class ContentEditForm extends ContentAddForm {
 		
 		WCF::getTPL()->assign(array(
 			'i18nValues' => $i18nValues,
-		    'i18nPlainValues' => $i18nPlainValues
+			'i18nPlainValues' => $i18nPlainValues
 		));
 		
 		WCF::getTPL()->assign(array(
