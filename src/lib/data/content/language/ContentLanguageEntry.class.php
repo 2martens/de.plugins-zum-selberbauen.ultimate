@@ -61,7 +61,8 @@ class ContentLanguageEntry extends AbstractUltimateLanguageEntry {
 			parent::handleData($data);
 			return;
 		}
-		
+
+		$data['languageEntryID'] = intval($data['languageEntryID']);
 		$data['contentVersionID'] = intval($data['contentVersionID']);
 		$data['languageID'] = intval($data['languageID']);
 		parent::handleData($data);
