@@ -34,8 +34,6 @@ use wcf\data\ITitledObject;
 use wcf\system\bbcode\AttachmentBBCode;
 use wcf\system\bbcode\MessageParser;
 use wcf\system\request\UltimateLinkHandler;
-use wcf\system\WCF;
-use wcf\util\DateUtil;
 use wcf\util\StringUtil;
 
 /**
@@ -66,9 +64,7 @@ use wcf\util\StringUtil;
  * @property-read	\DateTime|null						$publishDateObject	null if the content is neither planned nor published
  * @property-read	integer								$lastModified
  * @property-read	integer								$status	(0, 1, 2, 3)
- * @property-read	string								$visibility	('public', 'protected', 'private')
  * @property-read	string[]							$metaData	('metaDescription' => metaDescription, 'metaKeywords' => metaKeywords)
- * @property-read	\wcf\data\user\group\UserGroup[]	$groups
  */
 class Content extends AbstractUltimateVersionableDatabaseObject implements ITitledObject, IMessage {
 	/**
@@ -113,13 +109,8 @@ class Content extends AbstractUltimateVersionableDatabaseObject implements ITitl
 	 */
 	private $isVisible = null;
 	
-	// TODO Language system compatible with versions
-	// TODO usage of custom language system instead of WCF system
-	
 	/**
-	 * Returns the title of this content (without language interpreting).
-	 *
-	 * To use language interpreting, use getLangTitle method.
+	 * Returns the title of this content.
 	 *
 	 * @return	string
 	 */
@@ -128,12 +119,13 @@ class Content extends AbstractUltimateVersionableDatabaseObject implements ITitl
 	}
 	
 	/**
-	 * Returns the language interpreted content title.
+	 * Returns the content title.
 	 * 
+	 * @deprecated Use getTitle()
 	 * @return string
 	 */
 	public function getLangTitle() {
-		return WCF::getLanguage()->get($this->contentTitle);
+		return $this->getTitle();
 	}
 	
 	/**
@@ -213,12 +205,12 @@ class Content extends AbstractUltimateVersionableDatabaseObject implements ITitl
 	}
 	
 	/**
-	 * Returns the language interpreted message of this content.
+	 * Returns the message of this content.
 	 *
 	 * @return string
 	 */
 	public function getMessage() {
-		return WCF::getLanguage()->get($this->contentText);
+		return $this->contentText;
 	}
 	
 	/**
@@ -231,7 +223,7 @@ class Content extends AbstractUltimateVersionableDatabaseObject implements ITitl
 		AttachmentBBCode::setObjectID($this->contentID);
 	
 		MessageParser::getInstance()->setOutputType('text/html');
-		return MessageParser::getInstance()->parse(WCF::getLanguage()->get($this->contentText), $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
+		return MessageParser::getInstance()->parse($this->contentText, $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
 	}
 	
 	/**
@@ -252,7 +244,7 @@ class Content extends AbstractUltimateVersionableDatabaseObject implements ITitl
 	 */
 	public function getSimplifiedFormattedMessage() {
 		MessageParser::getInstance()->setOutputType('text/simplified-html');
-		return MessageParser::getInstance()->parse(WCF::getLanguage()->get($this->contentText), $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
+		return MessageParser::getInstance()->parse($this->contentText, $this->enableSmilies, $this->enableHtml, $this->enableBBCodes);
 	}
 	
 	/**

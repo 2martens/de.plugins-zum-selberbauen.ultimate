@@ -58,9 +58,9 @@ $(function() {
 											{if !$block->hideTitles}
 												<h1 itemprop="name">
 													{if $requestType != 'content' && $requestType != 'page' && ($queryModeSelected == 'default' || $fetchPageContentSelected == 'none')}
-														<a class="link" href="{linkExtended application='ultimate' date=$date contentSlug=$content->contentSlug}{/linkExtended}" itemprop="url">{$content->getLangTitle()}</a>
+														<a class="link" href="{linkExtended application='ultimate' date=$date contentSlug=$content->contentSlug}{/linkExtended}" itemprop="url">{$content->getTitle()}</a>
 													{else}
-														{$content->getLangTitle()}
+														{$content->getTitle()}
 													{/if}
 												</h1>
 											{/if}
