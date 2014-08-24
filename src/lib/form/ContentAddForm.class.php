@@ -254,7 +254,7 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 		I18nHandler::getInstance()->register('description');
 		I18nHandler::getInstance()->register('tags');
 		I18nHandler::getInstance()->register('text');
-
+		
 		$this->objectTypeID = ACLHandler::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.ultimate.content');
 	}
 	
