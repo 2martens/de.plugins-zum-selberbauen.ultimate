@@ -78,7 +78,7 @@
 			<ul>
 				{content}
 					{if $objectType->getProcessor()->canAddCategory()}
-						<li><a href="{link application='ultimate' controller=$addController}{/link}" title="{$objectType->getProcessor()->getLanguageVariable('add')}" class="button"><span class="icon icon24 icon-plus"></span> <span>{@$objectType->getProcessor()->getLanguageVariable('add')}</span></a></li>
+						<li><a href="{link application='ultimate' controller=$addController}{/link}" title="{$objectType->getProcessor()->getLanguageVariable('add')}" class="button"><span class="icon icon16 icon-plus"></span> <span>{@$objectType->getProcessor()->getLanguageVariable('add')}</span></a></li>
 					{/if}
 					
 					{event name='contentNavigationButtons'}
@@ -146,7 +146,7 @@
 				<ul>
 					{content}
 						{if $objectType->getProcessor()->canAddCategory()}
-							<li><a href="{link application='ultimate' controller=$addController}{/link}" title="{$objectType->getProcessor()->getLanguageVariable('add')}" class="button"><span class="icon icon24 icon-plus"></span> <span>{@$objectType->getProcessor()->getLanguageVariable('add')}</span></a></li>
+							<li><a href="{link application='ultimate' controller=$addController}{/link}" title="{$objectType->getProcessor()->getLanguageVariable('add')}" class="button"><span class="icon icon16 icon-plus"></span> <span>{@$objectType->getProcessor()->getLanguageVariable('add')}</span></a></li>
 						{/if}
 
 						{event name='contentNavigationButtons'}

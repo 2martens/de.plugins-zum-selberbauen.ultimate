@@ -22,7 +22,7 @@
 <div class="contentNavigation">
 	<nav>
 		<ul>
-			<li><a href="{link application='ultimate' controller='UltimateCategoryList'}{/link}" title="{lang}wcf.acp.menu.link.ultimate.category.list{/lang}" class="button"><span class="icon icon24 icon-list"></span> <span>{lang}wcf.acp.menu.link.ultimate.category.list{/lang}</span></a></li>
+			<li><a href="{link application='ultimate' controller='UltimateCategoryList'}{/link}" title="{lang}wcf.acp.menu.link.ultimate.category.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.ultimate.category.list{/lang}</span></a></li>
 			
 			{event name='contentNavigationButtons'}
 		</ul>

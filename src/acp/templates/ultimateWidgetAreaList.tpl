@@ -33,7 +33,7 @@
 	<nav>
 		<ul>
 			{if $__wcf->session->getPermission('admin.content.ultimate.canManageWidgetAreas')}
-				<li><a href="{link application='ultimate' controller='UltimateWidgetAreaAdd'}{/link}" title="{lang}wcf.acp.ultimate.widgetArea.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.widgetArea.add{/lang}</span></a></li>
+				<li><a href="{link application='ultimate' controller='UltimateWidgetAreaAdd'}{/link}" title="{lang}wcf.acp.ultimate.widgetArea.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.ultimate.widgetArea.add{/lang}</span></a></li>
 			{/if}
 			
 			{event name='contentNavigationButtons'}
@@ -99,7 +99,7 @@
 	<nav>
 		<ul>
 			{if $__wcf->session->getPermission('admin.content.ultimate.canManageWidgetAreas')}
-				<li><a href="{link application='ultimate' controller='UltimateWidgetAreaAdd'}{/link}" title="{lang}wcf.acp.ultimate.widgetArea.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.widgetArea.add{/lang}</span></a></li>
+				<li><a href="{link application='ultimate' controller='UltimateWidgetAreaAdd'}{/link}" title="{lang}wcf.acp.ultimate.widgetArea.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.ultimate.widgetArea.add{/lang}</span></a></li>
 			{/if}
 			
 			{event name='contentNavigationButtons'}
