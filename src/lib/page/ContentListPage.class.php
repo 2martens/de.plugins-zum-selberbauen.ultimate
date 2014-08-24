@@ -301,7 +301,7 @@ class ContentListPage extends AbstractCachedListPage implements IEditSuitePage {
 			'pageJS' => WCF::getTPL()->fetch('__editSuiteJS.ContentListPage', 'ultimate'),
 			'initialController' => 'ContentListPage',
 			'initialRequestType' => 'page',
-		    'initialURL' => '/EditSuite/ContentList/'
+			'initialURL' => '/EditSuite/ContentList/'
 		));
 	}
 	

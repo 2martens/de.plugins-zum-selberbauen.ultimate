@@ -109,7 +109,7 @@ class EditSuiteForm extends AbstractForm implements IEditSuitePage {
 			'pageJS' => WCF::getTPL()->fetch('__editSuiteJS.Main', 'ultimate'),
 			'initialController' => 'EditSuiteForm',
 			'initialRequestType' => 'form',
-		    'initialURL' => '/EditSuite/'
+			'initialURL' => '/EditSuite/'
 		));
 	}
 	
