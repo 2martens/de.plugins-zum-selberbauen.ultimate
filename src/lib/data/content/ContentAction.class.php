@@ -216,6 +216,9 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 			}
 			unset($this->parameters['data'][$key]);
 		}
+
+		// authorID is part of versionData as well
+		$versionData['authorID'] = $this->parameters['data']['authorID'];
 		
 		// prepare language data
 		$preparedLanguageData = array();
@@ -353,6 +356,9 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 				}
 				unset($this->parameters['data'][$key]);
 			}
+
+			// authorID is part of versionData as well
+			$versionData['authorID'] = $this->parameters['data']['authorID'];
 			
 			// prepare language data
 			$preparedLanguageData = array();
