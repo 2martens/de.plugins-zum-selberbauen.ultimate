@@ -102,7 +102,7 @@
                                 </p>
                             </td>
                             
-                            <td class="columnDate dateColumn"><p>{if $content->publishDate > 0 && $content->publishDate <= $timeNow && $content->status == 3}{@$content->publishDate|time}{else}{/if}</p></td>
+                            <td class="columnDate dateColumn"><p>{if $content->publishDate > 0 && $content->status >= 2}{@$content->publishDate|time}{else}{/if}</p></td>
                             <td class="columnLastModified dateColumn"><p>{@$content->lastModified|time}</p></td>
                             
                             {event name='columns'}
