@@ -93,6 +93,16 @@ class ContentEditForm extends ContentAddForm {
 	 * @var	string
 	 */
 	protected $publishButtonLang = '';
+
+	/**
+	 * Specifies which of the registered values are actually plain values.
+	 * @var boolean[]
+	 */
+	protected $fakeI18nValues = array(
+		'subject' => false,
+		'description' => false,
+		'text' => false
+	);
 	
 	/**
 	 * Reads parameters.
@@ -170,6 +180,7 @@ class ContentEditForm extends ContentAddForm {
 		}
 		else {
 			I18nHandler::getInstance()->setValue('subject', $this->subject);
+			$this->fakeI18nValues['subject'] = true;
 		}
 
 		if (!ContentLanguageEntryCache::getInstance()->isNeutralValue($this->content->__get('versionID'), 'contentDescription')) {
@@ -178,6 +189,7 @@ class ContentEditForm extends ContentAddForm {
 		}
 		else {
 			I18nHandler::getInstance()->setValue('description', $this->description);
+			$this->fakeI18nValues['description'] = true;
 		}
 
 		if (!ContentLanguageEntryCache::getInstance()->isNeutralValue($this->content->__get('versionID'), 'contentText')) {
@@ -186,6 +198,7 @@ class ContentEditForm extends ContentAddForm {
 		}
 		else {
 			I18nHandler::getInstance()->setValue('text', $this->text);
+			$this->fakeI18nValues['text'] = true;
 		}
 		
 		// read meta data
@@ -226,7 +239,7 @@ class ContentEditForm extends ContentAddForm {
 		}
 		$contentText = array();
 		if (I18nHandler::getInstance()->isPlainValue('text')) {
-			$contentText[ContentLanguageEntryCache::NEUTRAL_LANGUAGE] = $this->text;
+			$contentText[ContentLanguageEntryCache::NEUTRAL_LANGUAGE] = ($this->preParse ? PreParser::getInstance()->parse($this->text) : $this->text);
 		}
 		else {
 			$contentText = I18nHandler::getInstance()->getValues('text');
@@ -325,6 +338,25 @@ class ContentEditForm extends ContentAddForm {
 	 */
 	public function assignVariables() {
 		I18nHandler::getInstance()->assignVariables();
+		
+		// reverse wrong variable assignments of I18nHandler
+		$i18nValues = WCF::getTPL()->get('i18nValues');
+		$i18nPlainValues = WCF::getTPL()->get('i18nPlainValues');
+		foreach ($this->fakeI18nValues as $value => $isFake) {
+			if ($isFake) {
+				$i18nElementValues = array_values($i18nValues[$value]);
+				if (!empty($i18nElementValues)) {
+					$actualValue = $i18nElementValues[0];
+					$i18nPlainValues[$value] = $actualValue;
+					unset($i18nValues[$value]);
+				}
+			}
+		}
+		
+		WCF::getTPL()->assign(array(
+			'i18nValues' => $i18nValues,
+		    'i18nPlainValues' => $i18nPlainValues
+		));
 		
 		WCF::getTPL()->assign(array(
 			'contentID' => $this->contentID,
