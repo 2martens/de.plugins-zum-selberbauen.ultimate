@@ -1,5 +1,5 @@
 {capture assign='pageTitle'}{lang}wcf.acp.ultimate.widgetArea.list{/lang}{/capture}
-{include file='header' application='ultimate'}
+{include file='header'}
 
 <script data-relocate="true" type="text/javascript">
 	//<![CDATA[

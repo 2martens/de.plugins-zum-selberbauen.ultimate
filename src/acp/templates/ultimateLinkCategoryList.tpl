@@ -1,8 +1,8 @@
 {capture assign='pageTitle'}{@$objectType->getProcessor()->getLanguageVariable('list')}{/capture}
-{include file='header' application='ultimate'}
+{include file='header'}
 
 {if $categoryNodeList|count}
-	<script data-relocate="true "type="text/javascript">
+	<script data-relocate="true" type="text/javascript">
 		//<![CDATA[
 		$(function() {
 			{if $collapsibleObjectTypeID && $categoryNodeList|count > 1}
