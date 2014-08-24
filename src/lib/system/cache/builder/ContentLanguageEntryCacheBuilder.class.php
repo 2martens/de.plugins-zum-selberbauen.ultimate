@@ -60,11 +60,12 @@ class ContentLanguageEntryCacheBuilder extends AbstractLanguageEntryCacheBuilder
 		$statement->execute();
 		
 		while ($row = $statement->fetchArray()) {
+			$row['languageID'] = ($row['languageID'] === null ? 0 : $row['languageID']);
 			$entry = new static::$languageEntryClass(null, null, null, $row);
 			if (!isset($languageEntries[$row['contentVersionID']])) {
 				$languageEntries[$row['contentVersionID']] = array();
 			}
-			$languageEntries[$row['contentVersionID']][($row['languageID'] === null ? 0 : $row['languageID'])] = $entry;
+			$languageEntries[$row['contentVersionID']][$row['languageID']] = $entry;
 		}
 		return $languageEntries;
 	}
