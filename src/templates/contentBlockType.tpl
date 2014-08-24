@@ -3,7 +3,7 @@
 $(function() {	
 	{if MODULE_LIKE && $__wcf->getSession()->getPermission('user.like.canViewLike') && $requestType != 'page'}new ULTIMATE.Content.Like({if $__wcf->getUser()->userID && $__wcf->getSession()->getPermission('user.like.canLike')}1{else}0{/if}, {@LIKE_ENABLE_DISLIKE}, {@LIKE_SHOW_SUMMARY}, {@LIKE_ALLOW_FOR_OWN_CONTENT});{/if}
 	{if $__wcf->user->userID}
-		{if $__wcf->getSession()->getPermission('admin.content.ultimate.canEditContent')}
+		{if $__wcf->getSession()->getPermission('user.ultimate.content.canEditContent')}
 			var $inlineEditor = new ULTIMATE.Content.InlineEditor(0);
 		{/if}
 	{/if}
@@ -38,7 +38,7 @@ $(function() {
 					
 					{if !$block->hideContent}
 						<div class="message jsMessage messageReduced{if $requestType == 'page'} ultimateWhiteBackgroundColor{/if}"
-				data-can-edit="{if $__wcf->getSession()->getPermission('admin.content.ultimate.canEditContent')}1{else}0{/if}"
+				data-can-edit="{if $__wcf->getSession()->getPermission('user.ultimate.content.canEditContent')}1{else}0{/if}"
 				data-is-i18n="{literal}<?php if (mb_strpos($this->v['content']->contentText, 'ultimate.content.') !== false) { ?>{/literal}1{literal}<?php } else { ?>{/literal}0{literal}<?php } ?>{/literal}"
 				data-object-id="{@$contentID}"
 				data-object-type="de.plugins-zum-selberbauen.ultimate.likeableContent" {*
@@ -151,7 +151,7 @@ $(function() {
 												<nav class="jsMobileNavigation buttonGroupNavigation">
 													<ul class="smallButtons buttonGroup">{*
 														*}{if $requestType != 'content' && $requestType != 'page' && ($queryModeSelected == 'default' || $fetchPageContentSelected == 'none')}<li><a href="{linkExtended application='ultimate' date=$date contentSlug=$content->contentSlug}{/linkExtended}" class="button"><span class="icon icon16 icon-arrow-right"></span> <span>{lang}wcf.global.button.readMore{/lang}</span></a></li>{/if}{*
-														*}{if $__wcf->getSession()->getPermission('admin.content.ultimate.canEditContent') && !$hideInlineEdit}<li><a title="{lang}wcf.acp.ultimate.content.edit{/lang}" class="button jsMessageEditButton"><span class="icon icon16 icon-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}{*
+														*}{if $__wcf->getSession()->getPermission('user.ultimate.content.canEditContent') && !$hideInlineEdit}<li><a title="{lang}wcf.acp.ultimate.content.edit{/lang}" class="button jsMessageEditButton"><span class="icon icon16 icon-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}{*
 														*}<li class="toTopLink"><a href="{@$anchor}" title="{lang}wcf.global.scrollUp{/lang}" class="button jsTooltip"><span class="icon icon16 icon-arrow-up"></span> <span class="invisible">{lang}wcf.global.scrollUp{/lang}</span></a></li>{*
 													*}</ul>
 												</nav>
