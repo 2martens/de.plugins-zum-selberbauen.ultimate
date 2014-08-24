@@ -3,8 +3,8 @@
         {include file='aclPermissions'}
     {/if}
     {include file='wysiwyg'}
-	{include file='multipleLanguageInputJavascript' elementIdentifier='subject' forceSelection=false}
-	{include file='multipleLanguageInputJavascript' elementIdentifier='description' forceSelection=false}
+	{include application='ultimate' file='multipleLanguageInputJavascript' elementIdentifier='subject' forceSelection=false}
+	{include application='ultimate' file='multipleLanguageInputJavascript' elementIdentifier='description' forceSelection=false}
 	{include application='ultimate' file='multipleLanguageWYSIWYGJavascript' elementIdentifier='text' forceSelection=false}
 	
     <script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.ACL{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
@@ -42,7 +42,7 @@
 				<dl{if $errorField == 'subject'} class="formError"{/if}>
 					<dt><label for="subject">{lang}wcf.acp.ultimate.content.title{/lang}</label></dt>
 					<dd>
-						<input type="text" id="subject" name="subject" value="{@$i18nPlainValues['subject']}" class="long" required="required" placeholder="{lang}wcf.acp.ultimate.content.title.placeholder{/lang}" pattern=".{literal}{{/literal}4,{literal}}{/literal}" />
+						<input type="text" id="subject" name="subject" value="{@$I18nPlainValues['subject']}" class="long" required="required" placeholder="{lang}wcf.acp.ultimate.content.title.placeholder{/lang}" pattern=".{literal}{{/literal}4,{literal}}{/literal}" />
 						{if $errorField == 'subject'}
 							<small class="innerError">
 								{if $errorType == 'empty'}
@@ -75,7 +75,7 @@
 				<dl{if $errorField == 'description'} class="formError"{/if}>
 					<dt><label for="description">{lang}wcf.acp.ultimate.content.description{/lang}</label></dt>
 					<dd>
-						<input type="text" id="description" name="description" value="{@$i18nPlainValues['description']}" class="long" placeholder="{lang}wcf.acp.ultimate.content.description.placeholder{/lang}" pattern=".{literal}{{/literal}4,{literal}}{/literal}" />
+						<input type="text" id="description" name="description" value="{@$I18nPlainValues['description']}" class="long" placeholder="{lang}wcf.acp.ultimate.content.description.placeholder{/lang}" pattern=".{literal}{{/literal}4,{literal}}{/literal}" />
 						{if $errorField == 'description'}
 							<small class="innerError">
 								{if $errorType == 'empty'}
@@ -144,7 +144,7 @@
 				<dl{if $errorField == 'text'} class="formError"{/if}>
 					<dt><label for="text">{lang}wcf.acp.ultimate.content.text{/lang}</label></dt>
 					<dd>
-						<textarea id="text" name="text" rows="15" cols="40" class="long" >{@$i18nPlainValues['text']}</textarea>
+						<textarea id="text" name="text" rows="15" cols="40" class="long" >{@$I18nPlainValues['text']}</textarea>
 						
 						{if $errorField == 'text'}
 							<small class="innerError">

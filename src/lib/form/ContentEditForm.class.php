@@ -95,13 +95,25 @@ class ContentEditForm extends ContentAddForm {
 	protected $publishButtonLang = '';
 
 	/**
-	 * Specifies which of the registered values are actually plain values.
-	 * @var boolean[]
+	 * Contains the i18nValues.
+	 * @var string[][]
 	 */
-	protected $fakeI18nValues = array(
-		'subject' => false,
-		'description' => false,
-		'text' => false
+	protected $i18nValues = array(
+		'subject' => array(),
+		'description' => array(),
+		'text' => array(),
+		'tags' => array()
+	);
+
+	/**
+	 * Contains the i18nValues.
+	 * @var string[]
+	 */
+	protected $i18nPlainValues = array(
+		'subject' => '',
+		'description' => '',
+		'text' => '',
+		'tags' => ''
 	);
 	
 	/**
@@ -176,29 +188,26 @@ class ContentEditForm extends ContentAddForm {
 		// prepare I18nHandler
 		if (!ContentLanguageEntryCache::getInstance()->isNeutralValue($this->content->__get('versionID'), 'contentTitle')) {
 			$contentTitle = ContentLanguageEntryCache::getInstance()->getValues($this->content->__get('versionID'), 'contentTitle');
-			I18nHandler::getInstance()->setValues('subject', $contentTitle);
+			$this->i18nValues['subject'] = $contentTitle;
 		}
 		else {
-			I18nHandler::getInstance()->setValue('subject', $this->subject);
-			$this->fakeI18nValues['subject'] = true;
+			$this->i18nPlainValues['subject'] = $this->subject;
 		}
 
 		if (!ContentLanguageEntryCache::getInstance()->isNeutralValue($this->content->__get('versionID'), 'contentDescription')) {
 			$contentDescription = ContentLanguageEntryCache::getInstance()->getValues($this->content->__get('versionID'), 'contentDescription');
-			I18nHandler::getInstance()->setValues('description', $contentDescription);
+			$this->i18nValues['description'] = $contentDescription;
 		}
 		else {
-			I18nHandler::getInstance()->setValue('description', $this->description);
-			$this->fakeI18nValues['description'] = true;
+			$this->i18nPlainValues['description'] = $this->description;
 		}
 
 		if (!ContentLanguageEntryCache::getInstance()->isNeutralValue($this->content->__get('versionID'), 'contentText')) {
 			$contentText = ContentLanguageEntryCache::getInstance()->getValues($this->content->__get('versionID'), 'contentText');
-			I18nHandler::getInstance()->setValues('text', $contentText);
+			$this->i18nValues['text'] = $contentText;
 		}
 		else {
-			I18nHandler::getInstance()->setValue('text', $this->text);
-			$this->fakeI18nValues['text'] = true;
+			$this->i18nPlainValues['text'] = $this->text;
 		}
 		
 		// read meta data
@@ -337,27 +346,6 @@ class ContentEditForm extends ContentAddForm {
 	 * @see	UltimateContentAddForm::assignVariables()
 	 */
 	public function assignVariables() {
-		I18nHandler::getInstance()->assignVariables();
-		
-		// reverse wrong variable assignments of I18nHandler
-		$i18nValues = WCF::getTPL()->get('i18nValues');
-		$i18nPlainValues = WCF::getTPL()->get('i18nPlainValues');
-		foreach ($this->fakeI18nValues as $value => $isFake) {
-			if ($isFake) {
-				$i18nElementValues = array_values($i18nValues[$value]);
-				if (!empty($i18nElementValues)) {
-					$actualValue = $i18nElementValues[0];
-					$i18nPlainValues[$value] = $actualValue;
-					unset($i18nValues[$value]);
-				}
-			}
-		}
-		
-		WCF::getTPL()->assign(array(
-			'i18nValues' => $i18nValues,
-			'i18nPlainValues' => $i18nPlainValues
-		));
-		
 		WCF::getTPL()->assign(array(
 			'contentID' => $this->contentID,
 			'attachmentObjectID' => $this->contentID,
@@ -374,6 +362,12 @@ class ContentEditForm extends ContentAddForm {
 		if ($this->success) {
 			WCF::getTPL()->assign('success', true);
 		}
+
+		// fix for the broken assignment system (magic is in the works here); mind the capital I at the beginning
+		WCF::getTPL()->assign(array(
+			'I18nValues' => $this->i18nValues,
+			'I18nPlainValues' => $this->i18nPlainValues
+		));
 
 		parent::assignVariables();
 	}

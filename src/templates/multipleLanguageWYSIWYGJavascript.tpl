@@ -1,6 +1,6 @@
 {if $availableLanguages|count > 1}
     {capture assign='valuesI18n'}
-        {implode from=$i18nValues[$elementIdentifier] key=languageID item=value}'{@$languageID}': '{$value}'{/implode}
+        {implode from=$I18nValues[$elementIdentifier] key=languageID item=value}'{@$languageID}': '{$value}'{/implode}
     {/capture}
     <script data-relocate="true">
         //<![CDATA[
