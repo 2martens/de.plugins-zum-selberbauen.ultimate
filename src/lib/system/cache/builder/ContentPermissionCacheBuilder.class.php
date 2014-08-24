@@ -32,7 +32,7 @@ use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\WCF;
 
 /**
- * Caches the board permissions for a combination of user groups.
+ * Caches the content permissions for a combination of user groups.
  *
  * @author	    Jim Martens
  * @copyright	2011-2014 Jim Martens
@@ -62,7 +62,7 @@ class ContentPermissionCacheBuilder extends AbstractCacheBuilder {
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute($conditionBuilder->getParameters());
 			while ($row = $statement->fetchArray()) {
-				if (!isset($data[$row['boardID']][$row['permission']])) $data[$row['boardID']][$row['permission']] = $row['optionValue'];
+				if (!isset($data[$row['contentID']][$row['permission']])) $data[$row['contentID']][$row['permission']] = $row['optionValue'];
 				else $data[$row['contentID']][$row['permission']] = $row['optionValue'] || $data[$row['contentID']][$row['permission']];
 			}
 		}
