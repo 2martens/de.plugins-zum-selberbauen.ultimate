@@ -85,7 +85,7 @@ ULTIMATE.Action.Delete = WCF.Action.Delete.extend({
 				self._containers.push($containerID);
 			}
 		});
-	},
+	}
 });
 
 /**
@@ -186,7 +186,7 @@ ULTIMATE.Date.Picker = {
 		// this is not perfect, but a basic implementation and should work in 99% of the cases
 		this._dateFormat = WCF.Language.get('wcf.date.dateFormat').replace(/([^dDjlzSFmMnoYyU\\]*(?:\\.[^dDjlzSFmMnoYyU\\]*)*)([dDjlzSFmMnoYyU])/g, function(match, part1, part2, offset, string) {
 			for (var $key in $replacementTable) {
-				if (part2 == $key) {
+				if ($replacementTable.hasOwnProperty($key) && part2 == $key) {
 					part2 = $replacementTable[$key];
 				}
 			}
@@ -196,7 +196,7 @@ ULTIMATE.Date.Picker = {
 		
 		this._timeFormat = WCF.Language.get('wcf.date.timeFormat').replace(/([^aAgGhHisu\\]*(?:\\.[^aAgGhHisu\\]*)*)([aAgGhHisu])/g, function(match, part1, part2, offset, string) {
 			for (var $key in $replacementTable) {
-				if (part2 == $key) {
+				if ($replacementTable.hasOwnProperty($key) && part2 == $key) {
 					part2 = $replacementTable[$key];
 				}
 			}
@@ -454,7 +454,9 @@ ULTIMATE.MultipleLanguageWYSIWYG = WCF.MultipleLanguageInput.extend({
         // unescape values
         if ($.getLength(this._values)) {
             for (var $key in this._values) {
-                this._values[$key] = WCF.String.unescapeHTML(this._values[$key]);
+                if (this._values.hasOwnProperty($key)) {
+                    this._values[$key] = WCF.String.unescapeHTML(this._values[$key]);
+                }
             }
         }
 
@@ -494,7 +496,9 @@ ULTIMATE.MultipleLanguageWYSIWYG = WCF.MultipleLanguageInput.extend({
 
         // insert available languages
         for (var $languageID in this._availableLanguages) {
-            $('<li><span>' + this._availableLanguages[$languageID] + '</span></li>').data('languageID', $languageID).click($.proxy(this._changeLanguage, this)).appendTo(this._list);
+            if (this._availableLanguages.hasOwnProperty($languageID)) {
+                $('<li><span>' + this._availableLanguages[$languageID] + '</span></li>').data('languageID', $languageID).click($.proxy(this._changeLanguage, this)).appendTo(this._list);
+            }
         }
 
         // disable language input
@@ -615,7 +619,7 @@ ULTIMATE.MultipleLanguageWYSIWYG = WCF.MultipleLanguageInput.extend({
         var $elementID = this._element.wcfIdentify();
 
         for (var $languageID in this._availableLanguages) {
-            if (this._values[$languageID] === undefined) {
+            if (this._availableLanguages.hasOwnProperty($languageID) && this._values[$languageID] === undefined) {
                 this._values[$languageID] = '';
             }
 
@@ -690,23 +694,25 @@ ULTIMATE.NestedSortable.Delete = WCF.Action.Delete.extend({
 	 * @see WCF.Action.Delete.triggerEffect()
 	 */
 	triggerEffect : function(objectIDs) {
-		for ( var $index in this._containers) {
-			var $container = $('#' + this._containers[$index]);
-			if (WCF.inArray(
-					$container.find('.jsDeleteButton').data('objectID'),
-					objectIDs)) {
-				// move child categories up
-				if ($container.has('ol').has('li')) {
-					var $list = $container.find('> ol');
-					$container.before($list.contents());
-					$list.contents().detach();
-					$container.remove();
-				} else {
-					$container.wcfBlindOut('up', function() {
-						$container.remove();
-					});
-				}
-			}
+		for (var $index in this._containers) {
+            if (this._containers.hasOwnProperty($index)) {
+                var $container = $('#' + this._containers[$index]);
+                if (WCF.inArray(
+                        $container.find('.jsDeleteButton').data('objectID'),
+                        objectIDs)) {
+                    // move child categories up
+                    if ($container.has('ol').has('li')) {
+                        var $list = $container.find('> ol');
+                        $container.before($list.contents());
+                        $list.contents().detach();
+                        $container.remove();
+                    } else {
+                        $container.wcfBlindOut('up', function() {
+                            $container.remove();
+                        });
+                    }
+                }
+            }
 		}
 	}
 });
