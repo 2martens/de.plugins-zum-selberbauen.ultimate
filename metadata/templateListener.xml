@@ -60,21 +60,6 @@
             <templatecode><![CDATA[{include file='__copyright' application='ultimate'}]]></templatecode>
         </templatelistener>
         <!-- /frontend copyright -->
-        
-        <!-- WYSIWYG utility -->
-        <templatelistener name="ultimateUtil">
-            <environment>user</environment>
-            <templatename>wysiwyg</templatename>
-            <eventname>javascriptFiles</eventname>
-            <templatecode><![CDATA[,'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/ultimateUtil.js?v={@LAST_UPDATE_TIME}']]></templatecode>
-        </templatelistener>
-        <templatelistener name="ultimateUtilInit">
-            <environment>user</environment>
-            <templatename>wysiwyg</templatename>
-            <eventname>javascriptInit</eventname>
-            <templatecode><![CDATA[$config.plugins.push('ultimateUtil');
-]]></templatecode>
-        </templatelistener>
 		
 		<!-- ACP logo -->
 		<templatelistener name="headerLogoUltimateACP">

@@ -544,7 +544,7 @@ ULTIMATE.MultipleLanguageWYSIWYG = WCF.MultipleLanguageInput.extend({
         // set new language
         this._languageID = $button.data('languageID');
         if (this._values[this._languageID]) {
-            this._element.redactor('setText', this._values[this._languageID]);
+            this._element.redactor('replaceText', this._values[this._languageID]);
         }
         else {
             this._element.redactor('reset');
@@ -559,7 +559,8 @@ ULTIMATE.MultipleLanguageWYSIWYG = WCF.MultipleLanguageInput.extend({
 
         // close selection and set focus on input element
         if (this._didInit) {
-            this._element.blur().redactor('focus');
+            //this._box.blur();
+            //this._element.redactor('focus');
         }
     },
 
@@ -583,7 +584,7 @@ ULTIMATE.MultipleLanguageWYSIWYG = WCF.MultipleLanguageInput.extend({
 
        // update element value
         if (this._values[window.LANGUAGE_ID]) {
-            this._element.redactor('setText', this._values[window.LANGUAGE_ID]);
+            this._element.redactor('replaceText', this._values[window.LANGUAGE_ID]);
         }
         else {
             this._element.redactor('reset');
@@ -595,7 +596,8 @@ ULTIMATE.MultipleLanguageWYSIWYG = WCF.MultipleLanguageInput.extend({
             $(event.currentTarget).addClass('active');
         }
 
-        this._element.blur().redactor('focus');
+        //this._box.blur();
+        //this._element.redactor('focus');
         this._insertedDataAfterInit = false;
         this._isEnabled = false;
         this._values = { };
