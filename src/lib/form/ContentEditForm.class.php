@@ -50,13 +50,13 @@ use wcf\util\DateUtil;
 use wcf\util\HeaderUtil;
 
 /**
- * Shows the UltimateContentEdit form.
+ * Shows the ContentEdit form.
  * 
  * @author		Jim Martens
  * @copyright	2011-2014 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
- * @subpackage	acp.form
+ * @subpackage	form
  * @category	Ultimate CMS
  */
 class ContentEditForm extends ContentAddForm {
@@ -328,8 +328,7 @@ class ContentEditForm extends ContentAddForm {
 			'contentID' => $this->contentID,
 			'attachmentObjectID' => $this->contentID,
 			'publishButtonLang' => WCF::getLanguage()->get($this->publishButtonLang),
-			'saveButtonLang' => $this->saveButtonLang,
-			'publishButtonLangRaw' => $this->publishButtonLang
+			'saveButtonLang' => $this->saveButtonLang
 		));
 
 		WCF::getTPL()->assign(array(
