@@ -93,28 +93,6 @@ class ContentEditForm extends ContentAddForm {
 	 * @var	string
 	 */
 	protected $publishButtonLang = '';
-
-	/**
-	 * Contains the i18nValues.
-	 * @var string[][]
-	 */
-	protected $i18nValues = array(
-		'subject' => array(),
-		'description' => array(),
-		'text' => array(),
-		'tags' => array()
-	);
-
-	/**
-	 * Contains the i18nValues.
-	 * @var string[]
-	 */
-	protected $i18nPlainValues = array(
-		'subject' => '',
-		'description' => '',
-		'text' => '',
-		'tags' => ''
-	);
 	
 	/**
 	 * Reads parameters.

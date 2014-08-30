@@ -228,6 +228,28 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 		'ContentAddForm',
 		'ultimate.edit.contents'
 	);
+
+	/**
+	 * Contains the i18nValues.
+	 * @var string[][]
+	 */
+	protected $i18nValues = array(
+		'subject' => array(),
+		'description' => array(),
+		'text' => array(),
+		'tags' => array()
+	);
+
+	/**
+	 * Contains the i18nValues.
+	 * @var string[]
+	 */
+	protected $i18nPlainValues = array(
+		'subject' => '',
+		'description' => '',
+		'text' => '',
+		'tags' => ''
+	);
 	
 	/**
 	 * @see \ultimate\page\IEditSuitePage::getActiveMenuItems()
@@ -396,7 +418,7 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 		$returnValues = $this->objectAction->getReturnValues();
 		/* @var \ultimate\data\content\Content $content */
 		$content = $returnValues['returnValues'];
-		$contentID = $returnValues['returnValues']->contentID;
+		$contentID = $content->contentID;
 		
 		// save tags
 		foreach ($this->tagsI18n as $languageID => $tags) {
@@ -409,7 +431,7 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 		}
 
 		// save ACL
-		ACLHandler::getInstance()->save($returnValues['returnValues']->contentID, $this->objectTypeID);
+		ACLHandler::getInstance()->save($contentID, $this->objectTypeID);
 		UserStorageHandler::getInstance()->resetAll('ultimateContentPermissions');
 		
 		// reset cache
@@ -440,7 +462,7 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 		$this->text = $this->publishDate = '';
 		$this->publishDateTimestamp = $this->statusID = 0;
 		I18nHandler::getInstance()->reset();
-		$this->categoryIDs = $this->groupIDs = array();
+		$this->categoryIDs = array();
 		$this->tagsI18n = array();
 		$this->formatDate();
 		
@@ -451,6 +473,12 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 	 * Assigns variables to the template engine.
 	 */
 	public function assignVariables() {
+		// fix for the broken assignment system (magic is in the works here); mind the capital I at the beginning
+		WCF::getTPL()->assign(array(
+			'I18nValues' => $this->i18nValues,
+			'I18nPlainValues' => $this->i18nPlainValues
+		));
+		
 		parent::assignVariables();
 		I18nHandler::getInstance()->assignVariables();
 		ksort($this->statusOptions);
