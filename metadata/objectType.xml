@@ -185,6 +185,10 @@
             <name>de.plugins-zum-selberbauen.ultimate.content</name>
             <definitionname>com.woltlab.wcf.acl</definitionname>
         </type>
+        <type>
+            <name>de.plugins-zum-selberbauen.ultimate.page</name>
+            <definitionname>com.woltlab.wcf.acl</definitionname>
+        </type>
         <!-- /ACL -->
     </import>
 </data>

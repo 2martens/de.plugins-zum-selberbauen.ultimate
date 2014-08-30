@@ -27,6 +27,7 @@
  */
 namespace ultimate\data\page;
 use ultimate\data\AbstractUltimateDatabaseObject;
+use ultimate\system\page\PagePermissionHandler;
 use wcf\data\user\User;
 use wcf\data\ITitledObject;
 use wcf\system\WCF;
@@ -82,6 +83,12 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 	 * @var	string
 	 */
 	protected $contentPageTable = 'content_to_page';
+
+	/**
+	 * True, if the current content is visible for the current user.
+	 * @var boolean
+	 */
+	private $isVisible = null;
 	
 	/**
 	 * Returns the content of this page.
@@ -137,36 +144,13 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 	}
 	
 	/**
-	 * Returns all user groups associated with this page.
-	 * 
-	 * @return	\wcf\data\user\group\UserGroup[]
-	 */
-	public function getGroups() {
-		if (!isset($this->groups)) {
-			$sql = 'SELECT	  groupTable.*
-			        FROM      ultimate'.WCF_N.'_user_group_to_page groupToPage
-			        LEFT JOIN wcf'.WCF_N.'_user_group groupTable
-			        ON        (groupTable.groupID = groupToPage.groupID)
-			        WHERE     groupToPage.pageID = ?';
-			$statement = WCF::getDB()->prepareStatement($sql);
-			$statement->execute(array($this->pageID));
-			
-			$groups = array();
-			while ($group = $statement->fetchObject('\wcf\data\user\group\UserGroup')) {
-				$groups[$group->__get('groupID')] = $group;
-			}
-			$this->data['groups'] = $groups;
-		}
-		return $this->groups;
-	}
-	
-	/**
 	 * Returns the title of this page.
 	 * 
+	 * @deprecated Use getTitle()
 	 * @return	string
 	 */
 	public function getLangTitle() {
-		return WCF::getLanguage()->get($this->pageTitle);
+		return $this->getTitle();
 	}
 	
 	/**
@@ -175,7 +159,7 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 	 * @return	string
 	 */
 	public function __toString() {
-		return WCF::getLanguage()->get($this->pageTitle);
+		return $this->getTitle();
 	}
 	
 	/**
@@ -184,26 +168,16 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 	 * @return boolean
 	 */
 	public function isVisible() {
-		$isVisible = false;
-		if ($this->visibility == 'public') {
-			$isVisible = true;
+		if ($this->isVisible === null) {
+			$content = $this->getContent();
+			$isVisible = $content->isVisible();
+			$this->isVisible = $isVisible;
 		}
-		else if ($this->visibility == 'protected') {
-			$groupIDs = WCF::getUser()->getGroupIDs();
-			$pageGroupIDs = array_keys($this->groups);
-			$result = array_intersect($groupIDs, $pageGroupIDs);
-			if (!empty($result)) {
-				$isVisible = true;
-			}
-		} else {
-			$isVisible = (WCF::getUser()->__get('userID') == $this->authorID);
+		if ($this->isVisible) {
+			$this->isVisible = PagePermissionHandler::getInstance()->getPermission($this->pageID, 'canSeePage');
 		}
-	
-		if ($isVisible) {
-			$isVisible = ($this->status == 3);
-		}
-	
-		return $isVisible;
+		
+		return $this->isVisible;
 	}
 	
 	/**
@@ -211,16 +185,13 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 	 */
 	public function __get($name) {
 		$result = parent::__get($name);
-		if ($result === null && in_array($name, array('content', 'childPages', 'groups'))) {
+		if ($result === null && in_array($name, array('content', 'childPages'))) {
 			switch ($name) {
 				case 'content':
 					$result = $this->getContent();
 					break;
 				case 'childPages':
 					$result = $this->getChildPages();
-					break;
-				case 'groups':
-					$result = $this->getGroups();
 					break;
 			}
 		}

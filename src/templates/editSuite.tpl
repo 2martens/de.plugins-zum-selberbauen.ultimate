@@ -29,6 +29,12 @@
 					<li id="ContentAddForm">
 						<a data-controller="ContentAddForm" data-request-type="form" href="{linkExtended controller='ContentAdd' application='ultimate' parent='EditSuite'}{/linkExtended}">{lang}ultimate.edit.addContent{/lang}</a>
 					</li>
+                    <li id="PageListPage">
+                        <a data-controller="PageListPage" data-request-type="page" href="{linkExtended controller='PageList' application='ultimate' parent='EditSuite'}{/linkExtended}">{lang}ultimate.edit.listPages{/lang}</a>
+                    </li>
+                    <li id="PageAddForm">
+                        <a data-controller="PageAddForm" data-request-type="form" href="{linkExtended controller='PageAdd' application='ultimate' parent='EditSuite'}{/linkExtended}">{lang}ultimate.edit.addPage{/lang}</a>
+                    </li>
 				</ul>
 			</nav>
 		</fieldset>

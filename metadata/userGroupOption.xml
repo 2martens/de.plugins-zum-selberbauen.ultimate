@@ -156,7 +156,18 @@
                 <defaultvalue>0</defaultvalue>
                 <admindefaultvalue>1</admindefaultvalue>
             </option>
-            
+            <option name="user.ultimate.content.canEditPageSpecificRights">
+                <categoryname>user.ultimate.content</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+            <option name="user.ultimate.content.canEditPageStatus">
+                <categoryname>user.ultimate.content</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
 			<!-- /user options -->
 			
 			<!-- mod options -->
