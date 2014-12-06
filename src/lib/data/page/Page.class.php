@@ -26,8 +26,8 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\page;
-use ultimate\data\AbstractUltimateDatabaseObject;
 use ultimate\data\page\language\PageLanguageEntryCache;
+use ultimate\data\AbstractUltimateDatabaseObject;
 use ultimate\system\page\PagePermissionHandler;
 use wcf\data\user\User;
 use wcf\data\ITitledObject;
