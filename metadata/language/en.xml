@@ -462,6 +462,7 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.page.add"><![CDATA[Add page]]></item>
 		<item name="wcf.acp.ultimate.page.edit"><![CDATA[Edit page]]></item>
 		<item name="wcf.acp.ultimate.page.delete"><![CDATA[Delete page]]></item>
+        <item name="wcf.acp.ultimate.page.delete.sure"><![CDATA[Are you sure that you want to delete this page?]]></item>
 		<item name="wcf.acp.ultimate.page.title"><![CDATA[Title]]></item>
 		<item name="wcf.acp.ultimate.page.title.placeholder"><![CDATA[Company profile]]></item>
 		<item name="wcf.acp.ultimate.page.title.error.notUnique"><![CDATA[A page with the specified title already exists with this parent.]]></item>

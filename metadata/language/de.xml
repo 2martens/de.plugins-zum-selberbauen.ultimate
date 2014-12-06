@@ -462,7 +462,7 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.page.add"><![CDATA[Seite hinzufügen]]></item>
 		<item name="wcf.acp.ultimate.page.edit"><![CDATA[Seite bearbeiten]]></item>
 		<item name="wcf.acp.ultimate.page.delete"><![CDATA[Seite löschen]]></item>
-		<item name="wcf.acp.ultiamte.page.delete.sure"><![CDATA[Sind Sie sicher, dass Sie diese Seite löschen wollen?]]></item>
+		<item name="wcf.acp.ultimate.page.delete.sure"><![CDATA[Sind Sie sicher, dass Sie diese Seite löschen wollen?]]></item>
 		<item name="wcf.acp.ultimate.page.title"><![CDATA[Titel]]></item>
 		<item name="wcf.acp.ultimate.page.title.placeholder"><![CDATA[Beispielseite mit viel Gewürz]]></item>
 		<item name="wcf.acp.ultimate.page.title.error.notUnique"><![CDATA[Der angegebene Titel existiert bereits bei einer Seite auf gleichem Level.]]></item>
