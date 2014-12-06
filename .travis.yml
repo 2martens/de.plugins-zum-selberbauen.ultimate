@@ -9,8 +9,3 @@ before_install:
 script:
   - find . -type f -name '*.php' |xargs -I file php -l file > /dev/null
   - phpcs -p --extensions=php --ignore="*/thirdParty/*" --ignore="*/CodeSniff/*" --standard="`pwd`/CodeSniff/PzS" .
- 
-branches:
-  only:
-    - master
-    - dev
