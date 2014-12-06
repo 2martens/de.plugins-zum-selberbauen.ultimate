@@ -8,7 +8,7 @@ before_install:
   - phpenv rehash
 script:
   - find . -type f -name '*.php' |xargs -I file php -l file > /dev/null
-  - phpcs -p --extensions=php --ignore="*/thirdParty/*" --standard="`pwd`/CodeSniff/PzS" .
+  - phpcs -p --extensions=php --ignore="*/thirdParty/*" --ignore="*/CodeSniff/*" --standard="`pwd`/CodeSniff/PzS" .
  
 branches:
   only:
