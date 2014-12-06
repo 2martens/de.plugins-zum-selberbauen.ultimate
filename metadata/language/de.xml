@@ -802,6 +802,8 @@ Für die InlineEdit braucht man die gleichen Rechte um Inhalte zu schreiben, zu 
 		<item name="ultimate.edit.contents"><![CDATA[Inhalte]]></item>
 		<item name="ultimate.edit.listContents"><![CDATA[Inhalte auflisten]]></item>
 		<item name="ultimate.edit.addContent"><![CDATA[Inhalt hinzufügen]]></item>
+        <item name="ultimate.edit.listPages"><![CDATA[Seiten auflisten]]></item>
+        <item name="ultimate.edit.addPage"><![CDATA[Seite hinzufügen]]></item>
 	</category>
 	
 	<category name="ultimate.error">

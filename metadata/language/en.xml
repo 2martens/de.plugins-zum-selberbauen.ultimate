@@ -789,6 +789,8 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 		<item name="ultimate.edit.contents"><![CDATA[Contents]]></item>
 		<item name="ultimate.edit.listContents"><![CDATA[List contents]]></item>
 		<item name="ultimate.edit.addContent"><![CDATA[Add content]]></item>
+        <item name="ultimate.edit.listPages"><![CDATA[List pages]]></item>
+        <item name="ultimate.edit.addPage"><![CDATA[Add page]]></item>
 	</category>
 	
 	<category name="ultimate.error">
