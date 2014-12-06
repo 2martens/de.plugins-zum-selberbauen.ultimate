@@ -240,6 +240,9 @@ class PageAddForm extends AbstractForm implements IEditSuitePage {
 			0 => WCF::getLanguage()->get('wcf.acp.ultimate.status.draft'),
 			1 => WCF::getLanguage()->get('wcf.acp.ultimate.status.pendingReview'),
 		);
+		
+		$this->contents = PageUtil::getAvailableContents();
+		$this->pages = PageUtil::getAvailablePages();
 
 		parent::readData();
 
@@ -250,9 +253,6 @@ class PageAddForm extends AbstractForm implements IEditSuitePage {
 			$dateTime = $this->page->__get('publishDateObject');
 		}
 		$this->formatDate($dateTime);
-
-		$this->contents = PageUtil::getAvailableContents();
-		$this->pages = PageUtil::getAvailablePages();
 	}
 	
 	/**
