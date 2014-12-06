@@ -27,6 +27,7 @@
  */
 namespace ultimate\data\page;
 use ultimate\data\AbstractUltimateDatabaseObject;
+use ultimate\data\page\language\PageLanguageEntryCache;
 use ultimate\system\page\PagePermissionHandler;
 use wcf\data\user\User;
 use wcf\data\ITitledObject;
@@ -111,9 +112,7 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 	}
 	
 	/**
-	 * Returns the page title without language interpreting.
-	 * 
-	 * To use language interpreting, use getLangTitle method.
+	 * Returns the page title.
 	 * 
 	 * @return	string
 	 */
@@ -194,6 +193,9 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 					$result = $this->getChildPages();
 					break;
 			}
+		}
+		else if ($result === null) {
+			$result = PageLanguageEntryCache::getInstance()->getValue($this->pageID, $name);
 		}
 		
 		return $result;
