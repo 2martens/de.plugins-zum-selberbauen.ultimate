@@ -88,7 +88,7 @@
                             </td>
                             <td class="columnID"><p>{@$page->pageID}</p></td>
                             <td class="columnTitle"><p>{if $__wcf->session->getPermission('user.ultimate.content.canEditPage')}<a title="{lang}wcf.acp.ultimate.page.edit{/lang}" data-controller="PageEditForm" data-request-type="form" href="{linkExtended application='ultimate' parent='EditSuite' controller='PageEdit' id=$page->pageID}{/linkExtended}">{lang}{@$page->pageTitle}{/lang}</a>{else}{lang}{@$page->pageTitle}{/lang}{/if}</p></td>
-                            <td class="columnAuthor"><p><a data-controller="PageListPage" data-request-type="page" href="{linkExtended application='ultimate' parent='EditSuite' controller='PageList'}authorID={@$content->authorID}{/linkExtended}">{@$page->author}</a></p></td>
+                            <td class="columnAuthor"><p><a data-controller="PageListPage" data-request-type="page" href="{linkExtended application='ultimate' parent='EditSuite' controller='PageList'}authorID={@$page->authorID}{/linkExtended}">{@$page->author}</a></p></td>
                             <td class="columnDate dateColumn"><p>{if $page->publishDate}{@$page->publishDate|time}{/if}</p></td>
                             <td class="columnLastModified dateColumn"><p>{@$page->lastModified|time}</p></td>
                             
