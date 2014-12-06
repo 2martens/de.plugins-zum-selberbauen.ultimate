@@ -41,7 +41,6 @@ use wcf\system\bbcode\PreParser;
 use wcf\system\cache\builder\TagObjectCacheBuilder;
 use wcf\system\cache\builder\TypedTagCloudCacheBuilder;
 use wcf\system\cache\builder\UltimateTagCloudCacheBuilder;
-use wcf\system\cache\builder\UserGroupCacheBuilder;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\tagging\TagEngine;
