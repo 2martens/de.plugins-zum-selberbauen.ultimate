@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\acp\form;
+use ultimate\data\category\language\CategoryLanguageEntryCache;
 use ultimate\data\category\CategoryAction;
 use ultimate\data\category\CategoryEditor;
 use ultimate\util\CategoryUtil;
@@ -160,12 +161,28 @@ class UltimateCategoryAddForm extends AbstractForm {
 	public function save() {
 		parent::save();
 		
+		// retrieve I18n values
+		$categoryTitle = array();
+		if (I18nHandler::getInstance()->isPlainValue('categoryTitle')) {
+			$categoryTitle[CategoryLanguageEntryCache::NEUTRAL_LANGUAGE] = $this->categoryTitle;
+		}
+		else {
+			$categoryTitle = I18nHandler::getInstance()->getValues('categoryTitle');
+		}
+		$categoryDescription = array();
+		if (I18nHandler::getInstance()->isPlainValue('categoryDescription')) {
+			$categoryDescription[CategoryLanguageEntryCache::NEUTRAL_LANGUAGE] = $this->categoryDescription;
+		}
+		else {
+			$categoryDescription = I18nHandler::getInstance()->getValues('categoryDescription');
+		}
+		
 		$parameters = array(
 			'data' => array(
-				'categoryTitle' => $this->categoryTitle,
+				'categoryTitle' => $categoryTitle,
 				'categorySlug' => $this->categorySlug,
 				'categoryParent' => $this->categoryParent,
-				'categoryDescription' => $this->categoryDescription
+				'categoryDescription' => $categoryDescription
 			),
 			'metaDescription' => $this->metaDescription,
 			'metaKeywords' => $this->metaKeywords
@@ -176,27 +193,7 @@ class UltimateCategoryAddForm extends AbstractForm {
 		
 		$returnValues = $this->objectAction->getReturnValues();
 		$categoryID = $returnValues['returnValues']->categoryID;
-		$updateValues = array();
-		if (!I18nHandler::getInstance()->isPlainValue('categoryTitle')) {
-			I18nHandler::getInstance()->save('categoryTitle', 'ultimate.category.'.$categoryID.'.categoryTitle', 'ultimate.category', PACKAGE_ID);
-			$updateValues['categoryTitle'] = 'ultimate.category.'.$categoryID.'.categoryTitle';
-		}
-		if (!I18nHandler::getInstance()->isPlainValue('categoryDescription')) {
-			$values = I18nHandler::getInstance()->getValues('categoryDescription');
-			$update = true;
-			foreach ($values as $value) {
-				if (!empty($value)) continue;
-				$update = false;
-			}
-			if ($update) {
-				I18nHandler::getInstance()->save('categoryDescription', 'ultimate.category.'.$categoryID.'.categoryDescription', 'ultimate.category', PACKAGE_ID);
-				$updateValues['categoryDescription'] = 'ultimate.category.'.$categoryID.'.categoryDescription';
-			}
-		}
-		if (!empty($updateValues)) {
-			$categoryEditor = new CategoryEditor($returnValues['returnValues']);
-			$categoryEditor->update($updateValues);
-		}
+		
 		$this->saved();
 		
 		WCF::getTPL()->assign(

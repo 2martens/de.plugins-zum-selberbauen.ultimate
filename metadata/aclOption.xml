@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/aclOption.xsd">
+    <import>
+        <categories>
+            <!-- user -->
+            <category name="user.ultimate.content">
+                <objecttype>de.plugins-zum-selberbauen.ultimate.content</objecttype>
+            </category>
+            <category name="user.ultimate.page">
+                <objecttype>de.plugins-zum-selberbauen.ultimate.page</objecttype>
+            </category>
+            <!-- user -->
+        </categories>
+
+        <options>
+            <!-- user.content -->
+            <option name="canSeeContent">
+                <categoryname>user.ultimate.content</categoryname>
+                <objecttype>de.plugins-zum-selberbauen.ultimate.content</objecttype>
+            </option>
+            <option name="canEditContent">
+                <categoryname>user.ultimate.content</categoryname>
+                <objecttype>de.plugins-zum-selberbauen.ultimate.content</objecttype>
+            </option>
+            <option name="canEditContentStatus">
+                <categoryname>user.ultimate.content</categoryname>
+                <objecttype>de.plugins-zum-selberbauen.ultimate.content</objecttype>
+            </option>
+            <!-- /user.content -->
+
+            <!-- user.page -->
+            <option name="canSeePage">
+                <categoryname>user.ultimate.page</categoryname>
+                <objecttype>de.plugins-zum-selberbauen.ultimate.page</objecttype>
+            </option>
+            <option name="canEditPage">
+                <categoryname>user.ultimate.page</categoryname>
+                <objecttype>de.plugins-zum-selberbauen.ultimate.page</objecttype>
+            </option>
+            <option name="canEditPageStatus">
+                <categoryname>user.ultimate.page</categoryname>
+                <objecttype>de.plugins-zum-selberbauen.ultimate.page</objecttype>
+            </option>
+            <!-- /user.page -->
+        </options>
+    </import>
+</data>

@@ -10,7 +10,7 @@
 			{if $content->page|isset}
 				<a href="{linkExtended application='ultimate' pageSlug=$content->page->pageSlug}{/linkExtended}" class="messageGroupLink" data-content-id="{@$content->contentID}">{$content->page->getLangTitle()|wordwrap:35}</a>
 			{else}
-				<a href="{linkExtended application='ultimate' date=$content->publishDateObject->format('Y-m-d') contentSlug=$content->contentSlug}{/linkExtended}" class="messageGroupLink" data-content-id="{@$content->contentID}">{$content->getLangTitle()|wordwrap:35}</a>
+				<a href="{linkExtended application='ultimate' date=$content->publishDateObject->format('Y-m-d') contentSlug=$content->contentSlug}{/linkExtended}" class="messageGroupLink" data-content-id="{@$content->contentID}">{$content->getTitle()|wordwrap:35}</a>
 			{/if}
 			</h3>
 			

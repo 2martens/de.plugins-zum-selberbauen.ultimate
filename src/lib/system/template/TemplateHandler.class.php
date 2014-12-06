@@ -113,6 +113,7 @@ class TemplateHandler extends SingletonFactory {
 	 * @param	\ultimate\data\IUltimateData|null	$requestObject	(null only if $requestType is index)
 	 * @param	\wcf\page\IPage						$page
 	 * @return	string
+	 * @throws  SystemException
 	 */
 	public function getOutput($requestType, Layout $layout, $requestObject, IPage $page) {
 		$requestType = mb_strtolower(StringUtil::trim($requestType));

@@ -67,10 +67,11 @@ class TaggedContent extends TaggableContent implements ITagged {
 	 * @return	mixed
 	 */
 	public function __get($name) {
-		$value = parent::__get($name);
-		
-		if ($value === null) {
-			if ($name == 'tags') $value = $this->tags;
+		if ($name == 'tags') {
+			$value = $this->tags;
+		}
+		else {
+			$value = parent::__get($name);
 		}
 		return $value;
 	}

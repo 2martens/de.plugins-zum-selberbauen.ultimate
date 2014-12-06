@@ -37,85 +37,91 @@
 		<item name="wcf.acp.group.option.user.ultimate.content.canDeleteComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Ihre eigenen Kommentare zu Inhalten löschen.]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.content.canDownloadAttachment"><![CDATA[Kann Dateianhänge herunterladen]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.content.canViewAttachmentPreview"><![CDATA[Kann Dateianhangs-Vorschau sehen]]></item>
-		<!-- /user -->
-		
-		<!-- mod -->
-		<item name="wcf.acp.group.option.mod.ultimate.content.canModerateComment"><![CDATA[Kann Kommentare moderieren]]></item>
-		<item name="wcf.acp.group.option.mod.ultimate.content.canModerateComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kommentare moderieren.]]></item>
-		<item name="wcf.acp.group.option.mod.ultimate.content.canEditComment"><![CDATA[Kann Kommentare bearbeiten]]></item>
-		<item name="wcf.acp.group.option.mod.ultimate.content.canEditComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kommentare bearbeiten.]]></item>
-		<item name="wcf.acp.group.option.mod.ultimate.content.canDeleteComment"><![CDATA[Kann Kommentare löschen]]></item>
-		<item name="wcf.acp.group.option.mod.ultimate.content.canDeleteComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kommentare löschen.]]></item>
-		<!-- /mod -->
-		
-		<!-- admin -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canConfigureOptions"><![CDATA[Kann Optionen konfigurieren]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canConfigureOptions.description"><![CDATA[Mitglieder dieser Benutzergruppe können die Optionen für das Ultimate CMS konfigurieren.]]></item>
-		<!-- block -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageBlocks"><![CDATA[Kann Blöcke verwalten]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageBlocks.description"><![CDATA[Mitglieder dieser Benutzergruppe können Blöcke verwalten.]]></item>
-		<!-- /block -->
-		
-		<!-- category -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageCategories"><![CDATA[Kann Kategorien verwalten]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageCategories.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kategorien verwalten.]]></item>
-		<!-- /category -->
-		
-		<!-- content -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddContent"><![CDATA[Kann Inhalte hinzufügen]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddContent.description"><![CDATA[Mitglieder dieser Benutzergruppe können Inhalte hinzufügen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditContent"><![CDATA[Kann Inhalte bearbeiten]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditContent.description"><![CDATA[Mitglieder dieser Benutzergruppe können Inhalte bearbeiten.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent"><![CDATA[Kann Inhalte löschen]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeleteContent.description"><![CDATA[Mitglieder dieser Benutzergruppe können Inhalte löschen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canUploadAttachment"><![CDATA[Kann Dateianhänge hochladen]]></item>
-		<!-- /content -->
-		
-		<!-- layout -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLayouts"><![CDATA[Kann Layouts verwalten]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLayouts.description"><![CDATA[Mitglieder dieser Benutzergruppe können Layouts verwalten.]]></item>
-		<!-- /layout -->
-		
-		<!-- link -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLinks"><![CDATA[Kann Links verwalten]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLink.description"><![CDATA[Mitglieder dieser Benutzergruppe können Links verwalten.]]></item>
-		<!-- /link -->
-		
-		<!-- menu -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageMenus"><![CDATA[Kann Menüs verwalten]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageMenus.description"><![CDATA[Mitglieder dieser Benutzergruppe können Menüs verwalten.]]></item>
-		<!-- /menu -->
-		
-		<!-- menu item -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageMenuItems"><![CDATA[Kann Menüeinträge verwalten]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageMenuItems.description"><![CDATA[Mitglieder dieser Benutzergruppe können Menüeinträge verwalten.]]></item>
-		<!-- /menu item -->
-		
-		<!-- page -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddPage"><![CDATA[Kann Seiten hinzufügen]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canAddPage.description"><![CDATA[Mitglieder dieser Benutzergruppe können Seiten hinzufügen.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditPage"><![CDATA[Kann Seiten bearbeiten]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canEditPage.description"><![CDATA[Mitglieder dieser Benutzergruppe können Seiten bearbeiten.]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeletePage"><![CDATA[Kann Seiten löschen]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canDeletePage.description"><![CDATA[Mitglieder dieser Benutzergruppe können Seiten löschen.]]></item>
-		<!-- /page -->
-		
-		<!-- template -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageTemplates"><![CDATA[Kann Templates verwalten]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageTemplates.description"><![CDATA[Mitglieder dieser Benutzergruppe können Templates verwalten.]]></item>
-		<!-- /template -->
-		<!-- TODO: add missing language variables -->
-		
-		<!-- widget area -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgetAreas"><![CDATA[Kann Widgetkonfigurationen verwalten]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgetAreas.description"><![CDATA[Mitglieder dieser Benutzergruppe können Widgetkonfigurationen verwalten.]]></item>
-		<!-- /widget area -->
-		
-		<!-- widget -->
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgets"><![CDATA[Kann Widgets verwalten]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgets.description"><![CDATA[Mitglieder dieser Benutzergruppe können Widgets verwalten.]]></item>
-		<!-- /widget -->
-		<!-- /admin -->
+        <item name="wcf.acp.group.option.user.ultimate.content.canUploadAttachment"><![CDATA[Kann Dateianhänge hochladen]]></item>
+
+        <!-- content -->
+        <item name="wcf.acp.group.option.user.ultimate.content.canSeeContent"><![CDATA[Kann Inhalte sehen]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canEditContent"><![CDATA[Kann Inhalte bearbeiten]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canEditContentStatus"><![CDATA[Kann Status von Inhalten bearbeiten]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canDeleteContent"><![CDATA[Kann Inhalte löschen]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canSaveAsDraft"><![CDATA[Kann Inhalte als Entwurf speichern]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canSaveAsPendingReview"><![CDATA[Kann Inhalte als Ausstehendes Review speichern]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canPublish"><![CDATA[Kann Inhalte veröffentlichen]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canPublish.description"><![CDATA[Mitglieder dieser Benutzergruppe können Inhalte veröffentlichen oder die Veröffentlichung planen.]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canEditMetadata"><![CDATA[Kann Metadaten von Inhalten bearbeiten]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canEditMetadata.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kategorien und Tags zuweisen und die Meta-Keywords und Meta-Description ausfüllen.]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canDepublish"><![CDATA[Kann Inhalte depublizieren]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canAddContentVersion"><![CDATA[Kann neue Inhaltsversion hinzufügen]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canDeleteContentVersion"><![CDATA[Kann unveröffentlichte Inhaltsversionen löschen]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canRepublishContentVersion"><![CDATA[Kann alte Version erneut veröffentlichen]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.content.canEditContentSpecificRights"><![CDATA[Kann inhaltsspezifische Rechte vergeben]]></item>
+        <!-- /content -->
+
+        <!-- page -->
+        <item name="wcf.acp.group.option.admin.content.ultimate.canSeePage"><![CDATA[Kann Seiten sehen]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canEditPage"><![CDATA[Kann Seiten bearbeiten]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canDeletePage"><![CDATA[Kann Seiten löschen]]></item>
+        <!-- /page -->
+        <!-- /user -->
+
+        <!-- mod -->
+        <item name="wcf.acp.group.option.mod.ultimate.content.canModerateComment"><![CDATA[Kann Kommentare moderieren]]></item>
+        <item name="wcf.acp.group.option.mod.ultimate.content.canModerateComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kommentare moderieren.]]></item>
+        <item name="wcf.acp.group.option.mod.ultimate.content.canEditComment"><![CDATA[Kann Kommentare bearbeiten]]></item>
+        <item name="wcf.acp.group.option.mod.ultimate.content.canEditComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kommentare bearbeiten.]]></item>
+        <item name="wcf.acp.group.option.mod.ultimate.content.canDeleteComment"><![CDATA[Kann Kommentare löschen]]></item>
+        <item name="wcf.acp.group.option.mod.ultimate.content.canDeleteComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kommentare löschen.]]></item>
+        <!-- /mod -->
+
+        <!-- admin -->
+        <item name="wcf.acp.group.option.admin.content.ultimate.canConfigureOptions"><![CDATA[Kann Optionen konfigurieren]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canConfigureOptions.description"><![CDATA[Mitglieder dieser Benutzergruppe können die Optionen für das Ultimate CMS konfigurieren.]]></item>
+        <!-- block -->
+        <item name="wcf.acp.group.option.admin.content.ultimate.canManageBlocks"><![CDATA[Kann Blöcke verwalten]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canManageBlocks.description"><![CDATA[Mitglieder dieser Benutzergruppe können Blöcke verwalten.]]></item>
+        <!-- /block -->
+
+        <!-- category -->
+        <item name="wcf.acp.group.option.admin.content.ultimate.canManageCategories"><![CDATA[Kann Kategorien verwalten]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canManageCategories.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kategorien verwalten.]]></item>
+        <!-- /category -->
+
+        <!-- layout -->
+        <item name="wcf.acp.group.option.admin.content.ultimate.canManageLayouts"><![CDATA[Kann Layouts verwalten]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canManageLayouts.description"><![CDATA[Mitglieder dieser Benutzergruppe können Layouts verwalten.]]></item>
+        <!-- /layout -->
+
+        <!-- link -->
+        <item name="wcf.acp.group.option.admin.content.ultimate.canManageLinks"><![CDATA[Kann Links verwalten]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canManageLink.description"><![CDATA[Mitglieder dieser Benutzergruppe können Links verwalten.]]></item>
+        <!-- /link -->
+
+        <!-- menu -->
+        <item name="wcf.acp.group.option.admin.content.ultimate.canManageMenus"><![CDATA[Kann Menüs verwalten]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canManageMenus.description"><![CDATA[Mitglieder dieser Benutzergruppe können Menüs verwalten.]]></item>
+        <!-- /menu -->
+
+        <!-- menu item -->
+        <item name="wcf.acp.group.option.admin.content.ultimate.canManageMenuItems"><![CDATA[Kann Menüeinträge verwalten]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canManageMenuItems.description"><![CDATA[Mitglieder dieser Benutzergruppe können Menüeinträge verwalten.]]></item>
+        <!-- /menu item -->
+
+        <!-- template -->
+        <item name="wcf.acp.group.option.admin.content.ultimate.canManageTemplates"><![CDATA[Kann Templates verwalten]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canManageTemplates.description"><![CDATA[Mitglieder dieser Benutzergruppe können Templates verwalten.]]></item>
+        <!-- /template -->
+        <!-- TODO: add missing language variables -->
+
+        <!-- widget area -->
+        <item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgetAreas"><![CDATA[Kann Widgetkonfigurationen verwalten]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgetAreas.description"><![CDATA[Mitglieder dieser Benutzergruppe können Widgetkonfigurationen verwalten.]]></item>
+        <!-- /widget area -->
+
+        <!-- widget -->
+        <item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgets"><![CDATA[Kann Widgets verwalten]]></item>
+        <item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgets.description"><![CDATA[Mitglieder dieser Benutzergruppe können Widgets verwalten.]]></item>
+        <!-- /widget -->
+        <!-- /admin -->
 	</category>
     
     <category name="wcf.acp.index">
@@ -455,6 +461,7 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.page.add"><![CDATA[Seite hinzufügen]]></item>
 		<item name="wcf.acp.ultimate.page.edit"><![CDATA[Seite bearbeiten]]></item>
 		<item name="wcf.acp.ultimate.page.delete"><![CDATA[Seite löschen]]></item>
+        <item name="wcf.acp.ultimate.page.delete.sure"><![CDATA[Bist du sicher, dass du diese Seite löschen willst?]]></item>
 		<item name="wcf.acp.ultimate.page.title"><![CDATA[Titel]]></item>
 		<item name="wcf.acp.ultimate.page.title.placeholder"><![CDATA[Beispielseite mit viel Gewürz]]></item>
 		<item name="wcf.acp.ultimate.page.title.error.notUnique"><![CDATA[Der angegebene Titel existiert bereits bei einer Seite auf gleichem Level.]]></item>
@@ -758,14 +765,6 @@ Für die InlineEdit braucht man die gleichen Rechte um Inhalte zu schreiben, zu 
 		<item name="ultimate.button.update"><![CDATA[Aktualisieren]]></item>
 	</category>
 	
-	<!-- this category is used for all multilingual category fields -->
-	<category name="ultimate.category">
-		<item name="ultimate.category.1.categoryTitle"><![CDATA[Nicht kategorisiert]]></item>
-        <item name="ultimate.category.2.categoryTitle"><![CDATA[Seiten]]></item>
-        <item name="ultimate.category.2.categoryDescription"><![CDATA[Alle Inhalte, die als Seiten fungieren, sollten direkt oder indirekt in dieser Kategorie sein. Alle Inhalte, die in dieser Kategorie sind, werden nicht bei dem Erstellen von den 'Letzten Aktivitäten" berücksichtigt.]]></item>
-	</category>
-	
-	<!-- this category is used for all multilingual content fields -->
 	<category name="ultimate.content">
 		<item name="ultimate.content.comment"><![CDATA[Inhalt-Kommentar]]></item>
 		<item name="ultimate.content.commentResponse"><![CDATA[Inhalt-Antwort]]></item>
@@ -781,6 +780,15 @@ Für die InlineEdit braucht man die gleichen Rechte um Inhalte zu schreiben, zu 
 	<category name="ultimate.date">
 		<item name="ultimate.date.dateFormat"><![CDATA[d.m.Y]]></item>
 		<item name="ultimate.date.dateTimeFormat"><![CDATA[%date% %time%]]></item>
+	</category>
+	
+	<category name="ultimate.edit">
+		<item name="ultimate.edit.suite"><![CDATA[Edit-Suite]]></item>
+		<item name="ultimate.edit.contents"><![CDATA[Inhalte]]></item>
+		<item name="ultimate.edit.listContents"><![CDATA[Inhalte auflisten]]></item>
+		<item name="ultimate.edit.addContent"><![CDATA[Inhalt hinzufügen]]></item>
+        <item name="ultimate.edit.listPages"><![CDATA[Seiten auflisten]]></item>
+        <item name="ultimate.edit.addPage"><![CDATA[Seite hinzufügen]]></item>
 	</category>
 	
 	<category name="ultimate.error">

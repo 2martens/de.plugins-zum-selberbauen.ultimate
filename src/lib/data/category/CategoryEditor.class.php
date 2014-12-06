@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\category;
+use ultimate\data\category\language\CategoryLanguageEntryCache;
 use ultimate\data\layout\LayoutAction;
 use ultimate\system\cache\builder\CategoryCacheBuilder;
 use ultimate\system\cache\builder\LayoutCacheBuilder;
@@ -82,17 +83,6 @@ class CategoryEditor extends DatabaseObjectEditor implements IEditableCachedObje
 		// unmark contents
 		ClipboardHandler::getInstance()->unmark($objectIDs, ClipboardHandler::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.ultimate.category'));
 		
-		// delete language items
-		$sql = 'DELETE FROM wcf'.WCF_N.'_language_item
-		        WHERE       languageItem = ?';
-		$statement = WCF::getDB()->prepareStatement($sql);
-		
-		WCF::getDB()->beginTransaction();
-		foreach ($objectIDs as $objectID) {
-			$statement->executeUnbuffered(array('ultimate.category.'.$objectID.'.%'));
-		}
-		WCF::getDB()->commitTransaction();
-		
 		// delete meta data
 		$conditionBuilder = new PreparedStatementConditionBuilder();
 		$conditionBuilder->add('objectID IN (?)', array($objectIDs));
@@ -145,6 +135,7 @@ class CategoryEditor extends DatabaseObjectEditor implements IEditableCachedObje
 	 */
 	public static function resetCache() {
 		CategoryCacheBuilder::getInstance()->reset();
+		CategoryLanguageEntryCache::getInstance()->reloadCache();
 		LayoutCacheBuilder::getInstance()->reset();
 	}
 }

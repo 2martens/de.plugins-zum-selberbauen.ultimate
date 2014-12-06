@@ -70,7 +70,7 @@ class LatestContentsCacheBuilder extends AbstractCacheBuilder {
 		$sortOrder = 'DESC';
 		$sqlOrderBy = $sortField." ".$sortOrder;
 		$contentList->sqlOrderBy = $sqlOrderBy;
-		$contentList->getConditionBuilder()->add('content.publishDate <> ?', array(''));
+		$contentList->getConditionBuilder()->add('contentVersion.publishDate <> ?', array(''));
 		// check if there are contentIDsToPage at all
 		if (!empty($contentIDsToPage)) {
 			$contentList->getConditionBuilder()->add('content.contentID NOT IN (?)', array($contentIDsToPage));

@@ -20,35 +20,39 @@ ULTIMATE.Content.InlineEditor = WCF.Message.InlineEditor.extend({
 	 * Saves editor contents.
 	 */
 	_save: function() {
-		var $container = this._container[this._activeElementID];
-		var $objectID = $container.data('objectID');
-		var $message = '';
-		var $isI18n = $container.data('isI18n');
-		if ($.browser.mobile) {
-			$message = $('#' + this._messageEditorIDPrefix + $objectID).val();
-		}
-		else {
-			var $ckEditor = $('#' + this._messageEditorIDPrefix + $objectID).ckeditorGet();
-			$message = $ckEditor.getData();
-		}
-		
-		this._proxy.setOption('data', {
-			actionName: 'save',
-			className: this._getClassName(),
-			interfaceName: 'wcf\\data\\IMessageInlineEditorAction',
-			parameters: {
-				containerID: this._containerID,
-				data: {
-					message: $message,
-					isI18n: $isI18n
-				},
-				objectID: $objectID
-			}
-		});
-		this._proxy.sendRequest();
-		
-		this._hideEditor();
-	},
+        var $container = this._container[this._activeElementID];
+        var $objectID = $container.data('objectID');
+        var $message = '';
+        var $isI18n = $container.data('isI18n');
+
+        if ($.browser.redactor) {
+            $message = $('#' + this._messageEditorIDPrefix + $objectID).redactor('getText');
+        }
+        else {
+            $message = $('#' + this._messageEditorIDPrefix + $objectID).val();
+        }
+
+        var $parameters = {
+            containerID: this._containerID,
+            data: {
+                message: $message,
+                isI18n: $isI18n
+            },
+            objectID: $objectID
+        };
+
+        WCF.System.Event.fireEvent('com.woltlab.wcf.messageOptionsInline', 'submit_' + this._messageEditorIDPrefix + $objectID, $parameters);
+
+        this._proxy.setOption('data', {
+            actionName: 'save',
+            className: this._getClassName(),
+            interfaceName: 'wcf\\data\\IMessageInlineEditorAction',
+            parameters: $parameters
+        });
+        this._proxy.sendRequest();
+
+        this._hideEditor();
+	}
 });
 
 /**
@@ -101,9 +105,9 @@ ULTIMATE.Content.Like = WCF.Like.extend({
 	/**
 	 * Sets button active state.
 	 * 
-	 * @param 	jquery		likeButton
-	 * @param 	jquery		dislikeButton
-	 * @param	integer		likeStatus
+	 * @param {jQuery} likeButton
+	 * @param {jQuery} dislikeButton
+	 * @param {Number} likeStatus
 	 */
 	_setActiveState: function(likeButton, dislikeButton, likeStatus) {
 		likeButton = likeButton.find('.button').removeClass('active');

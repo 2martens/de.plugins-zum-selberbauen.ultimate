@@ -26,6 +26,7 @@
  */
 namespace ultimate\acp;
 use ultimate\data\blocktype\BlockTypeAction;
+use ultimate\data\category\language\CategoryLanguageEntryEditor;
 use wcf\system\WCF;
 
 /**
@@ -57,6 +58,7 @@ final class InstallUltimateCMS {
 		$this->packageID = $matches[1];
 		$this->addDefaultBlockTypes();
 		$this->deactivateMenuItem();
+		$this->addLanguageEntries();
 	}
 	
 	/**
@@ -106,6 +108,69 @@ final class InstallUltimateCMS {
 			'ultimate.header.menu.index',
 			$this->packageID
 		));
+	}
+	
+	/**
+	 * Adds the language entries for the first two categories.
+	 */
+	protected function addLanguageEntries() {
+		// workaround for installation
+		require_once(WCF_DIR.'lib/data/ILanguageEntry.class.php');
+		require_once(WCF_DIR.'lib/data/ILanguageEntryEditor.class.php');
+		require_once(WCF_DIR.'lib/data/AbstractLanguageEntry.class.php');
+		require_once(WCF_DIR.'lib/data/AbstractLanguageEntryCache.class.php');
+		require_once(WCF_DIR.'lib/data/AbstractLanguageEntryEditor.class.php');
+		require_once(ULTIMATE_DIR.'lib/data/category/language/CategoryLanguageEntry.class.php');
+		require_once(ULTIMATE_DIR.'lib/data/category/language/CategoryLanguageEntryCache.class.php');
+		require_once(ULTIMATE_DIR.'lib/data/category/language/CategoryLanguageEntryEditor.class.php');
+		
+		$languages = WCF::getLanguage()->getLanguages();
+		$entryDataCategory1 = array();
+		$entryDataCategory2 = array();
+		foreach ($languages as $languageID => $language) {
+			/* @var $language \wcf\data\language\Language */
+			if ($language->__get('languageCode') == 'de') {
+				$entryDataCategory1[$languageID] = array(
+					'categoryTitle' => 'Nicht kategorisiert'
+				);
+				$entryDataCategory2[$languageID] = array(
+					'categoryTitle' => 'Seiten',
+					'categoryDescription' => "Alle Inhalte, die als Seiten fungieren, sollten direkt oder indirekt in dieser Kategorie sein. Alle Inhalte, die in dieser Kategorie sind, werden nicht bei dem Erstellen von den 'Letzten Aktivitäten' berücksichtigt."
+				);
+			}
+			else if ($language->__get('languageCode') == 'de-informal') {
+				$entryDataCategory1[$languageID] = array(
+					'categoryTitle' => 'Nicht kategorisiert'
+				);
+				$entryDataCategory2[$languageID] = array(
+					'categoryTitle' => 'Seiten',
+					'categoryDescription' => "Alle Inhalte, die als Seiten fungieren, sollten direkt oder indirekt in dieser Kategorie sein. Alle Inhalte, die in dieser Kategorie sind, werden nicht bei dem Erstellen von den 'Letzten Aktivitäten' berücksichtigt."
+				);
+			}
+			else if ($language->__get('languageCode') == 'en') {
+				$entryDataCategory1[$languageID] = array(
+					'categoryTitle' => 'Uncategorized'
+				);
+				$entryDataCategory2[$languageID] = array(
+					'categoryTitle' => 'Pages',
+					'categoryDescription' => "All contents that are used by pages should be in this category, be it directly or indirectly. All contents that are in this category directly or indirectly, are not used for 'Recent Activities'."
+				);
+			}
+		}
+		// if languages are installed that are not supported, use english version
+		// 0 stands for neutral item
+		$entryDataCategory1[0] = array(
+			'categoryTitle' => 'Uncategorized'
+		);
+		$entryDataCategory2[0] = array(
+			'categoryTitle' => 'Uncategorized',
+			'categoryDescription' => "All contents that are used by pages should be in this category, be it directly or indirectly. All contents that are in this category directly or indirectly, are not used for 'Recent Activities'."
+		);
+		
+		// the first category has always ID 1
+		CategoryLanguageEntryEditor::createEntries(1, $entryDataCategory1);
+		// the second category has always ID 2
+		CategoryLanguageEntryEditor::createEntries(2, $entryDataCategory2);
 	}
 	
 }

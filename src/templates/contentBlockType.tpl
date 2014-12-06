@@ -3,7 +3,7 @@
 $(function() {	
 	{if MODULE_LIKE && $__wcf->getSession()->getPermission('user.like.canViewLike') && $requestType != 'page'}new ULTIMATE.Content.Like({if $__wcf->getUser()->userID && $__wcf->getSession()->getPermission('user.like.canLike')}1{else}0{/if}, {@LIKE_ENABLE_DISLIKE}, {@LIKE_SHOW_SUMMARY}, {@LIKE_ALLOW_FOR_OWN_CONTENT});{/if}
 	{if $__wcf->user->userID}
-		{if $__wcf->getSession()->getPermission('admin.content.ultimate.canEditContent')}
+		{if $__wcf->getSession()->getPermission('user.ultimate.content.canEditContent')}
 			var $inlineEditor = new ULTIMATE.Content.InlineEditor(0);
 		{/if}
 	{/if}
@@ -31,22 +31,22 @@ $(function() {
 		{else}
 			{assign var=date value=''}
 		{/if}
-		{if $content->status == 3}
+		{*if $content->status == 3*}
 			<li id="content{@$content->contentID}" class="marginTop">
 			
 				<article itemtype="http://schema.org/Article" itemscope="itemscope" class="ultimateContent{if $requestType == 'page'} ultimateWhiteBackgroundColor{/if} dividers">
 					
 					{if !$block->hideContent}
 						<div class="message jsMessage messageReduced{if $requestType == 'page'} ultimateWhiteBackgroundColor{/if}"
-				data-can-edit="{if $__wcf->getSession()->getPermission('admin.content.ultimate.canEditContent')}1{else}0{/if}"
+				data-can-edit="{if $__wcf->getSession()->getPermission('user.ultimate.content.canEditContent')}1{else}0{/if}"
 				data-is-i18n="{literal}<?php if (mb_strpos($this->v['content']->contentText, 'ultimate.content.') !== false) { ?>{/literal}1{literal}<?php } else { ?>{/literal}0{literal}<?php } ?>{/literal}"
 				data-object-id="{@$contentID}"
-				data-object-type="de.plugins-zum-selberbauen.ultimate.likeableContent"{*
+				data-object-type="de.plugins-zum-selberbauen.ultimate.likeableContent" {*
 				*}{if $requestType != 'page'}{*
 				*}data-like-liked="{if $likeData[$contentID]|isset}{@$likeData[$contentID]->liked}{/if}" 
 				data-like-likes="{if $likeData[$contentID]|isset}{@$likeData[$contentID]->likes}{else}0{/if}" 
 				data-like-dislikes="{if $likeData[$contentID]|isset}{@$likeData[$contentID]->dislikes}{else}0{/if}" 
-				data-like-users='{if $likeData[$contentID]|isset}{ {implode from=$likeData[$contentID]->getUsers() item=likeUser}"{@$likeUser->userID}": { "username": "{$likeUser->username|encodeJSON}" }{/implode} }{else}{ }{/if}'{*
+				data-like-users='{if $likeData[$contentID]|isset}{ {implode from=$likeData[$contentID]->getUsers() item=likeUser}"{@$likeUser->userID}": { "username": "{$likeUser->username|encodeJSON}" }{/implode} }{else}{ }{/if}' {*
 				*}{/if}{*
 				*}data-user-id="{@$content->authorID}">
 							
@@ -58,9 +58,9 @@ $(function() {
 											{if !$block->hideTitles}
 												<h1 itemprop="name">
 													{if $requestType != 'content' && $requestType != 'page' && ($queryModeSelected == 'default' || $fetchPageContentSelected == 'none')}
-														<a class="link" href="{linkExtended application='ultimate' date=$date contentSlug=$content->contentSlug}{/linkExtended}" itemprop="url">{$content->getLangTitle()}</a>
+														<a class="link" href="{linkExtended application='ultimate' date=$date contentSlug=$content->contentSlug}{/linkExtended}" itemprop="url">{$content->getTitle()}</a>
 													{else}
-														{$content->getLangTitle()}
+														{$content->getTitle()}
 													{/if}
 												</h1>
 											{/if}
@@ -92,7 +92,7 @@ $(function() {
 										
 										{if $requestType == 'content'}
 											{hascontent}
-												<p class="abstract" itemprop="description">{content}{lang}{$content->contentDescription}{/lang}{/content}</p>
+												<p class="abstract" itemprop="description">{content}{$content->contentDescription}{/content}</p>
 											{/hascontent}
 										{/if}
 									</header>
@@ -151,7 +151,7 @@ $(function() {
 												<nav class="jsMobileNavigation buttonGroupNavigation">
 													<ul class="smallButtons buttonGroup">{*
 														*}{if $requestType != 'content' && $requestType != 'page' && ($queryModeSelected == 'default' || $fetchPageContentSelected == 'none')}<li><a href="{linkExtended application='ultimate' date=$date contentSlug=$content->contentSlug}{/linkExtended}" class="button"><span class="icon icon16 icon-arrow-right"></span> <span>{lang}wcf.global.button.readMore{/lang}</span></a></li>{/if}{*
-														*}{if $__wcf->getSession()->getPermission('admin.content.ultimate.canEditContent') && !$hideInlineEdit}<li><a title="{lang}wcf.acp.ultimate.content.edit{/lang}" class="button jsMessageEditButton"><span class="icon icon16 icon-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}{*
+														*}{if $__wcf->getSession()->getPermission('user.ultimate.content.canEditContent') && !$hideInlineEdit}<li><a title="{lang}wcf.acp.ultimate.content.edit{/lang}" class="button jsMessageEditButton"><span class="icon icon16 icon-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}{*
 														*}<li class="toTopLink"><a href="{@$anchor}" title="{lang}wcf.global.scrollUp{/lang}" class="button jsTooltip"><span class="icon icon16 icon-arrow-up"></span> <span class="invisible">{lang}wcf.global.scrollUp{/lang}</span></a></li>{*
 													*}</ul>
 												</nav>
@@ -200,7 +200,7 @@ $(function() {
 					{/if}
 				</article>
 			</li>
-		{/if}
+		{*/if*}
 	{/foreach}
 	
 		</ul>

@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\acp\form;
+use ultimate\data\page\language\PageLanguageEntryCache;
 use ultimate\data\page\PageAction;
 use ultimate\data\page\PageEditor;
 use ultimate\util\PageUtil;
@@ -259,11 +260,20 @@ class UltimatePageAddForm extends AbstractForm {
 	public function save() {
 		parent::save();
 		
+		// retrieve I18n values
+		$pageTitle = array();
+		if (I18nHandler::getInstance()->isPlainValue('pageTitle')) {
+			$pageTitle[PageLanguageEntryCache::NEUTRAL_LANGUAGE] = $this->pageTitle;
+		}
+		else {
+			$pageTitle = I18nHandler::getInstance()->getValues('pageTitle');
+		}
+		
 		$parameters = array(
 			'data' => array(
 				'authorID' => WCF::getUser()->userID,
 				'pageParent' => $this->pageParent,
-				'pageTitle' => $this->pageTitle,
+				'pageTitle' => $pageTitle,
 				'pageSlug' => $this->pageSlug,
 				'publishDate' => $this->publishDateTimestamp,
 				'lastModified' => TIME_NOW,
@@ -281,17 +291,6 @@ class UltimatePageAddForm extends AbstractForm {
 		
 		$this->objectAction = new PageAction(array(), 'create', $parameters);
 		$this->objectAction->executeAction();
-		
-		if (!I18nHandler::getInstance()->isPlainValue('pageTitle')) {
-			$returnValues = $this->objectAction->getReturnValues();
-			$pageID = $returnValues['returnValues']->pageID;
-			I18nHandler::getInstance()->save('pageTitle', 'ultimate.page.'.$pageID.'.pageTitle', 'ultimate.page', PACKAGE_ID);
-		
-			$pageEditor = new PageEditor($returnValues['returnValues']);
-			$pageEditor->update(array(
-				'pageTitle' => 'ultimate.page.'.$pageID.'.pageTitle'
-			));
-		}
 		
 		$this->saved();
 		

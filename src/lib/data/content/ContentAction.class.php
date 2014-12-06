@@ -26,18 +26,18 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\content;
+use ultimate\data\content\language\ContentLanguageEntryCache;
+use ultimate\data\content\language\ContentLanguageEntryEditor;
 use ultimate\data\layout\LayoutAction;
-use ultimate\data\layout\LayoutList;
-use ultimate\system\cache\builder\ContentCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use wcf\data\smiley\SmileyCache;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IMessageInlineEditorAction;
+use wcf\data\IVersionableDatabaseObjectAction;
 use wcf\system\bbcode\BBCodeHandler;
 use wcf\system\bbcode\BBCodeParser;
 use wcf\system\bbcode\PreParser;
 use wcf\system\exception\UserInputException;
-use wcf\system\language\I18nHandler;
 use wcf\system\language\LanguageFactory;
 use wcf\system\search\SearchIndexManager;
 use wcf\system\WCF;
@@ -53,7 +53,7 @@ use wcf\util\ArrayUtil;
  * @subpackage	data.content
  * @category	Ultimate CMS
  */
-class ContentAction extends AbstractDatabaseObjectAction implements IMessageInlineEditorAction {
+class ContentAction extends AbstractDatabaseObjectAction implements IMessageInlineEditorAction, IVersionableDatabaseObjectAction {
 	/**
 	 * The class name.
 	 * @var	string
@@ -64,25 +64,37 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	 * Array of permissions that are required for create action.
 	 * @var	string[]
 	 */
-	protected $permissionsCreate = array('admin.content.ultimate.canAddContent');
+	protected $permissionsCreate = array(
+		'user.ultimate.content.canEditContent',		
+		'user.ultimate.content.canAddContentVersion'
+	);
 	
 	/**
 	 * Array of permissions that are required for delete action.
 	 * @var	string[]
 	 */
-	protected $permissionsDelete = array('admin.content.ultimate.canDeleteContent');
+	protected $permissionsDelete = array(
+		'user.ultimate.content.canDeleteContent', 
+		'user.ultimate.content.canDeleteContentVersion'
+	);
 	
 	/**
 	 * Array of permissions that are required for update action.
 	 * @var	string[]
 	 */
-	protected $permissionsUpdate = array('admin.content.ultimate.canEditContent');
+	protected $permissionsUpdate = array('user.ultimate.content.canEditContent');
 	
 	/**
 	 * disallow requests for specified methods if the origin is not the ACP
 	 * @var	string[]
 	 */
-	protected $requireACP = array('create', 'updateSearchIndex', 'delete');
+	protected $requireACP = array();
+	
+	/**
+	 * Resets cache if any of the listed actions is invoked
+	 * @var	string[]
+	 */
+	protected $resetCache = array('create', 'createVersion', 'delete', 'deleteVersion', 'toggle', 'update', 'updatePosition');
 	
 	/**
 	 * current content object
@@ -99,8 +111,56 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
 			$this->parameters['data']['attachments'] = count($this->parameters['attachmentHandler']);
 		}
+		
+		// separating core content data from version data
+		$contentParameters = array(
+			'contentID', 
+			'contentSlug', 
+			'authorID', 
+			'cumulativeLikes', 
+			'views', 
+			'lastModified'
+		);
+		
+		$languageEntryParameters = array(
+			'contentTitle',
+			'contentDescription',
+			'contentText'
+		);
+		
+		$versionData = array();
+		$languageData = array();
+		$tmpData = $this->parameters['data'];
+		foreach ($tmpData as $key => $value) {
+			if (in_array($key, $contentParameters)) continue;
+			if (in_array($key, $languageEntryParameters)) {
+				$languageData[$key] = $value;
+			}
+			else {
+				$versionData[$key] = $value;
+			}
+			unset($this->parameters['data'][$key]);
+		}
+		
+		// authorID is part of versionData as well
+		$versionData['authorID'] = $this->parameters['data']['authorID'];
+		
 		$content = parent::create();
 		$contentEditor = new ContentEditor($content);
+		// create version
+		$versionData['contentID'] = $content->__get('contentID');
+		$version = $contentEditor->createVersion($versionData);
+		// create language entries
+		$preparedLanguageData = array();
+		foreach ($languageData as $key => $value) {
+			foreach ($value as $languageID => $__value) {
+				if (!isset($preparedLanguageData[$languageID])) {
+					$preparedLanguageData[$languageID] = array();
+				}
+				$preparedLanguageData[$languageID][$key] = $__value;
+			}
+		}
+		ContentLanguageEntryEditor::createEntries($version->__get('versionID'), $preparedLanguageData);
 		
 		// update attachments
 		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
@@ -111,18 +171,111 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		$categoryIDs = (isset($this->parameters['categories'])) ? $this->parameters['categories'] : array();
 		$contentEditor->addToCategories($categoryIDs, false);
 		
-		// connect with userGroups
-		$groupIDs = (isset($this->parameters['groupIDs'])) ? ArrayUtil::toIntegerArray($this->parameters['groupIDs']) : array();
-		if (!empty($groupIDs)) {
-			$contentEditor->addGroups($groupIDs);
-		}
-		
 		// insert meta description/keywords
 		$metaDescription = (isset($this->parameters['metaDescription'])) ? $this->parameters['metaDescription'] : '';
 		$metaKeywords = (isset($this->parameters['metaKeywords'])) ? $this->parameters['metaKeywords'] : '';
 		$contentEditor->addMetaData($metaDescription, $metaKeywords);
 		
 		return $content;
+	}
+	
+	/**
+	 * @see \wcf\data\IVersionableDatabaseObjectAction::createVersion()
+	 */
+	public function createVersion() {
+		if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
+			$this->parameters['data']['attachments'] = count($this->parameters['attachmentHandler']);
+		}
+		
+		// separating core content data from version data
+		$contentParameters = array(
+			'contentID',
+			'contentSlug',
+			'authorID',
+			'cumulativeLikes',
+			'views',
+			'lastModified'
+		);
+		
+		$languageEntryParameters = array(
+			'contentTitle',
+			'contentDescription',
+			'contentText'
+		);
+		
+		$versionData = array();
+		$languageData = array();
+		$tmpData = $this->parameters['data'];
+		foreach ($tmpData as $key => $value) {
+			if (in_array($key, $contentParameters)) continue;
+			if (in_array($key, $languageEntryParameters)) {
+				$languageData[$key] = $value;
+			}
+			else {
+				$versionData[$key] = $value;
+			}
+			unset($this->parameters['data'][$key]);
+		}
+
+		// authorID is part of versionData as well
+		$versionData['authorID'] = $this->parameters['data']['authorID'];
+		
+		// prepare language data
+		$preparedLanguageData = array();
+		foreach ($languageData as $key => $value) {
+			foreach ($value as $languageID => $__value) {
+				if (!isset($preparedLanguageData[$languageID])) {
+					$preparedLanguageData[$languageID] = array();
+				}
+				$preparedLanguageData[$languageID][$key] = $__value;
+			}
+		}
+		
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+		
+		// update object
+		$versions = array();
+		if (isset($this->parameters['data'])) {
+			foreach ($this->objects as $object) {
+				$object->update($this->parameters['data']);
+				if (isset($this->parameters['counters'])) {
+					$object->updateCounters($this->parameters['counters']);
+				}
+				// create new version
+				$versionData['contentID'] = $object->__get('contentID');
+				$versions[$object->getObjectID()] = $object->createVersion($versionData);
+				
+				// create language entries
+				ContentLanguageEntryEditor::createEntries($object->getObjectID(), $preparedLanguageData);
+			}
+		}
+		
+		$categoryIDs = (isset($this->parameters['categories'])) ? $this->parameters['categories'] : array();
+		$removeCategories = (isset($this->parameters['removeCategories'])) ? $this->parameters['removeCategories'] : array();
+		$metaDescription = (isset($this->parameters['metaDescription'])) ? $this->parameters['metaDescription'] : '';
+		$metaKeywords = (isset($this->parameters['metaKeywords'])) ? $this->parameters['metaKeywords'] : '';
+		
+		foreach ($this->objects as $contentEditor) {
+			/* @var $contentEditor \ultimate\data\content\ContentEditor */
+			if (!empty($categoryIDs)) {
+				$contentEditor->addToCategories($categoryIDs);
+			}
+			
+			if (!empty($removeCategories)) {
+				$contentEditor->removeFromCategories($removeCategories);
+			}
+			
+			$contentEditor->addMetaData($metaDescription, $metaKeywords);
+		}
+	}
+	
+	/**
+	 * @see \wcf\data\IVersionableDatabaseObjectAction::validateCreateVersion()
+	 */
+	public function validateCreateVersion() {
+		WCF::getSession()->checkPermissions(array('admin.content.ultimate.canAddContentVersion'));
 	}
 	
 	/**
@@ -136,15 +289,18 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		foreach ($this->objects as $contentEditor) {
 			$languages = LanguageFactory::getInstance()->getLanguages();
 			SearchIndexManager::getInstance()->delete('de.plugins-zum-selberbauen.ultimate.content', array($contentEditor->__get('contentID')));
+			$textValues = ContentLanguageEntryCache::getInstance()->getValues($contentEditor->__get('versionID'), 'contentText');
+			$titleValues = ContentLanguageEntryCache::getInstance()->getValues($contentEditor->__get('versionID'), 'contentTitle');
 			foreach ($languages as $languageID => $language) {
-				$text = $language->get($contentEditor->__get('contentText'));
-				$title = $language->get($contentEditor->__get('contentTitle'));
-				$isI18n = (strpos($contentEditor->__get('contentText'), 'ultimate.content') !== false || strpos($contentEditor->__get('contentTitle'), 'ultimate.content') !== false);
+				$text = $textValues[$languageID];
+				$title = $titleValues[$languageID];
+				$isI18n = (!ContentLanguageEntryCache::getInstance()->isNeutralValue($contentEditor->__get('versionID'), 'contentText') 
+					|| !ContentLanguageEntryCache::getInstance()->isNeutralValue($contentEditor->__get('versionID'), 'contentTitle'));
 				SearchIndexManager::getInstance()->add(
 					'de.plugins-zum-selberbauen.ultimate.content',
 					$contentEditor->__get('contentID'),
-					(!empty($text) ? $text : $contentEditor->__get('contentText')),
-					(!empty($title) ? $title : $contentEditor->__get('contentTitle')),
+					$text,
+					$title,
 					$contentEditor->getTime(),
 					$contentEditor->getUserID(),
 					$contentEditor->getUsername(),
@@ -161,15 +317,71 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	 * Updates one or more objects.
 	 */
 	public function update() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+		
+		$versions = array();
 		if (isset($this->parameters['data'])) {
 			if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
 				$this->parameters['data']['attachments'] = count($this->parameters['attachmentHandler']);
 			}
-			parent::update();
+			
+			// separating core content data from version data
+			$contentParameters = array(
+				'contentID',
+				'contentSlug',
+				'authorID',
+				'cumulativeLikes',
+				'views',
+				'lastModified'
+			);
+			
+			$languageEntryParameters = array(
+				'contentTitle',
+				'contentDescription',
+				'contentText'
+			);
+			
+			$versionData = array();
+			$languageData = array();
+			$tmpData = $this->parameters['data'];
+			foreach ($tmpData as $key => $value) {
+				if (in_array($key, $contentParameters)) continue;
+				if (in_array($key, $languageEntryParameters)) {
+					$languageData[$key] = $value;
+				}
+				else {
+					$versionData[$key] = $value;
+				}
+				unset($this->parameters['data'][$key]);
+			}
+
+			// authorID is part of versionData as well
+			$versionData['authorID'] = $this->parameters['data']['authorID'];
+			
+			// prepare language data
+			$preparedLanguageData = array();
+			foreach ($languageData as $key => $value) {
+				foreach ($value as $languageID => $__value) {
+					if (!isset($preparedLanguageData[$languageID])) {
+						$preparedLanguageData[$languageID] = array();
+					}
+					$preparedLanguageData[$languageID][$key] = $__value;
+				}
+			}
+			
+			foreach ($this->objects as $object) {
+				$object->update($this->parameters['data']);
+				$versionID = $object->getCurrentVersion()->__get('versionID');
+				$object->updateVersion($versionID, $versionData);
+				ContentLanguageEntryEditor::updateEntries($versionID, $preparedLanguageData);
+			}
 		}
-		else {
-			if (empty($this->objects)) {
-				$this->readObjects();
+		
+		if (isset($this->parameters['counters'])) {
+			foreach ($this->objects as $object) {
+				$object->updateCounters($this->parameters['counters']);
 			}
 		}
 		
@@ -190,7 +402,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 			}
 			
 			if (!empty($groupIDs)) {
-				$contentEditor->addGroups($groupIDs);
+				$contentEditor->addGroups($versions[$contentEditor->getObjectID()], $groupIDs);
 			}
 			
 			$contentEditor->addMetaData($metaDescription, $metaKeywords);
@@ -210,6 +422,9 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		foreach ($this->objects as $object) {
 			$objectIDs[] = $object->getObjectID();
 		}
+
+		// execute action
+		$affectedRows = call_user_func(array($this->className, 'deleteAll'), $objectIDs);
 		
 		// update search index
 		SearchIndexManager::getInstance()->delete('de.plugins-zum-selberbauen.ultimate.content', $objectIDs);
@@ -217,26 +432,35 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		$layoutIDs = array();
 		foreach ($this->objects as $object) {
 			/* @var $layout \ultimate\data\layout\Layout */
-			$layout = null;
-			if (defined('TESTING_MODE') && TESTING_MODE) {
-				$layoutList = new LayoutList();
-				$layoutList->readObjects();
-				$layouts = $layoutList->getObjects();
-				foreach ($layouts as $__layout) {
-					if ($__layout->__get('objectID') == $object->__get('contentID') && $__layout->__get('objectType') == 'content') {
-						$layout = $__layout;
-					}
-				}
-			}
-			else {
-				$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($object->__get('contentID'), 'content');
-			}
+			$layout = LayoutHandler::getInstance()->getLayoutFromObjectData($object->__get('contentID'), 'content');
 			$layoutIDs[] = $layout->__get('layoutID');
 		}
 		$layoutAction = new LayoutAction($layoutIDs, 'delete', array());
 		$layoutAction->executeAction();
-		// execute action
-		return call_user_func(array($this->className, 'deleteAll'), $objectIDs);
+		return $affectedRows;
+	}
+	
+	/**
+	 * @see \wcf\data\IVersionableDatabaseObjectAction::deleteVersion()
+	 */
+	public function deleteVersion() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+		
+		// get ids
+		$objectIDs = array();
+		foreach ($this->objects as $object) {
+			/* @var $object \ultimate\data\content\ContentEditor */
+			$object->deleteVersion($this->parameters['versionID']);
+		}
+	}
+	
+	/**
+	 * @see \wcf\data\IVersionableDatabaseObjectAction::validateDeleteVersion()
+	 */
+	public function validateDeleteVersion() {
+		WCF::getSession()->checkPermissions(array('admin.content.ultimate.canDeleteContentVersion'));
 	}
 	
 	/**
@@ -292,6 +516,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	 * Validates the message.
 	 * 
 	 * @param	string	$message
+	 * @throws \wcf\system\exception\UserInputException
 	 */
 	public function validateMessage($message) {
 		// search for disallowed bbcodes
@@ -314,20 +539,19 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		$contentData['contentText'] = PreParser::getInstance()->parse($contentData['contentText'], explode(',', WCF::getSession()->getPermission('user.message.allowedBBCodes')));
 		$content = $this->content;
 		if ($isI18n) {
-			I18nHandler::getInstance()->register('text');
-			I18nHandler::getInstance()->setValues('text', array(
-				WCF::getUser()->getLanguage()->getObjectID() => $contentData['contentText']
-			));
-			I18nHandler::getInstance()->save('text', 'ultimate.content.'.$this->content->__get('contentID').'.contentText', 'ultimate.content', PACKAGE_ID);
+			$contentData = array(
+				WCF::getUser()->getLanguage()->getObjectID() => array(
+					'contentText' => $contentData['contentText']
+				)
+			);
 		} else {
-			// execute update action
-			$action = new ContentAction(array($this->content), 'update', array('data' => $contentData));
-			$action->executeAction();
-			
-			// load new post
-			$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
-			$content = $contents[$this->content->__get('contentID')];
+			$contentData = array(
+				ContentLanguageEntryCache::NEUTRAL_LANGUAGE => array(
+					'contentText' => $contentData['contentText']
+				)
+			);
 		}
+		ContentLanguageEntryEditor::updateEntries($this->content->__get('versionID'), $contentData);
 		
 		return array(
 			'actionName' => 'save',

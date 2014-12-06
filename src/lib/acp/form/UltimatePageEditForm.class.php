@@ -27,6 +27,7 @@
  */
 namespace ultimate\acp\form;
 use ultimate\acp\form\UltimatePageAddForm;
+use ultimate\data\page\language\PageLanguageEntryCache;
 use ultimate\data\page\Page;
 use ultimate\data\page\PageAction;
 use ultimate\util\PageUtil;
@@ -157,7 +158,14 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 			$this->metaDescription = $metaData['metaDescription'];
 			$this->metaKeywords = $metaData['metaKeywords'];
 			
-			I18nHandler::getInstance()->setOptions('pageTitle', PACKAGE_ID, $this->pageTitle, 'ultimate.page.\d+.pageTitle');
+			// prepare I18nHandler
+			if (!PageLanguageEntryCache::getInstance()->isNeutralValue($this->page->__get('pageID'), 'pageTitle')) {
+				$pageTitle = PageLanguageEntryCache::getInstance()->getValues($this->page->__get('pageID'), 'pageTitle');
+				I18nHandler::getInstance()->setValues('pageTitle', $pageTitle);
+			}
+			else {
+				I18nHandler::getInstance()->setValue('pageTitle', $this->pageTitle);
+			}
 		}
 		AbstractForm::readData();
 	}
@@ -169,19 +177,21 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 	public function save() {
 		AbstractForm::save();
 		
-		$this->pageTitle = 'ultimate.page.'.$this->pageID.'.pageTitle';
+		// retrieve I18n values
+		$pageTitle = array();
+		// for the time being the existing entries will be removed, if an array entry with id 0 is provided
 		if (I18nHandler::getInstance()->isPlainValue('pageTitle')) {
-			I18nHandler::getInstance()->remove($this->pageTitle, PACKAGE_ID);
-			$this->pageTitle = I18nHandler::getInstance()->getValue('pageTitle');
-		} else {
-			I18nHandler::getInstance()->save('pageTitle', $this->pageTitle, 'ultimate.page', PACKAGE_ID);
+			$pageTitle[PageLanguageEntryCache::NEUTRAL_LANGUAGE] = $this->pageTitle;
+		}
+		else {
+			$pageTitle = I18nHandler::getInstance()->getValues('pageTitle');
 		}
 		
 		$parameters = array(
 			'data' => array(
 				'authorID' => WCF::getUser()->userID,
 				'pageParent' => $this->pageParent,
-				'pageTitle' => $this->pageTitle,
+				'pageTitle' => $pageTitle,
 				'pageSlug' => $this->pageSlug,
 				'publishDate' => $this->publishDateTimestamp,
 				'lastModified' => TIME_NOW,
@@ -215,9 +225,7 @@ class UltimatePageEditForm extends UltimatePageAddForm {
 	public function assignVariables() {
 		parent::assignVariables();
 		
-		$useRequestData = (!empty($_POST)) ? true : false;
-		I18nHandler::getInstance()->assignVariables($useRequestData);
-		
+		I18nHandler::getInstance()->assignVariables();
 		WCF::getTPL()->assign(array(
 			'pageID' => $this->pageID,
 			'publishButtonLang' => $this->publishButtonLang,

@@ -26,6 +26,9 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\content;
+use ultimate\data\content\language\ContentLanguageEntryCache;
+use ultimate\data\content\language\ContentLanguageEntryEditor;
+use ultimate\data\content\version\ContentVersionCache;
 use ultimate\data\layout\LayoutAction;
 use ultimate\data\page\PageAction;
 use ultimate\system\cache\builder\ContentAttachmentCacheBuilder;
@@ -37,8 +40,10 @@ use ultimate\system\cache\builder\ContentTagCloudCacheBuilder;
 use ultimate\system\cache\builder\LatestContentsCacheBuilder;
 use ultimate\system\cache\builder\LayoutCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
+use wcf\data\AbstractVersionableDatabaseObjectEditor;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
+use wcf\system\attachment\AttachmentHandler;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\database\util\PreparedStatementConditionBuilder;
 use wcf\system\tagging\TagEngine;
@@ -55,7 +60,7 @@ use wcf\util\StringUtil;
  * @subpackage	data.content
  * @category	Ultimate CMS
  */
-class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObject {
+class ContentEditor extends AbstractVersionableDatabaseObjectEditor implements IEditableCachedObject {
 	/**
 	 * The base class.
 	 * @var	string
@@ -65,7 +70,8 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 	/**
 	 * Creates an object with the given parameters.
 	 * 
-	 * @param	array	$parameters	
+	 * @param	array	$parameters
+	 * @return  \ultimate\data\content\Content
 	 */
 	public static function create(array $parameters = array()) {
 		$content = parent::create($parameters);
@@ -83,27 +89,30 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 	/**
 	 * Deletes all corresponding objects to the given object IDs.
 	 * 
-	 * @param	integer[]	$objectIDs
+	 * @param	integer[]	$objectIDs	contentIDs
+	 * @return  integer
 	 */
 	public static function deleteAll(array $objectIDs = array()) {
-		if (defined('TESTING_MODE') && TESTING_MODE) {
-			return parent::deleteAll($objectIDs);
-		}
-		
 		// unmark contents
 		ClipboardHandler::getInstance()->unmark($objectIDs, ClipboardHandler::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.ultimate.content'));
+
+		// delete attachments
+		AttachmentHandler::removeAttachments('de.plugins-zum-selberbauen.ultimate.content', $objectIDs);
 		
-		// delete language items
-		$sql = 'DELETE FROM wcf'.WCF_N.'_language_item
-		        WHERE       languageItem = ?';
-		$statement = WCF::getDB()->prepareStatement($sql);
-		
-		WCF::getDB()->beginTransaction();
+		// delete language items and tags
 		foreach ($objectIDs as $objectID) {
-			$statement->executeUnbuffered(array('ultimate.content.'.$objectID.'.%'));
+			ContentLanguageEntryEditor::deleteEntries($objectID);
 			TagEngine::getInstance()->deleteObjectTags('de.plugins-zum-selberbauen.ultimate.content', $objectID);
 		}
-		WCF::getDB()->commitTransaction();
+
+		// delete meta data
+		$conditionBuilder = new PreparedStatementConditionBuilder();
+		$conditionBuilder->add('objectID IN (?)', array($objectIDs));
+		$conditionBuilder->add('objectType = ?', array('content'));
+		$sql = 'DELETE FROM ultimate'.WCF_N.'_meta
+			    '.$conditionBuilder->__toString();
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute($conditionBuilder->getParameters());
 		
 		// delete associated pages
 		$conditionBuilder = new PreparedStatementConditionBuilder();
@@ -122,15 +131,6 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 		
 		$pageAction = new PageAction($pageIDs, 'delete');
 		$pageAction->executeAction();
-		
-		// delete meta data
-		$conditionBuilder = new PreparedStatementConditionBuilder();
-		$conditionBuilder->add('objectID IN (?)', array($objectIDs));
-		$conditionBuilder->add('objectType = ?', array('content'));
-		$sql = 'DELETE FROM ultimate'.WCF_N.'_meta
-			    '.$conditionBuilder->__toString();
-		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute($conditionBuilder->getParameters());
 		
 		return parent::deleteAll($objectIDs);
 	}
@@ -270,32 +270,40 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 	}
 	
 	/**
-	 * Adds new groups to this page.
+	 * Adds new groups to the given content version.
 	 * 
+	 * @param	integer	$versionID
 	 * @param	array	$groupIDs
 	 * @param	boolean	$deleteOldGroups
 	 */
-	public function addGroups(array $groupIDs, $deleteOldGroups = true) {
+	public function addGroups($versionID, array $groupIDs, $deleteOldGroups = true) {
 		if ($deleteOldGroups) {
-			$sql = 'DELETE FROM ultimate'.WCF_N.'_user_group_to_content
-			        WHERE       contentID = ?';
+			$sql = 'DELETE FROM ultimate'.WCF_N.'_user_group_to_content_version
+			        WHERE       versionID = ?';
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute(array(
-				$this->object->__get('contentID')
+				$versionID
 			));
 		}
-		$sql = 'INSERT INTO ultimate'.WCF_N.'_user_group_to_content
-		               (groupID, contentID)
-		        VALUES (?, ?)';
+		$sql = 'INSERT INTO ultimate'.WCF_N.'_user_group_to_content_version
+		               (groupID, versionID)
+		        VALUES (?, ?, ?)';
 		$statement = WCF::getDB()->prepareStatement($sql);
 		WCF::getDB()->beginTransaction();
 		foreach ($groupIDs as $groupID) {
 			$statement->executeUnbuffered(array(
 				$groupID,
-				$this->object->__get('contentID')
+				$versionID
 			));
 		}
 		WCF::getDB()->commitTransaction();
+	}
+
+	/**
+	 * @see	\wcf\data\IStorableObject::getDatabaseTableName()
+	 */
+	public static function getDatabaseTableName() {
+		return call_user_func(array(static::$baseClass, 'getDatabaseTableName'));
 	}
 	
 	/**
@@ -305,9 +313,11 @@ class ContentEditor extends DatabaseObjectEditor implements IEditableCachedObjec
 		ContentAttachmentCacheBuilder::getInstance()->reset();
 		ContentCacheBuilder::getInstance()->reset();
 		ContentCategoryCacheBuilder::getInstance()->reset();
+		ContentLanguageEntryCache::getInstance()->reloadCache();
 		ContentPageCacheBuilder::getInstance()->reset();
 		ContentTagCacheBuilder::getInstance()->reset();
 		ContentTagCloudCacheBuilder::getInstance()->reset();
+		ContentVersionCache::getInstance()->reloadCache();
 		LayoutCacheBuilder::getInstance()->reset();
 		LatestContentsCacheBuilder::getInstance()->reset();
 	}

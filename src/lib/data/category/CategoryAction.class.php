@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\category;
+use ultimate\data\category\language\CategoryLanguageEntryEditor;
 use ultimate\data\layout\LayoutAction;
 use ultimate\data\layout\LayoutList;
 use ultimate\system\layout\LayoutHandler;
@@ -72,7 +73,32 @@ class CategoryAction extends AbstractDatabaseObjectAction {
 	 * @return	\ultimate\data\category\Category
 	 */
 	public function create() {
+		$languageEntryParameters = array(
+			'categoryTitle',
+			'categoryDescription',
+		);
+		
+		$languageData = array();
+		$tmpData = $this->parameters['data'];
+		foreach ($tmpData as $key => $value) {
+			if (!in_array($key, $languageEntryParameters)) continue;
+			
+			$languageData[$key] = $value;
+			unset($this->parameters['data'][$key]);
+		}
+		
+		$preparedLanguageData = array();
+		foreach ($languageData as $key => $value) {
+			foreach ($value as $languageID => $__value) {
+				if (!isset($preparedLanguageData[$languageID])) {
+					$preparedLanguageData[$languageID] = array();
+				}
+				$preparedLanguageData[$languageID][$key] = $__value;
+			}
+		}
+		
 		$category = parent::create();
+		CategoryLanguageEntryEditor::createEntries($category->__get('categoryID'), $preparedLanguageData);
 		$categoryEditor = new CategoryEditor($category);
 	
 		// insert meta description/keywords
@@ -88,7 +114,35 @@ class CategoryAction extends AbstractDatabaseObjectAction {
 	 */
 	public function update() {
 		if (isset($this->parameters['data'])) {
+			$languageEntryParameters = array(
+				'categoryTitle',
+				'categoryDescription',
+			);
+			
+			$languageData = array();
+			$tmpData = $this->parameters['data'];
+			foreach ($tmpData as $key => $value) {
+				if (!in_array($key, $languageEntryParameters)) continue;
+					
+				$languageData[$key] = $value;
+				unset($this->parameters['data'][$key]);
+			}
+			
+			$preparedLanguageData = array();
+			foreach ($languageData as $key => $value) {
+				foreach ($value as $languageID => $__value) {
+					if (!isset($preparedLanguageData[$languageID])) {
+						$preparedLanguageData[$languageID] = array();
+					}
+					$preparedLanguageData[$languageID][$key] = $__value;
+				}
+			}
+			
 			parent::update();
+			
+			foreach ($this->objects as $object) {
+				CategoryLanguageEntryEditor::updateEntries($object->__get('categoryID'), $preparedLanguageData);
+			}
 		}
 		else {
 			if (empty($this->objects)) {

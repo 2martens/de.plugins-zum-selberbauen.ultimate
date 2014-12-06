@@ -26,7 +26,6 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\style;
-use wcf\system\request\RequestHandler;
 use wcf\system\style\StyleHandler;
 use wcf\system\WCF;
 
@@ -46,10 +45,11 @@ class UltimateStyleHandler extends StyleHandler {
 	/**
 	 * Returns the HTML tag to include current stylesheet (only for ACP).
 	 *
+	 * @param   boolean $isACP
 	 * @return	string empty string if you call it outside ACP
 	 */
-	public function getStylesheet() {
-		if (RequestHandler::getInstance()->isACPRequest()) {
+	public function getStylesheet($isACP = false) {
+		if ($isACP) {
 			// ACP
 			$filename = 'acp/style/style-noWCF'.(WCF::getLanguage()->get('wcf.global.pageDirection') == 'rtl' ? '-rtl' : '').'.css';
 			if (!file_exists(WCF_DIR.$filename)) {

@@ -1,5 +1,5 @@
 {capture assign='pageTitle'}{lang}wcf.acp.ultimate.template.list{/lang}{/capture}
-{include file='header' application='ultimate'}
+{include file='header'}
 
 <script data-relocate="true" type="text/javascript">
 	//<![CDATA[
@@ -33,7 +33,7 @@
 	<nav>
 		<ul>
 			{if $__wcf->session->getPermission('admin.content.ultimate.canManageTemplates')}
-				<li><a href="{link application='ultimate' controller='UltimateTemplateAdd'}{/link}" title="{lang}wcf.acp.ultimate.template.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.template.add{/lang}</span></a></li>
+				<li><a href="{link application='ultimate' controller='UltimateTemplateAdd'}{/link}" title="{lang}wcf.acp.ultimate.template.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.ultimate.template.add{/lang}</span></a></li>
 			{/if}
 			
 			{event name='contentNavigationButtons'}
@@ -99,7 +99,7 @@
 	<nav>
 		<ul>
 			{if $__wcf->session->getPermission('admin.content.ultimate.canManageTemplates')}
-				<li><a href="{link application='ultimate' controller='UltimateTemplateAdd'}{/link}" title="{lang}wcf.acp.ultimate.template.add{/lang}" class="button"><span class="icon icon24 icon-plus"></span> <span>{lang}wcf.acp.ultimate.template.add{/lang}</span></a></li>
+				<li><a href="{link application='ultimate' controller='UltimateTemplateAdd'}{/link}" title="{lang}wcf.acp.ultimate.template.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.ultimate.template.add{/lang}</span></a></li>
 			{/if}
 			
 			{event name='contentNavigationButtons'}

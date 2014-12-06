@@ -90,7 +90,7 @@ class ContentAttachmentObjectType extends AbstractAttachmentObjectType {
 	 * @return	boolean
 	 */
 	public function canUpload($objectID, $parentObjectID = 0) {
-		return WCF::getSession()->getPermission('admin.content.ultimate.canUploadAttachment');
+		return WCF::getSession()->getPermission('user.ultimate.content.canUploadAttachment');
 	}
 	
 	/**
@@ -100,7 +100,7 @@ class ContentAttachmentObjectType extends AbstractAttachmentObjectType {
 	 * @return	boolean
 	 */
 	public function canDelete($objectID) {
-		return (WCF::getSession()->getPermission('admin.content.ultimate.canEditContent') || WCF::getSession()->getPermission('admin.content.ultimate.canAddContent'));
+		return (WCF::getSession()->getPermission('admin.content.ultimate.canEditContent'));
 	}
 	
 	/**

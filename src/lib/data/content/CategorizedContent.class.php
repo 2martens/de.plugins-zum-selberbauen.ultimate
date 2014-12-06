@@ -73,10 +73,11 @@ class CategorizedContent extends DatabaseObjectDecorator implements IUltimateDat
 	 * @return	mixed
 	 */
 	public function __get($name) {
-		$value = parent::__get($name);
-		
-		if ($value === null) {
-			if ($name == 'categories') $value = $this->categories;
+		if ($name == 'categories') {
+			$value = $this->categories;
+		}
+		else {
+			$value = parent::__get($name);
 		}
 		return $value;
 	}

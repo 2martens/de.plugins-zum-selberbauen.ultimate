@@ -4,7 +4,7 @@
 		<!-- frontend language -->
 		<templatelistener name="buttonLanguage">
 			<environment>user</environment>
-			<templatename>headInclude</templatename>
+			<templatename>headIncludeJavaScript</templatename>
 			<eventname>javascriptLanguageImport</eventname>
 			<templatecode><![CDATA[,
 'ultimate.button.saveAsDraft': '{lang}ultimate.button.saveAsDraft{/lang}',
@@ -18,11 +18,20 @@
 		<!-- frontend headInclude -->
 		<templatelistener name="includeUltimateJS">
 			<environment>user</environment>
-			<templatename>headInclude</templatename>
+			<templatename>headIncludeJavaScript</templatename>
 			<eventname>javascriptInclude</eventname>
-			<templatecode><![CDATA[<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
-<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.Content{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
+			<templatecode><![CDATA[<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@LAST_UPDATE_TIME}"></script>
+<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.Content{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@LAST_UPDATE_TIME}"></script>
 {if $customMenu|isset}{@$customMenu}{/if}
+]]></templatecode>
+		</templatelistener>
+		
+		<templatelistener name="includeEditSuiteJS">
+			<environment>user</environment>
+			<templatename>headIncludeJavaScript</templatename>
+			<eventname>javascriptInclude</eventname>
+			<templatecode><![CDATA[<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.ACL{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@LAST_UPDATE_TIME}"></script>
+<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.EditSuite{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@LAST_UPDATE_TIME}"></script>
 ]]></templatecode>
 		</templatelistener>
         
@@ -79,6 +88,25 @@
             <templatename>header</templatename>
             <eventname>stylesheets</eventname>
             <templatecode><![CDATA[{if $__ultimate|isset && $__ultimate->isActiveApplication()}{@$__wcf->getUltimateStyleHandler()->getStylesheet()}{/if}]]></templatecode>
+        </templatelistener>
+        <templatelistener name="ultimateACPJS">
+            <environment>admin</environment>
+            <templatename>header</templatename>
+            <eventname>javascriptInclude</eventname>
+            <templatecode><![CDATA[<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.js?v={@LAST_UPDATE_TIME}"></script>
+<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}acp/js/ULTIMATE.ACP.js?v={@LAST_UPDATE_TIME}"></script>]]></templatecode>
+        </templatelistener>
+        <templatelistener name="ultimateACPLanguageImport">
+            <environment>admin</environment>
+            <templatename>header</templatename>
+            <eventname>javascriptLanguageImport</eventname>
+            <templatecode><![CDATA[,'wcf.acp.ultimate.template.selectBlocktype.error.notSelected': '{lang}wcf.acp.ultimate.template.selectBlocktype.error.notSelected{/lang}',
+'wcf.acp.ultimate.menu.item.delete.sure': '{lang}wcf.acp.ultimate.menu.item.delete.sure{/lang}',
+'ultimate.button.saveAsDraft': '{lang}ultimate.button.saveAsDraft{/lang}',
+'ultimate.button.saveAsPending': '{lang}ultimate.button.saveAsPending{/lang}',
+'ultimate.button.schedule': '{lang}ultimate.button.schedule{/lang}',
+'ultimate.button.publish': '{lang}ultimate.button.publish{/lang}',
+'ultimate.button.update': '{lang}ultimate.button.update{/lang}']]></templatecode>
         </templatelistener>
         <!-- /ACP -->
         

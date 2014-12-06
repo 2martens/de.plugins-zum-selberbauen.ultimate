@@ -27,6 +27,7 @@
  */
 namespace ultimate\acp\form;
 use ultimate\acp\form\UltimateCategoryAddForm;
+use ultimate\data\category\language\CategoryLanguageEntryCache;
 use ultimate\data\category\Category;
 use ultimate\data\category\CategoryAction;
 use ultimate\util\CategoryUtil;
@@ -88,14 +89,30 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 		$this->categoryTitle = $this->category->__get('categoryTitle');
 		$this->categorySlug = $this->category->__get('categorySlug');
 		$this->categoryDescription = $this->category->__get('categoryDescription');
+		
+		// prepare I18nHandler
+		if (!CategoryLanguageEntryCache::getInstance()->isNeutralValue($this->category->__get('categoryID'), 'categoryTitle')) {
+			$categoryTitle = CategoryLanguageEntryCache::getInstance()->getValues($this->category->__get('categoryID'), 'categoryTitle');
+			I18nHandler::getInstance()->setValues('categoryTitle', $categoryTitle);
+		}
+		else {
+			I18nHandler::getInstance()->setValue('categoryTitle', $this->categoryTitle);
+		}
+		
+		if (!CategoryLanguageEntryCache::getInstance()->isNeutralValue($this->category->__get('categoryID'), 'categoryDescription')) {
+			$categoryDescription = CategoryLanguageEntryCache::getInstance()->getValues($this->category->__get('categoryID'), 'categoryDescription');
+			I18nHandler::getInstance()->setValues('categoryDescription', $categoryDescription);
+		}
+		else {
+			I18nHandler::getInstance()->setValue('categoryDescription', $this->categoryDescription);
+		}
+		
 		$metaData = $this->category->__get('metaData');
 		if (!empty($metaData)) {
 			$this->metaDescription = (isset($metaData['metaDescription']) ? $metaData['metaDescription'] : '');
 			$this->metaKeywords = (isset($metaData['metaKeywords']) ? $metaData['metaKeywords'] : '');
 		}
 		$this->categoryParent = $this->category->__get('categoryParent');
-		I18nHandler::getInstance()->setOptions('categoryTitle', PACKAGE_ID, $this->categoryTitle, 'ultimate.category.\d+.categoryTitle');
-		I18nHandler::getInstance()->setOptions('categoryDescription', PACKAGE_ID, $this->categoryDescription, 'ultimate.category.\d+.categoryDescription');
 		
 		AbstractForm::readData();
 	}
@@ -107,28 +124,29 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 	public function save() {
 		AbstractForm::save();
 		
-		$this->categoryTitle = 'ultimate.category.'.$this->categoryID.'.categoryTitle';
+		// retrieve I18n values
+		$categoryTitle = array();
+		// for the time being the existing entries will be removed, if an array entry with id 0 is provided
 		if (I18nHandler::getInstance()->isPlainValue('categoryTitle')) {
-			I18nHandler::getInstance()->remove($this->categoryTitle, PACKAGE_ID);
-			$this->categoryTitle = I18nHandler::getInstance()->getValue('categoryTitle');
-		} else {
-			I18nHandler::getInstance()->save('categoryTitle', $this->categoryTitle, 'ultimate.category', PACKAGE_ID);
+			$categoryTitle[CategoryLanguageEntryCache::NEUTRAL_LANGUAGE] = $this->categoryTitle;
 		}
-		
-		$this->categoryDescription = 'ultimate.category.'.$this->categoryID.'.categoryDescription';
+		else {
+			$categoryTitle = I18nHandler::getInstance()->getValues('categoryTitle');
+		}
+		$categoryDescription = array();
 		if (I18nHandler::getInstance()->isPlainValue('categoryDescription')) {
-			I18nHandler::getInstance()->remove($this->categoryDescription, PACKAGE_ID);
-			$this->categoryDescription = I18nHandler::getInstance()->getValue('categoryDescription');
-		} else {
-			I18nHandler::getInstance()->save('categoryDescription', $this->categoryDescription, 'ultimate.category', PACKAGE_ID);
+			$categoryDescription[CategoryLanguageEntryCache::NEUTRAL_LANGUAGE] = $this->categoryDescription;
+		}
+		else {
+			$categoryDescription = I18nHandler::getInstance()->getValues('categoryDescription');
 		}
 		
 		$parameters = array(
 			'data' => array(
-				'categoryTitle' => $this->categoryTitle,
+				'categoryTitle' => $categoryTitle,
 				'categorySlug' => $this->categorySlug,
 				'categoryParent' => $this->categoryParent,
-				'categoryDescription' => $this->categoryDescription
+				'categoryDescription' => $categoryDescription
 			),
 			'metaDescription' => $this->metaDescription,
 			'metaKeywords' => $this->metaKeywords
@@ -149,9 +167,7 @@ class UltimateCategoryEditForm extends UltimateCategoryAddForm {
 	public function assignVariables() {
 		parent::assignVariables();
 		
-		$useRequestData = (!empty($_POST)) ? true : false;
-		I18nHandler::getInstance()->assignVariables($useRequestData);
-		
+		I18nHandler::getInstance()->assignVariables();
 		WCF::getTPL()->assign(array(
 			'categoryID' => $this->categoryID,
 			'action' => 'edit'

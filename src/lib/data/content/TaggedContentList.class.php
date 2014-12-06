@@ -54,7 +54,7 @@ class TaggedContentList extends ContentList {
 	 * sql order by statement
 	 * @var	string
 	 */
-	public $sqlOrderBy = 'content.publishDate DESC';
+	public $sqlOrderBy = 'contentVersion.publishDate DESC';
 	
 	/**
 	 * Creates a new TaggedContentList object.
@@ -66,9 +66,11 @@ class TaggedContentList extends ContentList {
 		
 		$this->getConditionBuilder()->add('tag_to_object.objectTypeID = ? AND tag_to_object.languageID = ? AND tag_to_object.tagID = ?', array(TagEngine::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.ultimate.content'), $tag->languageID, $tag->tagID));
 		$this->getConditionBuilder()->add('content.contentID = tag_to_object.objectID');
-		$this->getConditionBuilder()->add('(content.visibility = ? OR (content.visibility = ? AND content.authorID = ?) OR (content.visibility = ? AND groupToContent.groupID IN (?)))', array('public', 'private', WCF::getUser()->__get('userID'), 'protected', WCF::getUser()->getGroupIDs()));
-		$this->getConditionBuilder()->add('content.status = ?', array(3)); // fixes #219
-		$this->sqlConditionJoins .= 'LEFT JOIN ultimate1_user_group_to_content groupToContent ON (groupToContent.contentID = content.contentID)';
+		$this->getConditionBuilder()->add('(contentVersion.visibility = ? OR (contentVersion.visibility = ? AND contentVersion.authorID = ?) OR (contentVersion.visibility = ? AND groupToContent.groupID IN (?)))', array('public', 'private', WCF::getUser()->__get('userID'), 'protected', WCF::getUser()->getGroupIDs()));
+		$this->getConditionBuilder()->add('contentVersion.status = ?', array(3)); // fixes #219
+		$this->sqlJoins .= ' LEFT JOIN ultimate'.WCF_N.'_content_version contentVersion ON (contentVersion.contentID = content.contentID)';
+		$this->sqlConditionJoins .= ' LEFT JOIN ultimate'.WCF_N.'_content_version contentVersion ON (contentVersion.contentID = content.contentID)';
+		$this->sqlConditionJoins .= ' LEFT JOIN ultimate'.WCF_N.'_user_group_to_content_version groupToVersion ON (contentVersion.versionID = groupToVersion.versionID)';
 	}
 	
 	/**
@@ -112,7 +114,84 @@ class TaggedContentList extends ContentList {
 	public function readObjects() {
 		if ($this->objectIDs === null) $this->readObjectIDs();
 		$this->conditionBuilder = new PreparedStatementConditionBuilder();
-		parent::readObjects();
+		
+		// include code from DatabaseObjectList
+		if ($this->objectIDs !== null) {
+			if (empty($this->objectIDs)) {
+				return;
+			}
+			$sql = 'SELECT '.(!empty($this->sqlSelects) ? $this->sqlSelects.($this->useQualifiedShorthand ? ',' : '') : '').'
+			               '.($this->useQualifiedShorthand ? $this->getDatabaseTableAlias().'.*' : '').'
+			        FROM   '.$this->getDatabaseTableName()." ".$this->getDatabaseTableAlias().'
+			               '.$this->sqlJoins.'
+			        WHERE  '.$this->getDatabaseTableAlias().'.'.$this->getDatabaseTableIndexName().' IN (?'.str_repeat(',?', count($this->objectIDs) - 1).')
+			               '.(!empty($this->sqlOrderBy) ? 'ORDER BY '.$this->sqlOrderBy : '');
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute($this->objectIDs);
+			$this->objects = $statement->fetchObjects(($this->objectClassName ?: $this->className));
+		}
+		else {
+			$sql = 'SELECT  '.(!empty($this->sqlSelects) ? $this->sqlSelects.($this->useQualifiedShorthand ? ',' : '') : '').'
+			                '.($this->useQualifiedShorthand ? $this->getDatabaseTableAlias().'.*' : '').'
+			        FROM    '.$this->getDatabaseTableName().' '.$this->getDatabaseTableAlias().'
+			                '.$this->sqlJoins.'
+			                '.$this->getConditionBuilder().'
+			                '.(!empty($this->sqlOrderBy) ? 'ORDER BY '.$this->sqlOrderBy : '');
+			$statement = WCF::getDB()->prepareStatement($sql, $this->sqlLimit, $this->sqlOffset);
+			$statement->execute($this->getConditionBuilder()->getParameters());
+			$this->objects = $statement->fetchObjects(($this->objectClassName ?: $this->className));
+		}
+		
+		// decorate objects
+		if (!empty($this->decoratorClassName)) {
+			foreach ($this->objects as &$object) {
+				$object = new $this->decoratorClassName($object);
+			}
+			unset($object);
+		}
+		
+		// use table index as array index
+		$objects = array();
+		foreach ($this->objects as $object) {
+			$objectID = $object->getObjectID();
+			// the select process is not distinctive
+			if (!isset($objects[$objectID])) {
+				$objects[$objectID] = $object;
+				$this->indexToObject[] = $objectID;
+			}
+		}
+		$this->objectIDs = $this->indexToObject;
+		$this->objects = $objects;
+		
+		// filter those objects out that are not visible for current user
+// 		$conditionBuilder = new PreparedStatementConditionBuilder();
+// 		$conditionBuilder->add('groupToVersion.groupID IN (?)', array(WCF::getUser()->getGroupIDs()));
+// 		$conditionBuilder->add('contentVersion.versionID = ?');
+// 		$conditionBuilder->add('contentVersion.contentID = ?');
+// 		$sql = 'SELECT DISTINCT contentVersion.contentID
+// 		        FROM   ultimate'.WCF_N.'_content_version contentVersion
+// 		        LEFT JOIN ultimate'.WCF_N.'_user_group_to_content_version groupToVersion
+// 		        ON        ((contentVersion.contentID = groupToVersion.contentID) AND (contentVersion.versionID = groupToVersion.versionID))
+// 		        '.$conditionBuilder;
+// 		$statement = WCF::getDB()->prepareStatement($sql);
+		
+// 		$objects = array();
+		
+// 		WCF::getDB()->beginTransaction();
+// 		foreach ($this->objects as $objectID => $object) {
+// 			$versionID = $object->getCurrentVersion()->getObjectID();
+// 			$statement->executeUnbuffered(array_merge($conditionBuilder->getParameters(), array($versionID, $objectID)));
+// 			$row = $statement->fetchArray();
+			
+// 			if ($row === null) continue;
+			
+// 			$objects[$objectID] = $object;
+// 		}
+// 		WCF::getDB()->commitTransaction();
+		
+// 		$this->objects = $objects;
+// 		$this->objectIDs = $this->indexToObject = array_keys($objects);
+		
 		$pageIDs = array_flip(ContentPageCacheBuilder::getInstance()->getData(array(), 'contentIDToPageID'));
 		$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
 		foreach ($this->objects as $objectID => &$object) {

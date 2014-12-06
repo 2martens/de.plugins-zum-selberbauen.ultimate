@@ -24,12 +24,9 @@ ULTIMATE.ACP.Button = {};
 /**
  * Handles button replacements.
  * 
- * @param {String}
- *            buttonID
- * @param {String}
- *            checkElementID
- * @param {String}
- *            action
+ * @param {String} buttonID
+ * @param {String} checkElementID
+ * @param {String} action
  * @constructor
  * @since version 1.0.0
  */
@@ -75,7 +72,7 @@ ULTIMATE.ACP.Button.Replacement.prototype = {
     /**
 	 * the initial status id
 	 * 
-	 * @type Integer
+	 * @type Number
 	 */
     _initialStatusID : 0,
     
@@ -110,12 +107,9 @@ ULTIMATE.ACP.Button.Replacement.prototype = {
     /**
 	 * Initializes the ButtonReplacement API.
 	 * 
-	 * @param {String}
-	 *            buttonID
-	 * @param {String}
-	 *            checkElementID
-	 * @param {String}
-	 *            action
+	 * @param {String} buttonID
+	 * @param {String} checkElementID
+	 * @param {String} action
 	 */
     init : function(buttonID, checkElementID, action) {
 	    this._button = $('#' + $.wcfEscapeID(buttonID));
@@ -191,12 +185,9 @@ ULTIMATE.ACP.Block = {};
 /**
  * Transfers new blocks to a template.
  * 
- * @param {String}
- *            elementID
- * @param {String}
- *            containerID
- * @param {String}
- *            className the action class name
+ * @param {String} elementID
+ * @param {String} containerID
+ * @param {String} className the action class name
  * @class Adds blocks to a block list.
  * @since version 1.0.0
  */
@@ -256,19 +247,16 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
     /**
 	 * Contains the edited block id.
 	 * 
-	 * @type Integer
+	 * @type Number
 	 */
     _editBlockID : 0,
     
     /**
 	 * Initializes the BlockTransfer API.
 	 * 
-	 * @param {String}
-	 *            elementID
-	 * @param {String}
-	 *            containerID
-	 * @param {String}
-	 *            className
+	 * @param {String} elementID
+	 * @param {String} containerID
+	 * @param {String} className
 	 */
     init : function(elementID, containerID, className) {
 	    this._element = $('#' + $.wcfEscapeID(elementID));
@@ -302,20 +290,16 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
     /**
 	 * Stops the form submit event.
 	 * 
-	 * @param {jQuery.Event}
-	 *            event
-	 * @return {Boolean}
+	 * @param {jQuery.Event} event
 	 */
     _stopFormSubmit : function(event) {
 	    event.preventDefault();
-	    return;
     },
     
     /**
 	 * Called each time a block is removed with remove().
 	 * 
-	 * @param {jQuery.Event}
-	 *            event
+	 * @param {jQuery.Event} event
 	 */
     _remove : function(event) {
 	    if ($('#' + this._containerID).find('.jsBlock').length <= 1) {
@@ -327,8 +311,7 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
     /**
 	 * Called each time a block is edited.
 	 * 
-	 * @param {jQuery.Event}
-	 *            event
+	 * @param {jQuery.Event} event
 	 */
     _edit : function(event) {
 	    var $target = $(event.currentTarget);
@@ -470,8 +453,7 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
     /**
 	 * Reads the block options form data.
 	 * 
-	 * @param {Object}
-	 *            parameters
+	 * @param {Object} parameters
 	 */
     _readBlockOptionsFormData : function($parameters) {
 	    for ( var i = 0; i < this._optionList.length; i++) {
@@ -512,19 +494,16 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
     /**
 	 * Shows dialog form.
 	 * 
-	 * @param {Object}
-	 *            data
-	 * @param {String}
-	 *            textStatus
-	 * @param {jQuery}
-	 *            jqXHR
+	 * @param {Object} data
+	 * @param {String} textStatus
+	 * @param {jQuery} jqXHR
 	 */
     _successFormData : function(data, textStatus, jqXHR) {
 	    try {
 		    var $data = data['returnValues'];
 		    this._createOptionsDialog($data);
 		    
-		    $('#blockForm input[type="checkbox"]').change(function(event) {
+		    $('#blockForm').find('input[type="checkbox"]').change(function(event) {
 			    var $target = $(event.currentTarget);
 			    var checked = $target.prop('checked');
 			    if (checked) {
@@ -552,19 +531,16 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
     /**
 	 * Shows dialog form on edit.
 	 * 
-	 * @param {Object}
-	 *            data
-	 * @param {String}
-	 *            textStatus
-	 * @param {jQuery}
-	 *            jqXHR
+	 * @param {Object} data
+	 * @param {String} textStatus
+	 * @param {jQuery} jqXHR
 	 */
     _successFormDataEdit : function(data, textStatus, jqXHR) {
 	    try {
 		    var $data = data['returnValues'];
 		    this._createOptionsDialog($data);
-		    
-		    $('#blockForm input[type="checkbox"]').change(function(event) {
+
+            $('#blockForm').find('input[type="checkbox"]').change(function(event) {
 			    var $target = $(event.currentTarget);
 			    var checked = $target.prop('checked');
 			    if (checked) {
@@ -592,8 +568,7 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
     /**
 	 * Initializes the block options dialog.
 	 * 
-	 * @param {Array}
-	 *            $data
+	 * @param {Array} $data
 	 */
     _createOptionsDialog : function($data) {
 	    this._optionList = $data[0];
@@ -636,8 +611,7 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
     /**
 	 * Toggles the tabs.
 	 * 
-	 * @param {jQuery}
-	 *            event
+	 * @param {jQuery} event
 	 */
     _toggleTabs : function(event) {
 	    var $target = $(event.currentTarget);
@@ -652,8 +626,7 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
     /**
 	 * Renders the tab content.
 	 * 
-	 * @param {String}
-	 *            menuItem
+	 * @param {String} menuItem
 	 */
     _renderTab : function(menuItem) {
 	    this._dialog.find('nav.tabMenu li').each(function(index, item) {
@@ -673,12 +646,9 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
     /**
 	 * Shows notification upon success.
 	 * 
-	 * @param {Object}
-	 *            data
-	 * @param {String}
-	 *            textStatus
-	 * @param {jQuery}
-	 *            jqXHR
+	 * @param {Object} data
+	 * @param {String} textStatus
+	 * @param {jQuery} jqXHR
 	 */
     _success : function(data, textStatus, jqXHR) {
 	    if (this._notification === null) {
@@ -748,12 +718,9 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
     /**
 	 * Shows notification upon edit success.
 	 * 
-	 * @param {Object}
-	 *            data
-	 * @param {String}
-	 *            textStatus
-	 * @param {jQuery}
-	 *            jqXHR
+	 * @param {Object} data
+	 * @param {String} textStatus
+	 * @param {jQuery} jqXHR
 	 */
     _successEdit : function(data, textStatus, jqXHR) {
 	    if (this._notification === null) {
@@ -794,16 +761,11 @@ ULTIMATE.ACP.Menu.Item = {};
 /**
  * Creates a new MenuItemTransfer.
  * 
- * @param {String}
- *            elementID
- * @param {String}
- *            menuItemListID
- * @param {String}
- *            className
- * @param {Integer}
- *            offset
- * @param {String}
- *            type
+ * @param {String} elementID
+ * @param {String} menuItemListID
+ * @param {String} className
+ * @param {Number} offset
+ * @param {String} type
  * @class Adds menu items to a menu item list.
  * @since version 1.0.0
  */
@@ -844,7 +806,7 @@ ULTIMATE.ACP.Menu.Item.Transfer.prototype = {
     /**
 	 * show order offset
 	 * 
-	 * @type Integer
+	 * @type Number
 	 */
     _offset : 0,
     
@@ -886,16 +848,11 @@ ULTIMATE.ACP.Menu.Item.Transfer.prototype = {
     /**
 	 * Initializes a menu item transfer.
 	 * 
-	 * @param {String}
-	 *            elementID
-	 * @param {String}
-	 *            menuItemListID
-	 * @param {String}
-	 *            className
-	 * @param {Integer}
-	 *            offset
-	 * @param {String}
-	 *            type
+	 * @param {String} elementID
+	 * @param {String} menuItemListID
+	 * @param {String} className
+	 * @param {Number} offset
+	 * @param {String} type
 	 */
     init : function(elementID, menuItemListID, className, offset, type) {
 	    this._element = $('#' + $.wcfEscapeID(elementID));
@@ -934,8 +891,7 @@ ULTIMATE.ACP.Menu.Item.Transfer.prototype = {
     /**
 	 * Called each time a menu item is removed with remove().
 	 * 
-	 * @param {jQuery.Event}
-	 *            event
+	 * @param {jQuery.Event} event
 	 */
     _remove : function(event) {
 	    var $target = $(event.target);
@@ -973,8 +929,7 @@ ULTIMATE.ACP.Menu.Item.Transfer.prototype = {
     /**
 	 * Stops the form submit event.
 	 * 
-	 * @param {jQuery.Event}
-	 *            event
+	 * @param {jQuery.Event} event
 	 * @return {Boolean}
 	 */
     _stopFormSubmit : function(event) {
@@ -1103,10 +1058,8 @@ ULTIMATE.ACP.Menu.Item.Transfer.prototype = {
     /**
 	 * Builds all nested elements.
 	 * 
-	 * @param {jQuery}
-	 *            $parent
-	 * @param {Integer}
-	 *            $parentID
+	 * @param {jQuery} $parent
+	 * @param {Number} $parentID
 	 */
     _getNestedElements : function($parent, $parentID) {
 	    $parent.find('ul > li > label > input[type="checkbox"]').each(
@@ -1134,12 +1087,9 @@ ULTIMATE.ACP.Menu.Item.Transfer.prototype = {
     /**
      * Shows notification upon success.
      * 
-     * @param {Object}
-     *            data
-     * @param {String}
-     *            textStatus
-     * @param {jQuery}
-     *            jqXHR
+     * @param {Object} data
+     * @param {String} textStatus
+     * @param {jQuery} jqXHR
      */
     _success : function(data, textStatus, jqXHR) {
 	    if (this._notification === null) {
@@ -1222,9 +1172,7 @@ ULTIMATE.ACP.Menu.Item.Transfer.prototype = {
 		    // call child method if applicable
 		    var $showError = true;
 		    if ($showError !== false) {
-			    $(
-			            '<div class="ajaxDebugMessage"><p>' + e.message
-			                    + '</p></div>').wcfDialog({
+			    $('<div class="ajaxDebugMessage"><p>' + e.message + '</p></div>').wcfDialog({
 				    title : WCF.Language.get('wcf.global.error.title')
 			    });
 		    }

@@ -1,5 +1,5 @@
 {capture assign='pageTitle'}{lang}wcf.acp.ultimate.content.assignToCategory{/lang}{/capture}
-{include file='header' application='ultimate'}
+{include file='header'}
 
 <header class="boxHeadline">
 	<h1>{lang}wcf.acp.ultimate.content.assignToCategory{/lang}</h1>
