@@ -15,6 +15,7 @@
 		<!-- user -->
 		<item name="wcf.acp.group.option.category.user.ultimate"><![CDATA[Ultimate CMS]]></item>
 		<item name="wcf.acp.group.option.category.user.ultimate.content"><![CDATA[Content]]></item>
+		<item name="wcf.acp.group.option.category.user.ultimate.editing"><![CDATA[Editing]]></item>
 		<!-- /user -->
 		
 		<!-- mod -->
@@ -39,6 +40,11 @@
 		<item name="wcf.acp.group.option.user.ultimate.content.canViewAttachmentPreview"><![CDATA[Can view attachment previews]]></item>
         <item name="wcf.acp.group.option.user.ultimate.content.canUploadAttachment"><![CDATA[Can upload attachments]]></item>
 
+		<!-- editing -->
+		<item name="wcf.acp.group.option.user.ultimate.editing.canAccessEditSuite"><![CDATA[Can enter Edit-Suite]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.editing.canAccessEditSuite.description"><![CDATA[Users of this group may access the Edit-Suite based upon their granted permissions. This option must be enabled if you wish to grant any editing-related option.]]></item>
+		<!-- /editing -->
+		
         <!-- content -->
         <item name="wcf.acp.group.option.user.ultimate.content.canSeeContent"><![CDATA[Can see contents]]></item>
         <item name="wcf.acp.group.option.user.ultimate.content.canEditContent"><![CDATA[Can edit contents]]></item>

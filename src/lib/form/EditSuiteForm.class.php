@@ -76,7 +76,7 @@ class EditSuiteForm extends AbstractForm implements IEditSuitePage {
 	 * needed permissions to view this page
 	 * @var	string[]
 	 */
-	public $neededPermissions = array();
+	public $neededPermissions = array('user.ultimate.editing.canAccessEditSuite');
 	
 	/**
 	 * A list of active EditSuite menu items.

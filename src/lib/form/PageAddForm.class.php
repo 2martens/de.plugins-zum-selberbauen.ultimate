@@ -76,6 +76,7 @@ class PageAddForm extends AbstractForm implements IEditSuitePage {
 	 * @var	string[]
 	 */
 	public $neededPermissions = array(
+		'user.ultimate.editing.canAccessEditSuite',
 		'user.ultimate.content.canEditPage'
 	);
 
