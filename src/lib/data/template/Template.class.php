@@ -102,7 +102,7 @@ class Template extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**
 	 * Returns all blocks associated with this template.
 	 *
-	 * @return	\wcf\data\ultimate\block\Block[]
+	 * @return	\ultimate\data\block\Block[]
 	 */
 	protected function getBlocks() {
 		$sql = 'SELECT    block.*

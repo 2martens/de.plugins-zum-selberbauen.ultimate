@@ -72,7 +72,6 @@ class LinkClipboardAction implements IClipboardAction {
 				$item->setURL(LinkHandler::getInstance()->getLink('UltimateLinkAssignToCategory'));
 				break;
 			case 'deleteLink':
-				$linkIDs = array();
 				$linkIDs = $this->validateDelete($objects);
 				if (empty($linkIDs)) {
 					return null;

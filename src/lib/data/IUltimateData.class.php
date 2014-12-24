@@ -37,4 +37,5 @@ namespace ultimate\data;
  * @subpackage	data
  * @category	Ultimate CMS
  */
-interface IUltimateData {}
+interface IUltimateData {
+}

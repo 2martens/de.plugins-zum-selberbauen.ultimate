@@ -28,7 +28,6 @@
 namespace ultimate\acp\form;
 use ultimate\data\page\language\PageLanguageEntryCache;
 use ultimate\data\page\PageAction;
-use ultimate\data\page\PageEditor;
 use ultimate\util\PageUtil;
 use wcf\form\AbstractForm;
 use wcf\system\cache\builder\UserGroupCacheBuilder;

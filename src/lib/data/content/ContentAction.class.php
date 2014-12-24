@@ -449,7 +449,6 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		}
 		
 		// get ids
-		$objectIDs = array();
 		foreach ($this->objects as $object) {
 			/* @var $object \ultimate\data\content\ContentEditor */
 			$object->deleteVersion($this->parameters['versionID']);

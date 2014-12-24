@@ -55,6 +55,7 @@ class LayoutEditor extends DatabaseObjectEditor implements IEditableCachedObject
 	 * @since	1.0.0
 	 * 
 	 * @param	integer[]	$objectIDs
+	 * @return  integer
 	 */
 	public static function deleteAll(array $objectIDs = array()) {
 		// delete language items

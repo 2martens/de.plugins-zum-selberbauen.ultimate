@@ -42,7 +42,7 @@ use wcf\system\database\MySQLDatabase;
 class DebugMySQLDatabase extends MySQLDatabase {
 	/**
 	 * Returns the PDO object.
-	 * @return PDO
+	 * @return \PDO
 	 */
 	public function getPDO() {
 		return $this->pdo;

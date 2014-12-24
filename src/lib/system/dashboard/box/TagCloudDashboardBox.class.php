@@ -69,7 +69,6 @@ class TagCloudDashboardBox extends AbstractSidebarDashboardBox {
 		parent::init($box, $page);
 	
 		if (MODULE_TAGGING) {
-			$languageIDs = array();
 			$languageIDs = WCF::getUser()->getLanguageIDs();
 				
 			$this->tagCloud = new UltimateTagCloud($languageIDs);

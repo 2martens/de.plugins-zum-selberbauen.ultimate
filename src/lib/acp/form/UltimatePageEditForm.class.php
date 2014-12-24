@@ -26,7 +26,6 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\acp\form;
-use ultimate\acp\form\UltimatePageAddForm;
 use ultimate\data\page\language\PageLanguageEntryCache;
 use ultimate\data\page\Page;
 use ultimate\data\page\PageAction;

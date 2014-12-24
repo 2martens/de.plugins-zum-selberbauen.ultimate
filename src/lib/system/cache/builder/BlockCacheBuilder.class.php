@@ -70,7 +70,7 @@ class BlockCacheBuilder extends AbstractCacheBuilder {
 		$data['blockIDs'] = $blockIDs;
 		
 		foreach ($data['blocks'] as $blockID => $block) {
-			/* @var $block \wcf\data\ultimate\block\Block */
+			/* @var $block \ultimate\data\block\Block */
 			
 			// cache custom queries
 			$sql = $block->__get('query');

@@ -35,6 +35,7 @@ use ultimate\system\menu\item\MenuItemHandler;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\ISortableAction;
 use wcf\data\IToggleAction;
+use wcf\system\database\DatabaseException;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\SystemException;
 use wcf\system\language\I18nHandler;
@@ -165,6 +166,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 	 * @since	1.0.0
 	 * 
 	 * @return	array[]
+	 * @throws  \wcf\system\exception\SystemException
 	 */
 	public function createAJAX() {
 		$menuItems = array();

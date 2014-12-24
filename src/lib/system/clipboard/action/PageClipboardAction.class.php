@@ -67,7 +67,6 @@ class PageClipboardAction implements IClipboardAction {
 		// handle actions
 		switch ($actionName) {
 			case 'deletePage':
-				$pageIDs = array();
 				$pageIDs = $this->validateDelete($objects);
 				if (empty($pageIDs)) {
 					return null;

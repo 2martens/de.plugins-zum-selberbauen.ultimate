@@ -126,5 +126,6 @@ abstract class AbstractMediaProvider implements IMediaProvider {
 	 * @param	integer	$maxheight	(optional) the maximum of height available
 	 * @return	string
 	 */
-	protected function getEmbedInformation($source, $maxwidth = 0, $maxheight = 0) {}
+	protected function getEmbedInformation($source, $maxwidth = 0, $maxheight = 0) {
+	}
 }

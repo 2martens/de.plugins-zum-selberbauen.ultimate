@@ -104,7 +104,6 @@ class PageCacheBuilder extends AbstractCacheBuilder {
 	 * 
 	 * @param	integer					 $pageID
 	 * @param	\ultimate\data\page\Page $page
-	 * @param	boolean					 $returnCompleteArray
 	 * @return	(\ultimate\data\page\Page|array)[]
 	 */
 	protected function buildNestedPages($pageID, Page $page) {

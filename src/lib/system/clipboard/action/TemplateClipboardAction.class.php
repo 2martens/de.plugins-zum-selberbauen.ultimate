@@ -67,7 +67,6 @@ class TemplateClipboardAction implements IClipboardAction {
 		// handle actions
 		switch ($actionName) {
 			case 'deleteTemplate':
-				$templateIDs = array();
 				$templateIDs = $this->validateDelete($objects);
 				if (empty($templateIDs)) {
 					return null;

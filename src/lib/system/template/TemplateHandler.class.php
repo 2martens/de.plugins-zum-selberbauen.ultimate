@@ -437,7 +437,6 @@ class TemplateHandler extends SingletonFactory {
 	 * @param	string								$requestType
 	 */
 	protected function assignSpiderSetting($requestObject, $requestType) {
-		$allowSpidersToIndexThisPage = false;
 		// only index is allowed to give a null reference
 		// therefore we eliminate both index and category with this if clause
 		if ($requestObject === null || $requestType == 'category') {

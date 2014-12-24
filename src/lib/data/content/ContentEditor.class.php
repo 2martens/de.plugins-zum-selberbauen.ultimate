@@ -41,7 +41,6 @@ use ultimate\system\cache\builder\LatestContentsCacheBuilder;
 use ultimate\system\cache\builder\LayoutCacheBuilder;
 use ultimate\system\layout\LayoutHandler;
 use wcf\data\AbstractVersionableDatabaseObjectEditor;
-use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 use wcf\system\attachment\AttachmentHandler;
 use wcf\system\clipboard\ClipboardHandler;

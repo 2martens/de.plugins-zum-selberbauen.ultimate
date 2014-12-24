@@ -161,7 +161,6 @@ class MenuItem extends PageMenuItem {
 	 * @return	boolean
 	 */
 	public function canDelete() {
-		$deletable = true;
 		$deletable = ($this->isLandingPage ? false : true);
 		
 		return $deletable;
@@ -222,6 +221,7 @@ class MenuItem extends PageMenuItem {
 	 * Returns the link of this menu item.
 	 * 
 	 * @return	string
+	 * @throws  \wcf\system\exception\SystemException
 	 */
 	public function getLink() {
 		$parameters = array();
