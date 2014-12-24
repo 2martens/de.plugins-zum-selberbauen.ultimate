@@ -1185,10 +1185,14 @@ ULTIMATE.EditSuite.Button.Replacement.prototype = {
         this._action = action;
 
         if (this._action == 'save') {
-            this._initialStatusID = this._checkElement.val();
-        } else if (this._action == 'publish') {
-            var $dateObj = this._checkElement.datetimepicker('getDate');
-            this._initialValueDateTime = $dateObj;
+			this._initialStatusID = this._checkElement.val();
+		} else if (this._action == 'publish') {
+			var $dateObj = this._checkElement.datetimepicker('getDate');
+			if ($dateObj === undefined) {
+				WCF.Date.Picker.init();
+				$dateObj = this._checkElement.datetimepicker('getDate');
+			}
+			this._initialValueDateTime = $dateObj;
             this._lastValueDateTime = $dateObj;
         }
 
