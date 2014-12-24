@@ -58,6 +58,7 @@ class PageEditForm extends PageAddForm {
 	 * @var string[]
 	 */
 	public $neededPermissions = array(
+		'user.ultimate.editing.canAccessEditSuite',
 		'user.ultimate.content.canEditPage'
 	);
 

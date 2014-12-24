@@ -65,6 +65,7 @@ class ContentEditForm extends ContentAddForm {
 	 * @var string[]
 	 */
 	public $neededPermissions = array(
+		'user.ultimate.editing.canAccessEditSuite',
 		'user.ultimate.content.canEditContent'
 	);
 	
