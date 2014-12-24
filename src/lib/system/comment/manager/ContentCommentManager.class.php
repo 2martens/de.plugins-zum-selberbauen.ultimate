@@ -183,5 +183,6 @@ class ContentCommentManager extends AbstractCommentManager {
 	 * @param	integer	$objectID
 	 * @param	integer	$value
 	 */
-	public function updateCounter($objectID, $value) { }
+	public function updateCounter($objectID, $value) {
+	}
 }

@@ -26,14 +26,12 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\form;
-use ultimate\acp\form\UltimatePageAddForm;
 use ultimate\data\page\language\PageLanguageEntryCache;
 use ultimate\data\page\Page;
 use ultimate\data\page\PageAction;
 use ultimate\util\PageUtil;
 use wcf\form\AbstractForm;
 use wcf\system\acl\ACLHandler;
-use wcf\system\cache\builder\UserGroupCacheBuilder;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
 use wcf\system\request\UltimateLinkHandler;

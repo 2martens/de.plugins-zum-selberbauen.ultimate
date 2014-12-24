@@ -109,7 +109,7 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
 		foreach ($this->categories as $categoryID => $categoryArray) {
 			foreach ($this->menuItems as $menuItem) {
 				/* @var $category \ultimate\data\category\Category */
-				/* @var $menuItem \ultimate\data\menu\item\MenuItemNode */
+				/* @var $menuItem \ultimate\data\menu\item\MenuItem */
 				if ($categoryArray[0]->getTitle() == $menuItem->__get('menuItemName')) {
 					$this->disabledCategoryIDs[] = $categoryID;
 					break;

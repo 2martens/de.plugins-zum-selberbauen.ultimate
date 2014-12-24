@@ -54,6 +54,7 @@ class LinkEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 * Deletes all corresponding objects to the given object IDs.
 	 * 
 	 * @param	integer[]	$objectIDs
+	 * @return  integer
 	 */
 	public static function deleteAll(array $objectIDs = array()) {
 		// unmark contents

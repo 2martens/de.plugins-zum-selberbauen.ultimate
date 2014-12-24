@@ -67,7 +67,6 @@ class MenuClipboardAction implements IClipboardAction {
 		// handle actions
 		switch ($actionName) {
 			case 'deleteMenu':
-				$menuIDs = array();
 				$menuIDs = $this->validateDelete($objects);
 				if (empty($menuIDs)) {
 					return null;

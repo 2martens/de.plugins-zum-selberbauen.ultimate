@@ -120,6 +120,7 @@ class CustomMenu extends TreeMenu {
 	 * This function should be used in each script which uses a template that includes the menu.tpl.
 	 *
 	 * @param	string		$menuItem	name of the active menu item
+	 * @return  boolean     False on error, true otherwise
 	 */
 	public function setActiveMenuItem($menuItem) {
 		$newActiveMenuItems = array();
@@ -131,6 +132,8 @@ class CustomMenu extends TreeMenu {
 		}
 	
 		if (!empty($newActiveMenuItems)) $this->activeMenuItems = $newActiveMenuItems;
+		
+		return true;
 	}
 	
 	/**
@@ -181,7 +184,7 @@ class CustomMenu extends TreeMenu {
 	/**
 	 * Checks the permissions of given menu item.
 	 * 
-	 * @param	\ultimate\data\menu\item\MenuItem	$menuItem
+	 * @param	\wcf\system\menu\ITreeMenuItem	$menuItem
 	 * @return	boolean
 	 */
 	protected function checkMenuItem(ITreeMenuItem $menuItem) {

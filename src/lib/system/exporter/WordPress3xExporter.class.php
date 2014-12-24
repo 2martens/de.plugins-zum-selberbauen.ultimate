@@ -380,7 +380,6 @@ class WordPress3xExporter extends AbstractExporter {
 	 * @return	integer
 	 */
 	private function getStatus($status) {
-		$statusCode = 0;
 		switch ($status) {
 			case 'publish':
 				$statusCode = 3;

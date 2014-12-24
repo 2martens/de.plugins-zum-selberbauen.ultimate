@@ -28,7 +28,6 @@
 namespace ultimate\acp\form;
 use ultimate\data\category\language\CategoryLanguageEntryCache;
 use ultimate\data\category\CategoryAction;
-use ultimate\data\category\CategoryEditor;
 use ultimate\util\CategoryUtil;
 use wcf\form\AbstractForm;
 use wcf\system\exception\UserInputException;
@@ -69,7 +68,7 @@ class UltimateCategoryAddForm extends AbstractForm {
 	
 	/**
 	 * All available categories.
-	 * @var	ultimate\data\category\Category[]
+	 * @var	\ultimate\data\category\Category[]
 	 */
 	public $categories = array();
 	
@@ -190,9 +189,6 @@ class UltimateCategoryAddForm extends AbstractForm {
 		
 		$this->objectAction = new CategoryAction(array(), 'create', $parameters);
 		$this->objectAction->executeAction();
-		
-		$returnValues = $this->objectAction->getReturnValues();
-		$categoryID = $returnValues['returnValues']->categoryID;
 		
 		$this->saved();
 		

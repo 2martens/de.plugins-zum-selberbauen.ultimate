@@ -189,5 +189,6 @@ class CategoryUtil {
 	/**
 	 * no constructor supported
 	 */
-	private function __construct() {}
+	private function __construct() {
+	}
 }

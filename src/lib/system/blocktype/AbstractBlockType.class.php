@@ -32,7 +32,6 @@ use ultimate\data\IUltimateData;
 use ultimate\system\cache\builder\BlockCacheBuilder;
 use wcf\system\event\EventHandler;
 use wcf\system\exception\SystemException;
-use wcf\system\request\RequestHandler;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -140,7 +139,8 @@ abstract class AbstractBlockType implements IBlockType {
 	 * 
 	 * {@internal The constructor does nothing and is final, because you can't control what the constructor. should do A subclass could easily overwrite this one and do some other stuff. }}
 	 */
-	public final function __construct() {}
+	public final function __construct() {		
+	}
 	
 	/**
 	 * Initializes the blockType.
@@ -153,6 +153,7 @@ abstract class AbstractBlockType implements IBlockType {
 	 * @return	void
 	 * 
 	 * @see	IBlockType::init()
+	 * @throws  \wcf\system\exception\SystemException
 	 */
 	public function init($requestType, Layout $layout, $requestObject, $blockID, $page) {
 		// fire event
@@ -224,7 +225,7 @@ abstract class AbstractBlockType implements IBlockType {
 			$className = array_pop($classParts);
 			$this->templateName = lcfirst($className);
 		}
-		$output = '';
+		
 		// only fetch template if the template should be used
 		if ($this->useTemplate) $output = WCF::getTPL()->fetch($this->templateName, 'ultimate');
 		// otherwise include template

@@ -60,6 +60,7 @@ class WidgetHandler extends SingletonFactory {
 	 *
 	 * @param	\ultimate\data\widget\area\WidgetArea	$widgetArea
 	 * @param	\wcf\page\IPage	$page
+	 * @throws  \wcf\system\exception\SystemException
 	 */
 	public function loadBoxes(WidgetArea $widgetArea, IPage $page) {
 		$boxIDs = array();
@@ -73,7 +74,7 @@ class WidgetHandler extends SingletonFactory {
 		foreach ($boxIDs as $boxID) {
 			$className = $this->boxCache[$boxID]->className;
 			if (!ClassUtil::isInstanceOf($className, 'wcf\system\dashboard\box\IDashboardBox')) {
-				throw new SystemException("'".$className."' does not implement 'wcf\system\dashboard\box\IDashboardbox'");
+				throw new SystemException("'".$className."' does not implement 'wcf\\system\\dashboard\\box\\IDashboardbox'");
 			}
 				
 			$boxObject = new $className();

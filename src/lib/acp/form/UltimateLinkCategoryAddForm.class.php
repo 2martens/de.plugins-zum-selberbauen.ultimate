@@ -47,7 +47,7 @@ class UltimateLinkCategoryAddForm extends AbstractCategoryAddForm {
 	
 	/**
 	 * The name of the object type.
-	 * @var strings
+	 * @var string
 	 */
 	public $objectTypeName = 'de.plugins-zum-selberbauen.ultimate.linkCategory';
 }

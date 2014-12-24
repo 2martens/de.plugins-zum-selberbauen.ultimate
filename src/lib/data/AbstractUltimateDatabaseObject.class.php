@@ -65,7 +65,6 @@ abstract class AbstractUltimateDatabaseObject extends DatabaseObject implements 
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($objectID, $objectType));
 	
-		$metaData = array();
 		$metaData = $statement->fetchArray();
 		return (($metaData !== false) ? $metaData: array('metaKeywords' => '', 'metaDescription' => ''));
 	}

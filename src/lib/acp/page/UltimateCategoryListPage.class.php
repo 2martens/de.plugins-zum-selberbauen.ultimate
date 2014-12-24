@@ -161,7 +161,7 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
 	 * Assigns template variables.
 	 */
 	public function assignVariables() {
-		if (isset($this->tempSortField)) {
+		if (isset($this->tempSortField) && isset($this->tempSortOrder)) {
 			$this->sortField = $this->tempSortField;
 			$this->sortOrder = $this->tempSortOrder;
 		}

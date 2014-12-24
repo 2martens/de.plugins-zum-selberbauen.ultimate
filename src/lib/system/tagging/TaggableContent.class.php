@@ -44,5 +44,6 @@ class TaggableContent extends \ultimate\data\content\TaggableContent {
 	 * 
 	 * @param \wcf\data\DatabaseObject $object
 	 */
-	public function __construct(DatabaseObject $object) {}
+	public function __construct(DatabaseObject $object) {
+	}
 }

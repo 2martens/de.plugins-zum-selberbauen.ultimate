@@ -59,6 +59,7 @@ class CategoryEditor extends DatabaseObjectEditor implements IEditableCachedObje
 	 * Creates an object with the given parameters.
 	 * 
 	 * @param	array	$parameters	
+	 * @return  \ultimate\data\category\Category
 	 */
 	public static function create(array $parameters = array()) {
 		$category = parent::create($parameters);
@@ -78,6 +79,7 @@ class CategoryEditor extends DatabaseObjectEditor implements IEditableCachedObje
 	 * Deletes all corresponding objects to the given object IDs.
 	 * 
 	 * @param	integer[]	$objectIDs
+	 * @return  integer
 	 */
 	public static function deleteAll(array $objectIDs = array()) {
 		// unmark contents

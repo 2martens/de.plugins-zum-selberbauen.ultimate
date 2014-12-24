@@ -72,7 +72,6 @@ class ContentClipboardAction implements IClipboardAction {
 				$item->setURL(LinkHandler::getInstance()->getLink('UltimateContentAssignToCategory'));
 				break;
 			case 'deleteContent':
-				$contentIDs = array();
 				$contentIDs = $this->validateDelete($objects);
 				if (empty($contentIDs)) {
 					return null;

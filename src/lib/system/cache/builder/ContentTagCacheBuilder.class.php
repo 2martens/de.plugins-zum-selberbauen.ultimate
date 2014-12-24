@@ -28,7 +28,6 @@
 namespace ultimate\system\cache\builder;
 use ultimate\data\content\ContentList;
 use ultimate\data\content\TaggedContent;
-use ultimate\system\cache\builder\ContentTagCloudCacheBuilder;
 use wcf\system\cache\builder\AbstractCacheBuilder;
 
 /**

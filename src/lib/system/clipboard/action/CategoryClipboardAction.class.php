@@ -67,7 +67,6 @@ class CategoryClipboardAction implements IClipboardAction {
 		// handle actions
 		switch ($actionName) {
 			case 'deleteCategory':
-				$categoryIDs = array();
 				$categoryIDs = $this->validateDelete($objects);
 				if (empty($categoryIDs)) {
 					return null;
