@@ -8,8 +8,6 @@
 			WCF.Dropdown.removeDropdown('tagSearchWrap');
 			$('#tagSearchWrap > p').remove();
 			
-			// date picker
-			WCF.Date.Picker.init();
 			WCF.DOMNodeRemovedHandler.removeCallback('WCF.Attachment.Upload');
 			$(document).off('click', '.jsSmiley');
 		}
@@ -27,8 +25,6 @@
             WCF.Dropdown.removeDropdown('tagSearchWrap');
             $('#tagSearchWrap > p').remove();
 
-            // date picker
-            WCF.Date.Picker.init();
             WCF.DOMNodeRemovedHandler.removeCallback('WCF.Attachment.Upload');
             $(document).off('click', '.jsSmiley');
         }
