@@ -63,7 +63,8 @@ class DebugException extends LoggedException {
 	public function __construct($message = '', $code = 0, \Exception $previous = null, $description = '') {
 		parent::__construct(StringUtil::trim($message), intval($code), $previous);
 		$this->description = StringUtil::trim($description);
-		$this->logID = $this->logError();
+		$this->logError();
+		$this->logID = $this->exceptionID;
 	}
 	
 	/**
