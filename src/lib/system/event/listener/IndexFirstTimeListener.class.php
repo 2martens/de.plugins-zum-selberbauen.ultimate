@@ -29,7 +29,7 @@ namespace ultimate\system\event\listener;
 use wcf\data\category\CategoryAction;
 use wcf\system\cache\builder\ObjectTypeCacheBuilder;
 use wcf\system\category\CategoryHandler;
-use wcf\system\event\IParameterizedEventListener;
+use wcf\system\event\listener\IParameterizedEventListener;
 use wcf\system\io\File;
 
 /**

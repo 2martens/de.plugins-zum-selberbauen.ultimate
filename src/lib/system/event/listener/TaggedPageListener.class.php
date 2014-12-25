@@ -27,7 +27,7 @@
  */
 namespace ultimate\system\event\listener;
 use ultimate\system\tagging\TypedTagCloud;
-use wcf\system\event\IParameterizedEventListener;
+use wcf\system\event\listener\IParameterizedEventListener;
 
 /**
  * Replaces the typed tag cloud in TaggedPage with a typed tag cloud that only contains tags of the current user language.

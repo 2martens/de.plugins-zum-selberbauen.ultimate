@@ -31,7 +31,7 @@ use ultimate\system\cache\builder\ContentCacheBuilder;
 use ultimate\system\cache\builder\ContentCategoryCacheBuilder;
 use ultimate\system\cache\builder\ContentPageCacheBuilder;
 use ultimate\system\cache\builder\ContentTagCacheBuilder;
-use wcf\system\event\IParameterizedEventListener;
+use wcf\system\event\listener\IParameterizedEventListener;
 
 /**
  * Resets caches.
