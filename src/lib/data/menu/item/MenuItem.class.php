@@ -138,7 +138,7 @@ class MenuItem extends PageMenuItem {
 		}
 	
 		// external links are not valid
-		if (mb_strpos($menuItemLink, 'http') !== false) {
+		if (mb_strpos($this->menuItemLink, 'http') !== false) {
 			return false;
 		}
 	
