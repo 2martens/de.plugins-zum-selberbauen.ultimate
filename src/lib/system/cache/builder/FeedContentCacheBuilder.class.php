@@ -60,7 +60,7 @@ class FeedContentCacheBuilder extends AbstractCacheBuilder {
 			$data['feedContentsToCategoryID'][$categoryID] = array();
 		} 
 		
-		$feedContentList = new FeedContentList();
+		$feedContentList = new FeedContentList($categoryIDs);
 		$feedContentList->readObjects();
 		$contents = $feedContentList->getObjects();
 		
