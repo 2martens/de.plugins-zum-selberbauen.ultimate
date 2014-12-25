@@ -18,34 +18,7 @@
             <listenerclassname>ultimate\system\event\listener\ACPFirstTimeListener</listenerclassname>
         </eventlistener>
          /ACPFirstTimeListener -->
-        
-        <!-- block action listener -->
-        <eventlistener>
-            <eventclassname>ultimate\action\BlockAction</eventclassname>
-            <eventname>i18nInitialization</eventname>
-            <inherit>0</inherit>
-            <listenerclassname>ultimate\system\event\listener\BlockActionI18nListener</listenerclassname>
-        </eventlistener>
-        <eventlistener>
-            <eventclassname>ultimate\action\BlockAction</eventclassname>
-            <eventname>createBlockLoadBlockContent</eventname>
-            <inherit>0</inherit>
-            <listenerclassname>ultimate\system\event\listener\BlockActionContentBlockTypeListener</listenerclassname>
-        </eventlistener>
-        <eventlistener>
-            <eventclassname>ultimate\action\BlockAction</eventclassname>
-            <eventname>updateBlockLoadBlockContent</eventname>
-            <inherit>0</inherit>
-            <listenerclassname>ultimate\system\event\listener\BlockActionContentBlockTypeListener</listenerclassname>
-        </eventlistener>
-        <eventlistener>
-            <eventclassname>ultimate\action\BlockAction</eventclassname>
-            <eventname>updateBlockLoadBlockOptions</eventname>
-            <inherit>0</inherit>
-            <listenerclassname>ultimate\system\event\listener\BlockActionContentBlockTypeListener</listenerclassname>
-        </eventlistener>
-        <!-- /block action listener -->
-        
+                
         <!-- cache reset listener -->
         <eventlistener>
         	<eventclassname>wcf\acp\form\UserAddForm</eventclassname>
