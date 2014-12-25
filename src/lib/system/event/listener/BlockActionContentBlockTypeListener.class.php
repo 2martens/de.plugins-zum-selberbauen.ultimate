@@ -26,7 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\event\listener;
-use wcf\system\event\IEventListener;
+use wcf\system\event\IParameterizedEventListener;
 
 /**
  * Manages the creation of a custom query.
@@ -38,7 +38,7 @@ use wcf\system\event\IEventListener;
  * @subpackage	system.event.listener
  * @category	Ultimate CMS
  */
-class BlockActionContentBlockTypeListener implements IEventListener {
+class BlockActionContentBlockTypeListener implements IParameterizedEventListener {
 	/**
 	 * Executes this listener.
 	 * 

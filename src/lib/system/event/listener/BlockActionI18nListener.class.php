@@ -26,7 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\event\listener;
-use wcf\system\event\IEventListener;
+use wcf\system\event\IParameterizedEventListener;
 use wcf\system\language\I18nHandler;
 
 /**
@@ -39,7 +39,7 @@ use wcf\system\language\I18nHandler;
  * @subpackage	system.event.listener
  * @category	Ultimate CMS
  */
-class BlockActionI18nListener implements IEventListener {
+class BlockActionI18nListener implements IParameterizedEventListener {
 	/**
 	 * Executes this listener.
 	 * 

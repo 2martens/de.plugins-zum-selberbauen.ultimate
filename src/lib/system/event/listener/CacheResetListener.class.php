@@ -31,7 +31,7 @@ use ultimate\system\cache\builder\ContentCacheBuilder;
 use ultimate\system\cache\builder\ContentCategoryCacheBuilder;
 use ultimate\system\cache\builder\ContentPageCacheBuilder;
 use ultimate\system\cache\builder\ContentTagCacheBuilder;
-use wcf\system\event\IEventListener;
+use wcf\system\event\IParameterizedEventListener;
 
 /**
  * Resets caches.
@@ -43,7 +43,7 @@ use wcf\system\event\IEventListener;
  * @subpackage	system.event.listener
  * @category	Ultimate CMS
  */
-class CacheResetListener implements IEventListener {
+class CacheResetListener implements IParameterizedEventListener {
 	/**
 	 * Executes this listener.
 	 * 

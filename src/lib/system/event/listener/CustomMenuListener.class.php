@@ -28,7 +28,7 @@
 namespace ultimate\system\event\listener;
 use ultimate\system\menu\custom\CustomMenu;
 use ultimate\system\template\TemplateHandler;
-use wcf\system\event\IEventListener;
+use wcf\system\event\IParameterizedEventListener;
 use wcf\system\menu\page\PageMenu;
 use wcf\system\request\RequestHandler;
 use wcf\system\WCF;
@@ -44,7 +44,7 @@ use wcf\util\StringUtil;
  * @subpackage	system.event.listener
  * @category	Ultimate CMS
  */
-class CustomMenuListener implements IEventListener {
+class CustomMenuListener implements IParameterizedEventListener {
 	/**
 	 * Executes this listener.
 	 * 
