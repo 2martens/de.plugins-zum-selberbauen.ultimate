@@ -28,7 +28,7 @@
 namespace ultimate\system\event\listener;
 use ultimate\system\menu\custom\CustomMenu;
 use ultimate\system\template\TemplateHandler;
-use wcf\system\event\IParameterizedEventListener;
+use wcf\system\event\listener\IParameterizedEventListener;
 use wcf\system\menu\page\PageMenu;
 use wcf\system\request\RequestHandler;
 use wcf\system\WCF;

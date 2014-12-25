@@ -26,7 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\system\event\listener;
-use wcf\system\event\IParameterizedEventListener;
+use wcf\system\event\listener\IParameterizedEventListener;
 use wcf\system\language\I18nHandler;
 
 /**
