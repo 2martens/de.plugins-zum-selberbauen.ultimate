@@ -72,11 +72,8 @@
 		
 		<!-- mod -->
 		<item name="wcf.acp.group.option.mod.ultimate.content.canModerateComment"><![CDATA[Can moderate comments]]></item>
-		<item name="wcf.acp.group.option.mod.ultimate.content.canModerateComment.description"><![CDATA[Members of this usergroup can moderate comments.]]></item>
 		<item name="wcf.acp.group.option.mod.ultimate.content.canEditComment"><![CDATA[Can edit comment]]></item>
-		<item name="wcf.acp.group.option.mod.ultimate.content.canEditComment.description"><![CDATA[Members of this usergroup can edit comments to contents.]]></item>
 		<item name="wcf.acp.group.option.mod.ultimate.content.canDeleteComment"><![CDATA[Can delete comment]]></item>
-		<item name="wcf.acp.group.option.mod.ultimate.content.canDeleteComment.description"><![CDATA[Members of this usergroup can delete comments to contents.]]></item>
 		<!-- /mod -->
 		
 		<!-- admin -->
@@ -84,49 +81,14 @@
 		<item name="wcf.acp.group.option.admin.content.ultimate.canConfigureOptions.description"><![CDATA[Members of this usergroup can configure the Ultimate CMS options.]]></item>
 		<!-- block -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageBlocks"><![CDATA[Can manage blocks]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageBlocks.description"><![CDATA[Members of this usergroup can manage blocks.]]></item>
-		<!-- /block -->
-		
-		<!-- category -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageCategories"><![CDATA[Can manage categories]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageCategories.description"><![CDATA[Members of this usergroup can manage categories.]]></item>
-		<!-- /category -->
-        
-		<!-- layout -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLayouts"><![CDATA[Can manage layouts]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLayouts.description"><![CDATA[Members of this usergroup can manage layouts.]]></item>
-		<!-- /layout -->
-		
-		<!-- link -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLinks"><![CDATA[Can manage links]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLinks.description"><![CDATA[Members of this usergroup can manage links.]]></item>
-		<!-- /link -->
-		
-		<!-- menu -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageMenus"><![CDATA[Can manage menus]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageMenus.description"><![CDATA[Members of this usergroup can manage menus.]]></item>
-		<!-- /menu -->
-		
-		<!-- menu item -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageMenuItems"><![CDATA[Can manage menu items]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageMenuItems.description"><![CDATA[Members of this usergroup can manage menu items.]]></item>
-		<!-- /menu item -->
-		
-		<!-- template -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageTemplates"><![CDATA[Can add templates]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageTemplates.description"><![CDATA[Members of this usergroup can manage templates.]]></item>
-		<!-- /template -->
-		
-		<!-- widget area -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgetAreas"><![CDATA[Can add widget configurations]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgetAreas.description"><![CDATA[Members of this usergroup can manage widget configurations.]]></item>
-		<!-- /widget area -->
-		
-		<!-- widget area -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgets"><![CDATA[Can manage widgets]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageWidget.description"><![CDATA[Members of this usergroup can manage widgets.]]></item>
-		<!-- /widget area -->
-		
 		<!-- /admin -->
 	</category>
     

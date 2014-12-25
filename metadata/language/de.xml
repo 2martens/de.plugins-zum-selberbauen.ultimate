@@ -72,11 +72,8 @@
 		
 		<!-- mod -->
 		<item name="wcf.acp.group.option.mod.ultimate.content.canModerateComment"><![CDATA[Kann Kommentare moderieren]]></item>
-		<item name="wcf.acp.group.option.mod.ultimate.content.canModerateComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kommentare moderieren.]]></item>
 		<item name="wcf.acp.group.option.mod.ultimate.content.canEditComment"><![CDATA[Kann Kommentare bearbeiten]]></item>
-		<item name="wcf.acp.group.option.mod.ultimate.content.canEditComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kommentare bearbeiten.]]></item>
 		<item name="wcf.acp.group.option.mod.ultimate.content.canDeleteComment"><![CDATA[Kann Kommentare löschen]]></item>
-		<item name="wcf.acp.group.option.mod.ultimate.content.canDeleteComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kommentare löschen.]]></item>
 		<!-- /mod -->
 		
 		<!-- admin -->
@@ -84,49 +81,15 @@
 		<item name="wcf.acp.group.option.admin.content.ultimate.canConfigureOptions.description"><![CDATA[Mitglieder dieser Benutzergruppe können die Optionen für das Ultimate CMS konfigurieren.]]></item>
 		<!-- block -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageBlocks"><![CDATA[Kann Blöcke verwalten]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageBlocks.description"><![CDATA[Mitglieder dieser Benutzergruppe können Blöcke verwalten.]]></item>
-		<!-- /block -->
-		
-		<!-- category -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageCategories"><![CDATA[Kann Kategorien verwalten]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageCategories.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kategorien verwalten.]]></item>
-		<!-- /category -->
-        
-		<!-- layout -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLayouts"><![CDATA[Kann Layouts verwalten]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLayouts.description"><![CDATA[Mitglieder dieser Benutzergruppe können Layouts verwalten.]]></item>
-		<!-- /layout -->
-		
-		<!-- link -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLinks"><![CDATA[Kann Links verwalten]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageLink.description"><![CDATA[Mitglieder dieser Benutzergruppe können Links verwalten.]]></item>
-		<!-- /link -->
-		
-		<!-- menu -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageMenus"><![CDATA[Kann Menüs verwalten]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageMenus.description"><![CDATA[Mitglieder dieser Benutzergruppe können Menüs verwalten.]]></item>
-		<!-- /menu -->
-		
-		<!-- menu item -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageMenuItems"><![CDATA[Kann Menüeinträge verwalten]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageMenuItems.description"><![CDATA[Mitglieder dieser Benutzergruppe können Menüeinträge verwalten.]]></item>
-		<!-- /menu item -->
-		
-		<!-- template -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageTemplates"><![CDATA[Kann Templates verwalten]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageTemplates.description"><![CDATA[Mitglieder dieser Benutzergruppe können Templates verwalten.]]></item>
-		<!-- /template -->
 		<!-- TODO: add missing language variables -->
-		
-		<!-- widget area -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgetAreas"><![CDATA[Kann Widgetkonfigurationen verwalten]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgetAreas.description"><![CDATA[Mitglieder dieser Benutzergruppe können Widgetkonfigurationen verwalten.]]></item>
-		<!-- /widget area -->
-		
-		<!-- widget -->
 		<item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgets"><![CDATA[Kann Widgets verwalten]]></item>
-		<item name="wcf.acp.group.option.admin.content.ultimate.canManageWidgets.description"><![CDATA[Mitglieder dieser Benutzergruppe können Widgets verwalten.]]></item>
-		<!-- /widget -->
 		<!-- /admin -->
 	</category>
     
