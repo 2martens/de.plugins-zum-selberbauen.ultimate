@@ -29,7 +29,7 @@ namespace ultimate\system\event\listener;
 use wcf\data\category\CategoryAction;
 use wcf\system\cache\builder\ObjectTypeCacheBuilder;
 use wcf\system\category\CategoryHandler;
-use wcf\system\event\IEventListener;
+use wcf\system\event\IParameterizedEventListener;
 use wcf\system\io\File;
 
 /**
@@ -42,7 +42,7 @@ use wcf\system\io\File;
  * @subpackage	system.event.listener
  * @category	Ultimate CMS
  */
-class IndexFirstTimeListener implements IEventListener {
+class IndexFirstTimeListener implements IParameterizedEventListener {
 	/**
 	 * The name of the config file.
 	 * @var	string
