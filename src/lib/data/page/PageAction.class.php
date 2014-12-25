@@ -51,19 +51,19 @@ class PageAction extends AbstractDatabaseObjectAction {
 	 * Array of permissions that are required for create action.
 	 * @var	string[]
 	 */
-	protected $permissionsCreate = array('user.ultimate.content.canAddPage');
+	protected $permissionsCreate = array('user.ultimate.editing.canAddPage');
 	
 	/**
 	 * Array of permissions that are required for delete action.
 	 * @var	string[]
 	 */
-	protected $permissionsDelete = array('user.ultimate.content.canDeletePage');
+	protected $permissionsDelete = array('user.ultimate.editing.canDeletePage');
 	
 	/**
 	 * Array of permissions that are required for update action.
 	 * @var	string[]
 	 */
-	protected $permissionsUpdate = array('user.ultimate.content.canEditPage');
+	protected $permissionsUpdate = array('user.ultimate.editing.canEditPage');
 	
 	/**
 	 * Creates a page.

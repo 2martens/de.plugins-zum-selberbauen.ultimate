@@ -30,6 +30,7 @@
 		
 		<!-- options -->
 		<!-- user -->
+		<!-- content -->
 		<item name="wcf.acp.group.option.user.ultimate.content.canAddComment"><![CDATA[Kann Kommentar hinzufügen]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.content.canAddComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kommentare zu Inhalten schreiben.]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.content.canEditComment"><![CDATA[Kann Kommentar bearbeiten]]></item>
@@ -38,37 +39,32 @@
 		<item name="wcf.acp.group.option.user.ultimate.content.canDeleteComment.description"><![CDATA[Mitglieder dieser Benutzergruppe können Ihre eigenen Kommentare zu Inhalten löschen.]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.content.canDownloadAttachment"><![CDATA[Kann Dateianhänge herunterladen]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.content.canViewAttachmentPreview"><![CDATA[Kann Dateianhangs-Vorschau sehen]]></item>
-        <item name="wcf.acp.group.option.user.ultimate.content.canUploadAttachment"><![CDATA[Kann Dateianhänge hochladen]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.content.canSeeContent"><![CDATA[Kann Inhalte sehen]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.content.canSeePage"><![CDATA[Kann Seiten sehen]]></item>
+		<!-- /content -->
 
 		<!-- editing -->
 		<item name="wcf.acp.group.option.user.ultimate.editing.canAccessEditSuite"><![CDATA[Kann Edit-Suite betreten]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.editing.canAccessEditSuite.description"><![CDATA[Mitglieder dieser Benutzergruppe können die Edit-Suite betreten und dort abhängig von den weiteren Zugriffsrechten verschiedene Aktionen durchführen. Diese Option muss aktiviert sein, wenn diesen Benutzern Bearbeitungsfunktionen erlaubt werden sollen.]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.editing.canUploadAttachment"><![CDATA[Kann Dateianhänge hochladen]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.editing.canEditContent"><![CDATA[Kann Inhalte bearbeiten]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.editing.canEditContentStatus"><![CDATA[Kann Status von Inhalten bearbeiten]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.editing.canDeleteContent"><![CDATA[Kann Inhalte löschen]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.editing.canSaveAsDraft"><![CDATA[Kann Inhalte als Entwurf speichern]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.editing.canSaveAsPendingReview"><![CDATA[Kann Inhalte als Ausstehendes Review speichern]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.editing.canPublish"><![CDATA[Kann Inhalte veröffentlichen]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.editing.canPublish.description"><![CDATA[Mitglieder dieser Benutzergruppe können Inhalte veröffentlichen oder die Veröffentlichung planen.]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.editing.canEditMetadata"><![CDATA[Kann Metadaten von Inhalten bearbeiten]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.editing.canEditMetadata.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kategorien und Tags zuweisen und die Meta-Keywords und Meta-Description ausfüllen.]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.editing.canDepublish"><![CDATA[Kann Inhalte depublizieren]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.editing.canAddContentVersion"><![CDATA[Kann neue Inhaltsversion hinzufügen]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.editing.canDeleteContentVersion"><![CDATA[Kann unveröffentlichte Inhaltsversionen löschen]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.editing.canRepublishContentVersion"><![CDATA[Kann alte Version erneut veröffentlichen]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.editing.canEditContentSpecificRights"><![CDATA[Kann inhaltsspezifische Rechte vergeben]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.editing.canEditPage"><![CDATA[Kann Seiten bearbeiten]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.editing.canDeletePage"><![CDATA[Kann Seiten löschen]]></item>
 		<!-- /editing -->
-		
-        <!-- content -->
-        <item name="wcf.acp.group.option.user.ultimate.content.canSeeContent"><![CDATA[Kann Inhalte sehen]]></item>
-        <item name="wcf.acp.group.option.user.ultimate.content.canEditContent"><![CDATA[Kann Inhalte bearbeiten]]></item>
-        <item name="wcf.acp.group.option.user.ultimate.content.canEditContentStatus"><![CDATA[Kann Status von Inhalten bearbeiten]]></item>
-        <item name="wcf.acp.group.option.user.ultimate.content.canDeleteContent"><![CDATA[Kann Inhalte löschen]]></item>
-        <item name="wcf.acp.group.option.user.ultimate.content.canSaveAsDraft"><![CDATA[Kann Inhalte als Entwurf speichern]]></item>
-        <item name="wcf.acp.group.option.user.ultimate.content.canSaveAsPendingReview"><![CDATA[Kann Inhalte als Ausstehendes Review speichern]]></item>
-        <item name="wcf.acp.group.option.user.ultimate.content.canPublish"><![CDATA[Kann Inhalte veröffentlichen]]></item>
-        <item name="wcf.acp.group.option.user.ultimate.content.canPublish.description"><![CDATA[Mitglieder dieser Benutzergruppe können Inhalte veröffentlichen oder die Veröffentlichung planen.]]></item>
-        <item name="wcf.acp.group.option.user.ultimate.content.canEditMetadata"><![CDATA[Kann Metadaten von Inhalten bearbeiten]]></item>
-        <item name="wcf.acp.group.option.user.ultimate.content.canEditMetadata.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kategorien und Tags zuweisen und die Meta-Keywords und Meta-Description ausfüllen.]]></item>
-        <item name="wcf.acp.group.option.user.ultimate.content.canDepublish"><![CDATA[Kann Inhalte depublizieren]]></item>
-        <item name="wcf.acp.group.option.user.ultimate.content.canAddContentVersion"><![CDATA[Kann neue Inhaltsversion hinzufügen]]></item>
-        <item name="wcf.acp.group.option.user.ultimate.content.canDeleteContentVersion"><![CDATA[Kann unveröffentlichte Inhaltsversionen löschen]]></item>
-        <item name="wcf.acp.group.option.user.ultimate.content.canRepublishContentVersion"><![CDATA[Kann alte Version erneut veröffentlichen]]></item>
-        <item name="wcf.acp.group.option.user.ultimate.content.canEditContentSpecificRights"><![CDATA[Kann inhaltsspezifische Rechte vergeben]]></item>
-        <!-- /content -->
-
-        <!-- page -->
-        <item name="wcf.acp.group.option.admin.content.ultimate.canSeePage"><![CDATA[Kann Seiten sehen]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canEditPage"><![CDATA[Kann Seiten bearbeiten]]></item>
-        <item name="wcf.acp.group.option.admin.content.ultimate.canDeletePage"><![CDATA[Kann Seiten löschen]]></item>
-        <!-- /page -->
-        <!-- /user -->
+		<!-- /user -->
 
         <!-- mod -->
         <item name="wcf.acp.group.option.mod.ultimate.content.canModerateComment"><![CDATA[Kann Kommentare moderieren]]></item>
