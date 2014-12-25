@@ -170,7 +170,7 @@ class ContentEditor extends AbstractVersionableDatabaseObjectEditor implements I
 			$statement = WCF::getDB()->prepareStatement($sql);
 			WCF::getDB()->beginTransaction();
 			foreach ($categoryIDs as $categoryID) {
-				$statement->executeUnbuffered(array(
+				$statement->execute(array(
 					$this->__get('contentID'),
 					$categoryID
 				));
@@ -236,7 +236,7 @@ class ContentEditor extends AbstractVersionableDatabaseObjectEditor implements I
 		$statement = WCF::getDB()->prepareStatement($sql);
 		WCF::getDB()->beginTransaction();
 		foreach ($categoryIDs as $categoryID) {
-			$statement->executeUnbuffered(array(
+			$statement->execute(array(
 				$this->object->__get('contentID'),
 				$categoryID
 			));
@@ -290,7 +290,7 @@ class ContentEditor extends AbstractVersionableDatabaseObjectEditor implements I
 		$statement = WCF::getDB()->prepareStatement($sql);
 		WCF::getDB()->beginTransaction();
 		foreach ($groupIDs as $groupID) {
-			$statement->executeUnbuffered(array(
+			$statement->execute(array(
 				$groupID,
 				$versionID
 			));

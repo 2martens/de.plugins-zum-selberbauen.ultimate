@@ -180,7 +180,7 @@ class TaggedContentList extends ContentList {
 // 		WCF::getDB()->beginTransaction();
 // 		foreach ($this->objects as $objectID => $object) {
 // 			$versionID = $object->getCurrentVersion()->getObjectID();
-// 			$statement->executeUnbuffered(array_merge($conditionBuilder->getParameters(), array($versionID, $objectID)));
+// 			$statement->execute(array_merge($conditionBuilder->getParameters(), array($versionID, $objectID)));
 // 			$row = $statement->fetchArray();
 			
 // 			if ($row === null) continue;
