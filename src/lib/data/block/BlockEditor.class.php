@@ -90,7 +90,7 @@ class BlockEditor extends DatabaseObjectEditor implements IEditableCachedObject 
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array(
 			$this->__get('blockID'),
-			$template
+			$templateID
 		));
 	}
 	
