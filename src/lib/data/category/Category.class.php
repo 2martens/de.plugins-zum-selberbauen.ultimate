@@ -81,10 +81,8 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledObject {
 	protected $contentCategoryTable = 'content_to_category';
 	
 	/**
-	 * Returns the title of this category (without language interpreting).
-	 * 
-	 * To use language interpreting, use getLangTitle method.
-	 * 
+	 * Returns the title of this category.
+	 *  
 	 * @return	string
 	 */
 	public function getTitle() {
@@ -94,10 +92,11 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledObject {
 	/**
 	 * Returns the title of this category.
 	 * 
+	 * @deprecated Use getTitle()
 	 * @return	string
 	 */
 	public function getLangTitle() {
-		return WCF::getLanguage()->get($this->categoryTitle);
+		return $this->getTitle();
 	}
 	
 	/**
@@ -106,7 +105,7 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledObject {
 	 * @return	string
 	 */
 	public function __toString() {
-		return WCF::getLanguage()->get($this->categoryTitle);
+		return $this->getTitle();
 	}
 	
 	/**

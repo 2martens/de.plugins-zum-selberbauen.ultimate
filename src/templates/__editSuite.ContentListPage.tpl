@@ -93,7 +93,7 @@
                             <td class="columnAuthor"><p><a data-controller="ContentListPage" data-request-type="page" href="{linkExtended controller='ContentList' application='ultimate' parent='EditSuite'}authorID={@$content->authorID}{/linkExtended}">{@$content->author}</a></p></td>
                             <td class="columnCategories">
                                 <p>
-                                    {implode from=$content->categories key=categoryID item=category}<a data-controller="ContentListPage" data-request-type="page" href="{linkExtended controller='ContentList' application='ultimate' parent='EditSuite'}categoryID={@$category->categoryID}{/linkExtended}">{@$category->getLangTitle()}</a>{/implode}
+                                    {implode from=$content->categories key=categoryID item=category}<a data-controller="ContentListPage" data-request-type="page" href="{linkExtended controller='ContentList' application='ultimate' parent='EditSuite'}categoryID={@$category->categoryID}{/linkExtended}">{@$category->getTitle()}</a>{/implode}
                                 </p>
                             </td>
                             <td class="columnTags">

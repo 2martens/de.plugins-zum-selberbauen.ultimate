@@ -13,7 +13,7 @@
 			<legend>{lang}wcf.acp.ultimate.content.assignToCategory.markedContents{/lang}</legend>
 			
 			<div>
-				{implode from=$contents item=$content}<a href="{link controller='UltimateContentEdit' id=$content->contentID}{/link}">{@$content->getLangTitle()}</a>{/implode}
+				{implode from=$contents item=$content}<a href="{link controller='UltimateContentEdit' id=$content->contentID}{/link}">{@$content->getTitle()}</a>{/implode}
 			</div>
 		</fieldset>
 		<fieldset>

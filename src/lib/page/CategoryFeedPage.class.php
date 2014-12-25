@@ -86,7 +86,7 @@ class CategoryFeedPage extends AbstractFeedPage {
 		if (count($this->objectIDs) === 1) {
 			$categories = CategoryCacheBuilder::getInstance()->getData(array(), 'categories');
 			$category = $categories[reset($this->objectIDs)];
-			$this->title = $category->getLangTitle();
+			$this->title = $category->getTitle();
 		}
 		else {
 			$this->title = WCF::getLanguage()->get('ultimate.header.menu.index');

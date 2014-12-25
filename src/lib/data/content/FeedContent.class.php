@@ -62,7 +62,7 @@ class FeedContent extends CategorizedContent implements IFeedEntry {
 	 * @return	string
 	 */
 	public function getTitle() {
-		return $this->getDecoratedObject()->getLangTitle();
+		return $this->getDecoratedObject()->getTitle();
 	}
 	
 	/**

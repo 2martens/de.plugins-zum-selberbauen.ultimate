@@ -20,7 +20,7 @@
 									{/if}
 									
 									<div class="messageHeadline">
-										<h1><a href="{linkExtended application='ultimate' date=$content->publishDateObject->format('Y-m-d') contentSlug=$content->contentSlug}{/linkExtended}">{$content->getLangTitle()}</a></h1>
+										<h1><a href="{linkExtended application='ultimate' date=$content->publishDateObject->format('Y-m-d') contentSlug=$content->contentSlug}{/linkExtended}">{$content->getTitle()}</a></h1>
 										<p>
 											<span class="username">{if $content->authorID}<a href="{link controller='User' object=$content->authorProfile}{/link}" class="userLink" data-user-id="{@$content->authorID}">{$content->author->username}</a>{else}{$content->author->username}{/if}</span>
 											<span>{@$content->publishDate|time}</span>{*
