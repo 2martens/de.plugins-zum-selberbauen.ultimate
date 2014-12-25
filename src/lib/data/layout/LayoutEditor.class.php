@@ -65,7 +65,7 @@ class LayoutEditor extends DatabaseObjectEditor implements IEditableCachedObject
 	
 		WCF::getDB()->beginTransaction();
 		foreach ($objectIDs as $objectID) {
-			$statement->executeUnbuffered(array('ultimate.layout.'.$objectID.'.%'));
+			$statement->execute(array('ultimate.layout.'.$objectID.'.%'));
 		}
 		WCF::getDB()->commitTransaction();
 		return parent::deleteAll($objectIDs);

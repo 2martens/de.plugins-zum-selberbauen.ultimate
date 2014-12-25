@@ -130,7 +130,7 @@ class PageEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		$statement = WCF::getDB()->prepareStatement($sql);
 		WCF::getDB()->beginTransaction();
 		foreach ($groupIDs as $groupID) {
-			$statement->executeUnbuffered(array(
+			$statement->execute(array(
 				$groupID,
 				$this->object->__get('pageID')
 			));

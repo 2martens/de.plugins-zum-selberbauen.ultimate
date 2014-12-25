@@ -81,7 +81,7 @@ class MenuItemEditor extends DatabaseObjectEditor implements IEditableCachedObje
 		$statement = WCF::getDB()->prepareStatement($sql);
 		WCF::getDB()->beginTransaction();
 		foreach ($objectIDs as $objectID) {
-			$statement->executeUnbuffered(array('ultimate.menu.item.'.$objectID.'.%'));
+			$statement->execute(array('ultimate.menu.item.'.$objectID.'.%'));
 		}
 		WCF::getDB()->commitTransaction();
 		return parent::deleteAll($objectIDs);

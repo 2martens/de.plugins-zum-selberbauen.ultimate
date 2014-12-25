@@ -67,7 +67,7 @@ class LinkEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		
 		WCF::getDB()->beginTransaction();
 		foreach ($objectIDs as $objectID) {
-			$statement->executeUnbuffered(array('ultimate.link.'.$objectID.'.%'));
+			$statement->execute(array('ultimate.link.'.$objectID.'.%'));
 		}
 		WCF::getDB()->commitTransaction();
 		return parent::deleteAll($objectIDs);
@@ -98,7 +98,7 @@ class LinkEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 			$statement = WCF::getDB()->prepareStatement($sql);
 			WCF::getDB()->beginTransaction();
 			foreach ($categoryIDs as $categoryID) {
-				$statement->executeUnbuffered(array(
+				$statement->execute(array(
 					$this->__get('linkID'),
 					$categoryID
 				));
@@ -150,7 +150,7 @@ class LinkEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		$statement = WCF::getDB()->prepareStatement($sql);
 		WCF::getDB()->beginTransaction();
 		foreach ($categoryIDs as $categoryID) {
-			$statement->executeUnbuffered(array(
+			$statement->execute(array(
 				$this->__get('linkID'),
 				$categoryID
 			));
