@@ -104,7 +104,7 @@ class MySpaceMediaProvider extends AbstractMediaProvider {
 			throw new SystemException('invalid source', 0, 'The given source URL is not a valid MySpace share link.');
 		}
 		
-		$matches = $regexOj->getMatches();
+		$matches = $regexObj->getMatches();
 		$videoID = $matches[1][0];
 		
 		$embedSource = 'http://mediaservices.myspace.com/services/media/embed.aspx/m='.$videoID.',t=1,mt=video';
