@@ -147,7 +147,7 @@ class TemplateHandler extends SingletonFactory {
 		));
 		if ($requestObject !== null) {
 			WCF::getTPL()->assign(array(
-				'title' => $requestObject->getLangTitle(),
+				'title' => $requestObject->getTitle(),
 				'requestObject' => $requestObject
 			));
 		}

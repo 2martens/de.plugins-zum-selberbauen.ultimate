@@ -52,7 +52,7 @@ class LikeableContent extends AbstractLikeObject {
 	 * @return	string
 	 */
 	public function getTitle() {
-		return $this->__call('getLangTitle', array());
+		return $this->__call('getTitle', array());
 	}
 	
 	/**

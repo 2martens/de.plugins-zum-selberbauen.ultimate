@@ -50,10 +50,10 @@ class SearchResultContent extends CategorizedContent implements ISearchResultObj
 	}
 	
 	/**
-	 * @see	\ultimate\data\content\Content::getLangTitle()
+	 * @see	\ultimate\data\content\Content::getTitle()
 	 */
 	public function getSubject() {
-		return $this->getLangTitle();
+		return $this->getTitle();
 	}
 	
 	/**
