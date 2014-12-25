@@ -58,11 +58,11 @@ class MyVideoMediaProvider extends AbstractMediaProvider {
 		$source = $this->getEmbedInformation(StringUtil::trim($source));
 		$html = '<iframe';
 		$html .= ' '.$this->getAttributeHTML('src', $source);
-		$html .= ' '.$this->getAttributeHTML('width', integer($width));
-		$html .= ' '.$this->getAttributeHTML('height', integer($height));
+		$html .= ' '.$this->getAttributeHTML('width', intval($width));
+		$html .= ' '.$this->getAttributeHTML('height', intval($height));
 		$html .= ' '.$this->getAttributeHTML('class', 'myvideo-video');
 		$html .= ' '.$this->getAttributeHTML('style', 
-			'width: '.integer($width).'px; height: '.integer($height).'px;'
+			'width: '.intval($width).'px; height: '.intval($height).'px;'
 		);
 		$html .= '></iframe>';
 		return $html;
