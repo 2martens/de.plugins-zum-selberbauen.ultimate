@@ -65,8 +65,8 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	 * @var	string[]
 	 */
 	protected $permissionsCreate = array(
-		'user.ultimate.content.canEditContent',		
-		'user.ultimate.content.canAddContentVersion'
+		'user.ultimate.editing.canEditContent',		
+		'user.ultimate.editing.canAddContentVersion'
 	);
 	
 	/**
@@ -74,15 +74,15 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	 * @var	string[]
 	 */
 	protected $permissionsDelete = array(
-		'user.ultimate.content.canDeleteContent', 
-		'user.ultimate.content.canDeleteContentVersion'
+		'user.ultimate.editing.canDeleteContent', 
+		'user.ultimate.editing.canDeleteContentVersion'
 	);
 	
 	/**
 	 * Array of permissions that are required for update action.
 	 * @var	string[]
 	 */
-	protected $permissionsUpdate = array('user.ultimate.content.canEditContent');
+	protected $permissionsUpdate = array('user.ultimate.editing.canEditContent');
 	
 	/**
 	 * disallow requests for specified methods if the origin is not the ACP

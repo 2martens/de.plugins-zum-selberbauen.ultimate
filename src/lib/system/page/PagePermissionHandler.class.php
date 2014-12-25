@@ -63,6 +63,22 @@ class PagePermissionHandler extends SingletonFactory {
 	public function getPermission($pageID, $permission) {
 		if (isset($this->pagePermissions[$pageID][$permission])) return $this->pagePermissions[$pageID][$permission];
 
-		return WCF::getSession()->getPermission('user.ultimate.content.'.$permission);
+		$editingKeywords = array(
+			'add',
+			'edit',
+			'delete',
+			'save',
+			'publish'
+		);
+		
+		$category = 'content';
+		foreach ($editingKeywords as $keyword) {
+			if (stripos($permission, $keyword) !== false) {
+				$category = 'editing';
+				break;
+			}
+		}
+		
+		return WCF::getSession()->getPermission('user.ultimate.'.$category.'.'.$permission);
 	}
 }

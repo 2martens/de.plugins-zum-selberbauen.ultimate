@@ -90,7 +90,7 @@ class ContentAttachmentObjectType extends AbstractAttachmentObjectType {
 	 * @return	boolean
 	 */
 	public function canUpload($objectID, $parentObjectID = 0) {
-		return WCF::getSession()->getPermission('user.ultimate.content.canUploadAttachment');
+		return WCF::getSession()->getPermission('user.ultimate.editing.canUploadAttachment');
 	}
 	
 	/**
