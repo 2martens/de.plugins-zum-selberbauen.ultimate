@@ -29,6 +29,7 @@ namespace ultimate\system\cronjob;
 use ultimate\data\content\ContentAction;
 use ultimate\data\page\PageAction;
 use ultimate\system\cache\builder\ContentCacheBuilder;
+use ultimate\system\cache\builder\ContentVersionCacheBuilder;
 use ultimate\system\cache\builder\PageCacheBuilder;
 use wcf\data\cronjob\Cronjob;
 use wcf\system\cronjob\AbstractCronjob;
@@ -53,23 +54,25 @@ class PublishContentPageCronjob extends AbstractCronjob {
 	public function execute(Cronjob $cronjob) {
 		// reading cache
 		$contents = ContentCacheBuilder::getInstance()->getData(array(), 'contents');
+		$contentVersionsToContentID = ContentVersionCacheBuilder::getInstance()->getData(array(), 'versionsToObjectID');
 		
 		$pages = PageCacheBuilder::getInstance()->getData(array(), 'pages');
 		
 		// checking publish dates
-		$updateObjects = array();
 		foreach ($contents as $contentID => $content) {
-			if (!(0 < $content->publishDate && $content->publishDate < TIME_NOW && $content->status == 2)) continue;
-			/* @var $content \ultimate\data\content\TaggableContent */
-			$updateObjects[] = $content->getDecoratedObject();
+			foreach ($contentVersionsToContentID[$contentID] as $versionID => $version) {
+				if (!(0 < $version->publishDate && $version->publishDate < TIME_NOW && $version->status == 2)) continue;
+				/* @var $content \ultimate\data\content\TaggableContent */
+				$parameters = array(
+					'data' => array(
+						'status' => 3
+					),
+					'versionID' => $versionID
+				);
+				$action = new ContentAction(array($contentID), 'updateVersion', $parameters);
+				$action->executeAction();
+			}
 		}
-		$parameters = array(
-			'data' => array(
-				'status' => 3
-			)
-		);
-		$action = new ContentAction($updateObjects, 'update', $parameters);
-		$action->executeAction();
 		
 		// pages
 		$updateObjects = array();
