@@ -2,7 +2,7 @@
 <head>
 	<title>{lang}ultimate.edit.suite{/lang} - {lang}{PAGE_TITLE}{/lang}</title>
 	
-	{include file='headInclude' application='ultimate'}
+	{include file='headInclude'}
 	{* for debug purposes only *}
 	{include file='__editSuiteJS' application='ultimate'}
 </head>
