@@ -446,7 +446,7 @@ ULTIMATE.MultipleLanguageWYSIWYG = WCF.MultipleLanguageInput.extend({
     init: function(elementID, forceSelection, values, availableLanguages) {
         this._button = null;
         this._element = $('#' + $.wcfEscapeID(elementID));
-        this._box = this._element.redactor('getBox');
+        this._box = this._element.redactor('core.getBox');
         this._forceSelection = forceSelection;
         this._values = values;
         this._availableLanguages = availableLanguages;
