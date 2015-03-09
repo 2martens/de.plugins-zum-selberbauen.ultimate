@@ -1,5 +1,7 @@
 <a id="top"></a>
 
+{event name='beforePageHeader'}
+
 <header id="pageHeader" class="{if $__wcf->getStyleHandler()->getStyle()->getVariable('useFluidLayout')}layoutFluid{else}layoutFixed{/if}{if $sidebarOrientation|isset && $sidebar|isset} sidebarOrientation{@$sidebarOrientation|ucfirst}{if $sidebarOrientation == 'right' && $sidebarCollapsed} sidebarCollapsed{/if}{/if}">
 	<div>
 		<nav id="topMenu" class="userPanel">
@@ -36,6 +38,8 @@
 			{include file='mainMenu'}
 		{/if}
 		<!-- /main menu -->
+
+        {event name='afterMainMenu'}
 	
 		<!-- navigation -->
 		<nav class="navigation navigationHeader">
