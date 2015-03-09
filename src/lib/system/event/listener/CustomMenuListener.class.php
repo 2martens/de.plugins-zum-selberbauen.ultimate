@@ -52,7 +52,7 @@ class CustomMenuListener implements IParameterizedEventListener {
 	 * @param	string	$className
 	 * @param	string	$eventName
 	 */
-	public function execute($eventObj, $className, $eventName) {
+	public function execute($eventObj, $className, $eventName, array &$parameters) {
 		// rules out all ultimate classes and all ACP requests
 		if (mb_strpos($className, 'ultimate') !== false) return;
 		if (RequestHandler::getInstance()->isACPRequest()) return;
