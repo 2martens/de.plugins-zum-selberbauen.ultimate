@@ -3,8 +3,6 @@
 	<title>{lang}ultimate.edit.suite{/lang} - {lang}{PAGE_TITLE}{/lang}</title>
 	
 	{include file='headInclude'}
-	{* for debug purposes only *}
-	{include file='__editSuiteJS' application='ultimate'}
 </head>
 
 <body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
