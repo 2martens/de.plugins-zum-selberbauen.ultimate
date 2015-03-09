@@ -9,9 +9,9 @@
 	
     {if $__wcf->session->getPermission('user.ultimate.editing.canEditContentSpecificRights')}
         {if $contentID|isset}
-            {include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.ultimate.editing' objectID=$contentID aclListClassName='ULTIMATE.ACL.List'}
+            {include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.ultimate.content' objectID=$contentID aclListClassName='ULTIMATE.ACL.List'}
         {else}
-            {include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.ultimate.editing' aclListClassName='ULTIMATE.ACL.List'}
+            {include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.ultimate.content' aclListClassName='ULTIMATE.ACL.List'}
         {/if}
     {/if}
 	<header class="boxHeadline">
