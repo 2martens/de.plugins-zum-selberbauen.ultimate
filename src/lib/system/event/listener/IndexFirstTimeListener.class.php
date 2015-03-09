@@ -56,7 +56,7 @@ class IndexFirstTimeListener implements IParameterizedEventListener {
 	 * @param	string	$className
 	 * @param	string	$eventName
 	 */
-	public function execute($eventObj, $className, $eventName) {
+	public function execute($eventObj, $className, $eventName, array &$parameters) {
 		// adds default link category
 		require_once(ULTIMATE_DIR.'acp/'.self::CONFIG_FILE);
 		if (!$initiatedDefaultLinkCategory) {

@@ -47,7 +47,7 @@ class TaggedPageListener implements IParameterizedEventListener {
 	 * @param	string	$className
 	 * @param	string	$eventName
 	 */
-	public function execute($eventObj, $className, $eventName) {
+	public function execute($eventObj, $className, $eventName, array &$parameters) {
 		if ($eventObj->objectType->objectType != 'de.plugins-zum-selberbauen.ultimate.content') return;
 		
 		$tagCloud = new TypedTagCloud('de.plugins-zum-selberbauen.ultimate.content');

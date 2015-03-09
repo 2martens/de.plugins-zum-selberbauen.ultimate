@@ -51,7 +51,7 @@ class CacheResetListener implements IParameterizedEventListener {
 	 * @param	string	$className
 	 * @param	string	$eventName
 	 */
-	public function execute($eventObj, $className, $eventName) {
+	public function execute($eventObj, $className, $eventName, array &$parameters) {
 		switch ($className) {
 			case 'wcf\acp\action\AJAXProxyAction':
 				if ($eventObj->className != 'wcf\data\user\UserAction' || $eventName != 'delete') break;
