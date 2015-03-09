@@ -44,10 +44,12 @@ use wcf\system\cache\builder\UltimateTagCloudCacheBuilder;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
+use wcf\system\request\UltimateLinkHandler;
 use wcf\system\tagging\TagEngine;
 use wcf\system\Regex;
 use wcf\system\WCF;
 use wcf\util\DateUtil;
+use wcf\util\HeaderUtil;
 use wcf\util\MessageUtil;
 use wcf\util\StringUtil;
 
@@ -289,13 +291,13 @@ class ContentVersionAddForm extends MessageForm implements IEditSuitePage {
 		// fill publishDate with default value (today)
 		/* @var $dateTime \DateTime */
 		$dateTime = null;
+		if (isset($this->version)) {
+			$dateTime = $this->version->__get('publishDateObject');
+		}
 		$this->formatDate($dateTime);
 
 		$this->attachmentList = ContentAttachmentCacheBuilder::getInstance()->getData(array(), 'attachmentList');
 
-		if (!empty($_POST)) {
-			return;
-		}
 		// get languages
 		$languages = WCF::getLanguage()->getLanguages();
 
@@ -309,15 +311,27 @@ class ContentVersionAddForm extends MessageForm implements IEditSuitePage {
 				array($languageID)
 			);
 		}
+		
+		// set version if not existing
+		/** @var \ultimate\data\content\version\ContentVersion $version */
+		$version = null;
+		if (!isset($this->version)) {
+			/** @var \ultimate\data\content\Content $content */
+			$content = $this->content->getDecoratedObject();
+			$version = $this->$content->getCurrentVersion();
+		}
+		else {
+			$version = $this->version;
+		}
 
 		// reading object fields
-		$this->subject = $this->content->__get('contentTitle');
-		$this->description = $this->content->__get('contentDescription');
-		$this->text = $this->content->__get('contentText');
+		$this->subject = $version->__get('contentTitle');
+		$this->description = $version->__get('contentDescription');
+		$this->text = $version->__get('contentText');
 		$this->lastModified = $this->content->__get('lastModified');
 
 		// prepare I18nHandler
-		if (!ContentLanguageEntryCache::getInstance()->isNeutralValue($this->content->__get('versionID'), 'contentTitle')) {
+		if (!ContentLanguageEntryCache::getInstance()->isNeutralValue($version->__get('versionID'), 'contentTitle')) {
 			$contentTitle = ContentLanguageEntryCache::getInstance()->getValues($this->content->__get('versionID'), 'contentTitle');
 			$this->i18nValues['subject'] = $contentTitle;
 		}
@@ -325,16 +339,16 @@ class ContentVersionAddForm extends MessageForm implements IEditSuitePage {
 			$this->i18nPlainValues['subject'] = $this->subject;
 		}
 
-		if (!ContentLanguageEntryCache::getInstance()->isNeutralValue($this->content->__get('versionID'), 'contentDescription')) {
-			$contentDescription = ContentLanguageEntryCache::getInstance()->getValues($this->content->__get('versionID'), 'contentDescription');
+		if (!ContentLanguageEntryCache::getInstance()->isNeutralValue($version->__get('versionID'), 'contentDescription')) {
+			$contentDescription = ContentLanguageEntryCache::getInstance()->getValues($version->__get('versionID'), 'contentDescription');
 			$this->i18nValues['description'] = $contentDescription;
 		}
 		else {
 			$this->i18nPlainValues['description'] = $this->description;
 		}
 
-		if (!ContentLanguageEntryCache::getInstance()->isNeutralValue($this->content->__get('versionID'), 'contentText')) {
-			$contentText = ContentLanguageEntryCache::getInstance()->getValues($this->content->__get('versionID'), 'contentText');
+		if (!ContentLanguageEntryCache::getInstance()->isNeutralValue($version->__get('versionID'), 'contentText')) {
+			$contentText = ContentLanguageEntryCache::getInstance()->getValues($version->__get('versionID'), 'contentText');
 			$this->i18nValues['text'] = $contentText;
 		}
 		else {
@@ -349,9 +363,9 @@ class ContentVersionAddForm extends MessageForm implements IEditSuitePage {
 		}
 
 		// read editor permissions
-		$this->enableBBCodes = $this->content->__get('enableBBCodes');
-		$this->enableHtml = $this->content->__get('enableHtml');
-		$this->enableSmilies = $this->content->__get('enableSmilies');
+		$this->enableBBCodes = $version->__get('enableBBCodes');
+		$this->enableHtml = $version->__get('enableHtml');
+		$this->enableSmilies = $version->__get('enableSmilies');
 	}
 
 	/**
@@ -457,6 +471,8 @@ class ContentVersionAddForm extends MessageForm implements IEditSuitePage {
 
 		$this->objectAction = new ContentAction(array($this->contentID), 'createVersion', $parameters);
 		$this->objectAction->executeAction();
+		$returnValues = $this->objectAction->getReturnValues();
+		$version = $returnValues['returnValues'];
 
 		// save tags
 		foreach ($this->tagsI18n as $languageID => $tags) {
@@ -465,7 +481,7 @@ class ContentVersionAddForm extends MessageForm implements IEditSuitePage {
 				continue;
 			}
 			TagEngine::getInstance()->addObjectTags('de.plugins-zum-selberbauen.ultimate.content', $this->contentID, $tags, $languageID);
-			$this->tagsI18n[$languageID] = implode(',', $tags);
+			$this->tagsI18n[$languageID] = Tag::buildString($tags);
 		}
 
 		// reset cache
@@ -478,7 +494,17 @@ class ContentVersionAddForm extends MessageForm implements IEditSuitePage {
 
 		$this->saved();
 
-		WCF::getTPL()->assign('success', true);
+		$url = UltimateLinkHandler::getInstance()->getLink('ContentVersionEdit',
+			array(
+				'id' => $version->__get('versionID'),
+				'application' => 'ultimate',
+				'parent' => 'EditSuite'
+			),
+			'success=true'
+		);
+		HeaderUtil::redirect($url);
+		// after initiating the redirect, no other code should be executed as the request for the original resource has ended
+		exit;
 	}
 
 	/**
