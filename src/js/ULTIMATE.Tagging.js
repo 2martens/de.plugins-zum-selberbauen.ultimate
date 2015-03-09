@@ -650,8 +650,9 @@ ULTIMATE.Tagging.TagSearch = WCF.Tagging.TagSearch.extend({
 		}
 		
 		// close dropdown
-		WCF.Dropdown.getDropdown(this._searchInput.parents('.dropdown').wcfIdentify()).removeClass('dropdownOpen');
-		WCF.Dropdown.getDropdownMenu(this._searchInput.parents('.dropdown').wcfIdentify()).removeClass('dropdownOpen');
+        var dropdown = this._searchInput.parent().wcfIdentify();
+		WCF.Dropdown.getDropdown(dropdown).removeClass('dropdownOpen');
+		WCF.Dropdown.getDropdownMenu(dropdown).removeClass('dropdownOpen');
 		
 		this._list.end().empty();
 		
