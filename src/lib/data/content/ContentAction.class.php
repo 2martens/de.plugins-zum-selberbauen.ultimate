@@ -94,7 +94,8 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	 * Resets cache if any of the listed actions is invoked
 	 * @var	string[]
 	 */
-	protected $resetCache = array('create', 'createVersion', 'delete', 'deleteVersion', 'toggle', 'update', 'updatePosition');
+	protected $resetCache = array('create', 'createVersion', 'delete', 'deleteVersion', 'toggle', 'update', 'updateVersion', 
+	                              'updatePosition');
 	
 	/**
 	 * current content object
@@ -478,6 +479,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 				$object->update($this->parameters['data']);
 				$versionID = $this->parameters['versionID'];
 				$object->updateVersion($versionID, $versionData);
+
 				if (!empty($preparedLanguageData)) {
 					ContentLanguageEntryEditor::updateEntries($versionID, $preparedLanguageData);
 				}
