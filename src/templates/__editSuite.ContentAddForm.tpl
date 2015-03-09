@@ -7,7 +7,6 @@
 	{include application='ultimate' file='multipleLanguageInputJavascript' elementIdentifier='description' forceSelection=false}
 	{include application='ultimate' file='multipleLanguageWYSIWYGJavascript' elementIdentifier='text' forceSelection=false}
 	
-    <script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.ACL{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
     {if $__wcf->session->getPermission('user.ultimate.editing.canEditContentSpecificRights')}
         {if $contentID|isset}
             {include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.ultimate.editing' objectID=$contentID aclListClassName='ULTIMATE.ACL.List'}

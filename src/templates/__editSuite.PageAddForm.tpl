@@ -4,7 +4,6 @@
     {/if}
     {include application='ultimate' file='multipleLanguageInputJavascript' elementIdentifier='pageTitle' forceSelection=false}
 
-    <script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.ACL{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
     {if $__wcf->session->getPermission('user.ultimate.editing.canEditPageSpecificRights')}
         {if $pageID|isset}
             {include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.ultimate.page' objectID=$pageID aclListClassName='ULTIMATE.ACL.List'}
