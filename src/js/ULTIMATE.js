@@ -538,16 +538,16 @@ ULTIMATE.MultipleLanguageWYSIWYG = WCF.MultipleLanguageInput.extend({
 
         // save current value
         if (this._didInit) {
-            this._values[this._languageID] = this._element.redactor('getText');
+            this._values[this._languageID] = this._element.redactor('wutil.getText');
         }
 
         // set new language
         this._languageID = $button.data('languageID');
         if (this._values[this._languageID]) {
-            this._element.redactor('replaceText', this._values[this._languageID]);
+            this._element.redactor('wutil.replaceText', this._values[this._languageID]);
         }
         else {
-            this._element.redactor('reset');
+            this._element.redactor('wutil.reset');
         }
 
         // update marking
@@ -584,10 +584,10 @@ ULTIMATE.MultipleLanguageWYSIWYG = WCF.MultipleLanguageInput.extend({
 
        // update element value
         if (this._values[window.LANGUAGE_ID]) {
-            this._element.redactor('replaceText', this._values[window.LANGUAGE_ID]);
+            this._element.redactor('wutil.replaceText', this._values[window.LANGUAGE_ID]);
         }
         else {
-            this._element.redactor('reset');
+            this._element.redactor('wutil.reset');
         }
         this._languageID = window.LANGUAGE_ID;
 
@@ -614,7 +614,7 @@ ULTIMATE.MultipleLanguageWYSIWYG = WCF.MultipleLanguageInput.extend({
 
         // fetch active value
         if (this._languageID) {
-            this._values[this._languageID] = this._element.redactor('getText');
+            this._values[this._languageID] = this._element.redactor('wutil.getText');
         }
 
         var $form = $(this._element.parents('form')[0]);
