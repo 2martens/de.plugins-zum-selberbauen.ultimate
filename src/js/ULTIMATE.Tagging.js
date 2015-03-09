@@ -390,11 +390,7 @@ ULTIMATE.Tagging.TagList = WCF.Tagging.TagList.extend({
 				return true;
 			}
 			
-			if (this._searchInput.val().length >= this._maxLength) {
-				return false;
-			}
-			
-			return true;
+			return this._searchInput.val().length < this._maxLength;
 		}
 		
 		return false;
