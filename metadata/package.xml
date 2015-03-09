@@ -9,7 +9,7 @@
 		
 		<isapplication>1</isapplication>
 		<version>1.1.0 Dev 1</version>
-		<date>2014-08-20</date>
+		<date>2015-03-09</date>
 	</packageinformation>
 	
 	<authorinformation>
@@ -18,8 +18,8 @@
 	</authorinformation>
 	
 	<requiredpackages>
-		<requiredpackage minversion="2.1.0*">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="2.0.4" file="requirements/com.woltlab.wcf.conversation.tar.gz">com.woltlab.wcf.conversation</requiredpackage>
+		<requiredpackage minversion="2.1.1">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="2.1.0" file="requirements/com.woltlab.wcf.conversation.tar.gz">com.woltlab.wcf.conversation</requiredpackage>
 		<requiredpackage minversion="1.0.0" file="requirements/de.plugins-zum-selberbauen.cachedList.tar.gz">de.plugins-zum-selberbauen.cachedList</requiredpackage>
 		<requiredpackage minversion="1.1.0*" file="requirements/de.plugins-zum-selberbauen.ultimateCore.tar.gz">de.plugins-zum-selberbauen.ultimateCore</requiredpackage>
 	</requiredpackages>
