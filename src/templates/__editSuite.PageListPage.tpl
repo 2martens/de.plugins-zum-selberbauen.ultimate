@@ -37,7 +37,7 @@
         <nav>
             <ul>
                 {content}
-                    {if $__wcf->session->getPermission('user.ultimate.content.canEditPage')}
+                    {if $__wcf->session->getPermission('user.ultimate.editing.canEditPage')}
                         <li><a data-controller="PageAddForm" data-request-type="form" href="{linkExtended application='ultimate' parent='EditSuite' controller='PageAdd'}{/linkExtended}" title="{lang}wcf.acp.ultimate.page.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.ultimate.page.add{/lang}</span></a></li>
                     {/if}
                     
@@ -72,13 +72,13 @@
                             <td class="columnMark"><label><input type="checkbox" class="jsClipboardItem" data-object-id="{@$page->pageID}" /></label></td>
                             <td class="columnIcon">
                                 
-                                {if $__wcf->session->getPermission('user.ultimate.content.canEditPage')}
+                                {if $__wcf->session->getPermission('user.ultimate.editing.canEditPage')}
                                     <a data-controller="PageEditForm" data-request-type="form" href="{linkExtended application='ultimate' parent='EditSuite' controller='PageEdit' id=$page->pageID}{/linkExtended}"><span title="{lang}wcf.acp.ultimate.page.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
                                 {else}
                                     <span title="{lang}wcf.acp.ultimate.page.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
                                 {/if}
                                 
-                                {if $__wcf->session->getPermission('user.ultimate.content.canDeletePage')}
+                                {if $__wcf->session->getPermission('user.ultimate.editing.canDeletePage')}
                                     <span title="{lang}wcf.acp.ultimate.page.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton pointer" data-object-id="{@$page->pageID}" data-confirm-message="{lang}wcf.acp.ultimate.page.delete.sure{/lang}"></span>
                                 {else}
                                     <span title="{lang}wcf.acp.ultimate.page.delete{/lang}" class="icon icon16 icon-remove disabled"></span>
@@ -87,7 +87,7 @@
                                 {event name='buttons'}
                             </td>
                             <td class="columnID"><p>{@$page->pageID}</p></td>
-                            <td class="columnTitle"><p>{if $__wcf->session->getPermission('user.ultimate.content.canEditPage')}<a title="{lang}wcf.acp.ultimate.page.edit{/lang}" data-controller="PageEditForm" data-request-type="form" href="{linkExtended application='ultimate' parent='EditSuite' controller='PageEdit' id=$page->pageID}{/linkExtended}">{@$page->pageTitle}</a>{else}{@$page->pageTitle}{/if}</p></td>
+                            <td class="columnTitle"><p>{if $__wcf->session->getPermission('user.ultimate.editing.canEditPage')}<a title="{lang}wcf.acp.ultimate.page.edit{/lang}" data-controller="PageEditForm" data-request-type="form" href="{linkExtended application='ultimate' parent='EditSuite' controller='PageEdit' id=$page->pageID}{/linkExtended}">{@$page->pageTitle}</a>{else}{@$page->pageTitle}{/if}</p></td>
                             <td class="columnAuthor"><p><a data-controller="PageListPage" data-request-type="page" href="{linkExtended application='ultimate' parent='EditSuite' controller='PageList'}authorID={@$page->authorID}{/linkExtended}">{@$page->author}</a></p></td>
                             <td class="columnDate dateColumn"><p>{if $page->publishDate}{@$page->publishDate|time}{/if}</p></td>
                             <td class="columnLastModified dateColumn"><p>{@$page->lastModified|time}</p></td>
@@ -109,7 +109,7 @@
         <nav>
             <ul>
                 {content}
-                    {if $__wcf->session->getPermission('user.ultimate.content.canEditPage')}
+                    {if $__wcf->session->getPermission('user.ultimate.editing.canEditPage')}
                         <li><a data-controller="PageAddForm" data-request-type="form" href="{linkExtended application='ultimate' parent='EditSuite' controller='PageAdd'}{/linkExtended}" title="{lang}wcf.acp.ultimate.page.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.ultimate.page.add{/lang}</span></a></li>
                     {/if}
                     

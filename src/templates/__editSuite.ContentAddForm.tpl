@@ -1,5 +1,5 @@
 <div id="pageContent" data-controller="ContentAddForm" data-request-type="form" data-ajax-only="true">
-    {if $__wcf->session->getPermission('user.ultimate.content.canEditContentSpecificRights')}
+    {if $__wcf->session->getPermission('user.ultimate.editing.canEditContentSpecificRights')}
         {include file='aclPermissions'}
     {/if}
     {include file='wysiwyg'}
@@ -8,11 +8,11 @@
 	{include application='ultimate' file='multipleLanguageWYSIWYGJavascript' elementIdentifier='text' forceSelection=false}
 	
     <script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.ACL{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
-    {if $__wcf->session->getPermission('user.ultimate.content.canEditContentSpecificRights')}
+    {if $__wcf->session->getPermission('user.ultimate.editing.canEditContentSpecificRights')}
         {if $contentID|isset}
-            {include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.ultimate.content' objectID=$contentID aclListClassName='ULTIMATE.ACL.List'}
+            {include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.ultimate.editing' objectID=$contentID aclListClassName='ULTIMATE.ACL.List'}
         {else}
-            {include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.ultimate.content' aclListClassName='ULTIMATE.ACL.List'}
+            {include file='aclPermissionJavaScript' containerID='userPermissionsContainer' categoryName='user.ultimate.editing' aclListClassName='ULTIMATE.ACL.List'}
         {/if}
     {/if}
 	<header class="boxHeadline">
@@ -87,7 +87,7 @@
 						{/if}
 					</dd>
 				</dl>
-                {if $__wcf->session->getPermission('user.ultimate.content.canEditMetadata')}
+                {if $__wcf->session->getPermission('user.ultimate.editing.canEditMetadata')}
                     {include file='metaInput' application='ultimate' metaDescription=$metaDescription metaKeywords=$metaKeywords errorField=$errorField errorType=$errorType}
                     <dl{if $errorField == 'category'} class="formError"{/if}>
                         <dt><label>{lang}wcf.acp.ultimate.content.categories{/lang}</label></dt>
@@ -159,12 +159,12 @@
 					</dd>
 				</dl>
 			</fieldset>
-            {if $__wcf->session->getPermission('user.ultimate.content.canPublish') ||
-                $__wcf->session->getPermission('user.ultimate.content.canSaveAsDraft') || 
-                $__wcf->session->getPermission('user.ultimate.content.canSaveAsPendingReview')}
+            {if $__wcf->session->getPermission('user.ultimate.editing.canPublish') ||
+                $__wcf->session->getPermission('user.ultimate.editing.canSaveAsDraft') || 
+                $__wcf->session->getPermission('user.ultimate.editing.canSaveAsPendingReview')}
 			<fieldset>
 				<legend>{lang}wcf.acp.ultimate.publishing{/lang}</legend>
-                {if $__wcf->session->getPermission('user.ultimate.content.canPublish')}
+                {if $__wcf->session->getPermission('user.ultimate.editing.canPublish')}
                 <dl{if $errorField == 'publishDate'} class="formError"{/if}>
                     <dt><label for="publishDateInput">{lang}wcf.acp.ultimate.publishDate{/lang}</label></dt>
                     <dd>
@@ -189,7 +189,7 @@
                     </dd>
                 </dl>
                 {/if}
-                {if $__wcf->session->getPermission('user.ultimate.content.canEditContentSpecificRights')}
+                {if $__wcf->session->getPermission('user.ultimate.editing.canEditContentSpecificRights')}
                 <dl id="userPermissionsContainer">
                     <dt><label for="accessMatrix">{lang}wcf.acl.permissions{/lang}</label></dt>
                     <dd>
@@ -198,7 +198,7 @@
                 </dl>
                 {/if}
 
-                {if $__wcf->session->getPermission('user.ultimate.content.canEditContentStatus') && ($__wcf->session->getPermission('user.ultimate.content.canSaveAsDraft') || $__wcf->session->getPermission('user.ultimate.content.canSaveAsPendingReview'))}
+                {if $__wcf->session->getPermission('user.ultimate.editing.canEditContentStatus') && ($__wcf->session->getPermission('user.ultimate.editing.canSaveAsDraft') || $__wcf->session->getPermission('user.ultimate.editing.canSaveAsPendingReview'))}
                     <dl{if $errorField == 'status'} class="formError"{/if}>
                         <dt><label for="statusSelect">{lang}wcf.acp.ultimate.status{/lang}</label></dt>
                         <dd>
@@ -225,15 +225,15 @@
 			{event name='fieldsets'}
 		</div>
 
-        {if $__wcf->session->getPermission('user.ultimate.content.canPublish') ||
-            $__wcf->session->getPermission('user.ultimate.content.canSaveAsDraft') ||
-            $__wcf->session->getPermission('user.ultimate.content.canSaveAsPendingReview')}
+        {if $__wcf->session->getPermission('user.ultimate.editing.canPublish') ||
+            $__wcf->session->getPermission('user.ultimate.editing.canSaveAsDraft') ||
+            $__wcf->session->getPermission('user.ultimate.editing.canSaveAsPendingReview')}
             <div class="formSubmit">
                 <input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
-                {if $__wcf->session->getPermission('user.ultimate.content.canSaveAsDraft') || $__wcf->session->getPermission('user.ultimate.content.canSaveAsPendingReview')}
+                {if $__wcf->session->getPermission('user.ultimate.editing.canSaveAsDraft') || $__wcf->session->getPermission('user.ultimate.editing.canSaveAsPendingReview')}
                     <input type="submit" name="save" id="saveButton" value="{if $saveButtonLang|isset}{@$saveButtonLang}{else}{lang}ultimate.button.saveAsDraft{/lang}{/if}" />
                 {/if}
-                {if $__wcf->session->getPermission('user.ultimate.content.canPublish')}
+                {if $__wcf->session->getPermission('user.ultimate.editing.canPublish')}
                     <input type="submit" name="publish" id="publishButton" value="{if $publishButtonLang|isset}{@$publishButtonLang}{else}{lang}ultimate.button.publish{/lang}{/if}" accesskey="s" />
                 {/if}
                 {@SID_INPUT_TAG}
