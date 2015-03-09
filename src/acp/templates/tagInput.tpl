@@ -4,8 +4,6 @@
 		<div id="tagList{if $tagInputSuffix|isset}{@$tagInputSuffix}{/if}" class="editableItemList"></div>
 	</dd>
 </dl>
-<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath()}js/WCF.Tagging{if !ENABLE_DEBUG_MODE}.min{/if}.js"></script>
-<script data-relocate="true" type="text/javascript" src="{@$__wcf->getPath('ultimate')}js/ULTIMATE.Tagging{if !ENABLE_DEBUG_MODE}.min{/if}.js"></script>
 <script data-relocate="true" type="text/javascript">
 	//<![CDATA[
 	$(function() {
