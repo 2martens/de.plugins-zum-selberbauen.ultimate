@@ -318,7 +318,7 @@ class ContentVersionAddForm extends MessageForm implements IEditSuitePage {
 		if (!isset($this->version)) {
 			/** @var \ultimate\data\content\Content $content */
 			$content = $this->content->getDecoratedObject();
-			$version = $this->$content->getCurrentVersion();
+			$version = $content->getCurrentVersion();
 		}
 		else {
 			$version = $this->version;
