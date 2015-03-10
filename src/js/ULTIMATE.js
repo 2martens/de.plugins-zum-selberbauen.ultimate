@@ -88,6 +88,41 @@ ULTIMATE.Action.Delete = WCF.Action.Delete.extend({
 	}
 });
 
+ULTIMATE.Action.DeleteVersion = ULTIMATE.Action.Delete.extend({
+    /**
+     * Sends the request
+     *
+     * @param {jQuery} object
+     */
+    _sendRequest: function(object) {
+        this.proxy.setOption('data', {
+            actionName: 'deleteVersion',
+            className: this._className,
+            interfaceName: 'wcf\\data\\IDeleteAction',
+            objectIDs: [ $(object).data('contentID') ],
+            parameters: {
+                versionNumber: $(object).data('objectID')
+            }
+        });
+
+        this.proxy.sendRequest();
+    },
+
+    /**
+     * Deletes items from containers.
+     * 
+     * @param {Object} data
+     * @param {String} textStatus
+     * @param {jqXHR} jqXHR
+     * @private
+     */
+    _success: function(data, textStatus, jqXHR) {
+        var returnValues = data['returnValues'];
+        var versionNumber = +returnValues['versionNumbers'][0];
+        this.triggerEffect([versionNumber]);
+    }
+});
+
 /**
  * Namespace for date-related functions
  * 

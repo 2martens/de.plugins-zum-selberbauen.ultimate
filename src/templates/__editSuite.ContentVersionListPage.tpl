@@ -68,8 +68,7 @@
                             {else}
                                 <span title="{lang}wcf.acp.ultimate.content.version.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
                             {/if}
-
-
+                            
                             {if $__wcf->session->getPermission('user.ultimate.editing.canDeleteContentVersion') && $items > 1}
                                 <span title="{lang}wcf.acp.ultimate.content.version.delete{/lang}" class="icon icon16 icon-remove jsTooltip jsDeleteButton pointer" data-object-id="{@$version->versionNumber}" data-content-id="{@$contentID}" data-confirm-message="{lang}wcf.acp.ultimate.content.version.delete.sure{/lang}"></span>
                             {else}
@@ -78,7 +77,7 @@
 
                             {event name='buttons'}
                         </td>
-                        <td class="columnID"><p>{@$version->versionID}</p></td>
+                        <td class="columnID"><p>{@$version->versionNumber}</p></td>
                         <td class="columnTitle"><p>{if $__wcf->session->getPermission('user.ultimate.editing.canEditContentVersion')}<a title="{lang}wcf.acp.ultimate.content.version.edit{/lang}" data-controller="ContentVersionEditForm" data-request-type="form"  href="{linkExtended controller='ContentVersionEdit' application='ultimate' parent='EditSuite' id=$version->versionID}{/linkExtended}">{@$version->contentTitle}</a>{else}{@$version->contentTitle}{/if}</p></td>
                         <td class="columnAuthor"><p><a data-controller="ContentVersionListPage" data-request-type="page" href="{linkExtended controller='ContentVersionList' application='ultimate' parent='EditSuite'}authorID={@$version->authorID}{/linkExtended}">{@$version->author}</a></p></td>
                         <td class="columnDate dateColumn"><p>{if $version->publishDate > 0 && $version->status >= 2}{@$version->publishDate|time}{else}{/if}</p></td>

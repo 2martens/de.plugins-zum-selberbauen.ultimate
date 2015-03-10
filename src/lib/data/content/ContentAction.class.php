@@ -544,11 +544,11 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		// get ids
 		foreach ($this->objects as $object) {
 			/* @var $object \ultimate\data\content\ContentEditor */
-			$object->deleteVersion($this->parameters['versionID']);
+			$object->deleteVersion($this->parameters['versionNumber']);
 		}
 		
 		return array(
-			'versionIDs' => array($this->parameters['versionID'])
+			'versionNumbers' => array($this->parameters['versionNumber'])
 		);
 	}
 	
