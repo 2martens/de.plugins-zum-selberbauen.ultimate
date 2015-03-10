@@ -19,7 +19,7 @@
     </script>
 
     <header class="boxHeadline">
-        <h1>{lang}wcf.acp.ultimate.content.list{/lang}</h1>
+        <h1>{lang}wcf.acp.ultimate.content.version.list{/lang}</h1>
     </header>
 
     {assign var=encodedURL value=$url|rawurlencode}
@@ -44,7 +44,7 @@
     {if $items}
         <div id="contentVersionTableContainer" class="tabularBox tabularBoxTitle marginTop jsClipboardContainer" data-type="de.plugins-zum-selberbauen.ultimate.content.version">
             <header>
-                <h2>{lang}wcf.acp.ultimate.content.list{/lang} <span class="counter badge badgeInverse" title="{lang}wcf.acp.ultimate.content.version.list.count{/lang}">{#$items}</span></h2>
+                <h2>{lang}wcf.acp.ultimate.content.version.list{/lang} <span class="counter badge badgeInverse" title="{lang}wcf.acp.ultimate.content.version.list.count{/lang}">{#$items}</span></h2>
             </header>
             <table class="table">
                 <thead>
