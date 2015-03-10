@@ -74,24 +74,29 @@ class ContentVersionListPage extends AbstractCachedListPage implements IEditSuit
 	 * @var	string[]
 	 */
 	public $validSortFields = array(
-		'contentID',
+		'versionNumber',
 		'contentTitle',
 		'contentAuthor',
-		'publishDate',
-		'lastModified'
+		'publishDate'
 	);
 
 	/**
 	 * The default sort order.
 	 * @var	string
 	 */
-	public $defaultSortOrder = ULTIMATE_SORT_CONTENT_SORTORDER;
+	public $defaultSortOrder = 'DESC';
 
 	/**
 	 * The default sort field.
 	 * @var	string
 	 */
-	public $defaultSortField = ULTIMATE_SORT_CONTENT_SORTFIELD;
+	public $defaultSortField = 'versionNumber';
+
+	/**
+	 * The order by clause.
+	 * @var string
+	 */
+	public $sqlOrderBy = 'versionNumber DESC';
 
 	/**
 	 * Contains the fully qualified name of the CacheBuilder.
