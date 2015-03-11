@@ -21,7 +21,7 @@
 		<requiredpackage minversion="2.1.1">com.woltlab.wcf</requiredpackage>
 		<requiredpackage minversion="2.1.0" file="requirements/com.woltlab.wcf.conversation.tar.gz">com.woltlab.wcf.conversation</requiredpackage>
 		<requiredpackage minversion="1.0.1" file="requirements/de.plugins-zum-selberbauen.cachedList.tar.gz">de.plugins-zum-selberbauen.cachedList</requiredpackage>
-		<requiredpackage minversion="1.1.0*" file="requirements/de.plugins-zum-selberbauen.ultimateCore.tar.gz">de.plugins-zum-selberbauen.ultimateCore</requiredpackage>
+		<requiredpackage minversion="1.1.0 Dev 2" file="requirements/de.plugins-zum-selberbauen.ultimateCore.tar.gz">de.plugins-zum-selberbauen.ultimateCore</requiredpackage>
 	</requiredpackages>
     
 	<instructions type="install">
