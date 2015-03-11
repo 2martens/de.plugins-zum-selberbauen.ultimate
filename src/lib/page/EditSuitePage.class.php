@@ -40,7 +40,7 @@ use wcf\system\WCF;
  * The whole edit suite is designed on a modular basis so that it is easy to add more editing features later on.
  * 
  * @author		Jim Martens
- * @copyright	2011-2014 Jim Martens
+ * @copyright	2011-2015 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	page

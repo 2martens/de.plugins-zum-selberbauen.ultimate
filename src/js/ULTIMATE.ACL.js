@@ -9,7 +9,7 @@ ULTIMATE.ACL = {};
  * Extends WCF ACL support with ability to use ACL in frontend.
  *
  * @author      Alexander Ebert
- * @copyright   2011-2014 Jim Martens
+ * @copyright   2011-2015 Jim Martens
  * @license     http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  */
 ULTIMATE.ACL.List = WCF.ACL.List.extend({

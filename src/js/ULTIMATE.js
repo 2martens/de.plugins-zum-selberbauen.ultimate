@@ -4,7 +4,7 @@
  * Class and function collection for ULTIMATE CMS
  * 
  * @author		Jim Martens
- * @copyright	2011-2014 Jim Martens
+ * @copyright	2011-2015 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  */
 
