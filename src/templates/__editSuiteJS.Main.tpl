@@ -1,9 +1,9 @@
 <div id="pageJS" data-ajax-only="false">
 <script type="text/javascript">
-	function initEditSuite() {
-	}
+	initFunction = function initEditSuite() {
+	};
 	
-	function postInitEditSuite() {
-	}
+	postInitFunction = function postInitEditSuite() {
+	};
 </script>
 </div>

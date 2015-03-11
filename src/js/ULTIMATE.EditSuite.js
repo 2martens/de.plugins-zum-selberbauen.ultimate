@@ -453,20 +453,19 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	 */
 	_replaceHTML : function(controller) {
 		var script = $(this._cachedData[controller]['js']);
-		var scriptContent = script.html();
+		var scriptContent = script.html(),
+            initFunction = null,
+            postInitFunction = null;
 		eval(scriptContent);
-		var rawFunctionName = 'init' + controller;
-		eval(rawFunctionName + '()');
+		initFunction.call();
 		
 		this._pageContainer.html(this._cachedData[controller]['html']);
-//		this._pageJSContainer.html(this._cachedData[controller]['js']);
 		this._sidebarMenu.updateActiveItems(this._cachedData[controller]['activeMenuItems']);
 		
 		script = $(this._cachedData[controller]['js']);
 		scriptContent = script.html();
-		eval(scriptContent);
-		rawFunctionName = 'postInit' + controller;
-		eval(rawFunctionName + '()');
+        eval(scriptContent);
+        postInitFunction.call();
 	}
 });
 
