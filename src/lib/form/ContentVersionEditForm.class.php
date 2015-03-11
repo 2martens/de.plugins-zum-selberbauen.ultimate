@@ -26,11 +26,11 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\form;
+use ultimate\data\content\language\ContentLanguageEntryCache;
+use ultimate\data\content\version\ContentVersion;
 use ultimate\data\content\CategorizedContent;
 use ultimate\data\content\Content;
-use ultimate\data\content\language\ContentLanguageEntryCache;
 use ultimate\data\content\ContentAction;
-use ultimate\data\content\version\ContentVersion;
 use wcf\data\tag\Tag;
 use wcf\form\AbstractCaptchaForm;
 use wcf\form\MessageForm;

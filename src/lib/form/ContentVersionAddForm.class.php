@@ -26,9 +26,9 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\form;
+use ultimate\data\content\language\ContentLanguageEntryCache;
 use ultimate\data\content\CategorizedContent;
 use ultimate\data\content\Content;
-use ultimate\data\content\language\ContentLanguageEntryCache;
 use ultimate\data\content\ContentAction;
 use ultimate\page\IEditSuitePage;
 use ultimate\system\cache\builder\CategoryCacheBuilder;
