@@ -3,9 +3,9 @@
 
     <category name="wcf.acl.option">
         <item name="wcf.acl.option.category.de.plugins-zum-selberbauen.ultimate.content.user.ultimate.content"><![CDATA[Contents]]></item>
-        <item name="wcf.acl.option.de.plugins-zum-selberbauen.ultimate.ultimate.content.canSeeContent"><![CDATA[Can see content]]></item>
-        <item name="wcf.acl.option.de.plugins-zum-selberbauen.ultimate.ultimate.content.canEditContent"><![CDATA[Can edit content]]></item>
-        <item name="wcf.acl.option.de.plugins-zum-selberbauen.ultimate.ultimate.content.canEditContentStatus"><![CDATA[Can edit content status]]></item>
+        <item name="wcf.acl.option.de.plugins-zum-selberbauen.ultimate.content.canSeeContent"><![CDATA[Can see content]]></item>
+        <item name="wcf.acl.option.de.plugins-zum-selberbauen.ultimate.content.canEditContent"><![CDATA[Can edit content]]></item>
+        <item name="wcf.acl.option.de.plugins-zum-selberbauen.ultimate.content.canEditContentStatus"><![CDATA[Can edit content status]]></item>
     </category>
     
 	<category name="wcf.acp.dataImport">
