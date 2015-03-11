@@ -498,7 +498,6 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	 * @see \wcf\data\IVersionableDatabaseObjectAction::validateCreateVersion()
 	 */
 	public function validateUpdateVersion() {
-		// TODO add canEditContentVersion
 		WCF::getSession()->checkPermissions(array('user.ultimate.editing.canEditContentVersion'));
 	}
 	
