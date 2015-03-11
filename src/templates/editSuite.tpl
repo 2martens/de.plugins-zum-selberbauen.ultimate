@@ -24,15 +24,22 @@
 					<li id="ContentListPage">
 						<a data-controller="ContentListPage" data-request-type="page" href="{linkExtended controller='ContentList' application='ultimate' parent='EditSuite'}{/linkExtended}">{lang}ultimate.edit.listContents{/lang}</a>
 					</li>
-					<li id="ContentAddForm">
-						<a data-controller="ContentAddForm" data-request-type="form" href="{linkExtended controller='ContentAdd' application='ultimate' parent='EditSuite'}{/linkExtended}">{lang}ultimate.edit.addContent{/lang}</a>
-					</li>
+                    
+                    {if $__wcf->session->getPermission('user.ultimate.editing.canEditContent')}
+                    <li id="ContentAddForm">
+                        <a data-controller="ContentAddForm" data-request-type="form" href="{linkExtended controller='ContentAdd' application='ultimate' parent='EditSuite'}{/linkExtended}">{lang}ultimate.edit.addContent{/lang}</a>
+                    </li>
+                    {/if}
+                    
                     <li id="PageListPage">
                         <a data-controller="PageListPage" data-request-type="page" href="{linkExtended controller='PageList' application='ultimate' parent='EditSuite'}{/linkExtended}">{lang}ultimate.edit.listPages{/lang}</a>
                     </li>
+
+                    {if $__wcf->session->getPermission('user.ultimate.editing.canEditPage')}
                     <li id="PageAddForm">
                         <a data-controller="PageAddForm" data-request-type="form" href="{linkExtended controller='PageAdd' application='ultimate' parent='EditSuite'}{/linkExtended}">{lang}ultimate.edit.addPage{/lang}</a>
                     </li>
+                    {/if}
 				</ul>
 			</nav>
 		</fieldset>
