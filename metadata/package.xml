@@ -8,7 +8,7 @@
 		<packagedescription language="de-informal"><![CDATA[Ein WCF-kompatibles CMS.]]></packagedescription>
 		
 		<isapplication>1</isapplication>
-		<version>1.1.0 Dev 2</version>
+		<version>1.1.0 Dev 3</version>
 		<date>2015-03-11</date>
 	</packageinformation>
 	
@@ -57,13 +57,8 @@
 		<!-- /xml and rest -->
 	</instructions>
     
-    <instructions type="update" fromversion="1.1.0 Dev 1">
-        <instruction type="acpTemplate">acptemplates_update.tar</instruction>
-        <instruction type="file">files_update.tar</instruction>
+    <instructions type="update" fromversion="1.1.0 Dev 2">
         <instruction type="template">templates_update.tar</instruction>
-
-        <instruction type="templateListener">templateListener.xml</instruction>
-        <instruction type="userGroupOption">userGroupOption.xml</instruction>
         <instruction type="language">language/*.xml</instruction>
     </instructions>
 </package>

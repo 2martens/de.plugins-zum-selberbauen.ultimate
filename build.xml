@@ -38,52 +38,10 @@
              basedir="srcWCF"
         />
 
-        <!-- 1.1.0 Dev 2 update tars -->
-        <tar destfile="metadata/files_update.tar">
-            <tarfileset dir="src">
-                <exclude name="templates/**" />
-                <exclude name="acp/templates/**" />
-                <include name="js/ULTIMATE.Tagging.js" />
-                <include name="js/ULTIMATE.Tagging.min.js" />
-                <include name="js/ULTIMATE.js" />
-                <include name="js/ULTIMATE.min.js" />
-                <include name="lib/data/content/ContentAction.class.php" />
-                <include name="lib/data/menu/item/MenuItem.class.php" />
-                <include name="lib/form/ContentAddForm.class.php" />
-                <include name="lib/form/ContentVersionAddForm.class.php" />
-                <include name="lib/form/ContentVersionEditForm.class.php" />
-                <include name="lib/form/PageAddForm.class.php" />
-                <include name="lib/form/PageEditForm.class.php" />
-                <include name="lib/page/ContentVersionListPage.class.php" />
-                <include name="lib/system/ULTIMATECore.class.php" />
-                <include name="lib/system/cronjob/PublishContentPageCronjob.class.php" />
-                <include name="lib/system/event/listener/CacheResetListener.class.php" />
-                <include name="lib/system/event/listener/CustomMenuListener.class.php" />
-                <include name="lib/system/event/listener/IndexFirstTimeListener.class.php" />
-                <include name="lib/system/event/listener/TaggedPageListener.class.php" />
-                <include name="lib/system/sitemap/UltimateSitemapProvider.class.php" />
-            </tarfileset>
-        </tar>
-        <tar destfile="metadata/acptemplates_update.tar">
-            <tarfileset dir="src/acp/templates">
-                <include name="*tagInput.tpl" />
-            </tarfileset>
-        </tar>
+        <!-- 1.1.0 Dev 3 update tars -->
         <tar destfile="metadata/templates_update.tar">
             <tarfileset dir="src/templates">
-                <include name="__editSuite.ContentAddForm.tpl" />
-                <include name="__editSuite.ContentListPage.tpl" />
-                <include name="__editSuite.ContentVersionAddForm.tpl" />
-                <include name="__editSuite.ContentVersionListPage.tpl" />
-                <include name="__editSuite.PageAddForm.tpl" />
-                <include name="__editSuite.PageListPage.tpl" />
-                <include name="__editSuiteJS.ContentVersionAddForm.tpl" />
-                <include name="__editSuiteJS.ContentVersionListPage.tpl" />
-                <include name="editSuite.tpl" />
-                <include name="header.tpl" />
-                <include name="multipleLanguageInputJavascript.tpl" />
-                <include name="sitemapUltimate.tpl" />
-                <include name="tagInput.tpl" />
+                <include name="__searchAreaSettings.tpl" />
             </tarfileset>
         </tar>
     </target>
