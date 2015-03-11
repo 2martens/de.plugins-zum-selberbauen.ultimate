@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains the EditSuiteForm class.
+ * Contains the EditSuitePage class.
  * 
  * LICENSE:
  * This file is part of the Ultimate CMS.
@@ -19,15 +19,14 @@
  * along with the Ultimate CMS. If not, see {@link http://www.gnu.org/licenses/}}.
  * 
  * @author		Jim Martens
- * @copyright	2011-2014 Jim Martens
+ * @copyright	2011-2015 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	form
  * @category	Ultimate CMS
  */
-namespace ultimate\form;
-use ultimate\page\IEditSuitePage;
-use wcf\form\AbstractForm;
+namespace ultimate\page;
+use wcf\page\AbstractPage;
 use wcf\system\WCF;
 
 /**
@@ -44,10 +43,10 @@ use wcf\system\WCF;
  * @copyright	2011-2014 Jim Martens
  * @license		http://www.gnu.org/licenses/lgpl-3.0 GNU Lesser General Public License, version 3
  * @package		de.plugins-zum-selberbauen.ultimate
- * @subpackage	form
+ * @subpackage	page
  * @category	Ultimate CMS
  */
-class EditSuiteForm extends AbstractForm implements IEditSuitePage {
+class EditSuitePage extends AbstractPage implements IEditSuitePage {
 	/**
 	 * name of the template for the called page
 	 * @var	string
@@ -107,8 +106,8 @@ class EditSuiteForm extends AbstractForm implements IEditSuitePage {
 			'activeMenuItems' => $this->activeMenuItems,
 			'pageContent' => WCF::getTPL()->fetch('__editSuite.Main', 'ultimate'),
 			'pageJS' => WCF::getTPL()->fetch('__editSuiteJS.Main', 'ultimate'),
-			'initialController' => 'EditSuiteForm',
-			'initialRequestType' => 'form',
+			'initialController' => 'EditSuitePage',
+			'initialRequestType' => 'page',
 			'initialURL' => '/EditSuite/'
 		));
 	}
