@@ -58,6 +58,7 @@
 		<item name="wcf.acp.group.option.user.ultimate.editing.canEditMetadata.description"><![CDATA[Members of this usergroup an select categories and tags and can insert the meta keywords and meta description.]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.editing.canDepublish"><![CDATA[Can depublish contents]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.editing.canAddContentVersion"><![CDATA[Can add new content version]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.editing.canEditContentVersion"><![CDATA[Can edit content versions]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.editing.canDeleteContentVersion"><![CDATA[Can delete unpublished content versions]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.editing.canRepublishContentVersion"><![CDATA[Can republish an old version]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.editing.canEditContentSpecificRights"><![CDATA[Can assign content-specific rights]]></item>
@@ -98,7 +99,8 @@
 		<item name="wcf.acp.menu.link.ultimate.category.add"><![CDATA[Add category]]></item>
 		<item name="wcf.acp.menu.link.ultimate.category.list"><![CDATA[List categories]]></item>
 		<item name="wcf.acp.menu.link.ultimate.content.add"><![CDATA[Add content]]></item>
-		<item name="wcf.acp.menu.link.ultimate.content.list"><![CDATA[List content]]></item>
+		<item name="wcf.acp.menu.link.ultimate.content.list"><![CDATA[List contents]]></item>
+        <item name="wcf.acp.menu.link.ultimate.content.version.list"><![CDATA[List content versions]]></item>
 		<item name="wcf.acp.menu.link.ultimate.page.add"><![CDATA[Add page]]></item>
 		<item name="wcf.acp.menu.link.ultimate.page.list"><![CDATA[List pages]]></item>
 		<item name="wcf.acp.menu.link.ultimate.link.add"><![CDATA[Add link]]></item>
@@ -330,8 +332,19 @@ Tom likes the warm water and the wunderful beach.]]></item>
 		<item name="wcf.acp.ultimate.content.list.all"><![CDATA[All contents]]></item>
 		<item name="wcf.acp.ultimate.content.list.count"><![CDATA[{#$items} Content{if $items != 1}s{/if}]]></item>
 		<!-- /content -->
-		
-		<!-- layout -->
+
+        <!-- content versions -->
+        <item name="wcf.acp.ultimate.content.version.add"><![CDATA[Add content version]]></item>
+        <item name="wcf.acp.ultimate.content.version.edit"><![CDATA[Edit content version]]></item>
+        <item name="wcf.acp.ultimate.content.version.delete"><![CDATA[Delete content version]]></item>
+        <item name="wcf.acp.ultimate.content.version.delete.sure"><![CDATA[Are you sure that you want to delete this content version?]]></item>
+        <item name="wcf.acp.ultimate.content.noVersions"><![CDATA[No content versions found.]]></item>
+        <item name="wcf.acp.ultimate.content.version.list"><![CDATA[Content version list]]></item>
+        <item name="wcf.acp.ultimate.content.version.list.all"><![CDATA[All content versions]]></item>
+        <item name="wcf.acp.ultimate.content.version.list.count"><![CDATA[{#$items} Content version{if $items != 1}s{/if}]]></item>
+        <!-- /content versions -->
+
+        <!-- layout -->
 		<item name="wcf.acp.ultimate.layoutManager"><![CDATA[Layout-Manager]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.childLayout"><![CDATA[Child layout]]></item>
 		<item name="wcf.acp.ultimate.layoutManager.childTemplate"><![CDATA[Template for child layout]]></item>
@@ -757,6 +770,8 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 		<item name="ultimate.edit.addContent"><![CDATA[Add content]]></item>
         <item name="ultimate.edit.listPages"><![CDATA[List pages]]></item>
         <item name="ultimate.edit.addPage"><![CDATA[Add page]]></item>
+        <item name="ultimate.edit.wysiwyg"><![CDATA[WYSIWYG editor]]></item>
+        <item name="ultimate.edit.publishing"><![CDATA[Publishing]]></item>
 	</category>
 	
 	<category name="ultimate.error">

@@ -108,7 +108,7 @@
                 $__wcf->session->getPermission('user.ultimate.editing.canSaveAsDraft') ||
                 $__wcf->session->getPermission('user.ultimate.editing.canSaveAsPendingReview')}
             <fieldset>
-                <legend>{lang}wcf.acp.ultimate.publishing{/lang}</legend>
+                <legend>{lang}ultimate.edit.publishing{/lang}</legend>
                 {if $__wcf->session->getPermission('user.ultimate.editing.canPublish')}
                     <dl{if $errorField == 'publishDate'} class="formError"{/if}>
                         <dt><label for="publishDateInput">{lang}wcf.acp.ultimate.publishDate{/lang}</label></dt>

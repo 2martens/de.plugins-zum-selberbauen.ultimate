@@ -73,6 +73,14 @@
                         <tr id="contentContainer{@$content->contentID}" class="jsContentRow jsClipboardObject">
                             <td class="columnMark jsOnly"><label><input type="checkbox" class="jsClipboardItem" data-object-id="{@$content->contentID}" /></label></td>
                             <td class="columnIcon">
+
+                                {if $__wcf->session->getPermission('user.ultimate.editing.canAddContentVersion')}
+                                    <a data-controller="ContentVersionAddForm" data-request-type="form" href="{linkExtended controller='ContentVersionAdd' application='ultimate' parent='EditSuite' id=$content->contentID}{/linkExtended}"><span title="{lang}wcf.acp.ultimate.content.version.add{/lang}" class="icon icon16 icon-plus jsTooltip"></span></a>
+                                {else}
+                                    <span title="{lang}wcf.acp.ultimate.content.version.add{/lang}" class="icon icon16 icon-plus disabled"></span>
+                                {/if}
+
+                                <a data-controller="ContentVersionListPage" data-request-type="page" href="{linkExtended controller='ContentVersionList' application='ultimate' parent='EditSuite' id=$content->contentID}{/linkExtended}"><span title="{lang}wcf.acp.ultimate.content.version.list{/lang}" class="icon icon16 icon-list jsTooltip"></span></a>
                                 
                                 {if $__wcf->session->getPermission('user.ultimate.editing.canEditContent')}
                                     <a data-controller="ContentEditForm" data-request-type="form" href="{linkExtended controller='ContentEdit' application='ultimate' parent='EditSuite' id=$content->contentID}{/linkExtended}"><span title="{lang}wcf.acp.ultimate.content.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>

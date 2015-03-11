@@ -58,6 +58,7 @@
 		<item name="wcf.acp.group.option.user.ultimate.editing.canEditMetadata.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kategorien und Tags zuweisen und die Meta-Keywords und Meta-Description ausfüllen.]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.editing.canDepublish"><![CDATA[Kann Inhalte depublizieren]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.editing.canAddContentVersion"><![CDATA[Kann neue Inhaltsversion hinzufügen]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.editing.canEditContentVersion"><![CDATA[Kann Inhaltsversionen bearbeiten]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.editing.canDeleteContentVersion"><![CDATA[Kann unveröffentlichte Inhaltsversionen löschen]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.editing.canRepublishContentVersion"><![CDATA[Kann alte Version erneut veröffentlichen]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.editing.canEditContentSpecificRights"><![CDATA[Kann inhaltsspezifische Rechte vergeben]]></item>
@@ -98,6 +99,7 @@
 		<item name="wcf.acp.menu.link.ultimate"><![CDATA[Ultimate CMS]]></item>
 		<item name="wcf.acp.menu.link.ultimate.content.add"><![CDATA[Inhalt hinzufügen]]></item>
 		<item name="wcf.acp.menu.link.ultimate.content.list"><![CDATA[Inhalte auflisten]]></item>
+        <item name="wcf.acp.menu.link.ultimate.content.version.list"><![CDATA[Inhaltsversionen auflisten]]></item>
 		<item name="wcf.acp.menu.link.ultimate.category.add"><![CDATA[Kategorie hinzufügen]]></item>
 		<item name="wcf.acp.menu.link.ultimate.category.list"><![CDATA[Kategorien auflisten]]></item>
 		<item name="wcf.acp.menu.link.ultimate.page.add"><![CDATA[Seite hinzufügen]]></item>
@@ -330,6 +332,17 @@ Tom mag das warme Wasser und den wunderschönen Strand.]]></item>
 		<item name="wcf.acp.ultimate.content.list.all"><![CDATA[Alle Inhalte]]></item>
 		<item name="wcf.acp.ultimate.content.list.count"><![CDATA[{#$items} Inhalt{if $items != 1}e{/if}]]></item>
 		<!-- /content -->
+        
+        <!-- content versions -->
+        <item name="wcf.acp.ultimate.content.version.add"><![CDATA[Inhaltsversion hinzufügen]]></item>
+        <item name="wcf.acp.ultimate.content.version.edit"><![CDATA[Inhaltsversion bearbeiten]]></item>
+        <item name="wcf.acp.ultimate.content.version.delete"><![CDATA[Inhaltsversion löschen]]></item>
+        <item name="wcf.acp.ultimate.content.version.delete.sure"><![CDATA[Sind Sie sicher, dass Sie diese Inhaltsversion löschen möchten?]]></item>
+        <item name="wcf.acp.ultimate.content.noVersions"><![CDATA[Keine Inhaltsversionen gefunden.]]></item>
+        <item name="wcf.acp.ultimate.content.version.list"><![CDATA[Inhaltsversionsliste]]></item>
+        <item name="wcf.acp.ultimate.content.version.list.all"><![CDATA[Alle Inhaltsversionen]]></item>
+        <item name="wcf.acp.ultimate.content.version.list.count"><![CDATA[{#$items} Inhaltsversion{if $items != 1}en{/if}]]></item>
+        <!-- /content versions -->
 		
 		<!-- layout -->
 		<item name="wcf.acp.ultimate.layoutManager"><![CDATA[Layout-Manager]]></item>
@@ -769,6 +782,8 @@ Für die InlineEdit braucht man die gleichen Rechte um Inhalte zu schreiben, zu 
 		<item name="ultimate.edit.addContent"><![CDATA[Inhalt hinzufügen]]></item>
         <item name="ultimate.edit.listPages"><![CDATA[Seiten auflisten]]></item>
         <item name="ultimate.edit.addPage"><![CDATA[Seite hinzufügen]]></item>
+        <item name="ultimate.edit.wysiwyg"><![CDATA[WYSIWYG-Editor]]></item>
+        <item name="ultimate.edit.publishing"><![CDATA[Veröffentlichung]]></item>
 	</category>
 	
 	<category name="ultimate.error">

@@ -94,7 +94,7 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	 * Resets cache if any of the listed actions is invoked
 	 * @var	string[]
 	 */
-	protected $resetCache = array('create', 'createVersion', 'delete', 'deleteVersion', 'toggle', 'update', 'updatePosition');
+	protected $resetCache = array('create', 'createVersion', 'delete', 'deleteVersion', 'toggle', 'update', 'updateVersion', 'updatePosition');
 	
 	/**
 	 * current content object
@@ -236,19 +236,21 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		}
 		
 		// update object
-		$versions = array();
+		$version = null;
 		if (isset($this->parameters['data'])) {
+			// assumes that only one object is existing
 			foreach ($this->objects as $object) {
+				/** @var \ultimate\data\content\ContentEditor $object */
 				$object->update($this->parameters['data']);
 				if (isset($this->parameters['counters'])) {
 					$object->updateCounters($this->parameters['counters']);
 				}
 				// create new version
 				$versionData['contentID'] = $object->__get('contentID');
-				$versions[$object->getObjectID()] = $object->createVersion($versionData);
+				$version = $object->createVersion($versionData);
 				
 				// create language entries
-				ContentLanguageEntryEditor::createEntries($object->getObjectID(), $preparedLanguageData);
+				ContentLanguageEntryEditor::createEntries($version->__get('versionID'), $preparedLanguageData);
 			}
 		}
 		
@@ -269,13 +271,15 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 			
 			$contentEditor->addMetaData($metaDescription, $metaKeywords);
 		}
+		
+		return $version;
 	}
 	
 	/**
 	 * @see \wcf\data\IVersionableDatabaseObjectAction::validateCreateVersion()
 	 */
 	public function validateCreateVersion() {
-		WCF::getSession()->checkPermissions(array('admin.content.ultimate.canAddContentVersion'));
+		WCF::getSession()->checkPermissions(array('user.ultimate.editing.canAddContentVersion'));
 	}
 	
 	/**
@@ -321,7 +325,6 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 			$this->readObjects();
 		}
 		
-		$versions = array();
 		if (isset($this->parameters['data'])) {
 			if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
 				$this->parameters['data']['attachments'] = count($this->parameters['attachmentHandler']);
@@ -358,7 +361,9 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 			}
 
 			// authorID is part of versionData as well
-			$versionData['authorID'] = $this->parameters['data']['authorID'];
+			if (isset($this->parameters['data']['authorID'])) {
+				$versionData['authorID'] = $this->parameters['data']['authorID'];
+			}
 			
 			// prepare language data
 			$preparedLanguageData = array();
@@ -402,11 +407,99 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 			}
 			
 			if (!empty($groupIDs)) {
-				$contentEditor->addGroups($versions[$contentEditor->getObjectID()], $groupIDs);
+				$versionID = $contentEditor->getCurrentVersion()->__get('versionID');
+				$contentEditor->addGroups($versionID, $groupIDs);
 			}
 			
 			$contentEditor->addMetaData($metaDescription, $metaKeywords);
 		}
+	}
+
+	/**
+	 * Updates a version of a content.
+	 */
+	public function updateVersion() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+
+		if (isset($this->parameters['data'])) {
+			if (isset($this->parameters['attachmentHandler']) && $this->parameters['attachmentHandler'] !== null) {
+				$this->parameters['data']['attachments'] = count($this->parameters['attachmentHandler']);
+			}
+
+			// separating core content data from version data
+			$contentParameters = array(
+				'contentID',
+				'contentSlug',
+				'authorID',
+				'cumulativeLikes',
+				'views',
+				'lastModified'
+			);
+
+			$languageEntryParameters = array(
+				'contentTitle',
+				'contentDescription',
+				'contentText'
+			);
+
+			$versionData = array();
+			$languageData = array();
+			$tmpData = $this->parameters['data'];
+			foreach ($tmpData as $key => $value) {
+				if (in_array($key, $contentParameters)) continue;
+				if (in_array($key, $languageEntryParameters)) {
+					$languageData[$key] = $value;
+				}
+				else {
+					$versionData[$key] = $value;
+				}
+				unset($this->parameters['data'][$key]);
+			}
+
+			// authorID is part of versionData as well
+			if (isset($this->parameters['data']['authorID'])) {
+				$versionData['authorID'] = $this->parameters['data']['authorID'];
+			}
+
+			// prepare language data
+			$preparedLanguageData = array();
+			foreach ($languageData as $key => $value) {
+				foreach ($value as $languageID => $__value) {
+					if (!isset($preparedLanguageData[$languageID])) {
+						$preparedLanguageData[$languageID] = array();
+					}
+					$preparedLanguageData[$languageID][$key] = $__value;
+				}
+			}
+
+			foreach ($this->objects as $object) {
+				$object->update($this->parameters['data']);
+				$versionID = $this->parameters['versionID'];
+				$object->updateVersion($versionID, $versionData);
+
+				if (!empty($preparedLanguageData)) {
+					ContentLanguageEntryEditor::updateEntries($versionID, $preparedLanguageData);
+				}
+			}
+		}
+
+		$metaDescription = (isset($this->parameters['metaDescription'])) ? $this->parameters['metaDescription'] : '';
+		$metaKeywords = (isset($this->parameters['metaKeywords'])) ? $this->parameters['metaKeywords'] : '';
+
+		foreach ($this->objects as $contentEditor) {
+			/* @var $contentEditor \ultimate\data\content\ContentEditor */
+			$contentEditor->addMetaData($metaDescription, $metaKeywords);
+		}
+	}
+
+	/**
+	 * @see \wcf\data\IVersionableDatabaseObjectAction::validateCreateVersion()
+	 */
+	public function validateUpdateVersion() {
+		// TODO add canEditContentVersion
+		WCF::getSession()->checkPermissions(array('user.ultimate.editing.canEditContentVersion'));
 	}
 	
 	/**
@@ -451,15 +544,19 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 		// get ids
 		foreach ($this->objects as $object) {
 			/* @var $object \ultimate\data\content\ContentEditor */
-			$object->deleteVersion($this->parameters['versionID']);
+			$object->deleteVersion($this->parameters['versionNumber']);
 		}
+		
+		return array(
+			'versionNumbers' => array($this->parameters['versionNumber'])
+		);
 	}
 	
 	/**
 	 * @see \wcf\data\IVersionableDatabaseObjectAction::validateDeleteVersion()
 	 */
 	public function validateDeleteVersion() {
-		WCF::getSession()->checkPermissions(array('admin.content.ultimate.canDeleteContentVersion'));
+		WCF::getSession()->checkPermissions(array('user.ultimate.editing.canDeleteContentVersion'));
 	}
 	
 	/**
