@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language languagecode="de" languagename="Deutsch" countrycode="de" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd">
 	
+    <category name="wcf.acl.option">
+        <item name="wcf.acl.option.category.de.plugins-zum-selberbauen.ultimate.content.user.ultimate.content"><![CDATA[Inhalte]]></item>
+        <item name="wcf.acl.option.de.plugins-zum-selberbauen.ultimate.ultimate.content.canSeeContent"><![CDATA[Kann Inhalt sehen]]></item>
+        <item name="wcf.acl.option.de.plugins-zum-selberbauen.ultimate.ultimate.content.canEditContent"><![CDATA[Kann Inhalt bearbeiten]]></item>
+        <item name="wcf.acl.option.de.plugins-zum-selberbauen.ultimate.ultimate.content.canEditContentStatus"><![CDATA[Kann Inhaltsstatus bearbeiten]]></item>
+    </category>
+    
 	<category name="wcf.acp.dataImport">
 		<item name="wcf.acp.dataImport.exporter.de.plugins-zum-selberbauen.ultimate.exporter.wordpress3x"><![CDATA[WordPress 3.7+ (Ultimate CMS)]]></item>
 		<item name="wcf.acp.dataImport.data.de.plugins-zum-selberbauen.ultimate.category"><![CDATA[Kategorien]]></item>
