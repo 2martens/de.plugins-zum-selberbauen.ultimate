@@ -27,6 +27,7 @@
  */
 namespace ultimate\system\sitemap;
 use ultimate\system\cache\builder\CurrentMenuCacheBuilder;
+use wcf\system\cache\builder\PageMenuCacheBuilder;
 use wcf\system\sitemap\ISitemapProvider;
 use wcf\system\WCF;
 
@@ -48,16 +49,23 @@ class UltimateSitemapProvider implements ISitemapProvider {
 	 */
 	public function getTemplate() {
 		$menuItems = CurrentMenuCacheBuilder::getInstance()->getData(array(), 'currentMenuItems');
-		$menuItems = $menuItems[''];
+		if (!isset($menuItems[''])) {
+			$menuItems = PageMenuCacheBuilder::getInstance()->getData();
+			$menuItems = $menuItems['header'];
+			WCF::getTPL()->assign('childMenuItems', false);
+		}
+		else {
+			$menuItems = $menuItems[''];
+			WCF::getTPL()->assign('childMenuItems', false);
+		}
+
 		$remainingItems = array();
 		foreach ($menuItems as $menuItemID => $menuItem) {
-			if ($menuItem->__get('menuItemController') === null) {
-				$remainingItems[$menuItemID] = $menuItem;
-			}
+			$remainingItems[$menuItemID] = $menuItem;
 		}
-		
+
 		WCF::getTPL()->assign('menuItems', $remainingItems);
-		
+
 		return WCF::getTPL()->fetch('sitemapUltimate', 'ultimate');
 	}
 }

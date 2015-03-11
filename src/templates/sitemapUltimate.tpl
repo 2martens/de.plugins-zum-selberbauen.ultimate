@@ -1,14 +1,14 @@
 <ul class="sitemapList">
 	{foreach from=$menuItems item=menuItem}
 		<li>
-			<a href="{$menuItem->getLink()}">{$menuItem->menuItemName|language}</a>
+			<a href="{$menuItem->getLink()}">{$menuItem}</a>
 		
-		{if $menuItem->childItems|count}
+		{if $childMenuItems && $menuItem->childItems|count}
 			<ul>
 				{foreach from=$menuItem->childItems item=childItem}
 					{if $childItem->menuItemController == null}
 						<li>
-							<a href="{$childItem->getLink()}">{$childItem->menuItemName|language}</a>
+							<a href="{$childItem->getLink()}">{$childItem}</a>
 						</li>
 					{/if}
 				{/foreach}
