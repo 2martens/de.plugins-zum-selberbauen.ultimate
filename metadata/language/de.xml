@@ -63,7 +63,7 @@
 		<item name="wcf.acp.group.option.user.ultimate.editing.canPublish.description"><![CDATA[Mitglieder dieser Benutzergruppe können Inhalte veröffentlichen oder die Veröffentlichung planen.]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.editing.canEditMetadata"><![CDATA[Kann Metadaten von Inhalten bearbeiten]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.editing.canEditMetadata.description"><![CDATA[Mitglieder dieser Benutzergruppe können Kategorien und Tags zuweisen und die Meta-Keywords und Meta-Description ausfüllen.]]></item>
-		<item name="wcf.acp.group.option.user.ultimate.editing.canDepublish"><![CDATA[Kann Inhalte depublizieren]]></item>
+		<item name="wcf.acp.group.option.user.ultimate.editing.canDepublish"><![CDATA[Kann depublizieren]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.editing.canAddContentVersion"><![CDATA[Kann neue Inhaltsversion hinzufügen]]></item>
         <item name="wcf.acp.group.option.user.ultimate.editing.canEditContentVersion"><![CDATA[Kann Inhaltsversionen bearbeiten]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.editing.canDeleteContentVersion"><![CDATA[Kann unveröffentlichte Inhaltsversionen löschen]]></item>
