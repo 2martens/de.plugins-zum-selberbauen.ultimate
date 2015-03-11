@@ -58,24 +58,6 @@ class ULTIMATECore extends AbstractApplication {
 	}
 	
 	/**
-	 * Returns the current application based upon the called controller.
-	 * 
-	 * @return	string
-	 */
-	public function getCurrentApplication() {
-		$activeRequest = RequestHandler::getInstance()->getActiveRequest();
-		if ($activeRequest === null) {
-			// in this case we have an exception, so the WCF is assumed
-			return 'wcf';
-		}
-		
-		$className = $activeRequest->getClassName();
-		$parts = explode('\\', $className);
-		$abbreviation = array_shift($parts);
-		return $abbreviation;
-	}
-	
-	/**
 	 * Inits the custom routes.
 	 */
 	protected function initRoutes() {
