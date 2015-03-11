@@ -183,7 +183,7 @@
         $__wcf->session->getPermission('user.ultimate.editing.canSaveAsPendingReview')}
             <div class="formSubmit">
                 <input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
-                {if $__wcf->session->getPermission('user.ultimate.editing.canSaveAsDraft') || $__wcf->session->getPermission('user.ultimate.editing.canSaveAsPendingReview')}
+                {if ($statusID < 2 || $__wcf->session->getPermission('user.ultimate.editing.canDepublish')) && ($__wcf->session->getPermission('user.ultimate.editing.canSaveAsDraft') || $__wcf->session->getPermission('user.ultimate.editing.canSaveAsPendingReview'))}
                     <input type="submit" name="save" id="saveButton" value="{if $saveButtonLang|isset}{@$saveButtonLang}{else}{lang}ultimate.button.saveAsDraft{/lang}{/if}" />
                 {/if}
                 {if $__wcf->session->getPermission('user.ultimate.editing.canPublish')}
@@ -191,7 +191,7 @@
                 {/if}
                 {@SID_INPUT_TAG}
                 <input type="hidden" name="action" value="{@$action}" />
-                {if $contentID|isset}<input type="hidden" name="id" value="{@$contentID}" />{/if}
+                {if $versionID|isset}<input type="hidden" name="id" value="{@$versionID}" />{/if}
                 {@SECURITY_TOKEN_INPUT_TAG}
             </div>
         {/if}

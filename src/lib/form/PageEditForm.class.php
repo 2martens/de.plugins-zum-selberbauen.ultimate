@@ -110,11 +110,7 @@ class PageEditForm extends PageAddForm {
 		$this->pages = PageUtil::getAvailablePages($this->pageID);
 		
 		// get status data
-		$this->statusID = $this->page->__get('status');
-		$this->statusOptions = array(
-			0 => WCF::getLanguage()->get('wcf.acp.ultimate.status.draft'),
-			1 => WCF::getLanguage()->get('wcf.acp.ultimate.status.pendingReview'),
-		);
+		$this->statusID = $this->page->__get('status');		
 		
 		// fill publish button with fitting language
 		$this->publishButtonLang = 'ultimate.button.publish';

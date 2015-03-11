@@ -285,9 +285,11 @@ class ContentAddForm extends MessageForm implements IEditSuitePage {
 	 */
 	public function readData() {
 		// fill status options
-		$this->statusOptions[0] = WCF::getLanguage()->get('wcf.acp.ultimate.status.draft');
-		$this->statusOptions[1] = WCF::getLanguage()->get('wcf.acp.ultimate.status.pendingReview');
-		
+		if ($this->statusID < 2 || WCF::getSession()->getPermission('user.ultimate.editing.canDepublish')) {
+			$this->statusOptions[0] = WCF::getLanguage()->get('wcf.acp.ultimate.status.draft');
+			$this->statusOptions[1] = WCF::getLanguage()->get('wcf.acp.ultimate.status.pendingReview');
+		}
+
 		parent::readData();
 		
 		// fill publishDate with default value (today)
