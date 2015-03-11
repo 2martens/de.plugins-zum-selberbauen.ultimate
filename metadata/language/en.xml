@@ -772,6 +772,7 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 	
 	<category name="ultimate.edit">
 		<item name="ultimate.edit.suite"><![CDATA[Edit-Suite]]></item>
+        <item name="ultimate.edit.suite.welcome"><![CDATA[Welcome in the Edit-Suite. Here you can edit everything that changes often (limited to Ultimate CMS data). The Edit-Suite uses AJAX requests to dramatically reduce loading times.]]></item>
 		<item name="ultimate.edit.contents"><![CDATA[Contents]]></item>
 		<item name="ultimate.edit.listContents"><![CDATA[List contents]]></item>
 		<item name="ultimate.edit.addContent"><![CDATA[Add content]]></item>

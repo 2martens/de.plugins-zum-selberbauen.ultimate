@@ -770,6 +770,7 @@ Für die InlineEdit braucht man die gleichen Rechte um Inhalte zu schreiben, zu 
 	
 	<category name="ultimate.edit">
 		<item name="ultimate.edit.suite"><![CDATA[Edit-Suite]]></item>
+        <item name="ultimate.edit.suite.welcome"><![CDATA[Willkommen in der Edit-Suite. Hier kannst du alles editieren, was sich häufig ändert (vom Ultimate CMS versteht sich). Die Edit-Suite verwendet Javascript, um mithilfe von AJAX-Requests die Ladezeiten erheblich zu verkürzen.]]></item>
 		<item name="ultimate.edit.contents"><![CDATA[Inhalte]]></item>
 		<item name="ultimate.edit.listContents"><![CDATA[Inhalte auflisten]]></item>
 		<item name="ultimate.edit.addContent"><![CDATA[Inhalt hinzufügen]]></item>
