@@ -253,25 +253,6 @@ class MenuItem extends PageMenuItem {
 	}
 	
 	/**
-	 * Parses controller name.
-	 */
-	protected function parseController() {
-		if ($this->controller === null) {
-			$this->controller = '';
-				
-			// resolve application and controller
-			if ($this->menuItemController) {
-				$parts = explode('\\', $this->menuItemController);
-				$this->application = array_shift($parts);
-				$menuItemController = array_pop($parts);
-	
-				// drop controller suffix
-				$this->controller = Regex::compile('(Action|Form|Page)$')->replace($menuItemController, '');
-			}
-		}
-	}
-	
-	/**
 	 * Handles data.
 	 * 
 	 * @param	array	$data
