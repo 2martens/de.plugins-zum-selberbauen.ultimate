@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Class and function collection for ULTIMATE CMS Tagging
  * 
@@ -159,9 +161,10 @@ ULTIMATE.Tagging.MultipleLanguageInput = WCF.MultipleLanguageInput.extend({
 		this._inputContainer = $('#tagSearchWrap');
 		
 		for (var $languageID in this._availableLanguages) {
-			$element = $('#' + $.wcfEscapeID(elementID + $languageID));
-			this._elementList[$languageID] = $element;
-			$(this._hiddenInput + 'Wrap' + $languageID).detach().appendTo(this._hiddenContainer);
+            if (this._availableLanguages.hasOwnProperty($languageID)) {
+                this._elementList[$languageID] = $('#' + $.wcfEscapeID(elementID + $languageID));
+                $(this._hiddenInput + 'Wrap' + $languageID).detach().appendTo(this._hiddenContainer);
+            }
 		}
 		
 		// default to current user language
@@ -176,7 +179,7 @@ ULTIMATE.Tagging.MultipleLanguageInput = WCF.MultipleLanguageInput.extend({
 		$('#tagContainer' + this._languageID).show();
 		
 		// build selection handler
-		var $enableOnInit = ($.getLength(this._values) > 0) ? true : false;
+		var $enableOnInit = ($.getLength(this._values) > 0);
 		this._insertedDataAfterInit = $enableOnInit;
 		this._prepareElement($enableOnInit);
 		
@@ -661,5 +664,5 @@ ULTIMATE.Tagging.TagSearch = WCF.Tagging.TagSearch.extend({
 		// reset item navigation
 		this._itemCount = 0;
 		this._itemIndex = -1;
-	},
+	}
 });

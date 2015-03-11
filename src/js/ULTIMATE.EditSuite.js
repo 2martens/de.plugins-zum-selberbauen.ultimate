@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Class and function collection for ULTIMATE CMS Edit Suite
  * 
