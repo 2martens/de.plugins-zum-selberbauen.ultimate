@@ -58,6 +58,7 @@
 		<item name="wcf.acp.group.option.user.ultimate.editing.canEditMetadata.description"><![CDATA[Members of this usergroup an select categories and tags and can insert the meta keywords and meta description.]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.editing.canDepublish"><![CDATA[Can depublish contents]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.editing.canAddContentVersion"><![CDATA[Can add new content version]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.editing.canEditContentVersion"><![CDATA[Can edit content versions]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.editing.canDeleteContentVersion"><![CDATA[Can delete unpublished content versions]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.editing.canRepublishContentVersion"><![CDATA[Can republish an old version]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.editing.canEditContentSpecificRights"><![CDATA[Can assign content-specific rights]]></item>
