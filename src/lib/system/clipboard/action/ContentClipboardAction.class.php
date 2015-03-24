@@ -69,7 +69,7 @@ class ContentClipboardAction implements IClipboardAction {
 		switch ($actionName) {
 			case 'assignContentToCategory':
 				$item->setName('content.assignToCategory');
-				$item->setURL(LinkHandler::getInstance()->getLink('UltimateContentAssignToCategory'));
+				$item->setURL(LinkHandler::getInstance()->getLink('ContentAssignToCategory'));
 				break;
 			case 'deleteContent':
 				$contentIDs = $this->validateDelete($objects);
