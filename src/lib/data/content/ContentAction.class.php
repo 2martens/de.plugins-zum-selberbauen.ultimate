@@ -495,6 +495,33 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	}
 
 	/**
+	 * Publishes the content(s).
+	 */
+	public function publish() {
+		if (empty($this->objects)) {
+			$this->readObjects();
+		}
+		
+		$data = array(
+			'publishDate' => TIME_NOW,
+			'status' => 3
+		);
+
+		foreach ($this->objects as $object) {
+			/** @var \ultimate\data\content\ContentEditor $object */
+			$versionID = $object->getCurrentVersion()->__get('versionID');
+			$object->updateVersion($versionID, $data);
+		}
+	}
+
+	/**
+	 * @see \wcf\data\IVersionableDatabaseObjectAction::validateDeleteVersion()
+	 */
+	public function validatePublish() {
+		WCF::getSession()->checkPermissions(array('user.ultimate.editing.canPublish'));
+	}
+
+	/**
 	 * @see \wcf\data\IVersionableDatabaseObjectAction::validateCreateVersion()
 	 */
 	public function validateUpdateVersion() {

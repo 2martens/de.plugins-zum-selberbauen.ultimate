@@ -83,6 +83,17 @@ class ContentClipboardAction implements IClipboardAction {
 				$item->addParameter('objectIDs', $contentIDs);
 				$item->setName('content.delete');
 				break;
+			case 'publishContent':
+				$contentIDs = $this->validatePublish($objects);
+				if (empty($contentIDs)) {
+					return null;
+				}
+
+				$item->addParameter('actionName', 'publish');
+				$item->addParameter('className', '\ultimate\data\content\ContentAction');
+				$item->addParameter('objectIDs', $contentIDs);
+				$item->setName('content.publish');
+				break;
 			default:
 				throw new SystemException("Action '".$actionName."' is invalid.");
 				break;
@@ -136,6 +147,26 @@ class ContentClipboardAction implements IClipboardAction {
 		// prevent possible problems with array_keys
 		if (empty($objects)) return array();
 		
+		// get ids
+		$contentIDs = array_keys($objects);
+		return $contentIDs;
+	}
+
+	/**
+	 * Validates the publish action.
+	 *
+	 * @param	\ultimate\data\content\Content[]	$objects
+	 * @return	integer[]
+	 */
+	protected function validatePublish(array $objects) {
+		// checking permission
+		if (!WCF::getSession()->getPermission('user.ultimate.editing.canPublish')) {
+			return array();
+		}
+
+		// prevent possible problems with array_keys
+		if (empty($objects)) return array();
+
 		// get ids
 		$contentIDs = array_keys($objects);
 		return $contentIDs;

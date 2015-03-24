@@ -15,15 +15,20 @@
 			<actionclassname><![CDATA[ultimate\system\clipboard\action\ContentClipboardAction]]></actionclassname>
 			<showorder>1</showorder>
 			<pages>
-				<page><![CDATA[ultimate\acp\page\UltimateContentListPage]]></page>
 				<page><![CDATA[ultimate\page\ContentListPage]]></page>
 			</pages>
 		</action>
+        <action name="publishContent">
+            <actionclassname><![CDATA[ultimate\system\clipboard\action\ContentClipboardAction]]></actionclassname>
+            <showorder>1</showorder>
+            <pages>
+                <page><![CDATA[ultimate\page\ContentListPage]]></page>
+            </pages>
+        </action>
 		<action name="deleteContent">
 			<actionclassname><![CDATA[ultimate\system\clipboard\action\ContentClipboardAction]]></actionclassname>
 			<showorder>2</showorder>
 			<pages>
-				<page><![CDATA[ultimate\acp\page\UltimateContentListPage]]></page>
 				<page><![CDATA[ultimate\page\ContentListPage]]></page>
 			</pages>
 		</action>

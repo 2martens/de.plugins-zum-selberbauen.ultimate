@@ -645,6 +645,8 @@ For the InlineEdit you require the same rights to write, edit or delete contents
 		<item name="wcf.clipboard.label.category.marked"><![CDATA[{if $count == 1}One{else}{#$count}{/if} categor{if $count == 1}y{else}ies{/if} marked]]></item>
 		<item name="wcf.clipboard.item.content.assignToCategory"><![CDATA[Assign to category]]></item>
 		<item name="wcf.clipboard.item.content.assignToCategory.success"><![CDATA[The category/ies has/have been successfully assigned.]]></item>
+        <item name="wcf.clipboard.item.content.publish"><![CDATA[Publish]]></item>
+        <item name="wcf.clipboard.item.content.publish.confirmMessage"><![CDATA[Publish {if $count == 1}one content{else}{#$count} contents{/if}?]]></item>
 		<item name="wcf.clipboard.item.content.delete"><![CDATA[Delete content(s)]]></item>
 		<item name="wcf.clipboard.item.content.delete.confirmMessage"><![CDATA[Delete {if $count == 1}one{else}{#$count}{/if} content{if $count != 1}s{/if}?]]></item>
 		<item name="wcf.clipboard.label.content.marked"><![CDATA[{if $count == 1}One{else}{#$count}{/if} content{if $count != 1}s{/if} marked]]></item>
