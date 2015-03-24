@@ -38,22 +38,12 @@
              basedir="srcWCF"
         />
 
-        <!-- 1.1.0 Dev 4 update tars -->
-        <tar destfile="metadata/templates_update.tar">
-            <tarfileset dir="src/templates">
-                <include name="__editSuite.ContentAssignToCategoryForm.tpl" />
-                <include name="__editSuiteJS.ContentAssignToCategoryForm.tpl" />
-            </tarfileset>
-        </tar>
-
+        <!-- 1.1.0 Dev 5 update tars -->
         <tar destfile="metadata/files_update.tar">
             <tarfileset dir="src">
                 <exclude name="templates/**" />
                 <exclude name="acp/templates/**" />
                 <include name="lib/data/content/ContentAction.class.php" />
-                <include name="lib/form/ContentAssignToCategoryForm.class.php" />
-                <include name="lib/system/clipboard/action/ContentClipboardAction.class.php" />
-                <include name="lib/system/clipboard/action/PageClipboardAction.class.php" />
             </tarfileset>
         </tar>
     </target>
