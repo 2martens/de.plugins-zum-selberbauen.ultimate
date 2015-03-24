@@ -94,7 +94,8 @@ class ContentAction extends AbstractDatabaseObjectAction implements IMessageInli
 	 * Resets cache if any of the listed actions is invoked
 	 * @var	string[]
 	 */
-	protected $resetCache = array('create', 'createVersion', 'delete', 'deleteVersion', 'toggle', 'update', 'updateVersion', 'updatePosition');
+	protected $resetCache = array('create', 'createVersion', 'delete', 'deleteVersion', 'toggle', 'update', 'updateVersion', 
+	                              'updatePosition', 'publish');
 	
 	/**
 	 * current content object
