@@ -89,6 +89,7 @@ class ContentClipboardAction implements IClipboardAction {
 					return null;
 				}
 
+				$item->addInternalData('confirmMessage', WCF::getLanguage()->getDynamicVariable('wcf.clipboard.item.content.publish.confirmMessage', array('count' => count($contentIDs))));
 				$item->addParameter('actionName', 'publish');
 				$item->addParameter('className', '\ultimate\data\content\ContentAction');
 				$item->addParameter('objectIDs', $contentIDs);
