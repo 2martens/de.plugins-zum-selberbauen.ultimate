@@ -29,19 +29,11 @@
 		/>
 		
 		<!-- 1.0.2 update tars -->
-		<tar destfile="metadata/files_update.102.tar">
+		<tar destfile="metadata/files_update.103.tar">
 			<tarfileset dir="src">
 				<exclude name="templates/**" />
 				<exclude name="acp/templates/**" />
-				<include name="lib/system/blocktype/Content*" />
-				<include name="lib/style/ultimate.less" />
-			</tarfileset>
-		</tar>
-		<tar destfile="metadata/acptemplates_update.102.tar">
-			<tarfileset dir="src/acp/templates">
-				<include name="*contentBlockOptions.tpl" />
-				<include name="*ContentList.tpl" />
-				<include name="*PageList.tpl" />
+				<include name="lib/system/style/UltimateStyleHandler*" />
 			</tarfileset>
 		</tar>
 	</target>

@@ -46,9 +46,10 @@ class UltimateStyleHandler extends StyleHandler {
 	/**
 	 * Returns the HTML tag to include current stylesheet (only for ACP).
 	 *
+	 * @param boolean $isACP
 	 * @return	string empty string if you call it outside ACP
 	 */
-	public function getStylesheet() {
+	public function getStylesheet($isACP = false) {
 		if (RequestHandler::getInstance()->isACPRequest()) {
 			// ACP
 			$filename = 'acp/style/style-noWCF'.(WCF::getLanguage()->get('wcf.global.pageDirection') == 'rtl' ? '-rtl' : '').'.css';
