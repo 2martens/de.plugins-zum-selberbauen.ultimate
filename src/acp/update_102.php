@@ -94,8 +94,10 @@ foreach ($contents as $contentID => $content) {
 	$version = $contentEditor->createVersion($versionData);
 	$neutralContentTitle = false;
 	$neutralContentDescription = false;
+	$neutralContentText = false;
 	$neutralTitle = '';
 	$neutralDescription = '';
+	$neutralText = '';
 
 	foreach ($languages as $languageID => $language) {
 		/** @var \wcf\data\language\Language $language */
@@ -119,6 +121,16 @@ foreach ($contents as $contentID => $content) {
 		else {
 			$neutralDescription = $contentDescription;
 		}
+
+		$rawContentText = $content->contentText;
+		$contentText = $language->get($rawContentText);
+		$neutralContentText = ($rawContentText == $contentText);
+		if (!$neutralContentText) {
+			$languageData[$languageID]['contentText'] = $contentText;
+		}
+		else {
+			$neutralText = $contentText;
+		}
 	}
 	
 	$languageData[0] = array();
@@ -128,6 +140,10 @@ foreach ($contents as $contentID => $content) {
 
 	if ($neutralContentDescription) {
 		$languageData[0]['contentDescription'] = $neutralDescription;
+	}
+
+	if ($neutralContentText) {
+		$languageData[0]['contentText'] = $neutralText;
 	}
 	
 	ContentLanguageEntryEditor::createEntries($version->versionID, $languageData);
