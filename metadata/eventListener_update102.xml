@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/typhoon/eventListener.xsd">
+    <delete>
+        <eventlistener>
+            <eventclassname>ultimate\action\BlockAction</eventclassname>
+            <eventname>i18nInitialization</eventname>
+            <inherit>0</inherit>
+            <listenerclassname>ultimate\system\event\listener\BlockActionI18nListener</listenerclassname>
+        </eventlistener>
+        <eventlistener>
+            <eventclassname>ultimate\action\BlockAction</eventclassname>
+            <eventname>createBlockLoadBlockContent</eventname>
+            <inherit>0</inherit>
+            <listenerclassname>ultimate\system\event\listener\BlockActionContentBlockTypeListener</listenerclassname>
+        </eventlistener>
+        <eventlistener>
+            <eventclassname>ultimate\action\BlockAction</eventclassname>
+            <eventname>updateBlockLoadBlockContent</eventname>
+            <inherit>0</inherit>
+            <listenerclassname>ultimate\system\event\listener\BlockActionContentBlockTypeListener</listenerclassname>
+        </eventlistener>
+        <eventlistener>
+            <eventclassname>ultimate\action\BlockAction</eventclassname>
+            <eventname>updateBlockLoadBlockOptions</eventname>
+            <inherit>0</inherit>
+            <listenerclassname>ultimate\system\event\listener\BlockActionContentBlockTypeListener</listenerclassname>
+        </eventlistener>
+    </delete>
+</data>
