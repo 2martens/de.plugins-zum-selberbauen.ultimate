@@ -27,9 +27,9 @@
 
 use ultimate\data\category\CategoryList;
 use ultimate\data\category\language\CategoryLanguageEntryEditor;
+use ultimate\data\content\language\ContentLanguageEntryEditor;
 use ultimate\data\content\ContentEditor;
 use ultimate\data\content\ContentList;
-use ultimate\data\content\language\ContentLanguageEntryEditor;
 use ultimate\data\page\language\PageLanguageEntryEditor;
 use ultimate\data\page\PageList;
 use wcf\system\WCF;
