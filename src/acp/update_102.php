@@ -25,8 +25,8 @@
  * @category	Ultimate CMS
  */
 
-use ultimate\data\category\CategoryList;
 use ultimate\data\category\language\CategoryLanguageEntryEditor;
+use ultimate\data\category\CategoryList;
 use ultimate\data\content\language\ContentLanguageEntryEditor;
 use ultimate\data\content\ContentEditor;
 use ultimate\data\content\ContentList;
