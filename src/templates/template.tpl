@@ -2,7 +2,7 @@
 <head>
 	<title>{if $title|isset}{lang}{@$title}{/lang}{if $requestType == 'category'}{if $pageNo > 1} - {lang}wcf.page.pageNo{/lang}{/if}{/if} - {/if}{lang}{PAGE_TITLE}{/lang}</title>
 	
-	{include file='headInclude' application='ultimate'}
+	{include file='headInclude'}
 	
 	{if $requestType == 'category'}
 		{if $__wcf->getUser()->userID}
