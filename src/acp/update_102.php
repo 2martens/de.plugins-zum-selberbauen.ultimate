@@ -46,7 +46,9 @@ foreach ($categories as $categoryID => $category) {
 	/** @var \ultimate\data\category\Category $category */
 	$data = array();
 	$neutralCategoryTitle = false;
+	$neutralCategoryDescription = false;
 	$neutralTitle = '';
+	$neutralDescription = '';
 
 	foreach ($languages as $languageID => $language) {
 		/** @var \wcf\data\language\Language $language */
@@ -60,14 +62,26 @@ foreach ($categories as $categoryID => $category) {
 		else {
 			$neutralTitle = $categoryTitle;
 		}
+
+		$rawCategoryDescription = $category->categoryDescription;
+		$categoryDescription = $language->get($rawCategoryDescription);
+		$neutralCategoryDescription = ($rawCategoryDescription == $categoryDescription);
+		if (!$neutralCategoryDescription) {
+			$languageData[$languageID]['categoryDescription'] = $categoryDescription;
+		}
+		else {
+			$neutralDescription = $categoryDescription;
+		}
 	}
 
+	$data[0] = array();
 	if ($neutralCategoryTitle) {
-		$data[0] = array(
-			'categoryTitle' => $neutralTitle
-		);
+		$data[0]['categoryTitle'] = $neutralTitle;
 	}
-
+	if ($neutralCategoryDescription) {
+		$data[0]['categoryDescription'] = $neutralDescription;
+	}
+	
 	CategoryLanguageEntryEditor::createEntries($categoryID, $data);
 }
 
