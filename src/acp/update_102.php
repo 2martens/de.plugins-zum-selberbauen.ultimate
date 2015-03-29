@@ -45,17 +45,29 @@ $categories = $categoryList->getObjects();
 foreach ($categories as $categoryID => $category) {
 	/** @var \ultimate\data\category\Category $category */
 	$data = array();
-	
+	$neutralCategoryTitle = false;
+	$neutralTitle = '';
+
 	foreach ($languages as $languageID => $language) {
 		/** @var \wcf\data\language\Language $language */
-		$categoryTitle = $language->get($category->categoryTitle);
-		$categoryDescription = $language->get($category->categoryDescription);
-		$data[$languageID] = array(
-			'categoryTitle' => $categoryTitle,
-			'categoryDescription' => $categoryDescription
+		$data[$languageID] = array();
+		$rawCategoryTitle = $category->categoryTitle;
+		$categoryTitle = $language->get($rawCategoryTitle);
+		$neutralCategoryTitle = ($rawCategoryTitle == $categoryTitle);
+		if (!$neutralCategoryTitle) {
+			$data[$languageID]['categoryTitle'] = $categoryTitle;
+		}
+		else {
+			$neutralTitle = $categoryTitle;
+		}
+	}
+
+	if ($neutralCategoryTitle) {
+		$data[0] = array(
+			'categoryTitle' => $neutralTitle
 		);
 	}
-	
+
 	CategoryLanguageEntryEditor::createEntries($categoryID, $data);
 }
 
@@ -80,17 +92,44 @@ foreach ($contents as $contentID => $content) {
 	$contentEditor = new ContentEditor($content);
 	/** @var \ultimate\data\content\version\ContentVersion $version */
 	$version = $contentEditor->createVersion($versionData);
+	$neutralContentTitle = false;
+	$neutralContentDescription = false;
+	$neutralTitle = '';
+	$neutralDescription = '';
 
 	foreach ($languages as $languageID => $language) {
 		/** @var \wcf\data\language\Language $language */
-		$contentTitle = $language->get($content->contentTitle);
-		$contentDescription = $language->get($content->contentDescription);
-		$languageData[$languageID] = array(
-			'contentTitle' => $contentTitle,
-			'contentDescription' => $contentDescription
-		);
+		$languageData[$languageID] = array();
+		$rawContentTitle = $content->contentTitle;
+		$contentTitle = $language->get($rawContentTitle);
+		$neutralContentTitle = ($rawContentTitle == $contentTitle);
+		if (!$neutralContentTitle) {
+			$languageData[$languageID]['contentTitle'] = $contentTitle;
+		}
+		else {
+			$neutralTitle = $contentTitle;
+		}
+
+		$rawContentDescription = $content->contentDescription;
+		$contentDescription = $language->get($rawContentDescription);
+		$neutralContentDescription = ($rawContentDescription == $contentDescription);
+		if (!$neutralContentDescription) {
+			$languageData[$languageID]['contentDescription'] = $contentDescription;
+		}
+		else {
+			$neutralDescription = $contentDescription;
+		}
+	}
+	
+	$languageData[0] = array();
+	if ($neutralContentTitle) {
+		$languageData[0]['contentTitle'] = $neutralTitle;
 	}
 
+	if ($neutralContentDescription) {
+		$languageData[0]['contentDescription'] = $neutralDescription;
+	}
+	
 	ContentLanguageEntryEditor::createEntries($version->versionID, $languageData);
 }
 
@@ -102,14 +141,28 @@ $pages = $pageList->getObjects();
 foreach ($pages as $pageID => $page) {
 	/** @var \ultimate\data\page\Page $page */
 	$data = array();
-
+	$neutralPageTitle = false;
+	$neutralTitle = '';
+	
 	foreach ($languages as $languageID => $language) {
 		/** @var \wcf\data\language\Language $language */
-		$pageTitle = $language->get($page->pageTitle);
-		$data[$languageID] = array(
-			'pageTitle' => $pageTitle
-		);
+		$data[$languageID] = array();
+		$rawPageTitle = $page->pageTitle;
+		$pageTitle = $language->get($rawPageTitle);
+		$neutralPageTitle = ($rawPageTitle == $pageTitle);
+		if (!$neutralPageTitle) {
+			$data[$languageID]['pageTitle'] = $pageTitle;
+		}
+		else {
+			$neutralTitle = $pageTitle;
+		}
 	}
+	
+	if ($neutralPageTitle) {
+		$data[0] = array(
+			'pageTitle' => $neutralTitle
+		);
+	}	
 
 	PageLanguageEntryEditor::createEntries($pageID, $data);
 }
