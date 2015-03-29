@@ -1,32 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/acpMenu.xsd">
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/typhoon/acpMenu.xsd">
 	<import>
 		<!-- content.ultimate -->
 		<acpmenuitem name="wcf.acp.menu.link.ultimate">
 			<parent>wcf.acp.menu.link.content</parent>
 			<showorder>1</showorder>
 		</acpmenuitem>
-		
-		<!-- content -->
-		<acpmenuitem name="wcf.acp.menu.link.ultimate.content">
-			<parent>wcf.acp.menu.link.ultimate</parent>
-			<showorder>1</showorder>
-		</acpmenuitem>
-		
-		<acpmenuitem name="wcf.acp.menu.link.ultimate.content.list">
-			<controller><![CDATA[ultimate\acp\page\UltimateContentListPage]]></controller>
-			<parent>wcf.acp.menu.link.ultimate.content</parent>
-			<permissions>admin.content.ultimate.canEditContent,admin.content.ultimate.canDeleteContent</permissions>
-			<showorder>1</showorder>
-		</acpmenuitem>
-		
-		<acpmenuitem name="wcf.acp.menu.link.ultimate.content.add">
-			<controller><![CDATA[ultimate\acp\form\UltimateContentAddForm]]></controller>
-			<parent>wcf.acp.menu.link.ultimate.content</parent>
-			<permissions>admin.content.ultimate.canAddContent</permissions>
-			<showorder>2</showorder>
-		</acpmenuitem>
-		<!-- /content -->
 		
 		<!-- category -->
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.category">
@@ -48,27 +27,6 @@
 			<showorder>2</showorder>
 		</acpmenuitem>
 		<!-- /category -->
-		
-		<!-- pages -->
-		<acpmenuitem name="wcf.acp.menu.link.ultimate.page">
-			<parent>wcf.acp.menu.link.ultimate</parent>
-			<showorder>3</showorder>
-		</acpmenuitem>
-		
-		<acpmenuitem name="wcf.acp.menu.link.ultimate.page.list">
-			<controller><![CDATA[ultimate\acp\page\UltimatePageListPage]]></controller>
-			<parent>wcf.acp.menu.link.ultimate.page</parent>
-			<permissions>admin.content.ultimate.canEditPage,admin.content.ultimate.canDeletePage</permissions>
-			<showorder>1</showorder>
-		</acpmenuitem>
-		
-		<acpmenuitem name="wcf.acp.menu.link.ultimate.page.add">
-			<controller><![CDATA[ultimate\acp\form\UltimatePageAddForm]]></controller>
-			<parent>wcf.acp.menu.link.ultimate.page</parent>
-			<permissions>admin.content.ultimate.canAddPage</permissions>
-			<showorder>2</showorder>
-		</acpmenuitem>
-		<!-- /pages -->
 		
 		<!-- links -->
 		<acpmenuitem name="wcf.acp.menu.link.ultimate.link">
