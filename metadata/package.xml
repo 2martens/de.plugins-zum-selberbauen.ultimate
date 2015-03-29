@@ -9,7 +9,7 @@
 		
 		<isapplication>1</isapplication>
 		<version>1.1.0 Dev 6</version>
-		<date>2015-03-28</date>
+		<date>2015-03-29</date>
 	</packageinformation>
 	
 	<authorinformation>
@@ -60,7 +60,7 @@
     <instructions type="update" fromversion="1.1.0 Dev 5">
     </instructions>
     
-    <instructions type="update" fromversion="1.0.2">
+    <instructions type="update" fromversion="1.0.3">
         <!-- file based PIPs -->
         <instruction type="file">files.tar</instruction>
         <instruction type="file" application="wcf">files_wcf.tar</instruction>
