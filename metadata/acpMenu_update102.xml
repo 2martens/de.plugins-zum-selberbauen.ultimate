@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/typhoon/acpMenu.xsd">
+	<delete>
+        <acpmenuitem name="wcf.acp.menu.link.ultimate.content" />
+        <acpmenuitem name="wcf.acp.menu.link.ultimate.content.list" />
+        <acpmenuitem name="wcf.acp.menu.link.ultimate.content.add" />
+        <acpmenuitem name="wcf.acp.menu.link.ultimate.page" />
+        <acpmenuitem name="wcf.acp.menu.link.ultimate.page.list" />
+        <acpmenuitem name="wcf.acp.menu.link.ultimate.page.add" />
+	</delete>
+</data>

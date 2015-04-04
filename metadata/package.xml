@@ -75,6 +75,7 @@
         <instruction type="sql" run="standalone">update_102-part2.sql</instruction>
         
         <!-- other updates -->
+        <instruction type="acpMenu">acpMenu_update102.xml</instruction>
         <instruction type="clipboardAction">clipboardAction.xml</instruction>
         <instruction type="objectType">objectType.xml</instruction>
         <instruction type="aclOption">aclOption.xml</instruction>
