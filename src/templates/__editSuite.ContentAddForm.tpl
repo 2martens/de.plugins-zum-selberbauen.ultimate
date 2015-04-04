@@ -27,14 +27,14 @@
 	<div class="contentNavigation">
 		<nav>
 			<ul>
-				<li><a data-controller="ContentListPage" data-request-type="page" href="{linkExtended application='ultimate' parent='EditSuite' controller='ContentList'}{/linkExtended}" title="{lang}wcf.acp.menu.link.ultimate.content.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.ultimate.content.list{/lang}</span></a></li>
+				<li><a data-controller="ContentListPage" data-request-type="page" href="{link application='ultimate' parent='edit-suite' controller='ContentList'}{/link}" title="{lang}wcf.acp.menu.link.ultimate.content.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.ultimate.content.list{/lang}</span></a></li>
 				
 				{event name='contentNavigationButtons'}
 			</ul>
 		</nav>
 	</div>
 	
-	<form method="post" action="{if $action == 'add'}{linkExtended application='ultimate' parent='EditSuite' controller='ContentAdd'}{/linkExtended}{else}{linkExtended application='ultimate' parent='EditSuite' controller='ContentEdit'}{/linkExtended}{/if}">
+	<form method="post" action="{if $action == 'add'}{link application='ultimate' parent='edit-suite' controller='ContentAdd'}{/link}{else}{link application='ultimate' parent='edit-suite' controller='ContentEdit'}{/link}{/if}">
 		<div class="container containerPadding marginTop shadow">
 			<fieldset>
 				<legend>{lang}wcf.acp.ultimate.content.general{/lang}</legend>

@@ -38,7 +38,7 @@
             <ul>
                 {content}
                     {if $__wcf->session->getPermission('user.ultimate.editing.canEditPage')}
-                        <li><a data-controller="PageAddForm" data-request-type="form" href="{linkExtended application='ultimate' parent='EditSuite' controller='PageAdd'}{/linkExtended}" title="{lang}wcf.acp.ultimate.page.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.ultimate.page.add{/lang}</span></a></li>
+                        <li><a data-controller="PageAddForm" data-request-type="form" href="{link application='ultimate' parent='edit-suite' controller='PageAdd'}{/link}" title="{lang}wcf.acp.ultimate.page.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.ultimate.page.add{/lang}</span></a></li>
                     {/if}
                     
                     {event name='contentNavigationButtons'}
@@ -56,11 +56,11 @@
                 <thead>
                     <tr>
                         <th class="columnMark"><label><input type="checkbox" class="jsClipboardMarkAll" /></label></th>
-                        <th class="columnID{if $sortField == 'pageID'} active {@$sortOrder}{/if}" colspan="2"><a data-controller="PageListPage" data-request-type="page" href="{linkExtended application='ultimate' parent='EditSuite' controller='PageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=pageID&sortOrder={if $sortField == 'pageID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/linkExtended}">{lang}wcf.global.objectID{/lang}</a></th>
-                        <th class="columnTitle{if $sortField == 'pageTitle'} active {@$sortOrder}{/if}"><a data-controller="PageListPage" data-request-type="page" href="{linkExtended application='ultimate' parent='EditSuite' controller='PageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=pageTitle&sortOrder={if $sortField == 'pageTitle' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/linkExtended}">{lang}wcf.acp.ultimate.page.title{/lang}</a></th>
-                        <th class="columnAuthor{if $sortField == 'pageAuthor'} active {@$sortOrder}{/if}"><a data-controller="PageListPage" data-request-type="page" href="{linkExtended application='ultimate' parent='EditSuite' controller='PageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=pageAuthor&sortOrder={if $sortField == 'pageAuthor' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/linkExtended}">{lang}wcf.acp.ultimate.author{/lang}</a></th>
-                        <th class="columnDate dateColumn{if $sortField == 'publishDate'} active {@$sortOrder}{/if}"><a data-controller="PageListPage" data-request-type="page" href="{linkExtended application='ultimate' parent='EditSuite' controller='PageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=publishDate&sortOrder={if $sortField == 'publishDate' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/linkExtended}">{lang}wcf.acp.ultimate.publishDateList{/lang}</a></th>
-                        <th class="columnLastModified dateColumn{if $sortField == 'lastModified'} active {@$sortOrder}{/if}"><a data-controller="PageListPage" data-request-type="page" href="{linkExtended application='ultimate' parent='EditSuite' controller='PageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=lastModified&sortOrder={if $sortField == 'lastModified' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/linkExtended}">{lang}wcf.acp.ultimate.lastModified{/lang}</a></th>
+                        <th class="columnID{if $sortField == 'pageID'} active {@$sortOrder}{/if}" colspan="2"><a data-controller="PageListPage" data-request-type="page" href="{link application='ultimate' parent='edit-suite' controller='PageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=pageID&sortOrder={if $sortField == 'pageID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
+                        <th class="columnTitle{if $sortField == 'pageTitle'} active {@$sortOrder}{/if}"><a data-controller="PageListPage" data-request-type="page" href="{link application='ultimate' parent='edit-suite' controller='PageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=pageTitle&sortOrder={if $sortField == 'pageTitle' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.page.title{/lang}</a></th>
+                        <th class="columnAuthor{if $sortField == 'pageAuthor'} active {@$sortOrder}{/if}"><a data-controller="PageListPage" data-request-type="page" href="{link application='ultimate' parent='edit-suite' controller='PageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=pageAuthor&sortOrder={if $sortField == 'pageAuthor' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.author{/lang}</a></th>
+                        <th class="columnDate dateColumn{if $sortField == 'publishDate'} active {@$sortOrder}{/if}"><a data-controller="PageListPage" data-request-type="page" href="{link application='ultimate' parent='edit-suite' controller='PageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=publishDate&sortOrder={if $sortField == 'publishDate' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.publishDateList{/lang}</a></th>
+                        <th class="columnLastModified dateColumn{if $sortField == 'lastModified'} active {@$sortOrder}{/if}"><a data-controller="PageListPage" data-request-type="page" href="{link application='ultimate' parent='edit-suite' controller='PageList'}action={@$encodedAction}&pageNo={@$pageNo}&sortField=lastModified&sortOrder={if $sortField == 'lastModified' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.lastModified{/lang}</a></th>
                         
                         {event name='headColumns'}
                     </tr>
@@ -73,7 +73,7 @@
                             <td class="columnIcon">
                                 
                                 {if $__wcf->session->getPermission('user.ultimate.editing.canEditPage')}
-                                    <a data-controller="PageEditForm" data-request-type="form" href="{linkExtended application='ultimate' parent='EditSuite' controller='PageEdit' id=$page->pageID}{/linkExtended}"><span title="{lang}wcf.acp.ultimate.page.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
+                                    <a data-controller="PageEditForm" data-request-type="form" href="{link application='ultimate' parent='edit-suite' controller='PageEdit' id=$page->pageID}{/link}"><span title="{lang}wcf.acp.ultimate.page.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
                                 {else}
                                     <span title="{lang}wcf.acp.ultimate.page.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
                                 {/if}
@@ -87,8 +87,8 @@
                                 {event name='buttons'}
                             </td>
                             <td class="columnID"><p>{@$page->pageID}</p></td>
-                            <td class="columnTitle"><p>{if $__wcf->session->getPermission('user.ultimate.editing.canEditPage')}<a title="{lang}wcf.acp.ultimate.page.edit{/lang}" data-controller="PageEditForm" data-request-type="form" href="{linkExtended application='ultimate' parent='EditSuite' controller='PageEdit' id=$page->pageID}{/linkExtended}">{@$page->pageTitle}</a>{else}{@$page->pageTitle}{/if}</p></td>
-                            <td class="columnAuthor"><p><a data-controller="PageListPage" data-request-type="page" href="{linkExtended application='ultimate' parent='EditSuite' controller='PageList'}authorID={@$page->authorID}{/linkExtended}">{@$page->author}</a></p></td>
+                            <td class="columnTitle"><p>{if $__wcf->session->getPermission('user.ultimate.editing.canEditPage')}<a title="{lang}wcf.acp.ultimate.page.edit{/lang}" data-controller="PageEditForm" data-request-type="form" href="{link application='ultimate' parent='edit-suite' controller='PageEdit' id=$page->pageID}{/link}">{@$page->pageTitle}</a>{else}{@$page->pageTitle}{/if}</p></td>
+                            <td class="columnAuthor"><p><a data-controller="PageListPage" data-request-type="page" href="{link application='ultimate' parent='edit-suite' controller='PageList'}authorID={@$page->authorID}{/link}">{@$page->author}</a></p></td>
                             <td class="columnDate dateColumn"><p>{if $page->publishDate}{@$page->publishDate|time}{/if}</p></td>
                             <td class="columnLastModified dateColumn"><p>{@$page->lastModified|time}</p></td>
                             
@@ -110,7 +110,7 @@
             <ul>
                 {content}
                     {if $__wcf->session->getPermission('user.ultimate.editing.canEditPage')}
-                        <li><a data-controller="PageAddForm" data-request-type="form" href="{linkExtended application='ultimate' parent='EditSuite' controller='PageAdd'}{/linkExtended}" title="{lang}wcf.acp.ultimate.page.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.ultimate.page.add{/lang}</span></a></li>
+                        <li><a data-controller="PageAddForm" data-request-type="form" href="{link application='ultimate' parent='edit-suite' controller='PageAdd'}{/link}" title="{lang}wcf.acp.ultimate.page.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.ultimate.page.add{/lang}</span></a></li>
                     {/if}
                     
                     {event name='contentNavigationButtons'}

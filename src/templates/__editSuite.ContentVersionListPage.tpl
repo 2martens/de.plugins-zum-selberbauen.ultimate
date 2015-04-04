@@ -32,7 +32,7 @@
                 <ul>
                     {content}
                     {if $__wcf->session->getPermission('user.ultimate.editing.canAddContentVersion')}
-                        <li><a data-controller="ContentVersionAddForm" data-request-type="form" href="{linkExtended controller='ContentVersionAdd' application='ultimate' parent='EditSuite' id=$contentID}{/linkExtended}" title="{lang}wcf.acp.ultimate.content.version.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.ultimate.content.version.add{/lang}</span></a></li>
+                        <li><a data-controller="ContentVersionAddForm" data-request-type="form" href="{link controller='ContentVersionAdd' application='ultimate' parent='edit-suite' id=$contentID}{/link}" title="{lang}wcf.acp.ultimate.content.version.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.ultimate.content.version.add{/lang}</span></a></li>
                     {/if}
 
                     {event name='contentNavigationButtonsTop'}
@@ -49,10 +49,10 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th class="columnID{if $sortField == 'versionNumber'} active {@$sortOrder}{/if}" colspan="2"><a data-controller="ContentVersionListPage" data-request-type="page" href="{linkExtended controller='ContentVersionList' application='ultimate' parent='EditSuite' id=$contentID}pageNo={@$pageNo}&sortField=versionNumber&sortOrder={if $sortField == 'versionNumber' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/linkExtended}">{lang}wcf.global.objectID{/lang}</a></th>
-                    <th class="columnTitle{if $sortField == 'contentTitle'} active {@$sortOrder}{/if}"><a data-controller="ContentVersionListPage" data-request-type="page" href="{linkExtended controller='ContentVersionList' application='ultimate' parent='EditSuite' id=$contentID}pageNo={@$pageNo}&sortField=contentTitle&sortOrder={if $sortField == 'contentTitle' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/linkExtended}">{lang}wcf.acp.ultimate.content.title{/lang}</a></th>
-                    <th class="columnAuthor{if $sortField == 'contentAuthor'} active {@$sortOrder}{/if}"><a data-controller="ContentVersionListPage" data-request-type="page" href="{linkExtended controller='ContentVersionList' application='ultimate' parent='EditSuite' id=$contentID}pageNo={@$pageNo}&sortField=contentAuthor&sortOrder={if $sortField == 'contentAuthor' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/linkExtended}">{lang}wcf.acp.ultimate.author{/lang}</a></th>
-                    <th class="columnDate{if $sortField == 'publishDate'} active {@$sortOrder}{/if}"><a data-controller="ContentVersionListPage" data-request-type="page" href="{linkExtended controller='ContentVersionList' application='ultimate' parent='EditSuite' id=$contentID}pageNo={@$pageNo}&sortField=publishDate&sortOrder={if $sortField == 'publishDate' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/linkExtended}">{lang}wcf.acp.ultimate.publishDateList{/lang}</a></th>
+                    <th class="columnID{if $sortField == 'versionNumber'} active {@$sortOrder}{/if}" colspan="2"><a data-controller="ContentVersionListPage" data-request-type="page" href="{link controller='ContentVersionList' application='ultimate' parent='edit-suite' id=$contentID}pageNo={@$pageNo}&sortField=versionNumber&sortOrder={if $sortField == 'versionNumber' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
+                    <th class="columnTitle{if $sortField == 'contentTitle'} active {@$sortOrder}{/if}"><a data-controller="ContentVersionListPage" data-request-type="page" href="{link controller='ContentVersionList' application='ultimate' parent='edit-suite' id=$contentID}pageNo={@$pageNo}&sortField=contentTitle&sortOrder={if $sortField == 'contentTitle' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.content.title{/lang}</a></th>
+                    <th class="columnAuthor{if $sortField == 'contentAuthor'} active {@$sortOrder}{/if}"><a data-controller="ContentVersionListPage" data-request-type="page" href="{link controller='ContentVersionList' application='ultimate' parent='edit-suite' id=$contentID}pageNo={@$pageNo}&sortField=contentAuthor&sortOrder={if $sortField == 'contentAuthor' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.author{/lang}</a></th>
+                    <th class="columnDate{if $sortField == 'publishDate'} active {@$sortOrder}{/if}"><a data-controller="ContentVersionListPage" data-request-type="page" href="{link controller='ContentVersionList' application='ultimate' parent='edit-suite' id=$contentID}pageNo={@$pageNo}&sortField=publishDate&sortOrder={if $sortField == 'publishDate' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.ultimate.publishDateList{/lang}</a></th>
 
                     {event name='headColumns'}
                 </tr>
@@ -64,7 +64,7 @@
                         <td class="columnIcon">
 
                             {if $__wcf->session->getPermission('user.ultimate.editing.canEditContentVersion')}
-                                <a data-controller="ContentVersionEditForm" data-request-type="form" href="{linkExtended controller='ContentVersionEdit' application='ultimate' parent='EditSuite' id=$version->versionID}{/linkExtended}"><span title="{lang}wcf.acp.ultimate.content.version.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
+                                <a data-controller="ContentVersionEditForm" data-request-type="form" href="{link controller='ContentVersionEdit' application='ultimate' parent='edit-suite' id=$version->versionID}{/link}"><span title="{lang}wcf.acp.ultimate.content.version.edit{/lang}" class="icon icon16 icon-pencil jsTooltip"></span></a>
                             {else}
                                 <span title="{lang}wcf.acp.ultimate.content.version.edit{/lang}" class="icon icon16 icon-pencil disabled"></span>
                             {/if}
@@ -78,8 +78,8 @@
                             {event name='buttons'}
                         </td>
                         <td class="columnID"><p>{@$version->versionNumber}</p></td>
-                        <td class="columnTitle"><p>{if $__wcf->session->getPermission('user.ultimate.editing.canEditContentVersion')}<a title="{lang}wcf.acp.ultimate.content.version.edit{/lang}" data-controller="ContentVersionEditForm" data-request-type="form"  href="{linkExtended controller='ContentVersionEdit' application='ultimate' parent='EditSuite' id=$version->versionID}{/linkExtended}">{@$version->contentTitle}</a>{else}{@$version->contentTitle}{/if}</p></td>
-                        <td class="columnAuthor"><p><a data-controller="ContentVersionListPage" data-request-type="page" href="{linkExtended controller='ContentVersionList' application='ultimate' parent='EditSuite'}authorID={@$version->authorID}{/linkExtended}">{@$version->author}</a></p></td>
+                        <td class="columnTitle"><p>{if $__wcf->session->getPermission('user.ultimate.editing.canEditContentVersion')}<a title="{lang}wcf.acp.ultimate.content.version.edit{/lang}" data-controller="ContentVersionEditForm" data-request-type="form"  href="{link controller='ContentVersionEdit' application='ultimate' parent='edit-suite' id=$version->versionID}{/link}">{@$version->contentTitle}</a>{else}{@$version->contentTitle}{/if}</p></td>
+                        <td class="columnAuthor"><p><a data-controller="ContentVersionListPage" data-request-type="page" href="{link controller='ContentVersionList' application='ultimate' parent='edit-suite'}authorID={@$version->authorID}{/link}">{@$version->author}</a></p></td>
                         <td class="columnDate dateColumn"><p>{if $version->publishDate > 0 && $version->status >= 2}{@$version->publishDate|time}{else}{/if}</p></td>
 
                         {event name='columns'}
@@ -99,7 +99,7 @@
                 <ul>
                     {content}
                     {if $__wcf->session->getPermission('user.ultimate.editing.canAddContentVersion')}
-                        <li><a data-controller="ContentVersionAddForm" data-request-type="form" href="{linkExtended controller='ContentVersionAdd' application='ultimate' parent='EditSuite' id=$contentID}{/linkExtended}" title="{lang}wcf.acp.ultimate.content.version.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.ultimate.content.version.add{/lang}</span></a></li>
+                        <li><a data-controller="ContentVersionAddForm" data-request-type="form" href="{link controller='ContentVersionAdd' application='ultimate' parent='edit-suite' id=$contentID}{/link}" title="{lang}wcf.acp.ultimate.content.version.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.ultimate.content.version.add{/lang}</span></a></li>
                     {/if}
 
                     {event name='contentNavigationButtonsBottom'}

@@ -97,7 +97,7 @@ class ContentPage extends AbstractPage {
 		parent::readParameters();
 		/* @var $routeData string[] */
 		$routeData = RouteHandler::getInstance()->getRouteData();
-		$this->contentSlugs = explode('/', StringUtil::trim($routeData['contentSlug']));
+		$this->contentSlugs = explode('/', StringUtil::trim($routeData['contentslug']));
 	}
 	
 	/**

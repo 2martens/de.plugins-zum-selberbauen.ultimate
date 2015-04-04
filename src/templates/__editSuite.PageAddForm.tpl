@@ -24,14 +24,14 @@
     <div class="contentNavigation">
         <nav>
             <ul>
-                <li><a data-controller="PageListPage" data-request-type="page" href="{linkExtended application='ultimate' parent='EditSuite' controller='PageList'}{/linkExtended}" title="{lang}wcf.acp.menu.link.ultimate.page.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.ultimate.page.list{/lang}</span></a></li>
+                <li><a data-controller="PageListPage" data-request-type="page" href="{link application='ultimate' parent='edit-suite' controller='PageList'}{/link}" title="{lang}wcf.acp.menu.link.ultimate.page.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.ultimate.page.list{/lang}</span></a></li>
                 
                 {event name='contentNavigationButtons'}
             </ul>
         </nav>
     </div>
     
-    <form method="post" action="{if $action == 'add'}{linkExtended application='ultimate' parent='EditSuite' controller='PageAdd'}{/linkExtended}{else}{linkExtended application='ultimate' parent='EditSuite' controller='PageEdit'}{/linkExtended}{/if}">
+    <form method="post" action="{if $action == 'add'}{link application='ultimate' parent='edit-suite' controller='PageAdd'}{/link}{else}{link application='ultimate' parent='edit-suite' controller='PageEdit'}{/link}{/if}">
         <div class="container containerPadding marginTop shadow">
             <fieldset>
                 <legend>{lang}wcf.acp.ultimate.page.general{/lang}</legend>

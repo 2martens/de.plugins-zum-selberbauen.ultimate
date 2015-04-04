@@ -29,8 +29,9 @@ namespace ultimate\system;
 use ultimate\system\request\Route;
 use wcf\system\application\AbstractApplication;
 use wcf\system\menu\page\PageMenu;
-use wcf\system\request\RequestHandler;
+use wcf\system\request\FlexibleRoute;
 use wcf\system\request\RouteHandler;
+use wcf\system\request\StaticRoute;
 
 /**
  * The core class of the Ultimate CMS.
@@ -61,28 +62,68 @@ class ULTIMATECore extends AbstractApplication {
 	 * Inits the custom routes.
 	 */
 	protected function initRoutes() {
-		$pageRoute = new Route('pageRoute-'.PACKAGE_ID);
-		$pageRoute->setSchema('/{pageSlug}/', 'Page');
-		$pageRoute->setParameterOption('pageSlug', null, '[a-z]+(?:\-{1}[a-zA-Z0-9]+)*(?:\_{1}[a-zA-Z]+(?:\-{1}[a-zA-Z0-9]+)*)*');
-		RouteHandler::getInstance()->addRoute($pageRoute);
-		
-		$categoryRoute = new Route('categoryRoute-'.PACKAGE_ID);
-		$categoryRoute->setSchema('/{category}/{categorySlug}/', 'Category');
-		$categoryRoute->setParameterOption('category', 'category', 'category');
-		$categoryRoute->setParameterOption('categorySlug', null, '[a-zA-Z]+(?:\-{1}[a-zA-Z0-9]+)*(?:\_{1}[a-zA-Z]+(?:\-{1}[a-zA-Z0-9]+)*)*');
-		RouteHandler::getInstance()->addRoute($categoryRoute);
-		
-		$contentRoute = new Route('contentRoute-'.PACKAGE_ID);
-		$contentRoute->setSchema('/{date}/{contentSlug}/', 'Content');
-		$contentRoute->setParameterOption('date', null, '2[0-9]{3}\-[0-9]{2}\-[0-9]{2}');
-		$contentRoute->setParameterOption('contentSlug', null, '[a-zA-Z]+(\-{1}[a-zA-Z0-9]+)*');
-		RouteHandler::getInstance()->addRoute($contentRoute);
-		
-		$editSuiteRoute = new Route('editSuiteRoute-'.PACKAGE_ID);
-		$editSuiteRoute->setSchema('/{parent}/{controller}/{id}/', null);
-		$editSuiteRoute->setParameterOption('parent', null, '[a-zA-Z]+');
-		$editSuiteRoute->setParameterOption('controller', null, '[a-zA-Z]+');
-		$editSuiteRoute->setParameterOption('id', null, '\d+', true);
-		RouteHandler::getInstance()->addRoute($editSuiteRoute);
+		if (URL_LEGACY_MODE) {
+			$pageRoute = new Route('pageRoute-'.PACKAGE_ID);
+			$pageRoute->setSchema('/{pageslug}/', 'Page');
+			$pageRoute->setParameterOption('pageslug', null, '[a-z]+(?:\-{1}[a-zA-Z0-9]+)*(?:\_{1}[a-zA-Z]+(?:\-{1}[a-zA-Z0-9]+)*)*');
+			RouteHandler::getInstance()->addRoute($pageRoute);
+
+			$categoryRoute = new Route('categoryRoute-'.PACKAGE_ID);
+			$categoryRoute->setSchema('/{category}/{categoryslug}/', 'Category');
+			$categoryRoute->setParameterOption('category', 'category', 'category');
+			$categoryRoute->setParameterOption('categoryslug', null, '[a-zA-Z]+(?:\-{1}[a-zA-Z0-9]+)*(?:\_{1}[a-zA-Z]+(?:\-{1}[a-zA-Z0-9]+)*)*');
+			RouteHandler::getInstance()->addRoute($categoryRoute);
+
+			$contentRoute = new Route('contentRoute-'.PACKAGE_ID);
+			$contentRoute->setSchema('/{date}/{contentslug}/', 'Content');
+			$contentRoute->setParameterOption('date', null, '2[0-9]{3}\-[0-9]{2}\-[0-9]{2}');
+			$contentRoute->setParameterOption('contentslug', null, '[a-zA-Z]+(\-{1}[a-zA-Z0-9]+)*');
+			RouteHandler::getInstance()->addRoute($contentRoute);
+
+			$editSuiteRoute = new Route('editSuiteRoute-'.PACKAGE_ID);
+			$editSuiteRoute->setSchema('/{parent}/{controller}/{id}/', null);
+			$editSuiteRoute->setParameterOption('parent', null, '[a-zA-Z]+');
+			$editSuiteRoute->setParameterOption('controller', null, '[a-zA-Z]+');
+			$editSuiteRoute->setParameterOption('id', null, '\d+', true);
+			RouteHandler::getInstance()->addRoute($editSuiteRoute);
+		}
+		else {
+			$pageRoute = new StaticRoute();
+			$pageRoute->setBuildSchema('/page/{pageslug}/');
+			$pageRoute->setStaticController('ultimate', 'Page');
+			$pageRoute->setPattern('~/?page/(?P<pageslug>[a-z]+(?:\-{1}[a-zA-Z0-9]+)*(?:\_{1}[a-zA-Z]+(?:\-{1}[a-zA-Z0-9]+)*)*)/?~x');
+			$pageRoute->setRequiredComponents([
+				'pageslug' => '~^[a-z]+(?:\-{1}[a-zA-Z0-9]+)*(?:\_{1}[a-zA-Z]+(?:\-{1}[a-zA-Z0-9]+)*)*$~'
+			]);
+			RouteHandler::getInstance()->addRoute($pageRoute);
+
+			$categoryRoute = new StaticRoute();
+			$categoryRoute->setBuildSchema('/category/{categoryslug}/');
+			$categoryRoute->setStaticController('ultimate', 'Category');
+			$categoryRoute->setPattern('~/?category/(?P<categoryslug>[a-zA-Z]+(?:\-{1}[a-zA-Z0-9]+)*(?:\_{1}[a-zA-Z]+(?:\-{1}[a-zA-Z0-9]+)*)*)/?~x');
+			$categoryRoute->setRequiredComponents([
+				'categoryslug' => '~^[a-zA-Z]+(?:\-{1}[a-zA-Z0-9]+)*(?:\_{1}[a-zA-Z]+(?:\-{1}[a-zA-Z0-9]+)*)*$~'
+			]);
+			RouteHandler::getInstance()->addRoute($categoryRoute);
+
+			$contentRoute = new StaticRoute();
+			$contentRoute->setBuildSchema('/{date}/{contentslug}/');
+			$contentRoute->setStaticController('ultimate', 'Content');
+			$contentRoute->setPattern('~/?(?P<date>2[0-9]{3}\-[0-9]{2}\-[0-9]{2})/(?P<contentSlug>[a-zA-Z]+(\-{1}[a-zA-Z0-9]+)*)/?~x');
+			$contentRoute->setRequiredComponents([
+				'date' => '~^2[0-9]{3}\-[0-9]{2}\-[0-9]{2}$~',
+				'contentslug' => '~^[a-zA-Z]+(\-{1}[a-zA-Z0-9]+)*$~'
+			]);
+			RouteHandler::getInstance()->addRoute($contentRoute);
+			
+			$editSuiteRoute = new FlexibleRoute(false);
+			$editSuiteRoute->setBuildSchema('/{parent}/{controller}/{id}/');
+			$editSuiteRoute->setPattern('~/?(?P<parent>[a-zA-Z]+)/(?P<controller>[a-zA-Z]+)/(?P<id>\d+)?/?~x');
+			$editSuiteRoute->setRequiredComponents([
+				'parent' => '~^[a-zA-Z\-]+$~',
+				'controller' => '~^[a-zA-Z]+$~'
+			]);
+			RouteHandler::getInstance()->addRoute($editSuiteRoute);
+		}
 	}
 }

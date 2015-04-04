@@ -12,12 +12,12 @@
 		{/if}
 		
 		{if $pageNo < $pages}
-			<link rel="next" href="{linkExtended application='ultimate' category='category' categorySlug=$requestObject->categorySlug}pageNo={@$pageNo+1}{/linkExtended}" />
+			<link rel="next" href="{link application='ultimate' category='category' categoryslug=$requestObject->categorySlug}pageNo={@$pageNo+1}{/link}" />
 		{/if}
 		{if $pageNo > 1}
-			<link rel="prev" href="{linkExtended application='ultimate' category='category' categorySlug=$requestObject->categorySlug}{if $pageNo > 2}pageNo={@$pageNo-1}{/if}{/linkExtended}" />
+			<link rel="prev" href="{link application='ultimate' category='category' categoryslug=$requestObject->categorySlug}{if $pageNo > 2}pageNo={@$pageNo-1}{/if}{/link}" />
 		{/if}
-		<link rel="canonical" href="{linkExtended application='ultimate' category='category' categorySlug=$requestObject->categorySlug}{if $pageNo > 1}pageNo={@$pageNo}{/if}{/linkExtended}" />
+		<link rel="canonical" href="{link application='ultimate' category='category' categoryslug=$requestObject->categorySlug}{if $pageNo > 1}pageNo={@$pageNo}{/if}{/link}" />
 	{/if}
 	{if $requestType == 'index'}
 		{if $__wcf->getUser()->userID}

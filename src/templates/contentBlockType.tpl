@@ -16,7 +16,7 @@ $(function() {
 	
 	{if $requestType == 'category'}
 		<div class="contentNavigation">
-			{pagesExtended print=true pages=$amountOfPages assign=pagesLinks application='ultimate' link="pageNo=%d" category='category' categorySlug=$requestObject->categorySlug}
+			{pagesExtended print=true pages=$amountOfPages assign=pagesLinks application='ultimate' link="pageNo=%d" category='category' categoryslug=$requestObject->categorySlug}
 		</div>
 	{/if}
 	
@@ -58,7 +58,7 @@ $(function() {
 											{if !$block->hideTitles}
 												<h1 itemprop="name">
 													{if $requestType != 'content' && $requestType != 'page' && ($queryModeSelected == 'default' || $fetchPageContentSelected == 'none')}
-														<a class="link" href="{linkExtended application='ultimate' date=$date contentSlug=$content->contentSlug}{/linkExtended}" itemprop="url">{$content->getTitle()}</a>
+														<a class="link" href="{link application='ultimate' date=$date contentslug=$content->contentSlug}{/link}" itemprop="url">{$content->getTitle()}</a>
 													{else}
 														{$content->getTitle()}
 													{/if}
@@ -150,7 +150,7 @@ $(function() {
 											<footer class="messageOptions">
 												<nav class="jsMobileNavigation buttonGroupNavigation">
 													<ul class="smallButtons buttonGroup">{*
-														*}{if $requestType != 'content' && $requestType != 'page' && ($queryModeSelected == 'default' || $fetchPageContentSelected == 'none')}<li><a href="{linkExtended application='ultimate' date=$date contentSlug=$content->contentSlug}{/linkExtended}" class="button"><span class="icon icon16 icon-arrow-right"></span> <span>{lang}wcf.global.button.readMore{/lang}</span></a></li>{/if}{*
+														*}{if $requestType != 'content' && $requestType != 'page' && ($queryModeSelected == 'default' || $fetchPageContentSelected == 'none')}<li><a href="{link application='ultimate' date=$date contentslug=$content->contentSlug}{/link}" class="button"><span class="icon icon16 icon-arrow-right"></span> <span>{lang}wcf.global.button.readMore{/lang}</span></a></li>{/if}{*
 														*}{if $__wcf->getSession()->getPermission('user.ultimate.content.canEditContent') && !$hideInlineEdit}<li><a title="{lang}wcf.acp.ultimate.content.edit{/lang}" class="button jsMessageEditButton"><span class="icon icon16 icon-pencil"></span> <span>{lang}wcf.global.button.edit{/lang}</span></a></li>{/if}{*
 														*}<li class="toTopLink"><a href="{@$anchor}" title="{lang}wcf.global.scrollUp{/lang}" class="button jsTooltip"><span class="icon icon16 icon-arrow-up"></span> <span class="invisible">{lang}wcf.global.scrollUp{/lang}</span></a></li>{*
 													*}</ul>

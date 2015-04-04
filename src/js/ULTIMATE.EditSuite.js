@@ -385,6 +385,12 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
         if (id !== null) {
             id = id[1];
         }
+        else {
+            id = idRegex.exec(queryData[0]);
+            if (id !== null) {
+                id = id[1];
+            }
+        }
         if (id) {
             queryDataObject['id'] = id;
         }
