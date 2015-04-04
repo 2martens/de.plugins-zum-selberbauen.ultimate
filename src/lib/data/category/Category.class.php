@@ -163,6 +163,8 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledObject {
 		        FROM      ultimate'.WCF_N.'_'.$this->contentCategoryTable.' contentToCategory
 		        LEFT JOIN ultimate'.WCF_N.'_content content
 		        ON        (content.contentID = contentToCategory.contentID)
+		        LEFT JOIN ultimate'.WCF_N.'_content_version contentVersion
+		        ON        (content.contentID = contentVersion.contentID)
 		        WHERE     contentToCategory.categoryID = ?
 		        ORDER BY '.ULTIMATE_SORT_CONTENT_SORTFIELD.' '.ULTIMATE_SORT_CONTENT_SORTORDER;
 		$statement = WCF::getDB()->prepareStatement($sql);
