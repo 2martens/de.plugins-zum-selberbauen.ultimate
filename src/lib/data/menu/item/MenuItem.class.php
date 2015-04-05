@@ -227,10 +227,10 @@ class MenuItem extends PageMenuItem {
 		$parameters = array();
 		$parameters['application'] = 'ultimate';
 		$parameters['isRaw'] = true;
-		$menuItemLink = $this->menuItemLink;
+		$menuItemLink = (!URL_LEGACY_MODE && $this->type == 'page' ? 'page/' : '') . $this->menuItemLink;
 		if (mb_strpos($menuItemLink, 'http') === false) {
 			if ($this->menuItemController === null) {
-				$menuItemLink = 'index.php/'.$menuItemLink;
+				$menuItemLink = 'index.php'. (URL_LEGACY_MODE ? '/' : '?') . $menuItemLink;
 				return UltimateLinkHandler::getInstance()->getLink(null, $parameters, $menuItemLink);
 			} else {
 				// external link

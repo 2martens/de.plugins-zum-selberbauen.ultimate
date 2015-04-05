@@ -33,6 +33,7 @@ use ultimate\system\template\TemplateHandler;
 use ultimate\util\PageUtil;
 use wcf\page\AbstractPage;
 use wcf\system\exception\IllegalLinkException;
+use wcf\system\request\RouteHandler;
 use wcf\util\HeaderUtil;
 use wcf\util\StringUtil;
 
@@ -82,7 +83,8 @@ class PagePage extends AbstractPage {
 	 */
 	public function readParameters() {
 		parent::readParameters();
-		if (isset($_GET['pageSlug'])) $this->pageSlugs = explode('_', StringUtil::trim($_GET['pageslug']));
+		$routeData = RouteHandler::getInstance()->getRouteData();
+		$this->pageSlugs = explode('_', StringUtil::trim($routeData['pageslug']));
 	}
 	
 	/**

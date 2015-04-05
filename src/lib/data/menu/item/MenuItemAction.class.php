@@ -295,7 +295,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 		
 		return $menuItemsAJAX;
 		}
-		catch (Exception $e) {
+		catch (\Exception $e) {
 			echo $e->getMessage();
 			throw new SystemException($e->getMessage(), $e->getCode(), '', $e);
 		}

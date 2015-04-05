@@ -88,15 +88,6 @@ class ULTIMATECore extends AbstractApplication {
 			RouteHandler::getInstance()->addRoute($categoryRoute);
 		}
 	else {
-			$pageRoute = new StaticRoute();
-			$pageRoute->setBuildSchema('/page/{pageslug}/');
-			$pageRoute->setStaticController('ultimate', 'Page');
-			$pageRoute->setPattern('~/?page/(?P<pageslug>[a-z]+(?:\-{1}[a-zA-Z0-9]+)*(?:\_{1}[a-zA-Z]+(?:\-{1}[a-zA-Z0-9]+)*)*)/?~x');
-			$pageRoute->setRequiredComponents(array(
-				'pageslug' => '~^[a-z]+(?:\-{1}[a-zA-Z0-9]+)*(?:\_{1}[a-zA-Z]+(?:\-{1}[a-zA-Z0-9]+)*)*$~'
-			));
-			RouteHandler::getInstance()->addRoute($pageRoute);
-
 			$contentRoute = new StaticRoute();
 			$contentRoute->setBuildSchema('/{date}/{contentslug}/');
 			$contentRoute->setStaticController('ultimate', 'Content');
@@ -115,6 +106,15 @@ class ULTIMATECore extends AbstractApplication {
 				'controller' => '~^[a-zA-Z]+$~'
 			));
 			RouteHandler::getInstance()->addRoute($editSuiteRoute);
+
+			$pageRoute = new StaticRoute();
+			$pageRoute->setBuildSchema('/page/{pageslug}/');
+			$pageRoute->setStaticController('ultimate', 'Page');
+			$pageRoute->setPattern('~/?page/(?P<pageslug>[a-z]+(?:\-{1}[a-zA-Z0-9]+)*(?:\_{1}[a-zA-Z]+(?:\-{1}[a-zA-Z0-9]+)*)*)/?~x');
+			$pageRoute->setRequiredComponents(array(
+				'pageslug' => '~^[a-z]+(?:\-{1}[a-zA-Z0-9]+)*(?:\_{1}[a-zA-Z]+(?:\-{1}[a-zA-Z0-9]+)*)*$~'
+			));
+			RouteHandler::getInstance()->addRoute($pageRoute);
 	
 			$categoryRoute = new StaticRoute();
 			$categoryRoute->setBuildSchema('/category/{categoryslug}/');
