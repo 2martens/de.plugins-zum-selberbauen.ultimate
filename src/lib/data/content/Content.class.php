@@ -33,7 +33,7 @@ use wcf\data\IMessage;
 use wcf\data\ITitledObject;
 use wcf\system\bbcode\AttachmentBBCode;
 use wcf\system\bbcode\MessageParser;
-use wcf\system\request\UltimateLinkHandler;
+use wcf\system\request\LinkHandler;
 use wcf\util\StringUtil;
 
 /**
@@ -188,10 +188,10 @@ class Content extends AbstractUltimateVersionableDatabaseObject implements ITitl
 	 * @return	string
 	 */
 	public function getLink() {
-		return UltimateLinkHandler::getInstance()->getLink(null, array(
+		return LinkHandler::getInstance()->getLink(null, array(
 			'application' => 'ultimate',
 			'date' => $this->publishDateObject->format('Y-m-d'),
-			'contentSlug' => $this->contentSlug
+			'contentslug' => $this->contentSlug
 		));
 	}
 	

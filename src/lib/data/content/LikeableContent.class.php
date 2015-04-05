@@ -27,7 +27,7 @@
  */
 namespace ultimate\data\content;
 use wcf\data\like\object\AbstractLikeObject;
-use wcf\system\request\UltimateLinkHandler;
+use wcf\system\request\LinkHandler;
 
 /**
  * Likeable object implementation for contents.
@@ -61,10 +61,10 @@ class LikeableContent extends AbstractLikeObject {
 	 * @return	string
 	 */
 	public function getURL() {
-		return UltimateLinkHandler::getInstance()->getLink(null, array(
+		return LinkHandler::getInstance()->getLink(null, array(
 			'application' => 'ultimate', 
 			'date' => $this->__get('publishDateObject')->format('Y-m-d'),
-			'contentSlug' => $this->__get('contentSlug')
+			'contentslug' => $this->__get('contentSlug')
 		));
 	}
 	

@@ -28,7 +28,7 @@
 namespace ultimate\data\content;
 use wcf\data\IFeedEntry;
 use wcf\system\comment\CommentHandler;
-use wcf\system\request\UltimateLinkHandler;
+use wcf\system\request\LinkHandler;
 
 /**
  * Represents a viewable content for rss feeds.
@@ -47,10 +47,10 @@ class FeedContent extends CategorizedContent implements IFeedEntry {
 	 * @return	string
 	 */
 	public function getLink() {
-		return UltimateLinkHandler::getInstance()->getLink(null, array(
+		return LinkHandler::getInstance()->getLink(null, array(
 			'application' => 'ultimate',
 			'date' => $this->__get('publishDateObject')->format('Y-m-d'),
-			'contentSlug' => $this->__get('contentSlug'),
+			'contentslug' => $this->__get('contentSlug'),
 			'appendSession' => false,
 			'encodeTitle' => true
 		));

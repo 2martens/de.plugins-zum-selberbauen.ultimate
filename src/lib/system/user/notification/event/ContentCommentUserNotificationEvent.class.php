@@ -27,7 +27,7 @@
  */
 namespace ultimate\system\user\notification\event;
 use ultimate\system\cache\builder\ContentCacheBuilder;
-use wcf\system\request\UltimateLinkHandler;
+use wcf\system\request\LinkHandler;
 use wcf\system\user\notification\event\AbstractUserNotificationEvent;
 
 /**
@@ -89,9 +89,9 @@ class ContentCommentUserNotificationEvent extends AbstractUserNotificationEvent 
 		
 		/* @var $date \DateTime */
 		$date = $content->__get('publishDateObject');
-		return UltimateLinkHandler::getInstance()->getLink(null, array(
+		return LinkHandler::getInstance()->getLink(null, array(
 			'date' => ''. $date->format('Y-m-d'),
-			'contentSlug' => $content->__get('contentSlug')
+			'contentslug' => $content->__get('contentSlug')
 		));
 	}
 	

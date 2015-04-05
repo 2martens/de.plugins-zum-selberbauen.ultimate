@@ -28,7 +28,7 @@
 namespace ultimate\data\content;
 use wcf\data\search\ISearchResultObject;
 use wcf\data\user\UserProfile;
-use wcf\system\request\UltimateLinkHandler;
+use wcf\system\request\LinkHandler;
 use wcf\system\search\SearchResultTextParser;
 
 /**
@@ -63,14 +63,14 @@ class SearchResultContent extends CategorizedContent implements ISearchResultObj
 		$parameters = array(
 			'application' => 'ultimate',
 			'date' => $this->publishDateObject->format('Y-m-d'),
-			'contentSlug' => $this->contentSlug
+			'contentslug' => $this->contentSlug
 		);
 		
 		if ($query) {
 			$parameters['highlight'] = urlencode($query);
 		}
 			
-		return UltimateLinkHandler::getInstance()->getLink(null, $parameters);
+		return LinkHandler::getInstance()->getLink(null, $parameters);
 	}
 	
 	/**

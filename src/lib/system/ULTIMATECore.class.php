@@ -100,7 +100,7 @@ class ULTIMATECore extends AbstractApplication {
 			$contentRoute = new StaticRoute();
 			$contentRoute->setBuildSchema('/{date}/{contentslug}/');
 			$contentRoute->setStaticController('ultimate', 'Content');
-			$contentRoute->setPattern('~/?(?P<date>2[0-9]{3}\-[0-9]{2}\-[0-9]{2})/(?P<contentSlug>[a-zA-Z]+(\-{1}[a-zA-Z0-9]+)*)/?~x');
+			$contentRoute->setPattern('~/?(?P<date>2[0-9]{3}\-[0-9]{2}\-[0-9]{2})/(?P<contentslug>[a-zA-Z]+(\-{1}[a-zA-Z0-9]+)*)/?~x');
 			$contentRoute->setRequiredComponents(array(
 				'date' => '~^2[0-9]{3}\-[0-9]{2}\-[0-9]{2}$~',
 				'contentslug' => '~^[a-zA-Z]+(\-{1}[a-zA-Z0-9]+)*$~'
