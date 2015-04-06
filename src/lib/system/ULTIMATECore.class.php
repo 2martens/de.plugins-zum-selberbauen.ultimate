@@ -100,10 +100,10 @@ class ULTIMATECore extends AbstractApplication {
 	
 			$editSuiteRoute = new FlexibleRoute(false);
 			$editSuiteRoute->setBuildSchema('/{parent}/{controller}/{id}/');
-			$editSuiteRoute->setPattern('~/?(?P<parent>[a-zA-Z]+)/(?P<controller>[a-zA-Z]+)/(?P<id>\d+)?/?~x');
+			$editSuiteRoute->setPattern('~/?(?P<parent>[a-zA-Z\-]+)/(?P<controller>[a-zA-Z\-]+)/(?P<id>\d+)?/?~x');
 			$editSuiteRoute->setRequiredComponents(array(
 				'parent' => '~^[a-zA-Z\-]+$~',
-				'controller' => '~^[a-zA-Z]+$~'
+				'controller' => '~^[a-zA-Z\-]+$~'
 			));
 			RouteHandler::getInstance()->addRoute($editSuiteRoute);
 
