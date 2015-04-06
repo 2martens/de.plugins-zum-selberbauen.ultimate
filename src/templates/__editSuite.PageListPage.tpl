@@ -31,7 +31,7 @@
     {assign var=encodedURL value=$url|rawurlencode}
     {assign var=encodedAction value=$action|rawurlencode}
     <div class="contentNavigation">
-        {pagesExtended print=true assign=pagesLinks application='ultimate' controller="PageList" parent="EditSuite" link="pageNo=%d&action=$encodedAction&sortField=$sortField&sortOrder=$sortOrder"}
+        {pagesExtended print=true assign=pagesLinks application='ultimate' controller="PageList" parent="edit-suite" link="pageNo=%d&action=$encodedAction&sortField=$sortField&sortOrder=$sortOrder"}
         
         {hascontent}
         <nav>
