@@ -8,8 +8,8 @@
 		<packagedescription language="de-informal"><![CDATA[Ein WCF-kompatibles CMS.]]></packagedescription>
 		
 		<isapplication>1</isapplication>
-		<version>1.1.0 Dev 6</version>
-		<date>2015-03-29</date>
+		<version>1.1.0 Dev 7</version>
+		<date>2015-04-06</date>
 	</packageinformation>
 	
 	<authorinformation>
@@ -57,10 +57,9 @@
 		<!-- /xml and rest -->
 	</instructions>
     
-    <instructions type="update" fromversion="1.1.0 Dev 5">
+    <instructions type="update" fromversion="1.1.0 Dev 6">
         <instruction type="file">files.tar</instruction>
         <instruction type="template">templates.tar</instruction>
-        <instruction type="language">language/*.xml</instruction>
     </instructions>
     
     <instructions type="update" fromversion="1.0.3">
