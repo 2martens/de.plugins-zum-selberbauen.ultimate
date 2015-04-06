@@ -302,8 +302,9 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
 	 * @param {jQuery.Event} event
 	 */
     _remove : function(event) {
-	    if ($('#' + this._containerID).find('.jsBlock').length <= 1) {
-		    $('#' + this._containerID).find('button[data-type="submit"]').prop(
+        var $containerSelection = $('#' + this._containerID);
+	    if ($containerSelection.find('.jsBlock').length <= 1) {
+            $containerSelection.find('button[data-type="submit"]').prop(
 		            'disabled', true).addClass('disabled');
 	    }
     },
@@ -346,7 +347,8 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
     _submit : function() {
 	    var $data = {};
 	    // read form data
-	    var blockTypeID = $('#selectBlocktype').val();
+	    var blockTypeID = $('#selectBlocktype').val(),
+            $selectBlocktypeError = $('#selectBlocktypeError');
 	    
 	    if (blockTypeID == '0') {
 		    this._notification = new WCF.System.Notification(WCF.Language
@@ -356,13 +358,13 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
 		            + WCF.Language
 		                    .get('wcf.acp.ultimate.template.selectBlocktype.error.notSelected')
 		            + '</small>';
-		    $('#selectBlocktypeError').empty().remove();
+            $selectBlocktypeError.empty().remove();
 		    this._element.find('dl:first > dd').append($html);
 		    this._notification.show();
 		    return;
 	    }
 	    this._notification = null;
-	    $('#selectBlocktypeError').empty().remove();
+	    $selectBlocktypeError.empty().remove();
 	    
 	    // select blockType specific information
 	    var $formDataParameters = $.extend(true, {
@@ -389,8 +391,10 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
 	 */
     _submitFormData : function() {
 	    // read form data
-	    var blockTypeID = $('#selectBlocktype').val();
-	    var height = $('#height').val();
+        var $selectBlocktype = $('#selectBlocktype'),
+	        blockTypeID = $selectBlocktype.val(),
+            $height = $('#height'),
+	        height = $height.val();
 	    var $parameters = $.extend(true, {
 		    data : {
 		        blockTypeID : blockTypeID,
@@ -404,8 +408,8 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
 	    $parameters = this._readBlockOptionsFormData($parameters);
 	    
 	    // reset form
-	    $('#selectBlocktype').val('0');
-	    $('#height').val('0');
+        $selectBlocktype.val('0');
+	    $height.val('0');
 	    
 	    // build proxy data
 	    var $data = $.extend(true, {
@@ -500,10 +504,11 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
 	 */
     _successFormData : function(data, textStatus, jqXHR) {
 	    try {
-		    var $data = data['returnValues'];
+		    var $data = data['returnValues'],
+                $blockForm = $('#blockForm');
 		    this._createOptionsDialog($data);
-		    
-		    $('#blockForm').find('input[type="checkbox"]').change(function(event) {
+
+            $blockForm.find('input[type="checkbox"]').change(function(event) {
 			    var $target = $(event.currentTarget);
 			    var checked = $target.prop('checked');
 			    if (checked) {
@@ -512,8 +517,8 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
 				    $target.val('0');
 			    }
 		    });
-		    
-		    $('#blockForm').find('form').submit(
+
+            $blockForm.find('form').submit(
 		            $.proxy(this._submitFormData, this));
 		    
 	    } catch (e) {
@@ -537,10 +542,11 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
 	 */
     _successFormDataEdit : function(data, textStatus, jqXHR) {
 	    try {
-		    var $data = data['returnValues'];
+		    var $data = data['returnValues'],
+                $blockForm = $('#blockForm');
 		    this._createOptionsDialog($data);
 
-            $('#blockForm').find('input[type="checkbox"]').change(function(event) {
+            $blockForm.find('input[type="checkbox"]').change(function(event) {
 			    var $target = $(event.currentTarget);
 			    var checked = $target.prop('checked');
 			    if (checked) {
@@ -550,7 +556,7 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
 			    }
 		    });
 		    
-		    $('#blockForm').find('form').submit(
+		    $blockForm.find('form').submit(
 		            $.proxy(this._submitFormDataEdit, this));
 		    
 	    } catch (e) {
@@ -572,8 +578,9 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
 	 */
     _createOptionsDialog : function($data) {
 	    this._optionList = $data[0];
-	    $('#blockForm').html($data[1]);
-	    $('#blockForm').find('form')
+        var $blockForm = $('#blockForm');
+	    $blockForm.html($data[1]);
+        $blockForm.find('form')
 	            .submit($.proxy(this._stopFormSubmit, this));
 	    
 	    if (!$.wcfIsset('blockForm'))
@@ -688,10 +695,11 @@ ULTIMATE.ACP.Block.Transfer.prototype = {
 		            + $data['blockTypeName'] + ' #' + $data['blockID']
 		            + '</span></span></li>';
 		    
-		    $('#' + this._containerID).find('> ol').append($newHtml);
-		    if ($('#' + this._containerID).find('button[data-type="submit"]')
+            var $containerSelection = $('#' + this._containerID);
+            $containerSelection.find('> ol').append($newHtml);
+		    if ($containerSelection.find('button[data-type="submit"]')
 		            .prop('disabled')) {
-			    $('#' + this._containerID).find('button[data-type="submit"]')
+                $containerSelection.find('button[data-type="submit"]')
 			            .prop('disabled', false).removeClass('disabled');
 		    }
 		    if (ULTIMATE.Permission
@@ -906,8 +914,9 @@ ULTIMATE.ACP.Menu.Item.Transfer.prototype = {
 		            }
 	            }, this));
 	    
-	    if ($('#' + this._menuItemListID).find('.sortableNode').length <= 1) {
-		    $('#' + this._menuItemListID).find('button[data-type="submit"]')
+        var $menuItemList = $('#' + this._menuItemListID);
+	    if ($menuItemList.find('.sortableNode').length <= 1) {
+            $menuItemList.find('button[data-type="submit"]')
 		            .prop('disabled', true).addClass('disabled');
 	    }
     },
@@ -949,15 +958,19 @@ ULTIMATE.ACP.Menu.Item.Transfer.prototype = {
     _submit : function() {
 	    this._structure = {};
 	    if (this._type == 'custom') {
-		    var linkType = $('input[name="linkType"]').val();
-		    var url = $('#url').val();
-		    var controller = $('#controller').val();
-		    var linkTitleFound = this._element.find('input[name="title"]');
-		    var linkTitle = '';
-		    var $data = {};
+            var $url = $('#url'),
+                $controller = $('#controller'),
+                $linkType = $('input[name="linkType"]'),
+		        linkType = $linkType.val(),
+		        url = $url.val(),
+		        controller = $controller.val(),
+		        linkTitleFound = this._element.find('input[name="title"]'),
+		        linkTitle = '',
+		        $data = {},
+                $title = $('#title');
 		    // only add title to post values if linkTitle is not i18n
 		    if (linkTitleFound.length == 1) {
-			    linkTitle = $('#title').val();
+			    linkTitle = $title.val();
 			    $data = $.extend(true, {
 				    title : linkTitle
 			    }, $data);
@@ -983,10 +996,10 @@ ULTIMATE.ACP.Menu.Item.Transfer.prototype = {
 		    this._structure['linkType'] = linkType;
 		    this._structure['linkTitle'] = linkTitle;
 		    // resets the form
-		    $('#url').val('http://');
-		    $('#controller').val('');
-		    $('input[name="linkType"]').val('controller');
-		    $('#title').val('');
+		    $url.val('http://');
+		    $controller.val('');
+		    $linkType.val('controller');
+		    $title.val('');
 		    // send request
 		    var $parameters = $.extend(true, {
 			    data : {
@@ -1013,7 +1026,7 @@ ULTIMATE.ACP.Menu.Item.Transfer.prototype = {
 			            var $parentID = $listItem.val();
 			            var $parent = $listItem.parent().parent();
 			            if ($parentID !== undefined) {
-				            $checkedParent = $listItem.prop('checked');
+				            var $checkedParent = $listItem.prop('checked');
 				            this._getNestedElements($parent, $parentID);
 				            if (!this._structure[0]) {
 					            this._structure[0] = [];
@@ -1027,7 +1040,7 @@ ULTIMATE.ACP.Menu.Item.Transfer.prototype = {
 			            }
 		            }, this));
 		    // send request
-		    var $parameters = $.extend(true, {
+		    $parameters = $.extend(true, {
 			    data : {
 			        offset : this._offset,
 			        structure : this._structure,
@@ -1156,9 +1169,10 @@ ULTIMATE.ACP.Menu.Item.Transfer.prototype = {
 			    $('#' + this._menuItemListID + '> .sortableList').append(
 			            $newItemHtml);
 			    
-			    if ($('#' + this._menuItemListID).find(
+                var $menuItemList = $('#' + this._menuItemListID);
+			    if ($menuItemList.find(
 			            'button[data-type="submit"]').prop('disabled')) {
-				    $('#' + this._menuItemListID).find(
+                    $menuItemList.find(
 				            'button[data-type="submit"]').prop('disabled',
 				            false).removeClass('disabled');
 			    }

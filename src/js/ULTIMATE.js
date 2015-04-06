@@ -15,18 +15,18 @@
 		$(this).triggerHandler("empty");
 		return _empty.call($(this));
 	};
-})(jQuery);
+}(jQuery));
 
 // extends $.ui.resizable to avoid using deprecated method
-(function($, undefined) {
-	$.extend($.ui.resizable, {
-		_propagate : function(n, event) {
-			// prevents deprecated usage
-			n.call(this, [ event, this.ui() ]);
-			(n != "resize" && this._trigger(n, event, this.ui()));
-		}
-	});
-});
+(function ($, undefined) {
+    $.extend($.ui.resizable, {
+        _propagate: function (n, event) {
+            // prevents deprecated usage
+            n.call(this, [event, this.ui()]);
+            (n != "resize" && this._trigger(n, event, this.ui()));
+        }
+    });
+}(jQuery));
 
 // a nice utility to access query values
 (function($, undefined) {
@@ -68,9 +68,10 @@ ULTIMATE.Action.Delete = WCF.Action.Delete.extend({
 	 * @param	{jQuery}		element
 	 */
 	_didTriggerEffect: function(element) {
-		var text = $('.counter').text();
-		var newCount = text - 1;
-		$('.counter').text(newCount);
+        var counterSelection = $('span.counter'),
+		    text = counterSelection.text(),
+		    newCount = text - 1;
+		counterSelection.text(newCount);
 	},
 	
 	/**

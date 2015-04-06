@@ -83,13 +83,14 @@
 					<script data-relocate="true" type="text/javascript">
 					/* <![CDATA[ */
 					$(function() {
-						var $initialValue = $('#showWidgetArea').val();
+                        var $widgetArea = $('#showWidgetArea'),
+						    $initialValue = $widgetArea.val();
 						if ($initialValue) {
 							$('#widgetAreaSide').removeClass('disabled').prop('disabled', false);
 						} else {
 							$('#widgetAreaSide').addClass('disabled').prop('disabled', true);
 						}
-						$('#showWidgetArea').change(function(event) {
+                        $widgetArea.change(function(event) {
 							var $value = $(this).prop('checked');
 							if ($value) {
 								$('#widgetAreaSide').removeClass('disabled').prop('disabled', false);
@@ -117,13 +118,14 @@
 					<script data-relocate="true" type="text/javascript">
 					/* <![CDATA[ */
 					$(function() {
-						var $initialValue = $('#showWidgetArea').val();
+                        var $widgetArea = $('#showWidgetArea'),
+						    $initialValue = $widgetArea.val();
 						if ($initialValue) {
 							$('#selectWidgetArea').removeClass('disabled').prop('disabled', false);
 						} else {
 							$('#selectWidgetArea').addClass('disabled').prop('disabled', true);
 						}
-						$('#showWidgetArea').change(function(event) {
+                        $widgetArea.change(function(event) {
 							var $value = $(this).prop('checked');
 							if ($value) {
 								$('#selectWidgetArea').removeClass('disabled').prop('disabled', false);

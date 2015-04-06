@@ -257,7 +257,8 @@ ULTIMATE.Tagging.MultipleLanguageInput = WCF.MultipleLanguageInput.extend({
 	 * @param {jQuery.Event} event
 	 */
 	_changeLanguage: function(event) {
-		var $button = $(event.currentTarget);
+		var $button = $(event.currentTarget),
+            self = this;
 		this._insertedDataAfterInit = true;
 		
 		// save current value
@@ -271,7 +272,7 @@ ULTIMATE.Tagging.MultipleLanguageInput = WCF.MultipleLanguageInput.extend({
 		$(this._hiddenInput + 'Wrap' + this._languageID).detach().appendTo(this._inputContainer);
 		
 		$button = this._list.children('li').filter(function() {
-		    return $(this).data('languageID') && $(this).data('languageID') == this._languageID;
+		    return $(this).data('languageID') && $(this).data('languageID') == self._languageID;
 		});
 		
 		// update marking
