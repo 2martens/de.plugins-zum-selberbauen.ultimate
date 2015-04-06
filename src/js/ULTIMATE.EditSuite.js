@@ -41,6 +41,7 @@ ULTIMATE.EditSuite.SidebarMenu = Class.extend({
 	 * Initializes EditSuite sidebar menu.
 	 * 
 	 * @param {Array} activeMenuItems
+     * @public
 	 */
 	init : function(activeMenuItems) {
 		this._sidebarNavigation = $('aside.collapsibleMenu > div');
@@ -52,6 +53,7 @@ ULTIMATE.EditSuite.SidebarMenu = Class.extend({
 	 * Updates the active menu items.
 	 * 
 	 * @param {Array} activeMenuItems
+     * @public
 	 */
 	updateActiveItems : function(activeMenuItems) {
 		this._activeMenuItems = activeMenuItems;
@@ -62,6 +64,7 @@ ULTIMATE.EditSuite.SidebarMenu = Class.extend({
 	 * Returns the active menu items.
 	 * 
 	 * @return {Array}
+     * @public
 	 */
 	getActiveMenuItems : function() {
 		return this._activeMenuItems;
@@ -69,6 +72,7 @@ ULTIMATE.EditSuite.SidebarMenu = Class.extend({
 	
 	/**
 	 * Resets all elements and binds event listeners.
+     * @private
 	 */
 	_prepareElements : function(activeMenuItems) {
 		this._sidebarNavigation.find('legend').each($.proxy(function(index, menuHeader) {
@@ -90,6 +94,9 @@ ULTIMATE.EditSuite.SidebarMenu = Class.extend({
 	
 	/**
 	 * Toggles a navigation group entry.
+     * 
+     * @param {jQuery.Event} event
+     * @private
 	 */
 	_toggleItem : function(event) {
 		var $menuItem = $(event.currentTarget);
@@ -102,6 +109,7 @@ ULTIMATE.EditSuite.SidebarMenu = Class.extend({
 	 * Renders sidebar including highlighting of currently active menu items.
 	 * 
 	 * @param {Array} activeMenuItems
+     * @private
 	 */
 	_renderSidebar : function(activeMenuItems) {
 		this._sidebarNavigation.find('li').removeClass('active');
@@ -138,21 +146,24 @@ ULTIMATE.EditSuite.AJAXIdentifiers = {
 	/**
 	 * Contains the identifiers.
 	 * 
-	 * @type WCF.Dictionary
+	 * @type {WCF.Dictionary}
 	 */
 	_identifiers : new WCF.Dictionary(),
 	
 	/**
-	 * @param {String} key
-	 * @param {String} value
+	 * @param {string} key
+	 * @param {string} value
 	 * @see WCF.Dictionary.add()
+     * @public
 	 */
 	add : function(key, value) {
 		this._identifiers.add(key, value);
 	},
 
 	/**
+     * @param {Object} object
 	 * @see WCF.Dictionary.addObject()
+     * @public
 	 */
 	addObject : function(object) {
 		this._identifiers.addObject(object);
@@ -161,8 +172,9 @@ ULTIMATE.EditSuite.AJAXIdentifiers = {
 	/**
 	 * Retrieves an identifier.
 	 * 
-	 * @param {String} key
-	 * @return {String}
+	 * @param {string} key
+	 * @return {string}
+     * @public
 	 */
 	get : function(key) {
 		var value = this._identifiers.get(key);
@@ -179,8 +191,8 @@ ULTIMATE.EditSuite.AJAXIdentifiers = {
 /**
  * Handles EditSuite AJAX loading.
  * 
- * @param {String} pageContainer
- * @param {String} pageJSContainer
+ * @param {string} pageContainer
+ * @param {string} pageJSContainer
  * @param {ULTIMATE.EditSuite.SidebarMenu} menuSidebar
  * @constructor
  */
@@ -188,7 +200,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	/**
 	 * Contains the page container.
 	 * 
-	 * @type jQuery
+	 * @type {jQuery}
      * @private
 	 */
 	_pageContainer : null,
@@ -196,7 +208,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	/**
 	 * Contains the page JS container.
 	 * 
-	 * @type jQuery
+	 * @type {jQuery}
      * @private
 	 */
 	_pageJSContainer : null,
@@ -204,7 +216,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	/**
 	 * Contains a proxy object.
 	 * 
-	 * @type WCF.Action.Proxy
+	 * @type {WCF.Action.Proxy}
      * @private
 	 */
     _proxy : null,
@@ -212,7 +224,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
     /**
 	 * Contains a proxy object for jSAJAX requests.
 	 * 
-	 * @type WCF.Action.Proxy
+	 * @type {WCF.Action.Proxy}
      * @private
 	 */
     _jsAJAXProxy : null,
@@ -220,14 +232,14 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
     /**
      * Contains the cached HTML.
      * 
-     * @type Object
+     * @type {Object}
      * @private
      */
     _cachedData : {},
     
     /**
      * Contains the sidebar menu.
-     * @type ULTIMATE.EditSuite.SidebarMenu
+     * @type {ULTIMATE.EditSuite.SidebarMenu}
      * @private
      */
     _sidebarMenu : null,
@@ -235,8 +247,8 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	/**
 	 * Initializes EditSuite AJAXLoading.
 	 * 
-	 * @param {String} pageContainer
-	 * @param {String} pageJSContainer
+	 * @param {string} pageContainer
+	 * @param {string} pageJSContainer
 	 * @param {ULTIMATE.EditSuite.SidebarMenu} sidebarMenu
      * @public
 	 */
@@ -270,7 +282,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	/**
 	 * Event method for anchor clicks.
 	 * 
-	 * @param {Event} event
+	 * @param {jQuery.Event} event
      * @private
 	 */
 	_eventClick : function(event) {
@@ -369,10 +381,10 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	/**
 	 * Fires an AJAX request to load the form/page content.
 	 * 
-	 * @param {String} controller
-	 * @param {String} requestType
-	 * @param {String} url
-	 * @param {String} actionName
+	 * @param {string} controller
+	 * @param {string} requestType
+	 * @param {string} url
+	 * @param {string} actionName
      * @private
 	 */
 	_fireRequest : function(controller, requestType, url, actionName) {
@@ -419,8 +431,8 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	 * Displays HTML content.
 	 * 
 	 * @param {Object} data
-	 * @param {String} textStatus
-	 * @param {jQuery} jqXHR
+	 * @param {string} textStatus
+	 * @param {XMLHttpRequest} jqXHR
      * @private
 	 */
 	_success : function(data, textStatus, jqXHR) {
@@ -441,8 +453,8 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	 * Displays HTML content.
 	 * 
 	 * @param {Object} data
-	 * @param {String} textStatus
-	 * @param {jQuery} jqXHR
+	 * @param {string} textStatus
+	 * @param {XMLHttpRequest} jqXHR
      * @private
 	 */
 	_successJSAJAX : function(data, textStatus, jqXHR) {
@@ -454,7 +466,7 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
 	/**
 	 * Replaces the HTML.
 	 * 
-	 * @param {String} controller
+	 * @param {string} controller
      * @private
 	 */
 	_replaceHTML : function(controller) {
@@ -479,86 +491,87 @@ ULTIMATE.EditSuite.AJAXLoading = Class.extend({
  * Extends the WCF.Clipboard API with functionality
  * to handle AJAX requests.
  *
- * @param {String} page
- * @param {Number} hasMarkedItems
+ * @param {string} page
+ * @param {number} hasMarkedItems
  * @param {Object} actionObjects
- * @param {Number} pageObjectID
+ * @param {number} pageObjectID
  * @constructor
  */
 ULTIMATE.EditSuite.Clipboard = {
     /**
      * action proxy object
-     * @type WCF.Action.Proxy
+     * @type {WCF.Action.Proxy}
      */
     _actionProxy : null,
 
     /**
      * action objects
-     * @type Object
+     * @type {Object}
      */
     _actionObjects : {},
 
     /**
      * list of clipboard containers
-     * @type jQuery
+     * @type {jQuery}
      */
     _containers : null,
 
     /**
      * container meta data
-     * @type Object
+     * @type {Object}
      */
     _containerData : { },
 
     /**
      * user has marked items
-     * @type Boolean
+     * @type {boolean}
      */
     _hasMarkedItems : false,
 
     /**
      * list of ids of marked objects grouped by object type
-     * @type Object
+     * @type {Object}
      */
     _markedObjectIDs : { },
 
     /**
      * current page
-     * @type String
+     * @type {string}
      */
     _page : '',
 
     /**
      * current page's object id
-     * @type Number
+     * @type {number}
      */
     _pageObjectID : 0,
 
     /**
      * proxy object
-     * @type WCF.Action.Proxy
+     * @type {WCF.Action.Proxy}
      */
     _proxy : null,
 
     /**
      * list of elements already tracked for clipboard actions
-     * @type Object
+     * @type {Object}
      */
     _trackedElements : { },
 
     /**
      * counter for markAll calls
-     * @type Number
+     * @type {number}
      */
     _markAllCalls : 0,
 
     /**
      * Initializes the clipboard API.
      *
-     * @param {String} page
-     * @param {Number} hasMarkedItems
+     * @param {string} page
+     * @param {number} hasMarkedItems
      * @param {Object} actionObjects
-     * @param {Number} pageObjectID
+     * @param {number} pageObjectID
+     * @public
      */
     init : function(page, hasMarkedItems, actionObjects, pageObjectID) {
         this._page = page;
@@ -598,6 +611,7 @@ ULTIMATE.EditSuite.Clipboard = {
 
     /**
      * Loads marked items on init.
+     * @private
      */
     _loadMarkedItems : function() {
         new WCF.Action.Proxy({
@@ -614,6 +628,7 @@ ULTIMATE.EditSuite.Clipboard = {
 
     /**
      * Reloads the list of marked items.
+     * @public
      */
     reload : function() {
         if (this._containers === null) {
@@ -627,8 +642,9 @@ ULTIMATE.EditSuite.Clipboard = {
      * Marks all returned items as marked
      *
      * @param {Object} data
-     * @param {String} textStatus
-     * @param {jQuery} jqXHR
+     * @param {string} textStatus
+     * @param {XMLHttpRequest} jqXHR
+     * @private
      */
     _loadMarkedItemsSuccess : function(data, textStatus, jqXHR) {
         this._resetMarkings();
@@ -692,6 +708,7 @@ ULTIMATE.EditSuite.Clipboard = {
 
     /**
      * Resets all checkboxes.
+     * @private
      */
     _resetMarkings : function() {
         this._containers.each($.proxy(function(index, container) {
@@ -707,6 +724,7 @@ ULTIMATE.EditSuite.Clipboard = {
      * Initializes a clipboard container.
      *
      * @param {Object} container
+     * @private
      */
     _initContainer : function(container) {
         var $container = $(container);
@@ -744,7 +762,8 @@ ULTIMATE.EditSuite.Clipboard = {
     /**
      * Processes change checkbox state.
      *
-     * @param {Object} event
+     * @param {jQuery.Event} event
+     * @private
      */
     _click : function(event) {
         var $item = $(event.target);
@@ -797,7 +816,8 @@ ULTIMATE.EditSuite.Clipboard = {
     /**
      * Marks all associated clipboard items as checked.
      *
-     * @param {Event} event
+     * @param {jQuery.Event} event
+     * @private
      */
     _markAll : function(event) {
         var $item = $(event.target);
@@ -860,9 +880,10 @@ ULTIMATE.EditSuite.Clipboard = {
     /**
      * Saves clipboard item state.
      *
-     * @param {String}  type
+     * @param {string}  type
      * @param {Array}   objectIDs
-     * @param {Boolean} isMarked
+     * @param {boolean} isMarked
+     * @private
      */
     _saveState : function(type, objectIDs, isMarked) {
         this._proxy.setOption('data', {
@@ -880,8 +901,9 @@ ULTIMATE.EditSuite.Clipboard = {
      * Updates editor options.
      *
      * @param {Object} data
-     * @param {String} textStatus
-     * @param {jQuery} jqXHR
+     * @param {string} textStatus
+     * @param {XMLHttpRequest} jqXHR
+     * @private
      */
     _success : function(data, textStatus, jqXHR) {
         // clear all editors first
@@ -972,6 +994,7 @@ ULTIMATE.EditSuite.Clipboard = {
 
     /**
      * Closes the clipboard editor item list.
+     * @private
      */
     _closeLists : function() {
         $('.jsClipboardEditor ul').removeClass('dropdownOpen');
@@ -980,7 +1003,8 @@ ULTIMATE.EditSuite.Clipboard = {
     /**
      * Executes a clipboard editor item action.
      *
-     * @param {Event} event
+     * @param {jquery.Event} event
+     * @private
      */
     _executeAction : function(event) {
         var $listItem = $(event.currentTarget);
@@ -1026,6 +1050,7 @@ ULTIMATE.EditSuite.Clipboard = {
      *
      * @param {jQuery} listItem
      * @param {Object} data
+     * @private
      */
     _executeAJAXActions : function(listItem, data) {
         data = data || { };
@@ -1076,6 +1101,7 @@ ULTIMATE.EditSuite.Clipboard = {
      * Sends a clipboard proxy request.
      *
      * @param {Object} item
+     * @public
      */
     sendRequest : function(item) {
         var $item = $(item);
@@ -1098,9 +1124,9 @@ ULTIMATE.EditSuite.Button = {};
 /**
  * Handles button replacements.
  *
- * @param {String} buttonID
- * @param {String} checkElementID
- * @param {String} action
+ * @param {string} buttonID
+ * @param {string} checkElementID
+ * @param {string} action
  * @constructor
  * @since version 1.0.0
  */
@@ -1111,56 +1137,56 @@ ULTIMATE.EditSuite.Button.Replacement.prototype = {
     /**
      * target input[type=submit] element
      *
-     * @type jQuery
+     * @type {jQuery}
      */
     _button : null,
 
     /**
      * the button value
      *
-     * @type String
+     * @type {string}
      */
     _buttonValue : '',
 
     /**
      * element to check for changes
      *
-     * @type jQuery
+     * @type {jQuery}
      */
     _checkElement : null,
 
     /**
      * the initial date
      *
-     * @type Date
+     * @type {Date}
      */
     _initialValueDateTime : null,
 
     /**
      * the last date
      *
-     * @type Date
+     * @type {Date}
      */
     _lastValueDateTime : null,
 
     /**
      * the initial status id
      *
-     * @type Number
+     * @type {number}
      */
     _initialStatusID : 0,
 
     /**
      * action parameter
      *
-     * @type String
+     * @type {string}
      */
     _action : '',
 
     /**
      * Contains the language variables for the save action.
      *
-     * @type Object
+     * @type {Object}
      */
     _saveMap : {
         0 : 'ultimate.button.saveAsDraft',
@@ -1170,7 +1196,7 @@ ULTIMATE.EditSuite.Button.Replacement.prototype = {
     /**
      * Contains the language variables for the publish action.
      *
-     * @type Object
+     * @type {Object}
      */
     _publishMap : {
         0 : 'ultimate.button.publish',
@@ -1181,9 +1207,10 @@ ULTIMATE.EditSuite.Button.Replacement.prototype = {
     /**
      * Initializes the ButtonReplacement API.
      *
-     * @param {String} buttonID
-     * @param {String} checkElementID
-     * @param {String} action
+     * @param {string} buttonID
+     * @param {string} checkElementID
+     * @param {string} action
+     * @public
      */
     init : function(buttonID, checkElementID, action) {
         this._button = $('#' + $.wcfEscapeID(buttonID));
@@ -1209,6 +1236,7 @@ ULTIMATE.EditSuite.Button.Replacement.prototype = {
 
     /**
      * Changes button label.
+     * @private
      */
     _change : function() {
         if (this._action == 'save') {
