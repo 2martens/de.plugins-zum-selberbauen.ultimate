@@ -34,6 +34,9 @@ use ultimate\data\page\language\PageLanguageEntryEditor;
 use ultimate\data\page\PageList;
 use wcf\system\WCF;
 
+// remove ULTIMATE headInclude template
+unlink(ULTIMATE_DIR.'templates/headInclude.tpl');
+
 $languages = WCF::getLanguage()->getLanguages();
 
 // category language
