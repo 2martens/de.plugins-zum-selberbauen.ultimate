@@ -52,7 +52,7 @@
  * 
  * @namespace
  */
-var ULTIMATE = {};
+window.ULTIMATE = {};
 
 /**
  * Namespace for action-related functions
