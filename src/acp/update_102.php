@@ -76,7 +76,7 @@ foreach ($categories as $categoryID => $category) {
 		);
 		$neutralCategoryDescription = ($rawCategoryDescription == $categoryDescription);
 		if (!$neutralCategoryDescription) {
-			$languageData[$languageID]['categoryDescription'] = $categoryDescription;
+			$data[$languageID]['categoryDescription'] = $categoryDescription;
 		}
 		else {
 			$neutralDescription = $categoryDescription;
