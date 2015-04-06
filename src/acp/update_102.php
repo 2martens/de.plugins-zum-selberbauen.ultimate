@@ -41,11 +41,9 @@ unlink(ULTIMATE_DIR.'templates/headInclude.tpl');
 $languages = WCF::getLanguage()->getLanguages();
 
 // category language
-
 $categoryList = new CategoryList();
 $categoryList->readObjects();
 $categories = $categoryList->getObjects();
-$file = new File(WCF_DIR.'log/install.txt', 'ab');
 
 foreach ($categories as $categoryID => $category) {
 	/** @var \ultimate\data\category\Category $category */
@@ -70,10 +68,6 @@ foreach ($categories as $categoryID => $category) {
 
 		$rawCategoryDescription = $category->categoryDescription;
 		$categoryDescription = $language->get($rawCategoryDescription);
-		$file->write(
-			'Category:' . $categoryID . ', Language: ' . $languageID . ', rawDesc: ' . $rawCategoryDescription . 
-			', desc: ' . $categoryDescription . "\n"
-		);
 		$neutralCategoryDescription = ($rawCategoryDescription == $categoryDescription);
 		if (!$neutralCategoryDescription) {
 			$data[$languageID]['categoryDescription'] = $categoryDescription;
@@ -93,7 +87,6 @@ foreach ($categories as $categoryID => $category) {
 	
 	CategoryLanguageEntryEditor::createEntries($categoryID, $data);
 }
-$file->close();
 
 // content versions and language
 $contentList = new ContentList();
