@@ -32,6 +32,7 @@ use ultimate\data\content\ContentEditor;
 use ultimate\data\content\ContentList;
 use ultimate\data\page\language\PageLanguageEntryEditor;
 use ultimate\data\page\PageList;
+use wcf\system\io\File;
 use wcf\system\WCF;
 
 // remove ULTIMATE headInclude template
@@ -44,6 +45,7 @@ $languages = WCF::getLanguage()->getLanguages();
 $categoryList = new CategoryList();
 $categoryList->readObjects();
 $categories = $categoryList->getObjects();
+$file = new File(WCF_DIR.'log/install.txt', 'ab');
 
 foreach ($categories as $categoryID => $category) {
 	/** @var \ultimate\data\category\Category $category */
@@ -68,6 +70,10 @@ foreach ($categories as $categoryID => $category) {
 
 		$rawCategoryDescription = $category->categoryDescription;
 		$categoryDescription = $language->get($rawCategoryDescription);
+		$file->write(
+			'Category:' . $categoryID . ', Language: ' . $languageID . ', rawDesc: ' . $rawCategoryDescription . 
+			', desc: ' . $categoryDescription . "\n"
+		);
 		$neutralCategoryDescription = ($rawCategoryDescription == $categoryDescription);
 		if (!$neutralCategoryDescription) {
 			$languageData[$languageID]['categoryDescription'] = $categoryDescription;
@@ -87,6 +93,7 @@ foreach ($categories as $categoryID => $category) {
 	
 	CategoryLanguageEntryEditor::createEntries($categoryID, $data);
 }
+$file->close();
 
 // content versions and language
 $contentList = new ContentList();
