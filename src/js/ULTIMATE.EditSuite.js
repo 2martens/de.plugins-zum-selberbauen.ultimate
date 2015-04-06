@@ -993,6 +993,18 @@ ULTIMATE.EditSuite.Clipboard = {
     },
 
     /**
+     * Called upon successful proxy request.
+     * 
+     * @param {Object} data
+     * @param {string} textStatus
+     * @param {XMLHttpRequest} jqXHR
+     * @private
+     */
+    _actionSuccess : function(data, textStatus, jqXHR) {
+        
+    },
+
+    /**
      * Closes the clipboard editor item list.
      * @private
      */
