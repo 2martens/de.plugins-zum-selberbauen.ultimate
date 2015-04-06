@@ -84,6 +84,6 @@
         <instruction type="aclOption">aclOption.xml</instruction>
         <instruction type="userGroupOption">userGroupOption.xml</instruction>
         <instruction type="eventListener">eventListener_update102.xml</instruction>
-        <instruction type="templateListener">templateListener.xml</instruction>
+        <instruction type="templateListener">templateListener_update102.xml</instruction>
     </instructions>
 </package>
