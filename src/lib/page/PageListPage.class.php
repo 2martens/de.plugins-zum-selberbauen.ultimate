@@ -101,6 +101,24 @@ class PageListPage extends AbstractCachedListPage implements IEditSuitePage {
 	 * @see \wcf\page\AbstractCachedListPage::$cacheIndex
 	 */
 	public $cacheIndex = 'pages';
+
+	/**
+	 * If given only pages written by this author are loaded.
+	 * @var integer
+	 */
+	protected $authorID = 0;
+
+	/**
+	 * Contains a temporarily saved sort field.
+	 * @var string
+	 */
+	protected $tempSortField = '';
+
+	/**
+	 * Contains a temporarily saved sort order.
+	 * @var string
+	 */
+	protected $tempSortOrder = '';
 	
 	/**
 	 * The url.
@@ -116,6 +134,17 @@ class PageListPage extends AbstractCachedListPage implements IEditSuitePage {
 		'PageListPage',
 		'ultimate.edit.contents'
 	);
+
+	/**
+	 * Reads parameters.
+	 */
+	public function readParameters() {
+		parent::readParameters();
+
+		// these two are exclusive to each other
+		// don't use both at the same time
+		if (isset($_REQUEST['authorID'])) $this->authorID = intval($_REQUEST['authorID']);
+	}
 	
 	/**
 	 * Reads data.
@@ -123,6 +152,26 @@ class PageListPage extends AbstractCachedListPage implements IEditSuitePage {
 	public function readData() {
 		parent::readData();
 		$this->url = LinkHandler::getInstance()->getLink('PageList', array(), 'action='.rawurlencode($this->action).'&pageNo='.$this->pageNo.'&sortField='.$this->sortField.'&sortOrder='.$this->sortOrder);
+
+		// save the items count
+		$items = $this->items;
+
+		// if no category id, no tag id and no author id specified, proceed as always
+		if (!$this->authorID) {
+			return;
+		}
+		else if ($this->authorID) {
+			$this->cacheBuilderClassName = '\ultimate\system\cache\builder\PageAuthorCacheBuilder';
+			$this->cacheIndex = 'pagesToAuthorID';
+
+			$this->loadCache();
+			$this->objects = $this->objects[$this->authorID];
+			$this->calculateNumberOfPages();
+			$this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
+		}
+		
+		// restore old items count
+		$this->items = $items;
 	}
 	
 	/**
@@ -161,12 +210,10 @@ class PageListPage extends AbstractCachedListPage implements IEditSuitePage {
 	/**
 	 * Loads the cache.
 	 * 
-	 * @param	string	$path
-	 * 
 	 * @see \wcf\page\AbstractCachedListPage::loadCache
 	 */
-	public function loadCache($path = ULTIMATE_DIR) {
-		parent::loadCache($path);
+	public function loadCache() {
+		parent::loadCache();
 	}
 
 	/**

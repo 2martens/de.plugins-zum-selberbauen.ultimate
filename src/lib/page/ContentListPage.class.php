@@ -180,8 +180,13 @@ class ContentListPage extends AbstractCachedListPage implements IEditSuitePage {
 			return;
 		}
 		else if ($this->authorID) {
-			// TODO ContentAuthorCache
-			return;
+			$this->cacheBuilderClassName = '\ultimate\system\cache\builder\ContentAuthorCacheBuilder';
+			$this->cacheIndex = 'contentsToAuthorID';
+			
+			$this->loadCache();
+			$this->objects = $this->objects[$this->authorID];
+			$this->calculateNumberOfPages();
+			$this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
 		}
 		else if ($this->categoryID) {
 			// if category id provided, change object variables and load the new cache
@@ -246,13 +251,11 @@ class ContentListPage extends AbstractCachedListPage implements IEditSuitePage {
 	
 	/**
 	 * Loads the cache.
-	 *
-	 * @param	string	$path
-	 *
+	 * 
 	 * @see \wcf\page\AbstractCachedListPage::loadCache
 	 */
-	public function loadCache($path = ULTIMATE_DIR) {
-		parent::loadCache($path);
+	public function loadCache() {
+		parent::loadCache();
 	}
 	
 	/**
