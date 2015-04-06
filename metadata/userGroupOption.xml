@@ -63,8 +63,7 @@
 			<option name="user.ultimate.content.canSeePage">
 				<categoryname>user.ultimate.content</categoryname>
 				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
-				<admindefaultvalue>1</admindefaultvalue>
+				<defaultvalue>1</defaultvalue>
 			</option>
             
 			<!-- editing -->
