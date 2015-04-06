@@ -14,7 +14,7 @@ $.fn.extend({
 	 * does not equal input[type=text], input[type=password] or
 	 * textarea, -1 is returned.
 	 * 
-	 * @return	integer
+	 * @return	{number}
 	 */
 	getCaret1: function() {
 		if (this.is('input')) {
@@ -48,8 +48,8 @@ $.fn.extend({
 	 * does not equal input[type=text], input[type=password] or
 	 * textarea, false is returned.
 	 * 
-	 * @param	integer		position
-	 * @return	boolean
+	 * @param	{number}	position
+	 * @return	{boolean}
 	 */
 	setCaret1: function (position) {
 		if (this.is('input')) {
@@ -90,61 +90,61 @@ ULTIMATE.Tagging = {};
 /**
  * Handles multiple tag input fields.
  * 
- * @param	{String}	elementID
- * @param	{String}	inputID
- * @param	{Boolean}	forceSelection
+ * @param	{string}	elementID
+ * @param	{string}	inputID
+ * @param	{boolean}	forceSelection
  * @param	{Object}	values
  * @param	{Object}	availableLanguages
  */
 ULTIMATE.Tagging.MultipleLanguageInput = WCF.MultipleLanguageInput.extend({
 	/**
 	 * Contains the list of buttons.
-	 * @var	Object
+	 * @type {Object}
 	 */
 	_buttonList: null,
 	
 	/**
 	 * Contains the list of lists.
-	 * @var	Object
+	 * @type {Object}
 	 */
 	_listList: null,
 	
 	/**
 	 * Contains the list of wrappers.
-	 * @var	Object
+	 * @type {Object}
 	 */
 	_wrapperList: null,
 	
 	/**
 	 * Contains the list of elements.
-	 * @var	Object
+	 * @type {Object}
 	 */
 	_elementList: null,
 	
 	/**
 	 * Contains base for hidden input fields.
-	 * @var	String
+	 * @type {string}
 	 */
 	_hiddenInput: '',
 	
 	/**
 	 * The hidden container.
-	 * @var	jQuery
+	 * @type {jQuery}
 	 */
 	_hiddenContainer: null,
 	
 	/**
 	 * The input container.
-	 * @var	jQuery
+	 * @type {jQuery}
 	 */
 	_inputContainer: null,
 	
 	/**
 	 * Initializes multiple language ability for given element id.
 	 * 
-	 * @param	{String}		elementID
-	 * @param	{String}		inputID
-	 * @param	{Boolean}		forceSelection
+	 * @param	{string}		elementID
+	 * @param	{string}		inputID
+	 * @param	{boolean}		forceSelection
 	 * @param	{Object}		values
 	 * @param	{Object}		availableLanguages
 	 */
@@ -200,7 +200,7 @@ ULTIMATE.Tagging.MultipleLanguageInput = WCF.MultipleLanguageInput.extend({
 	/**
 	 * Called when a key is down on the input.
 	 * 
-	 * @param	{jQuery}	event
+	 * @param {jQuery.Event} event
 	 */
 	_inputKeydown: function(event) {
 		$(this._hiddenInput + this._languageID).focus();
@@ -212,7 +212,7 @@ ULTIMATE.Tagging.MultipleLanguageInput = WCF.MultipleLanguageInput.extend({
 	/**
 	 * Builds language handler.
 	 * 
-	 * @param	{Boolean}		enableOnInit
+	 * @param	{boolean}		enableOnInit
 	 */
 	_prepareElement: function(enableOnInit) {
 		var $wrapper = $('#tagSearchWrap');
@@ -254,7 +254,7 @@ ULTIMATE.Tagging.MultipleLanguageInput = WCF.MultipleLanguageInput.extend({
 	/**
 	 * Changes the currently active language.
 	 * 
-	 * @param	{jQuery}	event
+	 * @param {jQuery.Event} event
 	 */
 	_changeLanguage: function(event) {
 		var $button = $(event.currentTarget);
@@ -290,8 +290,8 @@ ULTIMATE.Tagging.MultipleLanguageInput = WCF.MultipleLanguageInput.extend({
 	/**
 	 * Handles dropdown actions.
 	 * 
-	 * @param	string		containerID
-	 * @param	string		action
+	 * @param	{string}	containerID
+	 * @param	{string}	action
 	 */
 	_handleAction: function(containerID, action) {
 		if (action === 'open') {
@@ -321,12 +321,15 @@ ULTIMATE.Tagging.MultipleLanguageInput = WCF.MultipleLanguageInput.extend({
 ULTIMATE.Tagging.TagList = WCF.Tagging.TagList.extend({
 	/**
 	 * language ID
-	 * @var Integer
+	 * @type {number}
 	 */
 	_languageID: 0,
 	
 	/**
-	 * @param	{Integer}	languageID
+     * @param   {string}    itemListSelector
+     * @param   {string}    searchInputSelector
+     * @param   {number}    maxLength
+	 * @param	{number}	languageID
 	 * @see	WCF.EditableItemList.init()
 	 */
 	init: function(itemListSelector, searchInputSelector, maxLength, languageID) {
@@ -375,6 +378,7 @@ ULTIMATE.Tagging.TagList = WCF.Tagging.TagList.extend({
 	
 	/**
 	 * @see	WCF.EditableItemList._keyDown()
+     * @return  {boolean}
 	 */
 	_keyDown: function(event) {
 		if (this._keyDown1(event)) {
@@ -402,7 +406,8 @@ ULTIMATE.Tagging.TagList = WCF.Tagging.TagList.extend({
 	/**
 	 * Handles the key down event.
 	 * 
-	 * @param	object		event
+	 * @param {jQuery.Event} event
+     * @return {boolean}
 	 */
 	_keyDown1: function(event) {
 		// 188 = [,]
@@ -470,22 +475,22 @@ ULTIMATE.Tagging.TagSearch = WCF.Tagging.TagSearch.extend({
 	
 	/**
 	 * The language id.
-	 * @var	Integer
+	 * @type {number}
 	 */
 	_languageID: 0,
 	
 	/**
 	 * Initializes the Ultimate Tag Search.
 	 * 
-	 * @param	{String}	searchInput
-	 * @param	{Intger}	languageID
+	 * @param	{string}	searchInput
+	 * @param	{number}	languageID
 	 * @param	{Function}	callback
 	 * @param	{Array}		excludedSearchValues
-	 * @param	{Boolean}	commaSeperated
+	 * @param	{boolean}	commaSeparated
 	 * 
 	 * @see	WCF.Search.Base.init()
 	 */
-	init: function(searchInput, languageID, callback, excludedSearchValues, commaSeperated) {
+	init: function(searchInput, languageID, callback, excludedSearchValues, commaSeparated) {
 		if (callback !== null && callback !== undefined && !$.isFunction(callback)) {
 			console.debug("[ULTIMATE.Tagging.TagSearch] The given callback is invalid, aborting.");
 			return;
@@ -508,7 +513,7 @@ ULTIMATE.Tagging.TagSearch = WCF.Tagging.TagSearch.extend({
 		this._searchInput.keydown($.proxy(this._keyDown, this)).keyup($.proxy(this._keyUp, this));
 		this._list = $('<ul class="dropdownMenu" />').insertAfter(this._searchInput);
 		
-		this._commaSeperated = (commaSeperated) ? true : false;
+		this._commaSeperated = !!(commaSeparated);
 		this._oldSearchString = [ ];
 		
 		this._itemCount = 0;
@@ -552,7 +557,7 @@ ULTIMATE.Tagging.TagSearch = WCF.Tagging.TagSearch.extend({
 	/**
 	 * Performs a search upon key up.
 	 * 
-	 * @param	object		event
+	 * @param {jQuery.Event} event
 	 */
 	_keyUp: function(event) {
 		// handle arrow keys and return key
@@ -606,10 +611,10 @@ ULTIMATE.Tagging.TagSearch = WCF.Tagging.TagSearch.extend({
 	},
 	
 	/**
-	 * Evalutes search results.
+	 * Evaluates search results.
 	 * 
 	 * @param	{Object}	data
-	 * @param	{String}	textStatus
+	 * @param	{string}	textStatus
 	 * @param	{jQuery}	jqXHR
 	 */
 	_success: function(data, textStatus, jqXHR) {
@@ -645,7 +650,7 @@ ULTIMATE.Tagging.TagSearch = WCF.Tagging.TagSearch.extend({
 	/**
 	 * Closes the suggestion list and clears search input on demand.
 	 * 
-	 * @param	{Boolean}	clearSearchInput
+	 * @param	{boolean}	clearSearchInput
 	 */
 	_clearList: function(clearSearchInput) {
 		if (clearSearchInput && !this._commaSeperated) {
