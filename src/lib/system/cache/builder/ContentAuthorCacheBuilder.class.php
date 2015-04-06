@@ -57,6 +57,10 @@ class ContentAuthorCacheBuilder extends AbstractCacheBuilder {
 		);
 
 		$contentList = new ContentList();
+		$sortField = ULTIMATE_SORT_CONTENT_SORTFIELD;
+		$sortOrder = ULTIMATE_SORT_CONTENT_SORTORDER;
+		$sqlOrderBy = $sortField.' '.$sortOrder;
+		$contentList->sqlOrderBy = $sqlOrderBy;
 		$contentList->readObjects();
 		$contents = $contentList->getObjects();
 

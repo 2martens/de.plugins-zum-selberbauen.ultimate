@@ -56,6 +56,10 @@ class PageAuthorCacheBuilder extends AbstractCacheBuilder {
 		);
 
 		$pageList = new PageList();
+		$sortField = ULTIMATE_SORT_PAGE_SORTFIELD;
+		$sortOrder = ULTIMATE_SORT_PAGE_SORTORDER;
+		$sqlOrderBy = $sortField." ".$sortOrder;
+		$pageList->sqlOrderBy = $sqlOrderBy;
 		$pageList->readObjects();
 		$pages = $pageList->getObjects();
 
