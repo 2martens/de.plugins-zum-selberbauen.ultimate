@@ -44,4 +44,16 @@ class PageList extends DatabaseObjectList {
 	 * @var	string
 	 */
 	public $className = '\ultimate\data\page\Page';
+
+	/**
+	 * Initializes a ContentList object.
+	 */
+	public function __construct() {
+		parent::__construct();
+
+		// get like status
+		if (!empty($this->sqlSelects)) $this->sqlSelects .= ',';
+		$this->sqlSelects .= "pageLanguage.*";
+		$this->sqlJoins .= " LEFT JOIN ultimate".WCF_N."_page_language pageLanguage ON (pageLanguage.pageID = page.pageID)";
+	}
 }

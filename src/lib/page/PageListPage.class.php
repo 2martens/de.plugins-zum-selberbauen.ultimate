@@ -151,6 +151,9 @@ class PageListPage extends AbstractCachedListPage implements IEditSuitePage {
 	 */
 	public function readData() {
 		parent::readData();
+		if ($this->sortField == 'page.pageID') {
+			$this->sortField = 'pageID';
+		}
 		$this->url = LinkHandler::getInstance()->getLink('PageList', array(), 'action='.rawurlencode($this->action).'&pageNo='.$this->pageNo.'&sortField='.$this->sortField.'&sortOrder='.$this->sortOrder);
 
 		// save the items count
@@ -204,6 +207,9 @@ class PageListPage extends AbstractCachedListPage implements IEditSuitePage {
 			$this->tempSortOrder = $this->sortOrder;
 			$this->sortField = $this->defaultSortField;
 			$this->sortOrder = $this->defaultSortOrder;
+		}
+		if ($this->sortField == 'pageID') {
+			$this->sortField = 'page.pageID';
 		}
 	}
 	
@@ -274,5 +280,19 @@ class PageListPage extends AbstractCachedListPage implements IEditSuitePage {
 		if (!$this->useTemplate) {
 			WCF::getTPL()->display($this->templateName, 'ultimate', false);
 		}
+	}
+
+	/**
+	 * Reads object list.
+	 */
+	protected function readObjects() {
+		$conditionBuilder = $this->objectList->getConditionBuilder();
+		$conditionBuilder->add(
+			'(pageLanguage.languageID = ? OR pageLanguage.languageID IS NULL)',
+			array(WCF::getLanguage()->getObjectID())
+		);
+		$conditionBuilder->add('pageLanguage.pageTitle IS NOT NULL', array());
+
+		parent::readObjects();
 	}
 }
