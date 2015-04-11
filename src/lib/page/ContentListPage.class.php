@@ -248,6 +248,9 @@ class ContentListPage extends AbstractCachedListPage implements IEditSuitePage {
 			$this->sortField = $this->defaultSortField;
 			$this->sortOrder = $this->defaultSortOrder;
 		}
+		if ($this->sortField == 'contentID') {
+			$this->sortField = 'content.contentID';
+		}
 	}
 	
 	/**
