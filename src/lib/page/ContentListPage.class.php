@@ -337,6 +337,8 @@ class ContentListPage extends AbstractCachedListPage implements IEditSuitePage {
 		$versionIDs = ContentCacheBuilder::getInstance()->getData(array(), 'versionIDToContentID');
 		$conditionBuilder->add('contentVersion.versionID IN (?)', array($versionIDs));
 		$conditionBuilder->add("contentLanguage.contentTitle <> ''", array());
+		$this->objectList->sqlJoins .=  " LEFT JOIN ultimate".WCF_N."_content_version contentVersion ON (contentVersion.contentID = content.contentID)";
+		$this->objectList->sqlJoins .= " LEFT JOIN ultimate".WCF_N."_content_language contentLanguage ON (contentLanguage.contentVersionID = contentVersion.versionID)";
 		
 		parent::readObjects();
 	}

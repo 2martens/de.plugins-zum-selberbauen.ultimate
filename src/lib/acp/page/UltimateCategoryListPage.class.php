@@ -198,7 +198,8 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
 			array(WCF::getLanguage()->getObjectID())
 		);
 		$conditionBuilder->add("categoryLanguage.categoryTitle <> ''", array());
-
+		$this->objectList->sqlJoins .= " LEFT JOIN ultimate".WCF_N."_category_language categoryLanguage ON (categoryLanguage.categoryID = category.categoryID)";
+		
 		parent::readObjects();
 	}
 }

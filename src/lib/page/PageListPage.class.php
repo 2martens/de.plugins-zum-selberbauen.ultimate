@@ -292,7 +292,8 @@ class PageListPage extends AbstractCachedListPage implements IEditSuitePage {
 			array(WCF::getLanguage()->getObjectID())
 		);
 		$conditionBuilder->add("pageLanguage.pageTitle <> ''", array());
-
+		$this->objectList->sqlJoins .= " LEFT JOIN ultimate".WCF_N."_page_language pageLanguage ON (pageLanguage.pageID = page.pageID)";
+		
 		parent::readObjects();
 	}
 }
