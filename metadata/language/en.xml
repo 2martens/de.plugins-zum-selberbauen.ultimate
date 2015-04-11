@@ -71,6 +71,8 @@
 		<item name="wcf.acp.group.option.user.ultimate.editing.canEditContentSpecificRights"><![CDATA[Can assign content-specific rights]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.editing.canEditPage"><![CDATA[Can edit pages]]></item>
 		<item name="wcf.acp.group.option.user.ultimate.editing.canDeletePage"><![CDATA[Can delete pages]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.editing.canEditPageStatus"><![CDATA[Can edit the status of pages]]></item>
+        <item name="wcf.acp.group.option.user.ultimate.editing.canEditPageSpecificRights"><![CDATA[Can assign page-specific rights]]></item>
 		<!-- /editing -->
 		<!-- /user -->
 
