@@ -108,7 +108,7 @@ AE:wcf.acp.option.ultimate_general_englishDateFormat.AE]]>
 				<optiontype>select</optiontype>
 				<defaultvalue><![CDATA[categoryID]]></defaultvalue>
 				<selectoptions>
-					<![CDATA[categoryID:wcf.acp.option.ultimate_sort_category_sortField.categoryID
+					<![CDATA[category.categoryID:wcf.acp.option.ultimate_sort_category_sortField.categoryID
 categorySlug:wcf.acp.option.ultimate_sort_category_sortField.categorySlug
 categoryContents:wcf.acp.option.ultimate_sort_category_sortField.categoryContents]]>
 				</selectoptions>
@@ -129,7 +129,7 @@ DESC:wcf.global.sortOrder.descending]]>
 				<optiontype>select</optiontype>
 				<defaultvalue><![CDATA[contentID]]></defaultvalue>
 				<selectoptions>
-					<![CDATA[contentID:wcf.acp.option.ultimate_sort_content_sortField.contentID
+					<![CDATA[content.contentID:wcf.acp.option.ultimate_sort_content_sortField.contentID
 contentAuthor:wcf.acp.option.ultimate_sort_content_sortField.contentAuthor
 publishDate:wcf.acp.option.ultimate_sort_content_sortField.publishDate
 lastModified:wcf.acp.option.ultimate_sort_content_sortField.lastModified]]>
@@ -151,7 +151,7 @@ DESC:wcf.global.sortOrder.descending]]>
 				<optiontype>select</optiontype>
 				<defaultvalue><![CDATA[pageID]]></defaultvalue>
 				<selectoptions>
-					<![CDATA[pageID:wcf.acp.option.ultimate_sort_page_sortField.pageID
+					<![CDATA[page.pageID:wcf.acp.option.ultimate_sort_page_sortField.pageID
 pageAuthor:wcf.acp.option.ultimate_sort_page_sortField.pageAuthor
 publishDate:wcf.acp.option.ultimate_sort_page_sortField.publishDate
 lastModified:wcf.acp.option.ultimate_sort_page_sortField.lastModified]]>
