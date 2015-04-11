@@ -291,7 +291,7 @@ class PageListPage extends AbstractCachedListPage implements IEditSuitePage {
 			'(pageLanguage.languageID = ? OR pageLanguage.languageID IS NULL)',
 			array(WCF::getLanguage()->getObjectID())
 		);
-		$conditionBuilder->add('pageLanguage.pageTitle IS NOT NULL', array());
+		$conditionBuilder->add("pageLanguage.pageTitle <> ''", array());
 
 		parent::readObjects();
 	}

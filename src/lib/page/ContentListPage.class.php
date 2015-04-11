@@ -336,7 +336,7 @@ class ContentListPage extends AbstractCachedListPage implements IEditSuitePage {
 		);
 		$versionIDs = ContentCacheBuilder::getInstance()->getData(array(), 'versionIDToContentID');
 		$conditionBuilder->add('contentVersion.versionID IN (?)', array($versionIDs));
-		$conditionBuilder->add('contentLanguage.contentTitle IS NOT NULL', array());
+		$conditionBuilder->add("contentLanguage.contentTitle <> ''", array());
 		
 		parent::readObjects();
 	}
