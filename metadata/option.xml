@@ -109,8 +109,6 @@ AE:wcf.acp.option.ultimate_general_englishDateFormat.AE]]>
 				<defaultvalue><![CDATA[categoryID]]></defaultvalue>
 				<selectoptions>
 					<![CDATA[categoryID:wcf.acp.option.ultimate_sort_category_sortField.categoryID
-categoryTitle:wcf.acp.option.ultimate_sort_category_sortField.categoryTitle
-categoryDescription:wcf.acp.option.ultimate_sort_category_sortField.categoryDescription
 categorySlug:wcf.acp.option.ultimate_sort_category_sortField.categorySlug
 categoryContents:wcf.acp.option.ultimate_sort_category_sortField.categoryContents]]>
 				</selectoptions>
@@ -132,7 +130,6 @@ DESC:wcf.global.sortOrder.descending]]>
 				<defaultvalue><![CDATA[contentID]]></defaultvalue>
 				<selectoptions>
 					<![CDATA[contentID:wcf.acp.option.ultimate_sort_content_sortField.contentID
-contentTitle:wcf.acp.option.ultimate_sort_content_sortField.contentTitle
 contentAuthor:wcf.acp.option.ultimate_sort_content_sortField.contentAuthor
 publishDate:wcf.acp.option.ultimate_sort_content_sortField.publishDate
 lastModified:wcf.acp.option.ultimate_sort_content_sortField.lastModified]]>
@@ -155,7 +152,6 @@ DESC:wcf.global.sortOrder.descending]]>
 				<defaultvalue><![CDATA[pageID]]></defaultvalue>
 				<selectoptions>
 					<![CDATA[pageID:wcf.acp.option.ultimate_sort_page_sortField.pageID
-pageTitle:wcf.acp.option.ultimate_sort_page_sortField.pageTitle
 pageAuthor:wcf.acp.option.ultimate_sort_page_sortField.pageAuthor
 publishDate:wcf.acp.option.ultimate_sort_page_sortField.publishDate
 lastModified:wcf.acp.option.ultimate_sort_page_sortField.lastModified]]>

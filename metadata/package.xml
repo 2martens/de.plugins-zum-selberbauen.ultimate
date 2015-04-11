@@ -60,6 +60,7 @@
     <instructions type="update" fromversion="1.1.0 Dev 6">
         <instruction type="file">files.tar</instruction>
         <instruction type="template">templates.tar</instruction>
+        <instruction type="option">option.xml</instruction>
     </instructions>
     
     <instructions type="update" fromversion="1.0.3">
@@ -82,6 +83,7 @@
         <instruction type="objectType">objectType.xml</instruction>
         <instruction type="aclOption">aclOption.xml</instruction>
         <instruction type="userGroupOption">userGroupOption.xml</instruction>
+        <instruction type="option">option.xml</instruction>
         <instruction type="eventListener">eventListener_update102.xml</instruction>
         <instruction type="templateListener">templateListener_update102.xml</instruction>
     </instructions>
