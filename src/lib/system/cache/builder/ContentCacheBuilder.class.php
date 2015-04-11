@@ -41,6 +41,7 @@ use wcf\system\cache\builder\AbstractCacheBuilder;
  * * integer[] contentIDs
  * * \ultimate\data\content\CategorizedContent[] contentsToSlug (contentSlug => content)
  * * \ultimate\data\content\ContentSearchResult[] contentsSearchResult (contentID => contentSearchResult)
+ * * integer[] versionIDToContentID Maps all contents to their most recent version ID.
  * 
  * @author		Jim Martens
  * @copyright	2011-2015 Jim Martens
@@ -61,7 +62,8 @@ class ContentCacheBuilder extends AbstractCacheBuilder {
 			'contents' => array(),
 			'contentIDs' => array(),
 			'contentsToSlug' => array(),
-			'contentsSearchResult' => array()
+			'contentsSearchResult' => array(),
+			'versionIDToContentID' => array()
 		);
 		
 		$contentList = new ContentList();
@@ -86,6 +88,7 @@ class ContentCacheBuilder extends AbstractCacheBuilder {
 			$data['contents'][$contentID] = new TaggableContent($content);
 			$data['contentIDs'][] = $contentID;
 			$data['contentsToSlug'][$content->__get('contentSlug')] = new CategorizedContent($content);
+			$data['versionIDToContentID'][$contentID] = $content->__get('versionID');
 			
 			$taggedContent = new TaggedContent($content);
 			$tags = $taggedContent->__get('tags');

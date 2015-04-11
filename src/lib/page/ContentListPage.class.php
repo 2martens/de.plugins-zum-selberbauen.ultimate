@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\page;
+use ultimate\system\cache\builder\ContentCacheBuilder;
 use wcf\page\AbstractCachedListPage;
 use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\request\LinkHandler;
@@ -316,5 +317,16 @@ class ContentListPage extends AbstractCachedListPage implements IEditSuitePage {
 		if (!$this->useTemplate) {
 			WCF::getTPL()->display($this->templateName, 'ultimate', false);
 		}
+	}
+
+	/**
+	 * Reads object list.
+	 */
+	protected function readObjects() {
+		$conditionBuilder = $this->objectList->getConditionBuilder();
+		$conditionBuilder->add('contentLanguage.languageID IN (?)', array(WCF::getLanguage()->getObjectID(), null));
+		$versionIDs = ContentCacheBuilder::getInstance()->getData(array(), 'versionIDToContentID');
+		$conditionBuilder->add('contentVersion.versionID IN (?)', array($versionIDs));
+		parent::readObjects();
 	}
 }

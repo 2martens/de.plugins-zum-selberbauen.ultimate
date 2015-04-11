@@ -54,7 +54,7 @@ class ContentList extends DatabaseObjectList {
 		
 		// get like status
 		if (!empty($this->sqlSelects)) $this->sqlSelects .= ',';
-		$this->sqlSelects .= "like_object.likes, like_object.dislikes";
+		$this->sqlSelects .= "like_object.likes, like_object.dislikes, contentVersion.*, contentLanguage.*";
 		$this->sqlJoins .= " LEFT JOIN wcf".WCF_N."_like_object like_object ON (like_object.objectTypeID = ".LikeHandler::getInstance()->getObjectType('de.plugins-zum-selberbauen.ultimate.likeableContent')->objectTypeID." AND like_object.objectID = content.contentID)";
 		$this->sqlJoins .= " LEFT JOIN ultimate".WCF_N."_content_version contentVersion ON (contentVersion.contentID = content.contentID)";
 		$this->sqlJoins .= " LEFT JOIN ultimate".WCF_N."_content_language contentLanguage ON (contentLanguage.contentVersionID = contentVersion.versionID)";		
