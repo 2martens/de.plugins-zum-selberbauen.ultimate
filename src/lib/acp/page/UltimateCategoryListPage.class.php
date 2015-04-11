@@ -62,7 +62,6 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
 	public $validSortFields = array(
 		'categoryID',
 		'categoryTitle',
-		'categoryDescription',
 		'categorySlug',
 		'categoryContents'
 	);
