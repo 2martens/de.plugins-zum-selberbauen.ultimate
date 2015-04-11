@@ -172,6 +172,9 @@ class ContentListPage extends AbstractCachedListPage implements IEditSuitePage {
 	 */
 	public function readData() {
 		parent::readData();
+		if ($this->sortField == 'content.contentID') {
+			$this->sortField = 'contentID';
+		}
 		$this->url = LinkHandler::getInstance()->getLink('ContentList', array(), 'action='.rawurlencode($this->action).'&pageNo='.$this->pageNo.'&sortField='.$this->sortField.'&sortOrder='.$this->sortOrder);
 		// save the items count
 		$items = $this->items;
