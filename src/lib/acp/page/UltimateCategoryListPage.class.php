@@ -108,6 +108,9 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
 	 */
 	public function readData() {
 		parent::readData();
+		if ($this->sortField == 'category.categoryID') {
+			$this->sortField = 'categoryID';
+		}
 		$this->url = LinkHandler::getInstance()->getLink('UltimateCategoryList', array(), 'action='.rawurlencode($this->action).'&pageNo='.$this->pageNo.'&sortField='.$this->sortField.'&sortOrder='.$this->sortOrder);
 	}
 	
@@ -143,6 +146,9 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
 			// return the sorted array
 			$this->objects = $finalCategories;
 			$this->currentObjects = array_slice($this->objects, ($this->pageNo - 1) * $this->itemsPerPage, $this->itemsPerPage, true);
+		}
+		if ($this->sortField == 'categoryID') {
+			$this->sortField = 'category.categoryID';
 		}
 	}
 	
@@ -180,5 +186,19 @@ class UltimateCategoryListPage extends AbstractCachedListPage {
 		ACPMenu::getInstance()->setActiveMenuItem($this->activeMenuItem);
 		
 		parent::show();
+	}
+
+	/**
+	 * Reads object list.
+	 */
+	protected function readObjects() {
+		$conditionBuilder = $this->objectList->getConditionBuilder();
+		$conditionBuilder->add(
+			'(categoryLanguage.languageID = ? OR categoryLanguage.languageID IS NULL)',
+			array(WCF::getLanguage()->getObjectID())
+		);
+		$conditionBuilder->add("categoryLanguage.categoryTitle <> ''", array());
+
+		parent::readObjects();
 	}
 }

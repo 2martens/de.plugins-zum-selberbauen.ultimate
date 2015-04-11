@@ -44,4 +44,16 @@ class CategoryList extends DatabaseObjectList {
 	 * @var	string
 	 */
 	public $className = '\ultimate\data\category\Category';
+
+	/**
+	 * Initializes a CategoryList object.
+	 */
+	public function __construct() {
+		parent::__construct();
+
+		// get like status
+		if (!empty($this->sqlSelects)) $this->sqlSelects .= ',';
+		$this->sqlSelects .= "categoryLanguage.*";
+		$this->sqlJoins .= " LEFT JOIN ultimate".WCF_N."_category_language categoryLanguage ON (categoryLanguage.categoryID = category.categoryID)";
+	}
 }
