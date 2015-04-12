@@ -8,8 +8,8 @@
 		<packagedescription language="de-informal"><![CDATA[Ein WCF-kompatibles CMS.]]></packagedescription>
 		
 		<isapplication>1</isapplication>
-		<version>1.1.0 Dev 7</version>
-		<date>2015-04-06</date>
+		<version>1.1.0 Dev 8</version>
+		<date>2015-04-12</date>
 	</packageinformation>
 	
 	<authorinformation>
@@ -18,7 +18,7 @@
 	</authorinformation>
 	
 	<requiredpackages>
-		<requiredpackage minversion="2.1.2">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="2.1.2 pl 4">com.woltlab.wcf</requiredpackage>
 		<requiredpackage minversion="2.1.0" file="requirements/com.woltlab.wcf.conversation.tar.gz">com.woltlab.wcf.conversation</requiredpackage>
 		<requiredpackage minversion="1.1.0" file="requirements/de.plugins-zum-selberbauen.cachedList.tar.gz">de.plugins-zum-selberbauen.cachedList</requiredpackage>
 		<requiredpackage minversion="1.1.0 Dev 2" file="requirements/de.plugins-zum-selberbauen.ultimateCore.tar.gz">de.plugins-zum-selberbauen.ultimateCore</requiredpackage>
@@ -57,12 +57,6 @@
 		<!-- /xml and rest -->
 	</instructions>
     
-    <instructions type="update" fromversion="1.1.0 Dev 6">
-        <instruction type="file">files.tar</instruction>
-        <instruction type="template">templates.tar</instruction>
-        <instruction type="option">option.xml</instruction>
-    </instructions>
-    
     <instructions type="update" fromversion="1.0.3">
         <!-- file based PIPs -->
         <instruction type="file">files.tar</instruction>
@@ -82,8 +76,8 @@
         <instruction type="clipboardAction">clipboardAction.xml</instruction>
         <instruction type="objectType">objectType.xml</instruction>
         <instruction type="aclOption">aclOption.xml</instruction>
-        <instruction type="userGroupOption">userGroupOption.xml</instruction>
-        <instruction type="option">option.xml</instruction>
+        <instruction type="userGroupOption">userGroupOption_update102.xml</instruction>
+        <instruction type="option">option_update102.xml</instruction>
         <instruction type="eventListener">eventListener_update102.xml</instruction>
         <instruction type="templateListener">templateListener_update102.xml</instruction>
     </instructions>

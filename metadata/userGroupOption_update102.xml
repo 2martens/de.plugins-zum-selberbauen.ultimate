@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/userGroupOption.xsd">
+	<import>
+		<categories>
+            <category name="user.ultimate.editing">
+                <parent>user.ultimate</parent>
+            </category>
+		</categories>
+		
+		<options>
+			<!-- user options -->
+			<!-- content -->
+			<option name="user.ultimate.content.canSeeContent">
+				<categoryname>user.ultimate.content</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
+			<option name="user.ultimate.content.canSeePage">
+				<categoryname>user.ultimate.content</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
+            
+			<!-- editing -->
+			<option name="user.ultimate.editing.canAccessEditSuite">
+				<categoryname>user.ultimate.editing</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+
+			<option name="user.ultimate.editing.canUploadAttachment">
+				<categoryname>user.ultimate.editing</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+				<options>module_attachment</options>
+			</option>
+
+			<option name="user.ultimate.editing.canEditContent">
+				<categoryname>user.ultimate.editing</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.ultimate.editing.canDeleteContent">
+				<categoryname>user.ultimate.editing</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.ultimate.editing.canEditContentStatus">
+				<categoryname>user.ultimate.editing</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.ultimate.editing.canSaveAsDraft">
+				<categoryname>user.ultimate.editing</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.ultimate.editing.canSaveAsPendingReview">
+				<categoryname>user.ultimate.editing</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.ultimate.editing.canPublish">
+				<categoryname>user.ultimate.editing</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.ultimate.editing.canEditMetadata">
+				<categoryname>user.ultimate.editing</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.ultimate.editing.canDepublish">
+				<categoryname>user.ultimate.editing</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.ultimate.editing.canAddContentVersion">
+				<categoryname>user.ultimate.editing</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+            <option name="user.ultimate.editing.canEditContentVersion">
+                <categoryname>user.ultimate.editing</categoryname>
+                <optiontype>boolean</optiontype>
+                <defaultvalue>0</defaultvalue>
+                <admindefaultvalue>1</admindefaultvalue>
+            </option>
+			<option name="user.ultimate.editing.canDeleteContentVersion">
+				<categoryname>user.ultimate.editing</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.ultimate.editing.canRepublishContentVersion">
+				<categoryname>user.ultimate.editing</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.ultimate.editing.canEditContentSpecificRights">
+				<categoryname>user.ultimate.editing</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+
+			<option name="user.ultimate.editing.canEditPage">
+				<categoryname>user.ultimate.editing</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.ultimate.editing.canDeletePage">
+				<categoryname>user.ultimate.editing</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.ultimate.editing.canEditPageSpecificRights">
+				<categoryname>user.ultimate.editing</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<option name="user.ultimate.editing.canEditPageStatus">
+				<categoryname>user.ultimate.editing</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+				<admindefaultvalue>1</admindefaultvalue>
+			</option>
+			<!-- /user options -->
+		</options>
+	</import>
+    <delete>
+        <option name="admin.content.ultimate.canAddContent" />
+        <option name="admin.content.ultimate.canEditContent" />
+        <option name="admin.content.ultimate.canDeleteContent" />
+        <option name="admin.content.ultimate.canAddPage" />
+        <option name="admin.content.ultimate.canEditPage" />
+        <option name="admin.content.ultimate.canDeletePage" />
+    </delete>
+</data>
