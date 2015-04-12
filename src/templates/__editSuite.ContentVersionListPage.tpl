@@ -31,6 +31,7 @@
             <nav>
                 <ul>
                     {content}
+                        <li><a data-controller="ContentListPage" data-request-type="page" href="{link application='ultimate' parent='edit-suite' controller='ContentList'}{/link}" title="{lang}wcf.acp.menu.link.ultimate.content.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.ultimate.content.list{/lang}</span></a></li>
                     {if $__wcf->session->getPermission('user.ultimate.editing.canAddContentVersion')}
                         <li><a data-controller="ContentVersionAddForm" data-request-type="form" href="{link controller='ContentVersionAdd' application='ultimate' parent='edit-suite' id=$contentID}{/link}" title="{lang}wcf.acp.ultimate.content.version.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.ultimate.content.version.add{/lang}</span></a></li>
                     {/if}
@@ -98,6 +99,7 @@
             <nav>
                 <ul>
                     {content}
+                        <li><a data-controller="ContentListPage" data-request-type="page" href="{link application='ultimate' parent='edit-suite' controller='ContentList'}{/link}" title="{lang}wcf.acp.menu.link.ultimate.content.list{/lang}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.ultimate.content.list{/lang}</span></a></li>
                     {if $__wcf->session->getPermission('user.ultimate.editing.canAddContentVersion')}
                         <li><a data-controller="ContentVersionAddForm" data-request-type="form" href="{link controller='ContentVersionAdd' application='ultimate' parent='edit-suite' id=$contentID}{/link}" title="{lang}wcf.acp.ultimate.content.version.add{/lang}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.ultimate.content.version.add{/lang}</span></a></li>
                     {/if}
