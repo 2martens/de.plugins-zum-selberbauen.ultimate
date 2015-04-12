@@ -73,7 +73,9 @@ class ContentCacheBuilder extends AbstractCacheBuilder {
 		$sortOrder = ULTIMATE_SORT_CONTENT_SORTORDER;
 		$sqlOrderBy = $sortField.' '.$sortOrder;
 		$contentList->sqlOrderBy = $sqlOrderBy;
+		$contentList->sqlJoins .= 'LEFT JOIN ultimate'.WCF_N.'_content_version contentVersion ON (content.contentID = contentVersion.contentID)';
 		$contentSearchResultList->sqlOrderBy = $sqlOrderBy;
+		$contentSearchResultList->sqlJoins .= 'LEFT JOIN ultimate'.WCF_N.'_content_version contentVersion ON (content.contentID = contentVersion.contentID)';
 		
 		$contentList->readObjects();
 		$contentSearchResultList->readObjects();
