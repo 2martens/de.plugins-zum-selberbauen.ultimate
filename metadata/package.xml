@@ -8,7 +8,7 @@
 		<packagedescription language="de-informal"><![CDATA[Ein WCF-kompatibles CMS.]]></packagedescription>
 		
 		<isapplication>1</isapplication>
-		<version>1.1.0 Dev 8</version>
+		<version>1.1.0 Beta 1</version>
 		<date>2015-04-12</date>
 	</packageinformation>
 	
@@ -21,7 +21,7 @@
 		<requiredpackage minversion="2.1.2 pl 4">com.woltlab.wcf</requiredpackage>
 		<requiredpackage minversion="2.1.0" file="requirements/com.woltlab.wcf.conversation.tar.gz">com.woltlab.wcf.conversation</requiredpackage>
 		<requiredpackage minversion="1.1.0" file="requirements/de.plugins-zum-selberbauen.cachedList.tar.gz">de.plugins-zum-selberbauen.cachedList</requiredpackage>
-		<requiredpackage minversion="1.1.0 Dev 2" file="requirements/de.plugins-zum-selberbauen.ultimateCore.tar.gz">de.plugins-zum-selberbauen.ultimateCore</requiredpackage>
+		<requiredpackage minversion="1.1.0 Beta 1" file="requirements/de.plugins-zum-selberbauen.ultimateCore.tar.gz">de.plugins-zum-selberbauen.ultimateCore</requiredpackage>
 	</requiredpackages>
     
 	<instructions type="install">
@@ -56,6 +56,11 @@
 		<instruction type="cronjob">cronjob.xml</instruction>
 		<!-- /xml and rest -->
 	</instructions>
+    
+    <instructions type="update" fromversion="1.1.0 Dev 8">
+        <instruction type="file">files.tar</instruction>
+        <instruction type="template">templates.tar</instruction>
+    </instructions>
     
     <instructions type="update" fromversion="1.0.3">
         <!-- file based PIPs -->

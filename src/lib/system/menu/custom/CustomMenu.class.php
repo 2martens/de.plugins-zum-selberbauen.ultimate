@@ -196,7 +196,7 @@ class CustomMenu extends TreeMenu {
 				foreach ($this->contents as $contentID => $content) {
 					// if you added a menu item associated with a content
 					// then the name of the menu item equals the one of the content
-					if ($content->__get('contentTitle') != $menuItem->__get('menuItemName')) continue;
+					if ($content->__get('contentTitle') != $menuItem->__toString()) continue;
 					
 					$hasPermission = $content->isVisible();					
 				}
@@ -206,7 +206,7 @@ class CustomMenu extends TreeMenu {
 				foreach ($this->pages as $pageID => $page) {
 					// if you added a menu item associated with a page
 					// then the name of the menu item equals the one of the page
-					if ($page->__get('pageTitle') != $menuItem->__get('menuItemName')) continue;
+					if ($page->__get('pageTitle') != $menuItem->__toString()) continue;
 					
 					$hasPermission = $page->isVisible();
 				}
