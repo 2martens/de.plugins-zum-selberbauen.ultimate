@@ -3,14 +3,14 @@
 {if !$showViewColumn|isset}{assign var='showViewColumn' value=true}{/if}
 
 {foreach from=$objects item=content}
-{if $content->publishDate != 0}
+{if $content->publishDate != 0 && $content->isVisible()}
 	<tr id="content{@$content->contentID}" class="ultimateContent jsClipboardObject" data-content-id="{@$content->contentID}" data-element-id="{@$content->contentID}">
 		<td class="columnText columnSubject">
 			<h3>
 			{if $content->page|isset}
-				<a href="{link application='ultimate' pageslug=$content->page->pageSlug}{/link}" class="messageGroupLink" data-content-id="{@$content->contentID}">{$content->page->getTitle()|wordwrap:35}</a>
+				<a href="{link application='ultimate' controller='Page' pageslug=$content->page->pageSlug}{/link}" class="messageGroupLink" data-content-id="{@$content->contentID}">{$content->page->getTitle()|wordwrap:35}</a>
 			{else}
-				<a href="{link application='ultimate' date=$content->publishDateObject->format('Y-m-d') contentslug=$content->contentSlug}{/link}" class="messageGroupLink" data-content-id="{@$content->contentID}">{$content->getTitle()|wordwrap:35}</a>
+				<a href="{link application='ultimate' controller='Content' date=$content->publishDateObject->format('Y-m-d') contentslug=$content->contentSlug}{/link}" class="messageGroupLink" data-content-id="{@$content->contentID}">{$content->getTitle()|wordwrap:35}</a>
 			{/if}
 			</h3>
 			
