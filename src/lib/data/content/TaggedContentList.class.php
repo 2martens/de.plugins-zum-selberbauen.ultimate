@@ -66,11 +66,9 @@ class TaggedContentList extends ContentList {
 		
 		$this->getConditionBuilder()->add('tag_to_object.objectTypeID = ? AND tag_to_object.languageID = ? AND tag_to_object.tagID = ?', array(TagEngine::getInstance()->getObjectTypeID('de.plugins-zum-selberbauen.ultimate.content'), $tag->languageID, $tag->tagID));
 		$this->getConditionBuilder()->add('content.contentID = tag_to_object.objectID');
-		$this->getConditionBuilder()->add('(contentVersion.visibility = ? OR (contentVersion.visibility = ? AND contentVersion.authorID = ?) OR (contentVersion.visibility = ? AND groupToContent.groupID IN (?)))', array('public', 'private', WCF::getUser()->__get('userID'), 'protected', WCF::getUser()->getGroupIDs()));
 		$this->getConditionBuilder()->add('contentVersion.status = ?', array(3)); // fixes #219
 		$this->sqlJoins .= ' LEFT JOIN ultimate'.WCF_N.'_content_version contentVersion ON (contentVersion.contentID = content.contentID)';
 		$this->sqlConditionJoins .= ' LEFT JOIN ultimate'.WCF_N.'_content_version contentVersion ON (contentVersion.contentID = content.contentID)';
-		$this->sqlConditionJoins .= ' LEFT JOIN ultimate'.WCF_N.'_user_group_to_content_version groupToVersion ON (contentVersion.versionID = groupToVersion.versionID)';
 	}
 	
 	/**
