@@ -198,22 +198,7 @@ class CustomMenu extends TreeMenu {
 					// then the name of the menu item equals the one of the content
 					if ($content->__get('contentTitle') != $menuItem->__get('menuItemName')) continue;
 					
-					$visibility = $content->__get('visibility');
-					if ($visibility == 'public') {
-						$hasPermission = true;
-						continue;
-					} else if ($visibility == 'private') {
-						$hasPermission = (WCF::getUser()->__get('userID') == $content->__get('authorID'));
-						continue;
-					}
-					
-					$groups = $content->__get('groups');
-					$accessibleGroups = WCF::getUser()->getGroupIDs();
-					foreach ($accessibleGroups as $groupID) {
-						if (!isset($groups[$groupID])) continue;
-						$hasPermission = true;
-						break 2;
-					}
+					$hasPermission = $content->isVisible();					
 				}
 				break;
 			case 'page':
@@ -223,22 +208,7 @@ class CustomMenu extends TreeMenu {
 					// then the name of the menu item equals the one of the page
 					if ($page->__get('pageTitle') != $menuItem->__get('menuItemName')) continue;
 					
-					$visibility = $page->__get('visibility');
-					if ($visibility == 'public') {
-						$hasPermission = true;
-						continue;
-					} else if ($visibility == 'private') {
-						$hasPermission = (WCF::getUser()->__get('userID') == $page->__get('authorID'));
-						continue;
-					}
-					
-					$groups = $page->__get('groups');
-					$accessibleGroups = WCF::getUser()->getGroupIDs();
-					foreach ($accessibleGroups as $groupID) {
-						if (!isset($groups[$groupID])) continue;
-						$hasPermission = true;
-						break 2;
-					}
+					$hasPermission = $page->isVisible();
 				}
 				break;
 			default:
