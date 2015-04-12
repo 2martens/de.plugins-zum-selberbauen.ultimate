@@ -69,6 +69,7 @@ class LatestContentsCacheBuilder extends AbstractCacheBuilder {
 		$sortField = 'publishDate';
 		$sortOrder = 'DESC';
 		$sqlOrderBy = $sortField." ".$sortOrder;
+		$contentList->sqlJoins .= 'LEFT JOIN ultimate'.WCF_N.'_content_version contentVersion ON (content.contentID = contentVersion.contentID)';
 		$contentList->sqlOrderBy = $sqlOrderBy;
 		$contentList->getConditionBuilder()->add('contentVersion.publishDate <> ?', array(''));
 		// check if there are contentIDsToPage at all
