@@ -110,14 +110,14 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
 			foreach ($this->menuItems as $menuItem) {
 				/* @var $category \ultimate\data\category\Category */
 				/* @var $menuItem \ultimate\data\menu\item\MenuItem */
-				if ($categoryArray[0]->getTitle() == $menuItem->__get('menuItemName')) {
+				if ($categoryArray[0]->getSlug() == $menuItem->__get('menuItemName')) {
 					$this->disabledCategoryIDs[] = $categoryID;
 					break;
 				}
 				
 				/* @var $menuItem \ultimate\data\menu\item\ViewableMenuItem */
 				foreach ($menuItem as $_menuItem) {
-					if ($categoryArray[0]->getTitle() != $_menuItem->__get('menuItemName')) continue;
+					if ($categoryArray[0]->getSlug() != $_menuItem->__get('menuItemName')) continue;
 					$this->disabledCategoryIDs[] = $categoryID;
 					break 2;
 				}
@@ -131,14 +131,14 @@ class UltimateMenuEditForm extends UltimateMenuAddForm {
 		// get pages which are already used in this menu
 		foreach ($this->pages as $pageID => $pageArray) {
 			foreach ($this->menuItems as $menuItem) {
-				if ($pageArray[0]->getTitle() == $menuItem->__get('menuItemName')) {
+				if ($pageArray[0]->getSlug() == $menuItem->__get('menuItemName')) {
 					$this->disabledPageIDs[] = $pageID;
 					break;
 				}
 				
 				/* @var $menuItem \ultimate\data\menu\item\ViewableMenuItem */
 				foreach ($menuItem as $_menuItem) {
-					if ($pageArray[0]->getTitle() != $_menuItem->__get('menuItemName')) continue;
+					if ($pageArray[0]->getSlug() != $_menuItem->__get('menuItemName')) continue;
 					$this->disabledPageIDs[] = $pageID;
 					break 2;
 				}
