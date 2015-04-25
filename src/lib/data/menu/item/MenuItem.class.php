@@ -26,12 +26,14 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\menu\item;
+use ultimate\data\category\Category;
+use ultimate\data\content\Content;
+use ultimate\data\page\Page;
 use ultimate\system\menu\custom\DefaultCustomMenuItemProvider;
 use wcf\data\page\menu\item\PageMenuItem;
 use wcf\system\exception\SystemException;
 use wcf\system\request\LinkHandler;
 use wcf\system\request\UltimateLinkHandler;
-use wcf\system\Regex;
 use wcf\system\WCF;
 
 /**
@@ -43,20 +45,22 @@ use wcf\system\WCF;
  * @package		de.plugins-zum-selberbauen.ultimate
  * @subpackage	data.menu.item
  * @category	Ultimate CMS
- * 
- * @property-read	integer		$menuItemID
- * @property-read	integer		$menuID
- * @property-read	string		$menuItemName
- * @property-read	string		$menuItemParent
- * @property-read	string|NULL	$menuItemController
- * @property-read	string		$menuItemLink
- * @property-read	integer		$showOrder
- * @property-read	string		$permissions
- * @property-read	string		$options
- * @property-read	string		$type ('category', 'content', 'custom', 'page')
- * @property-read	boolean		$isDisabled
- * @property-read	string		$className
- * @property-read	boolean		$isLandingPage
+ *  
+ * @property-read	integer		                    $menuItemID
+ * @property-read	integer		                    $menuID
+ * @property-read	string		                    $menuItemName
+ * @property-read	string		                    $menuItemParent
+ * @property-read	string|NULL	                    $menuItemController
+ * @property-read	string		                    $menuItemLink
+ * @property-read	integer		                    $showOrder
+ * @property-read	string		                    $permissions
+ * @property-read	string		                    $options
+ * @property-read	string		                    $type   One of 'category', 'content', 'custom', 'page'
+ * @property-read   integer                         $objectID
+ * @property-read   \wcf\data\ITitledObject|NULL    $object
+ * @property-read	boolean		                    $isDisabled
+ * @property-read	string		                    $className
+ * @property-read	boolean		                    $isLandingPage
  */
 class MenuItem extends PageMenuItem {
 	/**
@@ -123,7 +127,7 @@ class MenuItem extends PageMenuItem {
 	 * @return	string
 	 */
 	public function __toString() {
-		return WCF::getLanguage()->getDynamicVariable($this->menuItemName);
+		return ($this->type == 'custom' ? WCF::getLanguage()->get($this->menuItemName) : $this->object->getTitle());
 	}
 	
 	/**
@@ -263,6 +267,22 @@ class MenuItem extends PageMenuItem {
 		$data['showOrder'] = intval($data['showOrder']);
 		$data['isDisabled'] = (boolean) intval($data['isDisabled']);
 		$data['isLandingPage'] = (boolean) intval($data['isLandingPage']);
+		$data['objectID'] = intval($data['objectID']);
+		$object = null;
+		switch($data['type']) {
+			case 'category':
+				$object = new Category($data['objectID']);
+				break;
+			case 'content':
+				$object = new Content($data['objectID']);
+				break;
+			case 'page':
+				$object = new Page($data['objectID']);
+				break;
+		}
+		if ($object !== null) {
+			$data['object'] = $object;
+		}
 		parent::handleData($data);
 	}
 }

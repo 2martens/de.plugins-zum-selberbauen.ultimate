@@ -27,6 +27,7 @@
  */
 namespace ultimate\data\content;
 use ultimate\data\AbstractUltimateVersionableDatabaseObject;
+use ultimate\data\ISlugObject;
 use ultimate\system\content\ContentPermissionHandler;
 use wcf\data\user\User;
 use wcf\data\IMessage;
@@ -66,7 +67,7 @@ use wcf\util\StringUtil;
  * @property-read	integer								$status	(0, 1, 2, 3)
  * @property-read	string[]							$metaData	('metaDescription' => metaDescription, 'metaKeywords' => metaKeywords)
  */
-class Content extends AbstractUltimateVersionableDatabaseObject implements ITitledObject, IMessage {
+class Content extends AbstractUltimateVersionableDatabaseObject implements ITitledObject, IMessage, ISlugObject {
 	/**
 	 * The database table name.
 	 * @var string
@@ -116,6 +117,15 @@ class Content extends AbstractUltimateVersionableDatabaseObject implements ITitl
 	 */
 	public function getTitle() {
 		return $this->contentTitle;
+	}
+
+	/**
+	 * Returns the slug of this page.
+	 *
+	 * @return string
+	 */
+	public function getSlug() {
+		return $this->contentSlug;
 	}
 	
 	/**

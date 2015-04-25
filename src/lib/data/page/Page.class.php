@@ -26,6 +26,7 @@
  * @category	Ultimate CMS
  */
 namespace ultimate\data\page;
+use ultimate\data\ISlugObject;
 use ultimate\data\page\language\PageLanguageEntryCache;
 use ultimate\data\AbstractUltimateDatabaseObject;
 use ultimate\system\page\PagePermissionHandler;
@@ -60,7 +61,7 @@ use wcf\util\DateUtil;
  * @property-read	\ultimate\data\page\Page[]			$childPages
  * @property-read	\wcf\data\user\group\UserGroup[]	$groups
  */
-class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
+class Page extends AbstractUltimateDatabaseObject implements ITitledObject, ISlugObject {
 	/**
 	 * The database table name.
 	 * @var	string
@@ -118,6 +119,15 @@ class Page extends AbstractUltimateDatabaseObject implements ITitledObject {
 	 */
 	public function getTitle() {
 		return $this->pageTitle;
+	}
+
+	/**
+	 * Returns the slug of this page.
+	 * 
+	 * @return string
+	 */
+	public function getSlug() {
+		return $this->pageSlug;
 	}
 	
 	/**

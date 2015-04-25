@@ -28,6 +28,7 @@
 namespace ultimate\data\category;
 use ultimate\data\category\language\CategoryLanguageEntryCache;
 use ultimate\data\AbstractUltimateDatabaseObject;
+use ultimate\data\ISlugObject;
 use wcf\data\ITitledObject;
 use wcf\system\WCF;
 
@@ -49,7 +50,7 @@ use wcf\system\WCF;
  * @property-read	\ultimate\data\category\Category[]	$childCategories (categoryID => category)
  * @property-read	string[]							$metaData ('metaDescription' => metaDescription, 'metaKeywords' => metaKeywords)
  */
-class Category extends AbstractUltimateDatabaseObject implements ITitledObject {
+class Category extends AbstractUltimateDatabaseObject implements ITitledObject, ISlugObject {
 	/**
 	 * The category ID of the page category.
 	 * @var integer
@@ -87,6 +88,15 @@ class Category extends AbstractUltimateDatabaseObject implements ITitledObject {
 	 */
 	public function getTitle() {
 		return $this->categoryTitle;
+	}
+
+	/**
+	 * Returns the slug of this page.
+	 *
+	 * @return string
+	 */
+	public function getSlug() {
+		return $this->categorySlug;
 	}
 	
 	/**

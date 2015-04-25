@@ -300,7 +300,7 @@ class TemplateHandler extends SingletonFactory {
 	 * 
 	 * @param	\ultimate\data\template\Template 	$template
 	 * @param	\ultimate\data\layout\Layout 		$layout
-	 * @param	\IUltimateData|null 				$requestObject
+	 * @param	\ultimate\data\IUltimateData|null 	$requestObject
 	 * @param	string 								$requestType
 	 * @param   \ultimate\data\block\Block[]		$blocks
 	 * @param	\wcf\page\IPage						$page
@@ -333,7 +333,7 @@ class TemplateHandler extends SingletonFactory {
 			// reset menu cache
 			CurrentMenuCacheBuilder::getInstance()->reset();
 			if ($requestType != 'index') {
-				$activeMenuItem = $requestObject->getTitle();
+				$activeMenuItem = $requestObject->getSlug();
 				CustomMenu::getInstance()->setActiveMenuItem($activeMenuItem);
 				$result = CustomMenu::getInstance()->getActiveMenuItem(0);
 				
@@ -372,13 +372,13 @@ class TemplateHandler extends SingletonFactory {
 					$activeMenuItem = $this->getActiveMenuItem($parents, $menuItems);
 					if ($requestType == 'content' && !empty($parents)) {
 						$parent = $parents[$startParentID];
-						$activeMenuItem = $parent->getTitle();
+						$activeMenuItem = $parent->getSlug();
 					}
 					
 					CustomMenu::getInstance()->setActiveMenuItem($activeMenuItem);
 				}
 			} else {
-				CustomMenu::getInstance()->setActiveMenuItem('ultimate.header.menu.index');
+				CustomMenu::getInstance()->setActiveMenuItem('index');
 			}
 			// rebuild menu cache
 			CurrentMenuCacheBuilder::getInstance()->getData(array(), 'currentMenuItems');
@@ -443,16 +443,7 @@ class TemplateHandler extends SingletonFactory {
 			$allowSpidersToIndexThisPage = true;
 		}
 		else {
-			$visibility = $requestObject->__get('visibility');
-			$allowSpidersToIndexThisPage = ($visibility == 'public');
-			// If the visibility is private nobody but the creator can view the contents.
-			// Therefore search engines shouldn't be able to index it.
-			// Of course one could speculate that a search engine only 
-			// gets access if it is publicly available but that's guessing.
-			if (!$allowSpidersToIndexThisPage && $visibility == 'protected') {
-				$groups = $requestObject->__get('groups');
-				$allowSpidersToIndexThisPage = (isset($groups[UserGroup::EVERYONE]) || isset($groups[UserGroup::GUESTS]));
-			}
+			$allowSpidersToIndexThisPage = $requestObject->isVisible();
 		}
 		WCF::getTPL()->assign('allowSpidersToIndexThisPage', $allowSpidersToIndexThisPage);
 	}
@@ -502,11 +493,11 @@ class TemplateHandler extends SingletonFactory {
 	 */
 	protected function getActiveMenuItem(array $parents, array $menuItems) {
 		foreach ($parents as $parent) {
-			$parentTitle = $parent->getTitle();
-			if (isset($menuItems[$parentTitle])) {
-				return $parentTitle;
+			$parentSlug = $parent->getSlug();
+			if (isset($menuItems[$parentSlug])) {
+				return $parentSlug;
 			}
 		}
-		return 'ultimate.header.menu.index';
+		return 'index';
 	}
 }

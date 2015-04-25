@@ -227,13 +227,13 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 					switch ($this->parameters['data']['type']) {
 						case 'category':
 							$element = $this->categories[$elementID];
-							$parameters['menuItemName'] = $element->__get('categoryTitle');
+							$parameters['menuItemName'] = $element->__get('categorySlug');
 							$parameters['menuItemLink'] = $this->getCategoryLink($element, true);
 							$parameters['type'] = 'category';
 							break;
 						case 'content':
 							$element = $this->contents[$elementID];
-							$parameters['menuItemName'] = $element->__get('contentTitle');
+							$parameters['menuItemName'] = $element->__get('contentSlug');
 							/* @var $dateTimeObj \DateTime */
 							$dateTimeObj = $element->__get('publishDateObject');
 							if ($dateTimeObj->getTimestamp()) {
@@ -246,7 +246,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 							break;
 						case 'page':
 							$element = $this->pages[$elementID];
-							$parameters['menuItemName'] = $element->__get('pageTitle');
+							$parameters['menuItemName'] = $element->__get('pageSlug');
 							$parameters['menuItemLink'] = $this->getPageLink($element, true);
 							$parameters['type'] = 'page';
 							break;
@@ -271,29 +271,47 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 		}
 		
 		try {
-		$menuItemsAJAX = array();
-		foreach ($menuItems as $menuItemID => $menuItem) {
-			$menuItemsAJAX[$menuItemID] = array(
-				'menuID' => $menuItem->__get('menuID'),
-				'menuItemName' => WCF::getLanguage()->get($menuItem->__get('menuItemName')),
-				'menuItemNameRaw' => $menuItem->__get('menuItemName'),
-				'menuItemParent' => $menuItem->__get('menuItemParent'),
-				'menuItemLink' => $menuItem->__get('menuItemLink'),
-				'showOrder' => $menuItem->__get('showOrder'),
-				'type' => $menuItem->__get('type'),
-				'isDisabled' => $menuItem->__get('isDisabled'),
-				'canDisable' => $menuItem->canDisable(),
-				'canDelete' => $menuItem->canDelete(),
-				'confirmMessage' => WCF::getLanguage()->getDynamicVariable(
-					'wcf.acp.pageMenu.delete.sure', 
-					array(
-						'__menuItem' => $menuItem->__toString()
+			$menuItemsAJAX = array();
+			foreach ($menuItems as $menuItemID => $menuItem) {
+				$menuItemName = '';
+				switch($menuItem->__get('type')) {
+					case 'custom':
+						$menuItemName = WCF::getLanguage()->get($menuItem->__get('menuItemName'));
+						break;
+					case 'category':
+						$object = $this->categories[$menuItem->__get('objectID')];
+						$menuItemName = $object->getTitle();
+						break;
+					case 'content':
+						$object = $this->contents[$menuItem->__get('objectID')];
+						$menuItemName = $object->getTitle();
+						break;
+					case 'page':
+						$object = $this->pages[$menuItem->__get('objectID')];
+						$menuItemName = $object->getTitle();
+						break;
+				}
+				$menuItemsAJAX[$menuItemID] = array(
+					'menuID' => $menuItem->__get('menuID'),
+					'menuItemName' => $menuItemName,
+					'menuItemNameRaw' => $menuItem->__get('menuItemName'),
+					'menuItemParent' => $menuItem->__get('menuItemParent'),
+					'menuItemLink' => $menuItem->__get('menuItemLink'),
+					'showOrder' => $menuItem->__get('showOrder'),
+					'type' => $menuItem->__get('type'),
+					'isDisabled' => $menuItem->__get('isDisabled'),
+					'canDisable' => $menuItem->canDisable(),
+					'canDelete' => $menuItem->canDelete(),
+					'confirmMessage' => WCF::getLanguage()->getDynamicVariable(
+						'wcf.acp.pageMenu.delete.sure', 
+						array(
+							'__menuItem' => $menuItemName
+						)
 					)
-				)
-			);
-		}
-		
-		return $menuItemsAJAX;
+				);
+			}
+			
+			return $menuItemsAJAX;
 		}
 		catch (\Exception $e) {
 			echo $e->getMessage();

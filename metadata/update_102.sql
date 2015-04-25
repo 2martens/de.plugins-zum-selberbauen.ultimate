@@ -49,6 +49,11 @@ CREATE TABLE ultimate1_page_language (
 );
 
 /**
+ * MODIFY TABLES
+ */
+ALTER TABLE ultimate1_menu_item ADD objectID INT(10) NULL AFTER type;
+
+/**
  * Drop existing tables
  */
 

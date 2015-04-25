@@ -146,6 +146,7 @@ CREATE TABLE ultimate1_menu_item (
 	permissions TEXT NULL,
 	options TEXT NULL,
 	type ENUM('category', 'content', 'custom', 'page') NOT NULL,
+  objectID INT(10) NULL,
 	isDisabled TINYINT(1) NOT NULL DEFAULT 0,
 	className VARCHAR(255) NOT NULL DEFAULT '',
 	isLandingPage TINYINT(1) NOT NULL DEFAULT 0,

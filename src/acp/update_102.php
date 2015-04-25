@@ -30,6 +30,7 @@ use ultimate\data\category\CategoryList;
 use ultimate\data\content\language\ContentLanguageEntryEditor;
 use ultimate\data\content\ContentEditor;
 use ultimate\data\content\ContentList;
+use ultimate\data\menu\item\MenuItemList;
 use ultimate\data\page\language\PageLanguageEntryEditor;
 use ultimate\data\page\PageList;
 use wcf\system\io\File;
@@ -40,23 +41,40 @@ unlink(ULTIMATE_DIR.'templates/headInclude.tpl');
 
 $languages = WCF::getLanguage()->getLanguages();
 
+// menu items
+$menuItemList = new MenuItemList();
+$menuItemList->readObjects();
+/** @var \ultimate\data\menu\item\MenuItem[] $menuItems */
+$menuItems = $menuItemList->getObjects();
+$objectIDToMenuItemID = array();
+
 // category language
 $categoryList = new CategoryList();
 $categoryList->readObjects();
+/** @var \ultimate\data\category\Category[] $categories */
 $categories = $categoryList->getObjects();
 
 foreach ($categories as $categoryID => $category) {
-	/** @var \ultimate\data\category\Category $category */
 	$data = array();
 	$neutralCategoryTitle = false;
 	$neutralCategoryDescription = false;
 	$neutralTitle = '';
 	$neutralDescription = '';
+	$rawCategoryTitle = $category->categoryTitle;
+	$rawCategoryDescription = $category->categoryDescription;
+
+	// check menu item relation
+	foreach ($menuItems as $menuItemID => $menuItem) {
+		$menuItemName = $menuItem->menuItemName;
+		if ($menuItemName != $rawCategoryTitle) {
+			continue;
+		}
+		$objectIDToMenuItemID[$menuItemID] = $categoryID;
+	}
 
 	foreach ($languages as $languageID => $language) {
 		/** @var \wcf\data\language\Language $language */
 		$data[$languageID] = array();
-		$rawCategoryTitle = $category->categoryTitle;
 		$categoryTitle = $language->get($rawCategoryTitle);
 		$neutralCategoryTitle = ($rawCategoryTitle == $categoryTitle);
 		if (!$neutralCategoryTitle) {
@@ -66,7 +84,6 @@ foreach ($categories as $categoryID => $category) {
 			$neutralTitle = $categoryTitle;
 		}
 
-		$rawCategoryDescription = $category->categoryDescription;
 		$categoryDescription = $language->get($rawCategoryDescription);
 		$neutralCategoryDescription = ($rawCategoryDescription == $categoryDescription);
 		if (!$neutralCategoryDescription) {
@@ -115,11 +132,21 @@ foreach ($contents as $contentID => $content) {
 	$neutralTitle = '';
 	$neutralDescription = '';
 	$neutralText = '';
+	$rawContentTitle = $content->contentTitle;
+	$rawContentDescription = $content->contentDescription;
+
+	// check menu item relation
+	foreach ($menuItems as $menuItemID => $menuItem) {
+		$menuItemName = $menuItem->menuItemName;
+		if ($menuItemName != $rawContentTitle) {
+			continue;
+		}
+		$objectIDToMenuItemID[$menuItemID] = $contentID;
+	}
 
 	foreach ($languages as $languageID => $language) {
 		/** @var \wcf\data\language\Language $language */
-		$languageData[$languageID] = array();
-		$rawContentTitle = $content->contentTitle;
+		$languageData[$languageID] = array();		
 		$contentTitle = $language->get($rawContentTitle);
 		$neutralContentTitle = ($rawContentTitle == $contentTitle);
 		if (!$neutralContentTitle) {
@@ -128,8 +155,7 @@ foreach ($contents as $contentID => $content) {
 		else {
 			$neutralTitle = $contentTitle;
 		}
-
-		$rawContentDescription = $content->contentDescription;
+		
 		$contentDescription = $language->get($rawContentDescription);
 		$neutralContentDescription = ($rawContentDescription == $contentDescription);
 		if (!$neutralContentDescription) {
@@ -176,11 +202,20 @@ foreach ($pages as $pageID => $page) {
 	$data = array();
 	$neutralPageTitle = false;
 	$neutralTitle = '';
+	$rawPageTitle = $page->pageTitle;
+
+	// check menu item relation
+	foreach ($menuItems as $menuItemID => $menuItem) {
+		$menuItemName = $menuItem->menuItemName;
+		if ($menuItemName != $rawPageTitle) {
+			continue;
+		}
+		$objectIDToMenuItemID[$menuItemID] = $pageID;
+	}
 	
 	foreach ($languages as $languageID => $language) {
 		/** @var \wcf\data\language\Language $language */
 		$data[$languageID] = array();
-		$rawPageTitle = $page->pageTitle;
 		$pageTitle = $language->get($rawPageTitle);
 		$neutralPageTitle = ($rawPageTitle == $pageTitle);
 		if (!$neutralPageTitle) {
@@ -199,3 +234,12 @@ foreach ($pages as $pageID => $page) {
 
 	PageLanguageEntryEditor::createEntries($pageID, $data);
 }
+
+// change database entries
+$sql = 'UPDATE ultimate'.WCF_N.'_menu_item SET objectID = ? WHERE menuItemID = ?';
+$statement = WCF::getDB()->prepareStatement($sql);
+WCF::getDB()->beginTransaction();
+foreach ($objectIDToMenuItemID as $menuItemID => $objectID) {
+	$statement->execute(array($objectID, $menuItemID));
+}
+WCF::getDB()->commitTransaction();
