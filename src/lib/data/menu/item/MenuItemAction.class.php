@@ -227,12 +227,14 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 					switch ($this->parameters['data']['type']) {
 						case 'category':
 							$element = $this->categories[$elementID];
+							$parameters['objectID'] = $elementID;
 							$parameters['menuItemName'] = $element->__get('categorySlug');
 							$parameters['menuItemLink'] = $this->getCategoryLink($element, true);
 							$parameters['type'] = 'category';
 							break;
 						case 'content':
 							$element = $this->contents[$elementID];
+							$parameters['objectID'] = $elementID;
 							$parameters['menuItemName'] = $element->__get('contentSlug');
 							/* @var $dateTimeObj \DateTime */
 							$dateTimeObj = $element->__get('publishDateObject');
@@ -246,6 +248,7 @@ class MenuItemAction extends AbstractDatabaseObjectAction implements ISortableAc
 							break;
 						case 'page':
 							$element = $this->pages[$elementID];
+							$parameters['objectID'] = $elementID;
 							$parameters['menuItemName'] = $element->__get('pageSlug');
 							$parameters['menuItemLink'] = $this->getPageLink($element, true);
 							$parameters['type'] = 'page';
