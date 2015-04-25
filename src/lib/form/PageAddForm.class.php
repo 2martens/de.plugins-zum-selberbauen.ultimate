@@ -129,6 +129,12 @@ class PageAddForm extends AbstractForm implements IEditSuitePage {
 	public $pages = array();
 	
 	/**
+	 * The page id.
+	 * @var	integer
+	 */
+	public $pageID = 0;
+	
+	/**
 	 * The parent page id.
 	 * @var	integer
 	 */
@@ -242,8 +248,8 @@ class PageAddForm extends AbstractForm implements IEditSuitePage {
 			$this->statusOptions[1] = WCF::getLanguage()->get('wcf.acp.ultimate.status.pendingReview');
 		}
 		
-		$this->contents = PageUtil::getAvailableContents();
-		$this->pages = PageUtil::getAvailablePages();
+		$this->contents = PageUtil::getAvailableContents($this->pageID);
+		$this->pages = PageUtil::getAvailablePages($this->pageID);
 
 		parent::readData();
 

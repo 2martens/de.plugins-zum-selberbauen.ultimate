@@ -60,13 +60,7 @@ class PageEditForm extends PageAddForm {
 		'user.ultimate.editing.canEditPage'
 	);
 
-	public $action = 'edit';
-	
-	/**
-	 * The page id.
-	 * @var	integer
-	 */
-	public $pageID = 0;
+	public $action = 'edit';	
 	
 	/**
 	 * The Page object of this page.
@@ -105,10 +99,7 @@ class PageEditForm extends PageAddForm {
 	 * Reads data.
 	 * @see UltimatePageAddForm::readData()
 	 */
-	public function readData() {
-		$this->contents = PageUtil::getAvailableContents($this->pageID);
-		$this->pages = PageUtil::getAvailablePages($this->pageID);
-		
+	public function readData() {		
 		// get status data
 		$this->statusID = $this->page->__get('status');		
 		
