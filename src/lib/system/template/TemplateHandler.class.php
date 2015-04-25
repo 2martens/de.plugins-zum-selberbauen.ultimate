@@ -183,7 +183,7 @@ class TemplateHandler extends SingletonFactory {
 	/**
 	 * This method should be used if you just want to initiate the custom menu.
 	 * 
-	 * The method will initate the custom menu that is connected with the template of the IndexPage.
+	 * The method will initiate the custom menu that is connected with the template of the IndexPage.
 	 * This method does only work if there is a template attached to the index layout.
 	 * If there is no such template, the method will return without initiating the custom menu.
 	 * 

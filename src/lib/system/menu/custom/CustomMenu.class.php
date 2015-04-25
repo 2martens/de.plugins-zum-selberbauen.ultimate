@@ -71,6 +71,12 @@ class CustomMenu extends TreeMenu {
 	protected $currentMenuItems = array();
 	
 	/**
+	 * landing page menu item
+	 * @var	\ultimate\data\menu\item\MenuItem
+	 */
+	protected $landingPage = null;
+	
+	/**
 	 * Builds the given menu.
 	 * 
 	 * You have to call this method before using getMenuItems in order to get the menu items for your menu.
@@ -92,6 +98,17 @@ class CustomMenu extends TreeMenu {
 		
 		// build plain menu item list
 		$this->buildMenuItemList();
+		
+		foreach ($this->currentMenuItems as $menuItems) {
+			foreach ($menuItems as $menuItem) {
+				if ($menuItem->isLandingPage) {
+					$this->landingPage = $menuItem;
+					break 2;
+				}
+			}
+		}
+		
+		$this->setActiveMenuItem($this->landingPage->menuItemName);
 	}
 	
 	/**
@@ -137,6 +154,17 @@ class CustomMenu extends TreeMenu {
 	}
 	
 	/**
+	 * Returns landing page menu item.
+	 * 
+	 * The buildMenu method must be called first in order for this method to return the proper value.
+	 *
+	 * @return	\ultimate\data\menu\item\MenuItem
+	 */
+	public function getLandingPage() {
+		return $this->landingPage;
+	}
+	
+	/**
 	 * Initializes the CustomMenu.
 	 */
 	protected function init() {
@@ -144,7 +172,7 @@ class CustomMenu extends TreeMenu {
 		$this->loadCache();
 		
 		// call init event
-		EventHandler::getInstance()->fireAction($this, 'init');
+		EventHandler::getInstance()->fireAction($this, 'init');		
 	}
 	
 	/**

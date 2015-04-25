@@ -53,16 +53,25 @@ class CustomMenuListener implements IParameterizedEventListener {
 	 * @param	string	$eventName
 	 */
 	public function execute($eventObj, $className, $eventName, array &$parameters) {
-		// rules out all ultimate classes and all ACP requests
-		if (mb_strpos($className, 'ultimate') !== false) return;
+		// rules out all ultimate classes but the EditSuite ones and all ACP requests
+		$allowedUltimateClasses = array(
+			'ultimate\page\EditSuitePage',
+			'ultimate\page\ContentListPage',
+			'ultimate\page\ContentVersionListPage',
+			'ultimate\page\PageListPage'
+		);
+		if (mb_strpos($className, 'ultimate') !== false && !in_array($className, $allowedUltimateClasses)) return;
 		if (RequestHandler::getInstance()->isACPRequest()) return;
 		
 		$activeMenuItems = PageMenu::getInstance()->getActiveMenuItems();
-		if (empty($activeMenuItems)) return;
-		
-		$activeMenuItem = $activeMenuItems[0];
-		
 		TemplateHandler::getInstance()->initiateCustomMenu();
+		if (empty($activeMenuItems)) {
+			$activeMenuItem = CustomMenu::getInstance()->getLandingPage()->menuItemName;
+		}
+		else {
+			$activeMenuItem = $activeMenuItems[0];
+		}
+		
 		CustomMenu::getInstance()->setActiveMenuItem($activeMenuItem);
 		
 		$assignCustomMenu = true;
