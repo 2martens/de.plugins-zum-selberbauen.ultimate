@@ -47,6 +47,7 @@ $menuItemList->readObjects();
 /** @var \ultimate\data\menu\item\MenuItem[] $menuItems */
 $menuItems = $menuItemList->getObjects();
 $objectIDToMenuItemID = array();
+$menuItemNameToMenuItemID = array();
 
 // category language
 $categoryList = new CategoryList();
@@ -70,6 +71,7 @@ foreach ($categories as $categoryID => $category) {
 			continue;
 		}
 		$objectIDToMenuItemID[$menuItemID] = $categoryID;
+		$menuItemNameToMenuItemID[$menuItemID] = $category->categorySlug;
 	}
 
 	foreach ($languages as $languageID => $language) {
@@ -142,6 +144,7 @@ foreach ($contents as $contentID => $content) {
 			continue;
 		}
 		$objectIDToMenuItemID[$menuItemID] = $contentID;
+		$menuItemNameToMenuItemID[$menuItemID] = $content->contentSlug;
 	}
 
 	foreach ($languages as $languageID => $language) {
@@ -211,6 +214,7 @@ foreach ($pages as $pageID => $page) {
 			continue;
 		}
 		$objectIDToMenuItemID[$menuItemID] = $pageID;
+		$menuItemNameToMenuItemID[$menuItemID] = $page->pageSlug;
 	}
 	
 	foreach ($languages as $languageID => $language) {
@@ -236,10 +240,10 @@ foreach ($pages as $pageID => $page) {
 }
 
 // change database entries
-$sql = 'UPDATE ultimate'.WCF_N.'_menu_item SET objectID = ? WHERE menuItemID = ?';
+$sql = 'UPDATE ultimate'.WCF_N.'_menu_item SET objectID = ?, menuItemName = ? WHERE menuItemID = ?';
 $statement = WCF::getDB()->prepareStatement($sql);
 WCF::getDB()->beginTransaction();
 foreach ($objectIDToMenuItemID as $menuItemID => $objectID) {
-	$statement->execute(array($objectID, $menuItemID));
+	$statement->execute(array($objectID, $menuItemNameToMenuItemID[$menuItemID], $menuItemID));
 }
 WCF::getDB()->commitTransaction();
