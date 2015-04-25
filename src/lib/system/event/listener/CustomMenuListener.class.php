@@ -72,15 +72,11 @@ class CustomMenuListener implements IParameterizedEventListener {
 		}
 		
 		if ($assignCustomMenu) {
-			$customMenu = '<script data-relocate="true" type="text/javascript">
-			//<![CDATA[
-				'."var customMenu = '".StringUtil::encodeJS(WCF::getTPL()->fetch('__customMenu', 'ultimate'))."';
-				var customMenuSubMenu = '".StringUtil::encodeJS(WCF::getTPL()->fetch('__customMenuSubMenu', 'ultimate'))."';".'
-			//]]>
-			</script>';
 			
 			WCF::getTPL()->assign(array(
-				'customMenu' => $customMenu
+				'customMenuAssigned' => true,
+				'customMenuJS' => StringUtil::encodeJS(WCF::getTPL()->fetch('__customMenu', 'ultimate')),
+				'customMenuSubMenuJS' => StringUtil::encodeJS(WCF::getTPL()->fetch('__customMenuSubMenu', 'ultimate'))
 			));
 		}
 	}
