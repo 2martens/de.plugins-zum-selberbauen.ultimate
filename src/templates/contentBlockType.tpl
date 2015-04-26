@@ -49,13 +49,22 @@ $(function() {
 				data-like-users='{if $likeData[$contentID]|isset}{ {implode from=$likeData[$contentID]->getUsers() item=likeUser}"{@$likeUser->userID}": { "username": "{$likeUser->username|encodeJSON}" }{/implode} }{else}{ }{/if}' {*
 				*}{/if}{*
 				*}data-user-id="{@$content->authorID}">
-							
+                            {assign var=showHeader value=false}
+                            {capture assign='metaAbove'}
+                                {if $metaAbove[$contentID]|isset && $metaAbove[$contentID] != ""}
+                                    {@$metaAbove[$contentID]}
+                                {/if}
+                                {if $metaAbove_i18n[$contentID][$__wcf->getLanguage()->__get('languageID')]|isset}
+                                    {@$metaAbove_i18n[$contentID][$__wcf->getLanguage()->__get('languageID')]}
+                                {/if}
+                            {/capture}
+                            {if !$metaAbove|trim|empty || !$content->contentDescription|trim|empty || !$block->hideTitles}{assign var=showHeader value=true}{/if}
 							<section class="messageContent{if $requestType == 'page'} ultimateWhiteBackgroundColor{/if}">
 								<div>
+                                    {if $showHeader}
 									<header class="messageHeader">
 										<div class="messageHeadline">
-										
-											{if !$block->hideTitles}
+                                            {if !$block->hideTitles}
 												<h1 itemprop="name">
 													{if $requestType != 'content' && $requestType != 'page' && ($queryModeSelected == 'default' || $fetchPageContentSelected == 'none')}
 														<a class="link" href="{link application='ultimate' date=$date contentslug=$content->contentSlug}{/link}" itemprop="url">{$content->getTitle()}</a>
@@ -73,12 +82,7 @@ $(function() {
 													<span class="meta" id="metaAbove-{$contentID}">
 													
 														{content}
-															{if $metaAbove[$contentID]|isset && $metaAbove[$contentID] != ""}
-																{@$metaAbove[$contentID]}
-															{/if}
-															{if $metaAbove_i18n[$contentID][$__wcf->getLanguage()->__get('languageID')]|isset}
-																{@$metaAbove_i18n[$contentID][$__wcf->getLanguage()->__get('languageID')]}
-															{/if}
+															{@$metaAbove}
 														{/content}
 													
 													</span>
@@ -87,7 +91,6 @@ $(function() {
 											{if $requestType != 'page'}
 												</p>
 											{/if}
-										
 										</div>
 										
 										{if $requestType == 'content'}
@@ -96,6 +99,7 @@ $(function() {
 											{/hascontent}
 										{/if}
 									</header>
+                                    {/if}
 									{if $block->contentBodyDisplay != 'hide'}
 										<div class="messageBody">
 											<div>
@@ -121,27 +125,26 @@ $(function() {
 											</div>
 											{assign var=objectID value=$contentID}
 											{include file='attachments'}
-											
+
+                                            {hascontent}
 											<div class="messageSignature">
 												
 												{if $contentMetaDisplaySelected[$requestType]|isset || $contentMetaDisplaySelected|count == 0}
-													{hascontent}
-														<div class="meta" id="metaBelow-{$contentID}">
-															
-															{content}
-																{if $metaBelow[$contentID]|isset && $metaBelow[$contentID] != ""}
-																	{@$metaBelow[$contentID]}
-																{/if}
-																{if $metaBelow_i18n[$contentID][$__wcf->getLanguage()->__get('languageID')]|isset}
-																	{@$metaBelow_i18n[$contentID][$__wcf->getLanguage()->__get('languageID')]}
-																{/if}
-															{/content}
-															
-														</div>
-													{/hascontent}
+                                                    <div class="meta" id="metaBelow-{$contentID}">
+
+                                                        {content}
+                                                            {if $metaBelow[$contentID]|isset && $metaBelow[$contentID] != ""}
+                                                                {@$metaBelow[$contentID]}
+                                                            {/if}
+                                                            {if $metaBelow_i18n[$contentID][$__wcf->getLanguage()->__get('languageID')]|isset}
+                                                                {@$metaBelow_i18n[$contentID][$__wcf->getLanguage()->__get('languageID')]}
+                                                            {/if}
+                                                        {/content}
+
+                                                    </div>
 												{/if}
-											
 											</div>
+                                            {/hascontent}
 											
 											<div class="messageFooter">
 											
