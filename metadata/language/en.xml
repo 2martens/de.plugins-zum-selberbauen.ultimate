@@ -168,8 +168,10 @@
 		<item name="wcf.acp.option.ultimate_general_englishDateFormat.description"><![CDATA[Please select here which date format should be used for the English language.]]></item>
 		<item name="wcf.acp.option.ultimate_general_englishDateFormat.BE"><![CDATA[d/m/Y]]></item>
 		<item name="wcf.acp.option.ultimate_general_englishDateFormat.AE"><![CDATA[m/d/Y]]></item>
-        <item name="wcf.acp.option.ultimate_general_useLandingPageLink"><![CDATA[Use landing page link]]></item>
-        <item name="wcf.acp.option.ultimate_general_useLandingPageLink.description"><![CDATA[If checked, the landing page of a custom menu will have a true landing page link. If you check this option, you need to have a DirectoryIndex statement (or equivalent in nginx or IIS) directing the server to the correct page.]]></item>
+		<item name="wcf.acp.option.ultimate_general_useLandingPageLink"><![CDATA[Use landing page link]]></item>
+		<item name="wcf.acp.option.ultimate_general_useLandingPageLink.description"><![CDATA[If checked, the landing page of a custom menu will have a true landing page link. If you check this option, you need to have a DirectoryIndex statement (or equivalent in nginx or IIS) directing the server to the correct page.]]></item>
+		<item name="wcf.acp.option.ultimate_general_hidePageLink"><![CDATA[Hide page/ in the page links]]></item>
+		<item name="wcf.acp.option.ultimate_general_hidePageLink.description"><![CDATA[Requires explicit URL rewrites for every single page. Should be used carefully. Has no influence on the compatibility mode for links.]]></item>
 		<!-- /ultimate.general -->
 		
 		<!-- ultimate.general.content -->

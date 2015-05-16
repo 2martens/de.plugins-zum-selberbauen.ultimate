@@ -231,7 +231,7 @@ class MenuItem extends PageMenuItem {
 		$parameters = array();
 		$parameters['application'] = 'ultimate';
 		$parameters['isRaw'] = true;
-		$menuItemLink = (!URL_LEGACY_MODE && $this->type == 'page' ? 'page/' : '') . $this->menuItemLink;
+		$menuItemLink = (!URL_LEGACY_MODE && $this->type == 'page' && !ULTIMATE_GENERAL_HIDEPAGELINK ? 'page/' : '') . $this->menuItemLink;
 		if (mb_strpos($menuItemLink, 'http') === false) {
 			if ($this->menuItemController === null) {
 				if (!URL_OMIT_INDEX_PHP) {
