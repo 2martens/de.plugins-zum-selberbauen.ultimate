@@ -170,6 +170,8 @@
 		<item name="wcf.acp.option.ultimate_general_englishDateFormat.description"><![CDATA[Bitte wähle das englische Datumsformat aus.]]></item>
 		<item name="wcf.acp.option.ultimate_general_englishDateFormat.BE"><![CDATA[d/m/Y]]></item>
 		<item name="wcf.acp.option.ultimate_general_englishDateFormat.AE"><![CDATA[m/d/Y]]></item>
+        <item name="wcf.acp.option.ultimate_general_useLandingPageLink"><![CDATA[Besonderen Link für Startseite nutzen]]></item>
+        <item name="wcf.acp.option.ultimate_general_useLandingPageLink.description"><![CDATA[Sorgt dafür, dass die Startseite in einem CustomMenu einen echten Startseitenlink bekommt. Diese Option erfordert jedoch ein DirectoryIndex Statement (oder vergleichbares in nginx oder IIS), um den Server auf die richtige Startseite zu leiten.]]></item>
 		<!-- /ultimate.general -->
 		
 		<!-- ultimate.general.content -->

@@ -168,11 +168,13 @@
 		<item name="wcf.acp.option.ultimate_general_englishDateFormat.description"><![CDATA[Please select here which date format should be used for the English language.]]></item>
 		<item name="wcf.acp.option.ultimate_general_englishDateFormat.BE"><![CDATA[d/m/Y]]></item>
 		<item name="wcf.acp.option.ultimate_general_englishDateFormat.AE"><![CDATA[m/d/Y]]></item>
+        <item name="wcf.acp.option.ultimate_general_useLandingPageLink"><![CDATA[Use landing page link]]></item>
+        <item name="wcf.acp.option.ultimate_general_useLandingPageLink.description"><![CDATA[If checked, the landing page of a custom menu will have a true landing page link. If you check this option, you need to have a DirectoryIndex statement (or equivalent in nginx or IIS) directing the server to the correct page.]]></item>
 		<!-- /ultimate.general -->
 		
 		<!-- ultimate.general.content -->
 		<item name="wcf.acp.option.ultimate_general_content_comments_per_page"><![CDATA[Comments per page]]></item>
-		<item name="wcf.acp.option.ultimate_general_content_comments_per_page.description"><![CDATA[Please insert here how many comments should be displayed per page. This setting doesn't influence the visability of comments (that depends on settings of the specific content blocks).]]></item>
+		<item name="wcf.acp.option.ultimate_general_content_comments_per_page.description"><![CDATA[Please insert here how many comments should be displayed per page. This setting doesn't influence the visibility of comments (that depends on settings of the specific content blocks).]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_metaAboveContent"><![CDATA[Meta above content]]></item>
 		<item name="wcf.acp.option.ultimate_general_content_metaAboveContent.description"><![CDATA[Please insert here the default meta above content. You can change this setting for each content block in the template edit form.
 

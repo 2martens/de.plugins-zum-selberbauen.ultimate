@@ -237,6 +237,9 @@ class MenuItem extends PageMenuItem {
 				if (!URL_OMIT_INDEX_PHP) {
 					$menuItemLink = 'index.php'. (URL_LEGACY_MODE ? '/' : '?') . $menuItemLink;
 				}
+				if ($this->isLandingPage && ULTIMATE_GENERAL_USELANDINGPAGELINK) {
+					$menuItemLink = '';
+				}
 				return UltimateLinkHandler::getInstance()->getLink(null, $parameters, $menuItemLink);
 			} else {
 				// external link
