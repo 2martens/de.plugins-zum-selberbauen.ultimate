@@ -38,12 +38,36 @@
              basedir="srcWCF"
         />
 
-        <!-- 1.1.0 Beta 4 update tars -->
-        <tar destfile="metadata/files_update_110beta3.tar">
+        <!-- 1.1.0 Beta 5 update tars -->
+        <tar destfile="metadata/files_update_110beta4.tar">
             <tarfileset dir="src">
                 <exclude name="templates/**" />
                 <exclude name="acp/templates/**" />
+                <include name="lib/system/menu/custom/CustomMenu.class.php" />
+            </tarfileset>
+        </tar>
+
+        <!-- 1.1.0 Beta 2 to 5 update tars -->
+        <tar destfile="metadata/files_update_110beta2.tar">
+            <tarfileset dir="src">
+                <exclude name="templates/**" />
+                <exclude name="acp/templates/**" />
+                <include name="lib/acp/form/UltimateMenuEditForm.class.php" />
                 <include name="lib/data/menu/item/MenuItem.class.php" />
+                <include name="lib/acp/form/UltimateMenuEditForm.class.php" />
+                <include name="lib/data/menu/item/MenuItemAction.class.php" />
+                <include name="lib/form/PageAddForm.class.php" />
+                <include name="lib/form/PageEditForm.class.php" />
+                <include name="lib/system/event/listener/CustomMenuListener.class.php" />
+                <include name="lib/system/menu/custom/CustomMenu.class.php" />
+                <include name="lib/system/template/TemplateHandler.class.php" />
+            </tarfileset>
+        </tar>
+
+        <tar destfile="metadata/templates_update_110beta2.tar">
+            <tarfileset dir="src/templates">
+                <include name="contentBlockType.tpl" />
+                <include name="__customMenuJS.tpl" />
             </tarfileset>
         </tar>
     </target>

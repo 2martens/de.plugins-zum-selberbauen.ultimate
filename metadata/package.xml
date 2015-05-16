@@ -8,7 +8,7 @@
 		<packagedescription language="de-informal"><![CDATA[Ein WCF-kompatibles CMS.]]></packagedescription>
 		
 		<isapplication>1</isapplication>
-		<version>1.1.0 Beta 4</version>
+		<version>1.1.0 Beta 5</version>
 		<date>2015-05-16</date>
 	</packageinformation>
 	
@@ -57,10 +57,15 @@
 		<!-- /xml and rest -->
 	</instructions>
 
-    <instructions type="update" fromversion="1.1.0 Beta 3">
-        <instruction type="file">files_update_110beta3.tar</instruction>
+	<instructions type="update" fromversion="1.1.0 Beta 4">
+		<instruction type="file">files_update_110beta4.tar</instruction>
+	</instructions>
+
+    <instructions type="update" fromversion="1.1.0 Beta 2">
+        <instruction type="file">files_update_110beta2.tar</instruction>
+		<instruction type="template">templates_update_110beta2.tar</instruction>
         <instruction type="language">language/*.xml</instruction>
-        <instruction type="option">option_update110beta3.xml</instruction>
+        <instruction type="option">option_update110beta2.xml</instruction>
     </instructions>
     
     <instructions type="update" fromversion="1.0.3">
