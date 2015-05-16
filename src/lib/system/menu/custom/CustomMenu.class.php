@@ -34,6 +34,7 @@ use wcf\system\event\EventHandler;
 use wcf\system\menu\ITreeMenuItem;
 use wcf\system\menu\TreeMenu;
 use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * Builds a custom menu.
@@ -226,7 +227,7 @@ class CustomMenu extends TreeMenu {
 					// then the name of the menu item equals the one of the content
 					if ($content->__get('contentTitle') != $menuItem->__toString()) continue;
 					
-					$hasPermission = $content->isVisible();					
+					$hasPermission = $content->isVisible();
 				}
 				break;
 			case 'page':
@@ -237,6 +238,14 @@ class CustomMenu extends TreeMenu {
 					if ($page->__get('pageTitle') != $menuItem->__toString()) continue;
 					
 					$hasPermission = $page->isVisible();
+				}
+				break;
+			case 'custom':
+				$hasPermission = false;
+				$optionConstant = mb_strtoupper($menuItem->__get('options'));
+				if ((defined($optionConstant) && constant($optionConstant)) || empty($optionConstant)) {
+					$permissions = $menuItem->__get('permissions');
+					$hasPermission = (empty($permissions) || WCF::getSession()->getPermission($permissions) ? true : false);
 				}
 				break;
 			default:
