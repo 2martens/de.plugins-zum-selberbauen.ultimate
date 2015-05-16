@@ -74,7 +74,7 @@
 						{foreach from=$menuItems item=menuItem}
 							<li class="sortableNode" data-object-name="{@$menuItem->menuItemName}" data-object-id="{@$menuItem->menuItemID}">
 								<span class="sortableNodeLabel">
-									<span>{lang}{$menuItem->menuItemName}{/lang}</span>
+									<span>{lang}{$menuItem}{/lang}</span>
 									<span class="statusDisplay sortableButtonContainer">
 										{if $menuItem->canDisable()}
 											<span class="icon icon16 icon-check{if $menuItem->isDisabled}-empty{/if} jsToggleButton jsTooltip pointer" title="{lang}wcf.global.button.{if $menuItem->isDisabled}enable{else}disable{/if}{/lang}" data-object-id="{@$menuItem->menuItemID}" data-disable-message="{lang}wcf.global.button.disable{/lang}" data-enable-message="{lang}wcf.global.button.enable{/lang}"></span>
@@ -94,7 +94,7 @@
 									{foreach from=$menuItem item=childMenuItem}
 										<li class="sortableNode sortableNoNesting" data-object-id="{@$childMenuItem->menuItemID}">
 											<span class="sortableNodeLabel">
-												<span>{lang}{$childMenuItem->menuItemName}{/lang}</span>
+												<span>{lang}{$childMenuItem}{/lang}</span>
 												<span class="statusDisplay sortableButtonContainer">
 													{if $childMenuItem->canDisable()}
 														<span class="icon icon16 icon-check{if $childMenuItem->isDisabled}-empty{/if} jsToggleButton jsTooltip pointer" title="{lang}wcf.global.button.{if $childMenuItem->isDisabled}enable{else}disable{/if}{/lang}" data-object-id="{@$childMenuItem->menuItemID}" data-disable-message="{lang}wcf.global.button.disable{/lang}" data-enable-message="{lang}wcf.global.button.enable{/lang}"></span>
