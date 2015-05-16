@@ -234,7 +234,9 @@ class MenuItem extends PageMenuItem {
 		$menuItemLink = (!URL_LEGACY_MODE && $this->type == 'page' ? 'page/' : '') . $this->menuItemLink;
 		if (mb_strpos($menuItemLink, 'http') === false) {
 			if ($this->menuItemController === null) {
-				$menuItemLink = 'index.php'. (URL_LEGACY_MODE ? '/' : '?') . $menuItemLink;
+				if (!URL_OMIT_INDEX_PHP) {
+					$menuItemLink = 'index.php'. (URL_LEGACY_MODE ? '/' : '?') . $menuItemLink;
+				}
 				return UltimateLinkHandler::getInstance()->getLink(null, $parameters, $menuItemLink);
 			} else {
 				// external link
