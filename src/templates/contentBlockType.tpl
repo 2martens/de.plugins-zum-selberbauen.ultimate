@@ -50,7 +50,7 @@ $(function() {
 				*}{/if}{*
 				*}data-user-id="{@$content->authorID}">
                             {assign var=showHeader value=false}
-                            {capture assign='metaAbove'}
+                            {capture assign='metaAboveCapture'}
                                 {if $metaAbove[$contentID]|isset && $metaAbove[$contentID] != ""}
                                     {@$metaAbove[$contentID]}
                                 {/if}
@@ -58,7 +58,7 @@ $(function() {
                                     {@$metaAbove_i18n[$contentID][$__wcf->getLanguage()->__get('languageID')]}
                                 {/if}
                             {/capture}
-                            {if !$metaAbove|trim|empty || !$content->contentDescription|trim|empty || !$block->hideTitles}{assign var=showHeader value=true}{/if}
+                            {if !$metaAboveCapture|trim|empty || !$content->contentDescription|trim|empty || !$block->hideTitles}{assign var=showHeader value=true}{/if}
 							<section class="messageContent{if $requestType == 'page'} ultimateWhiteBackgroundColor{/if}">
 								<div>
                                     {if $showHeader}
@@ -82,7 +82,7 @@ $(function() {
 													<span class="meta" id="metaAbove-{$contentID}">
 													
 														{content}
-															{@$metaAbove}
+															{@$metaAboveCapture}
 														{/content}
 													
 													</span>
